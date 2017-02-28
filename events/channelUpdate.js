@@ -58,5 +58,7 @@ module.exports = (oldChannel, newChannel) => {
         }
       ]
     }});
-  });
+  }).catch(e => {
+    message.client.log.error(e.stack);
+  });;
 };

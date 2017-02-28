@@ -51,5 +51,7 @@ module.exports = channel => {
         }
       ]
     }});
-  });
+  }).catch(e => {
+    message.client.log.error(e.stack);
+  });;
 };
