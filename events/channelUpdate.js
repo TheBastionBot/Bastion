@@ -59,6 +59,6 @@ module.exports = (oldChannel, newChannel) => {
       ]
     }});
   }).catch(e => {
-    message.client.log.error(e.stack);
+    channel.client.log.error(e.stack);
   });;
 };

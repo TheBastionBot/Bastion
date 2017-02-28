@@ -85,7 +85,12 @@ module.exports = message => {
   sql.all('SELECT userID FROM blacklistedUsers').then(users => {
     if (users.map(u => u.userID).indexOf(message.author.id) > -1) return;
     sql.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
-      if (profile && profile.hasOwnProperty('xp')) {
+      if (!profile) {
+        sql.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [message.author.id, 1]).catch(e => {
+          message.client.log.error(e.stack);
+        });
+      }
+      else {
         let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
         if (currentLevel > profile.level) {
           profile.level = currentLevel;
@@ -102,10 +107,8 @@ module.exports = message => {
           message.client.log.error(e.stack);
         });
       }
-    }).catch(() => {
-      sql.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [message.author.id, 1]).catch(e => {
-        message.client.log.error(e.stack);
-      });
+    }).catch(e => {
+      message.client.log.error(e.stack);
     });
 
     if (message.content.startsWith(message.client.config.prefix)) {
