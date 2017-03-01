@@ -29,13 +29,14 @@ module.exports = member => {
       greetMsg = greetMsg.replace(/\$user/, `<@${member.id}>`);
       greetMsg = greetMsg.replace(/\$server/, member.guild.name);
       greetMsg = greetMsg.replace(/\$username/, member.displayName);
+      greetMsg = greetMsg.replace(/\$prefix/, member.client.config.prefix);
 
       member.guild.channels.get(row.greetChannelID).sendMessage('', {embed: {
         color: 5088314,
         title: `Hello ${member.displayName}`,
         description: greetMsg
       }}).then(m => {
-        if (greetTimeout > 0) m.delete(1000*parseInt(greetTimeout)).catch(e => {
+        if (greetTimeout > 0) m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
           member.client.log.error(e.stack);
         });
       }).catch(e => {
