@@ -36,7 +36,7 @@ module.exports = member => {
         title: `Hello ${member.displayName}`,
         description: greetMsg
       }}).then(m => {
-        if (greetTimeout > 0) m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
+        if (row.greetTimeout > 0) m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
           member.client.log.error(e.stack);
         });
       }).catch(e => {

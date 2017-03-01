@@ -36,7 +36,7 @@ module.exports = member => {
         title: `Goodbye ${member.displayName}!`,
         description: farewellMsg + '\n:wave:'
       }}).then(m => {
-        if (farewellTimeout > 0) m.delete(1000*parseInt(row.farewellTimeout)).catch(e => {
+        if (row.farewellTimeout > 0) m.delete(1000*parseInt(row.farewellTimeout)).catch(e => {
           member.client.log.error(e.stack);
         });
       }).catch(e => {
