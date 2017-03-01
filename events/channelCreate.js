@@ -24,6 +24,7 @@ sql.open('./data/Bastion.sqlite');
 
 module.exports = channel => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID ='${channel.guild.id}'`).then(row => {
+    if (!row) return;
     if (row.log == 'false') return;
     channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 5088314,
