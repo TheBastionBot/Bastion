@@ -11,7 +11,7 @@ CYAN='\033[0;36m'
 if [ "$(id -u)" != "0" ]; then
   echo -e "${CYAN}[Bastion]: ${ORANGE}[ERROR] Bastion BOT Installer requires root permissions.${NC}"
   hash sudo &>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Run this installer with root permissions.\n" && exit 1)
-  sudo ./run.sh
+  sudo ./update.sh
   exit 1
 fi
 
