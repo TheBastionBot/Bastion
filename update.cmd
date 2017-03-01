@@ -6,6 +6,14 @@ ECHO.
 
 SET cwd=%~dp0
 
+ECHO [Bastion]: Updating Bastion BOT...
+git pull origin master 1>nul || (
+  ECHO [Bastion]: Unable to update the bot.
+  GOTO :EXIT
+)
+ECHO [Bastion]: Done.
+ECHO.
+
 IF EXIST node_modules (
   ECHO [Bastion]: Deleting old dependencies...
   RD /S /Q node_modules

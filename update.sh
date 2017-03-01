@@ -15,6 +15,11 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
+echo -e "${CYAN}[Bastion]:${NC} Updating Bastion BOT..."
+git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Unable to update the bot.\n" && exit 1)
+echo -e "${CYAN}[Bastion]:${NC} Done."
+echo
+
 if [ -d node_modules ]; then
     echo -e "${CYAN}[Bastion]:${NC} Deleting old dependencies..."
     rm -r node_modules
