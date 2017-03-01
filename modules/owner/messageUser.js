@@ -23,14 +23,13 @@ exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!/^[0-9]{18}$/.test(args[0])) return;
 
-  if (Bastion.users.get(args[0])) {
+  if (Bastion.users.get(args[0]))
     Bastion.users.get(args[0]).sendMessage('', {embed: {
       color: 6651610,
       description: args.slice(1).join(' ')
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }
 };
 
 exports.conf = {

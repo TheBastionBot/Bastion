@@ -43,7 +43,9 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 5088314,
       description: farewellStats
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

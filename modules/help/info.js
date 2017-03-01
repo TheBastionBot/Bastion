@@ -88,7 +88,9 @@ exports.run = function(Bastion, message, args) {
       text: `Ping: ${parseInt(Bastion.ping)}ms`
     },
     timestamp: new Date()
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

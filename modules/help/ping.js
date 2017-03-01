@@ -23,7 +23,9 @@ exports.run = function(Bastion, message, args) {
   message.channel.sendMessage('', {embed: {
     color: 11316394,
     description: `${parseInt(Bastion.ping)}ms`
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

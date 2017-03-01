@@ -34,7 +34,9 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 13380644,
       description: 'Invalid mathematical expression!'
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
 };
 

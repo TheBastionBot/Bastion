@@ -23,9 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = guild => {
-  if(guild.available) {
-    sql.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`);
-  } else {
-    console.log(`${guild.name} guild with ID: ${guild.id} is not available at the moment. Mostly, this is the cause of a server outage.`);
-  }
+  sql.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+    guild.client.log.error(e.stack);
+  });
 };

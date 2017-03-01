@@ -25,8 +25,12 @@ exports.run = function(Bastion, message, args) {
   if (!(user = message.mentions.users.first())) return;
   if (!message.guild.members.get(user.id).bannable) return;
 
-  message.guild.members.get(user.id).ban(7);
-  message.guild.unban(user.id);
+  message.guild.members.get(user.id).ban(7).catch(e => {
+    Bastion.log.error(e.stack);
+  });
+  message.guild.unban(user.id).catch(e => {
+    Bastion.log.error(e.stack);
+  });
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) reason = 'No reason given';
 
@@ -50,12 +54,16 @@ exports.run = function(Bastion, message, args) {
         inline: false
       }
     ]
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
   user.sendMessage('', {embed: {
     color: 14845440,
     title: `Soft-Banned from ${message.guild.name} Server`,
     description: `**Reason:** ${reason}`
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

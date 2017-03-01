@@ -101,7 +101,9 @@ exports.run = function(Bastion, message, args) {
     thumbnail: {
       url: `https://dummyimage.com/250/${args[0].indexOf('#') != -1 ? args[0].split('#').slice(1).join() : args[0]}/&text=%20`
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

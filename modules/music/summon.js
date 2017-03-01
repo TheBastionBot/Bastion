@@ -28,15 +28,21 @@ exports.run = function(Bastion, message, args) {
     if (!voiceChannel || voiceChannel.type !== 'voice') return message.channel.sendMessage('', {embed: {
       color: 13380644,
       description: `I can't join your voice channel <@${message.author.id}>.`
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
     if (voiceChannel.joinable) voiceChannel.join().then(connection => {
-      message.guild.members.get(Bastion.user.id).setDeaf(true);
+      message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       if (!voiceChannel.speakable) {
         voiceChannel.leave();
         message.channel.sendMessage('', {embed: {
           color: 13380644,
           description: 'I don\'t have permissions to speak in this channel.'
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }
     });
   }
@@ -46,19 +52,27 @@ exports.run = function(Bastion, message, args) {
       if (!musicChannel.musicVoiceChannelID) return message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: 'No default music channel has been set. So, only the bot owner can use this command.'
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID))) return message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: `I can't join your voice channel <@${message.author.id}>.`
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       if (voiceChannel.joinable) voiceChannel.join().then(connection => {
-        message.guild.members.get(Bastion.user.id).setDeaf(true);
+        message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
+          Bastion.log.error(e.stack);
+        });
         if (!voiceChannel.speakable) {
           voiceChannel.leave();
           message.channel.sendMessage('', {embed: {
             color: 13380644,
             description: 'I don\'t have permissions to speak in this channel.'
-          }});
+          }}).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         }
       });
     });

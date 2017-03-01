@@ -91,7 +91,9 @@ exports.run = function(Bastion, message, args) {
     thumbnail: {
       url: user.avatarURL
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

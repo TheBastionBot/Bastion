@@ -51,7 +51,9 @@ exports.run = function(Bastion, message, args) {
             text: 'Powered by xkcd',
             icon_url: 'https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_1024x1024.png?v=1479786341'
           }
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       });
     });
   }
@@ -81,7 +83,9 @@ exports.run = function(Bastion, message, args) {
           text: 'Powered by xkcd',
           icon_url: 'https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_1024x1024.png?v=1479786341'
         }
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     });
   }
   else {
@@ -112,7 +116,9 @@ exports.run = function(Bastion, message, args) {
             text: 'Powered by xkcd',
             icon_url: 'https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_1024x1024.png?v=1479786341'
           }
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       });
     });
   }

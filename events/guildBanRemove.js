@@ -45,6 +45,10 @@ module.exports = (guild, user) => {
           inline: false
         }
       ]
-    }});
+    }}).catch(e => {
+      guild.client.log.error(e.stack);
+    });
+  }).catch(e => {
+    guild.client.log.error(e.stack);
   });
 };

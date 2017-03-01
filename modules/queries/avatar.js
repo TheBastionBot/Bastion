@@ -37,7 +37,9 @@ exports.run = function(Bastion, message, args) {
     image: {
       url: user.avatarURL
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

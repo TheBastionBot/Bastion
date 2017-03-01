@@ -35,7 +35,9 @@ exports.run = function(Bastion, message, args) {
       color: 5088314,
       title: title,
       description: topic
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

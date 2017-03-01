@@ -41,7 +41,9 @@ exports.run = function(Bastion, message, args) {
     footer: {
       text: `Quote: ${index}`
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

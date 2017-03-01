@@ -31,7 +31,9 @@ exports.run = function(Bastion, message, args) {
         text: `Powered by Google Translate | Translation from ${res.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`,
         icon_url: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Google_Translate_Icon.png'
       }
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

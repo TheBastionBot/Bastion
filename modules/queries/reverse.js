@@ -28,7 +28,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'Reversed Text:',
     description: reverseString(args.join(' '))
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

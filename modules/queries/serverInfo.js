@@ -78,7 +78,9 @@ exports.run = function(Bastion, message, args) {
     thumbnail: {
       url: message.guild.iconURL
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

@@ -37,7 +37,9 @@ exports.run = function(Bastion, message, args) {
       color: 13380644,
       title: 'Role Removed',
       description: `**${user.username}**#${user.discriminator} has now been removed from **${role.name}** role.`,
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

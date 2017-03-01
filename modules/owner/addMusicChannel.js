@@ -39,7 +39,9 @@ exports.run = function(Bastion, message, args) {
           value: message.guild.channels.filter(c => c.type == 'voice').get(args[0]) ? message.guild.channels.filter(c => c.type == 'voice').get(args[0]).name : 'Invalid'
         }
       ]
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

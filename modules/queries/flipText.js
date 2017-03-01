@@ -27,13 +27,15 @@ exports.run = function(Bastion, message, args) {
 
   args = args.join(' ');
   for (var i = 0; i < Object.keys(flipText).length; i++)
-      args = args.replace(Object.keys(flipText)[i], flipText[Object.keys(flipText)[i]]);
+    args = args.replace(Object.keys(flipText)[i], flipText[Object.keys(flipText)[i]]);
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,
     title: 'Flipped Text:',
     description: reverseString(args)
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

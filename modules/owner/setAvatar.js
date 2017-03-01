@@ -28,7 +28,11 @@ exports.run = function(Bastion, message, args) {
       message.channel.sendMessage('', {embed: {
         color: 14211540,
         description: `${Bastion.user.username}'s avatar changed!`
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
+      Bastion.log.error(e.stack);
     });
   }
 };

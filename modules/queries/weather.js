@@ -95,7 +95,9 @@ exports.run = function(Bastion, message, args) {
         text: 'Powered by MSN Weather',
         icon_url: 'https://compass-ssl.microsoft.com/assets/97/01/97013f72-b153-4c69-ab73-a7416cb126b5.png?n=weather-png.png'
       }
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

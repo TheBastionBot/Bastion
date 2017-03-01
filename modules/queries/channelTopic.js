@@ -26,7 +26,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'Channel Topic',
     description: (channel.topic == null || channel.topic.length < 1) ? 'No channel topic set' : channel.topic
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

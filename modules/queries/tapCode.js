@@ -61,7 +61,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'Tap Code',
     description: `**${args}**`
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

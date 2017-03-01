@@ -28,8 +28,34 @@ exports.run = function(Bastion, message, args) {
       footer: {
         text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
       }
-    }});
-
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+    message.author.sendMessage('', {embed: {
+      color: 6651610,
+      title: 'Bastion Discord BOT',
+      url: 'https://bastion.js.org',
+      description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for any help you need.',
+      fields: [
+        {
+          name: 'Support Server Invite Link',
+          value: 'https://discord.gg/fzx8fkt'
+        },
+        {
+          name: 'BOT Invite Link',
+          value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
+        }
+      ],
+      thumbnail: {
+        url: message.client.user.avatarURL
+      },
+      footer: {
+        icon_url: 'https://sankarsankampa.com/assets/img/logo/snkrsn_32.png',
+        text: 'Copyright © 2017 Sankarsan Kampa | @snkrsnkampa'
+      }
+    }}).catch(e => {
+      message.client.log.error(e.stack);
+    });
   } else {
     let command = args[0];
     if (Bastion.commands.has(command)) {
@@ -73,7 +99,9 @@ exports.run = function(Bastion, message, args) {
             inline: true
           }
         ]
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }
   }
 };

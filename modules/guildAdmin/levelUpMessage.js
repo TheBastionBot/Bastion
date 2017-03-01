@@ -23,25 +23,25 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = function(Bastion, message, args) {
-  if (!message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0 && !message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID ='${message.guild.id}'`).then(row => {
-    if (row.filterInvite == 'false') {
-      sql.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID='${message.guild.id}'`).catch(e => {
+  sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID ='${message.guild.id}'`).then(guild => {
+    if (guild.levelUpMessage == 'true') {
+      sql.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID='${message.guild.id}'`).catch(e => {
         Bastion.log.error(e.stack);
       });
-      filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
+      levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
     }
     else {
-      sql.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID='${message.guild.id}'`).catch(e => {
         Bastion.log.error(e.stack);
       });
-      filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
+      levelUpMessageStats = 'I will now send messages when someone levels up.';
     }
 
     message.channel.sendMessage('', {embed: {
       color: 5088314,
-      description: filterInviteStats
+      description: levelUpMessageStats
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
@@ -51,12 +51,12 @@ exports.run = function(Bastion, message, args) {
 };
 
 exports.conf = {
-  aliases: ['filterinv']
+  aliases: ['lvlupmsg']
 };
 
 exports.help = {
-  name: 'filterinvite',
-  description: 'Toggles automatic deleting of discord server invites posted in the server. Does not apply to the server Administrators.',
-  permission: 'Manage Messages',
-  usage: ['filterInvite']
+  name: 'levelupmessage',
+  description: 'Toggles sending messages when someone levels up in this server.',
+  permission: '',
+  usage: ['levelUpMessage']
 };

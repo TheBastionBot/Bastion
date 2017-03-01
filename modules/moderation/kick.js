@@ -25,7 +25,9 @@ exports.run = function(Bastion, message, args) {
   if (!(user = message.mentions.users.first())) return;
   if (!message.guild.members.get(user.id).kickable) return;
 
-  message.guild.members.get(user.id).kick();
+  message.guild.members.get(user.id).kick().catch(e => {
+    Bastion.log.error(e.stack);
+  });
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) reason = 'No reason given';
 
@@ -49,12 +51,16 @@ exports.run = function(Bastion, message, args) {
         inline: false
       }
     ]
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
   user.sendMessage('', {embed: {
     color: 15451167,
     title: `Kicked from ${message.guild.name} Server`,
     description: `**Reason:** ${reason}`
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

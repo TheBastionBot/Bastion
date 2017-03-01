@@ -25,7 +25,6 @@ module.exports = Bastion => {
   Bastion.on('channelCreate', loadEvent('channelCreate'));
   Bastion.on('channelDelete', loadEvent('channelDelete'));
   Bastion.on('channelUpdate', loadEvent('channelUpdate'));
-  // Bastion.on('debug', loadEvent('debug'));
   Bastion.on('disconnect', () => loadEvent('disconnect')(Bastion));
   Bastion.on('error', loadEvent('error'));
   Bastion.on('guildBanAdd', loadEvent('guildBanAdd'));

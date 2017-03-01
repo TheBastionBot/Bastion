@@ -23,8 +23,11 @@ exports.run = function(Bastion, message, args) {
   message.channel.sendMessage('', {embed: {
     color: 3050327,
     title: 'Support Bastion BOT project',
+    url: 'https://bastion.js.org/',
     description: `You can support the Bastion BOT project on patreon: https://patreon.com/snkrsnkampa\n\nOR\n\nYou can send donations to https://paypal.me/snkrsnkampa\n\nDon't forget to leave your Discord username and/or user id in the message.\n\nThank you :hearts:️`,
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

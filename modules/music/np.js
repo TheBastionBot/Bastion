@@ -20,7 +20,9 @@
  */
 
 exports.run = function(Bastion, message, args) {
-  message.delete();
+  message.delete().catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

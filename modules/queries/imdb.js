@@ -82,7 +82,9 @@ exports.run = function(Bastion, message, args) {
         icon_url: 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg',
         text: 'Powered by IMDb'
       }
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

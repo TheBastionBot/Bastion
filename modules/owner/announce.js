@@ -34,7 +34,9 @@ exports.run = function(Bastion, message, args) {
     color: 5088314,
     title: 'Announced',
     description: args.join(' ')
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

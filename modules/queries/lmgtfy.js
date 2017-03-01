@@ -30,7 +30,9 @@ exports.run = function(Bastion, message, args) {
     footer: {
       text: 'Powered by lmgtfy'
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

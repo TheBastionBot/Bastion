@@ -51,7 +51,9 @@ exports.run = function(Bastion, message, args) {
     footer: {
       text: '🎱 Magic 8-ball'
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

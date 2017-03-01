@@ -29,12 +29,18 @@ exports.run = function(Bastion, message, args) {
         name: 'Help',
         value: `To get help/details about a command, type \`${Bastion.config.prefix}help command_name\``,
         inline: true
+      },
+      {
+        name: 'Commands List',
+        value: 'To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).'
       }
     ],
     footer: {
       text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
     }
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

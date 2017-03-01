@@ -37,7 +37,9 @@ exports.run = function(Bastion, message, args) {
       color: 5088314,
       title: 'Role Added',
       description: `**${user.username}**#${user.discriminator} has now been given **${role.name}** role.`,
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

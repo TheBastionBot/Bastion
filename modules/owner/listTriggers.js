@@ -30,7 +30,9 @@ exports.run = function(Bastion, message, args) {
       color: 5088314,
       title: 'List of triggers',
       description: triggers.map(t => t.trigger).join('\n\n')
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

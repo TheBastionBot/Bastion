@@ -49,7 +49,9 @@ exports.run = function(Bastion, message, args) {
         }
       }};
     }
-    message.channel.sendMessage('', embed);
+    message.channel.sendMessage('', embed).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

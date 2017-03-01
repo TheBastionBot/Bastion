@@ -44,7 +44,9 @@ exports.run = function(Bastion, message, args) {
   message.channel.sendMessage('', {embed: {
     color: 6651610,
     description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

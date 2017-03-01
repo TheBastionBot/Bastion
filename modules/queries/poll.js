@@ -49,7 +49,9 @@ exports.run = function(Bastion, message, args) {
       footer: {
         text: `To get help with voting, type: ${Bastion.config.prefix}help vote`
       }
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
 
     votes.on('message', m => {
       if ((m.content.startsWith(`${Bastion.config.prefix}endpoll`) || m.content.startsWith(`${Bastion.config.prefix}pollend`)) && (m.author.id == message.author.id)) votes.stop();
@@ -59,7 +61,9 @@ exports.run = function(Bastion, message, args) {
         description: `**+1 Vote:** ${args[i]}`
       }}).then(v => {
         v.delete();
-        m.delete();
+        m.delete().catch(e => {
+          Bastion.log.error(e.stack);
+        });
       });
     });
     votes.on('end', pollRes => {
@@ -84,9 +88,11 @@ exports.run = function(Bastion, message, args) {
         title: 'Poll Result',
         description: args[0],
         fields: result
-      }}).then(
+      }}).then(() => {
         activeChannels=activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1)
-      );
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     });
   }
   else {

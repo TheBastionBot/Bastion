@@ -28,7 +28,9 @@ exports.run = function(Bastion, message, args) {
   args = args.join(' ')
   if (!/.+ << .+/.test(args)) return;
   args = args.split(' << ');
-  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [args[0], args[1]]);
+  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [args[0], args[1]]).catch(e => {
+    Bastion.log.error(e.stack);
+  });;
 
   message.channel.sendMessage('', {embed: {
     color: 5088314,
@@ -43,7 +45,9 @@ exports.run = function(Bastion, message, args) {
         value: args[1]
       }
     ]
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

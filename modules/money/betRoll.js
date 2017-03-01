@@ -27,7 +27,9 @@ exports.run = function(Bastion, message, args) {
   if (args[0] < 2) return message.channel.sendMessage('', {embed: {
     color: 13380644,
     description: 'Minimum bet amount is 2 Bastion Currencies.'
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 
   let outcomes = [
     'one',
@@ -43,25 +45,29 @@ exports.run = function(Bastion, message, args) {
     if (args[0] > profile.bastionCurrencies) return message.channel.sendMessage('', {embed: {
       color: 13380644,
       description: `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
     if (outcome.toLowerCase() == args[1].toLowerCase()) {
       prize = args[0] < 50 ? parseInt(args[0])+outcomes.length : args[0] < 100 ? parseInt(args[0])*2 : parseInt(args[0])*3;
       result = `Congratulations! You won the bet.\nYou won **${prize}** Bastion Flowers.`;
       sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)+parseInt(prize)} WHERE userID=${message.author.id}`).catch(e => {
         Bastion.log.error(e.stack);
-      });;
+      });
     }
     else {
       result = 'Sorry, you lost the bet. Better luck next time.';
       sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)-parseInt(args[0])} WHERE userID=${message.author.id}`).catch(e => {
         Bastion.log.error(e.stack);
-      });;
+      });
     }
     message.channel.sendMessage('', {embed: {
       color: 6651610,
       title: `Rolled :${outcome}:`,
       description: result
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

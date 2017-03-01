@@ -22,7 +22,9 @@
 exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!/^[0-9]{18}$/.test(args[0])) return;
-  if (Bastion.guilds.get(args[0]).available) Bastion.guilds.get(args[0]).leave();
+  if (Bastion.guilds.get(args[0]).available) Bastion.guilds.get(args[0]).leave().catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

@@ -25,7 +25,15 @@ exports.run = function(Bastion, message, args) {
     title: 'Bastion BOT - Support Server',
     url: 'https://discord.gg/fzx8fkt',
     description: `Need help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt`,
-  }});
+    fields: [
+      {
+        name: 'Website'
+        value: 'https://bastion.js.org/'
+      }
+    ]
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

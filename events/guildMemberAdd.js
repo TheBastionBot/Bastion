@@ -35,9 +35,15 @@ module.exports = member => {
         title: `Hello ${member.displayName}`,
         description: greetMsg
       }}).then(m => {
-        if (greetTimeout > 0) m.delete(1000*parseInt(greetTimeout));
+        if (greetTimeout > 0) m.delete(1000*parseInt(greetTimeout)).catch(e => {
+          member.client.log.error(e.stack);
+        });
+      }).catch(e => {
+        member.client.log.error(e.stack);
       });
     }
+  }).catch(e => {
+    member.client.log.error(e.stack);
   });
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID ='${member.guild.id}'`).then(row => {
@@ -62,6 +68,10 @@ module.exports = member => {
           inline: false
         }
       ]
-    }});
+    }}).catch(e => {
+      member.client.log.error(e.stack);
+    });
+  }).catch(e => {
+    member.client.log.error(e.stack);
   });
 };

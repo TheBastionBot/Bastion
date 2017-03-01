@@ -27,7 +27,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'Fortune:',
     description: fortuneCookies[getRandomInt(0, fortuneCookies.length -1)]
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

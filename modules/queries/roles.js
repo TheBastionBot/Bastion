@@ -33,7 +33,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'List of Roles',
     fields: fields
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

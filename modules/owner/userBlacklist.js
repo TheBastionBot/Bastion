@@ -42,7 +42,7 @@ exports.run = function(Bastion, message, args) {
             Bastion.log.error(e.stack);
           });
         }
-        title = 'Added to blacklisted users'
+        title = 'Added to blacklisted users';
       }
       else if (/^(remove|rem|-)$/i.test(args[0])) {
         for (var i = 0; i < user.length; i++) {
@@ -51,14 +51,16 @@ exports.run = function(Bastion, message, args) {
             Bastion.log.error(e.stack);
           });
         }
-        title = 'Removed from blacklisted users'
+        title = 'Removed from blacklisted users';
       } else return;
 
       message.channel.sendMessage('', {embed: {
         color: 13380644,
         title: title,
         description: user.join(', ')
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }).catch(e => {
       Bastion.log.error(e.stack);
     });

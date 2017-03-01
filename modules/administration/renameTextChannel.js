@@ -28,7 +28,9 @@ exports.run = function(Bastion, message, args) {
       color: 5088314,
       title: 'Channel Name Changed',
       description: args.join('-')
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

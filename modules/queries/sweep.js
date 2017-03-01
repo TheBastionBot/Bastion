@@ -39,7 +39,9 @@ exports.run = function(Bastion, message, args) {
         inline: true
       }
     ]
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

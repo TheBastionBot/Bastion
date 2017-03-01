@@ -24,7 +24,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'In my opinion',
     description: args.join(' ').split('/')[Math.floor(Math.random()*args.join(' ').split('/').length)],
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

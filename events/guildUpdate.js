@@ -46,6 +46,10 @@ module.exports = (oldGuild, newGuild) => {
           inline: true
         }
       ]
-    }});
+    }}).catch(e => {
+      newGuild.client.log.error(e.stack);
+    });
+  }).catch(e => {
+    newGuild.client.log.error(e.stack);
   });
 };

@@ -23,11 +23,15 @@ exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (args.join(' ').length >= 1) {
-    Bastion.user.setUsername(args.join(' '));
+    Bastion.user.setUsername(args.join(' ')).catch(e => {
+      Bastion.log.error(e.stack);
+    });
     message.channel.sendMessage('', {embed: {
       color: 14211540,
       description: `${Bastion.user.username}'s username is now set to **${args.join(' ')}**`
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
 };
 

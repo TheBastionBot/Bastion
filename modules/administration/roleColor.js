@@ -47,7 +47,9 @@ exports.run = function(Bastion, message, args) {
         thumbnail: {
           url: `https://dummyimage.com/250/${args[0].slice(1)}/&text=%20`,
         }
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }).catch(e => {
       Bastion.log.error(e.stack);
     });

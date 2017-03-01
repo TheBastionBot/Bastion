@@ -31,7 +31,9 @@ exports.run = function(Bastion, message, args) {
       color: 13380644,
       title: 'Trigger deleted',
       description: args.join(' ')
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

@@ -35,7 +35,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
     description: crimeStat
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

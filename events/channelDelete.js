@@ -50,8 +50,10 @@ module.exports = channel => {
           inline: true
         }
       ]
-    }});
+    }}).catch(e => {
+      channel.client.log.error(e.stack);
+    });
   }).catch(e => {
     channel.client.log.error(e.stack);
-  });;
+  });
 };

@@ -37,7 +37,9 @@ exports.run = function(Bastion, message, args) {
       title: 'Hall of Fame',
       description: `Top ${profiles.length} users with highest Level & Experience Points`,
       fields: fields
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

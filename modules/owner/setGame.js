@@ -23,14 +23,20 @@ exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (args.length >= 1) {
-    Bastion.user.setGame(args.join(' '));
+    Bastion.user.setGame(args.join(' ')).catch(e => {
+      Bastion.log.error(e.stack);
+    });
     message.channel.sendMessage('', {embed: {
       color: 14211540,
       description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
   else {
-    Bastion.user.setGame(Bastion.config.game)
+    Bastion.user.setGame(Bastion.config.game).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
 };
 

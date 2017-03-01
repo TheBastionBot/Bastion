@@ -27,7 +27,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'Cat Fact:',
     description: catFacts[getRandomInt(0, catFacts.length -1)]
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

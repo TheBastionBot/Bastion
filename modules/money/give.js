@@ -31,7 +31,9 @@ exports.run = function(Bastion, message, args) {
     else return message.channel.sendMessage('', {embed: {
       color: 13380644,
       description: 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.'
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
   if (Bastion.credentials.ownerId.indexOf(message.author.id) > -1) {
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
@@ -47,11 +49,15 @@ exports.run = function(Bastion, message, args) {
       message.channel.sendMessage('', {embed: {
         color: 5088314,
         description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       Bastion.users.get(user).sendMessage('', {embed: {
         color: 5088314,
         description: `You have been awarded **${args[0]}** Bastion Currencies from ${message.author}.`
-      }});
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
@@ -62,7 +68,9 @@ exports.run = function(Bastion, message, args) {
       if (sender.bastionCurrencies < args[0]) return message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: `Sorry, unfortunately, you don't have enough Bastion Currencies with you to give it to others.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`
-      }})
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
         if (!receiver)
           sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, parseInt(args[0])]).catch(e => {
@@ -79,11 +87,15 @@ exports.run = function(Bastion, message, args) {
         message.channel.sendMessage('', {embed: {
           color: 5088314,
           description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
         Bastion.users.get(user).sendMessage('', {embed: {
           color: 5088314,
           description: `You have received **${args[0]}** Bastion Currencies from ${message.author}.`
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }).catch(e => {
         Bastion.log.error(e.stack);
       });

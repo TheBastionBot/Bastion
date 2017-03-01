@@ -27,7 +27,7 @@ module.exports = Bastion => {
   Bastion.user.setStatus(Bastion.config.status);
   Bastion.user.setGame(Bastion.config.game);
 
-  sql.run("CREATE TABLE IF NOT EXISTS guildSettings (guildID TEXT NOT NULL UNIQUE, greet TEXT NOT NULL DEFAULT 'false', greetChannelID TEXT, greetMessage TEXT NOT NULL DEFAULT 'Welcome to $server.', greetTimeout INTEGER NOT NULL DEFAULT 30, farewell TEXT NOT NULL DEFAULT 'false', farewellChannelID TEXT UNIQUE, farewellMessage TEXT NOT NULL DEFAULT 'We hope you enjoyed your stay here!', farewellTimeout INTEGER NOT NULL DEFAULT 15, log TEXT NOT NULL DEFAULT 'false', logChannelID TEXT UNIQUE, musicTextChannelID TEXT UNIQUE, musicVoiceChannelID TEXT UNIQUE, filterInvite TEXT NOT NULL DEFAULT 'false', chat TEXT NOT NULL DEFAULT 'false', PRIMARY KEY(guildID))").then(() => {
+  sql.run("CREATE TABLE IF NOT EXISTS guildSettings (guildID TEXT NOT NULL UNIQUE, greet TEXT NOT NULL DEFAULT 'false', greetChannelID TEXT, greetMessage TEXT NOT NULL DEFAULT 'Welcome to $server.', greetTimeout INTEGER NOT NULL DEFAULT 30, farewell TEXT NOT NULL DEFAULT 'false', farewellChannelID TEXT UNIQUE, farewellMessage TEXT NOT NULL DEFAULT 'We hope you enjoyed your stay here!', farewellTimeout INTEGER NOT NULL DEFAULT 15, log TEXT NOT NULL DEFAULT 'false', logChannelID TEXT UNIQUE, musicTextChannelID TEXT UNIQUE, musicVoiceChannelID TEXT UNIQUE, filterInvite TEXT NOT NULL DEFAULT 'false', chat TEXT NOT NULL DEFAULT 'false', levelUpMessage TEXT NOT NULL DEFAULT 'true', PRIMARY KEY(guildID))").then(() => {
     let BastionGuilds = Bastion.guilds.map(g => g.id);
     sql.all('SELECT guildID from guildSettings').then(row => {
       row = row.map(r => r.guildID);
@@ -40,7 +40,9 @@ module.exports = Bastion => {
           }
         }
         if(found == false)
-        sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [`${BastionGuilds[i]}`]);
+        sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [`${BastionGuilds[i]}`]).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }
       for (var i = 0; i < row.length; i++) {
         var found = false;
@@ -51,11 +53,15 @@ module.exports = Bastion => {
           }
         }
         if(found == false)
-        sql.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`);
+        sql.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
+  }).catch(e => {
+    Bastion.log.error(e.stack);
   });
   sql.run("CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))").catch(e => {
     Bastion.log.error(e.stack);

@@ -21,14 +21,17 @@
 
 exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
-
   if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) return;
 
-  Bastion.user.setGame(args.slice(1).join(' '), args[0]);
+  Bastion.user.setGame(args.slice(1).join(' '), args[0]).catch(e => {
+    Bastion.log.error(e.stack);
+  });
   message.channel.sendMessage('', {embed: {
     color: 14211540,
     description: `${Bastion.user.username} is now streaming **${args.slice(1).join(' ')}**`
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

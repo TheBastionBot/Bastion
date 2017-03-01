@@ -37,7 +37,9 @@ exports.run = function(Bastion, message, args) {
       title: 'Leaderboard',
       description: `Top ${profiles.length} users with highest Bastion Currencies`,
       fields: fields
-    }});
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });

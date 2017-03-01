@@ -37,7 +37,9 @@ exports.run = function(Bastion, message, args) {
     color: 6651610,
     title: 'You rolled:',
     description: outcome
-  }});
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {
