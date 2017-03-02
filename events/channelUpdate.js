@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 module.exports = (oldChannel, newChannel) => {
   if (oldChannel.name == newChannel.name) return;
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID ='${newChannel.guild.id}'`).then(row => {
+  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newChannel.guild.id}`).then(row => {
     if (row.log == 'false') return;
     newChannel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 5088314,

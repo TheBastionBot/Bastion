@@ -23,38 +23,43 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = channel => {
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID ='${channel.guild.id}'`).then(row => {
-    if (!row) return;
-    if (row.log == 'false') return;
-    channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: 5088314,
-      title: 'Channel Created',
-      fields: [
-        {
-          name: 'Name',
-          value: channel.name,
-          inline: true
-        },
-        {
-          name: 'ID',
-          value: channel.id,
-          inline: true
-        },
-        {
-          name: 'Type',
-          value: channel.type,
-          inline: true
-        },
-        {
-          name: 'Created At',
-          value: channel.createdAt.toUTCString(),
-          inline: false
-        }
-      ]
-    }}).catch(e => {
+  // I've Try/Catch because guild object is sometimes null, and I don't know why. If anyone finds the isseu, please let me know.
+  try {
+    sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${channel.guild.id}`).then(row => {
+      if (!row) return;
+      if (row.log == 'false') return;
+      channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+        color: 5088314,
+        title: 'Channel Created',
+        fields: [
+          {
+            name: 'Name',
+            value: channel.name,
+            inline: true
+          },
+          {
+            name: 'ID',
+            value: channel.id,
+            inline: true
+          },
+          {
+            name: 'Type',
+            value: channel.type,
+            inline: true
+          },
+          {
+            name: 'Created At',
+            value: channel.createdAt.toUTCString(),
+            inline: false
+          }
+        ]
+      }}).catch(e => {
+        channel.client.log.error(e.stack);
+      });
+    }).catch(e => {
       channel.client.log.error(e.stack);
     });
-  }).catch(e => {
+  } catch (e) {
     channel.client.log.error(e.stack);
-  });
+  }
 };
