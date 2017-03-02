@@ -110,6 +110,6 @@ exports.conf = {
 exports.help = {
   name: 'poll',
   description: 'Starts a poll which requires users to vote using the `vote` command. Separate question & each answers with `;`',
-  permission: 'Manage Messages',
+  permission: '',
   usage: ['poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2']
 };

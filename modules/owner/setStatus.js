@@ -47,6 +47,6 @@ exports.conf = {
 exports.help = {
   name: 'setstatus',
   description: 'Sets the bot\'s status to the given status (online/idle/dnd/invisible). If no status is given as the argument, it will set the bot\'s status to default (given in `config.json`).',
-  permission: 'Bot Owner Only',
+  permission: '',
   usage: ['setStatus invisible', 'setStatus']
 };

@@ -42,6 +42,6 @@ exports.conf = {
 exports.help = {
   name: 'setusername',
   description: 'Give a new username to the bot. (NOTE: It\'s Rate limited. You can only change it two times in an hour.)',
-  permission: 'Bot Owner Only',
+  permission: '',
   usage: ['setUsername NewUsername']
 };

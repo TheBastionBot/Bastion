@@ -28,6 +28,6 @@ exports.conf = {
 exports.help = {
   name: 'endpoll',
   description: 'Ends an ongoing poll and shows the result.',
-  permission: 'Poll Author',
+  permission: '',
   usage: ['endpoll']
 };

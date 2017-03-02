@@ -41,6 +41,6 @@ exports.conf = {
 exports.help = {
   name: 'shutdown',
   description: 'Shuts the bot down and terminates the process.',
-  permission: 'Bot Owner Only',
+  permission: '',
   usage: ['shutdown']
 };
