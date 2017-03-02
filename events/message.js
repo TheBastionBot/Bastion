@@ -164,9 +164,7 @@ module.exports = message => {
               message.channel.sendMessage(response).catch(e => {
                 message.client.log.error(e.stack);
               });
-              message.channel.stopTyping().catch(e => {
-                message.client.log.error(e.stack);
-              });
+              message.channel.stopTyping();
             }, response.length * 100);
           });
         });
