@@ -42,6 +42,8 @@ exports.run = function(Bastion, message, args) {
   } else {
     game = user.presence.game.name;
   }
+  let roles = message.guild.members.get(user.id).roles.map(r=>r.name).slice(1).join("\n");
+  if (roles == '') roles = '-';
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,
@@ -64,7 +66,7 @@ exports.run = function(Bastion, message, args) {
       },
       {
         name: "Roles",
-        value: message.guild.members.get(user.id).roles.map(r=>r.name).slice(1).join("\n"),
+        value: roles,
         inline: true
       },
       {
