@@ -24,7 +24,7 @@ exports.run = function(Bastion, message, args) {
 
   user = message.mentions.users.first();
   amount = parseInt(args[0]) ? args[0] : args[1];
-  amount = /^([2-9]|[1-9]{2}|100)$/.test(amount) ? parseInt(amount) : 100;
+  amount = /^[1-9][0-9]?$|^100$/.test(amount) ? parseInt(amount) : 100;
 
   message.channel.fetchMessages({
     limit: amount
