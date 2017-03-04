@@ -75,6 +75,7 @@ module.exports = message => {
         msg = msg.replace(/\$user/ig, `<@${message.author.id}>`);
         msg = msg.replace(/\$username/ig, message.author.username);
         msg = msg.replace(/\$server/ig, `**${message.guild.name}**`);
+        msg = msg.replace(/\$prefix/, message.client.config.prefix);
         return message.channel.sendMessage(msg).catch(e => {
           message.client.log.error(e.stack);
         });
