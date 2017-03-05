@@ -20,21 +20,23 @@
  */
 
 exports.run = function(Bastion, message, args) {
+  let modules = getDirSync('./modules/');
+  let fields = [];
+  for (var i = 0; i < modules.length; i++) {
+    commands[modules[i]] = [];
+    loadCommands(modules[i]);
+    fields.push({
+      name: modules[i].toUpperCase(),
+      value: Bastion.config.prefix + commands[modules[i]].join(`\n${Bastion.config.prefix}`),
+      inline: true
+    });
+  }
+
   message.channel.sendMessage('', {embed: {
     color: 15451167,
     title: 'List of Commands',
-    description: Array.from(Bastion.commands.keys()).join(', '),
-    fields: [
-      {
-        name: 'Help',
-        value: `To get help/details about a command, type \`${Bastion.config.prefix}help command_name\``,
-        inline: true
-      },
-      {
-        name: 'Commands List',
-        value: 'To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).'
-      }
-    ],
+    description: `To get help/details about a command, type \`${Bastion.config.prefix}help command_name\`\nTo get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
+    fields: fields,
     footer: {
       text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
     }
@@ -53,3 +55,11 @@ exports.help = {
   permission: '',
   usage: ['commands']
 };
+
+function loadCommands(module) {
+  files = fs.readdirSync(`./modules/${module}/`);
+  files.forEach(f => {
+    let cmd = require(`../../modules/${module}/${f}`);
+    commands[module].push(cmd.help.name);
+  });
+}
