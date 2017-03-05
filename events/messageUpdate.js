@@ -23,7 +23,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldMessage, newMessage) => {
+  if (newMessage.channel.type != 'text') return;
   if (newMessage.author.bot) return;
+
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterInvite == 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission("ADMINISTRATOR")) {
       let pattern = new RegExp('(https://)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)/?([a-z0-9-.]+)?', 'i');

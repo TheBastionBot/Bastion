@@ -23,6 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldChannel, newChannel) => {
+  if (channel.type != 'text') return;
   if (oldChannel.name == newChannel.name) return;
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newChannel.guild.id}`).then(row => {
