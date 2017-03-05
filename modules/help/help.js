@@ -35,7 +35,7 @@ exports.run = function(Bastion, message, args) {
       color: 6651610,
       title: 'Bastion Discord BOT',
       url: 'https://bastion.js.org',
-      description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for any help you need.',
+      description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
       fields: [
         {
           name: 'Support Server Invite Link',
