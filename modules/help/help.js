@@ -24,7 +24,7 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 15451167,
       title: 'Help',
-      description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help commandName\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt`,
+      description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help commandName\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
       footer: {
         text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
       }
