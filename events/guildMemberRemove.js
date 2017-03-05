@@ -29,7 +29,7 @@ module.exports = member => {
       farewellMsg = farewellMsg.replace(/\$user/, `<@${member.id}>`);
       farewellMsg = farewellMsg.replace(/\$server/, member.guild.name);
       farewellMsg = farewellMsg.replace(/\$username/, member.displayName);
-      greetMsg = greetMsg.replace(/\$prefix/, member.client.config.prefix);
+      farewellMsg = farewellMsg.replace(/\$prefix/, member.client.config.prefix);
 
       member.guild.channels.get(row.farewellChannelID).sendMessage('', {embed: {
         color: 13380644,
