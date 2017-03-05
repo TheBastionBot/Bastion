@@ -19,6 +19,10 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
+const fs = require('fs');
+const getDirSync = require('../../functions/getDirSync').func;
+let commands = new Object();
+
 exports.run = function(Bastion, message, args) {
   let modules = getDirSync('./modules/');
   let fields = [];
