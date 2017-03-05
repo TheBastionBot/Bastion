@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const zalgolize = require('zalgolize');
+const zalgo = require('zalgolize');
 
 exports.run = function(Bastion, message, args) {
   if (args.length < 1) return;
