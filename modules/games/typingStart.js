@@ -43,12 +43,18 @@ exports.run = function(Bastion, message, args) {
         if (reason == 'time') return message.channel.sendMessage('', {embed: {
           color: 13380644,
           description: 'Unfortunately, no one was able to type the article on time.'
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
         message.channel.sendMessage('', {embed: {
           color: 6651610,
           description: `Congrats ${collection.map(m => m.author)[0]}! You won it.`
-        }});
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       });
+    }).catch(e => {
+      Bastion.log.error(e.stack);
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
