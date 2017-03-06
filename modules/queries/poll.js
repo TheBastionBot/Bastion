@@ -64,6 +64,8 @@ exports.run = function(Bastion, message, args) {
         m.delete().catch(e => {
           Bastion.log.error(e.stack);
         });
+      }).catch(e => {
+        Bastion.log.error(e.stack);
       });
     });
     votes.on('end', pollRes => {
@@ -99,7 +101,9 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 13380644,
       description: `Can\'t start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll, you can end that by typing \`${Bastion.config.prefix}endpoll\``
-    }})
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
 };
 
