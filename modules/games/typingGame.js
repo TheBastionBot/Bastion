@@ -47,14 +47,15 @@ exports.run = function(Bastion, message, args) {
         collector.on('end', (collection, reason) => {
           if (reason == 'time') {
             color = 13380644;
-            result = 'Unfortunately, no one was able to type the article on time.';
+            result = 'Game ended. Unfortunately, no one was able to type the article on time.';
           }
           else {
             color = 6651610;
-            result = `Congrats ${collection.map(m => m.author)[0]}! You won it.`;
+            result = `Game ended. Congratulations ${collection.map(m => m.author)[0]}! You won it.`;
           }
           message.channel.sendMessage('', {embed: {
             color: color,
+            title: 'Typing Game',
             description: result
           }}).then(() => {
             activeChannels=activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1)
