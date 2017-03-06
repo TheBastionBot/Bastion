@@ -44,3 +44,7 @@ require('./handlers/eventHandler')(Bastion);
 require('./handlers/moduleHandler')(Bastion);
 
 Bastion.login(Bastion.credentials.token);
+
+process.on('unhandledRejection', (reason, p) => {
+  console.log('\n[ Unhandled Rejection ] at:\nPromise:\n', p, '\n\nReason:\n', reason, '\n');
+});
