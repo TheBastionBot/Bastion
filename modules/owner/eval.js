@@ -35,7 +35,7 @@ exports.run = function(Bastion, message, args) {
           },
           {
             name: ':outbox_tray:  OUTPUT',
-            value: `\`\`\`js\n${clean(evaled)}\n\`\`\``
+            value: `\`\`\`js\n${clean(Bastion, evaled)}\n\`\`\``
           }
         ]
       }}).catch(e => {
@@ -52,7 +52,7 @@ exports.run = function(Bastion, message, args) {
         fields: [
           {
             name: ':no_entry:  ERROR',
-            value: `\`\`\`js\n${clean(e)}\n\`\`\``
+            value: `\`\`\`js\n${clean(Bastion, e)}\n\`\`\``
           }
         ]
       }}).catch(e => {
@@ -75,7 +75,8 @@ exports.help = {
   usage: ['eval message.guild.members.size']
 };
 
-function clean(text) {
+function clean(Bastion, text) {
+  if (text.includes(Bastion.token)) text = text.replace(Bastion.token, 'Not for your :eyes:!');
   if (typeof(text) === 'string') return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
   else return text;
 }
