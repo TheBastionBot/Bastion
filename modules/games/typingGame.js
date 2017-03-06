@@ -30,7 +30,10 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 5088314,
       title: 'Typing Game',
-      description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`
+      description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`,
+      footer: {
+        text: `You have ${5} minutes to make your submission.`
+      }
     }}).then(msg => {
       let index = getRandomInt(1, Object.keys(typingArticles).length);
       message.channel.sendMessage('', {embed: {
