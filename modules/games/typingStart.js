@@ -21,44 +21,61 @@
 
 const getRandomInt = require('../../functions/getRandomInt').func;
 const typingArticles = require('../../data/typingArticles.json');
+let activeChannels = [];
 
 exports.run = function(Bastion, message, args) {
-  message.channel.sendMessage('', {embed: {
-    color: 5088314,
-    description: `${message.author} started a typing contest, type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`
-  }}).then(msg => {
-    let index = getRandomInt(1, Object.keys(typingArticles).length);
+  if(!activeChannels.includes(message.channel.id)) {
+    activeChannels.push(message.channel.id);
+
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
-      description: typingArticles[index]
-    }}).then(() => {
-      const collector = message.channel.createCollector(
-        msg => msg.content == typingArticles[index],
-        {
-          time: 5 * 60 * 1000,
-          maxMatches: 1
-        }
-      );
-      collector.on('end', (collection, reason) => {
-        if (reason == 'time') return message.channel.sendMessage('', {embed: {
-          color: 13380644,
-          description: 'Unfortunately, no one was able to type the article on time.'
-        }}).catch(e => {
-          Bastion.log.error(e.stack);
+      color: 5088314,
+      description: `${message.author} started a typing contest, type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`
+    }}).then(msg => {
+      let index = getRandomInt(1, Object.keys(typingArticles).length);
+      message.channel.sendMessage('', {embed: {
+        color: 6651610,
+        description: typingArticles[index]
+      }}).then(() => {
+        const collector = message.channel.createCollector(
+          msg => msg.content == typingArticles[index],
+          {
+            time: 5 * 60 * 1000,
+            maxMatches: 1
+          }
+        );
+        collector.on('end', (collection, reason) => {
+          if (reason == 'time') {
+            color = 13380644;
+            result = 'Unfortunately, no one was able to type the article on time.';
+          }
+          else {
+            color = 6651610;
+            result = `Congrats ${collection.map(m => m.author)[0]}! You won it.`;
+          }
+          message.channel.sendMessage('', {embed: {
+            color: color,
+            description: result
+          }}).then(() => {
+            activeChannels=activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1)
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         });
-        message.channel.sendMessage('', {embed: {
-          color: 6651610,
-          description: `Congrats ${collection.map(m => m.author)[0]}! You won it.`
-        }}).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+      }).catch(e => {
+        Bastion.log.error(e.stack);
       });
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  }
+  else {
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: `Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.conf = {
