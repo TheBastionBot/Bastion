@@ -20,11 +20,13 @@ git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Unable t
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo
 
-echo -e "${CYAN}[Bastion]:${NC} Deleting old dependencies..."
+echo -e "${CYAN}[Bastion]:${NC} Deleting old files..."
 rm -r node_modules
+rm data/Bastion.sqlite
 echo -e "${CYAN}[Bastion]:${NC} Done."
-echo -e "${CYAN}[Bastion]:${NC} Installing new dependencies... This may take a while, please be patient."
+echo -e "${CYAN}[Bastion]:${NC} Installing new files... This may take a while, please be patient."
 npm install &>/dev/null
+npm install -g ffmpeg-binaries &>nul
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
 echo

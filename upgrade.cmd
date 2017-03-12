@@ -14,11 +14,13 @@ git pull origin master 1>nul || (
 ECHO [Bastion]: Done.
 ECHO.
 
-ECHO [Bastion]: Deleting old dependencies...
+ECHO [Bastion]: Deleting old files...
 RD /S /Q node_modules
+DEL /Q data/Bastion.sqlite
 ECHO [Bastion]: Done.
-ECHO [Bastion]: Installing new dependencies...
+ECHO [Bastion]: Installing new files...
 npm install &>nul
+npm install -g ffmpeg-binaries &>nul
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Ready to boot up and start running.
 ECHO.
