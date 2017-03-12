@@ -206,9 +206,11 @@ exports.run = function(Bastion, message, args) {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}np`)) {
+                if (dispatcher.paused) title = 'Paused';
+                else title = 'Now Playing';
                 textChannel.sendMessage('', {embed: {
                   color: 5088314,
-                  title: 'Now Playing',
+                  title: title,
                   description: song.title,
                   thumbnail: {
                     url: song.thumbnail
@@ -223,10 +225,13 @@ exports.run = function(Bastion, message, args) {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}queue`)) {
-                let fields = [];
+                let fields = [{
+                  name: `:loud_sound: ${song.title}`,
+                  value: `**Duration:** ${song.duration}\t**Requester:** <@${song.requester}>`
+                }];
                 for (var i = 1; i < (queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25); i++)
                   fields.push({
-                    name: `${i  }. ${queue[message.guild.id].songs[i].title}`,
+                    name: `${i+1}. ${queue[message.guild.id].songs[i].title}`,
                     value: `**Duration:** ${queue[message.guild.id].songs[i].duration}\t**Requester:** <@${queue[message.guild.id].songs[i].requester}>`
                   });
                 textChannel.sendMessage('', {embed: {
