@@ -71,9 +71,7 @@ exports.run = function(Bastion, message, args) {
             description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
           }}).then(() => {
             delete activeChannels[message.channel.id];
-            msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
-            });
+            msg.delete();
           }).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -81,7 +79,7 @@ exports.run = function(Bastion, message, args) {
         else {
           let submissions = [];
           for (var i = 0; i < collection.size; i++)
-          submissions.push(`**${i+1}.** ${collection.map(a => a.content)[i]}`);
+            submissions.push(`**${i+1}.** ${collection.map(a => a.content)[i]}`);
           msg.channel.sendMessage('', {embed: {
             color: 5088314,
             title: 'Acrophobia',
@@ -96,13 +94,11 @@ exports.run = function(Bastion, message, args) {
               text: 'Vote by typing the corresponding number of a sentence. You have 60 seconds to vote.'
             }
           }}).then(subMsg => {
+            msg.delete();
             const votesCollector = msg.channel.createCollector(
               m => !m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) <= collection.size && !activeChannels[message.channel.id].usersVoted.includes(m.author.id),
               { time: 60 * 1000 }
             );
-            msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
-            });
             votesCollector.on('message', (msg, votes) => {
               msg.delete().catch(e => {
                 Bastion.log.error(e.stack);
@@ -127,9 +123,7 @@ exports.run = function(Bastion, message, args) {
                 }}).then(() => {
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
-                  subMsg.delete().catch(e => {
-                    Bastion.log.error(e.stack);
-                  });
+                  subMsg.delete();
                 }).catch(e => {
                   Bastion.log.error(e.stack);
                 });
@@ -155,9 +149,7 @@ exports.run = function(Bastion, message, args) {
                   delete activeChannels[message.channel.id].usersVoted;
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
-                  subMsg.delete().catch(e => {
-                    Bastion.log.error(e.stack);
-                  });
+                  subMsg.delete();
                 }).catch(e => {
                   Bastion.log.error(e.stack);
                 });
