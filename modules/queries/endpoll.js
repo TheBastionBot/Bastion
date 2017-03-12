@@ -22,7 +22,7 @@
 exports.run = function(Bastion, message, args) {};
 
 exports.conf = {
-  aliases: ['pollend']
+  aliases: []
 };
 
 exports.help = {

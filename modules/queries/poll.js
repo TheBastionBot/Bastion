@@ -19,88 +19,105 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-let activeChannels = [];
+let activeChannels = new Object();
 
 exports.run = function(Bastion, message, args) {
-  if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
+  args = args.join(' ').split(';');
 
-  if(!activeChannels.includes(message.channel.id)) {
-    args = args.join(' ').split(';');
-    activeChannels.push(message.channel.id);
+  if(!activeChannels.hasOwnProperty(message.channel.id)) {
+    activeChannels[message.channel.id] = new Object();
+    activeChannels[message.channel.id].usersVoted = new Array();
 
-    const votes = message.channel.createCollector(
-      m => m.content.startsWith(`${Bastion.config.prefix}vote `) || m.content.startsWith(`${Bastion.config.prefix}endpoll`) || m.content.startsWith(`${Bastion.config.prefix}pollend`),
-      { time: 60000*60*6 }
-    );
     let answers = [];
     for (var i = 1; i < args.length; i++)
-    answers.push({
-      name: `${i}.`,
-      value: `${args[i]}`,
-      inline: true
-    });
+      answers.push({
+        name: `${i}.`,
+        value: `${args[i]}`,
+        inline: true
+      });
 
     message.channel.sendMessage('', {embed: {
       color: 5088314,
-      title: `A poll has been started by **${message.author.username}**.`,
-      description: `**${args[0]}**`,
+      title: 'Poll started',
+      description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
       fields: answers,
       footer: {
-        text: `To get help with voting, type: ${Bastion.config.prefix}help vote`
+        text: 'Vote by typing the corresponding number of the option.'
       }
-    }}).catch(e => {
+    }}).then(msg => {
+      const votes = message.channel.createCollector(
+        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author == message.author || m.author.id == message.guild.ownerID) && m.content == `${Bastion.config.prefix}endpoll`),
+        { time: 60 * 60 * 1000 }
+      );
+      votes.on('message', (msg, votes) => {
+        if (msg.content == `${Bastion.config.prefix}endpoll`) return votes.stop();
+        else {
+          msg.delete().catch(e => {
+            Bastion.log.error(e.stack);
+          });
+          msg.channel.sendMessage('', {embed: {
+            color: 6651610,
+            description: `Thank you, ${msg.author}, for voting.`,
+            footer: {
+              text: `${votes.collected.size} votes in total.`
+            }
+          }}).then(m => {
+            activeChannels[message.channel.id].usersVoted.push(msg.author.id);
+            m.delete(5000);
+          });
+        }
+      });
+      votes.on('end', (pollRes, reason) => {
+        total = pollRes.size;
+        pollRes = pollRes.map(r => r.content);
+        if (reason == 'user') pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
+        if (pollRes.length == 0) return message.channel.sendMessage('', {embed: {
+          color: 13380644,
+          title: 'Poll Ended',
+          description: 'Unfortunately, no votes were given.'
+        }}).then(() => {
+          msg.delete();
+          delete activeChannels[message.channel.id];
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+
+        for (var i = args.length - 1; i > 0; i--)
+          pollRes.unshift(i);
+        var count = {};
+        for (var i = 0; i < pollRes.length; i++)
+          count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]]+1 : 1;
+        let result = [];
+        for (var i = 1; i < args.length; i++) {
+          result.push({
+            name: args[i],
+            value: `${((count[Object.keys(count)[i-1]] - 1) / (pollRes.length - (args.length - 1))) * 100}%`,
+            inline: true
+          });
+        }
+
+        message.channel.sendMessage('', {embed: {
+          color: 6651610,
+          title: 'Poll Ended',
+          description: `Poll results for **${args[0]}**`,
+          fields: result
+        }}).then(() => {
+          msg.delete();
+          delete activeChannels[message.channel.id];
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      });
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
 
-    votes.on('message', m => {
-      if ((m.content.startsWith(`${Bastion.config.prefix}endpoll`) || m.content.startsWith(`${Bastion.config.prefix}pollend`)) && (m.author.id == message.author.id)) votes.stop();
-      for (var i = 1; i < args.length; i++)
-      if (m.content.startsWith(`${Bastion.config.prefix}vote ${i}`))
-      m.channel.sendMessage('', {embed: {
-        description: `**+1 Vote:** ${args[i]}`
-      }}).then(v => {
-        v.delete();
-        m.delete().catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    });
-    votes.on('end', pollRes => {
-      total = pollRes.size;
-      pollRes = pollRes.map(r => r.content);
-      for (var i = args.length - 1; i > 0; i--)
-      pollRes.unshift(`${Bastion.config.prefix}vote ${i}`);
-      var count = {};
-      for (var i = 0; i < pollRes.length; i++)
-      count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]]+1 : 1;
-      let result = [];
-      for (var i = 1; i < args.length; i++) {
-        result.push({
-          name: args[i],
-          value: `${count[Object.keys(count)[i-1]]-1}/${pollRes.length - (args.length - 1)} votes`,
-          inline: true
-        });
-      }
-
-      message.channel.sendMessage('', {embed: {
-        color: 6651610,
-        title: 'Poll Result',
-        description: args[0],
-        fields: result
-      }}).then(() => {
-        activeChannels=activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1)
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    });
   }
   else {
     message.channel.sendMessage('', {embed: {
       color: 13380644,
-      description: `Can\'t start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll, you can end that by typing \`${Bastion.config.prefix}endpoll\``
+      description: `Can\'t start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
@@ -113,7 +130,7 @@ exports.conf = {
 
 exports.help = {
   name: 'poll',
-  description: 'Starts a poll which requires users to vote using the `vote` command. Separate question & each answers with `;`',
+  description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
   permission: '',
   usage: ['poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2']
 };
