@@ -20,38 +20,50 @@
  */
 
 exports.run = function(Bastion, message, args) {
-  if (!(channel = message.mentions.channels.first())) channel = message.channel;
+  if (!(channel = message.mentions.channels.first()))
+    if (/^[0-9]{18}$/.test(args[0])) channel = message.guild.channels.get(args[0]);
+    else channel = message.channel;
 
-  message.channel.sendMessage('', {embed: {
-    color: 6651610,
-    title: 'Channel Info',
-    fields: [
-      {
-        name: 'Name',
-        value: channel.name,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: channel.id,
-        inline: true
-      },
-      {
-        name: 'Topic',
-        value: (channel.topic == null || channel.topic.length < 1) ? '-' : channel.topic,
-        inline: false
-      },
-      {
-        name: 'Created At',
-        value: channel.createdAt.toUTCString(),
-        inline: true
-      },
-      {
-        name: 'Users',
-        value: channel.members.size,
-        inline: true
-      }
-    ]
+  if (channel) {
+    if (channel.type == 'text') title = 'Text channel Info';
+    else title = 'Voice channel Info';
+    message.channel.sendMessage('', {embed: {
+      color: 6651610,
+      title: title,
+      fields: [
+        {
+          name: 'Name',
+          value: channel.name,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: channel.id,
+          inline: true
+        },
+        {
+          name: 'Topic',
+          value: (channel.topic == null || channel.topic.length < 1) ? '-' : channel.topic,
+          inline: false
+        },
+        {
+          name: 'Created At',
+          value: channel.createdAt.toUTCString(),
+          inline: true
+        },
+        {
+          name: 'Users',
+          value: channel.members.size,
+          inline: true
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+  else return message.channel.sendMessage('', {embed: {
+    color: 13380644,
+    description: `No channel found with ID: **${args[0]}**`
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
