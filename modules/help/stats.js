@@ -94,12 +94,12 @@ exports.run = function(Bastion, message, args) {
 };
 
 exports.conf = {
-  aliases: []
+  aliases: ['info']
 };
 
 exports.help = {
-  name: 'info',
+  name: 'stats',
   description: 'Display stats & info about the bot.',
   permission: '',
-  usage: ['info']
+  usage: ['stats']
 };
