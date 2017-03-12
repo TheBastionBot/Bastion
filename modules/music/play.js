@@ -43,6 +43,22 @@ exports.run = function(Bastion, message, args) {
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
+      if (!voiceChannel.joinable) return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: `I don't have permission to join the voice channel **${voiceChannel.name}**`
+      }}).then(m => {
+        m.delete(10000);
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+      if (!voiceChannel.speakable) return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: `I don't have permission to speak in the voice channel **${voiceChannel.name}**`
+      }}).then(m => {
+        m.delete(10000);
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       vcStats = `You need to be in the default music channel (**${voiceChannel.name}**) of the BOT to be able to use music commands.`;
     }
     else return message.channel.sendMessage('', {embed: {
@@ -93,6 +109,9 @@ exports.run = function(Bastion, message, args) {
 
       if (!message.guild.voiceConnection) {
         voiceChannel.join().then(connection => {
+          message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
+            Bastion.log.error(e.stack);
+          });
           (function play(song) {
             if (song === undefined) return textChannel.sendMessage('', {embed: {
               color: 13380644,
@@ -261,6 +280,8 @@ exports.run = function(Bastion, message, args) {
               return Bastion.log.error(err);
             });
           }(queue[message.guild.id].songs[0]));
+        }).catch(e => {
+          Bastion.log.error(e.stack);
         });
       }
     });
