@@ -33,7 +33,10 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 6651610,
       title: `List of Members in ${role.name} role:\n`,
-      description: users.join('\n')
+      description: users.join('\n'),
+      thumbnail: {
+        url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`,
+      }
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
