@@ -20,13 +20,13 @@
  */
 
 const getRandomInt = require('../../functions/getRandomInt').func;
-let activeChannels = [];
-let usersSubmitted = [];
-let usersVoted = [];
+let activeChannels = new Object();
 
 exports.run = function(Bastion, message, args) {
-  if(!activeChannels.includes(message.channel.id)) {
-    activeChannels.push(message.channel.id);
+  if(!activeChannels.hasOwnProperty(message.channel.id)) {
+    activeChannels[message.channel.id] = new Object();
+    activeChannels[message.channel.id].usersSubmitted = new Array();
+    activeChannels[message.channel.id].usersVoted = new Array();
 
     let charPool = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     let acroLen = getRandomInt(2, 5);
@@ -43,7 +43,7 @@ exports.run = function(Bastion, message, args) {
       }
     }}).then(msg => {
       const collector = msg.channel.createCollector(
-        m => !m.author.bot && m.content.split(' ').length == acroLen && matchAcronym(acronym, m.content.split(' ')) && !usersSubmitted.includes(m.author),
+        m => !m.author.bot && m.content.split(' ').length == acroLen && matchAcronym(acronym, m.content.split(' ')) && !activeChannels[message.channel.id].usersSubmitted.includes(m.author.id),
         { time: 2 * 60 * 1000 }
       );
       collector.on('message', (msg, sentences) => {
@@ -57,7 +57,7 @@ exports.run = function(Bastion, message, args) {
             text: `${sentences.collected.size} submissions in total.`
           }
         }}).then(m => {
-          usersSubmitted.push(msg.author);
+          activeChannels[message.channel.id].usersSubmitted.push(msg.author.id);
           m.delete(5000);
         }).catch(e => {
           Bastion.log.error(e.stack);
@@ -70,7 +70,7 @@ exports.run = function(Bastion, message, args) {
             title: 'Acrophobia',
             description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
           }}).then(() => {
-            activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1);
+            delete activeChannels[message.channel.id];
             msg.delete().catch(e => {
               Bastion.log.error(e.stack);
             });
@@ -97,25 +97,25 @@ exports.run = function(Bastion, message, args) {
             }
           }}).then(subMsg => {
             const votesCollector = msg.channel.createCollector(
-              m => !m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) <= collection.size && !usersVoted.includes(m.author),
+              m => !m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) <= collection.size && !activeChannels[message.channel.id].usersVoted.includes(m.author.id),
               { time: 60 * 1000 }
             );
             msg.delete().catch(e => {
               Bastion.log.error(e.stack);
             });
-            votesCollector.on('message', (m, votes) => {
-              m.delete();
-              m.channel.sendMessage('', {embed: {
+            votesCollector.on('message', (msg, votes) => {
+              msg.delete().catch(e => {
+                Bastion.log.error(e.stack);
+              });
+              msg.channel.sendMessage('', {embed: {
                 color: 6651610,
-                description: `Thank you, ${m.author}, for voting.`,
+                description: `Thank you, ${msg.author}, for voting.`,
                 footer: {
                   text: `${votes.collected.size} votes in total.`
                 }
               }}).then(m => {
-                usersVoted.push(m.author);
-                m.delete(5000).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
+                activeChannels[message.channel.id].usersVoted.push(msg.author.id);
+                m.delete(5000);
               });
             });
             votesCollector.on('end', votes => {
@@ -125,8 +125,8 @@ exports.run = function(Bastion, message, args) {
                   title: 'Acrophobia',
                   description: 'Game ended. Unfortunately, no votes were given for any submissions.'
                 }}).then(() => {
-                  usersSubmitted = [];
-                  activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1)
+                  delete activeChannels[message.channel.id].usersSubmitted;
+                  delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
                     Bastion.log.error(e.stack);
                   });
@@ -152,9 +152,9 @@ exports.run = function(Bastion, message, args) {
                     }
                   ]
                 }}).then(m => {
-                  usersVoted = [];
-                  usersSubmitted = [];
-                  activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1);
+                  delete activeChannels[message.channel.id].usersVoted;
+                  delete activeChannels[message.channel.id].usersSubmitted;
+                  delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
                     Bastion.log.error(e.stack);
                   });
