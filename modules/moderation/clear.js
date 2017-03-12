@@ -20,7 +20,7 @@
  */
 
 exports.run = function(Bastion, message, args) {
-  if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   user = message.mentions.users.first();
   amount = parseInt(args[0]) ? args[0] : args[1];

@@ -20,9 +20,9 @@
  */
 
 exports.run = function(Bastion, message, args) {
-  if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
-
   if (!(channel = message.mentions.channels.first())) channel = message.channel;
+  if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+
   topic = args.join(' ');
   if (topic.length < 1) {
     topic = ' ';
