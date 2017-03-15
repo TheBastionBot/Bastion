@@ -114,5 +114,6 @@ exports.help = {
   name: 'help',
   description: 'Shows all the available commands. If a command name is specified as a argument, shows help about that command.',
   permission: '',
-  usage: ['help', 'help magic8ball']
+  usage: 'help [command_name]',
+  example: ['help', 'help magic8ball']
 };

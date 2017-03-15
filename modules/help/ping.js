@@ -36,5 +36,6 @@ exports.help = {
   name: 'ping',
   description: 'Pings the bot and shows you the time the bot responded in.',
   permission: '',
-  usage: ['ping']
+  usage: 'ping',
+  example: []
 };
