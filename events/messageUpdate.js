@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldMessage, newMessage) => {
-  if (newMessage.channel.type != 'text') return;
+  if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
