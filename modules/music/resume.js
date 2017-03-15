@@ -33,5 +33,6 @@ exports.help = {
   name: 'resume',
   description: 'Resumes the paused music playback.',
   permission: '',
-  usage: ['resume']
+  usage: 'resume',
+  example: []
 };

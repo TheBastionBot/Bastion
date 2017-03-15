@@ -33,5 +33,6 @@ exports.help = {
   name: 'skip',
   description: 'Skips the current music and plays the next music in the queue (if any).',
   permission: '',
-  usage: ['skip']
+  usage: 'skip',
+  example: []
 };

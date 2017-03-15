@@ -298,5 +298,6 @@ exports.help = {
   name: 'play',
   description: 'Adds a song to the queue by youtube video link, or adds the first youtube result for the provided search text.',
   permission: '',
-  usage: ['play song name', 'play youtube_video_link']
+  usage: 'play <song name|youtube_video_link>',
+  example: ['play song name', 'play youtube_video_link']
 };

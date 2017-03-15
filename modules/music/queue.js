@@ -33,5 +33,6 @@ exports.help = {
   name: 'queue',
   description: 'Shows the list of music in the queue.',
   permission: '',
-  usage: ['queue']
+  usage: 'queue',
+  example: []
 };

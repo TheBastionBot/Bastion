@@ -33,5 +33,6 @@ exports.help = {
   name: 'stop',
   description: 'Stops music playback, empties the queue and tells the BOT to leave the voice channel.',
   permission: '',
-  usage: ['stop']
+  usage: 'stop',
+  example: []
 };

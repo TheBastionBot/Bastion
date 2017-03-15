@@ -33,5 +33,6 @@ exports.help = {
   name: 'np',
   description: 'Shows the currently playing music.',
   permission: '',
-  usage: ['np']
+  usage: 'np',
+  example: []
 };

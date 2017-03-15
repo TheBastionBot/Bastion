@@ -33,5 +33,6 @@ exports.help = {
   name: 'pause',
   description: 'Pauses the current music playback.',
   permission: '',
-  usage: ['pause']
+  usage: 'pause',
+  example: []
 };
