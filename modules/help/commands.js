@@ -57,7 +57,7 @@ exports.help = {
   name: 'commands',
   description: 'Shows the complete list of commands with their aliases.',
   permission: '',
-  usage: 'commands'
+  usage: 'commands',
   example: []
 };
 
