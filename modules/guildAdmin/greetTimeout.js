@@ -47,5 +47,6 @@ exports.help = {
   name: 'greettimeout',
   description: 'Sets the time (in seconds) after which greeting message will be automatically deleted. Supported values: 1 - 300. Any value except the supported values will turn off automatic deletion.',
   permission: '',
-  usage: ['greetTimeout 120', 'greetTimeout']
+  usage: 'greetTimeout [time_in_seconds]',
+  example: ['greetTimeout 120', 'greetTimeout']
 };

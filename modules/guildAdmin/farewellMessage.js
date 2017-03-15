@@ -60,5 +60,6 @@ exports.help = {
   name: 'farewellmessage',
   description: 'Edit the farewell message that shows when a member leaves the server.',
   permission: '',
-  usage: ['farewellMessage Goodbye $username. Hope to see you soon!']
+  usage: 'farewellMessage [Message]',
+  example: ['farewellMessage Goodbye $username. Hope to see you soon!']
 };

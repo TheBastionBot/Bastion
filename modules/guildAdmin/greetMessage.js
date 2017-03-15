@@ -60,5 +60,6 @@ exports.help = {
   name: 'greetmessage',
   description: 'Edit the greeting message that shows when a new member is joined in the server.',
   permission: '',
-  usage: ['greetMessage Hello $user! Welcome to $server.']
+  usage: 'greetMessage',
+  example: ['greetMessage Hello $user! Welcome to $server.']
 };

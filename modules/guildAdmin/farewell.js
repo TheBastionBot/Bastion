@@ -59,5 +59,6 @@ exports.help = {
   name: 'farewell',
   description: 'Toggle farewell message for members who left the server.',
   permission: '',
-  usage: ['farewell']
+  usage: 'farewell',
+  example: []
 };

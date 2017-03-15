@@ -58,5 +58,6 @@ exports.help = {
   name: 'filterinvite',
   description: 'Toggles automatic deleting of discord server invites posted in the server. Does not apply to the server Administrators.',
   permission: 'Manage Messages',
-  usage: ['filterInvite']
+  usage: 'filterInvite',
+  example: []
 };

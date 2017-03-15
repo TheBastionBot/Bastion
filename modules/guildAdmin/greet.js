@@ -58,5 +58,6 @@ exports.help = {
   name: 'greet',
   description: 'Toggle greeting message for new members of the server.',
   permission: '',
-  usage: ['greet']
+  usage: 'greet',
+  example: []
 };

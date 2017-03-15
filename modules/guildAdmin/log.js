@@ -58,5 +58,6 @@ exports.help = {
   name: 'log',
   description: 'Toggle logging of various events in the server.',
   permission: '',
-  usage: ['log']
+  usage: 'log',
+  example: []
 };

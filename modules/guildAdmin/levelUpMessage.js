@@ -58,5 +58,6 @@ exports.help = {
   name: 'levelupmessage',
   description: 'Toggles sending messages when someone levels up in this server.',
   permission: '',
-  usage: ['levelUpMessage']
+  usage: 'levelUpMessage',
+  example: []
 };
