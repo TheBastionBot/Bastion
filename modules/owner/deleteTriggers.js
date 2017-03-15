@@ -47,5 +47,6 @@ exports.help = {
   name: 'deletetrigger',
   description: 'Deletes a trigger and response specified by it\'s trigger.',
   permission: '',
-  usage: ['deleteTrigger Hi, there?']
+  usage: 'deleteTrigger <trigger>',
+  example: ['deleteTrigger Hi, there?']
 };

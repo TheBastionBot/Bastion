@@ -43,5 +43,6 @@ exports.help = {
   name: 'setusername',
   description: 'Give a new username to the bot. (NOTE: It\'s Rate limited. You can only change it two times in an hour.)',
   permission: '',
-  usage: ['setUsername NewUsername']
+  usage: 'setUsername <text>',
+  example: ['setUsername NewUsername']
 };

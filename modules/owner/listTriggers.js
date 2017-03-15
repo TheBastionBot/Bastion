@@ -46,5 +46,6 @@ exports.help = {
   name: 'listtriggers',
   description: 'Lists all the triggers you have added.',
   permission: '',
-  usage: ['listTriggers']
+  usage: 'listTriggers',
+  example: []
 };

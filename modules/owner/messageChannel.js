@@ -40,5 +40,6 @@ exports.help = {
   name: 'messagechannel',
   description: 'Sends a message to a specified channel (by ID) of a server the bot is connected tos.',
   permission: '',
-  usage: ['messageChannel CHANNEL_ID Hello everyone!']
+  usage: 'messageChannel <channel_id> <message>',
+  example: ['messageChannel CHANNEL_ID Hello everyone!']
 };

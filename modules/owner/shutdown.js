@@ -42,5 +42,6 @@ exports.help = {
   name: 'shutdown',
   description: 'Shuts the bot down and terminates the process.',
   permission: '',
-  usage: ['shutdown']
+  usage: 'shutdown',
+  example: []
 };

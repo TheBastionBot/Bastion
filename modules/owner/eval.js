@@ -72,7 +72,8 @@ exports.help = {
   name: 'eval',
   description: 'Evaluates any JavaScript statement.',
   permission: '',
-  usage: ['eval message.guild.members.size']
+  usage: 'eval <JavaScript code>',
+  example: ['eval message.guild.members.size']
 };
 
 function clean(Bastion, text) {

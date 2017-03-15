@@ -48,5 +48,6 @@ exports.help = {
   name: 'setgame',
   description: 'Sets the bot\'s game to the given text. If no text is given, sets the bot\'s game to the default game (given in `config.json`).',
   permission: '',
-  usage: ['setGame with minions!', 'setGame']
+  usage: 'setGame [text]',
+  example: ['setGame with minions!', 'setGame']
 };

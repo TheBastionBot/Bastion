@@ -35,5 +35,6 @@ exports.help = {
   name: 'leave',
   description: 'Tells the bot to leave a specified server by ID.',
   permission: '',
-  usage: ['leave 441122339988775566']
+  usage: 'leave <guild_id>',
+  example: ['leave 441122339988775566']
 };

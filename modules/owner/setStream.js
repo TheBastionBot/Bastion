@@ -42,5 +42,6 @@ exports.help = {
   name: 'setstream',
   description: 'Set the bot to streaming mode with a given twitch link and name.',
   permission: '',
-  usage: ['setStream https\://twitch.tv/TheGamerFDN The Gamer Foundation']
+  usage: 'setStream <twitch> <text>',
+  example: ['setStream https\://twitch.tv/TheGamerFDN The Gamer Foundation']
 };
