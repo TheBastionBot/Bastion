@@ -25,15 +25,15 @@ sql.open('./data/Bastion.sqlite');
 exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0 && !message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID ='${message.guild.id}'`).then(guild => {
+  sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.levelUpMessage == 'true') {
-      sql.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
     }
     else {
-      sql.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       levelUpMessageStats = 'I will now send messages when someone levels up.';

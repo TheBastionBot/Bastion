@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 exports.run = function(Bastion, message, args) {
   if (!message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
-    sql.get(`SELECT greetMessage FROM guildSettings WHERE guildID='${message.guild.id}'`).then(guild => {
+    sql.get(`SELECT greetMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
       message.channel.sendMessage('', {embed: {
         color: 5088314,
         title: 'Greeting message:',
@@ -38,7 +38,7 @@ exports.run = function(Bastion, message, args) {
     });
   }
   else {
-    sql.run(`UPDATE guildSettings SET greetMessage='${args.join(' ')}' WHERE guildID='${message.guild.id}'`).catch(e => {
+    sql.run(`UPDATE guildSettings SET greetMessage='${args.join(' ')}' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e.stack);
     });
 

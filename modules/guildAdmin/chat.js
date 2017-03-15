@@ -25,15 +25,15 @@ sql.open('./data/Bastion.sqlite');
 exports.run = function(Bastion, message, args) {
   if (!message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  sql.get(`SELECT chat FROM guildSettings WHERE guildID ='${message.guild.id}'`).then(row => {
+  sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.chat == 'false') {
-      sql.run(`UPDATE guildSettings SET chat='true' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
     }
     else {
-      sql.run(`UPDATE guildSettings SET chat='false' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       chatStats = 'Disabled chat in this server. Now I\'m gonna miss talking with you. :disappointed:';

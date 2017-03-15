@@ -23,7 +23,8 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = member => {
-  sql.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID ='${member.guild.id}'`).then(row => {
+  sql.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+    if (!row) return;
     if (row.farewell == 'true') {
       let farewellMsg = row.farewellMessage;
       farewellMsg = farewellMsg.replace(/\$user/, `<@${member.id}>`);
@@ -47,7 +48,8 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID ='${member.guild.id}'`).then(row => {
+  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+    if (!row) return;
     if (row.log == 'false') return;
     member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 13380644,

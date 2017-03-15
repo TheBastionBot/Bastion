@@ -25,15 +25,15 @@ sql.open('./data/Bastion.sqlite');
 exports.run = function(Bastion, message, args) {
   if (!message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID ='${message.guild.id}'`).then(row => {
+  sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.filterInvite == 'false') {
-      sql.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
     }
     else {
-      sql.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';

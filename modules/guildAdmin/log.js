@@ -26,15 +26,15 @@ sql.open('./data/Bastion.sqlite');
 exports.run = function(Bastion, message, args) {
   if (!message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID ='${message.guild.id}'`).then(row => {
+  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.log == 'false') {
-      sql.run(`UPDATE guildSettings SET log='true', logChannelID='${message.channel.id}' WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       logStats = 'Logging is now enabled in this channel.';
     }
     else {
-      sql.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID='${message.guild.id}'`).catch(e => {
+      sql.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       logStats = 'Logging is now disabled.';

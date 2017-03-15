@@ -38,7 +38,7 @@ exports.run = function(Bastion, message, args) {
       if (/^(add|\+)$/i.test(args[0])) {
         for (var i = 0; i < user.length; i++) {
           if (blUsers.indexOf(user[i]) >= 0) continue;
-          sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [`${user[i]}`]).catch(e => {
+          sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [user[i]]).catch(e => {
             Bastion.log.error(e.stack);
           });
         }

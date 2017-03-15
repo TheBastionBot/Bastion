@@ -40,7 +40,7 @@ module.exports = Bastion => {
           }
         }
         if(found == false)
-        sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [`${BastionGuilds[i]}`]).catch(e => {
+        sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [BastionGuilds[i]]).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
