@@ -41,5 +41,6 @@ exports.help = {
   name: 'flip',
   description: 'Flips a coin and gives you the the outcome (Heads or Tails).',
   permission: '',
-  usage: ['flip']
+  usage: 'flip',
+  example: []
 };

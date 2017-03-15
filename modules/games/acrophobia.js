@@ -182,7 +182,8 @@ exports.help = {
   name: 'acrophobia',
   description: 'Starts a acrophobia game. The user will have to make a sentence from the given acronym within 2 minutes. After the submission is done, users can vote for the best sentence, the sentence to get highest no. of votes win.',
   permission: '',
-  usage: ['acrophobia']
+  usage: 'acrophobia',
+  example: []
 };
 
 function matchAcronym(charPool, strArr) {
