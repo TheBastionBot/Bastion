@@ -53,5 +53,6 @@ exports.help = {
   name: 'addrole',
   description: 'Adds a mentioned user to the given role. If no user is mentioned, adds you to the given role.',
   permission: 'Manage Roles',
-  usage: ['addRole @user#001 Role Name', 'addRole Role Name']
+  usage: 'addRole [@user-mention] <Role Name>',
+  example: ['addRole @user#001 Role Name', 'addRole Role Name']
 };

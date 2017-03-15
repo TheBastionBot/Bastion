@@ -53,5 +53,6 @@ exports.help = {
   name: 'removerole',
   description: 'Removes a user from a given role. If no user is mentioned, removes you from the given role.',
   permission: 'Manage Roles',
-  usage: ['removeRole @user#0001 Role Name', 'addRole Role Name']
+  usage: 'removeRole [@user-mention] <Role Name>',
+  example: ['removeRole @user#0001 Role Name', 'addRole Role Name']
 };

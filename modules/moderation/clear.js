@@ -46,5 +46,6 @@ exports.help = {
   name: 'clear',
   description: 'Delete a bulk of messages from a channel specified by an user & number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages.',
   permission: 'Manage Messages',
-  usage: ['clear 50', 'clear @user#0001', 'clear']
+  usage: 'clear [@user-mention] [no_of_messages]',
+  example: ['clear 50', 'clear @user#0001', 'clear']
 };

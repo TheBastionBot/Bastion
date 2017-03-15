@@ -64,5 +64,6 @@ exports.help = {
   name: 'undeafen',
   description: 'UnDeafens a mentioned user with an optional reason.',
   permission: 'Deafen Members',
-  usage: ['unDeafen @user#0001 Reason for undeafening.']
+  usage: 'unDeafen @user-mention [Reason]',
+  example: ['unDeafen @user#0001 Reason for undeafening.']
 };

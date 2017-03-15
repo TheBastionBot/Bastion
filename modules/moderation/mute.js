@@ -62,5 +62,6 @@ exports.help = {
   name: 'mute',
   description: 'Mutes a mentioned user with an optional reason.',
   permission: 'Mute Members',
-  usage: ['mute @user#0001 Reason for the mute.']
+  usage: 'mute @user-mention [Reason]',
+  example: ['mute @user#0001 Reason for the mute.']
 };

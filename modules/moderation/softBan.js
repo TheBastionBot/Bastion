@@ -74,5 +74,6 @@ exports.help = {
   name: 'softban',
   description: 'Bans & unbans a mentioned user, and removes 7 days of their message history.',
   permission: 'Ban Members',
-  usage: ['softBan @user#0001 Reason for soft ban.']
+  usage: 'softBan @user-mention [Reason]',
+  example: ['softBan @user#0001 Reason for soft ban.']
 };
