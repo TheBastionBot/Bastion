@@ -51,5 +51,6 @@ exports.help = {
   name: 'createtextchannel',
   description: 'Creates a new text channel with a given name.',
   permission: 'Manage Channels',
-  usage: ['createTextChannel Channel Name']
+  usage: 'createTextChannel <Channel Name>',
+  example: ['createTextChannel Channel Name']
 };

@@ -36,5 +36,6 @@ exports.help = {
   name: 'deletetextchannel',
   description: 'Deletes a mentioned text channel. If no channel is mentioned, deletes the current text channel.',
   permission: 'Manage Channels',
-  usage: ['deleteTextChannel #channel-name', 'deleteTextChannel']
+  usage: 'deleteTextChannel [#channel-mention]',
+  example: ['deleteTextChannel #channel-name', 'deleteTextChannel']
 };

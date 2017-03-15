@@ -36,5 +36,6 @@ exports.help = {
   name: 'deletevoicechannel',
   description: 'Deletes a voice channel by a given name.',
   permission: 'Manage Channels',
-  usage: ['deleteVoiceChannel Voice Channel Name']
+  usage: 'deleteVoiceChannel <Channel Name>',
+  example: ['deleteVoiceChannel Voice Channel Name']
 };

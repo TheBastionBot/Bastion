@@ -51,5 +51,6 @@ exports.help = {
   name: 'settopic',
   description: 'Sets the topic of the mentioned channel with a given name. If no channel is mentioned, sets the topic of the current channel with the given name.',
   permission: 'Manage Channels',
-  usage: ['setTopic #channel-name New Topic', 'setTopic New Topic']
+  usage: 'setTopic [#channel-mention] <Channel Topic>',
+  example: ['setTopic #channel-name New Topic', 'setTopic New Topic']
 };

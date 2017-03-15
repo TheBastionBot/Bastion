@@ -64,5 +64,6 @@ exports.help = {
   name: 'rolecolor',
   description: 'Change the color of a given role.',
   permission: 'Manage Roles',
-  usage: ['roleColor #00ff00 Role Name']
+  usage: 'roleColor <#hex-color-code> <Role Name>',
+  example: ['roleColor #00ff00 Role Name']
 };

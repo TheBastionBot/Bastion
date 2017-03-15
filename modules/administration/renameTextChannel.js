@@ -44,5 +44,6 @@ exports.help = {
   name: 'renametextchannel',
   description: 'Renames the current text channel to a given new name.',
   permission: 'Manage Channels',
-  usage: ['renameTextChannel New Channel Name']
+  usage: 'renameTextChannel <Channel Name>',
+  example: ['renameTextChannel New Channel Name']
 };

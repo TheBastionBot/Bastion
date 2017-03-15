@@ -51,5 +51,6 @@ exports.help = {
   name: 'createvoicechannel',
   description: 'Creates a new voice channel with a given name.',
   permission: 'Manage Channels',
-  usage: ['createVoiceChannel Channel Name']
+  usage: 'createVoiceChannel <Channel Name>',
+  example: ['createVoiceChannel Channel Name']
 };

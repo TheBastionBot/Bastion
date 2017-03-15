@@ -49,5 +49,6 @@ exports.help = {
   name: 'deleterole',
   description: 'Deletes a role by a given name.',
   permission: 'Manage Roles',
-  usage: ['deleteRole Role Name']
+  usage: 'deleteRole <Role Name>',
+  example: ['deleteRole Role Name']
 };
