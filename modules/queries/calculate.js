@@ -48,5 +48,6 @@ exports.help = {
   name: 'calculate',
   description: 'Evaluates a mathematical expression.',
   permission: '',
-  usage: ['calculate 9 * 10 - 11']
+  usage: 'calculate <mathematical_expression>',
+  example: ['calculate 9 * 10 - 11']
 };

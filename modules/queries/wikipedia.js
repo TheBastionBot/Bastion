@@ -58,5 +58,6 @@ exports.help = {
   name: 'wikipedia',
   description: 'Searches Wikipedia and shows the result.',
   permission: '',
-  usage: ['wikipedia Steve Jobs']
+  usage: 'wikipedia <text>',
+  example: ['wikipedia Steve Jobs']
 };

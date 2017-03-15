@@ -66,5 +66,6 @@ exports.help = {
   name: 'ask',
   description: 'Ask a polar (yes/no) question to the users and get votes. Shows you the result after a minute of getting votes.',
   permission: '',
-  usage: ['ask Anyone want to play Call of Duty Infinity Warfare now?']
+  usage: 'ask <text>',
+  example: ['ask Anyone want to play Call of Duty Infinity Warfare now?']
 };

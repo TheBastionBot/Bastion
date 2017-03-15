@@ -29,5 +29,6 @@ exports.help = {
   name: 'endpoll',
   description: 'Ends an ongoing poll and shows the result.',
   permission: '',
-  usage: ['endpoll']
+  usage: 'endpoll',
+  example: []
 };

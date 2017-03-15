@@ -82,5 +82,6 @@ exports.help = {
   name: 'roleinfo',
   description: 'Shows information about the specified role.',
   permission: '',
-  usage: ['roleInfo @Dark Knigths', 'roleInfo The Legends']
+  usage: 'roleInfo <@role-mention|role_name>',
+  example: ['roleInfo @Dark Knigths', 'roleInfo The Legends']
 };

@@ -77,5 +77,6 @@ exports.help = {
   name: 'channelinfo',
   description: 'Shows information about the mentioned channel. If no channel is mentioned, shows information about the current channel.',
   permission: '',
-  usage: ['channelInfo #channel-name', 'channelinfo']
+  usage: 'channelInfo [#channel-mention]',
+  example: ['channelInfo #channel-name', 'channelinfo']
 };

@@ -43,5 +43,6 @@ exports.help = {
   name: 'lmgtfy',
   description: 'A tool to teach other people how to use Google\'s internet search.',
   permission: '',
-  usage: ['lmgtfy How to shutdown a computer?']
+  usage: 'lmgtfy <text>',
+  example: ['lmgtfy How to shutdown a computer?']
 };

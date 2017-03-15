@@ -97,5 +97,6 @@ exports.help = {
   name: 'overwatch',
   description: 'Shows Overwatch player stats specified by his Region and BattleTag.',
   permission: '',
-  usage: ['overwatch GH0S7#11143']
+  usage: 'overwatch <BattleTag#discriminator>',
+  example: ['overwatch GH0S7#11143']
 };

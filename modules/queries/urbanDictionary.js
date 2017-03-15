@@ -60,5 +60,6 @@ exports.help = {
   name: 'urbandictionary',
   description: 'Searches Urban Dictionary for a urban definition of word.',
   permission: '',
-  usage: ['urbanDictionary pineapple']
+  usage: 'urbanDictionary <word>',
+  example: ['urbanDictionary pineapple']
 };

@@ -41,7 +41,8 @@ exports.help = {
   name: 'piratespeak',
   description: 'Convert\'s the given text to pirate speak.',
   permission: '',
-  usage: ['pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can’t trust.']
+  usage: 'pirateSpeak <text>',
+  example: ['pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can’t trust.']
 };
 
 function translateWord(word) {

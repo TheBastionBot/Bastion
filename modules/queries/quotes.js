@@ -54,5 +54,6 @@ exports.help = {
   name: 'quotes',
   description: 'Shows a quote to get you inspired. Search a quote by it\'s index no. or by the author. If none is provided, shows a random quote.',
   permission: '',
-  usage: ['quotes', 'quotes 189', 'quotes Steve Jobs']
+  usage: 'quotes <number|author>',
+  example: ['quotes', 'quotes 189', 'quotes Steve Jobs']
 };

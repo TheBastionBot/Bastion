@@ -100,5 +100,6 @@ exports.help = {
   name: 'morsecode',
   description: 'Encodes a given text into Morse Code.',
   permission: '',
-  usage: ['morseCode Shh! This is a secret.']
+  usage: 'morseCode <text>',
+  example: ['morseCode Shh! This is a secret.']
 };

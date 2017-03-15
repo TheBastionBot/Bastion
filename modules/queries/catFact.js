@@ -40,5 +40,6 @@ exports.help = {
   name: 'catfact',
   description: 'Shows a random catfact.',
   permission: '',
-  usage: ['catfact']
+  usage: 'catfact',
+  example: []
 };

@@ -36,5 +36,6 @@ exports.help = {
   name: 'edgelord',
   description: 'Shows an awesome message from an edgelord!',
   permission: '',
-  usage: ['edgeLord']
+  usage: 'edgeLord',
+  example: []
 };

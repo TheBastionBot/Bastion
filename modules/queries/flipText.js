@@ -46,5 +46,6 @@ exports.help = {
   name: 'fliptext',
   description: 'Flips a given text.',
   permission: '',
-  usage: ['fliptext This is Upside Down!']
+  usage: 'fliptext <text>',
+  example: ['fliptext This is Upside Down!']
 };

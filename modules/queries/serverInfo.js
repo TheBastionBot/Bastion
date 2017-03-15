@@ -91,5 +91,6 @@ exports.help = {
   name: 'serverinfo',
   description: 'Shows the server\'s information the command was invoked in.',
   permission: '',
-  usage: ['serverInfo']
+  usage: 'serverInfo',
+  example: []
 };

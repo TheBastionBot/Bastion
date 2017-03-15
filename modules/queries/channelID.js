@@ -49,5 +49,6 @@ exports.help = {
   name: 'channelid',
   description: 'Shows the id of the mentioned channel. If no channel is mentioned, shows the id of the current channel.',
   permission: '',
-  usage: ['channelID #channel-name', 'channelID']
+  usage: 'channelID [#channel-mention]',
+  example: ['channelID #channel-name', 'channelID']
 };

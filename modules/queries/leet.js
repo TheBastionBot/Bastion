@@ -47,5 +47,6 @@ exports.help = {
   name: 'leet',
   description: 'Changes a given text to leet text.',
   permission: '',
-  usage: ['leet Hello, Everyone!']
+  usage: 'leet <text>',
+  example: ['leet Hello, Everyone!']
 };

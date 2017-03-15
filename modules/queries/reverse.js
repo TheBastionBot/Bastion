@@ -41,5 +41,6 @@ exports.help = {
   name: 'reverse',
   description: 'Reverse a given text.',
   permission: '',
-  usage: ['reverse !looc si sihT']
+  usage: 'reverse <text>',
+  example: ['reverse !looc si sihT']
 };

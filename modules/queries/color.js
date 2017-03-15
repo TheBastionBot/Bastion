@@ -114,5 +114,6 @@ exports.help = {
   name: 'color',
   description: 'Convert `HEX` Color to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and CSS Keyword (Rounds to closest color).',
   permission: '',
-  usage: ['color #dd0000']
+  usage: 'color <#hex-color-code>',
+  example: ['color #dd0000']
 };

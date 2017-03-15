@@ -40,5 +40,6 @@ exports.help = {
   name: 'fortune',
   description: 'Shows you a fortune from fortune cookie.',
   permission: '',
-  usage: ['fortune']
+  usage: 'fortune',
+  example: []
 };

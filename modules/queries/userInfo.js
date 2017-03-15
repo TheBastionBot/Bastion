@@ -106,5 +106,6 @@ exports.help = {
   name: 'userinfo',
   description: 'Shows information about the mentioned user. If no user is mentioned, shows information about you.',
   permission: '',
-  usage: ['userInfo @user#0001', 'userInfo']
+  usage: 'userInfo [@user-mention]',
+  example: ['userInfo @user#0001', 'userInfo']
 };

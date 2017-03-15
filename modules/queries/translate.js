@@ -47,5 +47,6 @@ exports.help = {
   name: 'translate',
   description: 'Translates your message to a language specified in the arguments by the language code.',
   permission: '',
-  usage: ['translate EN Je suis génial!']
+  usage: 'translate <language_code> <text>',
+  example: ['translate EN Je suis génial!']
 };

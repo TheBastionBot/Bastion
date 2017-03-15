@@ -37,5 +37,6 @@ exports.help = {
   name: 'serverid',
   description: 'Shows the server\'s ID the command was invoked in.',
   permission: '',
-  usage: ['serverID']
+  usage: 'serverID',
+  example: []
 };

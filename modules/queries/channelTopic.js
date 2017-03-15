@@ -39,5 +39,6 @@ exports.help = {
   name: 'channeltopic',
   description: 'Returns a mentioned channel\'s topic. Or current channle\'s topic, if no channel is mentioned.',
   permission: '',
-  usage: ['channelTopic #channel-name', 'channelTopic']
+  usage: 'channelTopic [#channel-mention]',
+  example: ['channelTopic #channel-name', 'channelTopic']
 };

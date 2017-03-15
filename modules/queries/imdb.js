@@ -102,5 +102,6 @@ exports.help = {
   name: 'imdb',
   description: 'Shows details of a movie or a TV series.',
   permission: '',
-  usage: ['imdb Snowden', 'imdb The Blacklist']
+  usage: 'imdb <movie/tv series>',
+  example: ['imdb Snowden', 'imdb The Blacklist']
 };

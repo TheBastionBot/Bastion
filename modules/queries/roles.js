@@ -46,5 +46,6 @@ exports.help = {
   name: 'roles',
   description: 'Shows the list of roles in the server.',
   permission: '',
-  usage: ['roles']
+  usage: 'roles',
+  example: []
 };

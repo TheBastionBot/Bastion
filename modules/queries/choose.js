@@ -37,5 +37,6 @@ exports.help = {
   name: 'choose',
   description: 'Ask the bot to choose a option from any number of options, separated by a `/`.',
   permission: '',
-  usage: ['choose Chocolate/Ice Cream/Cake']
+  usage: 'choose <choices>',
+  example: ['choose Chocolate/Ice Cream/Cake']
 };

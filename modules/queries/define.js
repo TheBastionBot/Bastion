@@ -63,5 +63,6 @@ exports.help = {
   name: 'define',
   description: 'Searches the definition of a word from English, French or German dictionary (specified in the message; if no language is specified, defaults to English).',
   permission: '',
-  usage: ['define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre']
+  usage: 'define [language_code] <word>',
+  example: ['define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre']
 };

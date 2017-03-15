@@ -74,5 +74,6 @@ exports.help = {
   name: 'tapcode',
   description: 'Encodes a given text into Tap Code.',
   permission: '',
-  usage: ['tapCode Knock Knock']
+  usage: 'tapCode <text>',
+  example: ['tapCode Knock Knock']
 };

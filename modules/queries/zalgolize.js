@@ -41,5 +41,6 @@ exports.help = {
   name: 'zalgolize',
   description: 'Zalgolizes a given text.',
   permission: '',
-  usage: ['zaloglize It looks clumsy, but it\'s cool!']
+  usage: 'zaloglize <text>',
+  example: ['zaloglize It looks clumsy, but it\'s cool!']
 };
