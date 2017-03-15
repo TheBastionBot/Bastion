@@ -80,5 +80,6 @@ exports.help = {
   name: 'profile',
   description: 'Shows a mentioned user\'s Bastion profile. If no one is mentioned, shows your profile.',
   permission: '',
-  usage: ['profle', 'profile @user#0001']
+  usage: 'profile [@user-mention]',
+  example: ['profle', 'profile @user#0001']
 };
