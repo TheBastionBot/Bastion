@@ -24,7 +24,7 @@ exports.run = function(Bastion, message, args) {
     message.channel.sendMessage('', {embed: {
       color: 15451167,
       title: 'Help',
-      description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help commandName\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
+      description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
       footer: {
         text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
       }
@@ -60,18 +60,13 @@ exports.run = function(Bastion, message, args) {
     let command = args[0];
     if (Bastion.commands.has(command)) {
       command = Bastion.commands.get(command);
-
-      if ((permission = command.help.permission) == '') permission = '-';
-      if ((aliases = command.conf.aliases) == '') aliases = '-';
-      else aliases = aliases.join(', ');
-      let usage = [];
-      for (let i = 0; i < command.help.usage.length; i++)
-        usage.push(`\`${Bastion.config.prefix}${command.help.usage[i]}\``);
+      let example = [];
+      if (command.help.example.length < 1) example.push('-');
+      else for (let i = 0; i < command.help.example.length; i++)
+        example.push(`\`${Bastion.config.prefix}${command.help.example[i]}\``);
 
       message.channel.sendMessage('', {embed: {
         color: 16766720,
-        title: 'Help',
-        description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.`,
         fields: [
           {
             name: 'Command',
@@ -80,7 +75,7 @@ exports.run = function(Bastion, message, args) {
           },
           {
             name: 'Aliases',
-            value: aliases,
+            value: command.conf.aliases == '' ? '-' : command.conf.aliases.join(', '),
             inline: true
           },
           {
@@ -90,15 +85,23 @@ exports.run = function(Bastion, message, args) {
           },
           {
             name: 'Permissions Required',
-            value: permission,
-            inline: true
+            value: command.help.permission == '' ? '-' : command.help.permission,
+            inline: false
           },
           {
             name: 'Usage',
-            value: usage.join('\n'),
-            inline: true
+            value: `\`${Bastion.config.prefix}${command.help.usage}\``,
+            inline: false
+          },
+          {
+            name: 'Example',
+            value: example.join('\n'),
+            inline: false
           }
-        ]
+        ],
+        footer: {
+          text: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.`
+        }
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
