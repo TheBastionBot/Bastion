@@ -57,6 +57,18 @@ exports.run = function(Bastion, message, args) {
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
+    Bastion.users.get(user).sendMessage('', {embed: {
+      color: 13380644,
+      description: `You have been charged with a penalty of **${args[0]}** Bastion Currencies.`,
+      fields: [
+        {
+          name: 'Reason',
+          value: reason
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });
