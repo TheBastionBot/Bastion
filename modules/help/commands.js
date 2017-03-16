@@ -44,7 +44,14 @@ exports.run = function(Bastion, message, args) {
     footer: {
       text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
     }
-  }}).catch(e => {
+  }}).then(() => {
+    message.channel.sendMessage('', {embed: {
+      color: 5088314,
+      description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
