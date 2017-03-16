@@ -36,7 +36,7 @@ exports.run = function(Bastion, message, args) {
     });
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.author.sendMessage('', {embed: {
     color: 15451167,
     title: 'List of Commands',
     description: `To get help/details about a command, type \`${Bastion.config.prefix}help command_name\`\nTo get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
