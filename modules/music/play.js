@@ -107,183 +107,183 @@ exports.run = function(Bastion, message, args) {
       });
       if (queue.hasOwnProperty(message.guild.id) && (queue[message.guild.id].playing == true)) return;
 
-      if (!message.guild.voiceConnection) {
-        voiceChannel.join().then(connection => {
-          message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-          (function play(song) {
-            if (song === undefined) return textChannel.sendMessage('', {embed: {
-              color: 13380644,
-              description: 'Exiting voice channel.'
-            }}).then(m => {
-              queue[message.guild.id].playing = false;
-              voiceChannel.leave();
-              m.delete(10000);
-            }).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-            dispatcher = message.guild.voiceConnection.playStream(yt(song.url), { passes: 1 });
-            queue[message.guild.id].playing = true;
-            textChannel.sendMessage('', {embed: {
-              color: 5088314,
-              title: 'Playing',
-              description: song.title,
-              thumbnail: {
-                url: song.thumbnail
-              },
-              footer: {
-                text: `🔉 ${dispatcher.volume*50}% | Duration: ${info.duration} | Requester: ${message.author.username}#${message.author.discriminator}`
-              }
-            }}).then(m => {
-              m.delete(30000);
-            }).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-
-            let collector = textChannel.createCollector(
-              msg => msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}queue`)
-            );
-            collector.on('message', msg => {
-              if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
-                if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
-                if (!message.guild.voiceConnection.speaking) return;
-                textChannel.sendMessage('', {embed: {
-                  color: 15451167,
-                  title: 'Paused Playback',
-                  description: song.title,
-                  footer: {
-                    text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
-                  }
-                }}).then(m => {
-                  dispatcher.pause();
-                  m.delete(30000);
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-              else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
-                if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
-                if (message.guild.voiceConnection.speaking) return;
-                textChannel.sendMessage('', {embed: {
-                  color: 5088314,
-                  title: 'Resumed Playback',
-                  description: song.title,
-                  footer: {
-                    text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
-                  }
-                }}).then(m => {
-                  dispatcher.resume();
-                  m.delete(30000);
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-              else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
-                if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
-                textChannel.sendMessage('', {embed: {
-                  color: 14845440,
-                  description: 'Skipping current song.'
-                }}).then(m => {
-                  dispatcher.end();
-                  m.delete(10000);
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-              else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
-                if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
-                textChannel.sendMessage('', {embed: {
-                  color: 13380644,
-                  description: 'Stopped Playback.'
-                }}).then(m => {
-                  if (queue.hasOwnProperty(message.guild.id)) queue[message.guild.id].songs = [];
-                  voiceChannel.leave();
-                  m.delete(10000);
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-              else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
-                if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
-                param = msg.content.split(' ').slice(1);
-                if (param[0] == '+')
-                  dispatcher.setVolume((dispatcher.volume*50 + 2)/50);
-                else if (param[0] == '-')
-                  dispatcher.setVolume((dispatcher.volume*50 - 2)/50);
-                else if (/^\d+$/.test(param[0])) {
-                  param = param[0] > 0 && param[0] < 100 ? param[0] : 100;
-                  dispatcher.setVolume(param/50);
-                }
-                textChannel.sendMessage('', {embed: {
-                  color: 5088314,
-                  description: `Volume: ${Math.round(dispatcher.volume*50)}%`
-                }}).then(m => {
-                  m.delete(10000)
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-              else if (msg.content.startsWith(`${Bastion.config.prefix}np`)) {
-                if (dispatcher.paused) title = 'Paused';
-                else title = 'Now Playing';
-                textChannel.sendMessage('', {embed: {
-                  color: 5088314,
-                  title: title,
-                  description: song.title,
-                  thumbnail: {
-                    url: song.thumbnail
-                  },
-                  footer: {
-                    text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
-                  }
-                }}).then(m => {
-                  m.delete(30000)
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-              else if (msg.content.startsWith(`${Bastion.config.prefix}queue`)) {
-                let fields = [{
-                  name: `:loud_sound: ${song.title}`,
-                  value: `**Duration:** ${song.duration}\t**Requester:** <@${song.requester}>`
-                }];
-                for (var i = 1; i < (queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25); i++)
-                  fields.push({
-                    name: `${i+1}. ${queue[message.guild.id].songs[i].title}`,
-                    value: `**Duration:** ${queue[message.guild.id].songs[i].duration}\t**Requester:** <@${queue[message.guild.id].songs[i].requester}>`
-                  });
-                textChannel.sendMessage('', {embed: {
-                  color: 5088314,
-                  title: 'Music queue',
-                  description: `${(queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25)-1} songs in current queue`,
-                  fields: fields,
-                  footer: {
-                    text: `Total no. of songs in queue: ${queue[message.guild.id].songs.length-1}`
-                  }
-                }}).then(m => {
-                  m.delete(60000);
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }
-            });
-            dispatcher.on('end', () => {
-              collector.stop();
-              queue[message.guild.id].songs.shift();
-              play(queue[message.guild.id].songs[0]);
-            });
-            dispatcher.on('error', (err) => {
-              collector.stop();
-              queue[message.guild.id].songs.shift();
-              play(queue[message.guild.id].songs[0]);
-              return Bastion.log.error(err);
-            });
-          }(queue[message.guild.id].songs[0]));
-        }).catch(e => {
+      voiceChannel.join().then(connection => {
+        message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
           Bastion.log.error(e.stack);
         });
-      }
+        (function play(song) {
+          if (song === undefined) return textChannel.sendMessage('', {embed: {
+            color: 13380644,
+            description: 'Exiting voice channel.'
+          }}).then(m => {
+            queue[message.guild.id].playing = false;
+            voiceChannel.leave();
+            m.delete(10000);
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+          dispatcher = message.guild.voiceConnection.playStream(yt(song.url), { passes: 1 });
+          queue[message.guild.id].playing = true;
+          textChannel.sendMessage('', {embed: {
+            color: 5088314,
+            title: 'Playing',
+            description: song.title,
+            thumbnail: {
+              url: song.thumbnail
+            },
+            footer: {
+              text: `🔉 ${dispatcher.volume*50}% | Duration: ${info.duration} | Requester: ${message.author.username}#${message.author.discriminator}`
+            }
+          }}).then(m => {
+            m.delete(30000);
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+
+          let collector = textChannel.createCollector(
+            msg => msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}queue`)
+          );
+          collector.on('message', msg => {
+            if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (!message.guild.voiceConnection.speaking) return;
+              textChannel.sendMessage('', {embed: {
+                color: 15451167,
+                title: 'Paused Playback',
+                description: song.title,
+                footer: {
+                  text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
+                }
+              }}).then(m => {
+                dispatcher.pause();
+                m.delete(30000);
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (message.guild.voiceConnection.speaking) return;
+              textChannel.sendMessage('', {embed: {
+                color: 5088314,
+                title: 'Resumed Playback',
+                description: song.title,
+                footer: {
+                  text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
+                }
+              }}).then(m => {
+                dispatcher.resume();
+                m.delete(30000);
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              textChannel.sendMessage('', {embed: {
+                color: 14845440,
+                description: 'Skipping current song.'
+              }}).then(m => {
+                dispatcher.end();
+                m.delete(10000);
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              textChannel.sendMessage('', {embed: {
+                color: 13380644,
+                description: 'Stopped Playback.'
+              }}).then(m => {
+                if (queue.hasOwnProperty(message.guild.id)) queue[message.guild.id].songs = [];
+                voiceChannel.leave();
+                m.delete(10000);
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+                param = msg.content.split(' ').slice(1);
+              if (param[0] == '+')
+                dispatcher.setVolume((dispatcher.volume*50 + 2)/50);
+              else if (param[0] == '-')
+                dispatcher.setVolume((dispatcher.volume*50 - 2)/50);
+              else if (/^\d+$/.test(param[0])) {
+                param = param[0] > 0 && param[0] < 100 ? param[0] : 100;
+                dispatcher.setVolume(param/50);
+              }
+              textChannel.sendMessage('', {embed: {
+                color: 5088314,
+                description: `Volume: ${Math.round(dispatcher.volume*50)}%`
+              }}).then(m => {
+                m.delete(10000)
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}np`)) {
+              if (dispatcher.paused) title = 'Paused';
+              else title = 'Now Playing';
+              textChannel.sendMessage('', {embed: {
+                color: 5088314,
+                title: title,
+                description: song.title,
+                thumbnail: {
+                  url: song.thumbnail
+                },
+                footer: {
+                  text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
+                }
+              }}).then(m => {
+                m.delete(30000)
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}queue`)) {
+              let fields = [{
+                name: `:loud_sound: ${song.title}`,
+                value: `**Duration:** ${song.duration}\t**Requester:** <@${song.requester}>`
+              }];
+              for (var i = 1; i < (queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25); i++)
+                fields.push({
+                  name: `${i+1}. ${queue[message.guild.id].songs[i].title}`,
+                  value: `**Duration:** ${queue[message.guild.id].songs[i].duration}\t**Requester:** <@${queue[message.guild.id].songs[i].requester}>`
+                });
+              textChannel.sendMessage('', {embed: {
+                color: 5088314,
+                title: 'Music queue',
+                description: `${(queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25)-1} songs in current queue`,
+                fields: fields,
+                footer: {
+                  text: `Total no. of songs in queue: ${queue[message.guild.id].songs.length-1}`
+                }
+              }}).then(m => {
+                m.delete(60000);
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+          });
+          dispatcher.on('end', () => {
+            collector.stop();
+            queue[message.guild.id].playing = false;
+            queue[message.guild.id].songs.shift();
+            play(queue[message.guild.id].songs[0]);
+          });
+          dispatcher.on('error', (err) => {
+            collector.stop();
+            queue[message.guild.id].playing = false;
+            queue[message.guild.id].songs.shift();
+            play(queue[message.guild.id].songs[0]);
+            return Bastion.log.error(err);
+          });
+        }(queue[message.guild.id].songs[0]));
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
