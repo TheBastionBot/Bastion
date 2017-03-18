@@ -53,7 +53,7 @@ exports.conf = {
 
 exports.help = {
   name: 'addmusicchannel',
-  description: 'Adds a voice (by ID) & text channel (the channel this command was used) specific for the music module. i.e, BOT will only accept music commands in that text channel & if any one summons the bot it will automatically join the specified voice channel.',
+  description: 'Adds a voice channel (by ID) & text channel (the channel this command was used) specific for the music module. i.e, BOT will only accept music commands in that text channel & if any one summons the bot it will automatically join the specified voice channel.',
   permission: '',
   usage: 'addmusicchannel <voice_channel_id>',
   example: ['addmusicchannel 112233445566778899']
