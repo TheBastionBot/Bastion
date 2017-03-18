@@ -27,16 +27,20 @@ exports.run = function(Bastion, message, args) {
   if (role == null) return Bastion.log.info('No role found with that name.');
   if (message.guild.members.get(Bastion.user.id).highestRole.position <= role.position) return Bastion.log.info('I don\'t have permissions to use this command on my superiors.');
 
-  role.delete().then(r => message.channel.sendMessage('', {embed: {
-    color: 13380644,
-    title: 'Role Deleted',
-    fields: [
-      {
-        name: 'Name',
-        value: r.name
-      }
-    ]
-  }})).catch(e => {
+  role.delete().then(r => {
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      title: 'Role Deleted',
+      fields: [
+        {
+          name: 'Name',
+          value: r.name
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

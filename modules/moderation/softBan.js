@@ -28,41 +28,61 @@ exports.run = function(Bastion, message, args) {
   message.guild.members.get(user.id).ban(7).catch(e => {
     Bastion.log.error(e.stack);
   });
-  message.guild.unban(user.id).catch(e => {
+  message.guild.unban(user.id).then(user => {
+    let reason = args.slice(1).join(' ');
+    if (reason.length < 1) reason = 'No reason given';
+    
+    message.channel.sendMessage('', {embed: {
+      color: 14845440,
+      title: 'Soft-Banned',
+      fields: [
+        {
+          name: 'User',
+          value: `**${user.username}**#${user.discriminator}`,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        },
+        {
+          name: 'Reason',
+          value: reason,
+          inline: false
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+    user.sendMessage('', {embed: {
+      color: 14845440,
+      title: `Soft-Banned from ${message.guild.name} Server`,
+      description: `**Reason:** ${reason}`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
     Bastion.log.error(e.stack);
-  });
-  let reason = args.slice(1).join(' ');
-  if (reason.length < 1) reason = 'No reason given';
-
-  message.channel.sendMessage('', {embed: {
-    color: 14845440,
-    title: 'Soft-Banned',
-    fields: [
-      {
-        name: 'User',
-        value: `**${user.username}**#${user.discriminator}`,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: user.id,
-        inline: true
-      },
-      {
-        name: 'Reason',
-        value: reason,
-        inline: false
-      }
-    ]
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
-  user.sendMessage('', {embed: {
-    color: 14845440,
-    title: `Soft-Banned from ${message.guild.name} Server`,
-    description: `**Reason:** ${reason}`
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      title: 'Soft-Ban Error',
+      description: 'Banned but unable to unban. Please unban the following user.',
+      fields: [
+        {
+          name: 'User',
+          value: `**${user.username}**#${user.discriminator}`,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

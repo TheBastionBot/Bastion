@@ -23,7 +23,8 @@ exports.run = function(Bastion, message, args) {
   if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  message.guild.createChannel(args.join('-'), 'text').then(channel => channel.sendMessage('', {embed: {
+  message.guild.createChannel(args.join('-'), 'text').then(channel => {
+    channel.sendMessage('', {embed: {
       color: 5088314,
       title: 'Text Channel Created',
       fields: [
@@ -38,9 +39,12 @@ exports.run = function(Bastion, message, args) {
           inline: true
         }
       ]
-    }})).catch(e => {
+    }}).catch(e => {
       Bastion.log.error(e.stack);
     });
+  }).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.conf = {

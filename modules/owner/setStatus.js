@@ -23,18 +23,26 @@ exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (args.length >= 1 && (args == 'online' || args == 'idle' || args == 'dnd' || args == 'invisible') ) {
-    Bastion.user.setStatus(args.join(' ')).catch(e => {
-      Bastion.log.error(e.stack);
-    });
-    message.channel.sendMessage('', {embed: {
-      color: 14211540,
-      description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
-    }}).catch(e => {
+    Bastion.user.setStatus(args.join(' ')).then(() => {
+      message.channel.sendMessage('', {embed: {
+        color: 14211540,
+        description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   else {
-    Bastion.user.setStatus(Bastion.config.status).catch(e => {
+    Bastion.user.setStatus(Bastion.config.status).then(() => {
+      message.channel.sendMessage('', {embed: {
+        color: 14211540,
+        description: `${Bastion.user.username}'s status is now set to the default status **${Bastion.config.status}**`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }

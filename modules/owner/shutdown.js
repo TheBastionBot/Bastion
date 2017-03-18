@@ -22,14 +22,14 @@
 exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  message.channel.sendMessage('', {embed: {
-    color: 11316394,
-    description: 'GoodBye :wave:! See you soon.'
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
-
-  Bastion.destroy().catch(e => {
+  Bastion.destroy().then(() => {
+    message.channel.sendMessage('', {embed: {
+      color: 11316394,
+      description: 'GoodBye :wave:! See you soon.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

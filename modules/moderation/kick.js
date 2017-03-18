@@ -25,40 +25,41 @@ exports.run = function(Bastion, message, args) {
   if (!(user = message.mentions.users.first())) return;
   if (!message.guild.members.get(user.id).kickable) return;
 
-  message.guild.members.get(user.id).kick().catch(e => {
-    Bastion.log.error(e.stack);
-  });
-  let reason = args.slice(1).join(' ');
-  if (reason.length < 1) reason = 'No reason given';
+  message.guild.members.get(user.id).kick().then(member => {
+    let reason = args.slice(1).join(' ');
+    if (reason.length < 1) reason = 'No reason given';
 
-  message.channel.sendMessage('', {embed: {
-    color: 15451167,
-    title: 'Kicked',
-    fields: [
-      {
-        name: 'User',
-        value: `**${user.username}**#${user.discriminator}`,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: user.id,
-        inline: true
-      },
-      {
-        name: 'Reason',
-        value: reason,
-        inline: false
-      }
-    ]
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
-  user.sendMessage('', {embed: {
-    color: 15451167,
-    title: `Kicked from ${message.guild.name} Server`,
-    description: `**Reason:** ${reason}`
-  }}).catch(e => {
+    message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Kicked',
+      fields: [
+        {
+          name: 'User',
+          value: `**${user.username}**#${user.discriminator}`,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        },
+        {
+          name: 'Reason',
+          value: reason,
+          inline: false
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+    member.sendMessage('', {embed: {
+      color: 15451167,
+      title: `Kicked from ${message.guild.name} Server`,
+      description: `**Reason:** ${reason}`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

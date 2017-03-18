@@ -23,7 +23,6 @@ exports.run = function(Bastion, message, args) {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9-~#%]+)\.(jpg|jpeg|gif|png)$/i.test(args.join(' '))) {
-    return console.log('done');
     Bastion.user.setAvatar(args.join(' ')).then(() => {
       message.channel.sendMessage('', {embed: {
         color: 14211540,
