@@ -19,8 +19,8 @@ RD /S /Q node_modules
 DEL /Q data/Bastion.sqlite
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
-npm install &>nul
-npm install -g ffmpeg-binaries &>nul
+npm install >nul 2>&1
+npm install -g ffmpeg-binaries >nul 2>&1
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Ready to boot up and start running.
 ECHO.
@@ -30,7 +30,7 @@ EXIT /B 0
 :EXIT
 ECHO.
 ECHO [Bastion]: Press any key to exit.
-PAUSE &>nul
+PAUSE >nul 2>&1
 CD /D "%cwd%"
 TITLE Windows Command Prompt (CMD)
 COLOR

@@ -25,7 +25,6 @@ module.exports = Bastion => {
   Bastion.on('channelCreate', loadEvent('channelCreate'));
   Bastion.on('channelDelete', loadEvent('channelDelete'));
   Bastion.on('channelUpdate', loadEvent('channelUpdate'));
-  Bastion.on('disconnect', () => loadEvent('disconnect')(Bastion));
   Bastion.on('error', loadEvent('error'));
   Bastion.on('guildBanAdd', loadEvent('guildBanAdd'));
   Bastion.on('guildBanRemove', loadEvent('guildBanRemove'));
@@ -37,6 +36,5 @@ module.exports = Bastion => {
   Bastion.on('message', loadEvent('message'));
   Bastion.on('messageUpdate', loadEvent('messageUpdate'));
   Bastion.on('ready', () => loadEvent('ready')(Bastion));
-  Bastion.on('reconnecting', () => loadEvent('reconnecting')(Bastion));
   Bastion.on('warn', loadEvent('warn'));
 };
