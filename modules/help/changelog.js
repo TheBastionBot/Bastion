@@ -44,7 +44,7 @@ exports.run = function(Bastion, message, args) {
       url: Bastion.user.avatarURL
     },
     footer: {
-      text: 'March 23, 2017'
+      text: changes.date
     }
   }}).catch(e => {
     Bastion.log.error(e.stack);
