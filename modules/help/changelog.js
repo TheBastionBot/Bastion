@@ -29,17 +29,23 @@ exports.run = function(Bastion, message, args) {
     fields: [
       {
         name: 'Patched/Updated:',
-        value: `-${changes.updated.join('\n-')}`
+        value: `- ${changes.updated.join('\n- ')}`
       },
       {
         name: 'Added:',
-        value: `-${changes.added.join('\n-')}`
+        value: `- ${changes.added.join('\n- ')}`
       },
       {
         name: 'Removed:',
-        value: `-${changes.removed.join('\n-')}`
+        value: `- ${changes.removed.join('\n- ')}`
       }
-    ]
+    ],
+    thumbnail: {
+      url: Bastion.user.avatarURL
+    },
+    footer: {
+      text: 'March 23, 2017'
+    }
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
