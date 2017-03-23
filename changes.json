@@ -1,0 +1,10 @@
+{
+  "updated": [
+    "`play` command now shows the errors, if any",
+    "Updated dependencies"
+  ],
+  "added": [
+    "`changeLog` command"
+  ],
+  "removed": []
+}
