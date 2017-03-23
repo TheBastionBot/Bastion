@@ -1,5 +1,5 @@
 # Bastion: Discord BOT
-<a href="https://discord.gg/fzx8fkt"><img src="https://discordapp.com/api/guilds/267022940967665664/embed.png" alt="Discord server" /></a> [![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat)](https://bastion.js.org/changes)
+<a href="https://discord.gg/fzx8fkt"><img src="https://discordapp.com/api/guilds/267022940967665664/embed.png" alt="Discord server" /></a> [![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://bastion.js.org/changes)
 <!--[![Github All Releases](https://img.shields.io/github/downloads/snkrsnkampa/Bastion/total.svg?style=flat-square)]()-->  
 What features do you think an ideal [Discord](https://discordapp.com) BOT should have?  
 Administration, Moderation, Music, Games, Searches, Humor...  
