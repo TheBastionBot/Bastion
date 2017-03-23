@@ -34,6 +34,7 @@
     "urllib": "^2.21.2",
     "uws": "^0.13.0",
     "weather-js": "^2.0.0",
+    "webshot": "^0.18.0",
     "word-definition": "^2.1.6",
     "xkcd": "^1.1.2",
     "youtube-dl": "^1.11.1",
