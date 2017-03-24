@@ -157,18 +157,22 @@ module.exports = message => {
         let args = message.content.split(' ');
         if (args.length < 1) return;
 
-        bot.setNick(`${message.client.user.username}`);
-        bot.create(function (err, session) {
-          bot.ask(args.join(' '), function (err, response) {
-            message.channel.startTyping();
-            setTimeout(function () {
-              message.channel.sendMessage(response).catch(e => {
-                message.client.log.error(e.stack);
-              });
-              message.channel.stopTyping();
-            }, response.length * 100);
+        try {
+          bot.setNick(`${message.client.user.username}`);
+          bot.create(function (err, session) {
+            bot.ask(args.join(' '), function (err, response) {
+              message.channel.startTyping();
+              setTimeout(function () {
+                message.channel.sendMessage(response).catch(e => {
+                  message.client.log.error(e.stack);
+                });
+                message.channel.stopTyping();
+              }, response.length * 100);
+            });
           });
-        });
+        } catch (e) {
+          message.client.log.error(e.stack);
+        }
       }).catch(e => {
         message.client.log.error(e.stack);
       });
