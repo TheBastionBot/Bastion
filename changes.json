@@ -1,7 +1,9 @@
 {
   "date": "March 24, 2017",
   "updated": [
-    "Fixed bot crashes when no response from cleverbot"
+    "update/upgrade scripts when node_modules isn't present - gnu/mac",
+    "eval when it didn't had manage messages perms",
+    "chat bot"
   ],
   "added": [],
   "removed": []
