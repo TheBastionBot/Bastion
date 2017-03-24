@@ -1,9 +1,8 @@
 {
   "date": "March 24, 2017",
-  "updated": [],
-  "added": [
-    "`capture` command",
-    "`discrim` command"
+  "updated": [
+    "Fixed bot crashes when no response from cleverbot"
   ],
+  "added": [],
   "removed": []
 }
