@@ -25,40 +25,38 @@ exports.run = function(Bastion, message, args) {
   try {
     var evaled = eval(args.join(' '));
     if (typeof evaled !== 'string') evaled = require('util').inspect(evaled);
-    message.delete().then(() => {
-      message.channel.sendMessage('', {embed: {
-        color: 5088314,
-        fields: [
-          {
-            name: ':inbox_tray:  INPUT',
-            value: `\`\`\`js\n${args.join(' ')}\n\`\`\``
-          },
-          {
-            name: ':outbox_tray:  OUTPUT',
-            value: `\`\`\`js\n${clean(Bastion, evaled)}\n\`\`\``
-          }
-        ]
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }).catch(e => {
+    message.delete().catch(e => {
+      Bastion.log.error(e.stack);
+    });
+    message.channel.sendMessage('', {embed: {
+      color: 5088314,
+      fields: [
+        {
+          name: ':inbox_tray:  INPUT',
+          value: `\`\`\`js\n${args.join(' ')}\n\`\`\``
+        },
+        {
+          name: ':outbox_tray:  OUTPUT',
+          value: `\`\`\`js\n${clean(Bastion, evaled)}\n\`\`\``
+        }
+      ]
+    }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   catch(e) {
-    message.delete().then(() => {
-      message.channel.sendMessage('', {embed: {
-        color: 13380644,
-        fields: [
-          {
-            name: ':no_entry:  ERROR',
-            value: `\`\`\`js\n${clean(Bastion, e)}\n\`\`\``
-          }
-        ]
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }).catch(e => {
+    message.delete().catch(e => {
+      Bastion.log.error(e.stack);
+    });
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      fields: [
+        {
+          name: ':no_entry:  ERROR',
+          value: `\`\`\`js\n${clean(Bastion, e)}\n\`\`\``
+        }
+      ]
+    }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
