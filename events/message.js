@@ -20,8 +20,11 @@
  */
 
 const sql = require('sqlite');
-const cleverbot = require("cleverbot.io");
-const bot = new cleverbot('nELUiqi4HknK6FNs','BSzBZz64nwCwpntlFMAIAxhlJfk5sbpe');
+const Cleverbot = require('cleverbot');
+const credentials = require('../settings/credentials.json');
+const bot = new Cleverbot({
+  key: credentials.cleverbotAPIkey
+});
 const chalk = require('chalk');
 sql.open('./data/Bastion.sqlite');
 
@@ -157,22 +160,17 @@ module.exports = message => {
         let args = message.content.split(' ');
         if (args.length < 1) return;
 
-        try {
-          bot.setNick(`${message.client.user.username}`);
-          bot.create(function (err, session) {
-            bot.ask(args.join(' '), function (err, response) {
-              message.channel.startTyping();
-              setTimeout(function () {
-                message.channel.sendMessage(response).catch(e => {
-                  message.client.log.error(e.stack);
-                });
-                message.channel.stopTyping();
-              }, response.length * 100);
+        bot.query(args.join(' ')).then(response => {
+          message.channel.startTyping();
+          setTimeout(function () {
+            message.channel.sendMessage(response.output).catch(e => {
+              message.client.log.error(e.stack);
             });
-          });
-        } catch (e) {
+            message.channel.stopTyping();
+          }, response.output.length * 100);
+        }).catch(e => {
           message.client.log.error(e.stack);
-        }
+        });
       }).catch(e => {
         message.client.log.error(e.stack);
       });
