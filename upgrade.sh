@@ -21,8 +21,8 @@ echo -e "${CYAN}[Bastion]:${NC} Done."
 echo
 
 echo -e "${CYAN}[Bastion]:${NC} Deleting old files..."
-rm -r node_modules
-rm data/Bastion.sqlite
+rm -fr node_modules
+rm -f data/Bastion.sqlite
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Installing new files... This may take a while, please be patient."
 npm install &>/dev/null

@@ -21,7 +21,7 @@ echo -e "${CYAN}[Bastion]:${NC} Done."
 echo
 
 echo -e "${CYAN}[Bastion]:${NC} Deleting old dependencies..."
-rm -r node_modules
+rm -fr node_modules
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Installing new dependencies... This may take a while, please be patient."
 npm install &>/dev/null
