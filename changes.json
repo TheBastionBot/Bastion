@@ -2,7 +2,8 @@
   "date": "March 25, 2017",
   "updated": [
     "Some strings in `play` command",
-    "More stats for `overwatch` command"
+    "More stats for `overwatch` command",
+    "Some strings"
   ],
   "added": [
     "`todo` command",
