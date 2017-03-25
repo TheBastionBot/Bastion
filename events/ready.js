@@ -72,6 +72,9 @@ module.exports = Bastion => {
   sql.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
     Bastion.log.error(e.stack);
   });
+  sql.run("CREATE TABLE IF NOT EXISTS todo (ownerID TEXT NOT NULL UNIQUE, list TEXT NOT NULL DEFAULT '[]')").catch(e => {
+    Bastion.log.error(e.stack);
+  });
 
   console.log('\n');
   console.log(chalk.green(`[Author] `) + `${Bastion.package.author}`);
