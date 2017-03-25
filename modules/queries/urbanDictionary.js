@@ -25,7 +25,11 @@ exports.run = function(Bastion, message, args) {
   if (args.length < 1) return;
 
   urllib.request(`https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`, function (err, data) {
-    data = JSON.parse(data).list;
+    try {
+      data = JSON.parse(data).list;
+    } catch (e) {
+      return Bastion.log.error(e.stack);
+    }
     let embed = {};
     if (data.length != 0) {
       embed = {embed: {
