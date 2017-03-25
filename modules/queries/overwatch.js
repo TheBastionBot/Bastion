@@ -19,73 +19,133 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const urllib = require('urllib');
+const ow = require('overwatch-js');
 
 exports.run = function(Bastion, message, args) {
-  if (args.length != 2) return;
+  if (args.length < 1) return;
 
-  for (let i = 0; i < args.length - 1; i++)
-    args[i] = args[i].toLowerCase();
-  if (!/^(us|eu|kr|cn|global)$/.test(args[0])) args[0] = 'global';
-  if (!/^\w{3,12}#\d{4,6}$/.test(args[1])) return;
+  args[0] = args[0].toLowerCase();
+  if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) return;
+  if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) return;
 
-  urllib.request(`http://ow-api.herokuapp.com/profile/pc/${args[0]}/${args[1].replace('#', '-')}`, function (err, data) {
-    let embed = {};
-    if (data.toString() == 'Not Found') {
-      embed = {embed: {
-        color: 13380644,
-        description: `No user with BattleTag **${args[1]}** was not found in **${args[0].toUpperCase()}** region.`
-      }};
-    }
-    else {
-      data = JSON.parse(data);
-      if (data.competitive.rank == null) {
-        embed = {embed: {
-          color: 6651610,
-          title: args[1],
-          fields: [
-            {
-              name: 'Quick Play',
-              value: `**Wins:** ${data.games.quickplay.wins}\n**Playtime:** ${data.playtime.quickplay}`,
-              inline: true
-            },
-            {
-              name: 'Competitive Play',
-              value: 'No competitive play',
-              inline: true
-            }
-          ],
-          thumbnail: {
-            url: 'http://i.imgur.com/YZ4w2ey.png'
-          }
-        }};
+  ow.getOverall('pc', args[0], args[1].replace('#', '-')).then(data => {
+    let stats = [
+      {
+        name: 'Level',
+        value: data.profile.level,
+        inline: true
+      },
+      {
+        name: 'Rank',
+        value: `${parseInt(data.profile.rank) ? data.profile.rank : '-'}`,
+        inline: true
+      },
+      {
+        name: 'Quick Play',
+        value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
+      },
+      {
+        name: 'Eliminations - Average',
+        value: `${data.quickplay.global.eliminations_average}`,
+        inline: true
+      },
+      {
+        name: 'Damage Done - Average',
+        value: `${data.quickplay.global.damage_done_average}`,
+        inline: true
+      },
+      {
+        name: 'Deaths - Average',
+        value: `${data.quickplay.global.deaths_average}`,
+        inline: true
+      },
+      {
+        name: 'Final Blows - Average',
+        value: `${data.quickplay.global.final_blows_average}`,
+        inline: true
+      },
+      {
+        name: 'Healing Done - Average',
+        value: `${data.quickplay.global.healing_done_average}`,
+        inline: true
+      },
+      {
+        name: 'Objective Kills - Average',
+        value: `${data.quickplay.global.objective_kills_average}`,
+        inline: true
+      },
+      {
+        name: 'Objective Time - Average',
+        value: `${data.quickplay.global.objective_time_average}`,
+        inline: true
+      },
+      {
+        name: 'Solo Kills - Average',
+        value: `${data.quickplay.global.solo_kills_average}`,
+        inline: true
       }
-      else {
-        embed = {embed: {
-          color: 6651610,
-          title: args[1],
-          url: `https://playoverwatch.com/en-us/career/pc/${args[0]}/${args[1].replace('#', '-')}`,
-          fields: [
-            {
-              name: 'Quick Play',
-              value: `**Wins:** ${data.games.quickplay.wins}\n**Playtime:** ${data.playtime.quickplay}`,
-              inline: true
-            },
-            {
-              name: 'Competitive Play',
-              value: `**Rank:** ${data.competitive.rank}\n**Wins:** ${data.games.competitive.wins}\n**Loses:** ${data.games.competitive.lost}\n**Played:** ${data.games.competitive.played}\n**Playtime:** ${data.playtime.competitive}`,
-              inline: true
-            }
-          ],
-          thumbnail: {
-            url: data.competitive.rank_img
-          }
-        }};
-      }
+    ];
+    if (Object.keys(data.competitive.global).length > 0) {
+      stats.push(
+        {
+          name: 'Competitive',
+          value: `${args[1]} has won **${data.competitive.global.games_won}** games out of **${data.competitive.global.games_played}** played games.`
+        },
+        {
+          name: 'Eliminations - Average',
+          value: `${data.competitive.global.eliminations_average}`,
+          inline: true
+        },
+        {
+          name: 'Damage Done - Average',
+          value: `${data.competitive.global.damage_done_average}`,
+          inline: true
+        },
+        {
+          name: 'Deaths - Average',
+          value: `${data.competitive.global.deaths_average}`,
+          inline: true
+        },
+        {
+          name: 'Final Blows - Average',
+          value: `${data.competitive.global.final_blows_average}`,
+          inline: true
+        },
+        {
+          name: 'Healing Done - Average',
+          value: `${data.competitive.global.healing_done_average}`,
+          inline: true
+        },
+        {
+          name: 'Objective Kills - Average',
+          value: `${data.competitive.global.objective_kills_average}`,
+          inline: true
+        },
+        {
+          name: 'Objective Time - Average',
+          value: `${data.competitive.global.objective_time_average}`,
+          inline: true
+        },
+        {
+          name: 'Solo Kills - Average',
+          value: `${data.competitive.global.solo_kills_average}`,
+          inline: true
+        }
+      );
     }
-    message.channel.sendMessage('', embed).catch(e => {
+    message.channel.sendMessage('', {embed: {
+      color: 6651610,
+      title: args[1],
+      url: data.profile.url,
+      fields: stats,
+      thumbnail: {
+        url: data.profile.avatar != '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
+      }
+    }}).catch(e => {
       Bastion.log.error(e.stack);
     });
+  }).catch(e => {
+    Bastion.log.error(e.stack);
   });
 };
 
@@ -97,6 +157,6 @@ exports.help = {
   name: 'overwatch',
   description: 'Shows Overwatch player stats specified by his Region and BattleTag.',
   permission: '',
-  usage: 'overwatch <BattleTag#discriminator>',
-  example: ['overwatch GH0S7#11143']
+  usage: 'overwatch <region> <BattleTag#discriminator>',
+  example: ['overwatch us GH0S7#11143']
 };

@@ -1,10 +1,13 @@
 {
-  "date": "March 24, 2017",
+  "date": "March 25, 2017",
   "updated": [
-    "update/upgrade scripts when node_modules isn't present - gnu/mac",
-    "eval when it didn't had manage messages perms",
-    "chat bot"
+    "Some strings in `play` command",
+    "More stats for `overwatch` command"
   ],
-  "added": [],
+  "added": [
+    "`todo` command",
+    "`todoList` command",
+    "`deleteTodo` command"
+  ],
   "removed": []
 }
