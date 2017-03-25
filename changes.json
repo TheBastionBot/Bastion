@@ -1,14 +1,8 @@
 {
   "date": "March 25, 2017",
   "updated": [
-    "Some strings in `play` & `removeRole` command",
-    "More stats for `overwatch` command"
+    "Some causes of error when no data is received for ud & wiki"
   ],
-  "added": [
-    "`todo` command",
-    "`todoList` command",
-    "`deleteTodo` command",
-    "`removeAllRole` command"
-  ],
+  "added": [],
   "removed": []
 }
