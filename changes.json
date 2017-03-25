@@ -1,14 +1,14 @@
 {
   "date": "March 25, 2017",
   "updated": [
-    "Some strings in `play` command",
-    "More stats for `overwatch` command",
-    "Some strings"
+    "Some strings in `play` & `removeRole` command",
+    "More stats for `overwatch` command"
   ],
   "added": [
     "`todo` command",
     "`todoList` command",
-    "`deleteTodo` command"
+    "`deleteTodo` command",
+    "`removeAllRole` command"
   ],
   "removed": []
 }
