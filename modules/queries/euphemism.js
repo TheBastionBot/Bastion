@@ -6,7 +6,7 @@ function rnd_selection(base)
 	return String(arguments[Math.floor(Math.random()*arguments.length)]);
 }
 
-exports.run = function(client, message) {
+exports.run = function(Bastion, message) {
 
   let user = message.mentions.users.first()
   
@@ -21,8 +21,8 @@ request.get('http://toykeeper.net/programs/mad/euphemisms', function(error, resp
 					color: 
 					rnd_selection(3447003, 14365491, 3201849, 13818670, 13577435, 7089371, 14383916),
 					author: {
-						name: client.user.username,
-						icon_url: client.user.avatarURL
+						name: Bastion.user.username,
+						icon_url: Bastion.user.avatarURL
 					},
 					thumbnail: {
 						url: ('https://lynnschneiderbooks.files.wordpress.com/2011/05/euphemism-misc1.jpg')
