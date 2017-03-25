@@ -82,10 +82,10 @@ exports.run = function(Bastion, message, args) {
     args = /^((https:\/\/)(www\.)?(youtube\.com)\/watch\?v=[a-zA-Z0-9-_]{11})$/i.test(args[0]) ? args[0] : 'ytsearch:' + args.join(' ');
     yt.getInfo(args, ['-q', '--no-warnings', '--force-ipv4', '--format=bestvideo[height<=480]+bestaudio/best[height<=480]'], (err, info) => {
       if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-        if (err.stack.includes('No video results')) result = `No results found found for **${args}**.`;
+        if (err.stack.includes('No video results')) result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
         else {
           Bastion.log.error(err.stack);
-          result = `Some error has occured while finding results for **${args}**, please check the console.`
+          result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**, please check the console.`
         }
         return message.channel.sendMessage('', {embed: {
           color: 13380644,
