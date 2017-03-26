@@ -159,7 +159,7 @@ exports.run = function(Bastion, message, args) {
           );
           collector.on('message', msg => {
             if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               if (!message.guild.voiceConnection.speaking) return;
               textChannel.sendMessage('', {embed: {
                 color: 15451167,
@@ -176,7 +176,7 @@ exports.run = function(Bastion, message, args) {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               if (message.guild.voiceConnection.speaking) return;
               textChannel.sendMessage('', {embed: {
                 color: 5088314,
@@ -204,7 +204,7 @@ exports.run = function(Bastion, message, args) {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               textChannel.sendMessage('', {embed: {
                 color: 14845440,
                 description: 'Skipping current song.'
@@ -216,7 +216,7 @@ exports.run = function(Bastion, message, args) {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               textChannel.sendMessage('', {embed: {
                 color: 13380644,
                 description: 'Stopped Playback.'
@@ -229,7 +229,7 @@ exports.run = function(Bastion, message, args) {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
                 param = msg.content.split(' ').slice(1);
               if (param[0] == '+')
                 dispatcher.setVolume((dispatcher.volume*50 + 2)/50);
