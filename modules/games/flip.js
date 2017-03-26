@@ -24,10 +24,15 @@ exports.run = function(Bastion, message, args) {
     'Heads',
     'Tails'
   ];
+  let outcome = outcomes[Math.floor(Math.random()*outcomes.length)];
+  if (args[0] && parseInt(args[0]))
+    for (var i = 1; i < args[0]; i++)
+      outcome += `, ${outcomes[Math.floor(Math.random()*outcomes.length)]}`
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,
-    description: outcomes[Math.floor(Math.random()*outcomes.length)],
+    title: 'You flipped:',
+    description: outcome
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
@@ -39,8 +44,8 @@ exports.config = {
 
 exports.help = {
   name: 'flip',
-  description: 'Flips a coin and gives you the the outcome (Heads or Tails).',
+  description: 'Flips a coin and gives you the the outcome (Heads or Tails). If a number is provided as an argument, it flips that no. of coins.',
   permission: '',
-  usage: 'flip',
-  example: []
+  usage: 'flip [no_of_coins]',
+  example: ['flip', 'flip 5']
 };
