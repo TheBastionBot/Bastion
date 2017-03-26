@@ -4,7 +4,8 @@
     "Minor improvements",
     "Minor changes",
     "String fixes in `edgeLord` command",
-    "Added support for multiple coins in `flip` command"
+    "Support for multiple coins in `flip` command",
+    "Typo `roll` command",
   ],
   "added": [],
   "removed": []
