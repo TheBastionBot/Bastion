@@ -147,7 +147,7 @@ exports.run = function(Bastion, message, args) {
     Bastion.log.error(e.stack);
     message.channel.sendMessage('', {embed: {
       color: 13380644,
-      description: `No user **${args[1]}** found for the platform **${args[0]}**.`
+      description: `No player with username **${args[1]}** found for the platform **${args[0]}**.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });

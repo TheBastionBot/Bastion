@@ -8,7 +8,8 @@
     "Typo in `roll` command",
     "Only members listening to music can use music commands",
     "perms log for music module",
-    "`overwatch` command improvements"
+    "`overwatch` command improvements",
+    "`rainbow6` command string changes"
   ],
   "added": [
     "`repeat` command",
