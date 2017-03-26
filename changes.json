@@ -2,7 +2,8 @@
   "date": "March 26, 2017",
   "updated": [
     "Minor improvements",
-    "Minor changes"
+    "Minor changes",
+    "String fixes in `edgeLord` command"
   ],
   "added": [],
   "removed": []
