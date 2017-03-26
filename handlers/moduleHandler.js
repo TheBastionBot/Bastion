@@ -37,7 +37,7 @@ function loadEvent(Bastion, module) {
       let cmd = require(`../modules/${module}/${f}`);
       Bastion.log.msg(`Loading command: ${cmd.help.name}`)
       Bastion.commands.set(cmd.help.name, cmd);
-      cmd.conf.aliases.forEach(alias => {
+      cmd.config.aliases.forEach(alias => {
         Bastion.aliases.set(alias, cmd.help.name);
       });
     });

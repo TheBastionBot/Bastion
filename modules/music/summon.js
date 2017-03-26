@@ -80,7 +80,7 @@ exports.run = function(Bastion, message, args) {
   message.delete();
 };
 
-exports.conf = {
+exports.config = {
   aliases: ['join']
 };
 

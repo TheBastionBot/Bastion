@@ -31,7 +31,7 @@ exports.run = function(Bastion, message, args) {
   message.guild.unban(user.id).then(user => {
     let reason = args.slice(1).join(' ');
     if (reason.length < 1) reason = 'No reason given';
-    
+
     message.channel.sendMessage('', {embed: {
       color: 14845440,
       title: 'Soft-Banned',
@@ -86,7 +86,7 @@ exports.run = function(Bastion, message, args) {
   });
 };
 
-exports.conf = {
+exports.config = {
   aliases: ['sb']
 };
 

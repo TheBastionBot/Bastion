@@ -75,7 +75,7 @@ exports.run = function(Bastion, message, args) {
           },
           {
             name: 'Aliases',
-            value: command.conf.aliases == '' ? '-' : command.conf.aliases.join(', '),
+            value: command.config.aliases == '' ? '-' : command.config.aliases.join(', '),
             inline: true
           },
           {
@@ -109,7 +109,7 @@ exports.run = function(Bastion, message, args) {
   }
 };
 
-exports.conf = {
+exports.config = {
   aliases: ['h']
 };
 

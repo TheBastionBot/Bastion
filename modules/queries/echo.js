@@ -28,7 +28,7 @@ exports.run = function(Bastion, message, args) {
   });
 };
 
-exports.conf = {
+exports.config = {
   aliases: ['say']
 };
 
