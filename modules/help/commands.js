@@ -20,7 +20,7 @@
  */
 
 const fs = require('fs');
-const getDirSync = require('../../functions/getDirSync').func;
+const getDirSync = require('../../functions/getDirSync');
 let commands = new Object();
 
 exports.run = function(Bastion, message, args) {

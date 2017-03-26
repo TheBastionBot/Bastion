@@ -20,7 +20,7 @@
  */
 
 const fs = require('fs');
-const getDirSync = require('../functions/getDirSync').func;
+const getDirSync = require('../functions/getDirSync');
 
 module.exports = Bastion => {
   let modules = getDirSync('./modules/');

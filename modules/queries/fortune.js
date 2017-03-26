@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const getRandomInt = require('../../functions/getRandomInt').func;
+const getRandomInt = require('../../functions/getRandomInt');
 const fortuneCookies = require('../../data/fortuneCookies.json');
 
 exports.run = function(Bastion, message, args) {

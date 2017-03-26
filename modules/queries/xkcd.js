@@ -20,7 +20,7 @@
  */
 
 const xkcd = require('xkcd');
-const getRandomInt = require('../../functions/getRandomInt').func;
+const getRandomInt = require('../../functions/getRandomInt');
 
 exports.run = function(Bastion, message, args) {
   let num = parseInt(args[0]);

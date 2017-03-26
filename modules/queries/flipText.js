@@ -20,7 +20,7 @@
  */
 
 const flipText = require('../../data/flipText.json');
-const reverseString = require('../../functions/reverseString').func;
+const reverseString = require('../../functions/reverseString');
 
 exports.run = function(Bastion, message, args) {
   if (args.length < 1) return;
