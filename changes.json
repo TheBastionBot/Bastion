@@ -10,7 +10,8 @@
     "perms log for music module"
   ],
   "added": [
-    "`repeat` command"
+    "`repeat` command",
+    "`rainbow6` command"
   ],
   "removed": []
 }
