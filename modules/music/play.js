@@ -96,7 +96,7 @@ exports.run = function(Bastion, message, args) {
           Bastion.log.error(e.stack);
         });
       }
-      if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].songs = [];
+      if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].songs = [];
       queue[message.guild.id].songs.push({
         url: info.formats[0].url,
         title: info.title,
@@ -155,7 +155,7 @@ exports.run = function(Bastion, message, args) {
           });
 
           let collector = textChannel.createCollector(
-            msg => msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}queue`)
+            msg => msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}queue`)
           );
           collector.on('message', msg => {
             if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
@@ -188,6 +188,17 @@ exports.run = function(Bastion, message, args) {
               }}).then(m => {
                 dispatcher.resume();
                 m.delete(30000);
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}repeat`)) {
+              queue[message.guild.id].repeat = true;
+              textChannel.sendMessage('', {embed: {
+                color: 5088314,
+                description: 'Added the current song to the repeat queue.'
+              }}).then(m => {
+                m.delete(10000);
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -284,7 +295,9 @@ exports.run = function(Bastion, message, args) {
           dispatcher.on('end', () => {
             collector.stop();
             queue[message.guild.id].playing = false;
-            queue[message.guild.id].songs.shift();
+            if (!queue[message.guild.id].repeat)
+              queue[message.guild.id].songs.shift();
+            queue[message.guild.id].repeat = false;
             play(queue[message.guild.id].songs[0]);
           });
           dispatcher.on('error', (err) => {

@@ -5,8 +5,10 @@
     "Minor changes",
     "String fixes in `edgeLord` command",
     "Support for multiple coins in `flip` command",
-    "Typo `roll` command",
+    "Typo in `roll` command"
   ],
-  "added": [],
+  "added": [
+    "`repeat` command"
+  ],
   "removed": []
 }
