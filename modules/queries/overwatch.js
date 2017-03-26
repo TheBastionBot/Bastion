@@ -135,8 +135,11 @@ exports.run = function(Bastion, message, args) {
     }
     message.channel.sendMessage('', {embed: {
       color: 6651610,
-      title: args[1],
-      url: data.profile.url,
+      author: {
+        name: args[1],
+        url: data.profile.url,
+        icon_url: parseInt(data.profile.rank) ? data.profile.rankPicture : 'http://i.imgur.com/YZ4w2ey.png'
+      },
       fields: stats,
       thumbnail: {
         url: data.profile.avatar != '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
@@ -146,6 +149,12 @@ exports.run = function(Bastion, message, args) {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

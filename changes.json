@@ -6,8 +6,9 @@
     "String fixes in `edgeLord` command",
     "Support for multiple coins in `flip` command",
     "Typo in `roll` command",
-    "Only members listning to music can use music commands",
-    "perms log for music module"
+    "Only members listening to music can use music commands",
+    "perms log for music module",
+    "`overwatch` command improvements"
   ],
   "added": [
     "`repeat` command",
