@@ -155,7 +155,7 @@ exports.run = function(Bastion, message, args) {
           });
 
           let collector = textChannel.createCollector(
-            msg => msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}queue`)
+            msg => msg.guild.voiceConnection.channel == msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}queue`))
           );
           collector.on('message', msg => {
             if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
