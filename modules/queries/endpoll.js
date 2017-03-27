@@ -19,7 +19,11 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {};
+exports.run = (Bastion, message, args) => {
+  message.delete().catch(e => {
+    Bastion.log.error(e.stack);
+  });
+};
 
 exports.config = {
   aliases: []

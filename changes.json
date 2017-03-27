@@ -1,7 +1,8 @@
 {
   "date": "March 27, 2017",
   "updated": [
-    "Minor improvements"
+    "Minor improvements",
+    "Auto delete `endpoll` command"
   ],
   "added": [
     "`wouldYouRather` game",
