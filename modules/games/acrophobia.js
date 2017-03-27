@@ -22,7 +22,7 @@
 const getRandomInt = require('../../functions/getRandomInt');
 let activeChannels = new Object();
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if(!activeChannels.hasOwnProperty(message.channel.id)) {
     activeChannels[message.channel.id] = new Object();
     activeChannels[message.channel.id].usersSubmitted = new Array();

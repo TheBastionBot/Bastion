@@ -1,4 +1,4 @@
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   message.delete().catch(e => {
     Bastion.log.error(e.stack);
   });

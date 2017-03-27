@@ -21,7 +21,7 @@
 
 const roleData = require('../../functions/roleData');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (args[0] !== undefined && args[0].indexOf('#') == 0) {

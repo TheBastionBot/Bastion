@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!(channel = message.mentions.channels.first()))
     if (/^[0-9]{18}$/.test(args[0])) channel = message.guild.channels.get(args[0]);
     else channel = message.channel;

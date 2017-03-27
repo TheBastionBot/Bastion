@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) > -1) {
     voiceChannel = message.member.voiceChannel;
     if (!voiceChannel || voiceChannel.type !== 'voice') return message.channel.sendMessage('', {embed: {

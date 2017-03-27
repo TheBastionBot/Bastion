@@ -21,7 +21,7 @@
 
 let activeChannels = new Object();
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
   args = args.join(' ').split(';');
 

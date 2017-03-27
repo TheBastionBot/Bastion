@@ -21,7 +21,7 @@
 
 const wd = require('word-definition');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
   for (let i = 0; i < args.length - 1; i++)
     args[i] = args[i].toLowerCase();

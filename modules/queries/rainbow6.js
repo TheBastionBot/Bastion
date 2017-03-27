@@ -22,7 +22,7 @@
 const RainbowSix = require('rainbowsix-api-node');
 const r6 = new RainbowSix();
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 2) return;
   if (!/^(uplay|ps4|xone)$/.test(args[0] = args[0].toLowerCase())) return;
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) return;

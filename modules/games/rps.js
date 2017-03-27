@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   let outcomes = [
     'ROCK',
     'PAPER',

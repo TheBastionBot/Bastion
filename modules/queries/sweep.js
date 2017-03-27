@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   let members = message.guild.members.map(m => m.user.id);
   let sweepedUserId = members[Math.floor(Math.random()*members.length)];
   let sweepedUser = message.guild.members.get(sweepedUserId).user;

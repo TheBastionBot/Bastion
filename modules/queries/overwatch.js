@@ -21,7 +21,7 @@
 
 const ow = require('overwatch-js');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   args[0] = args[0].toLowerCase();

@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) args[0] = '0';

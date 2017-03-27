@@ -23,7 +23,7 @@ const getRandomInt = require('../../functions/getRandomInt');
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if(!activeChannels.includes(message.channel.id)) {
     activeChannels.push(message.channel.id);
 

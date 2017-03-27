@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite')
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!parseInt(args[0]) || !/^(heads|tails)$/.test(args[1])) return;
   if (args[0] < 2) return message.channel.sendMessage('', {embed: {
     color: 13380644,

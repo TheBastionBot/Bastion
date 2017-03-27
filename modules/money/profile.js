@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('../Bastion.sqlite');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!(args = message.mentions.users.first())) args = message.author;
   sql.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).then(profile => {
     if (!profile) {

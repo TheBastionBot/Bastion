@@ -21,7 +21,7 @@
 
 const urllib = require('urllib');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   urllib.request(`https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`, function (err, data) {

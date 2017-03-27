@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) return;
   let members = message.guild.members.filter(m => m.user.discriminator == args[0]).map(m => m.user);
   let total = members.length;

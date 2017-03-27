@@ -21,7 +21,7 @@
 
 const imdb = require('imdb-api');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   imdb.get(args.join(' '), (err, movie) => {
     if(err) return message.channel.sendMessage('', {embed: {
       color: 13380644,

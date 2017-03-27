@@ -24,7 +24,7 @@ const yt = require('youtube-dl');
 sql.open('./data/Bastion.sqlite');
 let queue = {};
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
   message.delete().catch(e => {
     Bastion.log.error(e.stack);

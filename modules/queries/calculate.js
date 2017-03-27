@@ -21,7 +21,7 @@
 
 const mathjs = require('mathjs');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   try {

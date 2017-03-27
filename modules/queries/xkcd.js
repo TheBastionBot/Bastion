@@ -22,7 +22,7 @@
 const xkcd = require('xkcd');
 const getRandomInt = require('../../functions/getRandomInt');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   let num = parseInt(args[0]);
   if (args[0] != undefined && !isNaN(num)) {
     xkcd(function (data) {

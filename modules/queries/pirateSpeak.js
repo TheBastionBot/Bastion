@@ -21,7 +21,7 @@
 
 const dictionary = require('../../data/piratePhrases.json');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   message.channel.sendMessage('', {embed: {

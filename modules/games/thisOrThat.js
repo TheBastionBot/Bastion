@@ -22,7 +22,7 @@
 const getRandomInt = require('../../functions/getRandomInt');
 const question = require('../../data/thisOrThat.json');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   let index = getRandomInt(0, Object.keys(question).length - 1);
   message.channel.sendMessage('', {embed: {
     color: 6651610,

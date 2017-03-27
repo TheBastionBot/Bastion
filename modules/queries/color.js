@@ -21,7 +21,7 @@
 
 const convert = require('color-convert');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) return;
 
   message.channel.sendMessage('', {embed: {

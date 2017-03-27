@@ -21,7 +21,7 @@
 
 const translate = require('google-translate-api');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 2) return;
   translate(args.slice(1).join(' '), {to: args[0]}).then(res => {
     message.channel.sendMessage('', {embed: {

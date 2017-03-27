@@ -21,7 +21,7 @@
 
 const weather = require('weather-js');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   weather.find({search: args.join(' '), degreeType: 'C'}, function(err, result) {

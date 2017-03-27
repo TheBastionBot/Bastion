@@ -22,7 +22,7 @@
 const getRandomInt = require('../../functions/getRandomInt');
 const quotes = require('../../data/quotes.json');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   let index = getRandomInt(1, Object.keys(quotes).length);
   if (!isNaN(args[0])) {
     if (args[0] >= 1 && args[0] <= Object.keys(quotes).length) index = args[0];

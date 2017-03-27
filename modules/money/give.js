@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = function(Bastion, message, args) {
+exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
   if (!parseInt(args[0])) return;
 
