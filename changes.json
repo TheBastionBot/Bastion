@@ -1,19 +1,8 @@
 {
-  "date": "March 26, 2017",
-  "updated": [
-    "Minor improvements",
-    "Minor changes",
-    "String fixes in `edgeLord` command",
-    "Support for multiple coins in `flip` command",
-    "Typo in `roll` command",
-    "Only members listening to music can use music commands",
-    "perms log for music module",
-    "`overwatch` command improvements",
-    "`rainbow6` command string changes"
-  ],
+  "date": "March 27, 2017",
+  "updated": [],
   "added": [
-    "`repeat` command",
-    "`rainbow6` command"
+    "`wouldYouRather` game",
   ],
   "removed": []
 }
