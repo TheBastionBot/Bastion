@@ -24,7 +24,6 @@ exports.run = (Bastion, message, args) => {
   if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (!(user = message.mentions.users.first())) user = message.author;
-  if (message.guild.members.get(Bastion.user.id).highestRole.position <= message.guild.members.get(user.id).highestRole.position) return Bastion.log.info('I don\'t have permissions to use this command on my superiors.');
 
   message.channel.members.get(user.id).removeRoles(message.channel.members.get(user.id).roles).then(() => {
     message.channel.sendMessage('', {embed: {
@@ -36,6 +35,12 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'I don\'t have enough permission to do that operation.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   });
 };
 

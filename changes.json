@@ -3,7 +3,8 @@
   "updated": [
     "Minor improvements",
     "Auto delete `endpoll` command",
-    "Some music commands"
+    "Some music commands",
+    "Role related commands"
   ],
   "added": [
     "`wouldYouRather` game",

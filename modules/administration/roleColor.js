@@ -25,7 +25,6 @@ exports.run = (Bastion, message, args) => {
   if (args[0] !== undefined && args[0].indexOf('#') == 0 && args[1] !== undefined) {
     if (args[0].length != 7) return;
     if (!(role = message.guild.roles.find('name', args.slice(1).join(' ')))) return Bastion.log.info('No role found with that name.');
-    if (message.guild.members.get(Bastion.user.id).highestRole.position <= role.position) return Bastion.log.info('I don\'t have permissions to use this command on my superiors.');
 
     role.setColor(args[0]).then(() => {
       message.channel.sendMessage('', {embed: {
@@ -52,6 +51,12 @@ exports.run = (Bastion, message, args) => {
       });
     }).catch(e => {
       Bastion.log.error(e.stack);
+      message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: 'I don\'t have enough permission to do that operation.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     });
   }
 };

@@ -27,7 +27,6 @@ exports.run = (Bastion, message, args) => {
     let oldName = args[0];
     let newName = args[1];
     if (!(role = message.guild.roles.find('name', oldName))) return Bastion.log.info('No role found with that name.');
-    if (message.guild.members.get(Bastion.user.id).highestRole.position <= role.position) return Bastion.log.info('I don\'t have permissions to use this command on my superiors.');
 
     role.setName(newName).then(() => {
       message.channel.sendMessage('', {embed: {
@@ -50,6 +49,12 @@ exports.run = (Bastion, message, args) => {
       });
     }).catch(e => {
       Bastion.log.error(e.stack);
+      message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: 'I don\'t have enough permission to do that operation.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     });
   }
 };
