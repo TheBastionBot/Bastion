@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.guild.members.get(message.author.id).hasPermission("BAN_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission("BAN_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) return;
   if (!message.guild.members.get(user.id).bannable) return;

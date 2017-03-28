@@ -20,8 +20,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
+  if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
-  if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (!(user = message.mentions.users.first())) {
     user = message.author;

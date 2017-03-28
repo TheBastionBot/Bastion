@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.guild.members.get(message.author.id).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
   message.guild.createChannel(args.join('-'), 'text').then(channel => {
