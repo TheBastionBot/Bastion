@@ -79,8 +79,8 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
 
-    args = /^((https:\/\/)(www\.)?(youtube\.com)\/watch\?v=[a-zA-Z0-9-_]{11})$/i.test(args[0]) ? args[0] : 'ytsearch:' + args.join(' ');
-    yt.getInfo(args, ['-q', '--no-warnings', '--force-ipv4', '--format=bestvideo[height<=480]+bestaudio/best[height<=480]'], (err, info) => {
+    args = /(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i.test(args[0]) ? args[0] : 'ytsearch:' + args.join(' ');
+    yt.getInfo(args, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
       if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
         if (err.stack.includes('No video results')) result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
         else {
@@ -98,7 +98,7 @@ exports.run = (Bastion, message, args) => {
       }
       if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].songs = [];
       queue[message.guild.id].songs.push({
-        url: info.formats[0].url,
+        url: info.formats[info.formats.length - 1].url,
         title: info.title,
         thumbnail: info.thumbnail,
         duration: info.duration,

@@ -1,14 +1,8 @@
 {
   "date": "March 28, 2017",
   "updated": [
-    "Minor improvements",
-    "Auto delete `endpoll` command",
-    "Some music commands",
-    "Role related commands"
+    "`play` now supports a lot more sites besides youtube"
   ],
-  "added": [
-    "`wouldYouRather` game",
-    "`thisOrThat` game"
-  ],
+  "added": [],
   "removed": []
 }
