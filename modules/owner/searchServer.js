@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['server']
+  aliases: ['servers']
 };
 
 exports.help = {
