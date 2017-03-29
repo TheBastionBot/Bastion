@@ -4,7 +4,8 @@
     "`play` now supports a lot more sites besides youtube"
   ],
   "added": [
-    "`emojiInfo` command"
+    "`emojiInfo` command",
+    "`searchServer` command"
   ],
   "removed": []
 }
