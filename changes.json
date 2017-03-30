@@ -2,7 +2,8 @@
   "date": "March 30, 2017",
   "updated": [
     "strings in `discrim` and `searchServer`",
-    "`help` now supports command name in any case"
+    "`help` now supports command name in any case",
+    "`eval` now shows the errors"
   ],
   "added": [
     "`setNick` command"

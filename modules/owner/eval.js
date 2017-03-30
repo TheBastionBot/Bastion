@@ -75,6 +75,7 @@ exports.help = {
 };
 
 function clean(Bastion, text) {
+  text = text.toString();
   if (text.includes(Bastion.token)) text = text.replace(Bastion.token, 'Not for your :eyes:!');
   if (typeof(text) === 'string') return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
   else return text;
