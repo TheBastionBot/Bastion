@@ -4,6 +4,8 @@
     "strings in `discrim` and `searchServer`",
     "`help` now supports command name in any case"
   ],
-  "added": [],
+  "added": [
+    "`setNick` command"
+  ],
   "removed": []
 }
