@@ -3,7 +3,8 @@
   "updated": [
     "strings in `discrim` and `searchServer`",
     "`help` now supports command name in any case",
-    "`eval` now shows the errors"
+    "`eval` now shows the errors",
+    "strings in music module"
   ],
   "added": [
     "`setNick` command"

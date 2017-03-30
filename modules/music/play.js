@@ -272,7 +272,7 @@ exports.run = (Bastion, message, args) => {
                 name: `:loud_sound: ${song.title}`,
                 value: `**Duration:** ${song.duration}\t**Requester:** <@${song.requester}>`
               }];
-              for (var i = 1; i < (queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25); i++)
+              for (var i = 1; i < (queue[message.guild.id].songs.length <= 10 ? queue[message.guild.id].songs.length : 10); i++)
                 fields.push({
                   name: `${i+1}. ${queue[message.guild.id].songs[i].title}`,
                   value: `**Duration:** ${queue[message.guild.id].songs[i].duration}\t**Requester:** <@${queue[message.guild.id].songs[i].requester}>`
@@ -280,11 +280,8 @@ exports.run = (Bastion, message, args) => {
               textChannel.sendMessage('', {embed: {
                 color: 5088314,
                 title: 'Music queue',
-                description: `${(queue[message.guild.id].songs.length <= 25 ? queue[message.guild.id].songs.length : 25)-1} songs in current queue`,
-                fields: fields,
-                footer: {
-                  text: `Total no. of songs in queue: ${queue[message.guild.id].songs.length-1}`
-                }
+                description: `${queue[message.guild.id].songs.length-1} songs in current queue`,
+                fields: fields
               }}).then(m => {
                 m.delete(60000);
               }).catch(e => {
