@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
       message.client.log.error(e.stack);
     });
   } else {
-    let command = args[0];
+    let command = args[0].toLowerCase();
     if (Bastion.commands.has(command)) {
       command = Bastion.commands.get(command);
       let example = [];
