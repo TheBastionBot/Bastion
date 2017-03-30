@@ -22,17 +22,30 @@
 exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  if (args.length < 1) return;
-  message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
-    message.channel.sendMessage('', {embed: {
-      color: 14211540,
-      description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}**`
-    }}).catch(e => {
+  if (args.length > 0) {
+    message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
+      message.channel.sendMessage('', {embed: {
+        color: 14211540,
+        description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  }
+  else {
+    message.guild.members.get(Bastion.user.id).setNickname('').then(() => {
+      message.channel.sendMessage('', {embed: {
+        color: 14211540,
+        description: `${Bastion.user.username}'s nick has been reset on this guild.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.config = {
@@ -41,8 +54,8 @@ exports.config = {
 
 exports.help = {
   name: 'setnick',
-  description: 'Sets the nick of the bot in the current guild.',
+  description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
   permission: '',
-  usage: 'setNick <text>',
-  example: ['setNick NewNick']
+  usage: 'setNick [text]',
+  example: ['setNick NewNick', 'setNick']
 };
