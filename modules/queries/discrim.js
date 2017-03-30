@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     fields: [
       {
         name: 'Users',
-        value: members
+        value: total > 10 ? `and ${total - 10} more.` : members
       }
     ]
   }}).catch(e => {
