@@ -23,6 +23,30 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldMessage, newMessage) => {
+  if (newMessage.content.includes(newMessage.client.token)) {
+    if (oldMessage.guild)
+      newMessage.delete().catch(e => {
+        newMessage.client.log.error(e.stack);
+      });
+    newMessage.client.fetchApplication().then(app => {
+      newMessage.client.users.get(app.owner.id).sendMessage('', {embed: {
+        color: 13380644,
+        title: 'ATTENTION!',
+        description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
+        fields: [
+          {
+            name: 'Responsible user',
+            value: `${newMessage.author.username}#${newMessage.author.discriminator} - ${newMessage.author.id}`
+          }
+        ]
+      }}).catch(e => {
+        newMessage.client.log.error(e.stack);
+      });
+    }).catch(e => {
+      newMessage.client.log.error(e.stack);
+    });
+  }
+
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 

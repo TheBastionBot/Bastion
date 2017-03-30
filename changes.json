@@ -1,11 +1,8 @@
 {
   "date": "March 29, 2017",
-  "updated": [
-    "`play` now supports a lot more sites besides youtube"
-  ],
+  "updated": [],
   "added": [
-    "`emojiInfo` command",
-    "`searchServer` command"
+    "Bastion now DMs you if it's token has been exposed. (Only if it is exposed in a guild/channel that Bastion has permissions to read.)"
   ],
   "removed": []
 }
