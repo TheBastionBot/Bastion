@@ -230,7 +230,7 @@ exports.run = (Bastion, message, args) => {
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
               if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
-                param = msg.content.split(' ').slice(1);
+              param = msg.content.split(' ').slice(1);
               if (param[0] == '+')
                 dispatcher.setVolume((dispatcher.volume*50 + 2)/50);
               else if (param[0] == '-')
