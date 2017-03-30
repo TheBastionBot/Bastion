@@ -1,6 +1,8 @@
 {
-  "date": "March 29, 2017",
-  "updated": [],
+  "date": "March 30, 2017",
+  "updated": [
+    "dependencies"
+  ],
   "added": [
     "Bastion now DMs you if it's token has been exposed. (Only if it is exposed in a guild/channel that Bastion has permissions to read.)"
   ],
