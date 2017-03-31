@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  let members = message.channel.members.map(m => m.user.id);
+  let members = message.channel.members.filter(m => !m.user.bot).map(m => m.user.id);
   let sweepedUserId = members[Math.floor(Math.random()*members.length)];
   let sweepedUser = message.channel.members.get(sweepedUserId).user;
 

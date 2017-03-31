@@ -1,7 +1,8 @@
 {
   "date": "March 31, 2017",
   "updated": [
-    "`sweep` command now sweeps users from channels"
+    "`sweep` command now sweeps users from channels",
+    "`sweep` command now ignores bot"
   ],
   "added": [],
   "removed": []
