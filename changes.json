@@ -1,5 +1,5 @@
 {
-  "date": "March 30, 2017",
+  "date": "March 31, 2017",
   "updated": [
     "strings in `discrim` and `searchServer`",
     "`help` now supports command name in any case",
