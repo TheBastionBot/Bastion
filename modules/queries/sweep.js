@@ -20,9 +20,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  let members = message.guild.members.map(m => m.user.id);
+  let members = message.channel.members.map(m => m.user.id);
   let sweepedUserId = members[Math.floor(Math.random()*members.length)];
-  let sweepedUser = message.guild.members.get(sweepedUserId).user;
+  let sweepedUser = message.channel.members.get(sweepedUserId).user;
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,

@@ -1,13 +1,8 @@
 {
   "date": "March 31, 2017",
   "updated": [
-    "strings in `discrim` and `searchServer`",
-    "`help` now supports command name in any case",
-    "`eval` now shows the errors",
-    "strings in music module"
+    "`sweep` command now sweeps users from channels"
   ],
-  "added": [
-    "`setNick` command"
-  ],
+  "added": [],
   "removed": []
 }
