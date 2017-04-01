@@ -6,7 +6,8 @@
     "`play` command now has `-favs` argument - plays the songs in your favourites",
     "Some changes to music module",
     "`play` help string",
-    "Moved `addMusicChannel` to music module"
+    "Moved `addMusicChannel` to music module",
+    "Paginated `listTodo`"
   ],
   "added": [
     "`addFav` command",
