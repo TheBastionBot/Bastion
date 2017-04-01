@@ -11,7 +11,8 @@
     "Fixed `listTodo` command error after the list is deleted.",
     "Paginated `listTriggers`",
     "No more issues when user don't have an avatar",
-    "No more issues when guilds don't have an icon"
+    "No more issues when guilds don't have an icon",
+    "Some issues with music"
   ],
   "added": [
     "`addFav` command",

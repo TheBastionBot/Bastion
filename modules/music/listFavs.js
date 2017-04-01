@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
   i = i - 1;
 
   message.channel.sendMessage('', {embed: {
-    color: 5088314,
+    color: 6651610,
     title: 'Favourite songs',
     description: favs.slice(i*10, (i*10)+10).join('\n'),
     footer: {
