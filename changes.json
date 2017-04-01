@@ -16,7 +16,8 @@
   ],
   "added": [
     "`addFav` command",
-    "`listFavs` command"
+    "`listFavs` command",
+    "Bastion now greets when summoned to a voice channel."
   ],
   "removed": []
 }

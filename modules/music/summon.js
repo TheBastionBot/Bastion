@@ -44,6 +44,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
+      else if (!connection.speaking) connection.playFile('./data/greeting.mp3', { passes: 1 });
     });
   }
   else {
@@ -74,6 +75,7 @@ exports.run = (Bastion, message, args) => {
             Bastion.log.error(e.stack);
           });
         }
+        else if (!connection.speaking) connection.playFile('./data/greeting.mp3', { passes: 1 });
       });
     });
   }
