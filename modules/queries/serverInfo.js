@@ -76,7 +76,7 @@ exports.run = (Bastion, message, args) => {
       }
     ],
     thumbnail: {
-      url: message.guild.iconURL
+      url: message.guild.iconURL ? message.guild.iconURL : 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png'
     }
   }}).catch(e => {
     Bastion.log.error(e.stack);
