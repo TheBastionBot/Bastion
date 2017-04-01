@@ -8,7 +8,8 @@
     "`play` help string"
   ],
   "added": [
-    "`addFav` command"
+    "`addFav` command",
+    "`listFavs` command"
   ],
   "removed": []
 }
