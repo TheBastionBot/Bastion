@@ -5,7 +5,8 @@
     "`sweep` command now ignores bot",
     "`play` command now has `-favs` argument - plays the songs in your favourites",
     "Some changes to music module",
-    "`play` help string"
+    "`play` help string",
+    "Moved `addMusicChannel` to music module"
   ],
   "added": [
     "`addFav` command",
