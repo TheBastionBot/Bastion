@@ -52,5 +52,5 @@ exports.help = {
   description: 'Adds a song to your favourite list specified by name/link.',
   permission: '',
   usage: 'addfav <song name | song link>',
-  example: []
+  example: ['addFav one more night', 'addFav https://www.youtube.com/watch?v=JGwWNGJdvx8']
 };
