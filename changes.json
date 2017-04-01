@@ -4,7 +4,8 @@
     "`sweep` command now sweeps users from channels",
     "`sweep` command now ignores bot",
     "`play` command now has `-favs` argument - plays the songs in your favourites",
-    "Some changes to music module"
+    "Some changes to music module",
+    "`play` help string"
   ],
   "added": [],
   "removed": []

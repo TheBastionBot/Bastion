@@ -356,8 +356,8 @@ exports.config = {
 
 exports.help = {
   name: 'play',
-  description: 'Adds a song to the queue by youtube video link, or adds the first youtube result for the provided search text.',
+  description: 'Plays a song (adds the song to the queue if already playing) specified by name/link. To play songs in your favourites use \'-favs\' argument instead of song name/link.',
   permission: '',
-  usage: 'play <song name|youtube_video_link>',
-  example: ['play song name', 'play youtube_video_link']
+  usage: 'play <name|link|-favs>',
+  example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -favs']
 };
