@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
   args = args.join(' ');
   try {
     db.reload();
-    db.push('[]', [args], false);
+    db.push('/', [args], false);
   } catch (e) {
     Bastion.log.error(e.stack);
   } finally {
