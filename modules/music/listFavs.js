@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   let favs = songs.map((e, i) => `${i+1}. ${e}`);
   let i = 0;
   if (isNaN(args = parseInt(args[0]))) i = 1;
-  else i = args < songs.length/10+1 ? args : 1
+  else i = args < songs.length/10+1 ? args : 1;
   i = i - 1;
 
   message.channel.sendMessage('', {embed: {
