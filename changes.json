@@ -1,8 +1,10 @@
 {
-  "date": "March 31, 2017",
+  "date": "April 1, 2017",
   "updated": [
     "`sweep` command now sweeps users from channels",
-    "`sweep` command now ignores bot"
+    "`sweep` command now ignores bot",
+    "`play` command now has `-favs` argument - plays the songs in your favourites",
+    "Some changes to music module"
   ],
   "added": [],
   "removed": []
