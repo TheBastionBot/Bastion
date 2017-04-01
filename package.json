@@ -28,6 +28,7 @@
     "google-translate-api": "^2.2.2",
     "imdb-api": "^2.2.1",
     "mathjs": "^3.10.1",
+    "node-json-db": "^0.7.3",
     "node-opus": "^0.2.4",
     "overwatch-js": "^1.3.0",
     "pretty-ms": "^2.1.0",
