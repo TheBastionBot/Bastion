@@ -50,5 +50,5 @@ exports.help = {
   description: 'Lists the songs in your favourite list.',
   permission: '',
   usage: 'listfavs [page_no]',
-  example: ['listfavs', 'listfavs 2']
+  example: ['listFavs', 'listFavs 2']
 };
