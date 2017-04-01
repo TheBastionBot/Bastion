@@ -8,7 +8,8 @@
     "`play` help string",
     "Moved `addMusicChannel` to music module",
     "Paginated `listTodo`",
-    "Fixed `listTodo` command error after the list is deleted."
+    "Fixed `listTodo` command error after the list is deleted.",
+    "Paginated `listTriggers`"
   ],
   "added": [
     "`addFav` command",
