@@ -31,11 +31,11 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Avatar URL',
-        value: user.avatarURL
+        value: user.displayAvatarURL
       }
     ],
     image: {
-      url: user.avatarURL
+      url: user.displayAvatarURL
     }
   }}).catch(e => {
     Bastion.log.error(e.stack);

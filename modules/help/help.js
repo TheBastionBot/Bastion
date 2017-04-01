@@ -47,7 +47,7 @@ exports.run = (Bastion, message, args) => {
         }
       ],
       thumbnail: {
-        url: message.client.user.avatarURL
+        url: message.client.user.displayAvatarURL
       },
       footer: {
         icon_url: 'https://sankarsankampa.com/assets/img/logo/snkrsn_32.png',

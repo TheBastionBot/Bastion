@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
     color: 11316394,
     author: {
       name: `Bastion ${Bastion.package.version}`,
-      icon_url: Bastion.user.avatarURL
+      icon_url: Bastion.user.displayAvatarURL
     },
     url: Bastion.package.url,
     fields: [
@@ -82,7 +82,7 @@ exports.run = (Bastion, message, args) => {
       }
     ],
     thumbnail: {
-      url: Bastion.user.avatarURL
+      url: Bastion.user.displayAvatarURL
     },
     footer: {
       text: `Ping: ${parseInt(Bastion.ping)}ms`

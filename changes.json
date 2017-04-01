@@ -9,7 +9,8 @@
     "Moved `addMusicChannel` to music module",
     "Paginated `listTodo`",
     "Fixed `listTodo` command error after the list is deleted.",
-    "Paginated `listTriggers`"
+    "Paginated `listTriggers`",
+    "No more issues when user don't have an avatar"
   ],
   "added": [
     "`addFav` command",

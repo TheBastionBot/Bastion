@@ -91,7 +91,7 @@ exports.run = (Bastion, message, args) => {
       }
     ],
     thumbnail: {
-      url: user.avatarURL
+      url: user.displayAvatarURL
     }
   }}).catch(e => {
     Bastion.log.error(e.stack);

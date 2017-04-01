@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       }
     ],
     thumbnail: {
-      url: Bastion.user.avatarURL
+      url: Bastion.user.displayAvatarURL
     },
     footer: {
       text: changes.date
