@@ -19,50 +19,64 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
+let activeChannels = [];
+
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  args = args.join(' ').split(';');
-  let opt = ['0⃣', '1⃣'];
+  if(!activeChannels.includes(message.channel.id)) {
+    args = args.join(' ').split(';');
+    let opt = ['0⃣', '1⃣'];
 
-  message.channel.sendMessage('', {embed: {
-    color: 6651610,
-    title: args.join(' '),
-    description: 'React to this message with :one: to vote **YES**\n\nReact to this message with :zero: to vote **NO**'
-  }}).then(m => {
-    try {
-      for (var i = 0; i < opt.length; i++) m.react(opt[i]).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    } finally {
-      setTimeout(function () {
-        let res = [];
-        for (var i = 0; i < opt.length; i++)
-          res.push(m.reactions.get(opt[i]).users.size - 1);
-        message.channel.sendMessage('', {embed: {
-          color: 5088314,
-          title: args.join(' '),
-          fields: [
-            {
-              name: 'Yes',
-              value: res[1],
-              inline: true
-            },
-            {
-              name: 'No',
-              value: res[0],
-              inline: true
-            }
-          ]
-        }}).catch(e => {
+    message.channel.sendMessage('', {embed: {
+      color: 5088314,
+      title: args.join(' '),
+      description: 'React to this message with :one: to vote **YES**\n\nReact to this message with :zero: to vote **NO**'
+    }}).then(m => {
+      activeChannels.push(message.channel.id);
+      try {
+        for (let i = 0; i < opt.length; i++) m.react(opt[i]).catch(e => {
           Bastion.log.error(e.stack);
         });
-      }, 60000);
-    }
-  }).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+      } finally {
+        setTimeout(function () {
+          let res = [];
+          for (let i = 0; i < opt.length; i++)
+            res.push(m.reactions.get(opt[i]).users.size - 1);
+          message.channel.sendMessage('', {embed: {
+            color: 6651610,
+            title: args.join(' '),
+            fields: [
+              {
+                name: 'Yes',
+                value: res[1],
+                inline: true
+              },
+              {
+                name: 'No',
+                value: res[0],
+                inline: true
+              }
+            ]
+          }}).then(m => {
+            activeChannels.splice(activeChannels.indexOf(message.channel.id), 1);
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }, 60000);
+      }
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+  else {
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'Can\'t ask now. Another question is already in progress. Wait a minute for it to end.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.config = {
