@@ -1,23 +1,8 @@
 {
   "date": "April 1, 2017",
   "updated": [
-    "`sweep` command now sweeps users from channels",
-    "`sweep` command now ignores bot",
-    "`play` command now has `-favs` argument - plays the songs in your favourites",
-    "Some changes to music module",
-    "`play` help string",
-    "Moved `addMusicChannel` to music module",
-    "Paginated `listTodo`",
-    "Fixed `listTodo` command error after the list is deleted.",
-    "Paginated `listTriggers`",
-    "No more issues when user don't have an avatar",
-    "No more issues when guilds don't have an icon",
-    "Some issues with music"
+    "Reading issues with favourites"
   ],
-  "added": [
-    "`addFav` command",
-    "`listFavs` command",
-    "Bastion now greets when summoned to a voice channel."
-  ],
+  "added": [],
   "removed": []
 }

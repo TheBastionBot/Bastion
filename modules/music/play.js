@@ -22,6 +22,8 @@
 const sql = require('sqlite');
 const yt = require('youtube-dl');
 sql.open('./data/Bastion.sqlite');
+const jsonDB = require('node-json-db');
+const db = new jsonDB('./data/favouriteSongs', true, true);
 let queue = {};
 
 exports.run = (Bastion, message, args) => {
@@ -81,7 +83,13 @@ exports.run = (Bastion, message, args) => {
     });
 
     if (args == '-favs') {
-      let favs = require('../../data/favouriteSongs.json');
+      let favs;
+      try {
+        db.reload();
+        favs = db.getData('/');
+      } catch(e) {
+        console.error(e);
+      }
       if (favs.length == 0) return message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: 'You don\'t have any songs in your favourite list!'

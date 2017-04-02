@@ -19,10 +19,25 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const songs = require('../../data/favouriteSongs.json');
+const jsonDB = require('node-json-db');
+const db = new jsonDB('./data/favouriteSongs', true, true);
 
 exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
+  let songs;
+  try {
+    db.reload();
+    songs = db.getData('/');
+  } catch(e) {
+    Bastion.log.error(e);
+  }
+  if (songs.length == 0) return message.channel.sendMessage('', {embed: {
+    color: 13380644,
+    description: 'You haven\'t added any favourite songs yet.'
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
+
   let favs = songs.map((e, i) => `${i+1}. ${e}`);
   let i = 0;
   if (isNaN(args = parseInt(args[0]))) i = 1;
