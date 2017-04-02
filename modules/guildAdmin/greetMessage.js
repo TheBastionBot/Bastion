@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    sql.run(`UPDATE guildSettings SET greetMessage='${args.join(' ')}' WHERE guildID=${message.guild.id}`).catch(e => {
+    sql.run(`UPDATE guildSettings SET greetMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e.stack);
     });
 

@@ -1,7 +1,8 @@
 {
   "date": "April 2, 2017",
   "updated": [
-    "play need some more work"
+    "play need some more work",
+    "greet/farewell message issues when it contained `'` character"
   ],
   "added": [],
   "removed": []
