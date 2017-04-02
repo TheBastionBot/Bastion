@@ -27,10 +27,10 @@ module.exports = member => {
     if (!row) return;
     if (row.greet == 'true') {
       let greetMsg = row.greetMessage;
-      greetMsg = greetMsg.replace(/\$user/, `<@${member.id}>`);
-      greetMsg = greetMsg.replace(/\$server/, member.guild.name);
-      greetMsg = greetMsg.replace(/\$username/, member.displayName);
-      greetMsg = greetMsg.replace(/\$prefix/, member.client.config.prefix);
+      greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
+      greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
+      greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
+      greetMsg = greetMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
       member.guild.channels.get(row.greetChannelID).sendMessage('', {embed: {
         color: 5088314,

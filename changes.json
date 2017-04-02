@@ -2,7 +2,8 @@
   "date": "April 2, 2017",
   "updated": [
     "play need some more work",
-    "greet/farewell message issues when it contained `'` character"
+    "greet/farewell message issues when it contained `'` character",
+    "RegEx for greet/farewell messages"
   ],
   "added": [],
   "removed": []

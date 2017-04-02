@@ -27,10 +27,10 @@ module.exports = member => {
     if (!row) return;
     if (row.farewell == 'true') {
       let farewellMsg = row.farewellMessage;
-      farewellMsg = farewellMsg.replace(/\$user/, `<@${member.id}>`);
-      farewellMsg = farewellMsg.replace(/\$server/, member.guild.name);
-      farewellMsg = farewellMsg.replace(/\$username/, member.displayName);
-      farewellMsg = farewellMsg.replace(/\$prefix/, member.client.config.prefix);
+      farewellMsg = farewellMsg.replace(/\$user/ig, `<@${member.id}>`);
+      farewellMsg = farewellMsg.replace(/\$server/ig, member.guild.name);
+      farewellMsg = farewellMsg.replace(/\$username/ig, member.displayName);
+      farewellMsg = farewellMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
       member.guild.channels.get(row.farewellChannelID).sendMessage('', {embed: {
         color: 13380644,
