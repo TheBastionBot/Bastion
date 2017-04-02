@@ -88,7 +88,7 @@ exports.run = (Bastion, message, args) => {
         db.reload();
         favs = db.getData('/');
       } catch(e) {
-        console.error(e);
+        Bastion.log.error(e.stack);
       }
       if (favs.length == 0) return message.channel.sendMessage('', {embed: {
         color: 13380644,
@@ -108,6 +108,7 @@ exports.run = (Bastion, message, args) => {
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
+        // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setInterval or flags is inefficient, find an efficient way to fix this!
         favs.forEach((e, i) => {
           e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i.test(e) ? e : 'ytsearch:' + e;
           if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].songs = [];
