@@ -23,8 +23,8 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1) return;
-  if (!parseInt(args[0])) return;
+  if (args.length < 2) return;
+  if (isNaN(args[0] = parseInt(args[0])) || args[0] < 1) return;
 
   if (!((user = message.mentions.users.first()) && (user = user.id))) {
     if (/^[0-9]{18}$/.test(args[1])) user = args[1];
@@ -38,11 +38,11 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) > -1) {
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
       if (!receiver)
-        sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, parseInt(args[0])]).catch(e => {
+        sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
           Bastion.log.error(e.stack);
         });
       else
-        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+parseInt(args[0])} WHERE userID=${user}`).catch(e => {
+        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args[0]} WHERE userID=${user}`).catch(e => {
           Bastion.log.error(e.stack);
         });
     }).then(() => {
@@ -73,17 +73,17 @@ exports.run = (Bastion, message, args) => {
       });
       sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
         if (!receiver)
-          sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, parseInt(args[0])]).catch(e => {
+          sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
             Bastion.log.error(e.stack);
           });
         else
-          sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+parseInt(args[0])} WHERE userID=${user}`).catch(e => {
+          sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args[0]} WHERE userID=${user}`).catch(e => {
             Bastion.log.error(e.stack);
           });
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
-      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(sender.bastionCurrencies)-parseInt(args[0])} WHERE userID=${message.author.id}`).then(() => {
+      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(sender.bastionCurrencies)-args[0]} WHERE userID=${message.author.id}`).then(() => {
         message.channel.sendMessage('', {embed: {
           color: 5088314,
           description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
@@ -113,6 +113,6 @@ exports.help = {
   name: 'give',
   description: 'Give any specified user (by mention or ID) Bastion Currencies deducting that amout from your currencies. If you are the BOT owner, you can give anyone any amount of Bastion Currencies.',
   permission: '',
-  usage: 'give [amount] <@user-mention|user_id>',
+  usage: 'give <amount> <@user-mention|user_id>',
   example: ['give 100 @user#0001', 'give 150 2233445566778899']
 };

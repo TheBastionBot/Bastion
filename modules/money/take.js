@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
-  if (!parseInt(args[0])) return;
+  if (isNaN(args[0] = parseInt(args[0])) || args[0] < 1) return;
 
   if (!((user = message.mentions.users.first()) && (user = user.id))) {
     if (/^[0-9]{18}$/.test(args[1])) user = args[1];
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
   else reason = 'No reason given.';
   sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(profile => {
     if (profile)
-      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)-parseInt(args[0])} WHERE userID=${user}`).catch(e => {
+      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)-args[0]} WHERE userID=${user}`).catch(e => {
         Bastion.log.error(e.stack);
       });
   }).then(() => {
@@ -82,6 +82,6 @@ exports.help = {
   name: 'take',
   description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
   permission: '',
-  usage: 'take [amount] <@user-mention|user_id> [Reason]',
+  usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: ['take 100 @user#0001 Misbehaving', 'take 150 2233445566778899']
 };
