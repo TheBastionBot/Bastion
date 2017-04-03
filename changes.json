@@ -1,12 +1,8 @@
 {
-  "date": "April 2, 2017",
-  "updated": [
-    "`play` need some more work",
-    "greet/farewell message issues when it contained `'` character",
-    "RegEx for greet/farewell messages",
-    "Users doesn't require manage messages permissions to use ask",
-    "Improvements to `ask` command"
+  "date": "April 3, 2017",
+  "updated": [],
+  "added": [
+    "`giveaway` command"
   ],
-  "added": [],
   "removed": []
 }
