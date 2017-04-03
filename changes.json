@@ -1,7 +1,8 @@
 {
   "date": "April 3, 2017",
   "updated": [
-    "`give`/`take` doesn't take negative numbers anymore"
+    "`give`/`take` doesn't take negative numbers anymore",
+    "dependencies"
   ],
   "added": [
     "`giveaway` command"
