@@ -38,7 +38,10 @@ exports.run = (Bastion, message, args) => {
     message.channel.sendMessage('', {embed: {
       color: 6651610,
       title: 'Self assignable roles:',
-      description: roleNames.slice(i*10, (i*10)+10).join('\n')
+      description: roleNames.slice(i*10, (i*10)+10).join('\n'),
+      footer: {
+        text: `Page: ${i+1} of ${parseInt(roleNames.length/10+1)}`
+      }
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
