@@ -62,7 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeselfassignableroles',
-  description: 'Deletes an role from the self assignable roles by it\'s index number.',
+  description: 'Deletes a role from the self assignable roles by it\'s index number.',
   permission: '',
   usage: 'removeSelfAssignableRoles <index>',
   example: ['removeSelfAssignableRoles 3']
