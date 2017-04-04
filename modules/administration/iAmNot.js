@@ -33,10 +33,10 @@ exports.run = (Bastion, message, args) => {
     selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
     if (!selfAssignableRoles.includes(role.id)) return;
 
-    message.guild.members.get(message.author.id).addRole(role).then(() => {
+    message.guild.members.get(message.author.id).removeRole(role).then(() => {
       message.channel.sendMessage('', {embed: {
         color: 5088314,
-        description: `${message.author}, you have been given **${role.name}** role.`,
+        description: `${message.author}, you have been removed from **${role.name}** role.`,
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
@@ -55,13 +55,13 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['iwant', 'ihave']
+  aliases: ['idontwant', 'idonthave']
 };
 
 exports.help = {
-  name: 'iam',
-  description: 'Adds a specified self assignable role to the user.',
+  name: 'iamnot',
+  description: 'Removes a specified self assignable role from the user.',
   permission: '',
-  usage: 'iAm <role name>',
-  example: ['iAm Looking to play']
+  usage: 'iAmNot <role name>',
+  example: ['iAmNot Looking to play']
 };
