@@ -1,7 +1,8 @@
 {
   "date": "April 3, 2017",
   "updated": [
-    "Some improvements to todo module"
+    "Some improvements to todo module",
+    "Some fixes to pagination"
   ],
   "added": [
     "`addSelfAssignableRoles` command",

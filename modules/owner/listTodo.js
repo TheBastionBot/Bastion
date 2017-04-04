@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
       list = list.map((l, i) => `**${i+1}.**  ${l}`);
       let i = 0;
       if (isNaN(args = parseInt(args[0]))) i = 1;
-      else i = args < list.length/10+1 ? args : 1;
+      else i = (args > 0 && args < list.length/10+1) ? args : 1;
       i = i - 1;
       message.channel.sendMessage('', {embed: {
         color: 6651610,
