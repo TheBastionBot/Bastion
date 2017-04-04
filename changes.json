@@ -3,6 +3,8 @@
   "updated": [
     "Some improvements to todo module"
   ],
-  "added": [],
+  "added": [
+    "`addSelfAssignableRoles` command"
+  ],
   "removed": []
 }
