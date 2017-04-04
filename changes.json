@@ -5,6 +5,7 @@
   ],
   "added": [
     "`addSelfAssignableRoles` command",
+    "`listSelfAssignableRoles` command",
     "`iAm` command",
     "`iAmNot` command"
   ],
