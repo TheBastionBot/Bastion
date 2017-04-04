@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     activeChannels[message.channel.id].usersVoted = new Array();
 
     let answers = [];
-    for (var i = 1; i < args.length; i++)
+    for (let i = 1; i < args.length; i++)
       answers.push({
         name: `${i}.`,
         value: `${args[i]}`,
@@ -83,13 +83,13 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
 
-        for (var i = args.length - 1; i > 0; i--)
+        for (let i = args.length - 1; i > 0; i--)
           pollRes.unshift(i);
-        var count = {};
-        for (var i = 0; i < pollRes.length; i++)
+        let count = {};
+        for (let i = 0; i < pollRes.length; i++)
           count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]]+1 : 1;
         let result = [];
-        for (var i = 1; i < args.length; i++) {
+        for (let i = 1; i < args.length; i++) {
           result.push({
             name: args[i],
             value: `${((count[Object.keys(count)[i-1]] - 1) / (pollRes.length - (args.length - 1))) * 100}%`,

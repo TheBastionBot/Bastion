@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   sql.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC LIMIT 10').then(profiles => {
     let fields = [];
-    for (var i = 0; i < profiles.length; i++) {
+    for (let i = 0; i < profiles.length; i++) {
       user = message.guild.members.map(m => m.id).indexOf(profiles[i].userID) > -1 ? `${message.guild.members.get(profiles[i].userID).user.username}#${message.guild.members.get(profiles[i].userID).user.discriminator}` : profiles[i].userID
       fields.push({
         name: `${i+1}. ${user}`,

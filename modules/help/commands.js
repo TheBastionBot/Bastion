@@ -26,7 +26,7 @@ let commands = new Object();
 exports.run = (Bastion, message, args) => {
   let modules = getDirSync('./modules/');
   let fields = [];
-  for (var i = 0; i < modules.length; i++) {
+  for (let i = 0; i < modules.length; i++) {
     commands[modules[i]] = [];
     loadCommands(modules[i]);
     fields.push({

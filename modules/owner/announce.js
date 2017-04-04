@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  for (var i = 0; i < Bastion.guilds.size; i++) {
+  for (let i = 0; i < Bastion.guilds.size; i++) {
     Bastion.guilds.map(g => g.defaultChannel)[i].sendMessage('', {embed: {
       color: 6651610,
       description: args.join(' ')

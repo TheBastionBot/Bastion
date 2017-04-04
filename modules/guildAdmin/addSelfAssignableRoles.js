@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
     roles = roles.concat(args);
     sql.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
       let roleNames = [];
-      for (var i = 0; i < roles.length; i++)
+      for (let i = 0; i < roles.length; i++)
         roleNames.push(message.guild.roles.get(roles[i]).name);
       message.channel.sendMessage('', {embed: {
         color: 5088314,

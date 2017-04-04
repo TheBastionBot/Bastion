@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   ];
   let outcome = outcomes[Math.floor(Math.random()*outcomes.length)];
   if (args[0] && parseInt(args[0]))
-    for (var i = 1; i < args[0]; i++)
+    for (let i = 1; i < args[0]; i++)
       outcome += `, ${outcomes[Math.floor(Math.random()*outcomes.length)]}`
 
   message.channel.sendMessage('', {embed: {

@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     let n = [];
-    for (var i = 1; i <= Object.keys(quotes).length; i++)
+    for (let i = 1; i <= Object.keys(quotes).length; i++)
       if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) != -1)
         n.push(i);
     if (n.length > 0) index = n[Math.floor(Math.random()*n.length)];

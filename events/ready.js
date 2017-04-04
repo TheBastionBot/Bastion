@@ -31,9 +31,9 @@ module.exports = Bastion => {
     let BastionGuilds = Bastion.guilds.map(g => g.id);
     sql.all('SELECT guildID from guildSettings').then(row => {
       row = row.map(r => r.guildID);
-      for (var i = 0; i < BastionGuilds.length; i++) {
-        var found = false;
-        for (var j = 0; j < row.length; j++) {
+      for (let i = 0; i < BastionGuilds.length; i++) {
+        let found = false;
+        for (let j = 0; j < row.length; j++) {
           if(BastionGuilds[i] == row[j]){
             found = true;
             break;
@@ -44,9 +44,9 @@ module.exports = Bastion => {
           Bastion.log.error(e.stack);
         });
       }
-      for (var i = 0; i < row.length; i++) {
-        var found = false;
-        for (var j = 0; j < BastionGuilds.length; j++) {
+      for (let i = 0; i < row.length; i++) {
+        let found = false;
+        for (let j = 0; j < BastionGuilds.length; j++) {
           if(row[i] == BastionGuilds[j]){
             found = true;
             break;

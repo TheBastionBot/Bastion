@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
     sql.all('SELECT userID from blacklistedUsers').then(blUsers => {
       blUsers = blUsers.map(u => u.userID)
       if (/^(add|\+)$/i.test(args[0])) {
-        for (var i = 0; i < user.length; i++) {
+        for (let i = 0; i < user.length; i++) {
           if (blUsers.indexOf(user[i]) >= 0) continue;
           sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [user[i]]).catch(e => {
             Bastion.log.error(e.stack);
@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
         title = 'Added to blacklisted users';
       }
       else if (/^(remove|rem|-)$/i.test(args[0])) {
-        for (var i = 0; i < user.length; i++) {
+        for (let i = 0; i < user.length; i++) {
           if (blUsers.indexOf(user[i]) < 0) continue;
           sql.run(`DELETE FROM blacklistedUsers where userID=${user[i]}`).catch(e => {
             Bastion.log.error(e.stack);

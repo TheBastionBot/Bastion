@@ -96,7 +96,7 @@ module.exports = message => {
 
   sql.all(`SELECT trigger, response FROM triggers`).then(triggers => {
     if (triggers == '') return;
-    for (var i = 0; i < triggers.length; i++) {
+    for (let i = 0; i < triggers.length; i++) {
       if (message.content.includes(triggers[i].trigger) && !message.content.startsWith(message.client.config.prefix)) {
         msg = triggers[i].response;
         msg = msg.replace(/\$user/ig, `<@${message.author.id}>`);

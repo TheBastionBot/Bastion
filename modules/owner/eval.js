@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   try {
-    var evaled = eval(args.join(' '));
+    let evaled = eval(args.join(' '));
     if (typeof evaled !== 'string') evaled = require('util').inspect(evaled);
     message.delete().catch(e => {
       Bastion.log.error(e.stack);

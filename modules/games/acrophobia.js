@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     let charPool = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     let acroLen = getRandomInt(2, 5);
     let acronym = [];
-    for (var i = 0; i < acroLen; i++)
+    for (let i = 0; i < acroLen; i++)
       acronym.push(charPool[getRandomInt(0, charPool.length - 1)]);
 
     message.channel.sendMessage('', {embed: {
@@ -78,7 +78,7 @@ exports.run = (Bastion, message, args) => {
         }
         else {
           let submissions = [];
-          for (var i = 0; i < collection.size; i++)
+          for (let i = 0; i < collection.size; i++)
             submissions.push(`**${i+1}.** ${collection.map(a => a.content)[i]}`);
           msg.channel.sendMessage('', {embed: {
             color: 5088314,
@@ -133,7 +133,7 @@ exports.run = (Bastion, message, args) => {
                 votes = votes.map(v => v.content);
                 for (let i = collection.size; i > 0; i--) votes.unshift(`${i}`);
                 let count = {};
-                for (var i = 0; i < votes.length; i++) count[votes[i]] = count[votes[i]] ? count[votes[i]]+1 : 1;
+                for (let i = 0; i < votes.length; i++) count[votes[i]] = count[votes[i]] ? count[votes[i]]+1 : 1;
                 let winningVoteIndex = Object.keys(count).reduce(function(a, b){ return count[a] > count[b] ? a : b });
                 msg.channel.sendMessage('', {embed: {
                   color: 6651610,
@@ -187,7 +187,7 @@ exports.help = {
 };
 
 function matchAcronym(charPool, strArr) {
-  for (var i = 0; i < charPool.length; i++)
+  for (let i = 0; i < charPool.length; i++)
     if (charPool[i] != strArr[i].charAt(0).toUpperCase())
       return false;
   return true;
