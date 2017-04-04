@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo)
-      sql.run('INSERT OR REPLACE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, `["${args.join(' ')}"]`]).then(() => {
+      sql.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, `["${args.join(' ')}"]`]).then(() => {
         message.channel.sendMessage('', {embed: {
           color: 5088314,
           title: 'Todo list created',
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
     else {
       let list = JSON.parse(todo.list);
       list.push(args.join(' '));
-      sql.run('INSERT OR REPLACE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, JSON.stringify(list)]).then(() => {
+      sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
         message.channel.sendMessage('', {embed: {
           color: 5088314,
           title: 'Todo list updated',

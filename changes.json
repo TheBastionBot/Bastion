@@ -1,11 +1,8 @@
 {
   "date": "April 3, 2017",
   "updated": [
-    "`give`/`take` doesn't take negative numbers anymore",
-    "dependencies"
+    "Some improvements to todo module"
   ],
-  "added": [
-    "`giveaway` command"
-  ],
+  "added": [],
   "removed": []
 }

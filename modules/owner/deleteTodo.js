@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       if (index >= list.length) return;
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);
-      sql.run('INSERT OR REPLACE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, JSON.stringify(list)]).then(() => {
+      sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
         message.channel.sendMessage('', {embed: {
           color: 6651610,
           description: `${message.author.username}, I've deleted **${deletedItem}** from your todo list.`
