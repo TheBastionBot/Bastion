@@ -20,9 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  let members = message.channel.members.filter(m => !m.user.bot).map(m => m.user.id);
-  let sweepedUserId = members[Math.floor(Math.random()*members.length)];
-  let sweepedUser = message.channel.members.get(sweepedUserId).user;
+  let sweepedUser = message.channel.members.filter(m => !m.user.bot).random();
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,
@@ -30,12 +28,12 @@ exports.run = (Bastion, message, args) => {
     fields: [
       {
         name: 'User',
-        value: `**${sweepedUser.username}**#${sweepedUser.discriminator}`,
+        value: `**${sweepedUser.user.username}**#${sweepedUser.user.discriminator}`,
         inline: true
       },
       {
         name: 'ID',
-        value: sweepedUserId,
+        value: sweepedUser.id,
         inline: true
       }
     ]
@@ -50,7 +48,7 @@ exports.config = {
 
 exports.help = {
   name: 'sweep',
-  description: 'Shows a random user from the server.',
+  description: 'Shows a random user from the channel.',
   permission: '',
   usage: 'sweep',
   example: []

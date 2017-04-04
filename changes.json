@@ -1,9 +1,10 @@
 {
-  "date": "April 3, 2017",
+  "date": "April 4, 2017",
   "updated": [
     "Some improvements to todo module",
     "Some fixes to pagination",
-    "Some improvements"
+    "Some improvements",
+    "Improved `sweep` command"
   ],
   "added": [
     "`addSelfAssignableRoles` command",
