@@ -4,7 +4,8 @@
     "Some improvements to todo module"
   ],
   "added": [
-    "`addSelfAssignableRoles` command"
+    "`addSelfAssignableRoles` command",
+    "`iam` command"
   ],
   "removed": []
 }
