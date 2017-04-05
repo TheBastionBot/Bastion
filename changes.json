@@ -1,17 +1,8 @@
 {
-  "date": "April 4, 2017",
+  "date": "April 5, 2017",
   "updated": [
-    "Some improvements to todo module",
-    "Some fixes to pagination",
-    "Some improvements",
-    "Improved `sweep` command"
+    "Autodelete `iAm`/`iAmNot` command and output."
   ],
-  "added": [
-    "`addSelfAssignableRoles` command",
-    "`removeSelfAssignableRoles` command",
-    "`listSelfAssignableRoles` command",
-    "`iAm` command",
-    "`iAmNot` command"
-  ],
+  "added": [],
   "removed": []
 }
