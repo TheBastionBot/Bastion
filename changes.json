@@ -1,7 +1,8 @@
 {
   "date": "April 6, 2017",
   "updated": [
-    "`Giveaway` now sends a message when event is ended."
+    "`Giveaway` now sends a message when event is ended.",
+    "Only one giveaway at a time, per channel."
   ],
   "added": [],
   "removed": []
