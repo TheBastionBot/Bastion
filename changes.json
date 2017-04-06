@@ -4,6 +4,8 @@
     "`Giveaway` now sends a message when event is ended.",
     "Only one giveaway at a time, per channel."
   ],
-  "added": [],
+  "added": [
+    "`russianRoulette` game"
+  ],
   "removed": []
 }
