@@ -40,6 +40,13 @@ exports.run = (Bastion, message, args) => {
     }
   }}).then(msg => {
     setTimeout(function () {
+      msg.edit('', {embed: {
+        color: 6651610,
+        title: 'Giveaway event ended',
+        description: `Giveaway event has been ended. Thank you for participating. All the participants are being rewarded with **${args}** Bastion Currencies.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
       if (msg.reactions.get(reaction)) winners = msg.reactions.get(reaction).users.map(u => u.id);
       winners.forEach((user, i) => {
         sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
@@ -65,7 +72,7 @@ exports.run = (Bastion, message, args) => {
     }, 60 * 60 * 1000);
   }).catch(e => {
     Bastion.log.error(e.stack);
-  })
+  });
 };
 
 exports.config = {

@@ -1,7 +1,7 @@
 {
-  "date": "April 5, 2017",
+  "date": "April 6, 2017",
   "updated": [
-    "Autodelete `iAm`/`iAmNot` command and output."
+    "`Giveaway` now sends a message when event is ended."
   ],
   "added": [],
   "removed": []
