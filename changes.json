@@ -1,11 +1,8 @@
 {
-  "date": "April 6, 2017",
+  "date": "April 7, 2017",
   "updated": [
-    "`Giveaway` now sends a message when event is ended.",
-    "Only one giveaway at a time, per channel."
+    "Fixed an issue with rock paper scissor"
   ],
-  "added": [
-    "`russianRoulette` game"
-  ],
+  "added": [],
   "removed": []
 }

@@ -29,17 +29,21 @@ exports.run = (Bastion, message, args) => {
   if (outcomes.indexOf(userOutcome) < 0) return;
   let botOutcome = outcomes[Math.floor(Math.random()*outcomes.length)];
   let result = 'I win! :yum:';
-  if (userOutcome == botOutcome)
+  if (userOutcome == botOutcome) {
     result = 'Oh damn! It\'s a draw, dude. :confused:';
-  else if (userOutcome == 'ROCK')
+  }
+  else if (userOutcome == 'ROCK') {
     if (botOutcome == 'SCISSOR')
       result = 'You win. :clap:';
-  else if (userOutcome == 'PAPER')
+  }
+  else if (userOutcome == 'PAPER') {
     if (botOutcome == 'ROCK')
       result = 'You win. :clap:';
-  else if (userOutcome == 'SCISSOR')
+  }
+  else if (userOutcome == 'SCISSOR') {
     if (botOutcome == 'PAPER')
       result = 'You win. :clap:';
+  }
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,
