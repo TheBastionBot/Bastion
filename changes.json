@@ -1,7 +1,7 @@
 {
-  "date": "April 7, 2017",
+  "date": "April 8, 2017",
   "updated": [
-    "Fixed an issue with rock paper scissor"
+    "Fixed an issue with delete trigger when the trigger contained ' characher"
   ],
   "added": [],
   "removed": []
