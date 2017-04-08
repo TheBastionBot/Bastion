@@ -263,10 +263,18 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}repeat`)) {
-              queue[message.guild.id].repeat = true;
+              let repeatStat = '';
+              if (queue[message.guild.id].repeat) {
+                queue[message.guild.id].repeat = false;
+                repeatStat = 'Removed the current song from repeat queue.'
+              }
+              else {
+                queue[message.guild.id].repeat = true;
+                repeatStat = 'Added the current song to the repeat queue.'
+              }
               textChannel.sendMessage('', {embed: {
                 color: 5088314,
-                description: 'Added the current song to the repeat queue.'
+                description: repeatStat
               }}).then(m => {
                 m.delete(10000);
               }).catch(e => {

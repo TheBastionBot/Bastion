@@ -1,7 +1,8 @@
 {
   "date": "April 8, 2017",
   "updated": [
-    "Fixed an issue with delete trigger when the trigger contained ' characher"
+    "Fixed an issue with delete trigger when the trigger contained ' characher",
+    "`repeat` music command now acts as a toggle"
   ],
   "added": [],
   "removed": []

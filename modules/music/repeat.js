@@ -10,7 +10,7 @@ exports.config = {
 
 exports.help = {
   name: 'repeat',
-  description: 'Puts the currently playing song to the repeat queue.',
+  description: 'Toggles the currently playing song to/from the repeat queue.',
   permission: '',
   usage: 'repeat',
   example: []
