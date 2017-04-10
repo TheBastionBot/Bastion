@@ -20,7 +20,7 @@
  */
 
 const sql = require('sqlite');
-sql.open('../Bastion.sqlite');
+sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!(args = message.mentions.users.first())) args = message.author;
