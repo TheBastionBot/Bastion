@@ -111,7 +111,7 @@ exports.run = (Bastion, message, args) => {
         // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setInterval or flags is inefficient, find an efficient way to fix this!
         favs.forEach((e, i) => {
           e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i.test(e) ? e : 'ytsearch:' + e;
-          if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].songs = [];
+          if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
           yt.getInfo(e, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
             if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
             queue[message.guild.id].songs.push({
@@ -143,7 +143,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].songs = [];
+      if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
       queue[message.guild.id].songs.push({
         url: info.formats[info.formats.length - 1].url,
         title: info.title,
@@ -300,15 +300,39 @@ exports.run = (Bastion, message, args) => {
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
               if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
-              textChannel.sendMessage('', {embed: {
-                color: 5088314,
-                description: 'Skipping current song.'
-              }}).then(m => {
-                dispatcher.end();
-                m.delete(10000);
-              }).catch(e => {
-                Bastion.log.error(e.stack);
-              });
+              else {
+                textChannel.sendMessage('', {embed: {
+                  color: 5088314,
+                  description: 'Skipping current song.'
+                }}).then(m => {
+                  dispatcher.end();
+                  m.delete(10000);
+                }).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
+              }
+              if (!queue[message.guild.id].skipVotes.includes(msg.author.id)) {
+                queue[message.guild.id].skipVotes.push(msg.author.id);
+              }
+              if (queue[message.guild.id].skipVotes.length >= (voiceChannel.members.size - 1) / 2) {
+                textChannel.sendMessage('', {embed: {
+                  color: 5088314,
+                  description: 'Skipping current song.'
+                }}).then(m => {
+                  dispatcher.end();
+                  m.delete(10000);
+                }).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
+              }
+              else {
+                textChannel.sendMessage('', {embed: {
+                  color: 5088314,
+                  description: `${((voiceChannel.members.size - 1) / 2) - queue[message.guild.id].skipVotes.length} votes required to skip the current song.`
+                }}).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
+              }
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
               if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
@@ -347,6 +371,7 @@ exports.run = (Bastion, message, args) => {
           dispatcher.on('end', () => {
             collector.stop();
             queue[message.guild.id].playing = false;
+            queue[message.guild.id].skipVotes = [];
             if (!queue[message.guild.id].repeat) queue[message.guild.id].songs.shift();
             else queue[message.guild.id].repeat = false;
             play(queue[message.guild.id].songs[0]);

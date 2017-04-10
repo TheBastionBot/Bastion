@@ -1,8 +1,7 @@
 {
-  "date": "April 8, 2017",
+  "date": "April 10, 2017",
   "updated": [
-    "Fixed an issue with delete trigger when the trigger contained ' characher",
-    "`repeat` music command now acts as a toggle"
+    "Now `skip` music command can be used by anyone. But when users without Mute Members perms use it, it requires at least 50% votes out of all the users in the voice channel"
   ],
   "added": [],
   "removed": []
