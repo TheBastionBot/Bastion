@@ -5,5 +5,7 @@
     "Best practices"
   ],
   "added": [],
-  "removed": []
+  "removed": [
+    "`ask` command as `poll` can do the same thing in a better way"
+  ]
 }
