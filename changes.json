@@ -2,7 +2,8 @@
   "date": "April 11, 2017",
   "updated": [
     "Fixed permission issues in `skip`",
-    "Best practices"
+    "Best practices",
+    "Better module categories"
   ],
   "added": [],
   "removed": [
