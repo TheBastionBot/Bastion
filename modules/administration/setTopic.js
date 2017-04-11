@@ -20,13 +20,21 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) channel = message.channel;
+  let topic = '';
+  if (!(channel = message.mentions.channels.first())) {
+    channel = message.channel;
+    topic = args.join(' ');
+  }
+  else {
+    topic = args.slice(1).join(' ').trim();
+  }
   if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  topic = args.join(' ');
+  let color = 5088314;
   if (topic.length < 1) {
     topic = ' ';
     title = 'Channel Topic Removed';
+    color = 13380644;
   }
   else {
     title = 'Channel Topic Set';
@@ -34,9 +42,20 @@ exports.run = (Bastion, message, args) => {
 
   channel.setTopic(topic).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: color,
       title: title,
-      description: topic
+      fields: [
+        {
+          name: 'Channel Name',
+          value: `#${channel.name}`,
+          inline: true
+        },
+        {
+          name: 'Topic',
+          value: channel.topic.length > 1 ? channel.topic : '-',
+          inline: true
+        }
+      ]
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
@@ -53,6 +72,6 @@ exports.help = {
   name: 'settopic',
   description: 'Sets the topic of the mentioned channel with a given name. If no channel is mentioned, sets the topic of the current channel with the given name.',
   permission: 'Manage Channels',
-  usage: 'setTopic [#channel-mention] <Channel Topic>',
-  example: ['setTopic #channel-name New Topic', 'setTopic New Topic']
+  usage: 'setTopic [#channel-mention] [Channel Topic]',
+  example: ['setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic']
 };

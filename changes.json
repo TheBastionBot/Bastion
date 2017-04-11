@@ -7,7 +7,8 @@
     "triggers now support multiple responses with same trigger",
     "Usage is shown to the user, if command's syntax is wrong",
     "Fixed some minor issues",
-    "Modified some string"
+    "Modified some string",
+    "Fixed and improved `setTopic` command"
   ],
   "added": [],
   "removed": [
