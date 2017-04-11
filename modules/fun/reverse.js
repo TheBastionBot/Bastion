@@ -19,8 +19,6 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const reverseString = require('../../functions/reverseString');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
@@ -35,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
     color: 6651610,
     title: 'Reversed Text:',
-    description: reverseString(args.join(' '))
+    description: args.join(' ').split('').reverse().join('')
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });

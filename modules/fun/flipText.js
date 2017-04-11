@@ -20,7 +20,6 @@
  */
 
 const flipText = require('../../data/flipText.json');
-const reverseString = require('../../functions/reverseString');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -41,7 +40,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
     color: 6651610,
     title: 'Flipped Text:',
-    description: reverseString(args)
+    description: args.split('').reverse().join('')
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });

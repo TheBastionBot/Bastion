@@ -9,6 +9,7 @@
   ],
   "added": [],
   "removed": [
-    "`ask` command as `poll` can do the same thing in a better way"
+    "`ask` command as `poll` can do the same thing in a better way",
+    "`reverseString` function - inlined it into the commands"
   ]
 }
