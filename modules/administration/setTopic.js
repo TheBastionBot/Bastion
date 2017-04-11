@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
   if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   let color = 5088314;
-  if (topic.length < 1) {
+  if (topic.length < 2) {
     topic = ' ';
     title = 'Channel Topic Removed';
     color = 13380644;

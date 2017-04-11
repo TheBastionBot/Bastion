@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
         },
         {
           name: 'Topic',
-          value: (channel.topic == null || channel.topic.length < 1) ? '-' : channel.topic,
+          value: (channel.topic == null || channel.topic.length < 2) ? '-' : channel.topic,
           inline: false
         },
         {
