@@ -26,6 +26,7 @@ const bot = new Cleverbot({
   key: credentials.cleverbotAPIkey
 });
 const chalk = require('chalk');
+const getRandomInt = require('../functions/getRandomInt');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = message => {
@@ -101,17 +102,15 @@ module.exports = message => {
 
   sql.all(`SELECT trigger, response FROM triggers`).then(triggers => {
     if (triggers == '') return;
-    for (let i = 0; i < triggers.length; i++) {
-      if (message.content.includes(triggers[i].trigger) && !message.content.startsWith(message.client.config.prefix)) {
-        msg = triggers[i].response;
-        msg = msg.replace(/\$user/ig, `<@${message.author.id}>`);
-        msg = msg.replace(/\$username/ig, message.author.username);
-        msg = msg.replace(/\$server/ig, `**${message.guild.name}**`);
-        msg = msg.replace(/\$prefix/ig, message.client.config.prefix);
-        return message.channel.sendMessage(msg).catch(e => {
-          message.client.log.error(e.stack);
-        });
-      }
+    let response = triggers.map(x => x.response)[getRandomInt(0, triggers.length - 1)];
+    if (message.content.includes(triggers[0].trigger) && !message.content.startsWith(message.client.config.prefix)) {
+      response = response.replace(/\$user/ig, `<@${message.author.id}>`);
+      response = response.replace(/\$username/ig, message.author.username);
+      response = response.replace(/\$server/ig, `**${message.guild.name}**`);
+      response = response.replace(/\$prefix/ig, message.client.config.prefix);
+      return message.channel.sendMessage(response).catch(e => {
+        message.client.log.error(e.stack);
+      });
     }
   }).catch(() => {
     sql.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {

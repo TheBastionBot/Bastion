@@ -3,7 +3,8 @@
   "updated": [
     "Fixed permission issues in `skip`",
     "Best practices",
-    "Better module categories"
+    "Better module categories",
+    "triggers now support multiple responses with same trigger"
   ],
   "added": [],
   "removed": [
