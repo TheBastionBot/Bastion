@@ -20,6 +20,16 @@
  */
 
 exports.run = (Bastion, message, args) => {
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   message.channel.sendMessage('', {embed: {
     color: 11316394,
     description: args.join(' ')

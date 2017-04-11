@@ -8,6 +8,7 @@
     "Usage is shown to the user, if command's syntax is wrong",
     "Fixed and improved `setTopic` command",
     "Fixed channel topic issues",
+    "`echo` doesn't accept empty strings anymore",
     "Fixed some minor issues",
     "Modified some string"
   ],
