@@ -25,6 +25,7 @@ sql.open('./data/Bastion.sqlite');
 module.exports = member => {
   sql.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
+
     if (row.greet == 'true') {
       let greetMsg = row.greetMessage;
       greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
@@ -37,9 +38,11 @@ module.exports = member => {
         title: `Hello ${member.displayName}`,
         description: greetMsg
       }}).then(m => {
-        if (row.greetTimeout > 0) m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
-          member.client.log.error(e.stack);
-        });
+        if (row.greetTimeout > 0) {
+          m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
+            member.client.log.error(e.stack);
+          });
+        }
       }).catch(e => {
         member.client.log.error(e.stack);
       });
@@ -51,6 +54,7 @@ module.exports = member => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     if (row.log == 'false') return;
+
     member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 5088314,
       title: 'User Joined',

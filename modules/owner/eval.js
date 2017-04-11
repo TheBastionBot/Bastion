@@ -24,7 +24,9 @@ exports.run = (Bastion, message, args) => {
 
   try {
     let evaled = eval(args.join(' '));
-    if (typeof evaled !== 'string') evaled = require('util').inspect(evaled);
+    if (typeof evaled !== 'string') {
+      evaled = require('util').inspect(evaled);
+    }
     message.delete().catch(e => {
       Bastion.log.error(e.stack);
     });

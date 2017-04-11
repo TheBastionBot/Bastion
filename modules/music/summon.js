@@ -25,12 +25,14 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) > -1) {
     voiceChannel = message.member.voiceChannel;
-    if (!voiceChannel || voiceChannel.type !== 'voice') return message.channel.sendMessage('', {embed: {
-      color: 13380644,
-      description: `I can't join your voice channel <@${message.author.id}>.`
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (!voiceChannel || voiceChannel.type !== 'voice') {
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: `I can't join your voice channel <@${message.author.id}>.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     if (voiceChannel.joinable) voiceChannel.join().then(connection => {
       message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
         Bastion.log.error(e.stack);
@@ -44,24 +46,30 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      else if (!connection.speaking) connection.playFile('./data/greeting.mp3', { passes: 1 });
+      else if (!connection.speaking) {
+        connection.playFile('./data/greeting.mp3', { passes: 1 });
+      }
     });
   }
   else {
     sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
       if (musicChannel.musicTextChannelID != message.channel.id) return;
-      if (!musicChannel.musicVoiceChannelID) return message.channel.sendMessage('', {embed: {
-        color: 13380644,
-        description: 'No default music channel has been set. So, only the bot owner can use this command.'
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-      if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID))) return message.channel.sendMessage('', {embed: {
-        color: 13380644,
-        description: `I can't join your voice channel <@${message.author.id}>.`
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      if (!musicChannel.musicVoiceChannelID) {
+        return message.channel.sendMessage('', {embed: {
+          color: 13380644,
+          description: 'No default music channel has been set. So, only the bot owner can use this command.'
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
+      if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID))) {
+        return message.channel.sendMessage('', {embed: {
+          color: 13380644,
+          description: `I can't join your voice channel <@${message.author.id}>.`
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
       if (voiceChannel.joinable) voiceChannel.join().then(connection => {
         message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
           Bastion.log.error(e.stack);
@@ -75,7 +83,9 @@ exports.run = (Bastion, message, args) => {
             Bastion.log.error(e.stack);
           });
         }
-        else if (!connection.speaking) connection.playFile('./data/greeting.mp3', { passes: 1 });
+        else if (!connection.speaking) {
+          connection.playFile('./data/greeting.mp3', { passes: 1 });
+        }
       });
     });
   }

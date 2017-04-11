@@ -24,9 +24,11 @@ sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldGuild, newGuild) => {
   if (oldGuild.name == newGuild.name) return;
+
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newGuild.id}`).then(row => {
     if (!row) return;
     if (row.log == 'false') return;
+
     newGuild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 5088314,
       title: 'Guild Name Changed',

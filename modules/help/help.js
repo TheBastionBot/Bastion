@@ -56,14 +56,20 @@ exports.run = (Bastion, message, args) => {
     }}).catch(e => {
       message.client.log.error(e.stack);
     });
-  } else {
+  }
+  else {
     let command = args[0].toLowerCase();
     if (Bastion.commands.has(command)) {
       command = Bastion.commands.get(command);
       let example = [];
-      if (command.help.example.length < 1) example.push('-');
-      else for (let i = 0; i < command.help.example.length; i++)
-        example.push(`\`${Bastion.config.prefix}${command.help.example[i]}\``);
+      if (command.help.example.length < 1) {
+        example.push('-');
+      }
+      else {
+        for (let i = 0; i < command.help.example.length; i++) {
+          example.push(`\`${Bastion.config.prefix}${command.help.example[i]}\``);
+        }
+      }
 
       message.channel.sendMessage('', {embed: {
         color: 16766720,

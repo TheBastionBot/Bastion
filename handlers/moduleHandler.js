@@ -25,8 +25,9 @@ const getDirSync = require('../functions/getDirSync');
 module.exports = Bastion => {
   let modules = getDirSync('./modules/');
   Bastion.log.info(`Loading ${modules.length} modules...`);
-  for (let i = 0; i < modules.length; i++)
+  for (let i = 0; i < modules.length; i++) {
     loadEvent(Bastion, modules[i]);
+  }
 };
 
 function loadEvent(Bastion, module) {

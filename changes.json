@@ -1,7 +1,8 @@
 {
   "date": "April 11, 2017",
   "updated": [
-    "Fixed permission issues in `skip`"
+    "Fixed permission issues in `skip`",
+    "Best practices"
   ],
   "added": [],
   "removed": []

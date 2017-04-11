@@ -54,7 +54,7 @@ exports.run = (Bastion, message, args) => {
     "z": tap + tap + tap + tap + tap + sp + tap + tap + tap + tap + tap,
     " ": " "
   };
-  args = args.replace(/\. /g, ' x ')
+  args = args.replace(/\. /g, ' x ');
   args = args.replace(/./g, x => tapCode[x]+' ').trim();
 
   message.channel.sendMessage('', {embed: {

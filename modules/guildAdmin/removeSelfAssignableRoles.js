@@ -28,13 +28,14 @@ exports.run = (Bastion, message, args) => {
   index -= 1;
 
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (!row)
+    if (!row) {  
       message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: 'No self assignable roles found.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
+    }
     else {
       let roles = JSON.parse(row.selfAssignableRoles);
       if (index >= roles.length) return;

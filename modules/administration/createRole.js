@@ -28,7 +28,9 @@ exports.run = (Bastion, message, args) => {
     if (args[0].length != 7) return;
     data = args[1] === undefined ? data = roleData('new role', args[0]) : roleData(args.slice(1).join(' '), args[0]);
   }
-  else data = args[0] === undefined ? data = roleData() : roleData(args.join(' '));
+  else {
+    data = args[0] === undefined ? data = roleData() : roleData(args.join(' '));
+  }
 
   message.guild.createRole(data).then(role => message.channel.sendMessage('', {embed: {
     color: 5088314,

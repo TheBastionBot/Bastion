@@ -28,7 +28,9 @@ exports.run = (Bastion, message, args) => {
     topic = ' ';
     title = 'Channel Topic Removed';
   }
-  else title = 'Channel Topic Set';
+  else {
+    title = 'Channel Topic Set';
+  }
 
   channel.setTopic(topic).then(() => {
     message.channel.sendMessage('', {embed: {

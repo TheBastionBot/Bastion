@@ -26,16 +26,19 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  for (let i = 0; i < args.length; i++)
-    if (!/^[0-9]{18}$/.test(args[i]))
+  for (let i = 0; i < args.length; i++) {
+    if (!/^[0-9]{18}$/.test(args[i])) {
       args.splice(args.indexOf(args[i]), 1);
+    }
+  }
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let roles = JSON.parse(row.selfAssignableRoles);
     roles = roles.concat(args);
     sql.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
       let roleNames = [];
-      for (let i = 0; i < roles.length; i++)
+      for (let i = 0; i < roles.length; i++) {
         roleNames.push(message.guild.roles.get(roles[i]).name);
+      }
       message.channel.sendMessage('', {embed: {
         color: 5088314,
         title: 'Added self assignable roles',

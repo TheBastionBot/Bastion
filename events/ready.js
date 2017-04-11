@@ -34,28 +34,30 @@ module.exports = Bastion => {
       for (let i = 0; i < BastionGuilds.length; i++) {
         let found = false;
         for (let j = 0; j < row.length; j++) {
-          if(BastionGuilds[i] == row[j]){
+          if (BastionGuilds[i] == row[j]){
             found = true;
             break;
           }
         }
-        if(found == false)
-        sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [BastionGuilds[i]]).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        if (found == false) {
+          sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [BastionGuilds[i]]).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
       }
       for (let i = 0; i < row.length; i++) {
         let found = false;
         for (let j = 0; j < BastionGuilds.length; j++) {
-          if(row[i] == BastionGuilds[j]){
+          if (row[i] == BastionGuilds[j]){
             found = true;
             break;
           }
         }
-        if(found == false)
-        sql.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        if (found == false) {
+          sql.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
       }
     }).catch(e => {
       Bastion.log.error(e.stack);

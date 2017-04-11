@@ -20,7 +20,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) channel = message.channel;
+  if (!(channel = message.mentions.channels.first())) {
+    channel = message.channel;
+  }
   if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   channel.delete().catch(e => {

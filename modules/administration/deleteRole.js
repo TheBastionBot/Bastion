@@ -23,8 +23,12 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  if (!(role = message.mentions.roles.first())) role = message.guild.roles.find('name', args.join(' '));
-  if (role == null) return Bastion.log.info('No role found with that name.');
+  if (!(role = message.mentions.roles.first())) {
+    role = message.guild.roles.find('name', args.join(' '));
+  }
+  if (role == null) {
+    return Bastion.log.info('No role found with that name.');
+  }
 
   role.delete().then(r => {
     message.channel.sendMessage('', {embed: {

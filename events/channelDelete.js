@@ -28,6 +28,7 @@ module.exports = channel => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${channel.guild.id}`).then(row => {
     if (!row) return;
     if (row.log == 'false') return;
+
     channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 13380644,
       title: 'Channel Deleted',

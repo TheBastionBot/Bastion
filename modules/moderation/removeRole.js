@@ -27,9 +27,13 @@ exports.run = (Bastion, message, args) => {
     user = message.author;
     role = args.join(' ');
   }
-  else role = args.slice(1).join(' ');
+  else {
+    role = args.slice(1).join(' ');
+  }
   role = message.guild.roles.find('name', role);
-  if (role == null) return Bastion.log.info('No role found with that name.');
+  if (role == null) {
+    return Bastion.log.info('No role found with that name.');
+  }
 
   message.guild.members.get(user.id).removeRole(role).then(() => {
     message.channel.sendMessage('', {embed: {

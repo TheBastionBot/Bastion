@@ -24,7 +24,7 @@ let activeChannels = [];
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
-  if(!activeChannels.includes(message.channel.id)) {
+  if (!activeChannels.includes(message.channel.id)) {
     args = args.join(' ').split(';');
     let opt = ['0⃣', '1⃣'];
 
@@ -35,14 +35,17 @@ exports.run = (Bastion, message, args) => {
     }}).then(m => {
       activeChannels.push(message.channel.id);
       try {
-        for (let i = 0; i < opt.length; i++) m.react(opt[i]).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        for (let i = 0; i < opt.length; i++) {
+          m.react(opt[i]).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
       } finally {
         setTimeout(function () {
           let res = [];
-          for (let i = 0; i < opt.length; i++)
+          for (let i = 0; i < opt.length; i++) {
             res.push(m.reactions.get(opt[i]).users.size - 1);
+          }
           message.channel.sendMessage('', {embed: {
             color: 6651610,
             title: args.join(' '),

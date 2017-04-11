@@ -20,7 +20,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(user = message.mentions.users.first())) user = message.author;
+  if (!(user = message.mentions.users.first())) {
+    user = message.author;
+  }
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,

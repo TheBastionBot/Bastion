@@ -35,12 +35,17 @@ exports.run = (Bastion, message, args) => {
 
     let roles = JSON.parse(row.selfAssignableRoles);
     let roleNames = [];
-    for (let i = 0; i < roles.length; i++)
+    for (let i = 0; i < roles.length; i++) {
       roleNames.push(message.guild.roles.get(roles[i]).name);
+    }
     roleNames = roleNames.map((r, i) => `${i+1}. ${r}`);
     let i = 0;
-    if (isNaN(args = parseInt(args[0]))) i = 1;
-    else i = (args > 0 && args < roleNames.length/10+1) ? args : 1;
+    if (isNaN(args = parseInt(args[0]))) {
+      i = 1;
+    }
+    else {
+      i = (args > 0 && args < roleNames.length/10+1) ? args : 1;
+    }
     i = i - 1;
     message.channel.sendMessage('', {embed: {
       color: 6651610,

@@ -52,7 +52,8 @@ exports.run = (Bastion, message, args) => {
           });
         }
         title = 'Removed from blacklisted users';
-      } else return;
+      }
+      else return;
 
       message.channel.sendMessage('', {embed: {
         color: 13380644,

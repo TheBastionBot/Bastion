@@ -25,6 +25,7 @@ sql.open('./data/Bastion.sqlite');
 module.exports = member => {
   sql.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
+
     if (row.farewell == 'true') {
       let farewellMsg = row.farewellMessage;
       farewellMsg = farewellMsg.replace(/\$user/ig, `<@${member.id}>`);
@@ -37,9 +38,11 @@ module.exports = member => {
         title: `Goodbye ${member.displayName}!`,
         description: farewellMsg + '\n:wave:'
       }}).then(m => {
-        if (row.farewellTimeout > 0) m.delete(1000*parseInt(row.farewellTimeout)).catch(e => {
-          member.client.log.error(e.stack);
-        });
+        if (row.farewellTimeout > 0) {
+          m.delete(1000*parseInt(row.farewellTimeout)).catch(e => {
+            member.client.log.error(e.stack);
+          });
+        }
       }).catch(e => {
         member.client.log.error(e.stack);
       });
@@ -51,6 +54,7 @@ module.exports = member => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     if (row.log == 'false') return;
+
     member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 13380644,
       title: 'User Left',

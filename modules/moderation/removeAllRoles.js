@@ -23,7 +23,9 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  if (!(user = message.mentions.users.first())) user = message.author;
+  if (!(user = message.mentions.users.first())) {
+    user = message.author;
+  }
 
   message.channel.members.get(user.id).removeRoles(message.channel.members.get(user.id).roles).then(() => {
     message.channel.sendMessage('', {embed: {

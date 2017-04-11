@@ -27,24 +27,30 @@ exports.run = (Bastion, message, args) => {
   if (isNaN(args[0] = parseInt(args[0])) || args[0] < 1) return;
 
   if (!((user = message.mentions.users.first()) && (user = user.id))) {
-    if (/^[0-9]{18}$/.test(args[1])) user = args[1];
-    else return message.channel.sendMessage('', {embed: {
-      color: 13380644,
-      description: 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.'
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (/^[0-9]{18}$/.test(args[1])) {
+      user = args[1];
+    }
+    else {
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   }
   if (Bastion.credentials.ownerId.indexOf(message.author.id) > -1) {
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
-      if (!receiver)
+      if (!receiver) {
         sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
           Bastion.log.error(e.stack);
         });
-      else
+      }
+      else {
         sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args[0]} WHERE userID=${user}`).catch(e => {
           Bastion.log.error(e.stack);
         });
+      }
     }).then(() => {
       message.channel.sendMessage('', {embed: {
         color: 5088314,
@@ -64,22 +70,27 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     if (message.author.id == user) return;
+
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
-      if (sender.bastionCurrencies < args[0]) return message.channel.sendMessage('', {embed: {
-        color: 13380644,
-        description: `Sorry, unfortunately, you don't have enough Bastion Currencies with you to give it to others.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      if (sender.bastionCurrencies < args[0]) {
+        return message.channel.sendMessage('', {embed: {
+          color: 13380644,
+          description: `Sorry, unfortunately, you don't have enough Bastion Currencies with you to give it to others.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
       sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
-        if (!receiver)
+        if (!receiver) {
           sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
             Bastion.log.error(e.stack);
           });
-        else
+        }
+        else {
           sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args[0]} WHERE userID=${user}`).catch(e => {
             Bastion.log.error(e.stack);
           });
+        }
       }).catch(e => {
         Bastion.log.error(e.stack);
       });

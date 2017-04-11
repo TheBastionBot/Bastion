@@ -27,7 +27,9 @@ exports.run = (Bastion, message, args) => {
 
   message.guild.members.get(user.id).kick().then(member => {
     let reason = args.slice(1).join(' ');
-    if (reason.length < 1) reason = 'No reason given';
+    if (reason.length < 1) {
+      reason = 'No reason given';
+    }
 
     message.channel.sendMessage('', {embed: {
       color: 15451167,

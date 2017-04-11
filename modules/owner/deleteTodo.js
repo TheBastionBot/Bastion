@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   index -= 1;
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
-    if (!todo)
+    if (!todo) {
       message.channel.sendMessage('', {embed: {
         color: 13380644,
         title: 'Todo list not found',
@@ -36,6 +36,7 @@ exports.run = (Bastion, message, args) => {
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
+    }
     else {
       let list = JSON.parse(todo.list);
       if (index >= list.length) return;

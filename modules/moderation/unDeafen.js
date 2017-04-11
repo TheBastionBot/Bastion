@@ -25,7 +25,9 @@ exports.run = (Bastion, message, args) => {
   if (!(user = message.mentions.users.first())) return;
 
   let reason = args.slice(1).join(' ');
-  if (reason.length < 1) reason = 'No reason given';
+  if (reason.length < 1) {
+    reason = 'No reason given';
+  }
 
   message.guild.members.get(user.id).setDeaf(false).then(() => {
     message.channel.sendMessage('', {embed: {

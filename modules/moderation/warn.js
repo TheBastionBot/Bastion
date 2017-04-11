@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-let guilds = new Object();
+let guilds = {};
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("KICK_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
@@ -28,13 +28,18 @@ exports.run = (Bastion, message, args) => {
   if (!message.guild.members.get(user.id).kickable) return;
 
   let reason = args.slice(1).join(' ');
-  if (reason.length < 1) reason = 'No reason given';
+  if (reason.length < 1) {
+    reason = 'No reason given';
+  }
 
-  if (!guilds.hasOwnProperty(message.guild.id))
-    guilds[message.guild.id] = new Object();
-  if (!guilds[message.guild.id].hasOwnProperty(user.id)) guilds[message.guild.id][user.id] = 1;
+  if (!guilds.hasOwnProperty(message.guild.id)) {
+    guilds[message.guild.id] = {};
+  }
+  if (!guilds[message.guild.id].hasOwnProperty(user.id)) {
+    guilds[message.guild.id][user.id] = 1;
+  }
   else {
-    if (guilds[message.guild.id][user.id] == 2)
+    if (guilds[message.guild.id][user.id] == 2) {
       message.guild.members.get(user.id).kick().then(member => {
         message.channel.sendMessage('', {embed: {
           color: 15451167,
@@ -74,7 +79,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
-    else guilds[message.guild.id][user.id] += 1;
+    }
+    else {
+      guilds[message.guild.id][user.id] += 1;
+    }
   }
   message.channel.sendMessage('', {embed: {
     color: 14845440,

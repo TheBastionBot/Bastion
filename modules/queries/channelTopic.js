@@ -20,7 +20,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) channel = message.channel;
+  if (!(channel = message.mentions.channels.first())) {
+    channel = message.channel;
+  }
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,

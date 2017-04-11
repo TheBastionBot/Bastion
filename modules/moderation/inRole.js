@@ -23,12 +23,15 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) return;
 
-  if (!(role = message.mentions.roles.first())) role = message.guild.roles.find('name', args.join(' '));
+  if (!(role = message.mentions.roles.first())) {
+    role = message.guild.roles.find('name', args.join(' '));
+  }
 
   if (role) {
     let users = [];
-    for (let i = 0; i < role.members.size; i++)
-    users.push(`**${role.members.map(r => r.user)[i].username}**#${role.members.map(r => r.user)[i].discriminator}`);
+    for (let i = 0; i < role.members.size; i++) {
+      users.push(`**${role.members.map(r => r.user)[i].username}**#${role.members.map(r => r.user)[i].discriminator}`);
+    }
 
     message.channel.sendMessage('', {embed: {
       color: 6651610,
@@ -41,12 +44,14 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  else return message.channel.sendMessage('', {embed: {
-    color: 13380644,
-    description: 'The specified role was not found.'
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  else {
+    return message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'The specified role was not found.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.config = {

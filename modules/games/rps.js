@@ -33,16 +33,19 @@ exports.run = (Bastion, message, args) => {
     result = 'Oh damn! It\'s a draw, dude. :confused:';
   }
   else if (userOutcome == 'ROCK') {
-    if (botOutcome == 'SCISSOR')
+    if (botOutcome == 'SCISSOR') {
       result = 'You win. :clap:';
+    }
   }
   else if (userOutcome == 'PAPER') {
-    if (botOutcome == 'ROCK')
+    if (botOutcome == 'ROCK') {
       result = 'You win. :clap:';
+    }
   }
   else if (userOutcome == 'SCISSOR') {
-    if (botOutcome == 'PAPER')
+    if (botOutcome == 'PAPER') {
       result = 'You win. :clap:';
+    }
   }
 
   message.channel.sendMessage('', {embed: {

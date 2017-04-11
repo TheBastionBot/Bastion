@@ -24,7 +24,7 @@ const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
 exports.run = (Bastion, message, args) => {
-  if(!activeChannels.includes(message.channel.id)) {
+  if (!activeChannels.includes(message.channel.id)) {
     activeChannels.push(message.channel.id);
 
     message.channel.sendMessage('', {embed: {

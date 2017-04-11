@@ -20,13 +20,20 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first()))
-    if (/^[0-9]{18}$/.test(args[0])) channel = message.guild.channels.get(args[0]);
+  if (!(channel = message.mentions.channels.first())) {
+    if (/^[0-9]{18}$/.test(args[0])) {
+      channel = message.guild.channels.get(args[0]);
+    }
     else channel = message.channel;
+  }
 
   if (channel) {
-    if (channel.type == 'text') title = 'Text channel Info';
-    else title = 'Voice channel Info';
+    if (channel.type == 'text') {
+      title = 'Text channel Info';
+    }
+    else {
+      title = 'Voice channel Info';
+    }
     message.channel.sendMessage('', {embed: {
       color: 6651610,
       title: title,
@@ -61,12 +68,14 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  else return message.channel.sendMessage('', {embed: {
-    color: 13380644,
-    description: `No channel found with ID: **${args[0]}**`
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  else {
+    return message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: `No channel found with ID: **${args[0]}**`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.config = {

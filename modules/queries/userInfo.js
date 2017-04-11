@@ -20,26 +20,36 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(user = message.mentions.users.first())) user = message.author;
-  if (!(nick = message.guild.members.get(user.id).nickname)) nick = "-";
+  if (!(user = message.mentions.users.first())) {
+    user = message.author;
+  }
+  if (!(nick = message.guild.members.get(user.id).nickname)) {
+    nick = "-";
+  }
   let status = user.presence.status;
   if (status == "online") {
     status = "Online";
-  } else if (status == "idle") {
+  }
+  else if (status == "idle") {
     status = "Idle";
-  } else if (status == "dnd") {
+  }
+  else if (status == "dnd") {
     status = "Do Not Disturb";
-  } else {
+  }
+  else {
     status = "Invisible";
   }
   let isStream = 'Current Game';
-  if (user.presence.game && user.presence.game.streaming)
+  if (user.presence.game && user.presence.game.streaming) {
     isStream = 'Current Stream';
+  }
   if (user.presence.game == null) {
     game = '-';
-  } else if (user.presence.game.streaming) {
+  }
+  else if (user.presence.game.streaming) {
     game = `[${user.presence.game.name}](${user.presence.game.url})`;
-  } else {
+  }
+  else {
     game = user.presence.game.name;
   }
   let roles = message.guild.members.get(user.id).roles.map(r=>r.name).slice(1).join("\n");

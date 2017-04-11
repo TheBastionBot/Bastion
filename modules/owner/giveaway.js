@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
   if (isNaN(args = parseInt(args[0])) || args < 0) return;
 
-  if(!activeChannels.includes(message.channel.id)) {
+  if (!activeChannels.includes(message.channel.id)) {
     let reactions = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'];
     let reaction = reactions[getRandomInt(0, reactions.length-1)]
     message.channel.sendMessage('', {embed: {
@@ -52,17 +52,21 @@ exports.run = (Bastion, message, args) => {
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
-        if (msg.reactions.get(reaction)) winners = msg.reactions.get(reaction).users.map(u => u.id);
+        if (msg.reactions.get(reaction)) {
+          winners = msg.reactions.get(reaction).users.map(u => u.id);
+        }
         winners.forEach((user, i) => {
           sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
-            if (!receiver)
+            if (!receiver) {
               sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args]).catch(e => {
                 Bastion.log.error(e.stack);
               });
-            else
+            }
+            else {
               sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args} WHERE userID=${user}`).catch(e => {
                 Bastion.log.error(e.stack);
               });
+            }
           }).then(() => {
             Bastion.users.get(user).sendMessage('', {embed: {
               color: 5088314,

@@ -29,7 +29,9 @@ exports.run = (Bastion, message, args) => {
   message.channel.fetchMessages({
     limit: amount
   }).then(msgs => {
-    if (user) msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, amount);
+    if (user) {
+      msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, amount);
+    }
     message.channel.bulkDelete(msgs).catch(e => {
       Bastion.log.error(e.stack);
     });

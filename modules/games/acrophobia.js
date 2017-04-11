@@ -20,19 +20,20 @@
  */
 
 const getRandomInt = require('../../functions/getRandomInt');
-let activeChannels = new Object();
+let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
-  if(!activeChannels.hasOwnProperty(message.channel.id)) {
-    activeChannels[message.channel.id] = new Object();
-    activeChannels[message.channel.id].usersSubmitted = new Array();
-    activeChannels[message.channel.id].usersVoted = new Array();
+  if (!activeChannels.hasOwnProperty(message.channel.id)) {
+    activeChannels[message.channel.id] = {};
+    activeChannels[message.channel.id].usersSubmitted = [];
+    activeChannels[message.channel.id].usersVoted = [];
 
     let charPool = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     let acroLen = getRandomInt(2, 5);
     let acronym = [];
-    for (let i = 0; i < acroLen; i++)
+    for (let i = 0; i < acroLen; i++) {
       acronym.push(charPool[getRandomInt(0, charPool.length - 1)]);
+    }
 
     message.channel.sendMessage('', {embed: {
       color: 5088314,
@@ -78,8 +79,9 @@ exports.run = (Bastion, message, args) => {
         }
         else {
           let submissions = [];
-          for (let i = 0; i < collection.size; i++)
+          for (let i = 0; i < collection.size; i++) {
             submissions.push(`**${i+1}.** ${collection.map(a => a.content)[i]}`);
+          }
           msg.channel.sendMessage('', {embed: {
             color: 5088314,
             title: 'Acrophobia',
@@ -187,8 +189,10 @@ exports.help = {
 };
 
 function matchAcronym(charPool, strArr) {
-  for (let i = 0; i < charPool.length; i++)
-    if (charPool[i] != strArr[i].charAt(0).toUpperCase())
+  for (let i = 0; i < charPool.length; i++) {
+    if (charPool[i] != strArr[i].charAt(0).toUpperCase()) {
       return false;
+    }
+  }
   return true;
 };

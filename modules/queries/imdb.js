@@ -23,12 +23,14 @@ const imdb = require('imdb-api');
 
 exports.run = (Bastion, message, args) => {
   imdb.get(args.join(' '), (err, movie) => {
-    if(err) return message.channel.sendMessage('', {embed: {
-      color: 13380644,
-      description: `No movie or TV series found with the name **${args.join(' ')}**. Please check the name and try again. Type \`${Bastion.config.prefix}help imdb\` for help on imdb command.`
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (err) {
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: `No movie or TV series found with the name **${args.join(' ')}**. Please check the name and try again. Type \`${Bastion.config.prefix}help imdb\` for help on imdb command.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     message.channel.sendMessage('', {embed: {
       color: 6651610,
       title: movie.series ? `${movie.title} (TV Series)` : movie.title,

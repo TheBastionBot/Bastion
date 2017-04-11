@@ -26,8 +26,9 @@ exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   args = args.join(' ');
-  for (let i = 0; i < Object.keys(flipText).length; i++)
+  for (let i = 0; i < Object.keys(flipText).length; i++) {
     args = args.replace(Object.keys(flipText)[i], flipText[Object.keys(flipText)[i]]);
+  }
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,

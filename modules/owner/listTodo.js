@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
-    if (!todo || todo.list == '[]')
+    if (!todo || todo.list == '[]') {
       message.channel.sendMessage('', {embed: {
         color: 13380644,
         title: 'Todo list not found',
@@ -34,12 +34,17 @@ exports.run = (Bastion, message, args) => {
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
+    }
     else {
       let list = JSON.parse(todo.list);
       list = list.map((l, i) => `**${i+1}.**  ${l}`);
       let i = 0;
-      if (isNaN(args = parseInt(args[0]))) i = 1;
-      else i = (args > 0 && args < list.length/10+1) ? args : 1;
+      if (isNaN(args = parseInt(args[0]))) {
+        i = 1;
+      }
+      else {
+        i = (args > 0 && args < list.length/10+1) ? args : 1;
+      }
       i = i - 1;
       message.channel.sendMessage('', {embed: {
         color: 6651610,

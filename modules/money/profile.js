@@ -23,17 +23,27 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!(args = message.mentions.users.first())) args = message.author;
+  if (!(args = message.mentions.users.first())) {
+    args = message.author;
+  }
   sql.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).then(profile => {
     if (!profile) {
-      if (args == message.author) return message.channel.sendMessage('', {embed: {
-        color: 6651610,
-        description: `Your profile is now created, <@${args.id}>`
-      }});
-      else return message.channel.sendMessage('', {embed: {
-        color: 6651610,
-        description: `<@${args.id}>'s profile is not yet created.`
-      }});
+      if (args == message.author) {
+        return message.channel.sendMessage('', {embed: {
+          color: 6651610,
+          description: `Your profile is now created, <@${args.id}>`
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
+      else {
+        return message.channel.sendMessage('', {embed: {
+          color: 6651610,
+          description: `<@${args.id}>'s profile is not yet created.`
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
     }
     message.channel.sendMessage('', {embed: {
       color: 6651610,

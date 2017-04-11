@@ -22,7 +22,7 @@
 const color = require('chalk');
 
 module.exports = Bastion => {
-  Bastion.log = new Object();
+  Bastion.log = {};
 
   Bastion.log.warn = msg => {
     console.log(color.yellow('[WARNING]'));
@@ -34,7 +34,6 @@ module.exports = Bastion => {
     console.log(msg);
     console.log(color.red('[/ERROR]'));
   };
-
   Bastion.log.msg = msg => {
     console.log(color.cyan('[Bastion]: ') + `${msg}`);
   }

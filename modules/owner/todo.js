@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
-    if (!todo)
+    if (!todo) {
       sql.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, `["${args.join(' ')}"]`]).then(() => {
         message.channel.sendMessage('', {embed: {
           color: 5088314,
@@ -39,6 +39,7 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
+    }
     else {
       let list = JSON.parse(todo.list);
       list.push(args.join(' '));

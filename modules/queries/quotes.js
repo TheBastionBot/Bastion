@@ -29,10 +29,14 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     let n = [];
-    for (let i = 1; i <= Object.keys(quotes).length; i++)
-      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) != -1)
+    for (let i = 1; i <= Object.keys(quotes).length; i++) {
+      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) != -1) {
         n.push(i);
-    if (n.length > 0) index = n[Math.floor(Math.random()*n.length)];
+      }
+    }
+    if (n.length > 0) {
+      index = n[Math.floor(Math.random()*n.length)];
+    }
   }
 
   message.channel.sendMessage('', {embed: {

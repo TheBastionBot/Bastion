@@ -23,7 +23,9 @@ const capture = require('webshot');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
-  if (!/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(args[0])) return console.log('invalid url');;
+  if (!/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(args[0])) {
+    return console.log('invalid url');
+  }
   let options = {
     windowSize: {
       width: 1366,
@@ -37,24 +39,28 @@ exports.run = (Bastion, message, args) => {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A'
   };
   capture(args[0], options, function (err, renderStream) {
-    if (err) return message.channel.sendMessage('', {embed: {
-      color: 13380644,
-      description: `Bastion can't find the server at **${args[0]}**.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may've been timed out, try again later.`
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (err) {
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: `Bastion can't find the server at **${args[0]}**.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may've been timed out, try again later.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     let imageBuffers = [];
     renderStream.on('data', function (data) {
       imageBuffers.push(data);
     });
     renderStream.on('end', function () {
       let imageBuffer = Buffer.concat(imageBuffers);
-      if (imageBuffer.length > 0) message.channel.sendMessage('', {file: {
-        attachment: imageBuffer,
-        name: 'capture.jpg'
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      if (imageBuffer.length > 0) {
+        message.channel.sendMessage('', {file: {
+          attachment: imageBuffer,
+          name: 'capture.jpg'
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
     });
   });
 };

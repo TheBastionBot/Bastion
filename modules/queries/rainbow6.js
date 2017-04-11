@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
         inline: true
       }
     ];
-    if (data.player.stats.ranked.has_played)
+    if (data.player.stats.ranked.has_played) {
       stats.push(
         {
           name: 'Ranked',
@@ -81,14 +81,16 @@ exports.run = (Bastion, message, args) => {
           inline: true
         }
       );
-    else
+    }
+    else {
       stats.push(
         {
           name: 'Ranked',
           value: `${args[1]} has not played any Ranked game.`
         }
       );
-    if (data.player.stats.casual.has_played)
+    }
+    if (data.player.stats.casual.has_played) {
       stats.push(
         {
           name: 'Casual',
@@ -125,13 +127,15 @@ exports.run = (Bastion, message, args) => {
           inline: true
         }
       );
-    else
+    }
+    else {
       stats.push(
         {
           name: 'Casual',
           value: `${args[1]} has not played any Casual game.`
         }
       );
+    }
     message.channel.sendMessage('', {embed: {
       color: 6651610,
       title: 'Rainbow 6',

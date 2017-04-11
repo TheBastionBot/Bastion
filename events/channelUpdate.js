@@ -29,6 +29,7 @@ module.exports = (oldChannel, newChannel) => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newChannel.guild.id}`).then(row => {
     if (!row) return;
     if (row.log == 'false') return;
+
     newChannel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
       color: 5088314,
       title: 'Channel Name Changed',

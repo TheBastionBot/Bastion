@@ -21,7 +21,9 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
-  if (!(role = message.mentions.roles.first())) role = message.guild.roles.find('name', args.join(' '));
+  if (!(role = message.mentions.roles.first())) {
+    role = message.guild.roles.find('name', args.join(' '));
+  }
 
   if (role) {
     message.channel.sendMessage('', {embed: {
@@ -66,12 +68,14 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  else return message.channel.sendMessage('', {embed: {
-    color: 13380644,
-    description: 'The specified role was not found.'
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  else {
+    return message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'The specified role was not found.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.config = {

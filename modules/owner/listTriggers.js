@@ -26,17 +26,23 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.all('SELECT trigger FROM triggers').then(triggers => {
-    if (triggers == '') return message.channel.sendMessage('', {embed: {
-      color: 13380644,
-      description: 'You don\'t have any triggers.',
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (triggers == '') {
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: 'You don\'t have any triggers.',
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
 
     triggers = triggers.map((t, i) => `${i+1}. ${t.trigger}`);
     let i = 0;
-    if (isNaN(args = parseInt(args[0]))) i = 1;
-    else i = (args > 0 && args < triggers.length/10+1) ? args : 1;
+    if (isNaN(args = parseInt(args[0]))) {
+      i = 1;
+    }
+    else {
+      i = (args > 0 && args < triggers.length/10+1) ? args : 1;
+    }
     i = i - 1;
     message.channel.sendMessage('', {embed: {
       color: 6651610,

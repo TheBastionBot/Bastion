@@ -28,22 +28,31 @@ exports.run = (Bastion, message, args) => {
   if (isNaN(args[0] = parseInt(args[0])) || args[0] < 1) return;
 
   if (!((user = message.mentions.users.first()) && (user = user.id))) {
-    if (/^[0-9]{18}$/.test(args[1])) user = args[1];
-    else return message.channel.sendMessage('', {embed: {
-      color: 13380644,
-      description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (/^[0-9]{18}$/.test(args[1])) {
+      user = args[1];
+    }
+    else {
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   }
   let reason;
-  if (args[2]) reason = args.slice(2).join(' ');
-  else reason = 'No reason given.';
+  if (args[2]) {
+    reason = args.slice(2).join(' ');
+  }
+  else {
+    reason = 'No reason given.';
+  }
   sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(profile => {
-    if (profile)
+    if (profile) {
       sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)-args[0]} WHERE userID=${user}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+    }
   }).then(() => {
     message.channel.sendMessage('', {embed: {
       color: 13380644,

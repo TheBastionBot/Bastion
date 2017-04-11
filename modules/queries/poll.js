@@ -19,23 +19,24 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-let activeChannels = new Object();
+let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
   args = args.join(' ').split(';');
 
-  if(!activeChannels.hasOwnProperty(message.channel.id)) {
-    activeChannels[message.channel.id] = new Object();
-    activeChannels[message.channel.id].usersVoted = new Array();
+  if (!activeChannels.hasOwnProperty(message.channel.id)) {
+    activeChannels[message.channel.id] = {};
+    activeChannels[message.channel.id].usersVoted = [];
 
     let answers = [];
-    for (let i = 1; i < args.length; i++)
+    for (let i = 1; i < args.length; i++) {
       answers.push({
         name: `${i}.`,
         value: `${args[i]}`,
         inline: true
       });
+    }
 
     message.channel.sendMessage('', {embed: {
       color: 5088314,
@@ -51,7 +52,9 @@ exports.run = (Bastion, message, args) => {
         { time: 60 * 60 * 1000 }
       );
       votes.on('message', (msg, votes) => {
-        if (msg.content == `${Bastion.config.prefix}endpoll`) return votes.stop();
+        if (msg.content == `${Bastion.config.prefix}endpoll`) {
+          return votes.stop();
+        }
         else {
           msg.delete().catch(e => {
             Bastion.log.error(e.stack);
@@ -71,7 +74,9 @@ exports.run = (Bastion, message, args) => {
       votes.on('end', (pollRes, reason) => {
         total = pollRes.size;
         pollRes = pollRes.map(r => r.content);
-        if (reason == 'user') pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
+        if (reason == 'user') {
+          pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
+        }
         if (pollRes.length == 0) return message.channel.sendMessage('', {embed: {
           color: 13380644,
           title: 'Poll Ended',
@@ -83,11 +88,13 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
 
-        for (let i = args.length - 1; i > 0; i--)
+        for (let i = args.length - 1; i > 0; i--) {
           pollRes.unshift(i);
+        }
         let count = {};
-        for (let i = 0; i < pollRes.length; i++)
+        for (let i = 0; i < pollRes.length; i++) {
           count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]]+1 : 1;
+        }
         let result = [];
         for (let i = 1; i < args.length; i++) {
           result.push({

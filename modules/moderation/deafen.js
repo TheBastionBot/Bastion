@@ -25,7 +25,9 @@ exports.run = (Bastion, message, args) => {
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
 
   let reason = args.slice(1).join(' ');
-  if (reason.length < 1) reason = 'No reason given';
+  if (reason.length < 1) {
+    reason = 'No reason given';
+  }
 
   message.guild.members.get(user.id).setDeaf(true).then(() => {
     message.channel.sendMessage('', {embed: {

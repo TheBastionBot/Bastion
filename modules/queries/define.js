@@ -23,13 +23,16 @@ const wd = require('word-definition');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) return;
-  for (let i = 0; i < args.length - 1; i++)
+  for (let i = 0; i < args.length - 1; i++) {
     args[i] = args[i].toLowerCase();
+  }
   if (!/^(en|fr|de)$/.test(lang=args[0])) {
     lang = 'en';
     args = args.join(' ');
   }
-  else args = args.slice(1).join(' ');
+  else {
+    args = args.slice(1).join(' ');
+  }
   wd.getDef(args, lang, null, function(data) {
     let embed = {};
     if (data.err) {
