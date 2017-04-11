@@ -19,8 +19,6 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const roleData = require('../../functions/roleData');
-
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
@@ -90,3 +88,11 @@ exports.help = {
   usage: 'createrole [#hex-color-code] [Role Name]',
   example: ['createrole #dc143c Role Name', 'createrole #dc143c', 'createrole Role Name', 'createrole']
 };
+
+function roleData(name = 'new role', color = '#000000') {
+  let data = {
+    name: name,
+    color: color
+  };
+  return data;
+}
