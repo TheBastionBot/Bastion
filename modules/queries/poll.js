@@ -127,7 +127,6 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
-
   }
   else {
     message.channel.sendMessage('', {embed: {

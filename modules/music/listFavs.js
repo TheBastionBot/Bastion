@@ -32,12 +32,14 @@ exports.run = (Bastion, message, args) => {
   } catch(e) {
     Bastion.log.error(e);
   }
-  if (songs.length == 0) return message.channel.sendMessage('', {embed: {
-    color: 13380644,
-    description: 'You haven\'t added any favourite songs yet.'
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  if (songs.length == 0) {
+    return message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'You haven\'t added any favourite songs yet.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   let favs = songs.map((e, i) => `${i+1}. ${e}`);
   let i = 0;
