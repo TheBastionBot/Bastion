@@ -6,7 +6,8 @@
     "Better module categories",
     "triggers now support multiple responses with same trigger",
     "Usage is shown to the user, if command's syntax is wrong",
-    "Fixed some minor issues"
+    "Fixed some minor issues",
+    "Modified some string"
   ],
   "added": [],
   "removed": [

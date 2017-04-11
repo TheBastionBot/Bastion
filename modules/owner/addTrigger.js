@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
         value: args[0]
       },
       {
-        name: 'Message',
+        name: 'Response',
         value: args[1]
       }
     ]
