@@ -22,41 +22,55 @@
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  if (args.length >= 3) {
-    args = args.join(' ').split(' - ');
-    let oldName = args[0];
-    let newName = args[1];
-    if (!(role = message.guild.roles.find('name', oldName))) return Bastion.log.info('No role found with that name.');
-
-    role.setName(newName).then(() => {
-      message.channel.sendMessage('', {embed: {
-        color: 5088314,
-        title: 'Role Renamed',
-        fields: [
-          {
-            name: 'From',
-            value: oldName,
-            inline: true
-          },
-          {
-            name: 'To',
-            value: newName,
-            inline: true
-          }
-        ]
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }).catch(e => {
+  if (args.length < 3) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
       Bastion.log.error(e.stack);
-      message.channel.sendMessage('', {embed: {
-        color: 13380644,
-        description: 'I don\'t have enough permission to do that operation.'
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
     });
   }
+  args = args.join(' ').split(' - ');
+  let oldName = args[0];
+  let newName = args[1];
+  if (!(role = message.guild.roles.find('name', oldName))) {
+    return message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'No role found with that name.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
+  role.setName(newName).then(() => {
+    message.channel.sendMessage('', {embed: {
+      color: 5088314,
+      title: 'Role Renamed',
+      fields: [
+        {
+          name: 'From',
+          value: oldName,
+          inline: true
+        },
+        {
+          name: 'To',
+          value: newName,
+          inline: true
+        }
+      ]
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
+    Bastion.log.error(e.stack);
+    message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'I don\'t have enough permission to do that operation.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  });
 };
 
 exports.config = {

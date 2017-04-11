@@ -25,7 +25,14 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (args[0] !== undefined && args[0].indexOf('#') == 0) {
-    if (args[0].length != 7) return;
+    if (args[0].length != 7) {
+      return message.channel.sendMessage('', {
+        color: 13380644,
+        description: 'Role color should be a 6 digit `HEX` color code.'
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     data = args[1] === undefined ? data = roleData('new role', args[0]) : roleData(args.slice(1).join(' '), args[0]);
   }
   else {

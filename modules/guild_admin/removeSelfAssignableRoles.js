@@ -24,11 +24,19 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
-  if (!(index = parseInt(args[0])) || index <= 0) return;
+  if (!(index = parseInt(args[0])) || index <= 0) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   index -= 1;
 
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (!row) {  
+    if (!row) {
       message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: 'No self assignable roles found.'
@@ -38,7 +46,14 @@ exports.run = (Bastion, message, args) => {
     }
     else {
       let roles = JSON.parse(row.selfAssignableRoles);
-      if (index >= roles.length) return;
+      if (index >= roles.length) {
+        return message.channel.sendMessage('', {embed: {
+          color: 13380644,
+          description: 'That index was not found.'
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
       let deletedRoleID = roles[parseInt(args[0]) - 1];
       roles.splice(parseInt(args[0]) - 1, 1);
       sql.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {

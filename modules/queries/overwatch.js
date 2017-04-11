@@ -22,11 +22,35 @@
 const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1) return;
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   args[0] = args[0].toLowerCase();
-  if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) return;
-  if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) return;
+  if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+  if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   ow.getOverall('pc', args[0], args[1].replace('#', '-')).then(data => {
     let stats = [

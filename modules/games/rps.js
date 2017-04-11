@@ -26,7 +26,15 @@ exports.run = (Bastion, message, args) => {
     'SCISSOR'
   ];
   let userOutcome = args.join(' ').toUpperCase();
-  if (outcomes.indexOf(userOutcome) < 0) return;
+  if (outcomes.indexOf(userOutcome) < 0) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   let botOutcome = outcomes[Math.floor(Math.random()*outcomes.length)];
   let result = 'I win! :yum:';
   if (userOutcome == botOutcome) {

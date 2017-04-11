@@ -22,7 +22,15 @@
 const convert = require('color-convert');
 
 exports.run = (Bastion, message, args) => {
-  if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) return;
+  if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   message.channel.sendMessage('', {embed: {
     color: 6651610,

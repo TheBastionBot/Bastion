@@ -22,7 +22,15 @@
 const translate = require('google-translate-api');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 2) return;
+  if (args.length < 2) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   translate(args.slice(1).join(' '), {to: args[0]}).then(res => {
     message.channel.sendMessage('', {embed: {
       color: 6651610,

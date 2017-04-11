@@ -21,7 +21,15 @@
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
-  if (args.length < 1) return;
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   if (!(role = message.mentions.roles.first())) {
     role = message.guild.roles.find('name', args.join(' '));

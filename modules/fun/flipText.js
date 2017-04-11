@@ -23,7 +23,15 @@ const flipText = require('../../data/flipText.json');
 const reverseString = require('../../functions/reverseString');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1) return;
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   args = args.join(' ');
   for (let i = 0; i < Object.keys(flipText).length; i++) {

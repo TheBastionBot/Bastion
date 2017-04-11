@@ -20,7 +20,15 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 2 || !args.join(' ').endsWith('?')) return;
+  if (args.length < 2 || !args.join(' ').endsWith('?')) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   let outcomes = [
   	'It\'s certain',
   	'It\'s decidedly so',

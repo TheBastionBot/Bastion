@@ -22,7 +22,15 @@
 const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1) return;
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   weather.find({search: args.join(' '), degreeType: 'C'}, function(err, result) {
     if (err) {

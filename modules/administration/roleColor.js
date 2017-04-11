@@ -23,9 +23,21 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   if (args[0] !== undefined && args[0].indexOf('#') == 0 && args[1] !== undefined) {
-    if (args[0].length != 7) return;
+    if (args[0].length != 7) {
+      return message.channel.sendMessage('', {
+        color: 13380644,
+        description: 'Role color should be a 6 digit `HEX` color code.'
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     if (!(role = message.guild.roles.find('name', args.slice(1).join(' ')))) {
-      return Bastion.log.info('No role found with that name.');
+      return message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: 'No role found with that name.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }
 
     role.setColor(args[0]).then(() => {

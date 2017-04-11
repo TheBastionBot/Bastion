@@ -24,7 +24,15 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
-  if (!(index = parseInt(args[0])) || index <= 0) return;
+  if (!(index = parseInt(args[0])) || index <= 0) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   index -= 1;
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
@@ -39,7 +47,14 @@ exports.run = (Bastion, message, args) => {
     }
     else {
       let list = JSON.parse(todo.list);
-      if (index >= list.length) return;
+      if (index >= list.length) {
+        return message.channel.sendMessage('', {embed: {
+          color: 13380644,
+          description: 'That index was not found.'
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);
       sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {

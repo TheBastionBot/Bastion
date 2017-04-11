@@ -22,9 +22,22 @@
 const capture = require('webshot');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1) return;
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: 15451167,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   if (!/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(args[0])) {
-    return console.log('invalid url');
+    return message.channel.sendMessage('', {embed: {
+      color: 13380644,
+      description: 'Invalid URL'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
   let options = {
     windowSize: {
