@@ -72,6 +72,6 @@ exports.help = {
   name: 'magic8ball',
   description: 'Ask the Magic 8-Ball a polar (yes/no) question.',
   permission: '',
-  usage: 'magic8ball <Question?>',
+  usage: 'magic8ball <Question>?',
   example: ['magic8ball Do I need a new lease on life?']
 };
