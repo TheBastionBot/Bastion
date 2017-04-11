@@ -5,7 +5,8 @@
     "Best practices",
     "Better module categories",
     "triggers now support multiple responses with same trigger",
-    "Usage is shown to the user, if command's syntax is wrong"
+    "Usage is shown to the user, if command's syntax is wrong",
+    "Fixed some minor issues"
   ],
   "added": [],
   "removed": [

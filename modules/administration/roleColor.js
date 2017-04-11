@@ -24,10 +24,10 @@ exports.run = (Bastion, message, args) => {
 
   if (args[0] !== undefined && args[0].indexOf('#') == 0 && args[1] !== undefined) {
     if (args[0].length != 7) {
-      return message.channel.sendMessage('', {
+      return message.channel.sendMessage('', {embed: {
         color: 13380644,
         description: 'Role color should be a 6 digit `HEX` color code.'
-      }).catch(e => {
+      }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
