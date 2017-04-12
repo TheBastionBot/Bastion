@@ -85,16 +85,18 @@ exports.run = (Bastion, message, args) => {
         if (reason == 'user') {
           pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
         }
-        if (pollRes.length == 0) return message.channel.sendMessage('', {embed: {
-          color: 13380644,
-          title: 'Poll Ended',
-          description: 'Unfortunately, no votes were given.'
-        }}).then(() => {
-          msg.delete();
-          delete activeChannels[message.channel.id];
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        if (pollRes.length == 0) {
+          return message.channel.sendMessage('', {embed: {
+            color: 13380644,
+            title: 'Poll Ended',
+            description: 'Unfortunately, no votes were given.'
+          }}).then(() => {
+            msg.delete();
+            delete activeChannels[message.channel.id];
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
 
         for (let i = args.length - 1; i > 0; i--) {
           pollRes.unshift(i);
