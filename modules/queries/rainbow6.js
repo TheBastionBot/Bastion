@@ -34,18 +34,16 @@ exports.run = (Bastion, message, args) => {
   }
   if (!/^(uplay|ps4|xone)$/.test(args[0] = args[0].toLowerCase())) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      color: 13380644,
+      description: `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      color: 13380644,
+      description: `**${args[1]}** is not a valid username.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });

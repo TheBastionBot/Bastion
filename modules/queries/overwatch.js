@@ -35,18 +35,16 @@ exports.run = (Bastion, message, args) => {
   args[0] = args[0].toLowerCase();
   if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      color: 13380644,
+      description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      color: 13380644,
+      description: `**${args[1]}** is not a valid BattleTag.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
