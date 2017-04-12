@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   }
   user = `${user.username}#${user.discriminator}`;
   let userHash = 0;
-  for (let i=0; i < user.length; i++) {
+  for (let i = 0; i < user.length; i++) {
     userHash += parseInt(user[i].charCodeAt(0));
   }
   let crimeCoefficient = Math.round(parseFloat('0.' + String(userHash)) * 500) + 1;

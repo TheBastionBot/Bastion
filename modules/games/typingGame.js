@@ -61,7 +61,7 @@ exports.run = (Bastion, message, args) => {
             title: 'Typing Game',
             description: result
           }}).then(() => {
-            activeChannels=activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1)
+            activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1);
           }).catch(e => {
             Bastion.log.error(e.stack);
           });

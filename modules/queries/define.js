@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
   for (let i = 0; i < args.length - 1; i++) {
     args[i] = args[i].toLowerCase();
   }
-  if (!/^(en|fr|de)$/.test(lang=args[0])) {
+  if (!/^(en|fr|de)$/.test(lang = args[0])) {
     lang = 'en';
     args = args.join(' ');
   }
