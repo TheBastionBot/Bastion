@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite')
 
 exports.run = (Bastion, message, args) => {
-  if (Bastion.credentials.ownerId.indexOf(message.author.id) < 0) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
       color: 15451167,
@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
       blUsers = blUsers.map(u => u.userID)
       if (/^(add|\+)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
-          if (blUsers.indexOf(user[i]) >= 0) continue;
+          if (blUsers.includes(user[i])) continue;
           sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [user[i]]).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -54,7 +54,7 @@ exports.run = (Bastion, message, args) => {
       }
       else if (/^(remove|rem|-)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
-          if (blUsers.indexOf(user[i]) < 0) continue;
+          if (!blUsers.includes(user[i])) continue;
           sql.run(`DELETE FROM blacklistedUsers where userID=${user[i]}`).catch(e => {
             Bastion.log.error(e.stack);
           });

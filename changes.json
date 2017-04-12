@@ -2,7 +2,6 @@
   "date": "April 12, 2017",
   "updated": [
     "Fixed permission issues in `skip`",
-    "Best practices",
     "Better module categories",
     "triggers now support multiple responses with same trigger",
     "Usage is shown to the user, if command's syntax is wrong",
@@ -11,6 +10,8 @@
     "`echo` doesn't accept empty strings anymore",
     "`overwatch` and `rainbow6` commands shows some useful errors to the user when wrong input is given",
     "`translate` now shows if the language is not supported",
+    "Best practices",
+    "Some command improvements",
     "Fixed some minor issues",
     "Modified some string"
   ],

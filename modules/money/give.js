@@ -46,7 +46,8 @@ exports.run = (Bastion, message, args) => {
       });
     }
   }
-  if (Bastion.credentials.ownerId.indexOf(message.author.id) > -1) {
+
+  if (Bastion.credentials.ownerId.includes(message.author.id)) {
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
       if (!receiver) {
         sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {

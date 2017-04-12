@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
     'SCISSOR'
   ];
   let userOutcome = args.join(' ').toUpperCase();
-  if (outcomes.indexOf(userOutcome) < 0) {
+  if (!outcomes.includes(userOutcome)) {
     return message.channel.sendMessage('', {embed: {
       color: 15451167,
       title: 'Usage',

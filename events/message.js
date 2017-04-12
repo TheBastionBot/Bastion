@@ -118,7 +118,7 @@ module.exports = message => {
   });
 
   sql.all('SELECT userID FROM blacklistedUsers').then(users => {
-    if (users.map(u => u.userID).indexOf(message.author.id) > -1) return;
+    if (users.map(u => u.userID).includes(message.author.id)) return;
 
     sql.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (!profile) {

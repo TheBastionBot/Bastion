@@ -259,7 +259,7 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
+              if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               if (!message.guild.voiceConnection.speaking) return;
               textChannel.sendMessage('', {embed: {
                 color: 15451167,
@@ -317,7 +317,7 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
+              if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               if (message.guild.voiceConnection.speaking) return;
               textChannel.sendMessage('', {embed: {
                 color: 5088314,
@@ -334,7 +334,7 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) {
+              if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) {
                 if (!queue[message.guild.id].skipVotes.includes(msg.author.id)) {
                   queue[message.guild.id].skipVotes.push(msg.author.id);
                 }
@@ -371,7 +371,7 @@ exports.run = (Bastion, message, args) => {
               }
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
+              if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               textChannel.sendMessage('', {embed: {
                 color: 13380644,
                 description: 'Stopped Playback.'
@@ -386,7 +386,7 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
-              if (Bastion.credentials.ownerId.indexOf(msg.author.id) < 0 && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
+              if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               param = msg.content.split(' ').slice(1);
               if (param[0] == '+') {
                 dispatcher.setVolume((dispatcher.volume*50 + 2)/50);

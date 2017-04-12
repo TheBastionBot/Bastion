@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   sql.all('SELECT userID, xp, level FROM profiles ORDER BY level DESC, xp DESC LIMIT 10').then(profiles => {
     let fields = [];
     for (let i = 0; i < profiles.length; i++) {
-      user = message.guild.members.map(m => m.id).indexOf(profiles[i].userID) > -1 ? `${message.guild.members.get(profiles[i].userID).user.username}#${message.guild.members.get(profiles[i].userID).user.discriminator}` : profiles[i].userID
+      user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? `${message.guild.members.get(profiles[i].userID).user.username}#${message.guild.members.get(profiles[i].userID).user.discriminator}` : profiles[i].userID
       fields.push({
         name: `${i+1}. ${user}`,
         value: `**Level:** ${profiles[i].level}\t**Experience Points:** ${profiles[i].xp}`
