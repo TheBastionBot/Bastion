@@ -89,8 +89,7 @@ module.exports = message => {
 
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.filterInvite == 'true' && !message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) {
-      let pattern = new RegExp('(https://)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)/?([a-z0-9-.]+)?', 'i');
-      if (pattern.test(message.content)) {
+      if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
         message.delete().catch(e => {
           message.client.log.error(e.stack);
         });
