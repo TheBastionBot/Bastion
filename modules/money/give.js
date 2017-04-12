@@ -23,16 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 2) {
-    return message.channel.sendMessage('', {embed: {
-      color: 15451167,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
-  }
-  if (isNaN(args[0] = parseInt(args[0])) || args[0] < 1) {
+  if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     return message.channel.sendMessage('', {embed: {
       color: 15451167,
       title: 'Usage',
