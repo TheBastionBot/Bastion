@@ -10,6 +10,7 @@
     "`echo` doesn't accept empty strings anymore",
     "`overwatch` and `rainbow6` commands shows some useful errors to the user when wrong input is given",
     "`translate` now shows if the language is not supported",
+    "`shutdown` command now asks for conformation before shutting down",
     "Best practices",
     "Some command improvements",
     "Fixed some minor issues",
