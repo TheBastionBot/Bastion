@@ -44,6 +44,14 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
+    if (e.stack.includes('not supported')) {
+      message.channel.sendMessage('', {embed: {
+        color: 13380644,
+        description: `The language **${args[0].toUpperCase()}** is not supported.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   });
 };
 

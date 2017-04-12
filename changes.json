@@ -10,6 +10,7 @@
     "Fixed channel topic issues",
     "`echo` doesn't accept empty strings anymore",
     "`overwatch` and `rainbow6` commands shows some useful errors to the user when wrong input is given",
+    "`translate` now shows if the language is not supported",
     "Fixed some minor issues",
     "Modified some string"
   ],
