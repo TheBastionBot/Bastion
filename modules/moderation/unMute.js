@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
   }
   message.guild.members.get(user.id).setMute(false).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       title: 'Unmuted',
       fields: [
         {

@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     description: `*"${quotes[index].quote}"*\n\n**${quotes[index].author}**`,
     footer: {
       text: `Quote: ${index}`

@@ -31,7 +31,7 @@ module.exports = (oldChannel, newChannel) => {
     if (row.log == 'false') return;
 
     newChannel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       title: 'Channel Name Changed',
       fields: [
         {

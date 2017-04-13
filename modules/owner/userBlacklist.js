@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -63,7 +63,7 @@ exports.run = (Bastion, message, args) => {
       }
       else {
         return message.channel.sendMessage('', {embed: {
-          color: 15451167,
+          color: Bastion.colors.yellow,
           title: 'Usage',
           description: `\`${Bastion.config.prefix}${this.help.usage}\``
         }}).catch(e => {
@@ -72,7 +72,7 @@ exports.run = (Bastion, message, args) => {
       }
 
       message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         title: title,
         description: user.join(', ')
       }}).catch(e => {

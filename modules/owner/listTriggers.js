@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   sql.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers == '') {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'You don\'t have any triggers.',
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
     }
     i = i - 1;
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.dark_grey,
       title: 'List of triggers',
       description: triggers.slice(i*10, (i*10)+10).join('\n'),
       footer: {

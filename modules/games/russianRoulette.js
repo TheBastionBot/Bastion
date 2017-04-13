@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
   for (let i = 0; i < args; i++) {
     outcome = `${message.author} ${outcomes[getRandomInt(0, outcomes.length-1)]}`;
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.blue,
       title: `Round ${i + 1}`,
       description: outcome
     }}).catch(e => {

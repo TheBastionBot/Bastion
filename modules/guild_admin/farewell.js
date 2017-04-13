@@ -31,17 +31,19 @@ exports.run = (Bastion, message, args) => {
       sql.run(`UPDATE guildSettings SET farewell='false', farewellChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+      color = Bastion.colors.red;
       farewellStats = 'Farewell Messages are now disabled.';
     }
     else {
       sql.run(`UPDATE guildSettings SET farewell='true', farewellChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+      color = Bastion.colors.green;
       farewellStats = 'Farewell Messages are now enabled in this channel.';
     }
 
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: color,
       description: farewellStats
     }}).catch(e => {
       Bastion.log.error(e.stack);

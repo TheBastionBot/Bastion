@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
     activeChannels.push(message.channel.id);
 
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.blue,
       title: 'Typing Game',
       description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`,
       footer: {
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
     }}).then(msg => {
       let index = getRandomInt(1, Object.keys(typingArticles).length);
       message.channel.sendMessage('', {embed: {
-        color: 6651610,
+        color: Bastion.colors.blue,
         description: typingArticles[index]
       }}).then(() => {
         const collector = message.channel.createCollector(
@@ -49,11 +49,11 @@ exports.run = (Bastion, message, args) => {
         );
         collector.on('end', (collection, reason) => {
           if (reason == 'time') {
-            color = 13380644;
+            color = Bastion.colors.red;
             result = 'Game ended. Unfortunately, no one was able to type the article on time.';
           }
           else {
-            color = 6651610;
+            color = Bastion.colors.blue;
             result = `Game ended. Congratulations ${collection.map(m => m.author)[0]}! You won it.`;
           }
           message.channel.sendMessage('', {embed: {
@@ -75,7 +75,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: `Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.`
     }}).catch(e => {
       Bastion.log.error(e.stack);

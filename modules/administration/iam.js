@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
 
     message.guild.members.get(message.author.id).addRole(role).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 5088314,
+        color: Bastion.colors.green,
         description: `${message.author}, you have been given **${role.name}** role.`,
       }}).then(m => {
         m.delete(10000).catch(e => {
@@ -58,7 +58,7 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e.stack);
       message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'I don\'t have enough permission to do that operation.'
       }}).catch(e => {
         Bastion.log.error(e.stack);

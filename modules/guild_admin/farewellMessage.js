@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     sql.get(`SELECT farewellMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
       message.channel.sendMessage('', {embed: {
-        color: 5088314,
+        color: Bastion.colors.dark_grey,
         title: 'Farewell message:',
         description: guild.farewellMessage
       }}).catch(e => {
@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
     });
 
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       title: 'Farewell message set to:',
       description: args.join(' ')
     }}).catch(e => {

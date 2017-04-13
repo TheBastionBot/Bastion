@@ -30,7 +30,7 @@ module.exports = channel => {
     if (row.log == 'false') return;
 
     channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       title: 'Channel Deleted',
       fields: [
         {

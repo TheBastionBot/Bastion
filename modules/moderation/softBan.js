@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   }
   if (!message.guild.members.get(user.id).bannable) {
     return message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: `I don't have permissions to softban ${user}.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
     }
 
     message.channel.sendMessage('', {embed: {
-      color: 14845440,
+      color: Bastion.colors.orange,
       title: 'Soft-Banned',
       fields: [
         {
@@ -73,7 +73,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
     user.sendMessage('', {embed: {
-      color: 14845440,
+      color: Bastion.colors.orange,
       title: `Soft-Banned from ${message.guild.name} Server`,
       description: `**Reason:** ${reason}`
     }}).catch(e => {
@@ -82,7 +82,7 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e.stack);
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       title: 'Soft-Ban Error',
       description: 'Banned but unable to unban. Please unban the following user.',
       fields: [

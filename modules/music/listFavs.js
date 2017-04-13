@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
   }
   if (songs.length == 0) {
     return message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'You haven\'t added any favourite songs yet.'
     }}).catch(e => {
       Bastion.log.error(e.stack);
@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
   i = i - 1;
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.dark_grey,
     title: 'Favourite songs',
     description: favs.slice(i*10, (i*10)+10).join('\n'),
     footer: {

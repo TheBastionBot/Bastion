@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
   if (roles == '') roles = '-';
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     title: 'User Info',
     fields: [
       {

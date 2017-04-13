@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.channel.sendMessage('', {embed: {
-    color: 11316394,
+    color: Bastion.colors.dark_grey,
     description: args.join(' ')
   }}).catch(e => {
     Bastion.log.error(e.stack);

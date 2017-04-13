@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   if (args[0] !== undefined && args[0].indexOf('#') == 0) {
     if (args[0].length != 7) {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'Role color should be a 6 digit `HEX` color code.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.guild.createRole(data).then(role => message.channel.sendMessage('', {embed: {
-    color: 5088314,
+    color: Bastion.colors.green,
     title: 'Role Created',
     fields: [
       {

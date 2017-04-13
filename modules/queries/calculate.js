@@ -24,7 +24,7 @@ const mathjs = require('mathjs');
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -34,13 +34,13 @@ exports.run = (Bastion, message, args) => {
 
   try {
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       title: 'Result:',
       description: mathjs.eval(args.join(' ')).toFixed(2)
     }});
   } catch(err) {
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'Invalid mathematical expression!'
     }}).catch(e => {
       Bastion.log.error(e.stack);

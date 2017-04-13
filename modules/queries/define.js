@@ -24,7 +24,7 @@ const wd = require('word-definition');
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -45,13 +45,13 @@ exports.run = (Bastion, message, args) => {
     let embed = {};
     if (data.err) {
       embed = {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: `No definition found for **${data.word}** in **${lang.toUpperCase()}** Dictionary.`
       }};
     }
     else {
       embed = {embed: {
-        color: 6651610,
+        color: Bastion.colors.blue,
         title: data.word,
         description: `*${data.category}*\n\n${data.definition}`,
         footer: {

@@ -24,7 +24,7 @@ const translate = require('google-translate-api');
 exports.run = (Bastion, message, args) => {
   if (args.length < 2) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   }
   translate(args.slice(1).join(' '), {to: args[0]}).then(res => {
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       description: res.text,
       footer: {
         text: `Powered by Google Translate | Translation from ${res.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`,
@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e.stack);
     if (e.stack.includes('not supported')) {
       message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: `The language **${args[0].toUpperCase()}** is not supported.`
       }}).catch(e => {
         Bastion.log.error(e.stack);

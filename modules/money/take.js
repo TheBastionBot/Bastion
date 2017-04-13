@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
     }
     else {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -62,7 +62,7 @@ exports.run = (Bastion, message, args) => {
     }
   }).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: `Penalty of **${args[0]}** Bastion Currencies has been charged to <@${user}>`,
       fields: [
         {
@@ -74,7 +74,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
     Bastion.users.get(user).sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: `You have been charged with a penalty of **${args[0]}** Bastion Currencies.`,
       fields: [
         {

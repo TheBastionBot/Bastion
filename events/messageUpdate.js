@@ -31,7 +31,7 @@ module.exports = (oldMessage, newMessage) => {
     }
     newMessage.client.fetchApplication().then(app => {
       newMessage.client.users.get(app.owner.id).sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         title: 'ATTENTION!',
         description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
         fields: [

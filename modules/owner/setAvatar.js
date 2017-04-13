@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
 
   if (!/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9-~#%]+)\.(jpg|jpeg|gif|png)$/i.test(args.join(' '))) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   }
   Bastion.user.setAvatar(args.join(' ')).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 14211540,
+      color: Bastion.colors.green,
       description: `${Bastion.user.username}'s avatar changed!`
     }}).catch(e => {
       Bastion.log.error(e.stack);

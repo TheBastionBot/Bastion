@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
   guilds = total > 0 ? guilds.slice(0,10).join(', ') : 'None';
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.dark_grey,
     title: 'Server search',
     description: `Found **${total}** servers with **${args.join(' ')}** in it's name.`,
     fields: [

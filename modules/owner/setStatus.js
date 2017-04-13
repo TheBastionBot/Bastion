@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   if (args.length >= 1 && (args == 'online' || args == 'idle' || args == 'dnd' || args == 'invisible') ) {
     Bastion.user.setStatus(args.join(' ')).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 14211540,
+        color: Bastion.colors.green,
         description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
   else {
     Bastion.user.setStatus(Bastion.config.status).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 14211540,
+        color: Bastion.colors.green,
         description: `${Bastion.user.username}'s status is now set to the default status **${Bastion.config.status}**`
       }}).catch(e => {
         Bastion.log.error(e.stack);

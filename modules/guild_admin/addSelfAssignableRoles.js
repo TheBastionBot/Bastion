@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
         roleNames.push(message.guild.roles.get(roles[i]).name);
       }
       message.channel.sendMessage('', {embed: {
-        color: 5088314,
+        color: Bastion.colors.green,
         title: 'Added self assignable roles',
         description: roleNames.join(', ')
       }}).catch(e => {

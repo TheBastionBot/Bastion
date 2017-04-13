@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.author.sendMessage('', {embed: {
-    color: 15451167,
+    color: Bastion.colors.yellow,
     title: 'List of Commands',
     description: `To get help/details about a command, type \`${Bastion.config.prefix}help command_name\`\nTo get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
     fields: fields,
@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
     }
   }}).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.dark_grey,
       description: `${message.author} Check your DM from me, I've sent you the list of commands.`
     }}).catch(e => {
       Bastion.log.error(e.stack);

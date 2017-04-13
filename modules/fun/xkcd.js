@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
     xkcd(function (data) {
       xkcd(num > data.num ? data.num : num, function (data) {
         message.channel.sendMessage('', {embed: {
-          color: 6651610,
+          color: Bastion.colors.blue,
           title: data.title,
           description: data.alt,
           url: `https://xkcd.com/${data.num}`,
@@ -60,7 +60,7 @@ exports.run = (Bastion, message, args) => {
   else if (args[0] != undefined && args[0].toLowerCase() == 'latest') {
     xkcd(function (data) {
       message.channel.sendMessage('', {embed: {
-        color: 6651610,
+        color: Bastion.colors.blue,
         title: data.title,
         description: data.alt,
         url: `https://xkcd.com/${data.num}`,
@@ -93,7 +93,7 @@ exports.run = (Bastion, message, args) => {
       let num = getRandomInt(1, data.num);
       xkcd(num, function (data) {
         message.channel.sendMessage('', {embed: {
-          color: 6651610,
+          color: Bastion.colors.blue,
           title: data.title,
           description: data.alt,
           url: `https://xkcd.com/${data.num}`,

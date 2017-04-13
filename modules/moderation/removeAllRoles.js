@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.members.get(user.id).removeRoles(message.channel.members.get(user.id).roles).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       title: 'All Roles Removed',
       description: `All roles has been removed from **${user.username}**#${user.discriminator}.`,
     }}).catch(e => {
@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e.stack);
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'I don\'t have enough permission to do that operation.'
     }}).catch(e => {
       Bastion.log.error(e.stack);

@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo || todo.list == '[]') {
       message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         title: 'Todo list not found',
         description: `${message.author.username}, you haven't created a todo list.`
       }}).catch(e => {
@@ -47,7 +47,7 @@ exports.run = (Bastion, message, args) => {
       }
       i = i - 1;
       message.channel.sendMessage('', {embed: {
-        color: 6651610,
+        color: Bastion.colors.dark_grey,
         description: `${message.author.username}, here's your todo list.`,
         fields: [
           {

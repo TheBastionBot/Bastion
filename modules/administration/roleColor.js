@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   if (args[0] !== undefined && args[0].indexOf('#') == 0 && args[1] !== undefined) {
     if (args[0].length != 7) {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'Role color should be a 6 digit `HEX` color code.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
     }
     if (!(role = message.guild.roles.find('name', args.slice(1).join(' ')))) {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'No role found with that name.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
 
     role.setColor(args[0]).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 5088314,
+        color: Bastion.colors.green,
         title: 'Role Color Changed',
         description: `**${role.name}** role color changed.`,
         fields: [
@@ -66,7 +66,7 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e.stack);
       message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'I don\'t have enough permission to do that operation.'
       }}).catch(e => {
         Bastion.log.error(e.stack);

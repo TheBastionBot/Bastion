@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     title: 'Channel Topic',
     description: (channel.topic == null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
   }}).catch(e => {

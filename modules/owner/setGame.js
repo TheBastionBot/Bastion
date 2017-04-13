@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   if (args.length >= 1) {
     Bastion.user.setGame(args.join(' ')).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 14211540,
+        color: Bastion.colors.yellow,
         description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
   else {
     Bastion.user.setGame(Bastion.config.game).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 14211540,
+        color: Bastion.colors.green,
         description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
       }}).catch(e => {
         Bastion.log.error(e.stack);

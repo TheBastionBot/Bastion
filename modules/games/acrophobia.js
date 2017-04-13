@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
     }
 
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.blue,
       title: 'Acrophobia',
       description: `Game started by ${message.author}. Create a sentence with this acronym: **${acronym.join('. ')}.**`,
       footer: {
@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
         msg.channel.sendMessage('', {embed: {
-          color: 5088314,
+          color: Bastion.colors.dark_grey,
           description: `${msg.author} made their submission.`,
           footer: {
             text: `${sentences.collected.size} submissions in total.`
@@ -67,7 +67,7 @@ exports.run = (Bastion, message, args) => {
       collector.on('end', (collection, reason) => {
         if (collection.size == 0) {
           message.channel.sendMessage('', {embed: {
-            color: 13380644,
+            color: Bastion.colors.red,
             title: 'Acrophobia',
             description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
           }}).then(() => {
@@ -83,7 +83,7 @@ exports.run = (Bastion, message, args) => {
             submissions.push(`**${i+1}.** ${collection.map(a => a.content)[i]}`);
           }
           msg.channel.sendMessage('', {embed: {
-            color: 5088314,
+            color: Bastion.colors.green,
             title: 'Acrophobia',
             description: 'Submissions closed',
             fields: [
@@ -106,7 +106,7 @@ exports.run = (Bastion, message, args) => {
                 Bastion.log.error(e.stack);
               });
               msg.channel.sendMessage('', {embed: {
-                color: 6651610,
+                color: Bastion.colors.dark_grey,
                 description: `Thank you, ${msg.author}, for voting.`,
                 footer: {
                   text: `${votes.collected.size} votes in total.`
@@ -119,7 +119,7 @@ exports.run = (Bastion, message, args) => {
             votesCollector.on('end', votes => {
               if (votes.size == 0) {
                 msg.channel.sendMessage('', {embed: {
-                  color: 13380644,
+                  color: Bastion.colors.red,
                   title: 'Acrophobia',
                   description: 'Game ended. Unfortunately, no votes were given for any submissions.'
                 }}).then(() => {
@@ -138,7 +138,7 @@ exports.run = (Bastion, message, args) => {
                 for (let i = 0; i < votes.length; i++) count[votes[i]] = count[votes[i]] ? count[votes[i]]+1 : 1;
                 let winningVoteIndex = Object.keys(count).reduce(function(a, b){ return count[a] > count[b] ? a : b });
                 msg.channel.sendMessage('', {embed: {
-                  color: 6651610,
+                  color: Bastion.colors.blue,
                   title: 'Acrophobia',
                   description: `Game Ended. ${collection.map(s => s.author)[winningVoteIndex - 1]} won by ${count[winningVoteIndex] - 1} of ${votes.length - collection.size} votes`,
                   fields: [
@@ -168,7 +168,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: `Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait for it to end, or wait for 3 mins to end it automatically.`
     }}).catch(e => {
       Bastion.log.error(e.stack);

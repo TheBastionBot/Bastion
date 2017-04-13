@@ -25,7 +25,7 @@ const question = require('../../data/wouldYouRather.json');
 exports.run = (Bastion, message, args) => {
   let index = getRandomInt(0, Object.keys(question).length - 1);
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     description: question[index]
   }}).catch(e => {
     Bastion.log.error(e.stack);

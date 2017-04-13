@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   if (args.length > 0) {
     message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 14211540,
+        color: Bastion.colors.green,
         description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.guild.members.get(Bastion.user.id).setNickname('').then(() => {
       message.channel.sendMessage('', {embed: {
-        color: 14211540,
+        color: Bastion.colors.green,
         description: `${Bastion.user.username}'s nick has been reset on this guild.`
       }}).catch(e => {
         Bastion.log.error(e.stack);

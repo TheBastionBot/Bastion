@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -123,7 +123,7 @@ exports.run = (Bastion, message, args) => {
   args = args.replace(/./g, x => morseCode[x]+' ').trim();
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     title: 'Morse Code',
     description: `**${args}**`
   }}).catch(e => {

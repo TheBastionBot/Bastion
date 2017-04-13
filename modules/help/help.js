@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (!args[0]) {
     message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Help',
       description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
       footer: {
@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
     message.author.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       title: 'Bastion Discord BOT',
       url: 'https://bastion.js.org',
       description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
@@ -72,7 +72,7 @@ exports.run = (Bastion, message, args) => {
       }
 
       message.channel.sendMessage('', {embed: {
-        color: 16766720,
+        color: Bastion.colors.yellow,
         fields: [
           {
             name: 'Command',

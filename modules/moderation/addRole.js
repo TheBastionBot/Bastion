@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
   role = message.guild.roles.find('name', role);
   if (role == null) {
     return message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'No role found with that name.'
     }}).catch(e => {
       Bastion.log.error(e.stack);
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
 
   message.guild.members.get(user.id).addRole(role).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       title: 'Role Added',
       description: `**${user.username}**#${user.discriminator} has now been given **${role.name}** role.`,
     }}).catch(e => {
@@ -59,7 +59,7 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e.stack);
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'I don\'t have enough permission to do that operation.'
     }}).catch(e => {
       Bastion.log.error(e.stack);

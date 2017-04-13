@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
 
   if (args.length < 3) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
   let newName = args[1];
   if (!(role = message.guild.roles.find('name', oldName))) {
     return message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'No role found with that name.'
     }}).catch(e => {
       Bastion.log.error(e.stack);
@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
 
   role.setName(newName).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       title: 'Role Renamed',
       fields: [
         {
@@ -65,7 +65,7 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e.stack);
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'I don\'t have enough permission to do that operation.'
     }}).catch(e => {
       Bastion.log.error(e.stack);

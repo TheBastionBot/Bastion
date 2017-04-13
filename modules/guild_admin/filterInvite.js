@@ -30,17 +30,19 @@ exports.run = (Bastion, message, args) => {
       sql.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+      color = Bastion.colors.green;
       filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
     }
     else {
       sql.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+      color = Bastion.colors.red;
       filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
     }
 
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: color,
       description: filterInviteStats
     }}).catch(e => {
       Bastion.log.error(e.stack);

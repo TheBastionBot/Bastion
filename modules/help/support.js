@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
-    color: 15451167,
+    color: Bastion.colors.yellow,
     title: 'Bastion BOT - Support Server',
     url: 'https://discord.gg/fzx8fkt',
     description: `Need help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt`,

@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       title: 'Hall of Fame',
       description: `Top ${profiles.length} users with highest Level & Experience Points`,
       fields: fields

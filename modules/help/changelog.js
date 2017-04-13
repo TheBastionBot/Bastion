@@ -23,7 +23,7 @@ const changes = require('../../changes.json');
 
 exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
-    color: 11316394,
+    color: Bastion.colors.dark_grey,
     title: 'Changelog',
     description: `Bastion v${Bastion.package.version}`,
     fields: [

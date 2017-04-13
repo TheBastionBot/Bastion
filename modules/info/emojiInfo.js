@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   args = args[0].split(':')[1];
   if (!args) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
   }
   args = message.guild.emojis.find('name', args);
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     title: 'Emoji info',
     fields: [
       {

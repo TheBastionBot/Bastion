@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1 || (isNaN(args = parseInt(args[0])) || args < 0)) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
     let reactions = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'];
     let reaction = reactions[getRandomInt(0, reactions.length-1)]
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       title: 'GIVEAWAY! 🎉',
       description: `Giveaway event started. React to this message with ${reaction} to get **${args}** Bastion Currencies.`,
       footer: {
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
       activeChannels.push(message.channel.id);
       setTimeout(function () {
         msg.edit('', {embed: {
-          color: 6651610,
+          color: Bastion.colors.blue,
           title: 'Giveaway event ended',
           description: `Giveaway event has been ended. Thank you for participating. All the participants are being rewarded with **${args}** Bastion Currencies.`
         }}).then(() => {
@@ -76,7 +76,7 @@ exports.run = (Bastion, message, args) => {
             }
           }).then(() => {
             Bastion.users.get(user).sendMessage('', {embed: {
-              color: 5088314,
+              color: Bastion.colors.green,
               description: `You have been awarded **${args}** Bastion Currencies for your participation in the giveaway event.`
             }}).catch(e => {
               Bastion.log.error(e.stack);
@@ -92,7 +92,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: 'Can\'t start another giveaway event now. Another giveaway event is already active in this channel. Wait a for it to end.'
     }}).catch(e => {
       Bastion.log.error(e.stack);

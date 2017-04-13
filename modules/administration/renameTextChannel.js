@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (name.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.setName(args.join('-')).then(() => {
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       title: 'Channel Name Changed',
       description: args.join('-')
     }}).catch(e => {

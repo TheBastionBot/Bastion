@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
     if (!todo) {
       sql.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, `["${args.join(' ')}"]`]).then(() => {
         message.channel.sendMessage('', {embed: {
-          color: 5088314,
+          color: Bastion.colors.green,
           title: 'Todo list created',
           description: `${message.author.username}, I've created your todo list and added **${args.join(' ')}** to it.`
         }}).catch(e => {
@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
       list.push(args.join(' '));
       sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
         message.channel.sendMessage('', {embed: {
-          color: 5088314,
+          color: Bastion.colors.green,
           title: 'Todo list updated',
           description: `${message.author.username}, I've added **${args.join(' ')}** to your todo list.`
         }}).catch(e => {

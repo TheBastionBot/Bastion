@@ -25,10 +25,10 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  args = args.join(' ')
+  args = args.join(' ');
   if (!/.+ << .+/.test(args)) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
   });
 
   message.channel.sendMessage('', {embed: {
-    color: 5088314,
+    color: Bastion.colors.green,
     title: 'New Trigger Added',
     fields: [
       {

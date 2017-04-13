@@ -25,14 +25,14 @@ exports.run = (Bastion, message, args) => {
   imdb.get(args.join(' '), (err, movie) => {
     if (err) {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: `No movie or TV series found with the name **${args.join(' ')}**. Please check the name and try again. Type \`${Bastion.config.prefix}help imdb\` for help on imdb command.`
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       title: movie.series ? `${movie.title} (TV Series)` : movie.title,
       url: movie.imdburl,
       description: movie.plot,

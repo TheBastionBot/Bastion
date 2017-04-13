@@ -30,17 +30,19 @@ exports.run = (Bastion, message, args) => {
       sql.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+      color = Bastion.colors.red;
       levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
     }
     else {
       sql.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
+      color = Bastion.colors.green;
       levelUpMessageStats = 'I will now send messages when someone levels up.';
     }
 
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: color,
       description: levelUpMessageStats
     }}).catch(e => {
       Bastion.log.error(e.stack);

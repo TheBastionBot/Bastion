@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
     message.channel.sendMessage('', {embed: {
-      color: 5088314,
+      color: Bastion.colors.green,
       fields: [
         {
           name: ':inbox_tray:  INPUT',
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
     message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       fields: [
         {
           name: ':no_entry:  ERROR',

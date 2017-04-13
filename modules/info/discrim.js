@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
   members = members.length > 0 ? members.slice(0,10).join(', ') : 'None';
 
   message.channel.sendMessage('', {embed: {
-    color: 6651610,
+    color: Bastion.colors.blue,
     title: 'Discriminator search',
     description: `Found **${total}** users with discriminator **${args[0]}**`,
     fields: [

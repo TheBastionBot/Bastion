@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
     voiceChannel = message.member.voiceChannel;
     if (!voiceChannel || voiceChannel.type !== 'voice') {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: `I can't join your voice channel <@${message.author.id}>.`
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
       if (!voiceChannel.speakable) {
         voiceChannel.leave();
         message.channel.sendMessage('', {embed: {
-          color: 13380644,
+          color: Bastion.colors.red,
           description: 'I don\'t have permissions to speak in this channel.'
         }}).catch(e => {
           Bastion.log.error(e.stack);
@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
       if (musicChannel.musicTextChannelID != message.channel.id) return;
       if (!musicChannel.musicVoiceChannelID) {
         return message.channel.sendMessage('', {embed: {
-          color: 13380644,
+          color: Bastion.colors.red,
           description: 'No default music channel has been set. So, only the bot owner can use this command.'
         }}).catch(e => {
           Bastion.log.error(e.stack);
@@ -64,7 +64,7 @@ exports.run = (Bastion, message, args) => {
       }
       if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID))) {
         return message.channel.sendMessage('', {embed: {
-          color: 13380644,
+          color: Bastion.colors.red,
           description: `I can't join your voice channel <@${message.author.id}>.`
         }}).catch(e => {
           Bastion.log.error(e.stack);
@@ -77,7 +77,7 @@ exports.run = (Bastion, message, args) => {
         if (!voiceChannel.speakable) {
           voiceChannel.leave();
           message.channel.sendMessage('', {embed: {
-            color: 13380644,
+            color: Bastion.colors.red,
             description: 'I don\'t have permissions to speak in this channel.'
           }}).catch(e => {
             Bastion.log.error(e.stack);

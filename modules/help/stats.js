@@ -23,7 +23,7 @@ const toHRTime = require('pretty-ms');
 
 exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
-    color: 11316394,
+    color: Bastion.colors.dark_grey,
     author: {
       name: `Bastion ${Bastion.package.version}`,
       icon_url: Bastion.user.displayAvatarURL

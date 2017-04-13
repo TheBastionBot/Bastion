@@ -24,7 +24,7 @@ const urllib = require('urllib');
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
-      color: 15451167,
+      color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
     }}).catch(e => {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
     let embed = {};
     if (data.length != 0) {
       embed = {embed: {
-        color: 6651610,
+        color: Bastion.colors.blue,
         title: data[0].word,
         url: `http://www.urbandictionary.com/define.php?term=${data[0].word}`,
         description: data[0].definition,
@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
     }
     else {
       embed = {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: `No definition found for the term **${args.join(' ')}**`,
       }};
     }

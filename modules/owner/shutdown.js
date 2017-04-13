@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   message.channel.sendMessage('', {embed: {
-    color: 14845440,
+    color: Bastion.colors.orange,
     description: 'Are you sure you want to shut me down?'
   }}).then(msg => {
     const collector = msg.channel.createCollector(m =>
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
     collector.on('message', (answer, collector) => {
       if (answer.content.startsWith('yes')) {
         message.channel.sendMessage('', {embed: {
-          color: 11316394,
+          color: Bastion.colors.dark_grey,
           description: 'GoodBye :wave:! See you soon.'
         }}).then(() => {
           Bastion.destroy().catch(e => {
@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
       }
       else {
         message.channel.sendMessage('', {embed: {
-          color: 14211540,
+          color: Bastion.colors.dark_grey,
           description: 'Cool! I\'m here.'
         }}).catch(e => {
           Bastion.log.error(e.stack);

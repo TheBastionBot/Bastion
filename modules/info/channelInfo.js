@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
       title = 'Voice channel Info';
     }
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.blue,
       title: title,
       fields: [
         {
@@ -70,7 +70,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     return message.channel.sendMessage('', {embed: {
-      color: 13380644,
+      color: Bastion.colors.red,
       description: `No channel found with ID: **${args[0]}**`
     }}).catch(e => {
       Bastion.log.error(e.stack);

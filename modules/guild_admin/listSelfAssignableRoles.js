@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row) {
       return message.channel.sendMessage('', {embed: {
-        color: 13380644,
+        color: Bastion.colors.red,
         description: 'No self assignable roles found.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
     }
     i = i - 1;
     message.channel.sendMessage('', {embed: {
-      color: 6651610,
+      color: Bastion.colors.dark_grey,
       title: 'Self assignable roles:',
       description: roleNames.slice(i*10, (i*10)+10).join('\n'),
       footer: {
