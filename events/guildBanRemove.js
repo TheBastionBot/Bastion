@@ -28,7 +28,7 @@ module.exports = (guild, user) => {
     if (row.log == 'false') return;
 
     guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: Bastion.colors.red,
+      color: guild.client.colors.red,
       title: 'User Unbanned',
       fields: [
         {

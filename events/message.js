@@ -38,7 +38,7 @@ module.exports = message => {
     }
     message.client.fetchApplication().then(app => {
       message.client.users.get(app.owner.id).sendMessage('', {embed: {
-        color: Bastion.colors.red,
+        color: message.client.colors.red,
         title: 'ATTENTION!',
         description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
         fields: [
@@ -59,7 +59,7 @@ module.exports = message => {
   if (message.channel.type == 'dm' || message.channel.type == 'group') {
     if (message.content.startsWith(`${message.client.config.prefix}h`) || message.content.startsWith(`${message.client.config.prefix}help`)) {
       return message.channel.sendMessage('', {embed: {
-        color: Bastion.colors.blue,
+        color: message.client.colors.blue,
         title: 'Bastion Discord BOT',
         url: 'https://bastion.js.org',
         description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
@@ -136,7 +136,7 @@ module.exports = message => {
             if (guild.levelUpMessage = 'false') return;
 
             message.channel.sendMessage('', {embed: {
-              color: Bastion.colors.blue,
+              color: message.client.colors.blue,
               title: 'Leveled up',
               description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
             }}).catch(e => {

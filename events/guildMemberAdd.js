@@ -34,7 +34,7 @@ module.exports = member => {
       greetMsg = greetMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
       member.guild.channels.get(row.greetChannelID).sendMessage('', {embed: {
-        color: Bastion.colors.green,
+        color: member.client.colors.green,
         title: `Hello ${member.displayName}`,
         description: greetMsg
       }}).then(m => {
@@ -56,7 +56,7 @@ module.exports = member => {
     if (row.log == 'false') return;
 
     member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: Bastion.colors.green,
+      color: member.client.colors.green,
       title: 'User Joined',
       fields: [
         {

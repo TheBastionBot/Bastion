@@ -30,7 +30,7 @@ module.exports = channel => {
     if (row.log == 'false') return;
 
     channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: Bastion.colors.green,
+      color: channel.client.colors.green,
       title: 'Channel Created',
       fields: [
         {

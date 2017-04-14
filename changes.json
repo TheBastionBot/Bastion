@@ -1,26 +1,8 @@
 {
-  "date": "April 13, 2017",
+  "date": "April 14, 2017",
   "updated": [
-    "Fixed permission issues in `skip`",
-    "Better module categories",
-    "triggers now support multiple responses with same trigger",
-    "Usage is shown to the user, if command's syntax is wrong",
-    "Fixed and improved `setTopic` command",
-    "Fixed channel topic issues",
-    "`echo` doesn't accept empty strings anymore",
-    "`overwatch` and `rainbow6` commands shows some useful errors to the user when wrong input is given",
-    "`translate` now shows if the language is not supported",
-    "`shutdown` command now asks for conformation before shutting down",
-    "Externalized colors",
-    "Best practices",
-    "Some command improvements",
-    "Fixed some minor issues",
-    "Modified some string"
+    "Fixed some issues"
   ],
   "added": [],
-  "removed": [
-    "`ask` command as `poll` can do the same thing in a better way",
-    "`reverseString` function - inlined it into the commands",
-    "`roleData` function - inlined it into the commands"
-  ]
+  "removed": []
 }
