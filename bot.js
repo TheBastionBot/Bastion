@@ -36,7 +36,7 @@ const Bastion = new Discord.Client({
 Bastion.package = require('./package.json');
 Bastion.credentials = require('./settings/credentials.json');
 Bastion.config = require('./settings/config.json');
-Bastion.colors = require('./data/colors.json');
+Bastion.colors = require('./settings/colors.json');
 Bastion.commands = new Discord.Collection();
 Bastion.aliases = new Discord.Collection();
 
