@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
   message.author.sendMessage('', {embed: {
     color: Bastion.colors.yellow,
     title: 'List of Commands',
-    description: `To get help/details about a command, type \`${Bastion.config.prefix}help command_name\`\nTo get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
+    description: `To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
     fields: fields,
     footer: {
       text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
