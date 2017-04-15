@@ -2,6 +2,7 @@
   "date": "April 15, 2017",
   "updated": [
     "Changed permissions for `inRole` command",
+    "Moved `inRole` command to `info` module",
     "Some internal changes"
   ],
   "added": [],
