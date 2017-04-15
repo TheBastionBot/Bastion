@@ -23,14 +23,19 @@ exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   user = message.mentions.users.first();
-  amount = parseInt(args[0]) ? args[0] : args[1];
-  amount = /^[1-9][0-9]?$|^100$/.test(amount) ? parseInt(amount) : 100;
+  limit = parseInt(args[0]) ? args[0] : args[1];
+  if (user) {
+    amount = 100
+  }
+  else {
+    amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
+  }
 
   message.channel.fetchMessages({
     limit: amount
   }).then(msgs => {
     if (user) {
-      msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, amount);
+      msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     message.channel.bulkDelete(msgs).catch(e => {
       Bastion.log.error(e.stack);

@@ -3,6 +3,7 @@
   "updated": [
     "Changed permissions for `inRole` command",
     "Moved `inRole` command to `info` module",
+    "Improved `clear` command",
     "Some internal changes"
   ],
   "added": [],
