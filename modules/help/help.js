@@ -112,6 +112,14 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
+    else {
+      message.channel.sendMessage('', {embed: {
+        color: Bastion.colors.red,
+        description: `There's no **${args[0]}** command`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   }
 };
 

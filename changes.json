@@ -6,6 +6,7 @@
     "Improved `clear` command",
     "`leaderboard` and `hallOfFame` commands now look compact",
     "Some improvements to `createVoiceChannel` and `createTextChannel` commands",
+    "`help` now shows if the asked command is not present"
     "Some internal changes"
   ],
   "added": [],
