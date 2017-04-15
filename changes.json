@@ -1,6 +1,9 @@
 {
   "date": "April 15, 2017",
-  "updated": [],
+  "updated": [
+    "Changed permissions for `inRole` command",
+    "Some internal changes"
+  ],
   "added": [],
   "removed": []
 }

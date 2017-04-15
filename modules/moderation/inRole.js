@@ -20,7 +20,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
     return message.channel.sendMessage('', {embed: {
       color: Bastion.colors.yellow,
