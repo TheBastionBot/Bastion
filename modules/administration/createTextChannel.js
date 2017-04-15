@@ -31,7 +31,17 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.guild.createChannel(args.join('-'), 'text').then(channel => {
+  args = args.join('-');
+  if (args.length < 2) {
+    return message.channel.sendMessage('', {embed: {
+      color: Bastion.colors.red,
+      description: 'Channel name should be at least two characters long.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
+  message.guild.createChannel(args, 'text').then(channel => {
     channel.sendMessage('', {embed: {
       color: Bastion.colors.green,
       title: 'Text Channel Created',

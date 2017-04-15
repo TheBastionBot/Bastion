@@ -5,6 +5,7 @@
     "Moved `inRole` command to `info` module",
     "Improved `clear` command",
     "`leaderboard` and `hallOfFame` commands now look compact",
+    "Some improvements to `createVoiceChannel` and `createTextChannel` commands",
     "Some internal changes"
   ],
   "added": [],
