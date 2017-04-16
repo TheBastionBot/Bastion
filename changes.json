@@ -1,5 +1,5 @@
 {
-  "date": "April 15, 2017",
+  "date": "April 16, 2017",
   "updated": [
     "Changed permissions for `inRole` command",
     "Moved `inRole` command to `info` module",
@@ -7,6 +7,7 @@
     "`leaderboard` and `hallOfFame` commands now look compact",
     "Some improvements to `createVoiceChannel` and `createTextChannel` commands",
     "`help` now shows if the asked command is not present",
+    "`give` now shows erros to user if you try to give yourself money",
     "Some internal changes",
     "Minor fixes"
   ],

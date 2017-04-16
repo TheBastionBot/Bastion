@@ -77,7 +77,14 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    if (message.author.id == user) return;
+    if (message.author.id == user) {
+      return message.channel.sendMessage('', {embed: {
+        color: Bastion.colors.red,
+        description: 'You can\'t give yourself Bastion Currencies!'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
 
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
       if (sender.bastionCurrencies < args[0]) {
