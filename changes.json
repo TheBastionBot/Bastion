@@ -9,6 +9,7 @@
     "`help` now shows if the asked command is not present",
     "`give` now shows erros to user if you try to give yourself money",
     "Improved `poll` command",
+    "Improved `choose` command",
     "Some internal changes",
     "Minor fixes"
   ],

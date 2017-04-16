@@ -20,10 +20,20 @@
  */
 
 exports.run = (Bastion, message, args) => {
+  if (args.length < 1 || !/^(.+( ?\/ ?.+[^\/])+)$/i.test(args = args.join(' '))) {
+    return message.channel.sendMessage('', {embed: {
+      color: Bastion.colors.yellow,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   message.channel.sendMessage('', {embed: {
     color: Bastion.colors.blue,
     title: 'In my opinion',
-    description: args.join(' ').split('/')[Math.floor(Math.random()*args.join(' ').split('/').length)],
+    description: args.split('/')[Math.floor(Math.random()*args.split('/').length)],
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
@@ -37,6 +47,6 @@ exports.help = {
   name: 'choose',
   description: 'Ask the bot to choose a option from any number of options, separated by a `/`.',
   permission: '',
-  usage: 'choose <choices>',
+  usage: 'choose <choice1>/<choice2>[/<choice3>][...]',
   example: ['choose Chocolate/Ice Cream/Cake']
 };
