@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
     color: Bastion.colors.blue,
     title: 'In my opinion',
-    description: args.split('/')[Math.floor(Math.random()*args.split('/').length)],
+    description: args.split('/').random(),
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });

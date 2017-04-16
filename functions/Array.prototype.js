@@ -7,8 +7,8 @@ Array.prototype.random = function() {
 Array.prototype.shuffle = function() {
 	let i = this.length;
 	while (i) {
-		var j = Math.floor(Math.random() * i);
-		var t = this[--i];
+		let j = Math.floor(Math.random() * i);
+		let t = this[--i];
 		this[i] = this[j];
 		this[j] = t;
 	}

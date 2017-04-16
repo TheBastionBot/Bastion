@@ -19,7 +19,6 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const getRandomInt = require('../../functions/getRandomInt');
 const outcomes = [
   '🔫 BANG! You are dead, buddy.',
   'You got lucky, my friend.'
@@ -29,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   args = isNaN(args = parseInt(args[0])) ? 1 : args > 7 ? 7 : args;
   let outcome = '';
   for (let i = 0; i < args; i++) {
-    outcome = `${message.author} ${outcomes[getRandomInt(0, outcomes.length-1)]}`;
+    outcome = `${message.author} ${outcomes.random()}`;
     message.channel.sendMessage('', {embed: {
       color: Bastion.colors.blue,
       title: `Round ${i + 1}`,

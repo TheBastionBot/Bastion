@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  let botOutcome = outcomes[Math.floor(Math.random()*outcomes.length)];
+  let botOutcome = outcomes.random();
   let result = 'I win! :yum:';
   if (userOutcome == botOutcome) {
     result = 'Oh damn! It\'s a draw, dude. :confused:';
