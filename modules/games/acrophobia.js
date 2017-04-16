@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     let acroLen = getRandomInt(2, 5);
     let acronym = [];
     for (let i = 0; i < acroLen; i++) {
-      acronym.push(charPool[getRandomInt(0, charPool.length - 1)]);
+      acronym.push(charPool.random());
     }
 
     message.channel.sendMessage('', {embed: {

@@ -19,14 +19,12 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const getRandomInt = require('../../functions/getRandomInt');
 const question = require('../../data/thisOrThat.json');
 
 exports.run = (Bastion, message, args) => {
-  let index = getRandomInt(0, Object.keys(question).length - 1);
   message.channel.sendMessage('', {embed: {
     color: Bastion.colors.blue,
-    description: question[index]
+    description: question.random()
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
