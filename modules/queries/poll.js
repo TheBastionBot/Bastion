@@ -148,6 +148,6 @@ exports.help = {
   name: 'poll',
   description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
   permission: '',
-  usage: 'poll <question>;<option1>[;option2[;option3[...]]]',
+  usage: 'poll <question>;option1>;option2[;<option3>[...]]',
   example: ['poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2']
 };
