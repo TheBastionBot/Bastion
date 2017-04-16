@@ -22,7 +22,7 @@
 let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1) {
+  if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
     return message.channel.sendMessage('', {embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
