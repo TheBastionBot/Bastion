@@ -44,6 +44,8 @@ require('./handlers/logHandler')(Bastion);
 require('./handlers/eventHandler')(Bastion);
 require('./handlers/moduleHandler')(Bastion);
 
+require('./functions/Array.prototype');
+
 Bastion.login(Bastion.credentials.token);
 
 process.on('unhandledRejection', (reason, p) => {
