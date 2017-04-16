@@ -39,13 +39,25 @@ exports.run = (Bastion, message, args) => {
       args.splice(args.indexOf(args[i]), 1);
     }
   }
+  args = args.filter(r => message.guild.roles.get(r));
+  if (args.length < 1) {
+    return message.channel.sendMessage('', {embed: {
+      color: Bastion.colors.red,
+      description: 'The role ID(s) you specified doesn\'t match any role.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let roles = JSON.parse(row.selfAssignableRoles);
     roles = roles.concat(args);
+    roles = roles.filter(r => message.guild.roles.get(r));
+    roles = roles.unique(roles);
     sql.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
       let roleNames = [];
-      for (let i = 0; i < roles.length; i++) {
-        roleNames.push(message.guild.roles.get(roles[i]).name);
+      for (let i = 0; i < args.length; i++) {
+        roleNames.push(message.guild.roles.get(args[i]).name);
       }
       message.channel.sendMessage('', {embed: {
         color: Bastion.colors.green,

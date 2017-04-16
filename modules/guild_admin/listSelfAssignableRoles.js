@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (!row) {
+    if (!row || row.selfAssignableRoles == '[]') {
       return message.channel.sendMessage('', {embed: {
         color: Bastion.colors.red,
         description: 'No self assignable roles found.'
@@ -36,6 +36,8 @@ exports.run = (Bastion, message, args) => {
     }
 
     let roles = JSON.parse(row.selfAssignableRoles);
+    roles = roles.filter(r => message.guild.roles.get(r));
+    roles = roles.unique(roles);
     let roleNames = [];
     for (let i = 0; i < roles.length; i++) {
       roleNames.push(message.guild.roles.get(roles[i]).name);
