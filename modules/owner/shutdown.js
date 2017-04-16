@@ -27,14 +27,14 @@ exports.run = (Bastion, message, args) => {
     description: 'Are you sure you want to shut me down?'
   }}).then(msg => {
     const collector = msg.channel.createCollector(m =>
-      Bastion.credentials.ownerId.includes(m.author.id) && (m.content.startsWith('yes') || m.content.startsWith('no')),
+      Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
       {
         time: 30 * 1000,
         maxMatches: 1
       }
     );
     collector.on('message', (answer, collector) => {
-      if (answer.content.startsWith('yes')) {
+      if (answer.content.toLowerCase().startsWith('yes')) {
         message.channel.sendMessage('', {embed: {
           color: Bastion.colors.dark_grey,
           description: 'GoodBye :wave:! See you soon.'
@@ -47,7 +47,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
       else {
-        message.channel.sendMessage('', {embed: {
+        message.channel.toLowerCase().sendMessage('', {embed: {
           color: Bastion.colors.dark_grey,
           description: 'Cool! I\'m here.'
         }}).catch(e => {
@@ -66,7 +66,7 @@ exports.config = {
 
 exports.help = {
   name: 'shutdown',
-  description: 'Shuts the bot down and terminates the process.',
+  description: 'Asks you for conformation to shut the bot down and terminates the process. Reply with `yes` or `no`.',
   permission: '',
   usage: 'shutdown',
   example: []

@@ -1,19 +1,7 @@
 {
   "date": "April 16, 2017",
   "updated": [
-    "Changed permissions for `inRole` command",
-    "Moved `inRole` command to `info` module",
-    "Improved `clear` command",
-    "`leaderboard` and `hallOfFame` commands now look compact",
-    "Some improvements to `createVoiceChannel` and `createTextChannel` commands",
-    "`help` now shows if the asked command is not present",
-    "`give` now shows erros to user if you try to give yourself money",
-    "Improved and fixed self assignable role commands",
-    "Improved `poll` command",
-    "Improved `choose` command",
-    "Some internal changes",
-    "Minor improvements",
-    "Minor fixes"
+    "Improved `shutdown` command and fixed it's help string"
   ],
   "added": [],
   "removed": []
