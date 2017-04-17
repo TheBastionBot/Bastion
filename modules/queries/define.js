@@ -55,7 +55,6 @@ exports.run = (Bastion, message, args) => {
         title: data.word,
         description: `*${data.category}*\n\n${data.definition}`,
         footer: {
-          icon_url: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Wiktionary_logo_Diego_UFCG.png',
           text: 'Powered by Wiktionary'
         }
       }};

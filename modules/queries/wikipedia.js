@@ -53,6 +53,9 @@ exports.run = (Bastion, message, args) => {
         description: `${data.extract}\n[Read More](${data.fullurl})`,
         thumbnail: {
           url: data.thumbnail ? data.thumbnail.source : `https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png`
+        },
+        footer: {
+          text: 'Powered by Wikipedia'
         }
       }};
     }

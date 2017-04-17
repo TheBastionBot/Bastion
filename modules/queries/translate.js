@@ -36,8 +36,7 @@ exports.run = (Bastion, message, args) => {
       color: Bastion.colors.blue,
       description: res.text,
       footer: {
-        text: `Powered by Google Translate | Translation from ${res.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`,
-        icon_url: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Google_Translate_Icon.png'
+        text: `Powered by Google Translate | Translation from ${res.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
       }
     }}).catch(e => {
       Bastion.log.error(e.stack);

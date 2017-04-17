@@ -48,8 +48,7 @@ exports.run = (Bastion, message, args) => {
       description: result[0].location.name,
       fields: fields,
       footer: {
-        text: 'Powered by MSN Weather',
-        icon_url: 'https://compass-ssl.microsoft.com/assets/97/01/97013f72-b153-4c69-ab73-a7416cb126b5.png?n=weather-png.png'
+        text: 'Powered by MSN Weather'
       }
     }}).catch(e => {
       Bastion.log.error(e.stack);

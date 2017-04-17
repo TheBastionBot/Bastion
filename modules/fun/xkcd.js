@@ -48,8 +48,7 @@ exports.run = (Bastion, message, args) => {
             url: data.img
           },
           footer: {
-            text: 'Powered by xkcd',
-            icon_url: 'https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_1024x1024.png?v=1479786341'
+            text: 'Powered by xkcd'
           }
         }}).catch(e => {
           Bastion.log.error(e.stack);
@@ -80,8 +79,7 @@ exports.run = (Bastion, message, args) => {
           url: data.img
         },
         footer: {
-          text: 'Powered by xkcd',
-          icon_url: 'https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_1024x1024.png?v=1479786341'
+          text: 'Powered by xkcd'
         }
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -113,8 +111,7 @@ exports.run = (Bastion, message, args) => {
             url: data.img
           },
           footer: {
-            text: 'Powered by xkcd',
-            icon_url: 'https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_1024x1024.png?v=1479786341'
+            text: 'Powered by xkcd'
           }
         }}).catch(e => {
           Bastion.log.error(e.stack);

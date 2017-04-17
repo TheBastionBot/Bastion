@@ -25,6 +25,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
     color: Bastion.colors.dark_grey,
     title: 'Changelog',
+    url: 'https://bastion.js.org/changes',
     description: `Bastion v${Bastion.package.version}`,
     fields: [
       {

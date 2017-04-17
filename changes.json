@@ -1,8 +1,11 @@
 {
   "date": "April 16, 2017",
   "updated": [
-    "Improved `shutdown` command and fixed it's help string"
+    "Improved `shutdown` command and fixed it's help string",
+    "Minor changes"
   ],
   "added": [],
-  "removed": []
+  "removed": [
+    "Removed images from embeds unless absolutely necessary"
+  ]
 }

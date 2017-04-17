@@ -50,8 +50,7 @@ exports.run = (Bastion, message, args) => {
         url: message.client.user.displayAvatarURL
       },
       footer: {
-        icon_url: 'https://sankarsankampa.com/assets/img/logo/snkrsn_32.png',
-        text: 'Copyright © 2017 Sankarsan Kampa | @snkrsnkampa'
+        text: 'Copyright © 2017 Sankarsan Kampa'
       }
     }}).catch(e => {
       message.client.log.error(e.stack);

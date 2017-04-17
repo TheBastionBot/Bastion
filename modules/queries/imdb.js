@@ -87,7 +87,6 @@ exports.run = (Bastion, message, args) => {
         url: movie.poster != 'N/A' ? movie.poster : 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg'
       },
       footer: {
-        icon_url: 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg',
         text: 'Powered by IMDb'
       }
     }}).catch(e => {

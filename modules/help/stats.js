@@ -25,8 +25,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.sendMessage('', {embed: {
     color: Bastion.colors.dark_grey,
     author: {
-      name: `Bastion ${Bastion.package.version}`,
-      icon_url: Bastion.user.displayAvatarURL
+      name: `Bastion ${Bastion.package.version}`
     },
     url: Bastion.package.url,
     fields: [

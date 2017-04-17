@@ -24,9 +24,6 @@ exports.run = (Bastion, message, args) => {
     color: Bastion.colors.blue,
     title: 'Let me Google that for you:',
     description: `https://lmgtfy.com/?q=${encodeURIComponent(args.join(' '))}`,
-    thumbnail: {
-      url: 'http://lmgtfy.com/assets/sticker-b222a421fb6cf257985abfab188be7d6746866850efe2a800a3e57052e1a2411.png',
-    },
     footer: {
       text: 'Powered by lmgtfy'
     }

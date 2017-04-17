@@ -46,7 +46,6 @@ exports.run = (Bastion, message, args) => {
         url: `http://www.urbandictionary.com/define.php?term=${data[0].word}`,
         description: data[0].definition,
         footer: {
-          icon_url: 'https://pbs.twimg.com/profile_images/1164168434/ud_profile2_400x400.jpg',
           text: 'Powered by Urban Dictionary'
         }
       }};
