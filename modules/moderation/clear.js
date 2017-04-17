@@ -37,6 +37,22 @@ exports.run = (Bastion, message, args) => {
     if (user) {
       msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
+    else if (args.includes('--bots')) {
+      msgs = msgs.filter(m => m.author.bot);
+    }
+    if (msgs.size < 2 || msgs.length < 2) {
+      if ((msgs.size == 1 || msgs.length == 1) && (user || args.includes('--bots'))) {
+        error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!'
+      }
+      else {
+        error = 'No messages found that could be deleted.'
+      }
+      return message.channel.sendMessage('', {embed: {
+        description: error
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     message.channel.bulkDelete(msgs).catch(e => {
       Bastion.log.error(e.stack);
     });

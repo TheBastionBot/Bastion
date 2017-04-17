@@ -1,10 +1,13 @@
 {
-  "date": "April 16, 2017",
+  "date": "April 17, 2017",
   "updated": [
     "Improved `shutdown` command and fixed it's help string",
+    "Improved `clear` command",
     "Minor changes"
   ],
-  "added": [],
+  "added": [
+    "Added `--bots` parameter to `clear` command that clears messages from bots"
+  ],
   "removed": [
     "Removed images from embeds unless absolutely necessary"
   ]
