@@ -24,8 +24,8 @@ exports.run = (Bastion, message, args) => {
 
   user = message.mentions.users.first();
   limit = parseInt(args[0]) ? args[0] : args[1];
-  if (user) {
-    amount = 100
+  if (user || args.includes('--bots')) {
+    amount = 100;
   }
   else {
     amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
@@ -38,14 +38,14 @@ exports.run = (Bastion, message, args) => {
       msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     else if (args.includes('--bots')) {
-      msgs = msgs.filter(m => m.author.bot);
+      msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     if (msgs.size < 2 || msgs.length < 2) {
       if ((msgs.size == 1 || msgs.length == 1) && (user || args.includes('--bots'))) {
-        error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!'
+        error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
       }
       else {
-        error = 'No messages found that could be deleted.'
+        error = 'No messages found that could be deleted.';
       }
       return message.channel.sendMessage('', {embed: {
         description: error
@@ -67,8 +67,8 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: 'Delete a bulk of messages from a channel specified by an user & number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages.',
+  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. It also accepts a parameter `--bots`, which clears messages from bots in that channel.',
   permission: 'Manage Messages',
-  usage: 'clear [@user-mention] [no_of_messages]',
-  example: ['clear 50', 'clear @user#0001', 'clear']
+  usage: 'clear [@user-mention | --bots] [no_of_messages]',
+  example: ['clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear']
 };
