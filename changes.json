@@ -6,7 +6,8 @@
     "Minor changes"
   ],
   "added": [
-    "Added `--bots` parameter to `clear` command that clears messages from bots"
+    "Added `--bots` parameter to `clear` command that clears messages from bots",
+    "Added `googleAPIkey` to credentials for future implementation"
   ],
   "removed": [
     "Removed images from embeds unless absolutely necessary"
