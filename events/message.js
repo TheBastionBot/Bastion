@@ -20,10 +20,11 @@
  */
 
 const sql = require('sqlite');
-const Cleverbot = require('cleverbot');
+const Cleverbot = require('cleverbot-node');
 const credentials = require('../settings/credentials.json');
-const bot = new Cleverbot({
-  key: credentials.cleverbotAPIkey
+const bot = new Cleverbot;
+bot.configure({
+  botapi: credentials.cleverbotAPIkey
 });
 const chalk = require('chalk');
 const getRandomInt = require('../functions/getRandomInt');
@@ -195,17 +196,19 @@ module.exports = message => {
         let args = message.content.split(' ');
         if (args.length < 1) return;
 
-        bot.query(args.join(' ')).then(response => {
-          message.channel.startTyping();
-          setTimeout(function () {
-            message.channel.sendMessage(response.output).catch(e => {
-              message.client.log.error(e.stack);
-            });
-            message.channel.stopTyping();
-          }, response.output.length * 100);
-        }).catch(e => {
+        try {
+          bot.write(args.join(' '), function (response) {
+            message.channel.startTyping();
+            setTimeout(function () {
+              message.channel.sendMessage(response.output).catch(e => {
+                message.client.log.error(e.stack);
+              });
+              message.channel.stopTyping();
+            }, response.output.length * 100);
+          });
+        } catch (e) {
           message.client.log.error(e.stack);
-        });
+        }
       }).catch(e => {
         message.client.log.error(e.stack);
       });
