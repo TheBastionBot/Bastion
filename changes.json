@@ -3,6 +3,7 @@
   "updated": [
     "Fixed chat module",
     "Fixed some issues with play",
+    "Changed reward amount for `betFlip` and `betRoll`",
     "Minor fixes"
   ],
   "added": [
