@@ -4,6 +4,8 @@
     "Fixed chat module",
     "Minor fixes"
   ],
-  "added": [],
+  "added": [
+    "Added cooldown to gambling games"
+  ],
   "removed": []
 }
