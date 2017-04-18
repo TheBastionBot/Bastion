@@ -1,15 +1,8 @@
 {
-  "date": "April 17, 2017",
+  "date": "April 18, 2017",
   "updated": [
-    "Improved `shutdown` command and fixed it's help string",
-    "Improved `clear` command",
-    "Minor changes"
+    "Minor fixes"
   ],
-  "added": [
-    "Added `--bots` parameter to `clear` command that clears messages from bots",
-    "Added `googleAPIkey` to credentials for future implementation"
-  ],
-  "removed": [
-    "Removed images from embeds unless absolutely necessary"
-  ]
+  "added": [],
+  "removed": []
 }
