@@ -153,12 +153,11 @@ exports.run = (Bastion, message, args) => {
 
     yt.getInfo(args, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
       if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-        if (err.stack.includes('No video results')) {
+        if (err && err.stack.includes('No video results')) {
           result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
         }
         else {
-          Bastion.log.error(err.stack);
-          result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**, please check the console.`
+          result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`
         }
         return message.channel.sendMessage('', {embed: {
           color: Bastion.colors.red,
