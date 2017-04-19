@@ -231,7 +231,7 @@ exports.run = (Bastion, message, args) => {
           });
 
           let collector = textChannel.createCollector(
-            msg => msg.guild.voiceConnection.channel == msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
+            msg => msg.guild.voiceConnection.channel == msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}shuffle`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
           );
           collector.on('message', msg => {
             if (msg.content.startsWith(`${Bastion.config.prefix}np`)) {
@@ -333,6 +333,10 @@ exports.run = (Bastion, message, args) => {
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
+            }
+            else if (msg.content.startsWith(`${Bastion.config.prefix}shuffle`)) {
+              if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
+              queue[message.guild.id].songs.shuffle();
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) {
