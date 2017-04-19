@@ -33,6 +33,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.guild.members.get(user.id).setMute(true).then(() => {
+    let reason = args.slice(1).join(' ');
+    if (reason.length < 1) {
+      reason = 'No reason given';
+    }
+
     message.channel.sendMessage('', {embed: {
       color: Bastion.colors.orange,
       title: 'Muted',
@@ -49,11 +54,57 @@ exports.run = (Bastion, message, args) => {
         },
         {
           name: 'Reason',
-          value: reason.length < 1 ? reason = 'No reason given' : args.slice(1).join(' '),
+          value: reason,
           inline: false
         }
       ]
     }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+
+    sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+      if (!row) return;
+
+      if (row.modLog == 'true') {
+        message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+          color: Bastion.colors.orange,
+          title: 'Muted user',
+          description: `Case Number: ${row.modCaseNo}`,
+          fields: [
+            {
+              name: 'User',
+              value: `${user}`,
+              inline: true
+            },
+            {
+              name: 'User ID',
+              value: user.id,
+              inline: true
+            },
+            {
+              name: 'Reason',
+              value: reason
+            },
+            {
+              name: 'Responsible Moderator',
+              value: `${message.author}`,
+              inline: true
+            },
+            {
+              name: 'Moderator ID',
+              value: message.author.id,
+              inline: true
+            }
+          ]
+        }}).then(msg => {
+          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

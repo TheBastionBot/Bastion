@@ -60,6 +60,52 @@ exports.run = (Bastion, message, args) => {
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
+
+    sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+      if (!row) return;
+
+      if (row.modLog == 'true') {
+        message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+          color: Bastion.colors.green,
+          title: 'Unmuted user',
+          description: `Case Number: ${row.modCaseNo}`,
+          fields: [
+            {
+              name: 'User',
+              value: `${user}`,
+              inline: true
+            },
+            {
+              name: 'User ID',
+              value: user.id,
+              inline: true
+            },
+            {
+              name: 'Reason',
+              value: reason
+            },
+            {
+              name: 'Responsible Moderator',
+              value: `${message.author}`,
+              inline: true
+            },
+            {
+              name: 'Moderator ID',
+              value: message.author.id,
+              inline: true
+            }
+          ]
+        }}).then(msg => {
+          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }).catch(e => {
     Bastion.log.error(e.stack);
   });
