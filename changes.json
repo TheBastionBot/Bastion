@@ -1,13 +1,8 @@
 {
-  "date": "April 18, 2017",
-  "updated": [
-    "Fixed chat module",
-    "Fixed some issues with play",
-    "Changed reward amount for `betFlip` and `betRoll`",
-    "Minor fixes"
-  ],
+  "date": "April 19, 2017",
+  "updated": [],
   "added": [
-    "Added cooldown to gambling games"
+    "Added `map` command"
   ],
   "removed": []
 }
