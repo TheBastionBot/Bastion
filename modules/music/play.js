@@ -63,7 +63,9 @@ exports.run = (Bastion, message, args) => {
           color: Bastion.colors.red,
           description: `I don't have permission to join the voice channel **${voiceChannel.name}**`
         }}).then(m => {
-          m.delete(10000);
+          m.delete(10000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
@@ -73,7 +75,9 @@ exports.run = (Bastion, message, args) => {
           color: Bastion.colors.red,
           description: `I don't have permission to speak in the voice channel **${voiceChannel.name}**`
         }}).then(m => {
-          m.delete(10000);
+          m.delete(10000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
@@ -85,7 +89,9 @@ exports.run = (Bastion, message, args) => {
         color: Bastion.colors.red,
         description: 'No default music channel has been set. And I need to be in a voice channel to be able to play music.'
       }}).then(m => {
-        m.delete(30000);
+        m.delete(30000).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
@@ -96,7 +102,9 @@ exports.run = (Bastion, message, args) => {
         color: Bastion.colors.red,
         description: vcStats
       }}).then(m => {
-        m.delete(30000);
+        m.delete(30000).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
@@ -115,7 +123,9 @@ exports.run = (Bastion, message, args) => {
           color: Bastion.colors.red,
           description: 'You don\'t have any songs in your favourite list!'
         }}).then(m => {
-          m.delete(10000);
+          m.delete(10000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
@@ -126,7 +136,9 @@ exports.run = (Bastion, message, args) => {
           color: Bastion.colors.green,
           description: `Adding ${favs.length+1} favourite songs to the queue...`
         }}).then(m => {
-          m.delete(10000);
+          m.delete(10000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
@@ -163,7 +175,9 @@ exports.run = (Bastion, message, args) => {
           color: Bastion.colors.red,
           description: result
         }}).then(m => {
-          m.delete(30000);
+          m.delete(30000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
@@ -189,7 +203,9 @@ exports.run = (Bastion, message, args) => {
           text: `Position: ${queue[message.guild.id].songs.length} | Duration: ${info.duration} | Requester: ${message.author.username}#${message.author.discriminator}`
         }
       }}).then(m => {
-        m.delete(30000);
+        m.delete(30000).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
@@ -207,7 +223,9 @@ exports.run = (Bastion, message, args) => {
             }}).then(m => {
               queue[message.guild.id].playing = false;
               voiceChannel.leave();
-              m.delete(10000);
+              m.delete(10000).catch(e => {
+                Bastion.log.error(e.stack);
+              });
             }).catch(e => {
               Bastion.log.error(e.stack);
             });
@@ -225,7 +243,9 @@ exports.run = (Bastion, message, args) => {
               text: `🔉 ${dispatcher.volume*50}% | Duration: ${info.duration} | Requester: ${message.author.username}#${message.author.discriminator}`
             }
           }}).then(m => {
-            m.delete(30000);
+            m.delete(30000).catch(e => {
+              Bastion.log.error(e.stack);
+            });
           }).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -252,7 +272,9 @@ exports.run = (Bastion, message, args) => {
                   text: `🔉 ${dispatcher.volume*50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${info.duration}`
                 }
               }}).then(m => {
-                m.delete(30000)
+                m.delete(30000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -269,7 +291,9 @@ exports.run = (Bastion, message, args) => {
                 }
               }}).then(m => {
                 dispatcher.pause();
-                m.delete(30000);
+                m.delete(30000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -291,7 +315,9 @@ exports.run = (Bastion, message, args) => {
                 description: `${queue[message.guild.id].songs.length-1} songs in queue`,
                 fields: fields
               }}).then(m => {
-                m.delete(60000);
+                m.delete(60000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -312,7 +338,9 @@ exports.run = (Bastion, message, args) => {
                 color: color,
                 description: repeatStat
               }}).then(m => {
-                m.delete(10000);
+                m.delete(10000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -329,7 +357,9 @@ exports.run = (Bastion, message, args) => {
                 }
               }}).then(m => {
                 dispatcher.resume();
-                m.delete(30000);
+                m.delete(30000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -349,7 +379,9 @@ exports.run = (Bastion, message, args) => {
                     description: 'Skipping current song.'
                   }}).then(m => {
                     dispatcher.end();
-                    m.delete(10000);
+                    m.delete(10000).catch(e => {
+                      Bastion.log.error(e.stack);
+                    });
                   }).catch(e => {
                     Bastion.log.error(e.stack);
                   });
@@ -369,7 +401,9 @@ exports.run = (Bastion, message, args) => {
                   description: 'Skipping current song.'
                 }}).then(m => {
                   dispatcher.end();
-                  m.delete(10000);
+                  m.delete(10000).catch(e => {
+                    Bastion.log.error(e.stack);
+                  });
                 }).catch(e => {
                   Bastion.log.error(e.stack);
                 });
@@ -385,7 +419,9 @@ exports.run = (Bastion, message, args) => {
                   queue[message.guild.id].songs = [];
                 }
                 voiceChannel.leave();
-                m.delete(10000);
+                m.delete(10000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });
@@ -407,7 +443,9 @@ exports.run = (Bastion, message, args) => {
                 color: Bastion.colors.green,
                 description: `Volume: ${Math.round(dispatcher.volume*50)}%`
               }}).then(m => {
-                m.delete(10000)
+                m.delete(10000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
               }).catch(e => {
                 Bastion.log.error(e.stack);
               });

@@ -2,7 +2,8 @@
   "date": "April 19, 2017",
   "updated": [
     "Fixed triggers module",
-    "Minor improvements"
+    "Minor improvements",
+    "Minor fixes"
   ],
   "added": [
     "Added `map` command",
