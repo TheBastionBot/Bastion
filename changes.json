@@ -6,7 +6,8 @@
   "added": [
     "Added `map` command",
     "Added `shorten` command",
-    "Added `addAutoAssignableRoles` command"
+    "Added `addAutoAssignableRoles` command",
+    "Added `listAutoAssignableRoles` command"
   ],
   "removed": []
 }
