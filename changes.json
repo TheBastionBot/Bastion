@@ -10,7 +10,8 @@
     "Added `listAutoAssignableRoles` command",
     "Added `removeAutoAssignableRoles` command",
     "Added `modLog` command",
-    "Added moderation logging module"
+    "Added moderation logging module",
+    "Added `updateDatabase` command"
   ],
   "removed": []
 }
