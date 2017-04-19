@@ -4,7 +4,8 @@
     "Minor improvements"
   ],
   "added": [
-    "Added `map` command"
+    "Added `map` command",
+    "Added `shorten` command"
   ],
   "removed": []
 }
