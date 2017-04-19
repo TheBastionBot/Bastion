@@ -1,6 +1,8 @@
 {
   "date": "April 19, 2017",
-  "updated": [],
+  "updated": [
+    "Minor improvements"
+  ],
   "added": [
     "Added `map` command"
   ],

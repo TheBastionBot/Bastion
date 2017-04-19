@@ -48,6 +48,7 @@ exports.run = (Bastion, message, args) => {
         error = 'No messages found that could be deleted.';
       }
       return message.channel.sendMessage('', {embed: {
+        color: Bastion.colors.red,
         description: error
       }}).catch(e => {
         Bastion.log.error(e.stack);
