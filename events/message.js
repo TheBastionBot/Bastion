@@ -101,8 +101,17 @@ module.exports = message => {
 
   sql.all(`SELECT trigger, response FROM triggers`).then(triggers => {
     if (triggers == '') return;
-    let response = triggers.map(x => x.response)[getRandomInt(0, triggers.length - 1)];
-    if (message.content.includes(triggers[0].trigger) && !message.content.startsWith(message.client.config.prefix)) {
+
+    let trigger = '';
+    let response = [];
+    for (let i = 0; i < triggers.length; i++) {
+      if (message.content.includes(triggers[i].trigger) && !message.content.startsWith(message.client.config.prefix)) {
+        trigger = triggers[i].trigger;
+        response.push(triggers[i].response);
+      }
+    }
+    response = response.random();
+    if (message.content.includes(trigger) && !message.content.startsWith(message.client.config.prefix)) {
       response = response.replace(/\$user/ig, `<@${message.author.id}>`);
       response = response.replace(/\$username/ig, message.author.username);
       response = response.replace(/\$server/ig, `**${message.guild.name}**`);
