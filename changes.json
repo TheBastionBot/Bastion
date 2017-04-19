@@ -8,7 +8,8 @@
     "Added `shorten` command",
     "Added `addAutoAssignableRoles` command",
     "Added `listAutoAssignableRoles` command",
-    "Added `removeAutoAssignableRoles` command"
+    "Added `removeAutoAssignableRoles` command",
+    "Added `modLog` command"
   ],
   "removed": []
 }
