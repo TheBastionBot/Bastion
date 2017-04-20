@@ -34,6 +34,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.fetchMessages({
     limit: amount
   }).then(msgs => {
+    msgs = msgs.filter(m => message.createdTimestamp - m.createdTimestamp < 1209600000);
     if (user) {
       msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }

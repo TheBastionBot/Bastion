@@ -1,20 +1,8 @@
 {
-  "date": "April 19, 2017",
+  "date": "April 20, 2017",
   "updated": [
-    "Fixed triggers module",
-    "Minor improvements",
-    "Minor fixes"
+    "Improved `clear` command"
   ],
-  "added": [
-    "Added `map` command",
-    "Added `shorten` command",
-    "Added `addAutoAssignableRoles` command",
-    "Added `listAutoAssignableRoles` command",
-    "Added `removeAutoAssignableRoles` command",
-    "Added `modLog` command",
-    "Added moderation logging module",
-    "Added `updateDatabase` command",
-    "Added `shuffle` music command"
-  ],
+  "added": [],
   "removed": []
 }
