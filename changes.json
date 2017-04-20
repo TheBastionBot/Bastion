@@ -2,7 +2,8 @@
   "date": "April 20, 2017",
   "updated": [
     "Improved `clear` command",
-    "Improved `setAvatar` command"
+    "Improved `setAvatar` command",
+    "Fixed minor issues"
   ],
   "added": [],
   "removed": []
