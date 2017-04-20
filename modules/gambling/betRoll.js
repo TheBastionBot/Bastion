@@ -25,7 +25,7 @@ let recentUsers = [];
 
 exports.run = (Bastion, message, args) => {
   if (!recentUsers.includes(message.author.id)) {
-    if (!parseInt(args[0]) || !/^(one|two|three|four|five|six)$/.test(args[1])) {
+    if (!parseInt(args[0]) || !/^(one|two|three|four|five|six)$/i.test(args[1])) {
       return message.channel.sendMessage('', {embed: {
         color: Bastion.colors.yellow,
         title: 'Usage',
