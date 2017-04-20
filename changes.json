@@ -1,7 +1,8 @@
 {
   "date": "April 20, 2017",
   "updated": [
-    "Improved `clear` command"
+    "Improved `clear` command",
+    "Improved `setAvatar` command"
   ],
   "added": [],
   "removed": []
