@@ -144,7 +144,7 @@ exports.run = (Bastion, message, args) => {
         });
         // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setInterval or flags is inefficient, find an efficient way to fix this!
         favs.forEach((e, i) => {
-          e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i.test(e) ? e : 'ytsearch:' + e;
+          e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(e) ? e : 'ytsearch:' + e;
           if (!queue.hasOwnProperty(message.guild.id)) {
             queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
           }
@@ -161,9 +161,81 @@ exports.run = (Bastion, message, args) => {
         });
       }
     }
-    args = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i.test(args) ? args : 'ytsearch:' + args;
+    else if (args.startsWith('-pl')) {
+      if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args.slice(4))) {
+        return message.channel.sendMessage('', {embed: {
+          color: Bastion.colors.red,
+          description: 'Invalid URL!'
+        }}).then(m => {
+          m.delete(10000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
+      message.channel.sendMessage('', {embed: {
+        color: Bastion.colors.green,
+        description: 'Processing playlist... This may take a while, thank you for your patience.'
+      }}).then(m => {
+        m.delete(10000).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+      let pl = [];
+      yt.getInfo(args.slice(4), ['-q', '-i', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]'], (err, info) => {
+        for (var i = 0; i < info.length; i++) {
+          pl.push(info[i].title)
+        }
+        if (pl.length == 0) {
+          return message.channel.sendMessage('', {embed: {
+            color: Bastion.colors.red,
+            description: 'No songs in the playlist!'
+          }}).then(m => {
+            m.delete(10000).catch(e => {
+              Bastion.log.error(e.stack);
+            });
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
+        else {
+          args = pl.shift();
+          message.channel.sendMessage('', {embed: {
+            color: Bastion.colors.green,
+            description: `Adding ${pl.length+1} songs to the queue...`
+          }}).then(m => {
+            m.delete(10000).catch(e => {
+              Bastion.log.error(e.stack);
+            });
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+          // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setInterval or flags is inefficient, find an efficient way to fix this!
+          pl.forEach((e, i) => {
+            e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(e) ? e : 'ytsearch:' + e;
+            if (!queue.hasOwnProperty(message.guild.id)) {
+              queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
+            }
+            yt.getInfo(e, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
+              if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
+              queue[message.guild.id].songs.push({
+                url: info.formats[info.formats.length - 1].url,
+                title: info.title,
+                thumbnail: info.thumbnail,
+                duration: info.duration,
+                requester: message.author.id
+              });
+            });
+          });
+        }
+      });
+    }
+    args = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args) ? args : 'ytsearch:' + args;
 
-    yt.getInfo(args, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
+    yt.getInfo(args, ['-q', '-i', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
       if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
         if (err && err.stack.includes('No video results')) {
           result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
@@ -418,7 +490,8 @@ exports.run = (Bastion, message, args) => {
                 if (queue.hasOwnProperty(message.guild.id)) {
                   queue[message.guild.id].songs = [];
                 }
-                voiceChannel.leave();
+                // voiceChannel.leave();
+                dispatcher.end();
                 m.delete(10000).catch(e => {
                   Bastion.log.error(e.stack);
                 });
@@ -486,8 +559,8 @@ exports.config = {
 
 exports.help = {
   name: 'play',
-  description: 'Plays a song (adds the song to the queue if already playing) specified by name/link. To play songs in your favourites use \'-favs\' argument instead of song name/link.',
+  description: 'Plays a song (adds the song to the queue if already playing) specified by name/link. To play songs in a YouTube playlist, use \'-pl\' argument with the playlist link. To play songs in your favourites use \'-favs\' argument instead of song name/link.',
   permission: '',
-  usage: 'play <name|link|-favs>',
-  example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -favs']
+  usage: 'play <name | song_link | -pl <playlist_link> | -favs>',
+  example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs']
 };

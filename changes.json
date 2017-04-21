@@ -6,6 +6,8 @@
     "Minor improvements",
     "Fixed minor issues"
   ],
-  "added": [],
+  "added": [
+    "YouTube playlist support for music module"
+  ],
   "removed": []
 }
