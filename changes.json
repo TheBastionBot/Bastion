@@ -1,13 +1,8 @@
 {
   "date": "April 21, 2017",
   "updated": [
-    "Improved `clear` command",
-    "Improved `setAvatar` command",
-    "Minor improvements",
-    "Fixed minor issues"
+    "Fixed modLog issues"
   ],
-  "added": [
-    "YouTube playlist support for music module"
-  ],
+  "added": [],
   "removed": []
 }

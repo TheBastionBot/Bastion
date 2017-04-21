@@ -19,6 +19,8 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
+const sql = require('sqlite');
+sql.open('./data/Bastion.sqlite'); 
 let guilds = {};
 
 exports.run = (Bastion, message, args) => {
