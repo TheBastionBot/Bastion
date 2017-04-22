@@ -7,7 +7,10 @@
   ],
   "added": [
     "Added message to shuffle command",
-    "Added `clean` music command"
+    "Added `clean` music command",
+    "Added `musicChannel` command"
   ],
-  "removed": []
+  "removed": [
+    "Removed `addMusicChannel` command"
+  ]
 }
