@@ -5,6 +5,8 @@
     "Minor changes",
     "Fixed some strings"
   ],
-  "added": [],
+  "added": [
+    "Added `clean` music command"
+  ],
   "removed": []
 }
