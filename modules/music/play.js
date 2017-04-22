@@ -449,6 +449,16 @@ exports.run = (Bastion, message, args) => {
             else if (msg.content.startsWith(`${Bastion.config.prefix}shuffle`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               queue[message.guild.id].songs.shuffle();
+              textChannel.sendMessage('', {embed: {
+                color: Bastion.colors.green,
+                description: 'Shuffled the queue.'
+              }}).then(m => {
+                m.delete(10000).catch(e => {
+                  Bastion.log.error(e.stack);
+                });
+              }).catch(e => {
+                Bastion.log.error(e.stack);
+              });
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) {

@@ -6,6 +6,7 @@
     "Fixed some strings"
   ],
   "added": [
+    "Added message to shuffle command",
     "Added `clean` music command"
   ],
   "removed": []
