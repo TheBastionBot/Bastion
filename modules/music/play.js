@@ -369,12 +369,12 @@ exports.run = (Bastion, message, args) => {
             else if (msg.content.startsWith(`${Bastion.config.prefix}queue`)) {
               let fields = [{
                 name: `:loud_sound: ${song.title}`,
-                value: `Duration: ${song.duration}\tRequester: <@${song.requester}>`
+                value: `Requested by: <@${song.requester}>`
               }];
               for (let i = 1; i < (queue[message.guild.id].songs.length < 10 ? queue[message.guild.id].songs.length : 9); i++) {
                 fields.push({
                   name: `${i+1}. ${queue[message.guild.id].songs[i].title}`,
-                  value: `Duration: ${queue[message.guild.id].songs[i].duration}\tRequester: <@${queue[message.guild.id].songs[i].requester}>`
+                  value: `Requested by: <@${queue[message.guild.id].songs[i].requester}>`
                 });
               }
               textChannel.sendMessage('', {embed: {
