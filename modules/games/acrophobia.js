@@ -169,7 +169,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.channel.sendMessage('', {embed: {
       color: Bastion.colors.red,
-      description: `Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait for it to end, or wait for 3 mins to end it automatically.`
+      description: `Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
