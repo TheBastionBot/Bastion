@@ -176,7 +176,7 @@ exports.run = (Bastion, message, args) => {
       }
       message.channel.sendMessage('', {embed: {
         color: Bastion.colors.green,
-        description: 'Processing playlist... This may take a while, thank you for your patience.'
+        description: 'Processing playlist...'
       }}).then(m => {
         m.delete(10000).catch(e => {
           Bastion.log.error(e.stack);
@@ -185,51 +185,47 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
       let pl = [];
-      yt.getInfo(args.slice(4), ['-q', '-i', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]'], (err, info) => {
-        for (var i = 0; i < info.length; i++) {
-          pl.push(info[i].title)
-        }
-        if (pl.length == 0) {
-          return message.channel.sendMessage('', {embed: {
-            color: Bastion.colors.red,
-            description: 'No songs in the playlist!'
-          }}).then(m => {
-            m.delete(10000).catch(e => {
+      yt.getInfo(args.slice(4), ['-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]'], (err, info) => {
+        if (err) return console.log(err);
+        if (info) {
+          if (info.length == 0) {
+            return message.channel.sendMessage('', {embed: {
+              color: Bastion.colors.red,
+              description: 'No songs in the playlist!'
+            }}).then(m => {
+              m.delete(10000).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }).catch(e => {
               Bastion.log.error(e.stack);
             });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-        else {
-          args = pl.shift();
-          message.channel.sendMessage('', {embed: {
-            color: Bastion.colors.green,
-            description: `Adding ${pl.length+1} songs to the queue...`
-          }}).then(m => {
-            m.delete(10000).catch(e => {
+          }
+          else {
+            args = info.shift().title;
+            message.channel.sendMessage('', {embed: {
+              color: Bastion.colors.green,
+              description: `Adding ${info.length} songs to the queue...`
+            }}).then(m => {
+              m.delete(10000).catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }).catch(e => {
               Bastion.log.error(e.stack);
             });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-          // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setInterval or flags is inefficient, find an efficient way to fix this!
-          pl.forEach((e, i) => {
-            e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(e) ? e : 'ytsearch:' + e;
-            if (!queue.hasOwnProperty(message.guild.id)) {
-              queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
-            }
-            yt.getInfo(e, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
-              if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
+            // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setInterval or flags is inefficient, find an efficient way to fix this!
+            info.forEach((e, i) => {
+              if (!queue.hasOwnProperty(message.guild.id)) {
+                queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
+              }
               queue[message.guild.id].songs.push({
-                url: info.formats[info.formats.length - 1].url,
-                title: info.title,
-                thumbnail: info.thumbnail,
-                duration: info.duration,
+                url: `https://www.youtube.com/watch?v=${e.url}`,
+                title: e.title,
+                thumbnail: '',
+                duration: e.duration,
                 requester: message.author.id
               });
             });
-          });
+          }
         }
       });
     }

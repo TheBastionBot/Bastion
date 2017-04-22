@@ -1,6 +1,7 @@
 {
   "date": "April 22, 2017",
   "updated": [
+    "Improved YouTube playlist support, it's now much faster and uses less bandwidth",
     "Fixed some strings"
   ],
   "added": [],
