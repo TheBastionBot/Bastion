@@ -80,7 +80,7 @@ exports.run = (Bastion, message, args) => {
               inline: true
             },
             {
-              name: 'Reason',
+              name: 'Role',
               value: role.name
             },
             {
