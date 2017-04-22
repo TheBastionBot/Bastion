@@ -8,7 +8,8 @@
   "added": [
     "Added message to shuffle command",
     "Added `clean` music command",
-    "Added `musicChannel` command"
+    "Added `musicChannel` command",
+    "Added `nickname` command"
   ],
   "removed": [
     "Removed `addMusicChannel` command"
