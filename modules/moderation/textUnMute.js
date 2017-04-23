@@ -128,5 +128,5 @@ exports.help = {
   description: 'UnMutes a previously muted user in a channel with an optional reason.',
   permission: 'Manage Roles',
   usage: 'textUnMute @user-mention [Reason]',
-  example: ['textUnMute @user#0001 Reason for the mute.']
+  example: ['textUnMute @user#0001 Reason for the unmute.']
 };
