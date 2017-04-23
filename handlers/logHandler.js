@@ -32,6 +32,7 @@ module.exports = Bastion => {
   Bastion.log.error = msg => {
     console.log(color.red('[ERROR]'));
     console.log(msg);
+    console.trace();
     console.log(color.red('[/ERROR]'));
   };
   Bastion.log.msg = msg => {
