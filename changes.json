@@ -1,17 +1,8 @@
 {
-  "date": "April 22, 2017",
+  "date": "April 23, 2017",
   "updated": [
-    "Improved YouTube playlist support, it's now much faster and uses less bandwidth",
-    "Minor changes",
-    "Fixed some strings"
+    "Fixed level up messages"
   ],
-  "added": [
-    "Added message to shuffle command",
-    "Added `clean` music command",
-    "Added `musicChannel` command",
-    "Added `nickname` command"
-  ],
-  "removed": [
-    "Removed `addMusicChannel` command"
-  ]
+  "added": [],
+  "removed": []
 }

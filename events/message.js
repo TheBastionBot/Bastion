@@ -142,7 +142,7 @@ module.exports = message => {
             message.client.log.error(e.stack);
           });
           sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-            if (guild.levelUpMessage = 'false') return;
+            if (guild.levelUpMessage == 'false') return;
 
             message.channel.sendMessage('', {embed: {
               color: message.client.colors.blue,
