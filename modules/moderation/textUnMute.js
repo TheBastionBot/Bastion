@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
     }
 
     message.channel.sendMessage('', {embed: {
-      color: Bastion.colors.orange,
+      color: Bastion.colors.green,
       title: 'Text unmuted',
       fields: [
         {
@@ -70,7 +70,7 @@ exports.run = (Bastion, message, args) => {
 
       if (row.modLog == 'true') {
         message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
-          color: Bastion.colors.orange,
+          color: Bastion.colors.green,
           title: 'Text unmuted user',
           description: `Case Number: ${row.modCaseNo}`,
           fields: [

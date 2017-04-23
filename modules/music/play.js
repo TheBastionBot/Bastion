@@ -482,7 +482,11 @@ exports.run = (Bastion, message, args) => {
                   textChannel.sendMessage('', {embed: {
                     color: Bastion.colors.dark_grey,
                     description: `${((voiceChannel.members.size - 1) / 2) - queue[message.guild.id].skipVotes.length} votes required to skip the current song.`
-                  }}).catch(e => {
+                  }}).then(m => {
+                    m.delete(10000).catch(e => {
+                      Bastion.log.error(e.stack);
+                    });
+                  }).catch(e => {
                     Bastion.log.error(e.stack);
                   });
                 }
