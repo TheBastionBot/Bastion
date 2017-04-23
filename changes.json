@@ -5,7 +5,8 @@
     "Internal changes & improvements"
   ],
   "added": [
-    "Added `textMute` command"
+    "Added `textMute` command",
+    "Added `textUnMute` command"
   ],
   "removed": []
 }
