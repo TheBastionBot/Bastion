@@ -4,6 +4,8 @@
     "Fixed level up messages",
     "Internal changes & improvements"
   ],
-  "added": [],
+  "added": [
+    "Added `textMute` command"
+  ],
   "removed": []
 }
