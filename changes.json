@@ -1,12 +1,8 @@
 {
-  "date": "April 23, 2017",
+  "date": "April 24, 2017",
   "updated": [
-    "Fixed level up messages",
-    "Internal changes & improvements"
+    "Fixed `weather` and `forecast` command, when no data was received"
   ],
-  "added": [
-    "Added `textMute` command",
-    "Added `textUnMute` command"
-  ],
+  "added": [],
   "removed": []
 }

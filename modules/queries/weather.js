@@ -42,6 +42,15 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
+    if (!result || result.length < 1) {
+      return message.channel.sendMessage('', {embed: {
+        color: Bastion.colors.red,
+        description: 'No weather data received, please try again later.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
+
     message.channel.sendMessage('', {embed: {
       color: Bastion.colors.blue,
       title: 'Current Weather',

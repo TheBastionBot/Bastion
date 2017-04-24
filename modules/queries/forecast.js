@@ -34,6 +34,15 @@ exports.run = (Bastion, message, args) => {
   weather.find({search: args.join(' '), degreeType: 'C'}, function(err, result) {
     if (err) return;
 
+    if (!result || result.length < 1) {
+      return message.channel.sendMessage('', {embed: {
+        color: Bastion.colors.red,
+        description: 'No weather data received, please try again later.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
+
     let fields = [];
     for (let i = 0; i < result[0].forecast.length; i++) {
       fields.push({
