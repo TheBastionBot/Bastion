@@ -84,9 +84,9 @@ module.exports = member => {
 
   sql.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
-
     autoAssignableRoles = JSON.parse(row.autoAssignableRoles);
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
+    if (autoAssignableRoles.length < 1) return;
     member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {
       member.client.log.error(e.stack);
     });
