@@ -1,7 +1,9 @@
 {
   "date": "April 25, 2017",
   "updated": [
-    "`listSelfAssignableRoles` doesn't require `ADMINISTRATOR` permission anymore"
+    "`listSelfAssignableRoles` doesn't require `ADMINISTRATOR` permission anymore",
+    "Updated dependencies",
+    "Minor changes"
   ],
   "added": [],
   "removed": []
