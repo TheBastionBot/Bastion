@@ -1,8 +1,7 @@
 {
-  "date": "April 24, 2017",
+  "date": "April 25, 2017",
   "updated": [
-    "Fixed `weather` and `forecast` command, when no data was received",
-    "Fixed autoAssignableRoles when there was none assigned."
+    "`listSelfAssignableRoles` doesn't require `ADMINISTRATOR` permission anymore"
   ],
   "added": [],
   "removed": []
