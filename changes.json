@@ -1,9 +1,7 @@
 {
-  "date": "April 25, 2017",
+  "date": "April 26, 2017",
   "updated": [
-    "`listSelfAssignableRoles` doesn't require `ADMINISTRATOR` permission anymore",
-    "Updated dependencies",
-    "Minor changes"
+    "Downgraded `cleverbot-node` package to temporarily fix a bug in it."
   ],
   "added": [],
   "removed": []
