@@ -88,7 +88,7 @@ exports.run = (Bastion, message, args) => {
 
           if (row.modLog == 'true') {
             message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
-              color: Bastion.colors.green,
+              color: Bastion.colors.orange,
               title: 'Kicked user',
               description: `Case Number: ${row.modCaseNo}`,
               fields: [
@@ -180,7 +180,7 @@ exports.run = (Bastion, message, args) => {
 
     if (row.modLog == 'true') {
       message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.orange,
         title: 'Warned user',
         description: `Case Number: ${row.modCaseNo}`,
         fields: [
