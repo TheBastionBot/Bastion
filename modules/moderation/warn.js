@@ -20,7 +20,7 @@
  */
 
 const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite'); 
+sql.open('./data/Bastion.sqlite');
 let guilds = {};
 
 exports.run = (Bastion, message, args) => {
@@ -58,6 +58,7 @@ exports.run = (Bastion, message, args) => {
   else {
     if (guilds[message.guild.id][user.id] == 2) {
       message.guild.members.get(user.id).kick().then(member => {
+        delete guilds[message.guild.id][user.id];
         message.channel.sendMessage('', {embed: {
           color: Bastion.colors.orange,
           title: 'Kicked',
