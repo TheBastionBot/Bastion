@@ -1,8 +1,8 @@
 {
   "date": "April 27, 2017",
   "updated": [
-    "Fixed issues with `warn`",
-    "Warnings are now shown in mod logs"
+    "Minor changes",
+    "Dependency source changes"
   ],
   "added": [],
   "removed": []
