@@ -1,10 +1,6 @@
 {
-  "date": "April 28, 2017",
-  "updated": [
-    "Fixed issues with music"
-  ],
-  "added": [
-    "Update scripts will now update ffmpeg"
-  ],
+  "date": "April 30, 2017",
+  "updated": [],
+  "added": [],
   "removed": []
 }
