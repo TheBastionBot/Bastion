@@ -20,7 +20,6 @@ DEL /Q data/Bastion.sqlite
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
 CALL npm install >nul 2>&1
-CALL npm install -g ffmpeg-binaries >nul 2>&1
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Ready to boot up and start running.
 ECHO.

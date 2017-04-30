@@ -1,10 +1,14 @@
 {
-  "date": "April 28, 2017",
+  "date": "April 30, 2017",
   "updated": [
-    "Fixed issues with music"
+    "Improved playlist support for music module",
+    "Improvements to moderation logs"
   ],
   "added": [
-    "Update scripts will now update ffmpeg"
+    "Added ffmpeg binaries to local packages",
+    "Added server emojis to `serverInfo` command"
   ],
-  "removed": []
+  "removed": [
+    "Removed global ffmpeg installation in update/upgrade scripts"
+  ]
 }
