@@ -24,6 +24,7 @@
     "cleverbot-node": "0.3.7",
     "color-convert": "^1.9.0",
     "discord.js": "^11.0.0",
+    "ffmpeg-binaries": "^3.2.2-3",
     "google-translate-api": "^2.2.2",
     "imdb-api": "^2.2.2",
     "mathjs": "^3.12.1",
