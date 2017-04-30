@@ -76,7 +76,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Server Emojis',
-        value: message.guild.emojis.size > 1 ? message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-'
+        value: message.guild.emojis.size > 0 ? message.guild.emojis.size >= 30 ? message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).splice(0, 30).join(' ') + `and ${message.guild.emojis.size - 30} more.` : message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-'
       }
     ],
     thumbnail: {

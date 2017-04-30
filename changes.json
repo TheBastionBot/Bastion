@@ -1,14 +1,8 @@
 {
-  "date": "April 30, 2017",
+  "date": "May 1, 2017",
   "updated": [
-    "Improved playlist support for music module",
-    "Improvements to moderation logs"
+    "Fixed `serverInfo` command when server emojis exceeded message char limit."
   ],
-  "added": [
-    "Added ffmpeg binaries to local packages",
-    "Added server emojis to `serverInfo` command"
-  ],
-  "removed": [
-    "Removed global ffmpeg installation in update/upgrade scripts"
-  ]
+  "added": [],
+  "removed": []
 }
