@@ -72,7 +72,6 @@ exports.run = (Bastion, message, args) => {
         message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
           color: Bastion.colors.orange,
           title: 'Text muted user',
-          description: `Case Number: ${row.modCaseNo}`,
           fields: [
             {
               name: 'User',
@@ -102,7 +101,11 @@ exports.run = (Bastion, message, args) => {
               value: message.author.id,
               inline: true
             }
-          ]
+          ],
+          footer: {
+            text: `Case Number: ${row.modCaseNo}`
+          },
+          timestamp: new Date()
         }}).then(msg => {
           sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
             Bastion.log.error(e.stack);
