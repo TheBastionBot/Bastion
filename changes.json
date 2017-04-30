@@ -4,5 +4,7 @@
   "added": [
     "Added ffmpeg binaries to local packages"
   ],
-  "removed": []
+  "removed": [
+    "Removed global ffmpeg installation in update/upgrade scripts"
+  ]
 }
