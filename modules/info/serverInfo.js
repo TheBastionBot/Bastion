@@ -73,6 +73,10 @@ exports.run = (Bastion, message, args) => {
         name: 'Voice Channels',
         value: message.guild.channels.filter(channel=> channel.type === "voice").size,
         inline: true
+      },
+      {
+        name: 'Server Emojis',
+        value: message.guild.emojis.size > 1 ? message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-'
       }
     ],
     thumbnail: {
