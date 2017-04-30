@@ -162,10 +162,10 @@ exports.run = (Bastion, message, args) => {
       }
     }
     else if (args.startsWith('-pl')) {
-      if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args.slice(4))) {
+      if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args.slice(4))) {
         return message.channel.sendMessage('', {embed: {
           color: Bastion.colors.red,
-          description: 'Invalid URL!'
+          description: 'Invalid YouTube Playlist URL!'
         }}).then(m => {
           m.delete(10000).catch(e => {
             Bastion.log.error(e.stack);

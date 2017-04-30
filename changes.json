@@ -1,6 +1,8 @@
 {
   "date": "April 30, 2017",
-  "updated": [],
+  "updated": [
+    "Improved playlist support for music module."
+  ],
   "added": [
     "Added ffmpeg binaries to local packages"
   ],
