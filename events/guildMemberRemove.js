@@ -51,31 +51,33 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
-    if (!row) return;
-    if (row.log == 'false') return;
+  member.guild.fetchBans().then(users => {
+    if (users.has(member.id)) return;
 
-    member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: member.client.colors.red,
-      title: 'User Left',
-      fields: [
-        {
-          name: 'Username',
-          value: `**${member.user.username}**#${member.user.discriminator}`,
-          inline: true
-        },
-        {
-          name: 'ID',
-          value: member.id,
-          inline: true
-        },
-        {
-          name: 'Left At',
-          value: new Date().toUTCString(),
-          inline: false
-        }
-      ]
-    }}).catch(e => {
+    sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+      if (!row) return;
+      if (row.log == 'false') return;
+
+      member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+        color: member.client.colors.red,
+        title: 'User Left',
+        fields: [
+          {
+            name: 'User',
+            value: member.user.tag,
+            inline: true
+          },
+          {
+            name: 'User ID',
+            value: member.id,
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }}).catch(e => {
+        member.client.log.error(e.stack);
+      });
+    }).catch(e => {
       member.client.log.error(e.stack);
     });
   }).catch(e => {

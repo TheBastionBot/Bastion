@@ -28,25 +28,21 @@ module.exports = (guild, user) => {
     if (row.log == 'false') return;
 
     guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: guild.client.colors.red,
+      color: guild.client.colors.green,
       title: 'User Unbanned',
       fields: [
         {
-          name: 'Username',
-          value: `**${user.username}**#${user.discriminator}`,
+          name: 'User',
+          value: user.tag,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'User ID',
           value: user.id,
           inline: true
-        },
-        {
-          name: 'Unbanned At',
-          value: new Date().toUTCString(),
-          inline: false
         }
-      ]
+      ],
+      timestamp: new Date()
     }}).catch(e => {
       guild.client.log.error(e.stack);
     });

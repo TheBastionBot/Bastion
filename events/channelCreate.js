@@ -34,26 +34,22 @@ module.exports = channel => {
       title: 'Channel Created',
       fields: [
         {
-          name: 'Name',
+          name: 'Channel Name',
           value: channel.name,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'Channel ID',
           value: channel.id,
           inline: true
         },
         {
-          name: 'Type',
-          value: channel.type,
+          name: 'Channel Type',
+          value: channel.type.toUpperCase(),
           inline: true
-        },
-        {
-          name: 'Created At',
-          value: channel.createdAt.toUTCString(),
-          inline: false
         }
-      ]
+      ],
+      timestamp: channel.createdAt
     }}).catch(e => {
       channel.client.log.error(e.stack);
     });

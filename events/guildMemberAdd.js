@@ -60,21 +60,17 @@ module.exports = member => {
       title: 'User Joined',
       fields: [
         {
-          name: 'Username',
-          value: `**${member.user.username}**#${member.user.discriminator}`,
+          name: 'User',
+          value: member.user.tag,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'User ID',
           value: member.id,
           inline: true
-        },
-        {
-          name: 'Joined At',
-          value: member.joinedAt.toUTCString(),
-          inline: false
         }
-      ]
+      ],
+      timestamp: member.joinedAt
     }}).catch(e => {
       member.client.log.error(e.stack);
     });

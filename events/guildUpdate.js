@@ -30,25 +30,26 @@ module.exports = (oldGuild, newGuild) => {
     if (row.log == 'false') return;
 
     newGuild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: newGuild.client.colors.green,
-      title: 'Guild Name Changed',
+      color: newGuild.client.colors.yellow,
+      title: 'Server Name Changed',
       fields: [
         {
-          name: 'Old Name',
+          name: 'Old Server Name',
           value: oldGuild.name,
           inline: true
         },
         {
-          name: 'New Name',
+          name: 'New Server Name',
           value: newGuild.name,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'Server ID',
           value: newGuild.id,
           inline: true
         }
-      ]
+      ],
+      timestamp: new Date()
     }}).catch(e => {
       newGuild.client.log.error(e.stack);
     });
