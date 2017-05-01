@@ -7,6 +7,7 @@
     "Updated `sqlite` `v2.6.0`",
     "Renamed `bot.js` to `bastion.js`",
     "Embed color changes",
+    "`error` and `warn` events' log can now be distinguished from regular `error` and `warn` logs",
     "Some minor changes"
   ],
   "added": [],
