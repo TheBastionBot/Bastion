@@ -44,6 +44,6 @@ require('./functions/Array.prototype');
 
 Bastion.login(Bastion.credentials.token);
 
-process.on('unhandledRejection', (reason, p) => {
-  console.log('\n[ Unhandled Rejection ] at:\nPromise:\n', p, '\n\nReason:\n', reason, '\n');
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('\n[ Unhandled Rejection ] at:\nPromise:\n', promise, '\n\nReason:\n', reason, '\n');
 });
