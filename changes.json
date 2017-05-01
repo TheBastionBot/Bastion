@@ -4,7 +4,8 @@
     "Updated `discord.js` to `v11.1.0`",
     "Updated `ffmpeg-binaries` `v3.2.2`",
     "Updated `mathjs` `v3.12.2`",
-    "Updated `sqlite` `v2.6.0`"
+    "Updated `sqlite` `v2.6.0`",
+    "Renamed `bot.js` to `bastion.js`"
   ],
   "added": [],
   "removed": [

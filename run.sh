@@ -18,9 +18,9 @@ fi
 echo -e "${CYAN}[Bastion]:${NC} Checking System..."
 echo
 
-if [ -r bot.js ]; then
+if [ -r bastion.js ]; then
     echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
-    nohup node bot.js > bastion.log 2>&1 &
+    nohup node bastion.js > bastion.log 2>&1 &
     echo $! > bastion.pid
     echo -e "${CYAN}[Bastion]:${NC} I've booted up [with ${GREEN}PID ${!}${NC}], and ready to roll."
 else
