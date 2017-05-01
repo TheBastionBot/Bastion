@@ -7,5 +7,7 @@
     "Updated `sqlite` `v2.6.0`"
   ],
   "added": [],
-  "removed": []
+  "removed": [
+    "Removed some `events` from `disabledEvents`."
+  ]
 }

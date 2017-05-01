@@ -22,12 +22,8 @@
 const Discord = require('discord.js');
 const Bastion = new Discord.Client({
   disabledEvents: [
-    'GUILD_MEMBERS_CHUNK',
-    'CHANNEL_PINS_UPDATE',
     'USER_NOTE_UPDATE',
-    // 'VOICE_STATE_UPDATE',
     'TYPING_START',
-    // 'VOICE_SERVER_UPDATE',
     'RELATIONSHIP_ADD',
     'RELATIONSHIP_REMOVE'
   ]
