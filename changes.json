@@ -5,7 +5,8 @@
     "Updated `ffmpeg-binaries` `v3.2.2`",
     "Updated `mathjs` `v3.12.2`",
     "Updated `sqlite` `v2.6.0`",
-    "Renamed `bot.js` to `bastion.js`"
+    "Renamed `bot.js` to `bastion.js`",
+    "Embed color changes"
   ],
   "added": [],
   "removed": [
