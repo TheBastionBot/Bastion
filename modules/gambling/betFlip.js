@@ -59,16 +59,16 @@ exports.run = (Bastion, message, args) => {
 
       recentUsers.push(message.author.id);
 
-      if (outcome.toLowerCase() == args[1].toLowerCase()) {
+      if (outcome.toLowerCase() === args[1].toLowerCase()) {
         prize = args[0] < 50 ? parseInt(args[0]) + outcomes.length : args[0] < 100 ? parseInt(args[0]) : parseInt(args[0]) * 2;
         result = `Congratulations! You won the bet.\nYou won **${prize}** Bastion Currencies.`;
-        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)+parseInt(prize)} WHERE userID=${message.author.id}`).catch(e => {
+        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies) + parseInt(prize)} WHERE userID=${message.author.id}`).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
       else {
         result = 'Sorry, you lost the bet. Better luck next time.';
-        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)-parseInt(args[0])} WHERE userID=${message.author.id}`).catch(e => {
+        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies) - parseInt(args[0])} WHERE userID=${message.author.id}`).catch(e => {
           Bastion.log.error(e.stack);
         });
       }

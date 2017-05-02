@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else {
-              sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args} WHERE userID=${user}`).catch(e => {
+              sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args} WHERE userID=${user}`).catch(e => {
                 Bastion.log.error(e.stack);
               });
             }

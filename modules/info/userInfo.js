@@ -27,13 +27,13 @@ exports.run = (Bastion, message, args) => {
     nick = "-";
   }
   let status = user.presence.status;
-  if (status == "online") {
+  if (status === "online") {
     status = "Online";
   }
-  else if (status == "idle") {
+  else if (status === "idle") {
     status = "Idle";
   }
-  else if (status == "dnd") {
+  else if (status === "dnd") {
     status = "Do Not Disturb";
   }
   else {
@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
   if (user.presence.game && user.presence.game.streaming) {
     isStream = 'Current Stream';
   }
-  if (user.presence.game == null) {
+  if (user.presence.game === null) {
     game = '-';
   }
   else if (user.presence.game.streaming) {
@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
     game = user.presence.game.name;
   }
   let roles = message.guild.members.get(user.id).roles.map(r=>r.name).slice(1).join("\n");
-  if (roles == '') roles = '-';
+  if (roles === '') roles = '-';
 
   message.channel.send({embed: {
     color: Bastion.colors.blue,

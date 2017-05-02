@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
 
-  if (args.length >= 1 && (args == 'online' || args == 'idle' || args == 'dnd' || args == 'invisible') ) {
+  if (args.length >= 1 && (args === 'online' || args === 'idle' || args === 'dnd' || args === 'invisible') ) {
     Bastion.user.setStatus(args.join(' ')).then(() => {
       message.channel.send({embed: {
         color: Bastion.colors.green,

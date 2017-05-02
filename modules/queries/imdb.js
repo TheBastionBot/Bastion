@@ -84,7 +84,7 @@ exports.run = (Bastion, message, args) => {
         }
       ],
       image: {
-        url: movie.poster != 'N/A' ? movie.poster : 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg'
+        url: movie.poster !== 'N/A' ? movie.poster : 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg'
       },
       footer: {
         text: 'Powered by IMDb'

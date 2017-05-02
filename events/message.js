@@ -138,7 +138,7 @@ module.exports = message => {
       else {
         let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
         if (currentLevel > profile.level) {
-          sql.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies+currentLevel*5}, xp=${profile.xp+1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
+          sql.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
           sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
@@ -156,7 +156,7 @@ module.exports = message => {
           });
         }
         else {
-          sql.run(`UPDATE profiles SET xp=${profile.xp+1} WHERE userID=${message.author.id}`).catch(e => {
+          sql.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
         }

@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   }
   sql.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).then(profile => {
     if (!profile) {
-      if (args == message.author) {
+      if (args === message.author) {
         return message.channel.send({embed: {
           color: Bastion.colors.green,
           description: `Your profile is now created, <@${args.id}>`
@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
         },
         {
           name: 'Rank',
-          value: profile.rank+1,
+          value: profile.rank + 1,
           inline: true
         },
         {

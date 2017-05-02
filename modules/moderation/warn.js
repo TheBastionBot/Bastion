@@ -65,7 +65,7 @@ exports.run = (Bastion, message, args) => {
     guilds[message.guild.id][user.id] = 1;
   }
   else {
-    if (guilds[message.guild.id][user.id] == 2) {
+    if (guilds[message.guild.id][user.id] === 2) {
       message.guild.members.get(user.id).kick().then(member => {
         delete guilds[message.guild.id][user.id];
         message.channel.send({embed: {
@@ -95,7 +95,7 @@ exports.run = (Bastion, message, args) => {
         sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
           if (!row) return;
 
-          if (row.modLog == 'true') {
+          if (row.modLog === 'true') {
             message.guild.channels.get(row.modLogChannelID).send({embed: {
               color: Bastion.colors.orange,
               title: 'Kicked user',
@@ -130,7 +130,7 @@ exports.run = (Bastion, message, args) => {
               },
               timestamp: new Date()
             }}).then(msg => {
-              sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+              sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                 Bastion.log.error(e.stack);
               });
             }).catch(e => {
@@ -190,7 +190,7 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row) return;
 
-    if (row.modLog == 'true') {
+    if (row.modLog === 'true') {
       message.guild.channels.get(row.modLogChannelID).send({embed: {
         color: Bastion.colors.orange,
         title: 'Warned user',
@@ -225,7 +225,7 @@ exports.run = (Bastion, message, args) => {
         },
         timestamp: new Date()
       }}).then(msg => {
-        sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+        sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
           Bastion.log.error(e.stack);
         });
       }).catch(e => {

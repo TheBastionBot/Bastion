@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
   else {
     let n = [];
     for (let i = 1; i <= Object.keys(quotes).length; i++) {
-      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) != -1) {
+      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) !== -1) {
         n.push(i);
       }
     }

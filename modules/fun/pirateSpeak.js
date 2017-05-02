@@ -89,7 +89,7 @@ function translate(text) {
       word += character;
     // If the character is not a letter, then we hit the end of a word, so we should translate the current word and add it to the translation.
     else {
-      if (word != "") {
+      if (word !== "") {
         // If we've just finished a word, translate it
         let pirateWord = translateWord(word);
         translatedText += pirateWord;

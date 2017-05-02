@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
     for (let i = 0; i < profiles.length; i++) {
       user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? `${message.guild.members.get(profiles[i].userID).user.username}#${message.guild.members.get(profiles[i].userID).user.discriminator}` : profiles[i].userID
       fields.push({
-        name: `${i+1}. ${user}`,
+        name: `${i + 1}. ${user}`,
         value: `${profiles[i].bastionCurrencies} Bastion Currencies`,
         inline: true
       });

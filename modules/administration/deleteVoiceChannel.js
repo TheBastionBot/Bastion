@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
 
   channel = message.guild.channels.filter(c => c.type === 'voice').find('name', args.join(' '));
   if (channel) {
-    if (!channel.permissionsFor(message.author).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+    if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
     if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
       return message.channel.send({embed: {
         color: Bastion.colors.red,

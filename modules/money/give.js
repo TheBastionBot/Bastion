@@ -55,7 +55,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
       else {
-        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args[0]} WHERE userID=${user}`).catch(e => {
+        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args[0]} WHERE userID=${user}`).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
@@ -77,7 +77,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    if (message.author.id == user) {
+    if (message.author.id === user) {
       return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'You can\'t give yourself Bastion Currencies!'
@@ -102,14 +102,14 @@ exports.run = (Bastion, message, args) => {
           });
         }
         else {
-          sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args[0]} WHERE userID=${user}`).catch(e => {
+          sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args[0]} WHERE userID=${user}`).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
-      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(sender.bastionCurrencies)-args[0]} WHERE userID=${message.author.id}`).then(() => {
+      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(sender.bastionCurrencies) - args[0]} WHERE userID=${message.author.id}`).then(() => {
         message.channel.send({embed: {
           color: Bastion.colors.green,
           description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`

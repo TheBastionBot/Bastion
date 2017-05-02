@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.author).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,

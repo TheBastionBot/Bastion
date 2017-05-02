@@ -41,14 +41,14 @@ exports.run = (Bastion, message, args) => {
         description: typingArticles[index]
       }}).then(() => {
         const collector = message.channel.createMessageCollector(
-          msg => msg.content == typingArticles[index],
+          msg => msg.content === typingArticles[index],
           {
             time: 5 * 60 * 1000,
             maxMatches: 1
           }
         );
         collector.on('end', (collection, reason) => {
-          if (reason == 'time') {
+          if (reason === 'time') {
             color = Bastion.colors.red;
             result = 'Game ended. Unfortunately, no one was able to type the article on time.';
           }
@@ -61,7 +61,7 @@ exports.run = (Bastion, message, args) => {
             title: 'Typing Game',
             description: result
           }}).then(() => {
-            activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id)+1, 1);
+            activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id) + 1, 1);
           }).catch(e => {
             Bastion.log.error(e.stack);
           });

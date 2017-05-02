@@ -164,7 +164,7 @@ exports.run = (Bastion, message, args) => {
       },
       fields: stats,
       thumbnail: {
-        url: data.profile.avatar != '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
+        url: data.profile.avatar !== '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
       }
     }}).catch(e => {
       Bastion.log.error(e.stack);

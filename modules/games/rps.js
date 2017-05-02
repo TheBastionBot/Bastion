@@ -37,21 +37,21 @@ exports.run = (Bastion, message, args) => {
   }
   let botOutcome = outcomes.random();
   let result = 'I win! :yum:';
-  if (userOutcome == botOutcome) {
+  if (userOutcome === botOutcome) {
     result = 'Oh damn! It\'s a draw, dude. :confused:';
   }
-  else if (userOutcome == 'ROCK') {
-    if (botOutcome == 'SCISSOR') {
+  else if (userOutcome === 'ROCK') {
+    if (botOutcome === 'SCISSOR') {
       result = 'You win. :clap:';
     }
   }
-  else if (userOutcome == 'PAPER') {
-    if (botOutcome == 'ROCK') {
+  else if (userOutcome === 'PAPER') {
+    if (botOutcome === 'ROCK') {
       result = 'You win. :clap:';
     }
   }
-  else if (userOutcome == 'SCISSOR') {
-    if (botOutcome == 'PAPER') {
+  else if (userOutcome === 'SCISSOR') {
+    if (botOutcome === 'PAPER') {
       result = 'You win. :clap:';
     }
   }

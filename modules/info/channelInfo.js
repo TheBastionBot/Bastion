@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (channel) {
-    if (channel.type == 'text') {
+    if (channel.type === 'text') {
       title = 'Text Channel Info';
     }
     else {
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
         },
         {
           name: 'Topic',
-          value: (channel.topic == null || channel.topic.length < 2) ? '-' : channel.topic,
+          value: (channel.topic === null || channel.topic.length < 2) ? '-' : channel.topic,
           inline: false
         },
         {

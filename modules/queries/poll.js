@@ -103,13 +103,13 @@ exports.run = (Bastion, message, args) => {
         }
         let count = {};
         for (let i = 0; i < pollRes.length; i++) {
-          count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]]+1 : 1;
+          count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]] + 1 : 1;
         }
         let result = [];
         for (let i = 1; i < args.length; i++) {
           result.push({
             name: args[i],
-            value: `${((count[Object.keys(count)[i-1]] - 1) / (pollRes.length - (args.length - 1))) * 100}%`,
+            value: `${((count[Object.keys(count)[i - 1]] - 1) / (pollRes.length - (args.length - 1))) * 100}%`,
             inline: true
           });
         }

@@ -85,7 +85,7 @@ exports.run = (Bastion, message, args) => {
     sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
       if (!row) return;
 
-      if (row.modLog == 'true') {
+      if (row.modLog === 'true') {
         message.guild.channels.get(row.modLogChannelID).send({embed: {
           color: Bastion.colors.red,
           title: 'Banned user',
@@ -120,7 +120,7 @@ exports.run = (Bastion, message, args) => {
           },
           timestamp: new Date()
         }}).then(msg => {
-          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
             Bastion.log.error(e.stack);
           });
         }).catch(e => {

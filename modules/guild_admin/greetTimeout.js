@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.send({embed: {
     color: Bastion.colors.green,
     title: 'Greet Timeout set to:',
-    description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] == 0 ? '∞' : `${args[0]} sec.`
+    description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] === 0 ? '∞' : `${args[0]} sec.`
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });

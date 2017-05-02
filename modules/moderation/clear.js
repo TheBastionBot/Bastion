@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.author).hasPermission('MANAGE_MESSAGES')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.channel.permissionsFor(message.member).hasPermission('MANAGE_MESSAGES')) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     if (msgs.size < 2 || msgs.length < 2) {
-      if ((msgs.size == 1 || msgs.length == 1) && (user || args.includes('--bots'))) {
+      if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
         error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
       }
       else {

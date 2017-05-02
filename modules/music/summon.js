@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
-      if (musicChannel.musicTextChannelID != message.channel.id) return;
+      if (musicChannel.musicTextChannelID !== message.channel.id) return;
       if (!musicChannel.musicVoiceChannelID) {
         return message.channel.send({embed: {
           color: Bastion.colors.red,
@@ -62,7 +62,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID))) {
+      if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID))) {
         return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `I can't join your voice channel <@${message.author.id}>.`

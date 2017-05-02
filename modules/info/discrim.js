@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  let members = message.guild.members.filter(m => m.user.discriminator == args[0]).map(m => m.user);
+  let members = message.guild.members.filter(m => m.user.discriminator === args[0]).map(m => m.user);
   let total = members.length;
   members = members.length > 0 ? members.slice(0,10).join(', ') : 'None';
 

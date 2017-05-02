@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
       }
     }}).then(msg => {
       const collector = msg.channel.createMessageCollector(
-        m => !m.author.bot && m.content.split(' ').length == acroLen && matchAcronym(acronym, m.content.split(' ')) && !activeChannels[message.channel.id].usersSubmitted.includes(m.author.id),
+        m => !m.author.bot && m.content.split(' ').length === acroLen && matchAcronym(acronym, m.content.split(' ')) && !activeChannels[message.channel.id].usersSubmitted.includes(m.author.id),
         { time: 2 * 60 * 1000 }
       );
       collector.on('collect', (msg, sentences) => {
@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
         });
       });
       collector.on('end', (collection, reason) => {
-        if (collection.size == 0) {
+        if (collection.size === 0) {
           message.channel.send({embed: {
             color: Bastion.colors.red,
             title: 'Acrophobia',
@@ -86,7 +86,7 @@ exports.run = (Bastion, message, args) => {
         else {
           let submissions = [];
           for (let i = 0; i < collection.size; i++) {
-            submissions.push(`**${i+1}.** ${collection.map(a => a.content)[i]}`);
+            submissions.push(`**${i + 1}.** ${collection.map(a => a.content)[i]}`);
           }
           msg.channel.send({embed: {
             color: Bastion.colors.green,
@@ -129,7 +129,7 @@ exports.run = (Bastion, message, args) => {
               });
             });
             votesCollector.on('end', votes => {
-              if (votes.size == 0) {
+              if (votes.size === 0) {
                 msg.channel.send({embed: {
                   color: Bastion.colors.red,
                   title: 'Acrophobia',
@@ -149,7 +149,7 @@ exports.run = (Bastion, message, args) => {
                 votes = votes.map(v => v.content);
                 for (let i = collection.size; i > 0; i--) votes.unshift(`${i}`);
                 let count = {};
-                for (let i = 0; i < votes.length; i++) count[votes[i]] = count[votes[i]] ? count[votes[i]]+1 : 1;
+                for (let i = 0; i < votes.length; i++) count[votes[i]] = count[votes[i]] ? count[votes[i]] + 1 : 1;
                 let winningVoteIndex = Object.keys(count).reduce(function(a, b){ return count[a] > count[b] ? a : b });
                 msg.channel.send({embed: {
                   color: Bastion.colors.blue,
@@ -206,7 +206,7 @@ exports.help = {
 
 function matchAcronym(charPool, strArr) {
   for (let i = 0; i < charPool.length; i++) {
-    if (charPool[i] != strArr[i].charAt(0).toUpperCase()) {
+    if (charPool[i] !== strArr[i].charAt(0).toUpperCase()) {
       return false;
     }
   }

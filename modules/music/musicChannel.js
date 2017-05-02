@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'Music channel',
-            value: message.guild.channels.filter(c => c.type == 'voice').get(args[0]) ? message.guild.channels.filter(c => c.type == 'voice').get(args[0]).name : 'Invalid'
+            value: message.guild.channels.filter(c => c.type === 'voice').get(args[0]) ? message.guild.channels.filter(c => c.type === 'voice').get(args[0]).name : 'Invalid'
           }
         ]
       }}).catch(e => {

@@ -24,7 +24,7 @@ const getRandomInt = require('../../functions/getRandomInt');
 
 exports.run = (Bastion, message, args) => {
   let num = parseInt(args[0]);
-  if (args[0] != undefined && !isNaN(num)) {
+  if (args[0] !== undefined && !isNaN(num)) {
     xkcd(function (data) {
       xkcd(num > data.num ? data.num : num, function (data) {
         message.channel.send({embed: {
@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
       });
     });
   }
-  else if (args[0] != undefined && args[0].toLowerCase() == 'latest') {
+  else if (args[0] !== undefined && args[0].toLowerCase() === 'latest') {
     xkcd(function (data) {
       message.channel.send({embed: {
         color: Bastion.colors.blue,

@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (row.chat == 'false') {
+    if (row.chat === 'false') {
       sql.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
