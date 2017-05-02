@@ -49,6 +49,7 @@ exports.run = (Bastion, message, args) => {
     if (role === null) return;
     selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
     if (!selfAssignableRoles.includes(role.id)) return;
+    if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
     message.guild.members.get(message.author.id).addRole(role).then(() => {
       message.channel.send({embed: {
