@@ -26,7 +26,7 @@ let recentUsers = [];
 exports.run = (Bastion, message, args) => {
   if (!recentUsers.includes(message.author.id)) {
     if (!parseInt(args[0]) || !/^(heads|tails)$/i.test(args[1])) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.yellow,
         title: 'Usage',
         description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
     if (args[0] < 2) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'Minimum bet amount is 2 Bastion Currencies.'
       }});
@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
 
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (args[0] > profile.bastionCurrencies) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`
         }}).catch(e => {
@@ -72,7 +72,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.blue,
         title: `Flipped ${outcome}`,
         description: result
@@ -88,7 +88,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `${message.author} you have gambled recently for this game, please wait at least 30 seconds before gambling again.`
     }}).catch(e => {
@@ -104,6 +104,7 @@ exports.config = {
 exports.help = {
   name: 'betflip',
   description: 'Bets a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you win more Bastion Currencies. If you lose, you lose the amount of currency you\'ve bet.',
+  botPermission: '',
   permission: '',
   usage: 'betflip <amount> <heads|tails>',
   example: ['betflip 100 heads']

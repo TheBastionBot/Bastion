@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   let sweepedUser = message.channel.members.filter(m => !m.user.bot).random();
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Sweeped user',
     fields: [
@@ -49,6 +49,7 @@ exports.config = {
 exports.help = {
   name: 'sweep',
   description: 'Shows a random user from the channel.',
+  botPermission: '',
   permission: '',
   usage: 'sweep',
   example: []

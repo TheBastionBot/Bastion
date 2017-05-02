@@ -14,6 +14,7 @@
     "Rewritten `events` for d.js `v11.1.0`",
     "Rewritten `administration` module",
     "Rewritten `fun` module",
+    "Rewritten `gambling` module",
     "Some minor changes"
   ],
   "added": [
