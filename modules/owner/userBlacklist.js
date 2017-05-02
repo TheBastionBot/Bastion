@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite')
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -62,7 +62,7 @@ exports.run = (Bastion, message, args) => {
         title = 'Removed from blacklisted users';
       }
       else {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.yellow,
           title: 'Usage',
           description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -71,7 +71,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
 
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.red,
         title: title,
         description: user.join(', ')
@@ -93,7 +93,8 @@ exports.config = {
 exports.help = {
   name: 'userblacklist',
   description: 'Adds/Removes user, by mention or user ID, to BOT blacklist, they can\'t use any of the bot\'s commands.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',
   example: ['userblacklist add @user#001 224433119988776655', 'userblacklist rem 224433119988776655 @user#0001', 'userblacklist + @user#001 224433119988776655', 'userblacklist - 224433119988776655 @user#0001']
 };

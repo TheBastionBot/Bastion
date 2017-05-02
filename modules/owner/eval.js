@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     message.delete().catch(e => {
       Bastion.log.error(e.stack);
     });
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.green,
       fields: [
         {
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
     message.delete().catch(e => {
       Bastion.log.error(e.stack);
     });
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       fields: [
         {
@@ -71,7 +71,8 @@ exports.config = {
 exports.help = {
   name: 'eval',
   description: 'Evaluates any JavaScript statement.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'eval <JavaScript code>',
   example: ['eval message.guild.members.size']
 };

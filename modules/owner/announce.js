@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,13 +32,13 @@ exports.run = (Bastion, message, args) => {
   }
 
   for (let i = 0; i < Bastion.guilds.size; i++) {
-    Bastion.guilds.map(g => g.defaultChannel)[i].sendMessage('', {embed: {
+    Bastion.guilds.map(g => g.defaultChannel)[i].send({embed: {
       color: Bastion.colors.blue,
       description: args.join(' ')
     }}).catch(() => {});
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.green,
     title: 'Announced',
     description: args.join(' ')
@@ -54,7 +54,8 @@ exports.config = {
 exports.help = {
   name: 'announce',
   description: 'Sends a message to all servers\' default channel, the bot is connected to.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'announce <message>',
   example: ['announce Just a random announcement.']
 };

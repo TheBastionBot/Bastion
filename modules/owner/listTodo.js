@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo || todo.list == '[]') {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.red,
         title: 'Todo list not found',
         description: `${message.author.username}, you haven't created a todo list.`
@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
         i = (args > 0 && args < list.length/10+1) ? args : 1;
       }
       i = i - 1;
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.dark_grey,
         description: `${message.author.username}, here's your todo list.`,
         fields: [
@@ -74,7 +74,8 @@ exports.config = {
 exports.help = {
   name: 'listtodo',
   description: 'Shows your todo list if you have one. It takes page number as an optional argument.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'listTodo [page_no]',
   example: ['listTodo', 'listTodo 2']
 };

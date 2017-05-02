@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!/^[0-9]{18}$/.test(args[0])) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (Bastion.users.get(args[0])) {
-    Bastion.users.get(args[0]).sendMessage('', {embed: {
+    Bastion.users.get(args[0]).send({embed: {
       color: Bastion.colors.blue,
       description: args.slice(1).join(' ')
     }}).catch(e => {
@@ -48,7 +48,8 @@ exports.config = {
 exports.help = {
   name: 'messageuser',
   description: 'Sends a private message to a specified user (by ID) of a server the bot is connected to.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'messageUser <user_id> <message>',
   example: ['messageUser USER_ID Hello, how are you?']
 };

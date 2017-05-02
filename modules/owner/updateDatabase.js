@@ -24,82 +24,34 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
-
-  let step = 0;
-  try {
-    sql.get('SELECT autoAssignableRoles FROM guildSettings').catch(e => {
-      sql.run('ALTER TABLE guildSettings ADD autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\'').then(() => {
-        message.channel.sendMessage('', {embed: {
-          color: Bastion.colors.green,
-          description: `Part ${++step} complete.`
-        }}).then(msg => {
-          msg.delete(3000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    });
-    sql.get('SELECT modLog FROM guildSettings').catch(e => {
-      sql.run('ALTER TABLE guildSettings ADD modLog TEXT NOT NULL DEFAULT \'false\'').then(() => {
-        message.channel.sendMessage('', {embed: {
-          color: Bastion.colors.green,
-          description: `Part ${++step} complete.`
-        }}).then(msg => {
-          msg.delete(3000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    });
-    sql.get('SELECT modLogChannelID FROM guildSettings').catch(e => {
-      sql.run('ALTER TABLE guildSettings ADD modLogChannelID TEXT').then(() => {
-        message.channel.sendMessage('', {embed: {
-          color: Bastion.colors.green,
-          description: `Part ${++step} complete.`
-        }}).then(msg => {
-          msg.delete(3000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    });
-    sql.get('SELECT modCaseNo FROM guildSettings').catch(e => {
-      sql.run('ALTER TABLE guildSettings ADD modCaseNo TEXT NOT NULL DEFAULT \'1\'').then(() => {
-        message.channel.sendMessage('', {embed: {
-          color: Bastion.colors.green,
-          description: `Part ${++step} complete.`
-        }}).then(msg => {
-          msg.delete(3000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    });
-  } catch (e) {
-    Bastion.log.error(e.stack);
-    return message.channel.sendMessage('', {embed: {
-      color: Bastion.colors.red,
-      description: 'Some error has occured while updating database, please check the console. And report it to Bastion Developers at https://discord.gg/fzx8fkt'
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
-  }
+  //
+  // let step = 0;
+  // try {
+  //   sql.get('SELECT <COLUMNS> FROM <TABLE>').catch(e => {
+  //     sql.run('ALTER TABLE <TABLE> ADD <COLUMN> <CONSTRAINTS>').then(() => {
+  //       message.channel.send({embed: {
+  //         color: Bastion.colors.green,
+  //         description: `Part ${++step} complete.`
+  //       }}).then(msg => {
+  //         msg.delete(3000).catch(e => {
+  //           Bastion.log.error(e.stack);
+  //         });
+  //       }).catch(e => {
+  //         Bastion.log.error(e.stack);
+  //       });
+  //     }).catch(e => {
+  //       Bastion.log.error(e.stack);
+  //     });
+  //   });
+  // } catch (e) {
+  //   Bastion.log.error(e.stack);
+  //   return message.channel.send({embed: {
+  //     color: Bastion.colors.red,
+  //     description: 'Some error has occured while updating database, please check the console. And report it to Bastion Developers at https://discord.gg/fzx8fkt'
+  //   }}).catch(e => {
+  //     Bastion.log.error(e.stack);
+  //   });
+  // }
 };
 
 exports.config = {
@@ -109,7 +61,8 @@ exports.config = {
 exports.help = {
   name: 'updatedatabase',
   description: 'Updates Bastion\'s Database to the current release.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'updateDatabase',
   example: []
 };

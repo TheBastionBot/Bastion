@@ -22,7 +22,7 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   Bastion.user.setGame(args.slice(1).join(' '), args[0]).then(() => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.green,
       description: `${Bastion.user.username} is now streaming **${args.slice(1).join(' ')}**`
     }}).catch(e => {
@@ -50,7 +50,8 @@ exports.config = {
 exports.help = {
   name: 'setstream',
   description: 'Set the bot to streaming mode with a given twitch link and name.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'setStream <twitch> <text>',
   example: ['setStream https\://twitch.tv/TheGamerFDN The Gamer Foundation']
 };

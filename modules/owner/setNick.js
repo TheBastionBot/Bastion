@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
 
   if (args.length > 0) {
     message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
       }}).catch(e => {
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     message.guild.members.get(Bastion.user.id).setNickname('').then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: `${Bastion.user.username}'s nick has been reset on this guild.`
       }}).catch(e => {
@@ -55,7 +55,8 @@ exports.config = {
 exports.help = {
   name: 'setnick',
   description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'setNick [text]',
   example: ['setNick NewNick', 'setNick']
 };

@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
 
   sql.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers == '') {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'You don\'t have any triggers.',
       }}).catch(e => {
@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
       i = (args > 0 && args < triggers.length/10+1) ? args : 1;
     }
     i = i - 1;
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.dark_grey,
       title: 'List of triggers',
       description: triggers.slice(i*10, (i*10)+10).join('\n'),
@@ -66,7 +66,8 @@ exports.config = {
 exports.help = {
   name: 'listtriggers',
   description: 'Lists all the triggers you have added. It takes page number as an optional argument.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'listTriggers [page_no]',
   example: ['listTriggers', 'listTriggers 2']
 };

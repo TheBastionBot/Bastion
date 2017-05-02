@@ -22,6 +22,7 @@
     "Rewritten `moderation` module",
     "Rewritten `money` module",
     "Rewritten `music` module",
+    "Rewritten `owner` module",
     "Some minor changes"
   ],
   "added": [

@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (!args[0]) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   sql.all(`DELETE FROM triggers WHERE trigger="${args.join(' ').replace(/"/g, '\'')}"`).then(triggers => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       title: 'Trigger deleted',
       description: args.join(' ')
@@ -54,7 +54,8 @@ exports.config = {
 exports.help = {
   name: 'deletetrigger',
   description: 'Deletes a trigger and response specified by it\'s trigger.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'deleteTrigger <trigger>',
   example: ['deleteTrigger Hi, there?']
 };
