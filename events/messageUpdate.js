@@ -30,14 +30,14 @@ module.exports = (oldMessage, newMessage) => {
       });
     }
     newMessage.client.fetchApplication().then(app => {
-      newMessage.client.users.get(app.owner.id).sendMessage('', {embed: {
+      newMessage.client.users.get(app.owner.id).send({embed: {
         color: newMessage.client.colors.red,
         title: 'ATTENTION!',
         description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
         fields: [
           {
             name: 'Responsible user',
-            value: `${newMessage.author.username}#${newMessage.author.discriminator} - ${newMessage.author.id}`
+            value: `${newMessage.author.tag} - ${newMessage.author.id}`
           }
         ]
       }}).catch(e => {
@@ -52,7 +52,7 @@ module.exports = (oldMessage, newMessage) => {
   if (newMessage.author.bot) return;
 
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
-    if (guild.filterInvite == 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission("ADMINISTRATOR")) {
+    if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {
         newMessage.delete().catch(e => {
           newMessage.client.log.error(e.stack);

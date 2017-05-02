@@ -26,14 +26,14 @@ module.exports = member => {
   sql.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
-    if (row.greet == 'true') {
+    if (row.greet === 'true') {
       let greetMsg = row.greetMessage;
       greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
       greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
       greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
       greetMsg = greetMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
-      member.guild.channels.get(row.greetChannelID).sendMessage('', {embed: {
+      member.guild.channels.get(row.greetChannelID).send({embed: {
         color: member.client.colors.green,
         title: `Hello ${member.displayName}`,
         description: greetMsg
@@ -53,9 +53,9 @@ module.exports = member => {
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
-    if (row.log == 'false') return;
+    if (row.log === 'false') return;
 
-    member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+    member.guild.channels.get(row.logChannelID).send({embed: {
       color: member.client.colors.green,
       title: 'User Joined',
       fields: [

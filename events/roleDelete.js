@@ -25,9 +25,9 @@ sql.open('./data/Bastion.sqlite');
 module.exports = role => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${role.guild.id}`).then(row => {
     if (!row) return;
-    if (row.log == 'false') return;
+    if (row.log === 'false') return;
 
-    role.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+    role.guild.channels.get(row.logChannelID).send({embed: {
       color: role.client.colors.red,
       title: 'Role Deleted',
       fields: [

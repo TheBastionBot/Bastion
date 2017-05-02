@@ -26,14 +26,14 @@ module.exports = member => {
   sql.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
-    if (row.farewell == 'true') {
+    if (row.farewell === 'true') {
       let farewellMsg = row.farewellMessage;
       farewellMsg = farewellMsg.replace(/\$user/ig, `<@${member.id}>`);
       farewellMsg = farewellMsg.replace(/\$server/ig, member.guild.name);
       farewellMsg = farewellMsg.replace(/\$username/ig, member.displayName);
       farewellMsg = farewellMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
-      member.guild.channels.get(row.farewellChannelID).sendMessage('', {embed: {
+      member.guild.channels.get(row.farewellChannelID).send({embed: {
         color: member.client.colors.red,
         title: `Goodbye ${member.displayName}!`,
         description: farewellMsg + '\n:wave:'
@@ -56,9 +56,9 @@ module.exports = member => {
 
     sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
       if (!row) return;
-      if (row.log == 'false') return;
+      if (row.log === 'false') return;
 
-      member.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+      member.guild.channels.get(row.logChannelID).send({embed: {
         color: member.client.colors.red,
         title: 'User Left',
         fields: [

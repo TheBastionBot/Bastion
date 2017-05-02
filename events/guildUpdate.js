@@ -23,13 +23,13 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldGuild, newGuild) => {
-  if (oldGuild.name == newGuild.name) return;
+  if (oldGuild.name === newGuild.name) return;
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newGuild.id}`).then(row => {
     if (!row) return;
-    if (row.log == 'false') return;
+    if (row.log === 'false') return;
 
-    newGuild.channels.get(row.logChannelID).sendMessage('', {embed: {
+    newGuild.channels.get(row.logChannelID).send({embed: {
       color: newGuild.client.colors.yellow,
       title: 'Server Name Changed',
       fields: [

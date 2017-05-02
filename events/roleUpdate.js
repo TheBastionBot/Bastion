@@ -27,9 +27,9 @@ module.exports = (oldRole, newRole) => {
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newRole.guild.id}`).then(row => {
     if (!row) return;
-    if (row.log == 'false') return;
+    if (row.log === 'false') return;
 
-    newRole.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+    newRole.guild.channels.get(row.logChannelID).send({embed: {
       color: newRole.client.colors.yellow,
       title: 'Role Name Changed',
       fields: [
