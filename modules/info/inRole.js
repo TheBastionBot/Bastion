@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -35,15 +35,10 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (role) {
-    let users = [];
-    for (let i = 0; i < role.members.size; i++) {
-      users.push(`**${role.members.map(r => r.user)[i].username}**#${role.members.map(r => r.user)[i].discriminator}`);
-    }
-
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
-      title: `List of Members in ${role.name} role:\n`,
-      description: users.join('\n'),
+      title: `Members in ${role.name} role:\n`,
+      description: role.members.size > 10 ? role.members.map(m => m.user.tag).splice(0, 10).join('\n') + `\nand ${role.members.size - 10} members.` :  role.members.map(m => m.user.tag).join('\n'),
       thumbnail: {
         url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`,
       }
@@ -52,7 +47,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'The specified role was not found.'
     }}).catch(e => {
@@ -68,6 +63,7 @@ exports.config = {
 exports.help = {
   name: 'inrole',
   description: 'Shows the list of all the users in a specified role.',
+  botPermission: '',
   permission: '',
   usage: 'inRole <Role Name|@role-mention>',
   example: ['inRole Role Name', 'inrole @roleMention']

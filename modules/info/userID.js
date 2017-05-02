@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
     user = message.author;
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     fields: [
       {
@@ -50,6 +50,7 @@ exports.config = {
 exports.help = {
   name: 'userid',
   description: 'Shows the mentioned user\'s ID. If no user is mentioned, shows your ID.',
+  botPermission: '',
   permission: '',
   usage: 'userID [@user-mention]',
   example: ['userID @user#0001', 'userID']

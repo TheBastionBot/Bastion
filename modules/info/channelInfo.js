@@ -29,12 +29,12 @@ exports.run = (Bastion, message, args) => {
 
   if (channel) {
     if (channel.type == 'text') {
-      title = 'Text channel Info';
+      title = 'Text Channel Info';
     }
     else {
-      title = 'Voice channel Info';
+      title = 'Voice Channel Info';
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: title,
       fields: [
@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `No channel found with ID: **${args[0]}**`
     }}).catch(e => {
@@ -85,7 +85,8 @@ exports.config = {
 exports.help = {
   name: 'channelinfo',
   description: 'Shows information about the mentioned channel. If no channel is mentioned, shows information about the current channel.',
+  botPermission: '',
   permission: '',
-  usage: 'channelInfo [#channel-mention]',
-  example: ['channelInfo #channel-name', 'channelinfo']
+  usage: 'channelInfo [#channel-mention | CHANNEL_ID]',
+  example: ['channelInfo #channel-name', 'channelInfo 221133445599667788', 'channelInfo']
 };

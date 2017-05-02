@@ -55,7 +55,7 @@ exports.run = (Bastion, message, args) => {
   let roles = message.guild.members.get(user.id).roles.map(r=>r.name).slice(1).join("\n");
   if (roles == '') roles = '-';
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'User Info',
     fields: [
@@ -115,6 +115,7 @@ exports.config = {
 exports.help = {
   name: 'userinfo',
   description: 'Shows information about the mentioned user. If no user is mentioned, shows information about you.',
+  botPermission: '',
   permission: '',
   usage: 'userInfo [@user-mention]',
   example: ['userInfo @user#0001', 'userInfo']

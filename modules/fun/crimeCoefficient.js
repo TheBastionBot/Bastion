@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!(user = message.mentions.users.first())) {
     user = message.author;
   }
-  user = `${user.username}#${user.discriminator}`;
+  user = user.tag;
   let userHash = 0;
   for (let i = 0; i < user.length; i++) {
     userHash += parseInt(user[i].charCodeAt(0));

@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (role) {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Role info',
       fields: [
@@ -77,7 +77,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'The specified role was not found.'
     }}).catch(e => {
@@ -93,6 +93,7 @@ exports.config = {
 exports.help = {
   name: 'roleinfo',
   description: 'Shows information about the specified role.',
+  botPermission: '',
   permission: '',
   usage: 'roleInfo <@role-mention|role_name>',
   example: ['roleInfo @Dark Knigths', 'roleInfo The Legends']

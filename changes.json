@@ -18,6 +18,7 @@
     "Rewritten `games` module",
     "Rewritten `guild_admin` module",
     "Rewritten `help` module",
+    "Rewritten `info` module",
     "Some minor changes"
   ],
   "added": [

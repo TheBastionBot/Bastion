@@ -24,12 +24,12 @@ exports.run = (Bastion, message, args) => {
     user = message.author;
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     fields: [
       {
         name: 'User',
-        value: `**${user.username}**#${user.discriminator}`
+        value: user.tag
       },
       {
         name: 'Avatar URL',
@@ -51,6 +51,7 @@ exports.config = {
 exports.help = {
   name: 'avatar',
   description: 'Shows a mentioned person\'s avatar. If no one is mentioned, it wil show your avatar.',
+  botPermission: '',
   permission: '',
   usage: 'avatar [@user-mention]',
   example: ['avatar @user#001', 'avatar']

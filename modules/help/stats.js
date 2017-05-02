@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Owner',
-        value: `${Bastion.users.get(Bastion.credentials.ownerId[0]).username}#${Bastion.users.get(Bastion.credentials.ownerId[0]).discriminator}`,
+        value: Bastion.users.get(Bastion.credentials.ownerId[0]).tag,
         inline: true
       },
       {

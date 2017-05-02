@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
     fields: [
       {
         name: 'User',
-        value: `**${sweepedUser.user.username}**#${sweepedUser.user.discriminator}`,
+        value: sweepedUser.user.tag,
         inline: true
       },
       {
