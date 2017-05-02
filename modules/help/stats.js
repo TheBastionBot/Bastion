@@ -22,7 +22,7 @@
 const toHRTime = require('pretty-ms');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     author: {
       name: `Bastion ${Bastion.package.version}`
@@ -99,6 +99,7 @@ exports.config = {
 exports.help = {
   name: 'stats',
   description: 'Display stats & info about the bot.',
+  botPermission: '',
   permission: '',
   usage: 'stats',
   example: []

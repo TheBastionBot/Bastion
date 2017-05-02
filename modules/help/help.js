@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (!args[0]) {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Help',
       description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
-    message.author.sendMessage('', {embed: {
+    message.author.send({embed: {
       color: Bastion.colors.blue,
       title: 'Bastion Discord BOT',
       url: 'https://bastion.js.org',
@@ -75,7 +75,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
 
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.yellow,
         fields: [
           {
@@ -117,7 +117,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
     else {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.red,
         description: `There's no **${args[0]}** command`
       }}).catch(e => {
@@ -134,6 +134,7 @@ exports.config = {
 exports.help = {
   name: 'help',
   description: 'Shows all the available commands. If a command name is specified as a argument, shows help about that command.',
+  botPermission: '',
   permission: '',
   usage: 'help [command_name]',
   example: ['help', 'help magic8ball']

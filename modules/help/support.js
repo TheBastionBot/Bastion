@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.yellow,
     title: 'Bastion BOT - Support Server',
     url: 'https://discord.gg/fzx8fkt',
@@ -43,6 +43,7 @@ exports.config = {
 exports.help = {
   name: 'support',
   description: 'Sends the invite link to Bastion BOT Support Server.',
+  botPermission: '',
   permission: '',
   usage: 'support',
   example: []

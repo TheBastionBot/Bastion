@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     description: `${parseInt(Bastion.ping)}ms`
   }}).catch(e => {
@@ -35,6 +35,7 @@ exports.config = {
 exports.help = {
   name: 'ping',
   description: 'Pings the bot and shows you the time the bot responded in.',
+  botPermission: '',
   permission: '',
   usage: 'ping',
   example: []
