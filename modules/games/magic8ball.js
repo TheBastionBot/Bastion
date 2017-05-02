@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || !args.join(' ').endsWith('?')) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
   	'Very doubtful'
   ];
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: args.join(' '),
     description: outcomes.random(),
@@ -71,6 +71,7 @@ exports.config = {
 exports.help = {
   name: 'magic8ball',
   description: 'Ask the Magic 8-Ball a polar (yes/no) question.',
+  botPermission: '',
   permission: '',
   usage: 'magic8ball <Question>?',
   example: ['magic8ball Do I need a new lease on life?']

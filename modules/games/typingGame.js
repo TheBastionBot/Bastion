@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
   if (!activeChannels.includes(message.channel.id)) {
     activeChannels.push(message.channel.id);
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Typing Game',
       description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`,
@@ -36,11 +36,11 @@ exports.run = (Bastion, message, args) => {
       }
     }}).then(msg => {
       let index = getRandomInt(1, Object.keys(typingArticles).length);
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.blue,
         description: typingArticles[index]
       }}).then(() => {
-        const collector = message.channel.createCollector(
+        const collector = message.channel.createMessageCollector(
           msg => msg.content == typingArticles[index],
           {
             time: 5 * 60 * 1000,
@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
             color = Bastion.colors.blue;
             result = `Game ended. Congratulations ${collection.map(m => m.author)[0]}! You won it.`;
           }
-          message.channel.sendMessage('', {embed: {
+          message.channel.send({embed: {
             color: color,
             title: 'Typing Game',
             description: result
@@ -74,7 +74,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.`
     }}).catch(e => {
@@ -90,6 +90,7 @@ exports.config = {
 exports.help = {
   name: 'typinggame',
   description: 'Starts a typing speed competition. The user to type the given article and send it first, wins. It automatically ends in 5 mins if no one is able to type the article by this time.',
+  botPermission: '',
   permission: '',
   usage: 'typingGame',
   example: []

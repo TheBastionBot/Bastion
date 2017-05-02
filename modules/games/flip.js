@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'You flipped:',
     description: outcome
@@ -47,6 +47,7 @@ exports.config = {
 exports.help = {
   name: 'flip',
   description: 'Flips a coin and gives you the the outcome (Heads or Tails). If a number is provided as an argument, it flips that no. of coins.',
+  botPermission: '',
   permission: '',
   usage: 'flip [no_of_coins]',
   example: ['flip', 'flip 5']

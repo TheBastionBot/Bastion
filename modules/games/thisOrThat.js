@@ -22,7 +22,7 @@
 const question = require('../../data/thisOrThat.json');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     description: question.random()
   }}).catch(e => {
@@ -37,6 +37,7 @@ exports.config = {
 exports.help = {
   name: 'thisorthat',
   description: 'Asks you a this or that question. Let\'s see how is your choice!',
+  botPermission: '',
   permission: '',
   usage: 'thisOrThat',
   example: []

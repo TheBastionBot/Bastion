@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'You rolled:',
     description: outcome
@@ -51,6 +51,7 @@ exports.config = {
 exports.help = {
   name: 'roll',
   description: 'Rolls a dice and gives you the the outcome. If a number is provided as an argument, it rolls that no. of dice.',
+  botPermission: '',
   permission: '',
   usage: 'roll [no_of_dice]',
   example: ['roll', 'roll 5']

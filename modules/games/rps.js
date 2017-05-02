@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
   ];
   let userOutcome = args.join(' ').toUpperCase();
   if (!outcomes.includes(userOutcome)) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
   }}).catch(e => {
@@ -71,6 +71,7 @@ exports.config = {
 exports.help = {
   name: 'rps',
   description: 'Play the classic *rock paper scissor* game with the bot.',
+  botPermission: '',
   permission: '',
   usage: 'rps <rock|paper|scissor>',
   example: ['rps Rock']
