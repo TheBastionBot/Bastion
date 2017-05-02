@@ -21,6 +21,15 @@
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
@@ -72,6 +81,7 @@ exports.config = {
 exports.help = {
   name: 'createtextchannel',
   description: 'Creates a new text channel with a given name.',
+  botPermission: 'Manage Channels',
   permission: 'Manage Channels',
   usage: 'createTextChannel <Channel Name>',
   example: ['createTextChannel Channel Name']

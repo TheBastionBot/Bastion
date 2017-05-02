@@ -20,7 +20,16 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.author).hasPermission('MANAGE_CHANNELS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.channel.permissionsFor(message.author).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (name.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
@@ -33,7 +42,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.setName(args.join('-')).then(() => {
     message.channel.send({embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.yellow,
       title: 'Channel Name Changed',
       description: args.join('-')
     }}).catch(e => {
@@ -51,6 +60,7 @@ exports.config = {
 exports.help = {
   name: 'renametextchannel',
   description: 'Renames the current text channel to a given new name.',
+  botPermission: 'Manage Channels',
   permission: 'Manage Channels',
   usage: 'renameTextChannel <Channel Name>',
   example: ['renameTextChannel New Channel Name']

@@ -13,6 +13,8 @@
     "`help` now accepts command aliases as well",
     "Rewritten `events` for d.js `v11.1.0`",
     "Rewritten `administration` module for d.js `v11.1.0`",
+    "Improved `administration` module",
+    "Improved permissions for `administration` module",
     "Some minor changes"
   ],
   "added": [

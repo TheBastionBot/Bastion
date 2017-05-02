@@ -23,6 +23,15 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
+  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
@@ -37,7 +46,7 @@ exports.run = (Bastion, message, args) => {
     if (!row) return;
 
     role = message.guild.roles.find('name', args.join(' '));
-    if (role == null) return;
+    if (role === null) return;
     selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
     if (!selfAssignableRoles.includes(role.id)) return;
 
@@ -63,6 +72,7 @@ exports.config = {
 exports.help = {
   name: 'iam',
   description: 'Adds a specified self assignable role to the user.',
+  botPermission: 'Manage Roles',
   permission: '',
   usage: 'iAm <role name>',
   example: ['iAm Looking to play']

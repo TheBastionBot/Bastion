@@ -21,6 +21,15 @@
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('MANAGE_ROLES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
@@ -34,7 +43,8 @@ exports.run = (Bastion, message, args) => {
   if (!(role = message.mentions.roles.first())) {
     role = message.guild.roles.find('name', args.join(' '));
   }
-  if (role === null) {
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 1) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  else if (!role) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'No role found with that name.'
@@ -74,6 +84,7 @@ exports.config = {
 exports.help = {
   name: 'deleterole',
   description: 'Deletes a role by a given name.',
+  botPermission: 'Manage Roles',
   permission: 'Manage Roles',
   usage: 'deleteRole <Role Name>',
   example: ['deleteRole Role Name']
