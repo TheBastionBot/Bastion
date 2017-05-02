@@ -1,10 +1,11 @@
 {
-  "date": "May 2, 2017",
+  "date": "May 3, 2017",
   "updated": [
+    "Updated `cleverbot-node` to `v0.3.10`",
     "Updated `discord.js` to `v11.1.0`",
     "Updated `ffmpeg-binaries` `v3.2.2`",
     "Updated `mathjs` `v3.12.2`",
-    "Updated `sqlite` `v2.6.0`",
+    "Updated `sqlite` `v2.7.0`",
     "Renamed `bot.js` to `bastion.js`",
     "Embed color changes",
     "`error` and `warn` events' log can now be distinguished from regular `error` and `warn` logs",
