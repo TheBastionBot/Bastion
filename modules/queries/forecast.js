@@ -72,6 +72,7 @@ exports.config = {
 exports.help = {
   name: 'forecast',
   description: 'Shows weather forecast for 5 days for a specified location by name or ZIP Code.',
+  botPermission: '',
   permission: '',
   usage: 'forecast <city [, country_code]|zipcode>',
   example: ['forecast London, UK', 'forecast 94109']

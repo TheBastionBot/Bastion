@@ -55,11 +55,11 @@ exports.run = (Bastion, message, args) => {
         text: 'Vote by typing the corresponding number of the option.'
       }
     }}).then(msg => {
-      const votes = message.channel.createCollector(
+      const votes = message.channel.createMessageCollector(
         m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author == message.author || m.author.id == message.guild.ownerID) && m.content == `${Bastion.config.prefix}endpoll`),
         { time: 60 * 60 * 1000 }
       );
-      votes.on('message', (msg, votes) => {
+      votes.on('collect', (msg, votes) => {
         if (msg.content == `${Bastion.config.prefix}endpoll`) {
           return votes.stop();
         }
@@ -147,6 +147,7 @@ exports.config = {
 exports.help = {
   name: 'poll',
   description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
+  botPermission: '',
   permission: '',
   usage: 'poll <question>;option1>;option2[;<option3>[...]]',
   example: ['poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2']

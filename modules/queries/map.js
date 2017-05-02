@@ -61,6 +61,7 @@ exports.config = {
 exports.help = {
   name: 'map',
   description: 'Get the map of the specified location. It takes an optional `--zoom` argument which takes an zoom amount from value 0 to 20.',
+  botPermission: '',
   permission: '',
   usage: 'map <location> [--zoom <amount>]',
   example: ['map New York, NY', 'map London Eye, London --zoom 18']

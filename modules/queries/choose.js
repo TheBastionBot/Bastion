@@ -46,6 +46,7 @@ exports.config = {
 exports.help = {
   name: 'choose',
   description: 'Ask the bot to choose a option from any number of options, separated by a `/`.',
+  botPermission: '',
   permission: '',
   usage: 'choose <choice1>/<choice2>[/<choice3>][...]',
   example: ['choose Chocolate/Ice Cream/Cake']

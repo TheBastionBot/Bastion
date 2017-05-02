@@ -138,6 +138,7 @@ exports.config = {
 exports.help = {
   name: 'morsecode',
   description: 'Encodes a given text into Morse Code.',
+  botPermission: '',
   permission: '',
   usage: 'morseCode <text>',
   example: ['morseCode Shh! This is a secret.']

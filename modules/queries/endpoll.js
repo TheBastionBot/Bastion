@@ -32,6 +32,7 @@ exports.config = {
 exports.help = {
   name: 'endpoll',
   description: 'Ends an ongoing poll and shows the result.',
+  botPermission: '',
   permission: '',
   usage: 'endpoll',
   example: []

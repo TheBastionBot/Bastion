@@ -81,6 +81,7 @@ exports.config = {
 exports.help = {
   name: 'tapcode',
   description: 'Encodes a given text into Tap Code.',
+  botPermission: '',
   permission: '',
   usage: 'tapCode <text>',
   example: ['tapCode Knock Knock']

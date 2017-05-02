@@ -61,6 +61,7 @@ exports.config = {
 exports.help = {
   name: 'translate',
   description: 'Translates your message to a language specified in the arguments by the language code.',
+  botPermission: '',
   permission: '',
   usage: 'translate <language_code> <text>',
   example: ['translate EN Je suis génial!']

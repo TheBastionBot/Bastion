@@ -187,6 +187,7 @@ exports.config = {
 exports.help = {
   name: 'overwatch',
   description: 'Shows Overwatch player stats specified by his Region and BattleTag.',
+  botPermission: '',
   permission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
   example: ['overwatch us GH0S7#11143']
