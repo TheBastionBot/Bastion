@@ -23,10 +23,19 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("KICK_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('KICK_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -35,7 +44,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!message.guild.members.get(user.id).kickable) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `I don't have permissions to kick ${user}.`
     }}).catch(e => {
@@ -49,7 +58,7 @@ exports.run = (Bastion, message, args) => {
       reason = 'No reason given';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.orange,
       title: 'Kicked',
       fields: [
@@ -77,7 +86,7 @@ exports.run = (Bastion, message, args) => {
       if (!row) return;
 
       if (row.modLog == 'true') {
-        message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+        message.guild.channels.get(row.modLogChannelID).send({embed: {
           color: Bastion.colors.orange,
           title: 'Kicked user',
           fields: [
@@ -122,7 +131,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
 
-    member.sendMessage('', {embed: {
+    member.send({embed: {
       color: Bastion.colors.orange,
       title: `Kicked from ${message.guild.name} Server`,
       description: `**Reason:** ${reason}`
@@ -141,6 +150,7 @@ exports.config = {
 exports.help = {
   name: 'kick',
   description: 'Kicks a mentioned user with an optional reason.',
+  botPermission: 'Kick Members',
   permission: 'Kick Members',
   usage: 'kick @user-mention [Reason]',
   example: ['kick @user#0001 Reason for the kick.']

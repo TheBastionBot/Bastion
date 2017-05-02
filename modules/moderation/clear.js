@@ -20,7 +20,15 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.channel.permissionsFor(message.author).hasPermission('MANAGE_MESSAGES')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   user = message.mentions.users.first();
   limit = parseInt(args[0]) ? args[0] : args[1];
@@ -48,7 +56,7 @@ exports.run = (Bastion, message, args) => {
       else {
         error = 'No messages found that could be deleted.';
       }
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: error
       }}).catch(e => {
@@ -70,6 +78,7 @@ exports.config = {
 exports.help = {
   name: 'clear',
   description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. It also accepts a parameter `--bots`, which clears messages from bots in that channel.',
+  botPermission: 'Manage Messages',
   permission: 'Manage Messages',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
   example: ['clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear']

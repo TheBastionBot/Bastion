@@ -23,10 +23,19 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("BAN_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('BAN_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -35,7 +44,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!message.guild.members.get(user.id).bannable) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `I don't have permissions to softban ${user}.`
     }}).catch(e => {
@@ -52,7 +61,7 @@ exports.run = (Bastion, message, args) => {
       reason = 'No reason given';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.orange,
       title: 'Soft-Banned',
       fields: [
@@ -80,7 +89,7 @@ exports.run = (Bastion, message, args) => {
       if (!row) return;
 
       if (row.modLog == 'true') {
-        message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+        message.guild.channels.get(row.modLogChannelID).send({embed: {
           color: Bastion.colors.orange,
           title: 'Soft-banned user',
           fields: [
@@ -125,7 +134,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
 
-    user.sendMessage('', {embed: {
+    user.send({embed: {
       color: Bastion.colors.orange,
       title: `Soft-Banned from ${message.guild.name} Server`,
       description: `**Reason:** ${reason}`
@@ -134,7 +143,7 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       title: 'Soft-Ban Error',
       description: 'Banned but unable to unban. Please unban the following user.',
@@ -163,6 +172,7 @@ exports.config = {
 exports.help = {
   name: 'softban',
   description: 'Bans & unbans a mentioned user, and removes 7 days of their message history.',
+  botPermission: 'Ban Members',
   permission: 'Ban Members',
   usage: 'softBan @user-mention [Reason]',
   example: ['softBan @user#0001 Reason for soft ban.']

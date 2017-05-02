@@ -19,6 +19,7 @@
     "Rewritten `guild_admin` module",
     "Rewritten `help` module",
     "Rewritten `info` module",
+    "Rewritten `moderation` module",
     "Some minor changes"
   ],
   "added": [

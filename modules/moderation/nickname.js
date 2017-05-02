@@ -20,9 +20,18 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MANAGE_NICKNAMES")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('MANAGE_NICKNAMES')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (!(user = message.mentions.users.first())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -43,7 +52,7 @@ exports.run = (Bastion, message, args) => {
     nickStat = `${user}'s nickname changed.`;
   }
   message.guild.members.get(user.id).setNickname(args.join(' ')).then(member => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: nickStat
     }}).catch(e => {
@@ -59,6 +68,7 @@ exports.config = {
 exports.help = {
   name: 'nickname',
   description: 'Change the nickname of the mentioned user in the server to a specified nick. If no nick is specified, it resets the user\'s nickname.',
+  botPermission: 'Manage Nicknames',
   permission: 'Manage Nicknames',
   usage: 'nickname <@user-mention> [nick]',
   example: ['nickname @user#0001 The Legend', 'nickname @user#0001']
