@@ -25,7 +25,7 @@ const db = new jsonDB('./data/favouriteSongs', true, true);
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
   } catch (e) {
     Bastion.log.error(e.stack);
   } finally {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.green,
       title: 'Added song to favourites',
       description: args
@@ -58,7 +58,8 @@ exports.config = {
 exports.help = {
   name: 'addfav',
   description: 'Adds a song to your favourite list specified by name/link.',
-  permission: '',
+  botPermission: '',
+  permission: 'Bot Owner',
   usage: 'addfav <song name | song link>',
   example: ['addFav one more night', 'addFav https://www.youtube.com/watch?v=JGwWNGJdvx8']
 };

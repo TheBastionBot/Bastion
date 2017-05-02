@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
     voiceChannel = message.member.voiceChannel;
     if (!voiceChannel || voiceChannel.type !== 'voice') {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: `I can't join your voice channel <@${message.author.id}>.`
       }}).catch(e => {
@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
       });
       if (!voiceChannel.speakable) {
         voiceChannel.leave();
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'I don\'t have permissions to speak in this channel.'
         }}).catch(e => {
@@ -55,7 +55,7 @@ exports.run = (Bastion, message, args) => {
     sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
       if (musicChannel.musicTextChannelID != message.channel.id) return;
       if (!musicChannel.musicVoiceChannelID) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'No default music channel has been set. So, only the bot owner can use this command.'
         }}).catch(e => {
@@ -63,7 +63,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
       if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID))) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `I can't join your voice channel <@${message.author.id}>.`
         }}).catch(e => {
@@ -76,7 +76,7 @@ exports.run = (Bastion, message, args) => {
         });
         if (!voiceChannel.speakable) {
           voiceChannel.leave();
-          message.channel.sendMessage('', {embed: {
+          message.channel.send({embed: {
             color: Bastion.colors.red,
             description: 'I don\'t have permissions to speak in this channel.'
           }}).catch(e => {
@@ -99,6 +99,7 @@ exports.config = {
 exports.help = {
   name: 'summon',
   description: 'Tells the BOT to join the default voice channel (if any), set by the BOT owner. Doesn\'t apply to BOT owner.',
+  botPermission: '',
   permission: '',
   usage: 'summon',
   example: []

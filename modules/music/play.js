@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e.stack);
   });
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
     }
     else if (musicChannel.musicTextChannelID && musicChannel.musicVoiceChannelID) {
       if (!(voiceChannel = message.guild.channels.filter(c => c.type == 'voice').get(musicChannel.musicVoiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type == 'text').get(musicChannel.musicTextChannelID))) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'Invalid Text/Voice Channel ID has been added to default music channel.'
         }}).catch(e => {
@@ -59,7 +59,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
       if (!voiceChannel.joinable) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `I don't have permission to join the voice channel **${voiceChannel.name}**`
         }}).then(m => {
@@ -71,7 +71,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
       if (!voiceChannel.speakable) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `I don't have permission to speak in the voice channel **${voiceChannel.name}**`
         }}).then(m => {
@@ -85,7 +85,7 @@ exports.run = (Bastion, message, args) => {
       vcStats = `You need to be in the default music channel (**${voiceChannel.name}**) of the BOT to be able to use music commands.`;
     }
     else {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'No default music channel has been set. And I need to be in a voice channel to be able to play music.'
       }}).then(m => {
@@ -98,7 +98,7 @@ exports.run = (Bastion, message, args) => {
     }
     if (textChannel != message.channel) return;
     if (voiceChannel.members.get(message.author.id) == undefined) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: vcStats
       }}).then(m => {
@@ -119,7 +119,7 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       }
       if (favs.length == 0) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'You don\'t have any songs in your favourite list!'
         }}).then(m => {
@@ -132,7 +132,7 @@ exports.run = (Bastion, message, args) => {
       }
       else {
         args = favs.shift();
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.green,
           description: `Adding ${favs.length+1} favourite songs to the queue...`
         }}).then(m => {
@@ -163,7 +163,7 @@ exports.run = (Bastion, message, args) => {
     }
     else if (args.startsWith('-pl')) {
       if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args.slice(4))) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'Invalid YouTube Playlist URL!'
         }}).then(m => {
@@ -174,7 +174,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: 'Processing playlist...'
       }}).then(m => {
@@ -189,7 +189,7 @@ exports.run = (Bastion, message, args) => {
         if (err) return console.log(err);
         if (info) {
           if (info.length == 0) {
-            return message.channel.sendMessage('', {embed: {
+            return message.channel.send({embed: {
               color: Bastion.colors.red,
               description: 'No songs in the playlist!'
             }}).then(m => {
@@ -202,7 +202,7 @@ exports.run = (Bastion, message, args) => {
           }
           else {
             args = info.shift().title;
-            message.channel.sendMessage('', {embed: {
+            message.channel.send({embed: {
               color: Bastion.colors.green,
               description: `Adding ${info.length} songs to the queue...`
             }}).then(m => {
@@ -239,7 +239,7 @@ exports.run = (Bastion, message, args) => {
         else {
           result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`
         }
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: result
         }}).then(m => {
@@ -260,7 +260,7 @@ exports.run = (Bastion, message, args) => {
         duration: info.duration,
         requester: message.author.id
       });
-      textChannel.sendMessage('', {embed: {
+      textChannel.send({embed: {
         color: Bastion.colors.green,
         title: 'Added to the queue',
         description: info.title,
@@ -285,7 +285,7 @@ exports.run = (Bastion, message, args) => {
         });
         (function play(song) {
           if (song === undefined) {
-            return textChannel.sendMessage('', {embed: {
+            return textChannel.send({embed: {
               color: Bastion.colors.red,
               description: 'Exiting voice channel.'
             }}).then(m => {
@@ -300,7 +300,7 @@ exports.run = (Bastion, message, args) => {
           }
           dispatcher = message.guild.voiceConnection.playStream(yt(song.url), { passes: 1 });
           queue[message.guild.id].playing = true;
-          textChannel.sendMessage('', {embed: {
+          textChannel.send({embed: {
             color: Bastion.colors.blue,
             title: 'Playing',
             description: song.title,
@@ -325,7 +325,7 @@ exports.run = (Bastion, message, args) => {
             if (msg.content.startsWith(`${Bastion.config.prefix}clean`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               queue[message.guild.id].songs.splice(1, queue[message.guild.id].songs.length - 1);
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.green,
                 description: 'Cleaned up the queue.'
               }}).then(m => {
@@ -343,7 +343,7 @@ exports.run = (Bastion, message, args) => {
               else {
                 title = 'Now Playing';
               }
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.blue,
                 title: title,
                 description: song.title,
@@ -364,7 +364,7 @@ exports.run = (Bastion, message, args) => {
             else if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               if (!message.guild.voiceConnection.speaking) return;
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.orange,
                 title: 'Paused Playback',
                 description: song.title,
@@ -391,7 +391,7 @@ exports.run = (Bastion, message, args) => {
                   value: `Requested by: <@${queue[message.guild.id].songs[i].requester}>`
                 });
               }
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.blue,
                 title: 'Music queue',
                 description: `${queue[message.guild.id].songs.length-1} songs in queue`,
@@ -416,7 +416,7 @@ exports.run = (Bastion, message, args) => {
                 queue[message.guild.id].repeat = true;
                 repeatStat = 'Added the current song to the repeat queue.'
               }
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: color,
                 description: repeatStat
               }}).then(m => {
@@ -430,7 +430,7 @@ exports.run = (Bastion, message, args) => {
             else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               if (message.guild.voiceConnection.speaking) return;
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.green,
                 title: 'Resumed Playback',
                 description: song.title,
@@ -449,7 +449,7 @@ exports.run = (Bastion, message, args) => {
             else if (msg.content.startsWith(`${Bastion.config.prefix}shuffle`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
               queue[message.guild.id].songs.shuffle();
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.green,
                 description: 'Shuffled the queue.'
               }}).then(m => {
@@ -466,7 +466,7 @@ exports.run = (Bastion, message, args) => {
                   queue[message.guild.id].skipVotes.push(msg.author.id);
                 }
                 if (queue[message.guild.id].skipVotes.length >= (voiceChannel.members.size - 1) / 2) {
-                  textChannel.sendMessage('', {embed: {
+                  textChannel.send({embed: {
                     color: Bastion.colors.green,
                     description: 'Skipping current song.'
                   }}).then(m => {
@@ -479,7 +479,7 @@ exports.run = (Bastion, message, args) => {
                   });
                 }
                 else {
-                  textChannel.sendMessage('', {embed: {
+                  textChannel.send({embed: {
                     color: Bastion.colors.dark_grey,
                     description: `${((voiceChannel.members.size - 1) / 2) - queue[message.guild.id].skipVotes.length} votes required to skip the current song.`
                   }}).then(m => {
@@ -492,7 +492,7 @@ exports.run = (Bastion, message, args) => {
                 }
               }
               else {
-                textChannel.sendMessage('', {embed: {
+                textChannel.send({embed: {
                   color: Bastion.colors.green,
                   description: 'Skipping current song.'
                 }}).then(m => {
@@ -507,7 +507,7 @@ exports.run = (Bastion, message, args) => {
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.author).hasPermission('MUTE_MEMBERS')) return;
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.red,
                 description: 'Stopped Playback.'
               }}).then(m => {
@@ -536,7 +536,7 @@ exports.run = (Bastion, message, args) => {
                 param = param[0] > 0 && param[0] < 100 ? param[0] : 100;
                 dispatcher.setVolume(param/50);
               }
-              textChannel.sendMessage('', {embed: {
+              textChannel.send({embed: {
                 color: Bastion.colors.green,
                 description: `Volume: ${Math.round(dispatcher.volume*50)}%`
               }}).then(m => {
@@ -584,6 +584,7 @@ exports.config = {
 exports.help = {
   name: 'play',
   description: 'Plays a song (adds the song to the queue if already playing) specified by name/link. To play songs in a YouTube playlist, use \'-pl\' argument with the playlist link. To play songs in your favourites use \'-favs\' argument instead of song name/link.',
+  botPermission: '',
   permission: '',
   usage: 'play <name | song_link | -pl <playlist_link> | -favs>',
   example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs']

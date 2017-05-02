@@ -23,8 +23,6 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/favouriteSongs', true, true);
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
-
   let songs;
   try {
     db.reload();
@@ -33,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e);
   }
   if (songs.length == 0) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'You haven\'t added any favourite songs yet.'
     }}).catch(e => {
@@ -51,7 +49,7 @@ exports.run = (Bastion, message, args) => {
   }
   i = i - 1;
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     title: 'Favourite songs',
     description: favs.slice(i*10, (i*10)+10).join('\n'),
@@ -70,6 +68,7 @@ exports.config = {
 exports.help = {
   name: 'listfavs',
   description: 'Lists the songs in your favourite list.',
+  botPermission: '',
   permission: '',
   usage: 'listfavs [page_no]',
   example: ['listFavs', 'listFavs 2']
