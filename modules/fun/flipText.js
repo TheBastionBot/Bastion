@@ -23,7 +23,7 @@ const flipText = require('../../data/flipText.json');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
     args = args.replace(Object.keys(flipText)[i], flipText[Object.keys(flipText)[i]]);
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Flipped Text:',
     description: args.split('').reverse().join('')
@@ -53,6 +53,7 @@ exports.config = {
 exports.help = {
   name: 'fliptext',
   description: 'Flips a given text.',
+  botPermission: '',
   permission: '',
   usage: 'fliptext <text>',
   example: ['fliptext This is Upside Down!']

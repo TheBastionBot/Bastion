@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
     crimeStat = 'Suspect poses a serious threat to the society. Lethal force is authorized. Dominator will automatically switch to Lethal Eliminator. Suspect that is hit by Lethal Eliminator will bloat and explode.';
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
     description: crimeStat
@@ -56,6 +56,7 @@ exports.config = {
 exports.help = {
   name: 'crimecoefficient',
   description: 'Finds the crime coefficient of a mentioned user. If no user is mentioned, it finds the crime coefficient of yours.',
+  botPermission: '',
   permission: '',
   usage: 'crimecoefficient [@user-mention]',
   example: ['crimecoefficient', 'crimecoefficient @user#0001']

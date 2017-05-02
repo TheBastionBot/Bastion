@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Reversed Text:',
     description: args.join(' ').split('').reverse().join('')
@@ -46,6 +46,7 @@ exports.config = {
 exports.help = {
   name: 'reverse',
   description: 'Reverse a given text.',
+  botPermission: '',
   permission: '',
   usage: 'reverse <text>',
   example: ['reverse !looc si sihT']

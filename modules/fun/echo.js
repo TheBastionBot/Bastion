@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     description: args.join(' ')
   }}).catch(e => {
@@ -45,6 +45,7 @@ exports.config = {
 exports.help = {
   name: 'echo',
   description: 'Sends the same message that you send as an argument. Just like an echo!',
+  botPermission: '',
   permission: '',
   usage: 'echo <text>',
   example: ['echo Hello, world!']

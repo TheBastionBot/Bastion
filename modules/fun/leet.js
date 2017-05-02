@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
   args = args.replace(/s/ig, '5');
   args = args.replace(/t/ig, '7');
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Leet Text',
     description: args
@@ -54,6 +54,7 @@ exports.config = {
 exports.help = {
   name: 'leet',
   description: 'Changes a given text to leet text.',
+  botPermission: '',
   permission: '',
   usage: 'leet <text>',
   example: ['leet Hello, Everyone!']
