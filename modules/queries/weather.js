@@ -23,7 +23,7 @@ const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
 
   weather.find({search: args.join(' '), degreeType: 'C'}, function(err, result) {
     if (err) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: `No weather data found for **${args.join(' ')}**. Please check the location and try again. Type \`${Bastion.config.prefix}help weather\` for help on weather command.`
       }}).catch(e => {
@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
     }
 
     if (!result || result.length < 1) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'No weather data received, please try again later.'
       }}).catch(e => {
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Current Weather',
       fields: [

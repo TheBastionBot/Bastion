@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Let me Google that for you:',
     description: `https://lmgtfy.com/?q=${encodeURIComponent(args.join(' '))}`,

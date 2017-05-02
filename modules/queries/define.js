@@ -23,7 +23,7 @@ const wd = require('word-definition');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -59,7 +59,7 @@ exports.run = (Bastion, message, args) => {
         }
       }};
     }
-    message.channel.sendMessage('', embed).catch(e => {
+    message.channel.send(embed).catch(e => {
       Bastion.log.error(e.stack);
     });
   });

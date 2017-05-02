@@ -24,7 +24,7 @@ const r6 = new RainbowSix();
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 2) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!/^(uplay|ps4|xone)$/.test(args[0] = args[0].toLowerCase())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`
     }}).catch(e => {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `**${args[1]}** is not a valid username.`
     }}).catch(e => {
@@ -158,7 +158,7 @@ exports.run = (Bastion, message, args) => {
         }
       );
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Rainbow 6',
       url: `https://r6stats.com/stats/${args[0]}/${encodeURIComponent(args[1])}`,
@@ -171,7 +171,7 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `No player with username **${args[1]}** found for the platform **${args[0]}**.`
     }}).catch(e => {

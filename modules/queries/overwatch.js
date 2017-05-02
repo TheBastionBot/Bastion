@@ -23,7 +23,7 @@ const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
 
   args[0] = args[0].toLowerCase();
   if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
     }}).catch(e => {
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `**${args[1]}** is not a valid BattleTag.`
     }}).catch(e => {
@@ -155,7 +155,7 @@ exports.run = (Bastion, message, args) => {
         }
       );
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       author: {
         name: args[1],
@@ -171,7 +171,7 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
     }}).catch(e => {
