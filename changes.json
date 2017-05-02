@@ -10,6 +10,7 @@
     "`error` and `warn` events' log can now be distinguished from regular `error` and `warn` logs",
     "Server logging modules improved",
     "`iAm`/`iAmNot` won't auto delete messages.",
+    "`help` now accepts command aliases as well",
     "Some minor changes"
   ],
   "added": [

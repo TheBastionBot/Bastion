@@ -58,8 +58,13 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     let command = args[0].toLowerCase();
-    if (Bastion.commands.has(command)) {
-      command = Bastion.commands.get(command);
+    if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
+      if (Bastion.commands.has(command)) {
+        command = Bastion.commands.get(command);
+      }
+      else if (Bastion.aliases.has(command)) {
+        command = Bastion.commands.get(Bastion.aliases.get(command));
+      }
       let example = [];
       if (command.help.example.length < 1) {
         example.push('-');
