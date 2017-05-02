@@ -20,11 +20,11 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('MANAGE_ROLES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
-  if (args[0] !== undefined && args[0].indexOf('#') == 0) {
-    if (args[0].length != 7) {
-      return message.channel.sendMessage('', {embed: {
+  if (args[0] !== undefined && args[0].indexOf('#') === 0) {
+    if (args[0].length !== 7) {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'Role color should be a 6 digit `HEX` color code.'
       }}).catch(e => {
@@ -37,23 +37,18 @@ exports.run = (Bastion, message, args) => {
     data = args[0] === undefined ? data = roleData() : roleData(args.join(' '));
   }
 
-  message.guild.createRole(data).then(role => message.channel.sendMessage('', {embed: {
+  message.guild.createRole(data).then(role => message.channel.send({embed: {
     color: Bastion.colors.green,
     title: 'Role Created',
     fields: [
       {
-        name: 'Name',
+        name: 'Role Name',
         value: role.name,
         inline: true
       },
       {
-        name: 'ID',
+        name: 'Role ID',
         value: role.id,
-        inline: true
-      },
-      {
-        name: 'Position',
-        value: role.position,
         inline: true
       },
       {
@@ -62,7 +57,12 @@ exports.run = (Bastion, message, args) => {
         inline: true
       },
       {
-        name: 'Hoist',
+        name: 'Position',
+        value: role.position,
+        inline: true
+      },
+      {
+        name: 'Hoisted',
         value: role.hoist,
         inline: true
       },

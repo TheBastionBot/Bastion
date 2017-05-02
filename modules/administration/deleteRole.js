@@ -20,9 +20,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('MANAGE_ROLES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -34,8 +34,8 @@ exports.run = (Bastion, message, args) => {
   if (!(role = message.mentions.roles.first())) {
     role = message.guild.roles.find('name', args.join(' '));
   }
-  if (role == null) {
-    return message.channel.sendMessage('', {embed: {
+  if (role === null) {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'No role found with that name.'
     }}).catch(e => {
@@ -44,13 +44,19 @@ exports.run = (Bastion, message, args) => {
   }
 
   role.delete().then(r => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       title: 'Role Deleted',
       fields: [
         {
-          name: 'Name',
-          value: r.name
+          name: 'Role Name',
+          value: r.name,
+          inline: true
+        },
+        {
+          name: 'Role ID',
+          value: r.id,
+          inline: true
         }
       ]
     }}).catch(e => {
@@ -58,12 +64,6 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.sendMessage('', {embed: {
-      color: Bastion.colors.red,
-      description: 'I don\'t have enough permission to do that operation.'
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
   });
 };
 

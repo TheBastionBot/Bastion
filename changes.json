@@ -12,6 +12,7 @@
     "`iAm`/`iAmNot` won't auto delete messages.",
     "`help` now accepts command aliases as well",
     "Rewritten `events` for d.js `v11.1.0`",
+    "Rewritten `administration` module for d.js `v11.1.0`",
     "Some minor changes"
   ],
   "added": [

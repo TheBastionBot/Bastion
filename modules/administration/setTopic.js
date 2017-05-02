@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
   else {
     topic = args.slice(1).join(' ').trim();
   }
-  if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!channel.permissionsFor(message.author).hasPermission('MANAGE_CHANNELS')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   let color = Bastion.colors.green;
   if (topic.length < 2) {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   channel.setTopic(topic).then(() => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       title: title,
       fields: [

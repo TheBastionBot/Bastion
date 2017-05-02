@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!(channel = message.mentions.channels.first())) {
     channel = message.channel;
   }
-  if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!channel.permissionsFor(message.author).hasPermission('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   channel.delete().catch(e => {
     Bastion.log.error(e.stack);

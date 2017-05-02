@@ -24,7 +24,7 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
     if (!selfAssignableRoles.includes(role.id)) return;
 
     message.guild.members.get(message.author.id).removeRole(role).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: `${message.author}, you have been removed from **${role.name}** role.`,
       }}).catch(e => {
@@ -50,12 +50,6 @@ exports.run = (Bastion, message, args) => {
       });
     }).catch(e => {
       Bastion.log.error(e.stack);
-      message.channel.sendMessage('', {embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
