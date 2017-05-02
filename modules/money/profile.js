@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).then(profile => {
     if (!profile) {
       if (args == message.author) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.green,
           description: `Your profile is now created, <@${args.id}>`
         }}).catch(e => {
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
       else {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `<@${args.id}>'s profile is not yet created.`
         }}).catch(e => {
@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
         });
       }
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'User Profile',
       description: `**${args.username}**#${args.discriminator}`,

@@ -24,7 +24,7 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
       user = args[1];
     }
     else {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.'
       }}).catch(e => {
@@ -60,13 +60,13 @@ exports.run = (Bastion, message, args) => {
         });
       }
     }).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
-      Bastion.users.get(user).sendMessage('', {embed: {
+      Bastion.users.get(user).send({embed: {
         color: Bastion.colors.green,
         description: `You have been awarded **${args[0]}** Bastion Currencies from ${message.author}.`
       }}).catch(e => {
@@ -78,7 +78,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     if (message.author.id == user) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'You can\'t give yourself Bastion Currencies!'
       }}).catch(e => {
@@ -88,7 +88,7 @@ exports.run = (Bastion, message, args) => {
 
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
       if (sender.bastionCurrencies < args[0]) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `Sorry, unfortunately, you don't have enough Bastion Currencies with you to give it to others.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`
         }}).catch(e => {
@@ -110,13 +110,13 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
       sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(sender.bastionCurrencies)-args[0]} WHERE userID=${message.author.id}`).then(() => {
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.green,
           description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
         }}).catch(e => {
           Bastion.log.error(e.stack);
         });
-        Bastion.users.get(user).sendMessage('', {embed: {
+        Bastion.users.get(user).send({embed: {
           color: Bastion.colors.green,
           description: `You have received **${args[0]}** Bastion Currencies from ${message.author}.`
         }}).catch(e => {

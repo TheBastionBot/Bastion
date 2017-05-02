@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
         inline: true
       });
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Leaderboard',
       description: `Top ${profiles.length} users with highest Bastion Currencies`,

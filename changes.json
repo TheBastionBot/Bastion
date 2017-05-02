@@ -20,6 +20,7 @@
     "Rewritten `help` module",
     "Rewritten `info` module",
     "Rewritten `moderation` module",
+    "Rewritten `money` module",
     "Some minor changes"
   ],
   "added": [
