@@ -8,7 +8,8 @@
     "Renamed `bot.js` to `bastion.js`",
     "Embed color changes",
     "`error` and `warn` events' log can now be distinguished from regular `error` and `warn` logs",
-    "Server logging module improved",
+    "Server logging modules improved",
+    "`iAm`/`iAmNot` won't auto delete messages.",
     "Some minor changes"
   ],
   "added": [],
