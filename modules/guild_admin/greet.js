@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT greet, greetChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.greetChannelID == message.channel.id) {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       greetStats = 'Greeting Messages are now enabled in this channel.';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: greetStats
     }}).catch(e => {
@@ -59,7 +59,8 @@ exports.config = {
 exports.help = {
   name: 'greet',
   description: 'Toggle greeting message for new members of the server.',
-  permission: '',
+  botPermission: '',
+  permission: 'Administrator',
   usage: 'greet',
   example: []
 };

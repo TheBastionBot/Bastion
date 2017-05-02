@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.filterInvite == 'false') {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: filterInviteStats
     }}).catch(e => {
@@ -59,7 +59,8 @@ exports.config = {
 exports.help = {
   name: 'filterinvite',
   description: 'Toggles automatic deleting of discord server invites posted in the server. Does not apply to the server Administrators.',
-  permission: 'Manage Messages',
+  botPermission: 'Manage Messages',
+  permission: 'Administrator',
   usage: 'filterInvite',
   example: []
 };

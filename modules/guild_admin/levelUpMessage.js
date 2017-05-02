@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.levelUpMessage == 'true') {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       levelUpMessageStats = 'I will now send messages when someone levels up.';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: levelUpMessageStats
     }}).catch(e => {
@@ -59,7 +59,8 @@ exports.config = {
 exports.help = {
   name: 'levelupmessage',
   description: 'Toggles sending messages when someone levels up in this server.',
-  permission: '',
+  botPermission: '',
+  permission: 'Administrator',
   usage: 'levelUpMessage',
   example: []
 };

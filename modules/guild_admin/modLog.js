@@ -24,7 +24,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT modLog, modLogChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.modLog == 'false') {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       color = Bastion.colors.red;
       modLogStats = 'Moderation audit logging is now disabled.';
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: modLogStats
     }}).catch(e => {
@@ -59,7 +59,8 @@ exports.config = {
 exports.help = {
   name: 'modlog',
   description: 'Toggle logging of various moderation events in the server.',
-  permission: '',
+  botPermission: '',
+  permission: 'Administrator',
   usage: 'modLog',
   example: []
 };

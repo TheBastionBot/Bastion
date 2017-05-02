@@ -24,7 +24,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT farewell, farewellChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.farewellChannelID == message.channel.id) {
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
       farewellStats = 'Farewell Messages are now enabled in this channel.';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: farewellStats
     }}).catch(e => {
@@ -60,7 +60,8 @@ exports.config = {
 exports.help = {
   name: 'farewell',
   description: 'Toggle farewell message for members who left the server.',
-  permission: '',
+  botPermission: '',
+  permission: 'Administrator',
   usage: 'farewell',
   example: []
 };

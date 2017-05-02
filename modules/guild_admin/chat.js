@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
 
   sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.chat == 'false') {
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       chatStats = 'Disabled chat in this server. Now I\'m gonna miss talking with you. :disappointed:';
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: chatStats
     }}).catch(e => {
@@ -59,7 +59,8 @@ exports.config = {
 exports.help = {
   name: 'chat',
   description: 'Toggles chatting feature of the bot.',
-  permission: '',
+  botPermission: '',
+  permission: 'Administrator',
   usage: 'chat',
   example: []
 };
