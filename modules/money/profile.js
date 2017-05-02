@@ -89,6 +89,7 @@ exports.config = {
 exports.help = {
   name: 'profile',
   description: 'Shows a mentioned user\'s Bastion profile. If no one is mentioned, shows your profile.',
+  botPermission: '',
   permission: '',
   usage: 'profile [@user-mention]',
   example: ['profle', 'profile @user#0001']

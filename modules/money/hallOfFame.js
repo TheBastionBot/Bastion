@@ -53,6 +53,7 @@ exports.config = {
 exports.help = {
   name: 'halloffame',
   description: 'Shows the top 10 ranking with the highest level & experience points from all the users of the bot.',
+  botPermission: '',
   permission: '',
   usage: 'halloffame',
   example: []

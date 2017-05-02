@@ -97,6 +97,7 @@ exports.config = {
 exports.help = {
   name: 'take',
   description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
+  botPermission: '',
   permission: '',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: ['take 100 @user#0001 Misbehaving', 'take 150 2233445566778899']

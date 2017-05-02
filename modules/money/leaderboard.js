@@ -53,6 +53,7 @@ exports.config = {
 exports.help = {
   name: 'leaderboard',
   description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the users of the bot.',
+  botPermission: '',
   permission: '',
   usage: 'leaderboard',
   example: []
