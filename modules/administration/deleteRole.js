@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
   if (!(role = message.mentions.roles.first())) {
     role = message.guild.roles.find('name', args.join(' '));
   }
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 1) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
   else if (!role) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,
