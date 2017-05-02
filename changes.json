@@ -12,7 +12,9 @@
     "`iAm`/`iAmNot` won't auto delete messages.",
     "Some minor changes"
   ],
-  "added": [],
+  "added": [
+    "Added `roleCreate`, `roleDelete` and `roleUpdate` events"
+  ],
   "removed": [
     "Removed some `events` from `disabledEvents`."
   ]
