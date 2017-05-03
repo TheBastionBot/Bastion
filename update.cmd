@@ -7,6 +7,10 @@ ECHO.
 SET cwd=%~dp0
 
 ECHO [Bastion]: Updating Bastion BOT...
+git stash 1>nul && git stash drop 1>nul || (
+  ECHO [Bastion]: You have modified Bastion's code. Revert them using `git stash` and `git stash drop` before running the updater.
+  GOTO :EXIT
+)
 git pull origin master 1>nul || (
   ECHO [Bastion]: Unable to update the bot.
   GOTO :EXIT

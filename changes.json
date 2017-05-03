@@ -14,6 +14,7 @@
     "`help` now accepts command aliases as well",
     "Rewritten all `events`",
     "Rewritten all modules",
+    "Improved update/upgrade scripts to be able to update modified bot",
     "Some minor changes"
   ],
   "added": [
