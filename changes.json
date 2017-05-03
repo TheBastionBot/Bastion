@@ -17,7 +17,9 @@
     "Some minor changes"
   ],
   "added": [
-    "Added `roleCreate`, `roleDelete` and `roleUpdate` events"
+    "Added `roleCreate`, `roleDelete` and `roleUpdate` events",
+    "`serverInfo` now shows splash URL of partnered servers",
+    "`serverInfo` now shows how many users & bots are there in a server"
   ],
   "removed": [
     "Removed some `events` from `disabledEvents`."
