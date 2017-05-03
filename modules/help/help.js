@@ -94,9 +94,14 @@ exports.run = (Bastion, message, args) => {
             inline: false
           },
           {
-            name: 'Permissions Required',
+            name: 'BOT Permissions',
+            value: command.help.botPermission === '' ? '-' : command.help.botPermission,
+            inline: true
+          },
+          {
+            name: 'User Permissions',
             value: command.help.permission === '' ? '-' : command.help.permission,
-            inline: false
+            inline: true
           },
           {
             name: 'Usage',
