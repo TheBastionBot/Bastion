@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!(index = parseInt(args[0])) || index <= 0) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,

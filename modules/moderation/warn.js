@@ -24,7 +24,7 @@ sql.open('./data/Bastion.sqlite');
 let guilds = {};
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('KICK_MEMBERS')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('KICK_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,

@@ -20,6 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
+  if (!message.member.hasPermission('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   message.delete().catch(e => {
     Bastion.log.error(e.stack);
   });
