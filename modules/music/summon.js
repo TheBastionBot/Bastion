@@ -33,23 +33,25 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    if (voiceChannel.joinable) voiceChannel.join().then(connection => {
-      message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-      if (!voiceChannel.speakable) {
-        voiceChannel.leave();
-        message.channel.send({embed: {
-          color: Bastion.colors.red,
-          description: 'I don\'t have permissions to speak in this channel.'
-        }}).catch(e => {
+    if (voiceChannel.joinable) {
+      voiceChannel.join().then(connection => {
+        message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
           Bastion.log.error(e.stack);
         });
-      }
-      else if (!connection.speaking) {
-        connection.playFile('./data/greeting.mp3', { passes: 1 });
-      }
-    });
+        if (!voiceChannel.speakable) {
+          voiceChannel.leave();
+          message.channel.send({embed: {
+            color: Bastion.colors.red,
+            description: 'I don\'t have permissions to speak in this channel.'
+          }}).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
+        else if (!connection.speaking) {
+          connection.playFile('./data/greeting.mp3', { passes: 1 });
+        }
+      });
+    }
   }
   else {
     sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
@@ -70,23 +72,25 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      if (voiceChannel.joinable) voiceChannel.join().then(connection => {
-        message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-        if (!voiceChannel.speakable) {
-          voiceChannel.leave();
-          message.channel.send({embed: {
-            color: Bastion.colors.red,
-            description: 'I don\'t have permissions to speak in this channel.'
-          }}).catch(e => {
+      if (voiceChannel.joinable) {
+        voiceChannel.join().then(connection => {
+          message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
             Bastion.log.error(e.stack);
           });
-        }
-        else if (!connection.speaking) {
-          connection.playFile('./data/greeting.mp3', { passes: 1 });
-        }
-      });
+          if (!voiceChannel.speakable) {
+            voiceChannel.leave();
+            message.channel.send({embed: {
+              color: Bastion.colors.red,
+              description: 'I don\'t have permissions to speak in this channel.'
+            }}).catch(e => {
+              Bastion.log.error(e.stack);
+            });
+          }
+          else if (!connection.speaking) {
+            connection.playFile('./data/greeting.mp3', { passes: 1 });
+          }
+        });
+      }
     });
   }
   message.delete();

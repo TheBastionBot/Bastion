@@ -24,6 +24,15 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
@@ -81,7 +90,7 @@ exports.config = {
 exports.help = {
   name: 'addselfassignableroles',
   description: 'Adds roles, specified by role ID, to self assignable roles category, so that anyone could use `iam`/`iamnot` command to assign these roles to themselves.',
-  botPermission: '',
+  botPermission: 'Manage Roles',
   permission: 'Administrator',
   usage: 'addSelfAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: ['addSelfAssignableRoles 443322110055998877 778899550011223344']
