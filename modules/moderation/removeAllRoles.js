@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({embed: {
       color: Bastion.colors.red,
       title: 'All Roles Removed',
-      description: `All roles has been removed from **${user.username}**#${user.discriminator}.`,
+      description: `All roles has been removed from ${user.tag}.`,
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });

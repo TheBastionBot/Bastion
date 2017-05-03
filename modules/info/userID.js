@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
     fields: [
       {
         name: 'User',
-        value: `**${user.username}**#${user.discriminator}`,
+        value: user.tag,
         inline: true
       },
       {

@@ -65,7 +65,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({embed: {
       color: Bastion.colors.red,
       title: 'Role Removed',
-      description: `**${user.username}**#${user.discriminator} has now been removed from **${role.name}** role.`,
+      description: `${user.tag} has now been removed from **${role.name}** role.`,
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });

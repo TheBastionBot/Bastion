@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'User Profile',
-      description: `**${args.username}**#${args.discriminator}`,
+      description: args.tag,
       fields: [
         {
           name: 'Bastion Currency',

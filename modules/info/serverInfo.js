@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Owner',
-        value: `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`,
+        value: message.guild.owner.user.tag,
         inline: true
       },
       {

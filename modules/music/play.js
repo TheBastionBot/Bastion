@@ -268,7 +268,7 @@ exports.run = (Bastion, message, args) => {
           url: info.thumbnail
         },
         footer: {
-          text: `Position: ${queue[message.guild.id].songs.length} | Duration: ${info.duration} | Requester: ${message.author.username}#${message.author.discriminator}`
+          text: `Position: ${queue[message.guild.id].songs.length} | Duration: ${info.duration} | Requester: ${message.author.tag}`
         }
       }}).then(m => {
         m.delete(30000).catch(e => {
@@ -308,7 +308,7 @@ exports.run = (Bastion, message, args) => {
               url: song.thumbnail
             },
             footer: {
-              text: `🔉 ${dispatcher.volume * 50}% | Duration: ${info.duration} | Requester: ${message.author.username}#${message.author.discriminator}`
+              text: `🔉 ${dispatcher.volume * 50}% | Duration: ${info.duration} | Requester: ${message.author.tag}`
             }
           }}).then(m => {
             m.delete(30000).catch(e => {

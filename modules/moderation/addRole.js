@@ -65,7 +65,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({embed: {
       color: Bastion.colors.green,
       title: 'Role Added',
-      description: `**${user.username}**#${user.discriminator} has now been given **${role.name}** role.`,
+      description: `${user.tag} has now been given **${role.name}** role.`,
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
