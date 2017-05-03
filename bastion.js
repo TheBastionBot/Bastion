@@ -42,8 +42,10 @@ require('./handlers/moduleHandler')(Bastion);
 
 require('./functions/Array.prototype');
 
-Bastion.login(Bastion.credentials.token);
+Bastion.login(Bastion.credentials.token).catch(e => {
+  Bastion.log.error(e.stack)
+});
 
-process.on('unhandledRejection', (reason, promise) => {
-  console.log('\n[ Unhandled Rejection ] at:\nPromise:\n', promise, '\n\nReason:\n', reason, '\n');
+process.on('unhandledRejection', rejection => {
+  Bastion.log.warn(rejection);
 });

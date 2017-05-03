@@ -23,6 +23,6 @@
     "`help` command now shows permissions required by bot for specific commands"
   ],
   "removed": [
-    "Removed some `events` from `disabledEvents`."
+    "Removed some `events` from `disabledEvents`"
   ]
 }
