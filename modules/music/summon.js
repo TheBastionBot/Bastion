@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (message.deletable) {
     message.delete(1000).catch(e => {
       Bastion.log.error(e.stack);
-    })
+    });
   }
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
     voiceChannel = message.member.voiceChannel;

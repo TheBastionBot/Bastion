@@ -20,8 +20,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).hasPermission('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
+  if (!message.channel.permissionsFor(message.member).has('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
