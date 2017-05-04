@@ -16,6 +16,7 @@
     "Improved update/upgrade scripts to be able to update modified bot",
     "Fixed Bastion crashes when connection issues occured before message collector in `play`",
     "Reduced the reward in `betFlip` command",
+    "Faster updates and low bandwidth uses",
     "Some minor changes"
   ],
   "added": [

@@ -21,12 +21,12 @@ git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Unable t
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo
 
-echo -e "${CYAN}[Bastion]:${NC} Deleting old dependencies..."
-rm -fr node_modules
-echo -e "${CYAN}[Bastion]:${NC} Done."
-echo -e "${CYAN}[Bastion]:${NC} Installing new dependencies... This may take a while, please be patient."
+echo -e "${CYAN}[Bastion]:${NC} Updating dependencies... This may take a while, please be patient."
 npm install 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${NC} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
 npm install -g ffmpeg-binaries 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${NC} Failed updating ffmpeg. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
+echo -e "${CYAN}[Bastion]:${NC} Done."
+echo -e "${CYAN}[Bastion]:${NC} Deleting unused dependencies..."
+npm prune 1>/dev/null 2>update.log
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
 echo
