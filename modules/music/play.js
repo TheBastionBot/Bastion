@@ -298,6 +298,14 @@ exports.run = (Bastion, message, args) => {
               Bastion.log.error(e.stack);
             });
           }
+          if (!message.guild.voiceConnection) {
+            return textChannel.send({embed: {
+              color: Bastion.colors.red,
+              description: 'Some connection error has occured. Please try again later.'
+            }}).catch(e => {
+              Bastion.log.error(e.stack);
+            })
+          }
           dispatcher = message.guild.voiceConnection.playStream(yt(song.url), { passes: 1 });
           queue[message.guild.id].playing = true;
           textChannel.send({embed: {

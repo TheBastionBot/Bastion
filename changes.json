@@ -15,6 +15,7 @@
     "Rewritten all `events`",
     "Rewritten all modules",
     "Improved update/upgrade scripts to be able to update modified bot",
+    "Fixed Bastion crashes when connection issues occured before message collector in `play`",
     "Some minor changes"
   ],
   "added": [
