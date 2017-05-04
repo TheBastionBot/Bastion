@@ -47,6 +47,5 @@ Bastion.login(Bastion.credentials.token).catch(e => {
 });
 
 process.on('unhandledRejection', rejection => {
-  console.warn('[ unhandledRejection ]');
-  Bastion.log.warn(rejection);
+  console.warn('\n[unhandledRejection]\n\n', rejection, '\n\n[/unhandledRejection]\n');
 });
