@@ -1,5 +1,5 @@
 {
-  "date": "May 3, 2017",
+  "date": "May 4, 2017",
   "updated": [
     "Updated `cleverbot-node` to `v0.3.10`",
     "Updated `discord.js` to `v11.1.0`",
@@ -16,6 +16,7 @@
     "Rewritten all modules",
     "Improved update/upgrade scripts to be able to update modified bot",
     "Fixed Bastion crashes when connection issues occured before message collector in `play`",
+    "Reduced the reward in `betFlip` command",
     "Some minor changes"
   ],
   "added": [
