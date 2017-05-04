@@ -27,6 +27,7 @@ rm -f data/Bastion.sqlite
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Installing new files... This may take a while, please be patient."
 npm install &>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
+npm install -g ffmpeg-binaries 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${NC} Failed updating ffmpeg. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
 echo

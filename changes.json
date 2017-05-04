@@ -3,7 +3,6 @@
   "updated": [
     "Updated `cleverbot-node` to `v0.3.10`",
     "Updated `discord.js` to `v11.1.0`",
-    "Updated `ffmpeg-binaries` `v3.2.2`",
     "Updated `mathjs` `v3.12.2`",
     "Updated `sqlite` `v2.7.0`",
     "Renamed `bot.js` to `bastion.js`",
@@ -26,6 +25,7 @@
     "`help` command now shows permissions required by bot for specific commands"
   ],
   "removed": [
-    "Removed some `events` from `disabledEvents`"
+    "Removed some `events` from `disabledEvents`",
+    "Removed `ffmpeg-binaries` from local packages"
   ]
 }
