@@ -63,7 +63,7 @@ exports.help = {
   name: 'airhorn',
   description: 'Plays an airhorn in the current voice channel.',
   botPermission: '',
-  permission: '',
+  permission: 'Mute Members',
   usage: 'airhorn',
   example: []
 };
