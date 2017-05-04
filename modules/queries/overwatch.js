@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  ow.getOverall('pc', args[0], args[1].replace('#', '-')).then(data => {
+  ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
     let stats = [
       {
         name: 'Level',
@@ -61,7 +61,23 @@ exports.run = (Bastion, message, args) => {
         name: 'Rank',
         value: `${parseInt(data.profile.rank) ? data.profile.rank : '-'}`,
         inline: true
-      },
+      }
+    ];
+    if (data.profile.hasOwnProperty('season')) {
+      stats.push(
+        {
+          name: 'Season ID',
+          value: `${data.profile.season.id}`,
+          inline: true
+        },
+        {
+          name: 'Season Rank',
+          value: `${data.profile.season.rank}`,
+          inline: true
+        }
+      )
+    }
+    stats.push(
       {
         name: 'Quick Play',
         value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
@@ -106,8 +122,8 @@ exports.run = (Bastion, message, args) => {
         value: `${data.quickplay.global.solo_kills_average}`,
         inline: true
       }
-    ];
-    if (Object.keys(data.competitive.global).length > 0) {
+    );
+    if (Object.keys(data.competitive.global).length > 1) {
       stats.push(
         {
           name: 'Competitive',
@@ -155,6 +171,10 @@ exports.run = (Bastion, message, args) => {
         }
       );
     }
+    stats.push({
+      name: 'Achievements',
+      value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ') || '-'
+    });
     message.channel.send({embed: {
       color: Bastion.colors.blue,
       author: {
@@ -171,12 +191,14 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (e.stack.includes('NOT_FOUND')) {
+      message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   });
 };
 

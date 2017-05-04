@@ -18,6 +18,7 @@
     "Reduced the reward in `betFlip` command",
     "Faster updates and low bandwidth uses",
     "`summon` now shows if it doesn't have valid permissions in the channel",
+    "`overwatch` now shows season ID, season rank and achievements",
     "Some minor changes"
   ],
   "added": [
