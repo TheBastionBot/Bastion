@@ -24,7 +24,8 @@
     "Added `roleCreate`, `roleDelete` and `roleUpdate` events",
     "`serverInfo` now shows splash URL of partnered servers",
     "`serverInfo` now shows how many users & bots are there in a server",
-    "`help` command now shows permissions required by bot for specific commands"
+    "`help` command now shows permissions required by bot for specific commands",
+    "Added `airhorn` command"
   ],
   "removed": [
     "Removed some `events` from `disabledEvents`",
