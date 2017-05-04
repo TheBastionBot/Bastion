@@ -23,6 +23,11 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
+  if (message.deletable) {
+    message.delete(1000).catch(e => {
+      Bastion.log.error(e.stack);
+    })
+  }
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
     voiceChannel = message.member.voiceChannel;
     if (!voiceChannel || voiceChannel.type !== 'voice') {
@@ -50,6 +55,14 @@ exports.run = (Bastion, message, args) => {
         else if (!connection.speaking) {
           connection.playFile('./data/greeting.mp3', { passes: 1 });
         }
+      });
+    }
+    else {
+      message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: `I don't have permissions to join the **${voiceChannel.name}** voice channel.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
       });
     }
   }
@@ -91,9 +104,16 @@ exports.run = (Bastion, message, args) => {
           }
         });
       }
+      else {
+        message.channel.send({embed: {
+          color: Bastion.colors.red,
+          description: `I don't have permissions to join the **${voiceChannel.name}** voice channel.`
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
     });
   }
-  message.delete();
 };
 
 exports.config = {

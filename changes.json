@@ -17,6 +17,7 @@
     "Fixed Bastion crashes when connection issues occured before message collector in `play`",
     "Reduced the reward in `betFlip` command",
     "Faster updates and low bandwidth uses",
+    "`summon` now shows if it doesn't have valid permissions in the channel",
     "Some minor changes"
   ],
   "added": [
