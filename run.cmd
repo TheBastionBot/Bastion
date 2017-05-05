@@ -7,9 +7,9 @@ ECHO.
 SET cwd=%~dp0
 
 ECHO [Bastion]: Checking System...
-IF EXIST bot.js (
+IF EXIST bastion.js (
   ECHO [Bastion]: System Checked. O7. Booting up...
-  node bot.js
+  node bastion.js
 ) ELSE (
   TITLE [ERROR] System Check Failed
   ECHO [Bastion]: System check failed. Check if you Bastion BOT installed correctly.

@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   try {
     let evaled = eval(args.join(' '));
@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     message.delete().catch(e => {
       Bastion.log.error(e.stack);
     });
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.green,
       fields: [
         {
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
     message.delete().catch(e => {
       Bastion.log.error(e.stack);
     });
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       fields: [
         {
@@ -71,7 +71,8 @@ exports.config = {
 exports.help = {
   name: 'eval',
   description: 'Evaluates any JavaScript statement.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Bot Owner',
   usage: 'eval <JavaScript code>',
   example: ['eval message.guild.members.size']
 };

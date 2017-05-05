@@ -22,7 +22,7 @@
 const toHRTime = require('pretty-ms');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     author: {
       name: `Bastion ${Bastion.package.version}`
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Owner',
-        value: `${Bastion.users.get(Bastion.credentials.ownerId[0]).username}#${Bastion.users.get(Bastion.credentials.ownerId[0]).discriminator}`,
+        value: Bastion.users.get(Bastion.credentials.ownerId[0]).tag,
         inline: true
       },
       {
@@ -99,7 +99,8 @@ exports.config = {
 exports.help = {
   name: 'stats',
   description: 'Display stats & info about the bot.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'stats',
   example: []
 };

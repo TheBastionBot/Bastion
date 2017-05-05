@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
   else {
     let n = [];
     for (let i = 1; i <= Object.keys(quotes).length; i++) {
-      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) != -1) {
+      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) !== -1) {
         n.push(i);
       }
     }
@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     description: `*"${quotes[index].quote}"*\n\n**${quotes[index].author}**`,
     footer: {
@@ -57,7 +57,8 @@ exports.config = {
 exports.help = {
   name: 'quotes',
   description: 'Shows a quote to get you inspired. Search a quote by it\'s index no. or by the author. If none is provided, shows a random quote.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'quotes <number|author>',
   example: ['quotes', 'quotes 189', 'quotes Steve Jobs']
 };

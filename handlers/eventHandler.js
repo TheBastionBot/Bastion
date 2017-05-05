@@ -36,5 +36,8 @@ module.exports = Bastion => {
   Bastion.on('message', loadEvent('message'));
   Bastion.on('messageUpdate', loadEvent('messageUpdate'));
   Bastion.on('ready', () => loadEvent('ready')(Bastion));
+  Bastion.on('roleCreate', loadEvent('roleCreate'));
+  Bastion.on('roleDelete', loadEvent('roleDelete'));
+  Bastion.on('roleUpdate', loadEvent('roleUpdate'));
   Bastion.on('warn', loadEvent('warn'));
 };

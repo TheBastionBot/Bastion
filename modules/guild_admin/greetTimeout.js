@@ -23,7 +23,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
     args[0] = '0';
@@ -32,10 +32,10 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e.stack);
   });
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.green,
     title: 'Greet Timeout set to:',
-    description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] == 0 ? '∞' : `${args[0]} sec.`
+    description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] === 0 ? '∞' : `${args[0]} sec.`
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
@@ -48,7 +48,8 @@ exports.config = {
 exports.help = {
   name: 'greettimeout',
   description: 'Sets the time (in seconds) after which greeting message will be automatically deleted. Supported values: 1 - 300. Any value except the supported values will turn off automatic deletion.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Administrator',
   usage: 'greetTimeout [time_in_seconds]',
   example: ['greetTimeout 120', 'greetTimeout']
 };

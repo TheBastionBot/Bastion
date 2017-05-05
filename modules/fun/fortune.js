@@ -22,7 +22,7 @@
 const fortuneCookies = require('../../data/fortuneCookies.json');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Fortune:',
     description: fortuneCookies.random()
@@ -38,7 +38,8 @@ exports.config = {
 exports.help = {
   name: 'fortune',
   description: 'Shows you a fortune from fortune cookie.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'fortune',
   example: []
 };

@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   if (!(user = message.mentions.users.first())) {
     user = message.author;
   }
-  user = `${user.username}#${user.discriminator}`;
+  user = user.tag;
   let userHash = 0;
   for (let i = 0; i < user.length; i++) {
     userHash += parseInt(user[i].charCodeAt(0));
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
     crimeStat = 'Suspect poses a serious threat to the society. Lethal force is authorized. Dominator will automatically switch to Lethal Eliminator. Suspect that is hit by Lethal Eliminator will bloat and explode.';
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
     description: crimeStat
@@ -56,7 +56,8 @@ exports.config = {
 exports.help = {
   name: 'crimecoefficient',
   description: 'Finds the crime coefficient of a mentioned user. If no user is mentioned, it finds the crime coefficient of yours.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'crimecoefficient [@user-mention]',
   example: ['crimecoefficient', 'crimecoefficient @user#0001']
 };

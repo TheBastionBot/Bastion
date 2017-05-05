@@ -24,10 +24,19 @@ sql.open('./data/Bastion.sqlite');
 let guilds = {};
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("KICK_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('KICK_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -36,7 +45,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!message.guild.members.get(user.id).kickable) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `I don't have permissions to warn ${user}.`
     }}).catch(e => {
@@ -56,16 +65,16 @@ exports.run = (Bastion, message, args) => {
     guilds[message.guild.id][user.id] = 1;
   }
   else {
-    if (guilds[message.guild.id][user.id] == 2) {
+    if (guilds[message.guild.id][user.id] === 2) {
       message.guild.members.get(user.id).kick().then(member => {
         delete guilds[message.guild.id][user.id];
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.orange,
           title: 'Kicked',
           fields: [
             {
               name: 'User',
-              value: `**${user.username}**#${user.discriminator}`,
+              value: user.tag,
               inline: true
             },
             {
@@ -86,8 +95,8 @@ exports.run = (Bastion, message, args) => {
         sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
           if (!row) return;
 
-          if (row.modLog == 'true') {
-            message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+          if (row.modLog === 'true') {
+            message.guild.channels.get(row.modLogChannelID).send({embed: {
               color: Bastion.colors.orange,
               title: 'Kicked user',
               fields: [
@@ -121,7 +130,7 @@ exports.run = (Bastion, message, args) => {
               },
               timestamp: new Date()
             }}).then(msg => {
-              sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+              sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                 Bastion.log.error(e.stack);
               });
             }).catch(e => {
@@ -132,7 +141,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
 
-        member.sendMessage('', {embed: {
+        member.send({embed: {
           color: Bastion.colors.orange,
           title: `Kicked from ${message.guild.name} Server`,
           fields: [
@@ -152,12 +161,12 @@ exports.run = (Bastion, message, args) => {
       guilds[message.guild.id][user.id] += 1;
     }
   }
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.orange,
     title: 'Warning',
     description: `${user} have been warned by ${message.author} for **${reason}**.`
   }}).then(() => {
-    user.sendMessage('', {embed: {
+    user.send({embed: {
       color: Bastion.colors.orange,
       title: 'Warning',
       description: `You have been warned!`,
@@ -181,8 +190,8 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row) return;
 
-    if (row.modLog == 'true') {
-      message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+    if (row.modLog === 'true') {
+      message.guild.channels.get(row.modLogChannelID).send({embed: {
         color: Bastion.colors.orange,
         title: 'Warned user',
         fields: [
@@ -216,7 +225,7 @@ exports.run = (Bastion, message, args) => {
         },
         timestamp: new Date()
       }}).then(msg => {
-        sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+        sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
           Bastion.log.error(e.stack);
         });
       }).catch(e => {
@@ -235,7 +244,8 @@ exports.config = {
 exports.help = {
   name: 'warn',
   description: 'Warns a mentioned user with an optional reason. After 3 warnings are given, the users automatically gets kicked from the server.',
-  permission: 'Kick Members',
+  botPermission: 'Kick Members',
+  userPermission: 'Kick Members',
   usage: 'warn @user-mention [Reason]',
   example: ['warn @user#0001 Reason for the warning.']
 };

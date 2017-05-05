@@ -23,7 +23,7 @@ const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
     if (err) return;
 
     if (!result || result.length < 1) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'No weather data received, please try again later.'
       }}).catch(e => {
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Weather Forecast',
       description: result[0].location.name,
@@ -72,7 +72,8 @@ exports.config = {
 exports.help = {
   name: 'forecast',
   description: 'Shows weather forecast for 5 days for a specified location by name or ZIP Code.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'forecast <city [, country_code]|zipcode>',
   example: ['forecast London, UK', 'forecast 94109']
 };

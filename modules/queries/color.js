@@ -23,7 +23,7 @@ const convert = require('color-convert');
 
 exports.run = (Bastion, message, args) => {
   if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     fields: [
       {
@@ -121,7 +121,8 @@ exports.config = {
 exports.help = {
   name: 'color',
   description: 'Convert `HEX` Color to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and CSS Keyword (Rounds to closest color).',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'color <#hex-color-code>',
   example: ['color #dd0000']
 };

@@ -38,14 +38,14 @@ module.exports = message => {
       });
     }
     message.client.fetchApplication().then(app => {
-      message.client.users.get(app.owner.id).sendMessage('', {embed: {
+      message.client.users.get(app.owner.id).send({embed: {
         color: message.client.colors.red,
         title: 'ATTENTION!',
         description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
         fields: [
           {
             name: 'Responsible user',
-            value: `${message.author.username}#${message.author.discriminator} - ${message.author.id}`
+            value: `${message.author.tag} - ${message.author.id}`
           }
         ]
       }}).catch(e => {
@@ -57,9 +57,9 @@ module.exports = message => {
   }
 
   if (message.author.bot) return;
-  if (message.channel.type == 'dm' || message.channel.type == 'group') {
+  if (message.channel.type === 'dm' || message.channel.type === 'group') {
     if (message.content.startsWith(`${message.client.config.prefix}h`) || message.content.startsWith(`${message.client.config.prefix}help`)) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: message.client.colors.blue,
         title: 'Bastion Discord BOT',
         url: 'https://bastion.js.org',
@@ -88,7 +88,7 @@ module.exports = message => {
   }
 
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-    if (guild.filterInvite == 'true' && !message.guild.members.get(message.author.id).hasPermission("ADMINISTRATOR")) {
+    if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
         message.delete().catch(e => {
           message.client.log.error(e.stack);
@@ -100,7 +100,7 @@ module.exports = message => {
   });
 
   sql.all(`SELECT trigger, response FROM triggers`).then(triggers => {
-    if (triggers == '') return;
+    if (triggers === '') return;
 
     let trigger = '';
     let response = [];
@@ -116,7 +116,7 @@ module.exports = message => {
       response = response.replace(/\$username/ig, message.author.username);
       response = response.replace(/\$server/ig, `**${message.guild.name}**`);
       response = response.replace(/\$prefix/ig, message.client.config.prefix);
-      return message.channel.sendMessage(response).catch(e => {
+      return message.channel.send(response).catch(e => {
         message.client.log.error(e.stack);
       });
     }
@@ -138,13 +138,13 @@ module.exports = message => {
       else {
         let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
         if (currentLevel > profile.level) {
-          sql.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies+currentLevel*5}, xp=${profile.xp+1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
+          sql.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
           sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-            if (guild.levelUpMessage == 'false') return;
+            if (guild.levelUpMessage === 'false') return;
 
-            message.channel.sendMessage('', {embed: {
+            message.channel.send({embed: {
               color: message.client.colors.blue,
               title: 'Leveled up',
               description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
@@ -156,7 +156,7 @@ module.exports = message => {
           });
         }
         else {
-          sql.run(`UPDATE profiles SET xp=${profile.xp+1} WHERE userID=${message.author.id}`).catch(e => {
+          sql.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
         }
@@ -186,7 +186,7 @@ module.exports = message => {
       else {
         console.log(chalk.green(`[ARGUMENTs]: `) + chalk.yellow(`No arguments to execute`));
       }
-      if (message.channel.type == 'text') {
+      if (message.channel.type === 'text') {
         console.log(chalk.green(`[Server]: `) + `${message.guild}` + chalk.cyan(` <#${message.guild.id}>`));
         console.log(chalk.green(`[Channel]: `) + `${message.channel.name}` + chalk.cyan(` ${message.channel}`));
       }
@@ -201,7 +201,7 @@ module.exports = message => {
     }
     else if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
       sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-        if (guild.chat == 'false') return;
+        if (guild.chat === 'false') return;
         let args = message.content.split(' ');
         if (args.length < 1) return;
 
@@ -209,7 +209,7 @@ module.exports = message => {
           bot.write(args.join(' '), function (response) {
             message.channel.startTyping();
             setTimeout(function () {
-              message.channel.sendMessage(response.output).catch(e => {
+              message.channel.send(response.output).catch(e => {
                 message.client.log.error(e.stack);
               });
               message.channel.stopTyping();

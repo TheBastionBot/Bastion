@@ -34,12 +34,12 @@ module.exports = Bastion => {
       for (let i = 0; i < BastionGuilds.length; i++) {
         let found = false;
         for (let j = 0; j < row.length; j++) {
-          if (BastionGuilds[i] == row[j]){
+          if (BastionGuilds[i] === row[j]){
             found = true;
             break;
           }
         }
-        if (found == false) {
+        if (found === false) {
           sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [BastionGuilds[i]]).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -48,12 +48,12 @@ module.exports = Bastion => {
       for (let i = 0; i < row.length; i++) {
         let found = false;
         for (let j = 0; j < BastionGuilds.length; j++) {
-          if (row[i] == BastionGuilds[j]){
+          if (row[i] === BastionGuilds[j]){
             found = true;
             break;
           }
         }
-        if (found == false) {
+        if (found === false) {
           sql.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -65,7 +65,7 @@ module.exports = Bastion => {
   }).catch(e => {
     Bastion.log.error(e.stack);
   });
-  sql.run("CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))").catch(e => {
+  sql.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').catch(e => {
     Bastion.log.error(e.stack);
   });
   sql.run('CREATE TABLE IF NOT EXISTS profiles (userID TEXT NOT NULL UNIQUE, bastionCurrencies INTEGER DEFAULT 0, xp INTEGER DEFAULT 0, level INTEGER DEFAULT 0, PRIMARY KEY(userID))').catch(e => {

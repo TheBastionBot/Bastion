@@ -16,6 +16,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 echo -e "${CYAN}[Bastion]:${NC} Updating Bastion BOT..."
+git stash && git stash drop || (echo -e "${CYAN}[Bastion]: ${NC} You have modified Bastion's code. Revert them using `suo git stash` and `sudo git stash drop` before running the updater." && exit 1)
 git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Unable to update the bot.\n" && exit 1)
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo
@@ -26,6 +27,7 @@ rm -f data/Bastion.sqlite
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Installing new files... This may take a while, please be patient."
 npm install &>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
+npm install -g ffmpeg-binaries 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${NC} Failed updating ffmpeg. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
 echo

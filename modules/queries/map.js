@@ -23,7 +23,7 @@ const request = require('request');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -41,14 +41,14 @@ exports.run = (Bastion, message, args) => {
   request({url: `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(args[0])}&zoom=${args[1]}&size=600x300&maptype=roadmap%20&markers=color:blue|${encodeURIComponent(args[0])}&key=${Bastion.credentials.googleAPIkey}`, encoding: null}, function (err, res, body) {
     if (err) {
       Bastion.log.error(err);
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'Some error has occured, please check the console.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.sendFile(body).catch(e => {
+    message.channel.send({ files: [body] }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });
@@ -61,7 +61,8 @@ exports.config = {
 exports.help = {
   name: 'map',
   description: 'Get the map of the specified location. It takes an optional `--zoom` argument which takes an zoom amount from value 0 to 20.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'map <location> [--zoom <amount>]',
   example: ['map New York, NY', 'map London Eye, London --zoom 18']
 };

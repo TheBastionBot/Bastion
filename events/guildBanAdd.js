@@ -25,28 +25,24 @@ sql.open('./data/Bastion.sqlite');
 module.exports = (guild, user) => {
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${guild.id}`).then(row => {
     if (!row) return;
-    if (row.log == 'false') return;
+    if (row.log === 'false') return;
 
-    guild.channels.get(row.logChannelID).sendMessage('', {embed: {
-      color: guild.client.colors.green,
+    guild.channels.get(row.logChannelID).send({embed: {
+      color: guild.client.colors.red,
       title: 'User Banned',
       fields: [
         {
-          name: 'Username',
-          value: `**${user.username}**#${user.discriminator}`,
+          name: 'User',
+          value: user.tag,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'User ID',
           value: user.id,
           inline: true
-        },
-        {
-          name: 'Banned At',
-          value: new Date().toUTCString(),
-          inline: false
         }
-      ]
+      ],
+      timestamp: new Date()
     }}).catch(e => {
       guild.client.log.error(e.stack);
     });

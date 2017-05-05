@@ -22,7 +22,7 @@
 const question = require('../../data/wouldYouRather.json');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     description: question.random()
   }}).catch(e => {
@@ -37,7 +37,8 @@ exports.config = {
 exports.help = {
   name: 'wouldyourather',
   description: 'Asks you a would you rather question! Let\'s see how you answer that.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'wouldYouRather',
   example: []
 };

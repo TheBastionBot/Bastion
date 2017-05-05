@@ -24,10 +24,10 @@ const getRandomInt = require('../../functions/getRandomInt');
 
 exports.run = (Bastion, message, args) => {
   let num = parseInt(args[0]);
-  if (args[0] != undefined && !isNaN(num)) {
+  if (args[0] !== undefined && !isNaN(num)) {
     xkcd(function (data) {
       xkcd(num > data.num ? data.num : num, function (data) {
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.blue,
           title: data.title,
           description: data.alt,
@@ -56,9 +56,9 @@ exports.run = (Bastion, message, args) => {
       });
     });
   }
-  else if (args[0] != undefined && args[0].toLowerCase() == 'latest') {
+  else if (args[0] !== undefined && args[0].toLowerCase() === 'latest') {
     xkcd(function (data) {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.blue,
         title: data.title,
         description: data.alt,
@@ -90,7 +90,7 @@ exports.run = (Bastion, message, args) => {
     xkcd(function (data) {
       let num = getRandomInt(1, data.num);
       xkcd(num, function (data) {
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.blue,
           title: data.title,
           description: data.alt,
@@ -128,7 +128,8 @@ exports.config = {
 exports.help = {
   name: 'xkcd',
   description: 'Shows a **xkcd** comic. No arguments will shows a random comic. If a comic number is given, it will show that specific comic & \'latest\' will show the latest comic.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'xkcd [latest|comic_number]',
   example: ['xkcd', 'xkcd latest', 'xkcd 834']
 };

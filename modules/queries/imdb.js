@@ -24,14 +24,14 @@ const imdb = require('imdb-api');
 exports.run = (Bastion, message, args) => {
   imdb.get(args.join(' '), (err, movie) => {
     if (err) {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: `No movie or TV series found with the name **${args.join(' ')}**. Please check the name and try again. Type \`${Bastion.config.prefix}help imdb\` for help on imdb command.`
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: movie.series ? `${movie.title} (TV Series)` : movie.title,
       url: movie.imdburl,
@@ -84,7 +84,7 @@ exports.run = (Bastion, message, args) => {
         }
       ],
       image: {
-        url: movie.poster != 'N/A' ? movie.poster : 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg'
+        url: movie.poster !== 'N/A' ? movie.poster : 'https://pbs.twimg.com/profile_images/780796992611942405/qj7ytv9v.jpg'
       },
       footer: {
         text: 'Powered by IMDb'
@@ -102,7 +102,8 @@ exports.config = {
 exports.help = {
   name: 'imdb',
   description: 'Shows details of a movie or a TV series.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'imdb <movie/tv series>',
   example: ['imdb Snowden', 'imdb The Blacklist']
 };

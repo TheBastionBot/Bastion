@@ -23,8 +23,17 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
+  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,37 +41,25 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  message.delete(10000).catch(e => {
-    Bastion.log.error(e.stack);
-  });
 
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row) return;
 
     role = message.guild.roles.find('name', args.join(' '));
-    if (role == null) return;
+    if (role === null) return;
     selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
     if (!selfAssignableRoles.includes(role.id)) return;
+    if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
     message.guild.members.get(message.author.id).addRole(role).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: `${message.author}, you have been given **${role.name}** role.`,
-      }}).then(m => {
-        m.delete(10000).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
+      }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
       Bastion.log.error(e.stack);
-      message.channel.sendMessage('', {embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
@@ -76,7 +73,8 @@ exports.config = {
 exports.help = {
   name: 'iam',
   description: 'Adds a specified self assignable role to the user.',
-  permission: '',
+  botPermission: 'Manage Roles',
+  userPermission: '',
   usage: 'iAm <role name>',
   example: ['iAm Looking to play']
 };

@@ -23,9 +23,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!(index = parseInt(args[0])) || index <= 0) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -36,8 +36,8 @@ exports.run = (Bastion, message, args) => {
   index -= 1;
 
   sql.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (!row || row.autoAssignableRoles == '[]') {
-      message.channel.sendMessage('', {embed: {
+    if (!row || row.autoAssignableRoles === '[]') {
+      message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'No auto assignable roles found.'
       }}).catch(e => {
@@ -47,7 +47,7 @@ exports.run = (Bastion, message, args) => {
     else {
       let roles = JSON.parse(row.autoAssignableRoles);
       if (index >= roles.length) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'That index was not found.'
         }}).catch(e => {
@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
       let deletedRoleID = roles[parseInt(args[0]) - 1];
       roles.splice(parseInt(args[0]) - 1, 1);
       sql.run(`UPDATE guildSettings SET autoAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `I've deleted **${message.guild.roles.get(deletedRoleID).name}** from auto assignable roles.`
         }}).catch(e => {
@@ -79,7 +79,8 @@ exports.config = {
 exports.help = {
   name: 'removeautoassignableroles',
   description: 'Deletes a role from the auto assignable roles by it\'s index number.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Administrator',
   usage: 'removeAutoAssignableRoles <index>',
   example: ['removeAutoAssignableRoles 3']
 };

@@ -23,10 +23,19 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MUTE_MEMBERS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('MUTE_MEMBERS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   if (!(user = message.mentions.users.first())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -40,13 +49,13 @@ exports.run = (Bastion, message, args) => {
     reason = 'No reason given';
   }
   message.guild.members.get(user.id).setMute(false).then(() => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.green,
       title: 'Unmuted',
       fields: [
         {
           name: 'User',
-          value: `**${user.username}**#${user.discriminator}`,
+          value: user.tag,
           inline: true
         },
         {
@@ -67,8 +76,8 @@ exports.run = (Bastion, message, args) => {
     sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
       if (!row) return;
 
-      if (row.modLog == 'true') {
-        message.guild.channels.get(row.modLogChannelID).sendMessage('', {embed: {
+      if (row.modLog === 'true') {
+        message.guild.channels.get(row.modLogChannelID).send({embed: {
           color: Bastion.colors.green,
           title: 'Unmuted user',
           fields: [
@@ -102,7 +111,7 @@ exports.run = (Bastion, message, args) => {
           },
           timestamp: new Date()
         }}).then(msg => {
-          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo)+1} WHERE guildID=${message.guild.id}`).catch(e => {
+          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
             Bastion.log.error(e.stack);
           });
         }).catch(e => {
@@ -124,7 +133,8 @@ exports.config = {
 exports.help = {
   name: 'unmute',
   description: 'Unmutes a mentioned user with an optional reason.',
-  permission: 'Mute Members',
+  botPermission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'unMute @user-mention [Reason]',
   example: ['unMute @user#0001 Reason for the unmute.']
 };

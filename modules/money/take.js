@@ -23,9 +23,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
       user = args[1];
     }
     else {
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
       }}).catch(e => {
@@ -61,7 +61,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
   }).then(() => {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `Penalty of **${args[0]}** Bastion Currencies has been charged to <@${user}>`,
       fields: [
@@ -73,7 +73,7 @@ exports.run = (Bastion, message, args) => {
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
-    Bastion.users.get(user).sendMessage('', {embed: {
+    Bastion.users.get(user).send({embed: {
       color: Bastion.colors.red,
       description: `You have been charged with a penalty of **${args[0]}** Bastion Currencies.`,
       fields: [
@@ -97,7 +97,8 @@ exports.config = {
 exports.help = {
   name: 'take',
   description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Bot Owner',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: ['take 100 @user#0001 Misbehaving', 'take 150 2233445566778899']
 };

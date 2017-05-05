@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (!args[0]) {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Help',
       description: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.\nTo get help about a specific command, type \`${Bastion.config.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
-    message.author.sendMessage('', {embed: {
+    message.author.send({embed: {
       color: Bastion.colors.blue,
       title: 'Bastion Discord BOT',
       url: 'https://bastion.js.org',
@@ -58,8 +58,13 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     let command = args[0].toLowerCase();
-    if (Bastion.commands.has(command)) {
-      command = Bastion.commands.get(command);
+    if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
+      if (Bastion.commands.has(command)) {
+        command = Bastion.commands.get(command);
+      }
+      else if (Bastion.aliases.has(command)) {
+        command = Bastion.commands.get(Bastion.aliases.get(command));
+      }
       let example = [];
       if (command.help.example.length < 1) {
         example.push('-');
@@ -70,7 +75,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
 
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.yellow,
         fields: [
           {
@@ -80,7 +85,7 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'Aliases',
-            value: command.config.aliases == '' ? '-' : command.config.aliases.join(', '),
+            value: command.config.aliases === '' ? '-' : command.config.aliases.join(', '),
             inline: true
           },
           {
@@ -89,9 +94,14 @@ exports.run = (Bastion, message, args) => {
             inline: false
           },
           {
-            name: 'Permissions Required',
-            value: command.help.permission == '' ? '-' : command.help.permission,
-            inline: false
+            name: 'BOT Permissions',
+            value: command.help.botPermission === '' ? '-' : command.help.botPermission,
+            inline: true
+          },
+          {
+            name: 'User Permissions',
+            value: command.help.userPermission === '' ? '-' : command.help.userPermission,
+            inline: true
           },
           {
             name: 'Usage',
@@ -105,14 +115,14 @@ exports.run = (Bastion, message, args) => {
           }
         ],
         footer: {
-          text: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.`
+          text: `To get a list of commands, type ${Bastion.config.prefix}commands`
         }
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
     else {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.red,
         description: `There's no **${args[0]}** command`
       }}).catch(e => {
@@ -129,7 +139,8 @@ exports.config = {
 exports.help = {
   name: 'help',
   description: 'Shows all the available commands. If a command name is specified as a argument, shows help about that command.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'help [command_name]',
   example: ['help', 'help magic8ball']
 };

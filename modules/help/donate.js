@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: 3050327,
     title: 'Support Bastion BOT project',
     url: 'https://bastion.js.org/',
@@ -37,7 +37,8 @@ exports.config = {
 exports.help = {
   name: 'donate',
   description: 'Instructions on how to financially help the Bastion BOT project.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'donate',
   example: []
 };

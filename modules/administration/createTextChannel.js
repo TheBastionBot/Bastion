@@ -20,9 +20,18 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -33,7 +42,7 @@ exports.run = (Bastion, message, args) => {
 
   args = args.join('-');
   if (args.length < 2) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'Channel name should be at least two characters long.'
     }}).catch(e => {
@@ -42,17 +51,17 @@ exports.run = (Bastion, message, args) => {
   }
 
   message.guild.createChannel(args, 'text').then(channel => {
-    channel.sendMessage('', {embed: {
+    channel.send({embed: {
       color: Bastion.colors.green,
       title: 'Text Channel Created',
       fields: [
         {
-          name: 'Name',
+          name: 'Channel Name',
           value: channel.name,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'Channel ID',
           value: channel.id,
           inline: true
         }
@@ -72,7 +81,8 @@ exports.config = {
 exports.help = {
   name: 'createtextchannel',
   description: 'Creates a new text channel with a given name.',
-  permission: 'Manage Channels',
+  botPermission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'createTextChannel <Channel Name>',
   example: ['createTextChannel Channel Name']
 };

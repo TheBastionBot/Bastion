@@ -23,9 +23,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!(index = parseInt(args[0])) || index <= 0) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo) {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.red,
         title: 'Todo list not found',
         description: `${message.author.username}, you haven't created a todo list.`
@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
     else {
       let list = JSON.parse(todo.list);
       if (index >= list.length) {
-        return message.channel.sendMessage('', {embed: {
+        return message.channel.send({embed: {
           color: Bastion.colors.red,
           description: 'That index was not found.'
         }}).catch(e => {
@@ -58,7 +58,7 @@ exports.run = (Bastion, message, args) => {
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);
       sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.red,
           description: `${message.author.username}, I've deleted **${deletedItem}** from your todo list.`
         }}).catch(e => {
@@ -80,7 +80,8 @@ exports.config = {
 exports.help = {
   name: 'deletetodo',
   description: 'Deletes an item from your todo list by it\'s index number.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Bot Owner',
   usage: 'deleteTodo <index>',
   example: ['deleteTodo 3']
 };

@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Let me Google that for you:',
     description: `https://lmgtfy.com/?q=${encodeURIComponent(args.join(' '))}`,
@@ -39,7 +39,8 @@ exports.config = {
 exports.help = {
   name: 'lmgtfy',
   description: 'A tool to teach other people how to use Google\'s internet search.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'lmgtfy <text>',
   example: ['lmgtfy How to shutdown a computer?']
 };

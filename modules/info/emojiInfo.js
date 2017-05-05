@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
 
   args = args[0].split(':')[1];
   if (!args) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   args = message.guild.emojis.find('name', args);
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Emoji info',
     fields: [
@@ -76,7 +76,8 @@ exports.config = {
 exports.help = {
   name: 'emojiinfo',
   description: 'Shows information about the mentioned custom emoji.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'emojiInfo [:emoji:]',
   example: ['emojiInfo :bastion:']
 };

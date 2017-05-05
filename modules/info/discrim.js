@@ -21,7 +21,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -29,18 +29,18 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  let members = message.guild.members.filter(m => m.user.discriminator == args[0]).map(m => m.user);
+  let members = message.guild.members.filter(m => m.user.discriminator === args[0]).map(m => m.user);
   let total = members.length;
   members = members.length > 0 ? members.slice(0,10).join(', ') : 'None';
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Discriminator search',
     description: `Found **${total}** users with discriminator **${args[0]}**`,
     fields: [
       {
         name: 'Users',
-        value: total > 10 ? `and ${total - 10} more.` : members
+        value: total > 10 ? members + ` and ${total - 10} more.` : members
       }
     ]
   }}).catch(e => {
@@ -55,7 +55,8 @@ exports.config = {
 exports.help = {
   name: 'discrim',
   description: 'Searches the server for users with the specified discriminator.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'discrim <discriminator>',
   example: ['discrim 8383']
 };

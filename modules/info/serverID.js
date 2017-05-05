@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Server ID',
     description: message.guild.id
@@ -36,7 +36,8 @@ exports.config = {
 exports.help = {
   name: 'serverid',
   description: 'Shows the server\'s ID the command was invoked in.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'serverID',
   example: []
 };

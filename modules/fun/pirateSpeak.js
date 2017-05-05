@@ -23,7 +23,7 @@ const dictionary = require('../../data/piratePhrases.json');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Pirate Speak:',
     description: translate(args.join(' '))
@@ -48,7 +48,8 @@ exports.config = {
 exports.help = {
   name: 'piratespeak',
   description: 'Convert\'s the given text to pirate speak.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'pirateSpeak <text>',
   example: ['pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can’t trust.']
 };
@@ -88,7 +89,7 @@ function translate(text) {
       word += character;
     // If the character is not a letter, then we hit the end of a word, so we should translate the current word and add it to the translation.
     else {
-      if (word != "") {
+      if (word !== "") {
         // If we've just finished a word, translate it
         let pirateWord = translateWord(word);
         translatedText += pirateWord;

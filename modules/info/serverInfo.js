@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Server Info',
     fields: [
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Owner',
-        value: `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`,
+        value: message.guild.owner.user.tag,
         inline: true
       },
       {
@@ -61,7 +61,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Members',
-        value: message.guild.memberCount,
+        value: `${message.guild.members.filter(m => !m.user.bot).size} Users\n${message.guild.members.filter(m => m.user.bot).size} BOTs`,
         inline: true
       },
       {
@@ -81,6 +81,9 @@ exports.run = (Bastion, message, args) => {
     ],
     thumbnail: {
       url: message.guild.iconURL ? message.guild.iconURL : 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png'
+    },
+    image: {
+      url: message.guild.splash ? message.guild.splashURL : null
     }
   }}).catch(e => {
     Bastion.log.error(e.stack);
@@ -94,7 +97,8 @@ exports.config = {
 exports.help = {
   name: 'serverinfo',
   description: 'Shows the server\'s information the command was invoked in.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'serverInfo',
   example: []
 };

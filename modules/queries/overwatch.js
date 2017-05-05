@@ -23,7 +23,7 @@ const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
 
   args[0] = args[0].toLowerCase();
   if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
     }}).catch(e => {
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `**${args[1]}** is not a valid BattleTag.`
     }}).catch(e => {
@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  ow.getOverall('pc', args[0], args[1].replace('#', '-')).then(data => {
+  ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
     let stats = [
       {
         name: 'Level',
@@ -61,7 +61,23 @@ exports.run = (Bastion, message, args) => {
         name: 'Rank',
         value: `${parseInt(data.profile.rank) ? data.profile.rank : '-'}`,
         inline: true
-      },
+      }
+    ];
+    if (data.profile.hasOwnProperty('season')) {
+      stats.push(
+        {
+          name: 'Season ID',
+          value: `${data.profile.season.id}`,
+          inline: true
+        },
+        {
+          name: 'Season Rank',
+          value: `${data.profile.season.rank}`,
+          inline: true
+        }
+      )
+    }
+    stats.push(
       {
         name: 'Quick Play',
         value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
@@ -106,8 +122,8 @@ exports.run = (Bastion, message, args) => {
         value: `${data.quickplay.global.solo_kills_average}`,
         inline: true
       }
-    ];
-    if (Object.keys(data.competitive.global).length > 0) {
+    );
+    if (Object.keys(data.competitive.global).length > 1) {
       stats.push(
         {
           name: 'Competitive',
@@ -155,7 +171,11 @@ exports.run = (Bastion, message, args) => {
         }
       );
     }
-    message.channel.sendMessage('', {embed: {
+    stats.push({
+      name: 'Achievements',
+      value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ') || '-'
+    });
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       author: {
         name: args[1],
@@ -164,19 +184,21 @@ exports.run = (Bastion, message, args) => {
       },
       fields: stats,
       thumbnail: {
-        url: data.profile.avatar != '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
+        url: data.profile.avatar !== '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
       }
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.sendMessage('', {embed: {
-      color: Bastion.colors.red,
-      description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
-    }}).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (e.stack.includes('NOT_FOUND')) {
+      message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   });
 };
 
@@ -187,7 +209,8 @@ exports.config = {
 exports.help = {
   name: 'overwatch',
   description: 'Shows Overwatch player stats specified by his Region and BattleTag.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
   example: ['overwatch us GH0S7#11143']
 };

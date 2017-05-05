@@ -23,7 +23,7 @@ const wd = require('word-definition');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -59,7 +59,7 @@ exports.run = (Bastion, message, args) => {
         }
       }};
     }
-    message.channel.sendMessage('', embed).catch(e => {
+    message.channel.send(embed).catch(e => {
       Bastion.log.error(e.stack);
     });
   });
@@ -72,7 +72,8 @@ exports.config = {
 exports.help = {
   name: 'define',
   description: 'Searches the definition of a word from English, French or German dictionary (specified in the message; if no language is specified, defaults to English).',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'define [language_code] <word>',
   example: ['define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre']
 };

@@ -20,19 +20,10 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  let fields = [];
-  for (let i = 1; i < message.guild.roles.size; i++) {
-    fields.push({
-      name: message.guild.roles.map(r=>r.name)[i],
-      value: message.guild.roles.map(r=>r.members)[i].size,
-      inline: true
-    })
-  }
-
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
-    title: 'List of Roles',
-    fields: fields
+    title: 'Roles',
+    description: message.guild.roles.size > 10 ? message.guild.roles.map(r => r.name).splice(1, 10).join('\n') + `\nand ${message.guild.roles.size - 10 - 1} roles.` :  message.guild.roles.map(r => r.name).splice(1).join('\n'),
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
@@ -45,7 +36,8 @@ exports.config = {
 exports.help = {
   name: 'roles',
   description: 'Shows the list of roles in the server.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'roles',
   example: []
 };

@@ -22,7 +22,7 @@
 const chalk = require('chalk');
 
 module.exports = error => {
-  console.log(chalk.red('[ERROR]'));
+  console.log(chalk.red('[ERROR EVENT]'));
   console.log(error);
-  console.log(chalk.red('[/ERROR]'));
+  console.log(chalk.red('[/ERROR EVENT]'));
 };

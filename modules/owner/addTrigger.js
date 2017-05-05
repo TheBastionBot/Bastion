@@ -23,11 +23,11 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   args = args.join(' ');
   if (!/.+ << .+/.test(args)) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e.stack);
   });
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.green,
     title: 'New Trigger Added',
     fields: [
@@ -65,7 +65,8 @@ exports.config = {
 exports.help = {
   name: 'addtrigger',
   description: 'Adds a trigger with a response message. Separate trigger & message with `<<`.`',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Bot Owner',
   usage: 'addTrigger <trigger> << <response>',
   example: ['addTrigger Hi, there? << Hello $user! :wave:']
 };

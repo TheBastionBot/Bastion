@@ -23,7 +23,7 @@ let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.green,
       title: 'Poll started',
       description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
@@ -55,11 +55,11 @@ exports.run = (Bastion, message, args) => {
         text: 'Vote by typing the corresponding number of the option.'
       }
     }}).then(msg => {
-      const votes = message.channel.createCollector(
+      const votes = message.channel.createMessageCollector(
         m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author == message.author || m.author.id == message.guild.ownerID) && m.content == `${Bastion.config.prefix}endpoll`),
         { time: 60 * 60 * 1000 }
       );
-      votes.on('message', (msg, votes) => {
+      votes.on('collect', (msg, votes) => {
         if (msg.content == `${Bastion.config.prefix}endpoll`) {
           return votes.stop();
         }
@@ -67,7 +67,7 @@ exports.run = (Bastion, message, args) => {
           msg.delete().catch(e => {
             Bastion.log.error(e.stack);
           });
-          msg.channel.sendMessage('', {embed: {
+          msg.channel.send({embed: {
             color: Bastion.colors.dark_grey,
             description: `Thank you, ${msg.author}, for voting.`,
             footer: {
@@ -86,7 +86,7 @@ exports.run = (Bastion, message, args) => {
           pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
         }
         if (pollRes.length == 0) {
-          return message.channel.sendMessage('', {embed: {
+          return message.channel.send({embed: {
             color: Bastion.colors.red,
             title: 'Poll Ended',
             description: 'Unfortunately, no votes were given.'
@@ -103,18 +103,18 @@ exports.run = (Bastion, message, args) => {
         }
         let count = {};
         for (let i = 0; i < pollRes.length; i++) {
-          count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]]+1 : 1;
+          count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]] + 1 : 1;
         }
         let result = [];
         for (let i = 1; i < args.length; i++) {
           result.push({
             name: args[i],
-            value: `${((count[Object.keys(count)[i-1]] - 1) / (pollRes.length - (args.length - 1))) * 100}%`,
+            value: `${((count[Object.keys(count)[i - 1]] - 1) / (pollRes.length - (args.length - 1))) * 100}%`,
             inline: true
           });
         }
 
-        message.channel.sendMessage('', {embed: {
+        message.channel.send({embed: {
           color: Bastion.colors.blue,
           title: 'Poll Ended',
           description: `Poll results for **${args[0]}**`,
@@ -131,7 +131,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `Can\'t start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
     }}).catch(e => {
@@ -147,7 +147,8 @@ exports.config = {
 exports.help = {
   name: 'poll',
   description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'poll <question>;option1>;option2[;<option3>[...]]',
   example: ['poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2']
 };

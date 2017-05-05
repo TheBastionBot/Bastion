@@ -19,15 +19,14 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-// This feature is absolutely useless after Discord releases audit logs feature to the public. I'll probably remove logging module after that.
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (row.log == 'false') {
+    if (row.log === 'false') {
       sql.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
@@ -41,7 +40,7 @@ exports.run = (Bastion, message, args) => {
       color = Bastion.colors.red;
       logStats = 'Logging is now disabled.';
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: color,
       description: logStats
     }}).catch(e => {
@@ -59,7 +58,8 @@ exports.config = {
 exports.help = {
   name: 'log',
   description: 'Toggle logging of various events in the server.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Administrator',
   usage: 'log',
   example: []
 };

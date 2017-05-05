@@ -23,7 +23,15 @@ exports.run = (Bastion, message, args) => {
   if (!(channel = message.mentions.channels.first())) {
     channel = message.channel;
   }
-  if (!channel.permissionsFor(message.author).hasPermission("MANAGE_CHANNELS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   channel.delete().catch(e => {
     Bastion.log.error(e.stack);
@@ -37,7 +45,8 @@ exports.config = {
 exports.help = {
   name: 'deletetextchannel',
   description: 'Deletes a mentioned text channel. If no channel is mentioned, deletes the current text channel.',
-  permission: 'Manage Channels',
+  botPermission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'deleteTextChannel [#channel-mention]',
   example: ['deleteTextChannel #channel-name', 'deleteTextChannel']
 };

@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
   let outcome = '';
   for (let i = 0; i < args; i++) {
     outcome = `${message.author} ${outcomes.random()}`;
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: `Round ${i + 1}`,
       description: outcome
@@ -47,7 +47,8 @@ exports.config = {
 exports.help = {
   name: 'russianroulette',
   description: 'Play the ultimate game of chance - Russian Roulette! Let\'s see if you live or die.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'russianRoulette [no_of_bullets]',
   example: ['russianRoulette', 'russianRoulette 7']
 };

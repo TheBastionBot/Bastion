@@ -22,7 +22,7 @@
 const changes = require('../../changes.json');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     title: 'Changelog',
     url: 'https://bastion.js.org/changes',
@@ -59,7 +59,8 @@ exports.config = {
 exports.help = {
   name: 'changelog',
   description: 'Display changes done in the current version of Bastion Bot.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'changeLog',
   example: []
 };

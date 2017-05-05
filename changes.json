@@ -1,8 +1,36 @@
 {
-  "date": "May 1, 2017",
+  "date": "May 5, 2017",
   "updated": [
-    "Fixed `serverInfo` command when server emojis exceeded message char limit."
+    "Updated `cleverbot-node` to `v0.3.10`",
+    "Updated `discord.js` to `v11.1.0`",
+    "Updated `mathjs` `v3.12.2`",
+    "Updated `sqlite` `v2.7.0`",
+    "Renamed `bot.js` to `bastion.js`",
+    "Embed color changes",
+    "`error` and `warn` events' log can now be distinguished from regular `error` and `warn` logs",
+    "Server logging modules improved",
+    "`iAm`/`iAmNot` won't auto delete messages.",
+    "`help` now accepts command aliases as well",
+    "Rewritten all `events`",
+    "Rewritten all modules",
+    "Improved update/upgrade scripts to be able to update modified bot",
+    "Fixed Bastion crashes when connection issues occured before message collector in `play`",
+    "Reduced the reward in `betFlip` command",
+    "Faster updates and low bandwidth uses",
+    "`summon` now shows if it doesn't have valid permissions in the channel",
+    "`overwatch` now shows season ID, season rank and achievements",
+    "Some minor changes"
   ],
-  "added": [],
-  "removed": []
+  "added": [
+    "Added `roleCreate`, `roleDelete` and `roleUpdate` events",
+    "`serverInfo` now shows splash URL of partnered servers",
+    "`serverInfo` now shows how many users & bots are there in a server",
+    "`help` command now shows permissions required by bot for specific commands",
+    "Added `airhorn` command",
+    "Added `commandSearch` command"
+  ],
+  "removed": [
+    "Removed some `events` from `disabledEvents`",
+    "Removed `ffmpeg-binaries` from local packages"
+  ]
 }

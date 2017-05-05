@@ -20,7 +20,15 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.channel.permissionsFor(message.member).has('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
   user = message.mentions.users.first();
   limit = parseInt(args[0]) ? args[0] : args[1];
@@ -42,13 +50,13 @@ exports.run = (Bastion, message, args) => {
       msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     if (msgs.size < 2 || msgs.length < 2) {
-      if ((msgs.size == 1 || msgs.length == 1) && (user || args.includes('--bots'))) {
+      if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
         error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
       }
       else {
         error = 'No messages found that could be deleted.';
       }
-      return message.channel.sendMessage('', {embed: {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: error
       }}).catch(e => {
@@ -70,7 +78,8 @@ exports.config = {
 exports.help = {
   name: 'clear',
   description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. It also accepts a parameter `--bots`, which clears messages from bots in that channel.',
-  permission: 'Manage Messages',
+  botPermission: 'Manage Messages',
+  userPermission: 'Manage Messages',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
   example: ['clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear']
 };

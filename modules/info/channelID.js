@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
     channel = message.channel;
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     fields: [
       {
@@ -50,7 +50,8 @@ exports.config = {
 exports.help = {
   name: 'channelid',
   description: 'Shows the id of the mentioned channel. If no channel is mentioned, shows the id of the current channel.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'channelID [#channel-mention]',
   example: ['channelID #channel-name', 'channelID']
 };

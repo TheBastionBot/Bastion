@@ -20,19 +20,29 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('MANAGE_ROLES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 
-  if (args[0] !== undefined && args[0].indexOf('#') == 0 && args[1] !== undefined) {
-    if (args[0].length != 7) {
-      return message.channel.sendMessage('', {embed: {
+  if (args[0] !== undefined && args[0].indexOf('#') === 0 && args[1] !== undefined) {
+    if (args[0].length !== 7) {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'Role color should be a 6 digit `HEX` color code.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
-    if (!(role = message.guild.roles.find('name', args.slice(1).join(' ')))) {
-      return message.channel.sendMessage('', {embed: {
+    role = message.guild.roles.find('name', args.slice(1).join(' '));
+    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+    else if (!role) {
+      return message.channel.send({embed: {
         color: Bastion.colors.red,
         description: 'No role found with that name.'
       }}).catch(e => {
@@ -41,7 +51,7 @@ exports.run = (Bastion, message, args) => {
     }
 
     role.setColor(args[0]).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         title: 'Role Color Changed',
         description: `**${role.name}** role color changed.`,
@@ -65,12 +75,6 @@ exports.run = (Bastion, message, args) => {
       });
     }).catch(e => {
       Bastion.log.error(e.stack);
-      message.channel.sendMessage('', {embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
     });
   }
 };
@@ -82,7 +86,8 @@ exports.config = {
 exports.help = {
   name: 'rolecolor',
   description: 'Change the color of a given role.',
-  permission: 'Manage Roles',
+  botPermission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'roleColor <#hex-color-code> <Role Name>',
   example: ['roleColor #00ff00 Role Name']
 };

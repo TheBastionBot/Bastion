@@ -24,10 +24,10 @@ exports.run = (Bastion, message, args) => {
     channel = message.channel;
   }
 
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Channel Topic',
-    description: (channel.topic == null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
+    description: (channel.topic === null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
@@ -40,7 +40,8 @@ exports.config = {
 exports.help = {
   name: 'channeltopic',
   description: 'Returns a mentioned channel\'s topic. Or current channle\'s topic, if no channel is mentioned.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'channelTopic [#channel-mention]',
   example: ['channelTopic #channel-name', 'channelTopic']
 };

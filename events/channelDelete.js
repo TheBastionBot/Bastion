@@ -27,33 +27,29 @@ module.exports = channel => {
 
   sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${channel.guild.id}`).then(row => {
     if (!row) return;
-    if (row.log == 'false') return;
+    if (row.log === 'false') return;
 
-    channel.guild.channels.get(row.logChannelID).sendMessage('', {embed: {
+    channel.guild.channels.get(row.logChannelID).send({embed: {
       color: channel.client.colors.red,
       title: 'Channel Deleted',
       fields: [
         {
-          name: 'Name',
+          name: 'Channel Name',
           value: channel.name,
           inline: true
         },
         {
-          name: 'ID',
+          name: 'Channel ID',
           value: channel.id,
           inline: true
         },
         {
-          name: 'Type',
-          value: channel.type,
-          inline: true
-        },
-        {
-          name: 'Deleted At',
-          value: new Date().toUTCString(),
+          name: 'Channel Type',
+          value: channel.type.toUpperCase(),
           inline: true
         }
-      ]
+      ],
+      timestamp: new Date()
     }}).catch(e => {
       channel.client.log.error(e.stack);
     });

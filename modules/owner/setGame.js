@@ -20,11 +20,11 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   if (args.length >= 1) {
     Bastion.user.setGame(args.join(' ')).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.yellow,
         description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
       }}).catch(e => {
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     Bastion.user.setGame(Bastion.config.game).then(() => {
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
       }}).catch(e => {
@@ -55,7 +55,8 @@ exports.config = {
 exports.help = {
   name: 'setgame',
   description: 'Sets the bot\'s game to the given text. If no text is given, sets the bot\'s game to the default game (given in `config.json`).',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Bot Owner',
   usage: 'setGame [text]',
   example: ['setGame with minions!', 'setGame']
 };

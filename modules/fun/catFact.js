@@ -22,7 +22,7 @@
 const catFacts = require('../../data/catFacts.json');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.sendMessage('', {embed: {
+  message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Cat Fact:',
     description: catFacts.random()
@@ -38,7 +38,8 @@ exports.config = {
 exports.help = {
   name: 'catfact',
   description: 'Shows a random catfact.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'catfact',
   example: []
 };

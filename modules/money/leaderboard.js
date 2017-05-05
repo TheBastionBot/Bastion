@@ -26,14 +26,14 @@ exports.run = (Bastion, message, args) => {
   sql.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC LIMIT 10').then(profiles => {
     let fields = [];
     for (let i = 0; i < profiles.length; i++) {
-      user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? `${message.guild.members.get(profiles[i].userID).user.username}#${message.guild.members.get(profiles[i].userID).user.discriminator}` : profiles[i].userID
+      user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? message.guild.members.get(profiles[i].userID).user.tag : profiles[i].userID;
       fields.push({
-        name: `${i+1}. ${user}`,
+        name: `${i + 1}. ${user}`,
         value: `${profiles[i].bastionCurrencies} Bastion Currencies`,
         inline: true
       });
     }
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'Leaderboard',
       description: `Top ${profiles.length} users with highest Bastion Currencies`,
@@ -53,7 +53,8 @@ exports.config = {
 exports.help = {
   name: 'leaderboard',
   description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the users of the bot.',
-  permission: '',
+  botPermission: '',
+  userPermission: '',
   usage: 'leaderboard',
   example: []
 };

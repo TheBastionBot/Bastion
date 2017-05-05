@@ -26,9 +26,9 @@ let activeChannels = [];
 let winners = [];
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1 || (isNaN(args = parseInt(args[0])) || args < 0)) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
 
   if (!activeChannels.includes(message.channel.id)) {
     let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'].random();
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'GIVEAWAY! 🎉',
       description: `Giveaway event started. React to this message with ${reaction} to get **${args}** Bastion Currencies.`,
@@ -69,12 +69,12 @@ exports.run = (Bastion, message, args) => {
               });
             }
             else {
-              sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies)+args} WHERE userID=${user}`).catch(e => {
+              sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args} WHERE userID=${user}`).catch(e => {
                 Bastion.log.error(e.stack);
               });
             }
           }).then(() => {
-            Bastion.users.get(user).sendMessage('', {embed: {
+            Bastion.users.get(user).send({embed: {
               color: Bastion.colors.green,
               description: `You have been awarded **${args}** Bastion Currencies for your participation in the giveaway event.`
             }}).catch(e => {
@@ -90,7 +90,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.sendMessage('', {embed: {
+    message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'Can\'t start another giveaway event now. Another giveaway event is already active in this channel. Wait a for it to end.'
     }}).catch(e => {
@@ -106,7 +106,8 @@ exports.config = {
 exports.help = {
   name: 'giveaway',
   description: 'Starts a giveaway, users get the specified amount of Bastion Currencies if they react to the message with the given reaction, within 1 hour.',
-  permission: '',
+  botPermission: '',
+  userPermission: 'Bot Owner',
   usage: 'giveaway <amount>',
   example: ['giveaway 10']
 };

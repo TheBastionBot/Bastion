@@ -23,9 +23,18 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission("ADMINISTRATOR")) return Bastion.log.info('You don\'t have permissions to use this command.');
+  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `I need **${this.help.botPermission}** permission to use this command.`
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
       description: `\`${Bastion.config.prefix}${this.help.usage}\``
@@ -41,7 +50,7 @@ exports.run = (Bastion, message, args) => {
   }
   args = args.filter(r => message.guild.roles.get(r));
   if (args.length < 1) {
-    return message.channel.sendMessage('', {embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'The role ID(s) you specified doesn\'t match any role.'
     }}).catch(e => {
@@ -59,7 +68,7 @@ exports.run = (Bastion, message, args) => {
       for (let i = 0; i < args.length; i++) {
         roleNames.push(message.guild.roles.get(args[i]).name);
       }
-      message.channel.sendMessage('', {embed: {
+      message.channel.send({embed: {
         color: Bastion.colors.green,
         title: 'Added self assignable roles',
         description: roleNames.join(', ')
@@ -81,7 +90,8 @@ exports.config = {
 exports.help = {
   name: 'addselfassignableroles',
   description: 'Adds roles, specified by role ID, to self assignable roles category, so that anyone could use `iam`/`iamnot` command to assign these roles to themselves.',
-  permission: '',
+  botPermission: 'Manage Roles',
+  userPermission: 'Administrator',
   usage: 'addSelfAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: ['addSelfAssignableRoles 443322110055998877 778899550011223344']
 };
