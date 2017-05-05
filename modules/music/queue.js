@@ -20,9 +20,11 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.delete().catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  if (message.deletable) {
+    message.delete().catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
 };
 
 exports.config = {
