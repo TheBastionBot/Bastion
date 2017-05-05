@@ -33,7 +33,7 @@ exports.help = {
   name: 'repeat',
   description: 'Toggles the currently playing song to/from the repeat queue.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'repeat',
   example: []
 };

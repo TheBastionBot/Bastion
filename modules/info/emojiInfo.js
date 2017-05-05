@@ -77,7 +77,7 @@ exports.help = {
   name: 'emojiinfo',
   description: 'Shows information about the mentioned custom emoji.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'emojiInfo [:emoji:]',
   example: ['emojiInfo :bastion:']
 };

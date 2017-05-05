@@ -33,7 +33,7 @@ exports.help = {
   name: 'queue',
   description: 'Shows the list of music in the queue.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'queue',
   example: []
 };

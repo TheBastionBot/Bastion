@@ -33,7 +33,7 @@ exports.help = {
   name: 'skip',
   description: 'Skips the current music and plays the next music in the queue (if any).',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'skip',
   example: []
 };

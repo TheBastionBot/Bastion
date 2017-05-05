@@ -57,7 +57,7 @@ exports.help = {
   name: 'crimecoefficient',
   description: 'Finds the crime coefficient of a mentioned user. If no user is mentioned, it finds the crime coefficient of yours.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'crimecoefficient [@user-mention]',
   example: ['crimecoefficient', 'crimecoefficient @user#0001']
 };

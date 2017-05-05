@@ -54,7 +54,7 @@ exports.help = {
   name: 'fliptext',
   description: 'Flips a given text.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'fliptext <text>',
   example: ['fliptext This is Upside Down!']
 };

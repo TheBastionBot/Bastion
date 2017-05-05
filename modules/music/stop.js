@@ -34,7 +34,7 @@ exports.help = {
   name: 'stop',
   description: 'Stops music playback, empties the queue and tells the BOT to leave the voice channel.',
   botPermission: '',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'stop',
   example: []
 };

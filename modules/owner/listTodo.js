@@ -75,7 +75,7 @@ exports.help = {
   name: 'listtodo',
   description: 'Shows your todo list if you have one. It takes page number as an optional argument.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'listTodo [page_no]',
   example: ['listTodo', 'listTodo 2']
 };

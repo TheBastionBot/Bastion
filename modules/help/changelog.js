@@ -60,7 +60,7 @@ exports.help = {
   name: 'changelog',
   description: 'Display changes done in the current version of Bastion Bot.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'changeLog',
   example: []
 };

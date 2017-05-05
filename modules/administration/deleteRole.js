@@ -85,7 +85,7 @@ exports.help = {
   name: 'deleterole',
   description: 'Deletes a role by a given name.',
   botPermission: 'Manage Roles',
-  permission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'deleteRole <Role Name>',
   example: ['deleteRole Role Name']
 };

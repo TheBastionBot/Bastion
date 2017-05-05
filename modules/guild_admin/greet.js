@@ -60,7 +60,7 @@ exports.help = {
   name: 'greet',
   description: 'Toggle greeting message for new members of the server.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'greet',
   example: []
 };

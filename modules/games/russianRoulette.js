@@ -48,7 +48,7 @@ exports.help = {
   name: 'russianroulette',
   description: 'Play the ultimate game of chance - Russian Roulette! Let\'s see if you live or die.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'russianRoulette [no_of_bullets]',
   example: ['russianRoulette', 'russianRoulette 7']
 };

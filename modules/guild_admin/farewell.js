@@ -61,7 +61,7 @@ exports.help = {
   name: 'farewell',
   description: 'Toggle farewell message for members who left the server.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'farewell',
   example: []
 };

@@ -56,7 +56,7 @@ exports.help = {
   name: 'discrim',
   description: 'Searches the server for users with the specified discriminator.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'discrim <discriminator>',
   example: ['discrim 8383']
 };

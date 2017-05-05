@@ -67,7 +67,7 @@ exports.help = {
   name: 'listtriggers',
   description: 'Lists all the triggers you have added. It takes page number as an optional argument.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'listTriggers [page_no]',
   example: ['listTriggers', 'listTriggers 2']
 };

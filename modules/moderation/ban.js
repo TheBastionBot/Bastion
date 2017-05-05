@@ -151,7 +151,7 @@ exports.help = {
   name: 'ban',
   description: 'Bans a mentioned user with an optional reason, and removes 7 days of his message history.',
   botPermission: 'Ban Members',
-  permission: 'Ban Members',
+  userPermission: 'Ban Members',
   usage: 'ban <@user-mention> [Reason].',
   example: ['ban @user#001 Reason for the ban.']
 };

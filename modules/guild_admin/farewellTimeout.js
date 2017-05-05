@@ -49,7 +49,7 @@ exports.help = {
   name: 'farewelltimeout',
   description: 'Sets the time (in seconds) after which farewell message will be automatically deleted. Supported values: 1 - 300. Any value except the supported values will turn off automatic deletion.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'farewellTimeout [time_in_seconds]',
   example: ['farewellTimeout 120', 'farewellTimeout']
 };

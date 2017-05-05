@@ -85,7 +85,7 @@ exports.help = {
   name: 'renamerole',
   description: 'Renames a given role to a given new name.',
   botPermission: 'Manage Roles',
-  permission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'renameRole <Old Role Name> - <New Role Name>',
   example: ['renameRole Old Role Name - New Role Name']
 };

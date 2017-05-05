@@ -51,7 +51,7 @@ exports.help = {
   name: 'setavatar',
   description: 'Sets the avatar of the Bot.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'setavatar <image_url>',
   example: ['setavatar https\://example.com/avatar.jpeg']
 };

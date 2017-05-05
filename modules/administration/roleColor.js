@@ -87,7 +87,7 @@ exports.help = {
   name: 'rolecolor',
   description: 'Change the color of a given role.',
   botPermission: 'Manage Roles',
-  permission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'roleColor <#hex-color-code> <Role Name>',
   example: ['roleColor #00ff00 Role Name']
 };

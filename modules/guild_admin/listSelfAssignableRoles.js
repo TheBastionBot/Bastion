@@ -72,7 +72,7 @@ exports.help = {
   name: 'listselfassignableroles',
   description: 'Lists all self assignable roles.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'listSelfAssignableRoles [page_no]',
   example: ['listSelfAssignableRoles', 'listSelfAssignableRoles 2']
 };

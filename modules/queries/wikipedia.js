@@ -73,7 +73,7 @@ exports.help = {
   name: 'wikipedia',
   description: 'Searches Wikipedia and shows the result.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'wikipedia <text>',
   example: ['wikipedia Steve Jobs']
 };

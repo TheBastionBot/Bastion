@@ -133,7 +133,7 @@ exports.help = {
   name: 'weather',
   description: 'Shows weather information for a specified location by name or ZIP Code.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'weather <city [, country_code]|zipcode>',
   example: ['weather London, UK', 'weather 94109']
 };

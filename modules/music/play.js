@@ -593,7 +593,7 @@ exports.help = {
   name: 'play',
   description: 'Plays a song (adds the song to the queue if already playing) specified by name/link. To play songs in a YouTube playlist, use \'-pl\' argument with the playlist link. To play songs in your favourites use \'-favs\' argument instead of song name/link.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'play <name | song_link | -pl <playlist_link> | -favs>',
   example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs']
 };

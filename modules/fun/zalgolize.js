@@ -49,7 +49,7 @@ exports.help = {
   name: 'zalgolize',
   description: 'Zalgolizes a given text.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'zaloglize <text>',
   example: ['zaloglize It looks clumsy, but it\'s cool!']
 };

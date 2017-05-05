@@ -44,7 +44,7 @@ exports.help = {
   name: 'support',
   description: 'Sends the invite link to Bastion BOT Support Server.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'support',
   example: []
 };

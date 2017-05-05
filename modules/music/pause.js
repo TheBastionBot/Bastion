@@ -34,7 +34,7 @@ exports.help = {
   name: 'pause',
   description: 'Pauses the current music playback.',
   botPermission: '',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'pause',
   example: []
 };

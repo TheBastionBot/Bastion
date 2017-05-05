@@ -91,7 +91,7 @@ exports.help = {
   name: 'typinggame',
   description: 'Starts a typing speed competition. The user to type the given article and send it first, wins. It automatically ends in 5 mins if no one is able to type the article by this time.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'typingGame',
   example: []
 };

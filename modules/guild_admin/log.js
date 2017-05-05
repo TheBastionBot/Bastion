@@ -59,7 +59,7 @@ exports.help = {
   name: 'log',
   description: 'Toggle logging of various events in the server.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'log',
   example: []
 };

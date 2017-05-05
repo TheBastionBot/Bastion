@@ -98,7 +98,7 @@ exports.help = {
   name: 'serverinfo',
   description: 'Shows the server\'s information the command was invoked in.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'serverInfo',
   example: []
 };

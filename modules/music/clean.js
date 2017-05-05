@@ -34,7 +34,7 @@ exports.help = {
   name: 'clean',
   description: 'Cleans up the current music queue.',
   botPermission: '',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'clean',
   example: []
 };

@@ -93,7 +93,7 @@ exports.help = {
   name: 'createrole',
   description: 'Creates a new role with a given color (optional) and a given name (optional).',
   botPermission: 'Manage Roles',
-  permission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'createrole [#hex-color-code] [Role Name]',
   example: ['createrole #dc143c Role Name', 'createrole #dc143c', 'createrole Role Name', 'createrole']
 };

@@ -51,7 +51,7 @@ exports.help = {
   name: 'channelid',
   description: 'Shows the id of the mentioned channel. If no channel is mentioned, shows the id of the current channel.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'channelID [#channel-mention]',
   example: ['channelID #channel-name', 'channelID']
 };

@@ -56,7 +56,7 @@ exports.help = {
   name: 'setnick',
   description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'setNick [text]',
   example: ['setNick NewNick', 'setNick']
 };

@@ -91,7 +91,7 @@ exports.help = {
   name: 'addautoassignableroles',
   description: 'Adds roles, specified by role ID, to auto assignable roles category, anyone who joins the server gets these roles automatically.',
   botPermission: 'Manage Roles',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: ['addAutoAssignableRoles 443322110055998877 778899550011223344']
 };

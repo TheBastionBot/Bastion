@@ -64,7 +64,7 @@ exports.help = {
   name: 'deletevoicechannel',
   description: 'Deletes a voice channel by a given name.',
   botPermission: 'Manage Channels',
-  permission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'deleteVoiceChannel <Channel Name>',
   example: ['deleteVoiceChannel Voice Channel Name']
 };

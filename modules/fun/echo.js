@@ -46,7 +46,7 @@ exports.help = {
   name: 'echo',
   description: 'Sends the same message that you send as an argument. Just like an echo!',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'echo <text>',
   example: ['echo Hello, world!']
 };

@@ -68,7 +68,7 @@ exports.help = {
   name: 'shutdown',
   description: 'Asks you for conformation to shut the bot down and terminates the process. Reply with `yes` or `no`.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'shutdown',
   example: []
 };

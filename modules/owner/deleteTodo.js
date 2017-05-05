@@ -81,7 +81,7 @@ exports.help = {
   name: 'deletetodo',
   description: 'Deletes an item from your todo list by it\'s index number.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'deleteTodo <index>',
   example: ['deleteTodo 3']
 };

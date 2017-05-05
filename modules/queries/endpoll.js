@@ -33,7 +33,7 @@ exports.help = {
   name: 'endpoll',
   description: 'Ends an ongoing poll and shows the result.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'endpoll',
   example: []
 };

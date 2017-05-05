@@ -66,7 +66,7 @@ exports.help = {
   name: 'addtrigger',
   description: 'Adds a trigger with a response message. Separate trigger & message with `<<`.`',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'addTrigger <trigger> << <response>',
   example: ['addTrigger Hi, there? << Hello $user! :wave:']
 };

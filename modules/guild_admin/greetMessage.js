@@ -60,7 +60,7 @@ exports.help = {
   name: 'greetmessage',
   description: 'Edit the greeting message that shows when a new member is joined in the server.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'greetMessage [Message]',
   example: ['greetMessage Hello $user! Welcome to $server.']
 };

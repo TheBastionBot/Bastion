@@ -139,7 +139,7 @@ exports.help = {
   name: 'give',
   description: 'Give any specified user (by mention or ID) Bastion Currencies deducting that amout from your currencies. If you are the BOT owner, you can give anyone any amount of Bastion Currencies.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'give <amount> <@user-mention|user_id>',
   example: ['give 100 @user#0001', 'give 150 2233445566778899']
 };

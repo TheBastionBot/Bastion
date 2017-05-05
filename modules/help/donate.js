@@ -38,7 +38,7 @@ exports.help = {
   name: 'donate',
   description: 'Instructions on how to financially help the Bastion BOT project.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'donate',
   example: []
 };

@@ -72,7 +72,7 @@ exports.help = {
   name: 'rps',
   description: 'Play the classic *rock paper scissor* game with the bot.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'rps <rock|paper|scissor>',
   example: ['rps Rock']
 };

@@ -37,7 +37,7 @@ exports.help = {
   name: 'serverid',
   description: 'Shows the server\'s ID the command was invoked in.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'serverID',
   example: []
 };

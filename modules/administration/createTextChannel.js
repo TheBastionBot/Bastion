@@ -82,7 +82,7 @@ exports.help = {
   name: 'createtextchannel',
   description: 'Creates a new text channel with a given name.',
   botPermission: 'Manage Channels',
-  permission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'createTextChannel <Channel Name>',
   example: ['createTextChannel Channel Name']
 };

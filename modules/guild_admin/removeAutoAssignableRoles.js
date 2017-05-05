@@ -80,7 +80,7 @@ exports.help = {
   name: 'removeautoassignableroles',
   description: 'Deletes a role from the auto assignable roles by it\'s index number.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'removeAutoAssignableRoles <index>',
   example: ['removeAutoAssignableRoles 3']
 };

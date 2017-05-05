@@ -74,7 +74,7 @@ exports.help = {
   name: 'iamnot',
   description: 'Removes a specified self assignable role from the user.',
   botPermission: 'Manage Roles',
-  permission: '',
+  userPermission: '',
   usage: 'iAmNot <role name>',
   example: ['iAmNot Looking to play']
 };

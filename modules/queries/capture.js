@@ -86,7 +86,7 @@ exports.help = {
   name: 'capture',
   description: 'Captures and sends a screenshot of a specified webpage.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'capture <url>',
   example: ['capture bastion.js.org']
 };

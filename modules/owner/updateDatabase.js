@@ -62,7 +62,7 @@ exports.help = {
   name: 'updatedatabase',
   description: 'Updates Bastion\'s Database to the current release.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'updateDatabase',
   example: []
 };

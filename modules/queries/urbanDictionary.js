@@ -71,7 +71,7 @@ exports.help = {
   name: 'urbandictionary',
   description: 'Searches Urban Dictionary for a urban definition of word.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'urbanDictionary <word>',
   example: ['urbanDictionary pineapple']
 };

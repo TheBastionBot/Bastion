@@ -52,7 +52,7 @@ exports.help = {
   name: 'avatar',
   description: 'Shows a mentioned person\'s avatar. If no one is mentioned, it wil show your avatar.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'avatar [@user-mention]',
   example: ['avatar @user#001', 'avatar']
 };

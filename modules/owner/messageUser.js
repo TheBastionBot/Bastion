@@ -49,7 +49,7 @@ exports.help = {
   name: 'messageuser',
   description: 'Sends a private message to a specified user (by ID) of a server the bot is connected to.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'messageUser <user_id> <message>',
   example: ['messageUser USER_ID Hello, how are you?']
 };

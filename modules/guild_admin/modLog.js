@@ -60,7 +60,7 @@ exports.help = {
   name: 'modlog',
   description: 'Toggle logging of various moderation events in the server.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'modLog',
   example: []
 };

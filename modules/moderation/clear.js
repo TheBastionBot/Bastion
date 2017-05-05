@@ -79,7 +79,7 @@ exports.help = {
   name: 'clear',
   description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. It also accepts a parameter `--bots`, which clears messages from bots in that channel.',
   botPermission: 'Manage Messages',
-  permission: 'Manage Messages',
+  userPermission: 'Manage Messages',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
   example: ['clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear']
 };

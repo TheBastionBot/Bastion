@@ -111,7 +111,7 @@ exports.help = {
   name: 'betroll',
   description: 'Bets a specified amount of Bastion currency on prediction of the outcome of rolling a dice. If you win, you win more Bastion Currencies. If you lose, you lose the amount of currency you\'ve bet.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'betroll <amount> <one|two|three|four|five|six>',
   example: ['betroll 100 three']
 };

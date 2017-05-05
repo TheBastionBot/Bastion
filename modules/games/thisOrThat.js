@@ -38,7 +38,7 @@ exports.help = {
   name: 'thisorthat',
   description: 'Asks you a this or that question. Let\'s see how is your choice!',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'thisOrThat',
   example: []
 };

@@ -139,7 +139,7 @@ exports.help = {
   name: 'textunmute',
   description: 'UnMutes a previously muted user in a channel with an optional reason.',
   botPermission: 'Manage Roles',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'textUnMute @user-mention [Reason]',
   example: ['textUnMute @user#0001 Reason for the unmute.']
 };

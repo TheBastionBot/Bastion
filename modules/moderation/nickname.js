@@ -69,7 +69,7 @@ exports.help = {
   name: 'nickname',
   description: 'Change the nickname of the mentioned user in the server to a specified nick. If no nick is specified, it resets the user\'s nickname.',
   botPermission: 'Manage Nicknames',
-  permission: 'Manage Nicknames',
+  userPermission: 'Manage Nicknames',
   usage: 'nickname <@user-mention> [nick]',
   example: ['nickname @user#0001 The Legend', 'nickname @user#0001']
 };

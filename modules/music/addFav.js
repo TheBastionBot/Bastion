@@ -59,7 +59,7 @@ exports.help = {
   name: 'addfav',
   description: 'Adds a song to your favourite list specified by name/link.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'addfav <song name | song link>',
   example: ['addFav one more night', 'addFav https://www.youtube.com/watch?v=JGwWNGJdvx8']
 };

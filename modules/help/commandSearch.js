@@ -63,7 +63,7 @@ exports.help = {
   name: 'commandsearch',
   description: 'Search for a Bastion\'s command with a given text.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'commandSearch <text>',
   example: ['commandSearch user']
 };

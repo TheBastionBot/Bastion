@@ -99,7 +99,7 @@ exports.help = {
   name: 'shorten',
   description: 'Shortens a specified URL using Google URL Shortner.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'shorten <URL>',
   example: ['shorten https://bastion.js.org/SomeLongURL']
 };

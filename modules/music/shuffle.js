@@ -34,7 +34,7 @@ exports.help = {
   name: 'shuffle',
   description: 'Shuffles the songs in the current queue.',
   botPermission: '',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'shuffle',
   example: []
 };

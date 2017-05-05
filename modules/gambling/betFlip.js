@@ -105,7 +105,7 @@ exports.help = {
   name: 'betflip',
   description: 'Bets a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you win more Bastion Currencies. If you lose, you lose the amount of currency you\'ve bet.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'betflip <amount> <heads|tails>',
   example: ['betflip 100 heads']
 };

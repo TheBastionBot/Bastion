@@ -58,7 +58,7 @@ exports.help = {
   name: 'searchserver',
   description: 'Searches for servers, by specified text, the bot is connected to.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'searchServer <name>',
   example: ['searchServer Bastion']
 };

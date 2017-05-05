@@ -45,7 +45,7 @@ exports.help = {
   name: 'leave',
   description: 'Tells the bot to leave a specified server by ID.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'leave <guild_id>',
   example: ['leave 441122339988775566']
 };

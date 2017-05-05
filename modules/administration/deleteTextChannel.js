@@ -46,7 +46,7 @@ exports.help = {
   name: 'deletetextchannel',
   description: 'Deletes a mentioned text channel. If no channel is mentioned, deletes the current text channel.',
   botPermission: 'Manage Channels',
-  permission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'deleteTextChannel [#channel-mention]',
   example: ['deleteTextChannel #channel-name', 'deleteTextChannel']
 };

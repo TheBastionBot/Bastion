@@ -82,7 +82,7 @@ exports.help = {
   name: 'createvoicechannel',
   description: 'Creates a new voice channel with a given name.',
   botPermission: 'Manage Channels',
-  permission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'createVoiceChannel <Channel Name>',
   example: ['createVoiceChannel Channel Name']
 };

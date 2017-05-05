@@ -61,7 +61,7 @@ exports.help = {
   name: 'renametextchannel',
   description: 'Renames the current text channel to a given new name.',
   botPermission: 'Manage Channels',
-  permission: 'Manage Channels',
+  userPermission: 'Manage Channels',
   usage: 'renameTextChannel <Channel Name>',
   example: ['renameTextChannel New Channel Name']
 };

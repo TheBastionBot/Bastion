@@ -60,7 +60,7 @@ exports.help = {
   name: 'chat',
   description: 'Toggles chatting feature of the bot.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'chat',
   example: []
 };

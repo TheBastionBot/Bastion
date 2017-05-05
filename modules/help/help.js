@@ -100,7 +100,7 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'User Permissions',
-            value: command.help.permission === '' ? '-' : command.help.permission,
+            value: command.help.userPermission === '' ? '-' : command.help.userPermission,
             inline: true
           },
           {
@@ -115,7 +115,7 @@ exports.run = (Bastion, message, args) => {
           }
         ],
         footer: {
-          text: `To get a list of commands, type \`${Bastion.config.prefix}commands\`.`
+          text: `To get a list of commands, type ${Bastion.config.prefix}commands`
         }
       }}).catch(e => {
         Bastion.log.error(e.stack);
@@ -140,7 +140,7 @@ exports.help = {
   name: 'help',
   description: 'Shows all the available commands. If a command name is specified as a argument, shows help about that command.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'help [command_name]',
   example: ['help', 'help magic8ball']
 };

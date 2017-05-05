@@ -137,7 +137,7 @@ exports.help = {
   name: 'addrole',
   description: 'Adds a mentioned user to the given role. If no user is mentioned, adds you to the given role.',
   botPermission: 'Manage Roles',
-  permission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'addRole [@user-mention] <Role Name>',
   example: ['addRole @user#001 Role Name', 'addRole Role Name']
 };

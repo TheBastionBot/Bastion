@@ -100,7 +100,7 @@ exports.help = {
   name: 'stats',
   description: 'Display stats & info about the bot.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'stats',
   example: []
 };

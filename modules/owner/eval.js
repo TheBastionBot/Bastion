@@ -72,7 +72,7 @@ exports.help = {
   name: 'eval',
   description: 'Evaluates any JavaScript statement.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'eval <JavaScript code>',
   example: ['eval message.guild.members.size']
 };

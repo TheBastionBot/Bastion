@@ -135,7 +135,7 @@ exports.help = {
   name: 'mute',
   description: 'Mutes a mentioned user with an optional reason.',
   botPermission: 'Mute Members',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'mute @user-mention [Reason]',
   example: ['mute @user#0001 Reason for the mute.']
 };

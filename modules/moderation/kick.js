@@ -151,7 +151,7 @@ exports.help = {
   name: 'kick',
   description: 'Kicks a mentioned user with an optional reason.',
   botPermission: 'Kick Members',
-  permission: 'Kick Members',
+  userPermission: 'Kick Members',
   usage: 'kick @user-mention [Reason]',
   example: ['kick @user#0001 Reason for the kick.']
 };

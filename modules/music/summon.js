@@ -124,7 +124,7 @@ exports.help = {
   name: 'summon',
   description: 'Tells the BOT to join the default voice channel (if any), set by the BOT owner. Doesn\'t apply to BOT owner.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'summon',
   example: []
 };

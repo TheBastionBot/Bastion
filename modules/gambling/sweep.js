@@ -50,7 +50,7 @@ exports.help = {
   name: 'sweep',
   description: 'Shows a random user from the channel.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'sweep',
   example: []
 };

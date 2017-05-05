@@ -107,7 +107,7 @@ exports.help = {
   name: 'giveaway',
   description: 'Starts a giveaway, users get the specified amount of Bastion Currencies if they react to the message with the given reaction, within 1 hour.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'giveaway <amount>',
   example: ['giveaway 10']
 };

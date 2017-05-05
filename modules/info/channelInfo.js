@@ -86,7 +86,7 @@ exports.help = {
   name: 'channelinfo',
   description: 'Shows information about the mentioned channel. If no channel is mentioned, shows information about the current channel.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',
   example: ['channelInfo #channel-name', 'channelInfo 221133445599667788', 'channelInfo']
 };

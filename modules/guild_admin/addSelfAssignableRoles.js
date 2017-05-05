@@ -91,7 +91,7 @@ exports.help = {
   name: 'addselfassignableroles',
   description: 'Adds roles, specified by role ID, to self assignable roles category, so that anyone could use `iam`/`iamnot` command to assign these roles to themselves.',
   botPermission: 'Manage Roles',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'addSelfAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: ['addSelfAssignableRoles 443322110055998877 778899550011223344']
 };

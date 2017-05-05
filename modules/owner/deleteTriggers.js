@@ -55,7 +55,7 @@ exports.help = {
   name: 'deletetrigger',
   description: 'Deletes a trigger and response specified by it\'s trigger.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'deleteTrigger <trigger>',
   example: ['deleteTrigger Hi, there?']
 };

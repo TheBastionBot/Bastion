@@ -76,7 +76,7 @@ exports.help = {
   name: 'todo',
   description: 'Adds a text to your todo list.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'todo <text>',
   example: ['todo Reconfigure my firewall']
 };

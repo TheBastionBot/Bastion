@@ -120,7 +120,7 @@ exports.help = {
   name: 'removeallroles',
   description: 'Removes all roles from a mentioned user. If no user is mentioned, removes all roles from you.',
   botPermission: 'Manage Roles',
-  permission: 'Manage Roles',
+  userPermission: 'Manage Roles',
   usage: 'removeAllRoles [@user-mention]',
   example: ['removeAllRoles @user#0001', 'removeAllRoles']
 };

@@ -94,7 +94,7 @@ exports.help = {
   name: 'roleinfo',
   description: 'Shows information about the specified role.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',
   example: ['roleInfo @Dark Knigths', 'roleInfo The Legends']
 };

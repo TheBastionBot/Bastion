@@ -64,7 +64,7 @@ exports.help = {
   name: 'inrole',
   description: 'Shows the list of all the users in a specified role.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'inRole <Role Name|@role-mention>',
   example: ['inRole Role Name', 'inrole @roleMention']
 };

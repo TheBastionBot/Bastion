@@ -51,7 +51,7 @@ exports.help = {
   name: 'userid',
   description: 'Shows the mentioned user\'s ID. If no user is mentioned, shows your ID.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'userID [@user-mention]',
   example: ['userID @user#0001', 'userID']
 };

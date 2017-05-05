@@ -33,7 +33,7 @@ exports.help = {
   name: 'np',
   description: 'Shows the currently playing music.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'np',
   example: []
 };

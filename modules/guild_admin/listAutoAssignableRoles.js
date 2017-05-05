@@ -72,7 +72,7 @@ exports.help = {
   name: 'listautoassignableroles',
   description: 'Lists all auto assignable roles.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'listAutoAssignableRoles [page_no]',
   example: ['listAutoAssignableRoles', 'listAutoAssignableRoles 2']
 };

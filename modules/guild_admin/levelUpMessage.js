@@ -60,7 +60,7 @@ exports.help = {
   name: 'levelupmessage',
   description: 'Toggles sending messages when someone levels up in this server.',
   botPermission: '',
-  permission: 'Administrator',
+  userPermission: 'Administrator',
   usage: 'levelUpMessage',
   example: []
 };

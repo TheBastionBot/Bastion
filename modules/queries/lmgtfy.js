@@ -40,7 +40,7 @@ exports.help = {
   name: 'lmgtfy',
   description: 'A tool to teach other people how to use Google\'s internet search.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'lmgtfy <text>',
   example: ['lmgtfy How to shutdown a computer?']
 };

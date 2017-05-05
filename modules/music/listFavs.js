@@ -69,7 +69,7 @@ exports.help = {
   name: 'listfavs',
   description: 'Lists the songs in your favourite list.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'listfavs [page_no]',
   example: ['listFavs', 'listFavs 2']
 };

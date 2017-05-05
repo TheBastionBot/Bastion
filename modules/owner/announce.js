@@ -55,7 +55,7 @@ exports.help = {
   name: 'announce',
   description: 'Sends a message to all servers\' default channel, the bot is connected to.',
   botPermission: '',
-  permission: 'Bot Owner',
+  userPermission: 'Bot Owner',
   usage: 'announce <message>',
   example: ['announce Just a random announcement.']
 };

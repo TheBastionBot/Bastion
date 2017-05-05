@@ -38,7 +38,7 @@ exports.help = {
   name: 'wouldyourather',
   description: 'Asks you a would you rather question! Let\'s see how you answer that.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'wouldYouRather',
   example: []
 };

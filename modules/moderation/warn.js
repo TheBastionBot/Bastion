@@ -245,7 +245,7 @@ exports.help = {
   name: 'warn',
   description: 'Warns a mentioned user with an optional reason. After 3 warnings are given, the users automatically gets kicked from the server.',
   botPermission: 'Kick Members',
-  permission: 'Kick Members',
+  userPermission: 'Kick Members',
   usage: 'warn @user-mention [Reason]',
   example: ['warn @user#0001 Reason for the warning.']
 };

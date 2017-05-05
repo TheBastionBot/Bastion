@@ -139,7 +139,7 @@ exports.help = {
   name: 'textmute',
   description: 'Mutes a mentioned user from sending messages in a channel with an optional reason.',
   botPermission: 'Manage Roles',
-  permission: 'Mute Members',
+  userPermission: 'Mute Members',
   usage: 'textMute @user-mention [Reason]',
   example: ['textMute @user#0001 Reason for the mute.']
 };

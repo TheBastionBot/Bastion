@@ -74,7 +74,7 @@ exports.help = {
   name: 'iam',
   description: 'Adds a specified self assignable role to the user.',
   botPermission: 'Manage Roles',
-  permission: '',
+  userPermission: '',
   usage: 'iAm <role name>',
   example: ['iAm Looking to play']
 };

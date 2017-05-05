@@ -188,7 +188,7 @@ exports.help = {
   name: 'rainbow6',
   description: 'Shows Ranbow 6 player stats specified by his platform and username.',
   botPermission: '',
-  permission: '',
+  userPermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',
   example: ['rainbow6 uplay SaffronPants']
 };
