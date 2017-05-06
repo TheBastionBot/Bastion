@@ -4,7 +4,8 @@
     "`help` command now shows if a command is disabled"
   ],
   "added": [
-    "`disableCommand` command"
+    "Added `disableCommand` command",
+    "Added `enableCommand` command"
   ],
   "removed": []
 }
