@@ -1,6 +1,8 @@
 {
   "date": "May 6, 2017",
-  "updated": [],
+  "updated": [
+    "`help` command now shows if a command is disabled"
+  ],
   "added": [],
   "removed": []
 }

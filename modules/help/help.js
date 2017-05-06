@@ -115,7 +115,7 @@ exports.run = (Bastion, message, args) => {
           }
         ],
         footer: {
-          text: `To get a list of commands, type ${Bastion.config.prefix}commands`
+          text: command.config.enabled ? '' : 'This command is temporarily disabled.'
         }
       }}).catch(e => {
         Bastion.log.error(e.stack);
