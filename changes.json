@@ -3,6 +3,8 @@
   "updated": [
     "`help` command now shows if a command is disabled"
   ],
-  "added": [],
+  "added": [
+    "`disableCommand` command"
+  ],
   "removed": []
 }
