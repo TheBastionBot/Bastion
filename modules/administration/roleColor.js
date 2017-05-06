@@ -80,7 +80,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rc']
+  aliases: ['rc'],
+  enabled: true
 };
 
 exports.help = {

@@ -54,7 +54,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rtxtc']
+  aliases: ['rtxtc'],
+  enabled: true
 };
 
 exports.help = {

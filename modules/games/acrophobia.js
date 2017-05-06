@@ -193,7 +193,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['acro']
+  aliases: ['acro'],
+  enabled: true
 };
 
 exports.help = {

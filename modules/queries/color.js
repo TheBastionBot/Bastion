@@ -115,7 +115,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['colour']
+  aliases: ['colour'],
+  enabled: true
 };
 
 exports.help = {

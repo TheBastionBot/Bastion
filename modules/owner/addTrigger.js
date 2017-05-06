@@ -59,7 +59,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['addtrip']
+  aliases: ['addtrip'],
+  enabled: true
 };
 
 exports.help = {

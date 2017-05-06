@@ -62,7 +62,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['nick']
+  aliases: ['nick'],
+  enabled: true
 };
 
 exports.help = {

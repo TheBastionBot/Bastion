@@ -56,7 +56,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cmdsearch']
+  aliases: ['cmdsearch'],
+  enabled: true
 };
 
 exports.help = {

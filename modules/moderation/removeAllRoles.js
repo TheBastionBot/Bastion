@@ -113,7 +113,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rmar']
+  aliases: ['rmar'],
+  enabled: true
 };
 
 exports.help = {

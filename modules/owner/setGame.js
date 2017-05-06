@@ -49,7 +49,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setg']
+  aliases: ['setg'],
+  enabled: true
 };
 
 exports.help = {

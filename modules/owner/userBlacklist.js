@@ -87,7 +87,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ubl']
+  aliases: ['ubl'],
+  enabled: true
 };
 
 exports.help = {

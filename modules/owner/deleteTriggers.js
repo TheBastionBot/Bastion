@@ -48,7 +48,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['deltrigger', 'deletetrip', 'deltrip']
+  aliases: ['deltrigger', 'deletetrip', 'deltrip'],
+  enabled: true
 };
 
 exports.help = {

@@ -61,7 +61,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['die', 'turnoff']
+  aliases: ['die', 'turnoff'],
+  enabled: true
 };
 
 exports.help = {

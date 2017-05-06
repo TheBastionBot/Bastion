@@ -32,7 +32,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cookie']
+  aliases: ['cookie'],
+  enabled: true
 };
 
 exports.help = {

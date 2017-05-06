@@ -65,7 +65,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['lsar']
+  aliases: ['lsar'],
+  enabled: true
 };
 
 exports.help = {

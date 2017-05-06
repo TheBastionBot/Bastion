@@ -75,7 +75,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['tap']
+  aliases: ['tap'],
+  enabled: true
 };
 
 exports.help = {

@@ -73,7 +73,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rsar']
+  aliases: ['rsar'],
+  enabled: true
 };
 
 exports.help = {

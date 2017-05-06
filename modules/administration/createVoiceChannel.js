@@ -75,7 +75,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cvc']
+  aliases: ['cvc'],
+  enabled: true
 };
 
 exports.help = {

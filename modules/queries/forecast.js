@@ -66,7 +66,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['wefc']
+  aliases: ['wefc'],
+  enabled: true
 };
 
 exports.help = {

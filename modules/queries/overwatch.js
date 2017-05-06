@@ -203,7 +203,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ow']
+  aliases: ['ow'],
+  enabled: true
 };
 
 exports.help = {

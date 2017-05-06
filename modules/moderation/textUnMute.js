@@ -132,7 +132,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['tum']
+  aliases: ['tum'],
+  enabled: true
 };
 
 exports.help = {

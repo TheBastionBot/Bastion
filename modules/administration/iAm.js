@@ -67,7 +67,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['iwant', 'ihave']
+  aliases: ['iwant', 'ihave'],
+  enabled: true
 };
 
 exports.help = {

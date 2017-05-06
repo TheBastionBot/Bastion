@@ -42,7 +42,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['pirate']
+  aliases: ['pirate'],
+  enabled: true
 };
 
 exports.help = {

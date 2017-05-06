@@ -32,7 +32,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cfact']
+  aliases: ['cfact'],
+  enabled: true
 };
 
 exports.help = {

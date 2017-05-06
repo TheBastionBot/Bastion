@@ -65,7 +65,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['8ball']
+  aliases: ['8ball'],
+  enabled: true
 };
 
 exports.help = {

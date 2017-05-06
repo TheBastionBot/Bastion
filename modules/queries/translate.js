@@ -55,7 +55,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['trans']
+  aliases: ['trans'],
+  enabled: true
 };
 
 exports.help = {

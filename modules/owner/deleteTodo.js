@@ -74,7 +74,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['deltodo']
+  aliases: ['deltodo'],
+  enabled: true
 };
 
 exports.help = {

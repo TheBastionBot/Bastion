@@ -181,7 +181,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['r6']
+  aliases: ['r6'],
+  enabled: true
 };
 
 exports.help = {

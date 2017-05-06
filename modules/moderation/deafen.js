@@ -128,7 +128,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['deaf']
+  aliases: ['deaf'],
+  enabled: true
 };
 
 exports.help = {

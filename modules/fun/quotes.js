@@ -51,7 +51,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['q']
+  aliases: ['q'],
+  enabled: true
 };
 
 exports.help = {

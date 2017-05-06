@@ -68,7 +68,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['todolist']
+  aliases: ['todolist'],
+  enabled: true
 };
 
 exports.help = {

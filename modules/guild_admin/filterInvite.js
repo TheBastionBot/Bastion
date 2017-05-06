@@ -61,7 +61,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['filterinv']
+  aliases: ['filterinv'],
+  enabled: true
 };
 
 exports.help = {

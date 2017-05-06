@@ -73,7 +73,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['raar']
+  aliases: ['raar'],
+  enabled: true
 };
 
 exports.help = {

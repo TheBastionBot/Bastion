@@ -56,7 +56,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['horn']
+  aliases: ['horn'],
+  enabled: true
 };
 
 exports.help = {

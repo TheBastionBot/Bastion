@@ -47,7 +47,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['hof']
+  aliases: ['hof'],
+  enabled: true
 };
 
 exports.help = {

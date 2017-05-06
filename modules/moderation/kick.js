@@ -144,7 +144,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['k']
+  aliases: ['k'],
+  enabled: true
 };
 
 exports.help = {

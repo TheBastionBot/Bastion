@@ -84,7 +84,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['typegame']
+  aliases: ['typegame'],
+  enabled: true
 };
 
 exports.help = {

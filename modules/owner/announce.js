@@ -48,7 +48,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['notify']
+  aliases: ['notify'],
+  enabled: true
 };
 
 exports.help = {
