@@ -1,18 +1,7 @@
-* text=auto
+*.* text eol=lf
 
-# Explicitly declare text files that should be normalized and converted
-# to native line endings on checkout.
-*.md text
-
-# Declare files that should have CRLF line endings on checkout.
 *.cmd eol=crlf
 
-# Declare files that should have LF line endings on checkout.
-*.js eol=lf
-*.json eol=lf
-*.sh eol=lf
-
-# Declare files that are truly binary and shouldn't be modified.
 *.sqlite binary
 *.wav binary
 *.mp3 binary
