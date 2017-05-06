@@ -64,9 +64,11 @@ exports.run = (Bastion, message, args) => {
           return votes.stop();
         }
         else {
-          msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          if (msg.deletable) {
+            msg.delete().catch(e => {
+              Bastion.log.error(e.stack);
+            });
+          }
           msg.channel.send({embed: {
             color: Bastion.colors.dark_grey,
             description: `Thank you, ${msg.author}, for voting.`,
@@ -75,7 +77,9 @@ exports.run = (Bastion, message, args) => {
             }
           }}).then(m => {
             activeChannels[message.channel.id].usersVoted.push(msg.author.id);
-            m.delete(5000);
+            m.delete(5000).catch(e => {
+              Bastion.log.error(e.stack);
+            });
           });
         }
       });
@@ -91,7 +95,9 @@ exports.run = (Bastion, message, args) => {
             title: 'Poll Ended',
             description: 'Unfortunately, no votes were given.'
           }}).then(() => {
-            msg.delete();
+            msg.delete().catch(e => {
+              Bastion.log.error(e.stack);
+            });
             delete activeChannels[message.channel.id];
           }).catch(e => {
             Bastion.log.error(e.stack);
@@ -120,7 +126,9 @@ exports.run = (Bastion, message, args) => {
           description: `Poll results for **${args[0]}**`,
           fields: result
         }}).then(() => {
-          msg.delete();
+          msg.delete().catch(e => {
+            Bastion.log.error(e.stack);
+          });
           delete activeChannels[message.channel.id];
         }).catch(e => {
           Bastion.log.error(e.stack);

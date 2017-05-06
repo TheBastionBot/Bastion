@@ -27,9 +27,11 @@ exports.run = (Bastion, message, args) => {
     if (typeof evaled !== 'string') {
       evaled = require('util').inspect(evaled);
     }
-    message.delete().catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (message.deletable) {
+      message.delete().catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     message.channel.send({embed: {
       color: Bastion.colors.green,
       fields: [
@@ -47,9 +49,11 @@ exports.run = (Bastion, message, args) => {
     });
   }
   catch(e) {
-    message.delete().catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    if (message.deletable) {
+      message.delete().catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
     message.channel.send({embed: {
       color: Bastion.colors.red,
       fields: [
