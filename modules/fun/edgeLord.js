@@ -29,7 +29,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['edgy']
+  aliases: ['edgy'],
+  enabled: true
 };
 
 exports.help = {

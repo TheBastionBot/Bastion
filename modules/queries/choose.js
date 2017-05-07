@@ -40,7 +40,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['decide']
+  aliases: ['decide'],
+  enabled: true
 };
 
 exports.help = {

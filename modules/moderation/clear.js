@@ -72,7 +72,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['clr']
+  aliases: ['clr'],
+  enabled: true
 };
 
 exports.help = {

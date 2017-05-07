@@ -28,9 +28,11 @@ let queue = {};
 
 exports.run = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
-  message.delete().catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  if (message.deletable) {
+    message.delete().catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
   if (args.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
@@ -586,7 +588,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: []
+  aliases: [],
+  enabled: true
 };
 
 exports.help = {

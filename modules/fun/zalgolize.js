@@ -42,7 +42,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['zalgo']
+  aliases: ['zalgo'],
+  enabled: true
 };
 
 exports.help = {

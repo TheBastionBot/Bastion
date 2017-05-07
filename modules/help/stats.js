@@ -93,7 +93,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['info']
+  aliases: ['info'],
+  enabled: true
 };
 
 exports.help = {

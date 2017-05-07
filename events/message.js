@@ -195,6 +195,7 @@ module.exports = message => {
       }
       console.log(chalk.green(`[User]: `) + `${message.author.username}#${message.author.discriminator}` + chalk.cyan(` ${message.author}`));
 
+      if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
       if (cmd) {
         cmd.run(message.client, message, args);
       }

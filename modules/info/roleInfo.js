@@ -87,7 +87,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rinfo']
+  aliases: ['rinfo'],
+  enabled: true
 };
 
 exports.help = {

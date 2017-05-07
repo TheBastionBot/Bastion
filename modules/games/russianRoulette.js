@@ -41,7 +41,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rr']
+  aliases: ['rr'],
+  enabled: true
 };
 
 exports.help = {

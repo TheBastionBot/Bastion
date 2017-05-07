@@ -132,7 +132,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['morse']
+  aliases: ['morse'],
+  enabled: true
 };
 
 exports.help = {

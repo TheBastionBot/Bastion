@@ -44,7 +44,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cid']
+  aliases: ['cid'],
+  enabled: true
 };
 
 exports.help = {

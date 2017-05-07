@@ -117,7 +117,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['join']
+  aliases: ['join'],
+  enabled: true
 };
 
 exports.help = {

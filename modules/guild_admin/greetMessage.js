@@ -53,7 +53,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['gmsg']
+  aliases: ['gmsg'],
+  enabled: true
 };
 
 exports.help = {

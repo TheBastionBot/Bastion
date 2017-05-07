@@ -166,7 +166,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['sb']
+  aliases: ['sb'],
+  enabled: true
 };
 
 exports.help = {

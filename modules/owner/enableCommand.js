@@ -22,42 +22,45 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
-  if (args.length > 0) {
-    message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  let command = args[0].toLowerCase();
+  if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
+    if (Bastion.commands.has(command)) {
+      command = Bastion.commands.get(command);
+    }
+    else if (Bastion.aliases.has(command)) {
+      command = Bastion.commands.get(Bastion.aliases.get(command));
+    }
   }
   else {
-    message.guild.members.get(Bastion.user.id).setNickname('').then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s nick has been reset on this guild.`
-      }}).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }).catch(e => {
+    message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `\`${command}\` command was not found.`
+    }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
+
+  if (command.config.enabled) return;
+  command.config.enabled = true;
+
+  message.channel.send({embed: {
+    color: Bastion.colors.green,
+    description: `\`${command.help.name}\` command has been enabled.`
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.config = {
-  aliases: ['setn'],
+  aliases: ['enablecmd'],
   enabled: true
 };
 
 exports.help = {
-  name: 'setnick',
-  description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
+  name: 'enablecommand',
+  description: 'Enables a temporarily disabled command.',
   botPermission: '',
   userPermission: 'Bot Owner',
-  usage: 'setNick [text]',
-  example: ['setNick NewNick', 'setNick']
+  usage: 'enableCommand <command_name>',
+  example: ['enableCommand echo']
 };

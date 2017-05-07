@@ -42,7 +42,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ftout']
+  aliases: ['ftout'],
+  enabled: true
 };
 
 exports.help = {

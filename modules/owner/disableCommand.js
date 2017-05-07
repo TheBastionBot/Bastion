@@ -22,37 +22,54 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
-  if (!/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9_-~#%]+)\.(jpg|jpeg|gif|png)$/i.test(args.join(' '))) {
+  let command = args[0].toLowerCase();
+  if (command === 'disablecommand' || command === 'disablecmd' || command === 'enablecommand' || command === 'enablecmd') {
     return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      color: Bastion.colors.red,
+      description: `Can't disable \`${command}\` command.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
-  Bastion.user.setAvatar(args.join(' ')).then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      description: `${Bastion.user.username}'s avatar changed!`
+
+  if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
+    if (Bastion.commands.has(command)) {
+      command = Bastion.commands.get(command);
+    }
+    else if (Bastion.aliases.has(command)) {
+      command = Bastion.commands.get(Bastion.aliases.get(command));
+    }
+  }
+  else {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: `\`${command}\` command was not found.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }).catch(e => {
+  }
+
+  if (!command.config.enabled) return;
+  command.config.enabled = false;
+
+  message.channel.send({embed: {
+    color: Bastion.colors.red,
+    description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`${Bastion.config.prefix}enableCommand ${command.help.name}\`.`
+  }}).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['setav'],
+  aliases: ['disablecmd'],
   enabled: true
 };
 
 exports.help = {
-  name: 'setavatar',
-  description: 'Sets the avatar of the Bot.',
+  name: 'disablecommand',
+  description: 'Disables a command temporarily until Bastion is restarted or it is enabled again.',
   botPermission: '',
   userPermission: 'Bot Owner',
-  usage: 'setavatar <image_url>',
-  example: ['setavatar https\://example.com/avatar.jpeg']
+  usage: 'disableCommand <command_name>',
+  example: ['disableCommand echo']
 };

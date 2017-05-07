@@ -39,7 +39,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['dtc']
+  aliases: ['dtc'],
+  enabled: true
 };
 
 exports.help = {

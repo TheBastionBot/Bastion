@@ -40,7 +40,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rev']
+  aliases: ['rev'],
+  enabled: true
 };
 
 exports.help = {

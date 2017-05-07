@@ -50,7 +50,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ccof', 'ccoef']
+  aliases: ['ccof', 'ccoef'],
+  enabled: true
 };
 
 exports.help = {

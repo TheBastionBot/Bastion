@@ -42,7 +42,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['msgu']
+  aliases: ['msgu'],
+  enabled: true
 };
 
 exports.help = {

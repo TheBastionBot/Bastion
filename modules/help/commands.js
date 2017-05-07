@@ -57,7 +57,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cmds']
+  aliases: ['cmds'],
+  enabled: true
 };
 
 exports.help = {

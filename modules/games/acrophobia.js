@@ -76,9 +76,11 @@ exports.run = (Bastion, message, args) => {
             description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
           }}).then(() => {
             delete activeChannels[message.channel.id];
-            msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
-            });
+            if (msg.deletable) {
+              msg.delete().catch(e => {
+                Bastion.log.error(e.stack);
+              });
+            }
           }).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -193,7 +195,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['acro']
+  aliases: ['acro'],
+  enabled: true
 };
 
 exports.help = {

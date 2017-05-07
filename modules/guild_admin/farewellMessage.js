@@ -53,7 +53,8 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['fmsg']
+  aliases: ['fmsg'],
+  enabled: true
 };
 
 exports.help = {
