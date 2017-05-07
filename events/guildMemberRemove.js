@@ -51,8 +51,9 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  member.guild.fetchBans().then(users => {
-    if (users.has(member.id)) return;
+  // Commented this out as using requires BAN_MEMBERS perms and not everyone has given the bot those permissions
+  // member.guild.fetchBans().then(users => {
+  //   if (users.has(member.id)) return;
 
     sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
       if (!row) return;
@@ -80,7 +81,7 @@ module.exports = member => {
     }).catch(e => {
       member.client.log.error(e.stack);
     });
-  }).catch(e => {
-    member.client.log.error(e.stack);
-  });
+  // }).catch(e => {
+  //   member.client.log.error(e.stack);
+  // });
 };
