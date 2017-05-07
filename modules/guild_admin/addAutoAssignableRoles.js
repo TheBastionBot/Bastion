@@ -70,7 +70,7 @@ exports.run = (Bastion, message, args) => {
       }
       message.channel.send({embed: {
         color: Bastion.colors.green,
-        title: 'Added self assignable roles',
+        title: 'Added auto assignable roles',
         description: roleNames.join(', ')
       }}).catch(e => {
         Bastion.log.error(e.stack);

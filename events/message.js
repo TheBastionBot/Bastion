@@ -32,7 +32,7 @@ sql.open('./data/Bastion.sqlite');
 
 module.exports = message => {
   if (message.content.includes(message.client.token)) {
-    if (message.guild) {
+    if (message.deletable) {
       message.delete().catch(e => {
         message.client.log.error(e.stack);
       });
@@ -90,9 +90,11 @@ module.exports = message => {
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
-        message.delete().catch(e => {
-          message.client.log.error(e.stack);
-        });
+        if (message.deletable) {
+          message.delete().catch(e => {
+            message.client.log.error(e.stack);
+          });
+        }
       }
     }
   }).catch(e => {

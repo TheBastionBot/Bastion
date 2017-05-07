@@ -20,7 +20,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.guild.voiceConnection) return;
   if (message.deletable) {
     message.delete().catch(e => {
       Bastion.log.error(e.stack);
