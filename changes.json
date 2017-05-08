@@ -1,9 +1,10 @@
 {
-  "date": "May 8, 2017",
+  "date": "May 9, 2017",
   "updated": [
     "Fixed farewell messages",
     "Fixed `map` command",
     "Fixed `shuffle` music command",
+    "Bastion now shows errors if Cleverbot API key has not been set and `chat` command is used",
     "Minor improvements",
     "Minor fixes"
   ],
