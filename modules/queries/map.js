@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.send({ files: [body] }).catch(e => {
+    message.channel.send({ files: [{ attachment: body }] }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });

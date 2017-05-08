@@ -2,11 +2,12 @@
   "date": "May 8, 2017",
   "updated": [
     "Fixed farewell messages",
+    "Fixed `map` command",
     "Minor improvements",
     "Minor fixes"
   ],
   "added": [
-    "Added mod log for `clear` command"
+    "Added mod log for `clear` command",
     "Added mod log for filtered invites"
   ],
   "removed": []
