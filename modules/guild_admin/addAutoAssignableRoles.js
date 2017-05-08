@@ -62,7 +62,8 @@ exports.run = (Bastion, message, args) => {
     let roles = JSON.parse(row.autoAssignableRoles);
     roles = roles.concat(args);
     roles = roles.filter(r => message.guild.roles.get(r));
-    roles = roles.unique(roles);
+    roles = [...new Set(roles)];
+    // roles = roles.unique(roles);
     sql.run(`UPDATE guildSettings SET autoAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
       let roleNames = [];
       for (let i = 0; i < args.length; i++) {

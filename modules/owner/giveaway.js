@@ -38,7 +38,9 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!activeChannels.includes(message.channel.id)) {
-    let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'].random();
+    let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'];
+    reaction = reaction[Math.floor(Math.random() * reaction.length)];
+    // let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'].random();
     message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: 'GIVEAWAY! 🎉',

@@ -25,7 +25,8 @@ exports.run = (Bastion, message, args) => {
   message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Cat Fact:',
-    description: catFacts.random()
+    description: catFacts[Math.floor(Math.random() * catFacts.length)]
+    // description: catFacts.random()
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });

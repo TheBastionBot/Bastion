@@ -55,7 +55,8 @@ exports.run = (Bastion, message, args) => {
   message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: args.join(' '),
-    description: outcomes.random(),
+    description: outcomes[Math.floor(Math.random() * outcomes.length)],
+    // description: outcomes.random(),
     footer: {
       text: '🎱 Magic 8-ball'
     }

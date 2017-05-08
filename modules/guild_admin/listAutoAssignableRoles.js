@@ -35,7 +35,8 @@ exports.run = (Bastion, message, args) => {
 
     let roles = JSON.parse(row.autoAssignableRoles);
     roles = roles.filter(r => message.guild.roles.get(r));
-    roles = roles.unique(roles);
+    roles = [...new Set(roles)];
+    // roles = roles.unique(roles);
     let roleNames = [];
     for (let i = 0; i < roles.length; i++) {
       roleNames.push(message.guild.roles.get(roles[i]).name);

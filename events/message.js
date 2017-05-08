@@ -147,7 +147,8 @@ module.exports = message => {
         response.push(triggers[i].response);
       }
     }
-    response = response.random();
+    response = response[Math.floor(Math.random() * response.length)];
+    // response = response.random();
     if (message.content.includes(trigger) && !message.content.startsWith(message.client.config.prefix)) {
       response = response.replace(/\$user/ig, `<@${message.author.id}>`);
       response = response.replace(/\$username/ig, message.author.username);

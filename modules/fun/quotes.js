@@ -35,7 +35,8 @@ exports.run = (Bastion, message, args) => {
       }
     }
     if (n.length > 0) {
-      index = n.random();
+      index = n[Math.floor(Math.random() * n.length)];
+      // index = n.random();
     }
   }
 

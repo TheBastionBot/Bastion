@@ -28,7 +28,8 @@ exports.run = (Bastion, message, args) => {
   args = isNaN(args = parseInt(args[0])) ? 1 : args > 7 ? 7 : args;
   let outcome = '';
   for (let i = 0; i < args; i++) {
-    outcome = `${message.author} ${outcomes.random()}`;
+    outcome = `${message.author} ${outcomes[Math.floor(Math.random() * outcomes.length)]}`;
+    // outcome = `${message.author} ${outcomes.random()}`;
     message.channel.send({embed: {
       color: Bastion.colors.blue,
       title: `Round ${i + 1}`,

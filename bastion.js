@@ -40,7 +40,8 @@ require('./handlers/logHandler')(Bastion);
 require('./handlers/eventHandler')(Bastion);
 require('./handlers/moduleHandler')(Bastion);
 
-require('./functions/Array.prototype');
+// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
+// require('./functions/Array.prototype');
 
 Bastion.login(Bastion.credentials.token).catch(e => {
   Bastion.log.error(e.stack)

@@ -3,6 +3,7 @@
   "updated": [
     "Fixed farewell messages",
     "Fixed `map` command",
+    "Fixed `shuffle` music command",
     "Minor improvements",
     "Minor fixes"
   ],
