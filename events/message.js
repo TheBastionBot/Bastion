@@ -91,7 +91,42 @@ module.exports = message => {
     if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
         if (message.deletable) {
-          message.delete().catch(e => {
+          message.delete().then(() => {
+            sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+              if (!row) return;
+
+              if (row.modLog === 'true') {
+                message.guild.channels.get(row.modLogChannelID).send({embed: {
+                  color: message.client.colors.orange,
+                  title: 'Filtered Invite',
+                  fields: [
+                    {
+                      name: 'Responsible User',
+                      value: `${message.author}`,
+                      inline: true
+                    },
+                    {
+                      name: 'User ID',
+                      value: message.author.id,
+                      inline: true
+                    }
+                  ],
+                  footer: {
+                    text: `Case Number: ${row.modCaseNo}`
+                  },
+                  timestamp: new Date()
+                }}).then(msg => {
+                  sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+                    message.client.log.error(e.stack);
+                  });
+                }).catch(e => {
+                  message.client.log.error(e.stack);
+                });
+              }
+            }).catch(e => {
+              message.client.log.error(e.stack);
+            });
+          }).catch(e => {
             message.client.log.error(e.stack);
           });
         }
