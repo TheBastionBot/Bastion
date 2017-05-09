@@ -10,7 +10,8 @@
   ],
   "added": [
     "Added mod log for `clear` command",
-    "Added mod log for filtered invites"
+    "Added mod log for filtered invites",
+    "Added `deleteAllTriggers` command"
   ],
   "removed": []
 }
