@@ -24,7 +24,7 @@ sql.open('./data/Bastion.sqlite');
 
 module.exports = (oldMessage, newMessage) => {
   if (newMessage.content.includes(newMessage.client.token)) {
-    if (oldMessage.guild) {
+    if (newMessage.deletable) {
       newMessage.delete().catch(e => {
         newMessage.client.log.error(e.stack);
       });
@@ -54,9 +54,46 @@ module.exports = (oldMessage, newMessage) => {
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {
-        newMessage.delete().catch(e => {
-          newMessage.client.log.error(e.stack);
-        });
+        if (newMessage.deletable) {
+          newMessage.delete().then(() => {
+            sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
+              if (!row) return;
+
+              if (row.modLog === 'true') {
+                newMessage.guild.channels.get(row.modLogChannelID).send({embed: {
+                  color: newMessage.client.colors.orange,
+                  title: 'Filtered Invite',
+                  fields: [
+                    {
+                      name: 'Responsible User',
+                      value: `${newMessage.author}`,
+                      inline: true
+                    },
+                    {
+                      name: 'User ID',
+                      value: newMessage.author.id,
+                      inline: true
+                    }
+                  ],
+                  footer: {
+                    text: `Case Number: ${row.modCaseNo}`
+                  },
+                  timestamp: new Date()
+                }}).then(msg => {
+                  sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
+                    newMessage.client.log.error(e.stack);
+                  });
+                }).catch(e => {
+                  newMessage.client.log.error(e.stack);
+                });
+              }
+            }).catch(e => {
+              newMessage.client.log.error(e.stack);
+            });
+          }).catch(e => {
+            newMessage.client.log.error(e.stack);
+          });
+        }
       }
     }
   }).catch(e => {

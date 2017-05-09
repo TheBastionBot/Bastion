@@ -24,6 +24,14 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+    if (!Bastion.credentials.cleverbotAPIkey) {
+      return message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: 'Cleverbot API key has not been set. I can\'t chat with you! :sob:'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
 
   sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (row.chat === 'false') {

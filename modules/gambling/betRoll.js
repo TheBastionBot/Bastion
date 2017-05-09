@@ -51,7 +51,8 @@ exports.run = (Bastion, message, args) => {
       'five',
       'six'
     ];
-    let outcome = outcomes.random();
+    let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+    // let outcome = outcomes.random();
 
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (args[0] > profile.bastionCurrencies) {

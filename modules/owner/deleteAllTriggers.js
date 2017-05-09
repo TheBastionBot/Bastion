@@ -19,29 +19,34 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const catFacts = require('../../data/catFacts.json');
+const sql = require('sqlite');
+sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Cat Fact:',
-    description: catFacts[Math.floor(Math.random() * catFacts.length)]
-    // description: catFacts.random()
-  }}).catch(e => {
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+
+  sql.all('DELETE FROM triggers').then(triggers => {
+    message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: 'Deleted all the triggers and responses.'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['cfact'],
+  aliases: ['delalltriggers', 'deletealltrips', 'delalltrips'],
   enabled: true
 };
 
 exports.help = {
-  name: 'catfact',
-  description: 'Shows a random catfact.',
+  name: 'deletealltriggers',
+  description: 'Deletes all the triggers and responses.',
   botPermission: '',
-  userPermission: '',
-  usage: 'catfact',
+  userPermission: 'Bot Owner',
+  usage: 'deleteAllTriggers',
   example: []
 };

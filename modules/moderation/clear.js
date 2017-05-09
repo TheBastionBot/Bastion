@@ -19,6 +19,9 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
+const sql = require('sqlite');
+sql.open('./data/Bastion.sqlite');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
@@ -63,7 +66,56 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.bulkDelete(msgs).catch(e => {
+    message.channel.bulkDelete(msgs).then(() => {
+      sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+        if (!row) return;
+
+        if (row.modLog === 'true') {
+          message.guild.channels.get(row.modLogChannelID).send({embed: {
+            color: Bastion.colors.orange,
+            title: 'Messages Cleared',
+            fields: [
+              {
+                name: 'Channel',
+                value: `${message.channel}`,
+                inline: true
+              },
+              {
+                name: 'Channel ID',
+                value: message.channel.id,
+                inline: true
+              },
+              {
+                name: 'Cleared',
+                value: `${msgs.size || msgs.length} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
+              },
+              {
+                name: 'Responsible Moderator',
+                value: `${message.author}`,
+                inline: true
+              },
+              {
+                name: 'Moderator ID',
+                value: message.author.id,
+                inline: true
+              }
+            ],
+            footer: {
+              text: `Case Number: ${row.modCaseNo}`
+            },
+            timestamp: new Date()
+          }}).then(msg => {
+            sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+              Bastion.log.error(e.stack);
+            });
+          }).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        }
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

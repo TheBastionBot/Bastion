@@ -458,7 +458,12 @@ exports.run = (Bastion, message, args) => {
             }
             else if (msg.content.startsWith(`${Bastion.config.prefix}shuffle`)) {
               if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
-              queue[message.guild.id].songs.shuffle();
+
+              let nowPlaying = queue[message.guild.id].songs.shift();
+              queue[message.guild.id].songs = shuffle(queue[message.guild.id].songs);
+              queue[message.guild.id].songs.unshift(nowPlaying);
+              // queue[message.guild.id].songs.shuffle();
+
               textChannel.send({embed: {
                 color: Bastion.colors.green,
                 description: 'Shuffled the queue.'
@@ -600,3 +605,14 @@ exports.help = {
   usage: 'play <name | song_link | -pl <playlist_link> | -favs>',
   example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs']
 };
+
+function shuffle(array) {
+  let i = array.length;
+  while (i) {
+    let j = Math.floor(Math.random() * i);
+    let t = array[--i];
+    array[i] = array[j];
+    array[j] = t;
+  }
+  return array;
+}
