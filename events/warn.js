@@ -19,10 +19,10 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const chalk = require('chalk');
+const COLOR = require('chalk');
 
 module.exports = info => {
-  console.log(chalk.yellow('[WARNING EVENT]'));
+  console.log(COLOR.yellow('[WARNING EVENT]'));
   console.log(info);
-  console.log(chalk.yellow('[/WARNING EVENT]'));
+  console.log(COLOR.yellow('[/WARNING EVENT]'));
 };

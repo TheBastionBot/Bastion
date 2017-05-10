@@ -19,11 +19,11 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = guild => {
-  sql.run('CREATE TABLE IF NOT EXISTS guildSettings' +
+  SQL.run('CREATE TABLE IF NOT EXISTS guildSettings' +
           '(guildID TEXT NOT NULL UNIQUE,' +
           'greet TEXT NOT NULL DEFAULT \'false\',' +
           'greetChannelID TEXT,' +
@@ -47,7 +47,7 @@ module.exports = guild => {
           'modLogChannelID TEXT UNIQUE,' +
           'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
           'PRIMARY KEY(guildID))').then(() => {
-    sql.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [guild.id]).catch(e => {
+    SQL.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [guild.id]).catch(e => {
       guild.client.log.error(e.stack);
     });
   }).catch(e => {

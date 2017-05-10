@@ -19,13 +19,13 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = (oldGuild, newGuild) => {
   if (oldGuild.name === newGuild.name) return;
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newGuild.id}`).then(row => {
+  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newGuild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 

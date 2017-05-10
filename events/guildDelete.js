@@ -19,11 +19,11 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = guild => {
-  sql.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+  SQL.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
     guild.client.log.error(e.stack);
   });
 };

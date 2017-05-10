@@ -19,11 +19,11 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const fs = require('fs');
-const getDirSync = require('../functions/getDirSync');
+const FS = require('fs');
+const GET_DIR_SYNC = require('../functions/getDirSync');
 
 module.exports = Bastion => {
-  let modules = getDirSync('./modules/');
+  let modules = GET_DIR_SYNC('./modules/');
   Bastion.log.info(`Loading ${modules.length} modules...`);
   for (let i = 0; i < modules.length; i++) {
     loadEvent(Bastion, modules[i]);
@@ -31,8 +31,10 @@ module.exports = Bastion => {
 };
 
 function loadEvent(Bastion, module) {
-  fs.readdir(`./modules/${module}/`, (err, files) => {
-    if (err) console.error(err);
+  FS.readdir(`./modules/${module}/`, (err, files) => {
+    if (err) {
+      Bastion.log.error(err);
+    }
     Bastion.log.info(`Loading module: ${module} [${files.length} commands]`)
     files.forEach(f => {
       let cmd = require(`../modules/${module}/${f}`);

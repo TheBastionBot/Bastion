@@ -19,8 +19,8 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = (oldMessage, newMessage) => {
   if (newMessage.content.includes(newMessage.client.token)) {
@@ -51,12 +51,12 @@ module.exports = (oldMessage, newMessage) => {
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 
-  sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
+  SQL.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {
         if (newMessage.deletable) {
           newMessage.delete().then(() => {
-            sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
+            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
@@ -80,7 +80,7 @@ module.exports = (oldMessage, newMessage) => {
                   },
                   timestamp: new Date()
                 }}).then(msg => {
-                  sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
+                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
                     newMessage.client.log.error(e.stack);
                   });
                 }).catch(e => {

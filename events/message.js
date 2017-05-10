@@ -19,16 +19,15 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-const Cleverbot = require('cleverbot-node');
-const credentials = require('../settings/credentials.json');
-const bot = new Cleverbot;
-bot.configure({
-  botapi: credentials.cleverbotAPIkey
+const SQL = require('sqlite');
+const CLEVERBOT = require('cleverbot-node');
+const CREDENTIALS = require('../settings/credentials.json');
+const BOT = new CLEVERBOT;
+BOT.configure({
+  botapi: CREDENTIALS.cleverbotAPIkey
 });
-const chalk = require('chalk');
-const getRandomInt = require('../functions/getRandomInt');
-sql.open('./data/Bastion.sqlite');
+const COLOR = require('chalk');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = message => {
   if (message.content.includes(message.client.token)) {
@@ -87,12 +86,12 @@ module.exports = message => {
     else return;
   }
 
-  sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+  SQL.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
         if (message.deletable) {
           message.delete().then(() => {
-            sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
@@ -116,7 +115,7 @@ module.exports = message => {
                   },
                   timestamp: new Date()
                 }}).then(msg => {
-                  sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                     message.client.log.error(e.stack);
                   });
                 }).catch(e => {
@@ -136,7 +135,7 @@ module.exports = message => {
     message.client.log.error(e.stack);
   });
 
-  sql.all(`SELECT trigger, response FROM triggers`).then(triggers => {
+  SQL.all(`SELECT trigger, response FROM triggers`).then(triggers => {
     if (triggers === '') return;
 
     let trigger = '';
@@ -159,27 +158,27 @@ module.exports = message => {
       });
     }
   }).catch(() => {
-    sql.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
+    SQL.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
       message.client.log.error(e.stack);
     });
   });
 
-  sql.all('SELECT userID FROM blacklistedUsers').then(users => {
+  SQL.all('SELECT userID FROM blacklistedUsers').then(users => {
     if (users.map(u => u.userID).includes(message.author.id)) return;
 
-    sql.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
+    SQL.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (!profile) {
-        sql.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [message.author.id, 1]).catch(e => {
+        SQL.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [message.author.id, 1]).catch(e => {
           message.client.log.error(e.stack);
         });
       }
       else {
         let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
         if (currentLevel > profile.level) {
-          sql.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
+          SQL.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
-          sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+          SQL.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
             if (guild.levelUpMessage === 'false') return;
 
             message.channel.send({embed: {
@@ -194,7 +193,7 @@ module.exports = message => {
           });
         }
         else {
-          sql.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
+          SQL.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
         }
@@ -217,21 +216,21 @@ module.exports = message => {
       else return;
 
       console.log(`\n[${new Date()}]`);
-      console.log(chalk.green(`[COMMAND]: `) + message.client.config.prefix + command);
+      console.log(COLOR.green(`[COMMAND]: `) + message.client.config.prefix + command);
       if (args.length > 0) {
-        console.log(chalk.green(`[ARGUMENTs]: `) + args.join(' '));
+        console.log(COLOR.green(`[ARGUMENTs]: `) + args.join(' '));
       }
       else {
-        console.log(chalk.green(`[ARGUMENTs]: `) + chalk.yellow(`No arguments to execute`));
+        console.log(COLOR.green(`[ARGUMENTs]: `) + COLOR.yellow(`No arguments to execute`));
       }
       if (message.channel.type === 'text') {
-        console.log(chalk.green(`[Server]: `) + `${message.guild}` + chalk.cyan(` <#${message.guild.id}>`));
-        console.log(chalk.green(`[Channel]: `) + `${message.channel.name}` + chalk.cyan(` ${message.channel}`));
+        console.log(COLOR.green(`[Server]: `) + `${message.guild}` + COLOR.cyan(` <#${message.guild.id}>`));
+        console.log(COLOR.green(`[Channel]: `) + `${message.channel.name}` + COLOR.cyan(` ${message.channel}`));
       }
       else {
-        console.log(chalk.green(`[Channel]: `) + 'Direct Message');
+        console.log(COLOR.green(`[Channel]: `) + 'Direct Message');
       }
-      console.log(chalk.green(`[User]: `) + `${message.author.username}#${message.author.discriminator}` + chalk.cyan(` ${message.author}`));
+      console.log(COLOR.green(`[User]: `) + `${message.author.username}#${message.author.discriminator}` + COLOR.cyan(` ${message.author}`));
 
       if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
       if (cmd) {
@@ -239,13 +238,13 @@ module.exports = message => {
       }
     }
     else if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
-      sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+      SQL.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
         if (guild.chat === 'false') return;
         let args = message.content.split(' ');
         if (args.length < 1) return;
 
         try {
-          bot.write(args.join(' '), function (response) {
+          BOT.write(args.join(' '), function (response) {
             message.channel.startTyping();
             setTimeout(function () {
               message.channel.send(response.output).catch(e => {

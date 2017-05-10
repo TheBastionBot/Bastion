@@ -19,15 +19,15 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-const chalk = require('chalk');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+const COLOR = require('chalk');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = Bastion => {
   Bastion.user.setStatus(Bastion.config.status);
   Bastion.user.setGame(Bastion.config.game);
 
-  sql.run('CREATE TABLE IF NOT EXISTS guildSettings' +
+  SQL.run('CREATE TABLE IF NOT EXISTS guildSettings' +
           '(guildID TEXT NOT NULL UNIQUE,' +
           'greet TEXT NOT NULL DEFAULT \'false\',' +
           'greetChannelID TEXT,' +
@@ -53,7 +53,7 @@ module.exports = Bastion => {
           'PRIMARY KEY(guildID))').then(() => {
     let bastionGuilds = Bastion.guilds.map(g => g.id);
 
-    sql.all('SELECT guildID from guildSettings').then(row => {
+    SQL.all('SELECT guildID from guildSettings').then(row => {
       row = row.map(r => r.guildID);
 
       for (let i = 0; i < bastionGuilds.length; i++) {
@@ -65,7 +65,7 @@ module.exports = Bastion => {
           }
         }
         if (found === false) {
-          sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [bastionGuilds[i]]).catch(e => {
+          SQL.run('INSERT INTO guildSettings (guildID) VALUES (?)', [bastionGuilds[i]]).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
@@ -80,7 +80,7 @@ module.exports = Bastion => {
           }
         }
         if (found === false) {
-          sql.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
+          SQL.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
@@ -92,13 +92,13 @@ module.exports = Bastion => {
     Bastion.log.error(e.stack);
   });
 
-  sql.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
+  SQL.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
           '(userID TEXT NOT NULL UNIQUE,' +
           'PRIMARY KEY(userID))').catch(e => {
     Bastion.log.error(e.stack);
   });
 
-  sql.run('CREATE TABLE IF NOT EXISTS profiles' +
+  SQL.run('CREATE TABLE IF NOT EXISTS profiles' +
           '(userID TEXT NOT NULL UNIQUE,' +
           'bastionCurrencies INTEGER DEFAULT 0,' +
           'xp INTEGER DEFAULT 0,' +
@@ -107,26 +107,26 @@ module.exports = Bastion => {
     Bastion.log.error(e.stack);
   });
 
-  sql.run('CREATE TABLE IF NOT EXISTS triggers' +
+  SQL.run('CREATE TABLE IF NOT EXISTS triggers' +
           '(trigger TEXT NOT NULL,' +
           'response TEXT NOT NULL)').catch(e => {
     Bastion.log.error(e.stack);
   });
 
-  sql.run('CREATE TABLE IF NOT EXISTS todo' +
+  SQL.run('CREATE TABLE IF NOT EXISTS todo' +
           '(ownerID TEXT NOT NULL UNIQUE,' +
           'list TEXT NOT NULL DEFAULT \'[]\')').catch(e => {
     Bastion.log.error(e.stack);
   });
 
   console.log('\n');
-  console.log(chalk.green(`[Author] `) + `${Bastion.package.author}`);
-  console.log(chalk.green(`[Author URL] `) + `${Bastion.package.authorUrl}`);
-  console.log(chalk.green(`[Library] `) + `${Bastion.package.library}`);
-  console.log(chalk.green(`[Bot] `) + `Bastion v${Bastion.package.version}`);
-  console.log(chalk.green(`[Bot ID] `) + `${Bastion.credentials.botId}`);
-  console.log(chalk.green(`[Owner IDs] `) + `${Bastion.credentials.ownerId.join(', ')}`);
-  console.log(chalk.green(`[Servers] `) + `${Bastion.guilds.size}`);
-  console.log(chalk.green(`[Prefix] `) + `${Bastion.config.prefix}`);
-  console.log(chalk.cyan(`\n[${Bastion.user.username}]: `) + `I'm ready to roll! o7`);
+  console.log(COLOR.green(`[Author] `) + `${Bastion.package.author}`);
+  console.log(COLOR.green(`[Author URL] `) + `${Bastion.package.authorUrl}`);
+  console.log(COLOR.green(`[Library] `) + `${Bastion.package.library}`);
+  console.log(COLOR.green(`[Bot] `) + `Bastion v${Bastion.package.version}`);
+  console.log(COLOR.green(`[Bot ID] `) + `${Bastion.credentials.botId}`);
+  console.log(COLOR.green(`[Owner IDs] `) + `${Bastion.credentials.ownerId.join(', ')}`);
+  console.log(COLOR.green(`[Servers] `) + `${Bastion.guilds.size}`);
+  console.log(COLOR.green(`[Prefix] `) + `${Bastion.config.prefix}`);
+  console.log(COLOR.cyan(`\n[${Bastion.user.username}]: `) + `I'm ready to roll! o7`);
 };
