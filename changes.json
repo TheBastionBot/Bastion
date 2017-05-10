@@ -3,6 +3,8 @@
   "updated": [
     "Minor fixes"
   ],
-  "added": [],
+  "added": [
+    "Added `live` command"
+  ],
   "removed": []
 }
