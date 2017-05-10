@@ -27,28 +27,54 @@ module.exports = Bastion => {
   Bastion.user.setStatus(Bastion.config.status);
   Bastion.user.setGame(Bastion.config.game);
 
-  sql.run("CREATE TABLE IF NOT EXISTS guildSettings (guildID TEXT NOT NULL UNIQUE, greet TEXT NOT NULL DEFAULT 'false', greetChannelID TEXT, greetMessage TEXT NOT NULL DEFAULT 'Welcome to $server.', greetTimeout INTEGER NOT NULL DEFAULT 30, farewell TEXT NOT NULL DEFAULT 'false', farewellChannelID TEXT UNIQUE, farewellMessage TEXT NOT NULL DEFAULT 'We hope you enjoyed your stay here!', farewellTimeout INTEGER NOT NULL DEFAULT 15, log TEXT NOT NULL DEFAULT 'false', logChannelID TEXT UNIQUE, musicTextChannelID TEXT UNIQUE, musicVoiceChannelID TEXT UNIQUE, filterInvite TEXT NOT NULL DEFAULT 'false', chat TEXT NOT NULL DEFAULT 'false', levelUpMessage TEXT NOT NULL DEFAULT 'true', selfAssignableRoles TEXT NOT NULL DEFAULT '[]', autoAssignableRoles TEXT NOT NULL DEFAULT '[]', modLog TEXT NOT NULL DEFAULT 'false', modLogChannelID TEXT UNIQUE, modCaseNo TEXT NOT NULL DEFAULT '1', PRIMARY KEY(guildID))").then(() => {
-    let BastionGuilds = Bastion.guilds.map(g => g.id);
+  sql.run('CREATE TABLE IF NOT EXISTS guildSettings' +
+          '(guildID TEXT NOT NULL UNIQUE,' +
+          'greet TEXT NOT NULL DEFAULT \'false\',' +
+          'greetChannelID TEXT,' +
+          'greetMessage TEXT NOT NULL DEFAULT \'Welcome to $server.\',' +
+          'greetTimeout INTEGER NOT NULL DEFAULT 30,' +
+          'farewell TEXT NOT NULL DEFAULT \'false\',' +
+          'farewellChannelID TEXT UNIQUE,' +
+          'farewellMessage TEXT NOT NULL DEFAULT \'We hope you enjoyed your stay here!\',' +
+          'farewellTimeout INTEGER NOT NULL DEFAULT 15,' +
+          'log TEXT NOT NULL DEFAULT \'false\',' +
+          'logChannelID TEXT UNIQUE,' +
+          'musicTextChannelID TEXT UNIQUE,' +
+          'musicVoiceChannelID TEXT UNIQUE,' +
+          'filterInvite TEXT NOT NULL DEFAULT \'false\',' +
+          'filterLink TEXT NOT NULL DEFAULT \'false\',' +
+          'chat TEXT NOT NULL DEFAULT \'false\',' +
+          'levelUpMessage TEXT NOT NULL DEFAULT \'true\',' +
+          'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
+          'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
+          'modLog TEXT NOT NULL DEFAULT \'false\',' +
+          'modLogChannelID TEXT UNIQUE,' +
+          'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
+          'PRIMARY KEY(guildID))').then(() => {
+    let bastionGuilds = Bastion.guilds.map(g => g.id);
+
     sql.all('SELECT guildID from guildSettings').then(row => {
       row = row.map(r => r.guildID);
-      for (let i = 0; i < BastionGuilds.length; i++) {
+
+      for (let i = 0; i < bastionGuilds.length; i++) {
         let found = false;
         for (let j = 0; j < row.length; j++) {
-          if (BastionGuilds[i] === row[j]){
+          if (bastionGuilds[i] === row[j]){
             found = true;
             break;
           }
         }
         if (found === false) {
-          sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [BastionGuilds[i]]).catch(e => {
+          sql.run('INSERT INTO guildSettings (guildID) VALUES (?)', [bastionGuilds[i]]).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
       }
+
       for (let i = 0; i < row.length; i++) {
         let found = false;
-        for (let j = 0; j < BastionGuilds.length; j++) {
-          if (row[i] === BastionGuilds[j]){
+        for (let j = 0; j < bastionGuilds.length; j++) {
+          if (row[i] === bastionGuilds[j]){
             found = true;
             break;
           }
@@ -65,16 +91,31 @@ module.exports = Bastion => {
   }).catch(e => {
     Bastion.log.error(e.stack);
   });
-  sql.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').catch(e => {
+
+  sql.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
+          '(userID TEXT NOT NULL UNIQUE,' +
+          'PRIMARY KEY(userID))').catch(e => {
     Bastion.log.error(e.stack);
   });
-  sql.run('CREATE TABLE IF NOT EXISTS profiles (userID TEXT NOT NULL UNIQUE, bastionCurrencies INTEGER DEFAULT 0, xp INTEGER DEFAULT 0, level INTEGER DEFAULT 0, PRIMARY KEY(userID))').catch(e => {
+
+  sql.run('CREATE TABLE IF NOT EXISTS profiles' +
+          '(userID TEXT NOT NULL UNIQUE,' +
+          'bastionCurrencies INTEGER DEFAULT 0,' +
+          'xp INTEGER DEFAULT 0,' +
+          'level INTEGER DEFAULT 0,' +
+          'PRIMARY KEY(userID))').catch(e => {
     Bastion.log.error(e.stack);
   });
-  sql.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
+
+  sql.run('CREATE TABLE IF NOT EXISTS triggers' +
+          '(trigger TEXT NOT NULL,' +
+          'response TEXT NOT NULL)').catch(e => {
     Bastion.log.error(e.stack);
   });
-  sql.run("CREATE TABLE IF NOT EXISTS todo (ownerID TEXT NOT NULL UNIQUE, list TEXT NOT NULL DEFAULT '[]')").catch(e => {
+
+  sql.run('CREATE TABLE IF NOT EXISTS todo' +
+          '(ownerID TEXT NOT NULL UNIQUE,' +
+          'list TEXT NOT NULL DEFAULT \'[]\')').catch(e => {
     Bastion.log.error(e.stack);
   });
 
