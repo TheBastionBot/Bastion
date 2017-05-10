@@ -1,7 +1,7 @@
 {
-  "date": "May 9, 2017",
+  "date": "May 10, 2017",
   "updated": [
-    "Modified bots now need to run the upgrade script rather than update script"
+    "Minor fixes"
   ],
   "added": [],
   "removed": []
