@@ -1,6 +1,7 @@
 {
-  "date": "May 10, 2017",
+  "date": "May 11, 2017",
   "updated": [
+    "Fixed duration in now playing / paused / resumed messages",
     "Minor improvements to music module",
     "Code Improvements",
     "Minor fixes"

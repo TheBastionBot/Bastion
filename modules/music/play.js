@@ -321,7 +321,7 @@ exports.run = (Bastion, message, args) => {
                 url: song.thumbnail
               },
               footer: {
-                text: `🔉 ${dispatcher.volume * 50}% | Duration: ${info.duration} | Requester: ${message.author.tag}`
+                text: `🔉 ${dispatcher.volume * 50}% | Duration: ${song.duration} | Requester: ${message.author.tag}`
               }
             }}).then(m => {
               m.delete(30000).catch(e => {
@@ -364,7 +364,7 @@ exports.run = (Bastion, message, args) => {
                     url: song.thumbnail
                   },
                   footer: {
-                    text: `🔉 ${dispatcher.volume * 50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) <10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)} / ${info.duration}`
+                    text: `🔉 ${dispatcher.volume * 50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) <10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)} / ${song.duration}`
                   }
                 }}).then(m => {
                   m.delete(30000).catch(e => {
@@ -382,7 +382,7 @@ exports.run = (Bastion, message, args) => {
                   title: 'Paused Playback',
                   description: song.title,
                   footer: {
-                    text: `🔉 ${dispatcher.volume * 50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) <10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)} / ${info.duration}`
+                    text: `🔉 ${dispatcher.volume * 50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) <10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)} / ${song.duration}`
                   }
                 }}).then(m => {
                   dispatcher.pause();
@@ -448,7 +448,7 @@ exports.run = (Bastion, message, args) => {
                   title: 'Resumed Playback',
                   description: song.title,
                   footer: {
-                    text: `🔉 ${dispatcher.volume * 50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) <10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)} / ${info.duration}`
+                    text: `🔉 ${dispatcher.volume * 50}% | ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) <10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)} / ${song.duration}`
                   }
                 }}).then(m => {
                   dispatcher.resume();
@@ -582,7 +582,6 @@ exports.run = (Bastion, message, args) => {
             play(queue[message.guild.id].songs[0]);
           });
           dispatcher.on('error', (err) => {
-            collector.stop();
             queue[message.guild.id].playing = false;
             queue[message.guild.id].songs.shift();
             play(queue[message.guild.id].songs[0]);
