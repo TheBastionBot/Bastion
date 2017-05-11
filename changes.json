@@ -11,7 +11,8 @@
     "Added `live` command",
     "Added `filterLink` command",
     "Added `greetDM` command",
-    "Added `greetDMMessage` command"
+    "Added `greetDMMessage` command",
+    "Added `sendEmbed` command"
   ],
   "removed": []
 }
