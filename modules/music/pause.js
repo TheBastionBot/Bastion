@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   if (!message.guild.voiceConnection) return;
-  else if (message.guild.voiceConnection.channel.permissionsFor(message.member).has('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  else if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.guild.voiceConnection.channel.permissionsFor(message.member).has('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 };
 
 exports.config = {
