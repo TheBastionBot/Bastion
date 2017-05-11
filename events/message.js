@@ -135,6 +135,55 @@ module.exports = message => {
     message.client.log.error(e.stack);
   });
 
+  SQL.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+    if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
+      if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i.test(message.content)) {
+        if (message.deletable) {
+          message.delete().then(() => {
+            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+              if (!row) return;
+
+              if (row.modLog === 'true') {
+                message.guild.channels.get(row.modLogChannelID).send({embed: {
+                  color: message.client.colors.orange,
+                  title: 'Filtered Link',
+                  fields: [
+                    {
+                      name: 'Responsible User',
+                      value: `${message.author}`,
+                      inline: true
+                    },
+                    {
+                      name: 'User ID',
+                      value: message.author.id,
+                      inline: true
+                    }
+                  ],
+                  footer: {
+                    text: `Case Number: ${row.modCaseNo}`
+                  },
+                  timestamp: new Date()
+                }}).then(msg => {
+                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+                    message.client.log.error(e.stack);
+                  });
+                }).catch(e => {
+                  message.client.log.error(e.stack);
+                });
+              }
+            }).catch(e => {
+              message.client.log.error(e.stack);
+            });
+          }).catch(e => {
+            message.client.log.error(e.stack);
+          });
+        }
+      }
+    }
+  }).catch(e => {
+    message.client.log.error(e.stack);
+  });
+
   SQL.all(`SELECT trigger, response FROM triggers`).then(triggers => {
     if (triggers === '') return;
 
