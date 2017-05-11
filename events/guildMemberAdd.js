@@ -51,6 +51,34 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
+  SQL.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+    if (!row) return;
+
+    if (row.greetDM === 'true') {
+      let greetDMMsg = row.greetDMMessage;
+      greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
+      greetDMMsg = greetDMMsg.replace(/\$server/ig, member.guild.name);
+      greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
+      greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.client.config.prefix);
+
+      member.send({embed: {
+        color: member.client.colors.green,
+        title: `Hello ${member.displayName}`,
+        description: greetDMMsg
+      }}).then(m => {
+        if (row.greetTimeout > 0) {
+          m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
+            member.client.log.error(e.stack);
+          });
+        }
+      }).catch(e => {
+        member.client.log.error(e.stack);
+      });
+    }
+  }).catch(e => {
+    member.client.log.error(e.stack);
+  });
+
   SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
