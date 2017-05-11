@@ -8,7 +8,8 @@
   ],
   "added": [
     "Added `live` command",
-    "Added `filterLink` command"
+    "Added `filterLink` command",
+    "Added `greetDM` command"
   ],
   "removed": []
 }
