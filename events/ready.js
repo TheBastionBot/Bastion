@@ -121,6 +121,12 @@ module.exports = Bastion => {
     Bastion.log.error(e.stack);
   });
 
+  SQL.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
+          '(log TEXT NOT NULL DEFAULT \'false\',' +
+          'logChannelID TEXT UNIQUE)').catch(e => {
+    Bastion.log.error(e.stack);
+  });
+
   console.log('\n');
   console.log(COLOR.green(`[Author] `) + `${Bastion.package.author}`);
   console.log(COLOR.green(`[Author URL] `) + `${Bastion.package.authorUrl}`);
