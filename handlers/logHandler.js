@@ -19,26 +19,26 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const color = require('chalk');
+const COLOR = require('chalk');
 
 module.exports = Bastion => {
   Bastion.log = {};
 
   Bastion.log.warn = msg => {
-    console.log(color.yellow('[WARNING]'));
+    console.log(COLOR.yellow('[WARNING]'));
     console.log(msg);
-    console.log(color.yellow('[/WARNING]'));
+    console.log(COLOR.yellow('[/WARNING]'));
   };
   Bastion.log.error = msg => {
-    console.log(color.red('[ERROR]'));
+    console.log(COLOR.red('[ERROR]'));
     console.log(msg);
     console.trace();
-    console.log(color.red('[/ERROR]'));
+    console.log(COLOR.red('[/ERROR]'));
   };
   Bastion.log.msg = msg => {
-    console.log(color.cyan('[Bastion]: ') + `${msg}`);
+    console.log(COLOR.cyan('[Bastion]: ') + `${msg}`);
   }
   Bastion.log.info = msg => {
-    console.log(color.cyan('[Bastion]: ') + color.yellow(msg));
+    console.log(COLOR.cyan('[Bastion]: ') + COLOR.yellow(msg));
   }
 };

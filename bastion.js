@@ -20,7 +20,7 @@
  */
 
 const Discord = require('discord.js');
-const Bastion = new Discord.Client({
+const BASTION = new Discord.Client({
   disabledEvents: [
     'USER_NOTE_UPDATE',
     'TYPING_START',
@@ -29,22 +29,22 @@ const Bastion = new Discord.Client({
   ]
 });
 
-Bastion.package = require('./package.json');
-Bastion.credentials = require('./settings/credentials.json');
-Bastion.config = require('./settings/config.json');
-Bastion.colors = require('./settings/colors.json');
-Bastion.commands = new Discord.Collection();
-Bastion.aliases = new Discord.Collection();
+BASTION.package = require('./package.json');
+BASTION.credentials = require('./settings/credentials.json');
+BASTION.config = require('./settings/config.json');
+BASTION.colors = require('./settings/colors.json');
+BASTION.commands = new Discord.Collection();
+BASTION.aliases = new Discord.Collection();
 
-require('./handlers/logHandler')(Bastion);
-require('./handlers/eventHandler')(Bastion);
-require('./handlers/moduleHandler')(Bastion);
+require('./handlers/logHandler')(BASTION);
+require('./handlers/eventHandler')(BASTION);
+require('./handlers/moduleHandler')(BASTION);
 
 // Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
 // require('./functions/Array.prototype');
 
-Bastion.login(Bastion.credentials.token).catch(e => {
-  Bastion.log.error(e.stack)
+BASTION.login(BASTION.credentials.token).catch(e => {
+  BASTION.log.error(e.stack)
 });
 
 process.on('unhandledRejection', rejection => {

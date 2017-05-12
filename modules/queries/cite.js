@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1 || !/^(.+( ?\/ ?.+[^\/])+)$/i.test(args = args.join(' '))) {
+  if (args.length < 1 || !/^[0-9]{18}$/.test(args[0])) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
@@ -30,26 +30,43 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'In my opinion',
-    description: args.split('/')[Math.floor(Math.random() * args.length)]
-    // description: args.split('/').random()
-  }}).catch(e => {
-    Bastion.log.error(e.stack);
+  message.channel.fetchMessage(args[0]).then(msg => {
+    message.channel.send({embed: {
+      color: Bastion.colors.blue,
+      author: {
+        name: msg.author.tag,
+        icon_url: msg.author.avatarURL
+      },
+      description: msg.content,
+      timestamp: msg.createdAt
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }).catch(e => {
+    if (e.stack.includes('Unknown Message')) {
+      message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: 'No message was found with the specified Message ID in this channel.'
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
+    else {
+      Bastion.log.error(e.stack);
+    }
   });
 };
 
 exports.config = {
-  aliases: ['decide'],
+  aliases: [],
   enabled: true
 };
 
 exports.help = {
-  name: 'choose',
-  description: 'Ask the bot to choose a option from any number of options, separated by a `/`.',
+  name: 'cite',
+  description: 'Cites a users message, specified by the message ID, in the channel.',
   botPermission: '',
   userPermission: '',
-  usage: 'choose <choice1>/<choice2>[/<choice3>][...]',
-  example: ['choose Chocolate/Ice Cream/Cake']
+  usage: 'cite <MESSAGE_ID>',
+  example: ['cite 221133446677558899']
 };

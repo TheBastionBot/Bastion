@@ -19,11 +19,11 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = member => {
-  sql.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  SQL.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
     if (row.farewell === 'true') {
@@ -55,7 +55,7 @@ module.exports = member => {
   // member.guild.fetchBans().then(users => {
   //   if (users.has(member.id)) return;
 
-    sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+    SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
       if (!row) return;
       if (row.log === 'false') return;
 

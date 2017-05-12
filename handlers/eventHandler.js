@@ -19,25 +19,25 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const loadEvent = event => require(`../events/${event}`);
+const LOAD_EVENTS = event => require(`../events/${event}`);
 
 module.exports = Bastion => {
-  Bastion.on('channelCreate', loadEvent('channelCreate'));
-  Bastion.on('channelDelete', loadEvent('channelDelete'));
-  Bastion.on('channelUpdate', loadEvent('channelUpdate'));
-  Bastion.on('error', loadEvent('error'));
-  Bastion.on('guildBanAdd', loadEvent('guildBanAdd'));
-  Bastion.on('guildBanRemove', loadEvent('guildBanRemove'));
-  Bastion.on('guildCreate', loadEvent('guildCreate'));
-  Bastion.on('guildDelete', loadEvent('guildDelete'));
-  Bastion.on('guildMemberAdd', loadEvent('guildMemberAdd'));
-  Bastion.on('guildMemberRemove', loadEvent('guildMemberRemove'));
-  Bastion.on('guildUpdate', loadEvent('guildUpdate'));
-  Bastion.on('message', loadEvent('message'));
-  Bastion.on('messageUpdate', loadEvent('messageUpdate'));
-  Bastion.on('ready', () => loadEvent('ready')(Bastion));
-  Bastion.on('roleCreate', loadEvent('roleCreate'));
-  Bastion.on('roleDelete', loadEvent('roleDelete'));
-  Bastion.on('roleUpdate', loadEvent('roleUpdate'));
-  Bastion.on('warn', loadEvent('warn'));
+  Bastion.on('channelCreate', LOAD_EVENTS('channelCreate'));
+  Bastion.on('channelDelete', LOAD_EVENTS('channelDelete'));
+  Bastion.on('channelUpdate', LOAD_EVENTS('channelUpdate'));
+  Bastion.on('error', LOAD_EVENTS('error'));
+  Bastion.on('guildBanAdd', LOAD_EVENTS('guildBanAdd'));
+  Bastion.on('guildBanRemove', LOAD_EVENTS('guildBanRemove'));
+  Bastion.on('guildCreate', LOAD_EVENTS('guildCreate'));
+  Bastion.on('guildDelete', LOAD_EVENTS('guildDelete'));
+  Bastion.on('guildMemberAdd', LOAD_EVENTS('guildMemberAdd'));
+  Bastion.on('guildMemberRemove', LOAD_EVENTS('guildMemberRemove'));
+  Bastion.on('guildUpdate', LOAD_EVENTS('guildUpdate'));
+  Bastion.on('message', LOAD_EVENTS('message'));
+  Bastion.on('messageUpdate', LOAD_EVENTS('messageUpdate'));
+  Bastion.on('ready', () => LOAD_EVENTS('ready')(Bastion));
+  Bastion.on('roleCreate', LOAD_EVENTS('roleCreate'));
+  Bastion.on('roleDelete', LOAD_EVENTS('roleDelete'));
+  Bastion.on('roleUpdate', LOAD_EVENTS('roleUpdate'));
+  Bastion.on('warn', LOAD_EVENTS('warn'));
 };

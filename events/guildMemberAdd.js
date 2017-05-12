@@ -19,11 +19,11 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
+const SQL = require('sqlite');
+SQL.open('./data/Bastion.sqlite');
 
 module.exports = member => {
-  sql.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  SQL.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
     if (row.greet === 'true') {
@@ -51,7 +51,35 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  SQL.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+    if (!row) return;
+
+    if (row.greetDM === 'true') {
+      let greetDMMsg = row.greetDMMessage;
+      greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
+      greetDMMsg = greetDMMsg.replace(/\$server/ig, member.guild.name);
+      greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
+      greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.client.config.prefix);
+
+      member.send({embed: {
+        color: member.client.colors.green,
+        title: `Hello ${member.displayName}`,
+        description: greetDMMsg
+      }}).then(m => {
+        if (row.greetTimeout > 0) {
+          m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
+            member.client.log.error(e.stack);
+          });
+        }
+      }).catch(e => {
+        member.client.log.error(e.stack);
+      });
+    }
+  }).catch(e => {
+    member.client.log.error(e.stack);
+  });
+
+  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 
@@ -78,7 +106,7 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  sql.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  SQL.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     autoAssignableRoles = JSON.parse(row.autoAssignableRoles);
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));

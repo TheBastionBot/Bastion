@@ -20,13 +20,30 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
+  if (args.length < 1) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.yellow,
+      title: 'Usage',
+      description: `\`${Bastion.config.prefix}${this.help.usage}\``
+    }}).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
-  if (!message.guild.voiceConnection) return;
-  else if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.guild.voiceConnection.channel.permissionsFor(message.member).has('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+
+  try {
+    args = JSON.parse(args.join(' '));
+  } catch (e) {
+    return message.channel.send({embed: {
+      color: Bastion.colors.red,
+      description: 'Invalid embed object. Please check that it\'s an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).'
+    }}).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
+  message.channel.send({embed: args}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.config = {
@@ -35,10 +52,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'pause',
-  description: 'Pauses the current music playback.',
+  name: 'sendembed',
+  description: 'Sends an embed message created from the specified embed JavaScript object. To create an embed object, graphically, [click here](https://bastion.js.org/tools/embed_builder/).',
   botPermission: '',
-  userPermission: 'Mute Members',
-  usage: 'pause',
-  example: []
+  userPermission: '',
+  usage: 'sendEmbed <embedObject>',
+  example: ['sendEmbed {title: "Hello", description: "Isn\'t it cool?"}']
 };

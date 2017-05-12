@@ -52,6 +52,9 @@ exports.run = (Bastion, message, args) => {
     else if (args.includes('--bots')) {
       msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
+    if (args.includes('--nonpinned')) {
+      msgs = msgs.filter(m => !m.pinned);
+    }
     if (msgs.size < 2 || msgs.length < 2) {
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
         error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
@@ -130,7 +133,7 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. It also accepts a parameter `--bots`, which clears messages from bots in that channel.',
+  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. Using `--bots` flag clears messages from bots in that channel. Using `--nonpinned` flag clears messages that aren\'t pinned.',
   botPermission: 'Manage Messages',
   userPermission: 'Manage Messages',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',

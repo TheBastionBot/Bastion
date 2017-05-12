@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   args = encodeURI(args.join(' '));
-  if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i.test(args)) {
+  if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args)) {
     return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'Invalid URL'

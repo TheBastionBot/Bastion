@@ -20,13 +20,24 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e.stack);
-    });
-  }
-  if (!message.guild.voiceConnection) return;
-  else if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.guild.voiceConnection.channel.permissionsFor(message.member).has('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  message.channel.send({embed: {
+    color: Bastion.colors.yellow,
+    title: 'Bastion BOT - Guide',
+    url: 'https://bastion.js.org/',
+    description: `Need help installing and setting up Private Bastion BOT? No worries, we have made an amazing guide to help you out on that. And if you don't understand that or you need any more help or maybe if you just have a simple question, just join our Support Server on Discord.`,
+    fields: [
+      {
+        name: 'Bastion BOT - Installation Guide',
+        value: 'https://bastion.js.org/guide/'
+      },
+      {
+        name: 'Bastion BOT - Support Server',
+        value: 'https://discord.gg/fzx8fkt'
+      }
+    ]
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
+  });
 };
 
 exports.config = {
@@ -35,10 +46,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'pause',
-  description: 'Pauses the current music playback.',
+  name: 'guide',
+  description: 'Shows you the guide on how to setup and install Private Bastion BOT. And links to the official support server.',
   botPermission: '',
-  userPermission: 'Mute Members',
-  usage: 'pause',
+  userPermission: '',
+  usage: 'guide',
   example: []
 };

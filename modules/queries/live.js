@@ -19,34 +19,27 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
-module.exports = (guild, user) => {
-  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${guild.id}`).then(row => {
-    if (!row) return;
-    if (row.log === 'false') return;
-
-    guild.channels.get(row.logChannelID).send({embed: {
-      color: guild.client.colors.red,
-      title: 'User Banned',
-      fields: [
-        {
-          name: 'User',
-          value: user.tag,
-          inline: true
-        },
-        {
-          name: 'User ID',
-          value: user.id,
-          inline: true
-        }
-      ],
-      timestamp: new Date()
-    }}).catch(e => {
-      guild.client.log.error(e.stack);
-    });
-  }).catch(e => {
-    guild.client.log.error(e.stack);
+exports.run = (Bastion, message, args) => {
+  let streamers = Array.from(message.guild.presences.filter(p => p.game && p.game.streaming === true).keys());
+  message.channel.send({embed: {
+    color: Bastion.colors.violet,
+    title: 'Users Streaming',
+    description: streamers.length > 10 ? `<@${streamers.splice(0, 10).join('>\n<@')}>` + `\nand ${streamers.length - 10} others are now live.` : `<@${streamers.join('>\n<@')}>`
+  }}).catch(e => {
+    Bastion.log.error(e.stack);
   });
+};
+
+exports.config = {
+  aliases: [],
+  enabled: true
+};
+
+exports.help = {
+  name: 'live',
+  description: 'Shows the list of users in the server who are currently streaming.',
+  botPermission: '',
+  userPermission: '',
+  usage: 'live',
+  example: []
 };
