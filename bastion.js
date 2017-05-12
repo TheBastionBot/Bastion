@@ -44,7 +44,7 @@ require('./handlers/moduleHandler')(BASTION);
 // require('./functions/Array.prototype');
 
 BASTION.login(BASTION.credentials.token).catch(e => {
-  Bastion.log.error(e.stack)
+  BASTION.log.error(e.stack)
 });
 
 process.on('unhandledRejection', rejection => {
