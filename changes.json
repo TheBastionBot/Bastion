@@ -1,5 +1,5 @@
 {
-  "date": "May 12, 2017",
+  "date": "May 13, 2017",
   "updated": [
     "Fixed duration in now playing / paused / resumed messages",
     "Minor improvements to music module",
@@ -16,6 +16,7 @@
     "Added `sendEmbed` command",
     "Added `guide` command",
     "Added `cite` command",
+    "Added `bastionLog` command",
     "Added `--nonpinned` flag in clear command"
   ],
   "removed": []
