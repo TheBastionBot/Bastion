@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-console.log(args);
+
   message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'In my opinion',
