@@ -133,7 +133,7 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. It also accepts a parameter `--bots`, which clears messages from bots in that channel.',
+  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. Using `--bots` flag clears messages from bots in that channel. Using `--nonpinned` flag clears messages that aren\'t pinned.',
   botPermission: 'Manage Messages',
   userPermission: 'Manage Messages',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
