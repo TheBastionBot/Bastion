@@ -14,7 +14,7 @@
     "Added `greetDM` command",
     "Added `greetDMMessage` command",
     "Added `sendEmbed` command",
-    "Added `guide` command"
+    "Added `guide` command",
     "Added `--nonpinned` flag in clear command"
   ],
   "removed": []
