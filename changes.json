@@ -12,7 +12,8 @@
     "Added `filterLink` command",
     "Added `greetDM` command",
     "Added `greetDMMessage` command",
-    "Added `sendEmbed` command"
+    "Added `sendEmbed` command",
+    "Added `--nonpinned` flag in clear command"
   ],
   "removed": []
 }

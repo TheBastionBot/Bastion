@@ -52,6 +52,9 @@ exports.run = (Bastion, message, args) => {
     else if (args.includes('--bots')) {
       msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
+    if (args.includes('--nonpinned')) {
+      msgs = msgs.filter(m => !m.pinned);
+    }
     if (msgs.size < 2 || msgs.length < 2) {
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
         error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
