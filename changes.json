@@ -4,6 +4,7 @@
     "Fixed duration in now playing / paused / resumed messages",
     "Minor improvements to music module",
     "Some RegExp improvements",
+    "Updated `mathjs` lib to `v3.13.0`",
     "Code Improvements",
     "Minor fixes"
   ],
