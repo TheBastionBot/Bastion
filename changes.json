@@ -5,7 +5,8 @@
     "`give` command won't give more than 50% of users money",
     "`betFlip` command's cooldown increased to 60 seconds",
     "`betRoll` command's cooldown increased to 60 seconds",
-    "`betRoll` and `betRoll` won't accept negative numbers anymore"
+    "`betFlip` and `betRoll` won't accept negative numbers anymore",
+    "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies"
   ],
   "added": [
     "Added `enableAllCommands` command",

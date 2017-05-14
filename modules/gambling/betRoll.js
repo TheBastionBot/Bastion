@@ -25,7 +25,7 @@ let recentUsers = [];
 
 exports.run = (Bastion, message, args) => {
   if (!recentUsers.includes(message.author.id)) {
-    if (!parseInt(args[0]) || !/^(one|two|three|four|five|six)$/i.test(args[1]) || args[0] < 1) {
+    if (!(args[0] = parseInt(args[0])) || !/^(one|two|three|four|five|six)$/i.test(args[1]) || args[0] < 1) {
       return message.channel.send({embed: {
         color: Bastion.colors.yellow,
         title: 'Usage',
@@ -34,10 +34,11 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    if (args[0] < 2) {
+
+    if (args[0] < 5) {
       return message.channel.send({embed: {
         color: Bastion.colors.red,
-        description: 'Minimum bet amount is 2 Bastion Currencies.'
+        description: 'Minimum bet amount is 5 Bastion Currencies.'
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });
