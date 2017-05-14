@@ -27,7 +27,7 @@
     "discord.js": "^11.1.0",
     "google-translate-api": "^2.2.2",
     "imdb-api": "^2.2.2",
-    "mathjs": "^3.13.0",
+    "mathjs": "^3.13.1",
     "node-json-db": "^0.7.3",
     "node-opus": "^0.2.6",
     "overwatch-js": "^1.5.0",

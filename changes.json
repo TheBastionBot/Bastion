@@ -7,12 +7,13 @@
     "`betRoll` command's cooldown increased to 60 seconds",
     "`betFlip` and `betRoll` won't accept negative numbers anymore",
     "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies",
+    "Updated `mathjs` to `v3.13.1`",
     "Updated upgrade scripts"
   ],
   "added": [
     "Added `enableAllCommands` command",
     "Added `disableAllCommands` command",
-    "Added test script"
+    "Added npm test script"
   ],
   "removed": []
 }
