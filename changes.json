@@ -8,6 +8,7 @@
     "`betFlip` and `betRoll` won't accept negative numbers anymore",
     "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies",
     "Updated `mathjs` to `v3.13.1`",
+    "Improved `clear` mod log",
     "Updated upgrade scripts"
   ],
   "added": [
