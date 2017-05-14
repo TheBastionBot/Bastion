@@ -4,7 +4,8 @@
     "Fixed `help` command",
     "`give` command won't give more than 50% of users money",
     "`betFlip` command's cooldown increased to 60 seconds",
-    "`betRoll` command's cooldown increased to 60 seconds"
+    "`betRoll` command's cooldown increased to 60 seconds",
+    "`betRoll` and `betRoll` won't accept negative numbers anymore"
   ],
   "added": [
     "Added `enableAllCommands` command",
