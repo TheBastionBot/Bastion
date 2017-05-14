@@ -90,7 +90,7 @@ exports.run = (Bastion, message, args) => {
               },
               {
                 name: 'Cleared',
-                value: `${msgs.size || msgs.length} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
+                value: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
               },
               {
                 name: 'Responsible Moderator',

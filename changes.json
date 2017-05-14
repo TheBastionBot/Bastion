@@ -1,23 +1,20 @@
 {
-  "date": "May 13, 2017",
+  "date": "May 14, 2017",
   "updated": [
-    "Fixed duration in now playing / paused / resumed messages",
-    "Minor improvements to music module",
-    "Some RegExp improvements",
-    "Updated `mathjs` lib to `v3.13.0`",
-    "Code Improvements",
-    "Minor fixes"
+    "Fixed `help` command",
+    "`give` command won't give more than 50% of users money",
+    "`betFlip` command's cooldown increased to 60 seconds",
+    "`betRoll` command's cooldown increased to 60 seconds",
+    "`betFlip` and `betRoll` won't accept negative numbers anymore",
+    "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies",
+    "Updated `mathjs` to `v3.13.1`",
+    "Improved `clear` mod log",
+    "Updated upgrade scripts"
   ],
   "added": [
-    "Added `live` command",
-    "Added `filterLink` command",
-    "Added `greetDM` command",
-    "Added `greetDMMessage` command",
-    "Added `sendEmbed` command",
-    "Added `guide` command",
-    "Added `cite` command",
-    "Added `bastionLog` command",
-    "Added `--nonpinned` flag in clear command"
+    "Added `enableAllCommands` command",
+    "Added `disableAllCommands` command",
+    "Added npm test script"
   ],
   "removed": []
 }

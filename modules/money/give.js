@@ -95,6 +95,14 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
+      if (args[0] >= 0.5 * parseInt(sender.bastionCurrencies)) {
+        return message.channel.send({embed: {
+          color: Bastion.colors.red,
+          description: `Sorry, unfortunately, you can't give more than 50% of your Bastion Currencies.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`
+        }}).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      }
       sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
         if (!receiver) {
           sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
