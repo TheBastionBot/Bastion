@@ -7,7 +7,8 @@
     "`betRoll` command's cooldown increased to 60 seconds"
   ],
   "added": [
-    "Added `enableAllCommands` command"
+    "Added `enableAllCommands` command",
+    "Added `disableAllCommands` command"
   ],
   "removed": []
 }
