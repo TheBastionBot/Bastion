@@ -16,8 +16,6 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 echo -e "${CYAN}[Bastion]:${NC} Updating Bastion BOT..."
-git stash &>/dev/null
-git stash drop &>/dev/null
 git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Unable to update the bot.\n" && exit 1)
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo

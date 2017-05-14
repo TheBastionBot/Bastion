@@ -6,7 +6,8 @@
     "`betFlip` command's cooldown increased to 60 seconds",
     "`betRoll` command's cooldown increased to 60 seconds",
     "`betFlip` and `betRoll` won't accept negative numbers anymore",
-    "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies"
+    "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies",
+    "Updated upgrade scripts"
   ],
   "added": [
     "Added `enableAllCommands` command",
