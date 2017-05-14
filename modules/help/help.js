@@ -85,7 +85,7 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'Aliases',
-            value: command.config.aliases === '' ? '-' : command.config.aliases.join(', '),
+            value: command.config.aliases.join(', ') || '-',
             inline: true
           },
           {
@@ -95,12 +95,12 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'BOT Permissions',
-            value: command.help.botPermission === '' ? '-' : command.help.botPermission,
+            value: command.help.botPermission || '-',
             inline: true
           },
           {
             name: 'User Permissions',
-            value: command.help.userPermission === '' ? '-' : command.help.userPermission,
+            value: command.help.userPermission || '-',
             inline: true
           },
           {
