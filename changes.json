@@ -3,7 +3,8 @@
   "updated": [
     "Fixed `help` command",
     "`give` command won't give more than 50% of users money",
-    "`betFlip` command's cooldown increased to 60 seconds"
+    "`betFlip` command's cooldown increased to 60 seconds",
+    "`betRoll` command's cooldown increased to 60 seconds"
   ],
   "added": [],
   "removed": []
