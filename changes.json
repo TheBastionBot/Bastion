@@ -11,7 +11,8 @@
   ],
   "added": [
     "Added `enableAllCommands` command",
-    "Added `disableAllCommands` command"
+    "Added `disableAllCommands` command",
+    "Added test script"
   ],
   "removed": []
 }

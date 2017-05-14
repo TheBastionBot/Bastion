@@ -5,6 +5,7 @@
   "url": "https://bastion.js.org/",
   "main": "bastion.js",
   "scripts": {
+    "test": "node tests/boot.js",
     "start": "node bastion.js"
   },
   "library": "discord.js",
