@@ -1,7 +1,8 @@
 {
-  "date": "May 13, 2017",
+  "date": "May 14, 2017",
   "updated": [
-    "Fixed `help` command"
+    "Fixed `help` command",
+    "`give` command won't give more than 50% of users money."
   ],
   "added": [],
   "removed": []
