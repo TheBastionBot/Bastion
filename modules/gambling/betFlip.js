@@ -80,7 +80,7 @@ exports.run = (Bastion, message, args) => {
       }}).then(msg => {
         setTimeout(function () {
           recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
-        }, 30 * 1000);
+        }, 60 * 1000);
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
@@ -91,7 +91,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.channel.send({embed: {
       color: Bastion.colors.red,
-      description: `${message.author} you have gambled recently for this game, please wait at least 30 seconds before gambling again.`
+      description: `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
