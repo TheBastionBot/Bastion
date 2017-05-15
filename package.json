@@ -31,7 +31,6 @@
     "node-json-db": "^0.7.3",
     "node-opus": "^0.2.6",
     "overwatch-js": "^1.5.0",
-    "pretty-ms": "^2.1.0",
     "rainbowsix-api-node": "^0.0.1",
     "sqlite": "^2.7.0",
     "urllib": "^2.22.0",

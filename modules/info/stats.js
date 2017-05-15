@@ -19,9 +19,27 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const toHRTime = require('pretty-ms');
-
 exports.run = (Bastion, message, args) => {
+  let uptime = Bastion.uptime;
+	let seconds = uptime / 1000;
+	let days = parseInt(seconds / 86400);
+	seconds = seconds % 86400;
+	let hours = parseInt(seconds / 3600);
+	seconds = seconds % 3600;
+	let minutes = parseInt(seconds / 60);
+	seconds = parseInt(seconds % 60);
+
+  uptime = `${seconds}s`;
+  if (days) {
+    uptime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+  else if (hours) {
+    uptime = `${hours}h ${minutes}m ${seconds}s`;
+  }
+  else if (minutes) {
+    uptime = `${minutes}m ${seconds}s`;
+  }
+
   message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     author: {
@@ -66,7 +84,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Uptime',
-        value: toHRTime(Bastion.uptime),
+        value: uptime,
         inline: true
       },
       {

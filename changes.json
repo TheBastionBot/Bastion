@@ -4,8 +4,11 @@
     "Music crashes won't crash the bot anymore",
     "Fixed `enableCommand` command not showing message",
     "Fixed `disableAllCommands` command not showing message",
-    "Fixed `choose` command"
+    "Fixed `choose` command",
+    "Improved `stats` command"
   ],
   "added": [],
-  "removed": []
+  "removed": [
+    "Removed `pretty-ms` library"
+  ]
 }
