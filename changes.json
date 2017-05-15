@@ -1,20 +1,8 @@
 {
-  "date": "May 14, 2017",
+  "date": "May 16, 2017",
   "updated": [
-    "Fixed `help` command",
-    "`give` command won't give more than 50% of users money",
-    "`betFlip` command's cooldown increased to 60 seconds",
-    "`betRoll` command's cooldown increased to 60 seconds",
-    "`betFlip` and `betRoll` won't accept negative numbers anymore",
-    "Minimum bet amount for `betFlip` and `betRoll` changed to 5 Bastion Currencies",
-    "Updated `mathjs` to `v3.13.1`",
-    "Improved `clear` mod log",
-    "Updated upgrade scripts"
+    "Music crashes won't crash the bot anymore"
   ],
-  "added": [
-    "Added `enableAllCommands` command",
-    "Added `disableAllCommands` command",
-    "Added npm test script"
-  ],
+  "added": [],
   "removed": []
 }
