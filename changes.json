@@ -2,8 +2,9 @@
   "date": "May 16, 2017",
   "updated": [
     "Music crashes won't crash the bot anymore",
-    "Fixed enableCommand",
-    "Fixed disableAllCommands"
+    "Fixed `enableCommand` command not showing message",
+    "Fixed `disableAllCommands` command not showing message",
+    "Fixed `choose` command"
   ],
   "added": [],
   "removed": []
