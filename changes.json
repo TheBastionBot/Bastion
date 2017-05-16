@@ -7,7 +7,9 @@
     "Fixed `choose` command",
     "Improved `stats` command"
   ],
-  "added": [],
+  "added": [
+    "Added `slots` command"
+  ],
   "removed": [
     "Removed `pretty-ms` library"
   ]
