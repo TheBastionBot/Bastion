@@ -19,33 +19,40 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const changes = require('../../changes.json');
+const CHANGES = require('../../changes.json');
 
 exports.run = (Bastion, message, args) => {
+  let changes = [];
+  if (CHANGES.updated.length !== 0) {
+    changes.push({
+      name: 'Patched/Updated:',
+      value: `- ${CHANGES.updated.join('\n- ')}`
+    });
+  }
+  if (CHANGES.added.length !== 0) {
+    changes.push({
+      name: 'Added:',
+      value: `- ${CHANGES.added.join('\n- ')}`
+    });
+  }
+  if (CHANGES.removed.length !== 0) {
+    changes.push({
+      name: 'Removed:',
+      value: `- ${CHANGES.removed.join('\n- ')}`
+    });
+  }
+
   message.channel.send({embed: {
     color: Bastion.colors.dark_grey,
     title: 'Changelog',
     url: 'https://bastion.js.org/changes',
     description: `Bastion v${Bastion.package.version}`,
-    fields: [
-      {
-        name: 'Patched/Updated:',
-        value: `- ${changes.updated.join('\n- ')}`
-      },
-      {
-        name: 'Added:',
-        value: `- ${changes.added.join('\n- ')}`
-      },
-      {
-        name: 'Removed:',
-        value: `- ${changes.removed.join('\n- ')}`
-      }
-    ],
+    fields: changes,
     thumbnail: {
       url: Bastion.user.displayAvatarURL
     },
     footer: {
-      text: changes.date
+      text: CHANGES.date
     }
   }}).catch(e => {
     Bastion.log.error(e.stack);

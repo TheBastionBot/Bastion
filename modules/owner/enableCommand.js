@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    message.channel.send({embed: {
+    return message.channel.send({embed: {
       color: Bastion.colors.red,
       description: `\`${command}\` command was not found.`
     }}).catch(e => {

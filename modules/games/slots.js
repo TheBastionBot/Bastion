@@ -20,28 +20,52 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  let reel = [
+    ':custard:',
+    ':candy:',
+    ':cake:',
+    ':icecream:',
+    ':lollipop:',
+    ':chocolate_bar:',
+    // ':moneybag:',
+    ':shaved_ice:',
+    ':doughnut:',
+    ':cookie:',
+    ':ice_cream:'
+  ];
 
-  Bastion.commands.filter(cmd => (cmd.help.name !== 'enableallcommands' && cmd.help.name !== 'enablecommand' && cmd.help.name !== 'disablecommand') ? cmd.config.enabled = false : cmd.config.enabled = true);
+  let reels = [];
+  for (let i = 0; i < 3; i++) {
+    reels.push(reel[Math.floor(Math.random() * reel.length)])
+  }
+
+  let result = 'Sorry, you lost.';
+  if (reels[0] === reels[1] && reels[1] === reels[2]) {
+    result = 'Congrats! You won.';
+  }
 
   message.channel.send({embed: {
-    color: Bastion.colors.red,
-    description: `All commands have been disabled until next restart. You can enable all commands using \`${Bastion.config.prefix}enableAllCommands\`. Or you can enable any specific command using \`${Bastion.config.prefix}enableCommand\`.`
+    color: Bastion.colors.blue,
+    title: 'Slot Machine',
+    description: reels.join(' \u05C0 '),
+    footer: {
+      text: result
+    }
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['disableallcmds'],
+  aliases: [],
   enabled: true
 };
 
 exports.help = {
-  name: 'disableallcommands',
-  description: 'Disables all command temporarily until Bastion is restarted or it is enabled again.',
+  name: 'slots',
+  description: 'Spins the reels of the slot machine and shows you the result.',
   botPermission: '',
-  userPermission: 'Bot Owner',
-  usage: 'disableAllCommands',
+  userPermission: '',
+  usage: 'slots',
   example: []
 };

@@ -185,7 +185,7 @@ module.exports = message => {
   });
 
   SQL.all(`SELECT trigger, response FROM triggers`).then(triggers => {
-    if (triggers === '') return;
+    if (triggers.length === 0) return;
 
     let trigger = '';
     let response = [];
