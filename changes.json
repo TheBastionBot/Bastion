@@ -1,5 +1,5 @@
 {
-  "date": 1494932400113,
+  "date": "May 16, 2017",
   "updated": [
     "Music crashes won't crash the bot anymore",
     "Fixed `enableCommand` command not showing message",

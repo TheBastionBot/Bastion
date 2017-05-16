@@ -51,7 +51,9 @@ exports.run = (Bastion, message, args) => {
     thumbnail: {
       url: Bastion.user.displayAvatarURL
     },
-    timestamp: new Date(CHANGES.date)
+    footer: {
+      text: CHANGES.date
+    }
   }}).catch(e => {
     Bastion.log.error(e.stack);
   });
