@@ -52,45 +52,45 @@ exports.run = (Bastion, message, args) => {
   else {
     game = user.presence.game.name;
   }
-  let roles = message.guild.members.get(user.id).roles.map(r=>r.name).slice(1).join("\n");
-  if (roles === '') roles = '-';
+  let roles = message.guild.members.get(user.id).roles.map(r => r.name).slice(1).join('\n');
+  if (roles.length === 0) roles = '-';
 
   message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'User Info',
     fields: [
       {
-        name: "Name",
+        name: 'Name',
         value: user.tag,
         inline: true
       },
       {
-        name: "ID",
+        name: 'ID',
         value: user.id,
         inline: true
       },
       {
-        name: "Nickname",
+        name: 'Nickname',
         value: nick,
         inline: true
       },
       {
-        name: "Roles",
+        name: 'Roles',
         value: roles,
         inline: true
       },
       {
-        name: "Joined Server",
+        name: 'Joined Server',
         value: message.guild.members.get(user.id).joinedAt.toUTCString(),
         inline: true
       },
       {
-        name: "Joined Discord",
+        name: 'Joined Discord',
         value: user.createdAt.toUTCString(),
         inline: true
       },
       {
-        name: "Status",
+        name: 'Status',
         value: status,
         inline: true
       },

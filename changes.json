@@ -6,12 +6,11 @@
     "Fixed `disableAllCommands` command not showing message",
     "Fixed `choose` command",
     "Improved `stats` command",
-    "Minor changes"
+    "Minor changes",
+    "Minor fixes"
   ],
   "added": [
     "Added `slots` command"
   ],
-  "removed": [
-    "Removed `pretty-ms` library"
-  ]
+  "removed": []
 }
