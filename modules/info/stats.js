@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
     fields: [
       {
         name: 'Author',
-        value: Bastion.package.author,
+        value: `[${Bastion.package.author}](${Bastion.package.authorUrl})`,
         inline: true
       },
       {

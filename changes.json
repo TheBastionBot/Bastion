@@ -5,7 +5,8 @@
     "Fixed `enableCommand` command not showing message",
     "Fixed `disableAllCommands` command not showing message",
     "Fixed `choose` command",
-    "Improved `stats` command"
+    "Improved `stats` command",
+    "Minor changes"
   ],
   "added": [
     "Added `slots` command"
