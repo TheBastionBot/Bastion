@@ -1,6 +1,8 @@
 {
   "date": "May 17, 2017",
-  "updated": [],
+  "updated": [
+    "Moved `overwatch` and `rainbow6` commands to `game_stats` module"
+  ],
   "added": [
     "Added `cod4` command"
   ],
