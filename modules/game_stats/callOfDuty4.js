@@ -70,16 +70,10 @@ exports.run = (Bastion, message, args) => {
       gametype = data.row.g_gametype;
     }
 
-    let stats = [];
-    stats.push(
+    let stats = [
       {
         name: 'Server IP',
         value: `[${host}:${port}](cod4://${host}:${port})`,
-        inline: true
-      },
-      {
-        name: 'Players',
-        value: `${data.players.length}/${data.maxplayers}`,
         inline: true
       },
       {
@@ -88,10 +82,15 @@ exports.run = (Bastion, message, args) => {
         inline: true
       },
       {
+        name: 'Players',
+        value: `${data.players.length}/${data.maxplayers}`,
+        inline: true
+      },
+      {
         name: 'Map/Gametype',
         value: `${data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1))} - ${gametype}`
       }
-    );
+    ];
 
     if (data.players.length > 0) {
       let players = [];
