@@ -1,19 +1,8 @@
 {
-  "date": "May 16, 2017",
-  "updated": [
-    "Music crashes won't crash the bot anymore",
-    "Fixed `enableCommand` command not showing message",
-    "Fixed `disableAllCommands` command not showing message",
-    "Fixed `choose` command",
-    "Improved `stats` command",
-    "Improved `changelog` command",
-    "Minor changes",
-    "Minor fixes"
-  ],
+  "date": "May 17, 2017",
+  "updated": [],
   "added": [
-    "Added `slots` command"
+    "Added `cod4` command"
   ],
-  "removed": [
-    "Removed `pretty-ms` library"
-  ]
+  "removed": []
 }
