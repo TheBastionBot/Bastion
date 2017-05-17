@@ -5,7 +5,8 @@
   ],
   "added": [
     "Added `callOfDuty4` command",
-    "Added `teamFortress2` command"
+    "Added `teamFortress2` command",
+    "Added `minecraft` command"
   ],
   "removed": []
 }
