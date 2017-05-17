@@ -57,6 +57,18 @@ exports.run = (Bastion, message, args) => {
       else if (data.raw.g_gametype === 'sd') {
         gametype = 'Search and Destroy';
       }
+      else if (data.raw.g_gametype === 'dom') {
+        gametype = 'Domination';
+      }
+      else if (data.raw.g_gametype === 'koth') {
+        gametype = 'Headquarters';
+      }
+      else if (data.raw.g_gametype === 'sab') {
+        gametype = 'Sabotage';
+      }
+      else {
+        gametype = data.row.g_gametype;
+      }
 
       let stats = [];
       stats.push(
