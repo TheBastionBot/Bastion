@@ -47,16 +47,10 @@ exports.run = (Bastion, message, args) => {
     host: host,
     port: port
   }).then(data => {
-    let stats = [];
-    stats.push(
+    let stats = [
       {
         name: 'Server IP',
         value: `[${host}:${port}](steam://connect/${host}:${port})`,
-        inline: true
-      },
-      {
-        name: 'Players',
-        value: `${data.players.length}/${data.maxplayers}`,
         inline: true
       },
       {
@@ -65,10 +59,15 @@ exports.run = (Bastion, message, args) => {
         inline: true
       },
       {
+        name: 'Players',
+        value: `${data.players.length}/${data.maxplayers}`,
+        inline: true
+      },
+      {
         name: 'Map',
         value: data.map
       }
-    );
+    ];
 
     if (data.players.length > 0) {
       let players = [];
