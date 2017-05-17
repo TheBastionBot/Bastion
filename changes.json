@@ -4,7 +4,8 @@
     "Moved `overwatch` and `rainbow6` commands to `game_stats` module"
   ],
   "added": [
-    "Added `callOfDuty4` command"
+    "Added `callOfDuty4` command",
+    "Added `teamFortress2` command"
   ],
   "removed": []
 }
