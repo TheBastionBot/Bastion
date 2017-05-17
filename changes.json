@@ -1,19 +1,14 @@
 {
-  "date": "May 16, 2017",
+  "date": "May 18, 2017",
   "updated": [
-    "Music crashes won't crash the bot anymore",
-    "Fixed `enableCommand` command not showing message",
-    "Fixed `disableAllCommands` command not showing message",
-    "Fixed `choose` command",
-    "Improved `stats` command",
-    "Improved `changelog` command",
-    "Minor changes",
-    "Minor fixes"
+    "Moved `overwatch` and `rainbow6` commands to `game_stats` module"
   ],
   "added": [
-    "Added `slots` command"
+    "Added `callOfDuty4` command",
+    "Added `teamFortress2` command",
+    "Added `minecraft` command",
+    "Added `counterStrikeGlobalOffensive` command",
+    "Added `hello` command"
   ],
-  "removed": [
-    "Removed `pretty-ms` library"
-  ]
+  "removed": []
 }
