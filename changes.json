@@ -1,5 +1,5 @@
 {
-  "date": "May 17, 2017",
+  "date": "May 18, 2017",
   "updated": [
     "Moved `overwatch` and `rainbow6` commands to `game_stats` module"
   ],
@@ -7,6 +7,7 @@
     "Added `callOfDuty4` command",
     "Added `teamFortress2` command",
     "Added `minecraft` command",
+    "Added `counterStrikeGlobalOffensive` command",
     "Added `hello` command"
   ],
   "removed": []
