@@ -1,14 +1,6 @@
 {
   "date": "May 18, 2017",
-  "updated": [
-    "Moved `overwatch` and `rainbow6` commands to `game_stats` module"
-  ],
-  "added": [
-    "Added `callOfDuty4` command",
-    "Added `teamFortress2` command",
-    "Added `minecraft` command",
-    "Added `counterStrikeGlobalOffensive` command",
-    "Added `hello` command"
-  ],
+  "updated": [],
+  "added": [],
   "removed": []
 }
