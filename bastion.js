@@ -44,9 +44,10 @@ require('./handlers/moduleHandler')(BASTION);
 // require('./functions/Array.prototype');
 
 BASTION.login(BASTION.credentials.token).catch(e => {
-  BASTION.log.error(e.stack)
+  BASTION.log.error(e.stack);
 });
 
 process.on('unhandledRejection', rejection => {
+  // eslint-disable-next-line no-console
   console.warn('\n[unhandledRejection]\n\n', rejection, '\n\n[/unhandledRejection]\n');
 });

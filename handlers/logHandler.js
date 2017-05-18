@@ -19,6 +19,8 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
+/* eslint-disable no-console*/
+
 const COLOR = require('chalk');
 
 module.exports = Bastion => {
@@ -36,9 +38,9 @@ module.exports = Bastion => {
     console.log(COLOR.red('[/ERROR]'));
   };
   Bastion.log.msg = msg => {
-    console.log(COLOR.cyan('[Bastion]: ') + `${msg}`);
-  }
+    console.log(COLOR.cyan('[Bastion]: ') + msg);
+  };
   Bastion.log.info = msg => {
     console.log(COLOR.cyan('[Bastion]: ') + COLOR.yellow(msg));
-  }
+  };
 };
