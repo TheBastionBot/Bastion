@@ -1,6 +1,8 @@
 {
   "date": "May 18, 2017",
-  "updated": [],
+  "updated": [
+    "Fixed a string"
+  ],
   "added": [],
   "removed": []
 }
