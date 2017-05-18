@@ -41,5 +41,8 @@
     "xkcd": "^1.1.2",
     "youtube-dl": "^1.11.1",
     "zalgolize": "^1.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
   }
 }

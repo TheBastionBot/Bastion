@@ -3,6 +3,8 @@
   "updated": [
     "Fixed a string"
   ],
-  "added": [],
+  "added": [
+    "Added `eslint` to `devDependencies`"
+  ],
   "removed": []
 }
