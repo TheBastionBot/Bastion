@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
     if (!Bastion.credentials.cleverbotAPIkey) {
       return message.channel.send({embed: {

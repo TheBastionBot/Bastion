@@ -21,7 +21,7 @@
 
 const CHANGES = require('../../changes.json');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let changes = [];
   if (CHANGES.updated.length !== 0) {
     changes.push({

@@ -23,7 +23,7 @@ const fs = require('fs');
 const getDirSync = require('../../functions/getDirSync');
 let commands = {};
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let modules = getDirSync('./modules/');
   let fields = [];
   for (let i = 0; i < modules.length; i++) {

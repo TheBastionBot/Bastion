@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     channel = message.channel;

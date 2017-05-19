@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete(1000).catch(e => {
       Bastion.log.error(e.stack);

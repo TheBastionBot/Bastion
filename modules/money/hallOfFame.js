@@ -22,7 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   sql.all('SELECT userID, xp, level FROM profiles ORDER BY level DESC, xp DESC LIMIT 10').then(profiles => {
     let fields = [];
     for (let i = 0; i < profiles.length; i++) {

@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete(1000).catch(e => {
       Bastion.log.error(e.stack);

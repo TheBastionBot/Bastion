@@ -8,6 +8,8 @@
     "Fixed a string",
     "Fixed `shutdown` command",
     "Improved some RegEx",
+    "Improved `acrophobia` game command",
+    "Improved `typingGame` game command",
     "Minor fixes"
   ],
   "added": [

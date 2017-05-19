@@ -109,7 +109,7 @@ exports.run = (Bastion, message, args) => {
               text: `Case Number: ${row.modCaseNo}`
             },
             timestamp: new Date()
-          }}).then(msg => {
+          }}).then(() => {
             sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
               Bastion.log.error(e.stack);
             });

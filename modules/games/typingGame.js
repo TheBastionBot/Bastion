@@ -23,7 +23,7 @@ const getRandomInt = require('../../functions/getRandomInt');
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   if (!activeChannels.includes(message.channel.id)) {
     activeChannels.push(message.channel.id);
 
@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
       message.channel.send({embed: {
         color: Bastion.colors.blue,
         description: typingArticles[index]
-      }}).then(() => {
+      }}).then(articleMessage => {
         const collector = message.channel.createMessageCollector(
           msg => msg.content === typingArticles[index],
           {
@@ -62,6 +62,12 @@ exports.run = (Bastion, message, args) => {
             title: 'Typing Game',
             description: result
           }}).then(() => {
+            msg.delete().catch(e => {
+              Bastion.log.error(e.stack);
+            });
+            articleMessage.delete().catch(e => {
+              Bastion.log.error(e.stack);
+            });
             activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id) + 1, 1);
           }).catch(e => {
             Bastion.log.error(e.stack);

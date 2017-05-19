@@ -22,7 +22,7 @@
 const getRandomInt = require('../../functions/getRandomInt');
 let activeChannels = {};
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   if (!activeChannels.hasOwnProperty(message.channel.id)) {
     activeChannels[message.channel.id] = {};
     activeChannels[message.channel.id].usersSubmitted = [];
@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       });
-      collector.on('end', (collection, reason) => {
+      collector.on('end', (collection) => {
         if (collection.size === 0) {
           message.channel.send({embed: {
             color: Bastion.colors.red,
@@ -77,11 +77,9 @@ exports.run = (Bastion, message, args) => {
             description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
           }}).then(() => {
             delete activeChannels[message.channel.id];
-            if (msg.deletable) {
-              msg.delete().catch(e => {
-                Bastion.log.error(e.stack);
-              });
-            }
+            msg.delete().catch(e => {
+              Bastion.log.error(e.stack);
+            });
           }).catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -148,7 +146,6 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else {
-                let total = votes.size;
                 votes = votes.map(v => v.content);
                 for (let i = collection.size; i > 0; i--) {
                   votes.unshift(`${i}`);
@@ -170,7 +167,7 @@ exports.run = (Bastion, message, args) => {
                       value: collection.map(s => s.content)[winningVoteIndex - 1]
                     }
                   ]
-                }}).then(m => {
+                }}).then(() => {
                   delete activeChannels[message.channel.id].usersVoted;
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];

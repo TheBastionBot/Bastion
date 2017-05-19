@@ -21,7 +21,7 @@
 
 const fortuneCookies = require('../../data/fortuneCookies.json');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   message.channel.send({embed: {
     color: Bastion.colors.blue,
     title: 'Fortune:',

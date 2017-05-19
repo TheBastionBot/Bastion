@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   message.channel.send({embed: {
     color: Bastion.colors.grey,
     description: 'Hi! I\'m **Bastion**. \u{1F609}\n' +

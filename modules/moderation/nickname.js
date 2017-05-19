@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
     color = Bastion.colors.green;
     nickStat = `${user}'s nickname changed.`;
   }
-  message.guild.members.get(user.id).setNickname(args.join(' ')).then(member => {
+  message.guild.members.get(user.id).setNickname(args.join(' ')).then(() => {
     message.channel.send({embed: {
       color: color,
       description: nickStat

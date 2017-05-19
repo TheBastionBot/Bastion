@@ -85,7 +85,7 @@ exports.run = (Bastion, message, args) => {
         color: Bastion.colors.blue,
         title: `Rolled :${outcome}:`,
         description: result
-      }}).then(msg => {
+      }}).then(() => {
         setTimeout(function () {
           recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
         }, 60 * 1000);
