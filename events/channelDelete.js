@@ -29,28 +29,30 @@ module.exports = channel => {
     if (!row) return;
     if (row.log === 'false') return;
 
-    channel.guild.channels.get(row.logChannelID).send({embed: {
-      color: channel.client.colors.red,
-      title: 'Channel Deleted',
-      fields: [
-        {
-          name: 'Channel Name',
-          value: channel.name,
-          inline: true
-        },
-        {
-          name: 'Channel ID',
-          value: channel.id,
-          inline: true
-        },
-        {
-          name: 'Channel Type',
-          value: channel.type.toUpperCase(),
-          inline: true
-        }
-      ],
-      timestamp: new Date()
-    }}).catch(e => {
+    channel.guild.channels.get(row.logChannelID).send({
+      embed: {
+        color: channel.client.colors.red,
+        title: 'Channel Deleted',
+        fields: [
+          {
+            name: 'Channel Name',
+            value: channel.name,
+            inline: true
+          },
+          {
+            name: 'Channel ID',
+            value: channel.id,
+            inline: true
+          },
+          {
+            name: 'Channel Type',
+            value: channel.type.toUpperCase(),
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }
+    }).catch(e => {
       channel.client.log.error(e.stack);
     });
   }).catch(e => {

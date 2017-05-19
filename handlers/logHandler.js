@@ -19,13 +19,12 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
- /* eslint-disable no-console*/
-
 const COLOR = require('chalk');
 
 module.exports = Bastion => {
   Bastion.log = {};
 
+  /* eslint-disable no-console*/
   Bastion.log.warn = (...message) => {
     console.log(COLOR.yellow('[WARNING]'));
     console.warn(...message);

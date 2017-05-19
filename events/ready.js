@@ -53,52 +53,52 @@ module.exports = Bastion => {
           'modLogChannelID TEXT UNIQUE,' +
           'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
           'PRIMARY KEY(guildID))').then(() => {
-    let bastionGuilds = Bastion.guilds.map(g => g.id);
+            let bastionGuilds = Bastion.guilds.map(g => g.id);
 
-    SQL.all('SELECT guildID from guildSettings').then(row => {
-      row = row.map(r => r.guildID);
+            SQL.all('SELECT guildID from guildSettings').then(row => {
+              row = row.map(r => r.guildID);
 
-      for (let i = 0; i < bastionGuilds.length; i++) {
-        let found = false;
-        for (let j = 0; j < row.length; j++) {
-          if (bastionGuilds[i] === row[j]){
-            found = true;
-            break;
-          }
-        }
-        if (found === false) {
-          SQL.run('INSERT INTO guildSettings (guildID) VALUES (?)', [bastionGuilds[i]]).catch(e => {
+              for (let i = 0; i < bastionGuilds.length; i++) {
+                let found = false;
+                for (let j = 0; j < row.length; j++) {
+                  if (bastionGuilds[i] === row[j]){
+                    found = true;
+                    break;
+                  }
+                }
+                if (found === false) {
+                  SQL.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]).catch(e => {
+                    Bastion.log.error(e.stack);
+                  });
+                }
+              }
+
+              for (let i = 0; i < row.length; i++) {
+                let found = false;
+                for (let j = 0; j < bastionGuilds.length; j++) {
+                  if (row[i] === bastionGuilds[j]){
+                    found = true;
+                    break;
+                  }
+                }
+                if (found === false) {
+                  SQL.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
+                    Bastion.log.error(e.stack);
+                  });
+                }
+              }
+            }).catch(e => {
+              Bastion.log.error(e.stack);
+            });
+          }).catch(e => {
             Bastion.log.error(e.stack);
           });
-        }
-      }
-
-      for (let i = 0; i < row.length; i++) {
-        let found = false;
-        for (let j = 0; j < bastionGuilds.length; j++) {
-          if (row[i] === bastionGuilds[j]){
-            found = true;
-            break;
-          }
-        }
-        if (found === false) {
-          SQL.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
-  }).catch(e => {
-    Bastion.log.error(e.stack);
-  });
 
   SQL.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
           '(userID TEXT NOT NULL UNIQUE,' +
           'PRIMARY KEY(userID))').catch(e => {
-    Bastion.log.error(e.stack);
-  });
+            Bastion.log.error(e.stack);
+          });
 
   SQL.run('CREATE TABLE IF NOT EXISTS profiles' +
           '(userID TEXT NOT NULL UNIQUE,' +
@@ -106,35 +106,35 @@ module.exports = Bastion => {
           'xp INTEGER DEFAULT 0,' +
           'level INTEGER DEFAULT 0,' +
           'PRIMARY KEY(userID))').catch(e => {
-    Bastion.log.error(e.stack);
-  });
+            Bastion.log.error(e.stack);
+          });
 
   SQL.run('CREATE TABLE IF NOT EXISTS triggers' +
           '(trigger TEXT NOT NULL,' +
           'response TEXT NOT NULL)').catch(e => {
-    Bastion.log.error(e.stack);
-  });
+            Bastion.log.error(e.stack);
+          });
 
   SQL.run('CREATE TABLE IF NOT EXISTS todo' +
           '(ownerID TEXT NOT NULL UNIQUE,' +
           'list TEXT NOT NULL DEFAULT \'[]\')').catch(e => {
-    Bastion.log.error(e.stack);
-  });
+            Bastion.log.error(e.stack);
+          });
 
   SQL.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
           '(log TEXT NOT NULL DEFAULT \'false\',' +
           'logChannelID TEXT UNIQUE)').catch(e => {
-    Bastion.log.error(e.stack);
-  });
+            Bastion.log.error(e.stack);
+          });
 
-  console.log('\n');
-  console.log(COLOR.green(`[Author] `) + `${Bastion.package.author}`);
-  console.log(COLOR.green(`[Author URL] `) + `${Bastion.package.authorUrl}`);
-  console.log(COLOR.green(`[Library] `) + `${Bastion.package.library}`);
-  console.log(COLOR.green(`[Bot] `) + `Bastion v${Bastion.package.version}`);
-  console.log(COLOR.green(`[Bot ID] `) + `${Bastion.credentials.botId}`);
-  console.log(COLOR.green(`[Owner IDs] `) + `${Bastion.credentials.ownerId.join(', ')}`);
-  console.log(COLOR.green(`[Servers] `) + `${Bastion.guilds.size}`);
-  console.log(COLOR.green(`[Prefix] `) + `${Bastion.config.prefix}`);
-  console.log(COLOR.cyan(`\n[${Bastion.user.username}]: `) + `I'm ready to roll! o7`);
+  Bastion.log.console('\n');
+  Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
+  Bastion.log.console(COLOR.green('[Author URL] ') + Bastion.package.authorUrl);
+  Bastion.log.console(COLOR.green('[Library] ') + Bastion.package.library);
+  Bastion.log.console(`${COLOR.green('[Bot]')} Bastion v${Bastion.package.version}`);
+  Bastion.log.console(COLOR.green('[Bot ID] ') + Bastion.credentials.botId);
+  Bastion.log.console(COLOR.green('[Owner IDs] ') + Bastion.credentials.ownerId.join(', '));
+  Bastion.log.console(COLOR.green('[Servers] ') + Bastion.guilds.size);
+  Bastion.log.console(COLOR.green('[Prefix] ') + Bastion.config.prefix);
+  Bastion.log.console(`${COLOR.cyan(`\n[${Bastion.user.username}]:`)} I'm ready to roll! o7`);
 };

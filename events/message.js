@@ -37,17 +37,19 @@ module.exports = message => {
       });
     }
     message.client.fetchApplication().then(app => {
-      message.client.users.get(app.owner.id).send({embed: {
-        color: message.client.colors.red,
-        title: 'ATTENTION!',
-        description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-        fields: [
-          {
-            name: 'Responsible user',
-            value: `${message.author.tag} - ${message.author.id}`
-          }
-        ]
-      }}).catch(e => {
+      message.client.users.get(app.owner.id).send({
+        embed: {
+          color: message.client.colors.red,
+          title: 'ATTENTION!',
+          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
+          fields: [
+            {
+              name: 'Responsible user',
+              value: `${message.author.tag} - ${message.author.id}`
+            }
+          ]
+        }
+      }).catch(e => {
         message.client.log.error(e.stack);
       });
     }).catch(e => {
@@ -58,32 +60,34 @@ module.exports = message => {
   if (message.author.bot) return;
   if (message.channel.type === 'dm' || message.channel.type === 'group') {
     if (message.content.startsWith(`${message.client.config.prefix}h`) || message.content.startsWith(`${message.client.config.prefix}help`)) {
-      return message.channel.send({embed: {
-        color: message.client.colors.blue,
-        title: 'Bastion Discord BOT',
-        url: 'https://bastion.js.org',
-        description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
-        fields: [
-          {
-            name: 'Support Server Invite Link',
-            value: 'https://discord.gg/fzx8fkt'
+      return message.channel.send({
+        embed: {
+          color: message.client.colors.blue,
+          title: 'Bastion Discord BOT',
+          url: 'https://bastion.js.org',
+          description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
+          fields: [
+            {
+              name: 'Support Server Invite Link',
+              value: 'https://discord.gg/fzx8fkt'
+            },
+            {
+              name: 'BOT Invite Link',
+              value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
+            }
+          ],
+          thumbnail: {
+            url: message.client.user.displayAvatarURL
           },
-          {
-            name: 'BOT Invite Link',
-            value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
+          footer: {
+            text: 'Copyright © 2017 Sankarsan Kampa'
           }
-        ],
-        thumbnail: {
-          url: message.client.user.displayAvatarURL
-        },
-        footer: {
-          text: 'Copyright © 2017 Sankarsan Kampa'
         }
-      }}).catch(e => {
+      }).catch(e => {
         message.client.log.error(e.stack);
       });
     }
-    else return;
+    return;
   }
 
   SQL.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
@@ -95,26 +99,28 @@ module.exports = message => {
               if (!row) return;
 
               if (row.modLog === 'true') {
-                message.guild.channels.get(row.modLogChannelID).send({embed: {
-                  color: message.client.colors.orange,
-                  title: 'Filtered Invite',
-                  fields: [
-                    {
-                      name: 'Responsible User',
-                      value: `${message.author}`,
-                      inline: true
+                message.guild.channels.get(row.modLogChannelID).send({
+                  embed: {
+                    color: message.client.colors.orange,
+                    title: 'Filtered Invite',
+                    fields: [
+                      {
+                        name: 'Responsible User',
+                        value: `${message.author}`,
+                        inline: true
+                      },
+                      {
+                        name: 'User ID',
+                        value: message.author.id,
+                        inline: true
+                      }
+                    ],
+                    footer: {
+                      text: `Case Number: ${row.modCaseNo}`
                     },
-                    {
-                      name: 'User ID',
-                      value: message.author.id,
-                      inline: true
-                    }
-                  ],
-                  footer: {
-                    text: `Case Number: ${row.modCaseNo}`
-                  },
-                  timestamp: new Date()
-                }}).then(msg => {
+                    timestamp: new Date()
+                  }
+                }).then(() => {
                   SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                     message.client.log.error(e.stack);
                   });
@@ -137,33 +143,35 @@ module.exports = message => {
 
   SQL.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.filterLink === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
-      if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)/i.test(message.content)) {
+      if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(message.content)) {
         if (message.deletable) {
           message.delete().then(() => {
             SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
-                message.guild.channels.get(row.modLogChannelID).send({embed: {
-                  color: message.client.colors.orange,
-                  title: 'Filtered Link',
-                  fields: [
-                    {
-                      name: 'Responsible User',
-                      value: `${message.author}`,
-                      inline: true
+                message.guild.channels.get(row.modLogChannelID).send({
+                  embed: {
+                    color: message.client.colors.orange,
+                    title: 'Filtered Link',
+                    fields: [
+                      {
+                        name: 'Responsible User',
+                        value: `${message.author}`,
+                        inline: true
+                      },
+                      {
+                        name: 'User ID',
+                        value: message.author.id,
+                        inline: true
+                      }
+                    ],
+                    footer: {
+                      text: `Case Number: ${row.modCaseNo}`
                     },
-                    {
-                      name: 'User ID',
-                      value: message.author.id,
-                      inline: true
-                    }
-                  ],
-                  footer: {
-                    text: `Case Number: ${row.modCaseNo}`
-                  },
-                  timestamp: new Date()
-                }}).then(msg => {
+                    timestamp: new Date()
+                  }
+                }).then(() => {
                   SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                     message.client.log.error(e.stack);
                   });
@@ -184,7 +192,7 @@ module.exports = message => {
     message.client.log.error(e.stack);
   });
 
-  SQL.all(`SELECT trigger, response FROM triggers`).then(triggers => {
+  SQL.all('SELECT trigger, response FROM triggers').then(triggers => {
     if (triggers.length === 0) return;
 
     let trigger = '';
@@ -217,7 +225,7 @@ module.exports = message => {
 
     SQL.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (!profile) {
-        SQL.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [message.author.id, 1]).catch(e => {
+        SQL.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]).catch(e => {
           message.client.log.error(e.stack);
         });
       }
@@ -230,11 +238,13 @@ module.exports = message => {
           SQL.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
             if (guild.levelUpMessage === 'false') return;
 
-            message.channel.send({embed: {
-              color: message.client.colors.blue,
-              title: 'Leveled up',
-              description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
-            }}).catch(e => {
+            message.channel.send({
+              embed: {
+                color: message.client.colors.blue,
+                title: 'Leveled up',
+                description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
+              }
+            }).catch(e => {
               message.client.log.error(e.stack);
             });
           }).catch(e => {
@@ -264,22 +274,22 @@ module.exports = message => {
       }
       else return;
 
-      console.log(`\n[${new Date()}]`);
-      console.log(COLOR.green(`[COMMAND]: `) + message.client.config.prefix + command);
+      message.client.log.console(`\n[${new Date()}]`);
+      message.client.log.console(COLOR.green('[COMMAND]: ') + message.client.config.prefix + command);
       if (args.length > 0) {
-        console.log(COLOR.green(`[ARGUMENTs]: `) + args.join(' '));
+        message.client.log.console(COLOR.green('[ARGUMENTs]: ') + args.join(' '));
       }
       else {
-        console.log(COLOR.green(`[ARGUMENTs]: `) + COLOR.yellow(`No arguments to execute`));
+        message.client.log.console(COLOR.green('[ARGUMENTs]: ') + COLOR.yellow('No arguments to execute'));
       }
       if (message.channel.type === 'text') {
-        console.log(COLOR.green(`[Server]: `) + `${message.guild}` + COLOR.cyan(` <#${message.guild.id}>`));
-        console.log(COLOR.green(`[Channel]: `) + `${message.channel.name}` + COLOR.cyan(` ${message.channel}`));
+        message.client.log.console(`${COLOR.green('[Server]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
+        message.client.log.console(`${COLOR.green('[Channel]:')} ${message.channel.name} ${COLOR.cyan(message.channel)}`);
       }
       else {
-        console.log(COLOR.green(`[Channel]: `) + 'Direct Message');
+        message.client.log.console(`${COLOR.green('[Channel]:')} Direct Message`);
       }
-      console.log(COLOR.green(`[User]: `) + `${message.author.username}#${message.author.discriminator}` + COLOR.cyan(` ${message.author}`));
+      message.client.log.console(`${COLOR.green('[User]:')} ${message.author.username}#${message.author.discriminator} ${COLOR.cyan(`${message.author}`)}`);
 
       if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
       if (cmd) {
@@ -302,7 +312,8 @@ module.exports = message => {
               message.channel.stopTyping();
             }, response.output.length * 100);
           });
-        } catch (e) {
+        }
+        catch (e) {
           message.client.log.error(e.stack);
         }
       }).catch(e => {

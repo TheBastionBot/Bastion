@@ -29,28 +29,30 @@ module.exports = (oldRole, newRole) => {
     if (!row) return;
     if (row.log === 'false') return;
 
-    newRole.guild.channels.get(row.logChannelID).send({embed: {
-      color: newRole.client.colors.yellow,
-      title: 'Role Name Changed',
-      fields: [
-        {
-          name: 'Old Role Name',
-          value: oldRole.name,
-          inline: true
-        },
-        {
-          name: 'New Role Name',
-          value: newRole.name,
-          inline: true
-        },
-        {
-          name: 'Role ID',
-          value: newRole.id,
-          inline: true
-        }
-      ],
-      timestamp: new Date()
-    }}).catch(e => {
+    newRole.guild.channels.get(row.logChannelID).send({
+      embed: {
+        color: newRole.client.colors.yellow,
+        title: 'Role Name Changed',
+        fields: [
+          {
+            name: 'Old Role Name',
+            value: oldRole.name,
+            inline: true
+          },
+          {
+            name: 'New Role Name',
+            value: newRole.name,
+            inline: true
+          },
+          {
+            name: 'Role ID',
+            value: newRole.id,
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }
+    }).catch(e => {
       newRole.client.log.error(e.stack);
     });
   }).catch(e => {

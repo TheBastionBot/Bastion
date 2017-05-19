@@ -22,6 +22,7 @@
 const COLOR = require('chalk');
 
 module.exports = error => {
+  /* eslint-disable no-console */
   console.log(COLOR.red('[ERROR EVENT]'));
   console.log(error);
   console.log(COLOR.red('[/ERROR EVENT]'));

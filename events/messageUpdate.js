@@ -30,17 +30,19 @@ module.exports = (oldMessage, newMessage) => {
       });
     }
     newMessage.client.fetchApplication().then(app => {
-      newMessage.client.users.get(app.owner.id).send({embed: {
-        color: newMessage.client.colors.red,
-        title: 'ATTENTION!',
-        description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-        fields: [
-          {
-            name: 'Responsible user',
-            value: `${newMessage.author.tag} - ${newMessage.author.id}`
-          }
-        ]
-      }}).catch(e => {
+      newMessage.client.users.get(app.owner.id).send({
+        embed: {
+          color: newMessage.client.colors.red,
+          title: 'ATTENTION!',
+          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
+          fields: [
+            {
+              name: 'Responsible user',
+              value: `${newMessage.author.tag} - ${newMessage.author.id}`
+            }
+          ]
+        }
+      }).catch(e => {
         newMessage.client.log.error(e.stack);
       });
     }).catch(e => {
@@ -60,26 +62,28 @@ module.exports = (oldMessage, newMessage) => {
               if (!row) return;
 
               if (row.modLog === 'true') {
-                newMessage.guild.channels.get(row.modLogChannelID).send({embed: {
-                  color: newMessage.client.colors.orange,
-                  title: 'Filtered Invite',
-                  fields: [
-                    {
-                      name: 'Responsible User',
-                      value: `${newMessage.author}`,
-                      inline: true
+                newMessage.guild.channels.get(row.modLogChannelID).send({
+                  embed: {
+                    color: newMessage.client.colors.orange,
+                    title: 'Filtered Invite',
+                    fields: [
+                      {
+                        name: 'Responsible User',
+                        value: `${newMessage.author}`,
+                        inline: true
+                      },
+                      {
+                        name: 'User ID',
+                        value: newMessage.author.id,
+                        inline: true
+                      }
+                    ],
+                    footer: {
+                      text: `Case Number: ${row.modCaseNo}`
                     },
-                    {
-                      name: 'User ID',
-                      value: newMessage.author.id,
-                      inline: true
-                    }
-                  ],
-                  footer: {
-                    text: `Case Number: ${row.modCaseNo}`
-                  },
-                  timestamp: new Date()
-                }}).then(msg => {
+                    timestamp: new Date()
+                  }
+                }).then(() => {
                   SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
                     newMessage.client.log.error(e.stack);
                   });
@@ -102,33 +106,35 @@ module.exports = (oldMessage, newMessage) => {
 
   SQL.get(`SELECT filterLink FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterLink === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
-      if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)/i.test(newMessage.content)) {
+      if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(newMessage.content)) {
         if (newMessage.deletable) {
           newMessage.delete().then(() => {
             SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
-                newMessage.guild.channels.get(row.modLogChannelID).send({embed: {
-                  color: newMessage.client.colors.orange,
-                  title: 'Filtered Link',
-                  fields: [
-                    {
-                      name: 'Responsible User',
-                      value: `${newMessage.author}`,
-                      inline: true
+                newMessage.guild.channels.get(row.modLogChannelID).send({
+                  embed: {
+                    color: newMessage.client.colors.orange,
+                    title: 'Filtered Link',
+                    fields: [
+                      {
+                        name: 'Responsible User',
+                        value: `${newMessage.author}`,
+                        inline: true
+                      },
+                      {
+                        name: 'User ID',
+                        value: newMessage.author.id,
+                        inline: true
+                      }
+                    ],
+                    footer: {
+                      text: `Case Number: ${row.modCaseNo}`
                     },
-                    {
-                      name: 'User ID',
-                      value: newMessage.author.id,
-                      inline: true
-                    }
-                  ],
-                  footer: {
-                    text: `Case Number: ${row.modCaseNo}`
-                  },
-                  timestamp: new Date()
-                }}).then(msg => {
+                    timestamp: new Date()
+                  }
+                }).then(() => {
                   SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
                     newMessage.client.log.error(e.stack);
                   });
