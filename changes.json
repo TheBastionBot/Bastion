@@ -10,6 +10,7 @@
     "Improved some RegEx",
     "Improved `acrophobia` game command",
     "Improved `typingGame` game command",
+    "`sendEmbed` command now shows the error in the embed object (if any)",
     "Minor fixes"
   ],
   "added": [
