@@ -33,7 +33,8 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (!((user = message.mentions.users.first()) && (user = user.id))) {
+  let user = message.mentions.users.first();
+  if (!(user && (user = user.id))) {
     if (/^[0-9]{18}$/.test(args[1])) {
       user = args[1];
     }

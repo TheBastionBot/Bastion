@@ -25,7 +25,7 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
-  sql.all('DELETE FROM triggers').then(triggers => {
+  sql.all('DELETE FROM triggers').then(() => {
     message.channel.send({embed: {
       color: Bastion.colors.red,
       description: 'Deleted all the triggers and responses.'

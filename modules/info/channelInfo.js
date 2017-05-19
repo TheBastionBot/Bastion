@@ -20,7 +20,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) {
+  let channel = message.mentions.channels.first();
+  if (!channel) {
     if (/^[0-9]{18}$/.test(args[0])) {
       channel = message.guild.channels.get(args[0]);
     }
@@ -28,6 +29,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (channel) {
+    let title;
     if (channel.type === 'text') {
       title = 'Text Channel Info';
     }

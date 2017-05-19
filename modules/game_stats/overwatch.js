@@ -75,7 +75,7 @@ exports.run = (Bastion, message, args) => {
           value: `${data.profile.season.rank}`,
           inline: true
         }
-      )
+      );
     }
     stats.push(
       {

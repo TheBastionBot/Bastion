@@ -20,10 +20,12 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(user = message.mentions.users.first())) {
+  let user = message.mentions.users.first();
+  if (!user) {
     user = message.author;
   }
-  if (!(nick = message.guild.members.get(user.id).nickname)) {
+  let nick = message.guild.members.get(user.id).nickname;
+  if (!nick) {
     nick = "-";
   }
   let status = user.presence.status;
@@ -43,6 +45,7 @@ exports.run = (Bastion, message, args) => {
   if (user.presence.game && user.presence.game.streaming) {
     isStream = 'Current Stream';
   }
+  let game;
   if (user.presence.game === null) {
     game = '-';
   }

@@ -20,14 +20,16 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  let topic = '';
-  if (!(channel = message.mentions.channels.first())) {
+  let channel = message.mentions.channels.first();
+  let topic;
+  if (!channel) {
     channel = message.channel;
     topic = args.join(' ');
   }
   else {
     topic = args.slice(1).join(' ').trim();
   }
+
   if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
     return message.channel.send({embed: {
@@ -39,13 +41,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   let color = Bastion.colors.green;
+  let title = 'Channel Topic Set';
   if (topic.length < 2) {
     topic = ' ';
     title = 'Channel Topic Removed';
     color = Bastion.colors.red;
-  }
-  else {
-    title = 'Channel Topic Set';
   }
 
   channel.setTopic(topic).then(() => {

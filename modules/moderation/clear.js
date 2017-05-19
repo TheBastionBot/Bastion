@@ -33,8 +33,9 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  user = message.mentions.users.first();
-  limit = parseInt(args[0]) ? args[0] : args[1];
+  let user = message.mentions.users.first();
+  let limit = parseInt(args[0]) ? args[0] : args[1];
+  let amount;
   if (user || args.includes('--bots')) {
     amount = 100;
   }
@@ -56,6 +57,7 @@ exports.run = (Bastion, message, args) => {
       msgs = msgs.filter(m => !m.pinned);
     }
     if (msgs.size < 2 || msgs.length < 2) {
+      let error;
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
         error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
       }

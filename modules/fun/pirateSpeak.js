@@ -58,7 +58,7 @@ exports.help = {
 function translateWord(word) {
 	let pirateWord = dictionary[word.toLowerCase()];
 	if (pirateWord === undefined) return word;
-	else return applyCase(word, pirateWord);
+	return applyCase(word, pirateWord);
 }
 
 function applyCase(wordA, wordB) {
@@ -72,7 +72,7 @@ function applyCase(wordA, wordB) {
     return wordB.slice(0, 1).toUpperCase() + wordB.slice(1).toLowerCase();
 
   return wordB;
-};
+}
 
 function isLetter(character) {
   if (character.search(/[a-zA-Z'-]/) === -1) return false;
@@ -102,4 +102,4 @@ function translate(text) {
   // If we ended the loop before translating a word, then translate the final word and add it to the translation.
   if (word !== "") translatedText += translateWord(word);
   return translatedText;
-};
+}

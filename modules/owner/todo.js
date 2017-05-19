@@ -63,7 +63,7 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-  }).catch(() => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

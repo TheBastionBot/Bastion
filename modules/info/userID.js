@@ -20,7 +20,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(user = message.mentions.users.first())) {
+  let user = message.mentions.users.first();
+  if (!user) {
     user = message.author;
   }
 

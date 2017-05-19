@@ -30,7 +30,8 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (!(role = message.mentions.roles.first())) {
+  let role = message.mentions.roles.first();
+  if (!role) {
     role = message.guild.roles.find('name', args.join(' '));
   }
 

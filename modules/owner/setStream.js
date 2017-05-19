@@ -54,5 +54,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setStream <twitch> <text>',
-  example: ['setStream https\://twitch.tv/TheGamerFDN The Gamer Foundation']
+  example: ['setStream https://twitch.tv/TheGamerFDN The Gamer Foundation']
 };

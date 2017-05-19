@@ -28,6 +28,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
+  let voiceChannel;
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
     voiceChannel = message.member.voiceChannel;
     if (!voiceChannel || voiceChannel.type !== 'voice') {

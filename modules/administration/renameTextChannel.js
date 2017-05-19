@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (name.length < 1) {
+  if (args.length < 1) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',

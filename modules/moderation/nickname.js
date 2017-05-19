@@ -30,7 +30,8 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (!(user = message.mentions.users.first())) {
+  let user = message.mentions.users.first();
+  if (!user) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',

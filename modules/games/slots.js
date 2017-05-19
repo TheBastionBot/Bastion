@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
 
   let reels = [];
   for (let i = 0; i < 3; i++) {
-    reels.push(reel[Math.floor(Math.random() * reel.length)])
+    reels.push(reel[Math.floor(Math.random() * reel.length)]);
   }
 
   let result = 'Sorry, you lost.';

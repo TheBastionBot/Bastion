@@ -148,12 +148,18 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else {
-                total = votes.size;
+                let total = votes.size;
                 votes = votes.map(v => v.content);
-                for (let i = collection.size; i > 0; i--) votes.unshift(`${i}`);
+                for (let i = collection.size; i > 0; i--) {
+                  votes.unshift(`${i}`);
+                }
                 let count = {};
-                for (let i = 0; i < votes.length; i++) count[votes[i]] = count[votes[i]] ? count[votes[i]] + 1 : 1;
-                let winningVoteIndex = Object.keys(count).reduce(function(a, b){ return count[a] > count[b] ? a : b });
+                for (let i = 0; i < votes.length; i++) {
+                  count[votes[i]] = count[votes[i]] ? count[votes[i]] + 1 : 1;
+                }
+                let winningVoteIndex = Object.keys(count).reduce(function(a, b) {
+                  return count[a] > count[b] ? a : b;
+                });
                 msg.channel.send({embed: {
                   color: Bastion.colors.blue,
                   title: 'Acrophobia',
@@ -188,7 +194,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.channel.send({embed: {
       color: Bastion.colors.red,
-      description: `Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.`
+      description: 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.'
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });
@@ -215,4 +221,4 @@ function matchAcronym(charPool, strArr) {
     }
   }
   return true;
-};
+}

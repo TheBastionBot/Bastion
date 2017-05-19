@@ -48,6 +48,7 @@ exports.run = (Bastion, message, args) => {
           }
         );
         collector.on('end', (collection, reason) => {
+          let color, result;
           if (reason === 'time') {
             color = Bastion.colors.red;
             result = 'Game ended. Unfortunately, no one was able to type the article on time.';
@@ -76,7 +77,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.channel.send({embed: {
       color: Bastion.colors.red,
-      description: `Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.`
+      description: 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.'
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });

@@ -71,7 +71,9 @@ exports.help = {
 };
 
 function loadCommands(module) {
-  files = fs.readdirSync(`./modules/${module}/`);
+  // TODO: use async method or store modules in Bastion object while booting up.
+  // eslint-disable-next-line no-sync
+  let files = fs.readdirSync(`./modules/${module}/`);
   files.forEach(f => {
     let cmd = require(`../../modules/${module}/${f}`);
     commands[module].push(cmd.help.name);

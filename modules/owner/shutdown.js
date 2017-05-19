@@ -33,13 +33,15 @@ exports.run = (Bastion, message, args) => {
         maxMatches: 1
       }
     );
-    collector.on('collect', (answer, collector) => {
+    collector.on('collect', answer => {
       if (answer.content.toLowerCase().startsWith('yes')) {
         message.channel.send({embed: {
           color: Bastion.colors.dark_grey,
           description: 'GoodBye :wave:! See you soon.'
         }}).then(() => {
-          Bastion.destroy().catch(e => {
+          Bastion.destroy().then(() => {
+            process.exit(0);
+          }).catch(e => {
             Bastion.log.error(e.stack);
           });
         }).catch(e => {

@@ -34,6 +34,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   sql.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+    let color, filterInviteStats;
     if (row.filterInvite === 'false') {
       sql.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);

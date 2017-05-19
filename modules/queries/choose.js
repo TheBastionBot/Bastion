@@ -20,7 +20,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1 || !/^(.+( ?\/ ?.+[^\/])+)$/i.test(args = args.join(' '))) {
+  if (args.length < 1 || !/^(.+( ?\/ ?.+[^/])+)$/i.test(args = args.join(' '))) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',

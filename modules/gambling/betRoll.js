@@ -20,7 +20,7 @@
  */
 
 const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite')
+sql.open('./data/Bastion.sqlite');
 let recentUsers = [];
 
 exports.run = (Bastion, message, args) => {
@@ -67,8 +67,9 @@ exports.run = (Bastion, message, args) => {
 
       recentUsers.push(message.author.id);
 
+      let result;
       if (outcome.toLowerCase() === args[1].toLowerCase()) {
-        prize = args[0] < 50 ? parseInt(args[0]) + outcomes.length : args[0] < 100 ? parseInt(args[0]) : parseInt(args[0]) * 2;
+        let prize = args[0] < 50 ? parseInt(args[0]) + outcomes.length : args[0] < 100 ? parseInt(args[0]) : parseInt(args[0]) * 2;
         result = `Congratulations! You won the bet.\nYou won **${prize}** Bastion Currencies.`;
         sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies) + parseInt(prize)} WHERE userID=${message.author.id}`).catch(e => {
           Bastion.log.error(e.stack);

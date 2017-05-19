@@ -36,14 +36,12 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      else {
-        return message.channel.send({embed: {
-          color: Bastion.colors.red,
-          description: `<@${args.id}>'s profile is not yet created.`
-        }}).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
+      return message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: `<@${args.id}>'s profile is not yet created.`
+      }}).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }
     message.channel.send({embed: {
       color: Bastion.colors.blue,

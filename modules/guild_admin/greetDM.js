@@ -26,6 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   sql.get(`SELECT greetDM FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+    let color, greetDMStats;
     if (row.greetDM === 'true') {
       sql.run(`UPDATE guildSettings SET greetDM='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);

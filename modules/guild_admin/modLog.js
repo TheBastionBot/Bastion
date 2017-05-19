@@ -27,6 +27,7 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   sql.get(`SELECT modLog, modLogChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+    let color, modLogStats;
     if (row.modLog === 'false') {
       sql.run(`UPDATE guildSettings SET modLog='true', modLogChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);

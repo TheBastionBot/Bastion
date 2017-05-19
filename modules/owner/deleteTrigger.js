@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  sql.all(`DELETE FROM triggers WHERE trigger="${args.join(' ').replace(/"/g, '\'')}"`).then(triggers => {
+  sql.all(`DELETE FROM triggers WHERE trigger="${args.join(' ').replace(/"/g, '\'')}"`).then(() => {
     message.channel.send({embed: {
       color: Bastion.colors.red,
       title: 'Trigger deleted',

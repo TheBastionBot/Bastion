@@ -95,10 +95,10 @@ exports.run = (Bastion, message, args) => {
     if (data.players.length > 0) {
       let players = [];
       let scores = [];
-      for (i = 0; i < data.players.length; i++) {
+      for (let i = 0; i < data.players.length; i++) {
         players.push(data.players[i].name);
       }
-      for (i = 0; i < data.players.length; i++) {
+      for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].frags);
       }
       stats.push(

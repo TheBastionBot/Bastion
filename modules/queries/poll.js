@@ -63,28 +63,25 @@ exports.run = (Bastion, message, args) => {
         if (msg.content == `${Bastion.config.prefix}endpoll`) {
           return votes.stop();
         }
-        else {
-          if (msg.deletable) {
-            msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }
-          msg.channel.send({embed: {
-            color: Bastion.colors.dark_grey,
-            description: `Thank you, ${msg.author}, for voting.`,
-            footer: {
-              text: `${votes.collected.size} votes in total.`
-            }
-          }}).then(m => {
-            activeChannels[message.channel.id].usersVoted.push(msg.author.id);
-            m.delete(5000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
+        if (msg.deletable) {
+          msg.delete().catch(e => {
+            Bastion.log.error(e.stack);
           });
         }
+        msg.channel.send({embed: {
+          color: Bastion.colors.dark_grey,
+          description: `Thank you, ${msg.author}, for voting.`,
+          footer: {
+            text: `${votes.collected.size} votes in total.`
+          }
+        }}).then(m => {
+          activeChannels[message.channel.id].usersVoted.push(msg.author.id);
+          m.delete(5000).catch(e => {
+            Bastion.log.error(e.stack);
+          });
+        });
       });
       votes.on('end', (pollRes, reason) => {
-        total = pollRes.size;
         pollRes = pollRes.map(r => r.content);
         if (reason == 'user') {
           pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
@@ -141,7 +138,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.channel.send({embed: {
       color: Bastion.colors.red,
-      description: `Can\'t start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
+      description: `Can't start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
     }}).catch(e => {
       Bastion.log.error(e.stack);
     });

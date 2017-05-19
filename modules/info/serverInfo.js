@@ -66,12 +66,12 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Text Channels',
-        value: message.guild.channels.filter(channel=> channel.type === "text").size,
+        value: message.guild.channels.filter(channel => channel.type === "text").size,
         inline: true
       },
       {
         name: 'Voice Channels',
-        value: message.guild.channels.filter(channel=> channel.type === "voice").size,
+        value: message.guild.channels.filter(channel => channel.type === "voice").size,
         inline: true
       },
       {

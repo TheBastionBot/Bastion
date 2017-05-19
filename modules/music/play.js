@@ -42,10 +42,10 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  else {
-    args = args.join(' ');
-  }
+  args = args.join(' ');
+
   sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
+    let voiceChannel, textChannel, vcStats;
     if (message.guild.voiceConnection) {
       voiceChannel = message.guild.voiceConnection.channel;
       textChannel = message.channel;
@@ -133,39 +133,37 @@ exports.run = (Bastion, message, args) => {
             Bastion.log.error(e.stack);
           });
         }
-        else {
-          args = favs.shift();
-          message.channel.send({embed: {
-            color: Bastion.colors.green,
-            description: `Adding ${favs.length + 1} favourite songs to the queue...`
-          }}).then(m => {
-            m.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
+        args = favs.shift();
+        message.channel.send({embed: {
+          color: Bastion.colors.green,
+          description: `Adding ${favs.length + 1} favourite songs to the queue...`
+        }}).then(m => {
+          m.delete(10000).catch(e => {
             Bastion.log.error(e.stack);
           });
-          // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-          favs.forEach((e, i) => {
-            e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(e) ? e : 'ytsearch:' + e;
-            if (!queue.hasOwnProperty(message.guild.id)) {
-              queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
-            }
-            yt.getInfo(e, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
-              if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
-              queue[message.guild.id].songs.push({
-                url: info.formats[info.formats.length - 1].url,
-                title: info.title,
-                thumbnail: info.thumbnail,
-                duration: info.duration,
-                requester: message.author.id
-              });
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+        // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
+        favs.forEach(e => {
+          e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : 'ytsearch:' + e;
+          if (!queue.hasOwnProperty(message.guild.id)) {
+            queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
+          }
+          yt.getInfo(e, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
+            if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
+            queue[message.guild.id].songs.push({
+              url: info.formats[info.formats.length - 1].url,
+              title: info.title,
+              thumbnail: info.thumbnail,
+              duration: info.duration,
+              requester: message.author.id
             });
           });
-        }
+        });
       }
       else if (args.startsWith('-pl')) {
-        if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args.slice(4))) {
+        if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.slice(4))) {
           return message.channel.send({embed: {
             color: Bastion.colors.red,
             description: 'Invalid YouTube Playlist URL!'
@@ -187,7 +185,7 @@ exports.run = (Bastion, message, args) => {
         }).catch(e => {
           Bastion.log.error(e.stack);
         });
-        let pl = [];
+
         yt.getInfo(args.slice(4), ['-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]'], (err, info) => {
           if (err) return console.log(err);
           if (info) {
@@ -203,44 +201,43 @@ exports.run = (Bastion, message, args) => {
                 Bastion.log.error(e.stack);
               });
             }
-            else {
-              args = info.shift().title;
-              message.channel.send({embed: {
-                color: Bastion.colors.green,
-                description: `Adding ${info.length} songs to the queue...`
-              }}).then(m => {
-                m.delete(10000).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
-              }).catch(e => {
+            args = info.shift().title;
+            message.channel.send({embed: {
+              color: Bastion.colors.green,
+              description: `Adding ${info.length} songs to the queue...`
+            }}).then(m => {
+              m.delete(10000).catch(e => {
                 Bastion.log.error(e.stack);
               });
-              // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-              info.forEach((e, i) => {
-                if (!queue.hasOwnProperty(message.guild.id)) {
-                  queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
-                }
-                queue[message.guild.id].songs.push({
-                  url: `https://www.youtube.com/watch?v=${e.url}`,
-                  title: e.title,
-                  thumbnail: '',
-                  duration: e.duration,
-                  requester: message.author.id
-                });
+            }).catch(e => {
+              Bastion.log.error(e.stack);
+            });
+            // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
+            info.forEach(e => {
+              if (!queue.hasOwnProperty(message.guild.id)) {
+                queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
+              }
+              queue[message.guild.id].songs.push({
+                url: `https://www.youtube.com/watch?v=${e.url}`,
+                title: e.title,
+                thumbnail: '',
+                duration: e.duration,
+                requester: message.author.id
               });
-            }
+            });
           }
         });
       }
-      args = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/i.test(args) ? args : 'ytsearch:' + args;
+      args = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args) ? args : 'ytsearch:' + args;
 
       yt.getInfo(args, ['-q', '-i', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
         if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
+          let result;
           if (err && err.stack.includes('No video results')) {
             result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
           }
           else {
-            result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`
+            result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
           }
           return message.channel.send({embed: {
             color: Bastion.colors.red,
@@ -302,7 +299,8 @@ exports.run = (Bastion, message, args) => {
               });
             }
 
-            dispatcher = message.guild.voiceConnection.playStream(yt(song.url), { passes: 1 });
+            const dispatcher = connection.playStream(yt(song.url), { passes: 1 });
+            // const dispatcher = message.guild.voiceConnection.playStream(yt(song.url), { passes: 1 });
 
             dispatcher.on('start', () => {
               queue[message.guild.id].playing = true;
@@ -326,7 +324,8 @@ exports.run = (Bastion, message, args) => {
               });
 
               let collector = textChannel.createMessageCollector(
-                msg => msg.guild.voiceConnection.channel === msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}clean`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}shuffle`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
+                msg => connection.channel === msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}clean`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}shuffle`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
+                // msg => msg.guild.voiceConnection.channel === msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}clean`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}shuffle`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
               );
               collector.on('collect', msg => {
                 if (msg.content.startsWith(`${Bastion.config.prefix}clean`)) {
@@ -344,6 +343,7 @@ exports.run = (Bastion, message, args) => {
                   });
                 }
                 else if (msg.content.startsWith(`${Bastion.config.prefix}np`)) {
+                  let title;
                   if (dispatcher.paused) {
                     title = 'Paused';
                   }
@@ -370,7 +370,8 @@ exports.run = (Bastion, message, args) => {
                 }
                 else if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
                   if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
-                  if (!message.guild.voiceConnection.speaking) return;
+                  if (!connection.speaking) return;
+                  // if (!message.guild.voiceConnection.speaking) return;
                   textChannel.send({embed: {
                     color: Bastion.colors.orange,
                     title: 'Paused Playback',
@@ -412,16 +413,16 @@ exports.run = (Bastion, message, args) => {
                   });
                 }
                 else if (msg.content.startsWith(`${Bastion.config.prefix}repeat`)) {
-                  let repeatStat = '';
+                  let color, repeatStat = '';
                   if (queue[message.guild.id].repeat) {
                     color = Bastion.colors.red;
                     queue[message.guild.id].repeat = false;
-                    repeatStat = 'Removed the current song from repeat queue.'
+                    repeatStat = 'Removed the current song from repeat queue.';
                   }
                   else {
                     color = Bastion.colors.green;
                     queue[message.guild.id].repeat = true;
-                    repeatStat = 'Added the current song to the repeat queue.'
+                    repeatStat = 'Added the current song to the repeat queue.';
                   }
                   textChannel.send({embed: {
                     color: color,
@@ -436,7 +437,8 @@ exports.run = (Bastion, message, args) => {
                 }
                 else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
                   if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
-                  if (message.guild.voiceConnection.speaking) return;
+                  if (connection.speaking) return;
+                  // if (message.guild.voiceConnection.speaking) return;
                   textChannel.send({embed: {
                     color: Bastion.colors.green,
                     title: 'Resumed Playback',
@@ -540,7 +542,7 @@ exports.run = (Bastion, message, args) => {
                 }
                 else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
                   if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
-                  param = msg.content.split(' ').slice(1);
+                  let param = msg.content.split(' ').slice(1);
                   if (param[0] === '+') {
                     dispatcher.setVolume((dispatcher.volume * 50 + 2) / 50);
                   }

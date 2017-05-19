@@ -20,7 +20,7 @@
  */
 
 const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite')
+sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
@@ -42,7 +42,8 @@ exports.run = (Bastion, message, args) => {
 
   sql.run("CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))").then(() => {
     sql.all('SELECT userID from blacklistedUsers').then(blUsers => {
-      blUsers = blUsers.map(u => u.userID)
+      blUsers = blUsers.map(u => u.userID);
+      let title;
       if (/^(add|\+)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (blUsers.includes(user[i])) continue;

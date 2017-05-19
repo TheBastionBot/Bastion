@@ -39,21 +39,19 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    else {
-      if (!message.guild.voiceConnection.channel.speakable) {
-        return message.channel.send({embed: {
-          color: Bastion.colors.red,
-          description: 'I don\'t have permission to speak in this voice channel.'
-        }}).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
+    if (!message.guild.voiceConnection.channel.speakable) {
+      return message.channel.send({embed: {
+        color: Bastion.colors.red,
+        description: 'I don\'t have permission to speak in this voice channel.'
+      }}).then(msg => {
+        msg.delete(10000).catch(e => {
           Bastion.log.error(e.stack);
         });
-      }
-      message.guild.voiceConnection.playFile('./data/airhorn.wav', { passes: 1 });
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
     }
+    message.guild.voiceConnection.playFile('./data/airhorn.wav', { passes: 1 });
   }
   else {
     if (message.member.voiceChannel) {

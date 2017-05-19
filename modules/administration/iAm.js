@@ -45,16 +45,16 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row) return;
 
-    role = message.guild.roles.find('name', args.join(' '));
+    let role = message.guild.roles.find('name', args.join(' '));
     if (role === null) return;
-    selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
+    let selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
     if (!selfAssignableRoles.includes(role.id)) return;
     if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
     message.guild.members.get(message.author.id).addRole(role).then(() => {
       message.channel.send({embed: {
         color: Bastion.colors.green,
-        description: `${message.author}, you have been given **${role.name}** role.`,
+        description: `${message.author}, you have been given **${role.name}** role.`
       }}).catch(e => {
         Bastion.log.error(e.stack);
       });

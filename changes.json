@@ -3,7 +3,12 @@
   "updated": [
     "Code improvements",
     "Improved log handler",
-    "Fixed a string"
+    "Fixed some connection issues with music module",
+    "Fixed enableAllCommands not sending message",
+    "Fixed a string",
+    "Fixed shutdown command",
+    "Improved some RegEx",
+    "Minor fixes"
   ],
   "added": [
     "Added `eslint` to `devDependencies`"

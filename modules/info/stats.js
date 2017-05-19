@@ -79,7 +79,7 @@ exports.run = (Bastion, message, args) => {
       },
       {
         name: 'Presence',
-        value: `${Bastion.guilds.size} Servers\n${Bastion.channels.filter(channel=> channel.type === 'text').size} Text Channels\n${Bastion.channels.filter(channel=> channel.type === 'voice').size} Voice Channels`,
+        value: `${Bastion.guilds.size} Servers\n${Bastion.channels.filter(channel => channel.type === 'text').size} Text Channels\n${Bastion.channels.filter(channel => channel.type === 'voice').size} Voice Channels`,
         inline: true
       },
       {

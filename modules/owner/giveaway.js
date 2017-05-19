@@ -20,7 +20,6 @@
  */
 
 const sql = require('sqlite');
-const getRandomInt = require('../../functions/getRandomInt');
 sql.open('./data/Bastion.sqlite');
 let activeChannels = [];
 let winners = [];
@@ -63,7 +62,7 @@ exports.run = (Bastion, message, args) => {
         if (msg.reactions.get(reaction)) {
           winners = msg.reactions.get(reaction).users.map(u => u.id);
         }
-        winners.forEach((user, i) => {
+        winners.forEach(user => {
           sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
             if (!receiver) {
               sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args]).catch(e => {

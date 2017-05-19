@@ -43,7 +43,9 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (!(user = message.mentions.users.first())) {
+  let user = message.mentions.users.first();
+  let role;
+  if (!user) {
     user = message.author;
     role = args.join(' ');
   }

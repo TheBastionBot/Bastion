@@ -24,7 +24,8 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!(index = parseInt(args[0])) || index <= 0) {
+  let index = parseInt(args[0]);
+  if (!index || index <= 0) {
     return message.channel.send({embed: {
       color: Bastion.colors.yellow,
       title: 'Usage',
@@ -68,7 +69,7 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-  }).catch(() => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

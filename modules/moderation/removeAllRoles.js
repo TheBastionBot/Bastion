@@ -43,7 +43,8 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (!(user = message.mentions.users.first())) {
+  let user = message.mentions.users.first();
+  if (!user) {
     user = message.author;
   }
   if (message.author.id !== message.guild.ownerID && user.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');

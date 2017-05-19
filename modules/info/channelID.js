@@ -20,7 +20,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) {
+  let channel = message.mentions.channels.first();
+  if (!channel) {
     channel = message.channel;
   }
 
