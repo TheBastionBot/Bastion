@@ -23,11 +23,13 @@ let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -46,21 +48,24 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      title: 'Poll started',
-      description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
-      fields: answers,
-      footer: {
-        text: 'Vote by typing the corresponding number of the option.'
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        title: 'Poll started',
+        description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
+        fields: answers,
+        footer: {
+          text: 'Vote by typing the corresponding number of the option.'
+        }
       }
-    }}).then(msg => {
+    }).then(msg => {
       const votes = message.channel.createMessageCollector(
-        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author == message.author || m.author.id == message.guild.ownerID) && m.content == `${Bastion.config.prefix}endpoll`),
-        { time: 60 * 60 * 1000 }
+        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${Bastion.config.prefix}endpoll`),
+        { time: 5 * 1000 }
+        // { time: 60 * 60 * 1000 }
       );
       votes.on('collect', (msg, votes) => {
-        if (msg.content == `${Bastion.config.prefix}endpoll`) {
+        if (msg.content === `${Bastion.config.prefix}endpoll`) {
           return votes.stop();
         }
         if (msg.deletable) {
@@ -68,13 +73,15 @@ exports.run = (Bastion, message, args) => {
             Bastion.log.error(e.stack);
           });
         }
-        msg.channel.send({embed: {
-          color: Bastion.colors.dark_grey,
-          description: `Thank you, ${msg.author}, for voting.`,
-          footer: {
-            text: `${votes.collected.size} votes in total.`
+        msg.channel.send({
+          embed: {
+            color: Bastion.colors.dark_grey,
+            description: `Thank you, ${msg.author}, for voting.`,
+            footer: {
+              text: `${votes.collected.size} votes in total.`
+            }
           }
-        }}).then(m => {
+        }).then(m => {
           activeChannels[message.channel.id].usersVoted.push(msg.author.id);
           m.delete(5000).catch(e => {
             Bastion.log.error(e.stack);
@@ -83,15 +90,18 @@ exports.run = (Bastion, message, args) => {
       });
       votes.on('end', (pollRes, reason) => {
         pollRes = pollRes.map(r => r.content);
-        if (reason == 'user') {
+        if (reason === 'user') {
           pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
         }
-        if (pollRes.length == 0) {
-          return message.channel.send({embed: {
-            color: Bastion.colors.red,
-            title: 'Poll Ended',
-            description: 'Unfortunately, no votes were given.'
-          }}).then(() => {
+        pollRes = pollRes.filter(res => parseInt(res) && parseInt(res) > 0 && parseInt(res) < args.length);
+        if (pollRes.length === 0) {
+          return message.channel.send({
+            embed: {
+              color: Bastion.colors.red,
+              title: 'Poll Ended',
+              description: 'Unfortunately, no votes were given.'
+            }
+          }).then(() => {
             msg.delete().catch(e => {
               Bastion.log.error(e.stack);
             });
@@ -117,12 +127,14 @@ exports.run = (Bastion, message, args) => {
           });
         }
 
-        message.channel.send({embed: {
-          color: Bastion.colors.blue,
-          title: 'Poll Ended',
-          description: `Poll results for **${args[0]}**`,
-          fields: result
-        }}).then(() => {
+        message.channel.send({
+          embed: {
+            color: Bastion.colors.blue,
+            title: 'Poll Ended',
+            description: `Poll results for **${args[0]}**`,
+            fields: result
+          }
+        }).then(() => {
           msg.delete().catch(e => {
             Bastion.log.error(e.stack);
           });
@@ -136,10 +148,12 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `Can't start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `Can't start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
