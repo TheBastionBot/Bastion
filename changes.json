@@ -4,9 +4,9 @@
     "Code improvements",
     "Improved log handler",
     "Fixed some connection issues with music module",
-    "Fixed enableAllCommands not sending message",
+    "Fixed `enableAllCommands` not sending message",
     "Fixed a string",
-    "Fixed shutdown command",
+    "Fixed `shutdown` command",
     "Improved some RegEx",
     "Minor fixes"
   ],
