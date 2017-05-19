@@ -22,6 +22,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g ffmpeg-binaries; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ffmpeg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; npm config delete prefix; fi
 install:
   - npm install
 before_script:
