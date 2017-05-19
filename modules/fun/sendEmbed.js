@@ -21,27 +21,35 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   try {
     args = JSON.parse(args.join(' '));
-  } catch (e) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Invalid embed object. Please check that it\'s an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).'
-    }}).catch(e => {
+  }
+  catch (e) {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Invalid embed object. Please check that it\'s an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).' +
+                     `\`\`\`${e.toString()}\`\`\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
-  message.channel.send({embed: args}).catch(e => {
+  message.channel.send({
+    embed: args
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
@@ -57,5 +65,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'sendEmbed <embedObject>',
-  example: ['sendEmbed {title: "Hello", description: "Isn\'t it cool?"}']
+  example: [ 'sendEmbed {"title": "Hello", "description": "Isn\'t it cool?"}' ]
 };
