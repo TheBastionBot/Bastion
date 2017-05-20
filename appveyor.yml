@@ -14,6 +14,10 @@ install:
   - npm install
 platform: x64
 build: off
+before_test:
+  - ECHO {} > settings\credentials.json
+  - ECHO {} > settings\config.json
+  - ECHO [] > data\favouriteSongs.json
 test_script:
   - node --version
   - npm --version

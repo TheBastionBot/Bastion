@@ -22,8 +22,8 @@ before_install:
 install:
   - npm install
 before_script:
-  - cp settings/credentials_example.json settings/credentials.json
-  - cp settings/config_example.json settings/config.json
+  - echo "{}" > settings/credentials.json
+  - echo "{}" > settings/config.json
   - echo "[]" > data/favouriteSongs.json
 script:
   - npm test
