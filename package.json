@@ -27,7 +27,7 @@
     "color-convert": "^1.9.0",
     "discord.js": "11.1.0",
     "gamequery": "^1.0.16",
-    "google-translate-api": "^2.2.2",
+    "google-translate-api": "github:snkrsnkampa/google-translate-api",
     "imdb-api": "^2.2.2",
     "mathjs": "^3.13.1",
     "node-json-db": "^0.7.3",

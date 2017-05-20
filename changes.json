@@ -15,7 +15,10 @@
     "Minor fixes"
   ],
   "added": [
-    "Added `eslint` to `devDependencies`"
+    "Added `eslint` to `devDependencies`",
+    "Added `snkrsnkampa/google-translate-api` dependency"
   ],
-  "removed": []
+  "removed": [
+    "Removed `google-translate-api` dependency"
+  ]
 }
