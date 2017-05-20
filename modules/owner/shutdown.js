@@ -22,10 +22,12 @@
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
-  message.channel.send({embed: {
-    color: Bastion.colors.orange,
-    description: 'Are you sure you want to shut me down?'
-  }}).then(msg => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.orange,
+      description: 'Are you sure you want to shut me down?'
+    }
+  }).then(msg => {
     const collector = msg.channel.createMessageCollector(m =>
       Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
       {
@@ -35,10 +37,12 @@ exports.run = (Bastion, message) => {
     );
     collector.on('collect', answer => {
       if (answer.content.toLowerCase().startsWith('yes')) {
-        message.channel.send({embed: {
-          color: Bastion.colors.dark_grey,
-          description: 'GoodBye :wave:! See you soon.'
-        }}).then(() => {
+        message.channel.send({
+          embed: {
+            color: Bastion.colors.dark_grey,
+            description: 'GoodBye :wave:! See you soon.'
+          }
+        }).then(() => {
           Bastion.destroy().then(() => {
             process.exit(0);
           }).catch(e => {
@@ -49,10 +53,12 @@ exports.run = (Bastion, message) => {
         });
       }
       else {
-        message.channel.toLowerCase().send({embed: {
-          color: Bastion.colors.dark_grey,
-          description: 'Cool! I\'m here.'
-        }}).catch(e => {
+        message.channel.toLowerCase().send({
+          embed: {
+            color: Bastion.colors.dark_grey,
+            description: 'Cool! I\'m here.'
+          }
+        }).catch(e => {
           Bastion.log.error(e.stack);
         });
       }

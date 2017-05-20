@@ -27,10 +27,12 @@ exports.run = (Bastion, message, args) => {
 
   sql.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers.length === 0) {
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'You don\'t have any triggers.',
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'You don\'t have any triggers.',
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -44,14 +46,16 @@ exports.run = (Bastion, message, args) => {
       i = (args > 0 && args < triggers.length / 10 + 1) ? args : 1;
     }
     i = i - 1;
-    message.channel.send({embed: {
-      color: Bastion.colors.dark_grey,
-      title: 'List of triggers',
-      description: triggers.slice(i * 10, (i * 10) + 10).join('\n'),
-      footer: {
-        text: `Page: ${i + 1} of ${parseInt(triggers.length / 10 + 1)}`
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.dark_grey,
+        title: 'List of triggers',
+        description: triggers.slice(i * 10, (i * 10) + 10).join('\n'),
+        footer: {
+          text: `Page: ${i + 1} of ${parseInt(triggers.length / 10 + 1)}`
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

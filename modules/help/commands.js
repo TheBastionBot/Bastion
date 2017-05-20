@@ -36,19 +36,23 @@ exports.run = (Bastion, message) => {
     });
   }
 
-  message.author.send({embed: {
-    color: Bastion.colors.yellow,
-    title: 'List of Commands',
-    description: `To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
-    fields: fields,
-    footer: {
-      text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
+  message.author.send({
+    embed: {
+      color: Bastion.colors.yellow,
+      title: 'List of Commands',
+      description: 'To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).',
+      fields: fields,
+      footer: {
+        text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
+      }
     }
-  }}).then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.dark_grey,
-      description: `${message.author} Check your DM from me, I've sent you the list of commands.`
-    }}).catch(e => {
+  }).then(() => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.dark_grey,
+        description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

@@ -43,10 +43,12 @@ exports.run = (Bastion, message) => {
       farewellStats = 'Farewell Messages are now enabled in this channel.';
     }
 
-    message.channel.send({embed: {
-      color: color,
-      description: farewellStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: farewellStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

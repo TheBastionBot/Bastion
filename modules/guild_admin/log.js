@@ -41,10 +41,12 @@ exports.run = (Bastion, message) => {
       color = Bastion.colors.red;
       logStats = 'Logging is now disabled.';
     }
-    message.channel.send({embed: {
-      color: color,
-      description: logStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: logStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

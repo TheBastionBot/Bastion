@@ -26,10 +26,12 @@ exports.run = (Bastion, message) => {
     (cmd.help.name !== 'enableallcommands' && cmd.help.name !== 'enablecommand' && cmd.help.name !== 'disablecommand') ? cmd.config.enabled = false : cmd.config.enabled = true;
   });
 
-  message.channel.send({embed: {
-    color: Bastion.colors.red,
-    description: `All commands have been disabled until next restart. You can enable all commands using \`${Bastion.config.prefix}enableAllCommands\`. Or you can enable any specific command using \`${Bastion.config.prefix}enableCommand <command_name>\`.`
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.red,
+      description: `All commands have been disabled until next restart. You can enable all commands using \`${Bastion.config.prefix}enableAllCommands\`. Or you can enable any specific command using \`${Bastion.config.prefix}enableCommand <command_name>\`.`
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

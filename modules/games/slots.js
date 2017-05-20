@@ -44,14 +44,16 @@ exports.run = (Bastion, message) => {
     result = 'Congrats! You won.';
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Slot Machine',
-    description: reels.join(' \u05C0 '),
-    footer: {
-      text: result
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Slot Machine',
+      description: reels.join(' \u05C0 '),
+      footer: {
+        text: result
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

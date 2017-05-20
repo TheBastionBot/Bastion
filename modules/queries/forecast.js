@@ -23,22 +23,26 @@ const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
-  weather.find({search: args.join(' '), degreeType: 'C'}, function(err, result) {
+  weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
     if (err) return;
 
     if (!result || result.length < 1) {
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'No weather data received, please try again later.'
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'No weather data received, please try again later.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -51,15 +55,17 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'Weather Forecast',
-      description: result[0].location.name,
-      fields: fields,
-      footer: {
-        text: 'Powered by MSN Weather'
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: 'Weather Forecast',
+        description: result[0].location.name,
+        fields: fields,
+        footer: {
+          text: 'Powered by MSN Weather'
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });

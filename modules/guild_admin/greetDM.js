@@ -42,10 +42,12 @@ exports.run = (Bastion, message) => {
       greetDMStats = 'Sending Greeting Message as Direct Messages are now enabled.';
     }
 
-    message.channel.send({embed: {
-      color: color,
-      description: greetDMStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: greetDMStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

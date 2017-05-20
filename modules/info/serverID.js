@@ -20,11 +20,13 @@
  */
 
 exports.run = (Bastion, message) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Server ID',
-    description: message.guild.id
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Server ID',
+      description: message.guild.id
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

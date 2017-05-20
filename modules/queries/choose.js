@@ -21,22 +21,26 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?\/ ?.+[^/])+)$/i.test(args = args.join(' '))) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   args = args.split('/');
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'In my opinion',
-    description: args[Math.floor(Math.random() * args.length)]
-    // description: args.split('/').random()
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'In my opinion',
+      description: args[Math.floor(Math.random() * args.length)]
+      // description: args.split('/').random()
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

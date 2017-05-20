@@ -27,14 +27,17 @@ exports.run = (Bastion, message, args) => {
   try {
     db.reload();
     songs = db.getData('/');
-  } catch(e) {
+  }
+  catch(e) {
     Bastion.log.error(e);
   }
   if (songs.length === 0) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'You haven\'t added any favourite songs yet.'
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'You haven\'t added any favourite songs yet.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -49,14 +52,16 @@ exports.run = (Bastion, message, args) => {
   }
   i = i - 1;
 
-  message.channel.send({embed: {
-    color: Bastion.colors.dark_grey,
-    title: 'Favourite songs',
-    description: favs.slice(i * 10, (i * 10) + 10).join('\n'),
-    footer: {
-      text: `Page: ${i + 1} of ${parseInt(songs.length / 10 + 1)}`
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      title: 'Favourite songs',
+      description: favs.slice(i * 10, (i * 10) + 10).join('\n'),
+      footer: {
+        text: `Page: ${i + 1} of ${parseInt(songs.length / 10 + 1)}`
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

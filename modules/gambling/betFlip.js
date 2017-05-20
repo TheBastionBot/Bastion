@@ -26,20 +26,24 @@ let recentUsers = [];
 exports.run = (Bastion, message, args) => {
   if (!recentUsers.includes(message.author.id)) {
     if (!(args[0] = parseInt(args[0])) || !/^(heads|tails)$/i.test(args[1]) || args[0] < 1) {
-      return message.channel.send({embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.yellow,
+          title: 'Usage',
+          description: `\`${Bastion.config.prefix}${this.help.usage}\``
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
 
     if (args[0] < 5) {
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'Minimum bet amount is 5 Bastion Currencies.'
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'Minimum bet amount is 5 Bastion Currencies.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -53,10 +57,12 @@ exports.run = (Bastion, message, args) => {
 
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (args[0] > profile.bastionCurrencies) {
-        return message.channel.send({embed: {
-          color: Bastion.colors.red,
-          description: `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`
-        }}).catch(e => {
+        return message.channel.send({
+          embed: {
+            color: Bastion.colors.red,
+            description: `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`
+          }
+        }).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
@@ -77,11 +83,13 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      message.channel.send({embed: {
-        color: Bastion.colors.blue,
-        title: `Flipped ${outcome}`,
-        description: result
-      }}).then(() => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.blue,
+          title: `Flipped ${outcome}`,
+          description: result
+        }
+      }).then(() => {
         setTimeout(function () {
           recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
         }, 60 * 1000);
@@ -93,17 +101,19 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 };
 
 exports.config = {
-  aliases: ['bf'],
+  aliases: [ 'bf' ],
   enabled: true
 };
 
@@ -113,5 +123,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'betflip <amount> <heads|tails>',
-  example: ['betflip 100 heads']
+  example: [ 'betflip 100 heads' ]
 };

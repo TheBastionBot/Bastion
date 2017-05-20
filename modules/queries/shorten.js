@@ -23,21 +23,25 @@ const request = require('request');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   args = encodeURI(args.join(' '));
   if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args)) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Invalid URL'
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Invalid URL'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -46,45 +50,51 @@ exports.run = (Bastion, message, args) => {
     uri: `https://www.googleapis.com/urlshortener/v1/url?key=${Bastion.credentials.googleAPIkey}`,
     method: 'POST',
     json: {
-      "longUrl": args
+      longUrl: args
     }
   };
 
   request(options, function (error, response, body) {
     if (error) {
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'Some error has occured, please try again later.'
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'Some error has occured, please try again later.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
-    if (response.statusCode == 200) {
-      message.channel.send({embed: {
-        color: Bastion.colors.blue,
-        fields: [
-          {
-            name: 'Long URL',
-            value: args
-          },
-          {
-            name: 'Short URL',
-            value: body.id
+    if (response.statusCode === 200) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.blue,
+          fields: [
+            {
+              name: 'Long URL',
+              value: args
+            },
+            {
+              name: 'Short URL',
+              value: body.id
+            }
+          ],
+          footer: {
+            text: 'Powered by Google'
           }
-        ],
-        footer: {
-          text: 'Powered by Google'
         }
-      }}).catch(e => {
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
     else {
-      message.channel.send({embed: {
-        color: Bastion.colors.red,
-        title: `ERROR ${response.body.error.code}`,
-        description: response.body.error.message
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          title: `ERROR ${response.body.error.code}`,
+          description: response.body.error.message
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }

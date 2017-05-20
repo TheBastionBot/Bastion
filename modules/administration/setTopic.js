@@ -32,10 +32,12 @@ exports.run = (Bastion, message, args) => {
 
   if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -49,22 +51,24 @@ exports.run = (Bastion, message, args) => {
   }
 
   channel.setTopic(topic).then(() => {
-    message.channel.send({embed: {
-      color: color,
-      title: title,
-      fields: [
-        {
-          name: 'Channel Name',
-          value: `#${channel.name}`,
-          inline: true
-        },
-        {
-          name: 'Topic',
-          value: channel.topic.length > 1 ? channel.topic : '-',
-          inline: true
-        }
-      ]
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        title: title,
+        fields: [
+          {
+            name: 'Channel Name',
+            value: `#${channel.name}`,
+            inline: true
+          },
+          {
+            name: 'Topic',
+            value: channel.topic.length > 1 ? channel.topic : '-',
+            inline: true
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
@@ -73,7 +77,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['st'],
+  aliases: [ 'st' ],
   enabled: true
 };
 
@@ -83,5 +87,5 @@ exports.help = {
   botPermission: 'Manage Channels',
   userPermission: 'Manage Channels',
   usage: 'setTopic [#channel-mention] [Channel Topic]',
-  example: ['setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic']
+  example: [ 'setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic' ]
 };

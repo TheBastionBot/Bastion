@@ -26,10 +26,12 @@ exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   sql.all('DELETE FROM triggers').then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Deleted all the triggers and responses.'
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Deleted all the triggers and responses.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

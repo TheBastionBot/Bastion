@@ -21,50 +21,56 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   args = args[0].split(':')[1];
   if (!args) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   args = message.guild.emojis.find('name', args);
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Emoji info',
-    fields: [
-      {
-        name: 'Name',
-        value: args.name,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: args.id,
-        inline: true
-      },
-      {
-        name: 'Created At',
-        value: args.createdAt.toUTCString(),
-        inline: true
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Emoji info',
+      fields: [
+        {
+          name: 'Name',
+          value: args.name,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: args.id,
+          inline: true
+        },
+        {
+          name: 'Created At',
+          value: args.createdAt.toUTCString(),
+          inline: true
+        }
+      ],
+      thumbnail: {
+        url: args.url
       }
-    ],
-    thumbnail: {
-      url: args.url
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

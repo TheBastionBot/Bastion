@@ -41,7 +41,6 @@
     array-bracket-spacing: [ "warn", "always" ],
     block-spacing: "warn",
     brace-style: [ "warn", "stroustrup", { "allowSingleLine": true } ],
-    camelcase: "warn",
     comma-dangle: [ "warn", "never" ],
     comma-spacing: "warn",
     comma-style: "warn",

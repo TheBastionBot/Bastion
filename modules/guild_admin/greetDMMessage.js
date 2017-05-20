@@ -26,11 +26,13 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1) {
     sql.get(`SELECT greetDMMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-      message.channel.send({embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'DM Greeting message:',
-        description: guild.greetDMMessage
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.dark_grey,
+          title: 'DM Greeting message:',
+          description: guild.greetDMMessage
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -42,11 +44,13 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
 
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      title: 'DM Greeting message set to:',
-      description: args.join(' ')
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        title: 'DM Greeting message set to:',
+        description: args.join(' ')
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }

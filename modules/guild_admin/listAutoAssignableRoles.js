@@ -25,10 +25,12 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   sql.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.autoAssignableRoles === '[]') {
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'No auto assignable roles found.'
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'No auto assignable roles found.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -50,14 +52,16 @@ exports.run = (Bastion, message, args) => {
       i = (args > 0 && args < roleNames.length / 10 + 1) ? args : 1;
     }
     i = i - 1;
-    message.channel.send({embed: {
-      color: Bastion.colors.dark_grey,
-      title: 'Auto assignable roles:',
-      description: roleNames.slice(i * 10, (i * 10) + 10).join('\n'),
-      footer: {
-        text: `Page: ${i + 1} of ${parseInt(roleNames.length / 10 + 1)}`
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.dark_grey,
+        title: 'Auto assignable roles:',
+        description: roleNames.slice(i * 10, (i * 10) + 10).join('\n'),
+        footer: {
+          text: `Page: ${i + 1} of ${parseInt(roleNames.length / 10 + 1)}`
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

@@ -20,20 +20,22 @@
  */
 
 exports.run = (Bastion, message) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.grey,
-    description: 'Hi! I\'m **Bastion**. \u{1F609}\n' +
-                 'I\'m a BOT that is going to make your time it this Discord Server amazing!',
-    footer: {
-      text: `Type ${Bastion.config.prefix}help to find out more about me.`
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.grey,
+      description: 'Hi! I\'m **Bastion**. \u{1F609}\n' +
+                   'I\'m a BOT that is going to make your time it this Discord Server amazing!',
+      footer: {
+        text: `Type ${Bastion.config.prefix}help to find out more about me.`
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['hi'],
+  aliases: [ 'hi' ],
   enabled: true
 };
 

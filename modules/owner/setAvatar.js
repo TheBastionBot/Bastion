@@ -23,19 +23,23 @@ exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   if (!/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9_-~#%]+)\.(jpg|jpeg|gif|png)$/i.test(args.join(' '))) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   Bastion.user.setAvatar(args.join(' ')).then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      description: `${Bastion.user.username}'s avatar changed!`
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `${Bastion.user.username}'s avatar changed!`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

@@ -21,11 +21,13 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || !args.join(' ').endsWith('?')) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -52,15 +54,17 @@ exports.run = (Bastion, message, args) => {
     'Very doubtful'
   ];
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: args.join(' '),
-    description: outcomes[Math.floor(Math.random() * outcomes.length)],
-    // description: outcomes.random(),
-    footer: {
-      text: '🎱 Magic 8-ball'
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: args.join(' '),
+      description: outcomes[Math.floor(Math.random() * outcomes.length)],
+      // description: outcomes.random(),
+      footer: {
+        text: '🎱 Magic 8-ball'
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

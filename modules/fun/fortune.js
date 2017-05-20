@@ -22,18 +22,20 @@
 const fortuneCookies = require('../../data/fortuneCookies.json');
 
 exports.run = (Bastion, message) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Fortune:',
-    description: fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
-    // description: fortuneCookies.random()
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Fortune:',
+      description: fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
+      // description: fortuneCookies.random()
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['cookie'],
+  aliases: [ 'cookie' ],
   enabled: true
 };
 

@@ -37,11 +37,13 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'You rolled:',
-    description: outcome
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'You rolled:',
+      description: outcome
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

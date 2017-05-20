@@ -26,20 +26,20 @@ exports.run = (Bastion, message) => {
   }
   let nick = message.guild.members.get(user.id).nickname;
   if (!nick) {
-    nick = "-";
+    nick = '-';
   }
   let status = user.presence.status;
-  if (status === "online") {
-    status = "Online";
+  if (status === 'online') {
+    status = 'Online';
   }
-  else if (status === "idle") {
-    status = "Idle";
+  else if (status === 'idle') {
+    status = 'Idle';
   }
-  else if (status === "dnd") {
-    status = "Do Not Disturb";
+  else if (status === 'dnd') {
+    status = 'Do Not Disturb';
   }
   else {
-    status = "Invisible";
+    status = 'Invisible';
   }
   let isStream = 'Current Game';
   if (user.presence.game && user.presence.game.streaming) {
@@ -58,55 +58,57 @@ exports.run = (Bastion, message) => {
   let roles = message.guild.members.get(user.id).roles.map(r => r.name).slice(1).join('\n');
   if (roles.length === 0) roles = '-';
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'User Info',
-    fields: [
-      {
-        name: 'Name',
-        value: user.tag,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: user.id,
-        inline: true
-      },
-      {
-        name: 'Nickname',
-        value: nick,
-        inline: true
-      },
-      {
-        name: 'Roles',
-        value: roles,
-        inline: true
-      },
-      {
-        name: 'Joined Server',
-        value: message.guild.members.get(user.id).joinedAt.toUTCString(),
-        inline: true
-      },
-      {
-        name: 'Joined Discord',
-        value: user.createdAt.toUTCString(),
-        inline: true
-      },
-      {
-        name: 'Status',
-        value: status,
-        inline: true
-      },
-      {
-        name: isStream,
-        value: game,
-        inline: true
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'User Info',
+      fields: [
+        {
+          name: 'Name',
+          value: user.tag,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        },
+        {
+          name: 'Nickname',
+          value: nick,
+          inline: true
+        },
+        {
+          name: 'Roles',
+          value: roles,
+          inline: true
+        },
+        {
+          name: 'Joined Server',
+          value: message.guild.members.get(user.id).joinedAt.toUTCString(),
+          inline: true
+        },
+        {
+          name: 'Joined Discord',
+          value: user.createdAt.toUTCString(),
+          inline: true
+        },
+        {
+          name: 'Status',
+          value: status,
+          inline: true
+        },
+        {
+          name: isStream,
+          value: game,
+          inline: true
+        }
+      ],
+      thumbnail: {
+        url: user.displayAvatarURL
       }
-    ],
-    thumbnail: {
-      url: user.displayAvatarURL
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

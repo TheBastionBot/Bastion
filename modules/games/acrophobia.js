@@ -36,14 +36,16 @@ exports.run = (Bastion, message) => {
       // acronym.push(charPool.random());
     }
 
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'Acrophobia',
-      description: `Game started by ${message.author}. Create a sentence with this acronym: **${acronym.join('. ')}.**`,
-      footer: {
-        text: `You have ${2} minutes to make your submission.`
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: 'Acrophobia',
+        description: `Game started by ${message.author}. Create a sentence with this acronym: **${acronym.join('. ')}.**`,
+        footer: {
+          text: `You have ${2} minutes to make your submission.`
+        }
       }
-    }}).then(msg => {
+    }).then(msg => {
       const collector = msg.channel.createMessageCollector(
         m => !m.author.bot && m.content.split(' ').length === acroLen && matchAcronym(acronym, m.content.split(' ')) && !activeChannels[message.channel.id].usersSubmitted.includes(m.author.id),
         { time: 2 * 60 * 1000 }
@@ -54,13 +56,15 @@ exports.run = (Bastion, message) => {
             Bastion.log.error(e.stack);
           });
         }
-        msg.channel.send({embed: {
-          color: Bastion.colors.dark_grey,
-          description: `${msg.author} made their submission.`,
-          footer: {
-            text: `${sentences.collected.size} submissions in total.`
+        msg.channel.send({
+          embed: {
+            color: Bastion.colors.dark_grey,
+            description: `${msg.author} made their submission.`,
+            footer: {
+              text: `${sentences.collected.size} submissions in total.`
+            }
           }
-        }}).then(m => {
+        }).then(m => {
           activeChannels[message.channel.id].usersSubmitted.push(msg.author.id);
           m.delete(5000).catch(e => {
             Bastion.log.error(e.stack);
@@ -71,11 +75,13 @@ exports.run = (Bastion, message) => {
       });
       collector.on('end', (collection) => {
         if (collection.size === 0) {
-          message.channel.send({embed: {
-            color: Bastion.colors.red,
-            title: 'Acrophobia',
-            description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
-          }}).then(() => {
+          message.channel.send({
+            embed: {
+              color: Bastion.colors.red,
+              title: 'Acrophobia',
+              description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
+            }
+          }).then(() => {
             delete activeChannels[message.channel.id];
             msg.delete().catch(e => {
               Bastion.log.error(e.stack);
@@ -89,20 +95,22 @@ exports.run = (Bastion, message) => {
           for (let i = 0; i < collection.size; i++) {
             submissions.push(`**${i + 1}.** ${collection.map(a => a.content)[i]}`);
           }
-          msg.channel.send({embed: {
-            color: Bastion.colors.green,
-            title: 'Acrophobia',
-            description: 'Submissions closed',
-            fields: [
-              {
-                name: `Submitted sentences for ${acronym.join('. ')}.:`,
-                value: submissions.join('\n')
+          msg.channel.send({
+            embed: {
+              color: Bastion.colors.green,
+              title: 'Acrophobia',
+              description: 'Submissions closed',
+              fields: [
+                {
+                  name: `Submitted sentences for ${acronym.join('. ')}.:`,
+                  value: submissions.join('\n')
+                }
+              ],
+              footer: {
+                text: 'Vote by typing the corresponding number of a sentence. You have 60 seconds to vote.'
               }
-            ],
-            footer: {
-              text: 'Vote by typing the corresponding number of a sentence. You have 60 seconds to vote.'
             }
-          }}).then(subMsg => {
+          }).then(subMsg => {
             msg.delete().catch(e => {
               Bastion.log.error(e.stack);
             });
@@ -116,13 +124,15 @@ exports.run = (Bastion, message) => {
                   Bastion.log.error(e.stack);
                 });
               }
-              msg.channel.send({embed: {
-                color: Bastion.colors.dark_grey,
-                description: `Thank you, ${msg.author}, for voting.`,
-                footer: {
-                  text: `${votes.collected.size} votes in total.`
+              msg.channel.send({
+                embed: {
+                  color: Bastion.colors.dark_grey,
+                  description: `Thank you, ${msg.author}, for voting.`,
+                  footer: {
+                    text: `${votes.collected.size} votes in total.`
+                  }
                 }
-              }}).then(m => {
+              }).then(m => {
                 activeChannels[message.channel.id].usersVoted.push(msg.author.id);
                 m.delete(5000).catch(e => {
                   Bastion.log.error(e.stack);
@@ -131,11 +141,13 @@ exports.run = (Bastion, message) => {
             });
             votesCollector.on('end', votes => {
               if (votes.size === 0) {
-                msg.channel.send({embed: {
-                  color: Bastion.colors.red,
-                  title: 'Acrophobia',
-                  description: 'Game ended. Unfortunately, no votes were given for any submissions.'
-                }}).then(() => {
+                msg.channel.send({
+                  embed: {
+                    color: Bastion.colors.red,
+                    title: 'Acrophobia',
+                    description: 'Game ended. Unfortunately, no votes were given for any submissions.'
+                  }
+                }).then(() => {
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
@@ -157,17 +169,19 @@ exports.run = (Bastion, message) => {
                 let winningVoteIndex = Object.keys(count).reduce(function(a, b) {
                   return count[a] > count[b] ? a : b;
                 });
-                msg.channel.send({embed: {
-                  color: Bastion.colors.blue,
-                  title: 'Acrophobia',
-                  description: `Game Ended. ${collection.map(s => s.author)[winningVoteIndex - 1]} won by ${count[winningVoteIndex] - 1} of ${votes.length - collection.size} votes`,
-                  fields: [
-                    {
-                      name: 'Winning submission',
-                      value: collection.map(s => s.content)[winningVoteIndex - 1]
-                    }
-                  ]
-                }}).then(() => {
+                msg.channel.send({
+                  embed: {
+                    color: Bastion.colors.blue,
+                    title: 'Acrophobia',
+                    description: `Game Ended. ${collection.map(s => s.author)[winningVoteIndex - 1]} won by ${count[winningVoteIndex] - 1} of ${votes.length - collection.size} votes`,
+                    fields: [
+                      {
+                        name: 'Winning submission',
+                        value: collection.map(s => s.content)[winningVoteIndex - 1]
+                      }
+                    ]
+                  }
+                }).then(() => {
                   delete activeChannels[message.channel.id].usersVoted;
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
@@ -189,10 +203,12 @@ exports.run = (Bastion, message) => {
     });
   }
   else {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.'
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }

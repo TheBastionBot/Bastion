@@ -23,11 +23,13 @@ const urllib = require('urllib');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -35,29 +37,34 @@ exports.run = (Bastion, message, args) => {
   urllib.request(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts|info|pageimages&exsentences=10&exintro=true&explaintext=true&inprop=url&pithumbsize=512&redirects=1&formatversion=2&titles=${args.join(' ')}`, function (err, data) {
     try {
       data = JSON.parse(data).query.pages[0];
-    } catch (e) {
+    }
+    catch (e) {
       return Bastion.log.error(e.stack);
     }
     let embed = {};
     if (data.missing) {
-      embed = {embed: {
-        color: Bastion.colors.red,
-        description: `**${args.join(' ')}** was not found in Wikipedia.`
-      }};
+      embed = {
+        embed: {
+          color: Bastion.colors.red,
+          description: `**${args.join(' ')}** was not found in Wikipedia.`
+        }
+      };
     }
     else {
-      embed = {embed: {
-        color: Bastion.colors.blue,
-        title: data.title,
-        url: data.fullurl,
-        description: `${data.extract}\n[Read More](${data.fullurl})`,
-        thumbnail: {
-          url: data.thumbnail ? data.thumbnail.source : `https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png`
-        },
-        footer: {
-          text: 'Powered by Wikipedia'
+      embed = {
+        embed: {
+          color: Bastion.colors.blue,
+          title: data.title,
+          url: data.fullurl,
+          description: `${data.extract}\n[Read More](${data.fullurl})`,
+          thumbnail: {
+            url: data.thumbnail ? data.thumbnail.source : 'https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png'
+          },
+          footer: {
+            text: 'Powered by Wikipedia'
+          }
         }
-      }};
+      };
     }
     message.channel.send(embed).catch(e => {
       Bastion.log.error(e.stack);

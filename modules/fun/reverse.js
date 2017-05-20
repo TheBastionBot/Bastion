@@ -21,26 +21,30 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Reversed Text:',
-    description: args.join(' ').split('').reverse().join('')
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Reversed Text:',
+      description: args.join(' ').split('').reverse().join('')
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['rev'],
+  aliases: [ 'rev' ],
   enabled: true
 };
 
@@ -50,5 +54,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'reverse <text>',
-  example: ['reverse !looc si sihT']
+  example: [ 'reverse !looc si sihT' ]
 };

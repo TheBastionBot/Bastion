@@ -25,22 +25,24 @@ exports.run = (Bastion, message) => {
     user = message.author;
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    fields: [
-      {
-        name: 'User',
-        value: user.tag
-      },
-      {
-        name: 'Avatar URL',
-        value: user.displayAvatarURL
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      fields: [
+        {
+          name: 'User',
+          value: user.tag
+        },
+        {
+          name: 'Avatar URL',
+          value: user.displayAvatarURL
+        }
+      ],
+      image: {
+        url: user.displayAvatarURL
       }
-    ],
-    image: {
-      url: user.displayAvatarURL
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

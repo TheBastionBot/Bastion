@@ -36,45 +36,49 @@ exports.run = (Bastion, message, args) => {
     else {
       title = 'Voice Channel Info';
     }
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: title,
-      fields: [
-        {
-          name: 'Name',
-          value: channel.name,
-          inline: true
-        },
-        {
-          name: 'ID',
-          value: channel.id,
-          inline: true
-        },
-        {
-          name: 'Topic',
-          value: (channel.topic === null || channel.topic.length < 2) ? '-' : channel.topic,
-          inline: false
-        },
-        {
-          name: 'Created At',
-          value: channel.createdAt.toUTCString(),
-          inline: true
-        },
-        {
-          name: 'Users',
-          value: channel.members.size,
-          inline: true
-        }
-      ]
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: title,
+        fields: [
+          {
+            name: 'Name',
+            value: channel.name,
+            inline: true
+          },
+          {
+            name: 'ID',
+            value: channel.id,
+            inline: true
+          },
+          {
+            name: 'Topic',
+            value: (channel.topic === null || channel.topic.length < 2) ? '-' : channel.topic,
+            inline: false
+          },
+          {
+            name: 'Created At',
+            value: channel.createdAt.toUTCString(),
+            inline: true
+          },
+          {
+            name: 'Users',
+            value: channel.members.size,
+            inline: true
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   else {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `No channel found with ID: **${args[0]}**`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `No channel found with ID: **${args[0]}**`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }

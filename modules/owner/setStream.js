@@ -22,20 +22,24 @@
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   Bastion.user.setGame(args.slice(1).join(' '), args[0]).then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      description: `${Bastion.user.username} is now streaming **${args.slice(1).join(' ')}**`
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `${Bastion.user.username} is now streaming **${args.slice(1).join(' ')}**`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

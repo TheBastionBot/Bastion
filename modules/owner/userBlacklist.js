@@ -25,11 +25,13 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -40,7 +42,7 @@ exports.run = (Bastion, message, args) => {
   });
   user = user.concat(message.mentions.users.map(u => u.id));
 
-  sql.run("CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))").then(() => {
+  sql.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').then(() => {
     sql.all('SELECT userID from blacklistedUsers').then(blUsers => {
       blUsers = blUsers.map(u => u.userID);
       let title;
@@ -63,20 +65,24 @@ exports.run = (Bastion, message, args) => {
         title = 'Removed from blacklisted users';
       }
       else {
-        return message.channel.send({embed: {
-          color: Bastion.colors.yellow,
-          title: 'Usage',
-          description: `\`${Bastion.config.prefix}${this.help.usage}\``
-        }}).catch(e => {
+        return message.channel.send({
+          embed: {
+            color: Bastion.colors.yellow,
+            title: 'Usage',
+            description: `\`${Bastion.config.prefix}${this.help.usage}\``
+          }
+        }).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
 
-      message.channel.send({embed: {
-        color: Bastion.colors.red,
-        title: title,
-        description: user.join(', ')
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          title: title,
+          description: user.join(', ')
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {

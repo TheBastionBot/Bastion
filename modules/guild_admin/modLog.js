@@ -42,10 +42,12 @@ exports.run = (Bastion, message) => {
       color = Bastion.colors.red;
       modLogStats = 'Moderation audit logging is now disabled.';
     }
-    message.channel.send({embed: {
-      color: color,
-      description: modLogStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: modLogStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

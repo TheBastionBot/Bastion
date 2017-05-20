@@ -42,19 +42,21 @@ exports.run = (Bastion, message) => {
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.dark_grey,
-    title: 'Changelog',
-    url: 'https://bastion.js.org/changes',
-    description: `Bastion v${Bastion.package.version}`,
-    fields: changes,
-    thumbnail: {
-      url: Bastion.user.displayAvatarURL
-    },
-    footer: {
-      text: CHANGES.date
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      title: 'Changelog',
+      url: 'https://bastion.js.org/changes',
+      description: `Bastion v${Bastion.package.version}`,
+      fields: changes,
+      thumbnail: {
+        url: Bastion.user.displayAvatarURL
+      },
+      footer: {
+        text: CHANGES.date
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

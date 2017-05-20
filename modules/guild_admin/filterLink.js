@@ -25,10 +25,12 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!message.guild.me.hasPermission('MANAGE_MESSAGES')) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `I need **${this.help.botPermission}** permission to use this command.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `I need **${this.help.botPermission}** permission to use this command.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -50,10 +52,12 @@ exports.run = (Bastion, message) => {
       filterLinkStats = 'Disabled automatic deletion of discord server invites posted in this server.';
     }
 
-    message.channel.send({embed: {
-      color: color,
-      description: filterLinkStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: filterLinkStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

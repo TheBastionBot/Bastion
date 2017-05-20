@@ -33,12 +33,14 @@ exports.run = (Bastion, message) => {
         inline: true
       });
     }
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'Leaderboard',
-      description: `Top ${profiles.length} users with highest Bastion Currencies`,
-      fields: fields
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: 'Leaderboard',
+        description: `Top ${profiles.length} users with highest Bastion Currencies`,
+        fields: fields
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

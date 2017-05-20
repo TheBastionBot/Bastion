@@ -29,7 +29,7 @@ exports.run = (Bastion, message) => {
   for (let i = 0; i < user.length; i++) {
     userHash += parseInt(user[i].charCodeAt(0));
   }
-  let crimeCoefficient = Math.round(parseFloat('0.' + String(userHash)) * 500) + 1;
+  let crimeCoefficient = Math.round(parseFloat(`0.${String(userHash)}`) * 500) + 1;
   let crimeStat;
   if (crimeCoefficient < 100) {
     crimeStat = 'Suspect is not a target for enforcement action. The trigger of Dominator will be locked.';
@@ -41,17 +41,19 @@ exports.run = (Bastion, message) => {
     crimeStat = 'Suspect poses a serious threat to the society. Lethal force is authorized. Dominator will automatically switch to Lethal Eliminator. Suspect that is hit by Lethal Eliminator will bloat and explode.';
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
-    description: crimeStat
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
+      description: crimeStat
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['ccof', 'ccoef'],
+  aliases: [ 'ccof', 'ccoef' ],
   enabled: true
 };
 
@@ -61,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'crimecoefficient [@user-mention]',
-  example: ['crimecoefficient', 'crimecoefficient @user#0001']
+  example: [ 'crimecoefficient', 'crimecoefficient @user#0001' ]
 };

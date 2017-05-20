@@ -27,11 +27,13 @@ exports.run = (Bastion, message, args) => {
 
   args = args.join(' ');
   if (!/.+ << .+/.test(args)) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -40,20 +42,22 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e.stack);
   });
 
-  message.channel.send({embed: {
-    color: Bastion.colors.green,
-    title: 'New Trigger Added',
-    fields: [
-      {
-        name: 'Trigger',
-        value: args[0]
-      },
-      {
-        name: 'Response',
-        value: args[1]
-      }
-    ]
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      title: 'New Trigger Added',
+      fields: [
+        {
+          name: 'Trigger',
+          value: args[0]
+        },
+        {
+          name: 'Response',
+          value: args[1]
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

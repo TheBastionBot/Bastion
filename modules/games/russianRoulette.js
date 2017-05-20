@@ -30,11 +30,13 @@ exports.run = (Bastion, message, args) => {
   for (let i = 0; i < args; i++) {
     outcome = `${message.author} ${outcomes[Math.floor(Math.random() * outcomes.length)]}`;
     // outcome = `${message.author} ${outcomes.random()}`;
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: `Round ${i + 1}`,
-      description: outcome
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: `Round ${i + 1}`,
+        description: outcome
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
     if (outcome.includes('BANG')) return;

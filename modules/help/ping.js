@@ -20,10 +20,12 @@
  */
 
 exports.run = (Bastion, message) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.dark_grey,
-    description: `${parseInt(Bastion.ping)}ms`
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      description: `${parseInt(Bastion.ping)}ms`
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

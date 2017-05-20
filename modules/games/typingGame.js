@@ -27,19 +27,23 @@ exports.run = (Bastion, message) => {
   if (!activeChannels.includes(message.channel.id)) {
     activeChannels.push(message.channel.id);
 
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'Typing Game',
-      description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`,
-      footer: {
-        text: `You have ${5} minutes to make your submission.`
-      }
-    }}).then(msg => {
-      let index = getRandomInt(1, Object.keys(typingArticles).length);
-      message.channel.send({embed: {
+    message.channel.send({
+      embed: {
         color: Bastion.colors.blue,
-        description: typingArticles[index]
-      }}).then(articleMessage => {
+        title: 'Typing Game',
+        description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`,
+        footer: {
+          text: `You have ${5} minutes to make your submission.`
+        }
+      }
+    }).then(msg => {
+      let index = getRandomInt(1, Object.keys(typingArticles).length);
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.blue,
+          description: typingArticles[index]
+        }
+      }).then(articleMessage => {
         const collector = message.channel.createMessageCollector(
           msg => msg.content === typingArticles[index],
           {
@@ -57,11 +61,13 @@ exports.run = (Bastion, message) => {
             color = Bastion.colors.blue;
             result = `Game ended. Congratulations ${collection.map(m => m.author)[0]}! You won it.`;
           }
-          message.channel.send({embed: {
-            color: color,
-            title: 'Typing Game',
-            description: result
-          }}).then(() => {
+          message.channel.send({
+            embed: {
+              color: color,
+              title: 'Typing Game',
+              description: result
+            }
+          }).then(() => {
             msg.delete().catch(e => {
               Bastion.log.error(e.stack);
             });
@@ -81,10 +87,12 @@ exports.run = (Bastion, message) => {
     });
   }
   else {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.'
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }

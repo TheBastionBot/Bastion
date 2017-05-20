@@ -25,11 +25,13 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -40,10 +42,12 @@ exports.run = (Bastion, message, args) => {
       user = args[1];
     }
     else {
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -57,33 +61,37 @@ exports.run = (Bastion, message, args) => {
   }
   sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(profile => {
     if (profile) {
-      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies)-args[0]} WHERE userID=${user}`).catch(e => {
+      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies) - args[0]} WHERE userID=${user}`).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
   }).then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `Penalty of **${args[0]}** Bastion Currencies has been charged to <@${user}>`,
-      fields: [
-        {
-          name: 'Reason',
-          value: reason
-        }
-      ]
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `Penalty of **${args[0]}** Bastion Currencies has been charged to <@${user}>`,
+        fields: [
+          {
+            name: 'Reason',
+            value: reason
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
-    Bastion.users.get(user).send({embed: {
-      color: Bastion.colors.red,
-      description: `You have been charged with a penalty of **${args[0]}** Bastion Currencies.`,
-      fields: [
-        {
-          name: 'Reason',
-          value: reason
-        }
-      ]
-    }}).catch(e => {
+    Bastion.users.get(user).send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `You have been charged with a penalty of **${args[0]}** Bastion Currencies.`,
+        fields: [
+          {
+            name: 'Reason',
+            value: reason
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

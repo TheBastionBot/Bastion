@@ -40,19 +40,21 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    description: `*"${quotes[index].quote}"*\n\n**${quotes[index].author}**`,
-    footer: {
-      text: `Quote: ${index}`
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      description: `*"${quotes[index].quote}"*\n\n**${quotes[index].author}**`,
+      footer: {
+        text: `Quote: ${index}`
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['q'],
+  aliases: [ 'q' ],
   enabled: true
 };
 
@@ -62,5 +64,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'quotes <number|author>',
-  example: ['quotes', 'quotes 189', 'quotes Steve Jobs']
+  example: [ 'quotes', 'quotes 189', 'quotes Steve Jobs' ]
 };

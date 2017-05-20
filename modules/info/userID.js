@@ -25,21 +25,23 @@ exports.run = (Bastion, message) => {
     user = message.author;
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    fields: [
-      {
-        name: 'User',
-        value: user.tag,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: user.id,
-        inline: true
-      }
-    ]
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      fields: [
+        {
+          name: 'User',
+          value: user.tag,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

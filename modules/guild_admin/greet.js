@@ -42,10 +42,12 @@ exports.run = (Bastion, message) => {
       greetStats = 'Greeting Messages are now enabled in this channel.';
     }
 
-    message.channel.send({embed: {
-      color: color,
-      description: greetStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: greetStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

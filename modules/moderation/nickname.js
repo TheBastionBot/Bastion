@@ -22,21 +22,25 @@
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('MANAGE_NICKNAMES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `I need **${this.help.botPermission}** permission to use this command.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `I need **${this.help.botPermission}** permission to use this command.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   let user = message.mentions.users.first();
   if (!user) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -53,10 +57,12 @@ exports.run = (Bastion, message, args) => {
     nickStat = `${user}'s nickname changed.`;
   }
   message.guild.members.get(user.id).setNickname(args.join(' ')).then(() => {
-    message.channel.send({embed: {
-      color: color,
-      description: nickStat
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: nickStat
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });

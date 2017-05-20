@@ -20,14 +20,16 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Let me Google that for you:',
-    description: `https://lmgtfy.com/?q=${encodeURIComponent(args.join(' '))}`,
-    footer: {
-      text: 'Powered by lmgtfy'
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Let me Google that for you:',
+      description: `https://lmgtfy.com/?q=${encodeURIComponent(args.join(' '))}`,
+      footer: {
+        text: 'Powered by lmgtfy'
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

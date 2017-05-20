@@ -42,10 +42,12 @@ exports.run = (Bastion, message) => {
       levelUpMessageStats = 'I will now send messages when someone levels up.';
     }
 
-    message.channel.send({embed: {
-      color: color,
-      description: levelUpMessageStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: levelUpMessageStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

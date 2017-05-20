@@ -25,10 +25,12 @@ sql.open('./data/Bastion.sqlite');
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -64,10 +66,12 @@ exports.run = (Bastion, message, args) => {
       else {
         error = 'No messages found that could be deleted.';
       }
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: error
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: error
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -76,40 +80,42 @@ exports.run = (Bastion, message, args) => {
         if (!row) return;
 
         if (row.modLog === 'true') {
-          message.guild.channels.get(row.modLogChannelID).send({embed: {
-            color: Bastion.colors.orange,
-            title: 'Messages Cleared',
-            fields: [
-              {
-                name: 'Channel',
-                value: `${message.channel}`,
-                inline: true
+          message.guild.channels.get(row.modLogChannelID).send({
+            embed: {
+              color: Bastion.colors.orange,
+              title: 'Messages Cleared',
+              fields: [
+                {
+                  name: 'Channel',
+                  value: `${message.channel}`,
+                  inline: true
+                },
+                {
+                  name: 'Channel ID',
+                  value: message.channel.id,
+                  inline: true
+                },
+                {
+                  name: 'Cleared',
+                  value: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
+                },
+                {
+                  name: 'Responsible Moderator',
+                  value: `${message.author}`,
+                  inline: true
+                },
+                {
+                  name: 'Moderator ID',
+                  value: message.author.id,
+                  inline: true
+                }
+              ],
+              footer: {
+                text: `Case Number: ${row.modCaseNo}`
               },
-              {
-                name: 'Channel ID',
-                value: message.channel.id,
-                inline: true
-              },
-              {
-                name: 'Cleared',
-                value: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
-              },
-              {
-                name: 'Responsible Moderator',
-                value: `${message.author}`,
-                inline: true
-              },
-              {
-                name: 'Moderator ID',
-                value: message.author.id,
-                inline: true
-              }
-            ],
-            footer: {
-              text: `Case Number: ${row.modCaseNo}`
-            },
-            timestamp: new Date()
-          }}).then(() => {
+              timestamp: new Date()
+            }
+          }).then(() => {
             sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
               Bastion.log.error(e.stack);
             });
