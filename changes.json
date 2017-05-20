@@ -12,6 +12,7 @@
     "Improved `typingGame` game command",
     "`sendEmbed` command now shows the error in the embed object (if any)",
     "Improved `poll` command",
+    "Auto delete `sendEmbed` command",
     "Minor fixes"
   ],
   "added": [

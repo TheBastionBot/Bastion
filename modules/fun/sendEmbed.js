@@ -32,6 +32,12 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
+  if (message.deletable) {
+    message.delete().catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+
   try {
     args = JSON.parse(args.join(' '));
   }
