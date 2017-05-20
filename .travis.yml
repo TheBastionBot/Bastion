@@ -26,5 +26,4 @@ before_script:
   - cp settings/config_example.json settings/config.json
   - echo "[]" > data/favouriteSongs.json
 script:
-  - npm run test:lint
-  - npm run test:boot
+  - npm test

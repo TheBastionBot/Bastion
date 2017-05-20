@@ -18,7 +18,6 @@ build: off
 test_script:
   - node --version
   - npm --version
-  - npm run test:lint
-  - npm run test:boot
+  - npm test
 platform: x64
 deploy: off
