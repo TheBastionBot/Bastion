@@ -14,11 +14,11 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - cmd: npm install
+build: off
 test_script:
   - node --version
   - npm --version
   - npm run test:lint
   - npm run test:boot
 platform: x64
-build: off
 deploy: off
