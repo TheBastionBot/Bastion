@@ -72,7 +72,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['todolist'],
+  aliases: [ 'todolist' ],
   enabled: true
 };
 
@@ -82,5 +82,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'listTodo [page_no]',
-  example: ['listTodo', 'listTodo 2']
+  example: [ 'listTodo', 'listTodo 2' ]
 };

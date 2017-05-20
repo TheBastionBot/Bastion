@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['fmsg'],
+  aliases: [ 'fmsg' ],
   enabled: true
 };
 
@@ -67,5 +67,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'farewellMessage [Message]',
-  example: ['farewellMessage Goodbye $username. Hope to see you soon!']
+  example: [ 'farewellMessage Goodbye $username. Hope to see you soon!' ]
 };

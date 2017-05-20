@@ -137,7 +137,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['m'],
+  aliases: [ 'm' ],
   enabled: true
 };
 
@@ -147,5 +147,5 @@ exports.help = {
   botPermission: 'Mute Members',
   userPermission: 'Mute Members',
   usage: 'mute @user-mention [Reason]',
-  example: ['mute @user#0001 Reason for the mute.']
+  example: [ 'mute @user#0001 Reason for the mute.' ]
 };

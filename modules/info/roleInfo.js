@@ -74,7 +74,7 @@ exports.run = (Bastion, message, args) => {
           }
         ],
         thumbnail: {
-          url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`,
+          url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`
         }
       }
     }).catch(e => {
@@ -94,7 +94,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rinfo'],
+  aliases: [ 'rinfo' ],
   enabled: true
 };
 
@@ -104,5 +104,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',
-  example: ['roleInfo @Dark Knigths', 'roleInfo The Legends']
+  example: [ 'roleInfo @Dark Knigths', 'roleInfo The Legends' ]
 };

@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setg'],
+  aliases: [ 'setg' ],
   enabled: true
 };
 
@@ -63,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setGame [text]',
-  example: ['setGame with minions!', 'setGame']
+  example: [ 'setGame with minions!', 'setGame' ]
 };

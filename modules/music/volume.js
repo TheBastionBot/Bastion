@@ -41,5 +41,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Mute Members',
   usage: 'volume <+|-|amount>',
-  example: ['volume +', 'volume -', 'volume 25']
+  example: [ 'volume +', 'volume -', 'volume 25' ]
 };

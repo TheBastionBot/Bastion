@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
 
     let roles = JSON.parse(row.autoAssignableRoles);
     roles = roles.filter(r => message.guild.roles.get(r));
-    roles = [...new Set(roles)];
+    roles = [ ...new Set(roles) ];
     // roles = roles.unique(roles);
     let roleNames = [];
     for (let i = 0; i < roles.length; i++) {
@@ -70,7 +70,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['laar'],
+  aliases: [ 'laar' ],
   enabled: true
 };
 
@@ -80,5 +80,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'listAutoAssignableRoles [page_no]',
-  example: ['listAutoAssignableRoles', 'listAutoAssignableRoles 2']
+  example: [ 'listAutoAssignableRoles', 'listAutoAssignableRoles 2' ]
 };

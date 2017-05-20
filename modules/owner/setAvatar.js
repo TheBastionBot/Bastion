@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setav'],
+  aliases: [ 'setav' ],
   enabled: true
 };
 
@@ -58,5 +58,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setavatar <image_url>',
-  example: ['setavatar https://example.com/avatar.jpeg']
+  example: [ 'setavatar https://example.com/avatar.jpeg' ]
 };

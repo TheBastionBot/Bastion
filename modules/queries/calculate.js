@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['calc'],
+  aliases: [ 'calc' ],
   enabled: true
 };
 
@@ -66,5 +66,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'calculate <mathematical_expression>',
-  example: ['calculate 9 * 10 - 11']
+  example: [ 'calculate 9 * 10 - 11' ]
 };

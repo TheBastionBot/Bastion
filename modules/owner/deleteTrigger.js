@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['deltrigger', 'deletetrip', 'deltrip'],
+  aliases: [ 'deltrigger', 'deletetrip', 'deltrip' ],
   enabled: true
 };
 
@@ -62,5 +62,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'deleteTrigger <trigger>',
-  example: ['deleteTrigger Hi, there?']
+  example: [ 'deleteTrigger Hi, there?' ]
 };

@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ftout'],
+  aliases: [ 'ftout' ],
   enabled: true
 };
 
@@ -54,5 +54,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'farewellTimeout [time_in_seconds]',
-  example: ['farewellTimeout 120', 'farewellTimeout']
+  example: [ 'farewellTimeout 120', 'farewellTimeout' ]
 };

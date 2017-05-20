@@ -144,7 +144,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cod4'],
+  aliases: [ 'cod4' ],
   enabled: true
 };
 
@@ -154,5 +154,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',
-  example: ['callOfDuty4 139.59.31.128', 'callOfDuty4 139.59.31.128:27016']
+  example: [ 'callOfDuty4 139.59.31.128', 'callOfDuty4 139.59.31.128:27016' ]
 };

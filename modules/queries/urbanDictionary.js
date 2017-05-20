@@ -59,7 +59,7 @@ exports.run = (Bastion, message, args) => {
       embed = {
         embed: {
           color: Bastion.colors.red,
-          description: `No definition found for the term **${args.join(' ')}**`,
+          description: `No definition found for the term **${args.join(' ')}**`
         }
       };
     }
@@ -71,7 +71,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ud'],
+  aliases: [ 'ud' ],
   enabled: true
 };
 
@@ -81,5 +81,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'urbanDictionary <word>',
-  example: ['urbanDictionary pineapple']
+  example: [ 'urbanDictionary pineapple' ]
 };

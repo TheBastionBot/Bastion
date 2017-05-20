@@ -113,7 +113,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['info'],
+  aliases: [ 'info' ],
   enabled: true
 };
 

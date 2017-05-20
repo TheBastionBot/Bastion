@@ -82,7 +82,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rsar'],
+  aliases: [ 'rsar' ],
   enabled: true
 };
 
@@ -92,5 +92,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'removeSelfAssignableRoles <index>',
-  example: ['removeSelfAssignableRoles 3']
+  example: [ 'removeSelfAssignableRoles 3' ]
 };

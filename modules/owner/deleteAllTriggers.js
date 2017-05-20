@@ -40,7 +40,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['delalltriggers', 'deletealltrips', 'delalltrips'],
+  aliases: [ 'delalltriggers', 'deletealltrips', 'delalltrips' ],
   enabled: true
 };
 

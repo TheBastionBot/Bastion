@@ -62,7 +62,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['clog', 'changes'],
+  aliases: [ 'clog', 'changes' ],
   enabled: true
 };
 

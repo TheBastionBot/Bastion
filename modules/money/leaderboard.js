@@ -49,7 +49,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['lb'],
+  aliases: [ 'lb' ],
   enabled: true
 };
 

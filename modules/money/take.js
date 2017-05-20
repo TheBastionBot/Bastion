@@ -100,7 +100,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['fine'],
+  aliases: [ 'fine' ],
   enabled: true
 };
 
@@ -110,5 +110,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
-  example: ['take 100 @user#0001 Misbehaving', 'take 150 2233445566778899']
+  example: [ 'take 100 @user#0001 Misbehaving', 'take 150 2233445566778899' ]
 };

@@ -83,7 +83,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['deltodo'],
+  aliases: [ 'deltodo' ],
   enabled: true
 };
 
@@ -93,5 +93,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'deleteTodo <index>',
-  example: ['deleteTodo 3']
+  example: [ 'deleteTodo 3' ]
 };

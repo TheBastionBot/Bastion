@@ -93,7 +93,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.red,
-        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.',
+        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.'
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -102,7 +102,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['mc'],
+  aliases: [ 'mc' ],
   enabled: true
 };
 
@@ -112,5 +112,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'minecraft <MC_SERVER_IP>[:PORT]',
-  example: ['minecraft 139.59.31.129', 'minecraft 139.59.31.129:25565']
+  example: [ 'minecraft 139.59.31.129', 'minecraft 139.59.31.129:25565' ]
 };

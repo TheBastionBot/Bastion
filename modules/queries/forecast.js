@@ -72,7 +72,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['wefc'],
+  aliases: [ 'wefc' ],
   enabled: true
 };
 
@@ -82,5 +82,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'forecast <city [, country_code]|zipcode>',
-  example: ['forecast London, UK', 'forecast 94109']
+  example: [ 'forecast London, UK', 'forecast 94109' ]
 };

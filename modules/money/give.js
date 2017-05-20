@@ -55,7 +55,7 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
     sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
       if (!receiver) {
-        sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
+        sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args[0] ]).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
@@ -120,7 +120,7 @@ exports.run = (Bastion, message, args) => {
       }
       sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
         if (!receiver) {
-          sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args[0]]).catch(e => {
+          sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args[0] ]).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
@@ -169,5 +169,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'give <amount> <@user-mention|user_id>',
-  example: ['give 100 @user#0001', 'give 150 2233445566778899']
+  example: [ 'give 100 @user#0001', 'give 150 2233445566778899' ]
 };

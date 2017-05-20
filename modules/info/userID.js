@@ -47,7 +47,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['uid'],
+  aliases: [ 'uid' ],
   enabled: true
 };
 
@@ -57,5 +57,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'userID [@user-mention]',
-  example: ['userID @user#0001', 'userID']
+  example: [ 'userID @user#0001', 'userID' ]
 };

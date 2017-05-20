@@ -135,7 +135,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['clr'],
+  aliases: [ 'clr' ],
   enabled: true
 };
 
@@ -145,5 +145,5 @@ exports.help = {
   botPermission: 'Manage Messages',
   userPermission: 'Manage Messages',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
-  example: ['clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear']
+  example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };

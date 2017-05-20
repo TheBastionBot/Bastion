@@ -63,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'discrim <discriminator>',
-  example: ['discrim 8383']
+  example: [ 'discrim 8383' ]
 };

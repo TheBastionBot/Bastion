@@ -68,7 +68,7 @@ exports.run = (Bastion, message, args) => {
     let roles = JSON.parse(row.autoAssignableRoles);
     roles = roles.concat(args);
     roles = roles.filter(r => message.guild.roles.get(r));
-    roles = [...new Set(roles)];
+    roles = [ ...new Set(roles) ];
     // roles = roles.unique(roles);
     sql.run(`UPDATE guildSettings SET autoAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
       let roleNames = [];
@@ -93,7 +93,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['aaar'],
+  aliases: [ 'aaar' ],
   enabled: true
 };
 
@@ -103,5 +103,5 @@ exports.help = {
   botPermission: 'Manage Roles',
   userPermission: 'Administrator',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',
-  example: ['addAutoAssignableRoles 443322110055998877 778899550011223344']
+  example: [ 'addAutoAssignableRoles 443322110055998877 778899550011223344' ]
 };

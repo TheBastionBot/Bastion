@@ -97,5 +97,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'capture <url>',
-  example: ['capture bastion.js.org']
+  example: [ 'capture bastion.js.org' ]
 };

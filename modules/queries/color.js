@@ -119,7 +119,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['colour'],
+  aliases: [ 'colour' ],
   enabled: true
 };
 
@@ -129,5 +129,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'color <#hex-color-code>',
-  example: ['color #dd0000']
+  example: [ 'color #dd0000' ]
 };

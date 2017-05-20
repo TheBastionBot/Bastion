@@ -29,7 +29,7 @@ exports.run = (Bastion, message) => {
     let color = Bastion.colors.green;
     let logStats = 'Bastion\'s logging is now enabled in this channel.';
     if (!row) {
-      sql.run('INSERT INTO bastionSettings (log, logChannelID) VALUES (?, ?)', ['true', message.channel.id]).catch(e => {
+      sql.run('INSERT INTO bastionSettings (log, logChannelID) VALUES (?, ?)', [ 'true', message.channel.id ]).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -59,7 +59,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['botlog'],
+  aliases: [ 'botlog' ],
   enabled: true
 };
 

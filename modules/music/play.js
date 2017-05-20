@@ -167,7 +167,7 @@ exports.run = (Bastion, message, args) => {
           if (!queue.hasOwnProperty(message.guild.id)) {
             queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
           }
-          yt.getInfo(e, ['-q', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
+          yt.getInfo(e, [ '-q', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
             if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
             queue[message.guild.id].songs.push({
               url: info.formats[info.formats.length - 1].url,
@@ -207,7 +207,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
 
-        yt.getInfo(args.slice(4), ['-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]'], (err, info) => {
+        yt.getInfo(args.slice(4), [ '-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]' ], (err, info) => {
           if (err) {
             Bastion.log.error(err);
             return message.channel.send({
@@ -269,7 +269,7 @@ exports.run = (Bastion, message, args) => {
       }
       args = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args) ? args : `ytsearch:${args}`;
 
-      yt.getInfo(args, ['-q', '-i', '--no-warnings', '--format=bestaudio[protocol^=http]'], (err, info) => {
+      yt.getInfo(args, [ '-q', '-i', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
         if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
           let result;
           if (err && err.stack.includes('No video results')) {
@@ -442,10 +442,10 @@ exports.run = (Bastion, message, args) => {
                   });
                 }
                 else if (msg.content.startsWith(`${Bastion.config.prefix}queue`)) {
-                  let fields = [{
+                  let fields = [ {
                     name: `:loud_sound: ${song.title}`,
                     value: `Requested by: <@${song.requester}>`
-                  }];
+                  } ];
                   for (let i = 1; i < (queue[message.guild.id].songs.length < 10 ? queue[message.guild.id].songs.length : 9); i++) {
                     fields.push({
                       name: `${i + 1}. ${queue[message.guild.id].songs[i].title}`,
@@ -686,7 +686,7 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'play <name | song_link | -pl <playlist_link> | -favs>',
-  example: ['play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs']
+  example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs' ]
 };
 
 function shuffle(array) {

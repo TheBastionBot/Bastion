@@ -157,7 +157,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['k'],
+  aliases: [ 'k' ],
   enabled: true
 };
 
@@ -167,5 +167,5 @@ exports.help = {
   botPermission: 'Kick Members',
   userPermission: 'Kick Members',
   usage: 'kick @user-mention [Reason]',
-  example: ['kick @user#0001 Reason for the kick.']
+  example: [ 'kick @user#0001 Reason for the kick.' ]
 };

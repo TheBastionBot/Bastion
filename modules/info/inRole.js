@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
         title: `Members in ${role.name} role:\n`,
         description: role.members.size > 10 ? `${role.members.map(m => m.user.tag).splice(0, 10).join('\n')}\nand ${role.members.size - 10} members.` :  role.members.map(m => m.user.tag).join('\n'),
         thumbnail: {
-          url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`,
+          url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`
         }
       }
     }).catch(e => {
@@ -74,5 +74,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'inRole <Role Name|@role-mention>',
-  example: ['inRole Role Name', 'inrole @roleMention']
+  example: [ 'inRole Role Name', 'inrole @roleMention' ]
 };

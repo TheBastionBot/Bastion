@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['gtout'],
+  aliases: [ 'gtout' ],
   enabled: true
 };
 
@@ -54,5 +54,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'greetTimeout [time_in_seconds]',
-  example: ['greetTimeout 120', 'greetTimeout']
+  example: [ 'greetTimeout 120', 'greetTimeout' ]
 };

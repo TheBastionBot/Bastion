@@ -109,7 +109,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.red,
-        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.',
+        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.'
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -118,7 +118,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['tf2'],
+  aliases: [ 'tf2' ],
   enabled: true
 };
 
@@ -128,5 +128,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'teamFortress2 <TF2_SERVER_IP>[:PORT]',
-  example: ['teamFortress2 139.59.31.129', 'teamFortress2 139.59.31.129:27019']
+  example: [ 'teamFortress2 139.59.31.129', 'teamFortress2 139.59.31.129:27019' ]
 };

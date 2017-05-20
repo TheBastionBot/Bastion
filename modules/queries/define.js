@@ -73,7 +73,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['meaning'],
+  aliases: [ 'meaning' ],
   enabled: true
 };
 
@@ -83,5 +83,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'define [language_code] <word>',
-  example: ['define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre']
+  example: [ 'define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre' ]
 };

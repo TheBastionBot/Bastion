@@ -37,7 +37,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['ct'],
+  aliases: [ 'ct' ],
   enabled: true
 };
 
@@ -47,5 +47,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'channelTopic [#channel-mention]',
-  example: ['channelTopic #channel-name', 'channelTopic']
+  example: [ 'channelTopic #channel-name', 'channelTopic' ]
 };

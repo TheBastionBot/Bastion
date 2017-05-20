@@ -132,7 +132,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['join'],
+  aliases: [ 'join' ],
   enabled: true
 };
 

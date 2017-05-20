@@ -82,7 +82,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['raar'],
+  aliases: [ 'raar' ],
   enabled: true
 };
 
@@ -92,5 +92,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'removeAutoAssignableRoles <index>',
-  example: ['removeAutoAssignableRoles 3']
+  example: [ 'removeAutoAssignableRoles 3' ]
 };

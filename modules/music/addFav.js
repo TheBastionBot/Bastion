@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
   args = args.join(' ');
   try {
     db.reload();
-    db.push('/', [args], false);
+    db.push('/', [ args ], false);
   }
   catch (e) {
     Bastion.log.error(e.stack);
@@ -68,5 +68,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'addfav <song name | song link>',
-  example: ['addFav one more night', 'addFav https://www.youtube.com/watch?v=JGwWNGJdvx8']
+  example: [ 'addFav one more night', 'addFav https://www.youtube.com/watch?v=JGwWNGJdvx8' ]
 };

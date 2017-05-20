@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['gmsg'],
+  aliases: [ 'gmsg' ],
   enabled: true
 };
 
@@ -67,5 +67,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'greetMessage [Message]',
-  example: ['greetMessage Hello $user! Welcome to $server.']
+  example: [ 'greetMessage Hello $user! Welcome to $server.' ]
 };

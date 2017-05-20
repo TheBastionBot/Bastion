@@ -55,7 +55,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['servers'],
+  aliases: [ 'servers' ],
   enabled: true
 };
 
@@ -65,5 +65,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'searchServer <name>',
-  example: ['searchServer Bastion']
+  example: [ 'searchServer Bastion' ]
 };

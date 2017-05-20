@@ -74,7 +74,7 @@ exports.run = (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.green,
         title: 'Role Added',
-        description: `${user.tag} has now been given **${role.name}** role.`,
+        description: `${user.tag} has now been given **${role.name}** role.`
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -144,7 +144,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ar'],
+  aliases: [ 'ar' ],
   enabled: true
 };
 
@@ -154,5 +154,5 @@ exports.help = {
   botPermission: 'Manage Roles',
   userPermission: 'Manage Roles',
   usage: 'addRole [@user-mention] <Role Name>',
-  example: ['addRole @user#001 Role Name', 'addRole Role Name']
+  example: [ 'addRole @user#001 Role Name', 'addRole Role Name' ]
 };

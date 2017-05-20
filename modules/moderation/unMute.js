@@ -146,5 +146,5 @@ exports.help = {
   botPermission: 'Mute Members',
   userPermission: 'Mute Members',
   usage: 'unMute @user-mention [Reason]',
-  example: ['unMute @user#0001 Reason for the unmute.']
+  example: [ 'unMute @user#0001 Reason for the unmute.' ]
 };

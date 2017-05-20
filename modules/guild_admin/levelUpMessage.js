@@ -56,7 +56,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['lvlupmsg'],
+  aliases: [ 'lvlupmsg' ],
   enabled: true
 };
 

@@ -213,7 +213,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ow'],
+  aliases: [ 'ow' ],
   enabled: true
 };
 
@@ -223,5 +223,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
-  example: ['overwatch us GH0S7#11143']
+  example: [ 'overwatch us GH0S7#11143' ]
 };

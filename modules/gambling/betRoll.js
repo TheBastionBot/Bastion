@@ -117,7 +117,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['br'],
+  aliases: [ 'br' ],
   enabled: true
 };
 
@@ -127,5 +127,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'betroll <amount> <one|two|three|four|five|six>',
-  example: ['betroll 100 three']
+  example: [ 'betroll 100 three' ]
 };

@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo) {
-      sql.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [message.author.id, `["${args.join(' ')}"]`]).then(() => {
+      sql.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [ message.author.id, `["${args.join(' ')}"]` ]).then(() => {
         message.channel.send({
           embed: {
             color: Bastion.colors.green,
@@ -85,5 +85,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'todo <text>',
-  example: ['todo Reconfigure my firewall']
+  example: [ 'todo Reconfigure my firewall' ]
 };

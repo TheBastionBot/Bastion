@@ -56,7 +56,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['enablecmd'],
+  aliases: [ 'enablecmd' ],
   enabled: true
 };
 
@@ -66,5 +66,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'enableCommand <command_name>',
-  example: ['enableCommand echo']
+  example: [ 'enableCommand echo' ]
 };

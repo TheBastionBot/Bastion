@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setn'],
+  aliases: [ 'setn' ],
   enabled: true
 };
 
@@ -63,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setNick [text]',
-  example: ['setNick NewNick', 'setNick']
+  example: [ 'setNick NewNick', 'setNick' ]
 };

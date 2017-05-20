@@ -141,7 +141,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['tum'],
+  aliases: [ 'tum' ],
   enabled: true
 };
 
@@ -151,5 +151,5 @@ exports.help = {
   botPermission: 'Manage Roles',
   userPermission: 'Mute Members',
   usage: 'textUnMute @user-mention [Reason]',
-  example: ['textUnMute @user#0001 Reason for the unmute.']
+  example: [ 'textUnMute @user#0001 Reason for the unmute.' ]
 };

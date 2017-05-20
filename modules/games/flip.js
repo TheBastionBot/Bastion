@@ -55,5 +55,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'flip [no_of_coins]',
-  example: ['flip', 'flip 5']
+  example: [ 'flip', 'flip 5' ]
 };

@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.send({ files: [{ attachment: body }] }).catch(e => {
+    message.channel.send({ files: [ { attachment: body } ] }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });
@@ -69,5 +69,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'map <location> [--zoom <amount>]',
-  example: ['map New York, NY', 'map London Eye, London --zoom 18']
+  example: [ 'map New York, NY', 'map London Eye, London --zoom 18' ]
 };

@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['msgc'],
+  aliases: [ 'msgc' ],
   enabled: true
 };
 
@@ -56,5 +56,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'messageChannel <channel_id> <message>',
-  example: ['messageChannel CHANNEL_ID Hello everyone!']
+  example: [ 'messageChannel CHANNEL_ID Hello everyone!' ]
 };

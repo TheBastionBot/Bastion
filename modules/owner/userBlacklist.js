@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
       if (/^(add|\+)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (blUsers.includes(user[i])) continue;
-          sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [user[i]]).catch(e => {
+          sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [ user[i] ]).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
@@ -94,7 +94,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ubl'],
+  aliases: [ 'ubl' ],
   enabled: true
 };
 
@@ -104,5 +104,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',
-  example: ['userblacklist add @user#001 224433119988776655', 'userblacklist rem 224433119988776655 @user#0001', 'userblacklist + @user#001 224433119988776655', 'userblacklist - 224433119988776655 @user#0001']
+  example: [ 'userblacklist add @user#001 224433119988776655', 'userblacklist rem 224433119988776655 @user#0001', 'userblacklist + @user#001 224433119988776655', 'userblacklist - 224433119988776655 @user#0001' ]
 };

@@ -74,7 +74,7 @@ exports.run = (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.red,
         title: 'Role Removed',
-        description: `${user.tag} has now been removed from **${role.name}** role.`,
+        description: `${user.tag} has now been removed from **${role.name}** role.`
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -144,7 +144,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rmr'],
+  aliases: [ 'rmr' ],
   enabled: true
 };
 
@@ -154,5 +154,5 @@ exports.help = {
   botPermission: 'Manage Roles',
   userPermission: 'Manage Roles',
   usage: 'removeRole [@user-mention] <Role Name>',
-  example: ['removeRole @user#0001 Role Name', 'removeRole Role Name']
+  example: [ 'removeRole @user#0001 Role Name', 'removeRole Role Name' ]
 };

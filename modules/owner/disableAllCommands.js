@@ -37,7 +37,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['disableallcmds'],
+  aliases: [ 'disableallcmds' ],
   enabled: true
 };
 

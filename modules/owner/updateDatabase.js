@@ -60,7 +60,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['updatedb'],
+  aliases: [ 'updatedb' ],
   enabled: true
 };
 

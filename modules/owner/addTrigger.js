@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   args = args.split(' << ');
-  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [args[0], args[1]]).catch(e => {
+  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args[0], args[1] ]).catch(e => {
     Bastion.log.error(e.stack);
   });
 
@@ -63,7 +63,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['addtrip'],
+  aliases: [ 'addtrip' ],
   enabled: true
 };
 
@@ -73,5 +73,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'addTrigger <trigger> << <response>',
-  example: ['addTrigger Hi, there? << Hello $user! :wave:']
+  example: [ 'addTrigger Hi, there? << Hello $user! :wave:' ]
 };

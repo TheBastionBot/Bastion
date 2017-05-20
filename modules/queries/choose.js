@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['decide'],
+  aliases: [ 'decide' ],
   enabled: true
 };
 
@@ -56,5 +56,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'choose <choice1>/<choice2>[/<choice3>][...]',
-  example: ['choose Chocolate/Ice Cream/Cake']
+  example: [ 'choose Chocolate/Ice Cream/Cake' ]
 };

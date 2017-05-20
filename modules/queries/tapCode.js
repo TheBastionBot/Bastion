@@ -79,7 +79,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['tap'],
+  aliases: [ 'tap' ],
   enabled: true
 };
 
@@ -89,5 +89,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'tapCode <text>',
-  example: ['tapCode Knock Knock']
+  example: [ 'tapCode Knock Knock' ]
 };

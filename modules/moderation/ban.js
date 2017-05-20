@@ -157,7 +157,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['b'],
+  aliases: [ 'b' ],
   enabled: true
 };
 
@@ -167,5 +167,5 @@ exports.help = {
   botPermission: 'Ban Members',
   userPermission: 'Ban Members',
   usage: 'ban <@user-mention> [Reason].',
-  example: ['ban @user#001 Reason for the ban.']
+  example: [ 'ban @user#001 Reason for the ban.' ]
 };

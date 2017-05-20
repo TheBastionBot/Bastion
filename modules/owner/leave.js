@@ -50,5 +50,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'leave <guild_id>',
-  example: ['leave 441122339988775566']
+  example: [ 'leave 441122339988775566' ]
 };

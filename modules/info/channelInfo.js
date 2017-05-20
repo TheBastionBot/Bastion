@@ -85,7 +85,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cinfo'],
+  aliases: [ 'cinfo' ],
   enabled: true
 };
 
@@ -95,5 +95,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',
-  example: ['channelInfo #channel-name', 'channelInfo 221133445599667788', 'channelInfo']
+  example: [ 'channelInfo #channel-name', 'channelInfo 221133445599667788', 'channelInfo' ]
 };

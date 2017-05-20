@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setun'],
+  aliases: [ 'setun' ],
   enabled: true
 };
 
@@ -49,5 +49,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setUsername <text>',
-  example: ['setUsername NewUsername']
+  example: [ 'setUsername NewUsername' ]
 };

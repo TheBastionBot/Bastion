@@ -73,7 +73,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['wiki'],
+  aliases: [ 'wiki' ],
   enabled: true
 };
 
@@ -83,5 +83,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'wikipedia <text>',
-  example: ['wikipedia Steve Jobs']
+  example: [ 'wikipedia Steve Jobs' ]
 };

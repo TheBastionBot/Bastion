@@ -114,7 +114,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['uinfo'],
+  aliases: [ 'uinfo' ],
   enabled: true
 };
 
@@ -124,5 +124,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'userInfo [@user-mention]',
-  example: ['userInfo @user#0001', 'userInfo']
+  example: [ 'userInfo @user#0001', 'userInfo' ]
 };

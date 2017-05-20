@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['nick'],
+  aliases: [ 'nick' ],
   enabled: true
 };
 
@@ -79,5 +79,5 @@ exports.help = {
   botPermission: 'Manage Nicknames',
   userPermission: 'Manage Nicknames',
   usage: 'nickname <@user-mention> [nick]',
-  example: ['nickname @user#0001 The Legend', 'nickname @user#0001']
+  example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
 };

@@ -80,5 +80,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'rps <rock|paper|scissor>',
-  example: ['rps Rock']
+  example: [ 'rps Rock' ]
 };

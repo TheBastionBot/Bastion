@@ -109,7 +109,7 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.red,
-        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.',
+        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.'
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -118,7 +118,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['csgo'],
+  aliases: [ 'csgo' ],
   enabled: true
 };
 
@@ -128,5 +128,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'counterStrikeGlobalOffensive <CSGO_SERVER_IP>[:PORT]',
-  example: ['counterStrikeGlobalOffensive 139.59.31.128', 'counterStrikeGlobalOffensive 139.59.31.128:27016']
+  example: [ 'counterStrikeGlobalOffensive 139.59.31.128', 'counterStrikeGlobalOffensive 139.59.31.128:27016' ]
 };

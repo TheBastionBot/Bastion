@@ -45,5 +45,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'lmgtfy <text>',
-  example: ['lmgtfy How to shutdown a computer?']
+  example: [ 'lmgtfy How to shutdown a computer?' ]
 };

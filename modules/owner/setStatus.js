@@ -63,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setStatus [online|idle|dnd|invisible]',
-  example: ['setStatus invisible', 'setStatus']
+  example: [ 'setStatus invisible', 'setStatus' ]
 };

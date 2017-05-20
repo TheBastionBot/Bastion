@@ -137,7 +137,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['undeaf'],
+  aliases: [ 'undeaf' ],
   enabled: true
 };
 
@@ -147,5 +147,5 @@ exports.help = {
   botPermission: 'Deafen Members',
   userPermission: 'Deafen Members',
   usage: 'unDeafen @user-mention [Reason]',
-  example: ['unDeafen @user#0001 Reason for undeafening.']
+  example: [ 'unDeafen @user#0001 Reason for undeafening.' ]
 };

@@ -58,7 +58,7 @@ exports.run = (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.red,
         title: 'All Roles Removed',
-        description: `All roles has been removed from ${user.tag}.`,
+        description: `All roles has been removed from ${user.tag}.`
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -124,7 +124,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rmar'],
+  aliases: [ 'rmar' ],
   enabled: true
 };
 
@@ -134,5 +134,5 @@ exports.help = {
   botPermission: 'Manage Roles',
   userPermission: 'Manage Roles',
   usage: 'removeAllRoles [@user-mention]',
-  example: ['removeAllRoles @user#0001', 'removeAllRoles']
+  example: [ 'removeAllRoles @user#0001', 'removeAllRoles' ]
 };

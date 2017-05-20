@@ -181,7 +181,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['sb'],
+  aliases: [ 'sb' ],
   enabled: true
 };
 
@@ -191,5 +191,5 @@ exports.help = {
   botPermission: 'Ban Members',
   userPermission: 'Ban Members',
   usage: 'softBan @user-mention [Reason]',
-  example: ['softBan @user#0001 Reason for soft ban.']
+  example: [ 'softBan @user#0001 Reason for soft ban.' ]
 };

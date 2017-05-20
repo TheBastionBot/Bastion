@@ -59,5 +59,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'roll [no_of_dice]',
-  example: ['roll', 'roll 5']
+  example: [ 'roll', 'roll 5' ]
 };

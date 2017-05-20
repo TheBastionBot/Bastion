@@ -76,7 +76,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['einfo'],
+  aliases: [ 'einfo' ],
   enabled: true
 };
 
@@ -86,5 +86,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'emojiInfo [:emoji:]',
-  example: ['emojiInfo :bastion:']
+  example: [ 'emojiInfo :bastion:' ]
 };

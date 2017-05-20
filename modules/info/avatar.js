@@ -48,7 +48,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['av'],
+  aliases: [ 'av' ],
   enabled: true
 };
 
@@ -58,5 +58,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'avatar [@user-mention]',
-  example: ['avatar @user#001', 'avatar']
+  example: [ 'avatar @user#001', 'avatar' ]
 };

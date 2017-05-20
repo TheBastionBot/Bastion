@@ -54,7 +54,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['notify'],
+  aliases: [ 'notify' ],
   enabled: true
 };
 
@@ -64,5 +64,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'announce <message>',
-  example: ['announce Just a random announcement.']
+  example: [ 'announce Just a random announcement.' ]
 };

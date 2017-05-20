@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
       return message.channel.send({
         embed: {
           color: Bastion.colors.red,
-          description: 'You don\'t have any triggers.',
+          description: 'You don\'t have any triggers.'
         }
       }).catch(e => {
         Bastion.log.error(e.stack);
@@ -64,7 +64,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['listtrips'],
+  aliases: [ 'listtrips' ],
   enabled: true
 };
 
@@ -74,5 +74,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'listTriggers [page_no]',
-  example: ['listTriggers', 'listTriggers 2']
+  example: [ 'listTriggers', 'listTriggers 2' ]
 };

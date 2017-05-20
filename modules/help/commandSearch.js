@@ -62,7 +62,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cmdsearch'],
+  aliases: [ 'cmdsearch' ],
   enabled: true
 };
 
@@ -72,5 +72,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'commandSearch <text>',
-  example: ['commandSearch user']
+  example: [ 'commandSearch user' ]
 };

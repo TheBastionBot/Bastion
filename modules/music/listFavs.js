@@ -77,5 +77,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'listfavs [page_no]',
-  example: ['listFavs', 'listFavs 2']
+  example: [ 'listFavs', 'listFavs 2' ]
 };

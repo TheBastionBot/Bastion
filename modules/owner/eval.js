@@ -83,7 +83,7 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'eval <JavaScript code>',
-  example: ['eval message.guild.members.size']
+  example: [ 'eval message.guild.members.size' ]
 };
 
 function clean(Bastion, text) {

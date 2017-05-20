@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!activeChannels.includes(message.channel.id)) {
-    let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'];
+    let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁', '🎁' ];
     reaction = reaction[Math.floor(Math.random() * reaction.length)];
     // let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'].random();
     message.channel.send({
@@ -71,7 +71,7 @@ exports.run = (Bastion, message, args) => {
         winners.forEach(user => {
           sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
             if (!receiver) {
-              sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args]).catch(e => {
+              sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args ]).catch(e => {
                 Bastion.log.error(e.stack);
               });
             }
@@ -121,5 +121,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'giveaway <amount>',
-  example: ['giveaway 10']
+  example: [ 'giveaway 10' ]
 };

@@ -141,7 +141,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['h'],
+  aliases: [ 'h' ],
   enabled: true
 };
 
@@ -151,5 +151,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'help [command_name]',
-  example: ['help', 'help magic8ball']
+  example: [ 'help', 'help magic8ball' ]
 };

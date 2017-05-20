@@ -74,5 +74,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'cite <MESSAGE_ID>',
-  example: ['cite 221133446677558899']
+  example: [ 'cite 221133446677558899' ]
 };

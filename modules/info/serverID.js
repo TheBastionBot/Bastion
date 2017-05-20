@@ -32,7 +32,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['sid'],
+  aliases: [ 'sid' ],
   enabled: true
 };
 

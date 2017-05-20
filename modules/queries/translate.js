@@ -61,7 +61,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['trans'],
+  aliases: [ 'trans' ],
   enabled: true
 };
 
@@ -71,5 +71,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'translate <language_code> <text>',
-  example: ['translate EN Je suis génial!']
+  example: [ 'translate EN Je suis génial!' ]
 };

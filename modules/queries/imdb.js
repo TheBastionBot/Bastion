@@ -110,5 +110,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'imdb <movie/tv series>',
-  example: ['imdb Snowden', 'imdb The Blacklist']
+  example: [ 'imdb Snowden', 'imdb The Blacklist' ]
 };

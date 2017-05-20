@@ -97,5 +97,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'profile [@user-mention]',
-  example: ['profle', 'profile @user#0001']
+  example: [ 'profle', 'profile @user#0001' ]
 };

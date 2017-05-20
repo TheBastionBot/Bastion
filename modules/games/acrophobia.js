@@ -28,7 +28,7 @@ exports.run = (Bastion, message) => {
     activeChannels[message.channel.id].usersSubmitted = [];
     activeChannels[message.channel.id].usersVoted = [];
 
-    let charPool = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    let charPool = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
     let acroLen = getRandomInt(2, 5);
     let acronym = [];
     for (let i = 0; i < acroLen; i++) {
@@ -215,7 +215,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: ['acro'],
+  aliases: [ 'acro' ],
   enabled: true
 };
 

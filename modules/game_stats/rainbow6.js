@@ -191,7 +191,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['r6'],
+  aliases: [ 'r6' ],
   enabled: true
 };
 
@@ -201,5 +201,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',
-  example: ['rainbow6 uplay SaffronPants']
+  example: [ 'rainbow6 uplay SaffronPants' ]
 };

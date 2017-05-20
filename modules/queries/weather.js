@@ -134,7 +134,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['we'],
+  aliases: [ 'we' ],
   enabled: true
 };
 
@@ -144,5 +144,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'weather <city [, country_code]|zipcode>',
-  example: ['weather London, UK', 'weather 94109']
+  example: [ 'weather London, UK', 'weather 94109' ]
 };

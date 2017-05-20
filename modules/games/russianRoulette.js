@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['rr'],
+  aliases: [ 'rr' ],
   enabled: true
 };
 
@@ -54,5 +54,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'russianRoulette [no_of_bullets]',
-  example: ['russianRoulette', 'russianRoulette 7']
+  example: [ 'russianRoulette', 'russianRoulette 7' ]
 };

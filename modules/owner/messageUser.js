@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['msgu'],
+  aliases: [ 'msgu' ],
   enabled: true
 };
 
@@ -56,5 +56,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'messageUser <user_id> <message>',
-  example: ['messageUser USER_ID Hello, how are you?']
+  example: [ 'messageUser USER_ID Hello, how are you?' ]
 };
