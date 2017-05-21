@@ -32,12 +32,6 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e.stack);
-    });
-  }
-
   try {
     args = JSON.parse(args.join(' '));
   }
@@ -55,6 +49,12 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: args
+  }).then(() => {
+    if (message.deletable) {
+      message.delete().catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
   }).catch(e => {
     Bastion.log.error(e.stack);
   });
