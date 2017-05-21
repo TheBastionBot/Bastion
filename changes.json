@@ -17,6 +17,7 @@
     "Minor fixes"
   ],
   "added": [
+    "Added `youtubeSearch` command",
     "Added `eslint` to `devDependencies`",
     "Added `snkrsnkampa/google-translate-api` dependency"
   ],
