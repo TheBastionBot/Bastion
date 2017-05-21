@@ -13,6 +13,7 @@
     "`sendEmbed` command now shows the error in the embed object (if any)",
     "Improved `poll` command",
     "Auto delete `sendEmbed` command",
+    "Improved `moderation` module",
     "Minor fixes"
   ],
   "added": [

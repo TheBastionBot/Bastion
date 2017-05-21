@@ -49,6 +49,8 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
+
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
   if (!message.guild.members.get(user.id).kickable) {
     return message.channel.send({
       embed: {

@@ -45,6 +45,8 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+
   args = args.slice(1);
   let color;
   let nickStat = '';
