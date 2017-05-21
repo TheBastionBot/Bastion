@@ -21,36 +21,43 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
-  if (!(role = message.mentions.roles.first())) {
+  let role = message.mentions.roles.first();
+  if (!role) {
     role = message.guild.roles.find('name', args.join(' '));
   }
 
   if (role) {
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: `Members in ${role.name} role:\n`,
-      description: role.members.size > 10 ? role.members.map(m => m.user.tag).splice(0, 10).join('\n') + `\nand ${role.members.size - 10} members.` :  role.members.map(m => m.user.tag).join('\n'),
-      thumbnail: {
-        url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`,
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: `Members in ${role.name} role:\n`,
+        description: role.members.size > 10 ? `${role.members.map(m => m.user.tag).splice(0, 10).join('\n')}\nand ${role.members.size - 10} members.` :  role.members.map(m => m.user.tag).join('\n'),
+        thumbnail: {
+          url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   else {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'The specified role was not found.'
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'The specified role was not found.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -67,5 +74,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'inRole <Role Name|@role-mention>',
-  example: ['inRole Role Name', 'inrole @roleMention']
+  example: [ 'inRole Role Name', 'inrole @roleMention' ]
 };

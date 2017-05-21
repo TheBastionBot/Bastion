@@ -21,11 +21,13 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -38,17 +40,19 @@ exports.run = (Bastion, message, args) => {
   args = args.replace(/s/ig, '5');
   args = args.replace(/t/ig, '7');
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Leet Text',
-    description: args
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Leet Text',
+      description: args
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['1337'],
+  aliases: [ '1337' ],
   enabled: true
 };
 
@@ -58,5 +62,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'leet <text>',
-  example: ['leet Hello, Everyone!']
+  example: [ 'leet Hello, Everyone!' ]
 };

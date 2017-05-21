@@ -24,10 +24,12 @@ exports.run = (Bastion, message, args) => {
 
   let command = args[0].toLowerCase();
   if (command === 'disablecommand' || command === 'disablecmd' || command === 'enablecommand' || command === 'enablecmd') {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `Can't disable \`${command}\` command.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `Can't disable \`${command}\` command.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -41,10 +43,12 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `\`${command}\` command was not found.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `\`${command}\` command was not found.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -52,16 +56,18 @@ exports.run = (Bastion, message, args) => {
   if (!command.config.enabled) return;
   command.config.enabled = false;
 
-  message.channel.send({embed: {
-    color: Bastion.colors.red,
-    description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`${Bastion.config.prefix}enableCommand ${command.help.name}\`.`
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.red,
+      description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`${Bastion.config.prefix}enableCommand ${command.help.name}\`.`
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['disablecmd'],
+  aliases: [ 'disablecmd' ],
   enabled: true
 };
 
@@ -71,5 +77,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'disableCommand <command_name>',
-  example: ['disableCommand echo']
+  example: [ 'disableCommand echo' ]
 };

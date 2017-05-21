@@ -23,11 +23,13 @@ const urllib = require('urllib');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -35,26 +37,31 @@ exports.run = (Bastion, message, args) => {
   urllib.request(`https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`, function (err, data) {
     try {
       data = JSON.parse(data).list;
-    } catch (e) {
+    }
+    catch (e) {
       return Bastion.log.error(e.stack);
     }
     let embed = {};
-    if (data.length != 0) {
-      embed = {embed: {
-        color: Bastion.colors.blue,
-        title: data[0].word,
-        url: `http://www.urbandictionary.com/define.php?term=${data[0].word}`,
-        description: data[0].definition,
-        footer: {
-          text: 'Powered by Urban Dictionary'
+    if (data.length !== 0) {
+      embed = {
+        embed: {
+          color: Bastion.colors.blue,
+          title: data[0].word,
+          url: `http://www.urbandictionary.com/define.php?term=${data[0].word}`,
+          description: data[0].definition,
+          footer: {
+            text: 'Powered by Urban Dictionary'
+          }
         }
-      }};
+      };
     }
     else {
-      embed = {embed: {
-        color: Bastion.colors.red,
-        description: `No definition found for the term **${args.join(' ')}**`,
-      }};
+      embed = {
+        embed: {
+          color: Bastion.colors.red,
+          description: `No definition found for the term **${args.join(' ')}**`
+        }
+      };
     }
 
     message.channel.send(embed).catch(e => {
@@ -64,7 +71,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ud'],
+  aliases: [ 'ud' ],
   enabled: true
 };
 
@@ -74,5 +81,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'urbanDictionary <word>',
-  example: ['urbanDictionary pineapple']
+  example: [ 'urbanDictionary pineapple' ]
 };

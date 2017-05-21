@@ -23,7 +23,7 @@ const fs = require('fs');
 const getDirSync = require('../../functions/getDirSync');
 let commands = {};
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let modules = getDirSync('./modules/');
   let fields = [];
   for (let i = 0; i < modules.length; i++) {
@@ -36,19 +36,23 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.author.send({embed: {
-    color: Bastion.colors.yellow,
-    title: 'List of Commands',
-    description: `To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).`,
-    fields: fields,
-    footer: {
-      text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
+  message.author.send({
+    embed: {
+      color: Bastion.colors.yellow,
+      title: 'List of Commands',
+      description: 'To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).',
+      fields: fields,
+      footer: {
+        text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
+      }
     }
-  }}).then(() => {
-    message.channel.send({embed: {
-      color: Bastion.colors.dark_grey,
-      description: `${message.author} Check your DM from me, I've sent you the list of commands.`
-    }}).catch(e => {
+  }).then(() => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.dark_grey,
+        description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
@@ -57,7 +61,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['cmds'],
+  aliases: [ 'cmds' ],
   enabled: true
 };
 
@@ -71,7 +75,9 @@ exports.help = {
 };
 
 function loadCommands(module) {
-  files = fs.readdirSync(`./modules/${module}/`);
+  // TODO: use async method or store modules in Bastion object while booting up.
+  // eslint-disable-next-line no-sync
+  let files = fs.readdirSync(`./modules/${module}/`);
   files.forEach(f => {
     let cmd = require(`../../modules/${module}/${f}`);
     commands[module].push(cmd.help.name);

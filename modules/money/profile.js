@@ -29,52 +29,56 @@ exports.run = (Bastion, message, args) => {
   sql.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).then(profile => {
     if (!profile) {
       if (args === message.author) {
-        return message.channel.send({embed: {
-          color: Bastion.colors.green,
-          description: `Your profile is now created, <@${args.id}>`
-        }}).catch(e => {
+        return message.channel.send({
+          embed: {
+            color: Bastion.colors.green,
+            description: `Your profile is now created, <@${args.id}>`
+          }
+        }).catch(e => {
           Bastion.log.error(e.stack);
         });
       }
-      else {
-        return message.channel.send({embed: {
+      return message.channel.send({
+        embed: {
           color: Bastion.colors.red,
           description: `<@${args.id}>'s profile is not yet created.`
-        }}).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
-    }
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'User Profile',
-      description: args.tag,
-      fields: [
-        {
-          name: 'Bastion Currency',
-          value: profile.bastionCurrencies,
-          inline: true
-        },
-        {
-          name: 'Rank',
-          value: profile.rank + 1,
-          inline: true
-        },
-        {
-          name: 'Experience Points',
-          value: profile.xp,
-          inline: true
-        },
-        {
-          name: 'Level',
-          value: profile.level,
-          inline: true
         }
-      ],
-      thumbnail: {
-        url: args.displayAvatarURL
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: 'User Profile',
+        description: args.tag,
+        fields: [
+          {
+            name: 'Bastion Currency',
+            value: profile.bastionCurrencies,
+            inline: true
+          },
+          {
+            name: 'Rank',
+            value: profile.rank + 1,
+            inline: true
+          },
+          {
+            name: 'Experience Points',
+            value: profile.xp,
+            inline: true
+          },
+          {
+            name: 'Level',
+            value: profile.level,
+            inline: true
+          }
+        ],
+        thumbnail: {
+          url: args.displayAvatarURL
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
@@ -93,5 +97,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'profile [@user-mention]',
-  example: ['profle', 'profile @user#0001']
+  example: [ 'profle', 'profile @user#0001' ]
 };

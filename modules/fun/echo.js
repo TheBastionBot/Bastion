@@ -21,25 +21,29 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.dark_grey,
-    description: args.join(' ')
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      description: args.join(' ')
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['say'],
+  aliases: [ 'say' ],
   enabled: true
 };
 
@@ -49,5 +53,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'echo <text>',
-  example: ['echo Hello, world!']
+  example: [ 'echo Hello, world!' ]
 };

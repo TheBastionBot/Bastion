@@ -23,11 +23,13 @@ const request = require('request');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -38,17 +40,19 @@ exports.run = (Bastion, message, args) => {
   }
   args[1] = args[1] && args[1] >= 0 && args[1] <= 20 ? args[1] : 13;
 
-  request({url: `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(args[0])}&zoom=${args[1]}&size=600x300&maptype=roadmap%20&markers=color:blue|${encodeURIComponent(args[0])}&key=${Bastion.credentials.googleAPIkey}`, encoding: null}, function (err, res, body) {
+  request({ url: `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(args[0])}&zoom=${args[1]}&size=600x300&maptype=roadmap%20&markers=color:blue|${encodeURIComponent(args[0])}&key=${Bastion.credentials.googleAPIkey}`, encoding: null }, function (err, res, body) {
     if (err) {
       Bastion.log.error(err);
-      return message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'Some error has occured, please check the console.'
-      }}).catch(e => {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'Some error has occured, please check the console.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.send({ files: [{ attachment: body }] }).catch(e => {
+    message.channel.send({ files: [ { attachment: body } ] }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });
@@ -65,5 +69,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'map <location> [--zoom <amount>]',
-  example: ['map New York, NY', 'map London Eye, London --zoom 18']
+  example: [ 'map New York, NY', 'map London Eye, London --zoom 18' ]
 };

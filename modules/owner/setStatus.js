@@ -24,10 +24,12 @@ exports.run = (Bastion, message, args) => {
 
   if (args.length >= 1 && (args === 'online' || args === 'idle' || args === 'dnd' || args === 'invisible') ) {
     Bastion.user.setStatus(args.join(' ')).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -36,10 +38,12 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     Bastion.user.setStatus(Bastion.config.status).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s status is now set to the default status **${Bastion.config.status}**`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `${Bastion.user.username}'s status is now set to the default status **${Bastion.config.status}**`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -59,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setStatus [online|idle|dnd|invisible]',
-  example: ['setStatus invisible', 'setStatus']
+  example: [ 'setStatus invisible', 'setStatus' ]
 };

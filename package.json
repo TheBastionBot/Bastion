@@ -1,11 +1,13 @@
 {
   "name": "bastion",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Bastion: A Discord BOT that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://bastion.js.org/",
   "main": "bastion.js",
   "scripts": {
-    "test": "node tests/boot.js",
+    "test:lint": "./node_modules/.bin/eslint .",
+    "test:boot": "node tests/boot.js",
+    "test": "npm run test:lint && npm run test:boot",
     "start": "node bastion.js"
   },
   "library": "discord.js",
@@ -26,7 +28,7 @@
     "color-convert": "^1.9.0",
     "discord.js": "11.1.0",
     "gamequery": "^1.0.16",
-    "google-translate-api": "^2.2.2",
+    "google-translate-api": "github:snkrsnkampa/google-translate-api",
     "imdb-api": "^2.2.2",
     "mathjs": "^3.13.1",
     "node-json-db": "^0.7.3",
@@ -41,5 +43,8 @@
     "xkcd": "^1.1.2",
     "youtube-dl": "^1.11.1",
     "zalgolize": "^1.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
   }
 }

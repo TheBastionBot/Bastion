@@ -21,7 +21,7 @@
 
 const CHANGES = require('../../changes.json');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let changes = [];
   if (CHANGES.updated.length !== 0) {
     changes.push({
@@ -42,25 +42,27 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.dark_grey,
-    title: 'Changelog',
-    url: 'https://bastion.js.org/changes',
-    description: `Bastion v${Bastion.package.version}`,
-    fields: changes,
-    thumbnail: {
-      url: Bastion.user.displayAvatarURL
-    },
-    footer: {
-      text: CHANGES.date
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      title: 'Changelog',
+      url: 'https://bastion.js.org/changes',
+      description: `Bastion v${Bastion.package.version}`,
+      fields: changes,
+      thumbnail: {
+        url: Bastion.user.displayAvatarURL
+      },
+      footer: {
+        text: CHANGES.date
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['clog', 'changes'],
+  aliases: [ 'clog', 'changes' ],
   enabled: true
 };
 

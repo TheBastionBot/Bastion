@@ -23,29 +23,35 @@ const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   args[0] = args[0].toLowerCase();
   if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `**${args[1]}** is not a valid BattleTag.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `**${args[1]}** is not a valid BattleTag.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -75,7 +81,7 @@ exports.run = (Bastion, message, args) => {
           value: `${data.profile.season.rank}`,
           inline: true
         }
-      )
+      );
     }
     stats.push(
       {
@@ -175,27 +181,31 @@ exports.run = (Bastion, message, args) => {
       name: 'Achievements',
       value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ') || '-'
     });
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      author: {
-        name: args[1],
-        url: data.profile.url,
-        icon_url: parseInt(data.profile.rank) ? data.profile.rankPicture : 'http://i.imgur.com/YZ4w2ey.png'
-      },
-      fields: stats,
-      thumbnail: {
-        url: data.profile.avatar !== '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        author: {
+          name: args[1],
+          url: data.profile.url,
+          icon_url: parseInt(data.profile.rank) ? data.profile.rankPicture : 'http://i.imgur.com/YZ4w2ey.png'
+        },
+        fields: stats,
+        thumbnail: {
+          url: data.profile.avatar !== '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
     if (e.stack.includes('NOT_FOUND')) {
-      message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -203,7 +213,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['ow'],
+  aliases: [ 'ow' ],
   enabled: true
 };
 
@@ -213,5 +223,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
-  example: ['overwatch us GH0S7#11143']
+  example: [ 'overwatch us GH0S7#11143' ]
 };

@@ -23,26 +23,30 @@ const dictionary = require('../../data/piratePhrases.json');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Pirate Speak:',
-    description: translate(args.join(' '))
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Pirate Speak:',
+      description: translate(args.join(' '))
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['pirate'],
+  aliases: [ 'pirate' ],
   enabled: true
 };
 
@@ -52,13 +56,13 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'pirateSpeak <text>',
-  example: ['pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can’t trust.']
+  example: [ 'pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can’t trust.' ]
 };
 
 function translateWord(word) {
-	let pirateWord = dictionary[word.toLowerCase()];
-	if (pirateWord === undefined) return word;
-	else return applyCase(word, pirateWord);
+  let pirateWord = dictionary[word.toLowerCase()];
+  if (pirateWord === undefined) return word;
+  return applyCase(word, pirateWord);
 }
 
 function applyCase(wordA, wordB) {
@@ -68,11 +72,12 @@ function applyCase(wordA, wordB) {
 
   let firstChar = wordA.slice(0, 1);
   let otherChars = wordA.slice(1);
-  if (firstChar === firstChar.toUpperCase() && otherChars === otherChars.toLowerCase())
+  if (firstChar === firstChar.toUpperCase() && otherChars === otherChars.toLowerCase()) {
     return wordB.slice(0, 1).toUpperCase() + wordB.slice(1).toLowerCase();
+  }
 
   return wordB;
-};
+}
 
 function isLetter(character) {
   if (character.search(/[a-zA-Z'-]/) === -1) return false;
@@ -80,26 +85,27 @@ function isLetter(character) {
 }
 
 function translate(text) {
-  let translatedText = "";
+  let translatedText = '';
   // Loop through the text, one character at a time.
-  let word = "";
+  let word = '';
   for (let i = 0; i < text.length; i += 1) {
     let character = text[i];
     // If the character is a letter, then we are in the middle of a word, so we should accumulate the letter into the word variable.
-    if (isLetter(character))
+    if (isLetter(character)) {
       word += character;
+    }
     // If the character is not a letter, then we hit the end of a word, so we should translate the current word and add it to the translation.
     else {
-      if (word !== "") {
+      if (word !== '') {
         // If we've just finished a word, translate it
         let pirateWord = translateWord(word);
         translatedText += pirateWord;
-        word = "";
+        word = '';
       }
       translatedText += character; // Add the non-letter character
     }
   }
   // If we ended the loop before translating a word, then translate the final word and add it to the translation.
-  if (word !== "") translatedText += translateWord(word);
+  if (word !== '') translatedText += translateWord(word);
   return translatedText;
-};
+}

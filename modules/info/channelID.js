@@ -19,32 +19,35 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) {
+exports.run = (Bastion, message) => {
+  let channel = message.mentions.channels.first();
+  if (!channel) {
     channel = message.channel;
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    fields: [
-      {
-        name: 'Channel',
-        value: `#${channel.name}`,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: channel.id,
-        inline: true
-      }
-    ]
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      fields: [
+        {
+          name: 'Channel',
+          value: `#${channel.name}`,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: channel.id,
+          inline: true
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['cid'],
+  aliases: [ 'cid' ],
   enabled: true
 };
 
@@ -54,5 +57,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'channelID [#channel-mention]',
-  example: ['channelID #channel-name', 'channelID']
+  example: [ 'channelID #channel-name', 'channelID' ]
 };

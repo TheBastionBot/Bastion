@@ -24,10 +24,12 @@ exports.run = (Bastion, message, args) => {
 
   if (args.length > 0) {
     message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -36,10 +38,12 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     message.guild.members.get(Bastion.user.id).setNickname('').then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s nick has been reset on this guild.`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `${Bastion.user.username}'s nick has been reset on this guild.`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -49,7 +53,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setn'],
+  aliases: [ 'setn' ],
   enabled: true
 };
 
@@ -59,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setNick [text]',
-  example: ['setNick NewNick', 'setNick']
+  example: [ 'setNick NewNick', 'setNick' ]
 };

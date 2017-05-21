@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-const weather = require('weather-js');
+const yt = require('youtube-dl');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -33,36 +33,62 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
   }
-  weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
-    if (err) return;
 
-    if (!result || result.length < 1) {
+  args = `ytsearch:${args.join(' ')}`;
+  yt.getInfo(args, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
+    if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
+      let result;
+      if (err && err.stack.includes('No video results')) {
+        result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
+      }
+      else {
+        result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
+      }
       return message.channel.send({
         embed: {
           color: Bastion.colors.red,
-          description: 'No weather data received, please try again later.'
+          description: result
         }
+      }).then(m => {
+        m.delete(30000).catch(e => {
+          Bastion.log.error(e.stack);
+        });
       }).catch(e => {
         Bastion.log.error(e.stack);
-      });
-    }
-
-    let fields = [];
-    for (let i = 0; i < result[0].forecast.length; i++) {
-      fields.push({
-        name: new Date(result[0].forecast[i].date).toDateString(),
-        value: `**Condition:** ${result[0].forecast[i].skytextday}\n**Low:** ${result[0].forecast[i].low} \u00B0${result[0].location.degreetype}\n**Hign:** ${result[0].forecast[i].high} \u00B0${result[0].location.degreetype}\n**Precipitation:** ${result[0].forecast[i].precip} cm`
       });
     }
 
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
-        title: 'Weather Forecast',
-        description: result[0].location.name,
-        fields: fields,
+        author: {
+          name: info.uploader,
+          url: info.uploader_url
+        },
+        title: info.title,
+        url: `https://youtu.be/${info.id}`,
+        fields: [
+          {
+            name: 'Likes',
+            value: `${info.like_count}`,
+            inline: true
+          },
+          {
+            name: 'Dislikes',
+            value: `${info.dislike_count}`,
+            inline: true
+          },
+          {
+            name: 'Views',
+            value: `${info.view_count}`,
+            inline: true
+          }
+        ],
+        image: {
+          url: info.thumbnail
+        },
         footer: {
-          text: 'Powered by MSN Weather'
+          text: info.is_live ? 'Live Now' : `Duration: ${info.duration}`
         }
       }
     }).catch(e => {
@@ -72,15 +98,15 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'wefc' ],
+  aliases: [ 'ytsearch' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'forecast',
-  description: 'Shows weather forecast for 5 days for a specified location by name or ZIP Code.',
+  name: 'youtubesearch',
+  description: 'Searches for a video on YouTube and shows the first result.',
   botPermission: '',
   userPermission: '',
-  usage: 'forecast <city [, country_code]|zipcode>',
-  example: [ 'forecast London, UK', 'forecast 94109' ]
+  usage: 'youtubeSearch <text>',
+  example: [ 'youtubeSearch Call of Duty WW2' ]
 };

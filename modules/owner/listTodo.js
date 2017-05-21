@@ -27,11 +27,13 @@ exports.run = (Bastion, message, args) => {
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo || todo.list === '[]') {
-      message.channel.send({embed: {
-        color: Bastion.colors.red,
-        title: 'Todo list not found',
-        description: `${message.author.username}, you haven't created a todo list.`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          title: 'Todo list not found',
+          description: `${message.author.username}, you haven't created a todo list.`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -46,29 +48,31 @@ exports.run = (Bastion, message, args) => {
         i = (args > 0 && args < list.length / 10 + 1) ? args : 1;
       }
       i = i - 1;
-      message.channel.send({embed: {
-        color: Bastion.colors.dark_grey,
-        description: `${message.author.username}, here's your todo list.`,
-        fields: [
-          {
-            name: 'Todo list',
-            value: list.slice(i * 10, (i * 10) + 10).join('\n')
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.dark_grey,
+          description: `${message.author.username}, here's your todo list.`,
+          fields: [
+            {
+              name: 'Todo list',
+              value: list.slice(i * 10, (i * 10) + 10).join('\n')
+            }
+          ],
+          footer: {
+            text: `Page: ${i + 1} of ${parseInt(list.length / 10 + 1)}`
           }
-        ],
-        footer: {
-          text: `Page: ${i + 1} of ${parseInt(list.length / 10 + 1)}`
         }
-      }}).catch(e => {
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
-  }).catch(() => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['todolist'],
+  aliases: [ 'todolist' ],
   enabled: true
 };
 
@@ -78,5 +82,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'listTodo [page_no]',
-  example: ['listTodo', 'listTodo 2']
+  example: [ 'listTodo', 'listTodo 2' ]
 };

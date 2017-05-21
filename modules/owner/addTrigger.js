@@ -27,39 +27,43 @@ exports.run = (Bastion, message, args) => {
 
   args = args.join(' ');
   if (!/.+ << .+/.test(args)) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   args = args.split(' << ');
-  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [args[0], args[1]]).catch(e => {
+  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args[0], args[1] ]).catch(e => {
     Bastion.log.error(e.stack);
   });
 
-  message.channel.send({embed: {
-    color: Bastion.colors.green,
-    title: 'New Trigger Added',
-    fields: [
-      {
-        name: 'Trigger',
-        value: args[0]
-      },
-      {
-        name: 'Response',
-        value: args[1]
-      }
-    ]
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      title: 'New Trigger Added',
+      fields: [
+        {
+          name: 'Trigger',
+          value: args[0]
+        },
+        {
+          name: 'Response',
+          value: args[1]
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['addtrip'],
+  aliases: [ 'addtrip' ],
   enabled: true
 };
 
@@ -69,5 +73,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'addTrigger <trigger> << <response>',
-  example: ['addTrigger Hi, there? << Hello $user! :wave:']
+  example: [ 'addTrigger Hi, there? << Hello $user! :wave:' ]
 };

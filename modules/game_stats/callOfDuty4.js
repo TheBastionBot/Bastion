@@ -23,11 +23,13 @@ const COD4 = require('gamequery');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args = args[0])) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -95,10 +97,10 @@ exports.run = (Bastion, message, args) => {
     if (data.players.length > 0) {
       let players = [];
       let scores = [];
-      for (i = 0; i < data.players.length; i++) {
+      for (let i = 0; i < data.players.length; i++) {
         players.push(data.players[i].name);
       }
-      for (i = 0; i < data.players.length; i++) {
+      for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].frags);
       }
       stats.push(
@@ -115,30 +117,34 @@ exports.run = (Bastion, message, args) => {
       );
     }
 
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: data.name,
-      description: '[Call of Duty 4®: Modern Warfare®](https://store.steampowered.com/app/7940)',
-      fields: stats,
-      footer: {
-        text: `Server Uptime: ${data.raw.uptime}`
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: data.name,
+        description: '[Call of Duty 4®: Modern Warfare®](https://store.steampowered.com/app/7940)',
+        fields: stats,
+        footer: {
+          text: `Server Uptime: ${data.raw.uptime}`
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
     Bastion.log.error(e);
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.',
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });
 };
 
 exports.config = {
-  aliases: ['cod4'],
+  aliases: [ 'cod4' ],
   enabled: true
 };
 
@@ -148,5 +154,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',
-  example: ['callOfDuty4 139.59.31.128', 'callOfDuty4 139.59.31.128:27016']
+  example: [ 'callOfDuty4 139.59.31.128', 'callOfDuty4 139.59.31.128:27016' ]
 };

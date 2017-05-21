@@ -27,11 +27,13 @@ exports.run = (Bastion, message, args) => {
   ];
   let userOutcome = args.join(' ').toUpperCase();
   if (!outcomes.includes(userOutcome)) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -57,10 +59,12 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
@@ -76,5 +80,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'rps <rock|paper|scissor>',
-  example: ['rps Rock']
+  example: [ 'rps Rock' ]
 };

@@ -19,32 +19,35 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
-  if (!(user = message.mentions.users.first())) {
+exports.run = (Bastion, message) => {
+  let user = message.mentions.users.first();
+  if (!user) {
     user = message.author;
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    fields: [
-      {
-        name: 'User',
-        value: user.tag,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: user.id,
-        inline: true
-      }
-    ]
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      fields: [
+        {
+          name: 'User',
+          value: user.tag,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['uid'],
+  aliases: [ 'uid' ],
   enabled: true
 };
 
@@ -54,5 +57,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'userID [@user-mention]',
-  example: ['userID @user#0001', 'userID']
+  example: [ 'userID @user#0001', 'userID' ]
 };

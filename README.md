@@ -1,5 +1,11 @@
 # Bastion: Discord BOT
-<a href="https://discord.gg/fzx8fkt"><img src="https://discordapp.com/api/guilds/267022940967665664/embed.png" alt="Discord server" /></a> [![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://bastion.js.org/changes) [![Website](https://img.shields.io/website-up-down-green-red/https/bastion.js.org.svg?label=Website)](https://bastion.js.org) <a href="/LICENSE"><img src="https://img.shields.io/badge/LICENSE-Shared%20Source-blue.svg" alt="Discord server" /></a>  
+<a href="https://discord.gg/fzx8fkt"><img src="https://discordapp.com/api/guilds/267022940967665664/embed.png" alt="Discord server" /></a>
+[![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://bastion.js.org/changes)
+[![Build Status](https://travis-ci.org/snkrsnkampa/Bastion.svg?branch=master)](https://travis-ci.org/snkrsnkampa/Bastion)
+[![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
+[![Dependencies](https://david-dm.org/snkrsnkampa/Bastion.svg)](https://david-dm.org/snkrsnkampa/Bastion)
+[![Website](https://img.shields.io/website-up-down-green-red/https/bastion.js.org.svg?label=Website)](https://bastion.js.org) <a href="/LICENSE">
+<img src="https://img.shields.io/badge/LICENSE-Shared%20Source-blue.svg" alt="Discord server" /></a>  
 
 <!--[![Github All Releases](https://img.shields.io/github/downloads/snkrsnkampa/Bastion/total.svg?style=flat-square)]()-->  
 #### What features do you think an ideal [Discord](https://discordapp.com) BOT should have?  

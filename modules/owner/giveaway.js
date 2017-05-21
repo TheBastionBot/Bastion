@@ -20,7 +20,6 @@
  */
 
 const sql = require('sqlite');
-const getRandomInt = require('../../functions/getRandomInt');
 sql.open('./data/Bastion.sqlite');
 let activeChannels = [];
 let winners = [];
@@ -28,34 +27,40 @@ let winners = [];
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1 || (isNaN(args = parseInt(args[0])) || args < 0)) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   if (!activeChannels.includes(message.channel.id)) {
-    let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'];
+    let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁', '🎁' ];
     reaction = reaction[Math.floor(Math.random() * reaction.length)];
     // let reaction = ['🎈', '🎊', '🎉', '🎃', '🎁', '🎁'].random();
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'GIVEAWAY! 🎉',
-      description: `Giveaway event started. React to this message with ${reaction} to get **${args}** Bastion Currencies.`,
-      footer: {
-        text: 'Event stops in 1 hour. You will get your reward after the event has concluded.'
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: 'GIVEAWAY! 🎉',
+        description: `Giveaway event started. React to this message with ${reaction} to get **${args}** Bastion Currencies.`,
+        footer: {
+          text: 'Event stops in 1 hour. You will get your reward after the event has concluded.'
+        }
       }
-    }}).then(msg => {
+    }).then(msg => {
       activeChannels.push(message.channel.id);
       setTimeout(function () {
-        msg.edit('', {embed: {
-          color: Bastion.colors.blue,
-          title: 'Giveaway event ended',
-          description: `Giveaway event has been ended. Thank you for participating. All the participants are being rewarded with **${args}** Bastion Currencies.`
-        }}).then(() => {
+        msg.edit('', {
+          embed: {
+            color: Bastion.colors.blue,
+            title: 'Giveaway event ended',
+            description: `Giveaway event has been ended. Thank you for participating. All the participants are being rewarded with **${args}** Bastion Currencies.`
+          }
+        }).then(() => {
           activeChannels.splice(activeChannels.indexOf(message.channel.id), 1);
         }).catch(e => {
           Bastion.log.error(e.stack);
@@ -63,10 +68,10 @@ exports.run = (Bastion, message, args) => {
         if (msg.reactions.get(reaction)) {
           winners = msg.reactions.get(reaction).users.map(u => u.id);
         }
-        winners.forEach((user, i) => {
+        winners.forEach(user => {
           sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
             if (!receiver) {
-              sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [user, args]).catch(e => {
+              sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args ]).catch(e => {
                 Bastion.log.error(e.stack);
               });
             }
@@ -76,10 +81,12 @@ exports.run = (Bastion, message, args) => {
               });
             }
           }).then(() => {
-            Bastion.users.get(user).send({embed: {
-              color: Bastion.colors.green,
-              description: `You have been awarded **${args}** Bastion Currencies for your participation in the giveaway event.`
-            }}).catch(e => {
+            Bastion.users.get(user).send({
+              embed: {
+                color: Bastion.colors.green,
+                description: `You have been awarded **${args}** Bastion Currencies for your participation in the giveaway event.`
+              }
+            }).catch(e => {
               Bastion.log.error(e.stack);
             });
           }).catch(e => {
@@ -92,10 +99,12 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: 'Can\'t start another giveaway event now. Another giveaway event is already active in this channel. Wait a for it to end.'
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Can\'t start another giveaway event now. Another giveaway event is already active in this channel. Wait a for it to end.'
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -112,5 +121,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'giveaway <amount>',
-  example: ['giveaway 10']
+  example: [ 'giveaway 10' ]
 };

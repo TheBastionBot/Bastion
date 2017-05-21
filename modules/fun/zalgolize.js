@@ -23,26 +23,30 @@ const zalgo = require('zalgolize');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Zalgolized Text:',
-    description: zalgo(args.join(' '))
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Zalgolized Text:',
+      description: zalgo(args.join(' '))
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['zalgo'],
+  aliases: [ 'zalgo' ],
   enabled: true
 };
 
@@ -52,5 +56,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'zaloglize <text>',
-  example: ['zaloglize It looks clumsy, but it\'s cool!']
+  example: [ 'zaloglize It looks clumsy, but it\'s cool!' ]
 };

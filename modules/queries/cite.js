@@ -21,33 +21,39 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^[0-9]{18}$/.test(args[0])) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   message.channel.fetchMessage(args[0]).then(msg => {
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      author: {
-        name: msg.author.tag,
-        icon_url: msg.author.avatarURL
-      },
-      description: msg.content,
-      timestamp: msg.createdAt
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        author: {
+          name: msg.author.tag,
+          icon_url: msg.author.avatarURL
+        },
+        description: msg.content,
+        timestamp: msg.createdAt
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
     if (e.stack.includes('Unknown Message')) {
-      message.channel.send({embed: {
-        color: Bastion.colors.red,
-        description: 'No message was found with the specified Message ID in this channel.'
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          description: 'No message was found with the specified Message ID in this channel.'
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }
@@ -68,5 +74,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'cite <MESSAGE_ID>',
-  example: ['cite 221133446677558899']
+  example: [ 'cite 221133446677558899' ]
 };

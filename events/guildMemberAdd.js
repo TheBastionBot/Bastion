@@ -33,13 +33,15 @@ module.exports = member => {
       greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
       greetMsg = greetMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
-      member.guild.channels.get(row.greetChannelID).send({embed: {
-        color: member.client.colors.green,
-        title: `Hello ${member.displayName}`,
-        description: greetMsg
-      }}).then(m => {
+      member.guild.channels.get(row.greetChannelID).send({
+        embed: {
+          color: member.client.colors.green,
+          title: `Hello ${member.displayName}`,
+          description: greetMsg
+        }
+      }).then(m => {
         if (row.greetTimeout > 0) {
-          m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
+          m.delete(1000 * parseInt(row.greetTimeout)).catch(e => {
             member.client.log.error(e.stack);
           });
         }
@@ -61,13 +63,15 @@ module.exports = member => {
       greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
       greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.client.config.prefix);
 
-      member.send({embed: {
-        color: member.client.colors.green,
-        title: `Hello ${member.displayName}`,
-        description: greetDMMsg
-      }}).then(m => {
+      member.send({
+        embed: {
+          color: member.client.colors.green,
+          title: `Hello ${member.displayName}`,
+          description: greetDMMsg
+        }
+      }).then(m => {
         if (row.greetTimeout > 0) {
-          m.delete(1000*parseInt(row.greetTimeout)).catch(e => {
+          m.delete(1000 * parseInt(row.greetTimeout)).catch(e => {
             member.client.log.error(e.stack);
           });
         }
@@ -83,23 +87,25 @@ module.exports = member => {
     if (!row) return;
     if (row.log === 'false') return;
 
-    member.guild.channels.get(row.logChannelID).send({embed: {
-      color: member.client.colors.green,
-      title: 'User Joined',
-      fields: [
-        {
-          name: 'User',
-          value: member.user.tag,
-          inline: true
-        },
-        {
-          name: 'User ID',
-          value: member.id,
-          inline: true
-        }
-      ],
-      timestamp: member.joinedAt
-    }}).catch(e => {
+    member.guild.channels.get(row.logChannelID).send({
+      embed: {
+        color: member.client.colors.green,
+        title: 'User Joined',
+        fields: [
+          {
+            name: 'User',
+            value: member.user.tag,
+            inline: true
+          },
+          {
+            name: 'User ID',
+            value: member.id,
+            inline: true
+          }
+        ],
+        timestamp: member.joinedAt
+      }
+    }).catch(e => {
       member.client.log.error(e.stack);
     });
   }).catch(e => {
@@ -108,7 +114,7 @@ module.exports = member => {
 
   SQL.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
-    autoAssignableRoles = JSON.parse(row.autoAssignableRoles);
+    let autoAssignableRoles = JSON.parse(row.autoAssignableRoles);
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
     if (autoAssignableRoles.length < 1) return;
     member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {

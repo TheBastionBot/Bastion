@@ -24,10 +24,12 @@ exports.run = (Bastion, message, args) => {
 
   if (args.join(' ').length >= 1) {
     Bastion.user.setUsername(args.join(' ')).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s username is now set to **${args.join(' ')}**`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `${Bastion.user.username}'s username is now set to **${args.join(' ')}**`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -37,7 +39,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setun'],
+  aliases: [ 'setun' ],
   enabled: true
 };
 
@@ -47,5 +49,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setUsername <text>',
-  example: ['setUsername NewUsername']
+  example: [ 'setUsername NewUsername' ]
 };

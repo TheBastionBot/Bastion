@@ -19,33 +19,36 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
-  if (!(user = message.mentions.users.first())) {
+exports.run = (Bastion, message) => {
+  let user = message.mentions.users.first();
+  if (!user) {
     user = message.author;
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    fields: [
-      {
-        name: 'User',
-        value: user.tag
-      },
-      {
-        name: 'Avatar URL',
-        value: user.displayAvatarURL
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      fields: [
+        {
+          name: 'User',
+          value: user.tag
+        },
+        {
+          name: 'Avatar URL',
+          value: user.displayAvatarURL
+        }
+      ],
+      image: {
+        url: user.displayAvatarURL
       }
-    ],
-    image: {
-      url: user.displayAvatarURL
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['av'],
+  aliases: [ 'av' ],
   enabled: true
 };
 
@@ -55,5 +58,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'avatar [@user-mention]',
-  example: ['avatar @user#001', 'avatar']
+  example: [ 'avatar @user#001', 'avatar' ]
 };

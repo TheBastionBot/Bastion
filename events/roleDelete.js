@@ -27,28 +27,30 @@ module.exports = role => {
     if (!row) return;
     if (row.log === 'false') return;
 
-    role.guild.channels.get(row.logChannelID).send({embed: {
-      color: role.client.colors.red,
-      title: 'Role Deleted',
-      fields: [
-        {
-          name: 'Role Name',
-          value: role.name,
-          inline: true
-        },
-        {
-          name: 'Role ID',
-          value: role.id,
-          inline: true
-        },
-        {
-          name: 'External',
-          value: role.managed,
-          inline: true
-        }
-      ],
-      timestamp: new Date()
-    }}).catch(e => {
+    role.guild.channels.get(row.logChannelID).send({
+      embed: {
+        color: role.client.colors.red,
+        title: 'Role Deleted',
+        fields: [
+          {
+            name: 'Role Name',
+            value: role.name,
+            inline: true
+          },
+          {
+            name: 'Role ID',
+            value: role.id,
+            inline: true
+          },
+          {
+            name: 'External',
+            value: role.managed,
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }
+    }).catch(e => {
       role.client.log.error(e.stack);
     });
   }).catch(e => {

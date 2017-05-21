@@ -37,11 +37,13 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'You rolled:',
-    description: outcome
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'You rolled:',
+      description: outcome
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
@@ -57,5 +59,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'roll [no_of_dice]',
-  example: ['roll', 'roll 5']
+  example: [ 'roll', 'roll 5' ]
 };

@@ -23,11 +23,13 @@ const flipText = require('../../data/flipText.json');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -37,11 +39,13 @@ exports.run = (Bastion, message, args) => {
     args = args.replace(Object.keys(flipText)[i], flipText[Object.keys(flipText)[i]]);
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Flipped Text:',
-    description: args.split('').reverse().join('')
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Flipped Text:',
+      description: args.split('').reverse().join('')
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
@@ -57,5 +61,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'fliptext <text>',
-  example: ['fliptext This is Upside Down!']
+  example: [ 'fliptext This is Upside Down!' ]
 };

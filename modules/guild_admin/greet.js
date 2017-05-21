@@ -22,10 +22,11 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   sql.get(`SELECT greet, greetChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+    let color, greetStats;
     if (row.greetChannelID === message.channel.id) {
       sql.run(`UPDATE guildSettings SET greet='false', greetChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
@@ -41,10 +42,12 @@ exports.run = (Bastion, message, args) => {
       greetStats = 'Greeting Messages are now enabled in this channel.';
     }
 
-    message.channel.send({embed: {
-      color: color,
-      description: greetStats
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        description: greetStats
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {

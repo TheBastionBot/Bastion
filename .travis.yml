@@ -1,0 +1,29 @@
+os: linux
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - "7"
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode8.3
+    - os: osx
+      osx_image: xcode7.3
+    - os: osx
+      osx_image: xcode6.4
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y build-essential; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g ffmpeg-binaries; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ffmpeg; fi
+install:
+  - npm install
+before_script:
+  - echo "{}" > settings/credentials.json
+  - echo "{}" > settings/config.json
+  - echo "[]" > data/favouriteSongs.json
+script:
+  - npm test

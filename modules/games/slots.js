@@ -19,7 +19,7 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let reel = [
     ':custard:',
     ':candy:',
@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
 
   let reels = [];
   for (let i = 0; i < 3; i++) {
-    reels.push(reel[Math.floor(Math.random() * reel.length)])
+    reels.push(reel[Math.floor(Math.random() * reel.length)]);
   }
 
   let result = 'Sorry, you lost.';
@@ -44,14 +44,16 @@ exports.run = (Bastion, message, args) => {
     result = 'Congrats! You won.';
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Slot Machine',
-    description: reels.join(' \u05C0 '),
-    footer: {
-      text: result
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Slot Machine',
+      description: reels.join(' \u05C0 '),
+      footer: {
+        text: result
+      }
     }
-  }}).catch(e => {
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

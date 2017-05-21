@@ -24,10 +24,12 @@ exports.run = (Bastion, message, args) => {
 
   if (args.length >= 1) {
     Bastion.user.setGame(args.join(' ')).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.yellow,
-        description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.yellow,
+          description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -36,10 +38,12 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     Bastion.user.setGame(Bastion.config.game).then(() => {
-      message.channel.send({embed: {
-        color: Bastion.colors.green,
-        description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -49,7 +53,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['setg'],
+  aliases: [ 'setg' ],
   enabled: true
 };
 
@@ -59,5 +63,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'setGame [text]',
-  example: ['setGame with minions!', 'setGame']
+  example: [ 'setGame with minions!', 'setGame' ]
 };

@@ -19,18 +19,20 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Server ID',
-    description: message.guild.id
-  }}).catch(e => {
+exports.run = (Bastion, message) => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Server ID',
+      description: message.guild.id
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['sid'],
+  aliases: [ 'sid' ],
   enabled: true
 };
 

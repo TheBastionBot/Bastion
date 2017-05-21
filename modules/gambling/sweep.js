@@ -19,25 +19,27 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let sweepedUser = message.channel.members.filter(m => !m.user.bot).random();
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Sweeped user',
-    fields: [
-      {
-        name: 'User',
-        value: sweepedUser.user.tag,
-        inline: true
-      },
-      {
-        name: 'ID',
-        value: sweepedUser.id,
-        inline: true
-      }
-    ]
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Sweeped user',
+      fields: [
+        {
+          name: 'User',
+          value: sweepedUser.user.tag,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: sweepedUser.id,
+          inline: true
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

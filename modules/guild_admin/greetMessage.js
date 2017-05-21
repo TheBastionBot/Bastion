@@ -26,11 +26,13 @@ exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1) {
     sql.get(`SELECT greetMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-      message.channel.send({embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'Greeting message:',
-        description: guild.greetMessage
-      }}).catch(e => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.dark_grey,
+          title: 'Greeting message:',
+          description: guild.greetMessage
+        }
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     }).catch(e => {
@@ -42,18 +44,20 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
 
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      title: 'Greeting message set to:',
-      description: args.join(' ')
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        title: 'Greeting message set to:',
+        description: args.join(' ')
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 };
 
 exports.config = {
-  aliases: ['gmsg'],
+  aliases: [ 'gmsg' ],
   enabled: true
 };
 
@@ -63,5 +67,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Administrator',
   usage: 'greetMessage [Message]',
-  example: ['greetMessage Hello $user! Welcome to $server.']
+  example: [ 'greetMessage Hello $user! Welcome to $server.' ]
 };

@@ -32,10 +32,12 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `\`${command}\` command was not found.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `\`${command}\` command was not found.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -43,16 +45,18 @@ exports.run = (Bastion, message, args) => {
   if (command.config.enabled) return;
   command.config.enabled = true;
 
-  message.channel.send({embed: {
-    color: Bastion.colors.green,
-    description: `\`${command.help.name}\` command has been enabled.`
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      description: `\`${command.help.name}\` command has been enabled.`
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['enablecmd'],
+  aliases: [ 'enablecmd' ],
   enabled: true
 };
 
@@ -62,5 +66,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'enableCommand <command_name>',
-  example: ['enableCommand echo']
+  example: [ 'enableCommand echo' ]
 };

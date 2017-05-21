@@ -24,27 +24,33 @@ const r6 = new RainbowSix();
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 2) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.yellow,
-      title: 'Usage',
-      description: `\`${Bastion.config.prefix}${this.help.usage}\``
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.yellow,
+        title: 'Usage',
+        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   if (!/^(uplay|ps4|xone)$/.test(args[0] = args[0].toLowerCase())) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `**${args[1]}** is not a valid username.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `**${args[1]}** is not a valid username.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -70,7 +76,7 @@ exports.run = (Bastion, message, args) => {
       stats.push(
         {
           name: 'Ranked',
-          value: `${args[1]} has played Ranked games for **${(data.player.stats.ranked.playtime/60/60).toFixed(2)}** Hours.`
+          value: `${args[1]} has played Ranked games for **${(data.player.stats.ranked.playtime / 60 / 60).toFixed(2)}** Hours.`
         },
         {
           name: 'Wins',
@@ -116,7 +122,7 @@ exports.run = (Bastion, message, args) => {
       stats.push(
         {
           name: 'Casual',
-          value: `${args[1]} has played Casual games for **${(data.player.stats.casual.playtime/60/60).toFixed(2)}** Hours.`
+          value: `${args[1]} has played Casual games for **${(data.player.stats.casual.playtime / 60 / 60).toFixed(2)}** Hours.`
         },
         {
           name: 'Wins',
@@ -158,30 +164,34 @@ exports.run = (Bastion, message, args) => {
         }
       );
     }
-    message.channel.send({embed: {
-      color: Bastion.colors.blue,
-      title: 'Rainbow 6',
-      url: `https://r6stats.com/stats/${args[0]}/${encodeURIComponent(args[1])}`,
-      fields: stats,
-      thumbnail: {
-        url: 'https://vignette1.wikia.nocookie.net/rainbowsix/images/0/06/Rainbow_(Clear_Background)_logo.png'
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.blue,
+        title: 'Rainbow 6',
+        url: `https://r6stats.com/stats/${args[0]}/${encodeURIComponent(args[1])}`,
+        fields: stats,
+        thumbnail: {
+          url: 'https://vignette1.wikia.nocookie.net/rainbowsix/images/0/06/Rainbow_(Clear_Background)_logo.png'
+        }
       }
-    }}).catch(e => {
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
     Bastion.log.error(e.stack);
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `No player with username **${args[1]}** found for the platform **${args[0]}**.`
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `No player with username **${args[1]}** found for the platform **${args[0]}**.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   });
 };
 
 exports.config = {
-  aliases: ['r6'],
+  aliases: [ 'r6' ],
   enabled: true
 };
 
@@ -191,5 +201,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',
-  example: ['rainbow6 uplay SaffronPants']
+  example: [ 'rainbow6 uplay SaffronPants' ]
 };

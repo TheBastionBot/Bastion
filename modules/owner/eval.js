@@ -32,19 +32,21 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.send({embed: {
-      color: Bastion.colors.green,
-      fields: [
-        {
-          name: ':inbox_tray:  INPUT',
-          value: `\`\`\`js\n${args.join(' ')}\n\`\`\``
-        },
-        {
-          name: ':outbox_tray:  OUTPUT',
-          value: `\`\`\`js\n${clean(Bastion, evaled)}\n\`\`\``
-        }
-      ]
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        fields: [
+          {
+            name: ':inbox_tray:  INPUT',
+            value: `\`\`\`js\n${args.join(' ')}\n\`\`\``
+          },
+          {
+            name: ':outbox_tray:  OUTPUT',
+            value: `\`\`\`js\n${clean(Bastion, evaled)}\n\`\`\``
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -54,15 +56,17 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    message.channel.send({embed: {
-      color: Bastion.colors.red,
-      fields: [
-        {
-          name: ':no_entry:  ERROR',
-          value: `\`\`\`js\n${clean(Bastion, e)}\n\`\`\``
-        }
-      ]
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        fields: [
+          {
+            name: ':no_entry:  ERROR',
+            value: `\`\`\`js\n${clean(Bastion, e)}\n\`\`\``
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
@@ -79,12 +83,16 @@ exports.help = {
   botPermission: '',
   userPermission: 'Bot Owner',
   usage: 'eval <JavaScript code>',
-  example: ['eval message.guild.members.size']
+  example: [ 'eval message.guild.members.size' ]
 };
 
 function clean(Bastion, text) {
   text = text.toString();
-  if (text.includes(Bastion.token)) text = text.replace(Bastion.token, 'Not for your :eyes:!');
-  if (typeof(text) === 'string') return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
-  else return text;
+  if (text.includes(Bastion.token)) {
+    text = text.replace(Bastion.token, 'Not for your :eyes:!');
+  }
+  if (typeof(text) === 'string') {
+    return text.replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
+  }
+  return text;
 }

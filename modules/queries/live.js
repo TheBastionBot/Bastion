@@ -19,13 +19,15 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
+exports.run = (Bastion, message) => {
   let streamers = Array.from(message.guild.presences.filter(p => p.game && p.game.streaming === true).keys());
-  message.channel.send({embed: {
-    color: Bastion.colors.violet,
-    title: 'Users Streaming',
-    description: streamers.length > 10 ? `<@${streamers.splice(0, 10).join('>\n<@')}>` + `\nand ${streamers.length - 10} others are now live.` : `<@${streamers.join('>\n<@')}>`
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.violet,
+      title: 'Users Streaming',
+      description: streamers.length > 10 ? `<@${streamers.splice(0, 10).join('>\n<@')}>\nand ${streamers.length - 10} others are now live.` : `<@${streamers.join('>\n<@')}>`
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };

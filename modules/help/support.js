@@ -19,25 +19,27 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.yellow,
-    title: 'Bastion BOT - Support Server',
-    url: 'https://discord.gg/fzx8fkt',
-    description: `Need help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt`,
-    fields: [
-      {
-        name: 'Website',
-        value: 'https://bastion.js.org/'
-      }
-    ]
-  }}).catch(e => {
+exports.run = (Bastion, message) => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.yellow,
+      title: 'Bastion BOT - Support Server',
+      url: 'https://discord.gg/fzx8fkt',
+      description: 'Need help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt',
+      fields: [
+        {
+          name: 'Website',
+          value: 'https://bastion.js.org/'
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['ss'],
+  aliases: [ 'ss' ],
   enabled: true
 };
 

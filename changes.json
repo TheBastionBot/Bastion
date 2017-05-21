@@ -1,14 +1,29 @@
 {
-  "date": "May 18, 2017",
+  "date": "May 22, 2017",
   "updated": [
-    "Moved `overwatch` and `rainbow6` commands to `game_stats` module"
+    "Code improvements",
+    "Improved log handler",
+    "Fixed some connection issues with music module",
+    "Fixed `enableAllCommands` not sending message",
+    "Fixed a string",
+    "Fixed `shutdown` command",
+    "Improved some RegEx",
+    "Improved `acrophobia` game command",
+    "Improved `typingGame` game command",
+    "`sendEmbed` command now shows the error in the embed object (if any)",
+    "Improved `poll` command",
+    "Auto delete `sendEmbed` command after successful execution",
+    "Improved `moderation` module",
+    "Music messages won't auto delete anymore",
+    "Minor fixes"
   ],
   "added": [
-    "Added `callOfDuty4` command",
-    "Added `teamFortress2` command",
-    "Added `minecraft` command",
-    "Added `counterStrikeGlobalOffensive` command",
-    "Added `hello` command"
+    "Added `youtubeSearch` query command",
+    "Added `listWarns` moderation command",
+    "Added `eslint` to `devDependencies`",
+    "Added `snkrsnkampa/google-translate-api` dependency"
   ],
-  "removed": []
+  "removed": [
+    "Removed `google-translate-api` dependency"
+  ]
 }

@@ -19,22 +19,25 @@
  * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
  */
 
-exports.run = (Bastion, message, args) => {
-  if (!(channel = message.mentions.channels.first())) {
+exports.run = (Bastion, message) => {
+  let channel = message.mentions.channels.first();
+  if (!channel) {
     channel = message.channel;
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'Channel Topic',
-    description: (channel.topic === null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Channel Topic',
+      description: (channel.topic === null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['ct'],
+  aliases: [ 'ct' ],
   enabled: true
 };
 
@@ -44,5 +47,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'channelTopic [#channel-mention]',
-  example: ['channelTopic #channel-name', 'channelTopic']
+  example: [ 'channelTopic #channel-name', 'channelTopic' ]
 };

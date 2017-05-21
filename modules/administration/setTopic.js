@@ -20,51 +20,55 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  let topic = '';
-  if (!(channel = message.mentions.channels.first())) {
+  let channel = message.mentions.channels.first();
+  let topic;
+  if (!channel) {
     channel = message.channel;
     topic = args.join(' ');
   }
   else {
     topic = args.slice(1).join(' ').trim();
   }
+
   if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
-    return message.channel.send({embed: {
-      color: Bastion.colors.red,
-      description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-    }}).catch(e => {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
 
   let color = Bastion.colors.green;
+  let title = 'Channel Topic Set';
   if (topic.length < 2) {
     topic = ' ';
     title = 'Channel Topic Removed';
     color = Bastion.colors.red;
   }
-  else {
-    title = 'Channel Topic Set';
-  }
 
   channel.setTopic(topic).then(() => {
-    message.channel.send({embed: {
-      color: color,
-      title: title,
-      fields: [
-        {
-          name: 'Channel Name',
-          value: `#${channel.name}`,
-          inline: true
-        },
-        {
-          name: 'Topic',
-          value: channel.topic.length > 1 ? channel.topic : '-',
-          inline: true
-        }
-      ]
-    }}).catch(e => {
+    message.channel.send({
+      embed: {
+        color: color,
+        title: title,
+        fields: [
+          {
+            name: 'Channel Name',
+            value: `#${channel.name}`,
+            inline: true
+          },
+          {
+            name: 'Topic',
+            value: channel.topic.length > 1 ? channel.topic : '-',
+            inline: true
+          }
+        ]
+      }
+    }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }).catch(e => {
@@ -73,7 +77,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: ['st'],
+  aliases: [ 'st' ],
   enabled: true
 };
 
@@ -83,5 +87,5 @@ exports.help = {
   botPermission: 'Manage Channels',
   userPermission: 'Manage Channels',
   usage: 'setTopic [#channel-mention] [Channel Topic]',
-  example: ['setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic']
+  example: [ 'setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic' ]
 };

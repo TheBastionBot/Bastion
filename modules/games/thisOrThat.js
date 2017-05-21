@@ -21,18 +21,20 @@
 
 const question = require('../../data/thisOrThat.json');
 
-exports.run = (Bastion, message, args) => {
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    description: question[Math.floor(Math.random() * question.length)]
-    // description: question.random()
-  }}).catch(e => {
+exports.run = (Bastion, message) => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      description: question[Math.floor(Math.random() * question.length)]
+      // description: question.random()
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
 
 exports.config = {
-  aliases: ['thisthat'],
+  aliases: [ 'thisthat' ],
   enabled: true
 };
 

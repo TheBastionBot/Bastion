@@ -27,7 +27,41 @@ exports.run = (Bastion, message, args) => {
   if (args[0] !== undefined && !isNaN(num)) {
     xkcd(function (data) {
       xkcd(num > data.num ? data.num : num, function (data) {
-        message.channel.send({embed: {
+        message.channel.send({
+          embed: {
+            color: Bastion.colors.blue,
+            title: data.title,
+            description: data.alt,
+            url: `https://xkcd.com/${data.num}`,
+            fields: [
+              {
+                name: 'Comic Number',
+                value: data.num,
+                inline: true
+              },
+              {
+                name: 'Publication Date',
+                value: new Date(data.year, data.month, data.day).toDateString(),
+                inline: true
+              }
+            ],
+            image: {
+              url: data.img
+            },
+            footer: {
+              text: 'Powered by xkcd'
+            }
+          }
+        }).catch(e => {
+          Bastion.log.error(e.stack);
+        });
+      });
+    });
+  }
+  else if (args[0] !== undefined && args[0].toLowerCase() === 'latest') {
+    xkcd(function (data) {
+      message.channel.send({
+        embed: {
           color: Bastion.colors.blue,
           title: data.title,
           description: data.alt,
@@ -50,38 +84,8 @@ exports.run = (Bastion, message, args) => {
           footer: {
             text: 'Powered by xkcd'
           }
-        }}).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      });
-    });
-  }
-  else if (args[0] !== undefined && args[0].toLowerCase() === 'latest') {
-    xkcd(function (data) {
-      message.channel.send({embed: {
-        color: Bastion.colors.blue,
-        title: data.title,
-        description: data.alt,
-        url: `https://xkcd.com/${data.num}`,
-        fields: [
-          {
-            name: 'Comic Number',
-            value: data.num,
-            inline: true
-          },
-          {
-            name: 'Publication Date',
-            value: new Date(data.year, data.month, data.day).toDateString(),
-            inline: true
-          }
-        ],
-        image: {
-          url: data.img
-        },
-        footer: {
-          text: 'Powered by xkcd'
         }
-      }}).catch(e => {
+      }).catch(e => {
         Bastion.log.error(e.stack);
       });
     });
@@ -90,30 +94,32 @@ exports.run = (Bastion, message, args) => {
     xkcd(function (data) {
       let num = getRandomInt(1, data.num);
       xkcd(num, function (data) {
-        message.channel.send({embed: {
-          color: Bastion.colors.blue,
-          title: data.title,
-          description: data.alt,
-          url: `https://xkcd.com/${data.num}`,
-          fields: [
-            {
-              name: 'Comic Number',
-              value: data.num,
-              inline: true
+        message.channel.send({
+          embed: {
+            color: Bastion.colors.blue,
+            title: data.title,
+            description: data.alt,
+            url: `https://xkcd.com/${data.num}`,
+            fields: [
+              {
+                name: 'Comic Number',
+                value: data.num,
+                inline: true
+              },
+              {
+                name: 'Publication Date',
+                value: new Date(data.year, data.month, data.day).toDateString(),
+                inline: true
+              }
+            ],
+            image: {
+              url: data.img
             },
-            {
-              name: 'Publication Date',
-              value: new Date(data.year, data.month, data.day).toDateString(),
-              inline: true
+            footer: {
+              text: 'Powered by xkcd'
             }
-          ],
-          image: {
-            url: data.img
-          },
-          footer: {
-            text: 'Powered by xkcd'
           }
-        }}).catch(e => {
+        }).catch(e => {
           Bastion.log.error(e.stack);
         });
       });
@@ -132,5 +138,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'xkcd [latest|comic_number]',
-  example: ['xkcd', 'xkcd latest', 'xkcd 834']
+  example: [ 'xkcd', 'xkcd latest', 'xkcd 834' ]
 };

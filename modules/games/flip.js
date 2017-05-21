@@ -33,11 +33,13 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  message.channel.send({embed: {
-    color: Bastion.colors.blue,
-    title: 'You flipped:',
-    description: outcome
-  }}).catch(e => {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'You flipped:',
+      description: outcome
+    }
+  }).catch(e => {
     Bastion.log.error(e.stack);
   });
 };
@@ -53,5 +55,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'flip [no_of_coins]',
-  example: ['flip', 'flip 5']
+  example: [ 'flip', 'flip 5' ]
 };
