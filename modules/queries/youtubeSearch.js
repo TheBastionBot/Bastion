@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
-    // return console.log(info);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
