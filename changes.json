@@ -14,6 +14,7 @@
     "Improved `poll` command",
     "Auto delete `sendEmbed` command",
     "Improved `moderation` module",
+    "Music messages won't auto delete anymore",
     "Minor fixes"
   ],
   "added": [
