@@ -18,7 +18,8 @@
     "Minor fixes"
   ],
   "added": [
-    "Added `youtubeSearch` command",
+    "Added `youtubeSearch` query command",
+    "Added `listWarns` moderation command",
     "Added `eslint` to `devDependencies`",
     "Added `snkrsnkampa/google-translate-api` dependency"
   ],

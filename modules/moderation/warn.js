@@ -22,6 +22,7 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 let guilds = {};
+exports.warns = guilds;
 
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission('KICK_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
