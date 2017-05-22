@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Bastion: A Discord BOT that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://bastion.js.org/",
   "main": "bastion.js",
@@ -35,7 +35,7 @@
     "node-opus": "^0.2.6",
     "overwatch-js": "^1.5.0",
     "rainbowsix-api-node": "^0.0.1",
-    "sqlite": "^2.7.0",
+    "sqlite": "^2.8.0",
     "urllib": "^2.22.0",
     "weather-js": "^2.0.0",
     "webshot": "^0.18.0",
