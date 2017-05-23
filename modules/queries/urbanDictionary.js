@@ -45,25 +45,26 @@ exports.run = (Bastion, message, args) => {
       color = Bastion.colors.blue;
       try {
         body = JSON.parse(body).list[0];
+
+        data = [
+          {
+            name: 'Word',
+            value: body.word || args.join(' ')
+          },
+          {
+            name: 'Definition',
+            value: body.definition || '-'
+          },
+          {
+            name: 'Example',
+            value: body.example || '-'
+          }
+        ];
       }
       catch (e) {
         color = Bastion.colors.red;
         description = 'Some error has occured while parsing the received data. Please try again later.';
       }
-      data = [
-        {
-          name: 'Word',
-          value: body.word || args.join(' ')
-        },
-        {
-          name: 'Definition',
-          value: body.definition || '-'
-        },
-        {
-          name: 'Example',
-          value: body.example || '-'
-        }
-      ];
     }
     else {
       color = Bastion.colors.red;
