@@ -1,8 +1,9 @@
 {
-  "date": "May 23, 2017",
+  "date": "May 24, 2017",
   "updated": [
     "Fixed `filterLink` command strings",
-    "Improvements `urbanDictionary` command",
+    "Improvements to `urbanDictionary` command",
+    "Improvements to `wikipedia` command",
     "Improvements to update/upgrade scripts"
   ],
   "added": [],
