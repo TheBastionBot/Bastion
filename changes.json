@@ -1,29 +1,13 @@
 {
-  "date": "May 22, 2017",
+  "date": "May 24, 2017",
   "updated": [
-    "Code improvements",
-    "Improved log handler",
-    "Fixed some connection issues with music module",
-    "Fixed `enableAllCommands` not sending message",
-    "Fixed a string",
-    "Fixed `shutdown` command",
-    "Improved some RegEx",
-    "Improved `acrophobia` game command",
-    "Improved `typingGame` game command",
-    "`sendEmbed` command now shows the error in the embed object (if any)",
-    "Improved `poll` command",
-    "Auto delete `sendEmbed` command after successful execution",
-    "Improved `moderation` module",
-    "Music messages won't auto delete anymore",
-    "Minor fixes"
+    "Fixed `filterLink` command strings",
+    "Improvements to `urbanDictionary` command",
+    "Improvements to `wikipedia` command",
+    "Improvements to update/upgrade scripts"
   ],
-  "added": [
-    "Added `youtubeSearch` query command",
-    "Added `listWarns` moderation command",
-    "Added `eslint` to `devDependencies`",
-    "Added `snkrsnkampa/google-translate-api` dependency"
-  ],
+  "added": [],
   "removed": [
-    "Removed `google-translate-api` dependency"
+    "Removed `imdb` command, for now, as using the API requires an API key & to get an API key, users need to be their Patron"
   ]
 }
