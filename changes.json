@@ -1,6 +1,7 @@
 {
   "date": "May 23, 2017",
   "updated": [
+    "Fixed `filterLink` command strings",
     "Improvements to update/upgrade scripts"
   ],
   "added": [],

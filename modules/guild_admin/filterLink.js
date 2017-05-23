@@ -42,14 +42,14 @@ exports.run = (Bastion, message) => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.green;
-      filterLinkStats = 'Enabled automatic deletion of discord server invites posted in this server.';
+      filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
     }
     else {
       sql.run(`UPDATE guildSettings SET filterLink='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.red;
-      filterLinkStats = 'Disabled automatic deletion of discord server invites posted in this server.';
+      filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
     }
 
     message.channel.send({
