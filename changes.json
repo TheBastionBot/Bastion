@@ -2,6 +2,7 @@
   "date": "May 23, 2017",
   "updated": [
     "Fixed `filterLink` command strings",
+    "Improvements `urbanDictionary` command",
     "Improvements to update/upgrade scripts"
   ],
   "added": [],
