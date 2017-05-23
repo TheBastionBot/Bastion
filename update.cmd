@@ -15,7 +15,7 @@ ECHO [Bastion]: Done.
 ECHO.
 
 ECHO [Bastion]: Updating dependencies...
-CALL npm install >nul 2>update.log
+CALL npm install --production >nul 2>update.log
 CALL npm install -g ffmpeg-binaries >nul 2>update.log
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Deleting unused dependencies...

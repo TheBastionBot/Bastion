@@ -1,6 +1,8 @@
 {
-  "date": "May 22, 2017",
-  "updated": [],
+  "date": "May 23, 2017",
+  "updated": [
+    "Improvements to update/upgrade scripts"
+  ],
   "added": [],
   "removed": [
     "Removed `imdb` command, for now, as using the API requires an API key & to get an API key, users need to be their Patron"

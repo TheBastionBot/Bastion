@@ -19,7 +19,7 @@ RD /S /Q node_modules
 DEL /Q data/Bastion.sqlite
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
-CALL npm install >nul 2>update.log
+CALL npm install --production >nul 2>update.log
 CALL npm install -g ffmpeg-binaries >nul 2>update.log
 ECHO [Bastion]: Done.
 ECHO [Bastion]: If you get any errors please check the update.log file for errors while updating.
