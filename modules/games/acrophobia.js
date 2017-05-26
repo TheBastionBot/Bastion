@@ -227,6 +227,13 @@ exports.help = {
   example: []
 };
 
+/**
+ * Matches the first character of each element of a array of string to a character pool.
+ * @function matchAcronym
+ * @param {array} charPool The array that contains the character pool.
+ * @param {array} strArr The array of the string to match with the character pool.
+ * @returns {boolean} If the first character of each element of the array of string matches the character pool.
+*/
 function matchAcronym(charPool, strArr) {
   for (let i = 0; i < charPool.length; i++) {
     if (charPool[i] !== strArr[i].charAt(0).toUpperCase()) {

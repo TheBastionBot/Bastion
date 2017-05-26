@@ -602,6 +602,12 @@ exports.help = {
   example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -pl https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -favs' ]
 };
 
+/**
+ * Shuffles an array.
+ * @function shuffle
+ * @param {array} array The array to shuffle.
+ * @returns {array} The shuffled array.
+ */
 function shuffle(array) {
   let i = array.length;
   while (i) {

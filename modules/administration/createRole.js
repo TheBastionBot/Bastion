@@ -106,6 +106,13 @@ exports.help = {
   example: [ 'createrole #dc143c Role Name', 'createrole #dc143c', 'createrole Role Name', 'createrole' ]
 };
 
+/**
+ * Takes Discord role info and returns the role data object for use.
+ * @function roleData
+ * @param {string} [name=new role] role The array that contains the character pool.
+ * @param {string} [color=0] The array of the string to match with the character pool.
+ * @returns {object} The Discord role data object.
+*/
 function roleData(name = 'new role', color = '#000000') {
   let data = {
     name: name,

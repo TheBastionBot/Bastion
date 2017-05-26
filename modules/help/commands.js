@@ -74,6 +74,12 @@ exports.help = {
   example: []
 };
 
+/**
+ * Loads the commands
+ * @function loadCommands
+ * @param {string} module The name of the module.
+ * @returns {void}
+*/
 function loadCommands(module) {
   // TODO: use async method or store modules in Bastion object while booting up.
   // eslint-disable-next-line no-sync

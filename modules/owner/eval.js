@@ -86,10 +86,17 @@ exports.help = {
   example: [ 'eval message.guild.members.size' ]
 };
 
+/**
+ * Cleans the evaled result from tokens, etc.
+ * @function clean
+ * @param {object} Bastion The Bastion object.
+ * @param {string} text The evaled result/error before cleaning.
+ * @returns {string} The evaled result/error after cleaning.
+ */
 function clean(Bastion, text) {
   text = text.toString();
   if (text.includes(Bastion.token)) {
-    text = text.replace(Bastion.token, 'Not for your :eyes:!');
+    text = text.replace(Bastion.token, 'Not for your evil :eyes:!');
   }
   if (typeof(text) === 'string') {
     return text.replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
