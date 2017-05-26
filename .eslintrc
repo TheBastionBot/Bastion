@@ -11,6 +11,7 @@
     # Possible Errors
     no-console: "warn",
     no-template-curly-in-string: "warn",
+    valid-jsdoc: "warn",
 
     # Best Practices
     curly: [ "warn", "multi-line" ],
@@ -56,6 +57,7 @@
     no-unneeded-ternary: "error",
     object-curly-spacing: ["warn", "always"],
     quotes: [ "warn", "single" ],
+    require-jsdoc: "warn",
     semi: [ "error", "always" ],
     space-infix-ops: "warn",
     spaced-comment: ["error", "always"],
