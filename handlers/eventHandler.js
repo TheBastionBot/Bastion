@@ -5,16 +5,17 @@
  */
 
 /**
+ * Loads the events
  * @function LOAD_EVENTS
- * @param {string} event Name of the event
- * @returns {function} The event's function
+ * @param {string} event Name of the event.
+ * @returns {function} The event's function.
  */
 const LOAD_EVENTS = event => require(`../events/${event}`);
 
 /**
  * Handles/Loads all the events.
  * @module eventHandler
- * @param {object} Bastion The Bastion Object
+ * @param {object} Bastion The Bastion Object.
  * @returns {void}
  */
 module.exports = Bastion => {

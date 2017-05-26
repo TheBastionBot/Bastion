@@ -10,7 +10,7 @@ const GET_DIR_SYNC = require('../functions/getDirSync');
 /**
  * Handles/Loads all the events.
  * @module moduleHandler
- * @param {object} Bastion The Bastion Object
+ * @param {object} Bastion The Bastion Object.
  * @returns {void}
  */
 module.exports = Bastion => {
@@ -22,10 +22,11 @@ module.exports = Bastion => {
 };
 
 /**
-  @function loadEvent
-  @param {object} Bastion The Bastion object
-  @param {string} module The name of the module
-  @returns {void}
+ * Loads all the events.
+ * @function loadEvent
+ * @param {object} Bastion The Bastion object.
+ * @param {string} module The name of the module.
+ * @returns {void}
 */
 function loadEvent(Bastion, module) {
   FS.readdir(`./modules/${module}/`, (err, files) => {

@@ -1,6 +1,9 @@
 {
   "date": "May 26, 2017",
-  "updated": [],
+  "updated": [
+    "Improved `eval` command",
+    "Improved `createRole` command"
+  ],
   "added": [],
   "removed": []
 }

@@ -9,7 +9,7 @@ const COLOR = require('chalk');
 /**
  * Handles/Loads all the funcions for logging messages in console.
  * @module logHandler
- * @param {object} Bastion The Bastion Object
+ * @param {object} Bastion The Bastion Object.
  * @returns {void}
  */
 module.exports = Bastion => {
