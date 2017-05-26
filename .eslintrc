@@ -57,7 +57,7 @@
     no-unneeded-ternary: "error",
     object-curly-spacing: ["warn", "always"],
     quotes: [ "warn", "single" ],
-    require-jsdoc: "warn",
+    require-jsdoc: [ "warn", { require: { FunctionDeclaration: true, MethodDefinition: true, ClassDeclaration: true, ArrowFunctionExpression: true } } ],
     semi: [ "error", "always" ],
     space-infix-ops: "warn",
     spaced-comment: ["error", "always"],
