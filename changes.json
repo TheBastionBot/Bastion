@@ -1,13 +1,6 @@
 {
-  "date": "May 24, 2017",
-  "updated": [
-    "Fixed `filterLink` command strings",
-    "Improvements to `urbanDictionary` command",
-    "Improvements to `wikipedia` command",
-    "Improvements to update/upgrade scripts"
-  ],
+  "date": "May 26, 2017",
+  "updated": [],
   "added": [],
-  "removed": [
-    "Removed `imdb` command, for now, as using the API requires an API key & to get an API key, users need to be their Patron"
-  ]
+  "removed": []
 }
