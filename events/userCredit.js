@@ -54,16 +54,6 @@ module.exports = (message, userResolvable, amount) => {
     SQL.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) - parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
       message.client.log.error(e.stack);
     });
-  }).then(() => {
-    /* Let the user know by DM that their account has been credited. */
-    user.send({
-      embed: {
-        color: message.client.colors.red,
-        description: `Your account has been credited with **${amount}** Bastion Currencies.`
-      }
-    }).catch(e => {
-      message.client.log.error(e.stack);
-    });
   }).catch(e => {
     message.client.log.error(e.stack);
   });
