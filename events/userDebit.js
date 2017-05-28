@@ -12,8 +12,8 @@ module.exports = (user, amount) => {
      * If the user doesn't have a profile, create their profile & add Bastion Currencies.
      */
     if (!userProfile) {
-      sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user.id, parseInt(amount) ]).catch(e => {
-        Bastion.log.error(e.stack);
+      SQL.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user.id, parseInt(amount) ]).catch(e => {
+        user.client.log.error(e.stack);
       });
     }
 
