@@ -101,7 +101,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.emit('userCredit', message.author, args[0]);
 
       /**
-       * Send a message in the channel to let the Bot Owner know that the operation was successful.
+       * Send a message in the channel to let the user know that the operation was successful.
        */
       message.channel.send({
         embed: {
@@ -113,12 +113,27 @@ exports.run = (Bastion, message, args) => {
       });
 
       /**
-       * Let the user know by DM that their account has been debited.
+       * Let the user receiving Bastion Currencies know by DM that their account has been debited.
        */
       user.send({
         embed: {
           color: Bastion.colors.green,
           description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+
+      /**
+       * Let the user sending Bastion Currencies know by DM that their account has been credited.
+       */
+      message.author.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `Your account has been credited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e.stack);
