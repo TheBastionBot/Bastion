@@ -123,13 +123,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
 
       /**
-       * Let the user sending Bastion Currencies know by DM that their account has been credited.
-       */
+      * Let the user sending Bastion Currencies know by DM that their account has been credited.
+      */
       message.author.send({
         embed: {
           color: Bastion.colors.green,
