@@ -9,9 +9,13 @@ const SQL = require('sqlite');
 module.exports = (user, amount) => {
   SQL.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user.id}`).then(userProfile => {
     /*
-     * If the user doesn't have a profile, yet, we don't allow to add Bastion Currencies to them.
+     * If the user doesn't have a profile, create their profile & add Bastion Currencies.
      */
-    if (!userProfile) return;
+    if (!userProfile) {
+      sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user.id, parseInt(amount) ]).catch(e => {
+        Bastion.log.error(e.stack);
+      });
+    }
 
     /*
      * Add the given amount of Bastion Currencies to the user's account.
