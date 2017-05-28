@@ -119,5 +119,5 @@ module.exports = Bastion => {
    * Emitted whenever Bastion Currency is debited to a user.
    * @listens userDebit
    */
-  Bastion.on('userDebit', LOAD_EVENTS('userCredit'));
+  Bastion.on('userDebit', LOAD_EVENTS('userDebit'));
 };
