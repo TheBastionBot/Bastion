@@ -1,22 +1,7 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file give command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 const sql = require('sqlite');
@@ -36,57 +21,49 @@ exports.run = (Bastion, message, args) => {
   }
 
   let user = message.mentions.users.first();
-  if (!(user && (user = user.id))) {
-    if (/^[0-9]{18}$/.test(args[1])) {
-      user = args[1];
-    }
-    else {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }
+  if (/^[0-9]{18}$/.test(args[1])) {
+    user = Bastion.users.get(args[1]);
+  }
+  if (!user) {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.'
+      }
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
   }
 
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
-    sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
-      if (!receiver) {
-        sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args[0] ]).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+    Bastion.emit('userDebit', user, args[0]);
+
+    /**
+     * Send a message in the channel to let the Bot Owner know that the operation was successful.
+     */
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `You've awarded **${args[0]}** Bastion Currencies to <@${user.id}>.`
       }
-      else {
-        sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args[0]} WHERE userID=${user}`).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+
+    /**
+     * Let the user know by DM that their account has been debited.
+     */
+    user.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
       }
-    }).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-      Bastion.users.get(user).send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `You have been awarded **${args[0]}** Bastion Currencies from ${message.author}.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
   }
   else {
-    if (message.author.id === user) {
+    if (message.author.id === user.id) {
       return message.channel.send({
         embed: {
           color: Bastion.colors.red,
@@ -108,6 +85,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
+
       if (args[0] >= 0.5 * parseInt(sender.bastionCurrencies)) {
         return message.channel.send({
           embed: {
@@ -118,37 +96,30 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
-      sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
-        if (!receiver) {
-          sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args[0] ]).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-        else {
-          sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args[0]} WHERE userID=${user}`).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+
+      Bastion.emit('userDebit', user, args[0]);
+      Bastion.emit('userCredit', message.author, args[0]);
+
+      /**
+       * Send a message in the channel to let the Bot Owner know that the operation was successful.
+       */
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `You have given **${args[0]}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
-      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(sender.bastionCurrencies) - args[0]} WHERE userID=${message.author.id}`).then(() => {
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.green,
-            description: `You have given <@${user}> **${args[0]}** Bastion Currencies.`
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-        Bastion.users.get(user).send({
-          embed: {
-            color: Bastion.colors.green,
-            description: `You have received **${args[0]}** Bastion Currencies from ${message.author}.`
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+
+      /**
+       * Let the user know by DM that their account has been debited.
+       */
+      user.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
+        }
       }).catch(e => {
         Bastion.log.error(e.stack);
       });
