@@ -6,40 +6,7 @@
 
 const SQL = require('sqlite');
 
-module.exports = (message, userResolvable, amount) => {
-  /*
-   * Resolve the user to see if the user is valid.
-   */
-  let user = message.client.resolver.resolveUser(userResolvable);
-
-  /*
-   * If the user is not valid, let it be known.
-   */
-  if (!user) {
-    return message.channel.send({
-      embed: {
-        color: message.client.colors.red,
-        description: 'Can\'t do this operation on an invalid user.'
-      }
-    }).catch(e => {
-      message.client.log.error(e.stack);
-    });
-  }
-
-  /*
-   * Don't allow to deduct less than 1 Bastion Currencies.
-   */
-  if (amount < 1) {
-    return message.channel.send({
-      embed: {
-        color: message.client.colors.red,
-        description: 'Can\'t deduct less than 1 Bastion Currencies.'
-      }
-    }).catch(e => {
-      message.client.log.error(e.stack);
-    });
-  }
-
+module.exports = (message, user, amount) => {
   SQL.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user.id}`).then(userProfile => {
     /*
      * If the user doesn't have a profile, yet, we don't allow to deduct Bastion Currencies from them.
