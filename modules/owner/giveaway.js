@@ -54,29 +54,18 @@ exports.run = (Bastion, message, args) => {
           winners = msg.reactions.get(reaction).users.map(u => u.id);
         }
         winners.forEach(user => {
-          sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(receiver => {
-            if (!receiver) {
-              sql.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user, args ]).catch(e => {
-                Bastion.log.error(e.stack);
-              });
-            }
-            else {
-              sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(receiver.bastionCurrencies) + args} WHERE userID=${user}`).catch(e => {
-                Bastion.log.error(e.stack);
-              });
-            }
-          }).then(() => {
-            Bastion.users.get(user).send({
+          user = Bastion.users.get(user);
+          if (user) {
+            Bastion.emit('userDebit', user, args);
+            user.send({
               embed: {
                 color: Bastion.colors.green,
-                description: `You have been awarded **${args}** Bastion Currencies for your participation in the giveaway event.`
+                description: `Your account has been debited with **${args}** Bastion Currencies.`
               }
             }).catch(e => {
               Bastion.log.error(e.stack);
             });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          }
         });
       }, 60 * 60 * 1000);
     }).catch(e => {
