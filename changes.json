@@ -3,7 +3,8 @@
   "updated": [
     "Improved `eval` command",
     "Improved `createRole` command",
-    "Improved RegExp of link filter."
+    "Improved RegExp of link filter",
+    "Increased poll timeout to 6 hours"
   ],
   "added": [],
   "removed": []

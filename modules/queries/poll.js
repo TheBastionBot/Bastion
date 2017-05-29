@@ -61,8 +61,7 @@ exports.run = (Bastion, message, args) => {
     }).then(msg => {
       const votes = message.channel.createMessageCollector(
         m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${Bastion.config.prefix}endpoll`),
-        { time: 5 * 1000 }
-        // { time: 60 * 60 * 1000 }
+        { time: 6 * 60 * 60 * 1000 }
       );
       votes.on('collect', (msg, votes) => {
         if (msg.content === `${Bastion.config.prefix}endpoll`) {
