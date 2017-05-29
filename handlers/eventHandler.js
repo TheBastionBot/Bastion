@@ -111,6 +111,11 @@ module.exports = Bastion => {
   Bastion.on('warn', LOAD_EVENTS('warn'));
 
   /**
+   * Emitted whenever a command is used in with invalid parameters.
+   * @listens commandUsage
+   */
+  Bastion.on('commandUsage', LOAD_EVENTS('commandUsage'));
+  /**
    * Emitted whenever Bastion Currency is credited from a user.
    * @listens userCredit
    */
