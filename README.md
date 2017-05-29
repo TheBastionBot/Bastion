@@ -5,7 +5,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Dependencies](https://david-dm.org/snkrsnkampa/Bastion.svg)](https://david-dm.org/snkrsnkampa/Bastion)
 [![Website](https://img.shields.io/website-up-down-green-red/https/bastion.js.org.svg?label=Website)](https://bastion.js.org) <a href="/LICENSE">
-<img src="https://img.shields.io/badge/LICENSE-Shared%20Source-blue.svg" alt="Discord server" /></a>  
+[![license](https://img.shields.io/github/license/snkrsnkampa/Bastion.svg)](LICENSE)  
 
 <!--[![Github All Releases](https://img.shields.io/github/downloads/snkrsnkampa/Bastion/total.svg?style=flat-square)]()-->  
 #### What features do you think an ideal [Discord](https://discordapp.com) BOT should have?  
