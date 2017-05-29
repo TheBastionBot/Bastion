@@ -5,10 +5,12 @@
     "Improved `createRole` command",
     "Improved RegExp of link filter",
     "Increased poll timeout to 6 hours",
-    "`leaderboard` command shows the ranking of only guild members instead of all bot users"
+    "`leaderboard` command shows the ranking of only guild members instead of all bot users",
+    "`hallOfFame` command shows the ranking of only guild members instead of all bot users"
   ],
   "added": [
-    "`--global` flag to `leaderboard` command - shows the ranking of all users of the bot"
+    "Added `--global` flag to `leaderboard` command - shows the ranking of all users of the bot",
+    "Added `--global` flag to `hallOfFame` command - shows the ranking of all users of the bot"
   ],
   "removed": []
 }

@@ -59,7 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'leaderboard',
-  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the members of your server. If used with the `--global` flap, it shows the ranking of all users of the bot.',
+  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the members of the server. If used with the `--global` flap, it shows the ranking of all users of the bot.',
   botPermission: '',
   userPermission: '',
   usage: 'leaderboard [--global]',
