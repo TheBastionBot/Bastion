@@ -4,8 +4,11 @@
     "Improved `eval` command",
     "Improved `createRole` command",
     "Improved RegExp of link filter",
-    "Increased poll timeout to 6 hours"
+    "Increased poll timeout to 6 hours",
+    "`leaderboard` command shows the ranking of only guild members instead of all bot users"
   ],
-  "added": [],
+  "added": [
+    "`--global` flag to `leaderboard` command - shows the ranking of all users of the bot"
+  ],
   "removed": []
 }

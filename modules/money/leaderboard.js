@@ -22,9 +22,13 @@
 const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
-exports.run = (Bastion, message) => {
+exports.run = (Bastion, message, args) => {
   sql.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC LIMIT 10').then(profiles => {
     let fields = [];
+
+    if (args[0] !== '--global') {
+      profiles = profiles.filter(p => message.guild.members.get(p.userID));
+    }
     for (let i = 0; i < profiles.length; i++) {
       let user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? message.guild.members.get(profiles[i].userID).user.tag : profiles[i].userID;
       fields.push({
@@ -55,9 +59,9 @@ exports.config = {
 
 exports.help = {
   name: 'leaderboard',
-  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the users of the bot.',
+  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the members of your server. If used with the `--global` flap, it shows the ranking of all users of the bot.',
   botPermission: '',
   userPermission: '',
-  usage: 'leaderboard',
-  example: []
+  usage: 'leaderboard [--global]',
+  example: [ 'leaderboard', 'leaderboard --global' ]
 };
