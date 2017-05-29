@@ -16,13 +16,14 @@ module.exports = (user, amount) => {
         user.client.log.error(e.stack);
       });
     }
-
-    /*
-     * Add the given amount of Bastion Currencies to the user's account.
-     */
-    SQL.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) + parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
-      user.client.log.error(e.stack);
-    });
+    else {
+      /*
+      * Add the given amount of Bastion Currencies to the user's account.
+      */
+      SQL.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) + parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
+        user.client.log.error(e.stack);
+      });
+    }
   }).catch(e => {
     user.client.log.error(e.stack);
   });
