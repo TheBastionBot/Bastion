@@ -19,7 +19,10 @@ module.exports = (message, command) => {
           name: 'Example',
           value: `\`${command.example.join('`\n`') || '-'}\``
         }
-      ]
+      ],
+      footer: {
+        text: `Try ${message.client.config.prefix}help ${command.name} for more information.`
+      }
     }
   }).catch(e => {
     message.client.log.error(e.stack);
