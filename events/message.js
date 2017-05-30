@@ -6,6 +6,7 @@
 
 const SQL = require('sqlite');
 const CLEVERBOT = require('cleverbot-node');
+const parseArgs = require('command-line-args');
 const CREDENTIALS = require('../settings/credentials.json');
 const BOT = new CLEVERBOT;
 BOT.configure({
@@ -278,7 +279,7 @@ module.exports = message => {
 
       if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
       if (cmd) {
-        cmd.run(message.client, message, args);
+        cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
       }
     }
     else if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
