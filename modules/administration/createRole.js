@@ -5,8 +5,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('MANAGE_ROLES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -17,23 +17,11 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  let data;
-  if (args[0] !== undefined && args[0].indexOf('#') === 0) {
-    if (args[0].length !== 7) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Role color should be a 6 digit `HEX` color code.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }
-    data = args[1] === undefined ? data = roleData('new role', args[0]) : roleData(args.slice(1).join(' '), args[0]);
+  if (!Bastion.resolver.resolveColor(args.color)) {
+    args.color = 0;
   }
-  else {
-    data = args[0] === undefined ? data = roleData() : roleData(args.join(' '));
-  }
+
+  let data = roleData(args.name.join(' '), args.color);
 
   message.guild.createRole(data).then(role => message.channel.send({
     embed: {
@@ -52,7 +40,7 @@ exports.run = (Bastion, message, args) => {
         },
         {
           name: 'Color',
-          value: role.hexColor,
+          value: role.hexColor === '#000000' ? args.color : role.hexColor,
           inline: true
         },
         {
@@ -79,16 +67,20 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'cr' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'name', alias: 'n', multiple: true, defaultOption: true, defaultValue: [ 'new role' ] },
+    { name: 'color', alias: 'c', defaultValue: '0' }
+  ]
 };
 
 exports.help = {
   name: 'createrole',
   description: 'Creates a new role with a given color (optional) and a given name (optional).',
-  botPermission: 'Manage Roles',
-  userPermission: 'Manage Roles',
-  usage: 'createrole [#hex-color-code] [Role Name]',
-  example: [ 'createrole #dc143c Role Name', 'createrole #dc143c', 'createrole Role Name', 'createrole' ]
+  botPermission: 'MANAGE_ROLES',
+  userPermission: 'MANAGE_ROLES',
+  usage: 'createrole [[-n] Role Name] [-c hex-color-code]',
+  example: [ 'createrole -n Role Name -c #dc143', 'createrole -c #dc143c', 'createrole Role Name', 'createrole' ]
 };
 
 /**
