@@ -19,7 +19,6 @@
     eqeqeq: [ "warn", "always" ],
     dot-location: [ "warn", "object" ],
     no-else-return: "error",
-    no-div-regex: "error",
     no-extra-label: "error",
     no-floating-decimal: "error",
     no-lone-blocks: "error",
