@@ -11,5 +11,8 @@
     "Added `--global` flag to `hallOfFame` command - shows the ranking of all users of the bot",
     "Added `createChannel` command"
   ],
-  "removed": []
+  "removed": [
+    "Removed `createTextChannel` command",
+    "Removed `createVoiceChannel` command"
+  ]
 }
