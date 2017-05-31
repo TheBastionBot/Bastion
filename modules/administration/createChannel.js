@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   args.name = args.name.join('-');
-  if (args.length < 2 && args.name.length > 100) {
+  if (args.length < 2 || args.name.length > 100) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   let channelType = 'text';
-  if (args.voice) {
+  if (!args.text && args.voice) {
     channelType = 'voice';
   }
 
