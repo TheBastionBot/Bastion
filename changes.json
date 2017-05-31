@@ -10,6 +10,7 @@
     "Added `--global` flag to `leaderboard` command - shows the ranking of all users of the bot",
     "Added `--global` flag to `hallOfFame` command - shows the ranking of all users of the bot",
     "Added `createChannel` command"
+    "Added `deleteChannel` command"
   ],
   "removed": [
     "Removed `createTextChannel` command",
