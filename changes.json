@@ -18,5 +18,6 @@
     "Removed `createVoiceChannel` command",
     "Removed `deleteTextChannel` command",
     "Removed `deleteVoiceChannel` command"
+    "Removed `renameTextChannel` command"
   ]
 }
