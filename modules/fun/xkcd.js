@@ -122,6 +122,6 @@ exports.help = {
   description: 'Shows a **xkcd** comic. No arguments will shows a random comic. If a comic number is given, it will show that specific comic & \'latest\' will show the latest comic.',
   botPermission: '',
   userPermission: '',
-  usage: 'xkcd [latest|comic_number]',
+  usage: 'xkcd [ latest | comic_number ]',
   example: [ 'xkcd', 'xkcd latest', 'xkcd 834' ]
 };
