@@ -25,6 +25,7 @@ module.exports = guild => {
           'logChannelID TEXT UNIQUE,' +
           'musicTextChannelID TEXT UNIQUE,' +
           'musicVoiceChannelID TEXT UNIQUE,' +
+          'musicMasterRoleID TEXT UNIQUE,' +
           'filterInvite TEXT NOT NULL DEFAULT \'false\',' +
           'filterLink TEXT NOT NULL DEFAULT \'false\',' +
           'chat TEXT NOT NULL DEFAULT \'false\',' +
