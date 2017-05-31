@@ -41,7 +41,7 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'pirateSpeak <text>',
-  example: [ 'pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can’t trust.' ]
+  example: [ 'pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can\'t trust.' ]
 };
 
 /**
