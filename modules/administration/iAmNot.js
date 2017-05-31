@@ -4,11 +4,8 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
-  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -31,7 +28,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+  Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row) return;
 
     let role = message.guild.roles.find('name', args.join(' '));
@@ -65,7 +62,7 @@ exports.config = {
 exports.help = {
   name: 'iamnot',
   description: 'Removes a specified self assignable role from the user.',
-  botPermission: 'Manage Roles',
+  botPermission: 'MANAGE_ROLES',
   userPermission: '',
   usage: 'iAmNot <role name>',
   example: [ 'iAmNot Looking to play' ]
