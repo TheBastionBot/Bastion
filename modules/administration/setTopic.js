@@ -15,8 +15,8 @@ exports.run = (Bastion, message, args) => {
     topic = args.slice(1).join(' ').trim();
   }
 
-  if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
+  if (!channel.permissionsFor(message.member).has(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -69,8 +69,8 @@ exports.config = {
 exports.help = {
   name: 'settopic',
   description: 'Sets the topic of the mentioned channel with a given name. If no channel is mentioned, sets the topic of the current channel with the given name. If no topic is given, or lenght of the topic is less than 2, channel topic is removed.',
-  botPermission: 'Manage Channels',
-  userPermission: 'Manage Channels',
+  botPermission: 'MANAGE_CHANNELS',
+  userPermission: 'MANAGE_CHANNELS',
   usage: 'setTopic [#channel-mention] [Channel Topic]',
   example: [ 'setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic' ]
 };
