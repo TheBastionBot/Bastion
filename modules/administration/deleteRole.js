@@ -5,8 +5,8 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('MANAGE_ROLES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -17,7 +17,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  if (args.length < 1) {
+  if (!args.mention && !args.id && !args.name) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.yellow,
@@ -31,14 +31,20 @@ exports.run = (Bastion, message, args) => {
 
   let role = message.mentions.roles.first();
   if (!role) {
-    role = message.guild.roles.find('name', args.join(' '));
+    if (args.id) {
+      role = message.guild.roles.get(args.id);
+    }
+    else if (args.name) {
+      role = message.guild.roles.find('name', args.name.join(' '));
+    }
   }
+
   if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
   else if (!role) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
-        description: 'No role found with that name.'
+        description: 'No role found for the given parameter.'
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
@@ -73,14 +79,19 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'dr' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'mention', type: String, alias: 'm', multiple: true, defaultOption: true },
+    { name: 'id', type: String, alias: 'i' },
+    { name: 'name', type: String, alias: 'n', multiple: true }
+  ]
 };
 
 exports.help = {
   name: 'deleterole',
-  description: 'Deletes a role by a given name.',
-  botPermission: 'Manage Roles',
-  userPermission: 'Manage Roles',
-  usage: 'deleteRole <Role Name>',
-  example: [ 'deleteRole Role Name' ]
+  description: 'Deletes a role either by role mention (default), id or name.',
+  botPermission: 'MANAGE_ROLES',
+  userPermission: 'MANAGE_ROLES',
+  usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',
+  example: [ 'deleteRole -m @Server Staffs', 'deleteRole -i 295982817647788032', 'deleteRole -n Server Staffs' ]
 };
