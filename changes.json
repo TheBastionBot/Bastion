@@ -19,5 +19,6 @@
     "Removed `deleteTextChannel` command",
     "Removed `deleteVoiceChannel` command"
     "Removed `renameTextChannel` command"
+    "Removed `roleColor` command"
   ]
 }
