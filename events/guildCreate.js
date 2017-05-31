@@ -28,6 +28,8 @@ module.exports = guild => {
           'musicMasterRoleID TEXT UNIQUE,' +
           'filterInvite TEXT NOT NULL DEFAULT \'false\',' +
           'filterLink TEXT NOT NULL DEFAULT \'false\',' +
+          'filterWord TEXT NOT NULL DEFAULT \'false\',' +
+          'filteredWords TEXT NOT NULL DEFAULT \'[]\',' +
           'chat TEXT NOT NULL DEFAULT \'false\',' +
           'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
           'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
