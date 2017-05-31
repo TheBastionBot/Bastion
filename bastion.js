@@ -23,6 +23,8 @@ BASTION.config = require('./settings/config.json');
 BASTION.colors = require('./settings/colors.json');
 BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
+BASTION.db = require('sqlite');
+BASTION.db.open('./data/Bastion.sqlite');
 
 /**
  * Log handler
