@@ -45,6 +45,9 @@ exports.run = (Bastion, message, args) => {
   if (!args.text && args.voice) {
     channelType = 'voice';
   }
+  else {
+    args.name = args.name.replace(' ', '-');
+  }
 
   message.guild.createChannel(args.name, channelType).then(channel => {
     message.channel.send({
