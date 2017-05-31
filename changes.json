@@ -1,5 +1,5 @@
 {
-  "date": "May 31, 2017",
+  "date": "June 1, 2017",
   "updated": [
     "Improved RegExp of link filter",
     "Increased poll timeout to 6 hours",
@@ -11,6 +11,7 @@
     "Added `--global` flag to `hallOfFame` command - shows the ranking of all users of the bot",
     "Added `createChannel` command",
     "Added `deleteChannel` command"
+    "Added `renameChannel` command"
   ],
   "removed": [
     "Removed `createTextChannel` command",
