@@ -32,7 +32,7 @@ module.exports = Bastion => {
           'filterInvite TEXT NOT NULL DEFAULT \'false\',' +
           'filterLink TEXT NOT NULL DEFAULT \'false\',' +
           'chat TEXT NOT NULL DEFAULT \'false\',' +
-          'levelUpMessage TEXT NOT NULL DEFAULT \'true\',' +
+          'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
           'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
           'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
           'modLog TEXT NOT NULL DEFAULT \'false\',' +
