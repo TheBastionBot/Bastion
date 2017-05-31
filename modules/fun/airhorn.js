@@ -11,7 +11,7 @@ exports.run = (Bastion, message) => {
     });
   }
   if (message.guild.voiceConnection) {
-    if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+    if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
     if (message.guild.voiceConnection.speaking) {
       return message.channel.send({
         embed: {
@@ -44,7 +44,7 @@ exports.run = (Bastion, message) => {
   }
   else {
     if (message.member.voiceChannel) {
-      if (!message.member.voiceChannel.permissionsFor(message.member).has('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+      if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
       if (!message.member.voiceChannel.joinable) {
         return message.channel.send({
           embed: {
@@ -122,7 +122,7 @@ exports.help = {
   name: 'airhorn',
   description: 'Plays an airhorn in the current voice channel.',
   botPermission: '',
-  userPermission: 'Mute Members',
+  userPermission: 'MUTE_MEMBERS',
   usage: 'airhorn',
   example: []
 };
