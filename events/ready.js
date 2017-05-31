@@ -14,6 +14,7 @@ module.exports = Bastion => {
 
   SQL.run('CREATE TABLE IF NOT EXISTS guildSettings' +
           '(guildID TEXT NOT NULL UNIQUE,' +
+          `prefix TEXT NOT NULL DEFAULT '${Bastion.config.prefix}',` +
           'greet TEXT NOT NULL DEFAULT \'false\',' +
           'greetChannelID TEXT,' +
           'greetMessage TEXT NOT NULL DEFAULT \'Welcome to $server.\',' +

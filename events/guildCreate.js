@@ -10,6 +10,7 @@ SQL.open('./data/Bastion.sqlite');
 module.exports = guild => {
   SQL.run('CREATE TABLE IF NOT EXISTS guildSettings' +
           '(guildID TEXT NOT NULL UNIQUE,' +
+          `prefix TEXT NOT NULL DEFAULT '${guild.client.config.prefix}',` +
           'greet TEXT NOT NULL DEFAULT \'false\',' +
           'greetChannelID TEXT,' +
           'greetMessage TEXT NOT NULL DEFAULT \'Welcome to $server.\',' +
