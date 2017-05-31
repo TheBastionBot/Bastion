@@ -15,5 +15,7 @@
   "removed": [
     "Removed `createTextChannel` command",
     "Removed `createVoiceChannel` command"
+    "Removed `deleteTextChannel` command",
+    "Removed `deleteVoiceChannel` command"
   ]
 }
