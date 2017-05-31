@@ -69,8 +69,8 @@ exports.config = {
   aliases: [ 'cr' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'name', alias: 'n', multiple: true, defaultOption: true, defaultValue: [ 'new role' ] },
-    { name: 'color', alias: 'c', defaultValue: '0' }
+    { name: 'name', type: String, alias: 'n', multiple: true, defaultOption: true, defaultValue: [ 'new role' ] },
+    { name: 'color', type: String, alias: 'c', defaultValue: '0' }
   ]
 };
 

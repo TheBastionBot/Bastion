@@ -76,7 +76,7 @@ exports.config = {
   aliases: [ 'cc' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'name', alias: 'n', multiple: true, defaultOption: true },
+    { name: 'name', type: String, alias: 'n', multiple: true, defaultOption: true },
     { name: 'text', type: Boolean, alias: 't' },
     { name: 'voice', type: Boolean, alias: 'v' }
   ]
