@@ -8,16 +8,11 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('MUTE_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
@@ -135,8 +130,8 @@ exports.config = {
 exports.help = {
   name: 'textmute',
   description: 'Mutes a mentioned user from sending messages in a channel with an optional reason.',
-  botPermission: 'Manage Roles',
-  userPermission: 'Mute Members',
+  botPermission: 'MANAGE_ROLES',
+  userPermission: 'MANAGE_ROLES',
   usage: 'textMute @user-mention [Reason]',
   example: [ 'textMute @user#0001 Reason for the mute.' ]
 };

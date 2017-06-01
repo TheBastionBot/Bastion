@@ -8,16 +8,11 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('BAN_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!message.member.hasPermission(this.help.userPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
@@ -152,8 +147,8 @@ exports.config = {
 exports.help = {
   name: 'ban',
   description: 'Bans a mentioned user with an optional reason, and removes 7 days of his message history.',
-  botPermission: 'Ban Members',
-  userPermission: 'Ban Members',
+  botPermission: 'BAN_MEMBERS',
+  userPermission: 'BAN_MEMBERS',
   usage: 'ban <@user-mention> [Reason].',
   example: [ 'ban @user#001 Reason for the ban.' ]
 };

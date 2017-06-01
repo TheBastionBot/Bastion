@@ -8,16 +8,11 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   let user = message.mentions.users.first();
@@ -127,8 +122,8 @@ exports.config = {
 exports.help = {
   name: 'clear',
   description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. Using `--bots` flag clears messages from bots in that channel. Using `--nonpinned` flag clears messages that aren\'t pinned.',
-  botPermission: 'Manage Messages',
-  userPermission: 'Manage Messages',
+  botPermission: 'MANAGE_MESSAGES',
+  userPermission: 'MANAGE_MESSAGES',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
   example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };

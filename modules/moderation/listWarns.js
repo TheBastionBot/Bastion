@@ -7,7 +7,9 @@
 const warns = require('./warn').warns;
 
 exports.run = (Bastion, message) => {
-  if (!message.member.hasPermission('KICK_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   if (!warns[message.guild.id]) {
     return message.channel.send({
@@ -43,7 +45,7 @@ exports.help = {
   name: 'listwarns',
   description: 'Lists the server members who have been warned.',
   botPermission: '',
-  userPermission: 'Kick Members',
+  userPermission: 'KICK_MEMBERS',
   usage: 'listWarns',
   example: []
 };

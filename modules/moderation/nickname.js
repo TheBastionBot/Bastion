@@ -5,16 +5,11 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('MANAGE_NICKNAMES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!message.member.hasPermission(this.help.userPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   let user = message.mentions.users.first();
@@ -63,8 +58,8 @@ exports.config = {
 exports.help = {
   name: 'nickname',
   description: 'Change the nickname of the mentioned user in the server to a specified nick. If no nick is specified, it resets the user\'s nickname.',
-  botPermission: 'Manage Nicknames',
-  userPermission: 'Manage Nicknames',
+  botPermission: 'MANAGE_NICKNAMES',
+  userPermission: 'MANAGE_NICKNAMES',
   usage: 'nickname <@user-mention> [nick]',
   example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
 };
