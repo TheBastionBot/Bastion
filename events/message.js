@@ -247,42 +247,47 @@ module.exports = message => {
       message.client.log.error(e.stack);
     });
 
-    if (message.content.startsWith(message.client.config.prefix)) {
-      let args = message.content.split(' ');
-      let command = args.shift().slice(message.client.config.prefix.length).toLowerCase();
+    message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+      if (message.content.startsWith(guild.prefix)) {
+        let args = message.content.split(' ');
+        let command = args.shift().slice(guild.prefix.length).toLowerCase();
 
-      let cmd;
-      if (message.client.commands.has(command)) {
-        cmd = message.client.commands.get(command);
-      }
-      else if (message.client.aliases.has(command)) {
-        cmd = message.client.commands.get(message.client.aliases.get(command));
-      }
-      else return;
+        let cmd;
+        if (message.client.commands.has(command)) {
+          cmd = message.client.commands.get(command);
+        }
+        else if (message.client.aliases.has(command)) {
+          cmd = message.client.commands.get(message.client.aliases.get(command));
+        }
+        else return;
 
-      message.client.log.console(`\n[${new Date()}]`);
-      message.client.log.console(COLOR.green('[COMMAND]: ') + message.client.config.prefix + command);
-      if (args.length > 0) {
-        message.client.log.console(COLOR.green('[ARGUMENTs]: ') + args.join(' '));
-      }
-      else {
-        message.client.log.console(COLOR.green('[ARGUMENTs]: ') + COLOR.yellow('No arguments to execute'));
-      }
-      if (message.channel.type === 'text') {
-        message.client.log.console(`${COLOR.green('[Server]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
-        message.client.log.console(`${COLOR.green('[Channel]:')} ${message.channel.name} ${COLOR.cyan(message.channel)}`);
-      }
-      else {
-        message.client.log.console(`${COLOR.green('[Channel]:')} Direct Message`);
-      }
-      message.client.log.console(`${COLOR.green('[User]:')} ${message.author.username}#${message.author.discriminator} ${COLOR.cyan(`${message.author}`)}`);
+        message.client.log.console(`\n[${new Date()}]`);
+        message.client.log.console(COLOR.green('[COMMAND]: ') + guild.prefix + command);
+        if (args.length > 0) {
+          message.client.log.console(COLOR.green('[ARGUMENTs]: ') + args.join(' '));
+        }
+        else {
+          message.client.log.console(COLOR.green('[ARGUMENTs]: ') + COLOR.yellow('No arguments to execute'));
+        }
+        if (message.channel.type === 'text') {
+          message.client.log.console(`${COLOR.green('[Server]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
+          message.client.log.console(`${COLOR.green('[Channel]:')} ${message.channel.name} ${COLOR.cyan(message.channel)}`);
+        }
+        else {
+          message.client.log.console(`${COLOR.green('[Channel]:')} Direct Message`);
+        }
+        message.client.log.console(`${COLOR.green('[User]:')} ${message.author.username}#${message.author.discriminator} ${COLOR.cyan(`${message.author}`)}`);
 
-      if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
-      if (cmd) {
-        cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+        if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
+        if (cmd) {
+          cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+        }
       }
-    }
-    else if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
+    }).catch(e => {
+      message.client.log.error(e.stack);
+    });
+
+    if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
       SQL.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
         if (guild.chat === 'false') return;
         let args = message.content.split(' ');
