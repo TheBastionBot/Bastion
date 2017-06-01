@@ -111,7 +111,7 @@ module.exports = Bastion => {
   Bastion.on('warn', LOAD_EVENTS('warn'));
 
   /**
-  * Emitted whenever the bot doesn't have the required permission(s).
+  * Emitted whenever Bastion doesn't have the required permission(s).
   * @listens bastionMissingPermissions
   */
   Bastion.on('bastionMissingPermissions', LOAD_EVENTS('bastionMissingPermissions'));
@@ -130,4 +130,9 @@ module.exports = Bastion => {
    * @listens userDebit
    */
   Bastion.on('userDebit', LOAD_EVENTS('userDebit'));
+  /**
+  * Emitted whenever the user doesn't have the required permission(s) to use a command.
+  * @listens userMissingPermissions
+  */
+  Bastion.on('userMissingPermissions', LOAD_EVENTS('userMissingPermissions'));
 };
