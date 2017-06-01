@@ -8,7 +8,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
     args[0] = '0';
@@ -37,7 +37,7 @@ exports.help = {
   name: 'farewelltimeout',
   description: 'Sets the time (in seconds) after which farewell message will be automatically deleted. Supported values: 1 - 300. Any value except the supported values will turn off automatic deletion.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'farewellTimeout [time_in_seconds]',
   example: [ 'farewellTimeout 120', 'farewellTimeout' ]
 };

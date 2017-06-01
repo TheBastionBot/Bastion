@@ -8,8 +8,8 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('MANAGE_ROLES')) {
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
     return message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -85,8 +85,8 @@ exports.config = {
 exports.help = {
   name: 'addautoassignableroles',
   description: 'Adds roles, specified by role ID, to auto assignable roles category, anyone who joins the server gets these roles automatically.',
-  botPermission: 'Manage Roles',
-  userPermission: 'Administrator',
+  botPermission: 'MANAGE_ROLES',
+  userPermission: 'ADMINISTRATOR',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: [ 'addAutoAssignableRoles 443322110055998877 778899550011223344' ]
 };

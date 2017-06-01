@@ -8,7 +8,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (args.length < 1) {
     sql.get(`SELECT greetDMMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
       message.channel.send({
@@ -50,7 +50,7 @@ exports.help = {
   name: 'greetdmmessage',
   description: 'Edit the greeting message that is sent as direct message when a new member is joined in the server.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'greetDMMessage [Message]',
   example: [ 'greetDMMessage Hello $user! Welcome to $server.' ]
 };

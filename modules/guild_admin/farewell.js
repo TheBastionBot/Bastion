@@ -9,7 +9,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
 
   sql.get(`SELECT farewell, farewellChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let color, farewellStats;
@@ -50,7 +50,7 @@ exports.help = {
   name: 'farewell',
   description: 'Toggle farewell message for members who left the server.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'farewell',
   example: []
 };

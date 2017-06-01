@@ -8,7 +8,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   let index = parseInt(args[0]);
   if (!index || index <= 0) {
     return message.channel.send({
@@ -75,7 +75,7 @@ exports.help = {
   name: 'removeautoassignableroles',
   description: 'Deletes a role from the auto assignable roles by it\'s index number.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'removeAutoAssignableRoles <index>',
   example: [ 'removeAutoAssignableRoles 3' ]
 };

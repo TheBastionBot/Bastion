@@ -8,7 +8,7 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
   if (!Bastion.credentials.cleverbotAPIkey) {
     return message.channel.send({
       embed: {
@@ -59,7 +59,7 @@ exports.help = {
   name: 'chat',
   description: 'Toggles chatting feature of the bot.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'chat',
   example: []
 };
