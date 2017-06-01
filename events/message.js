@@ -263,25 +263,15 @@ module.exports = message => {
 
         message.client.log.console(`\n[${new Date()}]`);
         message.client.log.console(COLOR.green('[COMMAND]: ') + guild.prefix + command);
-        if (args.length > 0) {
-          message.client.log.console(COLOR.green('[ARGUMENTs]: ') + args.join(' '));
-        }
-        else {
-          message.client.log.console(COLOR.green('[ARGUMENTs]: ') + COLOR.yellow('No arguments to execute'));
-        }
-        if (message.channel.type === 'text') {
-          message.client.log.console(`${COLOR.green('[Server]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
-          message.client.log.console(`${COLOR.green('[Channel]:')} ${message.channel.name} ${COLOR.cyan(message.channel)}`);
-        }
-        else {
-          message.client.log.console(`${COLOR.green('[Channel]:')} Direct Message`);
-        }
-        message.client.log.console(`${COLOR.green('[User]:')} ${message.author.username}#${message.author.discriminator} ${COLOR.cyan(`${message.author}`)}`);
+        message.client.log.console(COLOR.green('[ARGUMENTs]: ') + (args.join(' ') || COLOR.yellow('No arguments to execute')));
+        message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
+        message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
+        message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
 
-        if (!cmd.config.enabled) return message.client.log.info('This command is disabled.');
-        if (cmd) {
-          cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+        if (!cmd.config.enabled) {
+          return message.client.log.info('This command is disabled.');
         }
+        cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
       }
     }).catch(e => {
       message.client.log.error(e.stack);
@@ -290,6 +280,7 @@ module.exports = message => {
     if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
       SQL.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
         if (guild.chat === 'false') return;
+
         let args = message.content.split(' ');
         if (args.length < 1) return;
 
@@ -297,10 +288,11 @@ module.exports = message => {
           BOT.write(args.join(' '), function (response) {
             message.channel.startTyping();
             setTimeout(function () {
-              message.channel.send(response.output).catch(e => {
+              message.channel.send(response.output).then(() => {
+                message.channel.stopTyping();
+              }).catch(e => {
                 message.client.log.error(e.stack);
               });
-              message.channel.stopTyping();
             }, response.output.length * 100);
           });
         }
