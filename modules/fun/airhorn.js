@@ -11,7 +11,10 @@ exports.run = (Bastion, message) => {
     });
   }
   if (message.guild.voiceConnection) {
-    if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+    if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    }
+
     if (message.guild.voiceConnection.speaking) {
       return message.channel.send({
         embed: {
@@ -26,6 +29,7 @@ exports.run = (Bastion, message) => {
         Bastion.log.error(e.stack);
       });
     }
+
     if (!message.guild.voiceConnection.channel.speakable) {
       return message.channel.send({
         embed: {
@@ -40,11 +44,15 @@ exports.run = (Bastion, message) => {
         Bastion.log.error(e.stack);
       });
     }
+
     message.guild.voiceConnection.playFile('./data/airhorn.wav', { passes: 1 });
   }
   else {
     if (message.member.voiceChannel) {
-      if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+      if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) {
+        return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      }
+
       if (!message.member.voiceChannel.joinable) {
         return message.channel.send({
           embed: {
@@ -59,6 +67,7 @@ exports.run = (Bastion, message) => {
           Bastion.log.error(e.stack);
         });
       }
+
       if (!message.member.voiceChannel.speakable) {
         return message.channel.send({
           embed: {
@@ -73,6 +82,7 @@ exports.run = (Bastion, message) => {
           Bastion.log.error(e.stack);
         });
       }
+
       if (message.member.voiceChannel.full) {
         return message.channel.send({
           embed: {
@@ -87,6 +97,7 @@ exports.run = (Bastion, message) => {
           Bastion.log.error(e.stack);
         });
       }
+
       message.member.voiceChannel.join().then(connection => {
         const dispatcher = connection.playFile('./data/airhorn.wav', { passes: 1 });
         dispatcher.on('end', () => {
