@@ -5,17 +5,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
-  }
 
   if (!args.old || !args.new) {
     return message.channel.send({
@@ -51,6 +40,13 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
+  }
+
+  if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   channel.setName(args.new).then(() => {

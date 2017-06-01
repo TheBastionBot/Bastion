@@ -6,14 +6,7 @@
 
 exports.run = (Bastion, message, args) => {
   if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   if (args.length < 1) {
