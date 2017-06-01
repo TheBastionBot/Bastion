@@ -4,11 +4,8 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = member => {
-  SQL.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  member.client.db.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
     if (row.farewell === 'true') {
@@ -38,10 +35,10 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  // Commented this out as using requires BAN_MEMBERS perms and not everyone has given the bot those permissions
+  // Commented this out as using requires BAN_MEMBERS perms and not everyone would've given the bot perms
   // member.guild.fetchBans().then(users => {
   //   if (users.has(member.id)) return;
-  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  member.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 

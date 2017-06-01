@@ -4,11 +4,8 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = role => {
-  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${role.guild.id}`).then(row => {
+  role.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${role.guild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 

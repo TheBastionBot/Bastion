@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = (oldMessage, newMessage) => {
   if (newMessage.content.includes(newMessage.client.token)) {
     if (newMessage.deletable) {
@@ -38,12 +35,12 @@ module.exports = (oldMessage, newMessage) => {
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 
-  SQL.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
+  oldMessage.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {
         if (newMessage.deletable) {
           newMessage.delete().then(() => {
-            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
+            oldMessage.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
@@ -69,7 +66,7 @@ module.exports = (oldMessage, newMessage) => {
                     timestamp: new Date()
                   }
                 }).then(() => {
-                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
+                  oldMessage.client.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
                     newMessage.client.log.error(e.stack);
                   });
                 }).catch(e => {
@@ -89,12 +86,12 @@ module.exports = (oldMessage, newMessage) => {
     newMessage.client.log.error(e.stack);
   });
 
-  SQL.get(`SELECT filterLink FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
+  oldMessage.client.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterLink === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(newMessage.content)) {
         if (newMessage.deletable) {
           newMessage.delete().then(() => {
-            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
+            oldMessage.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
@@ -120,7 +117,7 @@ module.exports = (oldMessage, newMessage) => {
                     timestamp: new Date()
                   }
                 }).then(() => {
-                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
+                  oldMessage.client.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${newMessage.guild.id}`).catch(e => {
                     newMessage.client.log.error(e.stack);
                   });
                 }).catch(e => {

@@ -4,11 +4,8 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = member => {
-  SQL.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  member.client.db.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
     if (row.greet === 'true') {
@@ -38,7 +35,7 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  SQL.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  member.client.db.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
 
     if (row.greetDM === 'true') {
@@ -68,7 +65,7 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  member.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 
@@ -97,7 +94,7 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  SQL.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
+  member.client.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
     if (!row) return;
     let autoAssignableRoles = JSON.parse(row.autoAssignableRoles);
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));

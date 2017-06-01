@@ -4,15 +4,13 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-
 module.exports = (user, amount) => {
-  SQL.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user.id}`).then(userProfile => {
+  user.client.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user.id}`).then(userProfile => {
     /*
      * If the user doesn't have a profile, create their profile & add Bastion Currencies.
      */
     if (!userProfile) {
-      SQL.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user.id, parseInt(amount) ]).catch(e => {
+      user.client.db.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user.id, parseInt(amount) ]).catch(e => {
         user.client.log.error(e.stack);
       });
     }
@@ -20,7 +18,7 @@ module.exports = (user, amount) => {
       /*
       * Add the given amount of Bastion Currencies to the user's account.
       */
-      SQL.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) + parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
+      user.client.db.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) + parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
         user.client.log.error(e.stack);
       });
     }

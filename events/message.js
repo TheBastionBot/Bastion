@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
 const CLEVERBOT = require('cleverbot-node');
 const parseArgs = require('command-line-args');
 const CREDENTIALS = require('../settings/credentials.json');
@@ -13,7 +12,6 @@ BOT.configure({
   botapi: CREDENTIALS.cleverbotAPIkey
 });
 const COLOR = require('chalk');
-SQL.open('./data/Bastion.sqlite');
 
 module.exports = message => {
   if (message.content.includes(message.client.token)) {
@@ -76,12 +74,12 @@ module.exports = message => {
     return;
   }
 
-  SQL.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+  message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
         if (message.deletable) {
           message.delete().then(() => {
-            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+            message.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
@@ -107,7 +105,7 @@ module.exports = message => {
                     timestamp: new Date()
                   }
                 }).then(() => {
-                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+                  message.client.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                     message.client.log.error(e.stack);
                   });
                 }).catch(e => {
@@ -127,12 +125,12 @@ module.exports = message => {
     message.client.log.error(e.stack);
   });
 
-  SQL.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+  message.client.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     if (guild.filterLink === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(message.content)) {
         if (message.deletable) {
           message.delete().then(() => {
-            SQL.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+            message.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
               if (!row) return;
 
               if (row.modLog === 'true') {
@@ -158,7 +156,7 @@ module.exports = message => {
                     timestamp: new Date()
                   }
                 }).then(() => {
-                  SQL.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+                  message.client.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
                     message.client.log.error(e.stack);
                   });
                 }).catch(e => {
@@ -178,7 +176,7 @@ module.exports = message => {
     message.client.log.error(e.stack);
   });
 
-  SQL.all('SELECT trigger, response FROM triggers').then(triggers => {
+  message.client.db.all('SELECT trigger, response FROM triggers').then(triggers => {
     if (triggers.length === 0) return;
 
     let trigger = '';
@@ -201,27 +199,27 @@ module.exports = message => {
       });
     }
   }).catch(() => {
-    SQL.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
+    message.client.db.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
       message.client.log.error(e.stack);
     });
   });
 
-  SQL.all('SELECT userID FROM blacklistedUsers').then(users => {
+  message.client.db.all('SELECT userID FROM blacklistedUsers').then(users => {
     if (users.map(u => u.userID).includes(message.author.id)) return;
 
-    SQL.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
+    message.client.db.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (!profile) {
-        SQL.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]).catch(e => {
+        message.client.db.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]).catch(e => {
           message.client.log.error(e.stack);
         });
       }
       else {
         let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
         if (currentLevel > profile.level) {
-          SQL.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
+          message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
-          SQL.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+          message.client.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
             if (guild.levelUpMessage === 'false') return;
 
             message.channel.send({
@@ -238,7 +236,7 @@ module.exports = message => {
           });
         }
         else {
-          SQL.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
+          message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
             message.client.log.error(e.stack);
           });
         }
@@ -278,7 +276,7 @@ module.exports = message => {
     });
 
     if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
-      SQL.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+      message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
         if (guild.chat === 'false') return;
 
         let args = message.content.split(' ');

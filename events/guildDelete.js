@@ -4,15 +4,12 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = guild => {
-  SQL.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+  guild.client.db.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
     guild.client.log.error(e.stack);
   });
 
-  SQL.get('SELECT log, logChannelID FROM bastionSettings').then(row => {
+  guild.client.db.get('SELECT log, logChannelID FROM bastionSettings').then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 

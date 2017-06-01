@@ -4,14 +4,11 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = (oldChannel, newChannel) => {
   if (!oldChannel.guild) return;
   if (oldChannel.name === newChannel.name) return;
 
-  SQL.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newChannel.guild.id}`).then(row => {
+  oldChannel.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${newChannel.guild.id}`).then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 

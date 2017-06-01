@@ -4,15 +4,13 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
 const COLOR = require('chalk');
-SQL.open('./data/Bastion.sqlite');
 
 module.exports = Bastion => {
   Bastion.user.setStatus(Bastion.config.status);
   Bastion.user.setGame(Bastion.config.game);
 
-  SQL.run('CREATE TABLE IF NOT EXISTS guildSettings' +
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
           '(guildID TEXT NOT NULL UNIQUE,' +
           `prefix TEXT NOT NULL DEFAULT '${Bastion.config.prefix}',` +
           'greet TEXT NOT NULL DEFAULT \'false\',' +
@@ -44,7 +42,7 @@ module.exports = Bastion => {
           'PRIMARY KEY(guildID))').then(() => {
             let bastionGuilds = Bastion.guilds.map(g => g.id);
 
-            SQL.all('SELECT guildID from guildSettings').then(row => {
+            Bastion.db.all('SELECT guildID from guildSettings').then(row => {
               row = row.map(r => r.guildID);
 
               for (let i = 0; i < bastionGuilds.length; i++) {
@@ -56,7 +54,7 @@ module.exports = Bastion => {
                   }
                 }
                 if (found === false) {
-                  SQL.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]).catch(e => {
+                  Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]).catch(e => {
                     Bastion.log.error(e.stack);
                   });
                 }
@@ -71,7 +69,7 @@ module.exports = Bastion => {
                   }
                 }
                 if (found === false) {
-                  SQL.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
+                  Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
                     Bastion.log.error(e.stack);
                   });
                 }
@@ -83,13 +81,13 @@ module.exports = Bastion => {
             Bastion.log.error(e.stack);
           });
 
-  SQL.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
           '(userID TEXT NOT NULL UNIQUE,' +
           'PRIMARY KEY(userID))').catch(e => {
             Bastion.log.error(e.stack);
           });
 
-  SQL.run('CREATE TABLE IF NOT EXISTS profiles' +
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS profiles' +
           '(userID TEXT NOT NULL UNIQUE,' +
           'bastionCurrencies INTEGER DEFAULT 0,' +
           'xp INTEGER DEFAULT 0,' +
@@ -98,19 +96,19 @@ module.exports = Bastion => {
             Bastion.log.error(e.stack);
           });
 
-  SQL.run('CREATE TABLE IF NOT EXISTS triggers' +
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS triggers' +
           '(trigger TEXT NOT NULL,' +
           'response TEXT NOT NULL)').catch(e => {
             Bastion.log.error(e.stack);
           });
 
-  SQL.run('CREATE TABLE IF NOT EXISTS todo' +
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS todo' +
           '(ownerID TEXT NOT NULL UNIQUE,' +
           'list TEXT NOT NULL DEFAULT \'[]\')').catch(e => {
             Bastion.log.error(e.stack);
           });
 
-  SQL.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
           '(log TEXT NOT NULL DEFAULT \'false\',' +
           'logChannelID TEXT UNIQUE)').catch(e => {
             Bastion.log.error(e.stack);

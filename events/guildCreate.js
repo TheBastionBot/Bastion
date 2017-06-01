@@ -4,11 +4,8 @@
  * @license MIT
  */
 
-const SQL = require('sqlite');
-SQL.open('./data/Bastion.sqlite');
-
 module.exports = guild => {
-  SQL.run('CREATE TABLE IF NOT EXISTS guildSettings' +
+  guild.client.db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
           '(guildID TEXT NOT NULL UNIQUE,' +
           `prefix TEXT NOT NULL DEFAULT '${guild.client.config.prefix}',` +
           'greet TEXT NOT NULL DEFAULT \'false\',' +
@@ -38,14 +35,14 @@ module.exports = guild => {
           'modLogChannelID TEXT UNIQUE,' +
           'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
           'PRIMARY KEY(guildID))').then(() => {
-            SQL.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [ guild.id ]).catch(e => {
+            guild.client.db.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [ guild.id ]).catch(e => {
               guild.client.log.error(e.stack);
             });
           }).catch(e => {
             guild.client.log.error(e.stack);
           });
 
-  SQL.get('SELECT log, logChannelID FROM bastionSettings').then(row => {
+  guild.client.db.get('SELECT log, logChannelID FROM bastionSettings').then(row => {
     if (!row) return;
     if (row.log === 'false') return;
 
