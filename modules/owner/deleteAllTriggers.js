@@ -8,7 +8,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   sql.all('DELETE FROM triggers').then(() => {
     message.channel.send({
@@ -33,7 +35,7 @@ exports.help = {
   name: 'deletealltriggers',
   description: 'Deletes all the triggers and responses.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'deleteAllTriggers',
   example: []
 };

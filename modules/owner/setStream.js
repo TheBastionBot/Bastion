@@ -5,7 +5,10 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) {
     return message.channel.send({
       embed: {
@@ -41,7 +44,7 @@ exports.help = {
   name: 'setstream',
   description: 'Set the bot to streaming mode with a given twitch link and name.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'setStream <twitch> <text>',
   example: [ 'setStream https://twitch.tv/TheGamerFDN The Gamer Foundation' ]
 };

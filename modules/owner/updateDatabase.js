@@ -8,7 +8,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   // let step = 0;
   // try {
@@ -53,7 +55,7 @@ exports.help = {
   name: 'updatedatabase',
   description: 'Updates Bastion\'s Database to the current release.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'updateDatabase',
   example: []
 };

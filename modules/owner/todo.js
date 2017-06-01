@@ -8,7 +8,10 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (args.length < 1) {
     return message.channel.send({
       embed: {
@@ -68,7 +71,7 @@ exports.help = {
   name: 'todo',
   description: 'Adds a text to your todo list.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'todo <text>',
   example: [ 'todo Reconfigure my firewall' ]
 };

@@ -8,7 +8,10 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   let index = parseInt(args[0]);
   if (!index || index <= 0) {
     return message.channel.send({
@@ -76,7 +79,7 @@ exports.help = {
   name: 'deletetodo',
   description: 'Deletes an item from your todo list by it\'s index number.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'deleteTodo <index>',
   example: [ 'deleteTodo 3' ]
 };

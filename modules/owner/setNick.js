@@ -5,7 +5,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   if (args.length > 0) {
     message.guild.members.get(Bastion.user.id).setNickname(args.join(' ')).then(() => {
@@ -46,7 +48,7 @@ exports.help = {
   name: 'setnick',
   description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'setNick [text]',
   example: [ 'setNick NewNick', 'setNick' ]
 };

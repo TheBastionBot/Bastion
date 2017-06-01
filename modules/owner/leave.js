@@ -5,7 +5,10 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (!/^[0-9]{18}$/.test(args[0])) {
     return message.channel.send({
       embed: {
@@ -33,7 +36,7 @@ exports.help = {
   name: 'leave',
   description: 'Tells the bot to leave a specified server by ID.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'leave <guild_id>',
   example: [ 'leave 441122339988775566' ]
 };

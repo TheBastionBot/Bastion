@@ -5,7 +5,9 @@
  */
 
 exports.run = (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   message.channel.send({
     embed: {
@@ -62,7 +64,7 @@ exports.help = {
   name: 'shutdown',
   description: 'Asks you for conformation to shut the bot down and terminates the process. Reply with `yes` or `no`.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'shutdown',
   example: []
 };

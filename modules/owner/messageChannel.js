@@ -5,7 +5,10 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (!/^[0-9]{18}$/.test(args[0])) {
     return message.channel.send({
       embed: {
@@ -39,7 +42,7 @@ exports.help = {
   name: 'messagechannel',
   description: 'Sends a message to a specified channel (by ID) of a server the bot is connected tos.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'messageChannel <channel_id> <message>',
   example: [ 'messageChannel CHANNEL_ID Hello everyone!' ]
 };

@@ -8,7 +8,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo || todo.list === '[]') {
@@ -65,7 +67,7 @@ exports.help = {
   name: 'listtodo',
   description: 'Shows your todo list if you have one. It takes page number as an optional argument.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'listTodo [page_no]',
   example: [ 'listTodo', 'listTodo 2' ]
 };

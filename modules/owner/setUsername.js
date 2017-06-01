@@ -5,7 +5,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   if (args.join(' ').length >= 1) {
     Bastion.user.setUsername(args.join(' ')).then(() => {
@@ -32,7 +34,7 @@ exports.help = {
   name: 'setusername',
   description: 'Give a new username to the bot. (NOTE: It\'s Rate limited. You can only change it two times in an hour.)',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'setUsername <text>',
   example: [ 'setUsername NewUsername' ]
 };

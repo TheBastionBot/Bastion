@@ -10,7 +10,10 @@ let activeChannels = [];
 let winners = [];
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (args.length < 1 || (isNaN(args = parseInt(args[0])) || args < 0)) {
     return message.channel.send({
       embed: {
@@ -93,7 +96,7 @@ exports.help = {
   name: 'giveaway',
   description: 'Starts a giveaway, users get the specified amount of Bastion Currencies if they react to the message with the given reaction, within 1 hour.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'giveaway <amount>',
   example: [ 'giveaway 10' ]
 };

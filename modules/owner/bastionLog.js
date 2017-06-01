@@ -8,7 +8,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   sql.get('SELECT log, logChannelID FROM bastionSettings').then(row => {
     let color = Bastion.colors.green;
@@ -52,7 +54,7 @@ exports.help = {
   name: 'bastionlog',
   description: 'Toggle logging of various events of the bot.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'bastionLog',
   example: []
 };

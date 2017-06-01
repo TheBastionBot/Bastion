@@ -8,7 +8,9 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   sql.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers.length === 0) {
@@ -57,7 +59,7 @@ exports.help = {
   name: 'listtriggers',
   description: 'Lists all the triggers you have added. It takes page number as an optional argument.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'listTriggers [page_no]',
   example: [ 'listTriggers', 'listTriggers 2' ]
 };

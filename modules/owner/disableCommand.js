@@ -5,7 +5,9 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
   let command = args[0].toLowerCase();
   if (command === 'disablecommand' || command === 'disablecmd' || command === 'enablecommand' || command === 'enablecmd') {
@@ -60,7 +62,7 @@ exports.help = {
   name: 'disablecommand',
   description: 'Disables a command temporarily until Bastion is restarted or it is enabled again.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'disableCommand <command_name>',
   example: [ 'disableCommand echo' ]
 };

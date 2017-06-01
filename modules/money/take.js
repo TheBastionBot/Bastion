@@ -8,7 +8,10 @@ const sql = require('sqlite');
 sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     return message.channel.send({
       embed: {
@@ -90,7 +93,7 @@ exports.help = {
   name: 'take',
   description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: [ 'take 100 @user#0001 Misbehaving', 'take 150 2233445566778899' ]
 };
