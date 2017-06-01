@@ -111,6 +111,11 @@ module.exports = Bastion => {
   Bastion.on('warn', LOAD_EVENTS('warn'));
 
   /**
+  * Emitted whenever the bot doesn't have the required permission(s).
+  * @listens bastionMissingPermissions
+  */
+  Bastion.on('bastionMissingPermissions', LOAD_EVENTS('bastionMissingPermissions'));
+  /**
    * Emitted whenever a command is used in with invalid parameters.
    * @listens commandUsage
    */
