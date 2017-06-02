@@ -27,6 +27,7 @@
     "Removed `deleteTextChannel` command",
     "Removed `deleteVoiceChannel` command",
     "Removed `renameTextChannel` command",
-    "Removed `roleColor` command"
+    "Removed `roleColor` command",
+    "Removed `filterInvite` & `filterLink` events from moderation logs"
   ]
 }
