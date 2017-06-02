@@ -14,15 +14,11 @@ exports.run = (Bastion, message, args) => {
 
   args = args.join(' ');
   if (!/.+ << .+/.test(args)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
   args = args.split(' << ');
   sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args[0], args[1] ]).catch(e => {

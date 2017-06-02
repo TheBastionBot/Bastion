@@ -10,15 +10,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9_-~#%]+)\.(jpg|jpeg|gif|png)$/i.test(args.join(' '))) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
   Bastion.user.setAvatar(args.join(' ')).then(() => {
     message.channel.send({

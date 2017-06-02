@@ -9,6 +9,14 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
+  if (args.length < 1) {
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
   let command = args[0].toLowerCase();
   if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
     if (Bastion.commands.has(command)) {
