@@ -11,7 +11,7 @@ exports.run = (Bastion, message, args) => {
 
   if (args.length < 1) {
     /**
-     * The command was run with invalid parameters.
+     * The command was ran with invalid parameters.
      * @fires commandUsage
      */
     return Bastion.emit('commandUsage', message, this.help);

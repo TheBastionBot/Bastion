@@ -11,15 +11,11 @@ let recentUsers = [];
 exports.run = (Bastion, message, args) => {
   if (!recentUsers.includes(message.author.id)) {
     if (!(args[0] = parseInt(args[0])) || !/^(heads|tails)$/i.test(args[1]) || args[0] < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.yellow,
-          title: 'Usage',
-          description: `\`${Bastion.config.prefix}${this.help.usage}\``
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
     }
 
     if (args[0] < 5) {
