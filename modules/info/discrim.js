@@ -6,16 +6,13 @@
 
 exports.run = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
+
   let members = message.guild.members.filter(m => m.user.discriminator === args[0]).map(m => m.user);
   let total = members.length;
   members = members.length > 0 ? members.slice(0, 10).join(', ') : 'None';
