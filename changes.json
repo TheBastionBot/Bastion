@@ -17,7 +17,8 @@
     "Added `renameChannel` command",
     "Added `setPrefix` command",
     "Added `setBio` command",
-    "Added `emoji` command"
+    "Added `emoji` command",
+    "Added `report` command"
   ],
   "removed": [
     "Removed `createTextChannel` command",
