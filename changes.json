@@ -4,7 +4,8 @@
     "Improved RegExp of link filter",
     "Increased poll timeout to 6 hours",
     "`leaderboard` command shows the ranking of only guild members instead of all bot users",
-    "`hallOfFame` command shows the ranking of only guild members instead of all bot users"
+    "`hallOfFame` command shows the ranking of only guild members instead of all bot users",
+    "`profile` command now shows the bio of the user"
   ],
   "added": [
     "Added `--global` flag to `leaderboard` command - shows the ranking of all users of the bot",

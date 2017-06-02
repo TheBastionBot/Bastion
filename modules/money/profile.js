@@ -23,6 +23,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         });
       }
+
       return message.channel.send({
         embed: {
           color: Bastion.colors.red,
@@ -32,11 +33,12 @@ exports.run = (Bastion, message, args) => {
         Bastion.log.error(e.stack);
       });
     }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
-        title: 'User Profile',
-        description: args.tag,
+        title: args.tag,
+        description: profile.bio || 'No bio set. Set your bio using `setBio` command.',
         fields: [
           {
             name: 'Bastion Currency',
