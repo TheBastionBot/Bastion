@@ -1,5 +1,5 @@
 /**
- * @file chat command
+ * @file setPrefix command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
