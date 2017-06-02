@@ -6,15 +6,11 @@
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
 
   args = args.join(' ');
