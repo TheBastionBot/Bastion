@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       gametype = 'Sabotage';
     }
     else {
-      gametype = data.row.g_gametype;
+      gametype = data.raw.g_gametype;
     }
 
     let stats = [
