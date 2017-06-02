@@ -13,16 +13,16 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  args = args.join(' ');
-  if (!/.+ << .+/.test(args)) {
+  if (!args.trigger || !args.response) {
+  // if (!/.+ << .+/.test(args)) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
      */
     return Bastion.emit('commandUsage', message, this.help);
   }
-  args = args.split(' << ');
-  Bastion.db.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args[0], args[1] ]).catch(e => {
+
+  Bastion.db.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args.trigger.join(' '), args.response.join(' ') ]).catch(e => {
     Bastion.log.error(e.stack);
   });
 
@@ -33,11 +33,11 @@ exports.run = (Bastion, message, args) => {
       fields: [
         {
           name: 'Trigger',
-          value: args[0]
+          value: args.trigger.join(' ')
         },
         {
           name: 'Response',
-          value: args[1]
+          value: args.response.join(' ')
         }
       ]
     }
@@ -48,7 +48,11 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'addtrip' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'trigger', type: String, alias: 't', multiple: true, defaultOption: true },
+    { name: 'response', type: String, alias: 'r', multiple: true }
+  ]
 };
 
 exports.help = {
@@ -56,6 +60,6 @@ exports.help = {
   description: 'Adds a trigger with a response message. Separate trigger & message with `<<`.`',
   botPermission: '',
   userPermission: 'BOT_OWNER',
-  usage: 'addTrigger <trigger> << <response>',
-  example: [ 'addTrigger Hi, there? << Hello $user! :wave:' ]
+  usage: 'addTrigger <-t trigger message -r response message>',
+  example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]
 };
