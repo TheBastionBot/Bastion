@@ -12,15 +12,11 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
   if (!args.name) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was run with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
 
   args.name = args.name.join('-');
