@@ -1,5 +1,5 @@
 {
-  "date": "June 1, 2017",
+  "date": "June 2, 2017",
   "updated": [
     "Improved RegExp of link filter",
     "Increased poll timeout to 6 hours",
@@ -14,7 +14,8 @@
     "Added `deleteChannel` command",
     "Added `renameChannel` command",
     "Added `setPrefix` command",
-    "Added `setBio` command"
+    "Added `setBio` command",
+    "Added `emoji` command"
   ],
   "removed": [
     "Removed `createTextChannel` command",
