@@ -59,7 +59,7 @@ exports.run = (Bastion, message) => {
           inline: true
         },
         {
-          name: 'Owner ID(s)',
+          name: `Owner ID${Bastion.credentials.ownerId.length > 1 ? 's' : ''}`,
           value: Bastion.credentials.ownerId.join('\n'),
           inline: true
         },
