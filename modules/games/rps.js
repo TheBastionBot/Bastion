@@ -11,17 +11,15 @@ exports.run = (Bastion, message, args) => {
     'SCISSOR'
   ];
   let userOutcome = args.join(' ').toUpperCase();
+
   if (!outcomes.includes(userOutcome)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
+
   let botOutcome = outcomes[Math.floor(Math.random() * outcomes.length)];
   // let botOutcome = outcomes.random();
   let result = 'I win! :yum:';
