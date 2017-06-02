@@ -306,8 +306,17 @@ exports.run = (Bastion, message, args) => {
               });
 
               let collector = textChannel.createMessageCollector(
-                msg => connection.channel === msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}clean`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}shuffle`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
-                // msg => msg.guild.voiceConnection.channel === msg.member.voiceChannel && (msg.content.startsWith(`${Bastion.config.prefix}clean`) || msg.content.startsWith(`${Bastion.config.prefix}np`) || msg.content.startsWith(`${Bastion.config.prefix}pause`) || msg.content.startsWith(`${Bastion.config.prefix}queue`) || msg.content.startsWith(`${Bastion.config.prefix}repeat`) || msg.content.startsWith(`${Bastion.config.prefix}resume`) || msg.content.startsWith(`${Bastion.config.prefix}shuffle`) || msg.content.startsWith(`${Bastion.config.prefix}skip`) || msg.content.startsWith(`${Bastion.config.prefix}stop`) || msg.content.startsWith(`${Bastion.config.prefix}volume`))
+                msg => connection.channel === msg.member.voiceChannel &&
+                        (msg.content.startsWith(`${Bastion.config.prefix}clean`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}np`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}pause`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}queue`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}repeat`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}resume`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}shuffle`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}skip`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}stop`) ||
+                          msg.content.startsWith(`${Bastion.config.prefix}volume`))
               );
               collector.on('collect', msg => {
                 if (msg.content.startsWith(`${Bastion.config.prefix}clean`)) {
@@ -349,7 +358,7 @@ exports.run = (Bastion, message, args) => {
                 else if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
                   if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
                   if (!connection.speaking) return;
-                  // if (!message.guild.voiceConnection.speaking) return;
+
                   textChannel.send({
                     embed: {
                       color: Bastion.colors.orange,
@@ -411,7 +420,7 @@ exports.run = (Bastion, message, args) => {
                 else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
                   if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
                   if (connection.speaking) return;
-                  // if (message.guild.voiceConnection.speaking) return;
+
                   textChannel.send({
                     embed: {
                       color: Bastion.colors.green,
