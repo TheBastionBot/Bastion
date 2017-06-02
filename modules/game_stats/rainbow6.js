@@ -9,15 +9,11 @@ const r6 = new RainbowSix();
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 2) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
   if (!/^(uplay|ps4|xone)$/.test(args[0] = args[0].toLowerCase())) {
     return message.channel.send({
