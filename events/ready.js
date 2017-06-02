@@ -92,6 +92,7 @@ module.exports = Bastion => {
           'bastionCurrencies INTEGER DEFAULT 0,' +
           'xp INTEGER DEFAULT 0,' +
           'level INTEGER DEFAULT 0,' +
+          'status TEXT,' +
           'PRIMARY KEY(userID))').catch(e => {
             Bastion.log.error(e.stack);
           });
