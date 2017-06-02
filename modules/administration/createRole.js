@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'cr' ],
+  aliases: [ 'creater' ],
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, alias: 'n', multiple: true, defaultOption: true, defaultValue: [ 'new role' ] },

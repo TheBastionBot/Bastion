@@ -71,7 +71,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'renr' ],
+  aliases: [ 'renamer' ],
   enabled: true,
   argsDefinitions: [
     { name: 'old', type: String, alias: 'o', multiple: true },

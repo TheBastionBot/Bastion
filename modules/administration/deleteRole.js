@@ -77,7 +77,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'dr' ],
+  aliases: [ 'deleter' ],
   enabled: true,
   argsDefinitions: [
     { name: 'mention', type: String, alias: 'm', multiple: true, defaultOption: true },

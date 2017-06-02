@@ -74,7 +74,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'cc' ],
+  aliases: [ 'createc' ],
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, alias: 'n', multiple: true, defaultOption: true },

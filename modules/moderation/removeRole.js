@@ -125,7 +125,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'rmr' ],
+  aliases: [ 'remover' ],
   enabled: true
 };
 
