@@ -12,6 +12,10 @@ exports.run = (Bastion, message) => {
   }
   if (message.guild.voiceConnection) {
     if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+      /**
+       * User has missing permissions.
+       * @fires userMissingPermissions
+       */
       return Bastion.emit('userMissingPermissions', this.help.userPermission);
     }
 
@@ -50,6 +54,10 @@ exports.run = (Bastion, message) => {
   else {
     if (message.member.voiceChannel) {
       if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) {
+        /**
+         * User has missing permissions.
+         * @fires userMissingPermissions
+         */
         return Bastion.emit('userMissingPermissions', this.help.userPermission);
       }
 

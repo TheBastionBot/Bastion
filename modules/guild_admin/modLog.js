@@ -10,6 +10,10 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 

@@ -39,9 +39,17 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
   if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    /**
+     * Bastion has missing permissions.
+     * @fires bastionMissingPermissions
+     */
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 

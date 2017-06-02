@@ -9,9 +9,17 @@ sql.open('./data/Bastion.sqlite');
 
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
   if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    /**
+     * Bastion has missing permissions.
+     * @fires bastionMissingPermissions
+     */
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
