@@ -8,42 +8,7 @@ const xkcd = require('xkcd');
 const getRandomInt = require('../../functions/getRandomInt');
 
 exports.run = (Bastion, message, args) => {
-  let num = parseInt(args[0]);
-  if (args[0] !== undefined && !isNaN(num)) {
-    xkcd(function (data) {
-      xkcd(num > data.num ? data.num : num, function (data) {
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.blue,
-            title: data.title,
-            description: data.alt,
-            url: `https://xkcd.com/${data.num}`,
-            fields: [
-              {
-                name: 'Comic Number',
-                value: data.num,
-                inline: true
-              },
-              {
-                name: 'Publication Date',
-                value: new Date(data.year, data.month, data.day).toDateString(),
-                inline: true
-              }
-            ],
-            image: {
-              url: data.img
-            },
-            footer: {
-              text: 'Powered by xkcd'
-            }
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      });
-    });
-  }
-  else if (args[0] !== undefined && args[0].toLowerCase() === 'latest') {
+  if (args.latest) {
     xkcd(function (data) {
       message.channel.send({
         embed: {
@@ -77,8 +42,15 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     xkcd(function (data) {
-      let num = getRandomInt(1, data.num);
-      xkcd(num, function (data) {
+      let comicNumber;
+      if (args.number && !isNaN(args.number)) {
+        comicNumber = args.number > data.num ? data.num : args.number;
+      }
+      else {
+        comicNumber = getRandomInt(1, data.num);
+      }
+
+      xkcd(comicNumber, function (data) {
         message.channel.send({
           embed: {
             color: Bastion.colors.blue,
@@ -114,7 +86,11 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'number', type: Number, alias: 'n' },
+    { name: 'latest', type: Boolean, alias: 'l' }
+  ]
 };
 
 exports.help = {
@@ -122,6 +98,6 @@ exports.help = {
   description: 'Shows a **xkcd** comic. No arguments will shows a random comic. If a comic number is given, it will show that specific comic & \'latest\' will show the latest comic.',
   botPermission: '',
   userPermission: '',
-  usage: 'xkcd [ latest | comic_number ]',
-  example: [ 'xkcd', 'xkcd latest', 'xkcd 834' ]
+  usage: 'xkcd [ --latest | -n comic_number ]',
+  example: [ 'xkcd', 'xkcd --latest', 'xkcd -n 834' ]
 };
