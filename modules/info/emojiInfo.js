@@ -15,15 +15,11 @@ exports.run = (Bastion, message, args) => {
 
   args = args[0].split(':')[1];
   if (!args) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
   args = message.guild.emojis.find('name', args);
   message.channel.send({
