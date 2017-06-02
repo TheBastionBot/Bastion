@@ -12,7 +12,8 @@
     "Added `createChannel` command",
     "Added `deleteChannel` command",
     "Added `renameChannel` command",
-    "Added `setPrefix` command"
+    "Added `setPrefix` command",
+    "Added `setBio` command"
   ],
   "removed": [
     "Removed `createTextChannel` command",
