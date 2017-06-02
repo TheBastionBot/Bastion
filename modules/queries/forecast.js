@@ -62,6 +62,6 @@ exports.help = {
   description: 'Shows weather forecast for 5 days for a specified location by name or ZIP Code.',
   botPermission: '',
   userPermission: '',
-  usage: 'forecast <city [, country_code]|zipcode>',
+  usage: 'forecast < city, country_code | zipcode >',
   example: [ 'forecast London, UK', 'forecast 94109' ]
 };
