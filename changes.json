@@ -18,7 +18,8 @@
     "Added `setPrefix` command",
     "Added `setBio` command",
     "Added `emoji` command",
-    "Added `report` command"
+    "Added `report` command",
+    "Added `$mention` variable for trigger's responses"
   ],
   "removed": [
     "Removed `createTextChannel` command",

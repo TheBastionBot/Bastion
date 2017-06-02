@@ -48,44 +48,7 @@ module.exports = message => {
       if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
         if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
           if (message.deletable) {
-            message.delete().then(() => {
-              message.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-                if (!row) return;
-
-                if (row.modLog === 'true') {
-                  message.guild.channels.get(row.modLogChannelID).send({
-                    embed: {
-                      color: message.client.colors.orange,
-                      title: 'Filtered Invite',
-                      fields: [
-                        {
-                          name: 'Responsible User',
-                          value: `${message.author}`,
-                          inline: true
-                        },
-                        {
-                          name: 'User ID',
-                          value: message.author.id,
-                          inline: true
-                        }
-                      ],
-                      footer: {
-                        text: `Case Number: ${row.modCaseNo}`
-                      },
-                      timestamp: new Date()
-                    }
-                  }).then(() => {
-                    message.client.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
-                      message.client.log.error(e.stack);
-                    });
-                  }).catch(e => {
-                    message.client.log.error(e.stack);
-                  });
-                }
-              }).catch(e => {
-                message.client.log.error(e.stack);
-              });
-            }).catch(e => {
+            message.delete().catch(e => {
               message.client.log.error(e.stack);
             });
           }
@@ -99,44 +62,7 @@ module.exports = message => {
       if (guild.filterLink === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
         if (/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(message.content)) {
           if (message.deletable) {
-            message.delete().then(() => {
-              message.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-                if (!row) return;
-
-                if (row.modLog === 'true') {
-                  message.guild.channels.get(row.modLogChannelID).send({
-                    embed: {
-                      color: message.client.colors.orange,
-                      title: 'Filtered Link',
-                      fields: [
-                        {
-                          name: 'Responsible User',
-                          value: `${message.author}`,
-                          inline: true
-                        },
-                        {
-                          name: 'User ID',
-                          value: message.author.id,
-                          inline: true
-                        }
-                      ],
-                      footer: {
-                        text: `Case Number: ${row.modCaseNo}`
-                      },
-                      timestamp: new Date()
-                    }
-                  }).then(() => {
-                    message.client.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
-                      message.client.log.error(e.stack);
-                    });
-                  }).catch(e => {
-                    message.client.log.error(e.stack);
-                  });
-                }
-              }).catch(e => {
-                message.client.log.error(e.stack);
-              });
-            }).catch(e => {
+            message.delete().catch(e => {
               message.client.log.error(e.stack);
             });
           }
@@ -162,6 +88,12 @@ module.exports = message => {
       if (message.content.includes(trigger) && !message.content.startsWith(message.client.config.prefix)) {
         response = response.replace(/\$user/ig, `<@${message.author.id}>`);
         response = response.replace(/\$username/ig, message.author.username);
+        if (message.mentions.users.first()) {
+          response = response.replace(/\$mention/ig, message.mentions.users.first());
+        }
+        else {
+          response = response.replace(/\$mention/ig, '');
+        }
         response = response.replace(/\$server/ig, `**${message.guild.name}**`);
         response = response.replace(/\$prefix/ig, message.client.config.prefix);
         return message.channel.send(response).catch(e => {
