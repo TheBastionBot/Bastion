@@ -116,7 +116,7 @@ module.exports = Bastion => {
   */
   Bastion.on('bastionMissingPermissions', LOAD_EVENTS('bastionMissingPermissions'));
   /**
-   * Emitted whenever a command is used in with invalid parameters.
+   * Emitted whenever a command is used with invalid parameters.
    * @listens commandUsage
    */
   Bastion.on('commandUsage', LOAD_EVENTS('commandUsage'));
