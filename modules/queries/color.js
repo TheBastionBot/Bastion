@@ -8,15 +8,11 @@ const convert = require('color-convert');
 
 exports.run = (Bastion, message, args) => {
   if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
 
   message.channel.send({
