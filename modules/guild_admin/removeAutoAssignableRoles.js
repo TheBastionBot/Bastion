@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -26,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   }
   index -= 1;
 
-  sql.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+  Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.autoAssignableRoles === '[]') {
       message.channel.send({
         embed: {
@@ -51,7 +48,7 @@ exports.run = (Bastion, message, args) => {
       }
       let deletedRoleID = roles[parseInt(args[0]) - 1];
       roles.splice(parseInt(args[0]) - 1, 1);
-      sql.run(`UPDATE guildSettings SET autoAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
+      Bastion.db.run(`UPDATE guildSettings SET autoAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
         message.channel.send({
           embed: {
             color: Bastion.colors.red,

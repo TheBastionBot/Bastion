@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -17,7 +14,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (args.length < 1) {
-    sql.get(`SELECT greetDMMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+    Bastion.db.get(`SELECT greetDMMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
       message.channel.send({
         embed: {
           color: Bastion.colors.dark_grey,
@@ -32,7 +29,7 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    sql.run(`UPDATE guildSettings SET greetDMMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.db.run(`UPDATE guildSettings SET greetDMMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e.stack);
     });
 

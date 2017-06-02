@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
 let activeChannels = [];
 let winners = [];
 

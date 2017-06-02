@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
 const yt = require('youtube-dl');
-sql.open('./data/Bastion.sqlite');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/favouriteSongs', true, true);
 let queue = {};
@@ -27,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   }
   args = args.join(' ');
 
-  sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
+  Bastion.db.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
     let voiceChannel, textChannel, vcStats;
     if (message.guild.voiceConnection) {
       voiceChannel = message.guild.voiceConnection.channel;

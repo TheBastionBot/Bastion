@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -16,17 +13,17 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  sql.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+  Bastion.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let color, logStats;
     if (row.log === 'false') {
-      sql.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.green;
       logStats = 'Logging is now enabled in this channel.';
     }
     else {
-      sql.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.red;

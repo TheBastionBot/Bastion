@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -27,17 +24,17 @@ exports.run = (Bastion, message) => {
     });
   }
 
-  sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+  Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let color, chatStats;
     if (row.chat === 'false') {
-      sql.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.green;
       chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
     }
     else {
-      sql.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.red;

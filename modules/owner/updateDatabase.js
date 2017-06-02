@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -18,8 +15,8 @@ exports.run = (Bastion, message) => {
 
   // let step = 0;
   // try {
-  //   sql.get('SELECT <COLUMNS> FROM <TABLE>').catch(() => {
-  //     sql.run('ALTER TABLE <TABLE> ADD <COLUMN> <CONSTRAINTS>').then(() => {
+  //   Bastion.db.get('SELECT <COLUMNS> FROM <TABLE>').catch(() => {
+  //     Bastion.db.run('ALTER TABLE <TABLE> ADD <COLUMN> <CONSTRAINTS>').then(() => {
   //       message.channel.send({
   //         embed: {
   //           color: Bastion.colors.green,

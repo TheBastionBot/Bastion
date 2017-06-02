@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -24,9 +21,9 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
+  Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo) {
-      sql.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [ message.author.id, `["${args.join(' ')}"]` ]).then(() => {
+      Bastion.db.run('INSERT OR IGNORE INTO todo (ownerID, list) VALUES (?, ?)', [ message.author.id, `["${args.join(' ')}"]` ]).then(() => {
         message.channel.send({
           embed: {
             color: Bastion.colors.green,
@@ -43,7 +40,7 @@ exports.run = (Bastion, message, args) => {
     else {
       let list = JSON.parse(todo.list);
       list.push(args.join(' '));
-      sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
+      Bastion.db.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
         message.channel.send({
           embed: {
             color: Bastion.colors.green,

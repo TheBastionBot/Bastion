@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     /**
@@ -70,7 +67,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
+    Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
       if (sender.bastionCurrencies < args[0]) {
         return message.channel.send({
           embed: {

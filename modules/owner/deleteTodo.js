@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -26,7 +23,7 @@ exports.run = (Bastion, message, args) => {
   }
   index -= 1;
 
-  sql.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
+  Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo) {
       message.channel.send({
         embed: {
@@ -52,7 +49,7 @@ exports.run = (Bastion, message, args) => {
       }
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);
-      sql.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
+      Bastion.db.run(`UPDATE todo SET list='${JSON.stringify(list)}' WHERE ownerID=${message.author.id}`).then(() => {
         message.channel.send({
           embed: {
             color: Bastion.colors.red,

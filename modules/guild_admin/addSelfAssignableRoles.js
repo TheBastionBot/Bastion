@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -48,13 +45,13 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  sql.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+  Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let roles = JSON.parse(row.selfAssignableRoles);
     roles = roles.concat(args);
     roles = roles.filter(r => message.guild.roles.get(r));
     roles = [ ...new Set(roles) ];
     // roles = roles.unique(roles);
-    sql.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
+    Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
       let roleNames = [];
       for (let i = 0; i < args.length; i++) {
         roleNames.push(message.guild.roles.get(args[i]).name);

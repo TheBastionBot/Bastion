@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -19,7 +16,7 @@ exports.run = (Bastion, message, args) => {
   if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
     args[0] = '0';
   }
-  sql.run(`UPDATE guildSettings SET greetTimeout=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
+  Bastion.db.run(`UPDATE guildSettings SET greetTimeout=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e.stack);
   });
 

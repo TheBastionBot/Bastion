@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete(1000).catch(e => {
@@ -59,7 +56,7 @@ exports.run = (Bastion, message) => {
     }
   }
   else {
-    sql.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
+    Bastion.db.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
       if (musicChannel.musicTextChannelID !== message.channel.id) return;
       if (!musicChannel.musicVoiceChannelID) {
         return message.channel.send({

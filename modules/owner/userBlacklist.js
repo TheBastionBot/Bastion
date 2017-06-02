@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -30,14 +27,14 @@ exports.run = (Bastion, message, args) => {
   });
   user = user.concat(message.mentions.users.map(u => u.id));
 
-  sql.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').then(() => {
-    sql.all('SELECT userID from blacklistedUsers').then(blUsers => {
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').then(() => {
+    Bastion.db.all('SELECT userID from blacklistedUsers').then(blUsers => {
       blUsers = blUsers.map(u => u.userID);
       let title;
       if (/^(add|\+)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (blUsers.includes(user[i])) continue;
-          sql.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [ user[i] ]).catch(e => {
+          Bastion.db.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [ user[i] ]).catch(e => {
             Bastion.log.error(e.stack);
           });
         }
@@ -46,7 +43,7 @@ exports.run = (Bastion, message, args) => {
       else if (/^(remove|rem|-)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (!blUsers.includes(user[i])) continue;
-          sql.run(`DELETE FROM blacklistedUsers where userID=${user[i]}`).catch(e => {
+          Bastion.db.run(`DELETE FROM blacklistedUsers where userID=${user[i]}`).catch(e => {
             Bastion.log.error(e.stack);
           });
         }

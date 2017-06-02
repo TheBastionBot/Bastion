@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -16,7 +13,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  sql.all('SELECT trigger FROM triggers').then(triggers => {
+  Bastion.db.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers.length === 0) {
       return message.channel.send({
         embed: {
