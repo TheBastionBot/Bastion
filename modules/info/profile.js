@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.blue,
         title: args.tag,
-        description: profile.bio || 'No bio set. Set your bio using `setBio` command.',
+        description: profile.bio || `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`,
         fields: [
           {
             name: 'Bastion Currency',
