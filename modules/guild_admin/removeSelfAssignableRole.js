@@ -1,5 +1,5 @@
 /**
- * @file removeSelfAssignableRoles command
+ * @file removeSelfAssignableRole command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -72,10 +72,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removeselfassignableroles',
+  name: 'removeselfassignablerole',
   description: 'Deletes a role from the self assignable roles by it\'s index number.',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
-  usage: 'removeSelfAssignableRoles <index>',
-  example: [ 'removeSelfAssignableRoles 3' ]
+  usage: 'removeSelfAssignableRole <index>',
+  example: [ 'removeSelfAssignableRole 3' ]
 };
