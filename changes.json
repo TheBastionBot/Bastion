@@ -1,5 +1,5 @@
 {
-  "date": "June 2, 2017",
+  "date": "June 3, 2017",
   "updated": [
     "Improved RegExp of link filter",
     "Increased poll timeout to 6 hours",
@@ -19,6 +19,7 @@
     "Added `setBio` command",
     "Added `emoji` command",
     "Added `report` command",
+    "Added `musicMasterRole` command",
     "Added `$mention` variable for trigger's responses"
   ],
   "removed": [
