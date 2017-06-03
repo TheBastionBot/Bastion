@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   }
   args = args.join(' ');
 
-  Bastion.db.get(`SELECT musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
+  Bastion.db.get(`SELECT musicMasterRoleID, musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(musicChannel => {
     let voiceChannel, textChannel, vcStats;
     if (message.guild.voiceConnection) {
       voiceChannel = message.guild.voiceConnection.channel;
@@ -318,7 +318,7 @@ exports.run = (Bastion, message, args) => {
             );
             collector.on('collect', msg => {
               if (msg.content.startsWith(`${Bastion.config.prefix}clean`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) return;
                 queue[message.guild.id].songs.splice(1, queue[message.guild.id].songs.length - 1);
                 textChannel.send({
                   embed: {
@@ -354,7 +354,7 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) return;
                 if (!connection.speaking) return;
 
                 textChannel.send({
@@ -416,7 +416,7 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) return;
                 if (connection.speaking) return;
 
                 textChannel.send({
@@ -435,7 +435,7 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}shuffle`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) return;
 
                 let nowPlaying = queue[message.guild.id].songs.shift();
                 queue[message.guild.id].songs = shuffle(queue[message.guild.id].songs);
@@ -452,7 +452,7 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) {
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) {
                   if (!queue[message.guild.id].skipVotes.includes(msg.author.id)) {
                     queue[message.guild.id].skipVotes.push(msg.author.id);
                   }
@@ -493,7 +493,7 @@ exports.run = (Bastion, message, args) => {
                 }
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}stop`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) return;
                 textChannel.send({
                   embed: {
                     color: Bastion.colors.red,
@@ -509,7 +509,7 @@ exports.run = (Bastion, message, args) => {
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
-                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !voiceChannel.permissionsFor(msg.member).has('MUTE_MEMBERS')) return;
+                if (!Bastion.credentials.ownerId.includes(msg.author.id) && !msg.member.roles.has(musicChannel.musicMasterRoleID)) return;
                 let param = msg.content.split(' ').slice(1);
                 if (param[0] === '+') {
                   dispatcher.setVolume((dispatcher.volume * 50 + 2) / 50);

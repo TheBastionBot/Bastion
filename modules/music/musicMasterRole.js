@@ -67,5 +67,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'musicMasterRole [ROLE_ID]',
-  example: [ 'musicMasterRole 319225727067095043', 'musicChannel' ]
+  example: [ 'musicMasterRole 319225727067095043', 'musicMasterRole' ]
 };
