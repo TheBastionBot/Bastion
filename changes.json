@@ -24,6 +24,7 @@
     "Added `filterWord` command",
     "Added `addFilteredWords` command",
     "Added `listFilteredWords` command",
+    "Added `removeFilteredWord` command",
     "Added `$mention` variable for trigger's responses"
   ],
   "removed": [
