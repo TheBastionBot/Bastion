@@ -35,6 +35,23 @@ module.exports = (oldMessage, newMessage) => {
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 
+  oldMessage.client.db.get(`SELECT filterWord, filteredWords FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
+    if (guild.filterWord === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
+      let filteredWords = JSON.parse(guild.filteredWords);
+      for (let i = 0; i < filteredWords.length; i++) {
+        if (newMessage.content.toLowerCase().includes(filteredWords[i].toLowerCase())) {
+          if (newMessage.deletable) {
+            return newMessage.delete().catch(e => {
+              newMessage.client.log.error(e.stack);
+            });
+          }
+        }
+      }
+    }
+  }).catch(e => {
+    newMessage.client.log.error(e.stack);
+  });
+
   oldMessage.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {

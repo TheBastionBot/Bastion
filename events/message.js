@@ -44,6 +44,23 @@ module.exports = message => {
   if (message.author.bot) return;
 
   if (message.guild) {
+    message.client.db.get(`SELECT filterWord, filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+      if (guild.filterWord === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
+        let filteredWords = JSON.parse(guild.filteredWords);
+        for (let i = 0; i < filteredWords.length; i++) {
+          if (message.content.toLowerCase().includes(filteredWords[i].toLowerCase())) {
+            if (message.deletable) {
+              return message.delete().catch(e => {
+                message.client.log.error(e.stack);
+              });
+            }
+          }
+        }
+      }
+    }).catch(e => {
+      message.client.log.error(e.stack);
+    });
+
     message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
       if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
         if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
