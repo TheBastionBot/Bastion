@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'addfw' ],
   enabled: true
 };
 

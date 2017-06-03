@@ -70,7 +70,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'removefw' ],
   enabled: true
 };
 
