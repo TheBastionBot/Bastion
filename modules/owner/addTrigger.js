@@ -1,44 +1,28 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file addTrigger command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
-
-  args = args.join(' ');
-  if (!/.+ << .+/.test(args)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
-  args = args.split(' << ');
-  sql.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args[0], args[1] ]).catch(e => {
+
+  if (!args.trigger || !args.response) {
+  // if (!/.+ << .+/.test(args)) {
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  Bastion.db.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args.trigger.join(' '), args.response.join(' ') ]).catch(e => {
     Bastion.log.error(e.stack);
   });
 
@@ -49,11 +33,11 @@ exports.run = (Bastion, message, args) => {
       fields: [
         {
           name: 'Trigger',
-          value: args[0]
+          value: args.trigger.join(' ')
         },
         {
           name: 'Response',
-          value: args[1]
+          value: args.response.join(' ')
         }
       ]
     }
@@ -64,14 +48,18 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'addtrip' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'trigger', type: String, alias: 't', multiple: true, defaultOption: true },
+    { name: 'response', type: String, alias: 'r', multiple: true }
+  ]
 };
 
 exports.help = {
   name: 'addtrigger',
   description: 'Adds a trigger with a response message. Separate trigger & message with `<<`.`',
   botPermission: '',
-  userPermission: 'Bot Owner',
-  usage: 'addTrigger <trigger> << <response>',
-  example: [ 'addTrigger Hi, there? << Hello $user! :wave:' ]
+  userPermission: 'BOT_OWNER',
+  usage: 'addTrigger <-t trigger message -r response message>',
+  example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]
 };

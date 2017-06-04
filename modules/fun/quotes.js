@@ -1,42 +1,47 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file quotes command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 const getRandomInt = require('../../functions/getRandomInt');
 const quotes = require('../../data/quotes.json');
 
 exports.run = (Bastion, message, args) => {
+  /*
+   * Get a random quote
+   */
   let index = getRandomInt(1, Object.keys(quotes).length);
-  if (!isNaN(args[0])) {
-    if (args[0] >= 1 && args[0] <= Object.keys(quotes).length) index = args[0];
+
+  /**
+   * If a quote number is provided, use that number.
+   */
+  if (!isNaN(args.number)) {
+    /**
+     * If the quote number exists
+     */
+    if (args.number >= 1 && args.number <= Object.keys(quotes).length) {
+      index = args.number;
+    }
   }
-  else {
-    let n = [];
+  /**
+   * If a author is provided, use that author.
+   */
+  else if (args.author) {
+    let authorQuoteIDs = [];
+    /**
+     * If the quotes list has a quote from the specified author, store it.
+     */
     for (let i = 1; i <= Object.keys(quotes).length; i++) {
-      if (quotes[i].author.search(new RegExp(args.join(' '), 'i')) !== -1) {
-        n.push(i);
+      if (quotes[i].author.search(new RegExp(args.author.join(' '), 'i')) !== -1) {
+        authorQuoteIDs.push(i);
       }
     }
-    if (n.length > 0) {
-      index = n[Math.floor(Math.random() * n.length)];
-      // index = n.random();
+    /**
+     * If the author has at least 1 quote, get a random quote number from it.
+     */
+    if (authorQuoteIDs.length > 0) {
+      index = authorQuoteIDs[Math.floor(Math.random() * authorQuoteIDs.length)];
     }
   }
 
@@ -45,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       color: Bastion.colors.blue,
       description: `*"${quotes[index].quote}"*\n\n**${quotes[index].author}**`,
       footer: {
-        text: `Quote: ${index}`
+        text: `Quote Number: ${index}`
       }
     }
   }).catch(e => {
@@ -55,7 +60,11 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'q' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'number', type: Number, alias: 'n' },
+    { name: 'author', type: String, alias: 'a', multiple: true }
+  ]
 };
 
 exports.help = {
@@ -63,6 +72,6 @@ exports.help = {
   description: 'Shows a quote to get you inspired. Search a quote by it\'s index no. or by the author. If none is provided, shows a random quote.',
   botPermission: '',
   userPermission: '',
-  usage: 'quotes <number|author>',
-  example: [ 'quotes', 'quotes 189', 'quotes Steve Jobs' ]
+  usage: 'quotes [ -n | -a Author Name]',
+  example: [ 'quotes', 'quotes -n 189', 'quotes -a Albert Einstein' ]
 };

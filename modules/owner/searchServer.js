@@ -1,36 +1,24 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file searchServer command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (args.length < 1) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
 
   let guilds = Bastion.guilds.filter(g => g.name.toLowerCase().includes(args.join(' ').toLowerCase())).map(g => g.name);
@@ -63,7 +51,7 @@ exports.help = {
   name: 'searchserver',
   description: 'Searches for servers, by specified text, the bot is connected to.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'searchServer <name>',
   example: [ 'searchServer Bastion' ]
 };

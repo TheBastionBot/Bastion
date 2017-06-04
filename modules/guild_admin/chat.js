@@ -1,29 +1,18 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file chat command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message) => {
-  if (!message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (!Bastion.credentials.cleverbotAPIkey) {
     return message.channel.send({
       embed: {
@@ -35,17 +24,17 @@ exports.run = (Bastion, message) => {
     });
   }
 
-  sql.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+  Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let color, chatStats;
     if (row.chat === 'false') {
-      sql.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.green;
       chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
     }
     else {
-      sql.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.red;
@@ -74,7 +63,7 @@ exports.help = {
   name: 'chat',
   description: 'Toggles chatting feature of the bot.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'chat',
   example: []
 };

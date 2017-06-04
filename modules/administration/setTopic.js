@@ -1,22 +1,7 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file setTopic command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 exports.run = (Bastion, message, args) => {
@@ -30,16 +15,19 @@ exports.run = (Bastion, message, args) => {
     topic = args.slice(1).join(' ').trim();
   }
 
-  if (!channel.permissionsFor(message.member).has('MANAGE_CHANNELS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    /**
+     * Bastion has missing permissions.
+     * @fires bastionMissingPermissions
+     */
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   let color = Bastion.colors.green;
@@ -77,15 +65,15 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'st' ],
+  aliases: [ 'sett' ],
   enabled: true
 };
 
 exports.help = {
   name: 'settopic',
   description: 'Sets the topic of the mentioned channel with a given name. If no channel is mentioned, sets the topic of the current channel with the given name. If no topic is given, or lenght of the topic is less than 2, channel topic is removed.',
-  botPermission: 'Manage Channels',
-  userPermission: 'Manage Channels',
+  botPermission: 'MANAGE_CHANNELS',
+  userPermission: 'MANAGE_CHANNELS',
   usage: 'setTopic [#channel-mention] [Channel Topic]',
   example: [ 'setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic' ]
 };

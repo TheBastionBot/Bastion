@@ -1,52 +1,33 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file deafen command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission('DEAFEN_MEMBERS')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.guild.me.hasPermission('DEAFEN_MEMBERS')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!message.member.hasPermission(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!message.guild.me.hasPermission(this.help.botPermission)) {
+    /**
+     * Bastion has missing permissions.
+     * @fires bastionMissingPermissions
+     */
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   let user = message.mentions.users.first();
   if (!user) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
 
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
@@ -83,7 +64,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e.stack);
     });
 
-    sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+    Bastion.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
       if (!row) return;
 
       if (row.modLog === 'true') {
@@ -123,7 +104,7 @@ exports.run = (Bastion, message, args) => {
             timestamp: new Date()
           }
         }).then(() => {
-          sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+          Bastion.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
             Bastion.log.error(e.stack);
           });
         }).catch(e => {
@@ -146,8 +127,8 @@ exports.config = {
 exports.help = {
   name: 'deafen',
   description: 'Deafens a mentioned user with an optional reason.',
-  botPermission: 'Deafen Members',
-  userPermission: 'Deafen Members',
+  botPermission: 'DEAFEN_MEMBERS',
+  userPermission: 'DEAFEN_MEMBERS',
   usage: 'deafen @user-mention [Reason]',
   example: [ 'deafen @user#0001 Reason for the deafening.' ]
 };

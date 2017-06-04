@@ -1,37 +1,18 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file poll command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
   }
   args = args.join(' ').split(';');
 
@@ -61,9 +42,9 @@ exports.run = (Bastion, message, args) => {
     }).then(msg => {
       const votes = message.channel.createMessageCollector(
         m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${Bastion.config.prefix}endpoll`),
-        { time: 5 * 1000 }
-        // { time: 60 * 60 * 1000 }
+        { time: 6 * 60 * 60 * 1000 }
       );
+
       votes.on('collect', (msg, votes) => {
         if (msg.content === `${Bastion.config.prefix}endpoll`) {
           return votes.stop();
@@ -88,6 +69,7 @@ exports.run = (Bastion, message, args) => {
           });
         });
       });
+
       votes.on('end', (pollRes, reason) => {
         pollRes = pollRes.map(r => r.content);
         if (reason === 'user') {
@@ -169,6 +151,6 @@ exports.help = {
   description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
   botPermission: '',
   userPermission: '',
-  usage: 'poll <question>;option1>;option2[;<option3>[...]]',
+  usage: 'poll <question>;<option1>;<option2>[;<option3>[...]]',
   example: [ 'poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2' ]
 };

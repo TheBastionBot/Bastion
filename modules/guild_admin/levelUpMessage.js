@@ -1,41 +1,29 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file levelUpMessage command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.hasPermission('ADMINISTRATOR')) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!message.member.hasPermission(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
 
-  sql.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+  Bastion.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
     let color, levelUpMessageStats;
     if (guild.levelUpMessage === 'true') {
-      sql.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.red;
       levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
     }
     else {
-      sql.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
         Bastion.log.error(e.stack);
       });
       color = Bastion.colors.green;
@@ -64,7 +52,7 @@ exports.help = {
   name: 'levelupmessage',
   description: 'Toggles sending messages when someone levels up in this server.',
   botPermission: '',
-  userPermission: 'Administrator',
+  userPermission: 'ADMINISTRATOR',
   usage: 'levelUpMessage',
   example: []
 };

@@ -1,38 +1,23 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file clear command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has('MANAGE_MESSAGES')) return Bastion.log.info('User doesn\'t have permission to use this command.');
-  if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I need **${this.help.botPermission}** permission, in this channel, to use this command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    /**
+     * Bastion has missing permissions.
+     * @fires bastionMissingPermissions
+     */
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
   let user = message.mentions.users.first();
@@ -76,7 +61,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
     message.channel.bulkDelete(msgs).then(() => {
-      sql.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
+      Bastion.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
         if (!row) return;
 
         if (row.modLog === 'true') {
@@ -116,7 +101,7 @@ exports.run = (Bastion, message, args) => {
               timestamp: new Date()
             }
           }).then(() => {
-            sql.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
+            Bastion.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
               Bastion.log.error(e.stack);
             });
           }).catch(e => {
@@ -142,8 +127,8 @@ exports.config = {
 exports.help = {
   name: 'clear',
   description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. Using `--bots` flag clears messages from bots in that channel. Using `--nonpinned` flag clears messages that aren\'t pinned.',
-  botPermission: 'Manage Messages',
-  userPermission: 'Manage Messages',
+  botPermission: 'MANAGE_MESSAGES',
+  userPermission: 'MANAGE_MESSAGES',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',
   example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };

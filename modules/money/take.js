@@ -1,56 +1,39 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file take command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
   if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  let user = message.mentions.users.first();
+  if (/^[0-9]{18}$/.test(args[1])) {
+    user = Bastion.users.get(args[1]);
+  }
+  if (!user) {
     return message.channel.send({
       embed: {
-        color: Bastion.colors.yellow,
-        title: 'Usage',
-        description: `\`${Bastion.config.prefix}${this.help.usage}\``
+        color: Bastion.colors.red,
+        description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
       }
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }
-
-  let user = message.mentions.users.first();
-  if (!(user && (user = user.id))) {
-    if (/^[0-9]{18}$/.test(args[1])) {
-      user = args[1];
-    }
-    else {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
-    }
   }
   let reason;
   if (args[2]) {
@@ -59,41 +42,40 @@ exports.run = (Bastion, message, args) => {
   else {
     reason = 'No reason given.';
   }
-  sql.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user}`).then(profile => {
-    if (profile) {
-      sql.run(`UPDATE profiles SET bastionCurrencies=${parseInt(profile.bastionCurrencies) - args[0]} WHERE userID=${user}`).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+
+  Bastion.emit('userCredit', user, args[0]);
+  /**
+   * Send a message in the channel to let the Bot Owner know that the operation was successful.
+   */
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.red,
+      description: `${args[0]} Bastion Currencies has been taken from <@${user.id}>`,
+      fields: [
+        {
+          name: 'Reason',
+          value: reason
+        }
+      ]
     }
-  }).then(() => {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `Penalty of **${args[0]}** Bastion Currencies has been charged to <@${user}>`,
-        fields: [
-          {
-            name: 'Reason',
-            value: reason
-          }
-        ]
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
-    Bastion.users.get(user).send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `You have been charged with a penalty of **${args[0]}** Bastion Currencies.`,
-        fields: [
-          {
-            name: 'Reason',
-            value: reason
-          }
-        ]
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  }).catch(e => {
+    Bastion.log.error(e.stack);
+  });
+
+  /**
+   * Let the user know by DM that their account has been credited.
+   */
+  user.send({
+    embed: {
+      color: Bastion.colors.red,
+      description: `Your account has been credited with **${args[0]}** Bastion Currencies.`,
+      fields: [
+        {
+          name: 'Reason',
+          value: reason
+        }
+      ]
+    }
   }).catch(e => {
     Bastion.log.error(e.stack);
   });
@@ -108,7 +90,7 @@ exports.help = {
   name: 'take',
   description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: [ 'take 100 @user#0001 Misbehaving', 'take 150 2233445566778899' ]
 };

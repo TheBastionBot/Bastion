@@ -1,22 +1,7 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file acrophobia command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 const getRandomInt = require('../../functions/getRandomInt');
@@ -227,6 +212,13 @@ exports.help = {
   example: []
 };
 
+/**
+ * Matches the first character of each element of a array of string to a character pool.
+ * @function matchAcronym
+ * @param {array} charPool The array that contains the character pool.
+ * @param {array} strArr The array of the string to match with the character pool.
+ * @returns {boolean} If the first character of each element of the array of string matches the character pool.
+*/
 function matchAcronym(charPool, strArr) {
   for (let i = 0; i < charPool.length; i++) {
     if (charPool[i] !== strArr[i].charAt(0).toUpperCase()) {

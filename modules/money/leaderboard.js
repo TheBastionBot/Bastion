@@ -1,30 +1,16 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file leaderboard command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
-const sql = require('sqlite');
-sql.open('./data/Bastion.sqlite');
-
-exports.run = (Bastion, message) => {
-  sql.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC LIMIT 10').then(profiles => {
+exports.run = (Bastion, message, args) => {
+  Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC LIMIT 10').then(profiles => {
     let fields = [];
+
+    if (args[0] !== '--global') {
+      profiles = profiles.filter(p => message.guild.members.get(p.userID));
+    }
     for (let i = 0; i < profiles.length; i++) {
       let user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? message.guild.members.get(profiles[i].userID).user.tag : profiles[i].userID;
       fields.push({
@@ -55,9 +41,9 @@ exports.config = {
 
 exports.help = {
   name: 'leaderboard',
-  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the users of the bot.',
+  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the members of the server. If used with the `--global` flap, it shows the ranking of all users of the bot.',
   botPermission: '',
   userPermission: '',
-  usage: 'leaderboard',
-  example: []
+  usage: 'leaderboard [--global]',
+  example: [ 'leaderboard', 'leaderboard --global' ]
 };

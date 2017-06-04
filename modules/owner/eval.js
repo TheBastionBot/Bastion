@@ -1,26 +1,25 @@
-/*
- * Copyright (C) 2017 Sankarsan Kampa
- *                    https://sankarsankampa.com/contact
- *
- * This file is a part of Bastion Discord BOT.
- *                        https://github.com/snkrsnkampa/Bastion
- *
- * This code is licensed under the SNKRSN Shared License. It is free to
- * download, copy, compile, use, study and refer under the terms of the
- * SNKRSN Shared License. You can modify the code only for personal or
- * internal use only. However, you can not redistribute the code without
- * explicitly getting permission fot it.
- *
- * Bastion BOT is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY. See the SNKRSN Shared License for
- * more details.
- *
- * You should have received a copy of the SNKRSN Shared License along
- * with this program. If not, see <https://github.com/snkrsnkampa/Bastion/LICENSE>.
+/**
+ * @file eval command
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license MIT
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) return Bastion.log.info('User doesn\'t have permission to use this command.');
+  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+    /**
+     * User has missing permissions.
+     * @fires userMissingPermissions
+     */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
+  if (args.length) {
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
   try {
     let evaled = eval(args.join(' '));
@@ -81,15 +80,22 @@ exports.help = {
   name: 'eval',
   description: 'Evaluates any JavaScript statement.',
   botPermission: '',
-  userPermission: 'Bot Owner',
+  userPermission: 'BOT_OWNER',
   usage: 'eval <JavaScript code>',
   example: [ 'eval message.guild.members.size' ]
 };
 
+/**
+ * Cleans the evaled result from tokens, etc.
+ * @function clean
+ * @param {object} Bastion The Bastion object.
+ * @param {string} text The evaled result/error before cleaning.
+ * @returns {string} The evaled result/error after cleaning.
+ */
 function clean(Bastion, text) {
   text = text.toString();
   if (text.includes(Bastion.token)) {
-    text = text.replace(Bastion.token, 'Not for your :eyes:!');
+    text = text.replace(Bastion.token, 'Not for your evil :eyes:!');
   }
   if (typeof(text) === 'string') {
     return text.replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
