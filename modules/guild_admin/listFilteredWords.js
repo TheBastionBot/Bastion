@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
         title: 'Filtered Words',
         description: filteredWords.slice(i * 10, (i * 10) + 10).join('\n'),
         footer: {
-          text: `Page: ${i + 1} of ${parseInt(filteredWords.length / 10 + 1)}`
+          text: `Page: ${i + 1} of ${parseInt(filteredWords.length / 10)}`
         }
       }
     }).catch(e => {
