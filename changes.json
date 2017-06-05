@@ -2,7 +2,8 @@
   "date": "June 6, 2017",
   "updated": [
     "Improved how triggers are tripped",
-    "Fixed `eval` command always showing command usage"
+    "Fixed `eval` command always showing command usage",
+    "Fixed `leaderboard` command showing 0 members for server"
   ],
   "added": [],
   "removed": []
