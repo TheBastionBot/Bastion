@@ -3,7 +3,8 @@
   "updated": [
     "Improved how triggers are tripped",
     "Fixed `eval` command always showing command usage",
-    "Fixed `leaderboard` command showing 0 members for server"
+    "Fixed `leaderboard` command showing 0 members for server",
+    "Fixed `hallOfFame` command showing 0 members for server"
   ],
   "added": [],
   "removed": []

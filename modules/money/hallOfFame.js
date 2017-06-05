@@ -5,12 +5,14 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  Bastion.db.all('SELECT userID, xp, level FROM profiles ORDER BY level DESC, xp DESC LIMIT 10').then(profiles => {
+  Bastion.db.all('SELECT userID, xp, level FROM profiles ORDER BY level DESC, xp DESC').then(profiles => {
     let fields = [];
 
-    if (args[0] !== '--global') {
+    if (!args.global) {
       profiles = profiles.filter(p => message.guild.members.get(p.userID));
     }
+    profiles = profiles.slice(0, 10);
+
     for (let i = 0; i < profiles.length; i++) {
       let user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? message.guild.members.get(profiles[i].userID).user.tag : profiles[i].userID;
       fields.push({
@@ -19,6 +21,7 @@ exports.run = (Bastion, message, args) => {
         inline: true
       });
     }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
@@ -36,7 +39,10 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'hof' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'global', type: Boolean, alias: 'g' }
+  ]
 };
 
 exports.help = {
