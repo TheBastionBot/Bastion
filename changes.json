@@ -6,7 +6,8 @@
     "Fixed `leaderboard` command showing 0 members for server",
     "Fixed `hallOfFame` command showing 0 members for server",
     "Fixed page numbers in commands with pagination",
-    "Command usage now shows guild specific prefix instead of default prefix"
+    "Command usage now shows guild specific prefix instead of default prefix",
+    "Added all categories to pubg command help"
   ],
   "added": [
     "Added `blockText` command",
