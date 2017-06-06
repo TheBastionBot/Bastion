@@ -8,7 +8,8 @@
     "Fixed page numbers in commands with pagination"
   ],
   "added": [
-    "Added `blockText` command"
+    "Added `blockText` command",
+    "Added `--dm` flag for `help` command - DMs the help message to the user."
   ],
   "removed": []
 }
