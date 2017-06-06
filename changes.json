@@ -7,6 +7,8 @@
     "Fixed `hallOfFame` command showing 0 members for server",
     "Fixed page numbers in commands with pagination"
   ],
-  "added": [],
+  "added": [
+    "Added `blockText` command"
+  ],
   "removed": []
 }
