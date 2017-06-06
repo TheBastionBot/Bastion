@@ -95,7 +95,7 @@ module.exports = message => {
       let trigger = '';
       let response = [];
       for (let i = 0; i < triggers.length; i++) {
-        if (message.content.includes(triggers[i].trigger) && !message.content.startsWith(message.client.config.prefix)) {
+        if (message.content.includes(` ${triggers[i].trigger} `) && !message.content.startsWith(message.client.config.prefix)) {
           trigger = triggers[i].trigger;
           response.push(triggers[i].response);
         }

@@ -1,42 +1,17 @@
 {
-  "date": "June 5, 2017",
+  "date": "June 7, 2017",
   "updated": [
-    "Improved RegExp of link filter",
-    "Increased poll timeout to 6 hours",
-    "`leaderboard` command shows the ranking of only guild members instead of all bot users",
-    "`hallOfFame` command shows the ranking of only guild members instead of all bot users",
-    "`profile` command now shows the bio of the user",
-    "Fixed `callOfDuty4` command - no results when the gametype was custom",
-    "Fixed multiple messages when using pause, etc. commands",
-    "Restricted Music module commands can now be used by users in Music Master role",
-    "Trying to prevent & log some connection issues when using `airhorn` command"
+    "Improved how triggers are tripped",
+    "Fixed `eval` command always showing command usage",
+    "Fixed `leaderboard` command showing 0 members for server",
+    "Fixed `hallOfFame` command showing 0 members for server",
+    "Fixed page numbers in commands with pagination",
+    "Command usage now shows guild specific prefix instead of default prefix",
+    "Added all categories to pubg command help"
   ],
   "added": [
-    "Added `--global` flag to `leaderboard` command - shows the ranking of all users of the bot",
-    "Added `--global` flag to `hallOfFame` command - shows the ranking of all users of the bot",
-    "Added `createChannel` command",
-    "Added `deleteChannel` command",
-    "Added `renameChannel` command",
-    "Added `setPrefix` command",
-    "Added `setBio` command",
-    "Added `emoji` command",
-    "Added `report` command",
-    "Added `musicMasterRole` command",
-    "Added `filterWord` command",
-    "Added `addFilteredWords` command",
-    "Added `listFilteredWords` command",
-    "Added `removeFilteredWord` command",
-    "Added `pubg` command",
-    "Added `selfDestruct` command",
-    "Added `$mention` variable for trigger's responses"
+    "Added `blockText` command",
+    "Added `--dm` flag for `help` command - DMs the help message to the user"
   ],
-  "removed": [
-    "Removed `createTextChannel` command",
-    "Removed `createVoiceChannel` command",
-    "Removed `deleteTextChannel` command",
-    "Removed `deleteVoiceChannel` command",
-    "Removed `renameTextChannel` command",
-    "Removed `roleColor` command",
-    "Removed `filterInvite` & `filterLink` events from moderation logs"
-  ]
+  "removed": []
 }

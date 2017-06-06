@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
       title: 'Favourite songs',
       description: favs.slice(i * 10, (i * 10) + 10).join('\n'),
       footer: {
-        text: `Page: ${i + 1} of ${parseInt(songs.length / 10 + 1)}`
+        text: `Page: ${i + 1} of ${parseInt(songs.length / 10)}`
       }
     }
   }).catch(e => {

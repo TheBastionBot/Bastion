@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
         title: 'List of triggers',
         description: triggers.slice(i * 10, (i * 10) + 10).join('\n'),
         footer: {
-          text: `Page: ${i + 1} of ${parseInt(triggers.length / 10 + 1)}`
+          text: `Page: ${i + 1} of ${parseInt(triggers.length / 10)}`
         }
       }
     }).catch(e => {

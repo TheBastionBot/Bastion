@@ -47,7 +47,7 @@ exports.run = (Bastion, message, args) => {
             }
           ],
           footer: {
-            text: `Page: ${i + 1} of ${parseInt(list.length / 10 + 1)}`
+            text: `Page: ${i + 1} of ${parseInt(list.length / 10)}`
           }
         }
       }).catch(e => {
