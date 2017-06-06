@@ -1,5 +1,5 @@
 {
-  "date": "June 6, 2017",
+  "date": "June 7, 2017",
   "updated": [
     "Improved how triggers are tripped",
     "Fixed `eval` command always showing command usage",
