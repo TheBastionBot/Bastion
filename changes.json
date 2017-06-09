@@ -1,17 +1,11 @@
 {
-  "date": "June 7, 2017",
+  "date": "June 9, 2017",
   "updated": [
-    "Improved how triggers are tripped",
-    "Fixed `eval` command always showing command usage",
-    "Fixed `leaderboard` command showing 0 members for server",
-    "Fixed `hallOfFame` command showing 0 members for server",
-    "Fixed page numbers in commands with pagination",
-    "Command usage now shows guild specific prefix instead of default prefix",
-    "Added all categories to pubg command help"
+    "Fixed `giveaway` command",
+    "Renamed `fearful` emoji to `look_away`"
   ],
   "added": [
-    "Added `blockText` command",
-    "Added `--dm` flag for `help` command - DMs the help message to the user"
+    "Added `paladins` command for player stats"
   ],
   "removed": []
 }
