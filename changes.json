@@ -1,7 +1,8 @@
 {
   "date": "June 9, 2017",
   "updated": [
-    "Fixed `giveaway` command"
+    "Fixed `giveaway` command",
+    "Renamed `fearful` emoji to `look_away`"
   ],
   "added": [
     "Added `paladins` command for player stats"
