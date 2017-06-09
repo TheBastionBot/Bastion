@@ -1,8 +1,10 @@
 {
-  "date": "June 8, 2017",
+  "date": "June 9, 2017",
   "updated": [
     "Fixed `giveaway` command"
   ],
-  "added": [],
+  "added": [
+    "Added `paladins` command for player stats"
+  ],
   "removed": []
 }
