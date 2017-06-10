@@ -1,8 +1,10 @@
 {
-  "date": "June 10, 2017",
+  "date": "June 11, 2017",
   "updated": [
     "`paladins` command now generates the session only when it is needed"
   ],
-  "added": [],
+  "added": [
+    "Added `race` command"
+  ],
   "removed": []
 }
