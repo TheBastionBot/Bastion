@@ -1,11 +1,8 @@
 {
-  "date": "June 9, 2017",
+  "date": "June 10, 2017",
   "updated": [
-    "Fixed `giveaway` command",
-    "Renamed `fearful` emoji to `look_away`"
+    "`paladins` command now generates the session only when it is needed"
   ],
-  "added": [
-    "Added `paladins` command for player stats"
-  ],
+  "added": [],
   "removed": []
 }

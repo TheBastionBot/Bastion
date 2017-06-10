@@ -11,14 +11,7 @@ const hirez = new HiRez({
   authKey: credentials.HiRezAuthKey
 });
 
-// TODO: generate it only when it's being used with a 15 min cooldown.d
-(function interval() {
-  hirez.paladins.session.generate().catch(e => {
-    // eslint-disable-next-line no-console
-    console.error(e.stack);
-  });
-  setTimeout(interval, 15 * 60 * 1000);
-})();
+let generatedSession = null;
 
 exports.run = (Bastion, message, args) => {
   if (!args.player) {
@@ -29,6 +22,47 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  if (!generatedSession) {
+    hirez.paladins.session.generate().then(session => {
+      generatedSession = session;
+      fetchAndSend(message, args);
+      setTimeout(() => {
+        generatedSession = null;
+      }, 15 * 60 * 1000);
+    }).catch(e => {
+      Bastion.log.error(e.stack);
+    });
+  }
+  else {
+    fetchAndSend(message, args);
+  }
+};
+
+exports.config = {
+  aliases: [],
+  enabled: true,
+  argsDefinitions: [
+    { name: 'player', type: String, alias: 'p', defaultOption: true }
+  ]
+};
+
+exports.help = {
+  name: 'paladins',
+  description: 'Get detailed status of any Paladins player.',
+  botPermission: '',
+  userPermission: '',
+  usage: 'paladins <player_name>',
+  example: [ 'paladins SaffronPants' ]
+};
+
+/**
+ * Fetches a player's Paladins stats and sends it.
+ * @function fetchAndSend
+ * @param {Object} message The message object
+ * @param {Object} args The args object
+ * @returns {void}
+ */
+function fetchAndSend(message, args) {
   hirez.paladins.getPlayer(args.player).then(player => {
     hirez.paladins.getPlayerStatus(args.player).then(playerStatus => {
       hirez.paladins.getChampionRanks(args.player).then(championRanks => {
@@ -37,11 +71,11 @@ exports.run = (Bastion, message, args) => {
         if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || championRanks === 0) {
           message.channel.send({
             embed: {
-              color: Bastion.colors.red,
+              color: message.client.colors.red,
               description: `Player **${args.player}** doesn't exist or we don't have any record of them yet.`
             }
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            message.client.log.error(e.stack);
           });
         }
         else {
@@ -50,7 +84,7 @@ exports.run = (Bastion, message, args) => {
 
           message.channel.send({
             embed: {
-              color: Bastion.colors.blue,
+              color: message.client.colors.blue,
               author: {
                 name: player.Name
               },
@@ -109,33 +143,16 @@ exports.run = (Bastion, message, args) => {
               }
             }
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            message.client.log.error(e.stack);
           });
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        message.client.log.error(e.stack);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      message.client.log.error(e.stack);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    message.client.log.error(e.stack);
   });
-};
-
-exports.config = {
-  aliases: [],
-  enabled: true,
-  argsDefinitions: [
-    { name: 'player', type: String, alias: 'p', defaultOption: true }
-  ]
-};
-
-exports.help = {
-  name: 'paladins',
-  description: 'Get detailed status of any Paladins player.',
-  botPermission: '',
-  userPermission: '',
-  usage: 'paladins <player_name>',
-  example: [ 'paladins SaffronPants' ]
-};
+}
