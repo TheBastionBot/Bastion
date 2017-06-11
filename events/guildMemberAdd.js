@@ -65,33 +65,8 @@ module.exports = member => {
     member.client.log.error(e.stack);
   });
 
-  member.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
-    if (!row) return;
-    if (row.log === 'false') return;
-
-    member.guild.channels.get(row.logChannelID).send({
-      embed: {
-        color: member.client.colors.green,
-        title: 'User Joined',
-        fields: [
-          {
-            name: 'User',
-            value: member.user.tag,
-            inline: true
-          },
-          {
-            name: 'User ID',
-            value: member.id,
-            inline: true
-          }
-        ],
-        timestamp: member.joinedAt
-      }
-    }).catch(e => {
-      member.client.log.error(e.stack);
-    });
-  }).catch(e => {
-    member.client.log.error(e.stack);
+  member.client.emit('serverLog', member.client, member.guild, 'guildMemberAdd', {
+    member: member
   });
 
   member.client.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
