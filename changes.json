@@ -1,7 +1,8 @@
 {
   "date": "June 11, 2017",
   "updated": [
-    "`paladins` command now generates the session only when it is needed"
+    "`paladins` command now generates the session only when it is needed",
+    "Improved how `triggers` work"
   ],
   "added": [
     "Added `race` command"

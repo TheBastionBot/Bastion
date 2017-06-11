@@ -95,14 +95,14 @@ module.exports = message => {
       let trigger = '';
       let response = [];
       for (let i = 0; i < triggers.length; i++) {
-        if (message.content.includes(` ${triggers[i].trigger} `) && !message.content.startsWith(message.client.config.prefix)) {
+        if (message.content.split(' ').includes(triggers[i].trigger) && !message.content.startsWith(message.client.config.prefix)) {
           trigger = triggers[i].trigger;
           response.push(triggers[i].response);
         }
       }
       response = response[Math.floor(Math.random() * response.length)];
       // response = response.random();
-      if (message.content.includes(trigger) && !message.content.startsWith(message.client.config.prefix)) {
+      if (message.content.split(' ').includes(trigger) && !message.content.startsWith(message.client.config.prefix)) {
         response = response.replace(/\$user/ig, `<@${message.author.id}>`);
         response = response.replace(/\$username/ig, message.author.username);
         if (message.mentions.users.first()) {
