@@ -121,6 +121,11 @@ module.exports = Bastion => {
    */
   Bastion.on('commandUsage', LOAD_EVENTS('commandUsage'));
   /**
+   * Emitted whenever server log event fires.
+   * @listens serverLog
+   */
+  Bastion.on('serverLog', LOAD_EVENTS('serverLog'));
+  /**
    * Emitted whenever Bastion Currency is credited from a user.
    * @listens userCredit
    */
