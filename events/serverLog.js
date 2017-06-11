@@ -250,7 +250,7 @@ module.exports = (Bastion, guild, event, parameters) => {
           break;
 
         default:
-          Bastion.log.error(`Server logging is not present for ${event} event.`);
+          return Bastion.log.error(`Server logging is not present for ${event} event.`);
       }
 
       logChannel.send({
