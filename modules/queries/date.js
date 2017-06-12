@@ -39,6 +39,9 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
+    let date = timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
+    date = date.substring(0, date.length - 4);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
@@ -49,7 +52,7 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'Date & Time',
-            value: timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString()
+            value: date
           }
         ]
       }
