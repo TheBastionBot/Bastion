@@ -5,7 +5,8 @@
     "Improved how `triggers` work",
     "If a reason is given with the `ban` command, it will be shown in the Discord's built in audit logs",
     "If a reason is given with the `kick` command, it will be shown in the Discord's built in audit logs",
-    "If a reason is given with the `softBan` command, it will be shown in the Discord's built in audit logs"
+    "If a reason is given with the `softBan` command, it will be shown in the Discord's built in audit logs",
+    "If a member is kicked due to being warned 3 times with the `warn` command, it will be shown in the Discord's built in audit logs"
   ],
   "added": [
     "Added `race` command"

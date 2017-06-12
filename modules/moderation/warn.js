@@ -47,7 +47,7 @@ exports.run = (Bastion, message, args) => {
 
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) {
-    reason = 'No reason given';
+    reason = 'No given reason';
   }
 
   if (!guilds.hasOwnProperty(message.guild.id)) {
@@ -58,7 +58,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     if (guilds[message.guild.id][user.id] === 2) {
-      message.guild.members.get(user.id).kick().then(member => {
+      message.guild.members.get(user.id).kick('Warned 3 times!').then(member => {
         delete guilds[message.guild.id][user.id];
         message.channel.send({
           embed: {
