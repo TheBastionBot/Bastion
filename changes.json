@@ -2,7 +2,8 @@
   "date": "June 12, 2017",
   "updated": [
     "`paladins` command now generates the session only when it is needed",
-    "Improved how `triggers` work"
+    "Improved how `triggers` work",
+    "If a reason is given with the `ban` command, it will be shown in the Discord's built in audit logs"
   ],
   "added": [
     "Added `race` command"
