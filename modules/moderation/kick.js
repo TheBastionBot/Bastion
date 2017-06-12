@@ -43,12 +43,12 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.guild.members.get(user.id).kick().then(member => {
-    let reason = args.slice(1).join(' ');
-    if (reason.length < 1) {
-      reason = 'No reason given';
-    }
+  let reason = args.slice(1).join(' ');
+  if (reason.length < 1) {
+    reason = 'No given reason';
+  }
 
+  message.guild.members.get(user.id).kick(reason).then(member => {
     message.channel.send({
       embed: {
         color: Bastion.colors.orange,
