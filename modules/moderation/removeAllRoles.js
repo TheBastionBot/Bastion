@@ -42,64 +42,24 @@ exports.run = (Bastion, message, args) => {
         description: `All roles has been removed from ${user.tag}.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
-    Bastion.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-      if (!row) return;
+    /**
+     * Logs moderation events if it is enabled
+     * @fires moderationLog
+     */
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user);
 
-      if (row.modLog === 'true') {
-        message.guild.channels.get(row.modLogChannelID).send({
-          embed: {
-            color: Bastion.colors.red,
-            title: 'Removed all roles',
-            fields: [
-              {
-                name: 'User',
-                value: `${user}`,
-                inline: true
-              },
-              {
-                name: 'User ID',
-                value: user.id,
-                inline: true
-              },
-              {
-                name: 'Responsible Moderator',
-                value: `${message.author}`,
-                inline: true
-              },
-              {
-                name: 'Moderator ID',
-                value: message.author.id,
-                inline: true
-              }
-            ],
-            footer: {
-              text: `Case Number: ${row.modCaseNo}`
-            },
-            timestamp: new Date()
-          }
-        }).then(() => {
-          Bastion.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
     message.channel.send({
       embed: {
         color: Bastion.colors.red,
         description: 'I don\'t have enough permission to do that operation.'
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };

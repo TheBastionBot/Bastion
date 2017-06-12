@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
         description: `I don't have permissions to kick ${user}.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 
@@ -72,59 +72,14 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
-    Bastion.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-      if (!row) return;
-
-      if (row.modLog === 'true') {
-        message.guild.channels.get(row.modLogChannelID).send({
-          embed: {
-            color: Bastion.colors.orange,
-            title: 'Kicked user',
-            fields: [
-              {
-                name: 'User',
-                value: `${user}`,
-                inline: true
-              },
-              {
-                name: 'User ID',
-                value: user.id,
-                inline: true
-              },
-              {
-                name: 'Reason',
-                value: reason
-              },
-              {
-                name: 'Responsible Moderator',
-                value: `${message.author}`,
-                inline: true
-              },
-              {
-                name: 'Moderator ID',
-                value: message.author.id,
-                inline: true
-              }
-            ],
-            footer: {
-              text: `Case Number: ${row.modCaseNo}`
-            },
-            timestamp: new Date()
-          }
-        }).then(() => {
-          Bastion.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Logs moderation events if it is enabled
+     * @fires moderationLog
+     */
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, member, reason);
 
     member.send({
       embed: {
@@ -133,10 +88,10 @@ exports.run = (Bastion, message, args) => {
         description: `**Reason:** ${reason}`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

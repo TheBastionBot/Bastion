@@ -32,95 +32,51 @@ exports.run = (Bastion, message, args) => {
 
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
 
-  message.channel.permissionOverwrites.get(user.id).delete().then(() => {
-    let reason = args.slice(1).join(' ');
-    if (reason.length < 1) {
-      reason = 'No reason given';
-    }
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
-        title: 'Text unmuted',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'ID',
-            value: user.id,
-            inline: true
-          },
-          {
-            name: 'Reason',
-            value: reason,
-            inline: false
-          }
-        ]
+  let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
+  if (permissionOverwrites) {
+    permissionOverwrites.delete().then(() => {
+      let reason = args.slice(1).join(' ');
+      if (reason.length < 1) {
+        reason = 'No reason given';
       }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
 
-    Bastion.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-      if (!row) return;
-
-      if (row.modLog === 'true') {
-        message.guild.channels.get(row.modLogChannelID).send({
-          embed: {
-            color: Bastion.colors.green,
-            title: 'Text unmuted user',
-            fields: [
-              {
-                name: 'User',
-                value: `${user}`,
-                inline: true
-              },
-              {
-                name: 'User ID',
-                value: user.id,
-                inline: true
-              },
-              {
-                name: 'Channel',
-                value: `${message.channel}`
-              },
-              {
-                name: 'Reason',
-                value: reason
-              },
-              {
-                name: 'Responsible Moderator',
-                value: `${message.author}`,
-                inline: true
-              },
-              {
-                name: 'Moderator ID',
-                value: message.author.id,
-                inline: true
-              }
-            ],
-            footer: {
-              text: `Case Number: ${row.modCaseNo}`
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          title: 'Text unmuted',
+          fields: [
+            {
+              name: 'User',
+              value: user.tag,
+              inline: true
             },
-            timestamp: new Date()
-          }
-        }).then(() => {
-          Bastion.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
+            {
+              name: 'ID',
+              value: user.id,
+              inline: true
+            },
+            {
+              name: 'Reason',
+              value: reason,
+              inline: false
+            }
+          ]
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      /**
+       * Logs moderation events if it is enabled
+       * @fires moderationLog
+       */
+      Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason, {
+        channel: message.channel
+      });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
-  }).catch(e => {
-    Bastion.log.error(e.stack);
-  });
+  }
 };
 
 exports.config = {
