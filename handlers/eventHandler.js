@@ -121,7 +121,12 @@ module.exports = Bastion => {
    */
   Bastion.on('commandUsage', LOAD_EVENTS('commandUsage'));
   /**
-   * Emitted whenever server log event fires.
+   * Emitted whenever a moderation log event fires.
+   * @listens serverLog
+   */
+  Bastion.on('moderationLog', LOAD_EVENTS('moderationLog'));
+  /**
+   * Emitted whenever a server log event fires.
    * @listens serverLog
    */
   Bastion.on('serverLog', LOAD_EVENTS('serverLog'));
