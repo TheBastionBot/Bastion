@@ -43,15 +43,18 @@ exports.run = (Bastion, message, args) => {
     });
   }
 
-  message.guild.members.get(user.id).ban(7).catch(e => {
+  let reason = args.slice(1).join(' ');
+  if (reason.length < 1) {
+    reason = 'No reason given';
+  }
+
+  message.guild.members.get(user.id).ban({
+    days: 7,
+    reason: reason
+  }).catch(e => {
     Bastion.log.error(e);
   });
   message.guild.unban(user.id).then(user => {
-    let reason = args.slice(1).join(' ');
-    if (reason.length < 1) {
-      reason = 'No reason given';
-    }
-
     message.channel.send({
       embed: {
         color: Bastion.colors.orange,
