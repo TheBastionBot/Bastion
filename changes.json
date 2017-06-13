@@ -10,7 +10,8 @@
   ],
   "added": [
     "Added `race` command",
-    "Added `date` command"
+    "Added `date` command",
+    "Added `cat` command"
   ],
   "removed": []
 }
