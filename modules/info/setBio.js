@@ -13,7 +13,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let charLimit = 260;
+  let charLimit = 350;
   let bio = args.join(' ').replace('"', '\'');
 
   if (bio.length > charLimit) {
