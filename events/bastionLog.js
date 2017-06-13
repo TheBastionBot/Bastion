@@ -30,7 +30,7 @@ module.exports = (Bastion, event, guild) => {
 
       if (!logChannel) return;
 
-      let color,
+      let color, guildIcon = guild.iconURL || 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png',
         logData = [
           {
             name: 'Server Name',
@@ -74,6 +74,9 @@ module.exports = (Bastion, event, guild) => {
           color: color,
           title: event,
           fields: logData,
+          thumbnail: {
+            url: guildIcon
+          },
           timestamp: new Date()
         }
       }).catch(e => {
