@@ -47,7 +47,7 @@
     computed-property-spacing: "warn",
     eol-last: "warn",
     func-call-spacing: "warn",
-    indent: [ "warn", 2 ],
+    indent: [ "warn", 2, { SwitchCase: 1, MemberExpression: 1 } ],
     linebreak-style: [ "error", "unix" ],
     no-array-constructor: "error",
     no-multiple-empty-lines: "warn",

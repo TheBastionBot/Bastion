@@ -111,6 +111,11 @@ module.exports = Bastion => {
   Bastion.on('warn', LOAD_EVENTS('warn'));
 
   /**
+  * Emitted whenever a bastion log event fires.
+  * @listens bastionLog
+  */
+  Bastion.on('bastionLog', LOAD_EVENTS('bastionLog'));
+  /**
   * Emitted whenever Bastion doesn't have the required permission(s).
   * @listens bastionMissingPermissions
   */
@@ -120,6 +125,16 @@ module.exports = Bastion => {
    * @listens commandUsage
    */
   Bastion.on('commandUsage', LOAD_EVENTS('commandUsage'));
+  /**
+   * Emitted whenever a moderation log event fires.
+   * @listens moderationLog
+   */
+  Bastion.on('moderationLog', LOAD_EVENTS('moderationLog'));
+  /**
+   * Emitted whenever a server log event fires.
+   * @listens serverLog
+   */
+  Bastion.on('serverLog', LOAD_EVENTS('serverLog'));
   /**
    * Emitted whenever Bastion Currency is credited from a user.
    * @listens userCredit

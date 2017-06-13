@@ -5,32 +5,8 @@
  */
 
 module.exports = (guild, user) => {
-  guild.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${guild.id}`).then(row => {
-    if (!row) return;
-    if (row.log === 'false') return;
-
-    guild.channels.get(row.logChannelID).send({
-      embed: {
-        color: guild.client.colors.red,
-        title: 'User Banned',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'User ID',
-            value: user.id,
-            inline: true
-          }
-        ],
-        timestamp: new Date()
-      }
-    }).catch(e => {
-      guild.client.log.error(e.stack);
-    });
-  }).catch(e => {
-    guild.client.log.error(e.stack);
+  guild.client.emit('serverLog', guild.client, guild, 'guildBanAdd', {
+    guild: guild,
+    user: user
   });
 };

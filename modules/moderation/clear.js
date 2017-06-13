@@ -57,65 +57,25 @@ exports.run = (Bastion, message, args) => {
           description: error
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     message.channel.bulkDelete(msgs).then(() => {
-      Bastion.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-        if (!row) return;
+      let reason = 'No reason given';
 
-        if (row.modLog === 'true') {
-          message.guild.channels.get(row.modLogChannelID).send({
-            embed: {
-              color: Bastion.colors.orange,
-              title: 'Messages Cleared',
-              fields: [
-                {
-                  name: 'Channel',
-                  value: `${message.channel}`,
-                  inline: true
-                },
-                {
-                  name: 'Channel ID',
-                  value: message.channel.id,
-                  inline: true
-                },
-                {
-                  name: 'Cleared',
-                  value: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
-                },
-                {
-                  name: 'Responsible Moderator',
-                  value: `${message.author}`,
-                  inline: true
-                },
-                {
-                  name: 'Moderator ID',
-                  value: message.author.id,
-                  inline: true
-                }
-              ],
-              footer: {
-                text: `Case Number: ${row.modCaseNo}`
-              },
-              timestamp: new Date()
-            }
-          }).then(() => {
-            Bastion.db.run(`UPDATE guildSettings SET modCaseNo=${parseInt(row.modCaseNo) + 1} WHERE guildID=${message.guild.id}`).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
+      /**
+       * Logs moderation events if it is enabled
+       * @fires moderationLog
+       */
+      Bastion.emit('moderationLog', message.guild, message.author, this.help.name, message.channel, reason, {
+        cleared: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
       });
+
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

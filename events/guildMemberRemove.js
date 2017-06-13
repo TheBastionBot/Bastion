@@ -38,35 +38,7 @@ module.exports = member => {
   // Commented this out as using requires BAN_MEMBERS perms and not everyone would've given the bot perms
   // member.guild.fetchBans().then(users => {
   //   if (users.has(member.id)) return;
-  member.client.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
-    if (!row) return;
-    if (row.log === 'false') return;
-
-    member.guild.channels.get(row.logChannelID).send({
-      embed: {
-        color: member.client.colors.red,
-        title: 'User Left',
-        fields: [
-          {
-            name: 'User',
-            value: member.user.tag,
-            inline: true
-          },
-          {
-            name: 'User ID',
-            value: member.id,
-            inline: true
-          }
-        ],
-        timestamp: new Date()
-      }
-    }).catch(e => {
-      member.client.log.error(e.stack);
-    });
-  }).catch(e => {
-    member.client.log.error(e.stack);
+  member.client.emit('serverLog', member.client, member.guild, 'guildMemberRemove', {
+    member: member
   });
-  // }).catch(e => {
-  //   member.client.log.error(e.stack);
-  // });
 };
