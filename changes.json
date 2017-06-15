@@ -1,20 +1,11 @@
 {
-  "date": "June 13, 2017",
+  "date": "June 15, 2017",
   "updated": [
-    "`paladins` command now generates the session only when it is needed",
-    "Improved how `triggers` work",
-    "If a reason is given with the `ban` command, it will be shown in the Discord's built in audit logs",
-    "If a reason is given with the `kick` command, it will be shown in the Discord's built in audit logs",
-    "If a reason is given with the `softBan` command, it will be shown in the Discord's built in audit logs",
-    "If a member is kicked due to being warned 3 times with the `warn` command, it will be shown in the Discord's built in audit logs",
-    "Increased Bastion profile's bio character limit to 350 characters",
-    "Major internal changes and improvements"
+    "Improved the Linux/macOS `run` scripts to use screen",
+    "Fixed `shutdown` command, it won't crash if user replies with no for the confirmation"
   ],
   "added": [
-    "Added `race` command",
-    "Added `date` command",
-    "Added `cat` command",
-    "Added `dog` command"
+    "Added my PayPal link to `donate` command"
   ],
   "removed": []
 }

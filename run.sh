@@ -20,7 +20,7 @@ echo
 
 if [ -r bastion.js ]; then
     echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
-    nohup node bastion.js > bastion.log 2>&1 &
+    screen -dmS bastion node .
     echo $! > bastion.pid
     echo -e "${CYAN}[Bastion]:${NC} I've booted up [with ${GREEN}PID ${!}${NC}], and ready to roll."
 else

@@ -1,5 +1,5 @@
-# Bastion: Discord BOT
-<a href="https://discord.gg/fzx8fkt"><img src="https://discordapp.com/api/guilds/267022940967665664/embed.png" alt="Discord server" /></a>
+# Bastion: Discord Bot
+[![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
 [![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://bastion.js.org/changes)
 [![Build Status](https://travis-ci.org/snkrsnkampa/Bastion.svg?branch=master)](https://travis-ci.org/snkrsnkampa/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
@@ -8,21 +8,34 @@
 [![license](https://img.shields.io/github/license/snkrsnkampa/Bastion.svg)](LICENSE)  
 
 <!--[![Github All Releases](https://img.shields.io/github/downloads/snkrsnkampa/Bastion/total.svg?style=flat-square)]()-->  
-#### What features do you think an ideal [Discord](https://discordapp.com) BOT should have?  
-*Administration, Moderation, Music, Games, Searches, Humor...*  
-Think no more because Bastion BOT can do it all, and even more. It will even talk with you! Ain't that cool?
+## What features do you think an ideal [Discord](https://discordapp.com) Bot should have?  
+*Administration, Moderation, Searches, Game Server Stats, Player Stats, Music, Games, User Profiles, User Levels, Virtual Currencies, Humor?*  
 
-## So, why to wait any longer?
-If you just want to get the chill of Bastion or just want to playaround with it, you can join the [Bastion BOT Official Discord Server](https://discord.gg/fzx8fkt).
+Think no more, Bastion Bot can do it all (*and even more*). Seriously, what else do you need?  
 
-### Okay, now you want to have Bastion BOT in your Discord Server?
-[Click Here](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463) to invite the public Bastion BOT to your Discord Server.  
+Bastion: The one Discord Bot you'll always need.  
+<a title="Visit Bastion Bot website to Learn More">Learn More</a>
+
+## Test it before you use it.
+If you just want to get the chill of Bastion or just want to play around with it, you can join the [Bastion Bot: Discord Server](https://discord.gg/fzx8fkt).
+You can ask any sort of questions about Bastion here. Chat around with everyone, play, test Bastion, or whatever (*not exactly whatever*) you want, you can do it here.
+**Do you like giveaways?** We like it too. Everyone does. So we also hold some sort of giveaway events here too. Just keep an eye on the [#announcements]() channel.  
+
+[![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png?style=banner2)](https://discord.gg/fzx8fkt)
+
+## Getting Started with Bastion Bot
+[Click Here](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463) to invite the public Bastion Bot to your Discord Server.  
 Or if you want to host it yourself and have access to all it's owner only commands, read the [Installation Guide](https://bastion.js.org/guide).
 
-> *If you ever face any problems with the BOT or you don't understard something, or if you need any kind of help with the BOT, just head over to the [#help](https://discord.gg/fzx8fkt) channel in [Bastion BOT Official Discord Server](https://discord.gg/fzx8fkt), and ask for help. Everyone will be more than willing to help you.*
+> *If you ever face any problems with Bastion Bot or you don't understard something, or if you need any kind of help with it, just head over to the [#help](https://discord.gg/fzx8fkt) channel in [Bastion Bot: Discord Server](https://discord.gg/fzx8fkt), and ask for help. We will be more than happy to help you.*
 
-### Liked this project and want to support this and keep this alive forever?
-If you like Bastion BOT project and want to support the development of this project to keep this alive forever, you can send donations. Your donations will ensure the development of this project and I'll make sure this project stays active forever.  
+## Support Bastion Bot project and keep it alive forever
+If you like the Bastion Bot project you can **⭐ Star** in on [GitHub](https://github.com/snkrsnkampa/Bastion).  
+
+If want to support the development of this project to keep this alive forever, you can send donations or contribute to it.  
+Your donations will ensure the development of this project and I'll make sure this project stays active forever. You can donate via Patreon or via PayPal:  
+
+<a href="https://www.patreon.com/snkrsnkampa" title="Pledge for the Bastion Bot Project"><img src="https://s7.postimg.org/m5awszoyz/patreon.jpg" alt="Pledge for the Bastion Bot Project" height="100" /></a>
+<a href="https://paypal.me/snkrsnkampa" title="Donate via PayPal"><img src="https://s1.postimg.org/wbhh3ef5b/paypal.jpg" alt="Donate via PayPal" height="100" /></a>
 <!-- [![patreon.jpg](https://s7.postimg.org/m5awszoyz/patreon.jpg)](https://www.patreon.com/snkrsnkampa) -->
-<a href="https://www.patreon.com/snkrsnkampa" title="Become a patron of snkrsnkampa"><img src="https://s7.postimg.org/m5awszoyz/patreon.jpg" alt="Become a patron of snkrsnkampa" height="100" /></a>
 <!-- [![paypal.jpg](https://s1.postimg.org/wbhh3ef5b/paypal.jpg)](https://paypal.me/snkrsnkampa) -->
