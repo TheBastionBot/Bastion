@@ -44,7 +44,7 @@ exports.run = (Bastion, message) => {
         });
       }
       else {
-        message.channel.toLowerCase().send({
+        message.channel.send({
           embed: {
             color: Bastion.colors.dark_grey,
             description: 'Cool! I\'m here.'
