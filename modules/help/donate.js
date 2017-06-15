@@ -10,7 +10,10 @@ exports.run = (Bastion, message) => {
       color: 3050327,
       title: 'Support Bastion BOT project',
       url: 'https://bastion.js.org/',
-      description: 'You can support and send donations for the Bastion BOT project on patreon: https://patreon.com/snkrsnkampa'
+      description: 'To support and send donations for the Bastion Bot, ' +
+                   'you can either pledge for The Bastion Bot project ' +
+                   'on **Patreon**: https://patreon.com/snkrsnkampa\nOR\nSend ' +
+                   'one off donations via **PayPal**: https://paypal.me/snkrsnkampa'
     }
   }).catch(e => {
     Bastion.log.error(e.stack);
@@ -24,7 +27,7 @@ exports.config = {
 
 exports.help = {
   name: 'donate',
-  description: 'Instructions on how to financially help the Bastion BOT project.',
+  description: 'Instructions on how to financially support the Bastion BOT project.',
   botPermission: '',
   userPermission: '',
   usage: 'donate',

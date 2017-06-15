@@ -4,6 +4,8 @@
     "Improved the Linux/macOS `run` scripts to use screen",
     "Fixed `shutdown` command, it won't crash if user replies with no for the confirmation"
   ],
-  "added": [],
+  "added": [
+    "Added my PayPal link to `donate` command"
+  ],
   "removed": []
 }
