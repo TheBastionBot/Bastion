@@ -2,6 +2,7 @@
   "date": "June 17, 2017",
   "updated": [
     "Fixed the Linux/macOS `run` script",
+    "Improved the Linux/macOS `update`/`upgrade` scripts"
   ],
   "added": [],
   "removed": []
