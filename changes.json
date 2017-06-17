@@ -4,6 +4,8 @@
     "Fixed the Linux/macOS `run` script",
     "Improved the Linux/macOS `update`/`upgrade` scripts"
   ],
-  "added": [],
+  "added": [
+    "Added `resetDatabase` command"
+  ],
   "removed": []
 }
