@@ -1,11 +1,12 @@
 {
-  "date": "June 15, 2017",
+  "date": "June 17, 2017",
   "updated": [
-    "Improved the Linux/macOS `run` scripts to use screen",
-    "Fixed `shutdown` command, it won't crash if user replies with no for the confirmation"
+    "Fixed the Linux/macOS `run` script",
+    "Improved the Linux/macOS `update`/`upgrade` scripts"
   ],
   "added": [
-    "Added my PayPal link to `donate` command"
+    "Added `resetDatabase` command",
+    "Added `ship` command"
   ],
   "removed": []
 }

@@ -9,13 +9,13 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 
 if [ "$(id -u)" != "0" ]; then
-  echo -e "${CYAN}[Bastion]: ${GREEN}[ERROR] Bastion BOT Installer requires root permissions.${NC}"
-  hash sudo &>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Run this installer with root permissions.\n" && exit 1)
+  echo -e "${CYAN}[Bastion]: ${GREEN}[ERROR] Bastion Bot Updater requires root permissions.${NC}"
+  hash sudo &>/dev/null || (echo -e "${CYAN}[Bastion]: ${NC} Run this updater with root permissions.\n" && exit 1)
   sudo ./update.sh
   exit 1
 fi
 
-echo -e "${CYAN}[Bastion]:${NC} Updating Bastion BOT..."
+echo -e "${CYAN}[Bastion]:${NC} Updating Bastion Bot..."
 git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to update the bot.\n" && exit 1)
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo
@@ -26,6 +26,12 @@ npm install -g ffmpeg-binaries 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bas
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Deleting unused dependencies..."
 npm prune 1>/dev/null 2>update.log
+echo -e "${CYAN}[Bastion]:${NC} Done."
+echo -e "${CYAN}[Bastion]:${NC} Fixing permissions..."
+(
+  cd ..
+  chown -R "$SUDO_USER":"$(id -gn "$SUDO_USER")" Bastion
+)
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
 echo
