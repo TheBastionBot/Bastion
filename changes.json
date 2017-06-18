@@ -1,12 +1,8 @@
 {
-  "date": "June 17, 2017",
-  "updated": [
-    "Fixed the Linux/macOS `run` script",
-    "Improved the Linux/macOS `update`/`upgrade` scripts"
-  ],
+  "date": "June 18, 2017",
+  "updated": [],
   "added": [
-    "Added `resetDatabase` command",
-    "Added `ship` command"
+    "Added `reminder` command"
   ],
   "removed": []
 }
