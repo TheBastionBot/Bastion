@@ -105,7 +105,7 @@ exports.config = {
 
 exports.help = {
   name: 'teamfortress2',
-  description: 'Get status of any Team Fortress 2 game server by it\'s IP address and optional PORT number.',
+  description: 'Get stats of any Team Fortress 2 game server by it\'s IP address and optional PORT number.',
   botPermission: '',
   userPermission: '',
   usage: 'teamFortress2 <TF2_SERVER_IP>[:PORT]',

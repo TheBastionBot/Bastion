@@ -105,7 +105,7 @@ exports.config = {
 
 exports.help = {
   name: 'counterstrikeglobaloffensive',
-  description: 'Get status of any Counter-Strike: Global Offensive game server by it\'s IP address and optional PORT number.',
+  description: 'Get stats of any Counter-Strike: Global Offensive game server by it\'s IP address and optional PORT number.',
   botPermission: '',
   userPermission: '',
   usage: 'counterStrikeGlobalOffensive <CSGO_SERVER_IP>[:PORT]',
