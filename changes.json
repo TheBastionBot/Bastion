@@ -1,6 +1,8 @@
 {
   "date": "June 18, 2017",
-  "updated": [],
+  "updated": [
+    "Fixed confliting aliases of `kick` and `report` command"
+  ],
   "added": [
     "Added `reminder` command",
     "Added `google` command"
