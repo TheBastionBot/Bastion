@@ -2,7 +2,8 @@
   "date": "June 18, 2017",
   "updated": [],
   "added": [
-    "Added `reminder` command"
+    "Added `reminder` command",
+    "Added `google` command"
   ],
   "removed": []
 }
