@@ -1,11 +1,12 @@
 {
-  "date": "June 18, 2017",
+  "date": "June 19, 2017",
   "updated": [
     "Fixed confliting aliases of `kick` and `report` command"
   ],
   "added": [
     "Added `reminder` command",
-    "Added `google` command"
+    "Added `google` command",
+    "Added `battlefield4` command"
   ],
   "removed": []
 }
