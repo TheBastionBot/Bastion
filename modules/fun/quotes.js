@@ -4,14 +4,13 @@
  * @license MIT
  */
 
-const getRandomInt = require('../../functions/getRandomInt');
 const quotes = require('../../data/quotes.json');
 
 exports.run = (Bastion, message, args) => {
   /*
    * Get a random quote
    */
-  let index = getRandomInt(1, Object.keys(quotes).length);
+  let index = Bastion.functions.getRandomInt(1, Object.keys(quotes).length);
 
   /**
    * If a quote number is provided, use that number.

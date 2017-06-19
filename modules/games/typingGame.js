@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const getRandomInt = require('../../functions/getRandomInt');
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
@@ -22,7 +21,7 @@ exports.run = (Bastion, message) => {
         }
       }
     }).then(msg => {
-      let index = getRandomInt(1, Object.keys(typingArticles).length);
+      let index = Bastion.functions.getRandomInt(1, Object.keys(typingArticles).length);
       message.channel.send({
         embed: {
           color: Bastion.colors.blue,

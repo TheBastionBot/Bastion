@@ -5,7 +5,6 @@
  */
 
 const location = require('weather-js');
-const timezoneOffsetToDate = require('../../functions/timezoneOffsetToDate.js');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -39,7 +38,7 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    let date = timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
+    let date = Bastion.functions.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
     date = date.substring(0, date.length - 4);
 
     message.channel.send({
