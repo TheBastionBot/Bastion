@@ -8,6 +8,7 @@ const fs = require('fs');
 let commands = {};
 
 exports.run = (Bastion, message) => {
+  // eslint-disable-next-line no-sync
   let modules = Bastion.functions.getDirSync('./modules/');
   let fields = [];
   for (let i = 0; i < modules.length; i++) {
