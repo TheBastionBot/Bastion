@@ -15,7 +15,7 @@ const BASTION = new Discord.Client({
 });
 
 /**
- * Add necessary files as a global object.
+ * Add necessary files as a global objects.
  */
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
@@ -23,9 +23,14 @@ BASTION.config = require('./settings/config.json');
 BASTION.colors = require('./settings/colors.json');
 BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
+BASTION.functions = {};
 BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite');
 
+/**
+* Function handler
+*/
+require('./handlers/functionHandler')(BASTION);
 /**
  * Log handler
  */
