@@ -16,6 +16,8 @@ exports.run = (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
+    args.money = parseInt(args.money);
+
     if (args.money < 5) {
       return message.channel.send({
         embed: {
@@ -112,6 +114,6 @@ exports.help = {
   description: 'Bets a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you win more Bastion Currencies. If you lose, you lose the amount of currency you\'ve bet.',
   botPermission: '',
   userPermission: '',
-  usage: 'betflip <amount> <heads|tails>',
-  example: [ 'betflip 100 heads' ]
+  usage: 'betflip < heads/tails > <-m amount>',
+  example: [ 'betflip heads -m 100' ]
 };
