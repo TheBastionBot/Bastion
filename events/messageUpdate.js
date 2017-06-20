@@ -5,6 +5,7 @@
  */
 
 const credentialsFilter = require('../utils/credentialsFilter');
+const wordFilter = require('../utils/wordFilter');
 
 module.exports = (oldMessage, newMessage) => {
   /**
@@ -15,22 +16,7 @@ module.exports = (oldMessage, newMessage) => {
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 
-  oldMessage.client.db.get(`SELECT filterWord, filteredWords FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
-    if (guild.filterWord === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
-      let filteredWords = JSON.parse(guild.filteredWords);
-      for (let i = 0; i < filteredWords.length; i++) {
-        if (newMessage.content.toLowerCase().includes(filteredWords[i].toLowerCase())) {
-          if (newMessage.deletable) {
-            return newMessage.delete().catch(e => {
-              newMessage.client.log.error(e.stack);
-            });
-          }
-        }
-      }
-    }
-  }).catch(e => {
-    newMessage.client.log.error(e.stack);
-  });
+  wordFilter(newMessage);
 
   oldMessage.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
     if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
