@@ -17,6 +17,7 @@ const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
 const inviteFilter = require('../utils/inviteFilter');
 const checkTrigger = require('../utils/messageTrigger');
+const levelUp = require('../utils/levelUp');
 
 module.exports = message => {
   /**
@@ -50,43 +51,10 @@ module.exports = message => {
     message.client.db.all('SELECT userID FROM blacklistedUsers').then(users => {
       if (users.map(u => u.userID).includes(message.author.id)) return;
 
-      message.client.db.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`).then(profile => {
-        if (!profile) {
-          message.client.db.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]).catch(e => {
-            message.client.log.error(e.stack);
-          });
-        }
-        else {
-          let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
-          if (currentLevel > profile.level) {
-            message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`).catch(e => {
-              message.client.log.error(e.stack);
-            });
-            message.client.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-              if (guild.levelUpMessage === 'false') return;
-
-              message.channel.send({
-                embed: {
-                  color: message.client.colors.blue,
-                  title: 'Leveled up',
-                  description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
-                }
-              }).catch(e => {
-                message.client.log.error(e.stack);
-              });
-            }).catch(e => {
-              message.client.log.error(e.stack);
-            });
-          }
-          else {
-            message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`).catch(e => {
-              message.client.log.error(e.stack);
-            });
-          }
-        }
-      }).catch(e => {
-        message.client.log.error(e.stack);
-      });
+      /**
+       * Increase experience and level up user
+       */
+      levelUp(message);
 
       message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
         if (message.content.startsWith(guild.prefix)) {
