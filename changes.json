@@ -3,6 +3,7 @@
   "updated": [
     "Fixed confliting aliases of `kick` and `report` command",
     "Paginated `roles` command",
+    "New domain added to invite filter",
     "Code improvements",
     "Minor improvements"
   ],
