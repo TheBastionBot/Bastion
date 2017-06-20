@@ -1,8 +1,9 @@
 {
-  "date": "June 19, 2017",
+  "date": "June 20, 2017",
   "updated": [
     "Fixed confliting aliases of `kick` and `report` command",
     "Paginated `roles` command",
+    "Code improvements",
     "Minor improvements"
   ],
   "added": [
