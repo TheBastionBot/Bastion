@@ -16,7 +16,7 @@ const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
 const inviteFilter = require('../utils/inviteFilter');
-const checkTrigger = require('../utils/messageTrigger');
+const handleTrigger = require('../handlers/triggerHandler');
 const levelUp = require('../utils/levelUp');
 
 module.exports = message => {
@@ -46,7 +46,7 @@ module.exports = message => {
     /**
      * Check if the message contains a trigger and respond to it
      */
-    checkTrigger(message);
+    handleTrigger(message);
 
     message.client.db.all('SELECT userID FROM blacklistedUsers').then(users => {
       if (users.map(u => u.userID).includes(message.author.id)) return;
