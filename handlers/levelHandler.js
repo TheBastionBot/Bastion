@@ -1,11 +1,11 @@
 /**
- * @file levelUp
+ * @file levelHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
 /**
- * Handles user's level ups
+ * Handles user's experience points and levels
  * @param {Message} message Discord.js message object
  * @returns {void}
  */

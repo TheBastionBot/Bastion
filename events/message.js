@@ -17,7 +17,7 @@ const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
 const inviteFilter = require('../utils/inviteFilter');
 const handleTrigger = require('../handlers/triggerHandler');
-const levelUp = require('../utils/levelUp');
+const handleUserLevel = require('../handlers/levelHandler');
 
 module.exports = message => {
   /**
@@ -54,7 +54,7 @@ module.exports = message => {
       /**
        * Increase experience and level up user
        */
-      levelUp(message);
+      handleUserLevel(message);
 
       message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
         if (message.content.startsWith(guild.prefix)) {
