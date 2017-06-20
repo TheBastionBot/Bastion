@@ -16,6 +16,7 @@ const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
 const inviteFilter = require('../utils/inviteFilter');
+const checkTrigger = require('../utils/messageTrigger');
 
 module.exports = message => {
   /**
@@ -41,39 +42,10 @@ module.exports = message => {
      */
     inviteFilter(message);
 
-    message.client.db.all('SELECT trigger, response FROM triggers').then(triggers => {
-      if (triggers.length === 0) return;
-
-      let trigger = '';
-      let response = [];
-      for (let i = 0; i < triggers.length; i++) {
-        if (message.content.split(' ').includes(triggers[i].trigger) && !message.content.startsWith(message.client.config.prefix)) {
-          trigger = triggers[i].trigger;
-          response.push(triggers[i].response);
-        }
-      }
-      response = response[Math.floor(Math.random() * response.length)];
-      // response = response.random();
-      if (message.content.split(' ').includes(trigger) && !message.content.startsWith(message.client.config.prefix)) {
-        response = response.replace(/\$user/ig, `<@${message.author.id}>`);
-        response = response.replace(/\$username/ig, message.author.username);
-        if (message.mentions.users.first()) {
-          response = response.replace(/\$mention/ig, message.mentions.users.first());
-        }
-        else {
-          response = response.replace(/\$mention/ig, '');
-        }
-        response = response.replace(/\$server/ig, `**${message.guild.name}**`);
-        response = response.replace(/\$prefix/ig, message.client.config.prefix);
-        return message.channel.send(response).catch(e => {
-          message.client.log.error(e.stack);
-        });
-      }
-    }).catch(() => {
-      message.client.db.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
-        message.client.log.error(e.stack);
-      });
-    });
+    /**
+     * Check if the message contains a trigger and respond to it
+     */
+    checkTrigger(message);
 
     message.client.db.all('SELECT userID FROM blacklistedUsers').then(users => {
       if (users.map(u => u.userID).includes(message.author.id)) return;
