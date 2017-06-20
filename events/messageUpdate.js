@@ -4,33 +4,13 @@
  * @license MIT
  */
 
+const credentialsFilter = require('../utils/credentialsFilter');
+
 module.exports = (oldMessage, newMessage) => {
-  if (newMessage.content.includes(newMessage.client.token)) {
-    if (newMessage.deletable) {
-      newMessage.delete().catch(e => {
-        newMessage.client.log.error(e.stack);
-      });
-    }
-    newMessage.client.fetchApplication().then(app => {
-      newMessage.client.users.get(app.owner.id).send({
-        embed: {
-          color: newMessage.client.colors.red,
-          title: 'ATTENTION!',
-          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-          fields: [
-            {
-              name: 'Responsible user',
-              value: `${newMessage.author.tag} - ${newMessage.author.id}`
-            }
-          ]
-        }
-      }).catch(e => {
-        newMessage.client.log.error(e.stack);
-      });
-    }).catch(e => {
-      newMessage.client.log.error(e.stack);
-    });
-  }
+  /**
+   * Filter Bastion's credentials from message
+   */
+  credentialsFilter(newMessage);
 
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;

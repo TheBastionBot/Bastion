@@ -12,34 +12,13 @@ BOT.configure({
   botapi: CREDENTIALS.cleverbotAPIkey
 });
 const COLOR = require('chalk');
+const credentialsFilter = require('../utils/credentialsFilter');
 
 module.exports = message => {
-  if (message.content.includes(message.client.token)) {
-    if (message.deletable) {
-      message.delete().catch(e => {
-        message.client.log.error(e.stack);
-      });
-    }
-    message.client.fetchApplication().then(app => {
-      message.client.users.get(app.owner.id).send({
-        embed: {
-          color: message.client.colors.red,
-          title: 'ATTENTION!',
-          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-          fields: [
-            {
-              name: 'Responsible user',
-              value: `${message.author.tag} - ${message.author.id}`
-            }
-          ]
-        }
-      }).catch(e => {
-        message.client.log.error(e.stack);
-      });
-    }).catch(e => {
-      message.client.log.error(e.stack);
-    });
-  }
+  /**
+   * Filter Bastion's credentials from message
+   */
+  credentialsFilter(message);
 
   if (message.author.bot) return;
 
