@@ -14,35 +14,30 @@ BOT.configure({
 const COLOR = require('chalk');
 const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
+const linkFilter = require('../utils/linkFilter');
 
 module.exports = message => {
   /**
-   * Filter Bastion's credentials from message
+   * Filter Bastion's credentials from the message
    */
   credentialsFilter(message);
 
   if (message.author.bot) return;
 
   if (message.guild) {
+    /**
+     * Filter specific words from the message
+     */
     wordFilter(message);
+
+    /**
+     * Filter links from the message
+     */
+    linkFilter(message);
 
     message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
       if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
         if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
-          if (message.deletable) {
-            message.delete().catch(e => {
-              message.client.log.error(e.stack);
-            });
-          }
-        }
-      }
-    }).catch(e => {
-      message.client.log.error(e.stack);
-    });
-
-    message.client.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-      if (guild.filterLink === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
-        if (/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(message.content)) {
           if (message.deletable) {
             message.delete().catch(e => {
               message.client.log.error(e.stack);
