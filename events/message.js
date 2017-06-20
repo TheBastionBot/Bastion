@@ -15,6 +15,7 @@ const COLOR = require('chalk');
 const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
+const inviteFilter = require('../utils/inviteFilter');
 
 module.exports = message => {
   /**
@@ -35,19 +36,10 @@ module.exports = message => {
      */
     linkFilter(message);
 
-    message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-      if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
-        if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(message.content)) {
-          if (message.deletable) {
-            message.delete().catch(e => {
-              message.client.log.error(e.stack);
-            });
-          }
-        }
-      }
-    }).catch(e => {
-      message.client.log.error(e.stack);
-    });
+    /**
+     * Filter Discord server invites from the message
+     */
+    inviteFilter(message);
 
     message.client.db.all('SELECT trigger, response FROM triggers').then(triggers => {
       if (triggers.length === 0) return;

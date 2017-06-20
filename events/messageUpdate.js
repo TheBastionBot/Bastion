@@ -7,6 +7,7 @@
 const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
+const inviteFilter = require('../utils/inviteFilter');
 
 module.exports = (oldMessage, newMessage) => {
   /**
@@ -27,17 +28,8 @@ module.exports = (oldMessage, newMessage) => {
    */
   linkFilter(newMessage);
 
-  oldMessage.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
-    if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
-      if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {
-        if (newMessage.deletable) {
-          newMessage.delete().catch(e => {
-            newMessage.client.log.error(e.stack);
-          });
-        }
-      }
-    }
-  }).catch(e => {
-    newMessage.client.log.error(e.stack);
-  });
+  /**
+   * Filter Discord server invites from the message
+   */
+  inviteFilter(newMessage);
 };
