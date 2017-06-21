@@ -11,7 +11,8 @@
   "added": [
     "Added `reminder` command",
     "Added `google` command",
-    "Added `battlefield4` command"
+    "Added `battlefield4` command",
+    "Added `generateInvite` command"
   ],
   "removed": []
 }
