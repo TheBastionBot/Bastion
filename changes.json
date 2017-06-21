@@ -1,10 +1,11 @@
 {
-  "date": "June 21, 2017",
+  "date": "June 22, 2017",
   "updated": [
     "Fixed confliting aliases of `kick` and `report` command",
     "Paginated `roles` command",
     "New domain added to invite filter",
     "Triggers would now only work exact matches",
+    "When invites are filtered, users are let known of their action",
     "Major code improvements",
     "Minor improvements"
   ],

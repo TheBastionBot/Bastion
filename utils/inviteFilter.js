@@ -18,6 +18,14 @@ module.exports = message => {
             message.client.log.error(e.stack);
           });
         }
+        message.channel.send({
+          embed: {
+            color: message.client.colors.orange,
+            description: `${message.author} you are not allowed to post server invite links here.`
+          }
+        }).catch(e => {
+          message.client.log.error(e);
+        });
       }
     }
   }).catch(e => {
