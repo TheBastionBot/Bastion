@@ -96,5 +96,5 @@ exports.help = {
   botPermission: '',
   userPermission: '',
   usage: 'reminder <-d Duration> <Message>',
-  example: [ 'reminder 10m30s Get back to work.' ]
+  example: [ 'reminder -d 10m30s Get back to work.' ]
 };
