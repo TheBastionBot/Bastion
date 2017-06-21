@@ -12,6 +12,7 @@ const handleTrigger = require('../handlers/triggerHandler');
 const handleUserLevel = require('../handlers/levelHandler');
 const handleCommand = require('../handlers/commandHandler');
 const handleConversation = require('../handlers/conversationHandler');
+const handleDirectMessage = require('../handlers/directMessageHandler');
 
 module.exports = message => {
   /**
@@ -19,6 +20,9 @@ module.exports = message => {
    */
   credentialsFilter(message);
 
+  /**
+   * If the message author is a bot, ignore it.
+   */
   if (message.author.bot) return;
 
   if (message.guild) {
@@ -55,6 +59,9 @@ module.exports = message => {
        */
       handleCommand(message);
 
+      /**
+       * Check if the message starts with mentioning Bastion
+       */
       if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
         /**
          * Handles conversations with Bastion
@@ -66,33 +73,9 @@ module.exports = message => {
     });
   }
   else {
-    if (message.content.startsWith(`${message.client.config.prefix}h`) || message.content.startsWith(`${message.client.config.prefix}help`)) {
-      return message.channel.send({
-        embed: {
-          color: message.client.colors.blue,
-          title: 'Bastion Discord BOT',
-          url: 'https://bastion.js.org',
-          description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
-          fields: [
-            {
-              name: 'Support Server Invite Link',
-              value: 'https://discord.gg/fzx8fkt'
-            },
-            {
-              name: 'BOT Invite Link',
-              value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
-            }
-          ],
-          thumbnail: {
-            url: message.client.user.displayAvatarURL
-          },
-          footer: {
-            text: 'Copyright © 2017 Sankarsan Kampa'
-          }
-        }
-      }).catch(e => {
-        message.client.log.error(e.stack);
-      });
-    }
+    /**
+     * Handles direct messages sent to Bastion
+     */
+    handleDirectMessage(message);
   }
 };
