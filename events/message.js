@@ -4,12 +4,6 @@
  * @license MIT
  */
 
-const CLEVERBOT = require('cleverbot-node');
-const CREDENTIALS = require('../settings/credentials.json');
-const BOT = new CLEVERBOT;
-BOT.configure({
-  botapi: CREDENTIALS.cleverbotAPIkey
-});
 const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
@@ -17,6 +11,7 @@ const inviteFilter = require('../utils/inviteFilter');
 const handleTrigger = require('../handlers/triggerHandler');
 const handleUserLevel = require('../handlers/levelHandler');
 const handleCommand = require('../handlers/commandHandler');
+const handleConversation = require('../handlers/conversationHandler');
 
 module.exports = message => {
   /**
@@ -61,30 +56,10 @@ module.exports = message => {
       handleCommand(message);
 
       if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
-        message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-          if (guild.chat === 'false') return;
-
-          let args = message.content.split(' ');
-          if (args.length < 1) return;
-
-          try {
-            BOT.write(args.join(' '), function (response) {
-              message.channel.startTyping();
-              setTimeout(function () {
-                message.channel.send(response.output).then(() => {
-                  message.channel.stopTyping();
-                }).catch(e => {
-                  message.client.log.error(e.stack);
-                });
-              }, response.output.length * 100);
-            });
-          }
-          catch (e) {
-            message.client.log.error(e.stack);
-          }
-        }).catch(e => {
-          message.client.log.error(e.stack);
-        });
+        /**
+         * Handles conversations with Bastion
+         */
+        handleConversation(message);
       }
     }).catch(e => {
       message.client.log.error(e.stack);
