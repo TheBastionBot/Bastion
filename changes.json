@@ -1,7 +1,8 @@
 {
   "date": "June 22, 2017",
   "updated": [
-    "Fixed issues with Discord snowflakes"
+    "Fixed issues with Discord snowflakes",
+    "Paginated `inRole` command"
   ],
   "added": [],
   "removed": []
