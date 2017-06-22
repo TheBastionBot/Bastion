@@ -5,7 +5,7 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (args.length < 1 || !/^[0-9]{18}$/.test(args[0])) {
+  if (args.length < 1 || !(parseInt(args[0]) < 9223372036854775807)) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage

@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   for (let i = 0; i < args.length; i++) {
-    if (!/^[0-9]{18}$/.test(args[i])) {
+    if (!(parseInt(args[i]) < 9223372036854775807)) {
       args.splice(args.indexOf(args[i]), 1);
     }
   }

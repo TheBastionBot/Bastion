@@ -23,7 +23,9 @@ exports.run = (Bastion, message, args) => {
 
   let user = [];
   args.forEach(uid => {
-    if (/^[0-9]{18}$/.test(uid)) user.push(uid);
+    if ((parseInt(uid) < 9223372036854775807)) {
+      user.push(uid);
+    }
   });
   user = user.concat(message.mentions.users.map(u => u.id));
 
