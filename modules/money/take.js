@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   let user = message.mentions.users.first();
-  if (/^[0-9]{18}$/.test(args[1])) {
+  if (parseInt(args[1]) < 9223372036854775807) {
     user = Bastion.users.get(args[1]);
   }
   if (!user) {

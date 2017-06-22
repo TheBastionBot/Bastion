@@ -18,7 +18,7 @@ module.exports = (Bastion, guild, event, parameters) => {
   if (typeof event !== 'string') {
     throw 'Event name should be a string';
   }
-  if (typeof guild.id !== 'string' || guild.id.length !== 18) {
+  if (guild.hasOwnProperty('available')) {
     throw 'Invalid Discord guild object';
   }
 

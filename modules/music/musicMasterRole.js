@@ -13,7 +13,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!/^[0-9]{18}$/.test(args[0])) {
+  if (!(parseInt(args[0]) < 9223372036854775807)) {
     Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=null WHERE guildID=${message.guild.id}`).then(() => {
       message.channel.send({
         embed: {

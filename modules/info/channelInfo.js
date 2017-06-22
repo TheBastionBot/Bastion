@@ -7,7 +7,7 @@
 exports.run = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
-    if (/^[0-9]{18}$/.test(args[0])) {
+    if (parseInt(args[0]) < 9223372036854775807) {
       channel = message.guild.channels.get(args[0]);
     }
     else channel = message.channel;
