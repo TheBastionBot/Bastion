@@ -11,13 +11,6 @@
  * @returns {void}
  */
 module.exports = (Bastion, event, guild) => {
-  if (!Bastion.ping) {
-    throw 'Invalid Bastion Discord client object';
-  }
-  if (typeof event !== 'string') {
-    throw 'Event name should be a string';
-  }
-
   Bastion.db.get('SELECT log, logChannelID FROM bastionSettings').
     then(bastionSettings => {
       if (!bastionSettings) return;
