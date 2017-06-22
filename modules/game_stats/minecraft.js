@@ -89,7 +89,7 @@ exports.config = {
 
 exports.help = {
   name: 'minecraft',
-  description: 'Get status of any Minecraft game server by it\'s IP address and optional PORT number.',
+  description: 'Get stats of any Minecraft game server by it\'s IP address and optional PORT number.',
   botPermission: '',
   userPermission: '',
   usage: 'minecraft <MC_SERVER_IP>[:PORT]',

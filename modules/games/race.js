@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const ProgressBar = require('../../functions/progress');
+const ProgressBar = require('../../utils/progress');
 
 exports.run = (Bastion, message) => {
   let racers = [ [], [] ];

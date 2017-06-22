@@ -4,79 +4,32 @@
  * @license MIT
  */
 
+const credentialsFilter = require('../utils/credentialsFilter');
+const wordFilter = require('../utils/wordFilter');
+const linkFilter = require('../utils/linkFilter');
+const inviteFilter = require('../utils/inviteFilter');
+
 module.exports = (oldMessage, newMessage) => {
-  if (newMessage.content.includes(newMessage.client.token)) {
-    if (newMessage.deletable) {
-      newMessage.delete().catch(e => {
-        newMessage.client.log.error(e.stack);
-      });
-    }
-    newMessage.client.fetchApplication().then(app => {
-      newMessage.client.users.get(app.owner.id).send({
-        embed: {
-          color: newMessage.client.colors.red,
-          title: 'ATTENTION!',
-          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-          fields: [
-            {
-              name: 'Responsible user',
-              value: `${newMessage.author.tag} - ${newMessage.author.id}`
-            }
-          ]
-        }
-      }).catch(e => {
-        newMessage.client.log.error(e.stack);
-      });
-    }).catch(e => {
-      newMessage.client.log.error(e.stack);
-    });
-  }
+  /**
+   * Filter Bastion's credentials from the message
+   */
+  credentialsFilter(newMessage);
 
   if (!oldMessage.guild) return;
   if (newMessage.author.bot) return;
 
-  oldMessage.client.db.get(`SELECT filterWord, filteredWords FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
-    if (guild.filterWord === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
-      let filteredWords = JSON.parse(guild.filteredWords);
-      for (let i = 0; i < filteredWords.length; i++) {
-        if (newMessage.content.toLowerCase().includes(filteredWords[i].toLowerCase())) {
-          if (newMessage.deletable) {
-            return newMessage.delete().catch(e => {
-              newMessage.client.log.error(e.stack);
-            });
-          }
-        }
-      }
-    }
-  }).catch(e => {
-    newMessage.client.log.error(e.stack);
-  });
+  /**
+   * Filter specific words from the message
+   */
+  wordFilter(newMessage);
 
-  oldMessage.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
-    if (guild.filterInvite === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
-      if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite\/)\/?([a-z0-9-.]+)?/i.test(newMessage.content)) {
-        if (newMessage.deletable) {
-          newMessage.delete().catch(e => {
-            newMessage.client.log.error(e.stack);
-          });
-        }
-      }
-    }
-  }).catch(e => {
-    newMessage.client.log.error(e.stack);
-  });
+  /**
+   * Filter links from the message
+   */
+  linkFilter(newMessage);
 
-  oldMessage.client.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${newMessage.guild.id}`).then(guild => {
-    if (guild.filterLink === 'true' && !newMessage.guild.members.get(newMessage.author.id).hasPermission('ADMINISTRATOR')) {
-      if (/(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/i.test(newMessage.content)) {
-        if (newMessage.deletable) {
-          newMessage.delete().catch(e => {
-            newMessage.client.log.error(e.stack);
-          });
-        }
-      }
-    }
-  }).catch(e => {
-    newMessage.client.log.error(e.stack);
-  });
+  /**
+   * Filter Discord server invites from the message
+   */
+  inviteFilter(newMessage);
 };

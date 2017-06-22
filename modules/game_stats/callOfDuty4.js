@@ -131,7 +131,7 @@ exports.config = {
 
 exports.help = {
   name: 'callofduty4',
-  description: 'Get status of any Call of Duty 4®: Modern Warfare® game server by it\'s IP address and optional PORT number.',
+  description: 'Get stats of any Call of Duty 4®: Modern Warfare® game server by it\'s IP address and optional PORT number.',
   botPermission: '',
   userPermission: '',
   usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',

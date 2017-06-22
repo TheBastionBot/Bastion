@@ -219,7 +219,7 @@ exports.config = {
 
 exports.help = {
   name: 'pubg',
-  description: 'Get detailed status of any PlayerUnknown\'s Battlegrounds player.',
+  description: 'Get detailed stats of any PlayerUnknown\'s Battlegrounds player.',
   botPermission: '',
   userPermission: '',
   usage: 'pubg <player_name> <-m solo/duo/squad> [-c Performance/Skill Rating/Per Game/Combat/Survival/Distance/Support]',

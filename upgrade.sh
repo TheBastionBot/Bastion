@@ -31,7 +31,7 @@ echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Fixing permissions..."
 (
   cd ..
-  chown -R "$SUDO_USER":"$(id -gn "$SUDO_USER")" Bastion
+  chown -R "$SUDO_USER":"$(id -gn "$SUDO_USER")" Bastion .config
 )
 echo -e "${CYAN}[Bastion]:${NC} Done."
 echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."

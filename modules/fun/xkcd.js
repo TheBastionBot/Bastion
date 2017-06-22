@@ -5,7 +5,6 @@
  */
 
 const xkcd = require('xkcd');
-const getRandomInt = require('../../functions/getRandomInt');
 
 exports.run = (Bastion, message, args) => {
   if (args.latest) {
@@ -47,7 +46,7 @@ exports.run = (Bastion, message, args) => {
         comicNumber = args.number > data.num ? data.num : args.number;
       }
       else {
-        comicNumber = getRandomInt(1, data.num);
+        comicNumber = Bastion.functions.getRandomInt(1, data.num);
       }
 
       xkcd(comicNumber, function (data) {

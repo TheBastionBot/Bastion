@@ -28,14 +28,11 @@ exports.run = (Bastion, message, args) => {
     else {
       let list = JSON.parse(todo.list);
       list = list.map((l, i) => `**${i + 1}.**  ${l}`);
-      let i = 0;
-      if (isNaN(args = parseInt(args[0]))) {
-        i = 1;
-      }
-      else {
-        i = (args > 0 && args < list.length / 10 + 1) ? args : 1;
-      }
+
+      let noOfPages = list.length / 10;
+      let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
       i = i - 1;
+
       message.channel.send({
         embed: {
           color: Bastion.colors.dark_grey,
@@ -47,7 +44,7 @@ exports.run = (Bastion, message, args) => {
             }
           ],
           footer: {
-            text: `Page: ${i + 1} of ${parseInt(list.length / 10)}`
+            text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
           }
         }
       }).catch(e => {
@@ -61,7 +58,10 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'todolist' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
+  ]
 };
 
 exports.help = {

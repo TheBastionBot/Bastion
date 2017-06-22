@@ -1,12 +1,20 @@
 {
-  "date": "June 17, 2017",
+  "date": "June 22, 2017",
   "updated": [
-    "Fixed the Linux/macOS `run` script",
-    "Improved the Linux/macOS `update`/`upgrade` scripts"
+    "Fixed confliting aliases of `kick` and `report` command",
+    "Paginated `roles` command",
+    "New domain added to invite filter",
+    "Triggers would now only work exact matches",
+    "When invites are filtered, users are let known of their action",
+    "When links are filtered, users are let known of their action",
+    "Major code improvements",
+    "Minor improvements"
   ],
   "added": [
-    "Added `resetDatabase` command",
-    "Added `ship` command"
+    "Added `reminder` command",
+    "Added `google` command",
+    "Added `battlefield4` command",
+    "Added `generateInvite` command"
   ],
   "removed": []
 }

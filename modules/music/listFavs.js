@@ -28,13 +28,9 @@ exports.run = (Bastion, message, args) => {
   }
 
   let favs = songs.map((e, i) => `${i + 1}. ${e}`);
-  let i = 0;
-  if (isNaN(args = parseInt(args[0]))) {
-    i = 1;
-  }
-  else {
-    i = (args > 0 && args < songs.length / 10 + 1) ? args : 1;
-  }
+
+  let noOfPages = favs.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
   i = i - 1;
 
   message.channel.send({
@@ -43,7 +39,7 @@ exports.run = (Bastion, message, args) => {
       title: 'Favourite songs',
       description: favs.slice(i * 10, (i * 10) + 10).join('\n'),
       footer: {
-        text: `Page: ${i + 1} of ${parseInt(songs.length / 10)}`
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
       }
     }
   }).catch(e => {
@@ -53,7 +49,10 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
+  ]
 };
 
 exports.help = {
