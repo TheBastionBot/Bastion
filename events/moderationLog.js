@@ -14,19 +14,6 @@
  * @returns {void}
  */
 module.exports = (guild, executor, action, target, reason, extras) => {
-  if (!guild.available) {
-    throw 'Invalid Discord guild object or the guild is not available.';
-  }
-  if (!executor.hasOwnProperty('bot')) {
-    throw 'Invalid Discord user object.';
-  }
-  if (typeof action !== 'string') {
-    throw 'Moderation action name should be a string';
-  }
-  if (reason && typeof reason !== 'string') {
-    throw 'Reason should be a string';
-  }
-
   guild.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${guild.id}`).
     then(guildSettings => {
       if (!guildSettings) return;
