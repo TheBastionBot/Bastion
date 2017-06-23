@@ -38,6 +38,10 @@ BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite');
 
 /**
+* Language handler
+*/
+require('./handlers/languageHandler')(BASTION);
+/**
 * Function handler
 */
 require('./handlers/functionHandler')(BASTION);
