@@ -6,9 +6,23 @@
 
 const COLOR = require('chalk');
 
-module.exports = error => {
-  /* eslint-disable no-console */
-  console.log(COLOR.red('[ERROR EVENT]'));
-  console.log(error);
-  console.log(COLOR.red('[/ERROR EVENT]'));
+module.exports = (error, description, channel) => {
+  if (channel) {
+    channel.send({
+      embed: {
+        color: channel.client.colors.red,
+        title: error,
+        description: description
+      }
+    }).catch(e => {
+      channel.client.log.error(e);
+    });
+  }
+  else {
+    /* eslint-disable no-console */
+    console.log(COLOR.red('[ERROR EVENT]'));
+    console.log(error);
+    console.log(COLOR.red('[/ERROR EVENT]'));
+    /* eslint-enable no-console */
+  }
 };
