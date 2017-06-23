@@ -28,15 +28,12 @@ exports.run = (Bastion, message, args) => {
   }
 
   args.name = args.name.join('-');
-  if (args.length < 2 || args.name.length > 100) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Channel name should be between 2 and 100 characters.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (args.name.length < 2 || args.name.length > 100) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Length', 'Channel name must be between 2 and 100 characters.', message.channel);
   }
 
   let channelType = 'text';

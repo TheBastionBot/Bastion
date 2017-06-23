@@ -28,14 +28,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!channel) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I didn\'t find any channels with the given name.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', 'No channel was found for the given parameter.', message.channel);
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {

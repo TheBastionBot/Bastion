@@ -15,14 +15,11 @@ exports.run = (Bastion, message, args) => {
       channel = message.guild.channels.find('name', args.name.join(' '));
     }
     if (!channel) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'I didn\'t find any channels with the given ID/name.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', 'No channel was found for the given parameter.', message.channel);
     }
   }
 
@@ -42,14 +39,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (channel.id === message.guild.defaultChannel.id) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I can\'t delete the default text channel of this server.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Forbidden', 'You cannot delete the default channel.', message.channel);
   }
 
   channel.delete().then(() => {
