@@ -17,15 +17,11 @@ exports.run = (Bastion, message, args) => {
     args = JSON.parse(args.join(' '));
   }
   catch (e) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Invalid embed object. Please check that it\'s an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).' +
-                     `\`\`\`${e.toString()}\`\`\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', `Invalid embed object. Please check that it's an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).\`\`\`${e.toString()}\`\`\``, message.channel);
   }
 
   message.channel.send({

@@ -14,14 +14,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (args.timeout > 600) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'The timeout can\'t exceed 600 seconds (10 minutes).'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not in Range', 'The timeout can\'t exceed 600 seconds (10 minutes).', message.channel);
   }
 
   if (message.deletable) {

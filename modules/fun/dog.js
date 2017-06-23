@@ -10,14 +10,11 @@ exports.run = (Bastion, message) => {
   let baseURL = 'https://random.dog/';
   request(`${baseURL}woof`, function (error, response, body) {
     if (error) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some error has occured while getting data from server. Please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
     }
 
     if (response && response.statusCode === 200) {

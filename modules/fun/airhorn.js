@@ -21,33 +21,19 @@ exports.run = (Bastion, message) => {
       }
 
       if (message.guild.voiceConnection.speaking) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'I\'m already playing something in a channel. Can\'t play airhorn now.'
-          }
-        }).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Busy', 'I\'m already playing something in a channel. Can\'t play airhorn now.', message.channel);
       }
 
       if (!message.guild.voiceConnection.channel.speakable) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'I don\'t have permission to speak in this voice channel.'
-          }
-        }).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Bastion has missing permissions.
+         * @fires bastionMissingPermissions
+         */
+        return Bastion.emit('bastionMissingPermissions', 'SPEAK', message);
       }
 
       message.guild.voiceConnection.playFile('./data/airhorn.wav', { passes: 1 });
@@ -63,48 +49,19 @@ exports.run = (Bastion, message) => {
         }
 
         if (!message.member.voiceChannel.joinable) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'I don\'t have permission to join this voice channel.'
-            }
-          }).then(msg => {
-            msg.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Bastion has missing permissions.
+           * @fires bastionMissingPermissions
+           */
+          return Bastion.emit('bastionMissingPermissions', 'CONNECT', message);
         }
 
         if (!message.member.voiceChannel.speakable) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'I don\'t have permission to speak in this voice channel.'
-            }
-          }).then(msg => {
-            msg.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-
-        if (message.member.voiceChannel.full) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'This voice channel is currently full. Try playing airhorn later.'
-            }
-          }).then(msg => {
-            msg.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Bastion has missing permissions.
+           * @fires bastionMissingPermissions
+           */
+          return Bastion.emit('bastionMissingPermissions', 'SPEAK', message);
         }
 
         message.member.voiceChannel.join().then(connection => {
@@ -117,18 +74,11 @@ exports.run = (Bastion, message) => {
         });
       }
       else {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'Either you or me needs to be in a voice channel to use this command.'
-          }
-        }).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', '', 'Either one of us should be in a voice channel.', message.channel);
       }
     }
   }
