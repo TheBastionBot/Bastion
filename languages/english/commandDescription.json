@@ -12,7 +12,7 @@
   "airhorn": "Plays an airhorn in a voice channel.",
   "blockText": "Sends the given text as text emojis.",
   "cat": "Shows a random picture of a cat.",
-  "catFacts": "Shows a random fact about cats.",
+  "catFact": "Shows a random fact about cats.",
   "crimeCoefficient": "Find the crime coefficient of a user.",
   "dog": "Shows a random picture of a dog.",
   "echo": "Sends the same message that you had sent. Just like an echo!",
