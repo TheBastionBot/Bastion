@@ -5,25 +5,24 @@
  */
 
 const common = require(`../languages/${process.env.LANG}/common.json`);
+const errors = require(`../languages/${process.env.LANG}/errors.json`);
+const commandDescription = require(`../languages/${process.env.LANG}/commandDescription.json`);
 const strings = {
-  common: common
+  common: common,
+  errors: errors,
+  commandDescription: commandDescription
 };
 
 /**
- * Handles all the languages supported by Bastion.
+ * Used to handle languages from external files.
  * @module languageHandler
- * @param {object} Bastion The Bastion Object.
- * @returns {void}
+ * @param {string} string The string to be translated
+ * @param {string} [namespace='common'] The namespace of the string
+ * @returns {string} the translated string
  */
-module.exports = Bastion => {
-  /**
-   * Used to display the warning messages.
-   * @function Bastion.translate
-   * @param {string} string The string to be translated
-   * @param {string} [namespace='common'] The namespace of the string
-   * @returns {string} the translated string
-   */
-  Bastion.translate = (string, namespace = 'common') => {
+module.exports = (string, namespace = 'common') => {
+  if (typeof string === 'string' && typeof namespace === 'string') {
     return strings[namespace][string];
-  };
+  }
+  return undefined;
 };
