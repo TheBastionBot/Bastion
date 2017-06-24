@@ -16,24 +16,18 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
   if (!/^(uplay|ps4|xone)$/.test(args[0] = args[0].toLowerCase())) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`, message.channel);
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `**${args[1]}** is not a valid username.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', `**${args[1]}** is not a valid username.`, message.channel);
   }
 
   r6.stats(args[1], args[0]).then(data => {
@@ -158,16 +152,12 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }).catch(e => {
-    Bastion.log.error(e.stack);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `No player with username **${args[1]}** found for the platform **${args[0]}**.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  }).catch(() => {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', `No player with username **${args[1]}** found for the platform **${args[0]}**.`, message.channel);
   });
 };
 

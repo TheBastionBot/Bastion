@@ -28,8 +28,11 @@ exports.run = (Bastion, message, args) => {
     let player, avatar, color, title = '', description = '', data = [];
 
     if (err) {
-      color = Bastion.colors.red;
-      description = 'Some error has occured while getting data from the server. Please try again later.';
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
     }
     else if (response.statusCode === 200) {
       color = Bastion.colors.blue;
@@ -43,8 +46,11 @@ exports.run = (Bastion, message, args) => {
           body.Stats = body.Stats.filter(s => s.Match === args.mode.toLowerCase());
 
           if (body.Stats.length <= 0) {
-            color = Bastion.colors.red;
-            description = `Unable to find any stats for the player **${args.player}** in **${args.mode}** game mode.`;
+            /**
+             * Error condition is encountered.
+             * @fires error
+             */
+            Bastion.emit('error', 'Not Found', `Unable to find any stats for the player **${args.player}** in **${args.mode}** game mode.`, message.channel);
           }
           else {
             let performance = body.Stats[0].Stats.filter(s => s.category === 'Performance');
@@ -165,24 +171,27 @@ exports.run = (Bastion, message, args) => {
           }
         }
         else {
-          color = Bastion.colors.red;
-          description = `Unable to find the player **${args.player}**.`;
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', 'Not Found', `Unable to find the player **${args.player}**.`, message.channel);
         }
       }
       catch (e) {
-        color = Bastion.colors.red;
-        description = 'Some error has occured while parsing the received data. Please try again later.';
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Parse Error', 'Some error has occured while parsing the received data. Please try again later.', message.channel);
       }
     }
     else {
-      color = Bastion.colors.red;
-      description = 'Some error has occured while getting data from the servers.';
-      data = [
-        {
-          name: `${response.statusCode}`,
-          value: response.statusMessage
-        }
-      ];
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
     }
 
     message.channel.send({

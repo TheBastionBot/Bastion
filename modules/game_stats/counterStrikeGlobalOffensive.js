@@ -85,16 +85,12 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e.stack);
     });
-  }).catch(e => {
-    Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  }).catch(() => {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Connection Error', 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.', message.channel);
   });
 };
 

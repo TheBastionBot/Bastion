@@ -17,24 +17,18 @@ exports.run = (Bastion, message, args) => {
 
   args[0] = args[0].toLowerCase();
   if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`, message.channel);
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `**${args[1]}** is not a valid BattleTag.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', `**${args[1]}** is not a valid BattleTag.`, message.channel);
   }
 
   ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
@@ -181,14 +175,11 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e.stack);
     if (e.stack.includes('NOT_FOUND')) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`, message.channel);
     }
   });
 };

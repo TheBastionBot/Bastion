@@ -69,14 +69,11 @@ function fetchAndSend(message, args) {
         playerStatus = playerStatus[0];
 
         if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || championRanks === 0) {
-          message.channel.send({
-            embed: {
-              color: message.client.colors.red,
-              description: `Player **${args.player}** doesn't exist or we don't have any record of them yet.`
-            }
-          }).catch(e => {
-            message.client.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          message.client.emit('error', 'Not Found', `Player **${args.player}** doesn't exist or we don't have any record of them yet.`, message.channel);
         }
         else {
           player = player[0];
