@@ -111,7 +111,7 @@ exports.run = (Bastion, message, args) => {
           if (!queue.hasOwnProperty(message.guild.id)) {
             queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].repeat = false, queue[message.guild.id].skipVotes = [], queue[message.guild.id].songs = [];
           }
-          yt.getInfo(e, [ '-q', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
+          yt.getInfo(e, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
             if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
             queue[message.guild.id].songs.push({
               url: info.formats[info.formats.length - 1].url,
