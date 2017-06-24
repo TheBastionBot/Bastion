@@ -1,0 +1,6 @@
+{
+  "notFound": "Not Found",
+  "invalidInput": "Invalid Input",
+  "connectionError": "Connection Error",
+  "noPermissions": "No Permissions"
+}
