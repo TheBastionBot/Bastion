@@ -16,14 +16,11 @@ exports.run = (Bastion, message, args) => {
   args = args.join('').toLowerCase();
   let commands = Bastion.commands.map(c => c.help.name).filter(c => c.includes(args));
   if (commands.length === 0) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `No command was found which contains *${args}*.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', `No command was found for *${args}*.`, message.channel);
   }
   message.channel.send({
     embed: {

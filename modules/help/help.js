@@ -80,14 +80,11 @@ exports.run = (Bastion, message, args) => {
       });
     }
     else {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `There's no **${args.command}** command`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', `There's no **${args.command}** command`, message.channel);
     }
   }
   else {
