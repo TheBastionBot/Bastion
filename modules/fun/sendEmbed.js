@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -44,7 +46,7 @@ exports.config = {
 
 exports.help = {
   name: 'sendembed',
-  description: 'Sends an embed message created from the specified embed JavaScript object. To create an embed object, graphically, [click here](https://bastion.js.org/tools/embed_builder/).',
+  description: string('sendEmbed', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'sendEmbed <embedObject>',

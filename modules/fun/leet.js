@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -39,7 +41,7 @@ exports.config = {
 
 exports.help = {
   name: 'leet',
-  description: 'Changes a given text to leet text.',
+  description: string('leet', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'leet <text>',

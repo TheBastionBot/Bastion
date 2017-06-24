@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
@@ -44,7 +46,7 @@ exports.config = {
 
 exports.help = {
   name: 'crimecoefficient',
-  description: 'Finds the crime coefficient of a mentioned user. If no user is mentioned, it finds the crime coefficient of yours.',
+  description: string('crimeCoefficient', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'crimecoefficient [@user-mention]',

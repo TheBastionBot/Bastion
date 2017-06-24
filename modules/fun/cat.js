@@ -5,6 +5,7 @@
  */
 
 const request = require('request');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   request('http://random.cat/meow', function (error, response, body) {
@@ -42,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'cat',
-  description: 'Sends a random cat image.',
+  description: string('cat', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'cat',

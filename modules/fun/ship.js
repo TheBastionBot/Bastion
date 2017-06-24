@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let users = message.mentions.users.map(u => u.username);
   if (users.length < 2) {
@@ -37,7 +39,7 @@ exports.config = {
 
 exports.help = {
   name: 'ship',
-  description: 'Combines the mentioned user\'s usernames.',
+  description: string('ship', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'ship <USER_MENTION> <USER_MENTION> [...USER_MENTION]',

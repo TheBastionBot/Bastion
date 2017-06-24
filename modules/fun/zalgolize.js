@@ -5,6 +5,7 @@
  */
 
 const zalgo = require('zalgolize');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -33,7 +34,7 @@ exports.config = {
 
 exports.help = {
   name: 'zalgolize',
-  description: 'Zalgolizes a given text.',
+  description: string('zalgolize', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'zaloglize <text>',

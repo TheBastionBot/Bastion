@@ -5,6 +5,7 @@
  */
 
 const xkcd = require('xkcd');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (args.latest) {
@@ -94,7 +95,7 @@ exports.config = {
 
 exports.help = {
   name: 'xkcd',
-  description: 'Shows a **xkcd** comic. No arguments will shows a random comic. If a comic number is given, it will show that specific comic & \'latest\' will show the latest comic.',
+  description: string('xkcd', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'xkcd [ --latest | -n comic_number ]',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -31,7 +33,7 @@ exports.config = {
 
 exports.help = {
   name: 'reverse',
-  description: 'Reverse a given text.',
+  description: string('reverse', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'reverse <text>',

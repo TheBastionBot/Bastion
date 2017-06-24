@@ -5,6 +5,7 @@
  */
 
 const fortuneCookies = require('../../data/fortuneCookies.json');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   message.channel.send({
@@ -26,7 +27,7 @@ exports.config = {
 
 exports.help = {
   name: 'fortune',
-  description: 'Shows you a fortune from fortune cookie.',
+  description: string('fortune', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'fortune',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   try {
     if (message.deletable) {
@@ -94,7 +96,7 @@ exports.config = {
 
 exports.help = {
   name: 'airhorn',
-  description: 'Plays an airhorn in the current voice channel.',
+  description: string('airhorn', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUTE_MEMBERS',
   usage: 'airhorn',

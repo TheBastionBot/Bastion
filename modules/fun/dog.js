@@ -5,6 +5,7 @@
  */
 
 const request = require('request');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   let baseURL = 'https://random.dog/';
@@ -34,7 +35,7 @@ exports.config = {
 
 exports.help = {
   name: 'dog',
-  description: 'Sends a random dog image.',
+  description: string('dog', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'dog',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!args.content) {
     /**
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'selfdestruct',
-  description: 'Sends a message that will be auto deleted after the given amount of seconds. If no timeout is given, it defaults to 30 seconds.',
+  description: string('selfDestruct', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'selfDestruct <content> [-t <seconds>]',
