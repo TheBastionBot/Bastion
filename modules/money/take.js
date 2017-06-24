@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -85,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'take',
-  description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
+  description: string('take', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',

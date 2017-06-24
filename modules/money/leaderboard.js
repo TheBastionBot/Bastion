@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC').then(profiles => {
     let fields = [];
@@ -47,7 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'leaderboard',
-  description: 'Shows the top 10 ranking with the highest amount of Bastion Currencies from all the members of the server. If used with the `--global` flap, it shows the ranking of all users of the bot.',
+  description: string('leaderboard', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'leaderboard [--global]',

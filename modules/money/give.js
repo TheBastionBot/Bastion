@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     /**
@@ -129,7 +131,7 @@ exports.config = {
 
 exports.help = {
   name: 'give',
-  description: 'Give any specified user (by mention or ID) Bastion Currencies deducting that amout from your currencies. If you are the BOT owner, you can give anyone any amount of Bastion Currencies.',
+  description: string('give', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'give <amount> <@user-mention|user_id>',
