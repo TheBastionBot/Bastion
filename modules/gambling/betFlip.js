@@ -19,14 +19,11 @@ exports.run = (Bastion, message, args) => {
     args.money = parseInt(args.money);
 
     if (args.money < 5) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Minimum bet amount is 5 Bastion Currencies.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', 'Minimum bet amount is 5 Bastion Currencies', message.channel);
     }
 
     let outcomes = [
@@ -38,14 +35,11 @@ exports.run = (Bastion, message, args) => {
 
     Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(profile => {
       if (args.money > profile.bastionCurrencies) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Insufficient Balance', `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`, message.channel);
       }
 
       recentUsers.push(message.author.id);
@@ -89,14 +83,11 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Cooldown', `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`, message.channel);
   }
 };
 
