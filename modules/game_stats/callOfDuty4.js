@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const COD4 = require('gamequery');
 
 exports.run = (Bastion, message, args) => {
@@ -127,7 +128,7 @@ exports.config = {
 
 exports.help = {
   name: 'callofduty4',
-  description: 'Get stats of any Call of Duty 4®: Modern Warfare® game server by it\'s IP address and optional PORT number.',
+  description: string('callOfDuty4', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',

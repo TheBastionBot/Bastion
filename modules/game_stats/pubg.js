@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -228,7 +229,7 @@ exports.config = {
 
 exports.help = {
   name: 'pubg',
-  description: 'Get detailed stats of any PlayerUnknown\'s Battlegrounds player.',
+  description: string('pubg', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'pubg <player_name> <-m solo/duo/squad> [-c Performance/Skill Rating/Per Game/Combat/Survival/Distance/Support]',

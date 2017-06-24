@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -147,7 +148,7 @@ exports.config = {
 
 exports.help = {
   name: 'battlefield4',
-  description: 'Get stats of any Battlefield 4 player.',
+  description: string('battlefield4', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'battlefield4 <player_name>',

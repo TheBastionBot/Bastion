@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const RainbowSix = require('rainbowsix-api-node');
 const r6 = new RainbowSix();
 
@@ -168,7 +169,7 @@ exports.config = {
 
 exports.help = {
   name: 'rainbow6',
-  description: 'Shows Ranbow 6 player stats specified by his platform and username.',
+  description: string('rainbow6', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',

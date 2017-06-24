@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const CSGO = require('gamequery');
 
 exports.run = (Bastion, message, args) => {
@@ -101,7 +102,7 @@ exports.config = {
 
 exports.help = {
   name: 'counterstrikeglobaloffensive',
-  description: 'Get stats of any Counter-Strike: Global Offensive game server by it\'s IP address and optional PORT number.',
+  description: string('counterStrikeGlobalOffensive', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'counterStrikeGlobalOffensive <CSGO_SERVER_IP>[:PORT]',

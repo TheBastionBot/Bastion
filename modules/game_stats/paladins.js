@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const credentials = require('../../settings/credentials.json');
 const HiRez = require('hirez.js');
 const hirez = new HiRez({
@@ -48,7 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'paladins',
-  description: 'Get detailed stats of any Paladins player.',
+  description: string('paladins', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'paladins <player_name>',

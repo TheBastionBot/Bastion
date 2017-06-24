@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const TF2 = require('gamequery');
 
 exports.run = (Bastion, message, args) => {
@@ -101,7 +102,7 @@ exports.config = {
 
 exports.help = {
   name: 'teamfortress2',
-  description: 'Get stats of any Team Fortress 2 game server by it\'s IP address and optional PORT number.',
+  description: string('teamFortress2', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'teamFortress2 <TF2_SERVER_IP>[:PORT]',

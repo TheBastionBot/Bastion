@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const MINECRAFT = require('gamequery');
 
 exports.run = (Bastion, message, args) => {
@@ -85,7 +86,7 @@ exports.config = {
 
 exports.help = {
   name: 'minecraft',
-  description: 'Get stats of any Minecraft game server by it\'s IP address and optional PORT number.',
+  description: string('minecraft', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'minecraft <MC_SERVER_IP>[:PORT]',

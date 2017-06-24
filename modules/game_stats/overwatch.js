@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
@@ -191,7 +192,7 @@ exports.config = {
 
 exports.help = {
   name: 'overwatch',
-  description: 'Shows Overwatch player stats specified by his Region and BattleTag.',
+  description: string('overwatch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
