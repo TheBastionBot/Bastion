@@ -53,14 +53,6 @@ exports.run = (Bastion, message, args) => {
 
   }).catch(e => {
     Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
   });
 };
 

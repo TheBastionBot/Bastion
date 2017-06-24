@@ -40,14 +40,11 @@ exports.run = (Bastion, message, args) => {
   role = message.guild.roles.find('name', role);
   if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
   else if (!role) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'No role found with that name.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', 'No role was found for the given parameter.', message.channel);
   }
 
   message.guild.members.get(user.id).removeRole(role).then(() => {
@@ -72,14 +69,6 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
   });
 };
 

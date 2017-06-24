@@ -33,14 +33,11 @@ exports.run = (Bastion, message, args) => {
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
 
   if (!message.guild.members.get(user.id).bannable) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I don't have permissions to softban ${user}.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'No Permissions', `I don't have permissions to softban ${user}.`, message.channel);
   }
 
   let reason = args.slice(1).join(' ');

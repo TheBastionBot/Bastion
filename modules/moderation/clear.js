@@ -51,14 +51,12 @@ exports.run = (Bastion, message, args) => {
       else {
         error = 'No messages found that could be deleted.';
       }
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: error
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', error, message.channel);
     }
     message.channel.bulkDelete(msgs).then(() => {
       let reason = 'No reason given';
