@@ -26,14 +26,11 @@ exports.run = (Bastion, message, args) => {
     user = Bastion.users.get(args[1]);
   }
   if (!user) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.', message.channel);
   }
   let reason;
   if (args[2]) {
