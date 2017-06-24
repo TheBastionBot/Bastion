@@ -64,14 +64,11 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'The specified role was not found.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', 'No role was found for the given parameter.', message.channel);
   }
 };
 

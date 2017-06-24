@@ -21,14 +21,11 @@ exports.run = (Bastion, message, args) => {
         });
       }
 
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `<@${args.id}>'s profile is not yet created.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', `<@${args.id}>'s profile is not yet created.`, message.channel);
     }
 
     message.channel.send({

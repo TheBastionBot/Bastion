@@ -17,14 +17,11 @@ exports.run = (Bastion, message, args) => {
   let bio = args.join(' ').replace('"', '\'');
 
   if (bio.length > charLimit) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `Your bio can't exceed ${charLimit} characters.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', `Your bio can't exceed ${charLimit} characters.`, message.channel);
   }
 
   Bastion.db.get(`SELECT bio FROM profiles WHERE userID=${message.author.id}`).then(user => {

@@ -58,14 +58,11 @@ exports.run = (Bastion, message, args) => {
     });
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `No channel found with ID: **${args[0]}**`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', 'No channel was found for the given parameter.', message.channel);
   }
 };
 
