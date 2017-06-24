@@ -31,14 +31,11 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `\`${command}\` command was not found.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', `\`${command}\` command was not found.`, message.channel);
   }
 
   if (command.config.enabled) return;

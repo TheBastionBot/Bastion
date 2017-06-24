@@ -94,14 +94,11 @@ exports.run = (Bastion, message, args) => {
     }, TIMEOUT * 60 * 60 * 1000);
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t start another giveaway event now. Another giveaway event is already active. Wait a for it to end.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Busy', 'Can\'t start another giveaway event now. Another giveaway event is already active. Wait a for it to end.', message.channel);
   }
 };
 

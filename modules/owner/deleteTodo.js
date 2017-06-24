@@ -25,27 +25,20 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: 'Todo list not found',
-          description: `${message.author.username}, you haven't created a todo list.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', 'Not Found', `${message.author.username}, your todo list is empty.`, message.channel);
     }
     else {
       let list = JSON.parse(todo.list);
       if (index >= list.length) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'That index was not found.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Not Found', 'That index was not found.', message.channel);
       }
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);

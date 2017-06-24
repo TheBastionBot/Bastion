@@ -36,14 +36,11 @@ exports.run = (Bastion, message) => {
   // }
   // catch (e) {
   //   Bastion.log.error(e.stack);
-  //   return message.channel.send({
-  //     embed: {
-  //       color: Bastion.colors.red,
-  //       description: 'Some error has occured while updating database, please check the console. And report it to Bastion Developers at https://discord.gg/fzx8fkt'
-  //     }
-  //   }).catch(e => {
-  //     Bastion.log.error(e.stack);
-  //   });
+  //   /**
+  //   * Error condition is encountered.
+  //   * @fires error
+  //   */
+  //   Bastion.emit('error', 'Not Found', 'Some error has occured while updating database. Please check the console and report it to Bastion Developers at https://discord.gg/fzx8fkt', message.channel);
   // }
 };
 

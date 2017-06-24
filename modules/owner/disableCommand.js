@@ -23,14 +23,11 @@ exports.run = (Bastion, message, args) => {
 
   let command = args[0].toLowerCase();
   if (command === 'disablecommand' || command === 'disablecmd' || command === 'enablecommand' || command === 'enablecmd') {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `Can't disable \`${command}\` command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Forbidden', `Can't disable \`${command}\` command.`, message.channel);
   }
 
   if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
@@ -42,14 +39,11 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `\`${command}\` command was not found.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', `\`${command}\` command was not found.`, message.channel);
   }
 
   if (!command.config.enabled) return;

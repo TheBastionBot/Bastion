@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
   Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').then(() => {
     Bastion.db.all('SELECT userID from blacklistedUsers').then(blUsers => {
       blUsers = blUsers.map(u => u.userID);
-      let title;
+      let title, color;
       if (/^(add|\+)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (blUsers.includes(user[i])) continue;
@@ -40,6 +40,7 @@ exports.run = (Bastion, message, args) => {
             Bastion.log.error(e.stack);
           });
         }
+        color = Bastion.colors.red;
         title = 'Added to blacklisted users';
       }
       else if (/^(remove|rem|-)$/i.test(args[0])) {
@@ -49,6 +50,7 @@ exports.run = (Bastion, message, args) => {
             Bastion.log.error(e.stack);
           });
         }
+        color = Bastion.colors.green;
         title = 'Removed from blacklisted users';
       }
       else {
@@ -61,7 +63,7 @@ exports.run = (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.red,
+          color: color,
           title: title,
           description: user.join(', ')
         }

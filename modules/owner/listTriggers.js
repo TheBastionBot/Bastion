@@ -15,14 +15,11 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers.length === 0) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'You don\'t have any triggers.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', 'Not Found', 'There are not triggers.', message.channel);
     }
 
     triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);
