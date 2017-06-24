@@ -31,14 +31,11 @@ exports.run = (Bastion, message, args) => {
     let role = message.guild.roles.get(args[0]);
 
     if (!role) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No role found for the provided role ID.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', 'No role was found for the given parameter.', message.channel);
     }
 
     Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=${args[0]} WHERE guildID=${message.guild.id}`).then(() => {

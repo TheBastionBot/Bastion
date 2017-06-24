@@ -34,46 +34,34 @@ exports.run = (Bastion, message, args) => {
     }
     else if (musicChannel.musicTextChannelID && musicChannel.musicVoiceChannelID) {
       if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(musicChannel.musicTextChannelID))) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'Invalid Text/Voice Channel ID has been added to default music channel.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Invalid Data', 'Invalid Text/Voice Channel ID has been added to default music channel.', message.channel);
       }
       if (!voiceChannel.joinable) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: `I don't have permission to join the voice channel **${voiceChannel.name}**`
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'No Permissions', `I don't have permission to join the voice channel **${voiceChannel.name}**`, message.channel);
       }
       if (!voiceChannel.speakable) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: `I don't have permission to speak in the voice channel **${voiceChannel.name}**`
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'No Permissions', 'I don\'t have permissions to speak in this channel.', message.channel);
       }
       vcStats = `You need to be in the default music channel (**${voiceChannel.name}**) of the BOT to be able to use music commands.`;
     }
     else {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No default music channel has been set. And I need to be in a voice channel to be able to play music.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'No Permissions', 'No default music channel has been set. And I need to be in a voice channel to be able to play music.', message.channel);
     }
     if (textChannel !== message.channel) return;
     if (voiceChannel.members.get(message.author.id) === undefined) {
@@ -98,14 +86,11 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e.stack);
         }
         if (favs.length === 0) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'You don\'t have any songs in your favourite list!'
-            }
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', 'Not Found', 'You don\'t have any songs in your favourite list!', textChannel);
         }
         args = favs.shift();
         message.channel.send({
@@ -140,14 +125,11 @@ exports.run = (Bastion, message, args) => {
       }
       else if (args.startsWith('-pl')) {
         if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.slice(4))) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'Invalid YouTube Playlist URL!'
-            }
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', 'Invalid Data', 'Invalid YouTube Playlist URL!', textChannel);
         }
         message.channel.send({
           embed: {
@@ -165,25 +147,19 @@ exports.run = (Bastion, message, args) => {
         yt.getInfo(args.slice(4), [ '-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]' ], (err, info) => {
           if (err) {
             Bastion.log.error(err);
-            return message.channel.send({
-              embed: {
-                color: Bastion.colors.red,
-                description: 'Some error has occured while adding songs from your playlist. Please check the console or try again.'
-              }
-            }).catch(e => {
-              Bastion.log.error(e.stack);
-            });
+            /**
+             * Error condition is encountered.
+             * @fires error
+             */
+            return Bastion.emit('error', 'Connection Error', 'Some error has occured while adding songs from your playlist. Please check the console or try again.', textChannel);
           }
           if (info) {
             if (info.length === 0) {
-              return message.channel.send({
-                embed: {
-                  color: Bastion.colors.red,
-                  description: 'No songs in the playlist!'
-                }
-              }).catch(e => {
-                Bastion.log.error(e.stack);
-              });
+              /**
+               * Error condition is encountered.
+               * @fires error
+               */
+              return Bastion.emit('error', 'Not Found', 'No songs in the playlist!', textChannel);
             }
             args = info.shift().title;
             message.channel.send({
@@ -557,14 +533,11 @@ exports.run = (Bastion, message, args) => {
       });
     }
     catch (e) {
-      textChannel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some connection error has occured. Please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', textChannel);
     }
   }).catch(e => {
     Bastion.log.error(e.stack);

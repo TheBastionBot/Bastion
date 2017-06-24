@@ -17,14 +17,11 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e);
   }
   if (songs.length === 0) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'You haven\'t added any favourite songs yet.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', 'You haven\'t added any favourite songs yet.', message.channel);
   }
 
   let favs = songs.map((e, i) => `${i + 1}. ${e}`);
