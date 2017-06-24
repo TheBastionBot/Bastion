@@ -17,25 +17,19 @@ exports.run = (Bastion, message, args) => {
 
   weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
     if (err) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `No weather data found for **${args.join(' ')}**. Please check the location and try again. Type \`${Bastion.config.prefix}help weather\` for help on weather command.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', `No weather data found for **${args.join(' ')}**. Please check the location and try again.`, message.channel);
     }
 
     if (!result || result.length < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No weather data received, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'No weather data received, please try again later.', message.channel);
     }
 
     message.channel.send({

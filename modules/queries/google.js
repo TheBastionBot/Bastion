@@ -10,26 +10,19 @@ const cheerio = require('cheerio');
 exports.run = (Bastion, message, args) => {
   request.get(`http://google.com/search?client=chrome&rls=en&ie=UTF-8&oe=UTF-8&q=${encodeURIComponent(args.query.join(' '))}`, (error, response, body) => {
     if (error) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some error has occured while getting data from server. Please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
     }
 
     if (response.statusCode !== 200) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: `${response.statusCode}`,
-          description: response.statusMessage
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
     }
 
     let $ = cheerio.load(body);

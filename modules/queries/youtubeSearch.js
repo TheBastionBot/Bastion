@@ -25,18 +25,11 @@ exports.run = (Bastion, message, args) => {
       else {
         result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
       }
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: result
-        }
-      }).then(m => {
-        m.delete(30000).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', result, message.channel);
     }
 
     message.channel.send({

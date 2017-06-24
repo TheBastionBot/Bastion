@@ -42,16 +42,13 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (remindUsers.hasOwnProperty(message.author.id)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'You already have a reminder. You can set only one ' +
-                     'reminder at once. Please wait for it to complete or ' +
-                     'run `reminder --cancel` to cancel the previous reminder.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Busy', 'You already have a reminder. You can set only one ' +
+                 'reminder at once. Please wait for it to complete or ' +
+                 'run `reminder --cancel` to cancel the previous reminder.', message.channel);
   }
 
   remindUsers[message.author.id] = Bastion.setTimeout(() => {

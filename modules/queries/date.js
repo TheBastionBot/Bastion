@@ -17,25 +17,19 @@ exports.run = (Bastion, message, args) => {
 
   location.find({ search: args.join(' ') }, function(err, result) {
     if (err) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `No data found for **${args.join(' ')}**. Please check the location and try again.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', `No data found for **${args.join(' ')}**. Please check the location and try again.`, message.channel);
     }
 
     if (!result || result.length < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No data received from the server, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'No data received from the server, please try again later.', message.channel);
     }
 
     let date = Bastion.functions.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();

@@ -1,6 +1,12 @@
 {
-  "date": "June 23, 2017",
-  "updated": [],
+  "date": "June 24, 2017",
+  "updated": [
+    "Improvements to `airhorn` command",
+    "Fixed `createChannel` command",
+    "Fixed `enableAllCommands` command",
+    "Fixed `userBlacklist` command",
+    "Minor fixes, improvements & changes to all modules"
+  ],
   "added": [],
   "removed": []
 }

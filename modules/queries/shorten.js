@@ -17,14 +17,11 @@ exports.run = (Bastion, message, args) => {
 
   args = encodeURI(args.join(' '));
   if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Invalid URL'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', 'You have entered an invalid URL.', message.channel);
   }
 
   let options = {
@@ -37,14 +34,11 @@ exports.run = (Bastion, message, args) => {
 
   request(options, function (error, response, body) {
     if (error) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some error has occured, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
     }
     if (response.statusCode === 200) {
       message.channel.send({
@@ -69,15 +63,11 @@ exports.run = (Bastion, message, args) => {
       });
     }
     else {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: `ERROR ${response.body.error.code}`,
-          description: response.body.error.message
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
     }
   });
 };

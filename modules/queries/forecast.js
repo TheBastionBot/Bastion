@@ -18,14 +18,11 @@ exports.run = (Bastion, message, args) => {
     if (err) return;
 
     if (!result || result.length < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No weather data received, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', 'No data received from the server, please try again later.', message.channel);
     }
 
     let fields = [];

@@ -29,14 +29,11 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     if (e.stack.includes('Unknown Message')) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No message was found with the specified Message ID in this channel.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', 'Not Found', 'No message was found for the given parameter.', message.channel);
     }
     else {
       Bastion.log.error(e.stack);

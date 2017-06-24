@@ -30,14 +30,11 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e.stack);
     if (e.stack.includes('not supported')) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `The language **${args[0].toUpperCase()}** is not supported.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Invalid Data', `The language **${args[0].toUpperCase()}** is not supported.`, message.channel);
     }
   });
 };

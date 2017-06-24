@@ -24,15 +24,12 @@ exports.run = (Bastion, message, args) => {
       }
     });
   }
-  catch(err) {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Invalid mathematical expression!'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  catch(error) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', 'Invalid mathematical expression.', message.channel);
   }
 };
 

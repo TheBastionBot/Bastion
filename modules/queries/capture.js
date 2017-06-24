@@ -16,14 +16,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(args[0])) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Invalid URL'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', 'You have entered an invalid URL', message.channel);
   }
   let options = {
     windowSize: {
@@ -39,14 +36,11 @@ exports.run = (Bastion, message, args) => {
   };
   capture(args[0], options, function (err, renderStream) {
     if (err) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `Bastion can't find the server at **${args[0]}**.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may've been timed out, try again later.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Connection Error', `Bastion can't find the server at **${args[0]}**.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may've been timed out, try again later.`, message.channel);
     }
     let imageBuffers = [];
     renderStream.on('data', function (data) {
