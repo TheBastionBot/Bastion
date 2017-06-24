@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 let recentUsers = [];
 
 exports.run = (Bastion, message, args) => {
@@ -102,7 +103,7 @@ exports.config = {
 
 exports.help = {
   name: 'betflip',
-  description: 'Bets a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you win more Bastion Currencies. If you lose, you lose the amount of currency you\'ve bet.',
+  description: string('betFlip', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'betflip < heads/tails > <-m amount>',

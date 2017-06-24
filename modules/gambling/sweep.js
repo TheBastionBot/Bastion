@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let sweepedUser = message.channel.members.filter(m => !m.user.bot).random();
 
@@ -36,7 +38,7 @@ exports.config = {
 
 exports.help = {
   name: 'sweep',
-  description: 'Shows a random user from the channel.',
+  description: string('sweep', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'sweep',
