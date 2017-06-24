@@ -17,6 +17,14 @@ exports.run = (Bastion, message, args) => {
   args.old = args.old.join(' ');
   args.new = args.new.join(' ');
 
+  if (args.new.length < 2 || args.new.length > 100) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Invalid Data', 'Channel name must be between 2 and 100 characters.', message.channel);
+  }
+
   let channel = message.channel;
   if (args.voice) {
     channel = message.guild.channels.filter(c => c.type === 'voice').find('name', args.old);

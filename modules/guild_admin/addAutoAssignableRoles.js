@@ -35,14 +35,11 @@ exports.run = (Bastion, message, args) => {
   }
   args = args.filter(r => message.guild.roles.get(r));
   if (args.length < 1) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'The role ID(s) you specified doesn\'t match any role.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Not Found', 'No role was found for the given parameter.', message.channel);
   }
 
   Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {

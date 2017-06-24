@@ -25,26 +25,20 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.autoAssignableRoles === '[]') {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No auto assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', 'Not Found', 'No auto assignable roles found.', message.channel);
     }
     else {
       let roles = JSON.parse(row.autoAssignableRoles);
       if (index >= roles.length) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'That index was not found.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Not Found', 'That index was not found.', message.channel);
       }
       let deletedRoleID = roles[parseInt(args[0]) - 1];
       roles.splice(parseInt(args[0]) - 1, 1);

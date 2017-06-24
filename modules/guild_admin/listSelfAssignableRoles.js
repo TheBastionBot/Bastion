@@ -7,14 +7,11 @@
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.selfAssignableRoles === '[]') {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No self assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', 'No self assignable roles found.', message.channel);
     }
 
     let roles = JSON.parse(row.selfAssignableRoles);

@@ -14,14 +14,11 @@ exports.run = (Bastion, message) => {
   }
 
   if (!Bastion.credentials.cleverbotAPIkey) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Cleverbot API key has not been set. I can\'t chat with you! :sob:'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', 'Unknown Credentials', 'Cleverbot API key has not been set. I can\'t chat with you! :sob:', message.channel);
   }
 
   Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {

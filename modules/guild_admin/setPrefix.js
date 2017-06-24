@@ -28,14 +28,11 @@ exports.run = (Bastion, message, args) => {
   else {
     prefix = args.prefix.join(' ');
     if (prefix.length > prefixMaxLength) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `The length of the prefix should not exceed ${prefixMaxLength} characters.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Invalid Data', `The length of the prefix should not exceed ${prefixMaxLength} characters.`, message.channel);
     }
   }
 

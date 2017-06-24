@@ -7,14 +7,11 @@
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.autoAssignableRoles === '[]') {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No auto assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', 'No auto assignable roles found.', message.channel);
     }
 
     let roles = JSON.parse(row.autoAssignableRoles);

@@ -25,27 +25,21 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.filteredWords === '[]') {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No self assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', 'Not Found', 'No words are being filterd.', message.channel);
     }
     else {
       let filteredWords = JSON.parse(row.filteredWords);
 
       if (index >= filteredWords.length) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'That index was not found.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', 'Not Found', 'That index was not found.', message.channel);
       }
 
       let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];

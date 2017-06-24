@@ -7,14 +7,11 @@
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.filteredWords === '[]') {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No words are being filtered.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', 'Not Found', 'No words are being filterd.', message.channel);
     }
 
     let filteredWords = JSON.parse(row.filteredWords);
