@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -82,7 +84,7 @@ exports.config = {
 
 exports.help = {
   name: 'createchannel',
-  description: 'Creates a new text/voice channel with a given name.',
+  description: string('createChannel', 'commandDescription'),
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'createChannel [-t | -v] <Channel Name>',

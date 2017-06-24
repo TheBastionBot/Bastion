@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -85,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'deleterole',
-  description: 'Deletes a role either by role mention (default), id or name.',
+  description: string('deleteRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',

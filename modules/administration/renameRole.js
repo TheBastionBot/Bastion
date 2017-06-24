@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -78,7 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'renamerole',
-  description: 'Renames a given role to a given new name.',
+  description: string('renameRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'renameRole < -o Old Role Name -n New Role Name >',

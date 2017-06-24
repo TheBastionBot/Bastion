@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
 
   if (!args.old || !args.new) {
@@ -97,7 +99,7 @@ exports.config = {
 
 exports.help = {
   name: 'renamechannel',
-  description: 'Renames a specified text (default) or voice channel to a new name.',
+  description: string('renameChannel', 'commandDescription'),
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'renameChannel [ -t | -v ] < -o Old Channel Name -n New Channel Name>',

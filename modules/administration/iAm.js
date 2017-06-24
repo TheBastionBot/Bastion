@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.guild.me.hasPermission(this.help.botPermission)) {
     /**
@@ -54,7 +56,7 @@ exports.config = {
 
 exports.help = {
   name: 'iam',
-  description: 'Adds a specified self assignable role to the user.',
+  description: string('iAm', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: '',
   usage: 'iAm <role name>',

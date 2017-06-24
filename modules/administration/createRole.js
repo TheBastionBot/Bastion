@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -79,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'createrole',
-  description: 'Creates a new role with a given color (optional) and a given name (optional).',
+  description: string('createRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'createrole [[-n] Role Name] [-c hex-color-code]',

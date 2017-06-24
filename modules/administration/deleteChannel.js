@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -91,7 +93,7 @@ exports.config = {
 
 exports.help = {
   name: 'deletechannel',
-  description: 'Deletes a mentioned text channel. If no channel is mentioned, deletes the current text channel.',
+  description: string('deleteChannel', 'commandDescription'),
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'deleteChannel [ [-m] #channel-mention | -i CHANNEL_ID | -n Channel Name ]',
