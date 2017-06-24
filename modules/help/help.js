@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.command) {
     let channel, command = args.command.toLowerCase();
@@ -140,7 +142,7 @@ exports.config = {
 
 exports.help = {
   name: 'help',
-  description: 'Shows all the available commands. If a command name is specified as a argument, shows help about that command and if the `--dm` flag is provided with that, it will DM you the help rather than posting it in the server.',
+  description: string('help', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'help [command_name [--dm]]',

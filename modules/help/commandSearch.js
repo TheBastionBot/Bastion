@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || args.join('').length < 2) {
     /**
@@ -46,7 +48,7 @@ exports.config = {
 
 exports.help = {
   name: 'commandsearch',
-  description: 'Search for a Bastion\'s command with a given text.',
+  description: string('commandSearch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'commandSearch <text>',

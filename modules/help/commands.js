@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const fs = require('fs');
 let commands = {};
 
@@ -52,7 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'commands',
-  description: 'Shows the complete list of commands with their aliases.',
+  description: string('commands', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'commands',

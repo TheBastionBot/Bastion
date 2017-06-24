@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -27,7 +29,7 @@ exports.config = {
 
 exports.help = {
   name: 'donate',
-  description: 'Instructions on how to financially support the Bastion BOT project.',
+  description: string('donate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'donate',

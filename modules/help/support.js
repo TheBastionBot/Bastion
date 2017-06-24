@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -30,7 +32,7 @@ exports.config = {
 
 exports.help = {
   name: 'support',
-  description: 'Sends the invite link to Bastion BOT Support Server.',
+  description: string('support', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'support',
