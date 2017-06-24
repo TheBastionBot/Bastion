@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
@@ -86,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'typinggame',
-  description: 'Starts a typing speed competition. The user to type the given article and send it first, wins. It automatically ends in 5 mins if no one is able to type the article by this time.',
+  description: string('typingGame', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'typingGame',

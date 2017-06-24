@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const outcomes = [
   '🔫 BANG! You are dead, buddy.',
   'You got lucky, my friend.'
@@ -35,7 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'russianroulette',
-  description: 'Play the ultimate game of chance - Russian Roulette! Let\'s see if you live or die.',
+  description: string('russianRoulette', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'russianRoulette [no_of_bullets]',

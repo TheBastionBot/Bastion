@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let outcomes = [
     ':one:',
@@ -40,7 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'roll',
-  description: 'Rolls a dice and gives you the the outcome. If a number is provided as an argument, it rolls that no. of dice.',
+  description: string('roll', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'roll [no_of_dice]',

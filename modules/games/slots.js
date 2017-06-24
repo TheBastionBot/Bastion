@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let reel = [
     ':custard:',
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'slots',
-  description: 'Spins the reels of the slot machine and shows you the result.',
+  description: string('slots', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'slots',
