@@ -187,14 +187,11 @@ exports.run = (Bastion, message) => {
     });
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    Bastion.emit('error', 'Busy', 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.', message.channel);
   }
 };
 

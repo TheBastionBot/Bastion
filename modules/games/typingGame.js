@@ -71,14 +71,11 @@ exports.run = (Bastion, message) => {
     });
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    Bastion.emit('error', 'Busy', 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.', message.channel);
   }
 };
 
