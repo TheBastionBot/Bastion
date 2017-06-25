@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.filteredWords === '[]') {
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'listfilteredwords',
-  description: 'Lists all filtered words.',
+  description: string('listFilteredWords', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'listFilteredWords [page_no]',

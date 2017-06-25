@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -38,7 +40,7 @@ exports.config = {
 
 exports.help = {
   name: 'greettimeout',
-  description: 'Sets the time (in seconds) after which greeting message will be automatically deleted. Supported values: 1 - 300. Any value except the supported values will turn off automatic deletion.',
+  description: string('greetTimeout', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greetTimeout [time_in_seconds]',

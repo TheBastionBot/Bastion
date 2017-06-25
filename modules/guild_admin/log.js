@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -49,7 +51,7 @@ exports.config = {
 
 exports.help = {
   name: 'log',
-  description: 'Toggle logging of various events in the server.',
+  description: string('log', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'log',

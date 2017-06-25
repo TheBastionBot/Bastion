@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.selfAssignableRoles === '[]') {
@@ -55,7 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listselfassignableroles',
-  description: 'Lists all self assignable roles.',
+  description: string('listSelfAssignableRoles', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'listSelfAssignableRoles [page_no]',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -70,7 +72,7 @@ exports.config = {
 
 exports.help = {
   name: 'removefilteredword',
-  description: 'Deletes a word from the list of filtered words it\'s index number.',
+  description: string('removeFilteredWord', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeFilteredWord <index>',

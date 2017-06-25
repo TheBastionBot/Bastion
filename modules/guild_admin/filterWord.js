@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -57,7 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'filterword',
-  description: 'Toggles automatic deleting of any links posted in the server. Does not apply to the server Administrators.',
+  description: string('filterWord', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'ADMINISTRATOR',
   usage: 'filterWord',

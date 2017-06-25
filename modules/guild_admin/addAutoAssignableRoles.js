@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -77,7 +79,7 @@ exports.config = {
 
 exports.help = {
   name: 'addautoassignableroles',
-  description: 'Adds roles, specified by role ID, to auto assignable roles category, anyone who joins the server gets these roles automatically.',
+  description: string('addAutoAssignableRoles', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'ADMINISTRATOR',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',

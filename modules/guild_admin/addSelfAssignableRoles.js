@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -77,7 +79,7 @@ exports.config = {
 
 exports.help = {
   name: 'addselfassignableroles',
-  description: 'Adds roles, specified by role ID, to self assignable roles category, so that anyone could use `iam`/`iamnot` command to assign these roles to themselves.',
+  description: string('addSelfAssignableRoles', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'ADMINISTRATOR',
   usage: 'addSelfAssignableRoles <RoleID> [RoleID] [RoleID]',

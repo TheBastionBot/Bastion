@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -62,7 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'setprefix',
-  description: 'Sets Bastion\'s prefix for the server to a given prefix. If the `--default` flag is given, it sets the prefix to Bastion\'s default prefix.',
+  description: string('setPrefix', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'setPrefix < prefix | --default >',

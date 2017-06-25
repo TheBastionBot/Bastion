@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'greetdm',
-  description: 'Toggle sending of greeting message as direct message for new members of the server.',
+  description: string('greetDM', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greetDM',

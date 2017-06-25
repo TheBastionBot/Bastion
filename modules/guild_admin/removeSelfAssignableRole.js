@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -67,7 +69,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeselfassignablerole',
-  description: 'Deletes a role from the self assignable roles by it\'s index number.',
+  description: string('removeSelfAssignableRole', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeSelfAssignableRole <index>',

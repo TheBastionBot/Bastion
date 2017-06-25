@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'greet',
-  description: 'Toggle greeting message for new members of the server.',
+  description: string('greet', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greet',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -58,7 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'chat',
-  description: 'Toggles chatting feature of the bot.',
+  description: string('chat', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'chat',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.autoAssignableRoles === '[]') {
@@ -55,7 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listautoassignableroles',
-  description: 'Lists all auto assignable roles.',
+  description: string('listAutoAssignableRoles', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'listAutoAssignableRoles [page_no]',
