@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!(args = message.mentions.users.first())) {
     args = message.author;
@@ -74,7 +76,7 @@ exports.config = {
 
 exports.help = {
   name: 'profile',
-  description: 'Shows a mentioned user\'s Bastion profile. If no one is mentioned, shows your profile.',
+  description: string('profile', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'profile [@user-mention]',

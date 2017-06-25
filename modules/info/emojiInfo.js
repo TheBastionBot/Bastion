@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -59,7 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'emojiinfo',
-  description: 'Shows information about the mentioned custom emoji.',
+  description: string('emojiInfo', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'emojiInfo [:emoji:]',

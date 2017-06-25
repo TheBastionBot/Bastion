@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
@@ -38,7 +40,7 @@ exports.config = {
 
 exports.help = {
   name: 'userid',
-  description: 'Shows the mentioned user\'s ID. If no user is mentioned, shows your ID.',
+  description: string('userID', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'userID [@user-mention]',

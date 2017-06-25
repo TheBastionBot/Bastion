@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!args.role) {
     /**
@@ -61,7 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'inrole',
-  description: 'Shows the list of all the users in a specified role.',
+  description: string('inRole', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'inRole < Role Name | @role-mention > [-p <PAGE_NO>]',

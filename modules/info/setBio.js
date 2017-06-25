@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -64,7 +66,7 @@ exports.config = {
 
 exports.help = {
   name: 'setbio',
-  description: 'Shows a mentioned person\'s avatar. If no one is mentioned, it wil show your avatar.',
+  description: string('setBio', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'setBio <text>',

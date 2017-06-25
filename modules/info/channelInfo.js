@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -73,7 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'channelinfo',
-  description: 'Shows information about the mentioned channel. If no channel is mentioned, shows information about the current channel.',
+  description: string('channelInfo', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',

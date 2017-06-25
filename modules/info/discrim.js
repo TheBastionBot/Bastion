@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
     /**
@@ -41,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'discrim',
-  description: 'Searches the server for users with the specified discriminator.',
+  description: string('discrim', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'discrim <discriminator>',

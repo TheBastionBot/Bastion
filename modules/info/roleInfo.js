@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -79,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleinfo',
-  description: 'Shows information about the specified role.',
+  description: string('roleInfo', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',
