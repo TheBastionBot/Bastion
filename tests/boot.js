@@ -18,11 +18,22 @@ BASTION.package = require('../package.json');
 BASTION.credentials = require('../settings/credentials.json');
 BASTION.config = require('../settings/config.json');
 BASTION.colors = require('../settings/colors.json');
+
+let languages = [
+  'english'
+];
+let language = 'english';
+if (languages.includes(BASTION.config.language)) {
+  language = BASTION.config.language;
+}
+process.env.LANG = language;
+
 BASTION.functions = {};
 BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
 
 try {
+  require('../handlers/languageHandler')(BASTION);
   require('../handlers/functionHandler')(BASTION);
   require('../handlers/logHandler')(BASTION);
   require('../handlers/eventHandler')(BASTION);
