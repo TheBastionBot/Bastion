@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -40,7 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'messageuser',
-  description: 'Sends a private message to a specified user (by ID) of a server the bot is connected to.',
+  description: string('messageUser', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'messageUser <user_id> <message>',

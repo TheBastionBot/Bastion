@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -55,7 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listtriggers',
-  description: 'Lists all the triggers you have added. It takes page number as an optional argument.',
+  description: string('listTriggers', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listTriggers [page_no]',

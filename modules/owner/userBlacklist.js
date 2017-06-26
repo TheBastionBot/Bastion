@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -85,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'userblacklist',
-  description: 'Adds/Removes user, by mention or user ID, to BOT blacklist, they can\'t use any of the bot\'s commands.',
+  description: string('userBlacklist', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',

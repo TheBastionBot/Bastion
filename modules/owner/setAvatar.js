@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -41,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'setavatar',
-  description: 'Sets the avatar of the Bot.',
+  description: string('setAvatar', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'setavatar <image_url>',

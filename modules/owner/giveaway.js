@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 let activeChannel;
 
 exports.run = (Bastion, message, args) => {
@@ -112,7 +113,7 @@ exports.config = {
 
 exports.help = {
   name: 'giveaway',
-  description: 'Starts a giveaway, users get the specified amount of Bastion Currencies if they react to the message with the given reaction, within 1 hour.',
+  description: string('giveaway', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'giveaway <amount>',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -51,7 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'updatedatabase',
-  description: 'Updates Bastion\'s Database to the current release.',
+  description: string('updateDatabase', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'updateDatabase',

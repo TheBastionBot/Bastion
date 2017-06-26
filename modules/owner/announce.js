@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -48,7 +50,7 @@ exports.config = {
 
 exports.help = {
   name: 'announce',
-  description: 'Sends a message to all servers\' default channel, the bot is connected to.',
+  description: string('announce', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'announce <message>',

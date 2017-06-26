@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'setnick',
-  description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
+  description: string('setNick', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'setNick [text]',
