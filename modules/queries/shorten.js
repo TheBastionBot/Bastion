@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -79,7 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'shorten',
-  description: 'Shortens a specified URL using Google URL Shortner.',
+  description: string('shorten', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'shorten <URL>',

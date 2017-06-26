@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const moment = require('moment');
 const remindUsers = {};
 
@@ -89,7 +90,7 @@ exports.config = {
 
 exports.help = {
   name: 'reminder',
-  description: 'Bastion sets a reminder to DM you with a specified message and duration. Duration can\'t exceed 24 hours and can\'t be less than 1 minute.',
+  description: string('reminder', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'reminder <-d Duration> <Message>',

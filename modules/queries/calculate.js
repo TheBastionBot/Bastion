@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const mathjs = require('mathjs');
 
 exports.run = (Bastion, message, args) => {
@@ -40,7 +41,7 @@ exports.config = {
 
 exports.help = {
   name: 'calculate',
-  description: 'Evaluates a mathematical expression.',
+  description: string('calculate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'calculate <mathematical_expression>',

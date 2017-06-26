@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const yt = require('youtube-dl');
 
 exports.run = (Bastion, message, args) => {
@@ -78,7 +79,7 @@ exports.config = {
 
 exports.help = {
   name: 'youtubesearch',
-  description: 'Searches for a video on YouTube and shows the first result.',
+  description: string('youtubeSearch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'youtubeSearch <text>',

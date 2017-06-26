@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -34,7 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'lmgtfy',
-  description: 'A tool to teach other people how to use Google\'s internet search.',
+  description: string('lmgtfy', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'lmgtfy <text>',

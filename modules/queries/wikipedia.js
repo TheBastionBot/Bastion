@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -84,7 +85,7 @@ exports.config = {
 
 exports.help = {
   name: 'wikipedia',
-  description: 'Searches Wikipedia and shows the result.',
+  description: string('wikipedia', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'wikipedia <text>',

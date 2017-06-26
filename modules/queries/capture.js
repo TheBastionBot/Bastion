@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const capture = require('webshot');
 
 exports.run = (Bastion, message, args) => {
@@ -69,7 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'capture',
-  description: 'Captures and sends a screenshot of a specified webpage.',
+  description: string('capture', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'capture <url>',

@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -42,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'map',
-  description: 'Get the map of the specified location. It takes an optional `--zoom` argument which takes an zoom amount from value 0 to 20.',
+  description: string('map', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'map <location> [--zoom <amount>]',

@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const location = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
@@ -62,7 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'date',
-  description: 'Shows the local date and time of any provided region.',
+  description: string('date', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'data < location name[, country code] | zip code >',

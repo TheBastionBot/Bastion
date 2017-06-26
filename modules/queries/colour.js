@@ -1,9 +1,10 @@
 /**
- * @file color command
+ * @file colour command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const convert = require('color-convert');
 
 exports.run = (Bastion, message, args) => {
@@ -100,15 +101,15 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'colour' ],
+  aliases: [ 'color' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'color',
-  description: 'Convert `HEX` Color to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and CSS Keyword (Rounds to closest color).',
+  name: 'colour',
+  description: string('colour', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'color <#hex-color-code>',
-  example: [ 'color #dd0000' ]
+  usage: 'colour <#hex-colour-code>',
+  example: [ 'colour #dd0000' ]
 };

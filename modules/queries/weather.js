@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
@@ -115,7 +116,7 @@ exports.config = {
 
 exports.help = {
   name: 'weather',
-  description: 'Shows weather information for a specified location by name or ZIP Code.',
+  description: string('weather', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'weather <city [, country_code]|zipcode>',

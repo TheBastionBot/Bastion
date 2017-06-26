@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
@@ -145,7 +146,7 @@ exports.config = {
 
 exports.help = {
   name: 'poll',
-  description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
+  description: string('poll', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'poll <question>;<option1>;<option2>[;<option3>[...]]',

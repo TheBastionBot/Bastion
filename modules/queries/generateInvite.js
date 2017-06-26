@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -43,7 +45,7 @@ exports.config = {
 
 exports.help = {
   name: 'generateinvite',
-  description: 'Generates an invite link of the channel the command was ran in.',
+  description: string('generateInvite', 'commandDescription'),
   botPermission: 'CREATE_INSTANT_INVITE',
   userPermission: 'CREATE_INSTANT_INVITE',
   usage: 'generateInvite [-u <NO_OF_USES>] [-a <INVITE_LINK_TIMEOUT_IN_MINUTES>]',

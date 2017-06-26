@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 const cheerio = require('cheerio');
 
@@ -67,7 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'google',
-  description: 'Searches google for the given query and shows the results.',
+  description: string('google', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'google <query>',

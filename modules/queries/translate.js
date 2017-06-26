@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const translate = require('google-translate-api');
 
 exports.run = (Bastion, message, args) => {
@@ -46,7 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'translate',
-  description: 'Translates your message to a language specified in the arguments by the language code.',
+  description: string('translate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'translate <language_code> <text>',
