@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -82,7 +84,7 @@ exports.config = {
 
 exports.help = {
   name: 'deafen',
-  description: 'Deafens a mentioned user with an optional reason.',
+  description: string('deafen', 'commandDescription'),
   botPermission: 'DEAFEN_MEMBERS',
   userPermission: 'DEAFEN_MEMBERS',
   usage: 'deafen @user-mention [Reason]',

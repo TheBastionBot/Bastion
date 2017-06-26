@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -84,7 +86,7 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. Using `--bots` flag clears messages from bots in that channel. Using `--nonpinned` flag clears messages that aren\'t pinned.',
+  description: string('clear', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'MANAGE_MESSAGES',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',

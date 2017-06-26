@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -61,7 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'nickname',
-  description: 'Change the nickname of the mentioned user in the server to a specified nick. If no nick is specified, it resets the user\'s nickname.',
+  description: string('nickname', 'commandDescription'),
   botPermission: 'MANAGE_NICKNAMES',
   userPermission: 'MANAGE_NICKNAMES',
   usage: 'nickname <@user-mention> [nick]',

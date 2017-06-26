@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let user = message.mentions.users.first();
   if (!user) {
@@ -46,7 +48,7 @@ exports.config = {
 
 exports.help = {
   name: 'report',
-  description: 'Reports a user to the moderators with a given reason.',
+  description: string('report', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'report @user-mention [Reason]',

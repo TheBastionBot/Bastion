@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -99,7 +101,7 @@ exports.config = {
 
 exports.help = {
   name: 'kick',
-  description: 'Kicks a mentioned user with an optional reason.',
+  description: string('kick', 'commandDescription'),
   botPermission: 'KICK_MEMBERS',
   userPermission: 'KICK_MEMBERS',
   usage: 'kick @user-mention [Reason]',

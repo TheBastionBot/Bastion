@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -80,7 +82,7 @@ exports.config = {
 
 exports.help = {
   name: 'unmute',
-  description: 'Unmutes a mentioned user with an optional reason.',
+  description: string('unMute', 'commandDescription'),
   botPermission: 'MUTE_MEMBERS',
   userPermission: 'MUTE_MEMBERS',
   usage: 'unMute @user-mention [Reason]',

@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 let guilds = {};
 exports.warns = guilds;
 
@@ -151,7 +152,7 @@ exports.config = {
 
 exports.help = {
   name: 'warn',
-  description: 'Warns a mentioned user with an optional reason. After 3 warnings are given, the users automatically gets kicked from the server.',
+  description: string('warn', 'commandDescription'),
   botPermission: 'KICK_MEMBERS',
   userPermission: 'KICK_MEMBERS',
   usage: 'warn @user-mention [Reason]',

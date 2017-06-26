@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -63,7 +65,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeallroles',
-  description: 'Removes all roles from a mentioned user. If no user is mentioned, removes all roles from you.',
+  description: string('removeAllRoles', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'removeAllRoles [@user-mention]',

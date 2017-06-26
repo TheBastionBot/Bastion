@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -79,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'addrole',
-  description: 'Adds a mentioned user to the given role. If no user is mentioned, adds you to the given role.',
+  description: string('addRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'addRole [@user-mention] <Role Name>',

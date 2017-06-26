@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -102,7 +104,7 @@ exports.config = {
 
 exports.help = {
   name: 'ban',
-  description: 'Bans a mentioned user with an optional reason, and removes 7 days of his message history.',
+  description: string('ban', 'commandDescription'),
   botPermission: 'BAN_MEMBERS',
   userPermission: 'BAN_MEMBERS',
   usage: 'ban <@user-mention> [Reason].',

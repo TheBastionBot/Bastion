@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -126,7 +128,7 @@ exports.config = {
 
 exports.help = {
   name: 'softban',
-  description: 'Bans & unbans a mentioned user, and removes 7 days of their message history.',
+  description: string('softBan', 'commandDescription'),
   botPermission: 'BAN_MEMBERS',
   userPermission: 'BAN_MEMBERS',
   usage: 'softBan @user-mention [Reason]',

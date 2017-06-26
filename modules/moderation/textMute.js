@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -83,7 +85,7 @@ exports.config = {
 
 exports.help = {
   name: 'textmute',
-  description: 'Mutes a mentioned user from sending messages in a channel with an optional reason.',
+  description: string('textMute', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'textMute @user-mention [Reason]',

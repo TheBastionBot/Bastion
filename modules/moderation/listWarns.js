@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 const warns = require('./warn').warns;
 
 exports.run = (Bastion, message) => {
@@ -47,7 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'listwarns',
-  description: 'Lists the server members who have been warned.',
+  description: string('listWarns', 'commandDescription'),
   botPermission: '',
   userPermission: 'KICK_MEMBERS',
   usage: 'listWarns',

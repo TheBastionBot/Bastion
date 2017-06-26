@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -86,7 +88,7 @@ exports.config = {
 
 exports.help = {
   name: 'textunmute',
-  description: 'UnMutes a previously muted user in a channel with an optional reason.',
+  description: string('textUnMute', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'textUnMute @user-mention [Reason]',
