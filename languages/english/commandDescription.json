@@ -187,6 +187,7 @@
   "date": "Shows the local date and time of any specified city.",
   "define": "Searches the definition of the specified word from English, French or German dictionary.",
   "endpoll": "Ends a currently running poll in the same text channel channel and shows the result.",
+  "followURL": "Follows a URL to until it reaches the last URL and shows you the the followed URL. Useful for getting past shortened URLs.",
   "forecast": "Shows the weather forecast for 5 days of the specified city.",
   "generateInvite": "Generates an invite link of the current text channel of your Discord server.",
   "google": "Searches Google, for the specified query, and shows the top results.",
