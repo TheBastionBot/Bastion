@@ -23,6 +23,8 @@ module.exports = message => {
             color: message.client.colors.orange,
             description: `${message.author} you are not allowed to post links here.`
           }
+        }).then(msg => {
+          msg.delete(5000);
         }).catch(e => {
           message.client.log.error(e);
         });

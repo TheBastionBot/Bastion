@@ -1,5 +1,5 @@
 {
-  "date": "June 25, 2017",
+  "date": "June 27, 2017",
   "updated": [
     "Improvements to `airhorn` command",
     "Fixed `createChannel` command",
@@ -7,6 +7,7 @@
     "Fixed `userBlacklist` command",
     "Fixed crashes when using cleverbot",
     "Adding songs from favourite playlist is now faster",
+    "Auto delete invite filter & link filter warnings",
     "Minor fixes, improvements & changes to all modules"
   ],
   "added": [],
