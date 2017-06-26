@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
@@ -19,7 +21,7 @@ exports.config = {
 
 exports.help = {
   name: 'repeat',
-  description: 'Toggles the currently playing song to/from the repeat queue.',
+  description: string('repeat', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'repeat',

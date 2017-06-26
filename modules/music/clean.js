@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
@@ -19,7 +21,7 @@ exports.config = {
 
 exports.help = {
   name: 'clean',
-  description: 'Cleans up the current music queue.',
+  description: string('clean', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'clean',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -60,7 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'musicmasterrole',
-  description: 'Adds a role (by ID) as the music master role of Bastion. Users with this role get access to restricted music commands like summon, stop, etc.',
+  description: string('musicMasterRole', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'musicMasterRole [ROLE_ID]',

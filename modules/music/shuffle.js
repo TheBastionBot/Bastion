@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
@@ -19,7 +21,7 @@ exports.config = {
 
 exports.help = {
   name: 'shuffle',
-  description: 'Shuffles the songs in the current queue.',
+  description: string('shuffle', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'shuffle',

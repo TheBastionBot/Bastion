@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let voiceChannel;
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
@@ -133,7 +135,7 @@ exports.config = {
 
 exports.help = {
   name: 'summon',
-  description: 'Tells the BOT to join the default voice channel (if any), set by the BOT owner. Doesn\'t apply to BOT owner.',
+  description: string('summon', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'summon',

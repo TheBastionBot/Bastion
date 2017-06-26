@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const yt = require('youtube-dl');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/favouriteSongs', true, true);
@@ -551,7 +552,7 @@ exports.config = {
 
 exports.help = {
   name: 'play',
-  description: 'Plays a song (adds the song to the queue if already playing) specified by name/link. To play songs in a YouTube playlist, use \'-pl\' argument with the playlist link. To play songs in your favourites use \'-favs\' argument instead of song name/link.',
+  description: string('play', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'play <name | song_link | -pl <playlist_link> | -favs>',

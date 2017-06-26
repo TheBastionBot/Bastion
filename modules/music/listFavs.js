@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/favouriteSongs', true, true);
 
@@ -54,9 +55,9 @@ exports.config = {
 
 exports.help = {
   name: 'listfavs',
-  description: 'Lists the songs in your favourite list.',
+  description: string('listFavs', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'listfavs [page_no]',
+  usage: 'listFavs [page_no]',
   example: [ 'listFavs', 'listFavs 2' ]
 };
