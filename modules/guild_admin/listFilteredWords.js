@@ -13,7 +13,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Not Found', 'No words are being filterd.', message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), 'No words are being filterd.', message.channel);
     }
 
     let filteredWords = JSON.parse(row.filteredWords);

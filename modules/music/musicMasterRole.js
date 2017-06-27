@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Not Found', 'No role was found for the given parameter.', message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), 'No role was found for the given parameter.', message.channel);
     }
 
     Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=${args[0]} WHERE guildID=${message.guild.id}`).then(() => {

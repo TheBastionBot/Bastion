@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', 'Not Found', 'No message was found for the given parameter.', message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), 'No message was found for the given parameter.', message.channel);
     }
     else {
       Bastion.log.error(e.stack);

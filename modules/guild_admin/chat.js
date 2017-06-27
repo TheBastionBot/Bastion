@@ -20,7 +20,7 @@ exports.run = (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Unknown Credentials', 'Cleverbot API key has not been set. I can\'t chat with you! :sob:', message.channel);
+    return Bastion.emit('error', string('noCredentials', 'errors'), 'Cleverbot API key has not been set. I can\'t chat with you! :sob:', message.channel);
   }
 
   Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {

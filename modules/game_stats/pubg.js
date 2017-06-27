@@ -33,7 +33,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
+      return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
     }
     else if (response.statusCode === 200) {
       color = Bastion.colors.blue;
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
              * Error condition is encountered.
              * @fires error
              */
-            Bastion.emit('error', 'Not Found', `Unable to find any stats for the player **${args.player}** in **${args.mode}** game mode.`, message.channel);
+            Bastion.emit('error', string('notFound', 'errors'), `Unable to find any stats for the player **${args.player}** in **${args.mode}** game mode.`, message.channel);
           }
           else {
             let performance = body.Stats[0].Stats.filter(s => s.category === 'Performance');
@@ -176,7 +176,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', 'Not Found', `Unable to find the player **${args.player}**.`, message.channel);
+          return Bastion.emit('error', string('notFound', 'errors'), `Unable to find the player **${args.player}**.`, message.channel);
         }
       }
       catch (e) {
@@ -184,7 +184,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Parse Error', 'Some error has occured while parsing the received data. Please try again later.', message.channel);
+        return Bastion.emit('error', string('parseError', 'errors'), 'Some error has occured while parsing the received data. Please try again later.', message.channel);
       }
     }
     else {

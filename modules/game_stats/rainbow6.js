@@ -21,14 +21,14 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), `**${args[0]}** is not a valid platform. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`, message.channel);
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', `**${args[1]}** is not a valid username.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), `**${args[1]}** is not a valid username.`, message.channel);
   }
 
   r6.stats(args[1], args[0]).then(data => {
@@ -158,7 +158,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Not Found', `No player with username **${args[1]}** found for the platform **${args[0]}**.`, message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), `No player with username **${args[1]}** found for the platform **${args[0]}**.`, message.channel);
   });
 };
 

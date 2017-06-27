@@ -117,7 +117,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Connection Error', 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.', message.channel);
+    return Bastion.emit('error', string('connectionError', 'errors'), 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.', message.channel);
   });
 };
 

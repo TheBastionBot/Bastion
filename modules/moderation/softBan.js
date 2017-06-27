@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'No Permissions', `I don't have permissions to softban ${user}.`, message.channel);
+    return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to softban ${user}.`, message.channel);
   }
 
   let reason = args.slice(1).join(' ');

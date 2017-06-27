@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', 'Invalid mathematical expression.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), 'Invalid mathematical expression.', message.channel);
   }
 };
 

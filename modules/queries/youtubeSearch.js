@@ -19,18 +19,20 @@ exports.run = (Bastion, message, args) => {
   args = `ytsearch:${args.join(' ')}`;
   yt.getInfo(args, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
     if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-      let result;
+      let error, errorMessage;
       if (err && err.stack.includes('No video results')) {
-        result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
+        error = string('notFound', 'errors');
+        errorMessage = `No results found found for **${args.replace('ytsearch:', '')}**.`;
       }
       else {
-        result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
+        error = string('connectionError', 'errors');
+        errorMessage = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
       }
       /**
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', '', result, message.channel);
+      return Bastion.emit('error', error, errorMessage, message.channel);
     }
 
     message.channel.send({

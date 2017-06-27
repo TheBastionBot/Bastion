@@ -39,21 +39,21 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Invalid Data', 'Invalid Text/Voice Channel ID has been added to default music channel.', message.channel);
+        return Bastion.emit('error', string('invalidInput', 'errors'), 'Invalid Text/Voice Channel ID has been added to default music channel.', message.channel);
       }
       if (!voiceChannel.joinable) {
         /**
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'No Permissions', `I don't have permission to join the voice channel **${voiceChannel.name}**`, message.channel);
+        return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permission to join the voice channel **${voiceChannel.name}**`, message.channel);
       }
       if (!voiceChannel.speakable) {
         /**
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'No Permissions', 'I don\'t have permissions to speak in this channel.', message.channel);
+        return Bastion.emit('error', string('forbidden', 'errors'), 'I don\'t have permissions to speak in this channel.', message.channel);
       }
       vcStats = `You need to be in the default music channel (**${voiceChannel.name}**) of the BOT to be able to use music commands.`;
     }
@@ -62,7 +62,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'No Permissions', 'No default music channel has been set. And I need to be in a voice channel to be able to play music.', message.channel);
+      return Bastion.emit('error', string('forbidden', 'errors'), 'No default music channel has been set. And I need to be in a voice channel to be able to play music.', message.channel);
     }
     if (textChannel !== message.channel) return;
     if (voiceChannel.members.get(message.author.id) === undefined) {
@@ -91,7 +91,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', 'Not Found', 'You don\'t have any songs in your favourite list!', textChannel);
+          return Bastion.emit('error', string('notFound', 'errors'), 'You don\'t have any songs in your favourite list!', textChannel);
         }
         args = favs.shift();
         message.channel.send({
@@ -130,7 +130,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', 'Invalid Data', 'Invalid YouTube Playlist URL!', textChannel);
+          return Bastion.emit('error', string('invalidInput', 'errors'), 'Invalid YouTube Playlist URL!', textChannel);
         }
         message.channel.send({
           embed: {
@@ -152,7 +152,7 @@ exports.run = (Bastion, message, args) => {
              * Error condition is encountered.
              * @fires error
              */
-            return Bastion.emit('error', 'Connection Error', 'Some error has occured while adding songs from your playlist. Please check the console or try again.', textChannel);
+            return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while adding songs from your playlist. Please check the console or try again.', textChannel);
           }
           if (info) {
             if (info.length === 0) {
@@ -160,7 +160,7 @@ exports.run = (Bastion, message, args) => {
                * Error condition is encountered.
                * @fires error
                */
-              return Bastion.emit('error', 'Not Found', 'No songs in the playlist!', textChannel);
+              return Bastion.emit('error', string('notFound', 'errors'), 'No songs in the playlist!', textChannel);
             }
             args = info.shift().title;
             message.channel.send({
@@ -538,7 +538,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', textChannel);
+      return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while receiving data from the server. Please try again later.', textChannel);
     }
   }).catch(e => {
     Bastion.log.error(e.stack);

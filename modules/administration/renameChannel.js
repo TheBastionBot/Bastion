@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', 'Channel name must be between 2 and 100 characters.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), 'Channel name must be between 2 and 100 characters.', message.channel);
   }
 
   let channel = message.channel;
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Not Found', 'No channel was found for the given parameter.', message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), 'No channel was found for the given parameter.', message.channel);
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {

@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Not Found', `No command was found for *${args}*.`, message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), `No command was found for *${args}*.`, message.channel);
   }
   message.channel.send({
     embed: {

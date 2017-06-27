@@ -135,7 +135,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Busy', `Can't start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``, message.channel);
+    return Bastion.emit('error', string('busy', 'errors'), `Can't start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``, message.channel);
   }
 };
 

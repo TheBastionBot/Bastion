@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', 'Not Found', 'No words are being filterd.', message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), 'No words are being filterd.', message.channel);
     }
     else {
       let filteredWords = JSON.parse(row.filteredWords);
@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Not Found', 'That index was not found.', message.channel);
+        return Bastion.emit('error', string('notFound', 'errors'), 'That index was not found.', message.channel);
       }
 
       let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];

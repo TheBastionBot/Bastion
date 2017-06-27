@@ -74,7 +74,7 @@ function fetchAndSend(message, args) {
            * Error condition is encountered.
            * @fires error
            */
-          message.client.emit('error', 'Not Found', `Player **${args.player}** doesn't exist or we don't have any record of them yet.`, message.channel);
+          message.client.emit('error', string('notFound', 'errors'), `Player **${args.player}** doesn't exist or we don't have any record of them yet.`, message.channel);
         }
         else {
           player = player[0];

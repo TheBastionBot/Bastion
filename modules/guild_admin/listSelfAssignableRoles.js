@@ -13,7 +13,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Not Found', 'No self assignable roles found.', message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), 'No self assignable roles found.', message.channel);
     }
 
     let roles = JSON.parse(row.selfAssignableRoles);

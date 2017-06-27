@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.', message.channel);
   }
 
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
@@ -60,7 +60,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Invalid Data', 'You can\'t give yourself Bastion Currencies!', message.channel);
+      return Bastion.emit('error', string('forbidden', 'errors'), 'You can\'t give yourself Bastion Currencies!', message.channel);
     }
 
     Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
@@ -69,7 +69,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Insufficient Balance', `Sorry, unfortunately, you don't have enough Bastion Currencies with you to give it to others.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`, message.channel);
+        return Bastion.emit('error', string('insufficientBalance', 'errors'), `Sorry, unfortunately, you don't have enough Bastion Currencies with you to give it to others.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`, message.channel);
       }
 
       if (args[0] >= 0.5 * parseInt(sender.bastionCurrencies)) {
@@ -77,7 +77,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Invalid Data', `Sorry, unfortunately, you can't give more than 50% of your Bastion Currencies.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`, message.channel);
+        return Bastion.emit('error', string('invalidInput', 'errors'), `Sorry, unfortunately, you can't give more than 50% of your Bastion Currencies.\nYou currently have **${sender.bastionCurrencies}** Bastion Currencies.`, message.channel);
       }
 
       Bastion.emit('userDebit', user, args[0]);

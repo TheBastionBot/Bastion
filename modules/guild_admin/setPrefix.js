@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Invalid Data', `The length of the prefix should not exceed ${prefixMaxLength} characters.`, message.channel);
+      return Bastion.emit('error', string('invalidInput', 'errors'), `The length of the prefix should not exceed ${prefixMaxLength} characters.`, message.channel);
     }
   }
 

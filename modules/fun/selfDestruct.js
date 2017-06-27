@@ -20,7 +20,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Not in Range', 'The timeout can\'t exceed 600 seconds (10 minutes).', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), 'The timeout can\'t exceed 600 seconds (10 minutes).', message.channel);
   }
 
   if (message.deletable) {

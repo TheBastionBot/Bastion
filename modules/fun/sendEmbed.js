@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', `Invalid embed object. Please check that it's an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).\`\`\`${e.toString()}\`\`\``, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), `Invalid embed object. Please check that it's an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).\`\`\`${e.toString()}\`\`\``, message.channel);
   }
 
   message.channel.send({

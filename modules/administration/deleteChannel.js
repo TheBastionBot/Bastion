@@ -21,7 +21,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Not Found', 'No channel was found for the given parameter.', message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), 'No channel was found for the given parameter.', message.channel);
     }
   }
 
@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Forbidden', 'You cannot delete the default channel.', message.channel);
+    return Bastion.emit('error', string('forbidden', 'errors'), 'You cannot delete the default channel.', message.channel);
   }
 
   channel.delete().then(() => {

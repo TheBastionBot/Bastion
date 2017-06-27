@@ -42,7 +42,7 @@ exports.run = (Bastion, message) => {
   //   * Error condition is encountered.
   //   * @fires error
   //   */
-  //   Bastion.emit('error', 'Not Found', 'Some error has occured while updating database. Please check the console and report it to Bastion Developers at https://discord.gg/fzx8fkt', message.channel);
+  //   Bastion.emit('error', string('unknown', 'errors'), 'Some error has occured while updating database. Please check the console and report it to Bastion Developers at https://discord.gg/fzx8fkt', message.channel);
   // }
 };
 

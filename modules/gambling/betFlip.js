@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', '', 'Minimum bet amount is 5 Bastion Currencies', message.channel);
+      return Bastion.emit('error', string('invalidInput', 'errors'), 'Minimum bet amount is 5 Bastion Currencies', message.channel);
     }
 
     let outcomes = [
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Insufficient Balance', `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`, message.channel);
+        return Bastion.emit('error', string('insufficientBalance', 'errors'), `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`, message.channel);
       }
 
       recentUsers.push(message.author.id);
@@ -88,7 +88,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Cooldown', `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`, message.channel);
+    return Bastion.emit('error', string('cooldown', 'errors'), `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`, message.channel);
   }
 };
 

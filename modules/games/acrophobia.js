@@ -192,7 +192,7 @@ exports.run = (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    Bastion.emit('error', 'Busy', 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.', message.channel);
+    Bastion.emit('error', string('busy', 'errors'), 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.', message.channel);
   }
 };
 

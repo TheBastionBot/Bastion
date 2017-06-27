@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', `Your bio can't exceed ${charLimit} characters.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), `Your bio can't exceed ${charLimit} characters.`, message.channel);
   }
 
   Bastion.db.get(`SELECT bio FROM profiles WHERE userID=${message.author.id}`).then(user => {

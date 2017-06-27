@@ -27,7 +27,7 @@ exports.run = (Bastion, message) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', 'Busy', 'I\'m already playing something in a channel. Can\'t play airhorn now.', message.channel);
+        return Bastion.emit('error', string('busy', 'errors'), 'I\'m already playing something in a channel. Can\'t play airhorn now.', message.channel);
       }
 
       if (!message.guild.voiceConnection.channel.speakable) {

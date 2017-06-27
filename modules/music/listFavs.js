@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Not Found', 'You haven\'t added any favourite songs yet.', message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), 'You haven\'t added any favourite songs yet.', message.channel);
   }
 
   let favs = songs.map((e, i) => `${i + 1}. ${e}`);

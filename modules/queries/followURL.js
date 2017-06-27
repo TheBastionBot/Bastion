@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', 'Invalid Data', 'The URL is not valid.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), 'The URL is not valid.', message.channel);
   }
 
   followURL(url).then(followedUrl => {

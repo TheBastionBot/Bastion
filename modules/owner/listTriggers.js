@@ -21,7 +21,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', 'Not Found', 'There are not triggers.', message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), 'There are not triggers.', message.channel);
     }
 
     triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);

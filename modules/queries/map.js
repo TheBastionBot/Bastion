@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', 'Connection Error', 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
+      return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while receiving data from the server. Please try again later.', message.channel);
     }
     message.channel.send({ files: [ { attachment: body } ] }).catch(e => {
       Bastion.log.error(e.stack);
