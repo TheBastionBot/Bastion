@@ -1,6 +1,12 @@
 {
+  "busy": "Busy",
+  "cooldown": "Cooldown",
   "notFound": "Not Found",
+  "forbidden": "Forbidden",
+  "parseError": "Parse Error",
   "invalidInput": "Invalid Input",
+  "noCredentials": "No Credentials",
   "connectionError": "Connection Error",
-  "noPermissions": "No Permissions"
+  "insufficientBalance": "Insufficient Balance",
+  "unknown": "Unknown Error"
 }
