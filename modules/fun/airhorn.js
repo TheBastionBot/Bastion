@@ -10,7 +10,7 @@ exports.run = (Bastion, message) => {
   try {
     if (message.deletable) {
       message.delete(1000).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     if (message.guild.voiceConnection) {
@@ -72,7 +72,7 @@ exports.run = (Bastion, message) => {
             connection.channel.leave();
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
       else {

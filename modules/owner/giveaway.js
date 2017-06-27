@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
       giveawayMessageID = msg.id;
       activeChannel = message.channel.id;
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
     setTimeout(function () {
@@ -63,7 +63,7 @@ exports.run = (Bastion, message, args) => {
         }).then(() => {
           activeChannel = null;
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
 
         reaction = encodeURIComponent(reaction);
@@ -85,12 +85,12 @@ exports.run = (Bastion, message, args) => {
                 description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
               }
             }).catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
           }
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }, TIMEOUT * 60 * 60 * 1000);
   }

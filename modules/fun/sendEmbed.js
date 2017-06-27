@@ -31,11 +31,11 @@ exports.run = (Bastion, message, args) => {
   }).then(() => {
     if (message.deletable) {
       message.delete().catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

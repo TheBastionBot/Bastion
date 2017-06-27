@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
           description: emojis.join(', ')
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     });
   }
@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
       message.channel.send({
         files: [ `./data/emojis/${args.name}.png` ]
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   });

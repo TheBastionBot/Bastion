@@ -85,7 +85,7 @@ exports.run = (Bastion, message) => {
             ]
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
       if (bastion.complete || racer.complete) {
@@ -93,7 +93,7 @@ exports.run = (Bastion, message) => {
       }
     }, 1000);
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

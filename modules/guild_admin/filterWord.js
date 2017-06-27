@@ -26,14 +26,14 @@ exports.run = (Bastion, message) => {
     let color, filterWordStats;
     if (row.filterWord === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET filterWord='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       filterWordStats = 'Enabled word filter in this server.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET filterWord='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       filterWordStats = 'Disabled word filter in this server.';
@@ -45,10 +45,10 @@ exports.run = (Bastion, message) => {
         description: filterWordStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

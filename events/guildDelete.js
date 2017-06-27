@@ -6,7 +6,7 @@
 
 module.exports = guild => {
   guild.client.db.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
-    guild.client.log.error(e.stack);
+    guild.client.log.error(e);
   });
 
   /**

@@ -27,14 +27,14 @@ exports.run = (Bastion, message) => {
     let color, chatStats;
     if (row.chat === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       chatStats = 'Disabled chat in this server. Now I\'m gonna miss talking with you. :disappointed:';
@@ -46,10 +46,10 @@ exports.run = (Bastion, message) => {
         description: chatStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

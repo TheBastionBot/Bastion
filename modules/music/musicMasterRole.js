@@ -23,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: 'Music Master role has been removed.'
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -47,10 +47,10 @@ exports.run = (Bastion, message, args) => {
           description: `**${role.name}** has been set as the Music Master role.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

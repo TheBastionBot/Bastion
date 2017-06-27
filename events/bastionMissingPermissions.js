@@ -12,7 +12,7 @@ module.exports = (permissions, message) => {
         description: `I need **${permissions.replace('_', ' ')}** permission to run this command.`
       }
     }).catch(e => {
-      message.client.log.error(e.stack);
+      message.client.log.error(e);
     });
   }
 };

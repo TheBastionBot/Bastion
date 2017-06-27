@@ -46,10 +46,10 @@ exports.run = (Bastion, message, args) => {
         description: `Prefix for your server is now set to: \`${prefix}\``
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

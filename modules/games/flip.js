@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
       description: outcome
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

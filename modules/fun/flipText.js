@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
       description: args.split('').reverse().join('')
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

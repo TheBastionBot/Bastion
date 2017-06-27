@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
     db.push('/', [ args ], false);
   }
   catch (e) {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   }
   finally {
     message.channel.send({
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
         description: args
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

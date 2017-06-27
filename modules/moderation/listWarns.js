@@ -22,7 +22,7 @@ exports.run = (Bastion, message) => {
       color: Bastion.colors.green,
       description: 'No one has been warned yet.'
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 
@@ -38,7 +38,7 @@ exports.run = (Bastion, message) => {
       description: warnedUsers.join('\n')
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

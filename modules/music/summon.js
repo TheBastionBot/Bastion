@@ -20,7 +20,7 @@ exports.run = (Bastion, message) => {
     if (voiceChannel.joinable) {
       voiceChannel.join().then(connection => {
         message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
         if (!voiceChannel.speakable) {
           voiceChannel.leave();
@@ -58,7 +58,7 @@ exports.run = (Bastion, message) => {
           if (voiceChannel.joinable) {
             voiceChannel.join().then(connection => {
               message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-                Bastion.log.error(e.stack);
+                Bastion.log.error(e);
               });
               if (!voiceChannel.speakable) {
                 voiceChannel.leave();
@@ -101,7 +101,7 @@ exports.run = (Bastion, message) => {
         if (voiceChannel.joinable) {
           voiceChannel.join().then(connection => {
             message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             if (!voiceChannel.speakable) {
               voiceChannel.leave();

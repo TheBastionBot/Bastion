@@ -23,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -37,10 +37,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s status is now set to the default status **${Bastion.config.status}**`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

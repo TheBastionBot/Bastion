@@ -19,14 +19,14 @@ exports.run = (Bastion, message) => {
     let color, greetDMStats;
     if (row.greetDM === 'true') {
       Bastion.db.run(`UPDATE guildSettings SET greetDM='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       greetDMStats = 'Sending Greeting Message as Direct Messages are now disabled.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET greetDM='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       greetDMStats = 'Sending Greeting Message as Direct Messages are now enabled.';
@@ -38,10 +38,10 @@ exports.run = (Bastion, message) => {
         description: greetDMStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

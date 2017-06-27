@@ -54,21 +54,21 @@ exports.run = (Bastion, message) => {
             }
           }).then(() => {
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             articleMessage.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id) + 1, 1);
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {

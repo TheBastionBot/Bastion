@@ -14,7 +14,7 @@ exports.run = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
   if (message.deletable) {
     message.delete().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   if (args.length < 1) {
@@ -72,7 +72,7 @@ exports.run = (Bastion, message, args) => {
           description: vcStats
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
 
@@ -84,7 +84,7 @@ exports.run = (Bastion, message, args) => {
           favs = db.getData('/');
         }
         catch(e) {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         }
         if (favs.length === 0) {
           /**
@@ -101,10 +101,10 @@ exports.run = (Bastion, message, args) => {
           }
         }).then(m => {
           m.delete(5000).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
         // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
         favs.forEach(e => {
@@ -139,10 +139,10 @@ exports.run = (Bastion, message, args) => {
           }
         }).then(m => {
           m.delete(5000).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
 
         yt.getInfo(args.slice(4), [ '-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]' ], (err, info) => {
@@ -170,10 +170,10 @@ exports.run = (Bastion, message, args) => {
               }
             }).then(m => {
               m.delete(5000).catch(e => {
-                Bastion.log.error(e.stack);
+                Bastion.log.error(e);
               });
             }).catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
             info.forEach(e => {
@@ -208,7 +208,7 @@ exports.run = (Bastion, message, args) => {
               description: result
             }
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         if (!queue.hasOwnProperty(message.guild.id)) {
@@ -234,13 +234,13 @@ exports.run = (Bastion, message, args) => {
             }
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
         if (queue.hasOwnProperty(message.guild.id) && (queue[message.guild.id].playing === true)) return;
 
         voiceChannel.join().then(connection => {
           message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
           (function play(song) {
             if (song === undefined) {
@@ -253,10 +253,10 @@ exports.run = (Bastion, message, args) => {
                 queue[message.guild.id].playing = false;
                 voiceChannel.leave();
                 m.delete(5000).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }).catch(e => {
-                Bastion.log.error(e.stack);
+                Bastion.log.error(e);
               });
             }
 
@@ -277,7 +277,7 @@ exports.run = (Bastion, message, args) => {
                 }
               }
             }).catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
 
             let collector = textChannel.createMessageCollector(
@@ -303,7 +303,7 @@ exports.run = (Bastion, message, args) => {
                     description: 'Cleaned up the queue.'
                   }
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}np`)) {
@@ -327,7 +327,7 @@ exports.run = (Bastion, message, args) => {
                     }
                   }
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}pause`)) {
@@ -346,7 +346,7 @@ exports.run = (Bastion, message, args) => {
                 }).then(() => {
                   dispatcher.pause();
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}queue`)) {
@@ -368,7 +368,7 @@ exports.run = (Bastion, message, args) => {
                     fields: fields
                   }
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}repeat`)) {
@@ -389,7 +389,7 @@ exports.run = (Bastion, message, args) => {
                     description: repeatStat
                   }
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}resume`)) {
@@ -408,7 +408,7 @@ exports.run = (Bastion, message, args) => {
                 }).then(() => {
                   dispatcher.resume();
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}shuffle`)) {
@@ -425,7 +425,7 @@ exports.run = (Bastion, message, args) => {
                     description: 'Shuffled the queue.'
                   }
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}skip`)) {
@@ -442,7 +442,7 @@ exports.run = (Bastion, message, args) => {
                     }).then(() => {
                       dispatcher.end();
                     }).catch(e => {
-                      Bastion.log.error(e.stack);
+                      Bastion.log.error(e);
                     });
                   }
                   else {
@@ -452,7 +452,7 @@ exports.run = (Bastion, message, args) => {
                         description: `${((voiceChannel.members.size - 1) / 2) - queue[message.guild.id].skipVotes.length} votes required to skip the current song.`
                       }
                     }).catch(e => {
-                      Bastion.log.error(e.stack);
+                      Bastion.log.error(e);
                     });
                   }
                 }
@@ -465,7 +465,7 @@ exports.run = (Bastion, message, args) => {
                   }).then(() => {
                     dispatcher.end();
                   }).catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }
               }
@@ -482,7 +482,7 @@ exports.run = (Bastion, message, args) => {
                   }
                   dispatcher.end();
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else if (msg.content.startsWith(`${Bastion.config.prefix}volume`)) {
@@ -504,7 +504,7 @@ exports.run = (Bastion, message, args) => {
                     description: `Volume: ${Math.round(dispatcher.volume * 50)}%`
                   }
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
             });
@@ -529,7 +529,7 @@ exports.run = (Bastion, message, args) => {
             });
           }(queue[message.guild.id].songs[0]));
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       });
     }
@@ -541,7 +541,7 @@ exports.run = (Bastion, message, args) => {
       return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while receiving data from the server. Please try again later.', textChannel);
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

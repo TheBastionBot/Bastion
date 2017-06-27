@@ -13,7 +13,7 @@ exports.run = (Bastion, message) => {
       description: `${parseInt(Bastion.ping)}ms`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

@@ -84,7 +84,7 @@ exports.run = (Bastion, message, args) => {
         fields: stats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(() => {
     /**

@@ -14,7 +14,7 @@ exports.run = (Bastion, message) => {
       description: message.guild.id
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

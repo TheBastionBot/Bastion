@@ -24,15 +24,15 @@ exports.run = (Bastion, message, args) => {
           description: guild.greetDMMessage
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
     Bastion.db.run(`UPDATE guildSettings SET greetDMMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
     message.channel.send({
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
         description: args.join(' ')
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

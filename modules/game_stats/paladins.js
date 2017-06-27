@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
         generatedSession = null;
       }, 15 * 60 * 1000);
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -141,16 +141,16 @@ function fetchAndSend(message, args) {
               }
             }
           }).catch(e => {
-            message.client.log.error(e.stack);
+            message.client.log.error(e);
           });
         }
       }).catch(e => {
-        message.client.log.error(e.stack);
+        message.client.log.error(e);
       });
     }).catch(e => {
-      message.client.log.error(e.stack);
+      message.client.log.error(e);
     });
   }).catch(e => {
-    message.client.log.error(e.stack);
+    message.client.log.error(e);
   });
 }

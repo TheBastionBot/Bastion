@@ -55,7 +55,7 @@ module.exports = Bastion => {
                 }
                 if (found === false) {
                   Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]).catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }
               }
@@ -70,21 +70,21 @@ module.exports = Bastion => {
                 }
                 if (found === false) {
                   Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${row[i]}`).catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }
               }
             }).catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
 
   Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
           '(userID TEXT NOT NULL UNIQUE,' +
           'PRIMARY KEY(userID))').catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
 
   Bastion.db.run('CREATE TABLE IF NOT EXISTS profiles' +
@@ -94,25 +94,25 @@ module.exports = Bastion => {
           'level INTEGER DEFAULT 0,' +
           'bio TEXT,' +
           'PRIMARY KEY(userID))').catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
 
   Bastion.db.run('CREATE TABLE IF NOT EXISTS triggers' +
           '(trigger TEXT NOT NULL,' +
           'response TEXT NOT NULL)').catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
 
   Bastion.db.run('CREATE TABLE IF NOT EXISTS todo' +
           '(ownerID TEXT NOT NULL UNIQUE,' +
           'list TEXT NOT NULL DEFAULT \'[]\')').catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
 
   Bastion.db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
           '(log TEXT NOT NULL DEFAULT \'false\',' +
           'logChannelID TEXT UNIQUE)').catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
 
   Bastion.log.console('\n');

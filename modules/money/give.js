@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
         description: `You've awarded **${args[0]}** Bastion Currencies to <@${user.id}>.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
     /**
@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
         description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -92,7 +92,7 @@ exports.run = (Bastion, message, args) => {
           description: `You have given **${args[0]}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
 
       /**
@@ -104,7 +104,7 @@ exports.run = (Bastion, message, args) => {
           description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
 
       /**
@@ -116,10 +116,10 @@ exports.run = (Bastion, message, args) => {
           description: `Your account has been credited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

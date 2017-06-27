@@ -39,10 +39,10 @@ exports.run = (Bastion, message) => {
           Bastion.destroy().then(() => {
             process.exit(0);
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
       else {
@@ -52,12 +52,12 @@ exports.run = (Bastion, message) => {
             description: 'Cool! I\'m here.'
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

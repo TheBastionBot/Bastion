@@ -36,10 +36,10 @@ module.exports = guild => {
           'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
           'PRIMARY KEY(guildID))').then(() => {
             guild.client.db.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [ guild.id ]).catch(e => {
-              guild.client.log.error(e.stack);
+              guild.client.log.error(e);
             });
           }).catch(e => {
-            guild.client.log.error(e.stack);
+            guild.client.log.error(e);
           });
 
   /**

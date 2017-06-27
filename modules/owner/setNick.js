@@ -23,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -37,10 +37,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s nick has been reset on this guild.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

@@ -17,9 +17,9 @@ module.exports = (user, amount) => {
      * that will still be deducted from their account.
      */
     user.client.db.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) - parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
-      user.client.log.error(e.stack);
+      user.client.log.error(e);
     });
   }).catch(e => {
-    user.client.log.error(e.stack);
+    user.client.log.error(e);
   });
 };

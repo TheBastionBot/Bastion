@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
 
   if (Bastion.guilds.get(args[0]).available) {
     Bastion.guilds.get(args[0]).leave().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

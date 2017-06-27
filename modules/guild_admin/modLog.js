@@ -21,14 +21,14 @@ exports.run = (Bastion, message) => {
     let color, modLogStats;
     if (row.modLog === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET modLog='true', modLogChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       modLogStats = 'Moderation audit logging is now enabled in this channel.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET modLog='false', modLogChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       modLogStats = 'Moderation audit logging is now disabled.';
@@ -39,10 +39,10 @@ exports.run = (Bastion, message) => {
         description: modLogStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

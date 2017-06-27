@@ -19,7 +19,7 @@ exports.run = (Bastion, message) => {
       description: (channel.topic === null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

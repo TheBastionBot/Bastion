@@ -20,17 +20,17 @@ exports.run = (Bastion, message) => {
     let logStats = 'Bastion\'s logging is now enabled in this channel.';
     if (!row) {
       Bastion.db.run('INSERT INTO bastionSettings (log, logChannelID) VALUES (?, ?)', [ 'true', message.channel.id ]).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else if (row.log === 'false') {
       Bastion.db.run(`UPDATE bastionSettings SET log='true', logChannelID=${message.channel.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else {
       Bastion.db.run('UPDATE bastionSettings SET log=\'false\', logChannelID=null').catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       logStats = 'Bastion\'s logging is now disabled.';
@@ -41,10 +41,10 @@ exports.run = (Bastion, message) => {
         description: logStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

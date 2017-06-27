@@ -26,18 +26,18 @@ exports.run = (Bastion, message) => {
   //         }
   //       }).then(msg => {
   //         msg.delete(3000).catch(e => {
-  //           Bastion.log.error(e.stack);
+  //           Bastion.log.error(e);
   //         });
   //       }).catch(e => {
-  //         Bastion.log.error(e.stack);
+  //         Bastion.log.error(e);
   //       });
   //     }).catch(e => {
-  //       Bastion.log.error(e.stack);
+  //       Bastion.log.error(e);
   //     });
   //   });
   // }
   // catch (e) {
-  //   Bastion.log.error(e.stack);
+  //   Bastion.log.error(e);
   //   /**
   //   * Error condition is encountered.
   //   * @fires error

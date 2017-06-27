@@ -19,14 +19,14 @@ exports.run = (Bastion, message) => {
     let color, levelUpMessageStats;
     if (guild.levelUpMessage === 'true') {
       Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       levelUpMessageStats = 'I will now send messages when someone levels up.';
@@ -38,10 +38,10 @@ exports.run = (Bastion, message) => {
         description: levelUpMessageStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

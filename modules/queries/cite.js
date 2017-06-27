@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
         timestamp: msg.createdAt
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
     if (e.stack.includes('Unknown Message')) {
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
       Bastion.emit('error', string('notFound', 'errors'), 'No message was found for the given parameter.', message.channel);
     }
     else {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     }
   });
 };

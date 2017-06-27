@@ -26,14 +26,14 @@ exports.run = (Bastion, message) => {
     let color, filterInviteStats;
     if (row.filterInvite === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
@@ -45,10 +45,10 @@ exports.run = (Bastion, message) => {
         description: filterInviteStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

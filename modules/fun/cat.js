@@ -30,7 +30,7 @@ exports.run = (Bastion, message) => {
       message.channel.send({
         files: [ cat ]
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   });

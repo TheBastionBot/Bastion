@@ -16,7 +16,7 @@ exports.run = (Bastion, message) => {
       // description: fortuneCookies.random()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

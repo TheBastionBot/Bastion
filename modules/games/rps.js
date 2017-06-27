@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

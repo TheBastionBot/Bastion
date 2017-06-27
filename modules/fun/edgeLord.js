@@ -40,7 +40,7 @@ exports.run = (Bastion, message) => {
                    'over you and I will drown in it. I\'m fucking dead, kiddo.'
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

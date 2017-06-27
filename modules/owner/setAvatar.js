@@ -29,10 +29,10 @@ exports.run = (Bastion, message, args) => {
         description: `${Bastion.user.username}'s avatar changed!`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

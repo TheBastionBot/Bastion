@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       };
     }
     message.channel.send(embed).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };

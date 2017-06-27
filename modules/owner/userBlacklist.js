@@ -39,7 +39,7 @@ exports.run = (Bastion, message, args) => {
         for (let i = 0; i < user.length; i++) {
           if (blUsers.includes(user[i])) continue;
           Bastion.db.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [ user[i] ]).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         color = Bastion.colors.red;
@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
         for (let i = 0; i < user.length; i++) {
           if (!blUsers.includes(user[i])) continue;
           Bastion.db.run(`DELETE FROM blacklistedUsers where userID=${user[i]}`).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         color = Bastion.colors.green;
@@ -70,13 +70,13 @@ exports.run = (Bastion, message, args) => {
           description: user.join(', ')
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

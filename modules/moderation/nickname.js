@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
         description: nickStat
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };

@@ -41,7 +41,7 @@ module.exports = message => {
           }
         }
       }).catch(e => {
-        message.client.log.error(e.stack);
+        message.client.log.error(e);
       });
     }
   }

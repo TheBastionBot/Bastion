@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
                       replace(/0/g, ':zero:');
 
   message.channel.send(blockedChars).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

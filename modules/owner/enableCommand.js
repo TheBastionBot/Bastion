@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
       description: `\`${command.help.name}\` command has been enabled.`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

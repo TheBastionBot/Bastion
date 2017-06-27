@@ -19,14 +19,14 @@ exports.run = (Bastion, message) => {
     let color, logStats;
     if (row.log === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       logStats = 'Logging is now enabled in this channel.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       logStats = 'Logging is now disabled.';
@@ -37,10 +37,10 @@ exports.run = (Bastion, message) => {
         description: logStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

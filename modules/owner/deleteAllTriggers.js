@@ -22,10 +22,10 @@ exports.run = (Bastion, message) => {
         description: 'Deleted all the triggers and responses.'
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

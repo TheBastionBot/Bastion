@@ -110,7 +110,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(() => {
     /**

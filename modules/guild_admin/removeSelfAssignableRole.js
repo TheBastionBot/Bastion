@@ -51,14 +51,14 @@ exports.run = (Bastion, message, args) => {
             description: `I've deleted **${message.guild.roles.get(deletedRoleID).name}** from self assignable roles.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

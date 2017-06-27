@@ -15,7 +15,7 @@ module.exports = message => {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content)) {
         if (message.deletable) {
           message.delete().catch(e => {
-            message.client.log.error(e.stack);
+            message.client.log.error(e);
           });
         }
 
@@ -32,6 +32,6 @@ module.exports = message => {
       }
     }
   }).catch(e => {
-    message.client.log.error(e.stack);
+    message.client.log.error(e);
   });
 };

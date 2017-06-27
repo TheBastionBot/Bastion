@@ -25,7 +25,7 @@ exports.run = (Bastion, message) => {
       description: 'All commands have been enabled.'
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

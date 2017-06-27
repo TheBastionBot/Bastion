@@ -39,10 +39,10 @@ exports.run = (Bastion, message) => {
         description: `${message.author} Check your DM from me, I've sent you the list of commands.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

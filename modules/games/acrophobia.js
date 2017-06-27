@@ -38,7 +38,7 @@ exports.run = (Bastion, message) => {
       collector.on('collect', (msg, sentences) => {
         if (msg.deletable) {
           msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         msg.channel.send({
@@ -52,10 +52,10 @@ exports.run = (Bastion, message) => {
         }).then(m => {
           activeChannels[message.channel.id].usersSubmitted.push(msg.author.id);
           m.delete(5000).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       });
       collector.on('end', (collection) => {
@@ -69,10 +69,10 @@ exports.run = (Bastion, message) => {
           }).then(() => {
             delete activeChannels[message.channel.id];
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         else {
@@ -97,7 +97,7 @@ exports.run = (Bastion, message) => {
             }
           }).then(subMsg => {
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             const votesCollector = msg.channel.createMessageCollector(
               m => !m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) <= collection.size && !activeChannels[message.channel.id].usersVoted.includes(m.author.id),
@@ -106,7 +106,7 @@ exports.run = (Bastion, message) => {
             votesCollector.on('collect', (msg, votes) => {
               if (msg.deletable) {
                 msg.delete().catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               msg.channel.send({
@@ -120,7 +120,7 @@ exports.run = (Bastion, message) => {
               }).then(m => {
                 activeChannels[message.channel.id].usersVoted.push(msg.author.id);
                 m.delete(5000).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               });
             });
@@ -136,10 +136,10 @@ exports.run = (Bastion, message) => {
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else {
@@ -171,20 +171,20 @@ exports.run = (Bastion, message) => {
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
             });
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {

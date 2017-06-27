@@ -70,10 +70,10 @@ exports.run = (Bastion, message, args) => {
           recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
         }, 60 * 1000);
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {

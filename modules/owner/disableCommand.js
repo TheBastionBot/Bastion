@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
       description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`${Bastion.config.prefix}enableCommand ${command.help.name}\`.`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

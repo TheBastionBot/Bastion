@@ -52,7 +52,7 @@ exports.run = (Bastion, message, args) => {
         }
         if (msg.deletable) {
           msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         msg.channel.send({
@@ -66,7 +66,7 @@ exports.run = (Bastion, message, args) => {
         }).then(m => {
           activeChannels[message.channel.id].usersVoted.push(msg.author.id);
           m.delete(5000).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         });
       });
@@ -86,11 +86,11 @@ exports.run = (Bastion, message, args) => {
             }
           }).then(() => {
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             delete activeChannels[message.channel.id];
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
 
@@ -119,15 +119,15 @@ exports.run = (Bastion, message, args) => {
           }
         }).then(() => {
           msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
           delete activeChannels[message.channel.id];
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {

@@ -95,7 +95,7 @@ exports.run = (Bastion, message) => {
       timestamp: new Date()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   Bastion.db.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args.trigger.join(' '), args.response.join(' ') ]).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 
   message.channel.send({
@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
       ]
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

@@ -19,7 +19,7 @@ exports.run = (Bastion, message, args) => {
     args[0] = '0';
   }
   Bastion.db.run(`UPDATE guildSettings SET farewellTimeout=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 
   message.channel.send({
@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
       description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] === 0 ? '∞' : `${args[0]} sec.`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

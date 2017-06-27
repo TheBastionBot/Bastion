@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     }
     if (message.deletable) {
       message.delete().catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     message.channel.send({
@@ -48,13 +48,13 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   catch(e) {
     if (message.deletable) {
       message.delete().catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     message.channel.send({
@@ -68,7 +68,7 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

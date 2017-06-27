@@ -16,7 +16,7 @@ exports.run = (Bastion, message) => {
       // description: catFacts.random()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

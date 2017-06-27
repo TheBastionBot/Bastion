@@ -78,7 +78,7 @@ exports.run = (Bastion, message, args) => {
           }
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else {
@@ -100,7 +100,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
     message.author.send({
       embed: {
@@ -115,18 +115,18 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'BOT Invite Link',
-            value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
+            value: `https://discordapp.com/oauth2/authorize?client_id=${Bastion.user.id}&scope=bot&permissions=2146958463`
           }
         ],
         thumbnail: {
-          url: message.client.user.displayAvatarURL
+          url: Bastion.user.displayAvatarURL
         },
         footer: {
           text: 'Copyright © 2017 Sankarsan Kampa'
         }
       }
     }).catch(e => {
-      message.client.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

@@ -35,7 +35,7 @@ exports.run = (Bastion, message) => {
       description: crimeStat
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

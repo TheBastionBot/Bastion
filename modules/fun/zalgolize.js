@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
       description: zalgo(args.join(' '))
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

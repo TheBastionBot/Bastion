@@ -69,7 +69,7 @@ module.exports = message => {
         handleConversation(message);
       }
     }).catch(e => {
-      message.client.log.error(e.stack);
+      message.client.log.error(e);
     });
   }
   else {

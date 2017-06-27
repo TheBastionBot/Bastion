@@ -18,7 +18,7 @@ exports.run = (Bastion, message) => {
                    'one off donations via **PayPal**: https://paypal.me/snkrsnkampa'
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

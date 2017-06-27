@@ -19,7 +19,7 @@ exports.run = (Bastion, message, args) => {
             description: `Your profile is now created, <@${args.id}>`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
 
@@ -62,10 +62,10 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

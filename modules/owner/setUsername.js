@@ -23,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s username is now set to **${args.join(' ')}**`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };

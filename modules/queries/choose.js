@@ -24,7 +24,7 @@ exports.run = (Bastion, message, args) => {
       // description: args.split('/').random()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

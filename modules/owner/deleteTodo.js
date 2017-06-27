@@ -51,14 +51,14 @@ exports.run = (Bastion, message, args) => {
             description: `${message.author.username}, I've deleted **${deletedItem}** from your todo list.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

@@ -33,10 +33,10 @@ exports.run = (Bastion, message, args) => {
             description: `${message.author.username}, I've created your todo list and added **${args.join(' ')}** to it.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else {
@@ -50,14 +50,14 @@ exports.run = (Bastion, message, args) => {
             description: `${message.author.username}, I've added **${args.join(' ')}** to your todo list.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 

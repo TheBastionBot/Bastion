@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
 
   if (message.deletable) {
     message.delete().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 
@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
   }).then(msg => {
     msg.delete(args.timeout * 1000);
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
