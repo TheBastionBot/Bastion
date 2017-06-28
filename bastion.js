@@ -38,9 +38,12 @@ BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite');
 
 /**
-* Language handler
-*/
-require('./handlers/languageHandler')(BASTION);
+ * Load base class prototypes
+ */
+// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
+// require('./utils/Array.prototype');
+require('./utils/String.prototype');
+
 /**
 * Function handler
 */
@@ -58,14 +61,12 @@ require('./handlers/eventHandler')(BASTION);
  */
 require('./handlers/moduleHandler')(BASTION);
 
-// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
-// require('./utils/Array.prototype');
-
 /**
  * Log Bastion in as a Discord client.
  */
 BASTION.login(BASTION.credentials.token).catch(e => {
-  BASTION.log.error(e.stack);
+  BASTION.log.error(e.toString());
+  process.exit(1);
 });
 
 /**
