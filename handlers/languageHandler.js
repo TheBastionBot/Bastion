@@ -5,12 +5,12 @@
  */
 
 const common = require(`../languages/${process.env.LANG}/common.json`);
-const errors = require(`../languages/${process.env.LANG}/errors.json`);
+const error = require(`../languages/${process.env.LANG}/error.json`);
 const errorMessage = require(`../languages/${process.env.LANG}/errorMessage.json`);
 const commandDescription = require(`../languages/${process.env.LANG}/commandDescription.json`);
 const strings = {
   common: common,
-  errors: errors,
+  errors: error,
   errorMessage: errorMessage,
   commandDescription: commandDescription
 };
@@ -29,10 +29,10 @@ const constants = {
  * @param {string} [namespace='common'] The namespace of the string
  * @returns {string} the translated string
  */
-module.exports = (string, namespace = 'common') => {
+module.exports = (string, namespace = 'common', ...vars) => {
   if (typeof string === 'string' && typeof namespace === 'string') {
     let regex = new RegExp(Object.keys(constants).join('|'), 'gi');
-    return strings[namespace][string].replace(regex, matched => constants[matched]);
+    return strings[namespace][string].replace(regex, matched => constants[matched]).substitute(...vars);
   }
   return '';
 };

@@ -6,7 +6,7 @@
   "parseError": "Parse Error",
   "invalidInput": "Invalid Input",
   "noCredentials": "No Credentials",
-  "connectionError": "Connection Error",
+  "connection": "Connection Error",
   "insufficientBalance": "Insufficient Balance",
   "unknown": "Unknown Error"
 }
