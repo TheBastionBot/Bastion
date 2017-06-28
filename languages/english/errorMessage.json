@@ -2,9 +2,9 @@
   "connection": "Some error has occured while receiving data from the server. Please try again later.",
   "gamblingCooldown": "%var% you have recently gambled in this game, please wait at least %var% seconds before gambling again.",
   "insufficientBalance": "You do not have sufficient balance in your account. Your current account balance is *%var%* %currencySymbol%.",
-  "invalidInput": "*%var%* is not a valid %var%.",
-  "noCredentials": "No credentials was found for %item%.",
-  "notFound": "No %var% was found for *%var%*.",
+  "invalidInput": "The *%var%* entered by you is not valid.",
+  "noCredentials": "No credentials was found for %var%.",
+  "notFound": "No %var% was found for the specified parameters.",
   "outOfRange": "%var% should be between %var% and %var%.",
   "parse": "Some error has occured while parsing the received data. Please try again later.",
   "unknown": "Some unknown error has occured. Please check the console and report it to %bastion% Developers at %discordInvLink%."
