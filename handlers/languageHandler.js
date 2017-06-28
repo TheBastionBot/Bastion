@@ -24,5 +24,5 @@ module.exports = (string, namespace = 'common') => {
   if (typeof string === 'string' && typeof namespace === 'string') {
     return strings[namespace][string];
   }
-  return undefined;
+  return '';
 };
