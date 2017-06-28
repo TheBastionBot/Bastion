@@ -16,15 +16,16 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let minLength = 2, maxLength = 100;
   args.old = args.old.join(' ');
   args.new = args.new.join(' ');
 
-  if (args.new.length < 2 || args.new.length > 100) {
+  if (args.new.length < minLength || args.new.length > maxLength) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), 'Channel name must be between 2 and 100 characters.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Channel name', minLength, maxLength), message.channel);
   }
 
   let channel = message.channel;
@@ -42,7 +43,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), 'No channel was found for the given parameter.', message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'channel'), message.channel);
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {

@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), `No data found for **${args.join(' ')}**. Please check the location and try again.`, message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'location'), message.channel);
     }
 
     if (!result || result.length < 1) {
@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connectionError', 'errors'), 'No data received from the server, please try again later.', message.channel);
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
 
     let date = Bastion.functions.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();

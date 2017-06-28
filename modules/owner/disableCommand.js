@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), `\`${command}\` command was not found.`, message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
   }
 
   if (!command.config.enabled) return;

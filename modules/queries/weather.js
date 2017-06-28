@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), `No weather data found for **${args.join(' ')}**. Please check the location and try again.`, message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('invalidInput', 'errorMessage', 'weather data'), message.channel);
     }
 
     if (!result || result.length < 1) {
@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connectionError', 'errors'), 'No weather data received, please try again later.', message.channel);
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
 
     message.channel.send({

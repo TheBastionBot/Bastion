@@ -29,13 +29,14 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let minLength = 2, maxLength = 100;
   args.name = args.name.join('-');
-  if (args.name.length < 2 || args.name.length > 100) {
+  if (args.name.length < minLength || args.name.length > maxLength) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), 'Channel name must be between 2 and 100 characters.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Channel name', minLength, maxLength), message.channel);
   }
 
   let channelType = 'text';

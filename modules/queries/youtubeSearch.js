@@ -22,11 +22,11 @@ exports.run = (Bastion, message, args) => {
       let error, errorMessage;
       if (err && err.stack.includes('No video results')) {
         error = string('notFound', 'errors');
-        errorMessage = `No results found found for **${args.replace('ytsearch:', '')}**.`;
+        errorMessage = string('notFound', 'errorMessage', 'video');
       }
       else {
-        error = string('connectionError', 'errors');
-        errorMessage = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
+        error = string('connection', 'errors');
+        errorMessage = string('connection', 'errorMessage');
       }
       /**
        * Error condition is encountered.

@@ -8,6 +8,8 @@ const string = require('../../handlers/languageHandler');
 let recentUsers = [];
 
 exports.run = (Bastion, message, args) => {
+  let cooldown = 60;
+
   if (!recentUsers.includes(message.author.id)) {
     if (!args.money || args.money < 1 || !/^(heads|tails)$/i.test(args.outcome)) {
       /**
@@ -40,7 +42,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('insufficientBalance', 'errors'), `Unfortunately, you can't bet. You only have **${profile.bastionCurrencies}** Bastion Currencies.`, message.channel);
+        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', profile.bastionCurrencies), message.channel);
       }
 
       recentUsers.push(message.author.id);
@@ -75,7 +77,7 @@ exports.run = (Bastion, message, args) => {
       }).then(() => {
         setTimeout(function () {
           recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
-        }, 60 * 1000);
+        }, cooldown * 1000);
       }).catch(e => {
         Bastion.log.error(e);
       });
@@ -88,7 +90,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('cooldown', 'errors'), `${message.author} you have gambled recently for this game, please wait at least 60 seconds before gambling again.`, message.channel);
+    return Bastion.emit('error', string('cooldown', 'errors'), string('gamblingCooldown', 'errorMessage', message.author, cooldown), message.channel);
   }
 };
 
@@ -96,7 +98,7 @@ exports.config = {
   aliases: [ 'bf' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'outcome', type: String, alias: 'o', multiple: true, defaultOption: true },
+    { name: 'outcome', type: String, alias: 'o', defaultOption: true },
     { name: 'money', type: Number, alias: 'm' }
   ]
 };

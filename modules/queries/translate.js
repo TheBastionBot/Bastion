@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('invalidInput', 'errors'), `The language **${args[0].toUpperCase()}** is not supported.`, message.channel);
+      return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'language code'), message.channel);
     }
   });
 };

@@ -15,12 +15,13 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (args.timeout > 600) {
+  let minTimeout = 5, maxTimeout = 600;
+  if (args.timeout < 5 || args.timeout > 600) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), 'The timeout can\'t exceed 600 seconds (10 minutes).', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Timeout', minTimeout, maxTimeout), message.channel);
   }
 
   if (message.deletable) {

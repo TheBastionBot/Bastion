@@ -22,14 +22,14 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidInput', 'errorMessage', 'region')} Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`, message.channel);
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), `**${args[1]}** is not a valid BattleTag.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'BattleTag'), message.channel);
   }
 
   ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
@@ -180,7 +180,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`, message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
     }
   });
 };

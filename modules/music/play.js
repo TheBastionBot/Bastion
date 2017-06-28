@@ -130,7 +130,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('invalidInput', 'errors'), 'Invalid YouTube Playlist URL!', textChannel);
+          return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'YouTube Playlist URL'), textChannel);
         }
         message.channel.send({
           embed: {
@@ -152,7 +152,7 @@ exports.run = (Bastion, message, args) => {
              * Error condition is encountered.
              * @fires error
              */
-            return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while adding songs from your playlist. Please check the console or try again.', textChannel);
+            return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), textChannel);
           }
           if (info) {
             if (info.length === 0) {
@@ -538,7 +538,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connectionError', 'errors'), 'Some error has occured while receiving data from the server. Please try again later.', textChannel);
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), textChannel);
     }
   }).catch(e => {
     Bastion.log.error(e);
