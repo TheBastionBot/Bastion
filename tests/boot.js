@@ -33,15 +33,16 @@ BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
 
 try {
-  require('../handlers/languageHandler')(BASTION);
+  require('../utils/String.prototype');
+  // Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
+  // require('../utils/Array.prototype');
+
   require('../handlers/functionHandler')(BASTION);
   require('../handlers/logHandler')(BASTION);
   require('../handlers/eventHandler')(BASTION);
   require('../handlers/moduleHandler')(BASTION);
-
-  // Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
-  // require('./functions/Array.prototype');}
 }
 catch (e) {
-  BASTION.log.error(e);
+  // eslint-disable-next-line no-console
+  console.error(e);
 }
