@@ -1,0 +1,11 @@
+{
+  "connection": "Some error has occured while receiving data from the server. Please try again later.",
+  "gamblingCooldown": "%author% you have recently gambled in this game, please wait at least %seconds% seconds before gambling again.",
+  "insufficientBalance": "You do not have sufficient balance in your account. Your current account balance is *%amount%* %currencySymbol%.",
+  "invalidInput": "*%input%* is not a valid %inputType%.",
+  "noCredentials": "No credentials was found for %item%.",
+  "notFound": "No %result% was found for *%parameter%*.",
+  "outOfRange": "%inputType% should be between %min% and %max%.",
+  "parse": "Some error has occured while parsing the received data. Please try again later.",
+  "unknown": "Some unknown error has occured. Please check the console and report it to %bastion% Developers at %discordInvLink%."
+}
