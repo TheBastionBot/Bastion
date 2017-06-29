@@ -11,6 +11,7 @@
     "Improved error messages",
     "Error logs are now detailed",
     "Added lower bound to `selfDestruct` timeout",
+    "Now users can report anyone, even the server owner",
     "Fixed `betFlip` & `betRoll` commands",
     "Minor fixes, improvements & changes to all modules"
   ],
