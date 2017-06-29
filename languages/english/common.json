@@ -1,7 +1,4 @@
 {
-  "bastion": "Bastion",
-  "currencyName": "Bastion Currency",
-  "_currencyName": "Bastion Currencies",
-  "currencySymbol": "BC",
-  "discordInvLink": "https://discord.gg/fzx8fkt"
+  "created": "Created",
+  "deleted": "Deleted"
 }
