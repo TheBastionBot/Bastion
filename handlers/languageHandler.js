@@ -15,11 +15,12 @@ const strings = {
   commandDescription: commandDescription
 };
 const constants = {
-  '%bastion%': strings['common']['bastion'],
-  '%currencyName%': strings['common']['currencyName'],
-  '%_currencyName%': strings['common']['_currencyName'],
-  '%currencySymbol%': strings['common']['currencySymbol'],
-  '%discordInvLink%': strings['common']['discordInvLink']
+  '%bastion%': 'Bastion',
+  '%currencyName%': 'Bastion Currency',
+  '%_currencyName%': 'Bastion Currencies',
+  '%currencySymbol%': 'BC',
+  '%bastionSite%': 'https://bastion.js.org',
+  '%discordInvLink%': 'https://discord.gg/fzx8fkt'
 };
 
 /**
