@@ -31,8 +31,8 @@
   "xkcd": "Shows a xkcd comics.",
   "zalgolize": "Sends the same message that you had sent, but zalgolized.",
 
-  "betFlip": "Bet a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you get more Bastion Currencies. If you lose, you lose the amount of currency you've bet.",
-  "betRoll": "Bet a specified amount of Bastion currency on prediction of the outcome of rolling a dice. If you win, you get more Bastion Currencies. If you lose, you lose the amount of currency you've bet.",
+  "betFlip": "Bet a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you get more Bastion Currencies. If you lose, you lose the amount of currency you have bet.",
+  "betRoll": "Bet a specified amount of Bastion currency on prediction of the outcome of rolling a dice. If you win, you get more Bastion Currencies. If you lose, you lose the amount of currency you have bet.",
   "sweep": "Shows a random user from the text channel.",
 
   "battlefield4": "Get stats of any Battlefield 4 player.",
