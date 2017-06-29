@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     if (message.guild.voiceConnection) {
       voiceChannel = message.guild.voiceConnection.channel;
       textChannel = message.channel;
-      vcStats = 'You need to be in the same voice channel as the BOT to be able to use music commands.';
+      vcStats = string('userNoSameVC', 'errorMessage', message.author.tag);
     }
     else if (musicChannel.musicTextChannelID && musicChannel.musicVoiceChannelID) {
       if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(musicChannel.musicTextChannelID))) {
@@ -39,41 +39,38 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('invalidInput', 'errors'), 'Invalid Text/Voice Channel ID has been added to default music channel.', message.channel);
+        return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidMusicChannel', 'errorMessage'), message.channel);
       }
       if (!voiceChannel.joinable) {
         /**
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permission to join the voice channel **${voiceChannel.name}**`, message.channel);
+        return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
       }
       if (!voiceChannel.speakable) {
         /**
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('forbidden', 'errors'), 'I don\'t have permissions to speak in this channel.', message.channel);
+        return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
       }
-      vcStats = `You need to be in the default music channel (**${voiceChannel.name}**) of the BOT to be able to use music commands.`;
+      vcStats = string('userNoMusicChannel', 'errorMessage', message.author.tag, voiceChannel.name);
     }
     else {
       /**
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('forbidden', 'errors'), 'No default music channel has been set. And I need to be in a voice channel to be able to play music.', message.channel);
+      return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
     }
     if (textChannel !== message.channel) return;
     if (voiceChannel.members.get(message.author.id) === undefined) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: vcStats
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', vcStats, message.channel);
     }
 
     try {
@@ -91,7 +88,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('notFound', 'errors'), 'You don\'t have any songs in your favourite list!', textChannel);
+          return Bastion.emit('error', string('notFound', 'errors'), string('favSongsNotFound', 'errorMessage'), textChannel);
         }
         args = favs.shift();
         message.channel.send({
@@ -160,7 +157,7 @@ exports.run = (Bastion, message, args) => {
                * Error condition is encountered.
                * @fires error
                */
-              return Bastion.emit('error', string('notFound', 'errors'), 'No songs in the playlist!', textChannel);
+              return Bastion.emit('error', string('notFound', 'errors'), string('playlistNotFound', 'errorMessage'), textChannel);
             }
             args = info.shift().title;
             message.channel.send({

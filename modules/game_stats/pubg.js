@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
              * Error condition is encountered.
              * @fires error
              */
-            Bastion.emit('error', string('notFound', 'errors'), `Unable to find any stats for the player **${args.player}** in **${args.mode}** game mode.`, message.channel);
+            Bastion.emit('error', string('notFound', 'errors'), string('playerModeMismatch', 'errorMessage', args.player, args.mode), message.channel);
           }
           else {
             let performance = body.Stats[0].Stats.filter(s => s.category === 'Performance');

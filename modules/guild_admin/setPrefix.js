@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Prefix', 1, prefixMaxLength), message.channel);
+      return Bastion.emit('error', string('invalidInput', 'errors'), string('prefixRange', 'errorMessage', prefixMaxLength), message.channel);
     }
   }
 

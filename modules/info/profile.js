@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), `<@${args.id}>'s profile is not yet created.`, message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
     }
 
     message.channel.send({

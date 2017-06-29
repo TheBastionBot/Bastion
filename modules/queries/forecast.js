@@ -16,7 +16,13 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
   weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
-    if (err) return;
+    if (err) {
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('weatherNotFound', 'errorMessage'), message.channel);
+    }
 
     if (!result || result.length < 1) {
       /**

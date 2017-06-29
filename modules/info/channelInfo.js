@@ -64,7 +64,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'channel'), message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
   }
 };
 

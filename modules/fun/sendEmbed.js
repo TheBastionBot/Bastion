@@ -23,7 +23,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidInput', 'errorMessage', 'embed object')} You can create an embed object [here](https://bastion.js.org/tools/embed_builder/).\`\`\`${e.toString()}\`\`\``, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidEmbedObject', 'errorMessage')}\`\`\`${e.toString()}\`\`\``, message.channel);
   }
 
   message.channel.send({

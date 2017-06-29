@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Channel name', minLength, maxLength), message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('channelNameLength', 'errorMessage', minLength, maxLength), message.channel);
   }
 
   let channelType = 'text';

@@ -76,7 +76,7 @@ exports.run = (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    Bastion.emit('error', string('busy', 'errors'), 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.', message.channel);
+    Bastion.emit('error', string('busy', 'errors'), string('isGameInUse', 'errorMessage', 'typing'), message.channel);
   }
 };
 

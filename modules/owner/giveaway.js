@@ -99,7 +99,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('busy', 'errors'), 'Can\'t start another giveaway event now. Another giveaway event is already active. Wait a for it to end.', message.channel);
+    return Bastion.emit('error', string('busy', 'errors'), string('isEventInUse', 'errorMessage', 'giveaway'), message.channel);
   }
 };
 

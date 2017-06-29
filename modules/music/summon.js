@@ -15,7 +15,7 @@ exports.run = (Bastion, message) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', '', `${message.author.tag} you need to be in a voice channel.`, message.channel);
+      return Bastion.emit('error', '', string('userNoVC', 'errorMessage', message.author.tag), message.channel);
     }
     if (voiceChannel.joinable) {
       voiceChannel.join().then(connection => {
@@ -28,7 +28,7 @@ exports.run = (Bastion, message) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('forbidden', 'errors'), 'I don\'t have permissions to speak in this channel.', message.channel);
+          return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
         }
         else if (!connection.speaking) {
           connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -40,7 +40,7 @@ exports.run = (Bastion, message) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to join the **${voiceChannel.name}** voice channel.`, message.channel);
+      return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
     }
   }
   else {
@@ -53,7 +53,7 @@ exports.run = (Bastion, message) => {
              * Error condition is encountered.
              * @fires error
              */
-            return Bastion.emit('error', '', `${message.author.tag} you need to be in a voice channel.`, message.channel);
+            return Bastion.emit('error', '', string('userNoVC', 'errorMessage', message.author.tag), message.channel);
           }
           if (voiceChannel.joinable) {
             voiceChannel.join().then(connection => {
@@ -66,7 +66,7 @@ exports.run = (Bastion, message) => {
                  * Error condition is encountered.
                  * @fires error
                  */
-                return Bastion.emit('error', string('forbidden', 'errors'), 'I don\'t have permissions to speak in this channel.', message.channel);
+                return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
               }
               else if (!connection.speaking) {
                 connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -78,7 +78,7 @@ exports.run = (Bastion, message) => {
              * Error condition is encountered.
              * @fires error
              */
-            return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to join the **${voiceChannel.name}** voice channel.`, message.channel);
+            return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
           }
         }
       }
@@ -89,14 +89,14 @@ exports.run = (Bastion, message) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('forbidden', 'errors'), 'No default music channel has been set. So, only the bot owner or the music masters can use this command.', message.channel);
+          return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
         }
         if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID))) {
           /**
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('forbidden', 'errors'), 'I am not able to join the default voice channel. Either a wrong voice channel has been set or the voice channel has been deleted.', message.channel);
+          return Bastion.emit('error', string('forbidden', 'errors'), string('invalidMusicChannel', 'errorMessage'), message.channel);
         }
         if (voiceChannel.joinable) {
           voiceChannel.join().then(connection => {
@@ -109,7 +109,7 @@ exports.run = (Bastion, message) => {
                * Error condition is encountered.
                * @fires error
                */
-              return Bastion.emit('error', string('forbidden', 'errors'), 'I don\'t have permissions to speak in this channel.', message.channel);
+              return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
             }
             else if (!connection.speaking) {
               connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -121,7 +121,7 @@ exports.run = (Bastion, message) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to join the **${voiceChannel.name}** voice channel.`, message.channel);
+          return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
         }
       }
     });

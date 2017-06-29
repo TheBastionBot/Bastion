@@ -47,9 +47,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('busy', 'errors'), 'You already have a reminder. You can set only one ' +
-                 'reminder at once. Please wait for it to complete or ' +
-                 'run `reminder --cancel` to cancel the previous reminder.', message.channel);
+    return Bastion.emit('error', string('busy', 'errors'), string('isReminderInUse', 'errorMessage', 'reminder --cancel'), message.channel);
   }
 
   remindUsers[message.author.id] = Bastion.setTimeout(() => {

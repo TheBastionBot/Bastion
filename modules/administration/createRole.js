@@ -26,6 +26,15 @@ exports.run = (Bastion, message, args) => {
     args.color = 0;
   }
 
+  let maxLength = 100;
+  if (args.name && args.name.join(' ').length > maxLength) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('roleNameLength', 'errorMessage', maxLength), message.channel);
+  }
+
   let data = roleData(args.name.join(' '), args.color);
 
   message.guild.createRole(data).then(role => message.channel.send({
@@ -46,21 +55,6 @@ exports.run = (Bastion, message, args) => {
         {
           name: 'Color',
           value: role.hexColor === '#000000' ? args.color : role.hexColor,
-          inline: true
-        },
-        {
-          name: 'Position',
-          value: role.position,
-          inline: true
-        },
-        {
-          name: 'Hoisted',
-          value: role.hoist,
-          inline: true
-        },
-        {
-          name: 'Mentionable',
-          value: role.mentionable,
           inline: true
         }
       ]

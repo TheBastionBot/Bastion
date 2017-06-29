@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', string('notFound', 'errors'), `${message.author.username}, your todo list is empty.`, message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
     }
     else {
       let list = JSON.parse(todo.list);
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('notFound', 'errors'), 'That index was not found.', message.channel);
+        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
       }
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);

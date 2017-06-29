@@ -16,12 +16,12 @@ exports.run = (Bastion, message, args) => {
   }
 
   let minTimeout = 5, maxTimeout = 600;
-  if (args.timeout < 5 || args.timeout > 600) {
+  if (args.timeout < minTimeout || args.timeout > maxTimeout) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Timeout', minTimeout, maxTimeout), message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('selfDestructTimeout', 'errorMessage', minTimeout, maxTimeout), message.channel);
   }
 
   if (message.deletable) {

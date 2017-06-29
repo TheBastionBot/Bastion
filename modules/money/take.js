@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), 'You need to mention the user or give their ID to whom you want to give Bastion Currencies.', message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('takeNoUser', 'errorMessage'), message.channel);
   }
   let reason;
   if (args[2]) {

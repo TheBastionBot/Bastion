@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
       }
     });
   }
-  catch(error) {
+  catch (error) {
     /**
      * Error condition is encountered.
      * @fires error

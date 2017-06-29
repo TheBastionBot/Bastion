@@ -30,8 +30,17 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let maxLength = 100;
   args.old = args.old.join(' ');
   args.new = args.new.join(' ');
+  if (args.new.length > maxLength) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('roleNameLength', 'errorMessage', maxLength), message.channel);
+  }
+
 
   let role = message.guild.roles.find('name', args.old);
   if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
@@ -40,7 +49,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'role'), message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   role.setName(args.new).then(() => {

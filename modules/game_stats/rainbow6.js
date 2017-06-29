@@ -21,7 +21,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidInput', 'errorMessage', 'platform')}. Valid platforms are \`Uplay\`, \`PS4\` and \`XOne\`.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidPlatform', 'errorMessage', '`Uplay`, `PS4` and `XOne`'), message.channel);
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
     /**

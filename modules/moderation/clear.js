@@ -48,10 +48,10 @@ exports.run = (Bastion, message, args) => {
     if (msgs.size < 2 || msgs.length < 2) {
       let error;
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
-        error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
+        error = string('singleMessage', 'errorMessage');
       }
       else {
-        error = 'No messages found that could be deleted.';
+        error = string('noDeletableMessage', 'errorMessage');
       }
 
       /**

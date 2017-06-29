@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.green,
           title: 'Added Words to Filter List',
-          description: filteredWords.join(', ')
+          description: args.join(', ')
         }
       }).catch(e => {
         Bastion.log.error(e);

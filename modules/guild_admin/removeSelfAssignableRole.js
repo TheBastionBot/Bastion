@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', string('notFound', 'errors'), 'No self assignable roles found.', message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'self-assignable roles'), message.channel);
     }
     else {
       let roles = JSON.parse(row.selfAssignableRoles);
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('notFound', 'errors'), 'That index was not found.', message.channel);
+        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
       }
       let deletedRoleID = roles[parseInt(args[0]) - 1];
       roles.splice(parseInt(args[0]) - 1, 1);

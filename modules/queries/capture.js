@@ -41,7 +41,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), `Bastion can't find the server at **${args[0]}**.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may've been timed out, try again later.`, message.channel);
+      return Bastion.emit('error', string('connection', 'errors'), string('serverNotFound', 'errorMessage', args[0]), message.channel);
     }
     let imageBuffers = [];
     renderStream.on('data', function (data) {

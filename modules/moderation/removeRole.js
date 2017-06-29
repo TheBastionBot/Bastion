@@ -40,13 +40,13 @@ exports.run = (Bastion, message, args) => {
     role = args.slice(1).join(' ');
   }
   role = message.guild.roles.find('name', role);
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
   else if (!role) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'role'), message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   message.guild.members.get(user.id).removeRole(role).then(() => {

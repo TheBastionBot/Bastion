@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('forbidden', 'errors'), `Can't disable \`${command}\` command.`, message.channel);
+    return Bastion.emit('error', string('forbidden', 'errors'), string('commandNoDisable', 'errorMessage', command), message.channel);
   }
 
   if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {

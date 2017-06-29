@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('outOfRange', 'errorMessage', 'Channel name', minLength, maxLength), message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('channelNameLength', 'errorMessage', minLength, maxLength), message.channel);
   }
 
   let channel = message.channel;
@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'channel'), message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {

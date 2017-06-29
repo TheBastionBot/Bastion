@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidInput', 'errorMessage', 'region')} Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`, message.channel);
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidRegion', 'errorMessage', '`US`, `EU`, `KR` and `CN`'), message.channel);
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
     /**

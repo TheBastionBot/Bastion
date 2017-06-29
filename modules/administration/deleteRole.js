@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'role'), message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   role.delete().then(r => {

@@ -21,12 +21,13 @@ exports.run = (Bastion, message, args) => {
 
     args.money = parseInt(args.money);
 
-    if (args.money < 5) {
+    let minAmount = 5;
+    if (args.money < minAmount) {
       /**
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('invalidInput', 'errors'), 'Minimum bet amount is 5 Bastion Currencies', message.channel);
+      return Bastion.emit('error', string('invalidInput', 'errors'), string('minBet', 'errorMessage', minAmount), message.channel);
     }
 
     let outcomes = [

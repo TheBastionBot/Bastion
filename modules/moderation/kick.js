@@ -32,14 +32,14 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
   if (!message.guild.members.get(user.id).kickable) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to kick ${user}.`, message.channel);
+    return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'kick', user), message.channel);
   }
 
   let reason = args.slice(1).join(' ');

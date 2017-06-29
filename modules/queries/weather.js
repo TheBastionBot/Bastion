@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('invalidInput', 'errorMessage', 'weather data'), message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('weatherNotFound', 'errorMessage'), message.channel);
     }
 
     if (!result || result.length < 1) {
