@@ -430,7 +430,7 @@ exports.run = (Bastion, message, args) => {
                   if (!queue[message.guild.id].skipVotes.includes(msg.author.id)) {
                     queue[message.guild.id].skipVotes.push(msg.author.id);
                   }
-                  if (queue[message.guild.id].skipVotes.length >= (voiceChannel.members.size - 1) / 2) {
+                  if (queue[message.guild.id].skipVotes.length >= parseInt((voiceChannel.members.size - 1) / 2)) {
                     textChannel.send({
                       embed: {
                         color: Bastion.colors.green,
@@ -446,7 +446,7 @@ exports.run = (Bastion, message, args) => {
                     textChannel.send({
                       embed: {
                         color: Bastion.colors.dark_grey,
-                        description: `${((voiceChannel.members.size - 1) / 2) - queue[message.guild.id].skipVotes.length} votes required to skip the current song.`
+                        description: `${parseInt((voiceChannel.members.size - 1) / 2) - queue[message.guild.id].skipVotes.length} votes required to skip the current song.`
                       }
                     }).catch(e => {
                       Bastion.log.error(e);

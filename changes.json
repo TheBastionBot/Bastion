@@ -1,5 +1,5 @@
 {
-  "date": "June 29, 2017",
+  "date": "June 30, 2017",
   "updated": [
     "Improvements to `airhorn` command",
     "Fixed `createChannel` command",
@@ -13,6 +13,7 @@
     "Added lower bound to `selfDestruct` timeout",
     "Now users can report anyone, even the server owner",
     "Fixed `betFlip` & `betRoll` commands",
+    "Fixed skip vote count",
     "Minor fixes, improvements & changes to all modules"
   ],
   "added": [
