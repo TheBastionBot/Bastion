@@ -37,6 +37,6 @@ exports.help = {
   description: string('zalgolize', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'zaloglize <text>',
-  example: [ 'zaloglize It looks clumsy, but it\'s cool!' ]
+  usage: 'zalgolize <text>',
+  example: [ 'zalgolize It looks clumsy, but it\'s cool!' ]
 };
