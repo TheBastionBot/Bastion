@@ -77,6 +77,7 @@
   "listAutoAssignableRoles": "Lists all auto-assignable roles.",
   "listFilteredWords": "Lists all filtered words.",
   "listSelfAssignableRoles": "Lists all self-assignable roles.",
+  "listWhitelistDomains": "Lists all whitelisted domains for the link filter.",
   "log": "Toggles logging of various events in the server.",
   "modLog": "Toggles logging of various moderation events in the server.",
   "removeAutoAssignableRole": "Deletes a role from the list of auto-assignable roles.",
