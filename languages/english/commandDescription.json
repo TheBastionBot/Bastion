@@ -60,6 +60,7 @@
   "addAutoAssignableRoles": "Adds specified roles to the list of auto-assignable roles, anyone who joins the server gets these roles automatically.",
   "addFilteredWords": "Adds specified words to the list of filtered words. If someone sends a message containing these words, their message will be automatically deleted.",
   "addSelfAssignableRoles": "Adds specified roles to the list of self-assignable roles, anyone could use `iAm`/`iAmNot` command to get/revoke these roles to themselves.",
+  "addWhitelistDomains": "Adds a domain to the whitelist for link filter.",
   "chat": "Toggles Bastion's chatting module.",
   "farewell": "Toggles sending of farewell message for members who left the server.",
   "farewellMessage": "Edits the farewell message that shows when a member leaves the server.",
