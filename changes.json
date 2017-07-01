@@ -14,6 +14,7 @@
     "Now users can report anyone, even the server owner",
     "Fixed `betFlip` & `betRoll` commands",
     "Fixed skip vote count",
+    "Restricted `listFilteredWords` commands to administrators",
     "Added support for whitelisting domains from link filter",
     "Minor fixes, improvements & changes to all modules"
   ],
