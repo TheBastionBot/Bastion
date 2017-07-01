@@ -83,6 +83,7 @@
   "removeAutoAssignableRole": "Deletes a role from the list of auto-assignable roles.",
   "removeFilteredWord": "Deletes a word from the list of filtered words.",
   "removeSelfAssignableRole": "Deletes a role from the list of self-assignable roles.",
+  "removeWhitelistDomain": "Deletes a domain from the list of whitelisted domains.",
   "setPrefix": "Sets Bastion's prefix for the server.",
 
   "changelog": "Shows the changes made in the current version of Bastion Bot.",

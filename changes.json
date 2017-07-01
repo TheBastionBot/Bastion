@@ -21,7 +21,8 @@
   "added": [
     "Added `followURL` command.",
     "Added `addWhitelistDomains` command.",
-    "Added `listWhitelistDomains` command."
+    "Added `listWhitelistDomains` command.",
+    "Added `removeWhitelistDomain` command."
   ],
   "removed": []
 }
