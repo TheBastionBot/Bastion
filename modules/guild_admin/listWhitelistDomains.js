@@ -13,7 +13,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'whitelisted domain'), message.channel);
     }
 
     let whitelistDomains = JSON.parse(row.whitelistDomains);

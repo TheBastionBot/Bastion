@@ -31,7 +31,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'whitelist domains'), message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'whitelist domain'), message.channel);
     }
     else {
       let whitelistDomains = JSON.parse(guild.whitelistDomains);
