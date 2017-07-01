@@ -15,35 +15,25 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  // let step = 0;
-  // try {
-  //   Bastion.db.get('SELECT <COLUMNS> FROM <TABLE>').catch(() => {
-  //     Bastion.db.run('ALTER TABLE <TABLE> ADD <COLUMN> <CONSTRAINTS>').then(() => {
-  //       message.channel.send({
-  //         embed: {
-  //           color: Bastion.colors.green,
-  //           description: `Part ${++step} complete.`
-  //         }
-  //       }).then(msg => {
-  //         msg.delete(3000).catch(e => {
-  //           Bastion.log.error(e);
-  //         });
-  //       }).catch(e => {
-  //         Bastion.log.error(e);
-  //       });
-  //     }).catch(e => {
-  //       Bastion.log.error(e);
-  //     });
-  //   });
-  // }
-  // catch (e) {
-  //   Bastion.log.error(e);
-  //   /**
-  //   * Error condition is encountered.
-  //   * @fires error
-  //   */
-  //   Bastion.emit('error', string('unknown', 'errors'), string('unknown', 'errorMessage'), message.channel);
-  // }
+  let step = 0;
+  Bastion.db.get('SELECT whitelistDomains FROM guildSettings').catch(() => {
+    Bastion.db.run('ALTER TABLE guildSettings ADD whitelistDomains TEXT NOT NULL DEFAULT \'[]\'').then(() => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `Part ${++step} complete.`
+        }
+      }).then(msg => {
+        msg.delete(3000).catch(e => {
+          Bastion.log.error(e);
+        });
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  });
 };
 
 exports.config = {
