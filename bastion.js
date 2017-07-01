@@ -35,7 +35,9 @@ BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
 BASTION.functions = {};
 BASTION.db = require('sqlite');
-BASTION.db.open('./data/Bastion.sqlite');
+BASTION.db.open('./data/Bastion.sqlite').then(db => {
+  db.run('PRAGMA foreign_keys = ON');
+});
 
 /**
  * Load base class prototypes
