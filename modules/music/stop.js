@@ -4,10 +4,12 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -19,7 +21,7 @@ exports.config = {
 
 exports.help = {
   name: 'stop',
-  description: 'Stops music playback, empties the queue and tells the BOT to leave the voice channel.',
+  description: string('stop', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'stop',

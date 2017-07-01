@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
@@ -17,25 +18,19 @@ exports.run = (Bastion, message, args) => {
 
   weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
     if (err) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `No weather data found for **${args.join(' ')}**. Please check the location and try again. Type \`${Bastion.config.prefix}help weather\` for help on weather command.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('weatherNotFound', 'errorMessage'), message.channel);
     }
 
     if (!result || result.length < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No weather data received, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
 
     message.channel.send({
@@ -109,7 +104,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -121,7 +116,7 @@ exports.config = {
 
 exports.help = {
   name: 'weather',
-  description: 'Shows weather information for a specified location by name or ZIP Code.',
+  description: string('weather', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'weather <city [, country_code]|zipcode>',

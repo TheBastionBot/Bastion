@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -15,7 +17,7 @@ exports.run = (Bastion, message) => {
       }
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -26,7 +28,7 @@ exports.config = {
 
 exports.help = {
   name: 'hello',
-  description: 'Get to know Bastion!',
+  description: string('hello', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'hello',

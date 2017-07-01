@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -23,7 +25,7 @@ exports.run = (Bastion, message) => {
       ]
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -34,7 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'guide',
-  description: 'Shows you the guide on how to setup and install Private Bastion BOT. And links to the official support server.',
+  description: string('guide', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'guide',

@@ -5,6 +5,7 @@
  */
 
 const fs = require('fs');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (!args.name && !args.list) {
@@ -34,7 +35,7 @@ exports.run = (Bastion, message, args) => {
           description: emojis.join(', ')
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     });
   }
@@ -52,7 +53,7 @@ exports.run = (Bastion, message, args) => {
       message.channel.send({
         files: [ `./data/emojis/${args.name}.png` ]
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   });
@@ -69,7 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'emoji',
-  description: 'Sends a large emoji specified by the given name. To list all the available emoji names, use the `--list` flag.',
+  description: string('emoji', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'emoji < emoji_name | --list >',

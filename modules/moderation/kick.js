@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -30,17 +32,14 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
   if (!message.guild.members.get(user.id).kickable) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I don't have permissions to kick ${user}.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'kick', user), message.channel);
   }
 
   let reason = args.slice(1).join(' ');
@@ -102,7 +101,7 @@ exports.config = {
 
 exports.help = {
   name: 'kick',
-  description: 'Kicks a mentioned user with an optional reason.',
+  description: string('kick', 'commandDescription'),
   botPermission: 'KICK_MEMBERS',
   userPermission: 'KICK_MEMBERS',
   usage: 'kick @user-mention [Reason]',

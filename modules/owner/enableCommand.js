@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -31,14 +33,11 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `\`${command}\` command was not found.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
   }
 
   if (command.config.enabled) return;
@@ -50,7 +49,7 @@ exports.run = (Bastion, message, args) => {
       description: `\`${command.help.name}\` command has been enabled.`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -61,7 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'enablecommand',
-  description: 'Enables a temporarily disabled command.',
+  description: string('enableCommand', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'enableCommand <command_name>',

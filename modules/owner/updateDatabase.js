@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -13,38 +15,25 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  // let step = 0;
-  // try {
-  //   Bastion.db.get('SELECT <COLUMNS> FROM <TABLE>').catch(() => {
-  //     Bastion.db.run('ALTER TABLE <TABLE> ADD <COLUMN> <CONSTRAINTS>').then(() => {
-  //       message.channel.send({
-  //         embed: {
-  //           color: Bastion.colors.green,
-  //           description: `Part ${++step} complete.`
-  //         }
-  //       }).then(msg => {
-  //         msg.delete(3000).catch(e => {
-  //           Bastion.log.error(e.stack);
-  //         });
-  //       }).catch(e => {
-  //         Bastion.log.error(e.stack);
-  //       });
-  //     }).catch(e => {
-  //       Bastion.log.error(e.stack);
-  //     });
-  //   });
-  // }
-  // catch (e) {
-  //   Bastion.log.error(e.stack);
-  //   return message.channel.send({
-  //     embed: {
-  //       color: Bastion.colors.red,
-  //       description: 'Some error has occured while updating database, please check the console. And report it to Bastion Developers at https://discord.gg/fzx8fkt'
-  //     }
-  //   }).catch(e => {
-  //     Bastion.log.error(e.stack);
-  //   });
-  // }
+  let step = 0;
+  Bastion.db.get('SELECT whitelistDomains FROM guildSettings').catch(() => {
+    Bastion.db.run('ALTER TABLE guildSettings ADD whitelistDomains TEXT NOT NULL DEFAULT \'[]\'').then(() => {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `Part ${++step} complete.`
+        }
+      }).then(msg => {
+        msg.delete(3000).catch(e => {
+          Bastion.log.error(e);
+        });
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  });
 };
 
 exports.config = {
@@ -54,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'updatedatabase',
-  description: 'Updates Bastion\'s Database to the current release.',
+  description: string('updateDatabase', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'updateDatabase',

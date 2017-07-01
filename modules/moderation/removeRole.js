@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -38,16 +40,13 @@ exports.run = (Bastion, message, args) => {
     role = args.slice(1).join(' ');
   }
   role = message.guild.roles.find('name', role);
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
   else if (!role) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'No role found with that name.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   message.guild.members.get(user.id).removeRole(role).then(() => {
@@ -72,14 +71,6 @@ exports.run = (Bastion, message, args) => {
     });
   }).catch(e => {
     Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
   });
 };
 
@@ -90,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'removerole',
-  description: 'Removes a user from a given role. If no user is mentioned, removes you from the given role.',
+  description: string('removeRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'removeRole [@user-mention] <Role Name>',

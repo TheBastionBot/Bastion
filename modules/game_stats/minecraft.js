@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const MINECRAFT = require('gamequery');
 
 exports.run = (Bastion, message, args) => {
@@ -67,18 +68,14 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
-  }).catch(e => {
-    Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  }).catch(() => {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('connection', 'errors'), string('invalidIPPort', 'errorMessage'), message.channel);
   });
 };
 
@@ -89,7 +86,7 @@ exports.config = {
 
 exports.help = {
   name: 'minecraft',
-  description: 'Get stats of any Minecraft game server by it\'s IP address and optional PORT number.',
+  description: string('minecraft', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'minecraft <MC_SERVER_IP>[:PORT]',

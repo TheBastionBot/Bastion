@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -23,18 +24,14 @@ exports.run = (Bastion, message, args) => {
 
   request({ url: `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(args[0])}&zoom=${args[1]}&size=600x300&maptype=roadmap%20&markers=color:blue|${encodeURIComponent(args[0])}&key=${Bastion.credentials.googleAPIkey}`, encoding: null }, function (err, res, body) {
     if (err) {
-      Bastion.log.error(err);
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some error has occured, please check the console.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
     message.channel.send({ files: [ { attachment: body } ] }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -46,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'map',
-  description: 'Get the map of the specified location. It takes an optional `--zoom` argument which takes an zoom amount from value 0 to 20.',
+  description: string('map', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'map <location> [--zoom <amount>]',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -11,7 +13,7 @@ exports.run = (Bastion, message) => {
       description: `${parseInt(Bastion.ping)}ms`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -22,7 +24,7 @@ exports.config = {
 
 exports.help = {
   name: 'ping',
-  description: 'Pings the bot and shows you the time the bot responded in.',
+  description: string('ping', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'ping',

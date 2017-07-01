@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -15,14 +17,11 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.all('SELECT trigger FROM triggers').then(triggers => {
     if (triggers.length === 0) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'You don\'t have any triggers.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', string('notFound', 'errors'), string('triggerNotFound', 'errorMessage'), message.channel);
     }
 
     triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);
@@ -41,10 +40,10 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -58,7 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listtriggers',
-  description: 'Lists all the triggers you have added. It takes page number as an optional argument.',
+  description: string('listTriggers', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listTriggers [page_no]',

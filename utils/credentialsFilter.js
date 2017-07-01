@@ -16,7 +16,7 @@ module.exports = message => {
   if (message.content.includes(message.client.token)) {
     if (message.deletable) {
       message.delete().catch(e => {
-        message.client.log.error(e.stack);
+        message.client.log.error(e);
       });
     }
 
@@ -34,10 +34,10 @@ module.exports = message => {
           ]
         }
       }).catch(e => {
-        message.client.log.error(e.stack);
+        message.client.log.error(e);
       });
     }).catch(e => {
-      message.client.log.error(e.stack);
+      message.client.log.error(e);
     });
   }
 };

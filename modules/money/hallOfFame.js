@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.all('SELECT userID, xp, level FROM profiles ORDER BY level DESC, xp DESC').then(profiles => {
     let fields = [];
@@ -30,10 +32,10 @@ exports.run = (Bastion, message, args) => {
         fields: fields
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -47,7 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'halloffame',
-  description: 'Shows the top 10 ranking with the highest level & experience points from all the members of the server. If used with the `--global` flap, it shows the ranking of all users of the bot.',
+  description: string('hallOfFame', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'hallOfFame [--global]',

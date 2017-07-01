@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -37,10 +39,10 @@ exports.run = (Bastion, message) => {
           Bastion.destroy().then(() => {
             process.exit(0);
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
       else {
@@ -50,12 +52,12 @@ exports.run = (Bastion, message) => {
             description: 'Cool! I\'m here.'
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -66,7 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'shutdown',
-  description: 'Asks you for conformation to shut the bot down and terminates the process. Reply with `yes` or `no`.',
+  description: string('shutdown', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'shutdown',

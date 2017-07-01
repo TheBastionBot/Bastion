@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const location = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
@@ -17,25 +18,19 @@ exports.run = (Bastion, message, args) => {
 
   location.find({ search: args.join(' ') }, function(err, result) {
     if (err) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `No data found for **${args.join(' ')}**. Please check the location and try again.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'location'), message.channel);
     }
 
     if (!result || result.length < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No data received from the server, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
 
     let date = Bastion.functions.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
@@ -68,7 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'date',
-  description: 'Shows the local date and time of any provided region.',
+  description: string('date', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'data < location name[, country code] | zip code >',

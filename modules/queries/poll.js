@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 let activeChannels = {};
 
 exports.run = (Bastion, message, args) => {
@@ -51,7 +52,7 @@ exports.run = (Bastion, message, args) => {
         }
         if (msg.deletable) {
           msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         msg.channel.send({
@@ -65,7 +66,7 @@ exports.run = (Bastion, message, args) => {
         }).then(m => {
           activeChannels[message.channel.id].usersVoted.push(msg.author.id);
           m.delete(5000).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         });
       });
@@ -85,11 +86,11 @@ exports.run = (Bastion, message, args) => {
             }
           }).then(() => {
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             delete activeChannels[message.channel.id];
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
 
@@ -118,26 +119,23 @@ exports.run = (Bastion, message, args) => {
           }
         }).then(() => {
           msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
           delete activeChannels[message.channel.id];
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `Can't start a poll now. A poll is already running in this channel.\nWait for it to end or if you had started that previous poll or are the owner of this server, you can end that by typing \`${Bastion.config.prefix}endpoll\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('busy', 'errors'), string('isEventInUse', 'errorMessage', 'poll'), message.channel);
   }
 };
 
@@ -148,7 +146,7 @@ exports.config = {
 
 exports.help = {
   name: 'poll',
-  description: 'Starts a poll in the current channel asking users to vote. Separate question & each answers with `;`',
+  description: string('poll', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'poll <question>;<option1>;<option2>[;<option3>[...]]',

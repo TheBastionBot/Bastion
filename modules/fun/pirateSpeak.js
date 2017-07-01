@@ -5,6 +5,7 @@
  */
 
 const dictionary = require('../../data/piratePhrases.json');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -22,7 +23,7 @@ exports.run = (Bastion, message, args) => {
       description: translate(args.join(' '))
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -33,7 +34,7 @@ exports.config = {
 
 exports.help = {
   name: 'piratespeak',
-  description: 'Convert\'s the given text to pirate speak.',
+  description: string('pirateSpeak', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'pirateSpeak <text>',

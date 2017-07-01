@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let outcomes = [
     'ROCK',
@@ -48,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -59,7 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'rps',
-  description: 'Play the classic *rock paper scissor* game with the bot.',
+  description: string('rps', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'rps <rock|paper|scissor>',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -112,7 +114,7 @@ exports.run = (Bastion, message, args) => {
       description: `**${args}**`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -123,7 +125,7 @@ exports.config = {
 
 exports.help = {
   name: 'morsecode',
-  description: 'Encodes a given text into Morse Code.',
+  description: string('morseCode', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'morseCode <text>',

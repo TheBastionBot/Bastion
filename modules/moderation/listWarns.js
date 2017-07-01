@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 const warns = require('./warn').warns;
 
 exports.run = (Bastion, message) => {
@@ -20,7 +22,7 @@ exports.run = (Bastion, message) => {
       color: Bastion.colors.green,
       description: 'No one has been warned yet.'
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 
@@ -36,7 +38,7 @@ exports.run = (Bastion, message) => {
       description: warnedUsers.join('\n')
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -47,7 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'listwarns',
-  description: 'Lists the server members who have been warned.',
+  description: string('listWarns', 'commandDescription'),
   botPermission: '',
   userPermission: 'KICK_MEMBERS',
   usage: 'listWarns',

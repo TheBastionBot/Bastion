@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -17,14 +19,11 @@ exports.run = (Bastion, message, args) => {
   let bio = args.join(' ').replace('"', '\'');
 
   if (bio.length > charLimit) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `Your bio can't exceed ${charLimit} characters.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('bioRange', 'errorMessage', charLimit), message.channel);
   }
 
   Bastion.db.get(`SELECT bio FROM profiles WHERE userID=${message.author.id}`).then(user => {
@@ -35,7 +34,7 @@ exports.run = (Bastion, message, args) => {
           description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
 
@@ -50,13 +49,13 @@ exports.run = (Bastion, message, args) => {
           }
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -67,7 +66,7 @@ exports.config = {
 
 exports.help = {
   name: 'setbio',
-  description: 'Shows a mentioned person\'s avatar. If no one is mentioned, it wil show your avatar.',
+  description: string('setBio', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'setBio <text>',

@@ -4,35 +4,31 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let voiceChannel;
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
     voiceChannel = message.member.voiceChannel;
     if (!voiceChannel || voiceChannel.type !== 'voice') {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `${message.author.tag} you need to be in a voice channel.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', string('userNoVC', 'errorMessage', message.author.tag), message.channel);
     }
     if (voiceChannel.joinable) {
       voiceChannel.join().then(connection => {
         message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
         if (!voiceChannel.speakable) {
           voiceChannel.leave();
-          message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'I don\'t have permissions to speak in this channel.'
-            }
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
         }
         else if (!connection.speaking) {
           connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -40,14 +36,11 @@ exports.run = (Bastion, message) => {
       });
     }
     else {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `I don't have permissions to join the **${voiceChannel.name}** voice channel.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
     }
   }
   else {
@@ -55,31 +48,25 @@ exports.run = (Bastion, message) => {
       if (musicChannel.musicMasterRoleID) {
         if (message.member.roles.has(musicChannel.musicMasterRoleID)) {
           voiceChannel = message.member.voiceChannel;
-          if (!voiceChannel || voiceChannel.type !== 'voice') {
-            return message.channel.send({
-              embed: {
-                color: Bastion.colors.red,
-                description: `${message.author.tag} you need to be in a voice channel.`
-              }
-            }).catch(e => {
-              Bastion.log.error(e.stack);
-            });
+          if (!voiceChannel) {
+            /**
+             * Error condition is encountered.
+             * @fires error
+             */
+            return Bastion.emit('error', '', string('userNoVC', 'errorMessage', message.author.tag), message.channel);
           }
           if (voiceChannel.joinable) {
             voiceChannel.join().then(connection => {
               message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-                Bastion.log.error(e.stack);
+                Bastion.log.error(e);
               });
               if (!voiceChannel.speakable) {
                 voiceChannel.leave();
-                message.channel.send({
-                  embed: {
-                    color: Bastion.colors.red,
-                    description: 'I don\'t have permissions to speak in this channel.'
-                  }
-                }).catch(e => {
-                  Bastion.log.error(e.stack);
-                });
+                /**
+                 * Error condition is encountered.
+                 * @fires error
+                 */
+                return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
               }
               else if (!connection.speaking) {
                 connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -87,54 +74,42 @@ exports.run = (Bastion, message) => {
             });
           }
           else {
-            message.channel.send({
-              embed: {
-                color: Bastion.colors.red,
-                description: `I don't have permissions to join the **${voiceChannel.name}** voice channel.`
-              }
-            }).catch(e => {
-              Bastion.log.error(e.stack);
-            });
+            /**
+             * Error condition is encountered.
+             * @fires error
+             */
+            return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
           }
         }
       }
       else {
         if (musicChannel.musicTextChannelID !== message.channel.id) return;
         if (!musicChannel.musicVoiceChannelID) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'No default music channel has been set. So, only the bot owner can use this command.'
-            }
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
         }
         if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID))) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'I am not able to join the default voice channel. Either a wrong voice channel has been set or the voice channel has been deleted.'
-            }
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', string('forbidden', 'errors'), string('invalidMusicChannel', 'errorMessage'), message.channel);
         }
         if (voiceChannel.joinable) {
           voiceChannel.join().then(connection => {
             message.guild.members.get(Bastion.user.id).setDeaf(true).catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             if (!voiceChannel.speakable) {
               voiceChannel.leave();
-              message.channel.send({
-                embed: {
-                  color: Bastion.colors.red,
-                  description: 'I don\'t have permissions to speak in this channel.'
-                }
-              }).catch(e => {
-                Bastion.log.error(e.stack);
-              });
+              /**
+               * Error condition is encountered.
+               * @fires error
+               */
+              return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
             }
             else if (!connection.speaking) {
               connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -142,14 +117,11 @@ exports.run = (Bastion, message) => {
           });
         }
         else {
-          message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: `I don't have permissions to join the **${voiceChannel.name}** voice channel.`
-            }
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
         }
       }
     });
@@ -163,7 +135,7 @@ exports.config = {
 
 exports.help = {
   name: 'summon',
-  description: 'Tells the BOT to join the default voice channel (if any), set by the BOT owner. Doesn\'t apply to BOT owner.',
+  description: string('summon', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'summon',

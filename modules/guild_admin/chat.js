@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -14,28 +16,25 @@ exports.run = (Bastion, message) => {
   }
 
   if (!Bastion.credentials.cleverbotAPIkey) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Cleverbot API key has not been set. I can\'t chat with you! :sob:'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('noCredentials', 'errors'), string('noCredentials', 'errorMessage', 'Cleverbot API'), message.channel);
   }
 
   Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     let color, chatStats;
     if (row.chat === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       chatStats = 'Disabled chat in this server. Now I\'m gonna miss talking with you. :disappointed:';
@@ -47,10 +46,10 @@ exports.run = (Bastion, message) => {
         description: chatStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -61,7 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'chat',
-  description: 'Toggles chatting feature of the bot.',
+  description: string('chat', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'chat',

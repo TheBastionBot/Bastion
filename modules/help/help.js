@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.command) {
     let channel, command = args.command.toLowerCase();
@@ -76,18 +78,15 @@ exports.run = (Bastion, message, args) => {
           }
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `There's no **${args.command}** command`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
     }
   }
   else {
@@ -101,7 +100,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
     message.author.send({
       embed: {
@@ -116,18 +115,18 @@ exports.run = (Bastion, message, args) => {
           },
           {
             name: 'BOT Invite Link',
-            value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
+            value: `https://discordapp.com/oauth2/authorize?client_id=${Bastion.user.id}&scope=bot&permissions=2146958463`
           }
         ],
         thumbnail: {
-          url: message.client.user.displayAvatarURL
+          url: Bastion.user.displayAvatarURL
         },
         footer: {
           text: 'Copyright © 2017 Sankarsan Kampa'
         }
       }
     }).catch(e => {
-      message.client.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -143,7 +142,7 @@ exports.config = {
 
 exports.help = {
   name: 'help',
-  description: 'Shows all the available commands. If a command name is specified as a argument, shows help about that command and if the `--dm` flag is provided with that, it will DM you the help rather than posting it in the server.',
+  description: string('help', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'help [command_name [--dm]]',

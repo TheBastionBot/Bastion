@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -33,14 +35,11 @@ exports.run = (Bastion, message, args) => {
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
 
   if (!message.guild.members.get(user.id).bannable) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I don't have permissions to softban ${user}.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'soft-ban', user), message.channel);
   }
 
   let reason = args.slice(1).join(' ');
@@ -129,7 +128,7 @@ exports.config = {
 
 exports.help = {
   name: 'softban',
-  description: 'Bans & unbans a mentioned user, and removes 7 days of their message history.',
+  description: string('softBan', 'commandDescription'),
   botPermission: 'BAN_MEMBERS',
   userPermission: 'BAN_MEMBERS',
   usage: 'softBan @user-mention [Reason]',

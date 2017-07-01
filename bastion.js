@@ -15,17 +15,36 @@ const BASTION = new Discord.Client({
 });
 
 /**
- * Add necessary files as a global objects.
+ * Initial configuration
  */
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
 BASTION.config = require('./settings/config.json');
 BASTION.colors = require('./settings/colors.json');
+
+let languages = [
+  'english'
+];
+let language = 'english';
+if (languages.includes(BASTION.config.language)) {
+  language = BASTION.config.language;
+}
+process.env.LANG = language;
+
 BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
 BASTION.functions = {};
 BASTION.db = require('sqlite');
-BASTION.db.open('./data/Bastion.sqlite');
+BASTION.db.open('./data/Bastion.sqlite').then(db => {
+  db.run('PRAGMA foreign_keys = ON');
+});
+
+/**
+ * Load base class prototypes
+ */
+// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
+// require('./utils/Array.prototype');
+require('./utils/String.prototype');
 
 /**
 * Function handler
@@ -44,14 +63,12 @@ require('./handlers/eventHandler')(BASTION);
  */
 require('./handlers/moduleHandler')(BASTION);
 
-// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
-// require('./utils/Array.prototype');
-
 /**
  * Log Bastion in as a Discord client.
  */
 BASTION.login(BASTION.credentials.token).catch(e => {
-  BASTION.log.error(e.stack);
+  BASTION.log.error(e.toString());
+  process.exit(1);
 });
 
 /**

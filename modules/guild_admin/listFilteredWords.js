@@ -4,17 +4,16 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.filteredWords === '[]') {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No words are being filtered.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
     }
 
     let filteredWords = JSON.parse(row.filteredWords);
@@ -36,10 +35,10 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -53,9 +52,9 @@ exports.config = {
 
 exports.help = {
   name: 'listfilteredwords',
-  description: 'Lists all filtered words.',
+  description: string('listFilteredWords', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userPermission: 'ADMINISTRATOR',
   usage: 'listFilteredWords [page_no]',
   example: [ 'listFilteredWords', 'listFilteredWords 2' ]
 };

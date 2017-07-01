@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/favouriteSongs', true, true);
 
@@ -17,14 +18,11 @@ exports.run = (Bastion, message, args) => {
     Bastion.log.error(e);
   }
   if (songs.length === 0) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'You haven\'t added any favourite songs yet.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('favSongsNotFound', 'errorMessage'), message.channel);
   }
 
   let favs = songs.map((e, i) => `${i + 1}. ${e}`);
@@ -43,7 +41,7 @@ exports.run = (Bastion, message, args) => {
       }
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -57,9 +55,9 @@ exports.config = {
 
 exports.help = {
   name: 'listfavs',
-  description: 'Lists the songs in your favourite list.',
+  description: string('listFavs', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'listfavs [page_no]',
+  usage: 'listFavs [page_no]',
   example: [ 'listFavs', 'listFavs 2' ]
 };

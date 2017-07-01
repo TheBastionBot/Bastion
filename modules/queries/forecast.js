@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
@@ -15,17 +16,20 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
   weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
-    if (err) return;
+    if (err) {
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('weatherNotFound', 'errorMessage'), message.channel);
+    }
 
     if (!result || result.length < 1) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No weather data received, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
 
     let fields = [];
@@ -47,7 +51,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -59,7 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'forecast',
-  description: 'Shows weather forecast for 5 days for a specified location by name or ZIP Code.',
+  description: string('forecast', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'forecast < city, country_code | zipcode >',

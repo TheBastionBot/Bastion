@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -28,14 +30,11 @@ exports.run = (Bastion, message, args) => {
   else {
     prefix = args.prefix.join(' ');
     if (prefix.length > prefixMaxLength) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `The length of the prefix should not exceed ${prefixMaxLength} characters.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('invalidInput', 'errors'), string('prefixRange', 'errorMessage', prefixMaxLength), message.channel);
     }
   }
 
@@ -47,10 +46,10 @@ exports.run = (Bastion, message, args) => {
         description: `Prefix for your server is now set to: \`${prefix}\``
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -65,7 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'setprefix',
-  description: 'Sets Bastion\'s prefix for the server to a given prefix. If the `--default` flag is given, it sets the prefix to Bastion\'s default prefix.',
+  description: string('setPrefix', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'setPrefix < prefix | --default >',

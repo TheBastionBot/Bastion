@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const fs = require('fs');
 let commands = {};
 
@@ -38,10 +39,10 @@ exports.run = (Bastion, message) => {
         description: `${message.author} Check your DM from me, I've sent you the list of commands.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -52,7 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'commands',
-  description: 'Shows the complete list of commands with their aliases.',
+  description: string('commands', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'commands',

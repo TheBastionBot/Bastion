@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const translate = require('google-translate-api');
 
 exports.run = (Bastion, message, args) => {
@@ -25,19 +26,16 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
     if (e.stack.includes('not supported')) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `The language **${args[0].toUpperCase()}** is not supported.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'language code'), message.channel);
     }
   });
 };
@@ -49,7 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'translate',
-  description: 'Translates your message to a language specified in the arguments by the language code.',
+  description: string('translate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'translate <language_code> <text>',

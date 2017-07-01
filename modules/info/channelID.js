@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -27,7 +29,7 @@ exports.run = (Bastion, message) => {
       ]
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -38,7 +40,7 @@ exports.config = {
 
 exports.help = {
   name: 'channelid',
-  description: 'Shows the id of the mentioned channel. If no channel is mentioned, shows the id of the current channel.',
+  description: string('channelID', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'channelID [#channel-mention]',

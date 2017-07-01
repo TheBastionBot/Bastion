@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -23,7 +25,7 @@ exports.run = (Bastion, message) => {
       description: `All commands have been disabled until next restart. You can enable all commands using \`${Bastion.config.prefix}enableAllCommands\`. Or you can enable any specific command using \`${Bastion.config.prefix}enableCommand <command_name>\`.`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -34,7 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'disableallcommands',
-  description: 'Disables all command temporarily until Bastion is restarted or it is enabled again.',
+  description: string('disableAllCommands', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'disableAllCommands',

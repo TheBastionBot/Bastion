@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -15,15 +17,11 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo || todo.list === '[]') {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: 'Todo list not found',
-          description: `${message.author.username}, you haven't created a todo list.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
     }
     else {
       let list = JSON.parse(todo.list);
@@ -48,11 +46,11 @@ exports.run = (Bastion, message, args) => {
           }
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -66,7 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'listtodo',
-  description: 'Shows your todo list if you have one. It takes page number as an optional argument.',
+  description: string('listTodo', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listTodo [page_no]',

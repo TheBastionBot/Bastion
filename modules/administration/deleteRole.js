@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -40,14 +42,11 @@ exports.run = (Bastion, message, args) => {
 
   if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
   else if (!role) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'No role found for the given parameter.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   role.delete().then(r => {
@@ -69,10 +68,10 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -88,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'deleterole',
-  description: 'Deletes a role either by role mention (default), id or name.',
+  description: string('deleteRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',

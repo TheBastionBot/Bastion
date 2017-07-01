@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -54,18 +56,15 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `No channel found with ID: **${args[0]}**`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
   }
 };
 
@@ -76,7 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'channelinfo',
-  description: 'Shows information about the mentioned channel. If no channel is mentioned, shows information about the current channel.',
+  description: string('channelInfo', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',

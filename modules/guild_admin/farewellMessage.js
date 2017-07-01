@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -22,15 +24,15 @@ exports.run = (Bastion, message, args) => {
           description: guild.farewellMessage
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
     Bastion.db.run(`UPDATE guildSettings SET farewellMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
     message.channel.send({
@@ -40,7 +42,7 @@ exports.run = (Bastion, message, args) => {
         description: args.join(' ')
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -52,7 +54,7 @@ exports.config = {
 
 exports.help = {
   name: 'farewellmessage',
-  description: 'Edit the farewell message that shows when a member leaves the server.',
+  description: string('farewellMessage', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'farewellMessage [Message]',

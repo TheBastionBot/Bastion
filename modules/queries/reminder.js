@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const moment = require('moment');
 const remindUsers = {};
 
@@ -42,16 +43,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (remindUsers.hasOwnProperty(message.author.id)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'You already have a reminder. You can set only one ' +
-                     'reminder at once. Please wait for it to complete or ' +
-                     'run `reminder --cancel` to cancel the previous reminder.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('busy', 'errors'), string('isReminderInUse', 'errorMessage', 'reminder --cancel'), message.channel);
   }
 
   remindUsers[message.author.id] = Bastion.setTimeout(() => {
@@ -92,7 +88,7 @@ exports.config = {
 
 exports.help = {
   name: 'reminder',
-  description: 'Bastion sets a reminder to DM you with a specified message and duration. Duration can\'t exceed 24 hours and can\'t be less than 1 minute.',
+  description: string('reminder', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'reminder <-d Duration> <Message>',

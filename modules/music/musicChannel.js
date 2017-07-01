@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -21,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: 'Default music channel removed.'
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -45,10 +47,10 @@ exports.run = (Bastion, message, args) => {
           ]
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -60,7 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'musicchannel',
-  description: 'Adds a voice channel (by ID) & text channel (the channel this command was used) specific for the music module. i.e, BOT will only accept music commands in that text channel & if any one summons the bot it will automatically join the specified voice channel. If channel ID is not given, it removes the default music channel.',
+  description: string('musicChannel', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'musicChannel [VOICE_CHANNEL_ID]',

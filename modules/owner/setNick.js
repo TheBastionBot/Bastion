@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -21,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -35,10 +37,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s nick has been reset on this guild.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'setnick',
-  description: 'Sets the nick of the bot in the current guild. If no nick is given, it resets the nickname.',
+  description: string('setNick', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'setNick [text]',

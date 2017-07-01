@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/favouriteSongs', true, true);
 
@@ -23,7 +24,7 @@ exports.run = (Bastion, message, args) => {
     db.push('/', [ args ], false);
   }
   catch (e) {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   }
   finally {
     message.channel.send({
@@ -33,7 +34,7 @@ exports.run = (Bastion, message, args) => {
         description: args
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -45,7 +46,7 @@ exports.config = {
 
 exports.help = {
   name: 'addfav',
-  description: 'Adds a song to your favourite list specified by name/link.',
+  description: string('addFav', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'addfav <song name | song link>',

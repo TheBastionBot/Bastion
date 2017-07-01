@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -38,7 +40,7 @@ exports.run = (Bastion, message) => {
                    'over you and I will drown in it. I\'m fucking dead, kiddo.'
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -49,7 +51,7 @@ exports.config = {
 
 exports.help = {
   name: 'edgelord',
-  description: 'Shows an awesome message from an edgelord!',
+  description: string('edgeLord', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'edgeLord',

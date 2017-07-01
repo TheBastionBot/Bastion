@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const wd = require('word-definition');
 
 exports.run = (Bastion, message, args) => {
@@ -49,7 +50,7 @@ exports.run = (Bastion, message, args) => {
       };
     }
     message.channel.send(embed).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -61,7 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'define',
-  description: 'Searches the definition of a word from English, French or German dictionary (specified in the message; if no language is specified, defaults to English).',
+  description: string('define', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'define [language_code] <word>',

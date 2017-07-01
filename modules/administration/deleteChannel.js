@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -15,14 +17,11 @@ exports.run = (Bastion, message, args) => {
       channel = message.guild.channels.find('name', args.name.join(' '));
     }
     if (!channel) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'I didn\'t find any channels with the given ID/name.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
     }
   }
 
@@ -42,14 +41,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (channel.id === message.guild.defaultChannel.id) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I can\'t delete the default text channel of this server.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('forbidden', 'errors'), string('deleteDefaultChannel', 'errorMessage'), message.channel);
   }
 
   channel.delete().then(() => {
@@ -77,11 +73,11 @@ exports.run = (Bastion, message, args) => {
           ]
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -97,7 +93,7 @@ exports.config = {
 
 exports.help = {
   name: 'deletechannel',
-  description: 'Deletes a mentioned text channel. If no channel is mentioned, deletes the current text channel.',
+  description: string('deleteChannel', 'commandDescription'),
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'deleteChannel [ [-m] #channel-mention | -i CHANNEL_ID | -n Channel Name ]',

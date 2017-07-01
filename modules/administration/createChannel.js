@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -27,16 +29,14 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let minLength = 2, maxLength = 100;
   args.name = args.name.join('-');
-  if (args.length < 2 || args.name.length > 100) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Channel name should be between 2 and 100 characters.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  if (args.name.length < minLength || args.name.length > maxLength) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('channelNameLength', 'errorMessage', minLength, maxLength), message.channel);
   }
 
   let channelType = 'text';
@@ -66,10 +66,10 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -85,7 +85,7 @@ exports.config = {
 
 exports.help = {
   name: 'createchannel',
-  description: 'Creates a new text/voice channel with a given name.',
+  description: string('createChannel', 'commandDescription'),
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'createChannel [-t | -v] <Channel Name>',

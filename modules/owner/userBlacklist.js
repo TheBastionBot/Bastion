@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -32,23 +34,25 @@ exports.run = (Bastion, message, args) => {
   Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))').then(() => {
     Bastion.db.all('SELECT userID from blacklistedUsers').then(blUsers => {
       blUsers = blUsers.map(u => u.userID);
-      let title;
+      let title, color;
       if (/^(add|\+)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (blUsers.includes(user[i])) continue;
           Bastion.db.run('INSERT OR IGNORE INTO blacklistedUsers (userID) VALUES (?)', [ user[i] ]).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
+        color = Bastion.colors.red;
         title = 'Added to blacklisted users';
       }
       else if (/^(remove|rem|-)$/i.test(args[0])) {
         for (let i = 0; i < user.length; i++) {
           if (!blUsers.includes(user[i])) continue;
           Bastion.db.run(`DELETE FROM blacklistedUsers where userID=${user[i]}`).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
+        color = Bastion.colors.green;
         title = 'Removed from blacklisted users';
       }
       else {
@@ -61,18 +65,18 @@ exports.run = (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.red,
+          color: color,
           title: title,
           description: user.join(', ')
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -83,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'userblacklist',
-  description: 'Adds/Removes user, by mention or user ID, to BOT blacklist, they can\'t use any of the bot\'s commands.',
+  description: string('userBlacklist', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',

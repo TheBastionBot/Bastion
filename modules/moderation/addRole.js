@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -38,16 +40,13 @@ exports.run = (Bastion, message, args) => {
     role = args.slice(1).join(' ');
   }
   role = message.guild.roles.find('name', role);
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
   else if (!role) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'No role found with that name.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   message.guild.members.get(user.id).addRole(role).then(() => {
@@ -58,7 +57,7 @@ exports.run = (Bastion, message, args) => {
         description: `${user.tag} has now been given **${role.name}** role.`
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
     let reason = 'No reason given';
@@ -82,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'addrole',
-  description: 'Adds a mentioned user to the given role. If no user is mentioned, adds you to the given role.',
+  description: string('addRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'addRole [@user-mention] <Role Name>',

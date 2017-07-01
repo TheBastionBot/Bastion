@@ -4,11 +4,13 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   try {
     if (message.deletable) {
       message.delete(1000).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     if (message.guild.voiceConnection) {
@@ -21,115 +23,63 @@ exports.run = (Bastion, message) => {
       }
 
       if (message.guild.voiceConnection.speaking) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'I\'m already playing something in a channel. Can\'t play airhorn now.'
-          }
-        }).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', string('busy', 'errors'), string('isSpeaking', 'errorMessage'), message.channel);
       }
 
       if (!message.guild.voiceConnection.channel.speakable) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'I don\'t have permission to speak in this voice channel.'
-          }
-        }).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Bastion has missing permissions.
+         * @fires bastionMissingPermissions
+         */
+        return Bastion.emit('bastionMissingPermissions', 'SPEAK', message);
       }
 
       message.guild.voiceConnection.playFile('./data/airhorn.wav', { passes: 1 });
     }
+    else if (message.member.voiceChannel) {
+      if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      }
+
+      if (!message.member.voiceChannel.joinable) {
+        /**
+         * Bastion has missing permissions.
+         * @fires bastionMissingPermissions
+         */
+        return Bastion.emit('bastionMissingPermissions', 'CONNECT', message);
+      }
+
+      if (!message.member.voiceChannel.speakable) {
+        /**
+         * Bastion has missing permissions.
+         * @fires bastionMissingPermissions
+         */
+        return Bastion.emit('bastionMissingPermissions', 'SPEAK', message);
+      }
+
+      message.member.voiceChannel.join().then(connection => {
+        const dispatcher = connection.playFile('./data/airhorn.wav', { passes: 1 });
+        dispatcher.on('end', () => {
+          connection.channel.leave();
+        });
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
     else {
-      if (message.member.voiceChannel) {
-        if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) {
-          /**
-          * User has missing permissions.
-          * @fires userMissingPermissions
-          */
-          return Bastion.emit('userMissingPermissions', this.help.userPermission);
-        }
-
-        if (!message.member.voiceChannel.joinable) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'I don\'t have permission to join this voice channel.'
-            }
-          }).then(msg => {
-            msg.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-
-        if (!message.member.voiceChannel.speakable) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'I don\'t have permission to speak in this voice channel.'
-            }
-          }).then(msg => {
-            msg.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-
-        if (message.member.voiceChannel.full) {
-          return message.channel.send({
-            embed: {
-              color: Bastion.colors.red,
-              description: 'This voice channel is currently full. Try playing airhorn later.'
-            }
-          }).then(msg => {
-            msg.delete(10000).catch(e => {
-              Bastion.log.error(e.stack);
-            });
-          }).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }
-
-        message.member.voiceChannel.join().then(connection => {
-          const dispatcher = connection.playFile('./data/airhorn.wav', { passes: 1 });
-          dispatcher.on('end', () => {
-            connection.channel.leave();
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
-      else {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'Either you or me needs to be in a voice channel to use this command.'
-          }
-        }).then(msg => {
-          msg.delete(10000).catch(e => {
-            Bastion.log.error(e.stack);
-          });
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', string('eitherOneInVC', 'errorMessage'), message.channel);
     }
   }
   catch (e) {
@@ -144,7 +94,7 @@ exports.config = {
 
 exports.help = {
   name: 'airhorn',
-  description: 'Plays an airhorn in the current voice channel.',
+  description: string('airhorn', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUTE_MEMBERS',
   usage: 'airhorn',

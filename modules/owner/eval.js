@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -28,7 +30,7 @@ exports.run = (Bastion, message, args) => {
     }
     if (message.deletable) {
       message.delete().catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     message.channel.send({
@@ -46,13 +48,13 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   catch(e) {
     if (message.deletable) {
       message.delete().catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     message.channel.send({
@@ -66,7 +68,7 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -78,7 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'eval',
-  description: 'Evaluates any JavaScript statement.',
+  description: string('eval', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'eval <JavaScript code>',

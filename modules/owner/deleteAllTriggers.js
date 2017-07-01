@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -20,10 +22,10 @@ exports.run = (Bastion, message) => {
         description: 'Deleted all the triggers and responses.'
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -34,7 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'deletealltriggers',
-  description: 'Deletes all the triggers and responses.',
+  description: string('deleteAllTriggers', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'deleteAllTriggers',

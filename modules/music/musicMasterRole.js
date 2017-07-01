@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -21,24 +23,21 @@ exports.run = (Bastion, message, args) => {
           description: 'Music Master role has been removed.'
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
     let role = message.guild.roles.get(args[0]);
 
     if (!role) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No role found for the provided role ID.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
     }
 
     Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=${args[0]} WHERE guildID=${message.guild.id}`).then(() => {
@@ -48,10 +47,10 @@ exports.run = (Bastion, message, args) => {
           description: `**${role.name}** has been set as the Music Master role.`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -63,7 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'musicmasterrole',
-  description: 'Adds a role (by ID) as the music master role of Bastion. Users with this role get access to restricted music commands like summon, stop, etc.',
+  description: string('musicMasterRole', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'musicMasterRole [ROLE_ID]',

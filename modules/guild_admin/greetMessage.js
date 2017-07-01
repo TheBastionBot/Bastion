@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -22,15 +24,15 @@ exports.run = (Bastion, message, args) => {
           description: guild.greetMessage
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
     Bastion.db.run(`UPDATE guildSettings SET greetMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
 
     message.channel.send({
@@ -40,7 +42,7 @@ exports.run = (Bastion, message, args) => {
         description: args.join(' ')
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -52,7 +54,7 @@ exports.config = {
 
 exports.help = {
   name: 'greetmessage',
-  description: 'Edit the greeting message that shows when a new member is joined in the server.',
+  description: string('greetMessage', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greetMessage [Message]',

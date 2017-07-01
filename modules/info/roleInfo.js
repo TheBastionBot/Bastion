@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -60,18 +62,15 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'The specified role was not found.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 };
 
@@ -82,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleinfo',
-  description: 'Shows information about the specified role.',
+  description: string('roleInfo', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',

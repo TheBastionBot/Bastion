@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -26,14 +28,11 @@ exports.run = (Bastion, message, args) => {
     user = Bastion.users.get(args[1]);
   }
   if (!user) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'You need to mention the user or give their ID to whom you want to charge for penalty.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('takeNoUser', 'errorMessage'), message.channel);
   }
   let reason;
   if (args[2]) {
@@ -59,7 +58,7 @@ exports.run = (Bastion, message, args) => {
       ]
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 
   /**
@@ -77,7 +76,7 @@ exports.run = (Bastion, message, args) => {
       ]
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -88,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'take',
-  description: 'Give any specified user (by mention or ID) penalty/fine by deducting a certain amount of Bastion Currencies from his profile, with an optional specified reason.',
+  description: string('take', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',

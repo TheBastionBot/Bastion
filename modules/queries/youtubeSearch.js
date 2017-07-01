@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const yt = require('youtube-dl');
 
 exports.run = (Bastion, message, args) => {
@@ -18,25 +19,20 @@ exports.run = (Bastion, message, args) => {
   args = `ytsearch:${args.join(' ')}`;
   yt.getInfo(args, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
     if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-      let result;
+      let error, errorMessage;
       if (err && err.stack.includes('No video results')) {
-        result = `No results found found for **${args.replace('ytsearch:', '')}**.`;
+        error = string('notFound', 'errors');
+        errorMessage = string('notFound', 'errorMessage', 'video');
       }
       else {
-        result = `Some error has occured while finding results for **${args.replace('ytsearch:', '')}**.`;
+        error = string('connection', 'errors');
+        errorMessage = string('connection', 'errorMessage');
       }
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: result
-        }
-      }).then(m => {
-        m.delete(30000).catch(e => {
-          Bastion.log.error(e.stack);
-        });
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', error, errorMessage, message.channel);
     }
 
     message.channel.send({
@@ -73,7 +69,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -85,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'youtubesearch',
-  description: 'Searches for a video on YouTube and shows the first result.',
+  description: string('youtubeSearch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'youtubeSearch <text>',

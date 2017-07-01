@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -17,14 +19,14 @@ exports.run = (Bastion, message) => {
     let color, greetStats;
     if (row.greetChannelID === message.channel.id) {
       Bastion.db.run(`UPDATE guildSettings SET greet='false', greetChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       greetStats = 'Greeting Messages are now disabled.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET greet='true', greetChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       greetStats = 'Greeting Messages are now enabled in this channel.';
@@ -36,10 +38,10 @@ exports.run = (Bastion, message) => {
         description: greetStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'greet',
-  description: 'Toggle greeting message for new members of the server.',
+  description: string('greet', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greet',

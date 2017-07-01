@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -24,14 +26,14 @@ exports.run = (Bastion, message) => {
     let color, filterLinkStats;
     if (row.filterLink === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET filterLink='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET filterLink='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
@@ -43,10 +45,10 @@ exports.run = (Bastion, message) => {
         description: filterLinkStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -57,7 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'filterlink',
-  description: 'Toggles automatic deleting of any links posted in the server. Does not apply to the server Administrators.',
+  description: string('filterLink', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'ADMINISTRATOR',
   usage: 'filterLink',

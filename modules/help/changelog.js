@@ -1,9 +1,10 @@
 /**
- * @file changeLog command
+ * @file changelog command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const CHANGES = require('../../changes.json');
 
 exports.run = (Bastion, message) => {
@@ -42,7 +43,7 @@ exports.run = (Bastion, message) => {
       }
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -53,9 +54,9 @@ exports.config = {
 
 exports.help = {
   name: 'changelog',
-  description: 'Display changes done in the current version of Bastion Bot.',
+  description: string('changelog', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'changeLog',
+  usage: 'changelog',
   example: []
 };

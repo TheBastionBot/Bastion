@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
@@ -53,32 +54,29 @@ exports.run = (Bastion, message) => {
             }
           }).then(() => {
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             articleMessage.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             activeChannels = activeChannels.slice(activeChannels.indexOf(message.channel.id) + 1, 1);
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t start a typing game now. A typing game is already running in this channel.\nPlease wait for it to end, or wait for 5 mins to end it automatically.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    Bastion.emit('error', string('busy', 'errors'), string('isGameInUse', 'errorMessage', 'typing'), message.channel);
   }
 };
 
@@ -89,7 +87,7 @@ exports.config = {
 
 exports.help = {
   name: 'typinggame',
-  description: 'Starts a typing speed competition. The user to type the given article and send it first, wins. It automatically ends in 5 mins if no one is able to type the article by this time.',
+  description: string('typingGame', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'typingGame',

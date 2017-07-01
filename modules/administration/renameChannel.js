@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
 
   if (!args.old || !args.new) {
@@ -14,8 +16,17 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let minLength = 2, maxLength = 100;
   args.old = args.old.join(' ');
   args.new = args.new.join(' ');
+
+  if (args.new.length < minLength || args.new.length > maxLength) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('channelNameLength', 'errorMessage', minLength, maxLength), message.channel);
+  }
 
   let channel = message.channel;
   if (args.voice) {
@@ -28,14 +39,11 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!channel) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I didn\'t find any channels with the given name.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {
@@ -72,10 +80,10 @@ exports.run = (Bastion, message, args) => {
         ]
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -92,7 +100,7 @@ exports.config = {
 
 exports.help = {
   name: 'renamechannel',
-  description: 'Renames a specified text (default) or voice channel to a new name.',
+  description: string('renameChannel', 'commandDescription'),
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'renameChannel [ -t | -v ] < -o Old Channel Name -n New Channel Name>',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -16,7 +18,7 @@ exports.run = (Bastion, message) => {
                    'one off donations via **PayPal**: https://paypal.me/snkrsnkampa'
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -27,7 +29,7 @@ exports.config = {
 
 exports.help = {
   name: 'donate',
-  description: 'Instructions on how to financially support the Bastion BOT project.',
+  description: string('donate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'donate',

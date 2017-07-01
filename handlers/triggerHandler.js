@@ -35,12 +35,12 @@ module.exports = message => {
       response = response.replace(/\$server/ig, `**${message.guild.name}**`);
       response = response.replace(/\$prefix/ig, message.client.config.prefix);
       return message.channel.send(response).catch(e => {
-        message.client.log.error(e.stack);
+        message.client.log.error(e);
       });
     }
   }).catch(() => {
     message.client.db.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)').catch(e => {
-      message.client.log.error(e.stack);
+      message.client.log.error(e);
     });
   });
 };

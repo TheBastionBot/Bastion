@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   let outcomes = [
     'Heads',
@@ -25,7 +27,7 @@ exports.run = (Bastion, message, args) => {
       description: outcome
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -36,7 +38,7 @@ exports.config = {
 
 exports.help = {
   name: 'flip',
-  description: 'Flips a coin and gives you the the outcome (Heads or Tails). If a number is provided as an argument, it flips that no. of coins.',
+  description: string('flip', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'flip [no_of_coins]',

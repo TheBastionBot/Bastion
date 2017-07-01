@@ -14,7 +14,7 @@
 Think no more, Bastion Bot can do it all (*and even more*). Seriously, what else do you need?  
 
 Bastion: The one Discord Bot you'll always need.  
-<a title="Visit Bastion Bot website to Learn More">Learn More</a>
+[Learn More](https://bastion.js.org 'Visit Bastion Bot website to Learn More')
 
 ## Test it before you use it.
 If you just want to get the chill of Bastion or just want to play around with it, you can join the [Bastion Bot: Discord Server](https://discord.gg/fzx8fkt).

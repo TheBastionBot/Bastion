@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -25,27 +27,20 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`).then(todo => {
     if (!todo) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: 'Todo list not found',
-          description: `${message.author.username}, you haven't created a todo list.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
     }
     else {
       let list = JSON.parse(todo.list);
       if (index >= list.length) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'That index was not found.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
       }
       let deletedItem = list[parseInt(args[0]) - 1];
       list.splice(parseInt(args[0]) - 1, 1);
@@ -56,14 +51,14 @@ exports.run = (Bastion, message, args) => {
             description: `${message.author.username}, I've deleted **${deletedItem}** from your todo list.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -74,7 +69,7 @@ exports.config = {
 
 exports.help = {
   name: 'deletetodo',
-  description: 'Deletes an item from your todo list by it\'s index number.',
+  description: string('deleteTodo', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'deleteTodo <index>',

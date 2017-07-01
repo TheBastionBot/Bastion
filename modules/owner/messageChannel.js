@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -28,7 +30,7 @@ exports.run = (Bastion, message, args) => {
         description: args.slice(1).join(' ')
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -40,7 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'messagechannel',
-  description: 'Sends a message to a specified channel (by ID) of a server the bot is connected tos.',
+  description: string('messageChannel', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'messageChannel <channel_id> <message>',

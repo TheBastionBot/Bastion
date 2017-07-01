@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?\/ ?.+[^/])+)$/i.test(args = args.join(' '))) {
     /**
@@ -22,7 +24,7 @@ exports.run = (Bastion, message, args) => {
       // description: args.split('/').random()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -33,7 +35,7 @@ exports.config = {
 
 exports.help = {
   name: 'choose',
-  description: 'Ask the bot to choose a option from any number of options, separated by a `/`.',
+  description: string('choose', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'choose <choice1>/<choice2>[/<choice3>][...]',

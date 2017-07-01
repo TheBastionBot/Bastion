@@ -4,17 +4,16 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.autoAssignableRoles === '[]') {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No auto assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'auto-assignable role'), message.channel);
     }
 
     let roles = JSON.parse(row.autoAssignableRoles);
@@ -41,10 +40,10 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -58,7 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listautoassignableroles',
-  description: 'Lists all auto assignable roles.',
+  description: string('listAutoAssignableRoles', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'listAutoAssignableRoles [page_no]',

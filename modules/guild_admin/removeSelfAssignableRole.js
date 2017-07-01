@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -25,26 +27,20 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.selfAssignableRoles === '[]') {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No self assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'self-assignable roles'), message.channel);
     }
     else {
       let roles = JSON.parse(row.selfAssignableRoles);
       if (index >= roles.length) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'That index was not found.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
       }
       let deletedRoleID = roles[parseInt(args[0]) - 1];
       roles.splice(parseInt(args[0]) - 1, 1);
@@ -55,14 +51,14 @@ exports.run = (Bastion, message, args) => {
             description: `I've deleted **${message.guild.roles.get(deletedRoleID).name}** from self assignable roles.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -73,7 +69,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeselfassignablerole',
-  description: 'Deletes a role from the self assignable roles by it\'s index number.',
+  description: string('removeSelfAssignableRole', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeSelfAssignableRole <index>',

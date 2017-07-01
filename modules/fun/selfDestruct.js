@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!args.content) {
     /**
@@ -13,20 +15,18 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (args.timeout > 600) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'The timeout can\'t exceed 600 seconds (10 minutes).'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+  let minTimeout = 5, maxTimeout = 600;
+  if (args.timeout < minTimeout || args.timeout > maxTimeout) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('selfDestructTimeout', 'errorMessage', minTimeout, maxTimeout), message.channel);
   }
 
   if (message.deletable) {
     message.delete().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 
@@ -38,7 +38,7 @@ exports.run = (Bastion, message, args) => {
   }).then(msg => {
     msg.delete(args.timeout * 1000);
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -53,7 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'selfdestruct',
-  description: 'Sends a message that will be auto deleted after the given amount of seconds. If no timeout is given, it defaults to 30 seconds.',
+  description: string('selfDestruct', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'selfDestruct <content> [-t <seconds>]',

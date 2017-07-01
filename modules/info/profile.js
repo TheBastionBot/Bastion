@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!(args = message.mentions.users.first())) {
     args = message.author;
@@ -17,18 +19,15 @@ exports.run = (Bastion, message, args) => {
             description: `Your profile is now created, <@${args.id}>`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
 
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `<@${args.id}>'s profile is not yet created.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
     }
 
     message.channel.send({
@@ -63,10 +62,10 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -77,7 +76,7 @@ exports.config = {
 
 exports.help = {
   name: 'profile',
-  description: 'Shows a mentioned user\'s Bastion profile. If no one is mentioned, shows your profile.',
+  description: string('profile', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'profile [@user-mention]',

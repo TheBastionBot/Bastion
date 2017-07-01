@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -21,10 +23,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -35,10 +37,10 @@ exports.run = (Bastion, message, args) => {
           description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'setgame',
-  description: 'Sets the bot\'s game to the given text. If no text is given, sets the bot\'s game to the default game (given in `config.json`).',
+  description: string('setGame', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'setGame [text]',

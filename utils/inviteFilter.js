@@ -15,20 +15,23 @@ module.exports = message => {
       if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content)) {
         if (message.deletable) {
           message.delete().catch(e => {
-            message.client.log.error(e.stack);
+            message.client.log.error(e);
           });
         }
+
         message.channel.send({
           embed: {
             color: message.client.colors.orange,
             description: `${message.author} you are not allowed to post server invite links here.`
           }
+        }).then(msg => {
+          msg.delete(5000);
         }).catch(e => {
           message.client.log.error(e);
         });
       }
     }
   }).catch(e => {
-    message.client.log.error(e.stack);
+    message.client.log.error(e);
   });
 };

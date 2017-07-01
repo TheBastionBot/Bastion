@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -19,7 +21,7 @@ exports.run = (Bastion, message, args) => {
       description: args.join(' ')
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -30,7 +32,7 @@ exports.config = {
 
 exports.help = {
   name: 'echo',
-  description: 'Sends the same message that you send as an argument. Just like an echo!',
+  description: string('echo', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'echo <text>',

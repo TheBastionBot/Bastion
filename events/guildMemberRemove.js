@@ -24,15 +24,15 @@ module.exports = member => {
       }).then(m => {
         if (row.farewellTimeout > 0) {
           m.delete(1000 * parseInt(row.farewellTimeout)).catch(e => {
-            member.client.log.error(e.stack);
+            member.client.log.error(e);
           });
         }
       }).catch(e => {
-        member.client.log.error(e.stack);
+        member.client.log.error(e);
       });
     }
   }).catch(e => {
-    member.client.log.error(e.stack);
+    member.client.log.error(e);
   });
 
   // Commented this out as using requires BAN_MEMBERS perms and not everyone would've given the bot perms

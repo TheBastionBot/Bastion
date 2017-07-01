@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -31,10 +33,10 @@ exports.run = (Bastion, message, args) => {
             description: `${message.author.username}, I've created your todo list and added **${args.join(' ')}** to it.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else {
@@ -48,14 +50,14 @@ exports.run = (Bastion, message, args) => {
             description: `${message.author.username}, I've added **${args.join(' ')}** to your todo list.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -66,7 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'todo',
-  description: 'Adds a text to your todo list.',
+  description: string('todo', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'todo <text>',

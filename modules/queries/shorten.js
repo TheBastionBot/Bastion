@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -17,14 +18,11 @@ exports.run = (Bastion, message, args) => {
 
   args = encodeURI(args.join(' '));
   if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args)) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Invalid URL'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'URL'), message.channel);
   }
 
   let options = {
@@ -37,14 +35,11 @@ exports.run = (Bastion, message, args) => {
 
   request(options, function (error, response, body) {
     if (error) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some error has occured, please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
     if (response.statusCode === 200) {
       message.channel.send({
@@ -65,19 +60,15 @@ exports.run = (Bastion, message, args) => {
           }
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
     else {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: `ERROR ${response.body.error.code}`,
-          description: response.body.error.message
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
     }
   });
 };
@@ -89,7 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'shorten',
-  description: 'Shortens a specified URL using Google URL Shortner.',
+  description: string('shorten', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'shorten <URL>',

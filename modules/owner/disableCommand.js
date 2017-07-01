@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -23,14 +25,11 @@ exports.run = (Bastion, message, args) => {
 
   let command = args[0].toLowerCase();
   if (command === 'disablecommand' || command === 'disablecmd' || command === 'enablecommand' || command === 'enablecmd') {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `Can't disable \`${command}\` command.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('forbidden', 'errors'), string('commandNoDisable', 'errorMessage', command), message.channel);
   }
 
   if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
@@ -42,14 +41,11 @@ exports.run = (Bastion, message, args) => {
     }
   }
   else {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `\`${command}\` command was not found.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
   }
 
   if (!command.config.enabled) return;
@@ -61,7 +57,7 @@ exports.run = (Bastion, message, args) => {
       description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`${Bastion.config.prefix}enableCommand ${command.help.name}\`.`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -72,7 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'disablecommand',
-  description: 'Disables a command temporarily until Bastion is restarted or it is enabled again.',
+  description: string('disableCommand', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'disableCommand <command_name>',

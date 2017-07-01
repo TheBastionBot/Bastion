@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -38,16 +40,16 @@ exports.run = (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.green,
           title: 'Added Words to Filter List',
-          description: filteredWords.join(', ')
+          description: args.join(', ')
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -58,7 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'addfilteredwords',
-  description: 'Adds words (separated by spaces) to the list of filtered words. If someone sends a message containing these words, their message will be automatically deleted.',
+  description: string('addFilteredWords', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'ADMINISTRATOR',
   usage: 'addFilteredWords word [anotherWord] [someOtherWord]',

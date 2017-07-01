@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -42,7 +43,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
       catch (e) {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
         color = Bastion.colors.red;
         description = 'Some error has occured while parsing the received data. Please try again later or contact the developer.';
       }
@@ -72,7 +73,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -84,7 +85,7 @@ exports.config = {
 
 exports.help = {
   name: 'wikipedia',
-  description: 'Searches Wikipedia and shows the result.',
+  description: string('wikipedia', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'wikipedia <text>',

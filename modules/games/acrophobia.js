@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 let activeChannels = {};
 
 exports.run = (Bastion, message) => {
@@ -37,7 +38,7 @@ exports.run = (Bastion, message) => {
       collector.on('collect', (msg, sentences) => {
         if (msg.deletable) {
           msg.delete().catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         msg.channel.send({
@@ -51,10 +52,10 @@ exports.run = (Bastion, message) => {
         }).then(m => {
           activeChannels[message.channel.id].usersSubmitted.push(msg.author.id);
           m.delete(5000).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       });
       collector.on('end', (collection) => {
@@ -68,10 +69,10 @@ exports.run = (Bastion, message) => {
           }).then(() => {
             delete activeChannels[message.channel.id];
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
         else {
@@ -96,7 +97,7 @@ exports.run = (Bastion, message) => {
             }
           }).then(subMsg => {
             msg.delete().catch(e => {
-              Bastion.log.error(e.stack);
+              Bastion.log.error(e);
             });
             const votesCollector = msg.channel.createMessageCollector(
               m => !m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) <= collection.size && !activeChannels[message.channel.id].usersVoted.includes(m.author.id),
@@ -105,7 +106,7 @@ exports.run = (Bastion, message) => {
             votesCollector.on('collect', (msg, votes) => {
               if (msg.deletable) {
                 msg.delete().catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               msg.channel.send({
@@ -119,7 +120,7 @@ exports.run = (Bastion, message) => {
               }).then(m => {
                 activeChannels[message.channel.id].usersVoted.push(msg.author.id);
                 m.delete(5000).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               });
             });
@@ -135,10 +136,10 @@ exports.run = (Bastion, message) => {
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
               else {
@@ -170,31 +171,28 @@ exports.run = (Bastion, message) => {
                   delete activeChannels[message.channel.id].usersSubmitted;
                   delete activeChannels[message.channel.id];
                   subMsg.delete().catch(e => {
-                    Bastion.log.error(e.stack);
+                    Bastion.log.error(e);
                   });
                 }).catch(e => {
-                  Bastion.log.error(e.stack);
+                  Bastion.log.error(e);
                 });
               }
             });
           }).catch(e => {
-            Bastion.log.error(e.stack);
+            Bastion.log.error(e);
           });
         }
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Can\'t start an acrophobia now. Another acrophobia game is already running in this channel.\nPlease wait 3 minutes for it to end.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    Bastion.emit('error', string('busy', 'errors'), string('isGameInUse', 'errorMessage', 'acrophobia'), message.channel);
   }
 };
 
@@ -205,7 +203,7 @@ exports.config = {
 
 exports.help = {
   name: 'acrophobia',
-  description: 'Starts a acrophobia game. The user will have to make a sentence from the given acronym within 2 minutes. After the submission is done, users can vote for the best sentence, the sentence to get highest no. of votes win.',
+  description: string('acrophobia', 'commandDescription'),
   userPermission: '',
   usage: 'acrophobia',
   example: []

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -17,15 +19,11 @@ exports.run = (Bastion, message, args) => {
     args = JSON.parse(args.join(' '));
   }
   catch (e) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Invalid embed object. Please check that it\'s an valid embed object or create one [here](https://bastion.js.org/tools/embed_builder/).' +
-                     `\`\`\`${e.toString()}\`\`\``
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidEmbedObject', 'errorMessage')}\`\`\`${e.toString()}\`\`\``, message.channel);
   }
 
   message.channel.send({
@@ -33,11 +31,11 @@ exports.run = (Bastion, message, args) => {
   }).then(() => {
     if (message.deletable) {
       message.delete().catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -48,7 +46,7 @@ exports.config = {
 
 exports.help = {
   name: 'sendembed',
-  description: 'Sends an embed message created from the specified embed JavaScript object. To create an embed object, graphically, [click here](https://bastion.js.org/tools/embed_builder/).',
+  description: string('sendEmbed', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'sendEmbed <embedObject>',

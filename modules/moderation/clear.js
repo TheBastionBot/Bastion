@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -46,19 +48,17 @@ exports.run = (Bastion, message, args) => {
     if (msgs.size < 2 || msgs.length < 2) {
       let error;
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
-        error = 'Dude, you can delete a single message by yourself, right? You don\'t need me for that!';
+        error = string('singleMessage', 'errorMessage');
       }
       else {
-        error = 'No messages found that could be deleted.';
+        error = string('noDeletableMessage', 'errorMessage');
       }
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: error
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', '', error, message.channel);
     }
     message.channel.bulkDelete(msgs).then(() => {
       let reason = 'No reason given';
@@ -86,7 +86,7 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: 'Delete a bulk of messages from a channel specified by an user and/or number. If no user is specified, delete everyone\'s messages. If no amount is specified, it defaults to 100 messages. Using `--bots` flag clears messages from bots in that channel. Using `--nonpinned` flag clears messages that aren\'t pinned.',
+  description: string('clear', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'MANAGE_MESSAGES',
   usage: 'clear [@user-mention | --bots] [no_of_messages]',

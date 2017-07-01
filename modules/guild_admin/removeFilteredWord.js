@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -25,27 +27,21 @@ exports.run = (Bastion, message, args) => {
 
   Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
     if (!row || row.filteredWords === '[]') {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No self assignable roles found.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
     }
     else {
       let filteredWords = JSON.parse(row.filteredWords);
 
       if (index >= filteredWords.length) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.red,
-            description: 'That index was not found.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e.stack);
-        });
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
       }
 
       let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];
@@ -58,14 +54,14 @@ exports.run = (Bastion, message, args) => {
             description: `I've deleted **${removedFilteredWord}** from filtered words.`
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -76,7 +72,7 @@ exports.config = {
 
 exports.help = {
   name: 'removefilteredword',
-  description: 'Deletes a word from the list of filtered words it\'s index number.',
+  description: string('removeFilteredWord', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeFilteredWord <index>',

@@ -5,18 +5,16 @@
  */
 
 const request = require('request');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   request('http://random.cat/meow', function (error, response, body) {
     if (error) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Some error has occured while getting data from server. Please try again later.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
 
     if (response && response.statusCode === 200) {
@@ -32,7 +30,7 @@ exports.run = (Bastion, message) => {
       message.channel.send({
         files: [ cat ]
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }
   });
@@ -45,7 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'cat',
-  description: 'Sends a random cat image.',
+  description: string('cat', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'cat',

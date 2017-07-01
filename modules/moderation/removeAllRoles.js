@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -32,7 +34,7 @@ exports.run = (Bastion, message, args) => {
   if (!user) {
     user = message.author;
   }
-  if (message.author.id !== message.guild.ownerID && user.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (message.author.id !== message.guild.ownerID && user.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
   message.guild.members.get(user.id).removeRoles(message.guild.members.get(user.id).roles).then(() => {
     message.channel.send({
@@ -53,14 +55,6 @@ exports.run = (Bastion, message, args) => {
 
   }).catch(e => {
     Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'I don\'t have enough permission to do that operation.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
   });
 };
 
@@ -71,7 +65,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeallroles',
-  description: 'Removes all roles from a mentioned user. If no user is mentioned, removes all roles from you.',
+  description: string('removeAllRoles', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'removeAllRoles [@user-mention]',

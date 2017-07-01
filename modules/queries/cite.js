@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !(parseInt(args[0]) < 9223372036854775807)) {
     /**
@@ -25,21 +27,18 @@ exports.run = (Bastion, message, args) => {
         timestamp: msg.createdAt
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
     if (e.stack.includes('Unknown Message')) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'No message was found with the specified Message ID in this channel.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', string('notFound', 'errors'), string('messageNotFound', 'errorMessage'), message.channel);
     }
     else {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     }
   });
 };
@@ -51,7 +50,7 @@ exports.config = {
 
 exports.help = {
   name: 'cite',
-  description: 'Cites a users message, specified by the message ID, in the channel.',
+  description: string('cite', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'cite <MESSAGE_ID>',

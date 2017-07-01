@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -22,8 +23,11 @@ exports.run = (Bastion, message, args) => {
     let player, url, color, title = '', description = '', data = [];
 
     if (err) {
-      color = Bastion.colors.red;
-      description = 'Some error has occured while getting data from the server. Please try again later.';
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
     else if (response.statusCode === 200) {
       color = Bastion.colors.blue;
@@ -98,19 +102,19 @@ exports.run = (Bastion, message, args) => {
         ];
       }
       catch (e) {
-        color = Bastion.colors.red;
-        description = 'Some error has occured while parsing the received data. Please try again later.';
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', string('parseError', 'errors'), string('parse', 'errorMessage'), message.channel);
       }
     }
     else {
-      color = Bastion.colors.red;
-      description = 'Some error has occured while getting data from the servers.';
-      data = [
-        {
-          name: `${response.statusCode}`,
-          value: response.statusMessage
-        }
-      ];
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
     }
 
     message.channel.send({
@@ -128,7 +132,7 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   });
 };
@@ -144,7 +148,7 @@ exports.config = {
 
 exports.help = {
   name: 'battlefield4',
-  description: 'Get stats of any Battlefield 4 player.',
+  description: string('battlefield4', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'battlefield4 <player_name>',

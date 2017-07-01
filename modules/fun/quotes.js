@@ -5,6 +5,7 @@
  */
 
 const quotes = require('../../data/quotes.json');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   /*
@@ -53,7 +54,7 @@ exports.run = (Bastion, message, args) => {
       }
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -68,7 +69,7 @@ exports.config = {
 
 exports.help = {
   name: 'quotes',
-  description: 'Shows a quote to get you inspired. Search a quote by it\'s index no. or by the author. If none is provided, shows a random quote.',
+  description: string('quotes', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'quotes [ -n | -a Author Name]',

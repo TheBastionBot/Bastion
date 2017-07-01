@@ -40,6 +40,6 @@ module.exports = message => {
       cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
     }
   }).catch(e => {
-    message.client.log.error(e.stack);
+    message.client.log.error(e);
   });
 };

@@ -5,6 +5,9 @@
  */
 
 // This feature is absolutely useless because Discord already has audit logs. I'll probably remove this in future.
+
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -18,14 +21,14 @@ exports.run = (Bastion, message) => {
     let color, modLogStats;
     if (row.modLog === 'false') {
       Bastion.db.run(`UPDATE guildSettings SET modLog='true', modLogChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       modLogStats = 'Moderation audit logging is now enabled in this channel.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET modLog='false', modLogChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       modLogStats = 'Moderation audit logging is now disabled.';
@@ -36,10 +39,10 @@ exports.run = (Bastion, message) => {
         description: modLogStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -50,7 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'modlog',
-  description: 'Toggle logging of various moderation events in the server.',
+  description: string('modLog', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'modLog',

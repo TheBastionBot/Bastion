@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || !args.join(' ').endsWith('?')) {
     /**
@@ -47,7 +49,7 @@ exports.run = (Bastion, message, args) => {
       }
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -58,7 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'magic8ball',
-  description: 'Ask the Magic 8-Ball a polar (yes/no) question.',
+  description: string('magic8ball', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'magic8ball <Question>?',

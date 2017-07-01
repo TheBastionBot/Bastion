@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -22,6 +24,15 @@ exports.run = (Bastion, message, args) => {
 
   if (!Bastion.resolver.resolveColor(args.color)) {
     args.color = 0;
+  }
+
+  let maxLength = 100;
+  if (args.name && args.name.join(' ').length > maxLength) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('roleNameLength', 'errorMessage', maxLength), message.channel);
   }
 
   let data = roleData(args.name.join(' '), args.color);
@@ -45,26 +56,11 @@ exports.run = (Bastion, message, args) => {
           name: 'Color',
           value: role.hexColor === '#000000' ? args.color : role.hexColor,
           inline: true
-        },
-        {
-          name: 'Position',
-          value: role.position,
-          inline: true
-        },
-        {
-          name: 'Hoisted',
-          value: role.hoist,
-          inline: true
-        },
-        {
-          name: 'Mentionable',
-          value: role.mentionable,
-          inline: true
         }
       ]
     }
   })).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -79,7 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'createrole',
-  description: 'Creates a new role with a given color (optional) and a given name (optional).',
+  description: string('createRole', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'createrole [[-n] Role Name] [-c hex-color-code]',

@@ -5,6 +5,7 @@
  */
 
 const catFacts = require('../../data/catFacts.json');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   message.channel.send({
@@ -15,7 +16,7 @@ exports.run = (Bastion, message) => {
       // description: catFacts.random()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -26,7 +27,7 @@ exports.config = {
 
 exports.help = {
   name: 'catfact',
-  description: 'Shows a random catfact.',
+  description: string('catFact', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'catfact',

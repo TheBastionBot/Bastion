@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -17,14 +19,14 @@ exports.run = (Bastion, message) => {
     let color, greetDMStats;
     if (row.greetDM === 'true') {
       Bastion.db.run(`UPDATE guildSettings SET greetDM='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.red;
       greetDMStats = 'Sending Greeting Message as Direct Messages are now disabled.';
     }
     else {
       Bastion.db.run(`UPDATE guildSettings SET greetDM='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
       color = Bastion.colors.green;
       greetDMStats = 'Sending Greeting Message as Direct Messages are now enabled.';
@@ -36,10 +38,10 @@ exports.run = (Bastion, message) => {
         description: greetDMStats
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -50,7 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'greetdm',
-  description: 'Toggle sending of greeting message as direct message for new members of the server.',
+  description: string('greetDM', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greetDM',

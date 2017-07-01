@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -35,14 +37,11 @@ exports.run = (Bastion, message, args) => {
   }
   args = args.filter(r => message.guild.roles.get(r));
   if (args.length < 1) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'The role ID(s) you specified doesn\'t match any role.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
   Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
@@ -63,13 +62,13 @@ exports.run = (Bastion, message, args) => {
           description: roleNames.join(', ')
         }
       }).catch(e => {
-        Bastion.log.error(e.stack);
+        Bastion.log.error(e);
       });
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -80,7 +79,7 @@ exports.config = {
 
 exports.help = {
   name: 'addautoassignableroles',
-  description: 'Adds roles, specified by role ID, to auto assignable roles category, anyone who joins the server gets these roles automatically.',
+  description: string('addAutoAssignableRoles', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'ADMINISTRATOR',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',

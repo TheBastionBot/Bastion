@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
@@ -17,24 +18,18 @@ exports.run = (Bastion, message, args) => {
 
   args[0] = args[0].toLowerCase();
   if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `**${args[0]}** is not a valid region. Valid regions are \`US\`, \`EU\`, \`KR\` and \`CN\`.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidRegion', 'errorMessage', '`US`, `EU`, `KR` and `CN`'), message.channel);
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `**${args[1]}** is not a valid BattleTag.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e.stack);
-    });
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'BattleTag'), message.channel);
   }
 
   ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
@@ -176,19 +171,16 @@ exports.run = (Bastion, message, args) => {
         }
       }
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
     if (e.stack.includes('NOT_FOUND')) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: `No player with BattleTag **${args[1]}** found in the region **${args[0].toUpperCase()}**.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e.stack);
-      });
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
     }
   });
 };
@@ -200,7 +192,7 @@ exports.config = {
 
 exports.help = {
   name: 'overwatch',
-  description: 'Shows Overwatch player stats specified by his Region and BattleTag.',
+  description: string('overwatch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',

@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -30,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) {
@@ -81,7 +83,7 @@ exports.config = {
 
 exports.help = {
   name: 'undeafen',
-  description: 'UnDeafens a mentioned user with an optional reason.',
+  description: string('unDeafen', 'commandDescription'),
   botPermission: 'DEAFEN_MEMBERS',
   userPermission: 'DEAFEN_MEMBERS',
   usage: 'unDeafen @user-mention [Reason]',

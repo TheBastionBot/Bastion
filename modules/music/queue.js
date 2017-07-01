@@ -4,10 +4,12 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -19,7 +21,7 @@ exports.config = {
 
 exports.help = {
   name: 'queue',
-  description: 'Shows the list of music in the queue.',
+  description: string('queue', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'queue',

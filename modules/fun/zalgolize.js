@@ -5,6 +5,7 @@
  */
 
 const zalgo = require('zalgolize');
+const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -22,7 +23,7 @@ exports.run = (Bastion, message, args) => {
       description: zalgo(args.join(' '))
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -33,9 +34,9 @@ exports.config = {
 
 exports.help = {
   name: 'zalgolize',
-  description: 'Zalgolizes a given text.',
+  description: string('zalgolize', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'zaloglize <text>',
-  example: [ 'zaloglize It looks clumsy, but it\'s cool!' ]
+  usage: 'zalgolize <text>',
+  example: [ 'zalgolize It looks clumsy, but it\'s cool!' ]
 };

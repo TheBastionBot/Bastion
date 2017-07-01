@@ -24,15 +24,15 @@ module.exports = member => {
       }).then(m => {
         if (row.greetTimeout > 0) {
           m.delete(1000 * parseInt(row.greetTimeout)).catch(e => {
-            member.client.log.error(e.stack);
+            member.client.log.error(e);
           });
         }
       }).catch(e => {
-        member.client.log.error(e.stack);
+        member.client.log.error(e);
       });
     }
   }).catch(e => {
-    member.client.log.error(e.stack);
+    member.client.log.error(e);
   });
 
   member.client.db.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
@@ -54,15 +54,15 @@ module.exports = member => {
       }).then(m => {
         if (row.greetTimeout > 0) {
           m.delete(1000 * parseInt(row.greetTimeout)).catch(e => {
-            member.client.log.error(e.stack);
+            member.client.log.error(e);
           });
         }
       }).catch(e => {
-        member.client.log.error(e.stack);
+        member.client.log.error(e);
       });
     }
   }).catch(e => {
-    member.client.log.error(e.stack);
+    member.client.log.error(e);
   });
 
   member.client.emit('serverLog', member.client, member.guild, 'guildMemberAdd', {
@@ -75,9 +75,9 @@ module.exports = member => {
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
     if (autoAssignableRoles.length < 1) return;
     member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {
-      member.client.log.error(e.stack);
+      member.client.log.error(e);
     });
   }).catch(e => {
-    member.client.log.error(e.stack);
+    member.client.log.error(e);
   });
 };

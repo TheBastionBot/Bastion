@@ -36,6 +36,7 @@ module.exports = Bastion => {
   Bastion.on('channelUpdate', LOAD_EVENTS('channelUpdate'));
   /**
    * Emitted whenever Bastion's WebSocket encounters a connection error.
+   * Also handles other errors emitted by Bastion.
    * @listens error
    */
   Bastion.on('error', LOAD_EVENTS('error'));

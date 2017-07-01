@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const credentials = require('../../settings/credentials.json');
 const HiRez = require('hirez.js');
 const hirez = new HiRez({
@@ -30,7 +31,7 @@ exports.run = (Bastion, message, args) => {
         generatedSession = null;
       }, 15 * 60 * 1000);
     }).catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
   else {
@@ -48,7 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'paladins',
-  description: 'Get detailed stats of any Paladins player.',
+  description: string('paladins', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'paladins <player_name>',
@@ -69,14 +70,11 @@ function fetchAndSend(message, args) {
         playerStatus = playerStatus[0];
 
         if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || championRanks === 0) {
-          message.channel.send({
-            embed: {
-              color: message.client.colors.red,
-              description: `Player **${args.player}** doesn't exist or we don't have any record of them yet.`
-            }
-          }).catch(e => {
-            message.client.log.error(e.stack);
-          });
+          /**
+           * Error condition is encountered.
+           * @fires error
+           */
+          message.client.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
         }
         else {
           player = player[0];
@@ -143,16 +141,16 @@ function fetchAndSend(message, args) {
               }
             }
           }).catch(e => {
-            message.client.log.error(e.stack);
+            message.client.log.error(e);
           });
         }
       }).catch(e => {
-        message.client.log.error(e.stack);
+        message.client.log.error(e);
       });
     }).catch(e => {
-      message.client.log.error(e.stack);
+      message.client.log.error(e);
     });
   }).catch(e => {
-    message.client.log.error(e.stack);
+    message.client.log.error(e);
   });
 }

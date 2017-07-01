@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const question = require('../../data/wouldYouRather.json');
 
 exports.run = (Bastion, message) => {
@@ -14,7 +15,7 @@ exports.run = (Bastion, message) => {
       // description: question.random()
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -25,7 +26,7 @@ exports.config = {
 
 exports.help = {
   name: 'wouldyourather',
-  description: 'Asks you a would you rather question! Let\'s see how you answer that.',
+  description: string('wouldYouRather', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'wouldYouRather',

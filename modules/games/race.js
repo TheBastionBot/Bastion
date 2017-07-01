@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
 const ProgressBar = require('../../utils/progress');
 
 exports.run = (Bastion, message) => {
@@ -84,7 +85,7 @@ exports.run = (Bastion, message) => {
             ]
           }
         }).catch(e => {
-          Bastion.log.error(e.stack);
+          Bastion.log.error(e);
         });
       }
       if (bastion.complete || racer.complete) {
@@ -92,7 +93,7 @@ exports.run = (Bastion, message) => {
       }
     }, 1000);
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -103,7 +104,7 @@ exports.config = {
 
 exports.help = {
   name: 'race',
-  description: 'Starts a race against Bastion.',
+  description: string('race', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'race',

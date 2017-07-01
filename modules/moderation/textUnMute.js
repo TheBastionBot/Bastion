@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -30,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
   let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
   if (permissionOverwrites) {
@@ -86,7 +88,7 @@ exports.config = {
 
 exports.help = {
   name: 'textunmute',
-  description: 'UnMutes a previously muted user in a channel with an optional reason.',
+  description: string('textUnMute', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'textUnMute @user-mention [Reason]',

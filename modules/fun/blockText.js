@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -27,7 +29,7 @@ exports.run = (Bastion, message, args) => {
                       replace(/0/g, ':zero:');
 
   message.channel.send(blockedChars).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -38,7 +40,7 @@ exports.config = {
 
 exports.help = {
   name: 'blocktext',
-  description: 'Sends the given text as blocked texts.',
+  description: string('blockText', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'blockText <text>',

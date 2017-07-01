@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message) => {
   let streamers = Array.from(message.guild.presences.filter(p => p.game && p.game.streaming === true).keys());
   message.channel.send({
@@ -13,7 +15,7 @@ exports.run = (Bastion, message) => {
       description: streamers.length > 10 ? `<@${streamers.splice(0, 10).join('>\n<@')}>\nand ${streamers.length - 10} others are now live.` : `<@${streamers.join('>\n<@')}>`
     }
   }).catch(e => {
-    Bastion.log.error(e.stack);
+    Bastion.log.error(e);
   });
 };
 
@@ -24,7 +26,7 @@ exports.config = {
 
 exports.help = {
   name: 'live',
-  description: 'Shows the list of users in the server who are currently streaming.',
+  description: string('live', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'live',

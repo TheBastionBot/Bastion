@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const string = require('../../handlers/languageHandler');
+
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -23,7 +25,7 @@ exports.run = (Bastion, message, args) => {
 
   if (Bastion.guilds.get(args[0]).available) {
     Bastion.guilds.get(args[0]).leave().catch(e => {
-      Bastion.log.error(e.stack);
+      Bastion.log.error(e);
     });
   }
 };
@@ -35,7 +37,7 @@ exports.config = {
 
 exports.help = {
   name: 'leave',
-  description: 'Tells the bot to leave a specified server by ID.',
+  description: string('leave', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'leave <guild_id>',
