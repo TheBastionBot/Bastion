@@ -1,5 +1,5 @@
 {
-  "date": "June 30, 2017",
+  "date": "July 1, 2017",
   "updated": [
     "Improvements to `airhorn` command",
     "Fixed `createChannel` command",
@@ -14,10 +14,12 @@
     "Now users can report anyone, even the server owner",
     "Fixed `betFlip` & `betRoll` commands",
     "Fixed skip vote count",
+    "Added support for whitelisting domains from link filter",
     "Minor fixes, improvements & changes to all modules"
   ],
   "added": [
     "Added `followURL` command."
+    "Added `addWhitelistDomains` command."
   ],
   "removed": []
 }
