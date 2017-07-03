@@ -21,7 +21,10 @@ module.exports = Bastion => {
         let cronExp = scheduledCommands[i].cronExp,
           command = scheduledCommands[i].command, cmd,
           channel = Bastion.channels.get(scheduledCommands[i].channelID);
-        if (!channel) return;
+        if (!channel) {
+          removeScheduledCommandByChannelID(Bastion, scheduledCommands[i].channelID);
+          continue;
+        }
         let args = scheduledCommands[i].arguments ? scheduledCommands[i].arguments.split(' ') : '';
 
         let job = new CronJob(cronExp,
@@ -33,18 +36,25 @@ module.exports = Bastion => {
               else if (Bastion.aliases.has(command)) {
                 cmd = Bastion.commands.get(Bastion.aliases.get(command));
               }
-              else return job.stop();
+              else {
+                job.stop();
+                return removeScheduledCommandByCommandName(Bastion, command);
+              }
 
               if (cmd.config.enabled) {
                 cmd.run(Bastion, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
               }
             }).catch(e => {
-              Bastion.log.error(e);
+              if (e.toString().includes('Unknown Message')) {
+                job.stop();
+                removeScheduledCommandByMessageID(Bastion, scheduledCommands[i].messageID);
+              }
+              else {
+                Bastion.log.error(e);
+              }
             });
           },
-          function () {
-            // This function is executed when the job stops
-          },
+          function () {},
           false // Start the job right now
         );
         job.start();
@@ -54,3 +64,39 @@ module.exports = Bastion => {
     });
   }, 5 * 1000);
 };
+
+/**
+ * Removes Bastion's scheduled commands
+ * @param {Bastion} Bastion Bastion Discord client object
+ * @param {String} channelID The Snowflake ID of the channel where the command is scheduled
+ * @returns {void}
+ */
+function removeScheduledCommandByChannelID(Bastion, channelID) {
+  Bastion.db.run(`DELETE FROM scheduledCommands WHERE channelID='${channelID}'`).catch(e => {
+    Bastion.log.error(e);
+  });
+}
+
+/**
+ * Removes Bastion's scheduled commands
+ * @param {Bastion} Bastion Bastion Discord client object
+ * @param {String} messageID The Snowflake ID of the message that holds the scheduled command's info
+ * @returns {void}
+ */
+function removeScheduledCommandByMessageID(Bastion, messageID) {
+  Bastion.db.run(`DELETE FROM scheduledCommands WHERE messageID='${messageID}'`).catch(e => {
+    Bastion.log.error(e);
+  });
+}
+
+/**
+ * Removes Bastion's scheduled commands
+ * @param {Bastion} Bastion Bastion Discord client object
+ * @param {String} commandName The name of the command that is scheduled
+ * @returns {void}
+ */
+function removeScheduledCommandByCommandName(Bastion, commandName) {
+  Bastion.db.run(`DELETE FROM scheduledCommands WHERE command='${commandName}'`).catch(e => {
+    Bastion.log.error(e);
+  });
+}
