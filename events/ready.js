@@ -116,6 +116,15 @@ module.exports = Bastion => {
             Bastion.log.error(e);
           });
 
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS scheduledCommands' +
+          '(cronExp TEXT NOT NULL,' +
+          'command TEXT NOT NULL,' +
+          'channelID TEXT NOT NULL,' +
+          'messageID TEXT NOT NULL,' +
+          'arguments TEXT)').catch(e => {
+            Bastion.log.error(e);
+          });
+
   Bastion.log.console('\n');
   Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
   Bastion.log.console(COLOR.green('[Author URL] ') + Bastion.package.authorUrl);
