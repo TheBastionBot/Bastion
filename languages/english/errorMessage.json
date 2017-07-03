@@ -41,6 +41,7 @@
   "isReminderInUse": "You have already set a reminder. You can set only one reminder at once. Please wait for it to complete or run `%var%` to cancel the previous reminder.",
   "roleNameLength": "Role name should be %var% or fewer in length.",
   "roleNotFound": "The specified role was not found.",
+  "scheduledCommandsNotFound": "There are no scheduled commands.",
   "selfDestructTimeout": "Timeout should be between %var% and %var% seconds.",
   "singleMessage": "Dude, you can delete a single message by yourself, right? You do not need me for that!",
   "takeNoUser": "You need to mention the user or give their ID from whom you want to take %_currencyName%.",

@@ -166,6 +166,7 @@
   "eval": "Evaluates JavaScript code.",
   "giveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
   "leave": "Asks Bastion to leave a specified server.",
+  "listScheduledCommands": "Lists all the scheduled commands.",
   "listTodo": "Lists all the items in your TODO list.",
   "listTriggers": "Lists all the message triggers.",
   "messageChannel": "Send a specified message to any specified text channel that Bastion has access to.",
