@@ -1,6 +1,8 @@
 {
   "date": "July 3, 2017",
-  "updated": [],
+  "updated": [
+    "Minor fixes"
+  ],
   "added": [
     "Added `lockdown` command",
     "Added `listScheduledCommands` command",

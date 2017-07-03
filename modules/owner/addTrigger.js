@@ -16,7 +16,6 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!args.trigger || !args.response) {
-  // if (!/.+ << .+/.test(args)) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -62,6 +61,6 @@ exports.help = {
   description: string('addTrigger', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
-  usage: 'addTrigger <-t trigger message -r response message>',
+  usage: 'addTrigger <-t trigger message> <-r response message>',
   example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]
 };
