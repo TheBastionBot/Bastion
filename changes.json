@@ -2,7 +2,8 @@
   "date": "July 3, 2017",
   "updated": [],
   "added": [
-    "Added `lockdown` command"
+    "Added `lockdown` command",
+    "Added `scheduleCommand` command"
   ],
   "removed": []
 }
