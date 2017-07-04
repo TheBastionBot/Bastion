@@ -89,6 +89,6 @@ exports.help = {
   description: string('clear', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'MANAGE_MESSAGES',
-  usage: 'clear [@user-mention | --bots] [no_of_messages]',
+  usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',
   example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };
