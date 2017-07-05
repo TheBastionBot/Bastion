@@ -31,6 +31,7 @@
   "noDeletableMessage": "No message was found that could be deleted.",
   "noPermission": "I do not have permission to %var% %var%.",
   "notFound": "No %var% was found for the specified parameters.",
+  "notPlaying": "No song is currently being played.",
   "notSet": "You have not set any %var%.",
   "outOfRange": "%var% should be between %var% and %var%.",
   "parse": "Some error has occured while parsing the received data. Please try again later.",
