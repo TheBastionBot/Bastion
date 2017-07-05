@@ -7,11 +7,34 @@
 const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
+  if (!message.guild.music) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
   }
+
+  let color, repeatStat = '';
+  if (message.guild.music.repeat) {
+    color = Bastion.colors.red;
+    message.guild.music.repeat = false;
+    repeatStat = 'Removed the current song from repeat queue.';
+  }
+  else {
+    color = Bastion.colors.green;
+    message.guild.music.repeat = true;
+    repeatStat = 'Added the current song to the repeat queue.';
+  }
+
+  message.guild.music.textChannel.send({
+    embed: {
+      color: color,
+      description: repeatStat
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {

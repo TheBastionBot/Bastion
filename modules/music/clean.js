@@ -7,11 +7,31 @@
 const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
+  if (!message.guild.music) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
   }
+
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRoleID)) {
+    /**
+    * User has missing permissions.
+    * @fires userMissingPermissions
+    */
+    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+  }
+
+  message.guild.music.songs.splice(1, message.guild.music.songs.length - 1);
+  message.guild.music.textChannel.send({
+    embed: {
+      color: Bastion.colors.green,
+      description: 'Cleaned up the queue.'
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {
