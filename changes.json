@@ -1,6 +1,9 @@
 {
-  "date": "July 5, 2017",
+  "date": "July 6, 2017",
   "updated": [
+    "Rewritten music module",
+    "Music will consume relatively less bandwidth",
+    "Apparently, will be faster",
     "Minor fixes and improvements"
   ],
   "added": [
