@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
       description: args.content.join(' ')
     }
   }).then(msg => {
-    msg.delete(args.timeout * 1000);
+    msg.delete(args.timeout * 1000).catch(() => {});
   }).catch(e => {
     Bastion.log.error(e);
   });

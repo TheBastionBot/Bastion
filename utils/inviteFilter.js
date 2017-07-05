@@ -25,7 +25,7 @@ module.exports = message => {
             description: `${message.author} you are not allowed to post server invite links here.`
           }
         }).then(msg => {
-          msg.delete(5000);
+          msg.delete(5000).catch(() => {});
         }).catch(e => {
           message.client.log.error(e);
         });

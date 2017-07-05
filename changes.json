@@ -1,7 +1,7 @@
 {
-  "date": "July 3, 2017",
+  "date": "July 5, 2017",
   "updated": [
-    "Minor fixes"
+    "Minor fixes and improvements"
   ],
   "added": [
     "Added `lockdown` command",
