@@ -54,6 +54,6 @@ exports.help = {
   description: string('followURL', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'endpoll',
+  usage: 'followURL',
   example: []
 };

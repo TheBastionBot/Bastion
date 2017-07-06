@@ -7,11 +7,35 @@
 const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
+  if (!message.guild.music) {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
+  }
+
+  let fields = [ {
+    name: `▶ ${message.guild.music.songs[0].title}`,
+    value: `Requested by: ${message.guild.music.songs[0].requester}`
+  } ];
+  for (let i = 1; i < (message.guild.music.songs.length < 10 ? message.guild.music.songs.length : 9); i++) {
+    fields.push({
+      name: `${i}. ${message.guild.music.songs[i].title}`,
+      value: `Requested by: ${message.guild.music.songs[i].requester}`
     });
   }
+
+  message.guild.music.textChannel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      title: 'Music queue',
+      description: `${message.guild.music.songs.length - 1} songs in queue`,
+      fields: fields
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {

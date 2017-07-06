@@ -1,28 +1,15 @@
 {
-  "date": "July 1, 2017",
+  "date": "July 6, 2017",
   "updated": [
-    "Improvements to `airhorn` command",
-    "Fixed `createChannel` command",
-    "Fixed `enableAllCommands` command",
-    "Fixed `userBlacklist` command",
-    "Fixed crashes when using cleverbot",
-    "Adding songs from favourite playlist is now faster",
-    "Auto delete invite filter & link filter warnings",
-    "Improved error messages",
-    "Error logs are now detailed",
-    "Added lower bound to `selfDestruct` timeout",
-    "Now users can report anyone, even the server owner",
-    "Fixed `betFlip` & `betRoll` commands",
-    "Fixed skip vote count",
-    "Restricted `listFilteredWords` commands to administrators",
-    "Added support for whitelisting domains from link filter",
-    "Minor fixes, improvements & changes to all modules"
+    "Rewritten music module",
+    "Music will consume relatively less bandwidth",
+    "Apparently, will be faster",
+    "Minor fixes and improvements"
   ],
   "added": [
-    "Added `followURL` command.",
-    "Added `addWhitelistDomains` command.",
-    "Added `listWhitelistDomains` command.",
-    "Added `removeWhitelistDomain` command."
+    "Added `lockdown` command",
+    "Added `listScheduledCommands` command",
+    "Added `scheduleCommand` command"
   ],
   "removed": []
 }

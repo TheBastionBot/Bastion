@@ -13,6 +13,10 @@ if ! [ -z "$SUDO_USER" ]; then
   exit 1
 fi
 
+# Set locale (needed to stop music warnings)
+export LC_ALL="$LANG"
+echo "LC_ALL=\"$LANG\"" >> /etc/environment
+
 # Check if bastion.js exists, run Bastion if true or exit
 echo -e "${CYAN}[Bastion]:${NC} Checking System..."
 if [ -r bastion.js ]; then

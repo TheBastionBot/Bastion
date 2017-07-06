@@ -1,12 +1,13 @@
 {
   "busy": "Busy",
+  "connection": "Connection Error",
   "cooldown": "Cooldown",
-  "notFound": "Not Found",
+  "emptyQueue": "Empty Queue",
   "forbidden": "Forbidden",
-  "parseError": "Parse Error",
+  "insufficientBalance": "Insufficient Balance",
   "invalidInput": "Invalid Input",
   "noCredentials": "No Credentials",
-  "connection": "Connection Error",
-  "insufficientBalance": "Insufficient Balance",
+  "notFound": "Not Found",
+  "parseError": "Parse Error",
   "unknown": "Unknown Error"
 }

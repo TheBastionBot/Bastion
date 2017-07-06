@@ -15,7 +15,7 @@ const BASTION = new Discord.Client({
 });
 
 /**
- * Initial configuration
+ * Initial configurations
  */
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
@@ -62,6 +62,10 @@ require('./handlers/eventHandler')(BASTION);
  * Module handler
  */
 require('./handlers/moduleHandler')(BASTION);
+/**
+ * Scheduled Commands handler
+ */
+require('./handlers/scheduledCommandHandler')(BASTION);
 
 /**
  * Log Bastion in as a Discord client.
