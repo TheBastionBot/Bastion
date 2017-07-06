@@ -1,15 +1,8 @@
 {
-  "date": "July 6, 2017",
+  "date": "July 7, 2017",
   "updated": [
-    "Rewritten music module",
-    "Music will consume relatively less bandwidth",
-    "Apparently, will be faster",
-    "Minor fixes and improvements"
+    "Minor fixes"
   ],
-  "added": [
-    "Added `lockdown` command",
-    "Added `listScheduledCommands` command",
-    "Added `scheduleCommand` command"
-  ],
+  "added": [],
   "removed": []
 }
