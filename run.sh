@@ -15,7 +15,7 @@ fi
 
 # Set locale (needed to stop music warnings)
 export LC_ALL="$LANG"
-echo "LC_ALL=\"$LANG\"" >> sudo /etc/environment
+grep -qF "LC_ALL=\"$LANG\"" /etc/environment || echo "LC_ALL=\"$LANG\"" | sudo tee -a /etc/environment 1>/dev/null
 
 # Check if bastion.js exists, run Bastion if true or exit
 echo -e "${CYAN}[Bastion]:${NC} Checking System..."
