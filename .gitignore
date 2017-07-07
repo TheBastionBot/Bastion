@@ -4,6 +4,9 @@ settings/config.json
 data/Bastion.sqlite
 data/favouriteSongs.json
 
+### Logs ###
+screenlog.*
+
 ### Linux ###
 *~
 
