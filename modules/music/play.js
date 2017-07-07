@@ -11,11 +11,12 @@ const db = new jsonDB('./data/favouriteSongs', true, true);
 
 exports.run = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
+  if (message.guild.music) {
+    if (message.channel.id !== message.guild.music.textChannel.id) {
+      return;
+    }
   }
+
   if (!args.song && (!args.playlist || args.playlist.length < 1) && !args.favourites) {
     /**
      * The command was ran with invalid parameters.

@@ -1,6 +1,7 @@
 {
   "date": "July 7, 2017",
   "updated": [
+    "Fixed `play` command working in other channels",
     "Minor fixes"
   ],
   "added": [],
