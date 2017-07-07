@@ -21,7 +21,7 @@ grep -qF "LC_ALL=\"$LANG\"" /etc/environment || echo "LC_ALL=\"$LANG\"" | sudo t
 echo -e "${CYAN}[Bastion]:${NC} Checking System..."
 if [ -r bastion.js ]; then
   echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
-  screen -dmS BastionBot -L node . && secho $! > bastion.pid && echo -e "${CYAN}[Bastion]:${NC} I've booted up, and ready to roll." \
+  screen -dmS BastionBot -L node . && echo $! > bastion.pid && echo -e "${CYAN}[Bastion]:${NC} I've booted up, and ready to roll." \
   || echo -e "${CYAN}[Bastion]:${RED} I'm unable to boot up. Please check the log using: \`cat screenlog.0\` and report it in the support server."
 else
   echo -e "${CYAN}[Bastion]: ${RED}[ERROR] System Check Failed." && echo -e "${CYAN}[Bastion]: ${NC}Check if you have Bastion Bot installed correctly." && exit 1
