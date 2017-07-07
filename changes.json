@@ -3,7 +3,7 @@
   "updated": [
     "Fixed `play` command working in other channels",
     "Module name is shown in command help",
-    "Minor fixes"
+    "Minor fixes and improvements"
   ],
   "added": [],
   "removed": []
