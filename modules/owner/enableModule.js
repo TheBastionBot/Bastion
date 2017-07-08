@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (args.length < 1) {
+  if (!args.name) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -23,10 +23,12 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let module = args[0].toLowerCase();
+  let module = args.name.toLowerCase();
 
   if (Bastion.commands.map(c => c.config.module).includes(module)) {
-    Bastion.commands.filter(c => c.config.module === module).filter(c => { c.config.enabled = true; });
+    Bastion.commands.filter(c => c.config.module === module).filter(c => {
+      c.config.enabled = true;
+    });
   }
   else {
     /**
@@ -48,7 +50,10 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'enablemdl' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'name', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {

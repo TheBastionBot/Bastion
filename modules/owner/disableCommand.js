@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (args.length < 1) {
+  if (!args.name) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -23,8 +23,17 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let command = args[0].toLowerCase();
-  if (command === 'disablecommand' || command === 'disablecmd' || command === 'enablecommand' || command === 'enablecmd') {
+  let command = args.name.toLowerCase(),
+    forbiddenCommands = [
+      'disableallcommands',
+      'disablecommand',
+      'disablemodule',
+      'enableallcommands',
+      'enablecommand',
+      'enablemodule'
+    ];
+
+  if (forbiddenCommands.includes(command)) {
     /**
      * Error condition is encountered.
      * @fires error
@@ -63,7 +72,10 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'disablecmd' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'name', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
