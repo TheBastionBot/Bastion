@@ -6,7 +6,8 @@
     "Minor fixes and improvements"
   ],
   "added": [
-    "Added `disableModule` command"
+    "Added `disableModule` command",
+    "Added `enableModule` command"
   ],
   "removed": []
 }

@@ -164,6 +164,7 @@
   "disableModule": "Disables the specified module, either until it is enabled manually or Bastion is restarted.",
   "enableAllCommands": "Enables all the commands of Bastion that were previously disabled.",
   "enableCommand": "Enables the specified command that was previously disabled.",
+  "enableModule": "Enables the specified module that was previously disabled.",
   "eval": "Evaluates JavaScript code.",
   "giveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
   "leave": "Asks Bastion to leave a specified server.",
