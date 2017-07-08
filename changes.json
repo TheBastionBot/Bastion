@@ -1,15 +1,15 @@
 {
-  "date": "July 6, 2017",
+  "date": "July 8, 2017",
   "updated": [
-    "Rewritten music module",
-    "Music will consume relatively less bandwidth",
-    "Apparently, will be faster",
+    "Fixed `play` command working in other channels",
+    "Module name is shown in command help",
     "Minor fixes and improvements"
   ],
   "added": [
-    "Added `lockdown` command",
-    "Added `listScheduledCommands` command",
-    "Added `scheduleCommand` command"
+    "Added `disableModule` command",
+    "Added `enableModule` command",
+    "Added `disableAllModules` alias to `disableAllCommands`",
+    "Added `enableAllModules` alias to `enableAllCommands`"
   ],
   "removed": []
 }

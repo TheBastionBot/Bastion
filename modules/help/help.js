@@ -22,7 +22,7 @@ exports.run = (Bastion, message, args) => {
       }
       else {
         for (let i = 0; i < command.help.example.length; i++) {
-          example.push(`\`${Bastion.config.prefix}${command.help.example[i]}\``);
+          example.push(`\`\`\`${Bastion.config.prefix}${command.help.example[i]}\`\`\``);
         }
       }
 
@@ -48,6 +48,11 @@ exports.run = (Bastion, message, args) => {
               inline: true
             },
             {
+              name: 'Module',
+              value: command.config.module.replace('_', ' ').toTitleCase(),
+              inline: true
+            },
+            {
               name: 'Description',
               value: command.help.description,
               inline: false
@@ -64,7 +69,7 @@ exports.run = (Bastion, message, args) => {
             },
             {
               name: 'Usage',
-              value: `\`${Bastion.config.prefix}${command.help.usage}\``,
+              value: `\`\`\`${Bastion.config.prefix}${command.help.usage}\`\`\``,
               inline: false
             },
             {

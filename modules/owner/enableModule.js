@@ -1,5 +1,5 @@
 /**
- * @file enableCommand command
+ * @file enableModule command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -23,30 +23,25 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let command = args.name.toLowerCase();
-  if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
-    if (Bastion.commands.has(command)) {
-      command = Bastion.commands.get(command);
-    }
-    else if (Bastion.aliases.has(command)) {
-      command = Bastion.commands.get(Bastion.aliases.get(command));
-    }
+  let module = args.name.toLowerCase();
+
+  if (Bastion.commands.map(c => c.config.module).includes(module)) {
+    Bastion.commands.filter(c => c.config.module === module).filter(c => {
+      c.config.enabled = true;
+    });
   }
   else {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
+    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'module'), message.channel);
   }
-
-  if (command.config.enabled) return;
-  command.config.enabled = true;
 
   message.channel.send({
     embed: {
       color: Bastion.colors.green,
-      description: `\`${command.help.name}\` command has been enabled.`
+      description: `\`${module}\` module has been enabled.`
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -54,7 +49,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'enablecmd' ],
+  aliases: [ 'enablemdl' ],
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, defaultOption: true }
@@ -62,10 +57,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'enablecommand',
-  description: string('enableCommand', 'commandDescription'),
+  name: 'enablemodule',
+  description: string('enableModule', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
-  usage: 'enableCommand <command_name>',
-  example: [ 'enableCommand echo' ]
+  usage: 'enableModule <module_name>',
+  example: [ 'enableModule music' ]
 };

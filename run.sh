@@ -15,15 +15,14 @@ fi
 
 # Set locale (needed to stop music warnings)
 export LC_ALL="$LANG"
-echo "LC_ALL=\"$LANG\"" >> /etc/environment
+grep -qF "LC_ALL=\"$LANG\"" /etc/environment || echo "LC_ALL=\"$LANG\"" | sudo tee -a /etc/environment 1>/dev/null
 
 # Check if bastion.js exists, run Bastion if true or exit
 echo -e "${CYAN}[Bastion]:${NC} Checking System..."
 if [ -r bastion.js ]; then
   echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
-  screen -dmS BastionBot -L node .
-  echo $! > bastion.pid
-  echo -e "${CYAN}[Bastion]:${NC} I've booted up, and ready to roll."
+  screen -dmS BastionBot -L node . && echo $! > bastion.pid && echo -e "${CYAN}[Bastion]:${NC} I've booted up, and ready to roll." \
+  || echo -e "${CYAN}[Bastion]:${RED} I'm unable to boot up. Please check the log using: \`cat screenlog.0\` and report it in the support server."
 else
   echo -e "${CYAN}[Bastion]: ${RED}[ERROR] System Check Failed." && echo -e "${CYAN}[Bastion]: ${NC}Check if you have Bastion Bot installed correctly." && exit 1
 fi

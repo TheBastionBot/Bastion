@@ -15,8 +15,17 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
+  let forbiddenCommands = [
+    'disableallcommands',
+    'disablecommand',
+    'disablemodule',
+    'enableallcommands',
+    'enablecommand',
+    'enablemodule'
+  ];
+
   Bastion.commands.filter(cmd => {
-    (cmd.help.name !== 'enableallcommands' && cmd.help.name !== 'enablecommand' && cmd.help.name !== 'disablecommand') ? cmd.config.enabled = false : cmd.config.enabled = true;
+    (!forbiddenCommands.includes(cmd.help.name)) ? cmd.config.enabled = false : cmd.config.enabled = true;
   });
 
   message.channel.send({
@@ -30,7 +39,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [ 'disableallcmds' ],
+  aliases: [ 'disableallmodules', 'disableallcmds', 'disableallmdls' ],
   enabled: true
 };
 

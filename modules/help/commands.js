@@ -5,19 +5,20 @@
  */
 
 const string = require('../../handlers/languageHandler');
-const fs = require('fs');
-let commands = {};
 
 exports.run = (Bastion, message) => {
-  // eslint-disable-next-line no-sync
-  let modules = Bastion.functions.getDirSync('./modules/');
+  let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
+
   let fields = [];
   for (let i = 0; i < modules.length; i++) {
-    commands[modules[i]] = [];
-    loadCommands(modules[i]);
+    let commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
+    if (commands.length === 0) {
+      continue;
+    }
+
     fields.push({
-      name: modules[i].toUpperCase(),
-      value: Bastion.config.prefix + commands[modules[i]].join(`\n${Bastion.config.prefix}`),
+      name: modules[i].replace('_', ' ').toTitleCase(),
+      value: Bastion.config.prefix + commands.join(`\n${Bastion.config.prefix}`),
       inline: true
     });
   }
@@ -29,7 +30,7 @@ exports.run = (Bastion, message) => {
       description: 'To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).',
       fields: fields,
       footer: {
-        text: `Prefix: ${Bastion.config.prefix} | Total Commands: ${Bastion.commands.size}`
+        text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
       }
     }
   }).then(() => {
@@ -59,19 +60,3 @@ exports.help = {
   usage: 'commands',
   example: []
 };
-
-/**
- * Loads the commands
- * @function loadCommands
- * @param {string} module The name of the module.
- * @returns {void}
-*/
-function loadCommands(module) {
-  // TODO: use async method or store modules in Bastion object while booting up.
-  // eslint-disable-next-line no-sync
-  let files = fs.readdirSync(`./modules/${module}/`);
-  files.forEach(f => {
-    let cmd = require(`../../modules/${module}/${f}`);
-    commands[module].push(cmd.help.name);
-  });
-}

@@ -21,7 +21,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', string('notFound', 'errors'), string('scheduledCommandsNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('scheduledCommandsNotFound', 'errorMessage'), message.channel);
     }
 
     scheduledCommands = scheduledCommands.map((t, i) => `${i + 1}. \`${t.cronExp} ${t.command} ${t.arguments}\``);
