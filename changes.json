@@ -7,7 +7,9 @@
   ],
   "added": [
     "Added `disableModule` command",
-    "Added `enableModule` command"
+    "Added `enableModule` command",
+    "Added `disableAllModules` alias to `disableAllCommands`",
+    "Added `enableAllModules` alias to `enableAllCommands`"
   ],
   "removed": []
 }
