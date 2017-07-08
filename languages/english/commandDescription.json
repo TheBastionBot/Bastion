@@ -161,6 +161,7 @@
   "deleteTrigger": "Deletes the specified message trigger.",
   "disableAllCommands": "Disables all the commands of Bastion, either until it is enabled manually or Bastion is restarted.",
   "disableCommand": "Disables the specified command, either until it is enabled manually or Bastion is restarted.",
+  "disableModule": "Disables the specified module, either until it is enabled manually or Bastion is restarted.",
   "enableAllCommands": "Enables all the commands of Bastion that were previously disabled.",
   "enableCommand": "Enables the specified command that was previously disabled.",
   "eval": "Evaluates JavaScript code.",

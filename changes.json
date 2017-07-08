@@ -1,10 +1,12 @@
 {
-  "date": "July 7, 2017",
+  "date": "July 8, 2017",
   "updated": [
     "Fixed `play` command working in other channels",
     "Module name is shown in command help",
     "Minor fixes and improvements"
   ],
-  "added": [],
+  "added": [
+    "Added `disableModule` command"
+  ],
   "removed": []
 }
