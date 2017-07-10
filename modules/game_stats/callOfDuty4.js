@@ -18,6 +18,15 @@ exports.run = (Bastion, message, args) => {
 
   args = args.split(':');
   let host = args[0];
+
+  if (host === '127.0.0.1') {
+    return message.channel.send({
+      embed: {
+        description: 'There is no place like `127.0.0.1`'
+      }
+    });
+  }
+
   let port;
   if (args[1]) {
     port = parseInt(args[1]);
