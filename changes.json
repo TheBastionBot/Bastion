@@ -1,8 +1,10 @@
 {
-  "date": "July 9, 2017",
+  "date": "July 10, 2017",
   "updated": [
     "Minor fixes"
   ],
-  "added": [],
+  "added": [
+    "Bastion profile now shows icons for Bastion's contributors, patrons and donators."
+  ],
   "removed": []
 }
