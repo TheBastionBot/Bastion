@@ -5,6 +5,7 @@
  */
 
 const string = require('../../handlers/languageHandler');
+const specialIDs = require('../../data/specialIDs.json');
 
 exports.run = (Bastion, message, args) => {
   if (!(args = message.mentions.users.first())) {
@@ -33,7 +34,10 @@ exports.run = (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
-        title: args.tag,
+        author: {
+          name: args.tag,
+          icon_url: getUserIcon(args)
+        },
         description: profile.bio || `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`,
         fields: [
           {
@@ -82,3 +86,41 @@ exports.help = {
   usage: 'profile [@user-mention]',
   example: [ 'profle', 'profile @user#0001' ]
 };
+
+/**
+ * Returns the provided user's staff icon
+ * @function getUserIcon
+ * @param {User} user The user for which we need to get the icon
+ * @returns {String} The url of the user's staff icon
+ */
+function getUserIcon(user) {
+  const bastionGuildID = specialIDs.bastionGuild;
+  const bastionGuild = user.client.guilds.get(bastionGuildID);
+  if (!bastionGuild) return;
+  const bastionGuildMember = bastionGuild.members.get(user.id);
+  if (!bastionGuildMember) return;
+  const creatorRoleID = specialIDs.developerRole;
+  const devsRoleID = specialIDs.contributorsRole;
+  const patronsRoleID = specialIDs.patronsRole;
+  const donorsRoleID = specialIDs.donorsRole;
+
+  const devsIcon = 'https://cdn.discordapp.com/emojis/314068430787706880.png';
+  // const partners = 'https://cdn.discordapp.com/emojis/314068430556758017.png';
+  // const hype = 'https://cdn.discordapp.com/emojis/314068430854684672.png';
+  // const nitro = 'https://cdn.discordapp.com/emojis/314068430611415041.png';
+  const patronsIcon = 'https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png';
+  const donorsIcon = 'https://i.imgur.com/sCbiaOK.png';
+
+  if (bastionGuildMember.roles.has(creatorRoleID)) {
+    return devsIcon;
+  }
+  else if (bastionGuildMember.roles.has(devsRoleID)) {
+    return devsIcon;
+  }
+  else if (bastionGuildMember.roles.has(patronsRoleID)) {
+    return patronsIcon;
+  }
+  else if (bastionGuildMember.roles.has(donorsRoleID)) {
+    return donorsIcon;
+  }
+}

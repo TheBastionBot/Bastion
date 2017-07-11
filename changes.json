@@ -1,15 +1,10 @@
 {
-  "date": "July 8, 2017",
+  "date": "July 10, 2017",
   "updated": [
-    "Fixed `play` command working in other channels",
-    "Module name is shown in command help",
     "Minor fixes and improvements"
   ],
   "added": [
-    "Added `disableModule` command",
-    "Added `enableModule` command",
-    "Added `disableAllModules` alias to `disableAllCommands`",
-    "Added `enableAllModules` alias to `enableAllCommands`"
+    "Bastion profile now shows icons for Bastion's contributors, patrons and donators"
   ],
   "removed": []
 }
