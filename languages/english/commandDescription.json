@@ -208,6 +208,7 @@
   "shorten": "Shortens a specified URL using Google URL Shortner.",
   "tapCode": "Encodes a given text in Tap Code.",
   "translate": "Translates your message to the specified language.",
+  "twitch": "Get streaming information of a live Twitch channel.",
   "urbanDictionary": "Searches the Urban Dictionary for an urban definition of the specified word.",
   "weather": "Shows weather information of the specified location.",
   "wikipedia": "Searches Wikipedia for the specified article.",

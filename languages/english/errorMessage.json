@@ -29,6 +29,7 @@
   "musicChannelNotFound": "No default music channel has been set. And I need to be in a voice channel to be able to play.",
   "noCredentials": "No credentials was found for %var%.",
   "noDeletableMessage": "No message was found that could be deleted.",
+  "noLiveStream": "No live stream found for the channel %var%.",
   "noPermission": "I do not have permission to %var% %var%.",
   "notFound": "No %var% was found for the specified parameters.",
   "notPlaying": "No song is currently being played.",

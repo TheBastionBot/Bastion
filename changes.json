@@ -1,10 +1,8 @@
 {
-  "date": "July 10, 2017",
-  "updated": [
-    "Minor fixes and improvements"
-  ],
+  "date": "July 11, 2017",
+  "updated": [],
   "added": [
-    "Bastion profile now shows icons for Bastion's contributors, patrons and donators"
+    "Added `twitch` command"
   ],
   "removed": []
 }
