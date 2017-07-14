@@ -144,6 +144,7 @@
   "np": "Shows details of the song currently being played, by Bastion, in your Discord server.",
   "pause": "Pauses the current playback in your Discord server.",
   "play": "Plays a song, or adds the song to the current music queue if Bastion is already playing in your Discord server, specified either by the name, or the link, or from your favourite songs list, or from a YouTube playlist link.",
+  "playlist": "Add a song to a given playlist or display the list of songs in a playlist.",
   "queue": "Shows the list of all the songs in the current music queue of your Discord server.",
   "repeat": "Adds the current song to the repeat queue, so it will repeat once again after the current playback is complete.",
   "resume": "Resumes the previously paused playback.",

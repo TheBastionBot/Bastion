@@ -1,8 +1,9 @@
 {
-  "date": "July 11, 2017",
+  "date": "July 15, 2017",
   "updated": [],
   "added": [
-    "Added `twitch` command"
+    "Added `twitch` command",
+    "Added `playlist` command"
   ],
   "removed": []
 }
