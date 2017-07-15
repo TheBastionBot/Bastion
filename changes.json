@@ -8,5 +8,7 @@
     "Added `playlist` command",
     "Added support for multiple playlist"
   ],
-  "removed": []
+  "removed": [
+    "Removed `addFav` command"
+  ]
 }
