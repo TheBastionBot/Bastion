@@ -24,9 +24,5 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ffmpeg; fi
 install:
   - npm install
-before_script:
-  - echo "{}" > settings/credentials.json
-  - echo "{}" > settings/config.json
-  - echo "[]" > data/favouriteSongs.json
 script:
   - npm test
