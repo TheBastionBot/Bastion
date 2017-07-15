@@ -15,8 +15,8 @@ const BASTION = new Discord.Client({
 });
 
 BASTION.package = require('../package.json');
-BASTION.credentials = require('../settings/credentials.json');
-BASTION.config = require('../settings/config.json');
+BASTION.credentials = require('../settings/credentials_example.json');
+BASTION.config = require('../settings/config_example.json');
 BASTION.colors = require('../settings/colors.json');
 
 let languages = [
