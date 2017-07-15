@@ -1,6 +1,7 @@
 {
   "date": "July 15, 2017",
   "updated": [
+    "Auto delete `eval` message",
     "Improved `play` command"
   ],
   "added": [

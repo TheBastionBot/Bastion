@@ -47,6 +47,10 @@ exports.run = (Bastion, message, args) => {
           }
         ]
       }
+    }).then(m => {
+      m.delete(30000).catch(e => {
+        Bastion.log.error(e);
+      });
     }).catch(e => {
       Bastion.log.error(e);
     });
