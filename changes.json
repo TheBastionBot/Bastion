@@ -1,9 +1,12 @@
 {
   "date": "July 15, 2017",
-  "updated": [],
+  "updated": [
+    "Improved `play` command"
+  ],
   "added": [
     "Added `twitch` command",
-    "Added `playlist` command"
+    "Added `playlist` command",
+    "Added support for multiple playlist"
   ],
   "removed": []
 }
