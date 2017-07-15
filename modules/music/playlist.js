@@ -81,7 +81,7 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'song', type: String, multiple: true, defaultOption: true },
-    { name: 'playlist', type: String, multiple: true, alias: 'p' }
+    { name: 'playlist', type: String, multiple: true, alias: 'p', defaultValue: [ 'default' ] }
   ]
 };
 
