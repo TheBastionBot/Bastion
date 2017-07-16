@@ -8,6 +8,7 @@
     "Added `twitch` command",
     "Added `playlist` command",
     "Added `movie` command",
+    "Added `tvShow` command",
     "Added support for multiple playlist"
   ],
   "removed": [
