@@ -63,11 +63,6 @@ exports.run = (Bastion, message, args) => {
                 name: 'Release Date',
                 value: movie.release_date,
                 inline: true
-              },
-              {
-                name: 'Avg. Rating',
-                value: `${movie.vote_average}`,
-                inline: true
               }
             ],
             image: {
@@ -93,7 +88,7 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'film' ],
   enabled: true,
   argsDefinitions: [
     { name: 'movie', type: String, multiple: true, defaultOption: true }
