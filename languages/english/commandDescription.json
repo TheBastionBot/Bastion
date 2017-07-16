@@ -204,6 +204,7 @@
   "lmgtfy": "Searches Google, for the specified query, and teaches users how to use Google's internet search.",
   "map": "Get the map of the specified location.",
   "morseCode": "Encodes a given text in Morse Code.",
+  "movie": "Searches for the details of a movie.",
   "poll": "Starts a poll in the current text channel asking users to vote.",
   "reminder": "Bastion sets a reminder to remind you of specified message, via direct message, after a specified duration.",
   "shorten": "Shortens a specified URL using Google URL Shortner.",

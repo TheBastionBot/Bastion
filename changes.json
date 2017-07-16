@@ -1,5 +1,5 @@
 {
-  "date": "July 15, 2017",
+  "date": "July 16, 2017",
   "updated": [
     "Auto delete `eval` message",
     "Improved `play` command"
@@ -7,6 +7,7 @@
   "added": [
     "Added `twitch` command",
     "Added `playlist` command",
+    "Added `movie` command",
     "Added support for multiple playlist"
   ],
   "removed": [
