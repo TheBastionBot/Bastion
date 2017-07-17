@@ -3,7 +3,8 @@
   "updated": [
     "Auto delete `eval` message",
     "Improved `play` command",
-    "`poll` command requires user to have Manage Messages permissions"
+    "`poll` command requires user to have Manage Messages permissions",
+    "Improved presence count format in `stats` command"
   ],
   "added": [
     "Added `twitch` command",
