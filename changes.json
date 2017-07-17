@@ -9,7 +9,8 @@
     "Added `playlist` command",
     "Added `movie` command",
     "Added `tvShow` command",
-    "Added support for multiple playlist"
+    "Added support for multiple playlist",
+    "Added cooldown for experience points"
   ],
   "removed": [
     "Removed `addFav` command",
