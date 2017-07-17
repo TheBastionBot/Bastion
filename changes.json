@@ -1,8 +1,9 @@
 {
-  "date": "July 16, 2017",
+  "date": "July 17, 2017",
   "updated": [
     "Auto delete `eval` message",
-    "Improved `play` command"
+    "Improved `play` command",
+    "`poll` command requires user to have Manage Messages permissions"
   ],
   "added": [
     "Added `twitch` command",
