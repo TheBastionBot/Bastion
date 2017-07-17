@@ -16,7 +16,11 @@ module.exports = (user, amount) => {
      * Yes, if they have less Bastion Currencies then the given amount,
      * that will still be deducted from their account.
      */
-    user.client.db.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) - parseInt(amount)} WHERE userID=${user.id}`).catch(e => {
+    user.client.db.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) - parseInt(amount)} WHERE userID=${user.id}`).then(() => {
+      user.client.db.run('INSERT INTO transactions (userID, type, amount) VALUES (?, ?, ?)', [ user.id, 'userCredit', amount ]).catch(e => {
+        user.client.log.error(e);
+      });
+    }).catch(e => {
       user.client.log.error(e);
     });
   }).catch(e => {
