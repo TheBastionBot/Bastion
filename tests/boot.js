@@ -34,6 +34,7 @@ BASTION.aliases = new Discord.Collection();
 
 try {
   require('../utils/String.prototype');
+  require('../utils/Number.prototype');
   // Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
   // require('../utils/Array.prototype');
 
