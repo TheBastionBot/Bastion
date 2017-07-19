@@ -13,6 +13,7 @@ const handleUserLevel = require('../handlers/levelHandler');
 const handleCommand = require('../handlers/commandHandler');
 const handleConversation = require('../handlers/conversationHandler');
 const handleDirectMessage = require('../handlers/directMessageHandler');
+let recentUsers = [];
 
 module.exports = message => {
   /**
@@ -50,9 +51,18 @@ module.exports = message => {
       if (users.map(u => u.userID).includes(message.author.id)) return;
 
       /**
-       * Increase experience and level up user
+       * Cooldown for experience points, to prevent spam
        */
-      handleUserLevel(message);
+      if (!recentUsers.includes(message.author.id)) {
+        recentUsers.push(message.author.id);
+        setTimeout(function () {
+          recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
+        }, 60 * 1000);
+        /**
+        * Increase experience and level up user
+        */
+        handleUserLevel(message);
+      }
 
       /**
        * Handles Bastion's commands

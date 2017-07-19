@@ -1,10 +1,22 @@
 {
-  "date": "July 10, 2017",
+  "date": "July 19, 2017",
   "updated": [
-    "Minor fixes and improvements"
+    "Auto delete `eval` message",
+    "Improved `play` command",
+    "`poll` command requires user to have Manage Messages permissions",
+    "Improved presence count format in `stats` command"
   ],
   "added": [
-    "Bastion profile now shows icons for Bastion's contributors, patrons and donators"
+    "Added `twitch` command",
+    "Added `playlist` command",
+    "Added `movie` command",
+    "Added `tvShow` command",
+    "Added support for multiple playlist",
+    "Added cooldown for experience points",
+    "Added transaction history to database"
   ],
-  "removed": []
+  "removed": [
+    "Removed `addFav` command",
+    "Removed `listFavs` command"
+  ]
 }

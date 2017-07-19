@@ -11,8 +11,8 @@ module.exports = (error, description, channel) => {
     channel.send({
       embed: {
         color: channel.client.colors.red,
-        title: error,
-        description: description
+        title: `${error}`,
+        description: `${description}`
       }
     }).catch(e => {
       channel.client.log.error(e);

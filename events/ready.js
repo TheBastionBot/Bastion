@@ -125,6 +125,13 @@ module.exports = Bastion => {
             Bastion.log.error(e);
           });
 
+  Bastion.db.run('CREATE TABLE IF NOT EXISTS transactions' +
+          '(userID TEXT NOT NULL,' +
+          'type TEXT NOT NULL,' +
+          'amount INTEGER NOT NULL)').catch(e => {
+            Bastion.log.error(e);
+          });
+
   Bastion.log.console('\n');
   Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
   Bastion.log.console(COLOR.green('[Author URL] ') + Bastion.package.authorUrl);

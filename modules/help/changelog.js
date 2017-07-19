@@ -32,8 +32,7 @@ exports.run = (Bastion, message) => {
     embed: {
       color: Bastion.colors.dark_grey,
       title: 'Changelog',
-      url: 'https://bastion.js.org/changes',
-      description: `Bastion v${Bastion.package.version}`,
+      description: `Bastion Bot v${Bastion.package.version}`,
       fields: changes,
       thumbnail: {
         url: Bastion.user.displayAvatarURL

@@ -11,7 +11,7 @@ exports.run = (Bastion, message) => {
     embed: {
       color: 3050327,
       title: 'Support Bastion BOT project',
-      url: 'https://bastion.js.org/',
+      url: 'https://BastionBot.org/',
       description: 'To support and send donations for the Bastion Bot, ' +
                    'you can either pledge for The Bastion Bot project ' +
                    'on **Patreon**: https://patreon.com/snkrsnkampa\nOR\nSend ' +

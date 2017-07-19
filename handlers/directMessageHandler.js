@@ -21,7 +21,7 @@ module.exports = message => {
         embed: {
           color: message.client.colors.blue,
           title: 'Bastion: Discord Bot',
-          url: 'https://bastion.js.org',
+          url: 'https://BastionBot.org',
           description: 'Join [**Bastion: Discord Server**](https://discord.gg/fzx8fkt) to test Bastion and it\'s commands, for giveaway events, for chatting and for a lot of fun!',
           fields: [
             {

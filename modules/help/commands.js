@@ -27,7 +27,7 @@ exports.run = (Bastion, message) => {
     embed: {
       color: Bastion.colors.yellow,
       title: 'List of Commands',
-      description: 'To get a complete list of all the commands with details click [here](https://bastion.js.org/commands).',
+      description: 'To get a complete list of all the commands with details click [here](https://BastionBot.org/commands).',
       fields: fields,
       footer: {
         text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`

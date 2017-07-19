@@ -7,7 +7,8 @@
 const string = require('../../handlers/languageHandler');
 const yt = require('youtube-dl');
 const jsonDB = require('node-json-db');
-const db = new jsonDB('./data/favouriteSongs', true, true);
+const db = new jsonDB('./data/playlist', true, true);
+// const db = new jsonDB('./data/favouriteSongs', true, true);
 
 exports.run = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
@@ -17,7 +18,7 @@ exports.run = (Bastion, message, args) => {
     }
   }
 
-  if (!args.song && (!args.playlist || args.playlist.length < 1) && !args.favourites) {
+  if (!args.song && (!args.ytpl || args.ytpl.length < 1) && !args.playlist) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -87,27 +88,27 @@ exports.run = (Bastion, message, args) => {
     };
 
     try {
-      if (args.favourites) {
-        let favs;
-        try {
-          db.reload();
-          favs = db.getData('/');
-        }
-        catch(e) {
-          Bastion.log.error(e);
-        }
-        if (favs.length === 0) {
+      if (args.playlist) {
+        let playlist;
+
+        db.reload();
+        playlist = db.getData('/');
+        playlist = playlist[args.playlist.join(' ')];
+
+        if (!playlist || playlist.length === 0) {
           /**
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('notFound', 'errors'), string('favSongsNotFound', 'errorMessage'), textChannel);
+          return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), textChannel);
         }
-        song = favs.shift();
+
+        song = playlist.shift();
+
         message.channel.send({
           embed: {
             color: Bastion.colors.green,
-            description: `Adding ${favs.length + 1} favourite songs to the queue...`
+            description: `Adding ${playlist.length + 1} favourite songs to the queue...`
           }
         }).then(m => {
           m.delete(5000).catch(e => {
@@ -116,8 +117,9 @@ exports.run = (Bastion, message, args) => {
         }).catch(e => {
           Bastion.log.error(e);
         });
+
         // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-        favs.forEach(e => {
+        playlist.forEach(e => {
           e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
           if (!message.guild.music) {
             message.guild.music = musicObject;
@@ -134,8 +136,8 @@ exports.run = (Bastion, message, args) => {
           });
         });
       }
-      else if (args.playlist) {
-        if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.playlist)) {
+      else if (args.ytpl) {
+        if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.ytpl)) {
           /**
            * Error condition is encountered.
            * @fires error
@@ -155,7 +157,7 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e);
         });
 
-        yt.getInfo(args.playlist, [ '-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]' ], (err, info) => {
+        yt.getInfo(args.ytpl, [ '-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]' ], (err, info) => {
           if (err) {
             Bastion.log.error(err);
             /**
@@ -272,8 +274,8 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'song', type: String, multiple: true, defaultOption: true },
-    { name: 'playlist', type: String, alias: 'l' },
-    { name: 'favourites', type: Boolean, alias: 'f' }
+    { name: 'ytpl', type: String, alias: 'l' },
+    { name: 'playlist', type: String, multiple: true, alias: 'p', defaultValue: [ 'default' ] }
   ]
 };
 
@@ -282,8 +284,8 @@ exports.help = {
   description: string('play', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'play <name | song_link | -l <playlist_link> | --favourites>',
-  example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=GoUyrUwDN64', 'play -l https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play --favourites' ]
+  usage: 'play < name | song_link | -l <playlist_link> | -p [Playlist Name] >',
+  example: [ 'play Shape of you', 'play -l https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -p My Favs', 'play -p' ]
 };
 
 /**
