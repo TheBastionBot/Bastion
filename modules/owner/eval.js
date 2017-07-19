@@ -28,11 +28,7 @@ exports.run = (Bastion, message, args) => {
     if (typeof evaled !== 'string') {
       evaled = require('util').inspect(evaled);
     }
-    if (message.deletable) {
-      message.delete().catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.green,
