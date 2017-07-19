@@ -19,7 +19,7 @@ const constants = {
   '%currencyName%': 'Bastion Currency',
   '%_currencyName%': 'Bastion Currencies',
   '%currencySymbol%': 'BC',
-  '%bastionSite%': 'https://bastion.js.org',
+  '%bastionSite%': 'https://BastionBot.org',
   '%discordInvLink%': 'https://discord.gg/fzx8fkt'
 };
 

@@ -11,12 +11,12 @@ exports.run = (Bastion, message) => {
     embed: {
       color: Bastion.colors.yellow,
       title: 'Bastion BOT - Guide',
-      url: 'https://bastion.js.org/',
+      url: 'https://BastionBot.org/',
       description: 'Need help installing and setting up Private Bastion BOT? No worries, we have made an amazing guide to help you out on that. And if you don\'t understand that or you need any more help or maybe if you just have a simple question, just join our Support Server on Discord.',
       fields: [
         {
           name: 'Bastion BOT - Installation Guide',
-          value: 'https://bastion.js.org/guide/'
+          value: 'https://BastionBot.org/guide/'
         },
         {
           name: 'Bastion BOT - Support Server',

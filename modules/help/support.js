@@ -16,7 +16,7 @@ exports.run = (Bastion, message) => {
       fields: [
         {
           name: 'Website',
-          value: 'https://bastion.js.org/'
+          value: 'https://BastionBot.org/'
         }
       ]
     }

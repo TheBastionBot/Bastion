@@ -1,10 +1,10 @@
 # Bastion: Discord Bot
 [![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
-[![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://bastion.js.org/changes)
+[![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://github.com/snkrsnkampa/Bastion/releases)
 [![Build Status](https://travis-ci.org/snkrsnkampa/Bastion.svg?branch=master)](https://travis-ci.org/snkrsnkampa/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Dependencies](https://david-dm.org/snkrsnkampa/Bastion.svg)](https://david-dm.org/snkrsnkampa/Bastion)
-[![Website](https://img.shields.io/website-up-down-green-red/https/bastion.js.org.svg?label=Website)](https://bastion.js.org) <a href="/LICENSE">
+[![Website](https://img.shields.io/website-up-down-green-red/https/BastionBot.org.svg?label=Website)](https://BastionBot.org) <a href="/LICENSE">
 [![license](https://img.shields.io/github/license/snkrsnkampa/Bastion.svg)](LICENSE)  
 
 <!--[![Github All Releases](https://img.shields.io/github/downloads/snkrsnkampa/Bastion/total.svg?style=flat-square)]()-->  
@@ -14,7 +14,7 @@
 Think no more, Bastion Bot can do it all (*and even more*). Seriously, what else do you need?  
 
 Bastion: The one Discord Bot you'll always need.  
-[Learn More](https://bastion.js.org 'Visit Bastion Bot website to Learn More')
+[Learn More](https://BastionBot.org 'Visit Bastion Bot website to Learn More')
 
 ## Test it before you use it.
 If you just want to get the chill of Bastion or just want to play around with it, you can join the [Bastion Bot: Discord Server](https://discord.gg/fzx8fkt).
@@ -25,7 +25,7 @@ You can ask any sort of questions about Bastion here. Chat around with everyone,
 
 ## Getting Started with Bastion Bot
 [Click Here](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463) to invite the public Bastion Bot to your Discord Server.  
-Or if you want to host it yourself and have access to all it's owner only commands, read the [Installation Guide](https://bastion.js.org/guide).
+Or if you want to host it yourself and have access to all it's owner only commands, read the [Installation Guide](https://BastionBot.org/guide).
 
 > *If you ever face any problems with Bastion Bot or you don't understard something, or if you need any kind of help with it, just head over to the [#help](https://discord.gg/fzx8fkt) channel in [Bastion Bot: Discord Server](https://discord.gg/fzx8fkt), and ask for help. We will be more than happy to help you.*
 

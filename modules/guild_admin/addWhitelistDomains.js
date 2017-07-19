@@ -60,5 +60,5 @@ exports.help = {
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'addWhitelistDomains [Domain] [anotherDomain] [someOtherDomain]',
-  example: [ 'addWhitelistDomains https://bastion.js.org https://*.sankarsankampa.com' ]
+  example: [ 'addWhitelistDomains https://BastionBot.org https://*.sankarsankampa.com' ]
 };
