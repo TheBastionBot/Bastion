@@ -14,6 +14,9 @@ install:
   - npm install
 platform: x64
 build: off
+before_test:
+  - cp settings\credentials_example.json settings\credentials.json
+  - cp settings\config_example.json settings\config.json
 test_script:
   - node --version
   - npm --version
