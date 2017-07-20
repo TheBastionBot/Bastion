@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
 
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
-  message.channel.overwritePermissions(user, { 'SEND_MESSAGES': false }).then(() => {
+  message.channel.overwritePermissions(user, { 'SEND_MESSAGES': false, 'ADD_REACTIONS': false }).then(() => {
     let reason = args.slice(1).join(' ');
     if (reason.length < 1) {
       reason = 'No reason given';
