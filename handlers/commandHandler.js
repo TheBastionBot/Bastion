@@ -14,7 +14,7 @@ const COLOR = require('chalk');
  */
 module.exports = message => {
   message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-    if (!message.guild.prefix) {
+    if (!message.guild.prefix || message.guild.prefix !== guild.prefix) {
       message.guild.prefix = guild.prefix;
     }
 
