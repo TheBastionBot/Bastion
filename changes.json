@@ -1,22 +1,12 @@
 {
-  "date": "July 19, 2017",
+  "date": "July 21, 2017",
   "updated": [
-    "Auto delete `eval` message",
-    "Improved `play` command",
-    "`poll` command requires user to have Manage Messages permissions",
-    "Improved presence count format in `stats` command"
+    "`eval` command won't auto remove to fix issues with scheduling",
+    "Removed ADD_REACTION permissions from text muted users",
+    "Minor improvements and fixes"
   ],
   "added": [
-    "Added `twitch` command",
-    "Added `playlist` command",
-    "Added `movie` command",
-    "Added `tvShow` command",
-    "Added support for multiple playlist",
-    "Added cooldown for experience points",
-    "Added transaction history to database"
+    "Added Bastion support, testers & translators' badge to profile"
   ],
-  "removed": [
-    "Removed `addFav` command",
-    "Removed `listFavs` command"
-  ]
+  "removed": []
 }

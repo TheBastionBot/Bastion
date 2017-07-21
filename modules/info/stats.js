@@ -51,7 +51,7 @@ exports.run = (Bastion, message) => {
           inline: true
         },
         {
-          name: 'Prefix',
+          name: 'Default Prefix',
           value: Bastion.config.prefix,
           inline: true
         },

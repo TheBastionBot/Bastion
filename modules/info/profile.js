@@ -101,15 +101,21 @@ function getUserIcon(user) {
   if (!bastionGuildMember) return;
   const creatorRoleID = specialIDs.developerRole;
   const devsRoleID = specialIDs.contributorsRole;
-  const patronsRoleID = specialIDs.patronsRole;
   const donorsRoleID = specialIDs.donorsRole;
+  const patronsRoleID = specialIDs.patronsRole;
+  const supportRoleID = specialIDs.supportRole;
+  const testersRoleID = specialIDs.testersRole;
+  const translatorsRoleID = specialIDs.translatorsRole;
 
   const devsIcon = 'https://cdn.discordapp.com/emojis/314068430787706880.png';
+  const donorsIcon = 'https://i.imgur.com/sCbiaOK.png';
+  const patronsIcon = 'https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png';
+  const supportIcon = 'https://i.imgur.com/1a0sa8R.png';
+  const testersIcon = 'https://i.imgur.com/3lwMiOo.png';
+  const translatorsIcon = 'https://i.imgur.com/RUOrraz.png';
   // const partners = 'https://cdn.discordapp.com/emojis/314068430556758017.png';
   // const hype = 'https://cdn.discordapp.com/emojis/314068430854684672.png';
   // const nitro = 'https://cdn.discordapp.com/emojis/314068430611415041.png';
-  const patronsIcon = 'https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png';
-  const donorsIcon = 'https://i.imgur.com/sCbiaOK.png';
 
   if (bastionGuildMember.roles.has(creatorRoleID)) {
     return devsIcon;
@@ -117,10 +123,19 @@ function getUserIcon(user) {
   else if (bastionGuildMember.roles.has(devsRoleID)) {
     return devsIcon;
   }
+  else if (bastionGuildMember.roles.has(supportRoleID)) {
+    return supportIcon;
+  }
   else if (bastionGuildMember.roles.has(patronsRoleID)) {
     return patronsIcon;
   }
   else if (bastionGuildMember.roles.has(donorsRoleID)) {
     return donorsIcon;
+  }
+  else if (bastionGuildMember.roles.has(testersRoleID)) {
+    return testersIcon;
+  }
+  else if (bastionGuildMember.roles.has(translatorsRoleID)) {
+    return translatorsIcon;
   }
 }

@@ -50,12 +50,12 @@ exports.run = (Bastion, message, args) => {
       }
     }).then(msg => {
       const votes = message.channel.createMessageCollector(
-        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${Bastion.config.prefix}endpoll`),
+        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${message.guild.prefix}endpoll`),
         { time: 6 * 60 * 60 * 1000 }
       );
 
       votes.on('collect', (msg, votes) => {
-        if (msg.content === `${Bastion.config.prefix}endpoll`) {
+        if (msg.content === `${message.guild.prefix}endpoll`) {
           return votes.stop();
         }
         if (msg.deletable) {
@@ -82,7 +82,7 @@ exports.run = (Bastion, message, args) => {
       votes.on('end', (pollRes, reason) => {
         pollRes = pollRes.map(r => r.content);
         if (reason === 'user') {
-          pollRes.splice(pollRes.indexOf(`${Bastion.config.prefix}endpoll`), 1);
+          pollRes.splice(pollRes.indexOf(`${message.guild.prefix}endpoll`), 1);
         }
         pollRes = pollRes.filter(res => parseInt(res) && parseInt(res) > 0 && parseInt(res) < args.length);
         if (pollRes.length === 0) {

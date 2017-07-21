@@ -13,7 +13,7 @@ module.exports = member => {
       farewellMsg = farewellMsg.replace(/\$user/ig, `<@${member.id}>`);
       farewellMsg = farewellMsg.replace(/\$server/ig, member.guild.name);
       farewellMsg = farewellMsg.replace(/\$username/ig, member.displayName);
-      farewellMsg = farewellMsg.replace(/\$prefix/ig, member.client.config.prefix);
+      farewellMsg = farewellMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
       member.guild.channels.get(row.farewellChannelID).send({
         embed: {

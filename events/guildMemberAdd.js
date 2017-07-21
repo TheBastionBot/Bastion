@@ -13,7 +13,7 @@ module.exports = member => {
       greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
       greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
       greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
-      greetMsg = greetMsg.replace(/\$prefix/ig, member.client.config.prefix);
+      greetMsg = greetMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
       member.guild.channels.get(row.greetChannelID).send({
         embed: {
@@ -43,7 +43,7 @@ module.exports = member => {
       greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
       greetDMMsg = greetDMMsg.replace(/\$server/ig, member.guild.name);
       greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
-      greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.client.config.prefix);
+      greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
       member.send({
         embed: {
