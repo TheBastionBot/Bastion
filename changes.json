@@ -1,9 +1,11 @@
 {
-  "date": "July 20, 2017",
+  "date": "July 21, 2017",
   "updated": [
     "`eval` command won't auto remove to fix issues with scheduling",
     "Removed ADD_REACTION permissions from text muted users"
   ],
-  "added": [],
+  "added": [
+    "Added Bastion support, testers & translators' badge to profile"
+  ],
   "removed": []
 }
