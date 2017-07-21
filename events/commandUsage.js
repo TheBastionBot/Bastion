@@ -5,29 +5,22 @@
  */
 
 module.exports = (message, command) => {
-  message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-    message.channel.send({
-      embed: {
-        color: message.client.colors.yellow,
-        title: 'Invalid Use!',
-        description: `See the usage below to know how to use \`${command.name}\` command.`,
-        fields: [
-          {
-            name: 'Usage',
-            value: `\`${command.usage}\``
-          },
-          {
-            name: 'Example',
-            value: `\`${command.example.join('`\n`') || '-'}\``
-          }
-        ],
-        footer: {
-          text: `Try ${guild.prefix}help ${command.name} for more information.`
+  message.channel.send({
+    embed: {
+      color: message.client.colors.red,
+      title: 'Invalid Use!',
+      description: `See the usage below to know how to use \`${command.name}\` command.`,
+      fields: [
+        {
+          name: 'Usage',
+          value: `\`\`\`${message.guild.prefix}${command.usage}\`\`\``
+        },
+        {
+          name: 'Help',
+          value: `\`\`\`${message.guild.prefix}help ${command.name}\`\`\``
         }
-      }
-    }).catch(e => {
-      message.client.log.error(e);
-    });
+      ]
+    }
   }).catch(e => {
     message.client.log.error(e);
   });
