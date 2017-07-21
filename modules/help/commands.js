@@ -18,7 +18,7 @@ exports.run = (Bastion, message) => {
 
     fields.push({
       name: modules[i].replace('_', ' ').toTitleCase(),
-      value: Bastion.config.prefix + commands.join(`\n${Bastion.config.prefix}`),
+      value: commands.join('\n'),
       inline: true
     });
   }

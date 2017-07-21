@@ -63,7 +63,7 @@ exports.run = (Bastion, message, args) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.red,
-      description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`${Bastion.config.prefix}enableCommand ${command.help.name}\`.`
+      description: `\`${command.help.name}\` command has been disabled until next restart. You can turn on this command using \`enableCommand ${command.help.name}\`.`
     }
   }).catch(e => {
     Bastion.log.error(e);

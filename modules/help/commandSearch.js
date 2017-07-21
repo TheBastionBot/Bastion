@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
       fields: [
         {
           name: 'Commands',
-          value: `${Bastion.config.prefix}${commands.join(`\n${Bastion.config.prefix}`)}`
+          value: `${message.guild.prefix}${commands.join(`\n${message.guild.prefix}`)}`
         }
       ]
     }
