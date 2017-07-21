@@ -14,6 +14,10 @@ const COLOR = require('chalk');
  */
 module.exports = message => {
   message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+    if (!message.guild.prefix) {
+      message.guild.prefix = guild.prefix;
+    }
+
     if (message.content.startsWith(guild.prefix)) {
       let args = message.content.split(' ');
       let command = args.shift().slice(guild.prefix.length).toLowerCase();
