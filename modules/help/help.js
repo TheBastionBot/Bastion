@@ -99,7 +99,7 @@ exports.run = (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.yellow,
         title: 'Help',
-        description: `To get a list of commands, type \`${message.guild.prefix}commands\`.\nTo get help about a specific command, type \`${message.guild.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord BOT?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
+        description: `To get a list of commands, type \`${message.guild.prefix}commands\`.\nTo get help about a specific command, type \`${message.guild.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord Bot?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
         footer: {
           text: `Server Prefix: ${message.guild.prefix} | Total Commands: ${Bastion.commands.size}`
         }
