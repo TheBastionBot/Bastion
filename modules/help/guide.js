@@ -10,16 +10,16 @@ exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.yellow,
-      title: 'Bastion BOT - Guide',
+      title: 'Bastion Bot - Guide',
       url: 'https://BastionBot.org/',
-      description: 'Need help installing and setting up Private Bastion BOT? No worries, we have made an amazing guide to help you out on that. And if you don\'t understand that or you need any more help or maybe if you just have a simple question, just join our Support Server on Discord.',
+      description: 'Need help installing and setting up Private Bastion Bot? No worries, we have made an amazing guide to help you out on that. And if you don\'t understand that or you need any more help or maybe if you just have a simple question, just join our Support Server on Discord.',
       fields: [
         {
-          name: 'Bastion BOT - Installation Guide',
+          name: 'Bastion Bot - Installation Guide',
           value: 'https://BastionBot.org/guide/'
         },
         {
-          name: 'Bastion BOT - Support Server',
+          name: 'Bastion Bot - Support Server',
           value: 'https://discord.gg/fzx8fkt'
         }
       ]

@@ -10,7 +10,7 @@ exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: 3050327,
-      title: 'Support Bastion BOT project',
+      title: 'Support Bastion Bot project',
       url: 'https://BastionBot.org/',
       description: 'To support and send donations for the Bastion Bot, ' +
                    'you can either pledge for The Bastion Bot project ' +

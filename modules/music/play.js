@@ -88,7 +88,10 @@ exports.run = (Bastion, message, args) => {
     };
 
     try {
-      if (args.playlist) {
+      if (args.song) {
+        song = args.song.join(' ');
+      }
+      else if (args.playlist) {
         let playlist;
 
         db.reload();
@@ -203,9 +206,8 @@ exports.run = (Bastion, message, args) => {
           }
         });
       }
-      else {
-        song = args.song.join(' ');
-      }
+      else return delete message.guild.music;
+
       song = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(song) ? song : `ytsearch:${song}`;
 
       yt.getInfo(song, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
