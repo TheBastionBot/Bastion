@@ -9,28 +9,28 @@
  * @param {Message} message Discord.js message object
  * @returns {void}
  */
-module.exports = message => {
-  message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-    if (guild.filterInvite === 'true' && !message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) {
-      if (/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content)) {
-        if (message.deletable) {
-          message.delete().catch(e => {
-            message.client.log.error(e);
-          });
-        }
+module.exports = async message => {
+  let guild = await message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    message.client.log.error(e);
+  });
 
-        message.channel.send({
-          embed: {
-            color: message.client.colors.orange,
-            description: `${message.author} you are not allowed to post server invite links here.`
-          }
-        }).then(msg => {
-          msg.delete(5000).catch(() => {});
-        }).catch(e => {
-          message.client.log.error(e);
-        });
-      }
+  if (guild.filterInvite !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+
+  if (!/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content)) return;
+
+  if (message.deletable) {
+    message.delete().catch(e => {
+      message.client.log.error(e);
+    });
+  }
+
+  message.channel.send({
+    embed: {
+      color: message.client.colors.orange,
+      description: `${message.author} you are not allowed to post server invite links here.`
     }
+  }).then(msg => {
+    msg.delete(5000);
   }).catch(e => {
     message.client.log.error(e);
   });

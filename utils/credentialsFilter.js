@@ -9,10 +9,10 @@
  * @param {Message} message Discord.js message object
  * @returns {void}
  */
-module.exports = message => {
+module.exports = async message => {
   /**
-   * Filter Discord client token
-   */
+  * Filter Discord client token
+  */
   if (message.content.includes(message.client.token)) {
     if (message.deletable) {
       message.delete().catch(e => {
@@ -20,22 +20,21 @@ module.exports = message => {
       });
     }
 
-    message.client.fetchApplication().then(app => {
-      message.client.users.get(app.owner.id).send({
-        embed: {
-          color: message.client.colors.red,
-          title: 'ATTENTION!',
-          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-          fields: [
-            {
-              name: 'Responsible user',
-              value: `${message.author.tag} - ${message.author.id}`
-            }
-          ]
-        }
-      }).catch(e => {
-        message.client.log.error(e);
-      });
+    let app = await message.client.fetchApplication();
+    let owner = message.client.users.get(app.owner.id);
+
+    owner.send({
+      embed: {
+        color: message.client.colors.red,
+        title: 'ATTENTION!',
+        description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
+        fields: [
+          {
+            name: 'Responsible user',
+            value: `${message.author.tag} - ${message.author.id}`
+          }
+        ]
+      }
     }).catch(e => {
       message.client.log.error(e);
     });
