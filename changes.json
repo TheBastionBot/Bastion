@@ -1,12 +1,8 @@
 {
-  "date": "July 21, 2017",
+  "date": "July 23, 2017",
   "updated": [
-    "`eval` command won't auto remove to fix issues with scheduling",
-    "Removed ADD_REACTION permissions from text muted users",
-    "Minor improvements and fixes"
+    "Fixed `play` command always trying to play playlist"
   ],
-  "added": [
-    "Added Bastion support, testers & translators' badge to profile"
-  ],
+  "added": [],
   "removed": []
 }
