@@ -5,14 +5,14 @@
  */
 
 module.exports = (permissions, message) => {
-  if (message) {
-    message.channel.send({
-      embed: {
-        color: message.client.colors.red,
-        description: `I need **${permissions.replace('_', ' ')}** permission to run this command.`
-      }
-    }).catch(e => {
-      message.client.log.error(e);
-    });
-  }
+  if (!message) return;
+
+  message.channel.send({
+    embed: {
+      color: message.client.colors.red,
+      description: `I need **${permissions.replace('_', ' ')}** permission to run this command.`
+    }
+  }).catch(e => {
+    message.client.log.error(e);
+  });
 };

@@ -11,4 +11,5 @@ module.exports = info => {
   console.log(COLOR.yellow('[WARNING EVENT]'));
   console.log(info);
   console.log(COLOR.yellow('[/WARNING EVENT]'));
+  /* eslint-enable no-console */
 };
