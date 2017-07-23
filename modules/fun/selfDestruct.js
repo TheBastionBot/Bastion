@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!args.content) {
     /**
      * The command was ran with invalid parameters.
@@ -24,22 +24,22 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('invalidInput', 'errors'), string('selfDestructTimeout', 'errorMessage', minTimeout, maxTimeout), message.channel);
   }
 
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.grey,
-      description: args.content.join(' ')
+  try {
+    if (message.deletable) {
+      await message.delete();
     }
-  }).then(msg => {
-    msg.delete(args.timeout * 1000).catch(() => {});
-  }).catch(e => {
+
+    let secretMessage = await message.channel.send({
+      embed: {
+        color: Bastion.colors.grey,
+        description: args.content.join(' ')
+      }
+    });
+    await secretMessage.delete(args.timeout * 1000);
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

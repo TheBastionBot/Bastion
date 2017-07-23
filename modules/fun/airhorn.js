@@ -6,12 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
-  if (message.deletable) {
-    message.delete(1000).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
+exports.run = async (Bastion, message) => {
   if (message.guild.voiceConnection) {
     if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) {
       /**
@@ -64,17 +59,21 @@ exports.run = (Bastion, message) => {
       return Bastion.emit('bastionMissingPermissions', 'SPEAK', message);
     }
 
-    message.member.voiceChannel.join().then(connection => {
+    try {
+      let connection = await message.member.voiceChannel.join();
       const dispatcher = connection.playFile('./data/airhorn.wav', { passes: 1 });
+
       dispatcher.on('error', error => {
         Bastion.log.error(error);
       });
+
       dispatcher.on('end', () => {
         connection.channel.leave();
       });
-    }).catch(e => {
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   }
   else {
     /**

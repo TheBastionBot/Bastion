@@ -8,7 +8,7 @@ const request = require('request');
 const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
-  request('http://random.cat/meow', function (error, response, body) {
+  request('http://random.cat/meow', async function (error, response, body) {
     if (error) {
       /**
        * Error condition is encountered.
@@ -18,20 +18,15 @@ exports.run = (Bastion, message) => {
     }
 
     if (response && response.statusCode === 200) {
-      let cat;
-
       try {
-        cat = JSON.parse(body).file;
+        let cat = await JSON.parse(body).file;
+        await message.channel.send({
+          files: [ cat ]
+        });
       }
       catch (e) {
         return Bastion.log.error(e);
       }
-
-      message.channel.send({
-        files: [ cat ]
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
     }
   });
 };
