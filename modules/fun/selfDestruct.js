@@ -24,11 +24,13 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('error', string('invalidInput', 'errors'), string('selfDestructTimeout', 'errorMessage', minTimeout, maxTimeout), message.channel);
   }
 
-  try {
-    if (message.deletable) {
-      await message.delete();
-    }
+  if (message.deletable) {
+    message.delete().catch(e => {
+      Bastion.log.error(e);
+    });
+  }
 
+  try {
     let secretMessage = await message.channel.send({
       embed: {
         color: Bastion.colors.grey,
