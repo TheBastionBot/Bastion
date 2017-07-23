@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.guild.me.hasPermission(this.help.botPermission)) {
     /**
      * Bastion has missing permissions.
@@ -23,30 +23,29 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (!row) return;
+  try {
+    let guild = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (!guild) return;
 
     let role = message.guild.roles.find('name', args.join(' '));
     if (role === null) return;
-    let selfAssignableRoles = JSON.parse(row.selfAssignableRoles);
+
+    let selfAssignableRoles = JSON.parse(guild.selfAssignableRoles);
     if (!selfAssignableRoles.includes(role.id)) return;
+
     if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
-    message.guild.members.get(message.author.id).removeRole(role).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `${message.author}, you have been removed from **${role.name}** role.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }).catch(e => {
-      Bastion.log.error(e);
+    await message.guild.members.get(message.author.id).removeRole(role);
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `${message.author}, you have been removed from **${role.name}** role.`
+      }
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

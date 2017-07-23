@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -47,8 +47,10 @@ exports.run = (Bastion, message, args) => {
     args.name = args.name.replace(' ', '-');
   }
 
-  message.guild.createChannel(args.name, channelType).then(channel => {
-    message.channel.send({
+  try {
+    let channel = await message.guild.createChannel(args.name, 'channelType');
+
+    await message.channel.send({
       embed: {
         color: Bastion.colors.green,
         title: `${channelType.charAt(0).toUpperCase() + channelType.substr(1)} Channel Created`,
@@ -65,12 +67,11 @@ exports.run = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

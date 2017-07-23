@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -52,8 +52,9 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
-  role.setName(args.new).then(() => {
-    message.channel.send({
+  try {
+    await role.setName(args.new);
+    await message.channel.send({
       embed: {
         color: Bastion.colors.green,
         title: 'Role Renamed',
@@ -70,12 +71,11 @@ exports.run = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
