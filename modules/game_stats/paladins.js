@@ -14,7 +14,7 @@ const hirez = new HiRez({
 
 let generatedSession = null;
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!args.player) {
     /**
      * The command was ran with invalid parameters.
@@ -24,19 +24,17 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!generatedSession) {
-    hirez.paladins.session.generate().then(session => {
-      generatedSession = session;
-      fetchAndSend(message, args);
-      setTimeout(() => {
-        generatedSession = null;
-      }, 15 * 60 * 1000);
-    }).catch(e => {
+    let session = await hirez.paladins.session.generate().catch(e => {
       Bastion.log.error(e);
     });
+    generatedSession = session;
+
+    setTimeout(() => {
+      generatedSession = null;
+    }, 15 * 60 * 1000);
   }
-  else {
-    fetchAndSend(message, args);
-  }
+
+  fetchAndSend(message, args);
 };
 
 exports.config = {
@@ -63,94 +61,88 @@ exports.help = {
  * @param {Object} args The args object
  * @returns {void}
  */
-function fetchAndSend(message, args) {
-  hirez.paladins.getPlayer(args.player).then(player => {
-    hirez.paladins.getPlayerStatus(args.player).then(playerStatus => {
-      hirez.paladins.getChampionRanks(args.player).then(championRanks => {
-        playerStatus = playerStatus[0];
+async function fetchAndSend(message, args) {
+  try {
+    let player = await hirez.paladins.getPlayer(args.player);
+    let playerStatus = await hirez.paladins.getPlayerStatus(args.player);
+    let championRanks = await hirez.paladins.getChampionRanks(args.player);
 
-        if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || championRanks === 0) {
-          /**
-           * Error condition is encountered.
-           * @fires error
-           */
-          message.client.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
-        }
-        else {
-          player = player[0];
-          championRanks = championRanks[0];
+    playerStatus = playerStatus[0];
 
-          message.channel.send({
-            embed: {
-              color: message.client.colors.blue,
-              author: {
-                name: player.Name
-              },
-              description: playerStatus.status_string.toLowerCase().includes('offline') ? `${playerStatus.status_string} - Last Seen: ${player.Last_Login_Datetime}` : playerStatus.status_string,
-              fields: [
-                {
-                  name: 'Level',
-                  value: `${player.Level}`,
-                  inline: true
-                },
-                {
-                  name: 'Mastery Level',
-                  value: `${player.MasteryLevel}`,
-                  inline: true
-                },
-                {
-                  name: 'Region',
-                  value: player.Region,
-                  inline: true
-                },
-                {
-                  name: 'Wins',
-                  value: `${player.Wins}`,
-                  inline: true
-                },
-                {
-                  name: 'Losses',
-                  value: `${player.Losses}`,
-                  inline: true
-                },
-                {
-                  name: 'Leaves',
-                  value: `${player.Leaves}`,
-                  inline: true
-                },
-                {
-                  name: 'Win %',
-                  value: `${player.Wins / (player.Wins + player.Losses) * 100}`,
-                  inline: true
-                },
-                {
-                  name: 'Total Achievements',
-                  value: `${player.Total_Achievements}`,
-                  inline: true
-                },
-                {
-                  name: 'Main Champion',
-                  value: `${championRanks.champion} - Level ${championRanks.Rank}\n` +
-                  `${championRanks.Kills} Kills, ${championRanks.Deaths} Deaths and ${championRanks.Assists} Assists (${(championRanks.Kills / championRanks.Deaths).toFixed(2)} K/D)\n` +
-                  `${championRanks.Wins} Wins and ${championRanks.Losses} Losses (${(championRanks.Wins / (championRanks.Wins + championRanks.Losses) * 100).toFixed(2)} Win %)`,
-                  inline: true
-                }
-              ],
-              footer: {
-                text: 'Powered by Hi-Rez Studios'
-              }
-            }
-          }).catch(e => {
-            message.client.log.error(e);
-          });
+    if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || championRanks === 0) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return message.client.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
+    }
+
+    player = player[0];
+    championRanks = championRanks[0];
+
+    message.channel.send({
+      embed: {
+        color: message.client.colors.blue,
+        author: {
+          name: player.Name
+        },
+        description: playerStatus.status_string.toLowerCase().includes('offline') ? `${playerStatus.status_string} - Last Seen: ${player.Last_Login_Datetime}` : playerStatus.status_string,
+        fields: [
+          {
+            name: 'Level',
+            value: `${player.Level}`,
+            inline: true
+          },
+          {
+            name: 'Mastery Level',
+            value: `${player.MasteryLevel}`,
+            inline: true
+          },
+          {
+            name: 'Region',
+            value: player.Region,
+            inline: true
+          },
+          {
+            name: 'Wins',
+            value: `${player.Wins}`,
+            inline: true
+          },
+          {
+            name: 'Losses',
+            value: `${player.Losses}`,
+            inline: true
+          },
+          {
+            name: 'Leaves',
+            value: `${player.Leaves}`,
+            inline: true
+          },
+          {
+            name: 'Win %',
+            value: `${player.Wins / (player.Wins + player.Losses) * 100}`,
+            inline: true
+          },
+          {
+            name: 'Total Achievements',
+            value: `${player.Total_Achievements}`,
+            inline: true
+          },
+          {
+            name: 'Main Champion',
+            value: `${championRanks.champion} - Level ${championRanks.Rank}\n` +
+            `${championRanks.Kills} Kills, ${championRanks.Deaths} Deaths and ${championRanks.Assists} Assists (${(championRanks.Kills / championRanks.Deaths).toFixed(2)} K/D)\n` +
+            `${championRanks.Wins} Wins and ${championRanks.Losses} Losses (${(championRanks.Wins / (championRanks.Wins + championRanks.Losses) * 100).toFixed(2)} Win %)`,
+            inline: true
+          }
+        ],
+        footer: {
+          text: 'Powered by Hi-Rez Studios'
         }
-      }).catch(e => {
-        message.client.log.error(e);
-      });
-    }).catch(e => {
-      message.client.log.error(e);
+      }
     });
-  }).catch(e => {
+  }
+  catch (e) {
     message.client.log.error(e);
-  });
+  }
 }
