@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 let recentUsers = [];
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   let cooldown = 60;
 
   if (!recentUsers.includes(message.author.id)) {
@@ -39,15 +39,16 @@ exports.run = (Bastion, message, args) => {
       'six'
     ];
     let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
-    // let outcome = outcomes.random();
 
-    Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(profile => {
-      if (args.money > profile.bastionCurrencies) {
+    try {
+      let user = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+
+      if (args.money > user.bastionCurrencies) {
         /**
-         * Error condition is encountered.
-         * @fires error
-         */
-        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', profile.bastionCurrencies), message.channel);
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', user.bastionCurrencies), message.channel);
       }
 
       recentUsers.push(message.author.id);
@@ -56,28 +57,38 @@ exports.run = (Bastion, message, args) => {
       if (outcome.toLowerCase() === args.outcome.toLowerCase()) {
         let prize = args.money < 50 ? args.money + outcomes.length : args.money < 100 ? args.money : args.money * 2;
         result = `Congratulations! You won the bet.\nYou won **${prize}** Bastion Currencies.`;
+
+        /**
+         * User's account is debited with Bastion Currencies
+         * @fires userDebit
+         */
         Bastion.emit('userDebit', message.author, prize);
       }
       else {
         result = 'Sorry, you lost the bet. Better luck next time.';
+
+        /**
+         * User's account is credited with Bastion Currencies
+         * @fires userCredit
+         */
         Bastion.emit('userCredit', message.author, args.money);
       }
-      message.channel.send({
+
+      await message.channel.send({
         embed: {
           color: Bastion.colors.blue,
           title: `Rolled :${outcome}:`,
           description: result
         }
-      }).then(() => {
-        setTimeout(function () {
-          recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
-        }, cooldown * 1000);
-      }).catch(e => {
-        Bastion.log.error(e);
       });
-    }).catch(e => {
+
+      setTimeout(() => {
+        recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
+      }, cooldown * 1000);
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   }
   else {
     /**
