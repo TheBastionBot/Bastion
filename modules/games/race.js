@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 const ProgressBar = require('../../utils/progress');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   let racers = [ [], [] ];
   const STEPS = 20;
   for (let i = 0; i < racers.length; i++) {
@@ -30,7 +30,7 @@ exports.run = (Bastion, message) => {
     total: 20
   });
 
-  message.channel.send({
+  let raceStatusMessage = await message.channel.send({
     embed: {
       color: Bastion.colors.blue,
       title: 'Race',
@@ -45,56 +45,56 @@ exports.run = (Bastion, message) => {
         }
       ]
     }
-  }).then(msg => {
-    let timer = setInterval(() => {
-      for (let i = 0; i < Math.floor(Math.random() * (5 - 1 + 1) + 1); i++) {
-        racer.tick();
-      }
-      for (let i = 0; i < Math.floor(Math.random() * (5 - 1 + 1) + 1); i++) {
-        bastion.tick();
-      }
-
-      if (bastion.lastDraw) {
-        let result = 'Race ',
-          progressBastion = `:vertical_traffic_light: ${bastion.lastDraw}:checkered_flag:`,
-          progressRacer = `:vertical_traffic_light: ${racer.lastDraw}:checkered_flag:`;
-        if (bastion.complete && !racer.complete) {
-          result += 'Ended';
-          progressBastion = `:vertical_traffic_light: ${bastion.lastDraw}:checkered_flag: :trophy:`;
-        }
-        else if (!bastion.complete && racer.complete) {
-          result += 'Ended';
-          progressRacer = `:vertical_traffic_light: ${racer.lastDraw}:checkered_flag: :trophy:`;
-        }
-        else if (bastion.complete && racer.complete) {
-          result += 'Ended - Draw';
-        }
-        msg.edit({
-          embed: {
-            color: Bastion.colors.blue,
-            title: result,
-            fields: [
-              {
-                name: Bastion.user.tag,
-                value: progressBastion
-              },
-              {
-                name: message.author.tag,
-                value: progressRacer
-              }
-            ]
-          }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
-      }
-      if (bastion.complete || racer.complete) {
-        clearInterval(timer);
-      }
-    }, 1000);
   }).catch(e => {
     Bastion.log.error(e);
   });
+
+  let timer = setInterval(() => {
+    for (let i = 0; i < Math.floor(Math.random() * (5 - 1 + 1) + 1); i++) {
+      racer.tick();
+    }
+    for (let i = 0; i < Math.floor(Math.random() * (5 - 1 + 1) + 1); i++) {
+      bastion.tick();
+    }
+
+    if (bastion.lastDraw) {
+      let result = 'Race ',
+        progressBastion = `:vertical_traffic_light: ${bastion.lastDraw}:checkered_flag:`,
+        progressRacer = `:vertical_traffic_light: ${racer.lastDraw}:checkered_flag:`;
+      if (bastion.complete && !racer.complete) {
+        result += 'Ended';
+        progressBastion = `:vertical_traffic_light: ${bastion.lastDraw}:checkered_flag: :trophy:`;
+      }
+      else if (!bastion.complete && racer.complete) {
+        result += 'Ended';
+        progressRacer = `:vertical_traffic_light: ${racer.lastDraw}:checkered_flag: :trophy:`;
+      }
+      else if (bastion.complete && racer.complete) {
+        result += 'Ended - Draw';
+      }
+      raceStatusMessage.edit({
+        embed: {
+          color: Bastion.colors.blue,
+          title: result,
+          fields: [
+            {
+              name: Bastion.user.tag,
+              value: progressBastion
+            },
+            {
+              name: message.author.tag,
+              value: progressRacer
+            }
+          ]
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    if (bastion.complete || racer.complete) {
+      clearInterval(timer);
+    }
+  }, 1000);
 };
 
 exports.config = {
