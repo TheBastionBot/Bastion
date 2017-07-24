@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -23,24 +23,24 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
-    let whitelistDomains = JSON.parse(guild.whitelistDomains);
-    whitelistDomains = whitelistDomains.concat(args.domains);
-    whitelistDomains = [ ...new Set(whitelistDomains) ];
+  let guildSettings = await Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    Bastion.db.run(`UPDATE guildSettings SET whitelistDomains='${JSON.stringify(whitelistDomains)}' WHERE guildID=${message.guild.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          title: 'Added Domains to Whitelist',
-          description: args.domains.join('\n')
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  let whitelistDomains = JSON.parse(guildSettings.whitelistDomains);
+  whitelistDomains = whitelistDomains.concat(args.domains);
+  whitelistDomains = [ ...new Set(whitelistDomains) ];
+
+  await Bastion.db.run(`UPDATE guildSettings SET whitelistDomains='${JSON.stringify(whitelistDomains)}' WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      title: 'Added Domains to Whitelist',
+      description: args.domains.join('\n')
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

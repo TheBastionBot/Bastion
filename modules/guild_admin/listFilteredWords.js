@@ -6,37 +6,37 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
-  Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    if (!row || row.filteredWords === '[]') {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
-    }
+exports.run = async (Bastion, message, args) => {
+  let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    let filteredWords = JSON.parse(row.filteredWords);
-    filteredWords = [ ...new Set(filteredWords) ];
+  if (!guildSettings || guildSettings.filteredWords === '[]') {
+    /**
+    * Error condition is encountered.
+    * @fires error
+    */
+    return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
+  }
 
-    filteredWords = filteredWords.map((r, i) => `${i + 1}. ${r}`);
+  let filteredWords = JSON.parse(guildSettings.filteredWords);
+  filteredWords = [ ...new Set(filteredWords) ];
 
-    let noOfPages = filteredWords.length / 10;
-    let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
-    i = i - 1;
+  filteredWords = filteredWords.map((r, i) => `${i + 1}. ${r}`);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'Filtered Words',
-        description: filteredWords.slice(i * 10, (i * 10) + 10).join('\n'),
-        footer: {
-          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
-        }
+  let noOfPages = filteredWords.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+  i = i - 1;
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      title: 'Filtered Words',
+      description: filteredWords.slice(i * 10, (i * 10) + 10).join('\n'),
+      footer: {
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

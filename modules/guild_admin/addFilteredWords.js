@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -30,24 +30,24 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let filteredWords = JSON.parse(row.filteredWords);
-    filteredWords = filteredWords.concat(args);
-    filteredWords = [ ...new Set(filteredWords) ];
+  let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    Bastion.db.run(`UPDATE guildSettings SET filteredWords='${JSON.stringify(filteredWords)}' WHERE guildID=${message.guild.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          title: 'Added Words to Filter List',
-          description: args.join(', ')
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  let filteredWords = JSON.parse(guildSettings.filteredWords);
+  filteredWords = filteredWords.concat(args);
+  filteredWords = [ ...new Set(filteredWords) ];
+
+  await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${JSON.stringify(filteredWords)}' WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      title: 'Added Words to Filter List',
+      description: args.join(', ')
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

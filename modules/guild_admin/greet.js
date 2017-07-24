@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -15,31 +15,31 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  Bastion.db.get(`SELECT greet, greetChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let color, greetStats;
-    if (row.greetChannelID === message.channel.id) {
-      Bastion.db.run(`UPDATE guildSettings SET greet='false', greetChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.red;
-      greetStats = 'Greeting Messages are now disabled.';
-    }
-    else {
-      Bastion.db.run(`UPDATE guildSettings SET greet='true', greetChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.green;
-      greetStats = 'Greeting Messages are now enabled in this channel.';
-    }
+  let guildSettings = await Bastion.db.get(`SELECT greet, greetChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    message.channel.send({
-      embed: {
-        color: color,
-        description: greetStats
-      }
-    }).catch(e => {
+  let color, greetStats;
+  if (guildSettings.greetChannelID === message.channel.id) {
+    Bastion.db.run(`UPDATE guildSettings SET greet='false', greetChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
+    color = Bastion.colors.red;
+    greetStats = 'Greeting Messages are now disabled.';
+  }
+  else {
+    Bastion.db.run(`UPDATE guildSettings SET greet='true', greetChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+    color = Bastion.colors.green;
+    greetStats = 'Greeting Messages are now enabled in this channel.';
+  }
+
+  message.channel.send({
+    embed: {
+      color: color,
+      description: greetStats
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });
