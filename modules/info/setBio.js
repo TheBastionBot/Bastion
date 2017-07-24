@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -26,34 +26,34 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('invalidInput', 'errors'), string('bioRange', 'errorMessage', charLimit), message.channel);
   }
 
-  Bastion.db.get(`SELECT bio FROM profiles WHERE userID=${message.author.id}`).then(user => {
-    if (!user) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+  let user = await Bastion.db.get(`SELECT bio FROM profiles WHERE userID=${message.author.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    Bastion.db.run(`UPDATE profiles SET bio="${bio}" WHERE userID=${message.author.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          title: 'Bio Set',
-          description: bio,
-          footer: {
-            text: args.tag
-          }
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+  if (!user) {
+    return message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
+  }
+
+  await Bastion.db.run(`UPDATE profiles SET bio="${bio}" WHERE userID=${message.author.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      title: 'Bio Set',
+      description: bio,
+      footer: {
+        text: args.tag
+      }
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

@@ -7,67 +7,68 @@
 const string = require('../../handlers/languageHandler');
 const specialIDs = require('../../data/specialIDs.json');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!(args = message.mentions.users.first())) {
     args = message.author;
   }
-  Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).then(profile => {
-    if (!profile) {
-      if (args === message.author) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.green,
-            description: `Your profile is now created, <@${args.id}>`
-          }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
-      }
 
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
+  let profile = await Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  if (!profile) {
+    if (args === message.author) {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `Your profile is now created, <@${args.id}>`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.blue,
-        author: {
-          name: args.tag,
-          icon_url: getUserIcon(args)
+    /**
+    * Error condition is encountered.
+    * @fires error
+    */
+    return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
+  }
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.blue,
+      author: {
+        name: args.tag,
+        icon_url: getUserIcon(args)
+      },
+      description: profile.bio || `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`,
+      fields: [
+        {
+          name: 'Bastion Currency',
+          value: profile.bastionCurrencies,
+          inline: true
         },
-        description: profile.bio || `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`,
-        fields: [
-          {
-            name: 'Bastion Currency',
-            value: profile.bastionCurrencies,
-            inline: true
-          },
-          {
-            name: 'Rank',
-            value: profile.rank + 1,
-            inline: true
-          },
-          {
-            name: 'Experience Points',
-            value: profile.xp,
-            inline: true
-          },
-          {
-            name: 'Level',
-            value: profile.level,
-            inline: true
-          }
-        ],
-        thumbnail: {
-          url: args.displayAvatarURL
+        {
+          name: 'Rank',
+          value: profile.rank + 1,
+          inline: true
+        },
+        {
+          name: 'Experience Points',
+          value: profile.xp,
+          inline: true
+        },
+        {
+          name: 'Level',
+          value: profile.level,
+          inline: true
         }
+      ],
+      thumbnail: {
+        url: args.displayAvatarURL
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });
