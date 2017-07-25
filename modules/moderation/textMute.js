@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -34,7 +34,9 @@ exports.run = (Bastion, message, args) => {
 
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
 
-  message.channel.overwritePermissions(user, { 'SEND_MESSAGES': false, 'ADD_REACTIONS': false }).then(() => {
+  try {
+    await message.channel.overwritePermissions(user, { 'SEND_MESSAGES': false, 'ADD_REACTIONS': false });
+
     let reason = args.slice(1).join(' ');
     if (reason.length < 1) {
       reason = 'No reason given';
@@ -67,15 +69,16 @@ exports.run = (Bastion, message, args) => {
     });
 
     /**
-     * Logs moderation events if it is enabled
-     * @fires moderationLog
-     */
+    * Logs moderation events if it is enabled
+    * @fires moderationLog
+    */
     Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason, {
       channel: message.channel
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
