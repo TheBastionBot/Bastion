@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 const followURL = require('../../functions/followURL');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   let url = args.url.join(' ');
 
   if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(url)) {
@@ -18,7 +18,9 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'URL'), message.channel);
   }
 
-  followURL(url).then(followedUrl => {
+  try {
+    let followedUrl = await followURL(url);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
@@ -36,9 +38,10 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 const translate = require('google-translate-api');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (args.length < 2) {
     /**
      * The command was ran with invalid parameters.
@@ -16,28 +16,31 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  translate(args.slice(1).join(' '), { to: args[0] }).then(res => {
+  try {
+    let result = await translate(args.slice(1).join(' '), { to: args[0] });
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
-        description: res.text,
+        description: result.text,
         footer: {
-          text: `Powered by Google | Translation from ${res.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
+          text: `Powered by Google | Translation from ${result.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
         }
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
-    Bastion.log.error(e);
+  }
+  catch (e) {
     if (e.stack.includes('not supported')) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
+      * Error condition is encountered.
+      * @fires error
+      */
       return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'language code'), message.channel);
     }
-  });
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
