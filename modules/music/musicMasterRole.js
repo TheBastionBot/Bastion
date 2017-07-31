@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -16,15 +16,15 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!(parseInt(args[0]) < 9223372036854775807)) {
-    Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=null WHERE guildID=${message.guild.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Music Master role has been removed.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    await Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=null WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Music Master role has been removed.'
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
@@ -40,15 +40,15 @@ exports.run = (Bastion, message, args) => {
       return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
     }
 
-    Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=${args[0]} WHERE guildID=${message.guild.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `**${role.name}** has been set as the Music Master role.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    await Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        description: `**${role.name}** has been set as the Music Master role.`
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
