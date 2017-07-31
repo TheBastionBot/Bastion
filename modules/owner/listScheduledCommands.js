@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -15,12 +15,14 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  Bastion.db.all('SELECT cronExp, command, arguments FROM scheduledCommands').then(scheduledCommands => {
+  try {
+    let scheduledCommands = await Bastion.db.all('SELECT cronExp, command, arguments FROM scheduledCommands');
+
     if (scheduledCommands.length === 0) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
+      * Error condition is encountered.
+      * @fires error
+      */
       return Bastion.emit('error', string('notFound', 'errors'), string('scheduledCommandsNotFound', 'errorMessage'), message.channel);
     }
 
@@ -42,9 +44,10 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

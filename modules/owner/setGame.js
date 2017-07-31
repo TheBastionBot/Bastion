@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -15,8 +15,10 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (args.length >= 1) {
-    Bastion.user.setGame(args.join(' ')).then(() => {
+  try {
+    if (args.length >= 1) {
+      await Bastion.user.setGame(args.join(' '));
+
       message.channel.send({
         embed: {
           color: Bastion.colors.yellow,
@@ -25,12 +27,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e);
       });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
-    Bastion.user.setGame(Bastion.config.game).then(() => {
+    }
+    else {
+      await Bastion.user.setGame(Bastion.config.game);
+
       message.channel.send({
         embed: {
           color: Bastion.colors.green,
@@ -39,9 +39,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e);
       });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

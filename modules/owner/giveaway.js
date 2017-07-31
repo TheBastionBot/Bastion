@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 let activeChannel;
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -32,29 +32,30 @@ exports.run = (Bastion, message, args) => {
      * @default
      */
     const TIMEOUT = 1;
-    let giveawayMessageID, reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁', '🎁' ];
+    let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁', '🎁' ];
 
     reaction = reaction[Math.floor(Math.random() * reaction.length)];
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.blue,
-        title: 'GIVEAWAY! 🎉',
-        description: `Giveaway event started. React to this message with ${reaction} to get **${args.amount}** Bastion Currencies.`,
-        footer: {
-          text: 'Event stops in 1 hour. You will get your reward after the event has concluded.'
+    try {
+      let giveawayMessage = await message.channel.send({
+        embed: {
+          color: Bastion.colors.blue,
+          title: 'GIVEAWAY! 🎉',
+          description: `Giveaway event started. React to this message with ${reaction} to get **${args.amount}** Bastion Currencies.`,
+          footer: {
+            text: `Event stops in ${TIMEOUT} hour. You will get your reward after the event has concluded.`
+          }
         }
-      }
-    }).then(msg => {
-      giveawayMessageID = msg.id;
+      });
+      let giveawayMessageID = giveawayMessage.id;
       activeChannel = message.channel.id;
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
 
-    setTimeout(function () {
-      message.channel.fetchMessage(giveawayMessageID).then(msg => {
-        msg.edit('', {
+      setTimeout(async () => {
+        let giveawayMessage = await message.channel.fetchMessage(giveawayMessageID).catch(e => {
+          Bastion.log.error(e);
+        });
+
+        giveawayMessage.edit('', {
           embed: {
             color: Bastion.colors.blue,
             title: 'Giveaway event ended',
@@ -67,17 +68,18 @@ exports.run = (Bastion, message, args) => {
         });
 
         reaction = encodeURIComponent(reaction);
+
         let winners = [];
-        if (msg.reactions.get(reaction)) {
-          winners = msg.reactions.get(reaction).users.map(u => u.id);
+        if (giveawayMessage.reactions.get(reaction)) {
+          winners = giveawayMessage.reactions.get(reaction).users.map(u => u.id);
         }
         winners.forEach(user => {
           user = Bastion.users.get(user);
           if (user) {
             /**
-             * User's account is debited with `args.amount` Bastion Currencies
-             * @fires userDebit
-             */
+            * User's account is debited with `args.amount` Bastion Currencies
+            * @fires userDebit
+            */
             Bastion.emit('userDebit', user, args.amount);
             user.send({
               embed: {
@@ -89,10 +91,11 @@ exports.run = (Bastion, message, args) => {
             });
           }
         });
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }, TIMEOUT * 60 * 60 * 1000);
+      }, TIMEOUT * 60 * 60 * 1000);
+    }
+    catch (e) {
+      Bastion.log.error(e);
+    }
   }
   else {
     /**
