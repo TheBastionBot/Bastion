@@ -1,8 +1,9 @@
 {
   "date": "August 2, 2017",
   "updated": [
-    "Fixed `play` command always trying to play playlist"
-    "Minor fixes"
+    "Fixed `play` command always trying to play playlist",
+    "Fixed `skip` and `stop` commands not working sometimes",
+    "Minor fixes and improvements"
   ],
   "added": [],
   "removed": []

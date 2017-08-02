@@ -290,20 +290,15 @@ function startStreamDispatcher(guild, connection) {
         color: guild.client.colors.red,
         description: 'Exiting voice channel.'
       }
-    }).then(m => {
+    }).then(() => {
       guild.music.voiceChannel.leave();
       delete guild.music;
-      m.delete(5000).catch(e => {
-        guild.client.log.error(e);
-      });
     }).catch(e => {
       guild.client.log.error(e);
     });
   }
 
-  // message.guild.voiceConnection.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: 1 });
-  const dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: 1 });
-
+  guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: 1 });
   guild.music.playing = true;
 
   guild.music.textChannel.send({
@@ -315,7 +310,7 @@ function startStreamDispatcher(guild, connection) {
         url: guild.music.songs[0].thumbnail
       },
       footer: {
-        text: `🔉 ${guild.voiceConnection.dispatcher.volume * 50}% | Duration: ${guild.music.songs[0].duration} | Requester: ${guild.music.songs[0].requester}`
+        text: `🔉 ${guild.music.dispatcher.volume * 50}% | Duration: ${guild.music.songs[0].duration} | Requester: ${guild.music.songs[0].requester}`
       }
     }
   }).catch(e => {
@@ -323,7 +318,7 @@ function startStreamDispatcher(guild, connection) {
   });
 
 
-  dispatcher.on('end', () => {
+  guild.music.dispatcher.on('end', () => {
     guild.music.playing = false;
     guild.music.skipVotes = [];
     if (!guild.music.repeat) {
@@ -335,7 +330,7 @@ function startStreamDispatcher(guild, connection) {
     startStreamDispatcher(guild, connection);
   });
 
-  dispatcher.on('error', (err) => {
+  guild.music.dispatcher.on('error', (err) => {
     guild.music.playing = false;
     guild.music.songs.shift();
     startStreamDispatcher(guild, connection);

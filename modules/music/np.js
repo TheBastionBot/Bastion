@@ -18,13 +18,13 @@ exports.run = (Bastion, message) => {
   message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.blue,
-      title: message.guild.voiceConnection.dispatcher.paused ? 'Paused' : 'Now Playing',
+      title: message.guild.music.dispatcher.paused ? 'Paused' : 'Now Playing',
       description: message.guild.music.songs[0].title,
       thumbnail: {
         url: message.guild.music.songs[0].thumbnail
       },
       footer: {
-        text: `🔉 ${message.guild.voiceConnection.dispatcher.volume * 50}% | ${Math.floor(message.guild.voiceConnection.dispatcher.time / 60000)}:${Math.floor((message.guild.voiceConnection.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.voiceConnection.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.voiceConnection.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
+        text: `🔉 ${message.guild.music.dispatcher.volume * 50}% | ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
       }
     }
   }).catch(e => {
