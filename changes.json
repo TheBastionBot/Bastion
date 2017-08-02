@@ -1,7 +1,8 @@
 {
-  "date": "July 23, 2017",
+  "date": "August 2, 2017",
   "updated": [
     "Fixed `play` command always trying to play playlist"
+    "Minor fixes"
   ],
   "added": [],
   "removed": []

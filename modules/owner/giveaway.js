@@ -59,7 +59,7 @@ exports.run = async (Bastion, message, args) => {
           embed: {
             color: Bastion.colors.blue,
             title: 'Giveaway event ended',
-            description: `Giveaway event has been ended. Thank you for participating. All the participants are being rewarded with **${args.amount}** Bastion Currencies.`
+            description: `Giveaway event has been ended. Thank you for participating. All the participants have been rewarded with **${args.amount}** Bastion Currencies.`
           }
         }).then(() => {
           activeChannel = null;
