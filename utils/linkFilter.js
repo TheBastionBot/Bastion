@@ -17,7 +17,7 @@ module.exports = async message => {
   if (guild.filterLink !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
 
   let whitelistDomains = JSON.parse(guild.whitelistDomains),
-    links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi),
+    links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi),
     matches = [];
 
   if (!links) return;

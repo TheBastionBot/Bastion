@@ -10,7 +10,7 @@ const followURL = require('../../functions/followURL');
 exports.run = async (Bastion, message, args) => {
   let url = args.url.join(' ');
 
-  if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(url)) {
+  if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(url)) {
     /**
      * Error condition is encountered.
      * @fires error
