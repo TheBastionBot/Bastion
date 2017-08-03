@@ -108,13 +108,19 @@ case $1 in
   fi
 ;;
 
---fix-locales)
+--fix-d)
+echo -e "${CYAN}[Bastion]:${NC} Fixing dependencies..."
+rm -rf node_modules
+npm install --production
+;;
+
+--fix-l)
   echo -e "${CYAN}[Bastion]:${NC} Fixing locales..."
   export LC_ALL="$LANG"
   grep -qF "LC_ALL=\"$LANG\"" /etc/environment || echo "LC_ALL=\"$LANG\"" | sudo tee -a /etc/environment 1>/dev/null
 ;;
 
---fix-perms)
+--fix-p)
   echo -e "${CYAN}[Bastion]:${NC} Fixing permissions..."
   (
     cd .. && sudo chown -R "$USER":"$(id -gn "$USER")" Bastion .config
@@ -135,6 +141,7 @@ case $1 in
   echo " --debug      Start Bastion in debug mode to see the issue that is"
   echo "              preventing Bastion from booting. Does not start Bastion in"
   echo "              background, so if you close the debug mode, Bastion stops."
+  echo " --fix-d      Fixes dependencies issues by reinstalling dependencies."
   echo " --fix-l      Fixes locales issue that causes errors with youtube-dl."
   echo " --fix-p      Fixes permission issues that causes errors in updating"
   echo "              or running."
