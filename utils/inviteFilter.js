@@ -10,14 +10,50 @@
  * @returns {void}
  */
 module.exports = async message => {
-  let guild = await message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+  try {
+    let guild = await message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`);
+
+    if (guild.filterInvite !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+
+    if (hasDiscordInvite(message.content)) {
+      deleteInvite(message);
+    }
+
+    let links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi);
+    if (!links) return;
+
+    for (let url of links) {
+      url = await message.client.functions.followURL(url);
+
+      if (hasDiscordInvite(url)) {
+        deleteInvite(message);
+      }
+    }
+  }
+  catch (e) {
     message.client.log.error(e);
-  });
+  }
+};
 
-  if (guild.filterInvite !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+/**
+ * Checks if a string contains a discord invite URL
+ * @param {String} string string which needs to be checked for
+ * @returns {Boolean} whether the string has invite URL or not
+ */
+function hasDiscordInvite(string) {
+  let discordInvite = /(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i;
 
-  if (!/(https:\/\/)?(www\.)?(discord\.gg|discord\.me|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content)) return;
+  if (discordInvite.test(string)) return true;
+  return false;
+}
 
+/**
+ * Deletes the message with the invite URL (if Bastion has permission)
+ * and warns the user
+ * @param {String} message Discord.js message object
+ * @returns {void}
+ */
+function deleteInvite(message) {
   if (message.deletable) {
     message.delete().catch(e => {
       message.client.log.error(e);
@@ -30,8 +66,8 @@ module.exports = async message => {
       description: `${message.author} you are not allowed to post server invite links here.`
     }
   }).then(msg => {
-    msg.delete(5000);
+    msg.delete(5000).catch(() => {});
   }).catch(e => {
     message.client.log.error(e);
   });
-};
+}

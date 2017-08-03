@@ -1,6 +1,7 @@
 {
   "date": "August 3, 2017",
   "updated": [
+    "Invite filter now checks for URL redirections, no more hiding invites behind different URLs",
     "Fixed `listTriggers` showing the list even if list was empty",
     "Fixed `play` command always trying to play playlist",
     "Fixed `skip` and `stop` commands not working sometimes",
