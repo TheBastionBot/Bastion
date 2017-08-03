@@ -109,9 +109,9 @@ case $1 in
 ;;
 
 --fix-d)
-echo -e "${CYAN}[Bastion]:${NC} Fixing dependencies..."
-rm -rf node_modules
-npm install --production
+  echo -e "${CYAN}[Bastion]:${NC} Fixing dependencies..."
+  rm -rf node_modules
+  npm install --production
 ;;
 
 --fix-l)
