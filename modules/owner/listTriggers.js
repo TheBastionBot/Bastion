@@ -23,7 +23,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', string('notFound', 'errors'), string('triggerNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('triggerNotFound', 'errorMessage'), message.channel);
     }
 
     triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);

@@ -1,6 +1,7 @@
 {
-  "date": "August 2, 2017",
+  "date": "August 3, 2017",
   "updated": [
+    "Fixed `listTriggers` showing the list even if list was empty",
     "Fixed `play` command always trying to play playlist",
     "Fixed `skip` and `stop` commands not working sometimes",
     "Minor fixes and improvements"
