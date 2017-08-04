@@ -29,6 +29,7 @@
   "selfDestruct": "Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.",
   "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastion.js.org/tools/embed_builder/).*",
   "ship": "Combines two or more mentioned user's names.",
+  "slap": "Give a slap to another user.",
   "xkcd": "Shows a xkcd comics.",
   "zalgolize": "Sends the same message that you had sent, but zalgolized.",
 
