@@ -7,6 +7,8 @@
     "Fixed `skip` and `stop` commands not working sometimes",
     "Minor fixes and improvements"
   ],
-  "added": [],
+  "added": [
+    "Added `punch` command."
+  ],
   "removed": []
 }
