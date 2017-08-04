@@ -10,6 +10,7 @@
   ],
   "added": [
     "Added `anime` command.",
+    "Added `manga` command.",
     "Added `punch` command.",
     "Added `slap` command."
   ],
