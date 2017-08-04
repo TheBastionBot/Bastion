@@ -5,6 +5,7 @@
     "Fixed `listTriggers` showing the list even if list was empty",
     "Fixed `play` command always trying to play playlist",
     "Fixed `skip` and `stop` commands not working sometimes",
+    "Removed perms to add reactions on channel lockdown",
     "Minor fixes and improvements"
   ],
   "added": [

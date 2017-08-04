@@ -46,7 +46,8 @@ exports.run = async (Bastion, message, args) => {
   }
   else {
     await message.channel.overwritePermissions(message.guild.id, {
-      SEND_MESSAGES: false
+      SEND_MESSAGES: false,
+      ADD_REACTIONS: false
     }).catch(e => {
       Bastion.log.error(e);
     });
