@@ -188,6 +188,7 @@
   "updateDatabase": "Updates Bastion's Database to the current release, if required.",
   "userBlacklist": "Adds/Removes a specified user to Bastion's blacklist. Blacklisted users can not use any of the Bastion's commands.",
 
+  "anime": "Searches for the details of an Anime.",
   "calculate": "Evaluates any mathematical expression.",
   "capture": "Captures a screenshot of the specified webpage.",
   "choose": "Asks the bot to choose an option from a number of options.",
