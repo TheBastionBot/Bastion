@@ -5,6 +5,7 @@
  */
 
 module.exports = permissions => {
-  /* eslint-disable  no-console*/
+  /* eslint-disable no-console*/
   console.log(`User needs ${permissions.replace('_', ' ')} permission to use this command.`);
+  /* eslint-enable no-console*/
 };

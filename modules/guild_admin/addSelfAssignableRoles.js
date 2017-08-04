@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -44,29 +44,30 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
-  Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let roles = JSON.parse(row.selfAssignableRoles);
-    roles = roles.concat(args);
-    roles = roles.filter(r => message.guild.roles.get(r));
-    roles = [ ...new Set(roles) ];
-    // roles = roles.unique(roles);
-    Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).then(() => {
-      let roleNames = [];
-      for (let i = 0; i < args.length; i++) {
-        roleNames.push(message.guild.roles.get(args[i]).name);
-      }
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          title: 'Added self assignable roles',
-          description: roleNames.join(', ')
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  let roles = JSON.parse(guildSettings.selfAssignableRoles);
+  roles = roles.concat(args);
+  roles = roles.filter(r => message.guild.roles.get(r));
+  roles = [ ...new Set(roles) ];
+
+  await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  let roleNames = [];
+  for (let i = 0; i < args.length; i++) {
+    roleNames.push(message.guild.roles.get(args[i]).name);
+  }
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.green,
+      title: 'Added self assignable roles',
+      description: roleNames.join(', ')
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

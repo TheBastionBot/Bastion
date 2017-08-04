@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 let activeChannels = {};
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -38,17 +38,19 @@ exports.run = (Bastion, message, args) => {
       });
     }
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
-        title: 'Poll started',
-        description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
-        fields: answers,
-        footer: {
-          text: 'Vote by typing the corresponding number of the option.'
+    try {
+      let pollStatus = await message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          title: 'Poll started',
+          description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
+          fields: answers,
+          footer: {
+            text: 'Vote by typing the corresponding number of the option.'
+          }
         }
-      }
-    }).then(msg => {
+      });
+
       const votes = message.channel.createMessageCollector(
         m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !activeChannels[message.channel.id].usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${message.guild.prefix}endpoll`),
         { time: 6 * 60 * 60 * 1000 }
@@ -93,7 +95,7 @@ exports.run = (Bastion, message, args) => {
               description: 'Unfortunately, no votes were given.'
             }
           }).then(() => {
-            msg.delete().catch(e => {
+            pollStatus.delete().catch(e => {
               Bastion.log.error(e);
             });
             delete activeChannels[message.channel.id];
@@ -126,7 +128,7 @@ exports.run = (Bastion, message, args) => {
             fields: result
           }
         }).then(() => {
-          msg.delete().catch(e => {
+          pollStatus.delete().catch(e => {
             Bastion.log.error(e);
           });
           delete activeChannels[message.channel.id];
@@ -134,9 +136,10 @@ exports.run = (Bastion, message, args) => {
           Bastion.log.error(e);
         });
       });
-    }).catch(e => {
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   }
   else {
     /**

@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
   let outcome = '';
   for (let i = 0; i < args; i++) {
     outcome = `${message.author} ${outcomes[Math.floor(Math.random() * outcomes.length)]}`;
-    // outcome = `${message.author} ${outcomes.random()}`;
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
@@ -25,6 +25,7 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
+
     if (outcome.includes('BANG')) return;
   }
 };

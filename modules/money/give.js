@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     /**
      * The command was ran with invalid parameters.
@@ -63,21 +63,23 @@ exports.run = (Bastion, message, args) => {
       return Bastion.emit('error', string('forbidden', 'errors'), string('giveYourself', 'errorMessage'), message.channel);
     }
 
-    Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(sender => {
+    try {
+      let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+
       if (sender.bastionCurrencies < args[0]) {
         /**
-         * Error condition is encountered.
-         * @fires error
-         */
+        * Error condition is encountered.
+        * @fires error
+        */
         return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', sender.bastionCurrencies), message.channel);
       }
 
       let giveLimit = 0.5;
       if (args[0] >= giveLimit * parseInt(sender.bastionCurrencies)) {
         /**
-         * Error condition is encountered.
-         * @fires error
-         */
+        * Error condition is encountered.
+        * @fires error
+        */
         return Bastion.emit('error', string('invalidInput', 'errors'), string('giveLimit', 'errorMessage', giveLimit * 100), message.channel);
       }
 
@@ -85,8 +87,8 @@ exports.run = (Bastion, message, args) => {
       Bastion.emit('userCredit', message.author, args[0]);
 
       /**
-       * Send a message in the channel to let the user know that the operation was successful.
-       */
+      * Send a message in the channel to let the user know that the operation was successful.
+      */
       message.channel.send({
         embed: {
           color: Bastion.colors.green,
@@ -97,8 +99,8 @@ exports.run = (Bastion, message, args) => {
       });
 
       /**
-       * Let the user receiving Bastion Currencies know by DM that their account has been debited.
-       */
+      * Let the user receiving Bastion Currencies know by DM that their account has been debited.
+      */
       user.send({
         embed: {
           color: Bastion.colors.green,
@@ -119,9 +121,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e);
       });
-    }).catch(e => {
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   }
 };
 

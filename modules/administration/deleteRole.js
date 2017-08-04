@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -49,30 +49,31 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
-  role.delete().then(r => {
-    message.channel.send({
+  try {
+    let deletedRole = await role.delete();
+
+    await message.channel.send({
       embed: {
         color: Bastion.colors.red,
         title: 'Role Deleted',
         fields: [
           {
             name: 'Role Name',
-            value: r.name,
+            value: deletedRole.name,
             inline: true
           },
           {
             name: 'Role ID',
-            value: r.id,
+            value: deletedRole.id,
             inline: true
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

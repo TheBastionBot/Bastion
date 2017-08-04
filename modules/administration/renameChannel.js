@@ -6,8 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
-
+exports.run = async (Bastion, message, args) => {
   if (!args.old || !args.new) {
     /**
      * The command was ran with invalid parameters.
@@ -61,8 +60,9 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  channel.setName(args.new).then(() => {
-    message.channel.send({
+  try {
+    await channel.setName(args.new);
+    await message.channel.send({
       embed: {
         color: Bastion.colors.green,
         title: `${channel.type.charAt(0).toUpperCase() + channel.type.substr(1)} Channel Renamed`,
@@ -79,12 +79,11 @@ exports.run = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

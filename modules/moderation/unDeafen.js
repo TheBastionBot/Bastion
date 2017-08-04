@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -39,7 +39,9 @@ exports.run = (Bastion, message, args) => {
     reason = 'No reason given';
   }
 
-  message.guild.members.get(user.id).setDeaf(false).then(() => {
+  try {
+    await message.guild.members.get(user.id).setDeaf(false);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.green,
@@ -67,13 +69,14 @@ exports.run = (Bastion, message, args) => {
     });
 
     /**
-     * Logs moderation events if it is enabled
-     * @fires moderationLog
-     */
+    * Logs moderation events if it is enabled
+    * @fires moderationLog
+    */
     Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

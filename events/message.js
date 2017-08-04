@@ -15,7 +15,7 @@ const handleConversation = require('../handlers/conversationHandler');
 const handleDirectMessage = require('../handlers/directMessageHandler');
 let recentUsers = [];
 
-module.exports = message => {
+module.exports = async message => {
   /**
    * Filter Bastion's credentials from the message
    */
@@ -47,40 +47,40 @@ module.exports = message => {
      */
     handleTrigger(message);
 
-    message.client.db.all('SELECT userID FROM blacklistedUsers').then(users => {
-      if (users.map(u => u.userID).includes(message.author.id)) return;
-
-      /**
-       * Cooldown for experience points, to prevent spam
-       */
-      if (!recentUsers.includes(message.author.id)) {
-        recentUsers.push(message.author.id);
-        setTimeout(function () {
-          recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
-        }, 60 * 1000);
-        /**
-        * Increase experience and level up user
-        */
-        handleUserLevel(message);
-      }
-
-      /**
-       * Handles Bastion's commands
-       */
-      handleCommand(message);
-
-      /**
-       * Check if the message starts with mentioning Bastion
-       */
-      if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
-        /**
-         * Handles conversations with Bastion
-         */
-        handleConversation(message);
-      }
-    }).catch(e => {
+    let users = await message.client.db.all('SELECT userID FROM blacklistedUsers').catch(e => {
       message.client.log.error(e);
     });
+
+    if (users.map(u => u.userID).includes(message.author.id)) return;
+
+    /**
+    * Cooldown for experience points, to prevent spam
+    */
+    if (!recentUsers.includes(message.author.id)) {
+      recentUsers.push(message.author.id);
+      setTimeout(function () {
+        recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
+      }, 60 * 1000);
+      /**
+      * Increase experience and level up user
+      */
+      handleUserLevel(message);
+    }
+
+    /**
+    * Handles Bastion's commands
+    */
+    handleCommand(message);
+
+    /**
+    * Check if the message starts with mentioning Bastion
+    */
+    if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
+      /**
+      * Handles conversations with Bastion
+      */
+      handleConversation(message);
+    }
   }
   else {
     /**

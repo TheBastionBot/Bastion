@@ -8,7 +8,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -17,30 +17,31 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  Bastion.db.get(`SELECT modLog, modLogChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let color, modLogStats;
-    if (row.modLog === 'false') {
-      Bastion.db.run(`UPDATE guildSettings SET modLog='true', modLogChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.green;
-      modLogStats = 'Moderation audit logging is now enabled in this channel.';
-    }
-    else {
-      Bastion.db.run(`UPDATE guildSettings SET modLog='false', modLogChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.red;
-      modLogStats = 'Moderation audit logging is now disabled.';
-    }
-    message.channel.send({
-      embed: {
-        color: color,
-        description: modLogStats
-      }
-    }).catch(e => {
+  let guildSettings = await Bastion.db.get(`SELECT modLog, modLogChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  let color, modLogStats;
+  if (guildSettings.modLog === 'false') {
+    await Bastion.db.run(`UPDATE guildSettings SET modLog='true', modLogChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
+    color = Bastion.colors.green;
+    modLogStats = 'Moderation audit logging is now enabled in this channel.';
+  }
+  else {
+    await Bastion.db.run(`UPDATE guildSettings SET modLog='false', modLogChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+    color = Bastion.colors.red;
+    modLogStats = 'Moderation audit logging is now disabled.';
+  }
+
+  message.channel.send({
+    embed: {
+      color: color,
+      description: modLogStats
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

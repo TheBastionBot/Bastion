@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -15,7 +15,9 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  Bastion.db.all('DELETE FROM triggers').then(() => {
+  try {
+    await Bastion.db.all('DELETE FROM triggers');
+
     message.channel.send({
       embed: {
         color: Bastion.colors.red,
@@ -24,9 +26,10 @@ exports.run = (Bastion, message) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

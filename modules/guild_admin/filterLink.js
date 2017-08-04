@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -22,31 +22,31 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  Bastion.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let color, filterLinkStats;
-    if (row.filterLink === 'false') {
-      Bastion.db.run(`UPDATE guildSettings SET filterLink='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.green;
-      filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
-    }
-    else {
-      Bastion.db.run(`UPDATE guildSettings SET filterLink='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.red;
-      filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
-    }
+  let guildSettings = await Bastion.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    message.channel.send({
-      embed: {
-        color: color,
-        description: filterLinkStats
-      }
-    }).catch(e => {
+  let color, filterLinkStats;
+  if (guildSettings.filterLink === 'false') {
+    await Bastion.db.run(`UPDATE guildSettings SET filterLink='true' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
+    color = Bastion.colors.green;
+    filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
+  }
+  else {
+    await Bastion.db.run(`UPDATE guildSettings SET filterLink='false' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+    color = Bastion.colors.red;
+    filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
+  }
+
+  message.channel.send({
+    embed: {
+      color: color,
+      description: filterLinkStats
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

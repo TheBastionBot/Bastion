@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 let recentUsers = [];
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   let cooldown = 60;
 
   if (!recentUsers.includes(message.author.id)) {
@@ -35,15 +35,16 @@ exports.run = (Bastion, message, args) => {
       'Tails'
     ];
     let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
-    // let outcome = outcomes.random();
 
-    Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`).then(profile => {
-      if (args.money > profile.bastionCurrencies) {
+    try {
+      let user = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+
+      if (args.money > user.bastionCurrencies) {
         /**
-         * Error condition is encountered.
-         * @fires error
-         */
-        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', profile.bastionCurrencies), message.channel);
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', user.bastionCurrencies), message.channel);
       }
 
       recentUsers.push(message.author.id);
@@ -69,22 +70,21 @@ exports.run = (Bastion, message, args) => {
         Bastion.emit('userCredit', message.author, args.money);
       }
 
-      message.channel.send({
+      await message.channel.send({
         embed: {
           color: Bastion.colors.blue,
           title: `Flipped ${outcome}`,
           description: result
         }
-      }).then(() => {
-        setTimeout(function () {
-          recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
-        }, cooldown * 1000);
-      }).catch(e => {
-        Bastion.log.error(e);
       });
-    }).catch(e => {
+
+      setTimeout(() => {
+        recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
+      }, cooldown * 1000);
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   }
   else {
     /**

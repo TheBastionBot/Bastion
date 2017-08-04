@@ -26,7 +26,7 @@ exports.run = (Bastion, message) => {
           description: 'Skipping current song.'
         }
       }).then(() => {
-        message.guild.voiceConnection.dispatcher.end();
+        message.guild.music.dispatcher.end();
       }).catch(e => {
         Bastion.log.error(e);
       });
@@ -49,7 +49,7 @@ exports.run = (Bastion, message) => {
         description: 'Skipping current song.'
       }
     }).then(() => {
-      message.guild.voiceConnection.dispatcher.end();
+      message.guild.music.dispatcher.end();
     }).catch(e => {
       Bastion.log.error(e);
     });

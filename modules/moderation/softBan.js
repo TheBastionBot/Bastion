@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -47,13 +47,37 @@ exports.run = (Bastion, message, args) => {
     reason = 'No reason given';
   }
 
-  message.guild.members.get(user.id).ban({
-    days: 7,
-    reason: reason
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
-  message.guild.unban(user.id).then(user => {
+  try {
+    await message.guild.members.get(user.id).ban({
+      days: 7,
+      reason: reason
+    });
+
+    await message.guild.unban(user.id).catch(e => {
+      Bastion.log.error(e);
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.red,
+          title: 'Soft-Ban Error',
+          description: 'Banned but unable to unban. Please unban the following user.',
+          fields: [
+            {
+              name: 'User',
+              value: user.tag,
+              inline: true
+            },
+            {
+              name: 'ID',
+              value: user.id,
+              inline: true
+            }
+          ]
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    });
+
     message.channel.send({
       embed: {
         color: Bastion.colors.orange,
@@ -81,9 +105,9 @@ exports.run = (Bastion, message, args) => {
     });
 
     /**
-     * Logs moderation events if it is enabled
-     * @fires moderationLog
-     */
+    * Logs moderation events if it is enabled
+    * @fires moderationLog
+    */
     Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
 
     user.send({
@@ -95,30 +119,10 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        title: 'Soft-Ban Error',
-        description: 'Banned but unable to unban. Please unban the following user.',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'ID',
-            value: user.id,
-            inline: true
-          }
-        ]
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  });
+  }
 };
 
 exports.config = {

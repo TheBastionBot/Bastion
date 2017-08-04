@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -59,7 +59,7 @@ exports.run = (Bastion, message, args) => {
   args.cronExp = args.cronExp.join(' ');
   args.arguments = args.arguments.join(' ');
 
-  message.channel.send({
+  let scheduledStatus = await message.channel.send({
     embed: {
       color: Bastion.colors.blue,
       title: 'Scheduled Command',
@@ -68,20 +68,20 @@ exports.run = (Bastion, message, args) => {
         text: 'Do not delete this message, as it is required by me run the scheduled command.'
       }
     }
-  }).then(msg => {
-    Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
-      [
-        args.cronExp,
-        message.channel.id,
-        msg.id,
-        args.command,
-        args.arguments
-      ]).catch(e => {
-        Bastion.log.error(e);
-      });
   }).catch(e => {
     Bastion.log.error(e);
   });
+
+  Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
+    [
+      args.cronExp,
+      message.channel.id,
+      scheduledStatus.id,
+      args.command,
+      args.arguments
+    ]).catch(e => {
+      Bastion.log.error(e);
+    });
 };
 
 exports.config = {

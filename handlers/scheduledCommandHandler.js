@@ -13,8 +13,10 @@ const parseArgs = require('command-line-args');
  * @returns {void}
  */
 module.exports = Bastion => {
-  setTimeout(() => {
-    Bastion.db.all('SELECT cronExp, command, channelID, messageID, arguments FROM scheduledCommands').then(scheduledCommands => {
+  setTimeout(async () => {
+    try {
+      let scheduledCommands = await Bastion.db.all('SELECT cronExp, command, channelID, messageID, arguments FROM scheduledCommands');
+
       if (scheduledCommands.length === 0) return;
 
       for (let i = 0; i < scheduledCommands.length; i++) {
@@ -28,23 +30,8 @@ module.exports = Bastion => {
         let args = scheduledCommands[i].arguments ? scheduledCommands[i].arguments.split(' ') : '';
 
         let job = new CronJob(cronExp,
-          function () {
-            channel.fetchMessage(scheduledCommands[i].messageID).then(message => {
-              if (Bastion.commands.has(command)) {
-                cmd = Bastion.commands.get(command);
-              }
-              else if (Bastion.aliases.has(command)) {
-                cmd = Bastion.commands.get(Bastion.aliases.get(command));
-              }
-              else {
-                job.stop();
-                return removeScheduledCommandByCommandName(Bastion, command);
-              }
-
-              if (cmd.config.enabled) {
-                cmd.run(Bastion, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
-              }
-            }).catch(e => {
+          async function () {
+            let message = await channel.fetchMessage(scheduledCommands[i].messageID).catch(e => {
               if (e.toString().includes('Unknown Message')) {
                 job.stop();
                 removeScheduledCommandByMessageID(Bastion, scheduledCommands[i].messageID);
@@ -53,15 +40,31 @@ module.exports = Bastion => {
                 Bastion.log.error(e);
               }
             });
+
+            if (Bastion.commands.has(command)) {
+              cmd = Bastion.commands.get(command);
+            }
+            else if (Bastion.aliases.has(command)) {
+              cmd = Bastion.commands.get(Bastion.aliases.get(command));
+            }
+            else {
+              job.stop();
+              return removeScheduledCommandByCommandName(Bastion, command);
+            }
+
+            if (cmd.config.enabled) {
+              cmd.run(Bastion, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+            }
           },
           function () {},
           false // Start the job right now
         );
         job.start();
       }
-    }).catch(e => {
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   }, 5 * 1000);
 };
 

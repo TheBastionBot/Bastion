@@ -6,8 +6,10 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
-  Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC').then(profiles => {
+exports.run = async (Bastion, message, args) => {
+  try {
+    let profiles = await Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies DESC');
+
     let fields = [];
 
     if (!args.global) {
@@ -34,9 +36,10 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

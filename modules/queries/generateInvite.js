@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -22,16 +22,19 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  message.channel.createInvite({
-    maxAge: args.age * 60,
-    maxUses: args.uses
-  }).then(invite => {
+  try {
+    let invite = await message.channel.createInvite({
+      maxAge: args.age * 60,
+      maxUses: args.uses
+    });
+
     message.channel.send(`discord.gg/${invite.code}`).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

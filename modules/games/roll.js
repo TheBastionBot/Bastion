@@ -16,11 +16,10 @@ exports.run = (Bastion, message, args) => {
     ':six:'
   ];
   let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
-  // let outcome = outcomes.random();
+
   if (args[0] && parseInt(args[0])) {
     for (let i = 1; i < args[0]; i++) {
       outcome += outcomes[Math.floor(Math.random() * outcomes.length)];
-      // outcome += outcomes.random();
     }
   }
 

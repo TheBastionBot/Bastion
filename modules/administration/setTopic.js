@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   let topic;
   if (!channel) {
@@ -40,8 +40,9 @@ exports.run = (Bastion, message, args) => {
     color = Bastion.colors.red;
   }
 
-  channel.setTopic(topic).then(() => {
-    message.channel.send({
+  try {
+    await channel.setTopic(topic);
+    await message.channel.send({
       embed: {
         color: color,
         title: title,
@@ -58,12 +59,11 @@ exports.run = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

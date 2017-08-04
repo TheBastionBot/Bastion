@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (args.length < 1 || !(parseInt(args[0]) < 9223372036854775807)) {
     /**
      * The command was ran with invalid parameters.
@@ -15,32 +15,35 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  message.channel.fetchMessage(args[0]).then(msg => {
+  try {
+    let citedMessage = await message.channel.fetchMessage(args[0]);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.blue,
         author: {
-          name: msg.author.tag,
-          icon_url: msg.author.avatarURL
+          name: citedMessage.author.tag,
+          icon_url: citedMessage.author.avatarURL
         },
-        description: msg.content,
-        timestamp: msg.createdAt
+        description: citedMessage.content,
+        timestamp: citedMessage.createdAt
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
-    if (e.stack.includes('Unknown Message')) {
+  }
+  catch (e) {
+    if (e.toString().includes('Unknown Message')) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
+      * Error condition is encountered.
+      * @fires error
+      */
       Bastion.emit('error', string('notFound', 'errors'), string('messageNotFound', 'errorMessage'), message.channel);
     }
     else {
       Bastion.log.error(e);
     }
-  });
+  }
 };
 
 exports.config = {

@@ -32,7 +32,7 @@ exports.run = (Bastion, message) => {
     if (message.guild.music) {
       message.guild.music.songs = [];
     }
-    message.guild.voiceConnection.dispatcher.end();
+    message.guild.music.dispatcher.end();
   }).catch(e => {
     Bastion.log.error(e);
   });

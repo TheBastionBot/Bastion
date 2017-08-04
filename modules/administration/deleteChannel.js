@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     channel = message.channel;
@@ -48,37 +48,38 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('forbidden', 'errors'), string('deleteDefaultChannel', 'errorMessage'), message.channel);
   }
 
-  channel.delete().then(() => {
-    if (channel.id !== message.channel.id) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          title: 'Channel Deleted',
-          fields: [
-            {
-              name: 'Channel Name',
-              value: channel.name,
-              inline: true
-            },
-            {
-              name: 'Channel ID',
-              value: channel.id,
-              inline: true
-            },
-            {
-              name: 'Channel Type',
-              value: channel.type.toUpperCase(),
-              inline: true
-            }
-          ]
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-  }).catch(e => {
+  try {
+    await channel.delete();
+
+    if (channel.id === message.channel.id) return;
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        title: 'Channel Deleted',
+        fields: [
+          {
+            name: 'Channel Name',
+            value: channel.name,
+            inline: true
+          },
+          {
+            name: 'Channel ID',
+            value: channel.id,
+            inline: true
+          },
+          {
+            name: 'Channel Type',
+            value: channel.type.toUpperCase(),
+            inline: true
+          }
+        ]
+      }
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

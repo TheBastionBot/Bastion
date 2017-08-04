@@ -16,29 +16,27 @@ BOT.configure({
  * @param {Message} message Discord.js message object
  * @returns {void}
  */
-module.exports = message => {
-  message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).then(guild => {
+module.exports = async message => {
+  try {
+    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).chat;
+
     if (guild.chat === 'false') return;
 
-    let args = message.content.split(' ');
-    if (args.length < 1) return;
+    let text = message.content.split(' ');
+    if (text.length < 1) return;
+    text = text.join(' ');
 
-    try {
-      BOT.write(args.join(' '), function (response) {
-        message.channel.startTyping();
-        setTimeout(function () {
-          message.channel.send(response.output).then(() => {
-            message.channel.stopTyping();
-          }).catch(e => {
-            message.client.log.error(e);
-          });
-        }, response.output.length * 100);
-      });
-    }
-    catch (e) {
-      message.client.log.error(e);
-    }
-  }).catch(e => {
+    BOT.write(text, response => {
+      message.channel.startTyping();
+      setTimeout(async () => {
+        await message.channel.send(response.output).catch(e => {
+          message.client.log.error(e);
+        });
+        message.channel.stopTyping();
+      }, response.output.length * 100);
+    });
+  }
+  catch (e) {
     message.client.log.error(e);
-  });
+  }
 };

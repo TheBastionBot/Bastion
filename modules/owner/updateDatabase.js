@@ -16,23 +16,22 @@ exports.run = (Bastion, message) => {
   }
 
   let step = 0;
-  Bastion.db.get('SELECT whitelistDomains FROM guildSettings').catch(() => {
-    Bastion.db.run('ALTER TABLE guildSettings ADD whitelistDomains TEXT NOT NULL DEFAULT \'[]\'').then(() => {
+  Bastion.db.get('SELECT whitelistDomains FROM guildSettings').catch(async () => {
+    try {
+      await Bastion.db.run('ALTER TABLE guildSettings ADD whitelistDomains TEXT NOT NULL DEFAULT \'[]\'');
+
       message.channel.send({
         embed: {
           color: Bastion.colors.green,
           description: `Part ${++step} complete.`
         }
-      }).then(msg => {
-        msg.delete(3000).catch(e => {
-          Bastion.log.error(e);
-        });
       }).catch(e => {
         Bastion.log.error(e);
       });
-    }).catch(e => {
+    }
+    catch (e) {
       Bastion.log.error(e);
-    });
+    }
   });
 };
 

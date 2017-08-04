@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -16,39 +16,39 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (!(parseInt(args[0]) < 9223372036854775807)) {
-    Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=null, musicVoiceChannelID=null WHERE guildID=${message.guild.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.red,
-          description: 'Default music channel removed.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=null, musicVoiceChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.red,
+        description: 'Default music channel removed.'
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
   else {
-    Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=${message.channel.id}, musicVoiceChannelID=${args[0]} WHERE guildID=${message.guild.id}`).then(() => {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          title: 'Default music channel set',
-          fields: [
-            {
-              name: 'Text channel for music commands',
-              value: `<#${message.channel.id}>`
-            },
-            {
-              name: 'Music channel',
-              value: message.guild.channels.filter(c => c.type === 'voice').get(args[0]) ? message.guild.channels.filter(c => c.type === 'voice').get(args[0]).name : 'Invalid'
-            }
-          ]
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=${message.channel.id}, musicVoiceChannelID=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        title: 'Default music channel set',
+        fields: [
+          {
+            name: 'Text channel for music commands',
+            value: `<#${message.channel.id}>`
+          },
+          {
+            name: 'Music channel',
+            value: message.guild.channels.filter(c => c.type === 'voice').get(args[0]) ? message.guild.channels.filter(c => c.type === 'voice').get(args[0]).name : 'Invalid'
+          }
+        ]
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });

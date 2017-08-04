@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
       evaled = require('util').inspect(evaled);
     }
 
-    message.channel.send({
+    let output = await message.channel.send({
       embed: {
         color: Bastion.colors.green,
         fields: [
@@ -43,21 +43,12 @@ exports.run = (Bastion, message, args) => {
           }
         ]
       }
-    }).then(m => {
-      m.delete(30000).catch(e => {
-        Bastion.log.error(e);
-      });
-    }).catch(e => {
-      Bastion.log.error(e);
     });
+
+    output.delete(3000).catch(() => {});
   }
   catch(e) {
-    if (message.deletable) {
-      message.delete().catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    message.channel.send({
+    let error = await message.channel.send({
       embed: {
         color: Bastion.colors.red,
         fields: [
@@ -70,6 +61,8 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
+
+    error.delete(3000).catch(() => {});
   }
 };
 

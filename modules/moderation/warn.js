@@ -8,7 +8,7 @@ const string = require('../../handlers/languageHandler');
 let guilds = {};
 exports.warns = guilds;
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -56,7 +56,9 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     if (guilds[message.guild.id][user.id] === 2) {
-      message.guild.members.get(user.id).kick('Warned 3 times!').then(member => {
+      try {
+        let member = await message.guild.members.get(user.id).kick('Warned 3 times!');
+
         delete guilds[message.guild.id][user.id];
         message.channel.send({
           embed: {
@@ -100,40 +102,42 @@ exports.run = (Bastion, message, args) => {
         }).catch(e => {
           Bastion.log.error(e);
         });
-      }).catch(e => {
+      }
+      catch (e) {
         Bastion.log.error(e);
-      });
+      }
     }
     else {
       guilds[message.guild.id][user.id] += 1;
     }
   }
+
   message.channel.send({
     embed: {
       color: Bastion.colors.orange,
       title: 'Warning',
       description: `${user} have been warned by ${message.author} for **${reason}**.`
     }
-  }).then(() => {
-    user.send({
-      embed: {
-        color: Bastion.colors.orange,
-        title: 'Warning',
-        description: 'You have been warned!',
-        fields: [
-          {
-            name: 'Reason',
-            value: reason
-          },
-          {
-            name: 'Server',
-            value: message.guild.name
-          }
-        ]
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  user.send({
+    embed: {
+      color: Bastion.colors.orange,
+      title: 'Warning',
+      description: 'You have been warned!',
+      fields: [
+        {
+          name: 'Reason',
+          value: reason
+        },
+        {
+          name: 'Server',
+          value: message.guild.name
+        }
+      ]
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

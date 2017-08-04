@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -44,7 +44,10 @@ exports.run = (Bastion, message, args) => {
     color = Bastion.colors.green;
     nickStat = `${user}'s nickname changed.`;
   }
-  message.guild.members.get(user.id).setNickname(args.join(' ')).then(() => {
+
+  try {
+    await message.guild.members.get(user.id).setNickname(args.join(' '));
+
     message.channel.send({
       embed: {
         color: color,
@@ -53,7 +56,10 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

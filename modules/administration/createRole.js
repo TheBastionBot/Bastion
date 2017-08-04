@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -37,31 +37,36 @@ exports.run = (Bastion, message, args) => {
 
   let data = roleData(args.name.join(' '), args.color);
 
-  message.guild.createRole(data).then(role => message.channel.send({
-    embed: {
-      color: Bastion.colors.green,
-      title: 'Role Created',
-      fields: [
-        {
-          name: 'Role Name',
-          value: role.name,
-          inline: true
-        },
-        {
-          name: 'Role ID',
-          value: role.id,
-          inline: true
-        },
-        {
-          name: 'Color',
-          value: role.hexColor === '#000000' ? args.color : role.hexColor,
-          inline: true
-        }
-      ]
-    }
-  })).catch(e => {
+  try {
+    let role = await message.guild.createRole(data);
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.green,
+        title: 'Role Created',
+        fields: [
+          {
+            name: 'Role Name',
+            value: role.name,
+            inline: true
+          },
+          {
+            name: 'Role ID',
+            value: role.id,
+            inline: true
+          },
+          {
+            name: 'Color',
+            value: role.hexColor === '#000000' ? args.color : role.hexColor,
+            inline: true
+          }
+        ]
+      }
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

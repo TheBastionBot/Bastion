@@ -24,6 +24,7 @@ exports.run = (Bastion, message, args) => {
      */
     return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
   }
+
   message.channel.send({
     embed: {
       color: Bastion.colors.yellow,

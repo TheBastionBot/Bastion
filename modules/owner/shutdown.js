@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -15,50 +15,52 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.orange,
-      description: 'Are you sure you want to shut me down?'
-    }
-  }).then(msg => {
-    const collector = msg.channel.createMessageCollector(m =>
+  try {
+    let confirmation = await message.channel.send({
+      embed: {
+        color: Bastion.colors.orange,
+        description: 'Are you sure you want to shut me down?'
+      }
+    });
+
+    const collector = confirmation.channel.createMessageCollector(m =>
       Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
       {
         time: 30 * 1000,
         maxMatches: 1
       }
     );
-    collector.on('collect', answer => {
-      if (answer.content.toLowerCase().startsWith('yes')) {
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.dark_grey,
-            description: 'GoodBye :wave:! See you soon.'
-          }
-        }).then(() => {
-          Bastion.destroy().then(() => {
-            process.exit(0);
-          }).catch(e => {
-            Bastion.log.error(e);
+
+    collector.on('collect', async answer => {
+      try {
+        if (answer.content.toLowerCase().startsWith('yes')) {
+          await message.channel.send({
+            embed: {
+              color: Bastion.colors.dark_grey,
+              description: 'GoodBye :wave:! See you soon.'
+            }
           });
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
+
+          await Bastion.destroy();
+          process.exit(0);
+        }
+        else {
+          await message.channel.send({
+            embed: {
+              color: Bastion.colors.dark_grey,
+              description: 'Cool! I\'m here.'
+            }
+          });
+        }
       }
-      else {
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.dark_grey,
-            description: 'Cool! I\'m here.'
-          }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
+      catch (e) {
+        Bastion.log.error(e);
       }
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -22,31 +22,31 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let color, filterInviteStats;
-    if (row.filterInvite === 'false') {
-      Bastion.db.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.green;
-      filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
-    }
-    else {
-      Bastion.db.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.red;
-      filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
-    }
+  let guildSettings = await Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    message.channel.send({
-      embed: {
-        color: color,
-        description: filterInviteStats
-      }
-    }).catch(e => {
+  let color, filterInviteStats;
+  if (guildSettings.filterInvite === 'false') {
+    await Bastion.db.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
+    color = Bastion.colors.green;
+    filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
+  }
+  else {
+    await Bastion.db.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+    color = Bastion.colors.red;
+    filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
+  }
+
+  message.channel.send({
+    embed: {
+      color: color,
+      description: filterInviteStats
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

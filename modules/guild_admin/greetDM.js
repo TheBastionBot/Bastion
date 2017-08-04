@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -15,31 +15,31 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  Bastion.db.get(`SELECT greetDM FROM guildSettings WHERE guildID=${message.guild.id}`).then(row => {
-    let color, greetDMStats;
-    if (row.greetDM === 'true') {
-      Bastion.db.run(`UPDATE guildSettings SET greetDM='false' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.red;
-      greetDMStats = 'Sending Greeting Message as Direct Messages are now disabled.';
-    }
-    else {
-      Bastion.db.run(`UPDATE guildSettings SET greetDM='true' WHERE guildID=${message.guild.id}`).catch(e => {
-        Bastion.log.error(e);
-      });
-      color = Bastion.colors.green;
-      greetDMStats = 'Sending Greeting Message as Direct Messages are now enabled.';
-    }
+  let guildSettings = await Bastion.db.get(`SELECT greetDM FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.log.error(e);
+  });
 
-    message.channel.send({
-      embed: {
-        color: color,
-        description: greetDMStats
-      }
-    }).catch(e => {
+  let color, greetDMStats;
+  if (guildSettings.greetDM === 'true') {
+    await Bastion.db.run(`UPDATE guildSettings SET greetDM='false' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
+    color = Bastion.colors.red;
+    greetDMStats = 'Sending Greeting Message as Direct Messages are now disabled.';
+  }
+  else {
+    await Bastion.db.run(`UPDATE guildSettings SET greetDM='true' WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+    color = Bastion.colors.green;
+    greetDMStats = 'Sending Greeting Message as Direct Messages are now enabled.';
+  }
+
+  message.channel.send({
+    embed: {
+      color: color,
+      description: greetDMStats
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -15,8 +15,10 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (args.length >= 1 && (args === 'online' || args === 'idle' || args === 'dnd' || args === 'invisible') ) {
-    Bastion.user.setStatus(args.join(' ')).then(() => {
+  try {
+    if (args.length >= 1 && (args === 'online' || args === 'idle' || args === 'dnd' || args === 'invisible') ) {
+      await Bastion.user.setStatus(args.join(' '));
+
       message.channel.send({
         embed: {
           color: Bastion.colors.green,
@@ -25,12 +27,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e);
       });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
-    Bastion.user.setStatus(Bastion.config.status).then(() => {
+    }
+    else {
+      await Bastion.user.setStatus(Bastion.config.status);
+
       message.channel.send({
         embed: {
           color: Bastion.colors.green,
@@ -39,9 +39,10 @@ exports.run = (Bastion, message, args) => {
       }).catch(e => {
         Bastion.log.error(e);
       });
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

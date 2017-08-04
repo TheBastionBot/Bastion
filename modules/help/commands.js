@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
   let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
 
   let fields = [];
@@ -23,7 +23,7 @@ exports.run = (Bastion, message) => {
     });
   }
 
-  message.author.send({
+  await message.author.send({
     embed: {
       color: Bastion.colors.yellow,
       title: 'List of Commands',
@@ -33,15 +33,15 @@ exports.run = (Bastion, message) => {
         text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
       }
     }
-  }).then(() => {
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.dark_grey,
-        description: `${message.author} Check your DM from me, I've sent you the list of commands.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.dark_grey,
+      description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+    }
   }).catch(e => {
     Bastion.log.error(e);
   });

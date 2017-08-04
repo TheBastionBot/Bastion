@@ -4,80 +4,80 @@
  * @license MIT
  */
 
-module.exports = member => {
-  member.client.db.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
-    if (!row) return;
-
-    if (row.greet === 'true') {
-      let greetMsg = row.greetMessage;
-      greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
-      greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
-      greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
-      greetMsg = greetMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
-
-      member.guild.channels.get(row.greetChannelID).send({
-        embed: {
-          color: member.client.colors.green,
-          title: `Hello ${member.displayName}`,
-          description: greetMsg
-        }
-      }).then(m => {
-        if (row.greetTimeout > 0) {
-          m.delete(1000 * parseInt(row.greetTimeout)).catch(e => {
-            member.client.log.error(e);
-          });
-        }
-      }).catch(e => {
-        member.client.log.error(e);
-      });
-    }
-  }).catch(e => {
+module.exports = async member => {
+  // Greet Message
+  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
 
-  member.client.db.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
-    if (!row) return;
+  if (guild && guild.greet === 'true') {
+    let greetMsg = guild.greetMessage;
+    greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
+    greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
+    greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
+    greetMsg = greetMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
-    if (row.greetDM === 'true') {
-      let greetDMMsg = row.greetDMMessage;
-      greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
-      greetDMMsg = greetDMMsg.replace(/\$server/ig, member.guild.name);
-      greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
-      greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
+    member.guild.channels.get(guild.greetChannelID).send({
+      embed: {
+        color: member.client.colors.green,
+        title: `Hello ${member.displayName}`,
+        description: greetMsg
+      }
+    }).then(m => {
+      if (guild.greetTimeout > 0) {
+        m.delete(1000 * parseInt(guild.greetTimeout)).catch(e => {
+          member.client.log.error(e);
+        });
+      }
+    }).catch(e => {
+      member.client.log.error(e);
+    });
+  }
 
-      member.send({
-        embed: {
-          color: member.client.colors.green,
-          title: `Hello ${member.displayName}`,
-          description: greetDMMsg
-        }
-      }).then(m => {
-        if (row.greetTimeout > 0) {
-          m.delete(1000 * parseInt(row.greetTimeout)).catch(e => {
-            member.client.log.error(e);
-          });
-        }
-      }).catch(e => {
-        member.client.log.error(e);
-      });
-    }
-  }).catch(e => {
+  // Greet DM Message
+  guild = await member.client.db.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
+
+  if (guild && guild.greetDM === 'true') {
+    let greetDMMsg = guild.greetDMMessage;
+    greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
+    greetDMMsg = greetDMMsg.replace(/\$server/ig, member.guild.name);
+    greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
+    greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
+
+    member.send({
+      embed: {
+        color: member.client.colors.green,
+        title: `Hello ${member.displayName}`,
+        description: greetDMMsg
+      }
+    }).then(m => {
+      if (guild.greetTimeout > 0) {
+        m.delete(1000 * parseInt(guild.greetTimeout)).catch(e => {
+          member.client.log.error(e);
+        });
+      }
+    }).catch(e => {
+      member.client.log.error(e);
+    });
+  }
 
   member.client.emit('serverLog', member.client, member.guild, 'guildMemberAdd', {
     member: member
   });
 
-  member.client.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).then(row => {
-    if (!row) return;
-    let autoAssignableRoles = JSON.parse(row.autoAssignableRoles);
-    autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
-    if (autoAssignableRoles.length < 1) return;
-    member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {
-      member.client.log.error(e);
-    });
-  }).catch(e => {
+  // Auto-Assignable Roles
+  guild = await member.client.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
+  if (guild) {
+    let autoAssignableRoles = JSON.parse(guild.autoAssignableRoles);
+    autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
+    if (autoAssignableRoles.length > 0) {
+      member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {
+        member.client.log.error(e);
+      });
+    }
+  }
 };

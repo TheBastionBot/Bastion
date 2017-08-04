@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
      * User has missing permissions.
@@ -32,9 +32,11 @@ exports.run = (Bastion, message, args) => {
     amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
   }
 
-  message.channel.fetchMessages({
-    limit: amount
-  }).then(msgs => {
+  try {
+    let msgs = await message.channel.fetchMessages({
+      limit: amount
+    });
+
     msgs = msgs.filter(m => message.createdTimestamp - m.createdTimestamp < 1209600000);
     if (user) {
       msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
@@ -55,28 +57,27 @@ exports.run = (Bastion, message, args) => {
       }
 
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
+      * Error condition is encountered.
+      * @fires error
+      */
       return Bastion.emit('error', '', error, message.channel);
     }
-    message.channel.bulkDelete(msgs).then(() => {
-      let reason = 'No reason given';
 
-      /**
-       * Logs moderation events if it is enabled
-       * @fires moderationLog
-       */
-      Bastion.emit('moderationLog', message.guild, message.author, this.help.name, message.channel, reason, {
-        cleared: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
-      });
+    await message.channel.bulkDelete(msgs);
 
-    }).catch(e => {
-      Bastion.log.error(e);
+    let reason = 'No reason given';
+
+    /**
+    * Logs moderation events if it is enabled
+    * @fires moderationLog
+    */
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, message.channel, reason, {
+      cleared: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
     });
-  }).catch(e => {
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
