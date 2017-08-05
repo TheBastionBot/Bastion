@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://BastionBot.org/",
   "main": "bastion.js",
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/snkrsnkampa/Bastion#readme",
   "dependencies": {
     "chalk": "^1.1.3",
+    "cheerio": "^1.0.0-rc.2",
     "cleverbot-node": "github:snkrsnkampa/cleverbot-node",
     "color-convert": "^1.9.0",
     "command-line-args": "github:snkrsnkampa/command-line-args",
@@ -38,6 +39,7 @@
     "node-opus": "^0.2.6",
     "overwatch-js": "^1.5.4",
     "rainbowsix-api-node": "^0.0.1",
+    "request": "^2.81.0",
     "sqlite": "^2.8.0",
     "weather-js": "^2.0.0",
     "webshot": "^0.18.0",
