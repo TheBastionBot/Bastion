@@ -34,7 +34,7 @@
     "google-translate-api": "github:snkrsnkampa/google-translate-api",
     "hirez.js": "github:snkrsnkampa/hirez.js",
     "kitsu.js": "^1.1.1",
-    "mathjs": "^3.15.0",
+    "mathjs": "^3.16.0",
     "node-json-db": "^0.7.3",
     "node-opus": "^0.2.6",
     "overwatch-js": "^1.5.4",
