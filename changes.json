@@ -1,18 +1,12 @@
 {
-  "date": "August 4, 2017",
+  "date": "August 6, 2017",
   "updated": [
-    "Invite filter now checks for URL redirections, no more hiding invites behind different URLs",
-    "Fixed `listTriggers` showing the list even if list was empty",
-    "Fixed `play` command always trying to play playlist",
-    "Fixed `skip` and `stop` commands not working sometimes",
-    "Removed perms to add reactions on channel lockdown",
-    "Minor fixes and improvements"
+    "Updated profile badge icons",
+    "Fixed `playlist` command",
+    "Fixed greeting DM and timeouts"
   ],
   "added": [
-    "Added `anime` command.",
-    "Added `manga` command.",
-    "Added `punch` command.",
-    "Added `slap` command."
+    "Added profile badges for Server Moderators"
   ],
   "removed": []
 }

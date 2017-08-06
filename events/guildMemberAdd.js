@@ -6,7 +6,7 @@
 
 module.exports = async member => {
   // Greet Message
-  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
+  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout, greetDM, greetDMMessage, autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
 
@@ -34,11 +34,6 @@ module.exports = async member => {
     });
   }
 
-  // Greet DM Message
-  guild = await member.client.db.get(`SELECT greetDM, greetDMMessage FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
-    member.client.log.error(e);
-  });
-
   if (guild && guild.greetDM === 'true') {
     let greetDMMsg = guild.greetDMMessage;
     greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
@@ -52,12 +47,6 @@ module.exports = async member => {
         title: `Hello ${member.displayName}`,
         description: greetDMMsg
       }
-    }).then(m => {
-      if (guild.greetTimeout > 0) {
-        m.delete(1000 * parseInt(guild.greetTimeout)).catch(e => {
-          member.client.log.error(e);
-        });
-      }
     }).catch(e => {
       member.client.log.error(e);
     });
@@ -67,10 +56,6 @@ module.exports = async member => {
     member: member
   });
 
-  // Auto-Assignable Roles
-  guild = await member.client.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
-    member.client.log.error(e);
-  });
   if (guild) {
     let autoAssignableRoles = JSON.parse(guild.autoAssignableRoles);
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));

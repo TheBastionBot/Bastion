@@ -19,12 +19,13 @@ exports.run = (Bastion, message, args) => {
 
   if (!args.song) {
     db.reload();
-    let playlist = db.getData('/');
+    let title = 'Saved Playlists', playlist = db.getData('/');
 
     if (!args.playlist) {
       playlist = Object.keys(playlist);
     }
     else {
+      title = 'Saved Songs';
       playlist = playlist[args.playlist.join(' ')];
     }
 
@@ -32,7 +33,7 @@ exports.run = (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.blue,
-          title: 'Saved Playlists',
+          title: title,
           description: playlist.join('\n')
         }
       }).catch(e => {
@@ -49,7 +50,7 @@ exports.run = (Bastion, message, args) => {
   }
   else {
     args.song = args.song.join(' ');
-    args.playlist = args.playlist.join(' ');
+    args.playlist = args.playlist ? args.playlist.join(' ') : 'default';
 
     db.reload();
     db.push(`/${args.playlist}`, [ args.song ], false);
@@ -81,7 +82,7 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'song', type: String, multiple: true, defaultOption: true },
-    { name: 'playlist', type: String, multiple: true, alias: 'p', defaultValue: [ 'default' ] }
+    { name: 'playlist', type: String, multiple: true, alias: 'p' }
   ]
 };
 
