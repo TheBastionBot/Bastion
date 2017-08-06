@@ -2,6 +2,7 @@
   "date": "August 6, 2017",
   "updated": [
     "Updated profile badge icons",
+    "Fixed `playlist` command",
     "Fixed greeting DM and timeouts"
   ],
   "added": [
