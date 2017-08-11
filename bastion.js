@@ -48,8 +48,8 @@ require('./utils/String.prototype');
 require('./utils/Number.prototype');
 
 /**
-* Function handler
-*/
+ * Function handler
+ */
 require('./handlers/functionHandler')(BASTION);
 /**
  * Log handler
