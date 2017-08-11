@@ -32,8 +32,7 @@ module.exports = guild => {
           'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
           'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
           'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
-          'modLog TEXT NOT NULL DEFAULT \'false\',' +
-          'modLogChannelID TEXT UNIQUE,' +
+          'modLog TEXT UNIQUE,' +
           'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
           'PRIMARY KEY(guildID))').then(() => {
             guild.client.db.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [ guild.id ]).catch(e => {

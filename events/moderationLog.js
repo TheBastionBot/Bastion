@@ -14,17 +14,12 @@
  * @returns {void}
  */
 module.exports = async (guild, executor, action, target, reason, extras) => {
-  let guildSettings = await guild.client.db.get(`SELECT modLog, modLogChannelID, modCaseNo FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+  let guildSettings = await guild.client.db.get(`SELECT modLog, modCaseNo FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
     guild.client.log.error(e);
   });
-  if (!guildSettings) return;
+  if (!guildSettings || !guildSettings.modLog) return;
 
-  let modLog = (guildSettings.modLog === 'true');
-  if (!modLog) return;
-
-  let modLogChannelID = guildSettings.modLogChannelID,
-    modLogChannel = guild.channels.get(modLogChannelID);
-
+  let modLogChannel = guild.channels.get(guildSettings.modLog);
   if (!modLogChannel) return;
 
   let modCaseNo = parseInt(guildSettings.modCaseNo), color,
