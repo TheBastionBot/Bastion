@@ -15,24 +15,24 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+  let guildSettings = await Bastion.db.get(`SELECT log FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });
 
   let color, logStats;
-  if (guildSettings.log === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    logStats = 'Logging is now enabled in this channel.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
+  if (guildSettings.log) {
+    await Bastion.db.run(`UPDATE guildSettings SET log=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
     color = Bastion.colors.red;
     logStats = 'Logging is now disabled.';
+  }
+  else {
+    await Bastion.db.run(`UPDATE guildSettings SET log=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
+      Bastion.log.error(e);
+    });
+    color = Bastion.colors.green;
+    logStats = 'Logging is now enabled in this channel.';
   }
 
   message.channel.send({

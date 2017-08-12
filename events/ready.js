@@ -24,8 +24,7 @@ module.exports = Bastion => {
       'farewellChannelID TEXT UNIQUE,' +
       'farewellMessage TEXT NOT NULL DEFAULT \'We hope you enjoyed your stay here!\',' +
       'farewellTimeout INTEGER NOT NULL DEFAULT 15,' +
-      'log TEXT NOT NULL DEFAULT \'false\',' +
-      'logChannelID TEXT UNIQUE,' +
+      'log TEXT UNIQUE,' +
       'musicTextChannelID TEXT UNIQUE,' +
       'musicVoiceChannelID TEXT UNIQUE,' +
       'musicMasterRoleID TEXT UNIQUE,' +

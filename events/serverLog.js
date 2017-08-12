@@ -12,17 +12,12 @@
  * @returns {void}
  */
 module.exports = async (Bastion, guild, event, parameters) => {
-  let guildSettings = await Bastion.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+  let guildSettings = await Bastion.db.get(`SELECT log FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
     Bastion.log.error(e);
   });
-  if (!guildSettings) return;
+  if (!guildSettings || !guildSettings.log) return;
 
-  let log = (guildSettings.log === 'true');
-  if (!log) return;
-
-  let logChannelID = guildSettings.logChannelID,
-    logChannel = guild.channels.get(logChannelID);
-
+  let logChannel = guild.channels.get(guildSettings.log);
   if (!logChannel) return;
 
   let color, logData = [];
