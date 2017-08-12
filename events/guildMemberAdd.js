@@ -5,19 +5,18 @@
  */
 
 module.exports = async member => {
-  // Greet Message
-  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetChannelID, greetTimeout, greetDM, greetDMMessage, autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
+  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetDM, greetDMMessage, autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
 
-  if (guild && guild.greet === 'true') {
+  if (guild && guild.greet) {
     let greetMsg = guild.greetMessage;
     greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
     greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
     greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
     greetMsg = greetMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
-    member.guild.channels.get(guild.greetChannelID).send({
+    member.guild.channels.get(guild.greet).send({
       embed: {
         color: member.client.colors.green,
         title: `Hello ${member.displayName}`,
