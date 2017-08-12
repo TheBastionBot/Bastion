@@ -92,6 +92,7 @@ module.exports = Bastion => {
       'bastionCurrencies TEXT NOT NULL DEFAULT 0,' +
       'xp TEXT NOT NULL DEFAULT 0,' +
       'level TEXT NOT NULL DEFAULT 0,' +
+      'reputation TEXT NOT NULL DEFAULT 0,' +
       'bio BLOB,' +
       'PRIMARY KEY(userID))');
 
