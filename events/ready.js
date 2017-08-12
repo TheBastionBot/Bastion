@@ -89,9 +89,9 @@ module.exports = Bastion => {
 
     Bastion.db.run('CREATE TABLE IF NOT EXISTS profiles' +
       '(userID TEXT NOT NULL UNIQUE,' +
-      'bastionCurrencies INTEGER DEFAULT 0,' +
-      'xp INTEGER DEFAULT 0,' +
-      'level INTEGER DEFAULT 0,' +
+      'bastionCurrencies TEXT NOT NULL DEFAULT 0,' +
+      'xp TEXT NOT NULL DEFAULT 0,' +
+      'level TEXT NOT NULL DEFAULT 0,' +
       'bio TEXT,' +
       'PRIMARY KEY(userID))');
 

@@ -17,6 +17,10 @@ module.exports = async message => {
       message.client.db.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]);
     }
     else {
+      profile.xp = parseInt(profile.xp);
+      profile.level = parseInt(profile.level);
+      profile.bastionCurrencies = parseInt(profile.bastionCurrencies);
+
       let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
 
       if (currentLevel > profile.level) {

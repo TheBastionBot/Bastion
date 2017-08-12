@@ -24,7 +24,7 @@ module.exports = async (user, amount) => {
     /*
      * Add the transaction detail to transactions table.
      */
-    user.client.db.run('INSERT INTO transactions (userID, type, amount) VALUES (?, ?, ?)', [ user.id, 'userCredit', amount ]).catch(e => {
+    user.client.db.run('INSERT INTO transactions (userID, type, amount) VALUES (?, ?, ?)', [ user.id, 'userCredit', parseInt(amount) ]).catch(e => {
       user.client.log.error(e);
     });
   }).catch(e => {

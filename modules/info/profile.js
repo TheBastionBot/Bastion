@@ -51,7 +51,7 @@ exports.run = async (Bastion, message, args) => {
         },
         {
           name: 'Rank',
-          value: profile.rank + 1,
+          value: parseInt(profile.rank) + 1,
           inline: true
         },
         {
@@ -100,6 +100,7 @@ function getUserIcon(user) {
   if (!bastionGuild) return;
   const bastionGuildMember = bastionGuild.members.get(user.id);
   if (!bastionGuildMember) return;
+
   const devRoleID = specialIDs.developerRole;
   const contributorsRoleID = specialIDs.contributorsRole;
   const donorsRoleID = specialIDs.donorsRole;

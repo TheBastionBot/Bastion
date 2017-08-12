@@ -65,6 +65,7 @@ exports.run = async (Bastion, message, args) => {
 
     try {
       let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+      sender.bastionCurrencies = parseInt(sender.bastionCurrencies);
 
       if (sender.bastionCurrencies < args[0]) {
         /**
@@ -75,7 +76,7 @@ exports.run = async (Bastion, message, args) => {
       }
 
       let giveLimit = 0.5;
-      if (args[0] >= giveLimit * parseInt(sender.bastionCurrencies)) {
+      if (args[0] >= giveLimit * sender.bastionCurrencies) {
         /**
         * Error condition is encountered.
         * @fires error

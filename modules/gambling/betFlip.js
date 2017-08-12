@@ -38,6 +38,7 @@ exports.run = async (Bastion, message, args) => {
 
     try {
       let user = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+      user.bastionCurrencies = parseInt(user.bastionCurrencies);
 
       if (args.money > user.bastionCurrencies) {
         /**
