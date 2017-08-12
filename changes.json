@@ -1,12 +1,9 @@
 {
-  "date": "August 6, 2017",
+  "date": "August 11, 2017",
   "updated": [
-    "Updated profile badge icons",
-    "Fixed `playlist` command",
-    "Fixed greeting DM and timeouts"
+    "Handled exceptions for empty arguments in `anime` & `manga` command",
+    "Minor improvements"
   ],
-  "added": [
-    "Added profile badges for Server Moderators"
-  ],
+  "added": [],
   "removed": []
 }
