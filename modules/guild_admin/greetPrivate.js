@@ -1,5 +1,5 @@
 /**
- * @file greetDM command
+ * @file greetPrivate command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -46,15 +46,15 @@ exports.run = async (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'greetprv' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'greetdm',
-  description: string('greetDM', 'commandDescription'),
+  name: 'greetprivate',
+  description: string('greetPrivate', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
-  usage: 'greetDM',
+  usage: 'greetPrivate',
   example: []
 };

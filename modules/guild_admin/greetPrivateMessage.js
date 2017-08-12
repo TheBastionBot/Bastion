@@ -1,5 +1,5 @@
 /**
- * @file greetDMMessage command
+ * @file greetPrivateMessage command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -56,15 +56,15 @@ exports.run = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'gdmmsg' ],
+  aliases: [ 'greetprvmsg' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'greetdmmessage',
-  description: string('greetDMMessage', 'commandDescription'),
+  name: 'greetprivatemessage',
+  description: string('greetPrivateMessage', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
-  usage: 'greetDMMessage [Message]',
-  example: [ 'greetDMMessage Hello $user! Welcome to $server.' ]
+  usage: 'greetPrivateMessage [Message]',
+  example: [ 'greetPrivateMessage Hello $user! Welcome to $server.' ]
 };
