@@ -5,18 +5,18 @@
  */
 
 module.exports = async member => {
-  let guild = await member.client.db.get(`SELECT farewell, farewellMessage, farewellChannelID, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
+  let guild = await member.client.db.get(`SELECT farewell, farewellMessage, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
 
-  if (guild && guild.farewell === 'true') {
+  if (guild && guild.farewell) {
     let farewellMsg = guild.farewellMessage;
     farewellMsg = farewellMsg.replace(/\$user/ig, `<@${member.id}>`);
     farewellMsg = farewellMsg.replace(/\$server/ig, member.guild.name);
     farewellMsg = farewellMsg.replace(/\$username/ig, member.displayName);
     farewellMsg = farewellMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
-    member.guild.channels.get(guild.farewellChannelID).send({
+    member.guild.channels.get(guild.farewell).send({
       embed: {
         color: member.client.colors.red,
         title: `Goodbye ${member.displayName}!`,

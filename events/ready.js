@@ -20,8 +20,7 @@ module.exports = Bastion => {
       'greetTimeout INTEGER NOT NULL DEFAULT 30,' +
       'greetDM TEXT NOT NULL DEFAULT \'false\',' +
       'greetDMMessage TEXT NOT NULL DEFAULT \'Welcome to $server.\',' +
-      'farewell TEXT NOT NULL DEFAULT \'false\',' +
-      'farewellChannelID TEXT UNIQUE,' +
+      'farewell TEXT UNIQUE,' +
       'farewellMessage TEXT NOT NULL DEFAULT \'We hope you enjoyed your stay here!\',' +
       'farewellTimeout INTEGER NOT NULL DEFAULT 15,' +
       'log TEXT UNIQUE,' +
