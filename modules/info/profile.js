@@ -34,6 +34,12 @@ exports.run = async (Bastion, message, args) => {
     */
     return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
   }
+  if (profile.bio) {
+    profile.bio = await Bastion.functions.decodeString(profile.bio);
+  }
+  else {
+    profile.bio = `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+  }
 
   message.channel.send({
     embed: {
@@ -42,7 +48,7 @@ exports.run = async (Bastion, message, args) => {
         name: args.tag,
         icon_url: getUserIcon(args)
       },
-      description: profile.bio || `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`,
+      description: profile.bio,
       fields: [
         {
           name: 'Bastion Currency',

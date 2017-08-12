@@ -14,9 +14,10 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('commandUsage', message, this.help);
   }
+  args = args.join(' ');
 
   let charLimit = 350;
-  let bio = args.join(' ').replace('"', '\'');
+  let bio = await Bastion.functions.encodeString(args);
 
   if (bio.length > charLimit) {
     /**
@@ -41,7 +42,7 @@ exports.run = async (Bastion, message, args) => {
     });
   }
 
-  await Bastion.db.run(`UPDATE profiles SET bio="${bio}" WHERE userID=${message.author.id}`).catch(e => {
+  await Bastion.db.run('UPDATE profiles SET bio=(?) WHERE userID=(?)', [ bio, message.author.id ]).catch(e => {
     Bastion.log.error(e);
   });
 
@@ -49,7 +50,7 @@ exports.run = async (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.green,
       title: 'Bio Set',
-      description: bio,
+      description: args,
       footer: {
         text: args.tag
       }
