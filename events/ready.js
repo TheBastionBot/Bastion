@@ -6,12 +6,12 @@
 
 const COLOR = require('chalk');
 
-module.exports = Bastion => {
+module.exports = async Bastion => {
   try {
     Bastion.user.setStatus(Bastion.config.status);
     Bastion.user.setGame(Bastion.config.game);
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
       '(guildID TEXT NOT NULL UNIQUE,' +
       `prefix TEXT NOT NULL DEFAULT '${Bastion.config.prefix}',` +
       'greet TEXT,' +
@@ -38,56 +38,53 @@ module.exports = Bastion => {
       'modLog TEXT UNIQUE,' +
       'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
       'PRIMARY KEY(guildID))').then(async () => {
-        let bastionGuilds = Bastion.guilds.map(g => g.id);
+        try {
+          let bastionGuilds = Bastion.guilds.map(g => g.id);
+          let guild = await Bastion.db.all('SELECT guildID from guildSettings');
+          guild = guild.map(r => r.guildID);
 
-        let guild = await Bastion.db.all('SELECT guildID from guildSettings').catch(e => {
-          Bastion.log.error(e);
-        });
-
-        guild = guild.map(r => r.guildID);
-
-        /*
-        * Add guilds to the DB which added Bastion when it was offline.
-        */
-        for (let i = 0; i < bastionGuilds.length; i++) {
-          let found = false;
-          for (let j = 0; j < guild.length; j++) {
-            if (bastionGuilds[i] === guild[j]){
-              found = true;
-              break;
+          /*
+          * Add guilds to the DB which added Bastion when it was offline.
+          */
+          for (let i = 0; i < bastionGuilds.length; i++) {
+            let found = false;
+            for (let j = 0; j < guild.length; j++) {
+              if (bastionGuilds[i] === guild[j]){
+                found = true;
+                break;
+              }
+            }
+            if (found === false) {
+              await Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]);
             }
           }
-          if (found === false) {
-            Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]).catch(e => {
-              Bastion.log.error(e);
-            });
+
+          /*
+          * Remove guilds from DB which removed Bastion when it was offline.
+          */
+          for (let i = 0; i < guild.length; i++) {
+            let found = false;
+            for (let j = 0; j < bastionGuilds.length; j++) {
+              if (guild[i] === bastionGuilds[j]){
+                found = true;
+                break;
+              }
+            }
+            if (found === false) {
+              await Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${guild[i]}`);
+            }
           }
         }
-
-        /*
-        * Remove guilds from DB which removed Bastion when it was offline.
-        */
-        for (let i = 0; i < guild.length; i++) {
-          let found = false;
-          for (let j = 0; j < bastionGuilds.length; j++) {
-            if (guild[i] === bastionGuilds[j]){
-              found = true;
-              break;
-            }
-          }
-          if (found === false) {
-            Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${guild[i]}`).catch(e => {
-              Bastion.log.error(e);
-            });
-          }
+        catch (e) {
+          Bastion.log.error(e);
         }
       });
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
       '(userID TEXT NOT NULL UNIQUE,' +
       'PRIMARY KEY(userID))');
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS profiles' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS profiles' +
       '(userID TEXT NOT NULL UNIQUE,' +
       'bastionCurrencies TEXT NOT NULL DEFAULT 0,' +
       'xp TEXT NOT NULL DEFAULT 0,' +
@@ -96,26 +93,26 @@ module.exports = Bastion => {
       'bio BLOB,' +
       'PRIMARY KEY(userID))');
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS triggers' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS triggers' +
       '(trigger TEXT NOT NULL,' +
       'response TEXT NOT NULL)');
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS todo' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS todo' +
       '(ownerID TEXT NOT NULL UNIQUE,' +
       'list TEXT NOT NULL DEFAULT \'[]\')');
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
       '(log TEXT NOT NULL DEFAULT \'false\',' +
       'logChannelID TEXT UNIQUE)');
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS scheduledCommands' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS scheduledCommands' +
       '(cronExp TEXT NOT NULL,' +
       'command TEXT NOT NULL,' +
       'channelID TEXT NOT NULL,' +
       'messageID TEXT NOT NULL,' +
       'arguments TEXT)');
 
-    Bastion.db.run('CREATE TABLE IF NOT EXISTS transactions' +
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS transactions' +
       '(userID TEXT NOT NULL,' +
       'type TEXT NOT NULL,' +
       'amount TEXT NOT NULL)');
@@ -133,5 +130,6 @@ module.exports = Bastion => {
   }
   catch (e) {
     Bastion.log.error(e);
+    process.exit(1);
   }
 };
