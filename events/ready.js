@@ -117,7 +117,7 @@ module.exports = Bastion => {
     Bastion.db.run('CREATE TABLE IF NOT EXISTS transactions' +
       '(userID TEXT NOT NULL,' +
       'type TEXT NOT NULL,' +
-      'amount INTEGER NOT NULL)');
+      'amount TEXT NOT NULL)');
 
     Bastion.log.console('\n');
     Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
