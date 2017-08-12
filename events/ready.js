@@ -92,7 +92,7 @@ module.exports = Bastion => {
       'bastionCurrencies TEXT NOT NULL DEFAULT 0,' +
       'xp TEXT NOT NULL DEFAULT 0,' +
       'level TEXT NOT NULL DEFAULT 0,' +
-      'bio TEXT,' +
+      'bio BLOB,' +
       'PRIMARY KEY(userID))');
 
     Bastion.db.run('CREATE TABLE IF NOT EXISTS triggers' +
