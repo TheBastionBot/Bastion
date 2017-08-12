@@ -1,7 +1,7 @@
 const lzutf8 = require('lzutf8');
 
 /**
- * Encodes/Compresses a string to BinaryString with LZUTF8
+ * Decodes/Decompresses a BinaryString, with LZUTF8, to String
  * @param {String} string the original string data
  * @returns {BinaryString} the compressed BinaryString
  */
