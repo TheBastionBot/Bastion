@@ -2,6 +2,7 @@
   "date": "August 12, 2017",
   "updated": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
+    "Users can now have (virtually) infinity amount of Bastion Currencies, without causing issues in the database",
     "Renamed `greetDM` command to `greetPrivate`",
     "Renamed `greetDMMessage` command to `greetPrivateMessage`",
     "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft`",
