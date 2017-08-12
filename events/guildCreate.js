@@ -9,12 +9,12 @@ module.exports = guild => {
     '(guildID TEXT NOT NULL UNIQUE,' +
     `prefix TEXT NOT NULL DEFAULT '${guild.client.config.prefix}',` +
     'greet TEXT UNIQUE,' +
-    'greetMessage TEXT NOT NULL DEFAULT \'Welcome to $server.\',' +
+    'greetMessage BLOB,' +
     'greetTimeout INTEGER NOT NULL DEFAULT 30,' +
-    'greetDM TEXT NOT NULL DEFAULT \'false\',' +
-    'greetDMMessage TEXT NOT NULL DEFAULT \'Welcome to $server.\',' +
+    'greetPrivate TEXT NOT NULL DEFAULT \'false\',' +
+    'greetPrivateMessage BLOB,' +
     'farewell TEXT UNIQUE,' +
-    'farewellMessage TEXT NOT NULL DEFAULT \'We hope you enjoyed your stay here!\',' +
+    'farewellMessage BLOB,' +
     'farewellTimeout INTEGER NOT NULL DEFAULT 15,' +
     'log TEXT UNIQUE,' +
     'musicTextChannelID TEXT UNIQUE,' +
