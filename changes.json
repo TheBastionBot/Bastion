@@ -4,6 +4,7 @@
     "Handled exceptions for empty arguments in `anime` & `manga` command",
     "Renamed `greetDM` command to `greetPrivate`",
     "Renamed `greetDMMessage` command to `greetPrivateMessage`",
+    "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft`",
     "Minor fixes & improvements"
   ],
   "added": [],
