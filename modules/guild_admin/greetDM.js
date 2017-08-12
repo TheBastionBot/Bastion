@@ -15,30 +15,30 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT greetDM FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+  let guildSettings = await Bastion.db.get(`SELECT greetPrivate FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });
 
-  let color, greetDMStats;
-  if (guildSettings.greetDM === 'true') {
-    await Bastion.db.run(`UPDATE guildSettings SET greetDM='false' WHERE guildID=${message.guild.id}`).catch(e => {
+  let color, greetPrivateStats;
+  if (guildSettings.greetPrivate === 'true') {
+    await Bastion.db.run(`UPDATE guildSettings SET greetPrivate='false' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
     color = Bastion.colors.red;
-    greetDMStats = 'Sending Greeting Message as Direct Messages are now disabled.';
+    greetPrivateStats = 'Sending Greeting Message as Direct Messages are now disabled.';
   }
   else {
-    await Bastion.db.run(`UPDATE guildSettings SET greetDM='true' WHERE guildID=${message.guild.id}`).catch(e => {
+    await Bastion.db.run(`UPDATE guildSettings SET greetPrivate='true' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
     color = Bastion.colors.green;
-    greetDMStats = 'Sending Greeting Message as Direct Messages are now enabled.';
+    greetPrivateStats = 'Sending Greeting Message as Direct Messages are now enabled.';
   }
 
   message.channel.send({
     embed: {
       color: color,
-      description: greetDMStats
+      description: greetPrivateStats
     }
   }).catch(e => {
     Bastion.log.error(e);

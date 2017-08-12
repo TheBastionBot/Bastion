@@ -5,22 +5,25 @@
  */
 
 module.exports = async member => {
-  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetDM, greetDMMessage, autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
+  let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetPrivate, greetPrivateMessage, autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`).catch(e => {
     member.client.log.error(e);
   });
 
   if (guild && guild.greet) {
-    let greetMsg = guild.greetMessage;
-    greetMsg = greetMsg.replace(/\$user/ig, `<@${member.id}>`);
-    greetMsg = greetMsg.replace(/\$server/ig, member.guild.name);
-    greetMsg = greetMsg.replace(/\$username/ig, member.displayName);
-    greetMsg = greetMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
+    let greetMessage = 'Welcome to $server! Enjoy your time here.';
+    if (guild.greetMessage) {
+      greetMessage = await member.client.decodeString(guild.greetMessage);
+    }
+    greetMessage = greetMessage.replace(/\$user/ig, `<@${member.id}>`);
+    greetMessage = greetMessage.replace(/\$server/ig, member.guild.name);
+    greetMessage = greetMessage.replace(/\$username/ig, member.displayName);
+    greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
     member.guild.channels.get(guild.greet).send({
       embed: {
         color: member.client.colors.green,
         title: `Hello ${member.displayName}`,
-        description: greetMsg
+        description: greetMessage
       }
     }).then(m => {
       if (guild.greetTimeout > 0) {
@@ -33,18 +36,21 @@ module.exports = async member => {
     });
   }
 
-  if (guild && guild.greetDM === 'true') {
-    let greetDMMsg = guild.greetDMMessage;
-    greetDMMsg = greetDMMsg.replace(/\$user/ig, `<@${member.id}>`);
-    greetDMMsg = greetDMMsg.replace(/\$server/ig, member.guild.name);
-    greetDMMsg = greetDMMsg.replace(/\$username/ig, member.displayName);
-    greetDMMsg = greetDMMsg.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
+  if (guild && guild.greetPrivate === 'true') {
+    let greetPrivateMessage = 'Welcome to $server! Enjoy your time here.';
+    if (guild.greetPrivateMessage) {
+      greetPrivateMessage = await member.client.decodeString(guild.greetPrivateMessage);
+    }
+    greetPrivateMessage = greetPrivateMessage.replace(/\$user/ig, `<@${member.id}>`);
+    greetPrivateMessage = greetPrivateMessage.replace(/\$server/ig, member.guild.name);
+    greetPrivateMessage = greetPrivateMessage.replace(/\$username/ig, member.displayName);
+    greetPrivateMessage = greetPrivateMessage.replace(/\$prefix/ig, member.guild.prefix || member.client.config.prefix);
 
     member.send({
       embed: {
         color: member.client.colors.green,
         title: `Hello ${member.displayName}`,
-        description: greetDMMsg
+        description: greetPrivateMessage
       }
     }).catch(e => {
       member.client.log.error(e);

@@ -20,26 +20,34 @@ exports.run = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
+    let greetMessage = `Not set. Set greeting message using \`${this.help.name} <Message>\``;
+    if (guildSettings.greetMessage) {
+      greetMessage = await Bastion.functions.decodeString(guildSettings.greetMessage);
+    }
+
     message.channel.send({
       embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'Greeting message:',
-        description: guildSettings.greetMessage
+        color: Bastion.colors.blue,
+        title: 'Greeting Message',
+        description: greetMessage
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
   else {
-    await Bastion.db.run(`UPDATE guildSettings SET greetMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
+    args = args.join(' ');
+
+    let greetMessage = await Bastion.functions.encodeString(args);
+    await Bastion.db.run('UPDATE guildSettings SET greetMessage=(?) WHERE guildID=(?)', [ greetMessage, message.guild.id ]).catch(e => {
       Bastion.log.error(e);
     });
 
     message.channel.send({
       embed: {
         color: Bastion.colors.green,
-        title: 'Greeting message set to:',
-        description: args.join(' ')
+        title: 'Greeting Message Set',
+        description: args
       }
     }).catch(e => {
       Bastion.log.error(e);
