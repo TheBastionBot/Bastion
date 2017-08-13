@@ -47,11 +47,13 @@ module.exports = async message => {
      */
     handleTrigger(message);
 
-    let users = await message.client.db.all('SELECT userID FROM blacklistedUsers').catch(e => {
+    try {
+      let users = await message.client.db.all('SELECT userID FROM blacklistedUsers');
+      if (users.map(u => u.userID).includes(message.author.id)) return;
+    }
+    catch (e) {
       message.client.log.error(e);
-    });
-
-    if (users.map(u => u.userID).includes(message.author.id)) return;
+    }
 
     /**
     * Cooldown for experience points, to prevent spam
