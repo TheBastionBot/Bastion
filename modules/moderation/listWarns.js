@@ -6,8 +6,6 @@
 
 const string = require('../../handlers/languageHandler');
 
-const warns = require('./warn').warns;
-
 exports.run = (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -17,7 +15,7 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!warns[message.guild.id]) {
+  if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
     return message.channel.send({
       color: Bastion.colors.green,
       description: 'No one has been warned yet.'
@@ -27,7 +25,7 @@ exports.run = (Bastion, message) => {
   }
 
   let warnedUsers = [];
-  Object.keys(warns[message.guild.id]).forEach(id => {
+  Object.keys(message.guild.warns).forEach(id => {
     warnedUsers.push(message.guild.members.get(id).user.tag);
   });
 

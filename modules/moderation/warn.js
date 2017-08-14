@@ -5,8 +5,6 @@
  */
 
 const string = require('../../handlers/languageHandler');
-let guilds = {};
-exports.warns = guilds;
 
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
@@ -48,18 +46,18 @@ exports.run = async (Bastion, message, args) => {
     reason = 'No given reason';
   }
 
-  if (!guilds.hasOwnProperty(message.guild.id)) {
-    guilds[message.guild.id] = {};
+  if (!message.guild.warns) {
+    message.guild.warns = {};
   }
-  if (!guilds[message.guild.id].hasOwnProperty(user.id)) {
-    guilds[message.guild.id][user.id] = 1;
+  if (!message.guild.warns.hasOwnProperty(user.id)) {
+    message.guild.warns[user.id] = 1;
   }
   else {
-    if (guilds[message.guild.id][user.id] === 2) {
+    if (message.guild.warns[user.id] === 2) {
       try {
         let member = await message.guild.members.get(user.id).kick('Warned 3 times!');
 
-        delete guilds[message.guild.id][user.id];
+        delete message.guild.warns[user.id];
         message.channel.send({
           embed: {
             color: Bastion.colors.orange,
@@ -108,7 +106,7 @@ exports.run = async (Bastion, message, args) => {
       }
     }
     else {
-      guilds[message.guild.id][user.id] += 1;
+      message.guild.warns[user.id] += 1;
     }
   }
 
