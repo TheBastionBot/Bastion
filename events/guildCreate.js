@@ -29,6 +29,7 @@ module.exports = guild => {
     'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
     'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
     'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
+    'warnAction TEXT,' +
     'modLog TEXT UNIQUE,' +
     'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
     'PRIMARY KEY(guildID))').then(() => {
