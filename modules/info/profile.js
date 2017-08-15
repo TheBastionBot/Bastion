@@ -73,6 +73,9 @@ exports.run = async (Bastion, message, args) => {
       ],
       thumbnail: {
         url: args.displayAvatarURL
+      },
+      footer: {
+        text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`
       }
     }
   }).catch(e => {
