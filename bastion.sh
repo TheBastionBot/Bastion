@@ -11,8 +11,7 @@ if ! [ -z "$SUDO_USER" ]; then
   exit 1
 fi
 
-command -v screen >/dev/null 2>&1
-if [ $? -ne 0 ]; then
+if command -v screen >/dev/null 2>&1; then
   echo -e "${CYAN}[Bastion]: ${ORANGE}You need to install 'screen' if you want to use this script!${NC}"
   exit 1
 fi
@@ -27,15 +26,15 @@ case $1 in
 
 --debug)
   if [[ $(screengrepname) ]]; then
-    echo -e "${ORANGE}$NAME is already running.${NC} Use '$0 stop' to stop it before you run it in dubug mode!"
+    echo -e "${ORANGE}$NAME is already running.${NC} Use '$0 --stop' to stop it before you run it in dubug mode!"
   else
     node .
   fi
 ;;
 
 --restart)
-  $0 stop
-  $0 start
+  $0 --stop
+  $0 --start
 ;;
 
 --show)
@@ -48,14 +47,14 @@ case $1 in
 
 --start)
   if [[ $(screengrepname) ]]; then
-    echo -e "${ORANGE}$NAME is already started.${NC} Use '$0 stop' to stop or '$0 restart' to restart it."
+    echo -e "${ORANGE}$NAME is already started.${NC} Use '$0 --stop' to stop or '$0 --restart' to restart it."
   else
     echo -e "${CYAN}[Bastion]:${NC} Checking System..."
     if [ -r bastion.js ]; then
       rm -f screenlog.0
       echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
       screen -dmS "$NAME" -L /bin/bash -c "until node .; do sleep 1; done"
-      echo -e "${GREEN}$NAME was successfully started!${NC} If you have any problems, see the log using '$0 show' or start $NAME in dubug mode using '$0 debug'!"
+      echo -e "${GREEN}$NAME was successfully started!${NC} If you have any problems, see the log using '$0 --show' or start $NAME in dubug mode using '$0 --debug'!"
     else
       echo -e "${RED}[ERROR] System Check Failed.${NC}" && echo -e "Check if you have Bastion Bot installed correctly." && exit 1
     fi
@@ -81,7 +80,7 @@ case $1 in
 
 --update)
   if [[ $(screengrepname) ]]; then
-    echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 stop' to stop it before running the update."
+    echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 --stop' to stop it before running the update."
   else
     echo "Updating $NAME..."
     git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\n" && exit 1)
@@ -95,7 +94,7 @@ case $1 in
 
 --upgrade)
   if [[ $(screengrepname) ]]; then
-    echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 stop' to stop it before running the update."
+    echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 --stop' to stop it before running the update."
   else
     echo "Deleting old files..."
     rm -fr node_modules
@@ -135,7 +134,7 @@ case $1 in
   echo -e "A Discord Bot, that can do it all. And Bastion will even talk with you!${NC}"
   echo
   echo -e "${GREEN}Usage:${NC}"
-  echo " $0 [OPTION]"
+  echo " $0 --[OPTION]"
   echo
   echo -e "${GREEN}Options:${NC}"
   echo " --debug      Start Bastion in debug mode to see the issue that is"
