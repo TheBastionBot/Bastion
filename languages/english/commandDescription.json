@@ -134,7 +134,8 @@
   "textUnMute": "Text unmutes from specified user from the specified text channel of your Discord server.",
   "unDeafen": "Undeafens a specified user server-wide in your Discord server.",
   "unMute": "Unmutes a specified user server-wide in your Discord server.",
-  "warn": "Warns the specified user. If three warns are given, he gets kicked automatically from your Discord server.",
+  "warn": "Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.",
+  "warnAction": "Sets the warn action for the server.",
 
   "give": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
   "hallOfFame": "Shows the top 10 ranking with the highest level & experience points.",
