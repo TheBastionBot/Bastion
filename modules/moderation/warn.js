@@ -22,7 +22,6 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   let user = message.mentions.users.first();
   if (!user) {
     /**
@@ -33,13 +32,6 @@ exports.run = async (Bastion, message, args) => {
   }
 
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
-  if (!message.guild.members.get(user.id).kickable) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to warn ${user}.`, message.channel);
-  }
 
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) {
@@ -53,53 +45,92 @@ exports.run = async (Bastion, message, args) => {
     message.guild.warns[user.id] = 1;
   }
   else {
-    if (message.guild.warns[user.id] === 2) {
+    if (message.guild.warns[user.id] >= 2) {
       try {
-        let member = await message.guild.members.get(user.id).kick('Warned 3 times!');
+        let guildSettings = await Bastion.db.get(`SELECT warnAction FROM guildSettings WHERE guildID='${message.guild.id}'`);
 
-        delete message.guild.warns[user.id];
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.orange,
-            title: 'Kicked',
-            fields: [
-              {
-                name: 'User',
-                value: user.tag,
-                inline: true
-              },
-              {
-                name: 'ID',
-                value: user.id,
-                inline: true
-              },
-              {
-                name: 'Reason',
-                value: 'Warned 3 times!',
-                inline: false
-              }
-            ]
+        if (guildSettings.warnAction) {
+          let member, action;
+          if (guildSettings.warnAction === 'kick') {
+            if (!message.guild.members.get(user.id).kickable) {
+              /**
+               * Error condition is encountered.
+               * @fires error
+               */
+              return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to kick ${user}.`, message.channel);
+            }
+            member = await message.guild.members.get(user.id).kick('Warned 3 times!');
+            action = 'Kicked';
           }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
-
-        Bastion.emit('moderationLog', message.guild, message.author, 'kick', user, 'Warned 3 times!');
-
-        member.send({
-          embed: {
-            color: Bastion.colors.orange,
-            title: `Kicked from ${message.guild.name} Server`,
-            fields: [
-              {
-                name: 'Reason',
-                value: 'You have been warned 3 times!'
-              }
-            ]
+          if (guildSettings.warnAction === 'softban') {
+            if (!message.guild.members.get(user.id).bannable) {
+              /**
+               * Error condition is encountered.
+               * @fires error
+               */
+              return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to soft-ban ${user}.`, message.channel);
+            }
+            member = await message.guild.members.get(user.id).ban('Warned 3 times!');
+            await message.guild.unban(member.id);
+            action = 'Soft-Banned';
           }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
+          if (guildSettings.warnAction === 'ban') {
+            if (!message.guild.members.get(user.id).bannable) {
+              /**
+               * Error condition is encountered.
+               * @fires error
+               */
+              return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to ban ${user}.`, message.channel);
+            }
+            member = await message.guild.members.get(user.id).ban('Warned 3 times!');
+            action = 'Banned';
+          }
+
+          delete message.guild.warns[user.id];
+          message.channel.send({
+            embed: {
+              color: Bastion.colors.red,
+              title: action,
+              fields: [
+                {
+                  name: 'User',
+                  value: user.tag,
+                  inline: true
+                },
+                {
+                  name: 'ID',
+                  value: user.id,
+                  inline: true
+                },
+                {
+                  name: 'Reason',
+                  value: 'Warned 3 times!',
+                  inline: false
+                }
+              ]
+            }
+          }).catch(e => {
+            Bastion.log.error(e);
+          });
+
+          Bastion.emit('moderationLog', message.guild, message.author, guildSettings.warnAction, user, 'Warned 3 times!');
+
+          member.send({
+            embed: {
+              color: Bastion.colors.red,
+              title: `${action} from ${message.guild.name} Server`,
+              fields: [
+                {
+                  name: 'Reason',
+                  value: 'You have been warned 3 times!'
+                }
+              ]
+            }
+          }).catch(e => {
+            Bastion.log.error(e);
+          });
+        }
+
       }
       catch (e) {
         Bastion.log.error(e);
