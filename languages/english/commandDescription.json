@@ -76,6 +76,7 @@
   "greetMessage": "Edits the greeting message that shows when a member joins the server.",
   "greetTimeout": "Sets the time after which greeting message will be automatically deleted.",
   "ignoreChannel": "Adds or removes a channel to/from the ignored channels' list. Bastion doesn't accept any commands in the channel that are being ignored.",
+  "ignoreRole": "Adds or removes a role to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored.",
   "levelUpMessage": "Toggles sending messages when someone levels up in the server.",
   "listAutoAssignableRoles": "Lists all auto-assignable roles.",
   "listFilteredWords": "Lists all filtered words.",
