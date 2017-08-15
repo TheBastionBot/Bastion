@@ -8,6 +8,7 @@
     "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft`",
     "Updated `profile` command, it now shows reps",
     "Improvements to `warn` and `listWarns` command",
+    "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
     "Minor fixes & improvements"
   ],
   "added": [

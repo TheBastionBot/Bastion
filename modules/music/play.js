@@ -92,50 +92,6 @@ exports.run = async (Bastion, message, args) => {
     if (args.song) {
       song = args.song.join(' ');
     }
-    else if (args.playlist) {
-      let playlist;
-
-      db.reload();
-      playlist = db.getData('/');
-      playlist = playlist[args.playlist.join(' ')];
-
-      if (!playlist || playlist.length === 0) {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), textChannel);
-      }
-
-      song = playlist.shift();
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `Adding ${playlist.length + 1} favourite songs to the queue...`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-
-      // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-      playlist.forEach(e => {
-        e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
-        if (!message.guild.music) {
-          message.guild.music = musicObject;
-        }
-        yt.getInfo(e, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
-          if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
-          message.guild.music.songs.push({
-            url: info.formats[info.formats.length - 1].url,
-            title: info.title,
-            thumbnail: info.thumbnail,
-            duration: info.duration,
-            requester: message.author.tag
-          });
-        });
-      });
-    }
     else if (args.ytpl) {
       if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.ytpl)) {
         /**
@@ -193,6 +149,50 @@ exports.run = async (Bastion, message, args) => {
             });
           });
         }
+      });
+    }
+    else if (args.playlist) {
+      let playlist;
+
+      db.reload();
+      playlist = db.getData('/');
+      playlist = playlist[args.playlist.join(' ')];
+
+      if (!playlist || playlist.length === 0) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), textChannel);
+      }
+
+      song = playlist.shift();
+
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.green,
+          description: `Adding ${playlist.length + 1} favourite songs to the queue...`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
+      playlist.forEach(e => {
+        e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
+        if (!message.guild.music) {
+          message.guild.music = musicObject;
+        }
+        yt.getInfo(e, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
+          if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
+          message.guild.music.songs.push({
+            url: info.formats[info.formats.length - 1].url,
+            title: info.title,
+            thumbnail: info.thumbnail,
+            duration: info.duration,
+            requester: message.author.tag
+          });
+        });
       });
     }
     else return delete message.guild.music;
