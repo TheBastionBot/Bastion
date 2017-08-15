@@ -33,6 +33,9 @@ const constants = {
 module.exports = (string, namespace = 'common', ...vars) => {
   if (typeof string === 'string' && typeof namespace === 'string') {
     let regex = new RegExp(Object.keys(constants).join('|'), 'gi');
+    if (!strings[namespace][string]) {
+      throw new Error(`'${string}' has no corresponding string in '${namespace}' namespace.`);
+    }
     return strings[namespace][string].replace(regex, matched => constants[matched]).substitute(...vars);
   }
   return '';
