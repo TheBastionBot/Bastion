@@ -6,10 +6,12 @@
     "Renamed `greetDM` command to `greetPrivate`",
     "Renamed `greetDMMessage` command to `greetPrivateMessage`",
     "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft`",
+    "Updated `profile` command, it now shows reps",
     "Improvements to `warn` and `listWarns` command",
     "Minor fixes & improvements"
   ],
   "added": [
+    "Added `reputation` command",
     "Added `ignoreChannel` command",
     "Added `ignoreRole` command"
   ],
