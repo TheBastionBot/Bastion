@@ -1,5 +1,5 @@
 {
-  "date": "August 14, 2017",
+  "date": "August 15, 2017",
   "updated": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
     "Users can now have (virtually) infinity amount of Bastion Currencies, without causing issues in the database",
@@ -9,6 +9,9 @@
     "Improvements to `warn` and `listWarns` command",
     "Minor fixes & improvements"
   ],
-  "added": [],
+  "added": [
+    "Added `ignoreChannel` command",
+    "Added `ignoreRole` command"
+  ],
   "removed": []
 }
