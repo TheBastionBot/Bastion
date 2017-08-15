@@ -22,14 +22,16 @@ module.exports = async message => {
 
     if (!message.content.startsWith(guild.prefix)) return;
 
-    if (guild.ignoredChannelIDs) {
-      if (guild.ignoredChannelIDs.split(' ').includes(message.channel.id)) return;
-    }
+    if (!message.member.hasPermission('ADMINISTRATOR')) {
+      if (guild.ignoredChannelIDs) {
+        if (guild.ignoredChannelIDs.split(' ').includes(message.channel.id)) return;
+      }
 
-    if (guild.ignoredRoleIDs) {
-      let ignoredRoleIDs = guild.ignoredRoleIDs.split(' ');
-      for (let roleID of ignoredRoleIDs) {
-        if (message.member.roles.has(roleID)) return;
+      if (guild.ignoredRoleIDs) {
+        let ignoredRoleIDs = guild.ignoredRoleIDs.split(' ');
+        for (let roleID of ignoredRoleIDs) {
+          if (message.member.roles.has(roleID)) return;
+        }
       }
     }
 
