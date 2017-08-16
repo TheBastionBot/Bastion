@@ -31,6 +31,7 @@ if (languages.includes(BASTION.config.language)) {
 }
 process.env.LANG = language;
 
+BASTION.log = require('./handlers/logHandler');
 BASTION.commands = new Discord.Collection();
 BASTION.aliases = new Discord.Collection();
 BASTION.functions = {};
@@ -51,10 +52,6 @@ require('./utils/Number.prototype');
  * Function handler
  */
 require('./handlers/functionHandler')(BASTION);
-/**
- * Log handler
- */
-require('./handlers/logHandler')(BASTION);
 /**
  * Event handler
  */
