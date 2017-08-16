@@ -16,23 +16,23 @@ exports.run = async (Bastion, message, args) => {
   }
 
   try {
-    let guildSettings = await Bastion.db.get(`SELECT ignoredChannelIDs FROM guildSettings WHERE guildID=${message.guild.id}`);
-    let ignoredChannelIDs = guildSettings.ignoredChannelIDs, isIgnored = false,
+    let guildSettings = await Bastion.db.get(`SELECT ignoredChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let ignoredChannels = guildSettings.ignoredChannels, isIgnored = false,
       description = null, color = Bastion.colors.red;
 
-    if (ignoredChannelIDs) {
-      ignoredChannelIDs = ignoredChannelIDs.split(' ');
-      if (ignoredChannelIDs.includes(message.channel.id)) {
+    if (ignoredChannels) {
+      ignoredChannels = ignoredChannels.split(' ');
+      if (ignoredChannels.includes(message.channel.id)) {
         isIgnored = true;
       }
     }
     else {
-      ignoredChannelIDs = [];
+      ignoredChannels = [];
     }
 
     if (isIgnored) {
       if (args.remove) {
-        ignoredChannelIDs.splice(ignoredChannelIDs.indexOf(message.channel.id), 1);
+        ignoredChannels.splice(ignoredChannels.indexOf(message.channel.id), 1);
         color = Bastion.colors.green;
         description = 'I\'ll stop ignoring commands in this channel, from now.';
       }
@@ -45,14 +45,14 @@ exports.run = async (Bastion, message, args) => {
         description = 'I\'m already accepting commands in this channel.';
       }
       else {
-        ignoredChannelIDs.push(message.channel.id);
+        ignoredChannels.push(message.channel.id);
         color = Bastion.colors.green;
         description = 'I\'ll ignore commands in this channel, from now.';
       }
     }
-    ignoredChannelIDs = ignoredChannelIDs.join(' ');
+    ignoredChannels = ignoredChannels.join(' ');
 
-    await Bastion.db.run(`UPDATE guildSettings SET ignoredChannelIDs='${ignoredChannelIDs}' WHERE guildID=${message.guild.id}`);
+    await Bastion.db.run(`UPDATE guildSettings SET ignoredChannels='${ignoredChannels}' WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {

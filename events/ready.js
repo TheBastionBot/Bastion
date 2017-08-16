@@ -36,8 +36,8 @@ module.exports = async Bastion => {
       'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
       'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
       'warnAction TEXT,' +
-      'ignoredChannelIDs TEXT,' +
-      'ignoredRoleIDs TEXT,' +
+      'ignoredChannels TEXT,' +
+      'ignoredRoles TEXT,' +
       'modLog TEXT UNIQUE,' +
       'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
       'PRIMARY KEY(guildID))').then(async () => {

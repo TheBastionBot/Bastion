@@ -31,23 +31,23 @@ exports.run = async (Bastion, message, args) => {
   }
 
   try {
-    let guildSettings = await Bastion.db.get(`SELECT ignoredRoleIDs FROM guildSettings WHERE guildID=${message.guild.id}`);
-    let ignoredRoleIDs = guildSettings.ignoredRoleIDs, isIgnored = false,
+    let guildSettings = await Bastion.db.get(`SELECT ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let ignoredRoles = guildSettings.ignoredRoles, isIgnored = false,
       description = null, color = Bastion.colors.red;
 
-    if (ignoredRoleIDs) {
-      ignoredRoleIDs = ignoredRoleIDs.split(' ');
-      if (ignoredRoleIDs.includes(args.id)) {
+    if (ignoredRoles) {
+      ignoredRoles = ignoredRoles.split(' ');
+      if (ignoredRoles.includes(args.id)) {
         isIgnored = true;
       }
     }
     else {
-      ignoredRoleIDs = [];
+      ignoredRoles = [];
     }
 
     if (isIgnored) {
       if (args.remove) {
-        ignoredRoleIDs.splice(ignoredRoleIDs.indexOf(args.id), 1);
+        ignoredRoles.splice(ignoredRoles.indexOf(args.id), 1);
         color = Bastion.colors.green;
         description = 'I\'ll stop ignoring commands from this role, from now.';
       }
@@ -60,14 +60,14 @@ exports.run = async (Bastion, message, args) => {
         description = 'I\'m already accepting commands from this role.';
       }
       else {
-        ignoredRoleIDs.push(args.id);
+        ignoredRoles.push(args.id);
         color = Bastion.colors.green;
         description = 'I\'ll ignore commands from this role, from now.';
       }
     }
-    ignoredRoleIDs = ignoredRoleIDs.join(' ');
+    ignoredRoles = ignoredRoles.join(' ');
 
-    await Bastion.db.run(`UPDATE guildSettings SET ignoredRoleIDs='${ignoredRoleIDs}' WHERE guildID=${message.guild.id}`);
+    await Bastion.db.run(`UPDATE guildSettings SET ignoredRoles='${ignoredRoles}' WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {
