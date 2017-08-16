@@ -2,8 +2,10 @@
   "date": "August 16, 2017",
   "updated": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
-    "Users can now have (virtually) infinity amount of Bastion Currencies, without causing issues in the database",
     "Fixed trigger handler warnings when no trigger was present",
+    "Fixed potential issue with `queue` command",
+    "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
+    "Users can now have (virtually) infinity amount of Bastion Currencies, without causing issues in the database",
     "Renamed `greetDM` command to `greetPrivate`",
     "Renamed `greetDMMessage` command to `greetPrivateMessage`",
     "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft`",
@@ -11,7 +13,6 @@
     "Improvements to `warn` and `listWarns` command",
     "Removed the default kick action for warnings",
     "Now you can set actions (none, kick, softban, ban) for warnings",
-    "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
     "Minor fixes & improvements"
   ],
   "added": [

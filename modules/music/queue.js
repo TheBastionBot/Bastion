@@ -7,7 +7,7 @@
 const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+  if (!message.guild.music || !message.guild.music.songs) {
     /**
      * Error condition is encountered.
      * @fires error
