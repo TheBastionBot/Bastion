@@ -25,14 +25,14 @@ exports.run = async (Bastion, message) => {
     await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     farewellStats = 'Farewell Messages are now disabled.';
   }
   else {
     await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     farewellStats = 'Farewell Messages are now enabled in this channel.';
   }
 

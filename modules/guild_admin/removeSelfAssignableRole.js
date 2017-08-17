@@ -56,7 +56,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         description: `I've deleted **${message.guild.roles.get(deletedRoleID).name}** from self assignable roles.`
       }
     }).catch(e => {

@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   for (let i = 0; i < Bastion.guilds.size; i++) {
     Bastion.guilds.map(g => g.defaultChannel)[i].send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         description: args.join(' ')
       }
     }).catch(() => {});
@@ -34,7 +34,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Announced',
       description: args.join(' ')
     }

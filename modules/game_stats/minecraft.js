@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
   }).then(data => {
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: data.name,
         description: '[Minecraft](https://minecraft.net/)',
         fields: [

@@ -17,7 +17,7 @@ exports.run = async (Bastion, message) => {
 
   try {
     let bastionSettings = await Bastion.db.get('SELECT log, logChannelID FROM bastionSettings');
-    let color = Bastion.colors.green;
+    let color = Bastion.colors.GREEN;
     let logStats = 'Bastion\'s logging is now enabled in this channel.';
 
     if (!bastionSettings) {
@@ -29,7 +29,7 @@ exports.run = async (Bastion, message) => {
     else {
       await Bastion.db.run('UPDATE bastionSettings SET log=\'false\', logChannelID=null');
 
-      color = Bastion.colors.red;
+      color = Bastion.colors.RED;
       logStats = 'Bastion\'s logging is now disabled.';
     }
 

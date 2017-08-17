@@ -30,7 +30,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
+      color: Bastion.colors.BLUE,
       title: 'Whitelisted Domains',
       description: whitelistDomains.slice(i * 10, (i * 10) + 10).join('\n'),
       footer: {

@@ -28,7 +28,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `${Bastion.user.username} is now streaming **${args.slice(1).join(' ')}**`
       }
     }).catch(e => {

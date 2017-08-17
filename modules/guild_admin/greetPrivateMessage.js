@@ -27,7 +27,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Greeting Private Message',
         description: greetPrivateMessage
       }
@@ -45,7 +45,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         title: 'Greeting Private Message Set',
         description: args
       }

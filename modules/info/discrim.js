@@ -21,7 +21,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Discriminator search',
       description: `Found **${total}** users with discriminator **${args[0]}**`,
       fields: [

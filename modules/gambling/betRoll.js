@@ -77,7 +77,7 @@ exports.run = async (Bastion, message, args) => {
 
       await message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: `Rolled :${outcome}:`,
           description: result
         }

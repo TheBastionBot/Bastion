@@ -52,7 +52,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.RED,
         title: 'Kicked',
         fields: [
           {
@@ -84,7 +84,7 @@ exports.run = async (Bastion, message, args) => {
 
     member.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.RED,
         title: `Kicked from ${message.guild.name} Server`,
         description: `**Reason:** ${reason}`
       }

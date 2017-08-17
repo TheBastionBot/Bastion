@@ -30,7 +30,7 @@ exports.run = (Bastion, message) => {
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       description: 'Shuffled the queue.'
     }
   }).catch(e => {

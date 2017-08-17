@@ -56,7 +56,7 @@ exports.run = async (Bastion, message, args) => {
     await role.setName(args.new);
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.ORANGE,
         title: 'Role Renamed',
         fields: [
           {

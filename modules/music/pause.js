@@ -27,7 +27,7 @@ exports.run = (Bastion, message) => {
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.orange,
+      color: Bastion.colors.ORANGE,
       title: 'Paused Playback',
       description: message.guild.music.songs[0].title,
       footer: {

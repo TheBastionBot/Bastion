@@ -28,7 +28,7 @@ exports.run = (Bastion, message) => {
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Music queue',
       description: `${message.guild.music.songs.length - 1} songs in queue`,
       fields: fields

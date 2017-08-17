@@ -61,7 +61,7 @@ exports.run = async (Bastion, message, args) => {
 
   let scheduledStatus = await message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Scheduled Command',
       description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
       footer: {

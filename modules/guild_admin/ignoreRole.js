@@ -33,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
   try {
     let guildSettings = await Bastion.db.get(`SELECT ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
     let ignoredRoles = guildSettings.ignoredRoles, isIgnored = false,
-      description = null, color = Bastion.colors.red;
+      description = null, color = Bastion.colors.RED;
 
     if (ignoredRoles) {
       ignoredRoles = ignoredRoles.split(' ');
@@ -48,7 +48,7 @@ exports.run = async (Bastion, message, args) => {
     if (isIgnored) {
       if (args.remove) {
         ignoredRoles.splice(ignoredRoles.indexOf(args.id), 1);
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         description = 'I\'ll stop ignoring commands from this role, from now.';
       }
       else {
@@ -61,7 +61,7 @@ exports.run = async (Bastion, message, args) => {
       }
       else {
         ignoredRoles.push(args.id);
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         description = 'I\'ll ignore commands from this role, from now.';
       }
     }

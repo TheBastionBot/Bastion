@@ -17,7 +17,7 @@ exports.run = (Bastion, message) => {
 
   if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
     return message.channel.send({
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       description: 'No one has been warned yet.'
     }).catch(e => {
       Bastion.log.error(e);
@@ -31,7 +31,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.orange,
+      color: Bastion.colors.ORANGE,
       title: 'Warning List',
       description: warnedUsers.join('\n')
     }

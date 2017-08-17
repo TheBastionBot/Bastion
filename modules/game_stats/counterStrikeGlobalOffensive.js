@@ -87,7 +87,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: data.name,
         description: '[Counter-Strike: Global Offensive](https://store.steampowered.com/app/730/)',
         fields: stats

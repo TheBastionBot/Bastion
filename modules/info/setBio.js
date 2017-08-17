@@ -34,7 +34,6 @@ exports.run = async (Bastion, message, args) => {
   if (!user) {
     return message.channel.send({
       embed: {
-        color: Bastion.colors.green,
         description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
       }
     }).catch(e => {
@@ -48,7 +47,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Bio Set',
       description: args,
       footer: {

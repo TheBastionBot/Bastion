@@ -35,7 +35,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.dark_grey,
+        color: Bastion.colors.BLUE,
         description: `${message.author.username}, here's your todo list.`,
         fields: [
           {

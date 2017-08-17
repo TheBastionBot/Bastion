@@ -9,7 +9,7 @@ const string = require('../../handlers/languageHandler');
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
+      color: Bastion.colors.BLUE,
       description: `${parseInt(Bastion.ping)}ms`
     }
   }).catch(e => {

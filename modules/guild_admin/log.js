@@ -24,14 +24,14 @@ exports.run = async (Bastion, message) => {
     await Bastion.db.run(`UPDATE guildSettings SET log=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     logStats = 'Logging is now disabled.';
   }
   else {
     await Bastion.db.run(`UPDATE guildSettings SET log=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     logStats = 'Logging is now enabled in this channel.';
   }
 

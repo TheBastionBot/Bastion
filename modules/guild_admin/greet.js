@@ -24,14 +24,14 @@ exports.run = async (Bastion, message) => {
     Bastion.db.run(`UPDATE guildSettings SET greet=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     greetStats = 'Greeting Messages are now disabled.';
   }
   else {
     Bastion.db.run(`UPDATE guildSettings SET greet=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     greetStats = 'Greeting Messages are now enabled in this channel.';
   }
 

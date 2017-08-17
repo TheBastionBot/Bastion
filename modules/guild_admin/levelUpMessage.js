@@ -24,14 +24,14 @@ exports.run = async (Bastion, message) => {
     await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
   }
   else {
     await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     levelUpMessageStats = 'I will now send messages when someone levels up.';
   }
 

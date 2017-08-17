@@ -110,7 +110,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: data.name,
         description: '[Call of Duty 4®: Modern Warfare®](https://store.steampowered.com/app/7940)',
         fields: stats,

@@ -25,7 +25,7 @@ module.exports = async member => {
 
       member.guild.channels.get(guild.greet).send({
         embed: {
-          color: member.client.colors.green,
+          color: member.client.colors.BLUE,
           title: `Hello ${member.displayName}`,
           description: greetMessage
         }
@@ -52,7 +52,7 @@ module.exports = async member => {
 
       member.send({
         embed: {
-          color: member.client.colors.green,
+          color: member.client.colors.BLUE,
           title: `Hello ${member.displayName}`,
           description: greetPrivateMessage
         }

@@ -32,12 +32,12 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  let color = Bastion.colors.green;
+  let color = Bastion.colors.GREEN;
   let title = 'Channel Topic Set';
   if (topic.length < 2) {
     topic = ' ';
     title = 'Channel Topic Removed';
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
   }
 
   try {

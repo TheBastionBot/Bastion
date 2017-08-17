@@ -38,7 +38,7 @@ exports.run = async (Bastion, message, args) => {
     await message.guild.members.get(message.author.id).addRole(role);
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `${message.author}, you have been given **${role.name}** role.`
       }
     });

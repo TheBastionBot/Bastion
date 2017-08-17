@@ -36,7 +36,7 @@ exports.run = async (Bastion, message) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `You have given one reputation to ${user.tag}`
         }
       }).catch(e => {

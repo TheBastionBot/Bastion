@@ -44,7 +44,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Added Words to Filter List',
       description: args.join(', ')
     }

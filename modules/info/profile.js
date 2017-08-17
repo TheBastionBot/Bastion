@@ -20,7 +20,7 @@ exports.run = async (Bastion, message, args) => {
     if (args === message.author) {
       return message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `Your profile is now created, <@${args.id}>`
         }
       }).catch(e => {
@@ -43,7 +43,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       author: {
         name: args.tag,
         icon_url: getUserIcon(args)

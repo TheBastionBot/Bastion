@@ -9,7 +9,7 @@ const string = require('../../handlers/languageHandler');
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.grey,
+      color: Bastion.colors.BLUE,
       description: 'Hi! I\'m **Bastion**. \u{1F609}\n' +
                    'I\'m a BOT that is going to make your time in this Discord Server amazing!',
       footer: {

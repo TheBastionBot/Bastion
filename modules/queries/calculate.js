@@ -19,7 +19,7 @@ exports.run = (Bastion, message, args) => {
   try {
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Result:',
         description: mathjs.eval(args.join(' ')).toFixed(2)
       }

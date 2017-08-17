@@ -41,7 +41,7 @@ exports.run = async (Bastion, message, args) => {
     try {
       let pollStatus = await message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.BLUE,
           title: 'Poll started',
           description: `A poll has been started by ${message.author}.\n\n**${args[0]}**`,
           fields: answers,
@@ -67,7 +67,6 @@ exports.run = async (Bastion, message, args) => {
         }
         msg.channel.send({
           embed: {
-            color: Bastion.colors.dark_grey,
             description: `Thank you, ${msg.author}, for voting.`,
             footer: {
               text: `${votes.collected.size} votes in total.`
@@ -90,7 +89,7 @@ exports.run = async (Bastion, message, args) => {
         if (pollRes.length === 0) {
           return message.channel.send({
             embed: {
-              color: Bastion.colors.red,
+              color: Bastion.colors.RED,
               title: 'Poll Ended',
               description: 'Unfortunately, no votes were given.'
             }
@@ -122,7 +121,7 @@ exports.run = async (Bastion, message, args) => {
 
         message.channel.send({
           embed: {
-            color: Bastion.colors.blue,
+            color: Bastion.colors.BLUE,
             title: 'Poll Ended',
             description: `Poll results for **${args[0]}**`,
             fields: result

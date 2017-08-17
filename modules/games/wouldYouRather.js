@@ -10,7 +10,7 @@ const question = require('../../data/wouldYouRather.json');
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: question[Math.floor(Math.random() * question.length)]
     }
   }).catch(e => {

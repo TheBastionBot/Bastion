@@ -24,7 +24,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
     switch (event) {
       case 'channelCreate':
         event = `${parameters.channel.type.charAt(0).toUpperCase()}${parameters.channel.type.substr(1)} Channel Created`;
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         logData.push(
           {
             name: 'Channel Name',
@@ -41,7 +41,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'channelDelete':
         event = `${parameters.channel.type.charAt(0).toUpperCase()}${parameters.channel.type.substr(1)} Channel Deleted`;
-        color = Bastion.colors.red;
+        color = Bastion.colors.RED;
         logData.push(
           {
             name: 'Channel Name',
@@ -58,7 +58,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'channelUpdate':
         event = `${parameters.newChannel.type.charAt(0).toUpperCase()}${parameters.newChannel.type.substr(1)} Channel Renamed`;
-        color = Bastion.colors.orange;
+        color = Bastion.colors.ORANGE;
         logData.push(
           {
             name: 'Old Channel Name',
@@ -80,7 +80,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'guildBanAdd':
         event = 'User Banned';
-        color = Bastion.colors.red;
+        color = Bastion.colors.RED;
         logData.push(
           {
             name: 'User',
@@ -97,7 +97,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'guildBanRemove':
         event = 'User Unbanned';
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         logData.push(
           {
             name: 'User',
@@ -114,7 +114,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'guildMemberAdd':
         event = 'User Joined';
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         logData.push(
           {
             name: 'User',
@@ -131,7 +131,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'guildMemberRemove':
         event = 'User Left';
-        color = Bastion.colors.red;
+        color = Bastion.colors.RED;
         logData.push(
           {
             name: 'User',
@@ -148,7 +148,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'guildUpdate':
         event = 'Server Renamed';
-        color = Bastion.colors.orange;
+        color = Bastion.colors.ORANGE;
         logData.push(
           {
             name: 'Old Server Name',
@@ -170,7 +170,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'roleCreate':
         event = 'Role Created';
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         logData.push(
           {
             name: 'Role Name',
@@ -192,7 +192,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'roleDelete':
         event = 'Role Deleted';
-        color = Bastion.colors.red;
+        color = Bastion.colors.RED;
         logData.push(
           {
             name: 'Role Name',
@@ -214,7 +214,7 @@ module.exports = async (Bastion, guild, event, parameters) => {
 
       case 'roleUpdate':
         event = 'Role Updated';
-        color = Bastion.colors.orange;
+        color = Bastion.colors.ORANGE;
         logData.push(
           {
             name: 'Old Role Name',

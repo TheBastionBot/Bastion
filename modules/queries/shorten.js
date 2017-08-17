@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
     if (response.statusCode === 200) {
       message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           fields: [
             {
               name: 'Long URL',

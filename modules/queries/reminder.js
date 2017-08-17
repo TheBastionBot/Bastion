@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
 
     return message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: 'Your reminders have been cancelled.'
       }
     }).catch(e => {
@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
   remindUsers[message.author.id] = Bastion.setTimeout(() => {
     Bastion.users.get(message.author.id).send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Reminder',
         description: args.message.join(' '),
         timestamp: new Date()
@@ -67,7 +67,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Reminder Set',
       description: `I will remind you to *${args.message.join(' ')}* after *${moment.duration(duration).humanize()}*.`
     }

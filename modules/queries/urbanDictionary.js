@@ -20,11 +20,11 @@ exports.run = (Bastion, message, args) => {
     let color, description = '', data = [];
 
     if (err) {
-      color = Bastion.colors.red;
+      color = Bastion.colors.RED;
       description = 'Some error has occured while getting data from the server. Please try again later.';
     }
     else if (response.statusCode === 200) {
-      color = Bastion.colors.blue;
+      color = Bastion.colors.BLUE;
       try {
         body = JSON.parse(body).list[0];
 
@@ -44,12 +44,12 @@ exports.run = (Bastion, message, args) => {
         ];
       }
       catch (e) {
-        color = Bastion.colors.red;
+        color = Bastion.colors.RED;
         description = 'Some error has occured while parsing the received data. Please try again later.';
       }
     }
     else {
-      color = Bastion.colors.red;
+      color = Bastion.colors.RED;
       description = 'Some error has occured while getting data from the server.';
       data = [
         {

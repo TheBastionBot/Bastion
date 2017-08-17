@@ -64,7 +64,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Added self assignable roles',
       description: roleNames.join(', ')
     }

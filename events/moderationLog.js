@@ -52,7 +52,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
     switch (action) {
       case 'addrole':
         action = 'Added Role';
-        color = guild.client.colors.green;
+        color = guild.client.colors.GREEN;
         logData.unshift(
           {
             name: 'Role',
@@ -63,12 +63,12 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
       case 'ban':
         action = 'Banned User';
-        color = guild.client.colors.red;
+        color = guild.client.colors.RED;
         break;
 
       case 'clear':
         action = 'Cleared Messages';
-        color = guild.client.colors.red;
+        color = guild.client.colors.RED;
         logData.splice(0, 3,
           {
             name: 'Channel',
@@ -89,35 +89,35 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
       case 'deafen':
         action = 'Deafened User';
-        color = guild.client.colors.orange;
+        color = guild.client.colors.ORANGE;
         break;
 
       case 'kick':
         action = 'Kicked User';
-        color = guild.client.colors.red;
+        color = guild.client.colors.RED;
         break;
 
       case 'mute':
         action = 'Muted User';
-        color = guild.client.colors.orange;
+        color = guild.client.colors.ORANGE;
         break;
 
       /*
       case 'nickname':
         action = 'Updated User Nickname';
-        color = guild.client.colors.orange;
+        color = guild.client.colors.ORANGE;
         logData.push();
         break;
       */
 
       case 'removeallroles':
         action = 'Removed All Roles';
-        color = guild.client.colors.red;
+        color = guild.client.colors.RED;
         break;
 
       case 'removerole':
         action = 'Removed Role';
-        color = guild.client.colors.red;
+        color = guild.client.colors.RED;
         logData.unshift(
           {
             name: 'Role',
@@ -128,7 +128,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
       case 'report':
         action = 'Reported User';
-        color = guild.client.colors.orange;
+        color = guild.client.colors.ORANGE;
         logData.splice(logData.length - 2, 2,
           {
             name: 'Reporter',
@@ -145,12 +145,12 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
       case 'softban':
         action = 'Soft Banned User';
-        color = guild.client.colors.red;
+        color = guild.client.colors.RED;
         break;
 
       case 'textmute':
         action = 'Text Muted User';
-        color = guild.client.colors.orange;
+        color = guild.client.colors.ORANGE;
         logData.splice(logData.length - 2, 0,
           {
             name: 'Channel',
@@ -161,7 +161,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
       case 'textunmute':
         action = 'Text Unmuted User';
-        color = guild.client.colors.green;
+        color = guild.client.colors.GREEN;
         logData.splice(logData.length - 2, 0,
           {
             name: 'Channel',
@@ -172,17 +172,17 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
       case 'undeafen':
         action = 'Undeafen User';
-        color = guild.client.colors.green;
+        color = guild.client.colors.GREEN;
         break;
 
       case 'unmute':
         action = 'Unmuted User';
-        color = guild.client.colors.green;
+        color = guild.client.colors.GREEN;
         break;
 
       case 'warn':
         action = 'Warned User';
-        color = guild.client.colors.orange;
+        color = guild.client.colors.ORANGE;
         break;
 
       default:

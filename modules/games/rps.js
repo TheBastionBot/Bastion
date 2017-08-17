@@ -46,7 +46,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
     }
   }).catch(e => {

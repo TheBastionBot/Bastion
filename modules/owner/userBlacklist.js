@@ -45,7 +45,7 @@ exports.run = async (Bastion, message, args) => {
           Bastion.log.error(e);
         });
       }
-      color = Bastion.colors.red;
+      color = Bastion.colors.RED;
       title = 'Added to blacklisted users';
     }
     else if (/^(remove|rem|-)$/i.test(args[0])) {
@@ -55,7 +55,7 @@ exports.run = async (Bastion, message, args) => {
           Bastion.log.error(e);
         });
       }
-      color = Bastion.colors.green;
+      color = Bastion.colors.GREEN;
       title = 'Removed from blacklisted users';
     }
     else {

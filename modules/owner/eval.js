@@ -31,7 +31,7 @@ exports.run = async (Bastion, message, args) => {
 
     let output = await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         fields: [
           {
             name: ':inbox_tray:  INPUT',
@@ -50,7 +50,7 @@ exports.run = async (Bastion, message, args) => {
   catch(e) {
     let error = await message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         fields: [
           {
             name: ':no_entry:  ERROR',

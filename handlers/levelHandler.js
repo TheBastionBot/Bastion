@@ -31,7 +31,7 @@ module.exports = async message => {
 
         message.channel.send({
           embed: {
-            color: message.client.colors.blue,
+            color: message.client.colors.BLUE,
             title: 'Leveled up',
             description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
           }

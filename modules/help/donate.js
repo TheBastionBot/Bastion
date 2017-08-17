@@ -9,7 +9,7 @@ const string = require('../../handlers/languageHandler');
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: 3050327,
+      color: Bastion.colors.DARK_GREEN,
       title: 'Support Bastion Bot project',
       url: 'https://BastionBot.org/',
       description: 'To support and send donations for the Bastion Bot, ' +

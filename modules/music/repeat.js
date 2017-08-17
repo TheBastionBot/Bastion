@@ -17,12 +17,12 @@ exports.run = (Bastion, message) => {
 
   let color, repeatStat = '';
   if (message.guild.music.repeat) {
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     message.guild.music.repeat = false;
     repeatStat = 'Removed the current song from repeat queue.';
   }
   else {
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     message.guild.music.repeat = true;
     repeatStat = 'Added the current song to the repeat queue.';
   }

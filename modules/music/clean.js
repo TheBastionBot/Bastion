@@ -26,7 +26,7 @@ exports.run = (Bastion, message) => {
   message.guild.music.songs.splice(1, message.guild.music.songs.length - 1);
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       description: 'Cleaned up the queue.'
     }
   }).catch(e => {

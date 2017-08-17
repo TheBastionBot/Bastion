@@ -27,7 +27,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.yellow,
+      color: Bastion.colors.GOLD,
       title: 'Command Search',
       description: `Found ${commands.length} commands containing *${args}*.`,
       fields: [

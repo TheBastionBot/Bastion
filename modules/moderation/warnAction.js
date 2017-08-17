@@ -24,7 +24,7 @@ exports.run = async (Bastion, message, args) => {
 
   try {
     let guildSettings = await Bastion.db.get(`SELECT warnAction FROM guildSettings WHERE guildID=${message.guild.id}`);
-    let warnAction = '', color = Bastion.colors.green, description;
+    let warnAction = '', color = Bastion.colors.GREEN, description;
 
     if (args.kick) {
       warnAction = 'kick';
@@ -37,7 +37,7 @@ exports.run = async (Bastion, message, args) => {
     }
 
     if (guildSettings.warnAction === warnAction) {
-      color = Bastion.colors.red;
+      color = Bastion.colors.RED;
       description = `Warn action is already set to ${warnAction ? warnAction : 'none'}.`;
     }
     else {

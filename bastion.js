@@ -14,13 +14,10 @@ const BASTION = new Discord.Client({
   ]
 });
 
-/**
- * Initial configurations
- */
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
 BASTION.config = require('./settings/config.json');
-BASTION.colors = require('./settings/colors.json');
+BASTION.colors = Discord.Constants.Colors;
 
 let languages = [
   'english'

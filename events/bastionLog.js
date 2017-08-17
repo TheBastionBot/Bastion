@@ -50,12 +50,12 @@ module.exports = async (Bastion, event, guild) => {
     switch (event) {
       case 'guildCreate':
         event = 'Joined Server';
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         break;
 
       case 'guildDelete':
         event = 'Left Server';
-        color = Bastion.colors.red;
+        color = Bastion.colors.RED;
         break;
 
       default:

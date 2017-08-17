@@ -25,7 +25,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'User Reported',
       description: `You have reported **${user.tag}** to the moderators for **${reason}**. They will look into it.`
     }

@@ -49,7 +49,7 @@ exports.run = (Bastion, message, args) => {
 
         message.channel.send({
           embed: {
-            color: Bastion.colors.blue,
+            color: Bastion.colors.BLUE,
             title: movie.title,
             url: `https://themoviedb.org/movie/${movie.id}`,
             description: movie.overview,

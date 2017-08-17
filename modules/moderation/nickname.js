@@ -37,11 +37,11 @@ exports.run = async (Bastion, message, args) => {
   let color;
   let nickStat = '';
   if (args.length < 1) {
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     nickStat = `${user}'s nickname removed.`;
   }
   else {
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     nickStat = `${user}'s nickname changed.`;
   }
 

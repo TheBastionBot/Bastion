@@ -89,7 +89,7 @@ exports.run = async (Bastion, message, args) => {
           delete message.guild.warns[user.id];
           message.channel.send({
             embed: {
-              color: Bastion.colors.red,
+              color: Bastion.colors.RED,
               title: action,
               fields: [
                 {
@@ -117,7 +117,7 @@ exports.run = async (Bastion, message, args) => {
 
           member.send({
             embed: {
-              color: Bastion.colors.red,
+              color: Bastion.colors.RED,
               title: `${action} from ${message.guild.name} Server`,
               fields: [
                 {
@@ -143,7 +143,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.orange,
+      color: Bastion.colors.ORANGE,
       title: 'Warning',
       description: `${user} have been warned by ${message.author} for **${reason}**.`
     }
@@ -153,7 +153,7 @@ exports.run = async (Bastion, message, args) => {
 
   user.send({
     embed: {
-      color: Bastion.colors.orange,
+      color: Bastion.colors.ORANGE,
       title: 'Warning',
       description: 'You have been warned!',
       fields: [

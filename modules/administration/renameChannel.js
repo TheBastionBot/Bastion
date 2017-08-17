@@ -64,7 +64,7 @@ exports.run = async (Bastion, message, args) => {
     await channel.setName(args.new);
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.ORANGE,
         title: `${channel.type.charAt(0).toUpperCase() + channel.type.substr(1)} Channel Renamed`,
         fields: [
           {

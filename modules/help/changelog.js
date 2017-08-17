@@ -30,7 +30,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
+      color: Bastion.colors.BLUE,
       title: 'Changelog',
       description: `Bastion Bot v${Bastion.package.version}`,
       fields: changes,

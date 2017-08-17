@@ -102,7 +102,6 @@ exports.run = async (Bastion, message, args) => {
       }
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
           description: 'Processing playlist...'
         }
       }).catch(e => {
@@ -129,7 +128,6 @@ exports.run = async (Bastion, message, args) => {
           song = info.shift().title;
           message.channel.send({
             embed: {
-              color: Bastion.colors.green,
               description: `Adding ${info.length} songs to the queue...`
             }
           }).catch(e => {
@@ -170,7 +168,6 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
           description: `Adding ${playlist.length + 1} favourite songs to the queue...`
         }
       }).catch(e => {
@@ -203,7 +200,7 @@ exports.run = async (Bastion, message, args) => {
       if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
         return message.channel.send({
           embed: {
-            color: Bastion.colors.red,
+            color: Bastion.colors.RED,
             description: string('notFound', 'errorMessage', 'result')
           }
         }).catch(e => {
@@ -224,7 +221,7 @@ exports.run = async (Bastion, message, args) => {
       });
       textChannel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           title: 'Added to the queue',
           description: info.title,
           thumbnail: {
@@ -287,7 +284,7 @@ function startStreamDispatcher(guild, connection) {
   if (guild.music.songs[0] === undefined) {
     return guild.music.textChannel.send({
       embed: {
-        color: guild.client.colors.red,
+        color: guild.client.colors.RED,
         description: 'Exiting voice channel.'
       }
     }).then(() => {
@@ -303,7 +300,7 @@ function startStreamDispatcher(guild, connection) {
 
   guild.music.textChannel.send({
     embed: {
-      color: guild.client.colors.blue,
+      color: guild.client.colors.BLUE,
       title: 'Playing',
       description: guild.music.songs[0].title,
       thumbnail: {

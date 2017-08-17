@@ -37,7 +37,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Added Domains to Whitelist',
       description: args.domains.join('\n')
     }

@@ -33,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
   try {
     let secretMessage = await message.channel.send({
       embed: {
-        color: Bastion.colors.grey,
+        color: Bastion.colors.DEFAULT,
         description: args.content.join(' ')
       }
     });

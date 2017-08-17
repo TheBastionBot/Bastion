@@ -38,7 +38,7 @@ exports.run = async (Bastion, message, args) => {
     await message.guild.members.get(message.author.id).removeRole(role);
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.RED,
         description: `${message.author}, you have been removed from **${role.name}** role.`
       }
     });

@@ -22,7 +22,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: anime.titles.english,
       url: `https://kitsu.io/anime/${anime.slug}`,
       description: anime.synopsis,

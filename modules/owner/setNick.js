@@ -21,7 +21,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
         }
       }).catch(e => {
@@ -33,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s nick has been reset on this guild.`
         }
       }).catch(e => {

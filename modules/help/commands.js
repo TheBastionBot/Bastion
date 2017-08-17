@@ -25,7 +25,7 @@ exports.run = async (Bastion, message) => {
 
   await message.author.send({
     embed: {
-      color: Bastion.colors.yellow,
+      color: Bastion.colors.GOLD,
       title: 'List of Commands',
       description: 'To get a complete list of all the commands with details click [here](https://BastionBot.org/commands).',
       fields: fields,
@@ -39,7 +39,6 @@ exports.run = async (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
       description: `${message.author} Check your DM from me, I've sent you the list of commands.`
     }
   }).catch(e => {

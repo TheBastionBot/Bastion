@@ -35,7 +35,7 @@ exports.run = async (Bastion, message, args) => {
      */
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `You've awarded **${args[0]}** Bastion Currencies to <@${user.id}>.`
       }
     }).catch(e => {
@@ -47,7 +47,7 @@ exports.run = async (Bastion, message, args) => {
      */
     user.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
       }
     }).catch(e => {
@@ -92,7 +92,7 @@ exports.run = async (Bastion, message, args) => {
       */
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `You have given **${args[0]}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
@@ -104,7 +104,7 @@ exports.run = async (Bastion, message, args) => {
       */
       user.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {
@@ -116,7 +116,7 @@ exports.run = async (Bastion, message, args) => {
       */
       message.author.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.RED,
           description: `Your account has been credited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {

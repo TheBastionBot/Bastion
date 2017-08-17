@@ -21,7 +21,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.yellow,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
         }
       }).catch(e => {
@@ -33,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
         }
       }).catch(e => {

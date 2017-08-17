@@ -24,14 +24,14 @@ exports.run = async (Bastion, message) => {
     await Bastion.db.run(`UPDATE guildSettings SET greetPrivate='false' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     greetPrivateStats = 'Sending Greeting Message as Direct Messages are now disabled.';
   }
   else {
     await Bastion.db.run(`UPDATE guildSettings SET greetPrivate='true' WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     greetPrivateStats = 'Sending Greeting Message as Direct Messages are now enabled.';
   }
 

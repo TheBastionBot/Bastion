@@ -25,7 +25,7 @@ module.exports = async message => {
 
     owner.send({
       embed: {
-        color: message.client.colors.red,
+        color: message.client.colors.RED,
         title: 'ATTENTION!',
         description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
         fields: [

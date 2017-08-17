@@ -62,7 +62,7 @@ function deleteInvite(message) {
 
   message.channel.send({
     embed: {
-      color: message.client.colors.orange,
+      color: message.client.colors.ORANGE,
       description: `${message.author} you are not allowed to post server invite links here.`
     }
   }).then(msg => {

@@ -7,7 +7,7 @@
 module.exports = (message, command) => {
   message.channel.send({
     embed: {
-      color: message.client.colors.red,
+      color: message.client.colors.RED,
       title: 'Invalid Use!',
       description: `See the usage below to know how to use \`${command.name}\` command.`,
       fields: [

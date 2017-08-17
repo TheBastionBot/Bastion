@@ -39,7 +39,7 @@ exports.run = async (Bastion, message, args) => {
     try {
       let giveawayMessage = await message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: 'GIVEAWAY! 🎉',
           description: `Giveaway event started. React to this message with ${reaction} to get **${args.amount}** Bastion Currencies.`,
           footer: {
@@ -57,7 +57,7 @@ exports.run = async (Bastion, message, args) => {
 
         giveawayMessage.edit('', {
           embed: {
-            color: Bastion.colors.blue,
+            color: Bastion.colors.BLUE,
             title: 'Giveaway event ended',
             description: `Giveaway event has been ended. Thank you for participating. All the participants have been rewarded with **${args.amount}** Bastion Currencies.`
           }
@@ -83,7 +83,7 @@ exports.run = async (Bastion, message, args) => {
             Bastion.emit('userDebit', user, args.amount);
             user.send({
               embed: {
-                color: Bastion.colors.green,
+                color: Bastion.colors.GREEN,
                 description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
               }
             }).catch(e => {

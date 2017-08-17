@@ -18,7 +18,7 @@ exports.run = async (Bastion, message, args) => {
   try {
     let guildSettings = await Bastion.db.get(`SELECT ignoredChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
     let ignoredChannels = guildSettings.ignoredChannels, isIgnored = false,
-      description = null, color = Bastion.colors.red;
+      description = null, color = Bastion.colors.RED;
 
     if (ignoredChannels) {
       ignoredChannels = ignoredChannels.split(' ');
@@ -33,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
     if (isIgnored) {
       if (args.remove) {
         ignoredChannels.splice(ignoredChannels.indexOf(message.channel.id), 1);
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         description = 'I\'ll stop ignoring commands in this channel, from now.';
       }
       else {
@@ -46,7 +46,7 @@ exports.run = async (Bastion, message, args) => {
       }
       else {
         ignoredChannels.push(message.channel.id);
-        color = Bastion.colors.green;
+        color = Bastion.colors.GREEN;
         description = 'I\'ll ignore commands in this channel, from now.';
       }
     }

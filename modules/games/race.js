@@ -32,7 +32,7 @@ exports.run = async (Bastion, message) => {
 
   let raceStatusMessage = await message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Race',
       fields: [
         {
@@ -74,7 +74,7 @@ exports.run = async (Bastion, message) => {
       }
       raceStatusMessage.edit({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: result,
           fields: [
             {

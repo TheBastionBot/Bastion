@@ -42,7 +42,7 @@ exports.run = async (Bastion, message, args) => {
 
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         title: 'Role Created',
         fields: [
           {

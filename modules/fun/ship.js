@@ -23,7 +23,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Shipped Users',
       description: `${users.join(' + ')} = **${shippedName}**`
     }
