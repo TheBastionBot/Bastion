@@ -5,6 +5,7 @@
     "Fixed trigger handler warnings when no trigger was present",
     "Fixed potential issue with `queue` command",
     "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
+    "Fixed playing/streaming status (was broken due to Discord API changes)",
     "Users can now have (virtually) infinity amount of Bastion Currencies, without causing issues in the database",
     "Improvements to `warn` and `listWarns` command",
     "Removed the default kick action for warnings",

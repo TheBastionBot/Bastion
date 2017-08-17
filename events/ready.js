@@ -8,8 +8,13 @@ const COLOR = require('chalk');
 
 module.exports = async Bastion => {
   try {
-    Bastion.user.setStatus(Bastion.config.status);
-    Bastion.user.setGame(Bastion.config.game);
+    Bastion.user.setPresence({
+      status: Bastion.config.status,
+      game: {
+        name: Bastion.config.game,
+        type: 0
+      }
+    });
 
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
       '(guildID TEXT NOT NULL UNIQUE,' +
