@@ -24,7 +24,13 @@ exports.run = async (Bastion, message, args) => {
   }
 
   try {
-    await Bastion.user.setGame(args.slice(1).join(' '), args[0]);
+    await Bastion.user.setPresence({
+      game: {
+        name: args.slice(1).join(' '),
+        type: 1,
+        url: args[0]
+      }
+    });
 
     message.channel.send({
       embed: {

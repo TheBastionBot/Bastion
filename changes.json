@@ -14,6 +14,7 @@
     "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft`",
     "Updated `profile` command, it now shows reps",
     "Updated `setGame` command as per Discord API changes",
+    "Updated `setStream` command as per Discord API changes",
     "Updated message embed colors",
     "Minor fixes & improvements"
   ],
