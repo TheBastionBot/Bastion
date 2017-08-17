@@ -33,8 +33,6 @@ process.env.LANG = language;
 
 BASTION.log = require('./handlers/logHandler');
 BASTION.functions = require('./handlers/functionHandler');
-BASTION.commands = new Discord.Collection();
-BASTION.aliases = new Discord.Collection();
 BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite').then(db => {
   db.run('PRAGMA foreign_keys = ON');
@@ -52,10 +50,11 @@ require('./utils/Number.prototype');
  * Event handler
  */
 require('./handlers/eventHandler')(BASTION);
-/**
- * Module handler
- */
-require('./handlers/moduleHandler')(BASTION);
+
+const Modules = require('./handlers/moduleHandler');
+BASTION.commands = Modules.commands;
+BASTION.aliases = Modules.aliases;
+
 /**
  * Scheduled Commands handler
  */
