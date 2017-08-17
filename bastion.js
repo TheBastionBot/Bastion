@@ -31,6 +31,10 @@ if (languages.includes(BASTION.config.language)) {
 }
 process.env.LANG = language;
 
+// require('./utils/Array.prototype');
+require('./utils/String.prototype');
+require('./utils/Number.prototype');
+
 BASTION.log = require('./handlers/logHandler');
 BASTION.functions = require('./handlers/functionHandler');
 BASTION.db = require('sqlite');
@@ -38,40 +42,20 @@ BASTION.db.open('./data/Bastion.sqlite').then(db => {
   db.run('PRAGMA foreign_keys = ON');
 });
 
-/**
- * Load base class prototypes
- */
-// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
-// require('./utils/Array.prototype');
-require('./utils/String.prototype');
-require('./utils/Number.prototype');
-
-/**
- * Event handler
- */
 require('./handlers/eventHandler')(BASTION);
 
 const Modules = require('./handlers/moduleHandler');
 BASTION.commands = Modules.commands;
 BASTION.aliases = Modules.aliases;
 
-/**
- * Scheduled Commands handler
- */
 require('./handlers/scheduledCommandHandler')(BASTION);
 
-/**
- * Log Bastion in as a Discord client.
- */
 BASTION.login(BASTION.credentials.token).catch(e => {
   BASTION.log.error(e.toString());
   process.exit(1);
 });
 
-/**
- * Handle unhandled rejections
- */
 process.on('unhandledRejection', rejection => {
   // eslint-disable-next-line no-console
-  console.warn('\n[unhandledRejection]\n\n', rejection, '\n\n[/unhandledRejection]\n');
+  console.warn(`\n[unhandledRejection]\n${rejection}\n[/unhandledRejection]\n`);
 });
