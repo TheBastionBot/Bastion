@@ -59,29 +59,33 @@ exports.run = async (Bastion, message, args) => {
   args.cronExp = args.cronExp.join(' ');
   args.arguments = args.arguments.join(' ');
 
-  let scheduledStatus = await message.channel.send({
-    embed: {
-      color: Bastion.colors.BLUE,
-      title: 'Scheduled Command',
-      description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
-      footer: {
-        text: 'Do not delete this message, as it is required by me run the scheduled command.'
+  try {
+    let scheduledStatus = await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Scheduled Command',
+        description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
+        footer: {
+          text: 'Do not delete this message, as it is required by me run the scheduled command.'
+        }
       }
-    }
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
-    [
-      args.cronExp,
-      message.channel.id,
-      scheduledStatus.id,
-      args.command,
-      args.arguments
-    ]).catch(e => {
-      Bastion.log.error(e);
     });
+
+    await Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
+      [
+        args.cronExp,
+        message.channel.id,
+        scheduledStatus.id,
+        args.command,
+        args.arguments
+      ]);
+
+    delete require.cache[require.resolve('../../handlers/scheduledCommandHandler')];
+    require('../../handlers/scheduledCommandHandler')(Bastion);
+  }
+  catch (e) {
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
