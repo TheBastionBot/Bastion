@@ -1,11 +1,14 @@
 {
   "date": "August 18, 2017",
-  "updated": [
+  "fixed": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
     "Fixed trigger handler warnings when no trigger was present",
     "Fixed potential issue with `queue` command",
     "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
     "Fixed playing/streaming status (was broken due to Discord API changes)",
+    "Minor fixes"
+  ],
+  "improved": [
     "Users can now have (virtually) infinity amount of Bastion Currencies, without causing issues in the database",
     "Improved `scheduleCommand`, not required to restart Bastion after scheduling a command",
     "Improvements to `warn` and `listWarns` command",
@@ -19,8 +22,9 @@
     "Updated `setGame` command as per Discord API changes",
     "Updated `setStream` command as per Discord API changes",
     "Updated `eval` output timeout to 10 sec",
+    "Updated `changelog` command",
     "Updated message embed colors",
-    "Minor fixes & improvements"
+    "Minor improvements"
   ],
   "added": [
     "Added `reputation` command",
