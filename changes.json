@@ -1,5 +1,5 @@
 {
-  "date": "August 17, 2017",
+  "date": "August 18, 2017",
   "updated": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
     "Fixed trigger handler warnings when no trigger was present",
@@ -16,6 +16,7 @@
     "Updated `profile` command, it now shows reps",
     "Updated `setGame` command as per Discord API changes",
     "Updated `setStream` command as per Discord API changes",
+    "Updated `eval` output timeout to 10 sec",
     "Updated message embed colors",
     "Minor fixes & improvements"
   ],

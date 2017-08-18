@@ -45,7 +45,7 @@ exports.run = async (Bastion, message, args) => {
       }
     });
 
-    output.delete(3000).catch(() => {});
+    output.delete(10000).catch(() => {});
   }
   catch(e) {
     let error = await message.channel.send({
@@ -62,7 +62,7 @@ exports.run = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
-    error.delete(3000).catch(() => {});
+    error.delete(10000).catch(() => {});
   }
 };
 
