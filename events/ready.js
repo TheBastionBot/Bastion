@@ -36,6 +36,7 @@ module.exports = async Bastion => {
       'whitelistDomains TEXT NOT NULL DEFAULT \'[]\',' +
       'filterWord TEXT NOT NULL DEFAULT \'false\',' +
       'filteredWords TEXT NOT NULL DEFAULT \'[]\',' +
+      'announcementChannel TEXT,' +
       'chat TEXT NOT NULL DEFAULT \'false\',' +
       'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
       'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
