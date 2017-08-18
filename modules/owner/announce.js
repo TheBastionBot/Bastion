@@ -6,7 +6,7 @@
 
 const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
      * User has missing permissions.
@@ -23,8 +23,11 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  for (let i = 0; i < Bastion.guilds.size; i++) {
-    Bastion.guilds.map(g => g.defaultChannel)[i].send({
+  let guildSettings = await Bastion.db.all('SELECT announcementChannel FROM guildSettings');
+  let announcementChannels = guildSettings.map(guild => guild.announcementChannel).filter(channel => channel);
+
+  for (let channel of announcementChannels) {
+    await Bastion.channels.get(channel).send({
       embed: {
         color: Bastion.colors.BLUE,
         description: args.join(' ')
