@@ -11,7 +11,7 @@ if ! [ -z "$SUDO_USER" ]; then
   exit 1
 fi
 
-if command -v screen >/dev/null 2>&1; then
+if ! command -v screen >/dev/null 2>&1; then
   echo -e "${CYAN}[Bastion]: ${ORANGE}You need to install 'screen' if you want to use this script!${NC}"
   exit 1
 fi
