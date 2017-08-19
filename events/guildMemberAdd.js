@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+const greetMessages = require('../data/greetingMessages.json');
+
 module.exports = async member => {
   member.client.emit('serverLog', member.client, member.guild, 'guildMemberAdd', {
     member: member
@@ -14,9 +16,12 @@ module.exports = async member => {
     if (!guild) return;
 
     if (guild.greet) {
-      let greetMessage = 'Welcome to $server! Enjoy your time here.';
+      let greetMessage;
       if (guild.greetMessage) {
         greetMessage = await member.client.decodeString(guild.greetMessage);
+      }
+      else {
+        greetMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
       }
       greetMessage = greetMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetMessage = greetMessage.replace(/\$server/ig, member.guild.name);
