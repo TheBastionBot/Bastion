@@ -28,19 +28,24 @@ exports.run = async (Bastion, message, args) => {
     if (!guild) return;
 
     let role = message.guild.roles.find('name', args.join(' '));
-    if (role === null) return;
+    if (!role) return;
 
-    let selfAssignableRoles = JSON.parse(guild.selfAssignableRoles);
+    let selfAssignableRoles = [];
+    if (guild.selfAssignableRoles) {
+      selfAssignableRoles = guild.selfAssignableRoles.split(' ');
+    }
     if (!selfAssignableRoles.includes(role.id)) return;
 
     if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
     await message.guild.members.get(message.author.id).addRole(role);
-    await message.channel.send({
+    message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
         description: `${message.author}, you have been given **${role.name}** role.`
       }
+    }).catch(e => {
+      Bastion.log.error(e);
     });
   }
   catch (e) {

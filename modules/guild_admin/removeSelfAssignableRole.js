@@ -25,19 +25,17 @@ exports.run = async (Bastion, message, args) => {
   }
   index -= 1;
 
-  let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  if (!guildSettings || guildSettings.selfAssignableRoles === '[]') {
-    /**
-    * Error condition is encountered.
-    * @fires error
-    */
-    Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'self-assignable roles'), message.channel);
-  }
-  else {
-    let roles = JSON.parse(guildSettings.selfAssignableRoles);
+    if (!guildSettings || !guildSettings.selfAssignableRoles) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'self-assignable roles'), message.channel);
+    }
+    let roles = guildSettings.selfAssignableRoles.split(' ');
 
     if (index >= roles.length) {
       /**
@@ -50,9 +48,7 @@ exports.run = async (Bastion, message, args) => {
     let deletedRoleID = roles[parseInt(args[0]) - 1];
     roles.splice(parseInt(args[0]) - 1, 1);
 
-    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
+    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {
@@ -62,6 +58,9 @@ exports.run = async (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
