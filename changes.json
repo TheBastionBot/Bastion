@@ -1,11 +1,12 @@
 {
-  "date": "August 18, 2017",
+  "date": "August 19, 2017",
   "fixed": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
     "Fixed trigger handler warnings when no trigger was present",
     "Fixed potential issue with `queue` command",
     "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
     "Fixed playing/streaming status (was broken due to Discord API changes)",
+    "Fixed word filter",
     "Minor fixes"
   ],
   "improved": [
