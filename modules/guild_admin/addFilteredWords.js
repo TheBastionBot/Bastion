@@ -30,27 +30,31 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let filteredWords = JSON.parse(guildSettings.filteredWords);
-  filteredWords = filteredWords.concat(args);
-  filteredWords = [ ...new Set(filteredWords) ];
-
-  await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${JSON.stringify(filteredWords)}' WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.GREEN,
-      title: 'Added Words to Filter List',
-      description: args.join(', ')
+    let filteredWords = [];
+    if (guildSettings.filteredWords) {
+      filteredWords = guildSettings.filteredWords.split(' ');
     }
-  }).catch(e => {
+    filteredWords = filteredWords.concat(args);
+    filteredWords = [ ...new Set(filteredWords) ];
+
+    await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${filteredWords.join(' ')}' WHERE guildID=${message.guild.id}`);
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Added Words to Filter List',
+        description: args.join(', ')
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
