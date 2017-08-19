@@ -24,6 +24,7 @@
     "Updated `setStream` command as per Discord API changes",
     "Updated `eval` output timeout to 10 sec",
     "Updated `changelog` command",
+    "A random greeting message is sent if no greeting message is specified",
     "Updated message embed colors",
     "Minor improvements"
   ],
