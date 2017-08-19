@@ -15,7 +15,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'auto-assignable role'), message.channel);
+      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'auto-assignable roles'), message.channel);
     }
 
     let roles = guildSettings.autoAssignableRoles.split(' ');
