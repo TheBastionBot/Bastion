@@ -40,7 +40,7 @@ module.exports = async Bastion => {
       'chat INTEGER NOT NULL DEFAULT 0,' +
       'levelUpMessage INTEGER NOT NULL DEFAULT 0,' +
       'selfAssignableRoles TEXT,' +
-      'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
+      'autoAssignableRoles TEXT,' +
       'streamerRole TEXT,' +
       'warnAction TEXT,' +
       'ignoredChannels TEXT,' +

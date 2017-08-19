@@ -66,9 +66,12 @@ module.exports = async member => {
       });
     }
 
-    let autoAssignableRoles = JSON.parse(guild.autoAssignableRoles);
+    let autoAssignableRoles = [];
+    if (guild.autoAssignableRoles) {
+      autoAssignableRoles = guild.autoAssignableRoles.split(' ');
+    }
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
-    if (autoAssignableRoles.length > 0) {
+    if (autoAssignableRoles.length) {
       member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {
         member.client.log.error(e);
       });
