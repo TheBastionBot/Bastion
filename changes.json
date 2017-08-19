@@ -7,6 +7,7 @@
     "Fixed issue while trying to play a youtube playlist (Bastion used to queue up the default playlist)",
     "Fixed playing/streaming status (was broken due to Discord API changes)",
     "Fixed word filter",
+    "Fixed showing level up messages even when it was disabled",
     "Minor fixes"
   ],
   "improved": [
@@ -20,11 +21,10 @@
     "Updated `announce` command - sends message to the announcement channel",
     "Updated `callOfDuty`, `CSGO`, `teamFortress2` and `minecraft` commands",
     "Updated `profile` command, it now shows reps",
-    "Updated `setGame` command as per Discord API changes",
-    "Updated `setStream` command as per Discord API changes",
-    "Updated `eval` output timeout to 10 sec",
-    "Updated `changelog` command",
+    "Updated `setGame` and `setStream` command as per Discord API changes",
     "A random greeting message is sent if no greeting message is specified",
+    "Updated `eval` output timeout to 10 sec",
+    "Improved `changelog` command",
     "Updated message embed colors",
     "Minor improvements"
   ],
