@@ -41,6 +41,7 @@ module.exports = async Bastion => {
       'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
       'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
       'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
+      'streamerRole TEXT,' +
       'warnAction TEXT,' +
       'ignoredChannels TEXT,' +
       'ignoredRoles TEXT,' +
