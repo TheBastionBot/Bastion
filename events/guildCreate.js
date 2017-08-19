@@ -27,7 +27,7 @@ module.exports = guild => {
     'filteredWords TEXT,' +
     'announcementChannel TEXT,' +
     'chat TEXT NOT NULL DEFAULT \'false\',' +
-    'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
+    'levelUpMessage INTEGER NOT NULL DEFAULT 0,' +
     'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
     'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
     'streamerRole TEXT,' +
