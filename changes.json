@@ -1,5 +1,5 @@
 {
-  "date": "August 19, 2017",
+  "date": "August 20, 2017",
   "fixed": [
     "Handled exceptions for empty arguments in `anime` & `manga` command",
     "Fixed trigger handler warnings when no trigger was present",
@@ -34,7 +34,8 @@
     "Added `warnAction` command",
     "Added `ignoreRole` command",
     "Added `ignoreChannel` command",
-    "Added `announcementChannel` command"
+    "Added `announcementChannel` command",
+    "Added `slowMode` command"
   ],
   "removed": []
 }
