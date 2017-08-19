@@ -23,8 +23,8 @@ module.exports = guild => {
     'filterInvite TEXT NOT NULL DEFAULT \'false\',' +
     'filterLink TEXT NOT NULL DEFAULT \'false\',' +
     'whitelistDomains TEXT NOT NULL DEFAULT \'[]\',' +
-    'filterWord TEXT NOT NULL DEFAULT \'false\',' +
-    'filteredWords TEXT NOT NULL DEFAULT \'[]\',' +
+    'filterWord INTEGER DEFAULT 0,' +
+    'filteredWords TEXT,' +
     'announcementChannel TEXT,' +
     'chat TEXT NOT NULL DEFAULT \'false\',' +
     'levelUpMessage TEXT NOT NULL DEFAULT \'false\',' +
