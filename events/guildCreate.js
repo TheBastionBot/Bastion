@@ -11,7 +11,7 @@ module.exports = guild => {
     'greet TEXT UNIQUE,' +
     'greetMessage BLOB,' +
     'greetTimeout INTEGER NOT NULL DEFAULT 30,' +
-    'greetPrivate TEXT NOT NULL DEFAULT \'false\',' +
+    'greetPrivate INTEGER NOT NULL DEFAULT 0,' +
     'greetPrivateMessage BLOB,' +
     'farewell TEXT UNIQUE,' +
     'farewellMessage BLOB,' +

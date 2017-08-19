@@ -45,7 +45,7 @@ module.exports = async member => {
       });
     }
 
-    if (guild.greetPrivate === 'true') {
+    if (guild.greetPrivate) {
       let greetPrivateMessage = 'Welcome to $server! Enjoy your time here.';
       if (guild.greetPrivateMessage) {
         greetPrivateMessage = await member.client.decodeString(guild.greetPrivateMessage);
