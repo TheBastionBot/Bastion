@@ -20,7 +20,7 @@ exports.run = async (Bastion, message) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         description: 'Deleted all the triggers and responses.'
       }
     }).catch(e => {

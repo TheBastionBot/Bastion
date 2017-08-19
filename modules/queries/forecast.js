@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Weather Forecast',
         description: result[0].location.name,
         fields: fields,

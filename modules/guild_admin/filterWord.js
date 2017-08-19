@@ -22,34 +22,33 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT filterWord FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT filterWord FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let color, filterWordStats;
-  if (guildSettings.filterWord === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET filterWord='true' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    filterWordStats = 'Enabled word filter in this server.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET filterWord='false' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    filterWordStats = 'Disabled word filter in this server.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: filterWordStats
+    let color, filterWordStats;
+    if (guildSettings.filterWord) {
+      await Bastion.db.run(`UPDATE guildSettings SET filterWord=0 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      filterWordStats = 'Disabled word filter in this server.';
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET filterWord=1 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      filterWordStats = 'Enabled word filter in this server.';
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: filterWordStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

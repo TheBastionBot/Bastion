@@ -9,10 +9,16 @@ const CHANGES = require('../../changes.json');
 
 exports.run = (Bastion, message) => {
   let changes = [];
-  if (CHANGES.updated.length !== 0) {
+  if (CHANGES.fixed.length !== 0) {
     changes.push({
-      name: 'Patched/Updated:',
-      value: `- ${CHANGES.updated.join('\n- ')}`
+      name: 'Fixed:',
+      value: `- ${CHANGES.fixed.join('\n- ')}`
+    });
+  }
+  if (CHANGES.improved.length !== 0) {
+    changes.push({
+      name: 'Improved:',
+      value: `- ${CHANGES.improved.join('\n- ')}`
     });
   }
   if (CHANGES.added.length !== 0) {
@@ -30,7 +36,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
+      color: Bastion.colors.BLUE,
       title: 'Changelog',
       description: `Bastion Bot v${Bastion.package.version}`,
       fields: changes,

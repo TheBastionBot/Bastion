@@ -18,10 +18,9 @@ exports.run = (Bastion, message, args) => {
   args = args.split('/');
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'In my opinion',
       description: args[Math.floor(Math.random() * args.length)]
-      // description: args.split('/').random()
     }
   }).catch(e => {
     Bastion.log.error(e);

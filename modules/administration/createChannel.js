@@ -52,7 +52,7 @@ exports.run = async (Bastion, message, args) => {
 
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         title: `${channelType.charAt(0).toUpperCase() + channelType.substr(1)} Channel Created`,
         fields: [
           {

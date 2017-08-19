@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: args.join(' '),
       description: outcomes[Math.floor(Math.random() * outcomes.length)],
       footer: {

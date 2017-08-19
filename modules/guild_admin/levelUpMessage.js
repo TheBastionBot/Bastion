@@ -15,34 +15,33 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let color, levelUpMessageStats;
-  if (guildSettings.levelUpMessage === 'true') {
-    await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='false' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage='true' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    levelUpMessageStats = 'I will now send messages when someone levels up.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: levelUpMessageStats
+    let color, levelUpMessageStats;
+    if (guildSettings.levelUpMessage) {
+      await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage=0 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage=1 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      levelUpMessageStats = 'I will now send messages when someone levels up.';
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: levelUpMessageStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

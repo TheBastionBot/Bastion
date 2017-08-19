@@ -14,20 +14,24 @@ module.exports = async message => {
     let profile = await message.client.db.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`);
 
     if (!profile) {
-      message.client.db.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]);
+      await message.client.db.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]);
     }
     else {
+      profile.xp = parseInt(profile.xp);
+      profile.level = parseInt(profile.level);
+      profile.bastionCurrencies = parseInt(profile.bastionCurrencies);
+
       let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
 
       if (currentLevel > profile.level) {
-        message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`);
+        await message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`);
 
-        let levelUpMessage = await message.client.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
-        if (levelUpMessage === 'false') return;
+        let guildSettings = await message.client.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
+        if (!guildSettings.levelUpMessage) return;
 
         message.channel.send({
           embed: {
-            color: message.client.colors.blue,
+            color: message.client.colors.BLUE,
             title: 'Leveled up',
             description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
           }
@@ -36,7 +40,7 @@ module.exports = async message => {
         });
       }
       else {
-        message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`);
+        await message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`);
       }
     }
   }

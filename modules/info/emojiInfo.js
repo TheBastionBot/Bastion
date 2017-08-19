@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   args = message.guild.emojis.find('name', args);
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Emoji info',
       fields: [
         {

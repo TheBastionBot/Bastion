@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     if (playlist && playlist.length !== 0) {
       message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: title,
           description: playlist.join('\n')
         }
@@ -57,7 +57,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         title: 'Added to playlist',
         fields: [
           {

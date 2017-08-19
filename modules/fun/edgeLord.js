@@ -9,7 +9,7 @@ const string = require('../../handlers/languageHandler');
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: 'What the heck did you just hecking say about me,' +
                    'you little bitch? I\'ll have you know I graduated top ' +
                    'of my class of Shadow School, and I\'m a certified ' +

@@ -17,7 +17,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Reversed Text:',
       description: args.join(' ').split('').reverse().join('')
     }

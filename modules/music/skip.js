@@ -15,14 +15,14 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
   }
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRoleID)) {
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
     if (!message.guild.music.skipVotes.includes(message.author.id)) {
       message.guild.music.skipVotes.push(message.author.id);
     }
     if (message.guild.music.skipVotes.length >= parseInt((message.guild.voiceConnection.channel/* voiceChannel */.members.size - 1) / 2)) {
       message.guild.music.textChannel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: 'Skipping current song.'
         }
       }).then(() => {
@@ -34,7 +34,6 @@ exports.run = (Bastion, message) => {
     else {
       message.guild.music.textChannel.send({
         embed: {
-          color: Bastion.colors.dark_grey,
           description: `${parseInt((message.guild.voiceConnection.channel/* voiceChannel */.members.size - 1) / 2) - message.guild.music.skipVotes.length} votes required to skip the current song.`
         }
       }).catch(e => {
@@ -45,7 +44,7 @@ exports.run = (Bastion, message) => {
   else {
     message.guild.music.textChannel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: 'Skipping current song.'
       }
     }).then(() => {

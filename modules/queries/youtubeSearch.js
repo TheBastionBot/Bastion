@@ -37,7 +37,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         author: {
           name: info.uploader,
           url: info.uploader_url

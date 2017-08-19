@@ -18,7 +18,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Pirate Speak:',
       description: translate(args.join(' '))
     }

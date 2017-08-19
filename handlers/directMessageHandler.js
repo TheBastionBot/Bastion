@@ -19,7 +19,7 @@ module.exports = message => {
     if (command === 'help' || command === 'h') {
       return message.channel.send({
         embed: {
-          color: message.client.colors.blue,
+          color: message.client.colors.BLUE,
           title: 'Bastion: Discord Bot',
           url: 'https://BastionBot.org',
           description: 'Join [**Bastion: Discord Server**](https://discord.gg/fzx8fkt) to test Bastion and it\'s commands, for giveaway events, for chatting and for a lot of fun!',

@@ -25,43 +25,44 @@ exports.run = async (Bastion, message, args) => {
   }
   index -= 1;
 
-  let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  if (!guildSettings || guildSettings.filteredWords === '[]') {
-    /**
-    * Error condition is encountered.
-    * @fires error
-    */
-    Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
-  }
-  else {
-    let filteredWords = JSON.parse(guildSettings.filteredWords);
-
-    if (index >= filteredWords.length) {
+    if (!guildSettings || !guildSettings.filteredWords) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
+      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
     }
+    else {
+      let filteredWords = guildSettings.filteredWords.split(' ');
 
-    let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];
-    filteredWords.splice(parseInt(args[0]) - 1, 1);
-
-    await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${JSON.stringify(filteredWords)}' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: `I've deleted **${removedFilteredWord}** from filtered words.`
+      if (index >= filteredWords.length) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+
+      let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];
+      filteredWords.splice(parseInt(args[0]) - 1, 1);
+
+      await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${filteredWords.join(' ')}' WHERE guildID=${message.guild.id}`);
+
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: `I've deleted **${removedFilteredWord}** from filtered words.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

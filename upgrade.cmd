@@ -1,12 +1,12 @@
 @ECHO off
-TITLE Bastion BOT
+TITLE Bastion Bot
 CLS
 COLOR 0F
 ECHO.
 
 SET cwd=%~dp0
 
-ECHO [Bastion]: Updating Bastion BOT...
+ECHO [Bastion]: Updating Bastion Bot...
 git pull origin master 1>nul || (
   ECHO [Bastion]: Unable to update the bot.
   GOTO :EXIT
@@ -19,8 +19,9 @@ RD /S /Q node_modules
 DEL /Q data/Bastion.sqlite
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
+choco upgrade chocolatey -y
+choco upgrade ffmpeg -y
 CALL npm install --production >nul 2>update.log
-CALL npm install -g ffmpeg-binaries >nul 2>update.log
 ECHO [Bastion]: Done.
 ECHO [Bastion]: If you get any errors please check the update.log file for errors while updating.
 ECHO [Bastion]: Ready to boot up and start running.

@@ -57,7 +57,7 @@ exports.run = async (Bastion, message, args) => {
       Bastion.log.error(e);
       message.channel.send({
         embed: {
-          color: Bastion.colors.red,
+          color: Bastion.colors.RED,
           title: 'Soft-Ban Error',
           description: 'Banned but unable to unban. Please unban the following user.',
           fields: [
@@ -80,7 +80,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.RED,
         title: 'Soft-Banned',
         fields: [
           {
@@ -112,7 +112,7 @@ exports.run = async (Bastion, message, args) => {
 
     user.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.RED,
         title: `Soft-Banned from ${message.guild.name} Server`,
         description: `**Reason:** ${reason}`
       }

@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
+      color: Bastion.colors.BLUE,
       title: 'Server search',
       description: `Found **${total}** servers with **${args.join(' ')}** in it's name.`,
       fields: [

@@ -47,7 +47,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.ORANGE,
         title: 'Text muted',
         fields: [
           {

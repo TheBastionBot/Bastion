@@ -21,7 +21,7 @@ exports.run = async (Bastion, message) => {
 
   let gameStatsMessage = await message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Typing Game',
       description: `Game started by ${message.author}. Type the following text and send in this channel ASAP. The first one to do so will be the winner.\nAnd please do not Copy & Paste the text, play fairly.`,
       footer: {
@@ -35,7 +35,6 @@ exports.run = async (Bastion, message) => {
   let index = Bastion.functions.getRandomInt(1, Object.keys(typingArticles).length);
   let articleMessage = await message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
       description: typingArticles[index]
     }
   }).catch(e => {
@@ -53,11 +52,11 @@ exports.run = async (Bastion, message) => {
   collector.on('end', async (collection, reason) => {
     let color, result;
     if (reason === 'time') {
-      color = Bastion.colors.red;
+      color = Bastion.colors.RED;
       result = 'Game ended. Unfortunately, no one was able to type the article on time.';
     }
     else {
-      color = Bastion.colors.blue;
+      color = Bastion.colors.BLUE;
       result = `Game ended. Congratulations ${collection.map(m => m.author)[0]}! You won it.`;
     }
 

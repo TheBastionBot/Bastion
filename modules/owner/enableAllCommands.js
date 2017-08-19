@@ -21,7 +21,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       description: 'All commands have been enabled.'
     }
   }).catch(e => {

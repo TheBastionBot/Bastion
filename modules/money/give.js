@@ -35,7 +35,7 @@ exports.run = async (Bastion, message, args) => {
      */
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `You've awarded **${args[0]}** Bastion Currencies to <@${user.id}>.`
       }
     }).catch(e => {
@@ -47,7 +47,7 @@ exports.run = async (Bastion, message, args) => {
      */
     user.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
       }
     }).catch(e => {
@@ -65,6 +65,7 @@ exports.run = async (Bastion, message, args) => {
 
     try {
       let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+      sender.bastionCurrencies = parseInt(sender.bastionCurrencies);
 
       if (sender.bastionCurrencies < args[0]) {
         /**
@@ -75,7 +76,7 @@ exports.run = async (Bastion, message, args) => {
       }
 
       let giveLimit = 0.5;
-      if (args[0] >= giveLimit * parseInt(sender.bastionCurrencies)) {
+      if (args[0] >= giveLimit * sender.bastionCurrencies) {
         /**
         * Error condition is encountered.
         * @fires error
@@ -91,7 +92,7 @@ exports.run = async (Bastion, message, args) => {
       */
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `You have given **${args[0]}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
@@ -103,7 +104,7 @@ exports.run = async (Bastion, message, args) => {
       */
       user.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {
@@ -115,7 +116,7 @@ exports.run = async (Bastion, message, args) => {
       */
       message.author.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.RED,
           description: `Your account has been credited with **${args[0]}** Bastion Currencies.`
         }
       }).catch(e => {

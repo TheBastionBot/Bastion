@@ -26,7 +26,7 @@ exports.run = (Bastion, message, args) => {
   if (Bastion.channels.get(args[0])) {
     Bastion.channels.get(args[0]).send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         description: args.slice(1).join(' ')
       }
     }).catch(e => {

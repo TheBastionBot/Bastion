@@ -10,7 +10,7 @@ module.exports = (error, description, channel) => {
   if (channel) {
     channel.send({
       embed: {
-        color: channel.client.colors.red,
+        color: channel.client.colors.RED,
         title: `${error}`,
         description: `${description}`
       }
@@ -23,6 +23,5 @@ module.exports = (error, description, channel) => {
     console.log(COLOR.red('[ERROR EVENT]'));
     console.log(error);
     console.log(COLOR.red('[/ERROR EVENT]'));
-    /* eslint-enable no-console */
   }
 };

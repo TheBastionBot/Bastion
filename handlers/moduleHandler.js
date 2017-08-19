@@ -4,45 +4,30 @@
  * @license MIT
  */
 
-const FS = require('fs');
-const GET_DIR_SYNC = require('../functions/getDirSync');
+const fs = require('fs');
+const path = require('path');
+const log = require('./logHandler');
 
-/**
- * Handles/Loads all the events.
- * @module moduleHandler
- * @param {object} Bastion The Bastion Object.
- * @returns {void}
- */
-module.exports = Bastion => {
-  let modules = GET_DIR_SYNC('./modules/');
-  Bastion.log.info(`Loading ${modules.length} modules...`);
-  for (let i = 0; i < modules.length; i++) {
-    loadEvent(Bastion, modules[i]);
-  }
-};
+/* eslint-disable no-sync */
+let commands = new Map();
+let aliases = new Map();
+let modules = fs.readdirSync('./modules/').filter(file => fs.statSync(path.join('./modules/', file)).isDirectory());
 
-/**
- * Loads all the events.
- * @function loadEvent
- * @param {object} Bastion The Bastion object.
- * @param {string} module The name of the module.
- * @returns {void}
-*/
-function loadEvent(Bastion, module) {
-  FS.readdir(`./modules/${module}/`, (err, files) => {
-    if (err) {
-      Bastion.log.error(err);
+for (let module of modules) {
+  let commandFiles = fs.readdirSync(`./modules/${module}`);
+  log.info(`Loading module: ${module} [${commandFiles.length} commands]`);
+  for (let file of commandFiles) {
+    file = file.substr(0, file.length - 3);
+    log.message(`Loading command: ${file}`);
+    file = require(`../modules/${module}/${file}`);
+    commands.set(file.help.name.toLowerCase(), file);
+    file.config.module = module;
+    for (let alias of file.config.aliases) {
+      aliases.set(alias.toLowerCase(), file.help.name);
     }
-    Bastion.log.info(`Loading module: ${module} [${files.length} commands]`);
-    files.forEach(f => {
-      let cmd = require(`../modules/${module}/${f}`);
-      Bastion.log.message(`Loading command: ${cmd.help.name}`);
-      Bastion.commands.set(cmd.help.name, cmd);
-      cmd.config.module = module;
-      cmd.config.aliases.forEach(alias => {
-        Bastion.aliases.set(alias, cmd.help.name);
-      });
-    });
-    Bastion.log.info('Done.');
-  });
+  }
+  log.info('Done.');
 }
+
+exports.commands = commands;
+exports.aliases = aliases;

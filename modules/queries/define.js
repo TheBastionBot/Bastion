@@ -32,7 +32,7 @@ exports.run = (Bastion, message, args) => {
     if (data.err) {
       embed = {
         embed: {
-          color: Bastion.colors.red,
+          color: Bastion.colors.RED,
           description: `No definition found for **${data.word}** in **${lang.toUpperCase()}** Dictionary.`
         }
       };
@@ -40,7 +40,7 @@ exports.run = (Bastion, message, args) => {
     else {
       embed = {
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: data.word,
           description: `*${data.category}*\n\n${data.definition}`,
           footer: {

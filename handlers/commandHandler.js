@@ -14,13 +14,26 @@ const COLOR = require('chalk');
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guild = await message.client.db.get(`SELECT prefix, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     if (!message.guild.prefix || message.guild.prefix !== guild.prefix) {
       message.guild.prefix = guild.prefix;
     }
 
     if (!message.content.startsWith(guild.prefix)) return;
+
+    if (!message.member.hasPermission('ADMINISTRATOR')) {
+      if (guild.ignoredChannels) {
+        if (guild.ignoredChannels.split(' ').includes(message.channel.id)) return;
+      }
+
+      if (guild.ignoredRoles) {
+        let ignoredRoles = guild.ignoredRoles.split(' ');
+        for (let roleID of ignoredRoles) {
+          if (message.member.roles.has(roleID)) return;
+        }
+      }
+    }
 
     let args = message.content.split(' ');
     let command = args.shift().slice(guild.prefix.length).toLowerCase();

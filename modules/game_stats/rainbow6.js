@@ -142,7 +142,7 @@ exports.run = (Bastion, message, args) => {
     }
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Rainbow 6',
         url: `https://r6stats.com/stats/${args[0]}/${encodeURIComponent(args[1])}`,
         fields: stats,

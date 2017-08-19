@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
    */
   message.channel.send({
     embed: {
-      color: Bastion.colors.red,
+      color: Bastion.colors.RED,
       description: `${args[0]} Bastion Currencies has been taken from <@${user.id}>`,
       fields: [
         {
@@ -66,7 +66,7 @@ exports.run = (Bastion, message, args) => {
    */
   user.send({
     embed: {
-      color: Bastion.colors.red,
+      color: Bastion.colors.RED,
       description: `Your account has been credited with **${args[0]}** Bastion Currencies.`,
       fields: [
         {

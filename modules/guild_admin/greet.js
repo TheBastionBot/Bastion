@@ -15,23 +15,23 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT greet, greetChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+  let guildSettings = await Bastion.db.get(`SELECT greet FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });
 
   let color, greetStats;
-  if (guildSettings.greetChannelID === message.channel.id) {
-    Bastion.db.run(`UPDATE guildSettings SET greet='false', greetChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
+  if (guildSettings.greet === message.channel.id) {
+    Bastion.db.run(`UPDATE guildSettings SET greet=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     greetStats = 'Greeting Messages are now disabled.';
   }
   else {
-    Bastion.db.run(`UPDATE guildSettings SET greet='true', greetChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
+    Bastion.db.run(`UPDATE guildSettings SET greet=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     greetStats = 'Greeting Messages are now enabled in this channel.';
   }
 

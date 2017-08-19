@@ -5,7 +5,7 @@
  */
 
 const string = require('../../handlers/languageHandler');
-const MINECRAFT = require('gamequery');
+const MINECRAFT = require('gamedig');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args = args[0])) {
@@ -42,7 +42,7 @@ exports.run = (Bastion, message, args) => {
   }).then(data => {
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: data.name,
         description: '[Minecraft](https://minecraft.net/)',
         fields: [

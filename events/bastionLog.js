@@ -11,69 +11,68 @@
  * @returns {void}
  */
 module.exports = async (Bastion, event, guild) => {
-  let bastionSettings = await Bastion.db.get('SELECT log, logChannelID FROM bastionSettings').catch(e => {
-    Bastion.log.error(e);
-  });
-  if (!bastionSettings) return;
+  try {
+    let bastionSettings = await Bastion.db.get('SELECT logChannel FROM bastionSettings');
+    if (!bastionSettings) return;
+    if (!bastionSettings.logChannel) return;
 
-  let log = (bastionSettings.log === 'true');
-  if (!log) return;
+    let logChannel = Bastion.channels.get(bastionSettings.logChannel);
+    if (!logChannel) return;
 
-  let logChannelID = bastionSettings.logChannelID,
-    logChannel = Bastion.channels.get(logChannelID);
+    let color, guildIcon = guild.iconURL || 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png',
+      logData = [
+        {
+          name: 'Server Name',
+          value: guild.name,
+          inline: true
+        },
+        {
+          name: 'Server ID',
+          value: guild.id,
+          inline: true
+        },
+        {
+          name: 'Server Owner',
+          value: guild.owner.user.tag,
+          inline: true
+        },
+        {
+          name: 'Server Owner ID',
+          value: guild.ownerID,
+          inline: true
+        }
+      ];
 
-  if (!logChannel) return;
+    switch (event) {
+      case 'guildCreate':
+        event = 'Joined Server';
+        color = Bastion.colors.GREEN;
+        break;
 
-  let color, guildIcon = guild.iconURL || 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png',
-    logData = [
-      {
-        name: 'Server Name',
-        value: guild.name,
-        inline: true
-      },
-      {
-        name: 'Server ID',
-        value: guild.id,
-        inline: true
-      },
-      {
-        name: 'Server Owner',
-        value: guild.owner.user.tag,
-        inline: true
-      },
-      {
-        name: 'Server Owner ID',
-        value: guild.ownerID,
-        inline: true
-      }
-    ];
+      case 'guildDelete':
+        event = 'Left Server';
+        color = Bastion.colors.RED;
+        break;
 
-  switch (event) {
-    case 'guildCreate':
-      event = 'Joined Server';
-      color = Bastion.colors.green;
-      break;
-
-    case 'guildDelete':
-      event = 'Left Server';
-      color = Bastion.colors.red;
-      break;
-
-    default:
-      return Bastion.log.error(`Bastion logging is not present for ${event} event.`);
-  }
-
-  logChannel.send({
-    embed: {
-      color: color,
-      title: event,
-      fields: logData,
-      thumbnail: {
-        url: guildIcon
-      },
-      timestamp: new Date()
+      default:
+        return Bastion.log.error(`Bastion logging is not present for ${event} event.`);
     }
-  }).catch(e => {
+
+    logChannel.send({
+      embed: {
+        color: color,
+        title: event,
+        fields: logData,
+        thumbnail: {
+          url: guildIcon
+        },
+        timestamp: new Date()
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };

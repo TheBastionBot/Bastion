@@ -18,15 +18,12 @@ BOT.configure({
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).chat;
+    if (message.content.length < 1) return;
 
-    if (guild.chat === 'false') return;
+    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (!guild.chat) return;
 
-    let text = message.content.split(' ');
-    if (text.length < 1) return;
-    text = text.join(' ');
-
-    BOT.write(text, response => {
+    BOT.write(message.content, response => {
       message.channel.startTyping();
       setTimeout(async () => {
         await message.channel.send(response.output).catch(e => {

@@ -20,26 +20,34 @@ exports.run = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
+    let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
+    if (guildSettings.farewellMessage) {
+      farewellMessage = await Bastion.functions.decodeString(guildSettings.farewellMessage);
+    }
+
     message.channel.send({
       embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'Farewell message:',
-        description: guildSettings.farewellMessage
+        color: Bastion.colors.BLUE,
+        title: 'Farewell Message',
+        description: farewellMessage
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
   else {
-    await Bastion.db.run(`UPDATE guildSettings SET farewellMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
+    args = args.join(' ');
+
+    let farewellMessage = await Bastion.functions.encodeString(args);
+    await Bastion.db.run('UPDATE guildSettings SET farewellMessage=(?) WHERE guildID=(?)', [ farewellMessage, message.guild.id ]).catch(e => {
       Bastion.log.error(e);
     });
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        title: 'Farewell message set to:',
-        description: args.join(' ')
+        color: Bastion.colors.GREEN,
+        title: 'Farewell Message Set',
+        description: args
       }
     }).catch(e => {
       Bastion.log.error(e);

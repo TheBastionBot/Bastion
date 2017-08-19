@@ -14,9 +14,10 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('commandUsage', message, this.help);
   }
+  args = args.join(' ');
 
   let charLimit = 350;
-  let bio = args.join(' ').replace('"', '\'');
+  let bio = await Bastion.functions.encodeString(args);
 
   if (bio.length > charLimit) {
     /**
@@ -33,7 +34,6 @@ exports.run = async (Bastion, message, args) => {
   if (!user) {
     return message.channel.send({
       embed: {
-        color: Bastion.colors.green,
         description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
       }
     }).catch(e => {
@@ -41,15 +41,15 @@ exports.run = async (Bastion, message, args) => {
     });
   }
 
-  await Bastion.db.run(`UPDATE profiles SET bio="${bio}" WHERE userID=${message.author.id}`).catch(e => {
+  await Bastion.db.run('UPDATE profiles SET bio=(?) WHERE userID=(?)', [ bio, message.author.id ]).catch(e => {
     Bastion.log.error(e);
   });
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Bio Set',
-      description: bio,
+      description: args,
       footer: {
         text: args.tag
       }

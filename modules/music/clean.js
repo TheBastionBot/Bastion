@@ -15,7 +15,7 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
   }
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRoleID)) {
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
     /**
     * User has missing permissions.
     * @fires userMissingPermissions
@@ -26,7 +26,7 @@ exports.run = (Bastion, message) => {
   message.guild.music.songs.splice(1, message.guild.music.songs.length - 1);
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       description: 'Cleaned up the queue.'
     }
   }).catch(e => {

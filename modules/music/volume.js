@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
   }
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRoleID)) {
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
     /**
     * User has missing permissions.
     * @fires userMissingPermissions
@@ -23,6 +23,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
+  let color = Bastion.colors.GREEN;
   if (args[0] === '+') {
     message.guild.voiceConnection.dispatcher.setVolume((message.guild.voiceConnection.dispatcher.volume * 50 + 2) / 50);
   }
@@ -33,10 +34,13 @@ exports.run = (Bastion, message, args) => {
     args = args[0] > 0 && args[0] < 100 ? args[0] : 100;
     message.guild.voiceConnection.dispatcher.setVolume(args / 50);
   }
+  else {
+    color = Bastion.colors.BLUE;
+  }
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: color,
       description: `Volume: ${Math.round(message.guild.voiceConnection.dispatcher.volume * 50)}%`
     }
   }).catch(e => {

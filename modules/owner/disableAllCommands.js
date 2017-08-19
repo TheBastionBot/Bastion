@@ -30,7 +30,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.red,
+      color: Bastion.colors.RED,
       description: 'All commands have been disabled until next restart. You can enable all commands using `enableAllCommands`. Or you can enable any specific module or command using `enableModule <module_name>` or `enableCommand <command_name>` respectively.'
     }
   }).catch(e => {

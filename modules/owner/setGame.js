@@ -17,11 +17,16 @@ exports.run = async (Bastion, message, args) => {
 
   try {
     if (args.length >= 1) {
-      await Bastion.user.setGame(args.join(' '));
+      await Bastion.user.setPresence({
+        game: {
+          name: args.join(' '),
+          type: 0
+        }
+      });
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.yellow,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
         }
       }).catch(e => {
@@ -29,11 +34,16 @@ exports.run = async (Bastion, message, args) => {
       });
     }
     else {
-      await Bastion.user.setGame(Bastion.config.game);
+      await Bastion.user.setPresence({
+        game: {
+          name: Bastion.config.game,
+          type: 0
+        }
+      });
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
         }
       }).catch(e => {

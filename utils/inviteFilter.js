@@ -13,7 +13,7 @@ module.exports = async message => {
   try {
     let guild = await message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-    if (guild.filterInvite !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+    if (!guild.filterInvite || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
 
     if (hasDiscordInvite(message.content)) {
       deleteInvite(message);
@@ -62,7 +62,7 @@ function deleteInvite(message) {
 
   message.channel.send({
     embed: {
-      color: message.client.colors.orange,
+      color: message.client.colors.ORANGE,
       description: `${message.author} you are not allowed to post server invite links here.`
     }
   }).then(msg => {

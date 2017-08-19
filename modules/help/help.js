@@ -35,7 +35,7 @@ exports.run = (Bastion, message, args) => {
 
       channel.send({
         embed: {
-          color: Bastion.colors.yellow,
+          color: Bastion.colors.GOLD,
           fields: [
             {
               name: 'Command',
@@ -97,7 +97,7 @@ exports.run = (Bastion, message, args) => {
   else {
     message.channel.send({
       embed: {
-        color: Bastion.colors.yellow,
+        color: Bastion.colors.GOLD,
         title: 'Help',
         description: `To get a list of commands, type \`${message.guild.prefix}commands\`.\nTo get help about a specific command, type \`${message.guild.prefix}help command_name\`.\n\nNeed help or support with Bastion Discord Bot?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
         footer: {
@@ -110,7 +110,7 @@ exports.run = (Bastion, message, args) => {
 
     message.author.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Bastion: Discord Bot',
         url: 'https://BastionBot.org',
         description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',

@@ -55,7 +55,7 @@ exports.run = async (Bastion, message, args) => {
 
     await message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         title: 'Channel Deleted',
         fields: [
           {

@@ -48,7 +48,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.red,
+      color: Bastion.colors.RED,
       description: `\`${module}\` module has been disabled until next restart. You can turn on this command using \`enableModule ${module}\`.`
     }
   }).catch(e => {

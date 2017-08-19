@@ -45,7 +45,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       description: `\`${command.help.name}\` command has been enabled.`
     }
   }).catch(e => {

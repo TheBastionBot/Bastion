@@ -26,7 +26,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let musicChannel = await Bastion.db.get(`SELECT musicMasterRoleID, musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`);
+  let guildSettings = await Bastion.db.get(`SELECT musicMasterRole, musicTextChannel, musicVoiceChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
 
   let voiceChannel, textChannel, vcStats;
   if (message.guild.voiceConnection) {
@@ -34,8 +34,8 @@ exports.run = async (Bastion, message, args) => {
     textChannel = message.channel;
     vcStats = string('userNoSameVC', 'errorMessage', message.author.tag);
   }
-  else if (musicChannel.musicTextChannelID && musicChannel.musicVoiceChannelID) {
-    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(musicChannel.musicTextChannelID))) {
+  else if (guildSettings.musicTextChannel && guildSettings.musicVoiceChannel) {
+    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(guildSettings.musicTextChannel))) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -66,7 +66,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
   }
 
-  let musicMasterRoleID = musicChannel.musicMasterRoleID;
+  let musicMasterRole = guildSettings.musicMasterRole;
 
   if (textChannel.id !== message.channel.id) return;
   if (voiceChannel.members.get(message.author.id) === undefined) {
@@ -81,7 +81,7 @@ exports.run = async (Bastion, message, args) => {
   let musicObject = {
     voiceChannel: voiceChannel,
     textChannel: textChannel,
-    musicMasterRoleID: musicMasterRoleID,
+    musicMasterRole: musicMasterRole,
     songs: [],
     playing: false,
     repeat: false,
@@ -91,50 +91,6 @@ exports.run = async (Bastion, message, args) => {
   try {
     if (args.song) {
       song = args.song.join(' ');
-    }
-    else if (args.playlist) {
-      let playlist;
-
-      db.reload();
-      playlist = db.getData('/');
-      playlist = playlist[args.playlist.join(' ')];
-
-      if (!playlist || playlist.length === 0) {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), textChannel);
-      }
-
-      song = playlist.shift();
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.green,
-          description: `Adding ${playlist.length + 1} favourite songs to the queue...`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-
-      // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-      playlist.forEach(e => {
-        e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
-        if (!message.guild.music) {
-          message.guild.music = musicObject;
-        }
-        yt.getInfo(e, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
-          if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
-          message.guild.music.songs.push({
-            url: info.formats[info.formats.length - 1].url,
-            title: info.title,
-            thumbnail: info.thumbnail,
-            duration: info.duration,
-            requester: message.author.tag
-          });
-        });
-      });
     }
     else if (args.ytpl) {
       if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.ytpl)) {
@@ -146,7 +102,6 @@ exports.run = async (Bastion, message, args) => {
       }
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
           description: 'Processing playlist...'
         }
       }).catch(e => {
@@ -173,7 +128,6 @@ exports.run = async (Bastion, message, args) => {
           song = info.shift().title;
           message.channel.send({
             embed: {
-              color: Bastion.colors.green,
               description: `Adding ${info.length} songs to the queue...`
             }
           }).catch(e => {
@@ -195,6 +149,49 @@ exports.run = async (Bastion, message, args) => {
         }
       });
     }
+    else if (args.playlist) {
+      let playlist;
+
+      db.reload();
+      playlist = db.getData('/');
+      playlist = playlist[args.playlist.join(' ')];
+
+      if (!playlist || playlist.length === 0) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), textChannel);
+      }
+
+      song = playlist.shift();
+
+      message.channel.send({
+        embed: {
+          description: `Adding ${playlist.length + 1} favourite songs to the queue...`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
+      playlist.forEach(e => {
+        e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
+        if (!message.guild.music) {
+          message.guild.music = musicObject;
+        }
+        yt.getInfo(e, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
+          if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
+          message.guild.music.songs.push({
+            url: info.formats[info.formats.length - 1].url,
+            title: info.title,
+            thumbnail: info.thumbnail,
+            duration: info.duration,
+            requester: message.author.tag
+          });
+        });
+      });
+    }
     else return delete message.guild.music;
 
     song = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(song) ? song : `ytsearch:${song}`;
@@ -203,7 +200,7 @@ exports.run = async (Bastion, message, args) => {
       if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
         return message.channel.send({
           embed: {
-            color: Bastion.colors.red,
+            color: Bastion.colors.RED,
             description: string('notFound', 'errorMessage', 'result')
           }
         }).catch(e => {
@@ -224,7 +221,7 @@ exports.run = async (Bastion, message, args) => {
       });
       textChannel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           title: 'Added to the queue',
           description: info.title,
           thumbnail: {
@@ -287,7 +284,7 @@ function startStreamDispatcher(guild, connection) {
   if (guild.music.songs[0] === undefined) {
     return guild.music.textChannel.send({
       embed: {
-        color: guild.client.colors.red,
+        color: guild.client.colors.RED,
         description: 'Exiting voice channel.'
       }
     }).then(() => {
@@ -303,7 +300,7 @@ function startStreamDispatcher(guild, connection) {
 
   guild.music.textChannel.send({
     embed: {
-      color: guild.client.colors.blue,
+      color: guild.client.colors.BLUE,
       title: 'Playing',
       description: guild.music.songs[0].title,
       thumbnail: {

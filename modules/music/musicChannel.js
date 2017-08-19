@@ -15,28 +15,25 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!(parseInt(args[0]) < 9223372036854775807)) {
-    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=null, musicVoiceChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
+  try {
+    if (!(parseInt(args[0]) < 9223372036854775807)) {
+      await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
+
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: 'Default music channel removed.'
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+
+    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=${message.channel.id}, musicVoiceChannel=${args[0]} WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
-        description: 'Default music channel removed.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=${message.channel.id}, musicVoiceChannelID=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         title: 'Default music channel set',
         fields: [
           {
@@ -52,6 +49,9 @@ exports.run = async (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

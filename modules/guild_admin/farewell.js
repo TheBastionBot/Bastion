@@ -16,23 +16,23 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT farewell, farewellChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
+  let guildSettings = await Bastion.db.get(`SELECT farewell FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });
 
   let color, farewellStats;
-  if (guildSettings.farewellChannelID === message.channel.id) {
-    await Bastion.db.run(`UPDATE guildSettings SET farewell='false', farewellChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
+  if (guildSettings.farewell === message.channel.id) {
+    await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     farewellStats = 'Farewell Messages are now disabled.';
   }
   else {
-    await Bastion.db.run(`UPDATE guildSettings SET farewell='true', farewellChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
+    await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
     });
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     farewellStats = 'Farewell Messages are now enabled in this channel.';
   }
 

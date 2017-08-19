@@ -9,12 +9,20 @@ const Kitsu = require('kitsu.js');
 const kitsu = new Kitsu();
 
 exports.run = async (Bastion, message, args) => {
+  if (!args.name) {
+    /**
+     * The command was ran with invalid parameters.
+     * @fires commandUsage
+     */
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
   let anime = await kitsu.searchAnime(args.name);
   anime = anime[0];
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: anime.titles.english,
       url: `https://kitsu.io/anime/${anime.slug}`,
       description: anime.synopsis,

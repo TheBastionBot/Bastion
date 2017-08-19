@@ -44,33 +44,37 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let roles = JSON.parse(guildSettings.selfAssignableRoles);
-  roles = roles.concat(args);
-  roles = roles.filter(r => message.guild.roles.get(r));
-  roles = [ ...new Set(roles) ];
-
-  await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let roleNames = [];
-  for (let i = 0; i < args.length; i++) {
-    roleNames.push(message.guild.roles.get(args[i]).name);
-  }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.green,
-      title: 'Added self assignable roles',
-      description: roleNames.join(', ')
+    let roles = [];
+    if (guildSettings.selfAssignableRoles) {
+      roles = guildSettings.selfAssignableRoles.split(' ');
     }
-  }).catch(e => {
+    roles = roles.concat(args);
+    roles = roles.filter(r => message.guild.roles.get(r));
+    roles = [ ...new Set(roles) ];
+
+    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${roles.join(' ')}' WHERE guildID=${message.guild.id}`);
+
+    let roleNames = [];
+    for (let i = 0; i < args.length; i++) {
+      roleNames.push(message.guild.roles.get(args[i]).name);
+    }
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Added self assignable roles',
+        description: roleNames.join(', ')
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

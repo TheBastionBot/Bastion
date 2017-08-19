@@ -159,7 +159,7 @@ exports.run = (Bastion, message, args) => {
     });
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         author: {
           name: args[1],
           url: data.profile.url,

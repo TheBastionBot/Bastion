@@ -12,7 +12,7 @@ exports.run = (Bastion, message, args) => {
     xkcd(function (data) {
       message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: data.title,
           description: data.alt,
           url: `https://xkcd.com/${data.num}`,
@@ -53,7 +53,7 @@ exports.run = (Bastion, message, args) => {
       xkcd(comicNumber, function (data) {
         message.channel.send({
           embed: {
-            color: Bastion.colors.blue,
+            color: Bastion.colors.BLUE,
             title: data.title,
             description: data.alt,
             url: `https://xkcd.com/${data.num}`,

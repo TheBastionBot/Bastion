@@ -22,34 +22,33 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let color, filterInviteStats;
-  if (guildSettings.filterInvite === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: filterInviteStats
+    let color, filterInviteStats;
+    if (guildSettings.filterInvite) {
+      await Bastion.db.run(`UPDATE guildSettings SET filterInvite=0 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET filterInvite=1 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: filterInviteStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

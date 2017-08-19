@@ -33,7 +33,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Slot Machine',
       description: reels.join(' \u05C0 '),
       footer: {

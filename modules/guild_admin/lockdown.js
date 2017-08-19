@@ -33,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         title: 'Channel Lockdown Removed',
         description: 'The lockdown on this channel has now been removed, you can now send messages in this channel.',
         footer: {
@@ -54,7 +54,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         title: 'Channel Lockdown Initiated',
         description: 'This text channel is in lockdown. You do not have permissions to send message in this channel unless you are explicitly allowed.\nAdministrators can remove the lockdown using the `lockdown --remove` command.',
         footer: {

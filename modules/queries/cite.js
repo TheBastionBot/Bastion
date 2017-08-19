@@ -20,7 +20,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         author: {
           name: citedMessage.author.tag,
           icon_url: citedMessage.author.avatarURL

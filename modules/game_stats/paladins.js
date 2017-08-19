@@ -82,7 +82,7 @@ async function fetchAndSend(message, args) {
 
     message.channel.send({
       embed: {
-        color: message.client.colors.blue,
+        color: message.client.colors.BLUE,
         author: {
           name: player.Name
         },

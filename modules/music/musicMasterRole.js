@@ -15,43 +15,42 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!(parseInt(args[0]) < 9223372036854775807)) {
-    await Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
+  try {
+    if (!(parseInt(args[0]) < 9223372036854775807)) {
+      await Bastion.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.red,
-        description: 'Music Master role has been removed.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: 'Music Master role has been removed.'
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+
     let role = message.guild.roles.get(args[0]);
-
     if (!role) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
+      * Error condition is encountered.
+      * @fires error
+      */
       return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
     }
 
-    await Bastion.db.run(`UPDATE guildSettings SET musicMasterRoleID=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
+    await Bastion.db.run(`UPDATE guildSettings SET musicMasterRole=${args[0]} WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `**${role.name}** has been set as the Music Master role.`
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

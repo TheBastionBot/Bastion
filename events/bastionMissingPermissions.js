@@ -9,7 +9,7 @@ module.exports = (permissions, message) => {
 
   message.channel.send({
     embed: {
-      color: message.client.colors.red,
+      color: message.client.colors.RED,
       description: `I need **${permissions.replace('_', ' ')}** permission to run this command.`
     }
   }).catch(e => {

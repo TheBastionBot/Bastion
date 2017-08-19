@@ -26,7 +26,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: `${message.author.username} punched ${user.username}! :punch:`,
       image: {
         url: punches[Math.floor(Math.random() * punches.length)]

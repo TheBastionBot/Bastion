@@ -55,7 +55,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         title: 'Banned',
         fields: [
           {
@@ -87,7 +87,7 @@ exports.run = async (Bastion, message, args) => {
 
     member.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         title: `Banned from ${message.guild.name} Server`,
         description: `**Reason:** ${reason}`
       }

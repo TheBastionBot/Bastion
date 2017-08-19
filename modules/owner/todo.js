@@ -31,7 +31,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           title: 'Todo list created',
           description: `${message.author.username}, I've created your todo list and added **${args.join(' ')}** to it.`
         }
@@ -47,7 +47,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           title: 'Todo list updated',
           description: `${message.author.username}, I've added **${args.join(' ')}** to your todo list.`
         }

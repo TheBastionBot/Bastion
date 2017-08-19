@@ -30,7 +30,7 @@ exports.run = (Bastion, message, args) => {
       return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
     }
     else if (response.statusCode === 200) {
-      color = Bastion.colors.blue;
+      color = Bastion.colors.BLUE;
       try {
         body = JSON.parse(body);
 

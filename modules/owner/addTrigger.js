@@ -29,7 +29,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'New Trigger Added',
       fields: [
         {

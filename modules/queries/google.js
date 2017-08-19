@@ -44,7 +44,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: `Search results for ${args.query.join(' ')}`,
         url: `https://www.google.com/search?q=${encodeURIComponent(args.query.join(' '))}`,
         fields: results,

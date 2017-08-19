@@ -30,7 +30,7 @@ exports.run = async (Bastion, message) => {
 
   let startMessage = await message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Acrophobia',
       description: `Game started by ${message.author}. Create a sentence with this acronym: **${acronym.join('. ')}.**`,
       footer: {
@@ -55,7 +55,6 @@ exports.run = async (Bastion, message) => {
 
     let submissions = await msg.channel.send({
       embed: {
-        color: Bastion.colors.dark_grey,
         description: `${msg.author} made their submission.`,
         footer: {
           text: `${sentences.collected.size} submissions in total.`
@@ -75,7 +74,7 @@ exports.run = async (Bastion, message) => {
     if (collection.size === 0) {
       await message.channel.send({
         embed: {
-          color: Bastion.colors.red,
+          color: Bastion.colors.RED,
           title: 'Acrophobia',
           description: 'Game ended. Unfortunately, no submissions were made for this acronym.'
         }
@@ -96,7 +95,7 @@ exports.run = async (Bastion, message) => {
 
       let submissionMessage = await startMessage.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.BLUE,
           title: 'Acrophobia',
           description: 'Submissions closed',
           fields: [
@@ -131,7 +130,6 @@ exports.run = async (Bastion, message) => {
 
         let thankingMessage = await vote.channel.send({
           embed: {
-            color: Bastion.colors.dark_grey,
             description: `Thank you, ${vote.author}, for voting.`,
             footer: {
               text: `${votes.collected.size} votes in total.`
@@ -151,7 +149,7 @@ exports.run = async (Bastion, message) => {
         if (votes.size === 0) {
           startMessage.channel.send({
             embed: {
-              color: Bastion.colors.red,
+              color: Bastion.colors.RED,
               title: 'Acrophobia',
               description: 'Game ended. Unfortunately, no votes were given for any submissions.'
             }
@@ -179,7 +177,7 @@ exports.run = async (Bastion, message) => {
 
           startMessage.channel.send({
             embed: {
-              color: Bastion.colors.blue,
+              color: Bastion.colors.BLUE,
               title: 'Acrophobia',
               description: `Game Ended. ${collection.map(s => s.author)[winningVoteIndex - 1]} won by ${count[winningVoteIndex] - 1} of ${votes.length - collection.size} votes`,
               fields: [

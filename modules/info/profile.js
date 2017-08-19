@@ -20,7 +20,7 @@ exports.run = async (Bastion, message, args) => {
     if (args === message.author) {
       return message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `Your profile is now created, <@${args.id}>`
         }
       }).catch(e => {
@@ -34,15 +34,21 @@ exports.run = async (Bastion, message, args) => {
     */
     return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
   }
+  if (profile.bio) {
+    profile.bio = await Bastion.functions.decodeString(profile.bio);
+  }
+  else {
+    profile.bio = `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+  }
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       author: {
         name: args.tag,
         icon_url: getUserIcon(args)
       },
-      description: profile.bio || `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`,
+      description: profile.bio,
       fields: [
         {
           name: 'Bastion Currency',
@@ -51,7 +57,7 @@ exports.run = async (Bastion, message, args) => {
         },
         {
           name: 'Rank',
-          value: profile.rank + 1,
+          value: parseInt(profile.rank) + 1,
           inline: true
         },
         {
@@ -67,6 +73,9 @@ exports.run = async (Bastion, message, args) => {
       ],
       thumbnail: {
         url: args.displayAvatarURL
+      },
+      footer: {
+        text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`
       }
     }
   }).catch(e => {
@@ -100,6 +109,7 @@ function getUserIcon(user) {
   if (!bastionGuild) return;
   const bastionGuildMember = bastionGuild.members.get(user.id);
   if (!bastionGuildMember) return;
+
   const devRoleID = specialIDs.developerRole;
   const contributorsRoleID = specialIDs.contributorsRole;
   const donorsRoleID = specialIDs.donorsRole;

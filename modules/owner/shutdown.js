@@ -18,7 +18,7 @@ exports.run = async (Bastion, message) => {
   try {
     let confirmation = await message.channel.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.ORANGE,
         description: 'Are you sure you want to shut me down?'
       }
     });
@@ -36,7 +36,6 @@ exports.run = async (Bastion, message) => {
         if (answer.content.toLowerCase().startsWith('yes')) {
           await message.channel.send({
             embed: {
-              color: Bastion.colors.dark_grey,
               description: 'GoodBye :wave:! See you soon.'
             }
           });
@@ -47,7 +46,6 @@ exports.run = async (Bastion, message) => {
         else {
           await message.channel.send({
             embed: {
-              color: Bastion.colors.dark_grey,
               description: 'Cool! I\'m here.'
             }
           });

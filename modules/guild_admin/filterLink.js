@@ -22,34 +22,33 @@ exports.run = async (Bastion, message) => {
     return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let color, filterLinkStats;
-  if (guildSettings.filterLink === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET filterLink='true' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET filterLink='false' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: filterLinkStats
+    let color, filterLinkStats;
+    if (guildSettings.filterLink) {
+      await Bastion.db.run(`UPDATE guildSettings SET filterLink=0 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET filterLink=1 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: filterLinkStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

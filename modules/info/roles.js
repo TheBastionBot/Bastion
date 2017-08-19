@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Roles',
       description: roles.slice(i * 10, (i * 10) + 10).join('\n'),
       footer: {
