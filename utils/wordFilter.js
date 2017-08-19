@@ -14,13 +14,17 @@ module.exports = async message => {
     message.client.log.error(e);
   });
 
-  if (guild.filterWord !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+  if (!guild.filterWord || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
 
-  let filteredWords = JSON.parse(guild.filteredWords);
-  for (let i = 0; i < filteredWords.length; i++) {
-    if (message.content.toLowerCase().includes(filteredWords[i].toLowerCase())) continue;
-    if (message.deletable) {
-      return message.delete();
+  let filteredWords = [];
+  if (guild.filteredWords) {
+    filteredWords = guild.filteredWords.split(' ');
+  }
+  for (let word of filteredWords) {
+    if (message.content.toLowerCase().includes(word.toLowerCase())) {
+      if (message.deletable) {
+        return message.delete();
+      }
     }
   }
 };
