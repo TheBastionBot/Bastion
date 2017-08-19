@@ -16,14 +16,12 @@ exports.run = async (Bastion, message) => {
   }
 
   try {
-    let bastionSettings = await Bastion.db.get('SELECT logChannel FROM bastionSettings');
-    let color, logStats;
+    let bastionSettings = await Bastion.db.get('SELECT logChannel FROM bastionSettings'),
+      color = Bastion.colors.GREEN,
+      logStats = 'Bastion\'s logging is now enabled in this channel.';
 
     if (!bastionSettings) {
       await Bastion.db.run('INSERT INTO bastionSettings (logChannel) VALUES (?)', [ message.channel.id ]);
-
-      color = Bastion.colors.GREEN;
-      logStats = 'Bastion\'s logging is now enabled in this channel.';
     }
     else if (bastionSettings.log) {
       await Bastion.db.run('UPDATE bastionSettings SET logChannel=null');
