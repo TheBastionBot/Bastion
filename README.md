@@ -1,6 +1,6 @@
 # Bastion: Discord Bot
 [![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
-[![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://github.com/snkrsnkampa/Bastion/releases)
+[![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
 [![Build Status](https://travis-ci.org/snkrsnkampa/Bastion.svg?branch=master)](https://travis-ci.org/snkrsnkampa/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Dependencies](https://david-dm.org/snkrsnkampa/Bastion.svg)](https://david-dm.org/snkrsnkampa/Bastion)
@@ -30,7 +30,7 @@ Or if you want to host it yourself and have access to all it's owner only comman
 > *If you ever face any problems with Bastion Bot or you don't understard something, or if you need any kind of help with it, just head over to the [#help](https://discord.gg/fzx8fkt) channel in [Bastion Bot: Discord Server](https://discord.gg/fzx8fkt), and ask for help. We will be more than happy to help you.*
 
 ## Support Bastion Bot project and keep it alive forever
-If you like the Bastion Bot project you can **⭐ Star** in on [GitHub](https://github.com/snkrsnkampa/Bastion).  
+If you like the Bastion Bot project you can **⭐ Star** in on [GitHub](https://github.com/TheBastionBot/Bastion).  
 
 If want to support the development of this project to keep this alive forever, you can send donations or contribute to it.  
 Your donations will ensure the development of this project and I'll make sure this project stays active forever. You can donate via Patreon or via PayPal:  

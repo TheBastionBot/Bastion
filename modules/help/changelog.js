@@ -37,8 +37,9 @@ exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Changelog',
-      description: `Bastion Bot v${Bastion.package.version}`,
+      title: `Bastion Bot v${Bastion.package.version} Changelog`,
+      url: 'https://github.com/TheBastionBot/Bastion/releases',
+      description: 'Missed an update? [Check out our previous change logs](https://github.com/TheBastionBot/Bastion/releases)',
       fields: changes,
       thumbnail: {
         url: Bastion.user.displayAvatarURL

@@ -7,10 +7,11 @@
 const fs = require('fs');
 const path = require('path');
 const log = require('./logHandler');
+const Discord = require('discord.js');
 
 /* eslint-disable no-sync */
-let commands = new Map();
-let aliases = new Map();
+let commands = new Discord.Collection();
+let aliases = new Discord.Collection();
 let modules = fs.readdirSync('./modules/').filter(file => fs.statSync(path.join('./modules/', file)).isDirectory());
 
 for (let module of modules) {
