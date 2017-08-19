@@ -21,7 +21,7 @@ module.exports = async message => {
     if (message.content.length < 1) return;
 
     let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (guild.chat === 'false') return;
+    if (!guild.chat) return;
 
     BOT.write(message.content, response => {
       message.channel.startTyping();

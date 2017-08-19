@@ -26,7 +26,7 @@ module.exports = guild => {
     'filterWord INTEGER NOT NULL DEFAULT 0,' +
     'filteredWords TEXT,' +
     'announcementChannel TEXT,' +
-    'chat TEXT NOT NULL DEFAULT \'false\',' +
+    'chat INTEGER NOT NULL DEFAULT 0,' +
     'levelUpMessage INTEGER NOT NULL DEFAULT 0,' +
     'selfAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
     'autoAssignableRoles TEXT NOT NULL DEFAULT \'[]\',' +
