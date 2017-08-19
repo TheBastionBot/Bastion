@@ -12,15 +12,11 @@
  */
 module.exports = async (Bastion, event, guild) => {
   try {
-    let bastionSettings = await Bastion.db.get('SELECT log, logChannelID FROM bastionSettings');
+    let bastionSettings = await Bastion.db.get('SELECT logChannel FROM bastionSettings');
     if (!bastionSettings) return;
+    if (!bastionSettings.logChannel) return;
 
-    let log = (bastionSettings.log === 'true');
-    if (!log) return;
-
-    let logChannelID = bastionSettings.logChannelID,
-      logChannel = Bastion.channels.get(logChannelID);
-
+    let logChannel = Bastion.channels.get(bastionSettings.logChannel);
     if (!logChannel) return;
 
     let color, guildIcon = guild.iconURL || 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png',

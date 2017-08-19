@@ -112,8 +112,7 @@ module.exports = async Bastion => {
       'list TEXT NOT NULL DEFAULT \'[]\')');
 
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
-      '(log TEXT NOT NULL DEFAULT \'false\',' +
-      'logChannelID TEXT UNIQUE)');
+      '(logChannel TEXT)');
 
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS scheduledCommands' +
       '(cronExp TEXT NOT NULL,' +
