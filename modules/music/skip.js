@@ -15,7 +15,7 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
   }
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRoleID)) {
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
     if (!message.guild.music.skipVotes.includes(message.author.id)) {
       message.guild.music.skipVotes.push(message.author.id);
     }

@@ -47,10 +47,10 @@ exports.run = async (Bastion, message) => {
       }
     }
     else {
-      let guildSettings = await Bastion.db.get(`SELECT musicMasterRoleID, musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`);
+      let guildSettings = await Bastion.db.get(`SELECT musicMasterRole, musicTextChannel, musicVoiceChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-      if (guildSettings.musicMasterRoleID) {
-        if (message.member.roles.has(guildSettings.musicMasterRoleID)) {
+      if (guildSettings.musicMasterRole) {
+        if (message.member.roles.has(guildSettings.musicMasterRole)) {
           voiceChannel = message.member.voiceChannel;
 
           if (!voiceChannel) {
@@ -89,9 +89,9 @@ exports.run = async (Bastion, message) => {
         }
       }
       else {
-        if (guildSettings.musicTextChannelID !== message.channel.id) return;
+        if (guildSettings.musicTextChannel !== message.channel.id) return;
 
-        if (!guildSettings.musicVoiceChannelID) {
+        if (!guildSettings.musicVoiceChannel) {
           /**
           * Error condition is encountered.
           * @fires error
@@ -99,7 +99,7 @@ exports.run = async (Bastion, message) => {
           return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
         }
 
-        if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannelID))) {
+        if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel))) {
           /**
           * Error condition is encountered.
           * @fires error

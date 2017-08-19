@@ -26,7 +26,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let musicChannel = await Bastion.db.get(`SELECT musicMasterRoleID, musicTextChannelID, musicVoiceChannelID FROM guildSettings WHERE guildID=${message.guild.id}`);
+  let guildSettings = await Bastion.db.get(`SELECT musicMasterRole, musicTextChannel, musicVoiceChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
 
   let voiceChannel, textChannel, vcStats;
   if (message.guild.voiceConnection) {
@@ -34,8 +34,8 @@ exports.run = async (Bastion, message, args) => {
     textChannel = message.channel;
     vcStats = string('userNoSameVC', 'errorMessage', message.author.tag);
   }
-  else if (musicChannel.musicTextChannelID && musicChannel.musicVoiceChannelID) {
-    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(musicChannel.musicVoiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(musicChannel.musicTextChannelID))) {
+  else if (guildSettings.musicTextChannel && guildSettings.musicVoiceChannel) {
+    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(guildSettings.musicTextChannel))) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -66,7 +66,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
   }
 
-  let musicMasterRoleID = musicChannel.musicMasterRoleID;
+  let musicMasterRole = guildSettings.musicMasterRole;
 
   if (textChannel.id !== message.channel.id) return;
   if (voiceChannel.members.get(message.author.id) === undefined) {
@@ -81,7 +81,7 @@ exports.run = async (Bastion, message, args) => {
   let musicObject = {
     voiceChannel: voiceChannel,
     textChannel: textChannel,
-    musicMasterRoleID: musicMasterRoleID,
+    musicMasterRole: musicMasterRole,
     songs: [],
     playing: false,
     repeat: false,

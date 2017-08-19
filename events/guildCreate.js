@@ -17,9 +17,9 @@ module.exports = guild => {
     'farewellMessage BLOB,' +
     'farewellTimeout INTEGER NOT NULL DEFAULT 15,' +
     'log TEXT UNIQUE,' +
-    'musicTextChannelID TEXT UNIQUE,' +
-    'musicVoiceChannelID TEXT UNIQUE,' +
-    'musicMasterRoleID TEXT UNIQUE,' +
+    'musicTextChannel TEXT UNIQUE,' +
+    'musicVoiceChannel TEXT UNIQUE,' +
+    'musicMasterRole TEXT UNIQUE,' +
     'filterInvite INTEGER NOT NULL DEFAULT 0,' +
     'filterLink INTEGER NOT NULL DEFAULT 0,' +
     'whitelistDomains TEXT NOT NULL DEFAULT \'[]\',' +
