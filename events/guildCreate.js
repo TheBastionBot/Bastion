@@ -21,7 +21,7 @@ module.exports = guild => {
     'musicVoiceChannelID TEXT UNIQUE,' +
     'musicMasterRoleID TEXT UNIQUE,' +
     'filterInvite INTEGER NOT NULL DEFAULT 0,' +
-    'filterLink TEXT NOT NULL DEFAULT \'false\',' +
+    'filterLink INTEGER NOT NULL DEFAULT 0,' +
     'whitelistDomains TEXT NOT NULL DEFAULT \'[]\',' +
     'filterWord INTEGER NOT NULL DEFAULT 0,' +
     'filteredWords TEXT,' +
