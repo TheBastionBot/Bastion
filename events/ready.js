@@ -31,10 +31,10 @@ module.exports = async Bastion => {
       'musicTextChannelID TEXT UNIQUE,' +
       'musicVoiceChannelID TEXT UNIQUE,' +
       'musicMasterRoleID TEXT UNIQUE,' +
-      'filterInvite TEXT NOT NULL DEFAULT \'false\',' +
+      'filterInvite INTEGER NOT NULL DEFAULT 0,' +
       'filterLink TEXT NOT NULL DEFAULT \'false\',' +
       'whitelistDomains TEXT NOT NULL DEFAULT \'[]\',' +
-      'filterWord INTEGER DEFAULT 0,' +
+      'filterWord INTEGER NOT NULL DEFAULT 0,' +
       'filteredWords TEXT,' +
       'announcementChannel TEXT,' +
       'chat TEXT NOT NULL DEFAULT \'false\',' +
