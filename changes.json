@@ -25,6 +25,7 @@
     "A random greeting message is sent if no greeting message is specified",
     "Updated `eval` output timeout to 10 sec",
     "Improved `changelog` command",
+    "Improved first load of `scheduledCommandHandler`",
     "Updated message embed colors",
     "Minor improvements"
   ],

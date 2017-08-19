@@ -126,6 +126,8 @@ module.exports = async Bastion => {
       'type TEXT NOT NULL,' +
       'amount TEXT NOT NULL)');
 
+    require('../handlers/scheduledCommandHandler')(Bastion);
+
     Bastion.log.console('\n');
     Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
     Bastion.log.console(COLOR.green('[Author URL] ') + Bastion.package.authorUrl);

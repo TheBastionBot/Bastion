@@ -45,8 +45,6 @@ const Modules = require('./handlers/moduleHandler');
 BASTION.commands = Modules.commands;
 BASTION.aliases = Modules.aliases;
 
-require('./handlers/scheduledCommandHandler')(BASTION);
-
 BASTION.login(BASTION.credentials.token).catch(e => {
   BASTION.log.error(e.toString());
   process.exit(1);
