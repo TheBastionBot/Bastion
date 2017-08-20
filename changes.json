@@ -35,7 +35,8 @@
     "Added `ignoreRole` command",
     "Added `ignoreChannel` command",
     "Added `announcementChannel` command",
-    "Added `slowMode` command"
+    "Added `slowMode` command",
+    "Added `terms` command"
   ],
   "removed": []
 }
