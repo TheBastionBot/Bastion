@@ -101,6 +101,7 @@
   "guide": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the official support server.",
   "help": "Shows help on the specifed command.",
   "support": "Sends the invite link to Bastion: Discord Server.",
+  "terms": "Read Bastion's Terms of Service.",
 
   "avatar": "Shows avatar of a specified user of your Discord server.",
   "channelID": "Shows ID of a specified channel of your Discord server.",
