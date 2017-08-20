@@ -18,7 +18,7 @@ module.exports = async member => {
     if (guild.greet) {
       let greetMessage;
       if (guild.greetMessage) {
-        greetMessage = await member.client.decodeString(guild.greetMessage);
+        greetMessage = await member.client.functions.decodeString(guild.greetMessage);
       }
       else {
         greetMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
@@ -48,7 +48,7 @@ module.exports = async member => {
     if (guild.greetPrivate) {
       let greetPrivateMessage = 'Welcome to $server! Enjoy your time here.';
       if (guild.greetPrivateMessage) {
-        greetPrivateMessage = await member.client.decodeString(guild.greetPrivateMessage);
+        greetPrivateMessage = await member.client.functions.decodeString(guild.greetPrivateMessage);
       }
       greetPrivateMessage = greetPrivateMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetPrivateMessage = greetPrivateMessage.replace(/\$server/ig, member.guild.name);
