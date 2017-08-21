@@ -1,13 +1,9 @@
 {
-  "date": "August 20, 2017",
+  "date": "August 21, 2017",
   "fixed": [
-    "Fixed issues with greet & farewell messages",
-    "Minor fixes"
+    "Fixed `leaderboard` and `hallOfFame` command"
   ],
-  "improved": [
-    "Updated repo links",
-    "Improved `changelog` command"
-  ],
+  "improved": [],
   "added": [],
   "removed": []
 }
