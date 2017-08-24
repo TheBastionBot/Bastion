@@ -34,5 +34,6 @@
   "$user joined. You must construct additional pylons.",
   "It's $user! Praise the sun! [T]/",
   "Big $user showed up!",
-  "Ermagherd. $user is here."
+  "Ermagherd. $user is here.",
+  "Welcome, $user. We hope you brought pizza."
 ]
