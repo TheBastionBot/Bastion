@@ -92,6 +92,7 @@
   "removeSelfAssignableRole": "Deletes a role from the list of self-assignable roles.",
   "removeWhitelistDomain": "Deletes a domain from the list of whitelisted domains.",
   "setPrefix": "Sets Bastion's prefix for the server.",
+  "starboard": "Toggles logging of starred messages of the server in this channel.",
   "slowMode": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.",
 
   "changelog": "Shows the changes made in the current version of Bastion Bot.",
