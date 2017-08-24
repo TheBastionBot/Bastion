@@ -46,6 +46,7 @@ module.exports = async Bastion => {
       'warnAction TEXT,' +
       'ignoredChannels TEXT,' +
       'ignoredRoles TEXT,' +
+      'starboard TEXT UNIQUE,' +
       'modLog TEXT UNIQUE,' +
       'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
       'PRIMARY KEY(guildID))').then(async () => {
