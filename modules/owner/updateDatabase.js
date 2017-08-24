@@ -16,9 +16,9 @@ exports.run = (Bastion, message) => {
   }
 
   let step = 0;
-  Bastion.db.get('SELECT whitelistDomains FROM guildSettings').catch(async () => {
+  Bastion.db.get('SELECT starboard FROM guildSettings').catch(async () => {
     try {
-      await Bastion.db.run('ALTER TABLE guildSettings ADD whitelistDomains TEXT NOT NULL DEFAULT \'[]\'');
+      await Bastion.db.run('ALTER TABLE guildSettings ADD starboard TEXT');
 
       message.channel.send({
         embed: {
