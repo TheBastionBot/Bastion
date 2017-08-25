@@ -19,7 +19,7 @@ exports.run = async (Bastion, message) => {
     let guildSettings = await Bastion.db.get(`SELECT starboard FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     let color, starboardStats;
-    if (guildSettings.modLog) {
+    if (guildSettings.starboard) {
       await Bastion.db.run(`UPDATE guildSettings SET starboard=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
       starboardStats = 'Starboard is now disabled.';
