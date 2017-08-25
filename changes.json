@@ -1,10 +1,12 @@
 {
-  "date": "August 24, 2017",
+  "date": "August 25, 2017",
   "fixed": [
-    "Fixed `leaderboard` and `hallOfFame` command"
+    "Fixed `leaderboard` and `hallOfFame` command",
+    "Updated default greeting messages"
   ],
   "improved": [],
   "added": [
+    "Added `serverSettings` command",
     "Added `starboard` command"
   ],
   "removed": []
