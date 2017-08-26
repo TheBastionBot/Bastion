@@ -1,13 +1,17 @@
 {
-  "date": "August 25, 2017",
+  "date": "August 26, 2017",
   "fixed": [
     "Fixed `leaderboard` and `hallOfFame` command",
+    "Improved invite, link and word filters",
     "Updated default greeting messages"
   ],
   "improved": [],
   "added": [
+    "Added `robotify` command",
     "Added `serverSettings` command",
-    "Added `starboard` command"
+    "Added `starboard` command",
+    "Added `whitelistChannel` command",
+    "Added `whitelistRole` command"
   ],
   "removed": []
 }
