@@ -14,6 +14,7 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
+
   if (!args.invites && !args.links && !args.words) {
     /**
      * The command was ran with invalid parameters.
