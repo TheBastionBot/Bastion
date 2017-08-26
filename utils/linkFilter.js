@@ -11,22 +11,41 @@
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT filterLink, whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let query = `SELECT filterLink, linkFilterWhitelistChannels, linkFilterWhitelistRoles, whitelistDomains FROM guildSettings LEFT OUTER JOIN whitelists ON guildSettings.guildID = whitelists.guildID WHERE guildSettings.guildId='${message.guild.id}'`;
+    let guild = await message.client.db.get(query);
 
-    if (!guild.filterLink || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+    // If link filter is disabled, return
+    if (!guild.filterLink) return;
+    // If the channel is whitelisted, return
+    if (guild.linkFilterWhitelistChannels) {
+      let whitelistChannels = guild.linkFilterWhitelistChannels.split(' ');
+      if (whitelistChannels.includes(message.channel.id)) return;
+    }
+    // If the user is in a whitelisted role, return
+    if (guild.linkFilterWhitelistRoles) {
+      let whitelistRoles = guild.linkFilterWhitelistRoles.split(' ');
+      for (let whitelistRole of whitelistRoles) {
+        if (message.member.roles.has(whitelistRole)) return;
+      }
+    }
+    // If the user is an admin, return
+    if (message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
 
     let whitelistDomains = JSON.parse(guild.whitelistDomains),
-      links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi),
-      matches = [];
+      links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi);
 
+    // If there are no links in the message content, return
     if (!links) return;
-
-    for (let i = 0; i < whitelistDomains.length; i++) {
-      matches[i] = links.filter(url => !message.client.functions.isSameDomain(whitelistDomains[i], url));
+    // If some domains are whitelisted, remove them from `links`
+    if (whitelistDomains.length) {
+      let matches = [];
+      for (let i = 0; i < whitelistDomains.length; i++) {
+        matches[i] = links.filter(url => !message.client.functions.isSameDomain(whitelistDomains[i], url));
+      }
+      links = message.client.functions.intersect(...matches);
     }
-    links = message.client.functions.intersect(...matches);
-
-    if (links.length !== 0) return;
+    // If there are no `links` left, return
+    if (!links.length) return;
 
     if (message.deletable) {
       message.delete().catch(e => {
