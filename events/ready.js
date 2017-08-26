@@ -92,6 +92,17 @@ module.exports = async Bastion => {
         }
       });
 
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS whitelists' +
+      '(guildID TEXT NOT NULL UNIQUE,' +
+      'inviteFilterWhitelistChannels TEXT UNIQUE,' +
+      'inviteFilterWhitelistRoles TEXT UNIQUE,' +
+      'linkFilterWhitelistChannels TEXT UNIQUE,' +
+      'linkFilterWhitelistRoles TEXT UNIQUE,' +
+      'linkFilterWhitelistDomains TEXT UNIQUE,' +
+      'wordFilterWhitelistChannels TEXT UNIQUE,' +
+      'wordFilterWhitelistRoles TEXT UNIQUE,' +
+      'FOREIGN KEY (guildID) REFERENCES guildSettings (guildID) ON DELETE CASCADE)');
+
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
       '(userID TEXT NOT NULL UNIQUE,' +
       'PRIMARY KEY(userID))');
