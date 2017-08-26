@@ -96,6 +96,7 @@
   "starboard": "Toggles logging of starred messages of the server in this channel.",
   "slowMode": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.",
   "whitelistChannel": "Add/remove the channel from the whitelist for invite filter, link filter or word filter.",
+  "whitelistRole": "Add/remove a role from the whitelist for invite filter, link filter or word filter.",
 
   "changelog": "Shows the changes made in the current version of Bastion Bot.",
   "commands": "Direct Messages you with a list of all the commands.",
