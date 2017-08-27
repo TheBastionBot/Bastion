@@ -1,5 +1,5 @@
 {
-  "date": "August 26, 2017",
+  "date": "August 27, 2017",
   "fixed": [
     "Fixed `leaderboard` and `hallOfFame` command",
     "Improved invite, link and word filters",
@@ -7,6 +7,7 @@
   ],
   "improved": [],
   "added": [
+    "Added `giphy` command",
     "Added `robotify` command",
     "Added `serverSettings` command",
     "Added `starboard` command",
