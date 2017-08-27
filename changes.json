@@ -1,13 +1,18 @@
 {
-  "date": "August 20, 2017",
+  "date": "August 27, 2017",
   "fixed": [
-    "Fixed issues with greet & farewell messages",
-    "Minor fixes"
+    "Fixed `leaderboard` and `hallOfFame` command",
+    "Improved invite, link and word filters",
+    "Updated default greeting messages"
   ],
-  "improved": [
-    "Updated repo links",
-    "Improved `changelog` command"
+  "improved": [],
+  "added": [
+    "Added `giphy` command",
+    "Added `robotify` command",
+    "Added `serverSettings` command",
+    "Added `starboard` command",
+    "Added `whitelistChannel` command",
+    "Added `whitelistRole` command"
   ],
-  "added": [],
   "removed": []
 }

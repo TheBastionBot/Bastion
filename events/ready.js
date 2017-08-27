@@ -46,6 +46,7 @@ module.exports = async Bastion => {
       'warnAction TEXT,' +
       'ignoredChannels TEXT,' +
       'ignoredRoles TEXT,' +
+      'starboard TEXT UNIQUE,' +
       'modLog TEXT UNIQUE,' +
       'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
       'PRIMARY KEY(guildID))').then(async () => {
@@ -90,6 +91,17 @@ module.exports = async Bastion => {
           Bastion.log.error(e);
         }
       });
+
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS whitelists' +
+      '(guildID TEXT NOT NULL UNIQUE,' +
+      'inviteFilterWhitelistChannels TEXT UNIQUE,' +
+      'inviteFilterWhitelistRoles TEXT UNIQUE,' +
+      'linkFilterWhitelistChannels TEXT UNIQUE,' +
+      'linkFilterWhitelistRoles TEXT UNIQUE,' +
+      'linkFilterWhitelistDomains TEXT UNIQUE,' +
+      'wordFilterWhitelistChannels TEXT UNIQUE,' +
+      'wordFilterWhitelistRoles TEXT UNIQUE,' +
+      'FOREIGN KEY (guildID) REFERENCES guildSettings (guildID) ON DELETE CASCADE)');
 
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers' +
       '(userID TEXT NOT NULL UNIQUE,' +
