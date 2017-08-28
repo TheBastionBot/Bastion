@@ -10,6 +10,9 @@ const linkFilter = require('../utils/linkFilter');
 const inviteFilter = require('../utils/inviteFilter');
 
 module.exports = (oldMessage, newMessage) => {
+  // If message content hasn't been changed, do nothing
+  if (oldMessage.content === newMessage.content) return;
+
   /**
    * Filter Bastion's credentials from the message
    */
