@@ -145,6 +145,7 @@
   "warn": "Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.",
   "warnAction": "Sets the warn action for the server.",
 
+  "giftShop": "Shows the products available in the gift shop, and their price.",
   "give": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
   "hallOfFame": "Shows the top 10 ranking with the highest level & experience points.",
   "leaderboard": "Shows the top 10 ranking with the highest amount of Bastion Currencies.",
