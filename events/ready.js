@@ -134,6 +134,18 @@ module.exports = async Bastion => {
       'messageID TEXT NOT NULL,' +
       'arguments TEXT)');
 
+    await Bastion.db.run('CREATE TABLE IF NOT EXISTS gifts' +
+      '(userID TEXT NOT NULL UNIQUE,' +
+      'cookies TEXT,' +
+      'chocolate_bars TEXT,' +
+      'icecreams TEXT,' +
+      'cakes TEXT,' +
+      'rings TEXT,' +
+      'crowns TEXT,' +
+      'gems TEXT,' +
+      'gift_hearts TEXT,' +
+      'love_letters TEXT)');
+
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS transactions' +
       '(userID TEXT NOT NULL,' +
       'type TEXT NOT NULL,' +
