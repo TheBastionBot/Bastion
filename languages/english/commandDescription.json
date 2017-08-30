@@ -150,6 +150,7 @@
   "give": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
   "hallOfFame": "Shows the top 10 ranking with the highest level & experience points.",
   "leaderboard": "Shows the top 10 ranking with the highest amount of Bastion Currencies.",
+  "myGifts": "Shows the gifts you currently have in your possession.",
   "take": "Take the specified amount of Bastion Currencies from the specified user.",
 
   "clean": "Removes all the songs from the current queue of your Discord server.",
