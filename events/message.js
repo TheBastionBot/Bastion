@@ -127,7 +127,7 @@ module.exports = async message => {
       recentLevelUps.push(message.author.id);
       setTimeout(function () {
         recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
-      }, 60 * 1000);
+      }, 20 * 1000);
       /**
       * Increase experience and level up user
       */
