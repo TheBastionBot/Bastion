@@ -1,9 +1,14 @@
 {
-  "date": "August 28, 2017",
+  "date": "August 31, 2017",
   "fixed": [],
   "improved": [
     "Minor improvements"
   ],
-  "added": [],
+  "added": [
+    "Added `buyGift` command",
+    "Added `gift` command",
+    "Added `giftShop` command",
+    "Added `myGifts` command"
+  ],
   "removed": []
 }
