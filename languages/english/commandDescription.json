@@ -146,6 +146,7 @@
   "warnAction": "Sets the warn action for the server.",
 
   "buyGift": "Buy gifts from Bastion's gift shop.",
+  "gift": "Send gifts to other users from the gift items you have with you.",
   "giftShop": "Shows the products available in the gift shop, and their price.",
   "give": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
   "hallOfFame": "Shows the top 10 ranking with the highest level & experience points.",
