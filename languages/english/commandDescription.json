@@ -129,6 +129,7 @@
   "addRole": "Adds the specified role to a specified user of your Discord server.",
   "ban": "Bans the specified user from your Discord server, and removes 7 days of their message history.",
   "clear": "Deletes a bulk of specified messages from a text channel of your Discord server.",
+  "clearWarn": "Clears all warnings from the given user.",
   "deafen": "Deafens a specified user server-wide in your Discord server.",
   "kick": "Kicks the specified user from your Discord server.",
   "listWarns": "Lists all the warned users of your Discord Server.",
