@@ -2,6 +2,7 @@
   "date": "September 2, 2017",
   "fixed": [
     "Fixed `listWarns` command issues when warn list was clear",
+    "Fixed slow mode issue that muted users too quickly",
     "Fixed duplicate scheduled command outputs - now scheduled commands will be activated only after a restart"
   ],
   "improved": [
