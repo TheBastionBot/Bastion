@@ -56,6 +56,12 @@ exports.run = (Bastion, message, args) => {
   }).catch(e => {
     Bastion.log.error(e);
   });
+
+  /**
+   * Logs moderation events if it is enabled
+   * @fires moderationLog
+   */
+  Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
 };
 
 exports.config = {

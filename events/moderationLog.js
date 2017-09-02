@@ -185,6 +185,11 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         color = guild.client.colors.ORANGE;
         break;
 
+      case 'clearWarn':
+        action = 'Cleared Warnings';
+        color = guild.client.colors.GREEN;
+        break;
+
       default:
         return guild.client.log.error(`Moderation logging is not present for ${action} action.`);
     }
