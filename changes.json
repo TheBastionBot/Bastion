@@ -1,12 +1,16 @@
 {
-  "date": "August 31, 2017",
-  "fixed": [],
+  "date": "September 2, 2017",
+  "fixed": [
+    "Fixed `listWarns` command issues when warn list was clear"
+  ],
   "improved": [
+    "Improved `listWarns` - now shows the number of warnings",
     "Made levelups faster",
     "Minor improvements"
   ],
   "added": [
     "Added `buyGift` command",
+    "Added `clearWarn` command",
     "Added `gift` command",
     "Added `giftShop` command",
     "Added `myGifts` command"
