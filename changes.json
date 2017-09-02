@@ -1,7 +1,8 @@
 {
   "date": "September 2, 2017",
   "fixed": [
-    "Fixed `listWarns` command issues when warn list was clear"
+    "Fixed `listWarns` command issues when warn list was clear",
+    "Fixed duplicate scheduled command outputs - now scheduled commands will be activated only after a restart"
   ],
   "improved": [
     "Improved `listWarns` - now shows the number of warnings",
