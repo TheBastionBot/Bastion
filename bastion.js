@@ -20,7 +20,8 @@ BASTION.config = require('./settings/config.json');
 BASTION.colors = Discord.Constants.Colors;
 
 let languages = [
-  'english'
+  'english',
+  'spanish'
 ];
 let language = 'english';
 if (languages.includes(BASTION.config.language)) {

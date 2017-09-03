@@ -1,5 +1,5 @@
 {
-  "date": "September 2, 2017",
+  "date": "September 3, 2017",
   "fixed": [
     "Fixed `listWarns` command issues when warn list was clear",
     "Fixed slow mode issue that muted users too quickly",
@@ -11,6 +11,7 @@
     "Minor improvements"
   ],
   "added": [
+    "Added Spanish language",
     "Added `buyGift` command",
     "Added `clearWarn` command",
     "Added `gift` command",
