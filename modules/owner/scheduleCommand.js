@@ -79,9 +79,6 @@ exports.run = async (Bastion, message, args) => {
         args.command,
         args.arguments
       ]);
-
-    delete require.cache[require.resolve('../../handlers/scheduledCommandHandler')];
-    require('../../handlers/scheduledCommandHandler')(Bastion);
   }
   catch (e) {
     Bastion.log.error(e);

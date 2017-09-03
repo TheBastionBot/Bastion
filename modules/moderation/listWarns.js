@@ -17,17 +17,19 @@ exports.run = (Bastion, message) => {
 
   if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
     return message.channel.send({
-      color: Bastion.colors.GREEN,
-      description: 'No one has been warned yet.'
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: 'No one has been warned yet.'
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
 
   let warnedUsers = [];
-  Object.keys(message.guild.warns).forEach(id => {
-    warnedUsers.push(message.guild.members.get(id).user.tag);
-  });
+  for (let userID of Object.keys(message.guild.warns)) {
+    warnedUsers.push(`${message.guild.members.get(userID).user.tag} - ${message.guild.warns[userID]} Warnings`);
+  }
 
   message.channel.send({
     embed: {

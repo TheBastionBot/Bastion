@@ -1,0 +1,13 @@
+{
+  "busy":"Ocupado",
+  "connection":"Error de conexión",
+  "cooldown":"Tiempo de reutilización",
+  "emptyQueue":"Lista vacía",
+  "forbidden":"Prohibido",
+  "insufficientBalance":"Fondos insuficientes",
+  "invalidInput":"Entrada no válida",
+  "noCredentials":"No hay Credenciales",
+  "notFound":"No Encontrado",
+  "parseError":"Error de análisis",
+  "unknown":"Error Desconocido"
+}

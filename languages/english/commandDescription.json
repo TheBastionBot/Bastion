@@ -129,6 +129,7 @@
   "addRole": "Adds the specified role to a specified user of your Discord server.",
   "ban": "Bans the specified user from your Discord server, and removes 7 days of their message history.",
   "clear": "Deletes a bulk of specified messages from a text channel of your Discord server.",
+  "clearWarn": "Clears all warnings from the given user.",
   "deafen": "Deafens a specified user server-wide in your Discord server.",
   "kick": "Kicks the specified user from your Discord server.",
   "listWarns": "Lists all the warned users of your Discord Server.",
@@ -145,9 +146,13 @@
   "warn": "Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.",
   "warnAction": "Sets the warn action for the server.",
 
+  "buyGift": "Buy gifts from Bastion's gift shop.",
+  "gift": "Send gifts to other users from the gift items you have with you.",
+  "giftShop": "Shows the products available in the gift shop, and their price.",
   "give": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
   "hallOfFame": "Shows the top 10 ranking with the highest level & experience points.",
   "leaderboard": "Shows the top 10 ranking with the highest amount of Bastion Currencies.",
+  "myGifts": "Shows the gifts you currently have in your possession.",
   "take": "Take the specified amount of Bastion Currencies from the specified user.",
 
   "clean": "Removes all the songs from the current queue of your Discord server.",

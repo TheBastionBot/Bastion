@@ -1,18 +1,22 @@
 {
-  "date": "August 27, 2017",
+  "date": "September 3, 2017",
   "fixed": [
-    "Fixed `leaderboard` and `hallOfFame` command",
-    "Improved invite, link and word filters",
-    "Updated default greeting messages"
+    "Fixed `listWarns` command issues when warn list was clear",
+    "Fixed slow mode issue that muted users too quickly",
+    "Fixed duplicate scheduled command outputs - now scheduled commands will be activated only after a restart"
   ],
-  "improved": [],
+  "improved": [
+    "Improved `listWarns` - now shows the number of warnings",
+    "Made levelups faster",
+    "Minor improvements"
+  ],
   "added": [
-    "Added `giphy` command",
-    "Added `robotify` command",
-    "Added `serverSettings` command",
-    "Added `starboard` command",
-    "Added `whitelistChannel` command",
-    "Added `whitelistRole` command"
+    "Added Spanish language",
+    "Added `buyGift` command",
+    "Added `clearWarn` command",
+    "Added `gift` command",
+    "Added `giftShop` command",
+    "Added `myGifts` command"
   ],
   "removed": []
 }

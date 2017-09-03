@@ -51,15 +51,7 @@ module.exports = async message => {
             let title, description;
 
             ++recentUsers[message.author.id];
-            if (recentUsers[message.author.id] === 3) {
-              title = 'Woah There. Way too Spicy.';
-              description = `${message.author} you are sending messages too quickly.`;
-            }
-            else if (recentUsers[message.author.id] === 4) {
-              title = 'Cooldown, dark lord.';
-              description = `${message.author} you are sending messages way too quickly.`;
-            }
-            else {
+            if (recentUsers[message.author.id] >= 5) {
               title = 'Warned ya!.';
               description = `${message.author} you have been muted for 5 minutes.`;
               await message.channel.overwritePermissions(message.author, {
@@ -84,14 +76,24 @@ module.exports = async message => {
                 }
               }, 5 * 60 * 1000);
             }
+            else if (recentUsers[message.author.id] >= 4) {
+              title = 'Cooldown, dark lord.';
+              description = `${message.author} you are sending messages way too quickly.`;
+            }
+            else if (recentUsers[message.author.id] >= 3) {
+              title = 'Woah There. Way too Spicy.';
+              description = `${message.author} you are sending messages too quickly.`;
+            }
 
-            await message.channel.send({
-              embed: {
-                color: message.client.colors.ORANGE,
-                title: title,
-                description: description
-              }
-            });
+            if (title && description) {
+              await message.channel.send({
+                embed: {
+                  color: message.client.colors.ORANGE,
+                  title: title,
+                  description: description
+                }
+              });
+            }
           }
           else {
             recentUsers[message.author.id] = 1;
@@ -127,7 +129,7 @@ module.exports = async message => {
       recentLevelUps.push(message.author.id);
       setTimeout(function () {
         recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
-      }, 60 * 1000);
+      }, 20 * 1000);
       /**
       * Increase experience and level up user
       */
