@@ -85,9 +85,8 @@ case $1 in
     echo "Updating $NAME..."
     git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\n" && exit 1)
     echo "Updating dependencies..."
+    rm -fr node_modules
     npm install --production 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
-    echo "Deleting unused dependencies..."
-    npm prune 1>/dev/null 2>update.log
     echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
   fi
 ;;

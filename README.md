@@ -1,14 +1,13 @@
 # Bastion: Discord Bot
 [![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
-[![GitHub release](https://img.shields.io/github/release/snkrsnkampa/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
-[![Build Status](https://travis-ci.org/snkrsnkampa/Bastion.svg?branch=master)](https://travis-ci.org/snkrsnkampa/Bastion)
+[![GitHub release](https://img.shields.io/github/release/TheBastionBot/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
+[![Build Status](https://travis-ci.org/TheBastionBot/Bastion.svg?branch=master)](https://travis-ci.org/TheBastionBot/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/bastion/localized.svg)](http://i18n.bastionbot.org/project/bastion)
-[![Dependencies](https://david-dm.org/snkrsnkampa/Bastion.svg)](https://david-dm.org/snkrsnkampa/Bastion)
-[![Website](https://img.shields.io/website-up-down-green-red/https/BastionBot.org.svg?label=Website)](https://BastionBot.org) <a href="/LICENSE">
-[![license](https://img.shields.io/github/license/snkrsnkampa/Bastion.svg)](LICENSE)  
-
-<!--[![Github All Releases](https://img.shields.io/github/downloads/snkrsnkampa/Bastion/total.svg?style=flat-square)]()-->  
+<!-- [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion) -->
+[![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
+[![Website](https://img.shields.io/website-up-down-green-red/https/BastionBot.org.svg?label=Website)](https://BastionBot.org)
+<!-- [![Github All Releases](https://img.shields.io/github/downloads/TheBastionBot/Bastion/total.svg?style=flat-square)]()   -->
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
 *Administration, Moderation, Searches, Game Server Stats, Player Stats,
 Music, Games, User Profiles, User Levels, Virtual Currencies, Humor?*  

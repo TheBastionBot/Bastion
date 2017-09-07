@@ -1,22 +1,12 @@
 {
-  "date": "September 3, 2017",
+  "date": "September 6, 2017",
   "fixed": [
-    "Fixed `listWarns` command issues when warn list was clear",
-    "Fixed slow mode issue that muted users too quickly",
-    "Fixed duplicate scheduled command outputs - now scheduled commands will be activated only after a restart"
+    "Minor fixes"
   ],
   "improved": [
-    "Improved `listWarns` - now shows the number of warnings",
-    "Made levelups faster",
+    "Giveaway will last for 6 hours. Don't miss the chance to get free money anymore.",
     "Minor improvements"
   ],
-  "added": [
-    "Added Spanish language",
-    "Added `buyGift` command",
-    "Added `clearWarn` command",
-    "Added `gift` command",
-    "Added `giftShop` command",
-    "Added `myGifts` command"
-  ],
+  "added": [],
   "removed": []
 }
