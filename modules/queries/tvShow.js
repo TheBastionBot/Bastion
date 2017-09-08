@@ -43,7 +43,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'TV show'), message.channel);
+          return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'TV show'), message.channel);
         }
 
         message.channel.send({
@@ -80,7 +80,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string(response.statusCode), string(response.statusMessage), message.channel);
+        return Bastion.emit('error', response.statusCode, response.statusMessage, message.channel);
       }
     }
   });
