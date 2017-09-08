@@ -6,7 +6,8 @@
   ],
   "improved": [
     "Improvements to `slowmode`",
-    "Improvements to word filter"
+    "Improvements to word filter",
+    "Updated giveaway timeout to 3 hours"
   ],
   "added": [],
   "removed": []
