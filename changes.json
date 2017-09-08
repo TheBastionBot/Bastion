@@ -4,7 +4,9 @@
     "Fixed `movie` command crashes",
     "Fixed `tvShow` command crashes"
   ],
-  "improved": [],
+  "improved": [
+    "Improvements to `slowmode`"
+  ],
   "added": [],
   "removed": []
 }
