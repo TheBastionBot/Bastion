@@ -5,7 +5,8 @@
     "Fixed `tvShow` command crashes"
   ],
   "improved": [
-    "Improvements to `slowmode`"
+    "Improvements to `slowmode`",
+    "Improvements to word filter"
   ],
   "added": [],
   "removed": []
