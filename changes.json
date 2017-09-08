@@ -1,12 +1,10 @@
 {
-  "date": "September 6, 2017",
+  "date": "September 8, 2017",
   "fixed": [
-    "Minor fixes"
+    "Fixed `movie` command crashes",
+    "Fixed `tvShow` command crashes"
   ],
-  "improved": [
-    "Giveaway will last for 6 hours. Don't miss the chance to get free money anymore.",
-    "Minor improvements"
-  ],
+  "improved": [],
   "added": [],
   "removed": []
 }
