@@ -1,8 +1,9 @@
 {
-  "date": "September 8, 2017",
+  "date": "September 9, 2017",
   "fixed": [
     "Fixed `movie` command crashes",
-    "Fixed `tvShow` command crashes"
+    "Fixed `tvShow` command crashes",
+    "Fixed case sensitive keywords in `commandSearch` command"
   ],
   "improved": [
     "Improvements to `slowmode`",
