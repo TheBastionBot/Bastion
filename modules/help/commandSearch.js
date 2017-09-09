@@ -16,7 +16,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   args = args.join('').toLowerCase();
-  let commands = Bastion.commands.map(c => c.help.name).filter(c => c.includes(args));
+  let commands = Bastion.commands.map(c => c.help.name.toLowerCase()).filter(c => c.includes(args));
   if (commands.length === 0) {
     /**
      * Error condition is encountered.
@@ -52,6 +52,6 @@ exports.help = {
   description: string('commandSearch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
-  usage: 'commandSearch <text>',
+  usage: 'commandSearch <keyword>',
   example: [ 'commandSearch user' ]
 };

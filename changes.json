@@ -1,11 +1,14 @@
 {
-  "date": "September 6, 2017",
+  "date": "September 9, 2017",
   "fixed": [
-    "Minor fixes"
+    "Fixed `movie` command crashes",
+    "Fixed `tvShow` command crashes",
+    "Fixed case sensitive keywords in `commandSearch` command"
   ],
   "improved": [
-    "Giveaway will last for 6 hours. Don't miss the chance to get free money anymore.",
-    "Minor improvements"
+    "Improvements to `slowmode`",
+    "Improvements to word filter",
+    "Updated giveaway timeout to 3 hours"
   ],
   "added": [],
   "removed": []

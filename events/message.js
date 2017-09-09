@@ -44,7 +44,7 @@ module.exports = async message => {
     inviteFilter(message);
 
     try {
-      if (!message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
+      if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
         let guildSettings = await message.client.db.get(`SELECT slowMode FROM guildSettings WHERE guildID=${message.guild.id}`);
         if (guildSettings && guildSettings.slowMode) {
           if (recentUsers.hasOwnProperty(message.author.id)) {

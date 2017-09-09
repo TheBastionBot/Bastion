@@ -35,7 +35,7 @@ module.exports = async message => {
       filteredWords = guild.filteredWords.split(' ');
     }
     for (let word of filteredWords) {
-      if (message.content.toLowerCase().includes(word.toLowerCase())) {
+      if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
         if (message.deletable) {
           return message.delete().catch(e => {
             message.client.log.error(e);

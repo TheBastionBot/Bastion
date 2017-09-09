@@ -4,9 +4,9 @@
 [![Build Status](https://travis-ci.org/TheBastionBot/Bastion.svg?branch=master)](https://travis-ci.org/TheBastionBot/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/bastion/localized.svg)](http://i18n.bastionbot.org/project/bastion)
-<!-- [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion) -->
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
 [![Website](https://img.shields.io/website-up-down-green-red/https/BastionBot.org.svg?label=Website)](https://BastionBot.org)
+<!-- [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion) -->
 <!-- [![Github All Releases](https://img.shields.io/github/downloads/TheBastionBot/Bastion/total.svg?style=flat-square)]()   -->
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
 *Administration, Moderation, Searches, Game Server Stats, Player Stats,
@@ -40,9 +40,9 @@ commands, read the [Installation Guide](https://BastionBot.org/guide).
 
 > *If you ever face any problems with Bastion Bot or you don't understand*
 > *something, or if you need any kind of help with it, just head over to the*
-> *[#help](https://discord.gg/fzx8fkt) channel in [Bastion Bot: Discord Server]*
-> *(https://discord.gg/fzx8fkt), and ask for help. We will be more than happy*
-> *to help you.*
+> *[#help](https://discord.gg/fzx8fkt) channel in*
+> *[Bastion Bot: Discord Server](https://discord.gg/fzx8fkt), and ask for help.*
+> *We will be more than happy to help you.*
 
 ## Support Bastion Bot project and keep it alive forever
 If you like the Bastion Bot project you can **⭐ Star** in on
