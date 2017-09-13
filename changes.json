@@ -1,15 +1,11 @@
 {
-  "date": "September 9, 2017",
+  "date": "September 13, 2017",
   "fixed": [
-    "Fixed `movie` command crashes",
-    "Fixed `tvShow` command crashes",
-    "Fixed case sensitive keywords in `commandSearch` command"
+    "Fixed case sensitive issues with command handler when using aliases"
   ],
-  "improved": [
-    "Improvements to `slowmode`",
-    "Improvements to word filter",
-    "Updated giveaway timeout to 3 hours"
+  "improved": [],
+  "added": [
+    "Added `viewPermissions` command"
   ],
-  "added": [],
   "removed": []
 }

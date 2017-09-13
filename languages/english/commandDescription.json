@@ -125,6 +125,7 @@
   "stats": "Shows detailed stats and info of Bastion.",
   "userID": "Shows ID of a specified user of your Discord server.",
   "userInfo": "Shows information of a specified user of your Discord server.",
+  "viewPermissions": "Shows the permissions you have in the server/channel.",
 
   "addRole": "Adds the specified role to a specified user of your Discord server.",
   "ban": "Bans the specified user from your Discord server, and removes 7 days of their message history.",
