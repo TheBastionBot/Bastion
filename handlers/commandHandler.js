@@ -43,7 +43,7 @@ module.exports = async message => {
       cmd = message.client.commands.get(command);
     }
     else if (message.client.aliases.has(command)) {
-      cmd = message.client.commands.get(message.client.aliases.get(command));
+      cmd = message.client.commands.get(message.client.aliases.get(command).toLowerCase());
     }
     else return;
 
