@@ -15,7 +15,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!args.trigger || !args.response) {
+  if (!args.trigger || !args.triggers.trim().length || !args.response || !args.response.trim().length) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
