@@ -169,7 +169,6 @@ exports.config = {
 
 exports.help = {
   name: 'rainbow6',
-  description: string('rainbow6', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',

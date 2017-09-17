@@ -94,7 +94,6 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreRole',
-  description: string('ignoreRole', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'ignoreRole <ROLE_ID> [--remove]',

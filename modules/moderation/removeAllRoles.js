@@ -66,8 +66,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removeallroles',
-  description: string('removeAllRoles', 'commandDescription'),
+  name: 'removeAllRoles',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'removeAllRoles [@user-mention]',

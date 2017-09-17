@@ -48,7 +48,6 @@ exports.config = {
 
 exports.help = {
   name: 'pause',
-  description: string('pause', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'pause',

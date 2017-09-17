@@ -96,8 +96,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'schedulecommand',
-  description: string('scheduleCommand', 'commandDescription'),
+  name: 'scheduleCommand',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'scheduleCommand <CRON PATTERN> <-c COMMAND> [-a ARGUMENTS]',

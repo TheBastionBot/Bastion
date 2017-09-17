@@ -87,7 +87,6 @@ exports.config = {
 
 exports.help = {
   name: 'take',
-  description: string('take', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',

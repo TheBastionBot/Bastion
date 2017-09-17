@@ -136,7 +136,6 @@ exports.config = {
 
 exports.help = {
   name: 'give',
-  description: string('give', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'give <amount> <@user-mention|user_id>',

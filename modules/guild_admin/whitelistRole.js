@@ -145,7 +145,6 @@ exports.config = {
 
 exports.help = {
   name: 'whitelistRole',
-  description: string('whitelistRole', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'whitelistRole <ROLE_ID> < --invites | --links | --words > [--remove]',

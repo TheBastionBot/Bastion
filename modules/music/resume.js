@@ -48,7 +48,6 @@ exports.config = {
 
 exports.help = {
   name: 'resume',
-  description: string('resume', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'resume',

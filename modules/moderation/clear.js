@@ -87,7 +87,6 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: string('clear', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'MANAGE_MESSAGES',
   usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',

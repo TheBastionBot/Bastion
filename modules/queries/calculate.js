@@ -41,7 +41,6 @@ exports.config = {
 
 exports.help = {
   name: 'calculate',
-  description: string('calculate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'calculate <mathematical_expression>',

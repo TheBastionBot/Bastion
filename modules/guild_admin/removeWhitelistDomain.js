@@ -71,8 +71,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removewhitelistdomain',
-  description: string('removeWhitelistDomain', 'commandDescription'),
+  name: 'removeWhitelistDomain',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeWhitelistDomain <index>',

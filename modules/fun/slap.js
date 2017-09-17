@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
@@ -45,7 +43,6 @@ exports.config = {
 
 exports.help = {
   name: 'slap',
-  description: string('slap', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'slap <@USER_MENTION>',

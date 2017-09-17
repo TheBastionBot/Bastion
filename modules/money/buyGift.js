@@ -105,7 +105,6 @@ exports.config = {
 
 exports.help = {
   name: 'buyGift',
-  description: string('buyGift', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'buyGift <product> [-a amount]',

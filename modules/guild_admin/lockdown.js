@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -77,7 +75,6 @@ exports.config = {
 
 exports.help = {
   name: 'lockdown',
-  description: string('lockdown', 'commandDescription'),
   botPermission: 'MANAGE_ROLES',
   userPermission: 'ADMINISTRATOR',
   usage: 'lockdown [--remove]',

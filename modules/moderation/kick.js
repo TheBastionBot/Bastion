@@ -104,7 +104,6 @@ exports.config = {
 
 exports.help = {
   name: 'kick',
-  description: string('kick', 'commandDescription'),
   botPermission: 'KICK_MEMBERS',
   userPermission: 'KICK_MEMBERS',
   usage: 'kick @user-mention [Reason]',

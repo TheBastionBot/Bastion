@@ -107,7 +107,6 @@ exports.config = {
 
 exports.help = {
   name: 'ban',
-  description: string('ban', 'commandDescription'),
   botPermission: 'BAN_MEMBERS',
   userPermission: 'BAN_MEMBERS',
   usage: 'ban <@user-mention> [Reason].',

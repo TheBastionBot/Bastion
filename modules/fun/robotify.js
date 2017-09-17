@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -39,7 +38,6 @@ exports.config = {
 
 exports.help = {
   name: 'robotify',
-  description: string('robotify', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'robotify [Random String]',

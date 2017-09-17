@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -61,8 +59,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'greetmessage',
-  description: string('greetMessage', 'commandDescription'),
+  name: 'greetMessage',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'greetMessage [Message]',

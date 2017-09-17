@@ -65,8 +65,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'setbio',
-  description: string('setBio', 'commandDescription'),
+  name: 'setBio',
   botPermission: '',
   userPermission: '',
   usage: 'setBio <text>',

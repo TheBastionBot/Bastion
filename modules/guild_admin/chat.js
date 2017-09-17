@@ -59,7 +59,6 @@ exports.config = {
 
 exports.help = {
   name: 'chat',
-  description: string('chat', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'chat',

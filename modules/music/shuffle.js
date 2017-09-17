@@ -45,7 +45,6 @@ exports.config = {
 
 exports.help = {
   name: 'shuffle',
-  description: string('shuffle', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'shuffle',

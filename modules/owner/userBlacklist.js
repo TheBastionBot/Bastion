@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -87,8 +85,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'userblacklist',
-  description: string('userBlacklist', 'commandDescription'),
+  name: 'userBlacklist',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',

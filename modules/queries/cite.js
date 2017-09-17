@@ -53,7 +53,6 @@ exports.config = {
 
 exports.help = {
   name: 'cite',
-  description: string('cite', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'cite <MESSAGE_ID>',

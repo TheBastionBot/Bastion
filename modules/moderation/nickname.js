@@ -69,7 +69,6 @@ exports.config = {
 
 exports.help = {
   name: 'nickname',
-  description: string('nickname', 'commandDescription'),
   botPermission: 'MANAGE_NICKNAMES',
   userPermission: 'MANAGE_NICKNAMES',
   usage: 'nickname <@user-mention> [nick]',

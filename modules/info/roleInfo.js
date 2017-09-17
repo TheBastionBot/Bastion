@@ -80,8 +80,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'roleinfo',
-  description: string('roleInfo', 'commandDescription'),
+  name: 'roleInfo',
   botPermission: '',
   userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',

@@ -63,8 +63,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'setprefix',
-  description: string('setPrefix', 'commandDescription'),
+  name: 'setPrefix',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'setPrefix < prefix | --default >',

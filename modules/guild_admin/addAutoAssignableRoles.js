@@ -83,8 +83,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'addautoassignableroles',
-  description: string('addAutoAssignableRoles', 'commandDescription'),
+  name: 'addAutoAssignableRoles',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'ADMINISTRATOR',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',

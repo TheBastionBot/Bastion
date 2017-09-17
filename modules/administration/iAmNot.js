@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.guild.me.hasPermission(this.help.botPermission)) {
     /**
@@ -59,8 +57,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'iamnot',
-  description: string('iAmNot', 'commandDescription'),
+  name: 'iAmNot',
   botPermission: 'MANAGE_ROLES',
   userPermission: '',
   usage: 'iAmNot <role name>',

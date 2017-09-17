@@ -106,8 +106,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'betflip',
-  description: string('betFlip', 'commandDescription'),
+  name: 'betFlip',
   botPermission: '',
   userPermission: '',
   usage: 'betflip < heads/tails > <-m amount>',

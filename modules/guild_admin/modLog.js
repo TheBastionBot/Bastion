@@ -6,8 +6,6 @@
 
 // This feature is absolutely useless because Discord already has audit logs. I'll probably remove this in future.
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -53,8 +51,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'modlog',
-  description: string('modLog', 'commandDescription'),
+  name: 'modLog',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'modLog',

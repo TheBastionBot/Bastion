@@ -45,7 +45,6 @@ exports.config = {
 
 exports.help = {
   name: 'queue',
-  description: string('queue', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'queue',

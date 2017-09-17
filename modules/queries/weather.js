@@ -116,7 +116,6 @@ exports.config = {
 
 exports.help = {
   name: 'weather',
-  description: string('weather', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'weather <city [, country_code]|zipcode>',

@@ -55,7 +55,6 @@ exports.config = {
 
 exports.help = {
   name: 'volume',
-  description: string('volume', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUSIC_MASTER',
   usage: 'volume < + | - | amount >',

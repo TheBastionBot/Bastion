@@ -185,7 +185,6 @@ exports.config = {
 
 exports.help = {
   name: 'warn',
-  description: string('warn', 'commandDescription'),
   botPermission: 'KICK_MEMBERS',
   userPermission: 'KICK_MEMBERS',
   usage: 'warn @user-mention [Reason]',

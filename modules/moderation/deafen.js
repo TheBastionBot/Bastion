@@ -86,7 +86,6 @@ exports.config = {
 
 exports.help = {
   name: 'deafen',
-  description: string('deafen', 'commandDescription'),
   botPermission: 'DEAFEN_MEMBERS',
   userPermission: 'DEAFEN_MEMBERS',
   usage: 'deafen @user-mention [Reason]',

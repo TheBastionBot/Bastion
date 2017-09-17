@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -67,8 +65,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'tapcode',
-  description: string('tapCode', 'commandDescription'),
+  name: 'tapCode',
   botPermission: '',
   userPermission: '',
   usage: 'tapCode <text>',

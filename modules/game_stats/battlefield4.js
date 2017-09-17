@@ -148,7 +148,6 @@ exports.config = {
 
 exports.help = {
   name: 'battlefield4',
-  description: string('battlefield4', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'battlefield4 <player_name>',

@@ -90,8 +90,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'textunmute',
-  description: string('textUnMute', 'commandDescription'),
+  name: 'textUnMute',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'textUnMute @user-mention [Reason]',

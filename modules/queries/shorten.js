@@ -80,7 +80,6 @@ exports.config = {
 
 exports.help = {
   name: 'shorten',
-  description: string('shorten', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'shorten <URL>',

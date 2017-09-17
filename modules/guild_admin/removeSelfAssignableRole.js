@@ -70,8 +70,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removeselfassignablerole',
-  description: string('removeSelfAssignableRole', 'commandDescription'),
+  name: 'removeSelfAssignableRole',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeSelfAssignableRole <index>',

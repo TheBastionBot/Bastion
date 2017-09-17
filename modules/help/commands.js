@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
 
@@ -53,7 +51,6 @@ exports.config = {
 
 exports.help = {
   name: 'commands',
-  description: string('commands', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'commands',

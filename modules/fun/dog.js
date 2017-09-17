@@ -35,7 +35,6 @@ exports.config = {
 
 exports.help = {
   name: 'dog',
-  description: string('dog', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'dog',

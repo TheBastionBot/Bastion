@@ -87,8 +87,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'deleterole',
-  description: string('deleteRole', 'commandDescription'),
+  name: 'deleteRole',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',

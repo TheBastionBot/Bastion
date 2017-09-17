@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -60,8 +58,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'emojiinfo',
-  description: string('emojiInfo', 'commandDescription'),
+  name: 'emojiInfo',
   botPermission: '',
   userPermission: '',
   usage: 'emojiInfo [:emoji:]',

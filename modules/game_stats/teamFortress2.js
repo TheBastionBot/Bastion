@@ -110,8 +110,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'teamfortress2',
-  description: string('teamFortress2', 'commandDescription'),
+  name: 'teamFortress2',
   botPermission: '',
   userPermission: '',
   usage: 'teamFortress2 <TF2_SERVER_IP>[:PORT]',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -44,8 +42,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'disableallcommands',
-  description: string('disableAllCommands', 'commandDescription'),
+  name: 'disableAllCommands',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'disableAllCommands',

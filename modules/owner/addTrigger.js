@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -57,8 +55,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'addtrigger',
-  description: string('addTrigger', 'commandDescription'),
+  name: 'addTrigger',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'addTrigger <-t trigger message> <-r response message>',

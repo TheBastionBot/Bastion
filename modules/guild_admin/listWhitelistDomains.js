@@ -51,8 +51,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listwhitelistdomains',
-  description: string('listWhitelistDomains', 'commandDescription'),
+  name: 'listWhitelistDomains',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'listWhitelistDomains [page_no]',

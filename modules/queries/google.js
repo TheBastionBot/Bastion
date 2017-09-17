@@ -68,7 +68,6 @@ exports.config = {
 
 exports.help = {
   name: 'google',
-  description: string('google', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'google <query>',

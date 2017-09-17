@@ -147,7 +147,6 @@ exports.config = {
 
 exports.help = {
   name: 'summon',
-  description: string('summon', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'summon',

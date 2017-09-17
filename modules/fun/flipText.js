@@ -5,7 +5,6 @@
  */
 
 const flipText = require('../../data/flipText.json');
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -38,8 +37,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'fliptext',
-  description: string('flipText', 'commandDescription'),
+  name: 'flipText',
   botPermission: '',
   userPermission: '',
   usage: 'fliptext <text>',

@@ -80,8 +80,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'youtubesearch',
-  description: string('youtubeSearch', 'commandDescription'),
+  name: 'youtubeSearch',
   botPermission: '',
   userPermission: '',
   usage: 'youtubeSearch <text>',

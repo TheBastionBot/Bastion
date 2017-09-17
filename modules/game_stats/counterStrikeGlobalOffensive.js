@@ -110,8 +110,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'counterstrikeglobaloffensive',
-  description: string('counterStrikeGlobalOffensive', 'commandDescription'),
+  name: 'counterStrikeGlobalOffensive',
   botPermission: '',
   userPermission: '',
   usage: 'counterStrikeGlobalOffensive <CSGO_SERVER_IP>[:PORT]',

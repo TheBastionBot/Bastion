@@ -90,7 +90,6 @@ exports.config = {
 
 exports.help = {
   name: 'profile',
-  description: string('profile', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'profile [@user-mention]',

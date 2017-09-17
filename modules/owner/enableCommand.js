@@ -62,8 +62,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'enablecommand',
-  description: string('enableCommand', 'commandDescription'),
+  name: 'enableCommand',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'enableCommand <command_name>',

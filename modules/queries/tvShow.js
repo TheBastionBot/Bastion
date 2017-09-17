@@ -95,8 +95,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'tvshow',
-  description: string('tvShow', 'commandDescription'),
+  name: 'tvShow',
   botPermission: '',
   userPermission: '',
   usage: 'tvShow <TV Show Name>',

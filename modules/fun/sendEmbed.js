@@ -45,8 +45,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'sendembed',
-  description: string('sendEmbed', 'commandDescription'),
+  name: 'sendEmbed',
   botPermission: '',
   userPermission: '',
   usage: 'sendEmbed <embedObject>',

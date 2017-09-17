@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -57,8 +55,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'filterinvite',
-  description: string('filterInvite', 'commandDescription'),
+  name: 'filterInvite',
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'ADMINISTRATOR',
   usage: 'filterInvite',

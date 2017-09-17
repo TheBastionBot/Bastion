@@ -86,7 +86,6 @@ exports.config = {
 
 exports.help = {
   name: 'mute',
-  description: string('mute', 'commandDescription'),
   botPermission: 'MUTE_MEMBERS',
   userPermission: 'MUTE_MEMBERS',
   usage: 'mute @user-mention [Reason]',

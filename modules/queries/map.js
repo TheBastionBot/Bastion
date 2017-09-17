@@ -43,7 +43,6 @@ exports.config = {
 
 exports.help = {
   name: 'map',
-  description: string('map', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'map <location> [--zoom <amount>]',

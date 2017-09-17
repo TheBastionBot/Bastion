@@ -65,8 +65,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listtodo',
-  description: string('listTodo', 'commandDescription'),
+  name: 'listTodo',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listTodo [page_no]',

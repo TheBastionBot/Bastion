@@ -65,8 +65,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'disablemodule',
-  description: string('disableModule', 'commandDescription'),
+  name: 'disableModule',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'disableModule <module_name>',

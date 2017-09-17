@@ -50,7 +50,6 @@ exports.config = {
 
 exports.help = {
   name: 'translate',
-  description: string('translate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'translate <language_code> <text>',

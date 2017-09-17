@@ -83,8 +83,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'addrole',
-  description: string('addRole', 'commandDescription'),
+  name: 'addRole',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'addRole [@user-mention] <Role Name>',

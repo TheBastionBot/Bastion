@@ -266,7 +266,6 @@ exports.config = {
 
 exports.help = {
   name: 'play',
-  description: string('play', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'play < name | song_link | -l <playlist_link> | -p [Playlist Name] >',

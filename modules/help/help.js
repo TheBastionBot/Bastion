@@ -14,7 +14,7 @@ exports.run = (Bastion, message, args) => {
         command = Bastion.commands.get(command);
       }
       else if (Bastion.aliases.has(command)) {
-        command = Bastion.commands.get(Bastion.aliases.get(command));
+        command = Bastion.commands.get(Bastion.aliases.get(command).toLowerCase());
       }
       let example = [];
       if (command.help.example.length < 1) {
@@ -54,7 +54,7 @@ exports.run = (Bastion, message, args) => {
             },
             {
               name: 'Description',
-              value: command.help.description,
+              value: string(command.help.name, 'commandDescription'),
               inline: false
             },
             {
@@ -148,7 +148,6 @@ exports.config = {
 
 exports.help = {
   name: 'help',
-  description: string('help', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'help [command_name [--dm]]',

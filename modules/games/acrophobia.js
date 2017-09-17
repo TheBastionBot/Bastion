@@ -208,7 +208,6 @@ exports.config = {
 
 exports.help = {
   name: 'acrophobia',
-  description: string('acrophobia', 'commandDescription'),
   userPermission: '',
   usage: 'acrophobia',
   example: []

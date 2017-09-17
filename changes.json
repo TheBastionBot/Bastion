@@ -1,11 +1,13 @@
 {
-  "date": "September 16, 2017",
+  "date": "September 17, 2017",
   "fixed": [
-    "Fixed case sensitive issues with command handler when using aliases"
+    "Fixed case sensitive issues with command handler when using aliases",
+    "Fixed case sensitive issues with `help` command when using aliases"
   ],
   "improved": [
     "User's bio text limit set to 160 characters",
-    "Improved `addTrigger` command; triggers and responses won't accept empty strings"
+    "Improved `addTrigger` command; triggers and responses won't accept empty strings",
+    "Improved `help` command"
   ],
   "added": [
     "Added `viewPermissions` command"

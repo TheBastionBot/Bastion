@@ -54,8 +54,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'selfdestruct',
-  description: string('selfDestruct', 'commandDescription'),
+  name: 'selfDestruct',
   botPermission: '',
   userPermission: '',
   usage: 'selfDestruct <content> [-t <seconds>]',

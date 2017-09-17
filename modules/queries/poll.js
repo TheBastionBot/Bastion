@@ -156,7 +156,6 @@ exports.config = {
 
 exports.help = {
   name: 'poll',
-  description: string('poll', 'commandDescription'),
   botPermission: '',
   userPermission: 'MANAGE_MESSAGES',
   usage: 'poll <question>;<option1>;<option2>[;<option3>[...]]',

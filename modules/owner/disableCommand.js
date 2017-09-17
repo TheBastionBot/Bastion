@@ -79,8 +79,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'disablecommand',
-  description: string('disableCommand', 'commandDescription'),
+  name: 'disableCommand',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'disableCommand <command_name>',

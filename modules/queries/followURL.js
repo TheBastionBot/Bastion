@@ -53,8 +53,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'followurl',
-  description: string('followURL', 'commandDescription'),
+  name: 'followURL',
   botPermission: '',
   userPermission: '',
   usage: 'followURL',

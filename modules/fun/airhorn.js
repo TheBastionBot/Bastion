@@ -91,7 +91,6 @@ exports.config = {
 
 exports.help = {
   name: 'airhorn',
-  description: string('airhorn', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUTE_MEMBERS',
   usage: 'airhorn',

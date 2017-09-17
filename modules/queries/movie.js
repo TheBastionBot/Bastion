@@ -97,7 +97,6 @@ exports.config = {
 
 exports.help = {
   name: 'movie',
-  description: string('movie', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'movie <Movie Name>',

@@ -39,7 +39,6 @@ exports.config = {
 
 exports.help = {
   name: 'np',
-  description: string('np', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'np',

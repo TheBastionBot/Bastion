@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   let fields = [];
   let permissions = message.member.permissions.serialize();
@@ -35,7 +33,6 @@ exports.config = {
 
 exports.help = {
   name: 'viewPermissions',
-  description: string('viewPermissions', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'viewPermissions',

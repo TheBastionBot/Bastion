@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   try {
     let profiles = await Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies * 1 DESC');
@@ -52,7 +50,6 @@ exports.config = {
 
 exports.help = {
   name: 'leaderboard',
-  description: string('leaderboard', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'leaderboard [--global]',

@@ -53,8 +53,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listfilteredwords',
-  description: string('listFilteredWords', 'commandDescription'),
+  name: 'listFilteredWords',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'listFilteredWords [page_no]',

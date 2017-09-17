@@ -85,8 +85,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'createchannel',
-  description: string('createChannel', 'commandDescription'),
+  name: 'createChannel',
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'createChannel [-t | -v] <Channel Name>',

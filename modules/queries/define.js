@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const wd = require('word-definition');
 
 exports.run = (Bastion, message, args) => {
@@ -62,7 +61,6 @@ exports.config = {
 
 exports.help = {
   name: 'define',
-  description: string('define', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'define [language_code] <word>',

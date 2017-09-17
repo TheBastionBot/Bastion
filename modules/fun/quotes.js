@@ -5,7 +5,6 @@
  */
 
 const quotes = require('../../data/quotes.json');
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   /*
@@ -69,7 +68,6 @@ exports.config = {
 
 exports.help = {
   name: 'quotes',
-  description: string('quotes', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'quotes [ -n | -a Author Name]',

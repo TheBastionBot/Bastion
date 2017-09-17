@@ -72,8 +72,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removefilteredword',
-  description: string('removeFilteredWord', 'commandDescription'),
+  name: 'removeFilteredWord',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeFilteredWord <index>',

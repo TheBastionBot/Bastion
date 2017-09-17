@@ -59,8 +59,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listautoassignableroles',
-  description: string('listAutoAssignableRoles', 'commandDescription'),
+  name: 'listAutoAssignableRoles',
   botPermission: '',
   userPermission: '',
   usage: 'listAutoAssignableRoles [page_no]',

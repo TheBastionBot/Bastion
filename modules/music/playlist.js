@@ -88,7 +88,6 @@ exports.config = {
 
 exports.help = {
   name: 'playlist',
-  description: string('playlist', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'playlist [Song Name] [-p Playlist Name]',

@@ -136,8 +136,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'callofduty4',
-  description: string('callOfDuty4', 'commandDescription'),
+  name: 'callOfDuty4',
   botPermission: '',
   userPermission: '',
   usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',

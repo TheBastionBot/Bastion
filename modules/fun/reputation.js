@@ -63,7 +63,6 @@ exports.config = {
 
 exports.help = {
   name: 'reputation',
-  description: string('reputation', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'reputation <@USER_MENTION>',

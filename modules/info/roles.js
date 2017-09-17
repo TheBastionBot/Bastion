@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   let roles = message.guild.roles.filter(r => r.position !== 0).map(r => r.name).map((r, i) => `${i + 1}. ${r}`);
 
@@ -37,7 +35,6 @@ exports.config = {
 
 exports.help = {
   name: 'roles',
-  description: string('roles', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'roles',

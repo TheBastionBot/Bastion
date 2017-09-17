@@ -48,8 +48,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'commandsearch',
-  description: string('commandSearch', 'commandDescription'),
+  name: 'commandSearch',
   botPermission: '',
   userPermission: '',
   usage: 'commandSearch <keyword>',

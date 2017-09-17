@@ -93,8 +93,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'deletechannel',
-  description: string('deleteChannel', 'commandDescription'),
+  name: 'deleteChannel',
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'deleteChannel [ [-m] #channel-mention | -i CHANNEL_ID | -n Channel Name ]',

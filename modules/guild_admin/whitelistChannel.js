@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -135,7 +133,6 @@ exports.config = {
 
 exports.help = {
   name: 'whitelistChannel',
-  description: string('whitelistChannel', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'whitelistChannel < --invites | --links | --words > [--remove]',

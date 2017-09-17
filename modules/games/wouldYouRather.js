@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const question = require('../../data/wouldYouRather.json');
 
 exports.run = (Bastion, message) => {
@@ -24,8 +23,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'wouldyourather',
-  description: string('wouldYouRather', 'commandDescription'),
+  name: 'wouldYouRather',
   botPermission: '',
   userPermission: '',
   usage: 'wouldYouRather',

@@ -60,8 +60,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'musicmasterrole',
-  description: string('musicMasterRole', 'commandDescription'),
+  name: 'musicMasterRole',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'musicMasterRole [ROLE_ID]',

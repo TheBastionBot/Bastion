@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -81,8 +80,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'urbandictionary',
-  description: string('urbanDictionary', 'commandDescription'),
+  name: 'urbanDictionary',
   botPermission: '',
   userPermission: '',
   usage: 'urbanDictionary <word>',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   let outcomes = [
     'Heads',
@@ -37,7 +35,6 @@ exports.config = {
 
 exports.help = {
   name: 'flip',
-  description: string('flip', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'flip [no_of_coins]',

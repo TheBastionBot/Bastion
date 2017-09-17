@@ -85,8 +85,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'undeafen',
-  description: string('unDeafen', 'commandDescription'),
+  name: 'unDeafen',
   botPermission: 'DEAFEN_MEMBERS',
   userPermission: 'DEAFEN_MEMBERS',
   usage: 'unDeafen @user-mention [Reason]',

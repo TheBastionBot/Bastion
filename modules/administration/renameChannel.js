@@ -98,8 +98,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'renamechannel',
-  description: string('renameChannel', 'commandDescription'),
+  name: 'renameChannel',
   botPermission: 'MANAGE_CHANNELS',
   userPermission: 'MANAGE_CHANNELS',
   usage: 'renameChannel [ -t | -v ] < -o Old Channel Name -n New Channel Name>',

@@ -59,8 +59,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listscheduledcommands',
-  description: string('listScheduledCommands', 'commandDescription'),
+  name: 'listScheduledCommands',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listScheduledCommands [page_no]',

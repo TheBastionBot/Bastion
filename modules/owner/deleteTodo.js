@@ -72,8 +72,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'deletetodo',
-  description: string('deleteTodo', 'commandDescription'),
+  name: 'deleteTodo',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'deleteTodo <index>',

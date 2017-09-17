@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const question = require('../../data/thisOrThat.json');
 
 exports.run = (Bastion, message) => {
@@ -24,8 +23,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'thisorthat',
-  description: string('thisOrThat', 'commandDescription'),
+  name: 'thisOrThat',
   botPermission: '',
   userPermission: '',
   usage: 'thisOrThat',

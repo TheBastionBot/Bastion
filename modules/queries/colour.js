@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const convert = require('color-convert');
 
 exports.run = (Bastion, message, args) => {
@@ -107,7 +106,6 @@ exports.config = {
 
 exports.help = {
   name: 'colour',
-  description: string('colour', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'colour <#hex-colour-code>',

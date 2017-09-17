@@ -110,8 +110,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'betroll',
-  description: string('betRoll', 'commandDescription'),
+  name: 'betRoll',
   botPermission: '',
   userPermission: '',
   usage: 'betroll < one/two/three/four/five/six > <-m amount>',

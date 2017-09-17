@@ -70,7 +70,6 @@ exports.config = {
 
 exports.help = {
   name: 'capture',
-  description: string('capture', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'capture <url>',

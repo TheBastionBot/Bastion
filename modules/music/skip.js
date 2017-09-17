@@ -62,7 +62,6 @@ exports.config = {
 
 exports.help = {
   name: 'skip',
-  description: string('skip', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'skip',

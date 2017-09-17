@@ -131,8 +131,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'softban',
-  description: string('softBan', 'commandDescription'),
+  name: 'softBan',
   botPermission: 'BAN_MEMBERS',
   userPermission: 'BAN_MEMBERS',
   usage: 'softBan @user-mention [Reason]',

@@ -5,7 +5,6 @@
  */
 
 const dictionary = require('../../data/piratePhrases.json');
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
@@ -33,8 +32,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'piratespeak',
-  description: string('pirateSpeak', 'commandDescription'),
+  name: 'pirateSpeak',
   botPermission: '',
   userPermission: '',
   usage: 'pirateSpeak <text>',

@@ -85,8 +85,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'unmute',
-  description: string('unMute', 'commandDescription'),
+  name: 'unMute',
   botPermission: 'MUTE_MEMBERS',
   userPermission: 'MUTE_MEMBERS',
   usage: 'unMute @user-mention [Reason]',

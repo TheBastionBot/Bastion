@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -72,7 +70,6 @@ exports.config = {
 
 exports.help = {
   name: 'warnAction',
-  description: string('warnAction', 'commandDescription'),
   botPermission: '',
   userPermission: 'BAN_MEMBERS',
   usage: 'warnAction < --kick | --softban | --ban | --none >',

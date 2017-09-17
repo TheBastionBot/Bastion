@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   try {
     let profiles = await Bastion.db.all('SELECT userID, xp, level FROM profiles ORDER BY level * 1 DESC, xp * 1 DESC');
@@ -51,8 +49,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'halloffame',
-  description: string('hallOfFame', 'commandDescription'),
+  name: 'hallOfFame',
   botPermission: '',
   userPermission: '',
   usage: 'hallOfFame [--global]',

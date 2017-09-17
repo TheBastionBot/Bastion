@@ -57,8 +57,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'enablemodule',
-  description: string('enableModule', 'commandDescription'),
+  name: 'enableModule',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'enableModule <module_name>',

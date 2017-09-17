@@ -79,8 +79,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'createrole',
-  description: string('createRole', 'commandDescription'),
+  name: 'createRole',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'createrole [[-n] Role Name] [-c hex-color-code]',

@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const Kitsu = require('kitsu.js');
 const kitsu = new Kitsu();
 
@@ -60,7 +59,6 @@ exports.config = {
 
 exports.help = {
   name: 'manga',
-  description: string('manga', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'manga <Manga Name>',

@@ -74,8 +74,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'channelinfo',
-  description: string('channelInfo', 'commandDescription'),
+  name: 'channelInfo',
   botPermission: '',
   userPermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',

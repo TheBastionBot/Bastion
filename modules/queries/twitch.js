@@ -109,7 +109,6 @@ exports.config = {
 
 exports.help = {
   name: 'twitch',
-  description: string('twitch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'twitch <username>',

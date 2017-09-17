@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -68,7 +66,6 @@ exports.config = {
 
 exports.help = {
   name: 'shutdown',
-  description: string('shutdown', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'shutdown',

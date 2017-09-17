@@ -59,8 +59,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listselfassignableroles',
-  description: string('listSelfAssignableRoles', 'commandDescription'),
+  name: 'listSelfAssignableRoles',
   botPermission: '',
   userPermission: '',
   usage: 'listSelfAssignableRoles [page_no]',

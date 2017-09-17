@@ -88,8 +88,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'renamerole',
-  description: string('renameRole', 'commandDescription'),
+  name: 'renameRole',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'renameRole < -o Old Role Name -n New Role Name >',

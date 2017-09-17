@@ -192,7 +192,6 @@ exports.config = {
 
 exports.help = {
   name: 'overwatch',
-  description: string('overwatch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',

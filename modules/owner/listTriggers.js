@@ -59,8 +59,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listtriggers',
-  description: string('listTriggers', 'commandDescription'),
+  name: 'listTriggers',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listTriggers [page_no]',

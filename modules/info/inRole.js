@@ -62,8 +62,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'inrole',
-  description: string('inRole', 'commandDescription'),
+  name: 'inRole',
   botPermission: '',
   userPermission: '',
   usage: 'inRole < Role Name | @role-mention > [-p <PAGE_NO>]',
