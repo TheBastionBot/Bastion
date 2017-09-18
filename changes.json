@@ -1,5 +1,5 @@
 {
-  "date": "September 17, 2017",
+  "date": "September 18, 2017",
   "fixed": [
     "Fixed case sensitive issues with command handler when using aliases",
     "Fixed case sensitive issues with `help` command when using aliases"
@@ -12,5 +12,7 @@
   "added": [
     "Added `viewPermissions` command"
   ],
-  "removed": []
+  "removed": [
+    "Removed `updateDatabase` command"
+  ]
 }
