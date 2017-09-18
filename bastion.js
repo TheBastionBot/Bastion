@@ -38,6 +38,7 @@ BASTION.functions = require('./handlers/functionHandler');
 BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite').then(db => {
   db.run('PRAGMA foreign_keys = ON');
+  require('./utils/populateDatabase')(BASTION.db);
 });
 
 require('./handlers/eventHandler')(BASTION);
