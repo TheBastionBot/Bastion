@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -33,7 +31,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'todoNotFound', true, message.author.username), message.channel);
     }
     else {
       let list = JSON.parse(todo.list);
@@ -43,7 +41,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
       }
 
       let deletedItem = list[parseInt(args[0]) - 1];

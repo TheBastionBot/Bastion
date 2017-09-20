@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!args.product) {
     /**
@@ -43,7 +41,7 @@ exports.run = async (Bastion, message, args) => {
     args.product = 'love_letter';
   }
   else {
-    return Bastion.emit('error', string('notFound', 'errors'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
   }
 
   let gifts = {
@@ -64,7 +62,7 @@ exports.run = async (Bastion, message, args) => {
     let requiredBalance = gifts[args.product][1] * args.amount;
 
     if (userBalance < requiredBalance) {
-      return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', userBalance), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, userBalance), message.channel);
     }
 
     Bastion.emit('userCredit', message.author, requiredBalance);

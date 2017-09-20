@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!args.old || !args.new) {
     /**
@@ -24,7 +22,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('channelNameLength', 'errorMessage', minLength, maxLength), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'channelNameLength', true, minLength, maxLength), message.channel);
   }
 
   let channel = message.channel;
@@ -42,7 +40,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
   }
 
   if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {

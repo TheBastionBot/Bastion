@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -32,14 +30,14 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
   if (!message.guild.members.get(user.id).kickable) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'kick', user), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'kick', user), message.channel);
   }
 
   let reason = args.slice(1).join(' ');

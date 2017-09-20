@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const TF2 = require('gamedig');
 
 exports.run = (Bastion, message, args) => {
@@ -100,7 +99,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('connection', 'errors'), string('invalidIPPort', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
   });
 };
 

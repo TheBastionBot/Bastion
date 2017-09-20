@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   try {
     let voiceChannel;
@@ -17,7 +15,7 @@ exports.run = async (Bastion, message) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', '', string('userNoVC', 'errorMessage', message.author.tag), message.channel);
+        return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'userNoVC', true, message.author.tag), message.channel);
       }
 
       if (voiceChannel.joinable) {
@@ -32,7 +30,7 @@ exports.run = async (Bastion, message) => {
           * Error condition is encountered.
           * @fires error
           */
-          return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
         }
         else if (!connection.speaking) {
           connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -43,7 +41,7 @@ exports.run = async (Bastion, message) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
       }
     }
     else {
@@ -58,7 +56,7 @@ exports.run = async (Bastion, message) => {
             * Error condition is encountered.
             * @fires error
             */
-            return Bastion.emit('error', '', string('userNoVC', 'errorMessage', message.author.tag), message.channel);
+            return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'userNoVC', true, message.author.tag), message.channel);
           }
 
           if (voiceChannel.joinable) {
@@ -73,7 +71,7 @@ exports.run = async (Bastion, message) => {
               * Error condition is encountered.
               * @fires error
               */
-              return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
+              return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
             }
             else if (!connection.speaking) {
               connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -84,7 +82,7 @@ exports.run = async (Bastion, message) => {
             * Error condition is encountered.
             * @fires error
             */
-            return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
+            return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
           }
         }
       }
@@ -96,7 +94,7 @@ exports.run = async (Bastion, message) => {
           * Error condition is encountered.
           * @fires error
           */
-          return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'musicChannelNotFound', true), message.channel);
         }
 
         if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel))) {
@@ -104,7 +102,7 @@ exports.run = async (Bastion, message) => {
           * Error condition is encountered.
           * @fires error
           */
-          return Bastion.emit('error', string('forbidden', 'errors'), string('invalidMusicChannel', 'errorMessage'), message.channel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'invalidMusicChannel', true), message.channel);
         }
 
         if (voiceChannel.joinable) {
@@ -119,7 +117,7 @@ exports.run = async (Bastion, message) => {
             * Error condition is encountered.
             * @fires error
             */
-            return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
+            return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
           }
           else if (!connection.speaking) {
             connection.playFile('./data/greeting.mp3', { passes: 1 });
@@ -130,7 +128,7 @@ exports.run = async (Bastion, message) => {
           * Error condition is encountered.
           * @fires error
           */
-          return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
         }
       }
     }

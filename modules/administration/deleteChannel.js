@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -21,7 +19,7 @@ exports.run = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
     }
   }
 
@@ -45,7 +43,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('forbidden', 'errors'), string('deleteDefaultChannel', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'deleteDefaultChannel', true), message.channel);
   }
 
   try {

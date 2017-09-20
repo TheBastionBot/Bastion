@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -20,7 +18,7 @@ exports.run = async (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('noCredentials', 'errors'), string('noCredentials', 'errorMessage', 'Cleverbot API'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'noCredentials'), Bastion.strings.error(message.guild.language, 'noCredentials', true, 'Cleverbot API'), message.channel);
   }
 
   try {

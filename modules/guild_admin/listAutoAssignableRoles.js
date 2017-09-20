@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   try {
     let guildSettings = await Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
@@ -15,7 +13,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'auto-assignable roles'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'auto-assignable roles'), message.channel);
     }
 
     let roles = guildSettings.autoAssignableRoles.split(' ');

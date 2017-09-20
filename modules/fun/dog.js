@@ -5,7 +5,6 @@
  */
 
 const request = require('request');
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   let baseURL = 'https://random.dog/';
@@ -15,7 +14,7 @@ exports.run = (Bastion, message) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
 
     if (response && response.statusCode === 200) {

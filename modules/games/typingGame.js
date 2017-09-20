@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
@@ -14,7 +13,7 @@ exports.run = async (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('busy', 'errors'), string('isGameInUse', 'errorMessage', 'typing'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isGameInUse', true, 'typing'), message.channel);
   }
 
   activeChannels.push(message.channel.id);

@@ -4,15 +4,13 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   if (!message.guild.music || !message.guild.music.songs) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
   let fields = [ {

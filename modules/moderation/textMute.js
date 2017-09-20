@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -32,7 +30,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
   try {
     await message.channel.overwritePermissions(user, {

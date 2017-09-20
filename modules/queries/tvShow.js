@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -31,7 +30,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
     if (response) {
       if (response.statusCode === 200) {
@@ -43,7 +42,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'TV show'), message.channel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'TV show'), message.channel);
         }
 
         message.channel.send({

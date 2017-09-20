@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
     /**
@@ -24,7 +22,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('giveNoUser', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveNoUser', true), message.channel);
   }
 
   if (Bastion.credentials.ownerId.includes(message.author.id)) {
@@ -60,7 +58,7 @@ exports.run = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('forbidden', 'errors'), string('giveYourself', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'giveYourself', true), message.channel);
     }
 
     try {
@@ -72,7 +70,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', sender.bastionCurrencies), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, sender.bastionCurrencies), message.channel);
       }
 
       let giveLimit = 0.5;
@@ -81,7 +79,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('invalidInput', 'errors'), string('giveLimit', 'errorMessage', giveLimit * 100), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveLimit', true, giveLimit * 100), message.channel);
       }
 
       Bastion.emit('userDebit', user, args[0]);

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -24,7 +22,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) {
@@ -36,14 +34,14 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), 'Everyone is decent here, no one has been warned.', message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'Everyone is decent here, no one has been warned.', message.channel);
   }
   if (!message.guild.warns.hasOwnProperty(user.id)) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), `Nah, ${user.tag} is good guy, he hasn't been warned.`, message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), `Nah, ${user.tag} is good guy, he hasn't been warned.`, message.channel);
   }
 
   delete message.guild.warns[user.id];

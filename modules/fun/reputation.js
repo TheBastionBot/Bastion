@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 let recentUsers = [];
 const COOLDOWN = 12;
 
@@ -17,7 +16,7 @@ exports.run = async (Bastion, message) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('forbidden', 'errors'), 'You can\'t give reputation to yourself!', message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
     }
 
     try {
@@ -52,7 +51,7 @@ exports.run = async (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('cooldown', 'errors'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
   }
 };
 

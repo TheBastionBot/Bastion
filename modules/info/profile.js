@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const specialIDs = require('../../data/specialIDs.json');
 
 exports.run = async (Bastion, message, args) => {
@@ -32,7 +31,7 @@ exports.run = async (Bastion, message, args) => {
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', string('notFound', 'errors'), string('profileNotCreated', 'errorMessage', `<@${args.id}>`), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${args.id}>`), message.channel);
   }
   if (profile.bio) {
     profile.bio = await Bastion.functions.decodeString(profile.bio);

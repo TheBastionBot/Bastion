@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 let activeChannels = {};
 
 exports.run = async (Bastion, message, args) => {
@@ -145,7 +144,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('busy', 'errors'), string('isEventInUse', 'errorMessage', 'poll'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'poll'), message.channel);
   }
 };
 

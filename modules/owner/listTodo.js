@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -23,7 +21,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'todoNotFound', true, message.author.username), message.channel);
     }
 
     let list = JSON.parse(todo.list);
