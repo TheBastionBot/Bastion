@@ -35,6 +35,8 @@ require('./utils/Number.prototype');
 
 BASTION.log = require('./handlers/logHandler');
 BASTION.functions = require('./handlers/functionHandler');
+const LanguageHandler = require('./handlers/languageHandler-rewrite');
+BASTION.strings = new LanguageHandler();
 BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite').then(db => {
   db.run('PRAGMA foreign_keys = ON');
