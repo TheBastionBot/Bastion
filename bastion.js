@@ -19,23 +19,13 @@ BASTION.credentials = require('./settings/credentials.json');
 BASTION.config = require('./settings/config.json');
 BASTION.colors = Discord.Constants.Colors;
 
-let languages = [
-  'english',
-  'spanish'
-];
-let language = 'english';
-if (languages.includes(BASTION.config.language)) {
-  language = BASTION.config.language;
-}
-process.env.LANG = language;
-
 // require('./utils/Array.prototype');
 require('./utils/String.prototype');
 require('./utils/Number.prototype');
 
 BASTION.log = require('./handlers/logHandler');
 BASTION.functions = require('./handlers/functionHandler');
-const LanguageHandler = require('./handlers/languageHandler-rewrite');
+const LanguageHandler = require('./handlers/languageHandler');
 BASTION.strings = new LanguageHandler();
 BASTION.db = require('sqlite');
 BASTION.db.open('./data/Bastion.sqlite').then(db => {
