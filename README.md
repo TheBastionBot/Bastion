@@ -45,7 +45,7 @@ commands, read the [Installation Guide](https://BastionBot.org/guide).
 > *We will be more than happy to help you.*
 
 ## Support Bastion Bot project and keep it alive forever
-If you like the Bastion Bot project you can **⭐ Star** in on
+If you like the Bastion Bot project you can **⭐ Star** it on
 [GitHub](https://github.com/TheBastionBot/Bastion).  
 
 If want to support the development of this project to keep this alive forever,
