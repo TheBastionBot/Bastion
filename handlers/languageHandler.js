@@ -74,13 +74,19 @@ module.exports = class LanguageHandler {
     let namespace, regex = new RegExp(Object.keys(constants).join('|'), 'gi');
     if (description) {
       if (!this.locales.get(locale).errors['descriptions'][key]) {
-        return `No string found for '${key}' in error descriptions.`;
+        if (locale === 'en') {
+          return `No string found for '${key}' in error descriptions.`;
+        }
+        return this.error('en', key, description, ...vars);
       }
       namespace = 'descriptions';
     }
     else {
       if (!this.locales.get(locale).errors['types'][key]) {
-        return `No string found for '${key}' in error types.`;
+        if (locale === 'en') {
+          return `No string found for '${key}' in error types.`;
+        }
+        return this.error('en', key);
       }
       namespace = 'types';
     }
@@ -101,7 +107,10 @@ module.exports = class LanguageHandler {
     }
 
     if (!this.locales.get(locale).modules[module] || !this.locales.get(locale).modules[module][command]) {
-      return `No string found for '${command}' command in ${module} module.`;
+      if (locale === 'en') {
+        return `No string found for '${command}' command in ${module} module.`;
+      }
+      return command('en', module, command);
     }
 
     return this.locales.get(locale).modules[module][command];
