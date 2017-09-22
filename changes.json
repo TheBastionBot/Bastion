@@ -7,6 +7,7 @@
   "improved": [
     "User's bio text limit set to 160 characters",
     "Improved `addTrigger` command; triggers and responses won't accept empty strings",
+    "Improved `setAvatar` command; added support for `.bmp`",
     "Improved `setPrefix` command to implement multiple prefixes",
     "Improved `help` command"
   ],
