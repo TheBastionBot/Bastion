@@ -21,13 +21,20 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let prefix, prefixMaxLength = 8;
+  let prefix, maxPrefix = 5, prefixMaxLength = 8;
   if (args.default) {
     prefix = Bastion.config.prefix;
   }
   else {
+    if (args.prefix.length > maxPrefix) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `You can only add a maximum of ${maxPrefix} prefixes.`, message.channel);
+    }
     prefix = args.prefix.join(' ');
-    if (prefix.length > prefixMaxLength) {
+    if (args.prefix.some(prefix => prefix.length > prefixMaxLength)) {
       /**
        * Error condition is encountered.
        * @fires error
