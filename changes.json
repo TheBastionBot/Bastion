@@ -12,6 +12,7 @@
   ],
   "added": [
     "Added support for multiple prefixes",
+    "Added `createEmoji` command",
     "Added `viewPermissions` command"
   ],
   "removed": [

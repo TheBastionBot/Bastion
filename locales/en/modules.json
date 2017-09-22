@@ -1,6 +1,7 @@
 {
   "administration": {
     "createChannel": "Creates a new text or voice channel on your Discord server.",
+    "createEmoji": "Creates a new emoji on your Discord server.",
     "createRole": "Creates a new role on your Discord server.",
     "deleteChannel": "Deletes the specified text or voice channel from your Discord server.",
     "deleteRole": "Deletes the specified role from your Discord server.",
