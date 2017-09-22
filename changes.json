@@ -1,5 +1,5 @@
 {
-  "date": "September 18, 2017",
+  "date": "September 22, 2017",
   "fixed": [
     "Fixed case sensitive issues with command handler when using aliases",
     "Fixed case sensitive issues with `help` command when using aliases"
@@ -7,9 +7,11 @@
   "improved": [
     "User's bio text limit set to 160 characters",
     "Improved `addTrigger` command; triggers and responses won't accept empty strings",
+    "Improved `setPrefix` command to implement multiple prefixes",
     "Improved `help` command"
   ],
   "added": [
+    "Added support for multiple prefixes",
     "Added `viewPermissions` command"
   ],
   "removed": [
