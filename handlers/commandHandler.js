@@ -16,7 +16,7 @@ module.exports = async message => {
   try {
     let guild = await message.client.db.get(`SELECT prefix, language, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-    if (!message.guild.prefix || message.guild.prefix !== guild.prefix) {
+    if (!message.guild.prefix || message.guild.prefix.join(' ') !== guild.prefix) {
       message.guild.prefix = guild.prefix.trim().split(' ');
     }
     if (!message.guild.language || message.guild.language !== guild.language) {
