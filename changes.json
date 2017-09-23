@@ -1,5 +1,5 @@
 {
-  "date": "September 22, 2017",
+  "date": "September 23, 2017",
   "fixed": [
     "Fixed case sensitive issues with command handler when using aliases",
     "Fixed case sensitive issues with `help` command when using aliases"
@@ -14,6 +14,7 @@
   "added": [
     "Added support for multiple prefixes",
     "Added `createEmoji` command",
+    "Added `setLanguage` command",
     "Added `viewPermissions` command"
   ],
   "removed": [
