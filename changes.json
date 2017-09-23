@@ -2,7 +2,8 @@
   "date": "September 24, 2017",
   "fixed": [
     "Fixed case sensitive issues with command handler when using aliases",
-    "Fixed case sensitive issues with `help` command when using aliases"
+    "Fixed case sensitive issues with `help` command when using aliases",
+    "Fixed a typo in `slap` command"
   ],
   "improved": [
     "User's bio text limit set to 160 characters",
