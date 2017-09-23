@@ -15,6 +15,7 @@
     "Added support for multiple prefixes",
     "Added `createEmoji` command",
     "Added `setLanguage` command",
+    "Added `trivia` command",
     "Added `viewPermissions` command"
   ],
   "removed": [
