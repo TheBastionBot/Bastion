@@ -13,6 +13,8 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
+  if (message.channel.id !== message.guild.music.textChannel.id) return;
+
   let color, repeatStat = '';
   if (message.guild.music.repeat) {
     color = Bastion.colors.RED;

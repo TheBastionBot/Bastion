@@ -13,6 +13,8 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
+  if (message.channel.id !== message.guild.music.textChannel.id) return;
+
   let fields = [ {
     name: `▶ ${message.guild.music.songs[0].title}`,
     value: `Requested by: ${message.guild.music.songs[0].requester}`

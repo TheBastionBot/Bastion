@@ -1,11 +1,12 @@
 {
-  "date": "September 23, 2017",
+  "date": "September 24, 2017",
   "fixed": [
     "Fixed case sensitive issues with command handler when using aliases",
     "Fixed case sensitive issues with `help` command when using aliases"
   ],
   "improved": [
     "User's bio text limit set to 160 characters",
+    "Music commands won't work in other channels",
     "Improved `addTrigger` command; triggers and responses won't accept empty strings",
     "Improved `serverSettings` command; added server language",
     "Improved `setAvatar` command; added support for `.bmp`",
