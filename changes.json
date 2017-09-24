@@ -18,6 +18,7 @@
     "Improved `help` command"
   ],
   "added": [
+    "Added Dutch language",
     "Added Turkish language",
     "Added support for multiple prefixes",
     "Added `createEmoji` command",
