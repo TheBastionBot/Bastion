@@ -3,6 +3,7 @@
   "fixed": [
     "Fixed case sensitive issues with command handler when using aliases",
     "Fixed case sensitive issues with `help` command when using aliases",
+    "Fixed `setStatus` command not accepting status",
     "Fixed a typo in `slap` command"
   ],
   "improved": [

@@ -14,13 +14,13 @@ exports.run = async (Bastion, message, args) => {
   }
 
   try {
-    if (args.length >= 1 && (args === 'online' || args === 'idle' || args === 'dnd' || args === 'invisible') ) {
-      await Bastion.user.setStatus(args.join(' '));
+    if (args.status && /^(?:online|idle|dnd|invisible)$/i.test(args.status)) {
+      await Bastion.user.setStatus(args.status);
 
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
+          description: `${Bastion.user.username}'s status is now set to **${args.status}**`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -46,7 +46,10 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'status', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
