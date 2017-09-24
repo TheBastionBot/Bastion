@@ -169,7 +169,7 @@
     "clean": "Tüm rolleri Discord sunucu belirtilen kullanıcıdan kaldırır.",
     "musicChannel": "Kimliği ve metin kanal (Bu komut içinde kullanılan kanal) tarafından belirtilen bir ses kanalı sizin Discord sunucu müzik modül için varsayılan olarak ekler. Yani, Bastion yalnızca metin kanal müzik komutları kabul eder ve herhangi bir ses kanalı katılmaya isterse, otomatik olarak belirtilen ses kanalı katılacak.",
     "musicMasterRole": "Bastion, müzik yüksek lisans rolü anlaşmazlık sunucunuzda olarak onun kimliği tarafından belirtilen rol ekler. Kullanıcılar bu rolü ile 'çağırmak', 'oyun', vb gibi sınırlı müzik komutlara erişmek ve çağırmak ve Discord sunucu herhangi bir ses kanalı müzik çalmak.",
-    "np": "Şu anda, Discord sunucu oynanan şarkı ayrıntılarını gösterir.",
+    "nowPlaying": "Şu anda, Discord sunucu oynanan şarkı ayrıntılarını gösterir.",
     "pause": "Şuankı oynan şarkıyı durdurur.",
     "play": "Bastion, Discord sunucunuzda zaten oynuyorsa, bir şarkıyı çalar veya o şarkıyı geçerli müzik kuyruğuna ekler; ada veya bağlantıya göre veya en sevdiğiniz şarkılar listesinden veya bir YouTube çalma listesi bağlantısından belirtilir.",
     "playlist": "Belirli çalma listesine şarkı ekleme veya bir çalma listesindeki şarkı listesini görüntüler.",

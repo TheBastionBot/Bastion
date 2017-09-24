@@ -1,5 +1,5 @@
 /**
- * @file np command
+ * @file nowPlaying command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -33,14 +33,14 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'np' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'np',
+  name: 'nowPlaying',
   botPermission: '',
   userPermission: '',
-  usage: 'np',
+  usage: 'nowPlaying',
   example: []
 };

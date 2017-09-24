@@ -8,6 +8,7 @@
   "improved": [
     "User's bio text limit set to 160 characters",
     "Music commands won't work in other channels",
+    "Renamed `np` command to `nowPlaying`; `np` is still an alias of `nowPlaying` command",
     "Improved link filter; logs filtered links in mod log channel",
     "Improved `addTrigger` command; triggers and responses won't accept empty strings",
     "Improved `serverSettings` command; added server language",

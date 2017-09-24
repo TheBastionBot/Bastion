@@ -169,7 +169,7 @@
     "clean": "Elimina todas las canciones de la lista actual de su servidor Discord.",
     "musicChannel": "Añade un canal de voz especificado por el ID y un canal de texto (el canal en el que se utilizó este comando) de su servidor Discord como predeterminado para el módulo de música. Es decir, Bastion sólo aceptará comandos de música en ese canal de texto y si alguien le pide que se una a un canal de voz, se unirá automáticamente al canal de voz especificado.",
     "musicMasterRole": "Añade un rol especificado por su ID como el rol de Maestro de Música de Bastion, en su servidor Discord. Los usuarios con esta función obtienen acceso a comandos de música restringida como `summon`, `play`, etc. y pueden convocar y reproducir música en cualquier canal de voz de su servidor Discord.",
-    "np": "Muestra los detalles de la canción que está siendo reproducida, por Bastion, en su servidor Discord.",
+    "nowPlaying": "Muestra los detalles de la canción que está siendo reproducida, por Bastion, en su servidor Discord.",
     "pause": "Pausa la reproducción actual en su servidor Discord.",
     "play": "Reproduce una canción o agrega la canción a la lista de música actual si Bastion ya está jugando en su servidor Discord, especificado por el nombre, o el vínculo, o de su lista de canciones favoritas o de un enlace de lista de reproducción de YouTube.",
     "playlist": "Añadir una canción a una lista de reproducción determinada o mostrar la lista de canciones en una lista de reproducción.",
