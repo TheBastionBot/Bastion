@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   let outcomes = [
     'ROCK',
@@ -61,7 +59,6 @@ exports.config = {
 
 exports.help = {
   name: 'rps',
-  description: string('rps', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'rps <rock|paper|scissor>',

@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const yt = require('youtube-dl');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
@@ -13,9 +12,7 @@ const db = new jsonDB('./data/playlist', true, true);
 exports.run = async (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
   if (message.guild.music) {
-    if (message.channel.id !== message.guild.music.textChannel.id) {
-      return;
-    }
+    if (message.channel.id !== message.guild.music.textChannel.id) return;
   }
 
   if (!args.song && !args.ytpl && !args.playlist) {
@@ -32,7 +29,7 @@ exports.run = async (Bastion, message, args) => {
   if (message.guild.voiceConnection) {
     voiceChannel = message.guild.voiceConnection.channel;
     textChannel = message.channel;
-    vcStats = string('userNoSameVC', 'errorMessage', message.author.tag);
+    vcStats = Bastion.strings.error(message.guild.language, 'userNoSameVC', true, message.author.tag);
   }
   else if (guildSettings.musicTextChannel && guildSettings.musicVoiceChannel) {
     if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(guildSettings.musicTextChannel))) {
@@ -40,30 +37,30 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidMusicChannel', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidMusicChannel', true), message.channel);
     }
     if (!voiceChannel.joinable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'join', voiceChannel.name), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
     }
     if (!voiceChannel.speakable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'speak', `in ${voiceChannel.name}`), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
     }
-    vcStats = string('userNoMusicChannel', 'errorMessage', message.author.tag, voiceChannel.name);
+    vcStats = Bastion.strings.error(message.guild.language, 'userNoMusicChannel', true, message.author.tag, voiceChannel.name);
   }
   else {
     /**
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', string('forbidden', 'errors'), string('musicChannelNotFound', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'musicChannelNotFound', true), message.channel);
   }
 
   let musicMasterRole = guildSettings.musicMasterRole;
@@ -98,7 +95,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'YouTube Playlist URL'), textChannel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'YouTube Playlist URL'), textChannel);
       }
       message.channel.send({
         embed: {
@@ -115,7 +112,7 @@ exports.run = async (Bastion, message, args) => {
           * Error condition is encountered.
           * @fires error
           */
-          return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), textChannel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), textChannel);
         }
         if (info) {
           if (info.length === 0) {
@@ -123,7 +120,7 @@ exports.run = async (Bastion, message, args) => {
             * Error condition is encountered.
             * @fires error
             */
-            return Bastion.emit('error', string('notFound', 'errors'), string('playlistNotFound', 'errorMessage'), textChannel);
+            return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'playlistNotFound', true), textChannel);
           }
           song = info.shift().title;
           message.channel.send({
@@ -161,7 +158,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), textChannel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'song/playlist'), textChannel);
       }
 
       song = playlist.shift();
@@ -201,7 +198,7 @@ exports.run = async (Bastion, message, args) => {
         return message.channel.send({
           embed: {
             color: Bastion.colors.RED,
-            description: string('notFound', 'errorMessage', 'result')
+            description: Bastion.strings.error(message.guild.language, 'notFound', true, 'result')
           }
         }).catch(e => {
           Bastion.log.error(e);
@@ -250,7 +247,7 @@ exports.run = async (Bastion, message, args) => {
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), textChannel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), textChannel);
   }
 };
 
@@ -266,7 +263,6 @@ exports.config = {
 
 exports.help = {
   name: 'play',
-  description: string('play', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'play < name | song_link | -l <playlist_link> | -p [Playlist Name] >',

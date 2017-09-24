@@ -5,7 +5,6 @@
  */
 
 const catFacts = require('../../data/catFacts.json');
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   message.channel.send({
@@ -26,8 +25,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'catfact',
-  description: string('catFact', 'commandDescription'),
+  name: 'catFact',
   botPermission: '',
   userPermission: '',
   usage: 'catfact',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -41,8 +39,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'messagechannel',
-  description: string('messageChannel', 'commandDescription'),
+  name: 'messageChannel',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'messageChannel <channel_id> <message>',

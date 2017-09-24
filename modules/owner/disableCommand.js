@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -38,7 +36,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('forbidden', 'errors'), string('commandNoDisable', 'errorMessage', command), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'commandNoDisable', true, command), message.channel);
   }
 
   if (Bastion.commands.has(command) || Bastion.aliases.has(command)) {
@@ -54,7 +52,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
   }
 
   if (!command.config.enabled) return;
@@ -79,8 +77,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'disablecommand',
-  description: string('disableCommand', 'commandDescription'),
+  name: 'disableCommand',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'disableCommand <command_name>',

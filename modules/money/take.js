@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -32,7 +30,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('takeNoUser', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'takeNoUser', true), message.channel);
   }
   let reason;
   if (args[2]) {
@@ -87,7 +85,6 @@ exports.config = {
 
 exports.help = {
   name: 'take',
-  description: string('take', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',

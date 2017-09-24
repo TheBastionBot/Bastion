@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   let uptime = Bastion.uptime;
   let seconds = uptime / 1000;
@@ -108,7 +106,6 @@ exports.config = {
 
 exports.help = {
   name: 'stats',
-  description: string('stats', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'stats',

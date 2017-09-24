@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const moment = require('moment');
 const remindUsers = {};
 
@@ -47,7 +46,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('busy', 'errors'), string('isReminderInUse', 'errorMessage', 'reminder --cancel'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isReminderInUse', true, 'reminder --cancel'), message.channel);
   }
 
   remindUsers[message.author.id] = Bastion.setTimeout(() => {
@@ -88,7 +87,6 @@ exports.config = {
 
 exports.help = {
   name: 'reminder',
-  description: string('reminder', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'reminder <-d Duration> <Message>',

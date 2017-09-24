@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
@@ -45,7 +44,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'song/playlist'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'song/playlist'), message.channel);
     }
   }
   else {
@@ -88,7 +87,6 @@ exports.config = {
 
 exports.help = {
   name: 'playlist',
-  description: string('playlist', 'commandDescription'),
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'playlist [Song Name] [-p Playlist Name]',

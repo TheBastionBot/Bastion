@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -23,7 +21,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('triggerNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'triggerNotFound', true), message.channel);
     }
 
     triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);
@@ -59,8 +57,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listtriggers',
-  description: string('listTriggers', 'commandDescription'),
+  name: 'listTriggers',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'listTriggers [page_no]',

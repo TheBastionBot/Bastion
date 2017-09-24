@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -31,7 +29,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
   let reason = args.slice(1).join(' ');
   if (reason.length < 1) {
@@ -57,7 +55,7 @@ exports.run = async (Bastion, message, args) => {
                * Error condition is encountered.
                * @fires error
                */
-              return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to kick ${user}.`, message.channel);
+              return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), `I don't have permissions to kick ${user}.`, message.channel);
             }
             member = await message.guild.members.get(user.id).kick('Warned 3 times!');
             action = 'Kicked';
@@ -68,7 +66,7 @@ exports.run = async (Bastion, message, args) => {
                * Error condition is encountered.
                * @fires error
                */
-              return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to soft-ban ${user}.`, message.channel);
+              return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), `I don't have permissions to soft-ban ${user}.`, message.channel);
             }
             member = await message.guild.members.get(user.id).ban('Warned 3 times!');
             await message.guild.unban(member.id);
@@ -80,7 +78,7 @@ exports.run = async (Bastion, message, args) => {
                * Error condition is encountered.
                * @fires error
                */
-              return Bastion.emit('error', string('forbidden', 'errors'), `I don't have permissions to ban ${user}.`, message.channel);
+              return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), `I don't have permissions to ban ${user}.`, message.channel);
             }
             member = await message.guild.members.get(user.id).ban('Warned 3 times!');
             action = 'Banned';
@@ -185,7 +183,6 @@ exports.config = {
 
 exports.help = {
   name: 'warn',
-  description: string('warn', 'commandDescription'),
   botPermission: 'KICK_MEMBERS',
   userPermission: 'KICK_MEMBERS',
   usage: 'warn @user-mention [Reason]',

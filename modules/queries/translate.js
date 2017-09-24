@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const translate = require('google-translate-api');
 
 exports.run = async (Bastion, message, args) => {
@@ -37,7 +36,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'language code'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'language code'), message.channel);
     }
     Bastion.log.error(e);
   }
@@ -50,7 +49,6 @@ exports.config = {
 
 exports.help = {
   name: 'translate',
-  description: string('translate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'translate <language_code> <text>',

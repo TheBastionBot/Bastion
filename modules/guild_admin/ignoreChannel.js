@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -78,7 +76,6 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreChannel',
-  description: string('ignoreChannel', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'ignoreChannel [--remove]',

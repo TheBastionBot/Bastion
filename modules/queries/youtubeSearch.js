@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const yt = require('youtube-dl');
 
 exports.run = (Bastion, message, args) => {
@@ -21,12 +20,12 @@ exports.run = (Bastion, message, args) => {
     if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
       let error, errorMessage;
       if (err && err.stack.includes('No video results')) {
-        error = string('notFound', 'errors');
-        errorMessage = string('notFound', 'errorMessage', 'video');
+        error = Bastion.strings.error(message.guild.language, 'notFound');
+        errorMessage = Bastion.strings.error(message.guild.language, 'notFound', true, 'video');
       }
       else {
-        error = string('connection', 'errors');
-        errorMessage = string('connection', 'errorMessage');
+        error = Bastion.strings.error(message.guild.language, 'connection');
+        errorMessage = Bastion.strings.error(message.guild.language, 'connection', true);
       }
       /**
        * Error condition is encountered.
@@ -80,8 +79,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'youtubesearch',
-  description: string('youtubeSearch', 'commandDescription'),
+  name: 'youtubeSearch',
   botPermission: '',
   userPermission: '',
   usage: 'youtubeSearch <text>',

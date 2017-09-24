@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -34,7 +32,7 @@ exports.run = async (Bastion, message, args) => {
     * Error condition is encountered.
     * @fires error
     */
-    Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'whitelist domain'), message.channel);
+    Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'whitelist domain'), message.channel);
   }
   else {
     let whitelistDomains = JSON.parse(guildSettings.whitelistDomains);
@@ -44,7 +42,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
     }
 
     let removedDomain = whitelistDomains[parseInt(args[0]) - 1];
@@ -71,8 +69,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removewhitelistdomain',
-  description: string('removeWhitelistDomain', 'commandDescription'),
+  name: 'removeWhitelistDomain',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeWhitelistDomain <index>',

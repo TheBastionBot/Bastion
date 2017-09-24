@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -85,7 +83,7 @@ exports.run = async (Bastion, message) => {
         }
       ],
       footer: {
-        text: `Prefix: ${guildSettings.prefix}`
+        text: `Prefix: ${guildSettings.prefix} | Language: ${guildSettings.language.toUpperCase()}`
       }
     }
   }).catch(e => {
@@ -100,7 +98,6 @@ exports.config = {
 
 exports.help = {
   name: 'serverSettings',
-  description: string('serverSettings', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'serverSettings',

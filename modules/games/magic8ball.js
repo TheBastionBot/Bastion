@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 2 || !args.join(' ').endsWith('?')) {
     /**
@@ -59,7 +57,6 @@ exports.config = {
 
 exports.help = {
   name: 'magic8ball',
-  description: string('magic8ball', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'magic8ball <Question>?',

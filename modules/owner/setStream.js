@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -52,8 +50,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'setstream',
-  description: string('setStream', 'commandDescription'),
+  name: 'setStream',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'setStream <twitch> <text>',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -32,7 +30,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
   try {
     await message.guild.members.get(user.id).setMute(true);
@@ -86,7 +84,6 @@ exports.config = {
 
 exports.help = {
   name: 'mute',
-  description: string('mute', 'commandDescription'),
   botPermission: 'MUTE_MEMBERS',
   userPermission: 'MUTE_MEMBERS',
   usage: 'mute @user-mention [Reason]',

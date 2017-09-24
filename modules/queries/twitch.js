@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -28,7 +27,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
     if (response.statusCode === 200) {
       try {
@@ -40,7 +39,7 @@ exports.run = (Bastion, message, args) => {
            * Error condition is encountered.
            * @fires error
            */
-          return Bastion.emit('error', string('notFound', 'errors'), string('noLiveStream', 'errorMessage', args.live), message.channel);
+          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'noLiveStream', true, args.live), message.channel);
         }
         author = {
           name: body.stream.channel.display_name,
@@ -86,7 +85,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('parseError', 'errors'), string('parse', 'errorMessage'), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'parseError'), Bastion.strings.error(message.guild.language, 'parse', true), message.channel);
       }
     }
     else {
@@ -109,7 +108,6 @@ exports.config = {
 
 exports.help = {
   name: 'twitch',
-  description: string('twitch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'twitch <username>',

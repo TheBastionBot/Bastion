@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const credentials = require('../../settings/credentials.json');
 const HiRez = require('hirez.js');
 const hirez = new HiRez({
@@ -47,7 +46,6 @@ exports.config = {
 
 exports.help = {
   name: 'paladins',
-  description: string('paladins', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'paladins <player_name>',
@@ -74,7 +72,7 @@ async function fetchAndSend(message, args) {
       * Error condition is encountered.
       * @fires error
       */
-      return message.client.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
+      return message.client.emit('error', message.client.strings.error(message.guild.language, 'notFound'), message.client.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
     }
 
     player = player[0];

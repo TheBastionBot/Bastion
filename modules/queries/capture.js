@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const capture = require('webshot');
 
 exports.run = (Bastion, message, args) => {
@@ -21,7 +20,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'URL'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'URL'), message.channel);
   }
   let options = {
     windowSize: {
@@ -41,7 +40,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('serverNotFound', 'errorMessage', args[0]), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'serverNotFound', true, args[0]), message.channel);
     }
     let imageBuffers = [];
     renderStream.on('data', function (data) {
@@ -70,7 +69,6 @@ exports.config = {
 
 exports.help = {
   name: 'capture',
-  description: string('capture', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'capture <url>',

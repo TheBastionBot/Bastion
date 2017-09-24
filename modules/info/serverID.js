@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -24,8 +22,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'serverid',
-  description: string('serverID', 'commandDescription'),
+  name: 'serverID',
   botPermission: '',
   userPermission: '',
   usage: 'serverID',

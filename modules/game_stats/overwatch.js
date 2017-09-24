@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const ow = require('overwatch-js');
 
 exports.run = (Bastion, message, args) => {
@@ -22,14 +21,14 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidRegion', 'errorMessage', '`US`, `EU`, `KR` and `CN`'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidRegion', true, '`US`, `EU`, `KR` and `CN`'), message.channel);
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'BattleTag'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'BattleTag'), message.channel);
   }
 
   ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
@@ -180,7 +179,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
     }
   });
 };
@@ -192,7 +191,6 @@ exports.config = {
 
 exports.help = {
   name: 'overwatch',
-  description: string('overwatch', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',

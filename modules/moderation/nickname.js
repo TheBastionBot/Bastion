@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -31,7 +29,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
   args = args.slice(1);
   let color;
@@ -69,7 +67,6 @@ exports.config = {
 
 exports.help = {
   name: 'nickname',
-  description: string('nickname', 'commandDescription'),
   botPermission: 'MANAGE_NICKNAMES',
   userPermission: 'MANAGE_NICKNAMES',
   usage: 'nickname <@user-mention> [nick]',

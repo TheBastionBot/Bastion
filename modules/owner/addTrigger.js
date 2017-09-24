@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -15,7 +13,7 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!args.trigger || !args.response) {
+  if (!args.trigger || !args.triggers.trim().length || !args.response || !args.response.trim().length) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -57,8 +55,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'addtrigger',
-  description: string('addTrigger', 'commandDescription'),
+  name: 'addTrigger',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'addTrigger <-t trigger message> <-r response message>',

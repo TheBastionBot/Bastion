@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const weather = require('weather-js');
 
 exports.run = (Bastion, message, args) => {
@@ -22,7 +21,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('weatherNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'weatherNotFound', true), message.channel);
     }
 
     if (!result || result.length < 1) {
@@ -30,7 +29,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
 
     message.channel.send({
@@ -116,7 +115,6 @@ exports.config = {
 
 exports.help = {
   name: 'weather',
-  description: string('weather', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'weather <city [, country_code]|zipcode>',

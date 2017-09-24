@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -39,7 +37,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('forbidden', 'errors'), string('noPermission', 'errorMessage', 'soft-ban', user), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'soft-ban', user), message.channel);
   }
 
   let reason = args.slice(1).join(' ');
@@ -131,8 +129,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'softban',
-  description: string('softBan', 'commandDescription'),
+  name: 'softBan',
   botPermission: 'BAN_MEMBERS',
   userPermission: 'BAN_MEMBERS',
   usage: 'softBan @user-mention [Reason]',

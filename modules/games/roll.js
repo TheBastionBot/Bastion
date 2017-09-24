@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   let outcomes = [
     ':one:',
@@ -41,7 +39,6 @@ exports.config = {
 
 exports.help = {
   name: 'roll',
-  description: string('roll', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'roll [no_of_dice]',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
@@ -13,7 +11,7 @@ exports.run = (Bastion, message) => {
       description: 'Hi! I\'m **Bastion**. \u{1F609}\n' +
                    'I\'m a BOT that is going to make your time in this Discord Server amazing!',
       footer: {
-        text: `Type ${message.guild.prefix}help to find out more about me.`
+        text: `Type ${message.guild.prefix[0]}help to find out more about me.`
       }
     }
   }).catch(e => {
@@ -28,7 +26,6 @@ exports.config = {
 
 exports.help = {
   name: 'hello',
-  description: string('hello', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'hello',

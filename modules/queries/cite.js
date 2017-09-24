@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (args.length < 1 || !(parseInt(args[0]) < 9223372036854775807)) {
     /**
@@ -38,7 +36,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', string('notFound', 'errors'), string('messageNotFound', 'errorMessage'), message.channel);
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'messageNotFound', true), message.channel);
     }
     else {
       Bastion.log.error(e);
@@ -53,7 +51,6 @@ exports.config = {
 
 exports.help = {
   name: 'cite',
-  description: string('cite', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'cite <MESSAGE_ID>',

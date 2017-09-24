@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const mathjs = require('mathjs');
 
 exports.run = (Bastion, message, args) => {
@@ -30,7 +29,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'mathematical expression'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'mathematical expression'), message.channel);
   }
 };
 
@@ -41,7 +40,6 @@ exports.config = {
 
 exports.help = {
   name: 'calculate',
-  description: string('calculate', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'calculate <mathematical_expression>',

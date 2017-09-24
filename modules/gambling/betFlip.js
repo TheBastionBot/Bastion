@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 let recentUsers = [];
 
 exports.run = async (Bastion, message, args) => {
@@ -27,7 +26,7 @@ exports.run = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('invalidInput', 'errors'), string('minBet', 'errorMessage', minAmount), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'minBet', true, minAmount), message.channel);
     }
 
     let outcomes = [
@@ -45,7 +44,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', user.bastionCurrencies), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, user.bastionCurrencies), message.channel);
       }
 
       recentUsers.push(message.author.id);
@@ -92,7 +91,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('cooldown', 'errors'), string('gamblingCooldown', 'errorMessage', message.author, cooldown), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), Bastion.strings.error(message.guild.language, 'gamblingCooldown', true, message.author, cooldown), message.channel);
   }
 };
 
@@ -106,8 +105,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'betflip',
-  description: string('betFlip', 'commandDescription'),
+  name: 'betFlip',
   botPermission: '',
   userPermission: '',
   usage: 'betflip < heads/tails > <-m amount>',

@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -27,7 +26,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
     else if (response.statusCode === 200) {
       color = Bastion.colors.BLUE;
@@ -106,7 +105,7 @@ exports.run = (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', string('parseError', 'errors'), string('parse', 'errorMessage'), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'parseError'), Bastion.strings.error(message.guild.language, 'parse', true), message.channel);
       }
     }
     else {
@@ -148,7 +147,6 @@ exports.config = {
 
 exports.help = {
   name: 'battlefield4',
-  description: string('battlefield4', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'battlefield4 <player_name>',

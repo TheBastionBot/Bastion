@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
@@ -39,8 +37,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'channelid',
-  description: string('channelID', 'commandDescription'),
+  name: 'channelID',
   botPermission: '',
   userPermission: '',
   usage: 'channelID [#channel-mention]',

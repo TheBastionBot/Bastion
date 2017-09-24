@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   try {
     let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
@@ -15,7 +13,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
     }
 
     let filteredWords = guildSettings.filteredWords.split(' ');
@@ -53,8 +51,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listfilteredwords',
-  description: string('listFilteredWords', 'commandDescription'),
+  name: 'listFilteredWords',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'listFilteredWords [page_no]',

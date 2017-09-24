@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const request = require('request');
 
 exports.run = (Bastion, message, args) => {
@@ -28,7 +27,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
     message.channel.send({ files: [ { attachment: body } ] }).catch(e => {
       Bastion.log.error(e);
@@ -43,7 +42,6 @@ exports.config = {
 
 exports.help = {
   name: 'map',
-  description: string('map', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'map <location> [--zoom <amount>]',

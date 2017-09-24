@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -23,7 +21,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), `${string('invalidEmbedObject', 'errorMessage')}\`\`\`${e.toString()}\`\`\``, message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `${Bastion.strings.error(message.guild.language, 'invalidEmbedObject', true)}\`\`\`${e.toString()}\`\`\``, message.channel);
   }
 
   message.channel.send({
@@ -45,8 +43,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'sendembed',
-  description: string('sendEmbed', 'commandDescription'),
+  name: 'sendEmbed',
   botPermission: '',
   userPermission: '',
   usage: 'sendEmbed <embedObject>',

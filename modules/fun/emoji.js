@@ -5,7 +5,6 @@
  */
 
 const fs = require('fs');
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message, args) => {
   if (!args.name && !args.list) {
@@ -70,7 +69,6 @@ exports.config = {
 
 exports.help = {
   name: 'emoji',
-  description: string('emoji', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'emoji < emoji_name | --list >',

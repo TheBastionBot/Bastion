@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -33,7 +31,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'self-assignable roles'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'self-assignable roles'), message.channel);
     }
     let roles = guildSettings.selfAssignableRoles.split(' ');
 
@@ -42,7 +40,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
     }
 
     let deletedRoleID = roles[parseInt(args[0]) - 1];
@@ -70,8 +68,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removeselfassignablerole',
-  description: string('removeSelfAssignableRole', 'commandDescription'),
+  name: 'removeSelfAssignableRole',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeSelfAssignableRole <index>',

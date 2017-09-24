@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -33,7 +31,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'filtered words'), message.channel);
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
     }
     else {
       let filteredWords = guildSettings.filteredWords.split(' ');
@@ -43,7 +41,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
       }
 
       let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];
@@ -72,8 +70,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removefilteredword',
-  description: string('removeFilteredWord', 'commandDescription'),
+  name: 'removeFilteredWord',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'removeFilteredWord <index>',

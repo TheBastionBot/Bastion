@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -38,8 +36,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'deletealltriggers',
-  description: string('deleteAllTriggers', 'commandDescription'),
+  name: 'deleteAllTriggers',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'deleteAllTriggers',

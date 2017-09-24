@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
@@ -21,7 +19,6 @@ exports.config = {
 
 exports.help = {
   name: 'endpoll',
-  description: string('endpoll', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'endpoll',

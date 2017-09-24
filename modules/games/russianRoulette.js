@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const outcomes = [
   '🔫 BANG! You are dead, buddy.',
   'You got lucky, my friend.'
@@ -36,8 +35,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'russianroulette',
-  description: string('russianRoulette', 'commandDescription'),
+  name: 'russianRoulette',
   botPermission: '',
   userPermission: '',
   usage: 'russianRoulette [no_of_bullets]',

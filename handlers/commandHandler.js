@@ -14,13 +14,17 @@ const COLOR = require('chalk');
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guild = await message.client.db.get(`SELECT prefix, language, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-    if (!message.guild.prefix || message.guild.prefix !== guild.prefix) {
-      message.guild.prefix = guild.prefix;
+    if (!message.guild.prefix || message.guild.prefix.join(' ') !== guild.prefix) {
+      message.guild.prefix = guild.prefix.trim().split(' ');
+    }
+    if (!message.guild.language || message.guild.language !== guild.language) {
+      message.guild.language = guild.language;
     }
 
-    if (!message.content.startsWith(guild.prefix)) return;
+    let usedPrefix;
+    if (!message.guild.prefix.some(prefix => message.content.startsWith(usedPrefix = prefix))) return;
 
     if (!message.member.hasPermission('ADMINISTRATOR')) {
       if (guild.ignoredChannels) {
@@ -36,19 +40,19 @@ module.exports = async message => {
     }
 
     let args = message.content.split(' ');
-    let command = args.shift().slice(guild.prefix.length).toLowerCase();
+    let command = args.shift().slice(usedPrefix.length).toLowerCase();
 
     let cmd;
     if (message.client.commands.has(command)) {
       cmd = message.client.commands.get(command);
     }
     else if (message.client.aliases.has(command)) {
-      cmd = message.client.commands.get(message.client.aliases.get(command));
+      cmd = message.client.commands.get(message.client.aliases.get(command).toLowerCase());
     }
     else return;
 
     message.client.log.console(`\n[${new Date()}]`);
-    message.client.log.console(COLOR.green('[COMMAND]: ') + guild.prefix + command);
+    message.client.log.console(COLOR.green('[COMMAND]: ') + usedPrefix + command);
     message.client.log.console(COLOR.green('[ARGUMENTs]: ') + (args.join(' ') || COLOR.yellow('No arguments to execute')));
     message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);

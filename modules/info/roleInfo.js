@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -70,7 +68,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
   }
 };
 
@@ -80,8 +78,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'roleinfo',
-  description: string('roleInfo', 'commandDescription'),
+  name: 'roleInfo',
   botPermission: '',
   userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',

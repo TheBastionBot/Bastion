@@ -1,10 +1,8 @@
 /**
- * @file np command
+ * @file nowPlaying command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
-
-const string = require('../../handlers/languageHandler');
 
 exports.run = (Bastion, message) => {
   if (!message.guild.music) {
@@ -12,8 +10,10 @@ exports.run = (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
+
+  if (message.channel.id !== message.guild.music.textChannel.id) return;
 
   message.guild.music.textChannel.send({
     embed: {
@@ -33,15 +33,14 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'np' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'np',
-  description: string('np', 'commandDescription'),
+  name: 'nowPlaying',
   botPermission: '',
   userPermission: '',
-  usage: 'np',
+  usage: 'nowPlaying',
   example: []
 };

@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const ProgressBar = require('../../utils/progress');
 
 exports.run = async (Bastion, message) => {
@@ -104,7 +103,6 @@ exports.config = {
 
 exports.help = {
   name: 'race',
-  description: string('race', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'race',

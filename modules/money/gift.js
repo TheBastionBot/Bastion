@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   let receiver = message.mentions.users.first();
   if (!args.product || !receiver) {
@@ -44,7 +42,7 @@ exports.run = async (Bastion, message, args) => {
     args.product = 'love_letter';
   }
   else {
-    return Bastion.emit('error', string('notFound', 'errors'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
   }
 
   let gifts = {
@@ -114,7 +112,6 @@ exports.config = {
 
 exports.help = {
   name: 'gift',
-  description: string('gift', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'gift <product> [-a amount] <@USER_MENTION>',

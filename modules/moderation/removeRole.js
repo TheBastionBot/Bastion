@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -40,13 +38,13 @@ exports.run = async (Bastion, message, args) => {
     role = args.slice(1).join(' ');
   }
   role = message.guild.roles.find('name', role);
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
   else if (!role) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
   }
 
   try {
@@ -83,8 +81,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'removerole',
-  description: string('removeRole', 'commandDescription'),
+  name: 'removeRole',
   botPermission: 'MANAGE_ROLES',
   userPermission: 'MANAGE_ROLES',
   usage: 'removeRole [@user-mention] <Role Name>',

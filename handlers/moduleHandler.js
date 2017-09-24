@@ -6,7 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const log = require('./logHandler');
+const color = require('chalk');
 const Discord = require('discord.js');
 
 /* eslint-disable no-sync */
@@ -16,18 +16,21 @@ let modules = fs.readdirSync('./modules/').filter(file => fs.statSync(path.join(
 
 for (let module of modules) {
   let commandFiles = fs.readdirSync(`./modules/${module}`);
-  log.info(`Loading module: ${module} [${commandFiles.length} commands]`);
+  process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${module} module...\n`);
   for (let file of commandFiles) {
     file = file.substr(0, file.length - 3);
-    log.message(`Loading command: ${file}`);
+    process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
     file = require(`../modules/${module}/${file}`);
     commands.set(file.help.name.toLowerCase(), file);
     file.config.module = module;
     for (let alias of file.config.aliases) {
       aliases.set(alias.toLowerCase(), file.help.name);
     }
+    process.stdout.moveCursor(0, -1);
+    process.stdout.clearLine();
   }
-  log.info('Done.');
+  process.stdout.moveCursor(0, -1);
+  process.stdout.clearLine();
 }
 
 exports.commands = commands;

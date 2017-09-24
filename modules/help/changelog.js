@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const CHANGES = require('../../changes.json');
 
 exports.run = (Bastion, message) => {
@@ -60,7 +59,6 @@ exports.config = {
 
 exports.help = {
   name: 'changelog',
-  description: string('changelog', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'changelog',

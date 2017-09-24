@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
     /**
@@ -50,10 +48,10 @@ exports.run = async (Bastion, message, args) => {
     if (msgs.size < 2 || msgs.length < 2) {
       let error;
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
-        error = string('singleMessage', 'errorMessage');
+        error = Bastion.strings.error(message.guild.language, 'singleMessage', true);
       }
       else {
-        error = string('noDeletableMessage', 'errorMessage');
+        error = Bastion.strings.error(message.guild.language, 'noDeletableMessage', true);
       }
 
       /**
@@ -87,7 +85,6 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
-  description: string('clear', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
   userPermission: 'MANAGE_MESSAGES',
   usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',

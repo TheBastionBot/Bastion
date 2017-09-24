@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const RainbowSix = require('rainbowsix-api-node');
 const r6 = new RainbowSix();
 
@@ -21,14 +20,14 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidPlatform', 'errorMessage', '`Uplay`, `PS4` and `XOne`'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidPlatform', true, '`Uplay`, `PS4` and `XOne`'), message.channel);
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'username'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'username'), message.channel);
   }
 
   r6.stats(args[1], args[0]).then(data => {
@@ -158,7 +157,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
   });
 };
 
@@ -169,7 +168,6 @@ exports.config = {
 
 exports.help = {
   name: 'rainbow6',
-  description: string('rainbow6', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',

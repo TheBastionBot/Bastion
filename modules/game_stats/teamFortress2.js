@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const TF2 = require('gamedig');
 
 exports.run = (Bastion, message, args) => {
@@ -100,7 +99,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('connection', 'errors'), string('invalidIPPort', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
   });
 };
 
@@ -110,8 +109,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'teamfortress2',
-  description: string('teamFortress2', 'commandDescription'),
+  name: 'teamFortress2',
   botPermission: '',
   userPermission: '',
   usage: 'teamFortress2 <TF2_SERVER_IP>[:PORT]',

@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const gifSearch = require('gif-search');
 
 exports.run = (Bastion, message, args) => {
@@ -32,7 +31,6 @@ exports.config = {
 
 exports.help = {
   name: 'giphy',
-  description: string('giphy', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'giphy <query>',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -15,7 +13,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9_-~#%]+)\.(jpg|jpeg|gif|png)$/i.test(args.join(' '))) {
+  if (!/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9-~#%])+\/)+)?([a-z0-9_-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args.join(' '))) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -46,8 +44,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'setavatar',
-  description: string('setAvatar', 'commandDescription'),
+  name: 'setAvatar',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'setavatar <image_url>',

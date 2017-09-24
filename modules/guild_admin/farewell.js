@@ -5,8 +5,6 @@
  */
 // I don't understand why this is even needed, but some fellows like this.
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -53,7 +51,6 @@ exports.config = {
 
 exports.help = {
   name: 'farewell',
-  description: string('farewell', 'commandDescription'),
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'farewell',

@@ -47,6 +47,7 @@ module.exports = async message => {
     // If there are no `links` left, return
     if (!links.length) return;
 
+    // Delete the message
     if (message.deletable) {
       message.delete().catch(e => {
         message.client.log.error(e);
@@ -62,6 +63,39 @@ module.exports = async message => {
       msg.delete(5000).catch(() => {});
     }).catch(e => {
       message.client.log.error(e);
+    });
+
+    // Log the links that are filtered
+    let guildSettings = await message.guild.client.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (!guildSettings || !guildSettings.modLog) return;
+
+    let modLogChannel = message.guild.channels.get(guildSettings.modLog);
+    if (!modLogChannel) return;
+
+    modLogChannel.send({
+      embed: {
+        color: message.client.colors.ORANGE,
+        title: 'Filtered Links',
+        fields: [
+          {
+            name: 'User',
+            value: message.author.tag,
+            inline: true
+          },
+          {
+            name: 'User ID',
+            value: message.author.id,
+            inline: true
+          },
+          {
+            name: 'Links',
+            value: links.join('\n')
+          }
+        ],
+        timestamp: new Date()
+      }
+    }).catch(e => {
+      guild.client.log.error(e);
     });
   }
   catch (e) {

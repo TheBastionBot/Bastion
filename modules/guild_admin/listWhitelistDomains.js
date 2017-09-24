@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   let guildSettings = await Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
@@ -16,7 +14,7 @@ exports.run = async (Bastion, message, args) => {
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notSet', 'errorMessage', 'whitelisted domain'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'whitelisted domain'), message.channel);
   }
 
   let whitelistDomains = JSON.parse(guildSettings.whitelistDomains);
@@ -51,8 +49,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listwhitelistdomains',
-  description: string('listWhitelistDomains', 'commandDescription'),
+  name: 'listWhitelistDomains',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'listWhitelistDomains [page_no]',

@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   if (message.guild.voiceConnection) {
     if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) {
@@ -21,7 +19,7 @@ exports.run = async (Bastion, message) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('busy', 'errors'), string('isSpeaking', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isSpeaking', true), message.channel);
     }
 
     if (!message.guild.voiceConnection.channel.speakable) {
@@ -80,7 +78,7 @@ exports.run = async (Bastion, message) => {
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', '', string('eitherOneInVC', 'errorMessage'), message.channel);
+    return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'eitherOneInVC', true), message.channel);
   }
 };
 
@@ -91,7 +89,6 @@ exports.config = {
 
 exports.help = {
   name: 'airhorn',
-  description: string('airhorn', 'commandDescription'),
   botPermission: '',
   userPermission: 'MUTE_MEMBERS',
   usage: 'airhorn',

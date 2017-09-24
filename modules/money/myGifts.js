@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message) => {
   let gifts = {
     chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
@@ -62,7 +60,6 @@ exports.config = {
 
 exports.help = {
   name: 'myGifts',
-  description: string('myGifts', 'commandDescription'),
   botPermission: '',
   userPermission: '',
   usage: 'myGifts',

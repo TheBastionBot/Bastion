@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || args.join('').length < 2) {
     /**
@@ -22,7 +20,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
   }
 
   message.channel.send({
@@ -33,7 +31,7 @@ exports.run = (Bastion, message, args) => {
       fields: [
         {
           name: 'Commands',
-          value: `${message.guild.prefix}${commands.join(`\n${message.guild.prefix}`)}`
+          value: `${message.guild.prefix[0]}${commands.join(`\n${message.guild.prefix[0]}`)}`
         }
       ]
     }
@@ -48,8 +46,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'commandsearch',
-  description: string('commandSearch', 'commandDescription'),
+  name: 'commandSearch',
   botPermission: '',
   userPermission: '',
   usage: 'commandSearch <keyword>',

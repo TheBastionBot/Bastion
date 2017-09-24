@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
     /**
@@ -49,8 +47,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'resetdatabase',
-  description: string('resetDatabase', 'commandDescription'),
+  name: 'resetDatabase',
   botPermission: '',
   userPermission: 'BOT_OWNER',
   usage: 'resetDatabase < --profiles >',

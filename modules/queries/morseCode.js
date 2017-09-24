@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -124,8 +122,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'morsecode',
-  description: string('morseCode', 'commandDescription'),
+  name: 'morseCode',
   botPermission: '',
   userPermission: '',
   usage: 'morseCode <text>',

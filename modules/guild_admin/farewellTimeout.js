@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
 exports.run = async (Bastion, message, args) => {
   if (!message.member.hasPermission(this.help.userPermission)) {
     /**
@@ -39,8 +37,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'farewelltimeout',
-  description: string('farewellTimeout', 'commandDescription'),
+  name: 'farewellTimeout',
   botPermission: '',
   userPermission: 'ADMINISTRATOR',
   usage: 'farewellTimeout [time_in_seconds]',

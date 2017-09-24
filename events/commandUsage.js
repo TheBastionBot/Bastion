@@ -13,11 +13,11 @@ module.exports = (message, command) => {
       fields: [
         {
           name: 'Usage',
-          value: `\`\`\`${message.guild.prefix}${command.usage}\`\`\``
+          value: `\`\`\`${message.guild.prefix[0]}${command.usage}\`\`\``
         },
         {
           name: 'Help',
-          value: `\`\`\`${message.guild.prefix}help ${command.name}\`\`\``
+          value: `\`\`\`${message.guild.prefix[0]}help ${command.name}\`\`\``
         }
       ]
     }
