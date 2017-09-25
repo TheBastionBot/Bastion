@@ -48,7 +48,7 @@
     "webshot": "^0.18.0",
     "word-definition": "^2.1.6",
     "xkcd": "^1.1.2",
-    "youtube-dl": "^1.11.1",
+    "youtube-dl": "przemyslawpluta/node-youtube-dl",
     "zalgolize": "^1.2.4"
   },
   "devDependencies": {
