@@ -31,7 +31,7 @@
     "reverse": "Envía el mismo mensaje que había enviado, pero invertido.",
     "robotify": "Genera una imagen de robot aleatoria de la cadena dada o su etiqueta Discord si no se especifica ninguna cadena.",
     "selfDestruct": "Envía el mismo mensaje que había enviado, pero sera auto eliminado después de un período de tiempo determinado.",
-    "sendEmbed": "Envía un mensaje incrustado desde el objeto embed (JavaScript) especificado. *Para crear un objeto incrustado, gráficamente, [haga clic aquí] (https://bastion.js.org/tools/embed_builder/).*",
+    "sendEmbed": "Envía un mensaje incrustado desde el objeto embed (JavaScript) especificado. *Para crear un objeto incrustado, gráficamente, [haga clic aquí] (https://bastionbot.org/tools/embed_builder/).*",
     "ship": "Combina dos o más nombres de usuario mencionados.",
     "slap": "Dar una bofetada a otro usuario.",
     "xkcd": "Muestra un comic de xkcd.",
