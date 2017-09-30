@@ -16,6 +16,10 @@ exports.run = (Bastion, message, args) => {
   let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
 
   if (args[0] && parseInt(args[0])) {
+    args[0] = parseInt(args[0]);
+    if (args[0] > 10) {
+      args[0] = 50;
+    }
     for (let i = 1; i < args[0]; i++) {
       outcome += outcomes[Math.floor(Math.random() * outcomes.length)];
     }
