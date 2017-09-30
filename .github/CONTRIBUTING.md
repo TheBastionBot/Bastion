@@ -13,12 +13,7 @@ place to go is [here](http://i18n.bastionbot.org 'Bastion Bot Translation').*
 
 Make sure that you have [Git](https://git-scm.com/ 'Git Website') and [Node.js](https://nodejs.org 'Node.js Website') `>= v8` installed.
 
-1. Fork and close the repository.
-1. Switch to the **dev** branch.
-```bash
-  git checkout dev
-```
-
+1. Fork and clone the repository.
 1. Install prerequisites
 ```bash
   # On Debian and Ubuntu based Linux distributions
@@ -52,6 +47,7 @@ npm test
 If you get any errors, fix it. Otherwise, your pull request won't be merged.
 
 1. [Submit a pull request](https://github.com/TheBastionBot/Bastion/compare)
+to the **dev** branch of this repository.
 
 1. [Join Bastion's Discord server](https://discord.gg/fzx8fkt),
 if you haven't already, to **claim your perks**.
