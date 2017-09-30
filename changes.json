@@ -1,9 +1,9 @@
 {
-  "date": "September 25, 2017",
-  "fixed": [
-    "Fixed some library issues"
+  "date": "September 30, 2017",
+  "fixed": [],
+  "improved": [
+    "Limited maximum number of coins to 50 for `flips` command"
   ],
-  "improved": [],
   "added": [],
   "removed": []
 }
