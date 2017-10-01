@@ -21,27 +21,42 @@ exports.run = async (Bastion, message) => {
     });
   }
 
-  await message.author.send({
-    embed: {
-      color: Bastion.colors.GOLD,
-      title: 'List of Commands',
-      description: 'To get a complete list of all the commands with details click [here](https://BastionBot.org/commands).',
-      fields: fields,
-      footer: {
-        text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
+  try {
+    await message.author.send({
+      embed: {
+        color: Bastion.colors.GOLD,
+        title: 'List of Commands',
+        description: 'To get a complete list of all the commands with details click [here](https://BastionBot.org/commands).',
+        fields: fields,
+        footer: {
+          text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
+        }
       }
-    }
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
+    });
 
-  message.channel.send({
-    embed: {
-      description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+    message.channel.send({
+      embed: {
+        description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
+    if (e.code === 50007) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: `${message.author} You need to allow Direct Message from your Privacy Settings so that I'll be able to DM you with the commands. If you still don't prefer to change your settings, you can view the commands in https://bastionbot.org/commands`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
+    else {
+      Bastion.log.error(e);
+    }
+  }
 };
 
 exports.config = {

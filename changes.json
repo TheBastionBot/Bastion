@@ -1,9 +1,11 @@
 {
-  "date": "September 25, 2017",
-  "fixed": [
-    "Fixed some library issues"
+  "date": "October 1, 2017",
+  "fixed": [],
+  "improved": [
+    "Limited maximum number of coins to 50 for `flip` command",
+    "Limited maximum number of coins to 50 for `flip` command",
+    "Notifies users when they have DMs disabled for `commands` command"
   ],
-  "improved": [],
   "added": [],
   "removed": []
 }
