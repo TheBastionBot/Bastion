@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://BastionBot.org/",
   "main": "bastion.js",
@@ -41,14 +41,14 @@
     "node-opus": "^0.2.7",
     "overwatch-js": "^1.6.0",
     "rainbowsix-api-node": "^0.0.1",
-    "request": "^2.82.0",
-    "snekfetch": "^3.3.1",
+    "request": "^2.83.0",
+    "snekfetch": "^3.4.2",
     "sqlite": "^2.8.0",
     "weather-js": "^2.0.0",
     "webshot": "^0.18.0",
     "word-definition": "^2.1.6",
     "xkcd": "^1.1.2",
-    "youtube-dl": "przemyslawpluta/node-youtube-dl",
+    "youtube-dl": "github:przemyslawpluta/node-youtube-dl",
     "zalgolize": "^1.2.4"
   },
   "devDependencies": {
