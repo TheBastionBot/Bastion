@@ -16,6 +16,13 @@ exports.run = async (Bastion, message, args) => {
   try {
     let citedMessage = await message.channel.fetchMessage(args[0]);
 
+    let image;
+    if (citedMessage.attachments.size) {
+      if (citedMessage.attachments.first().height) {
+        image = citedMessage.attachments.first().url;
+      }
+    }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -24,6 +31,9 @@ exports.run = async (Bastion, message, args) => {
           icon_url: citedMessage.author.avatarURL
         },
         description: citedMessage.content,
+        image: {
+          url: image
+        },
         timestamp: citedMessage.createdAt
       }
     }).catch(e => {

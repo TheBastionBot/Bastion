@@ -2,7 +2,8 @@
   "date": "October 5, 2017",
   "fixed": [],
   "improved": [
-    "Changed `twitch` command's embed color to purple"
+    "Changed `twitch` command's embed color to purple",
+    "`cite` command can now cite image attachment in the message"
   ],
   "added": [
     "Added `claim` command"
