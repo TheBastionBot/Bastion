@@ -67,7 +67,7 @@ exports.run = (Bastion, message, args) => {
 
         message.channel.send({
           embed: {
-            color: Bastion.colors.BLUE,
+            color: Bastion.colors.PURPLE,
             author: author,
             title: body.stream.channel.status,
             url: body.stream.channel.url,
