@@ -3,7 +3,8 @@
   "fixed": [],
   "improved": [
     "Changed `twitch` command's embed color to purple",
-    "`cite` command can now cite image attachment in the message"
+    "`cite` command can now cite image attachment in the message",
+    "Starboard can now support image attachment"
   ],
   "added": [
     "Added `claim` command"
