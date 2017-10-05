@@ -23,6 +23,14 @@ exports.run = async (Bastion, message, args) => {
       }
     }
 
+    if (!image && !citedMessage.content) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The message doesn\'t have any content that can be cited.', message.channel);
+    }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
