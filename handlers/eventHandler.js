@@ -71,6 +71,11 @@ module.exports = Bastion => {
    */
   Bastion.on('guildMemberRemove', LOAD_EVENTS('guildMemberRemove'));
   /**
+   * Emitted whenever a member leaves a guild, or is kicked.
+   * @listens guildMemberRemove
+   */
+  Bastion.on('presenceUpdate', LOAD_EVENTS('presenceUpdate'));
+  /**
    * Emitted whenever a guild is updated - e.g. name change.
    * @listens guildUpdate
    */
