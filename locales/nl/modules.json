@@ -222,7 +222,6 @@
     "calculate": "Evalueert een wiskundige expressie.",
     "capture": "Maakt een schermafbeelding van een website.",
     "choose": "Vraagt Bastion om een keuze te maken aan een gegeven aantal opties.",
-    "cite": "Haalt een bericht van een gebruiker uit dit kanaal van je Discord server.",
     "colour": "Converteer kleuren in `HEX` formaat naar `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` en `CSS` keywordformaten (Approximeert de dichtbijzijnste kleur).",
     "date": "Laat de locale tijd zien van een opgegeven stad.",
     "define": "Zoekt naar de definitie van woorden in Engels, Frans en Duits.",

@@ -5,6 +5,7 @@
     "Changed `twitch` command's embed color to purple",
     "`cite` command can now cite image attachment in the message",
     "`cite` command can now show proper errors for messages without any content",
+    "`cite` command now supports citing message from different channel of the server",
     "Starboard can now support image attachment",
     "Starboard will now ignore messages without any content"
   ],
