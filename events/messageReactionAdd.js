@@ -23,6 +23,8 @@ module.exports = async (reaction, user) => {
       }
     }
 
+    if (!image && !reaction.message.content) return;
+
     await reaction.message.guild.channels.get(guildSettings.starboard).send({
       embed: {
         color: user.client.colors.GOLD,
