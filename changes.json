@@ -7,7 +7,8 @@
     "`cite` command can now show proper errors for messages without any content",
     "`cite` command now supports citing message from different channel of the server",
     "Starboard can now support image attachment",
-    "Starboard will now ignore messages without any content"
+    "Starboard will now ignore messages without any content",
+    "Other minor changes"
   ],
   "added": [
     "Added `claim` command. Now you can caim your daily rewards!",

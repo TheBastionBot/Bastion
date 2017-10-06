@@ -53,6 +53,6 @@ exports.help = {
   name: 'setStream',
   botPermission: '',
   userPermission: 'BOT_OWNER',
-  usage: 'setStream <twitch> <text>',
-  example: [ 'setStream https://twitch.tv/TheGamerFDN The Gamer Foundation' ]
+  usage: 'setStream <twitch> <Status text>',
+  example: [ 'setStream https://twitch.tv/k3rn31p4nic Nothing' ]
 };
