@@ -1,5 +1,5 @@
 {
-  "date": "October 5, 2017",
+  "date": "October 6, 2017",
   "fixed": [],
   "improved": [
     "Changed `twitch` command's embed color to purple",
@@ -11,7 +11,7 @@
   ],
   "added": [
     "Added `claim` command. Now you can caim your daily rewards!",
-    "Added `streamerRole` command. Add a role as a streamer role, and whenever someone (who has at least 1 role) in your server starts streaming, they are given this role."
+    "Added `streamerRole` command. Add a role as the streamer role, and whenever someone (who has at least 1 role) in your server starts streaming, they are given this role."
   ],
   "removed": []
 }
