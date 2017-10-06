@@ -105,6 +105,7 @@
     "setPrefix": "Sets Bastion's prefix for the server.",
     "starboard": "Toggles logging of starred messages of the server in this channel.",
     "slowMode": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.",
+    "streamerRole": "Adds a role as the streamer role. When a guild member (who is at least in a single role) starts streaming, they are given the streamer role.",
     "whitelistChannel": "Add/remove the channel from the whitelist for invite filter, link filter or word filter.",
     "whitelistRole": "Add/remove a role from the whitelist for invite filter, link filter or word filter."
   },

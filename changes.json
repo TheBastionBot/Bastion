@@ -10,7 +10,8 @@
     "Starboard will now ignore messages without any content"
   ],
   "added": [
-    "Added `claim` command"
+    "Added `claim` command. Now you can caim your daily rewards!",
+    "Added `streamerRole` command. Add a role as a streamer role, and whenever someone (who has at least 1 role) in your server starts streaming, they are given this role."
   ],
   "removed": []
 }
