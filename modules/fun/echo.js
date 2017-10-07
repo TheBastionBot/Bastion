@@ -31,7 +31,7 @@ exports.config = {
 exports.help = {
   name: 'echo',
   botPermission: '',
-  userPermission: '',
+  userPermission: 'MANAGE_GUILD',
   usage: 'echo <text>',
   example: [ 'echo Hello, world!' ]
 };
