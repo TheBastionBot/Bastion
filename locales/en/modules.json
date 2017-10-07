@@ -180,6 +180,7 @@
     "play": "Plays a song, or adds the song to the current music queue if Bastion is already playing in your Discord server, specified either by the name, or the link, or from your favourite songs list, or from a YouTube playlist link.",
     "playlist": "Add a song to a given playlist or display the list of songs in a playlist.",
     "queue": "Shows the list of all the songs in the current music queue of your Discord server.",
+    "removeSong": "Removes a song from the current music queue by it's position number.",
     "repeat": "Adds the current song to the repeat queue, so it will repeat once again after the current playback is complete.",
     "resume": "Resumes the previously paused playback.",
     "shuffle": "Shuffles Bastion's entire music queue of your Discord server.",
