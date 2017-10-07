@@ -11,75 +11,78 @@ exports.run = async (Bastion, message, args) => {
     args = message.author;
   }
 
-  let profile = await Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp>p1.xp) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let profile = await Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp * 1 > p1.xp * 1) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`);
 
-  if (!profile) {
-    if (args === message.author) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          description: `Your profile is now created, <@${args.id}>`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-
-    /**
-    * Error condition is encountered.
-    * @fires error
-    */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${args.id}>`), message.channel);
-  }
-  if (profile.bio) {
-    profile.bio = await Bastion.functions.decodeString(profile.bio);
-  }
-  else {
-    profile.bio = `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
-  }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.BLUE,
-      author: {
-        name: args.tag,
-        icon_url: getUserIcon(args)
-      },
-      description: profile.bio,
-      fields: [
-        {
-          name: 'Bastion Currency',
-          value: profile.bastionCurrencies,
-          inline: true
-        },
-        {
-          name: 'Rank',
-          value: parseInt(profile.rank) + 1,
-          inline: true
-        },
-        {
-          name: 'Experience Points',
-          value: profile.xp,
-          inline: true
-        },
-        {
-          name: 'Level',
-          value: profile.level,
-          inline: true
-        }
-      ],
-      thumbnail: {
-        url: args.displayAvatarURL
-      },
-      footer: {
-        text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`
+    if (!profile) {
+      if (args === message.author) {
+        return message.channel.send({
+          embed: {
+            color: Bastion.colors.GREEN,
+            description: `Your profile is now created, <@${args.id}>`
+          }
+        }).catch(e => {
+          Bastion.log.error(e);
+        });
       }
+
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${args.id}>`), message.channel);
     }
-  }).catch(e => {
+    if (profile.bio) {
+      profile.bio = await Bastion.functions.decodeString(profile.bio);
+    }
+    else {
+      profile.bio = `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+    }
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        author: {
+          name: args.tag,
+          icon_url: getUserIcon(args)
+        },
+        description: profile.bio,
+        fields: [
+          {
+            name: 'Bastion Currency',
+            value: profile.bastionCurrencies,
+            inline: true
+          },
+          {
+            name: 'Rank',
+            value: parseInt(profile.rank) + 1,
+            inline: true
+          },
+          {
+            name: 'Experience Points',
+            value: profile.xp,
+            inline: true
+          },
+          {
+            name: 'Level',
+            value: profile.level,
+            inline: true
+          }
+        ],
+        thumbnail: {
+          url: args.displayAvatarURL
+        },
+        footer: {
+          text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`
+        }
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

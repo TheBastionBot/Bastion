@@ -1,6 +1,8 @@
 {
   "date": "October 7, 2017",
-  "fixed": [],
+  "fixed": [
+    "Fixed an issue with profile ranking that displayed wrong ranks of users"
+  ],
   "improved": [
     "Changed `twitch` command's embed color to purple",
     "`cite` command can now cite image attachment in the message",
