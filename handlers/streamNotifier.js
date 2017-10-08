@@ -20,7 +20,7 @@ module.exports = Bastion => {
           for (let guild of Bastion.guilds) {
             guild = guild[1];
             let streamers = await Bastion.db.get(`SELECT * FROM streamers WHERE guildID=${guild.id}`);
-            if (!streamers) return;
+            if (!streamers || !streamers.channelID) return;
             let twitchStreamers = streamers.twitch.split(' ');
 
             request({
