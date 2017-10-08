@@ -46,7 +46,7 @@ exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'User Info',
+      title: `${user.bot ? 'Bot' : 'User'} Info`,
       fields: [
         {
           name: 'Name',
