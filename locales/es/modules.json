@@ -107,7 +107,6 @@
   },
   "help": {
     "changelog": "Muestra los cambios realizados en la versión actual de Bastion Bot.",
-    "commands": "Envio de mensaje directo con una lista de todos los comandos.",
     "commandSearch": "Busca un comando con el texto dado.",
     "donate": "Instrucciones sobre cómo apoyar financieramente el desarrollo del proyecto Bastion Bot.",
     "guide": "Muestra la guía sobre cómo configurar e instalar en privado el Bastion Bot. Junto con el enlace al servidor de soporte oficial.",
@@ -222,7 +221,6 @@
     "calculate": "Evalúa cualquier expresión matemática.",
     "capture": "Captura una captura de pantalla de la página web especificada.",
     "choose": "Pide al bot que elija una opción de varias opciones.",
-    "cite": "Cita un mensaje de usuario en el mismo canal de texto de su servidor Discord.",
     "colour": "Convierte el color proporcionado en formato `HEX` a` RGB`, `CMYK`,` HSL`, `HSV`,` HWB`, `LAB`,` ANSI16`, `ANSI256`,` XYZ`, `HCG`, `Apple`,` Gray` y `CSS` (Aproxima al color más cercano).",
     "date": "Muestra la fecha y hora local de cualquier ciudad especificada.",
     "define": "Busca la definición de la palabra especificada en el diccionario inglés, francés o alemán.",

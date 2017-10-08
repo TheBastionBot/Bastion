@@ -16,6 +16,15 @@ module.exports = async (reaction, user) => {
     let stars = [ '🌟', '⭐' ];
     if (!stars.includes(reaction.emoji.name)) return;
 
+    let image;
+    if (reaction.message.attachments.size) {
+      if (reaction.message.attachments.first().height) {
+        image = reaction.message.attachments.first().url;
+      }
+    }
+
+    if (!image && !reaction.message.content) return;
+
     await reaction.message.guild.channels.get(guildSettings.starboard).send({
       embed: {
         color: user.client.colors.GOLD,
@@ -36,6 +45,9 @@ module.exports = async (reaction, user) => {
             inline: true
           }
         ],
+        image: {
+          url: image
+        },
         timestamp: reaction.message.createdAt
       }
     });

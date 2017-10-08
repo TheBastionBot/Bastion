@@ -53,6 +53,7 @@ module.exports = async Bastion => {
     }
 
     require('../handlers/scheduledCommandHandler')(Bastion);
+    require('../handlers/streamNotifier')(Bastion);
 
     Bastion.log.console('\n');
     Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);

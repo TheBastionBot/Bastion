@@ -5,7 +5,7 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (args.length < 1 || !(parseInt(args[0]) < 9223372036854775807)) {
+  if (!args.message || !(parseInt(args.message) < 9223372036854775807)) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -13,8 +13,28 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let channel = message.mentions.channels.first();
+  if (!channel) {
+    channel = message.channel;
+  }
+
   try {
-    let citedMessage = await message.channel.fetchMessage(args[0]);
+    let citedMessage = await channel.fetchMessage(args.message);
+
+    let image;
+    if (citedMessage.attachments.size) {
+      if (citedMessage.attachments.first().height) {
+        image = citedMessage.attachments.first().url;
+      }
+    }
+
+    if (!image && !citedMessage.content) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The message doesn\'t have any content that can be cited.', message.channel);
+    }
 
     message.channel.send({
       embed: {
@@ -24,6 +44,9 @@ exports.run = async (Bastion, message, args) => {
           icon_url: citedMessage.author.avatarURL
         },
         description: citedMessage.content,
+        image: {
+          url: image
+        },
         timestamp: citedMessage.createdAt
       }
     }).catch(e => {
@@ -46,7 +69,10 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'message', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {

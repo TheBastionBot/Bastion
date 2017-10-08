@@ -4,24 +4,30 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
-  let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
-
-  let fields = [];
-  for (let i = 0; i < modules.length; i++) {
-    let commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
-    if (commands.length === 0) {
-      continue;
+exports.run = async (Bastion, message, args) => {
+  try {
+    let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
+    if (args.modules) {
+      args.modules = args.modules.filter(module => modules.includes(module));
+      if (args.modules.length) {
+        modules = args.modules;
+      }
     }
 
-    fields.push({
-      name: modules[i].replace('_', ' ').toTitleCase(),
-      value: commands.join('\n'),
-      inline: true
-    });
-  }
+    let fields = [];
+    for (let i = 0; i < modules.length; i++) {
+      let commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
+      if (commands.length === 0) {
+        continue;
+      }
 
-  try {
+      fields.push({
+        name: modules[i].replace('_', ' ').toTitleCase(),
+        value: commands.join('\n'),
+        inline: true
+      });
+    }
+
     await message.author.send({
       embed: {
         color: Bastion.colors.GOLD,
@@ -36,7 +42,7 @@ exports.run = async (Bastion, message) => {
 
     message.channel.send({
       embed: {
-        description: `${message.author} Check your DM from me, I've sent you the list of commands.`
+        description: `${message.author} Check your DM from me, I've sent you the list of commands${args.modules && args.modules.length ? ` in ${args.modules.join(', ')} modules` : ''}.`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -61,13 +67,16 @@ exports.run = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'cmds' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'modules', type: String, multiple: true, defaultOption: true }
+  ]
 };
 
 exports.help = {
   name: 'commands',
   botPermission: '',
   userPermission: '',
-  usage: 'commands',
-  example: []
+  usage: 'commands [module names]',
+  example: [ 'commands administration moderation' ]
 };

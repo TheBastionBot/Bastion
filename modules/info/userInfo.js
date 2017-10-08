@@ -46,7 +46,7 @@ exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'User Info',
+      title: `${user.bot ? 'Bot' : 'User'} Info`,
       fields: [
         {
           name: 'Name',
@@ -91,6 +91,10 @@ exports.run = (Bastion, message) => {
       ],
       thumbnail: {
         url: user.displayAvatarURL
+      },
+      footer: {
+        text: `${message.guild.ownerID === user.id ? 'Server Owner' : ''}`,
+        icon_url: `${message.guild.ownerID === user.id ? 'https://i.imgur.com/2ogsleu.png' : ''}`
       }
     }
   }).catch(e => {

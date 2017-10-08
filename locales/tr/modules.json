@@ -107,7 +107,6 @@
   },
   "help": {
     "changelog": "Bastion Bot geçerli sürümünde yapılan değişiklikleri gösterir.",
-    "commands": "Doğrudan tüm komutları listesini içeren iletileri.",
     "commandSearch": "Belirtilen metni içeren bir komut için arama.",
     "donate": "Bastion Bot projenin geliştirilmesi mali destek hakkında talimatlar.",
     "guide": "Nasıl kurulum ve özel Bastion Bot yüklemek Kılavuzu gösterir. Ve resmi destek sunucusuna bağlantılar.",
@@ -222,7 +221,6 @@
     "calculate": "Herhangi bir matematiksel ifade değerlendirir.",
     "capture": "Belirtilen Web sayfası bir ekran görüntüsü yakalar.",
     "choose": "Bir dizi seçenek arasından bir seçenek belirlemek için bot sorar.",
-    "cite": "Aynı metin kanal anlaşmazlık sunucunuzun kullanıcıları iletisinde değinir.",
     "colour": "'HEX' oluşum 'RGB', 'CMYK', 'HSL', 'HSV', 'HWB', 'LAB', 'ANSI16', 'ANSI256', 'XYZ', 'HCG', 'Elma', 'Gri' ve 'CSS' anahtar kelime (Approximates yakın renge) biçimlerinde sağlanan renk dönüştürün.",
     "date": "Yerel Tarih ve saat belirtilen herhangi bir şehrin gösterir.",
     "define": "İngilizce, Fransızca veya Almanca sözlükten belirtilen kelime arar.",

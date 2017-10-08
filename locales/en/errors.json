@@ -18,6 +18,7 @@
     "channelNotFound": "The specified channel was not found.",
     "commandNoDisable": "You cannot disable %var% command.",
     "connection": "Some error has occured while receiving data from the server. Please try again later.",
+    "claimCooldown": "%var% you have recently claimed your daily reward, please try again tomorrow. You can claim daily rewards only once in 24 hours.",
     "serverNotFound": "Bastion cannot find the server at %var%.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may have been timed out, try again later.",
     "deleteDefaultChannel": "You cannot delete the default channel.",
     "eitherOneInVC": "Either one of us should be in a voice channel.",

@@ -1,11 +1,28 @@
 {
-  "date": "October 1, 2017",
-  "fixed": [],
-  "improved": [
-    "Limited maximum number of coins to 50 for `flip` command",
-    "Limited maximum number of coins to 50 for `roll` command",
-    "Notifies users when they have DMs disabled for `commands` command"
+  "date": "October 8, 2017",
+  "fixed": [
+    "Fixed an issue with profile ranking that displayed wrong ranks of users"
   ],
-  "added": [],
+  "improved": [
+    "Changed `twitch` command's embed color to purple",
+    "`cite` command can now cite image attachment in the message",
+    "`cite` command can now show proper errors for messages without any content",
+    "`cite` command now supports citing message from different channel of the server",
+    "`commands` command now takes module names as an optional parameter to send you only the commands in the given modules",
+    "`echo`, `sendEmbed` and `selfDestruct` command restriced to users with manage server permission",
+    "`userInfo` command sets server owner apart from other users. Rep yourself with the pride of a king!",
+    "`userID` and `userInfo` command sets users apart from bots. Because, why not?",
+    "Starboard can now support image attachment",
+    "Starboard will now ignore messages without any content",
+    "Other minor changes"
+  ],
+  "added": [
+    "Added French translations",
+    "Added support for notifications when your favorite streamers go live on Twitch.",
+    "Added `claim` command. Now you can caim your daily rewards!",
+    "Added `removeSong` command. Now you can easily remove the 10 hours long nyan cat video that you added by mistake (mistake?! XD) to the queue.",
+    "Added `streamerRole` command. Add a role as the streamer role, and whenever someone (who has at least 1 role) in your server starts streaming, they are given this role.",
+    "Added `streamers` command. Advanced twitch notification when users go live, at the touch of your keyboard."
+  ],
   "removed": []
 }
