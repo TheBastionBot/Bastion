@@ -9,7 +9,7 @@
     "`cite` command can now show proper errors for messages without any content",
     "`cite` command now supports citing message from different channel of the server",
     "`commands` command now takes module names as an optional parameter to send you only the commands in the given modules",
-    "`echo` command restriced to users with manage server permission",
+    "`echo`, `sendEmbed` and `selfDestruct` command restriced to users with manage server permission",
     "`userInfo` command sets server owner apart from other users. Rep yourself with the pride of a king!",
     "Starboard can now support image attachment",
     "Starboard will now ignore messages without any content",
