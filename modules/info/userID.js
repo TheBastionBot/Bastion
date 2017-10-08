@@ -15,7 +15,7 @@ exports.run = (Bastion, message) => {
       color: Bastion.colors.BLUE,
       fields: [
         {
-          name: 'User',
+          name: `${user.bot ? 'Bot' : 'User'}`,
           value: user.tag,
           inline: true
         },
