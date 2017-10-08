@@ -11,6 +11,7 @@
     "`commands` command now takes module names as an optional parameter to send you only the commands in the given modules",
     "`echo`, `sendEmbed` and `selfDestruct` command restriced to users with manage server permission",
     "`userInfo` command sets server owner apart from other users. Rep yourself with the pride of a king!",
+    "`userID` and `userInfo` command sets users apart from bots. Because, why not?",
     "Starboard can now support image attachment",
     "Starboard will now ignore messages without any content",
     "Other minor changes"
