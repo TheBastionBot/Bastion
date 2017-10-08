@@ -107,7 +107,6 @@
   },
   "help": {
     "changelog": "Geeft de wijzigingen weer van de nieuwe versie van Bastion Bot.",
-    "commands": "Geeft je een lijst met commando's per persoonlijk bericht.",
     "commandSearch": "Zoek voor een commando.",
     "donate": "Geeft instructies over hoe je het Bastion Bot project financieel kan ondersteunen.",
     "guide": "Geeft je een gids over hoe je Private Bastion Bot kan installeren op je server, en de weblinks naar de officiële support server.",

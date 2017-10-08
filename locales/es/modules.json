@@ -107,7 +107,6 @@
   },
   "help": {
     "changelog": "Muestra los cambios realizados en la versión actual de Bastion Bot.",
-    "commands": "Envio de mensaje directo con una lista de todos los comandos.",
     "commandSearch": "Busca un comando con el texto dado.",
     "donate": "Instrucciones sobre cómo apoyar financieramente el desarrollo del proyecto Bastion Bot.",
     "guide": "Muestra la guía sobre cómo configurar e instalar en privado el Bastion Bot. Junto con el enlace al servidor de soporte oficial.",

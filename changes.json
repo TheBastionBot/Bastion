@@ -1,5 +1,5 @@
 {
-  "date": "October 7, 2017",
+  "date": "October 8, 2017",
   "fixed": [
     "Fixed an issue with profile ranking that displayed wrong ranks of users"
   ],
@@ -8,6 +8,7 @@
     "`cite` command can now cite image attachment in the message",
     "`cite` command can now show proper errors for messages without any content",
     "`cite` command now supports citing message from different channel of the server",
+    "`commands` command now takes module names as an optional parameter to send you only the commands in the given modules",
     "`echo` command restriced to users with manage server permission",
     "Starboard can now support image attachment",
     "Starboard will now ignore messages without any content",

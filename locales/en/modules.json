@@ -111,7 +111,7 @@
   },
   "help": {
     "changelog": "Shows the changes made in the current version of Bastion Bot.",
-    "commands": "Direct Messages you with a list of all the commands.",
+    "commands": "Direct Messages you with a list of all the commands, or the commands in specific modules.",
     "commandSearch": "Search for a command with the given text.",
     "donate": "Instructions on how to financially support the development of the Bastion Bot project.",
     "guide": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the official support server.",

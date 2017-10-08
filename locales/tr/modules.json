@@ -107,7 +107,6 @@
   },
   "help": {
     "changelog": "Bastion Bot geçerli sürümünde yapılan değişiklikleri gösterir.",
-    "commands": "Doğrudan tüm komutları listesini içeren iletileri.",
     "commandSearch": "Belirtilen metni içeren bir komut için arama.",
     "donate": "Bastion Bot projenin geliştirilmesi mali destek hakkında talimatlar.",
     "guide": "Nasıl kurulum ve özel Bastion Bot yüklemek Kılavuzu gösterir. Ve resmi destek sunucusuna bağlantılar.",
