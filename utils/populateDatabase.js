@@ -102,5 +102,13 @@ module.exports = async db => {
     'type TEXT NOT NULL,' +
     'amount TEXT NOT NULL)');
 
+  await db.run('CREATE TABLE IF NOT EXISTS streamers' +
+    '(guildID TEXT NOT NULL UNIQUE,' +
+    'channelID TEXT UNIQUE,' +
+    'mixer TEXT,' +
+    'twitch TEXT,' +
+    'youtube TEXT,' +
+    'FOREIGN KEY (guildID) REFERENCES guildSettings (guildID) ON DELETE CASCADE)');
+
   require('./updateDatabase')(db);
 };
