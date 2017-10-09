@@ -66,7 +66,7 @@ exports.run = async (Bastion, message, args) => {
           Bastion.log.error(e);
         });
 
-        reaction = encodeURIComponent(reaction);
+        // reaction = encodeURIComponent(reaction);
 
         let winners = [];
         if (giveawayMessage.reactions.get(reaction)) {
