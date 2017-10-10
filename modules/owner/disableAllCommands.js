@@ -14,12 +14,12 @@ exports.run = (Bastion, message) => {
   }
 
   let forbiddenCommands = [
-    'disableallcommands',
-    'disablecommand',
-    'disablemodule',
-    'enableallcommands',
-    'enablecommand',
-    'enablemodule'
+    'disableAllCommands',
+    'disableCommand',
+    'disableModule',
+    'enableAllCommands',
+    'enableCommand',
+    'enableModule'
   ];
 
   Bastion.commands.filter(cmd => {
@@ -37,7 +37,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [ 'disableallmodules', 'disableallcmds', 'disableallmdls' ],
+  aliases: [ 'disableAllModules', 'disableAllCmds', 'disableAllMdls' ],
   enabled: true
 };
 

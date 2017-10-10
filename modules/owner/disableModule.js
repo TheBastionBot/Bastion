@@ -23,12 +23,12 @@ exports.run = (Bastion, message, args) => {
 
   let module = args.name.toLowerCase(),
     forbiddenCommands = [
-      'disableallcommands',
-      'disablecommand',
-      'disablemodule',
-      'enableallcommands',
-      'enablecommand',
-      'enablemodule'
+      'disableAllCommands',
+      'disableCommand',
+      'disableModule',
+      'enableAllCommands',
+      'enableCommand',
+      'enableModule'
     ];
 
   if (Bastion.commands.map(c => c.config.module).includes(module)) {
