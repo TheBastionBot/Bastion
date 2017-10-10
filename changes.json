@@ -1,9 +1,11 @@
 {
-  "date": "October 9, 2017",
+  "date": "October 10, 2017",
   "fixed": [
     "Fixed `giveaway` command not sending currencies after the giveaway was ended."
   ],
-  "improved": [],
+  "improved": [
+    "`giveaway` won't send out DMs when giveaway ends and users receive bastion currencies."
+  ],
   "added": [],
   "removed": []
 }

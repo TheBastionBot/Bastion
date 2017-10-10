@@ -80,14 +80,6 @@ exports.run = async (Bastion, message, args) => {
             * @fires userDebit
             */
             Bastion.emit('userDebit', user, args.amount);
-            user.send({
-              embed: {
-                color: Bastion.colors.GREEN,
-                description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
-              }
-            }).catch(e => {
-              Bastion.log.error(e);
-            });
           }
         });
       }, TIMEOUT * 60 * 60 * 1000);
