@@ -4,7 +4,8 @@
     "Fixed `giveaway` command not sending currencies after the giveaway was ended."
   ],
   "improved": [
-    "`giveaway` won't send out DMs when giveaway ends and users receive bastion currencies."
+    "`giveaway` won't send out DMs when giveaway ends and users receive bastion currencies.",
+    "Improvements to slow mode. It's less annoying now for non-spammers. And real spammers will now be muted for 15 minutes."
   ],
   "added": [],
   "removed": []

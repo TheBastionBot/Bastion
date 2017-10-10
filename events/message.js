@@ -51,15 +51,15 @@ module.exports = async message => {
             let title, description;
 
             ++recentUsers[message.author.id];
-            if (recentUsers[message.author.id] >= 5) {
+            if (recentUsers[message.author.id] >= 8) {
               title = 'Warned ya!.';
-              description = `${message.author} you have been muted for 5 minutes.`;
+              description = `${message.author} you have been muted for 15 minutes.`;
               await message.channel.overwritePermissions(message.author, {
                 SEND_MESSAGES: false,
                 ADD_REACTIONS: false
               });
 
-              setTimeout(function () {
+              setTimeout(() => {
                 let permissionOverwrites = message.channel.permissionOverwrites.get(message.author.id);
                 if (permissionOverwrites) {
                   if (permissionOverwrites.deny === 2112) {
@@ -74,13 +74,13 @@ module.exports = async message => {
                     });
                   }
                 }
-              }, 5 * 60 * 1000);
+              }, 15 * 60 * 1000);
             }
-            else if (recentUsers[message.author.id] >= 4) {
+            else if (recentUsers[message.author.id] >= 6) {
               title = 'Cooldown, dark lord.';
               description = `${message.author} you are sending messages way too quickly.`;
             }
-            else if (recentUsers[message.author.id] >= 3) {
+            else if (recentUsers[message.author.id] >= 4) {
               title = 'Woah There. Way too Spicy.';
               description = `${message.author} you are sending messages too quickly.`;
             }
@@ -98,7 +98,7 @@ module.exports = async message => {
           else {
             recentUsers[message.author.id] = 1;
 
-            setTimeout(function () {
+            setTimeout(() => {
               delete recentUsers[message.author.id];
             }, 5 * 1000);
           }
