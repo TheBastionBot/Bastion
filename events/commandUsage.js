@@ -8,15 +8,15 @@ module.exports = (message, command) => {
   message.channel.send({
     embed: {
       color: message.client.colors.RED,
-      title: 'Invalid Use!',
-      description: `See the usage below to know how to use \`${command.name}\` command.`,
+      title: message.client.strings.error(message.guild.language, 'invalidUse'),
+      description: message.client.strings.error(message.guild.language, 'commandUsage', true, command.name),
       fields: [
         {
           name: 'Usage',
           value: `\`\`\`${message.guild.prefix[0]}${command.usage}\`\`\``
         },
         {
-          name: 'Help',
+          name: 'Get Help',
           value: `\`\`\`${message.guild.prefix[0]}help ${command.name}\`\`\``
         }
       ]
