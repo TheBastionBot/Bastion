@@ -1,13 +1,14 @@
 {
-  "date": "October 12, 2017",
+  "date": "October 14, 2017",
   "fixed": [
     "Fixed `giveaway` command not sending currencies after the giveaway was ended.",
     "Fixed an issue that caused enable/disable commands to be able to get disabled."
   ],
   "improved": [
     "Now you can use `claim` everywhere.",
+    "Improvements to slow mode. It's less annoying now for non-spammers. And real spammers will now be muted for 15 minutes.",
     "`giveaway` won't send out DMs when giveaway ends and users receive bastion currencies.",
-    "Improvements to slow mode. It's less annoying now for non-spammers. And real spammers will now be muted for 15 minutes."
+    "`ping` command now shows the WebSocket ping as well as the response time."
   ],
   "added": [],
   "removed": []
