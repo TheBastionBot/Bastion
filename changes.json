@@ -8,6 +8,7 @@
     "Now you can use `claim` everywhere.",
     "Improvements to slow mode. It's less annoying now for non-spammers. And real spammers will now be muted for 15 minutes.",
     "`claim` command can now be used with `daily`",
+    "`clear` command will now show some info when messages has been cleared.",
     "`giveaway` won't send out DMs when giveaway ends and users receive bastion currencies.",
     "`ping` command now shows the WebSocket ping as well as the response time."
   ],

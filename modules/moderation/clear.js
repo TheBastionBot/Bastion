@@ -63,6 +63,17 @@ exports.run = async (Bastion, message, args) => {
 
     await message.channel.bulkDelete(msgs);
 
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: `I've cleared ${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}.`
+      }
+    }).then(msg => {
+      msg.delete(10000).catch(() => {});
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+
     let reason = 'No reason given';
 
     /**
