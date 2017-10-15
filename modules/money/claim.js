@@ -61,7 +61,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'daily' ],
   enabled: true
 };
 
