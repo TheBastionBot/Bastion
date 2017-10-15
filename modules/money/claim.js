@@ -8,19 +8,6 @@ let claimedUsers = [];
 const specialIDs = require('../../data/specialIDs.json');
 
 exports.run = (Bastion, message) => {
-  if (Bastion.credentials.guildId && Bastion.credentials.guildId instanceof Array && Bastion.credentials.guildId.length > 0) {
-    if (!Bastion.credentials.guildId.includes(message.guild.id)) {
-      return message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          description: 'You can claim your daily rewards only in the official server. Here\'s an invite link to the official server: https://discord.gg/fzx8fkt'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-  }
-
   if (!claimedUsers.includes(message.author.id)) {
     let rewardAmount;
 
@@ -74,7 +61,7 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'daily' ],
   enabled: true
 };
 

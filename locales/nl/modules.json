@@ -122,7 +122,6 @@
     "discrim": "Zoekt voor gebruikers in je Discord server met een dezelfde discriminator.",
     "emojiInfo": "Geeft informatie weer over een eigen emoji van je Discord server.",
     "inRole": "Laat alle gebruikers zien met dezelfde rol in je Discord server.",
-    "ping": "Geeft het gemiddelde WebSocket ping weer van Bastion.",
     "profile": "Geeft het Bastion gebruikersprofiel weer van iemand in je Discord server.",
     "roleInfo": "Geeft informatie weer over een specifieke rol in je Discord server.",
     "roles": "Geeft een lijst van alle rollen in je Discord server.",

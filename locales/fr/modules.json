@@ -122,7 +122,6 @@
     "discrim": "Recherche les utilisateurs de votre serveur Discord pour la discrimination spécifiée.",
     "emojiInfo": "Affiche l'information d'un emoji spécifié de votre serveur Discord.",
     "inRole": "Affiche les membres qui ont un rôle spécifique dans votre serveur Discord.",
-    "ping": "Affiche le ping WebSocket moyen de Bastion.",
     "profile": "Affiche le profil utilisateur Bastion d'un utilisateur spécifié de votre serveur Discord.",
     "roleInfo": "Affiche les informations d'un rôle spécifié de votre serveur Discord.",
     "roles": "Liste tous les rôles de votre serveur Discord.",

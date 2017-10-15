@@ -122,7 +122,6 @@
     "discrim": "Anlaşmazlık sunucunuz belirtilen Ayrıştırıcı için kullanıcıları arar.",
     "emojiInfo": "Belirtilen emoji anlaşmazlık sunucunuzun bilgilerini gösterir.",
     "inRole": "Discord sunucu belirtilen rolü olan üyeleri gösterir.",
-    "ping": "Ortalama WebSocket pingini gösterir.",
     "profile": "Belirtilen kullanıcı anlaşmazlık sunucunuzun Bastion kullanıcı profilini gösterir.",
     "roleInfo": "Discord sunucunuzun belirli bir rolünün bilgilerini gösterir.",
     "roles": "Yeni bir rol oluşturur discord sunucunuzda.",
