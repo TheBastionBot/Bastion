@@ -90,7 +90,7 @@ exports.run = (Bastion, message) => {
         url: Bastion.user.displayAvatarURL
       },
       footer: {
-        text: `Ping: ${parseInt(Bastion.ping)}ms`
+        text: `WebSocket PING: ${parseInt(Bastion.ping)}ms`
       },
       timestamp: new Date()
     }
