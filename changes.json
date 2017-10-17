@@ -1,9 +1,10 @@
 {
-  "date": "October 16, 2017",
+  "date": "October 17, 2017",
   "fixed": [
     "Minor fixes"
   ],
   "improved": [
+    "Only one user will win the currency `giveaway`. And the winner's name will be shown after the giveaway.",
     "Music outputs will now have direct links to the video, if the source is YouTube. Now you can directly go from music to video in seconds!"
   ],
   "added": [],
