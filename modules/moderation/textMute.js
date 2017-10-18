@@ -38,10 +38,11 @@ exports.run = async (Bastion, message, args) => {
       ADD_REACTIONS: false
     });
 
-    let reason = args.slice(1).join(' ');
-    if (reason.length < 1) {
-      reason = 'No reason given';
+    if (args.reason) {
+      args.reason = args.reason.filter(str => !str.startsWith('<@') || !str.endsWith('>'));
     }
+
+    args.reason = args.reason && args.reason.length ? args.reason.join(' ') : 'No reason given';
 
     message.channel.send({
       embed: {
@@ -60,7 +61,7 @@ exports.run = async (Bastion, message, args) => {
           },
           {
             name: 'Reason',
-            value: reason,
+            value: args.reason,
             inline: false
           }
         ]
@@ -73,7 +74,7 @@ exports.run = async (Bastion, message, args) => {
     * Logs moderation events if it is enabled
     * @fires moderationLog
     */
-    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason, {
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, args.reason, {
       channel: message.channel
     });
   }
@@ -84,7 +85,10 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'tm' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'reason', type: String, multiple: true, defaultOption: true }
+  ]
 };
 
 exports.help = {
