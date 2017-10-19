@@ -149,6 +149,7 @@
     "kick": "Kicks the specified user from your Discord server.",
     "listWarns": "Lists all the warned users of your Discord Server.",
     "mute": "Mutes a specified user server-wide in your Discord server.",
+    "muteList": "Lists all the server-wide muted users of your Discord Server.",
     "nickname": "Sets the nickname of the specified user of your Discord server.",
     "removeAllRoles": "Removes all the roles from the specified user of your Discord server.",
     "removeRole": "Removes the specified role from a specified user of your Discord server.",
