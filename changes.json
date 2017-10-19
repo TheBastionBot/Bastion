@@ -9,7 +9,8 @@
     "Music outputs will now have direct links to the video, if the source is YouTube. Now you can directly go from music to video in seconds!"
   ],
   "added": [
-    "Added `muteList` command. Now you can see who's been muted server-wide with ease."
+    "Added `muteList` command. Now you can see who's been muted server-wide with ease.",
+    "Added `lyrics` command. Get the lyrics of the song you're trying to sing, and sing it without any mistakes!"
   ],
   "removed": []
 }

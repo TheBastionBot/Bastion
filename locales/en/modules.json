@@ -243,6 +243,7 @@
     "google": "Searches Google, for the specified query, and shows the top results.",
     "live": "Shows the list of users in your Discord server who are currently streaming.",
     "lmgtfy": "Searches Google, for the specified query, and teaches users how to use Google's internet search.",
+    "lyrics": "Shows the lyrics of the specified song.",
     "manga": "Searches for the details of a Manga.",
     "map": "Get the map of the specified location.",
     "morseCode": "Encodes a given text in Morse Code.",
