@@ -1,5 +1,5 @@
 {
-  "date": "October 19, 2017",
+  "date": "October 20, 2017",
   "fixed": [
     "Minor fixes"
   ],
@@ -10,7 +10,8 @@
   ],
   "added": [
     "Added `muteList` command. Now you can see who's been muted server-wide with ease.",
-    "Added `lyrics` command. Get the lyrics of the song you're trying to sing, and sing it without any mistakes!"
+    "Added `lyrics` command. Get the lyrics of the song you're trying to sing, and sing it without any mistakes!",
+    "Wanted to disable some commands/modules in a specific channel? Now can do that; and the best part about it, is that you don't need to use any command for that. Read the [FAQ](https://bastionbot.org/faq) to know how you can do that."
   ],
   "removed": []
 }
