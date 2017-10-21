@@ -38,6 +38,7 @@
     "invalidMusicChannel": "I am not able to join the default voice channel. Either a wrong voice channel has been set or the voice channel has been deleted.",
     "invalidPlatform": "You have entered an invalid platform. Valid platforms are: %var%.",
     "invalidRegion": "You have entered an invalid region. Valid regions are: %var%.",
+    "invalidRoleColor": "The specified color is not available, please try one of these: ```%var%```",
     "isEventInUse": "Cannot start the %var% event now. It is already running in this channel. Please wait for it to end.",
     "isGameInUse": "Cannot start the %var% game now. It is already running in this channel. Please wait for it to end.",
     "isSpeaking": "I am currently playing something in a voice channel. I cannot play another sound simultaneously.",

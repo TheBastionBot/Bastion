@@ -9,6 +9,7 @@
     "iAmNot": "Revoke the specified self-assignable role to the user.",
     "renameChannel": "Renames the specified text or voice channel of your Discord server.",
     "renameRole": "Renames the specified role of your Discord server.",
+    "roleColor": "Changes the color of the specified role of your Discord server.",
     "setTopic": "Sets channel topic of the specified text channel of your Discord server."
   },
   "fun": {
