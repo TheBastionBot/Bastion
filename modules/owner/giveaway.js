@@ -36,7 +36,7 @@ exports.run = async (Bastion, message, args) => {
     reaction = reaction[Math.floor(Math.random() * reaction.length)];
 
     try {
-      await message.channel.send({
+      let giveawayMessage = await message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
           title: 'GIVEAWAY! 🎉',
@@ -46,18 +46,20 @@ exports.run = async (Bastion, message, args) => {
           }
         }
       });
+      await giveawayMessage.react(reaction);
 
+      let giveawayMessageID = giveawayMessage.id;
       activeChannel = message.channel.id;
 
       setTimeout(async () => {
         try {
-          let giveawayMessage = await message.channel.fetchMessage(giveawayMessage.id);
+          let giveawayMessage = await message.channel.fetchMessage(giveawayMessageID);
 
           // reaction = encodeURIComponent(reaction);
 
           let winners = [];
           if (giveawayMessage.reactions.get(reaction)) {
-            winners = giveawayMessage.reactions.get(reaction).users.map(u => u.id);
+            winners = giveawayMessage.reactions.get(reaction).users.filter(user => !user.bot).map(u => u.id);
           }
 
           let winner = winners[Math.floor(Math.random() * winners.length)];
