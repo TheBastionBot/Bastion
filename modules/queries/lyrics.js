@@ -36,7 +36,7 @@ exports.run = (Bastion, message, args) => {
             embed: {
               color: Bastion.colors.BLUE,
               title: `${args.song.join(' ').toTitleCase()} - Lyrics`,
-              description: body.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', `View full lyrics at [musixmatch.com](${body.message.body.lyrics.backlink_url} 'Musixmatch - The world's largest lyrics catlog)`),
+              description: body.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', `View full lyrics at [musixmatch.com](${body.message.body.lyrics.backlink_url} 'Musixmatch')`),
               footer: {
                 text: `Powered by Musixmatch | Language: ${body.message.body.lyrics.lyrics_language_description.toTitleCase()}`
               }
