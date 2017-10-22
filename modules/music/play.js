@@ -137,6 +137,7 @@ exports.run = async (Bastion, message, args) => {
             }
             message.guild.music.songs.push({
               url: `https://www.youtube.com/watch?v=${e.url}`,
+              id: e.url,
               title: e.title,
               thumbnail: '',
               duration: e.duration,
@@ -181,6 +182,7 @@ exports.run = async (Bastion, message, args) => {
           if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
           message.guild.music.songs.push({
             url: info.formats[info.formats.length - 1].url,
+            id: info.id,
             title: info.title,
             thumbnail: info.thumbnail,
             duration: info.duration,
@@ -211,6 +213,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.guild.music.songs.push({
         url: info.formats[info.formats.length - 1].url,
+        id: info.id,
         title: info.title,
         thumbnail: info.thumbnail,
         duration: info.duration,
@@ -220,6 +223,7 @@ exports.run = async (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.GREEN,
           title: 'Added to the queue',
+          url: info.id ? `https://youtu.be/${info.id}` : '',
           description: info.title,
           thumbnail: {
             url: info.thumbnail
@@ -298,6 +302,7 @@ function startStreamDispatcher(guild, connection) {
     embed: {
       color: guild.client.colors.BLUE,
       title: 'Playing',
+      url: guild.music.songs[0].id ? `https://youtu.be/${guild.music.songs[0].id}` : '',
       description: guild.music.songs[0].title,
       thumbnail: {
         url: guild.music.songs[0].thumbnail

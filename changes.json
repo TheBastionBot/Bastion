@@ -1,18 +1,21 @@
 {
-  "date": "October 15, 2017",
+  "date": "October 22, 2017",
   "fixed": [
-    "Fixed `giveaway` command not sending currencies after the giveaway was ended.",
-    "Fixed an issue that caused enable/disable commands to be able to get disabled."
+    "Minor fixes"
   ],
   "improved": [
-    "More string externalization.",
-    "Now you can use `claim` everywhere.",
-    "Improvements to slow mode. It's less annoying now for non-spammers. And real spammers will now be muted for 15 minutes.",
-    "`claim` command can now be used with `daily`",
-    "`clear` command will now show some info when messages has been cleared.",
-    "`giveaway` won't send out DMs when giveaway ends and users receive bastion currencies.",
-    "`ping` command now shows the WebSocket ping as well as the response time."
+    "Changes to `echo`, `sendEmbed` and `selfDestruct` command to distinguish it from Bastion's official messages.",
+    "Had a hard time finding the right reaction for the currency giveaway? Worry not, Bastion will now automatically add the right reaction to make it easy for you.",
+    "Had to use `textMute` command in every channel if you needed to mute a user globally? The pain's gone! `textMute` can now mute users across the server if you use the `--server` (or simply `-s`) flag along with the `textMute` command.",
+    "Music outputs will now have direct links to the video, if the source is YouTube. Now you can directly go from music to video in seconds!",
+    "Only one user will win the currency `giveaway`. And the winner's name will be shown after the giveaway."
   ],
-  "added": [],
+  "added": [
+    "Added `fidgetSpinner` command. Brag your fidget spinning skills (well, it's just random).",
+    "Added `lyrics` command. Get the lyrics of the song you're trying to sing, and sing it without any mistakes!",
+    "Added `muteList` command. Now you can see who's been muted server-wide with ease.",
+    "Added `roleColor` command. Change the color of any role without even touching the mouse.",
+    "Wanted to disable some commands/modules in a specific channel? Now can do that; and the best part about it, is that you don't need to use any command for that. Read the [FAQ](https://bastionbot.org/faq) to know how you can do that."
+  ],
   "removed": []
 }

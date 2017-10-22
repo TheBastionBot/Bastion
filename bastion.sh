@@ -152,7 +152,7 @@ case $1 in
   echo " --update     Updates Bastion to the latest version without losing data."
   echo " --upgrade    Updates Bastion to the latest version. But all your data"
   echo "              are reset. Needed if you want to start from scratch or if"
-  echo "              you have somehow corrupted the database or dependencies."
+  echo "              you have somehow corrupted the database."
   echo
   echo -e "${GREEN}Examples:${NC}"
   echo " $0 --start"

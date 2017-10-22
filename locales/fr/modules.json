@@ -146,7 +146,6 @@
     "removeRole": "Supprime le rôle spécifié d'un utilisateur spécifié de votre serveur Discord.",
     "report": "Report un utilisateur de votre serveur Discord. * Les journaux de modération doivent être activés. *",
     "softBan": "Banni et dé-banni l'utilisateur spécifié, immédiatement, de votre serveur Discord, et supprime 7 jours de l'historique de ses messages.",
-    "textMute": "Mute un utilisateur spécifié dans le canal de texte spécifié de votre serveur Discord.",
     "textUnMute": "Dé-mute l'utilisateur spécifié dans le canal de texte spécifié de votre serveur Discord.",
     "unDeafen": "Dé-mute un utilisateur spécifique dans tout le serveur de votre serveur Discord.",
     "unMute": "Dé-mute l'utilisateur de tous le canaux dans votre serveur Discord.",

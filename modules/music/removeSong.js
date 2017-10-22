@@ -46,6 +46,7 @@ exports.run = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.GREEN,
       title: 'Removed from the queue',
+      url: removedSong.id ? `https://youtu.be${removedSong.id}` : '',
       description: removedSong.title,
       thumbnail: {
         url: removedSong.thumbnail

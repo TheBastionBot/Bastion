@@ -46,42 +46,47 @@ exports.run = async (Bastion, message, args) => {
           }
         }
       });
+      await giveawayMessage.react(reaction);
+
       let giveawayMessageID = giveawayMessage.id;
       activeChannel = message.channel.id;
 
       setTimeout(async () => {
-        let giveawayMessage = await message.channel.fetchMessage(giveawayMessageID).catch(e => {
-          Bastion.log.error(e);
-        });
+        try {
+          let giveawayMessage = await message.channel.fetchMessage(giveawayMessageID);
 
-        giveawayMessage.edit('', {
-          embed: {
-            color: Bastion.colors.BLUE,
-            title: 'Giveaway event ended',
-            description: `Giveaway event has been ended. Thank you for participating. All the participants have been rewarded with **${args.amount}** Bastion Currencies.`
+          // reaction = encodeURIComponent(reaction);
+
+          let winners = [];
+          if (giveawayMessage.reactions.get(reaction)) {
+            winners = giveawayMessage.reactions.get(reaction).users.filter(user => !user.bot).map(u => u.id);
           }
-        }).then(() => {
-          activeChannel = null;
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
 
-        // reaction = encodeURIComponent(reaction);
-
-        let winners = [];
-        if (giveawayMessage.reactions.get(reaction)) {
-          winners = giveawayMessage.reactions.get(reaction).users.map(u => u.id);
-        }
-        winners.forEach(user => {
-          user = Bastion.users.get(user);
-          if (user) {
+          let winner = winners[Math.floor(Math.random() * winners.length)];
+          winner = Bastion.users.get(winner);
+          if (winner) {
             /**
             * User's account is debited with `args.amount` Bastion Currencies
             * @fires userDebit
             */
-            Bastion.emit('userDebit', user, args.amount);
+            Bastion.emit('userDebit', winner, args.amount);
+
+            giveawayMessage.edit('', {
+              embed: {
+                color: Bastion.colors.BLUE,
+                title: 'Giveaway event ended',
+                description: `${winner.tag} won the giveaway! And has been awarded with **${args.amount}** Bastion Currencies.\nThank you everyone for participating. Better luck next time.`
+              }
+            }).catch(e => {
+              Bastion.log.error(e);
+            });
           }
-        });
+
+          activeChannel = null;
+        }
+        catch (e) {
+          Bastion.log.error(e);
+        }
       }, TIMEOUT * 60 * 60 * 1000);
     }
     catch (e) {

@@ -23,6 +23,9 @@ exports.run = (Bastion, message, args) => {
 
   try {
     args = JSON.parse(args.join(' '));
+    args.footer = {
+      text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from Bastion or from it\'s creators.'}`
+    };
   }
   catch (e) {
     /**
