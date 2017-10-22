@@ -4,7 +4,7 @@
     "Minor fixes"
   ],
   "improved": [
-    "Changes to `echo` and `sendEmbed` command to distinguish it from Bastion's official messages.",
+    "Changes to `echo`, `sendEmbed` and `selfDestruct` command to distinguish it from Bastion's official messages.",
     "Had a hard time finding the right reaction for the currency giveaway? Worry not, Bastion will now automatically add the right reaction to make it easy for you.",
     "Had to use `textMute` command in every channel if you needed to mute a user globally? The pain's gone! `textMute` can now mute users across the server if you use the `--server` (or simply `-s`) flag along with the `textMute` command.",
     "Music outputs will now have direct links to the video, if the source is YouTube. Now you can directly go from music to video in seconds!",
