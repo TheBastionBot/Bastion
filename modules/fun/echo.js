@@ -24,7 +24,10 @@ exports.run = (Bastion, message, args) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.DEFAULT,
-      description: args.join(' ')
+      description: args.join(' '),
+      footer: {
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from Bastion or from it\'s creators.'}`
+      }
     }
   }).catch(e => {
     Bastion.log.error(e);
