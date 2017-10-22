@@ -11,6 +11,7 @@
     "Only one user will win the currency `giveaway`. And the winner's name will be shown after the giveaway."
   ],
   "added": [
+    "Added `fidgetSpinner` command. Brag your fidget spinning skills (well, it's just random).",
     "Added `lyrics` command. Get the lyrics of the song you're trying to sing, and sing it without any mistakes!",
     "Added `muteList` command. Now you can see who's been muted server-wide with ease.",
     "Added `roleColor` command. Change the color of any role without even touching the mouse.",
