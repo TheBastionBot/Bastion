@@ -1,11 +1,13 @@
 {
-  "date": "October 23, 2017",
+  "date": "October 24, 2017",
   "fixed": [
     "Fixed an issues that caused running of multiple trivia and acrophobia games in a channel."
   ],
   "improved": [
     "Updated some strings"
   ],
-  "added": [],
+  "added": [
+    "Added `battlefield1` command"
+  ],
   "removed": []
 }

@@ -46,6 +46,7 @@
     "sweep": "Shows a random user from the text channel."
   },
   "game_stats": {
+    "battlefield1": "Get stats of any Battlefield 1 player.",
     "battlefield4": "Get stats of any Battlefield 4 player.",
     "callOfDuty4": "Get stats of any Call of Duty 4: Modern Warfare game server.",
     "counterStrikeGlobalOffensive": "Get stats of any Counter-Strike: Global Offensive game server.",
