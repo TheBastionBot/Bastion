@@ -1,7 +1,7 @@
 {
   "date": "October 23, 2017",
   "fixed": [
-    "Fixed an issues that caused running of multiple trivias."
+    "Fixed an issues that caused running of multiple trivia and acrophobia games in a channel."
   ],
   "improved": [
     "Updated some strings"
