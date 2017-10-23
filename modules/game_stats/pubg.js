@@ -21,7 +21,7 @@ exports.run = (Bastion, message, args) => {
 
   request({
     headers: {
-      'TRN-Api-Key': Bastion.credentials.TRNApiKey
+      'TRN-Api-Key': Bastion.credentials.PUBGAPIKey
     },
     uri: `https://pubgtracker.com/api/profile/pc/${args.player}`
   }, function (err, response, body) {
