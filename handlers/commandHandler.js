@@ -6,6 +6,7 @@
 
 const parseArgs = require('command-line-args');
 const COLOR = require('chalk');
+const activeUsers = {};
 
 /**
  * Handles Bastion's commands
@@ -103,7 +104,24 @@ module.exports = async message => {
       }
     }
 
-    cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+    if (cmd.config.userCooldown && typeof cmd.config.userCooldown === 'number' && cmd.config.userCooldown >= 1 && cmd.config.userCooldown <= 1440) {
+      if (!activeUsers.hasOwnProperty(cmd.help.name)) {
+        activeUsers[cmd.help.name] = [];
+      }
+      if (activeUsers[cmd.help.name].includes(message.author.id)) {
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return message.client.emit('error', message.client.strings.error(message.guild.language, 'cooldown'), message.client.strings.error(message.guild.language, 'cooldown', true, `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
+      }
+    }
+
+    let isSuccessRun = await cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+
+    if (isSuccessRun === true) {
+      activeUsers[cmd.help.name].push(message.author.id);
+    }
   }
   catch (e) {
     message.client.log.error(e);
