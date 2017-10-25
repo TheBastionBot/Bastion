@@ -120,7 +120,9 @@ module.exports = async message => {
     let isSuccessRun = await cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
 
     if (isSuccessRun === true) {
-      activeUsers[cmd.help.name].push(message.author.id);
+      if (activeUsers.hasOwnProperty(cmd.help.name)) {
+        activeUsers[cmd.help.name].push(message.author.id);
+      }
     }
   }
   catch (e) {
