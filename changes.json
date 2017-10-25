@@ -1,5 +1,5 @@
 {
-  "date": "October 24, 2017",
+  "date": "October 25, 2017",
   "fixed": [
     "Fixed an issues that caused running of multiple trivia and acrophobia games in a channel."
   ],
@@ -7,6 +7,7 @@
     "Updated some strings"
   ],
   "added": [
+    "Added `bastionCurrency` command. Now you can see your account balance, without having to show your entire profile.",
     "Added `battlefield1` command"
   ],
   "removed": []
