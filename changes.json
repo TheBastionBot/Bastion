@@ -8,7 +8,8 @@
     "Improvements to regex for image url in `setAvatar` and `createEmoji` commands.",
     "Improvements to `give` command. Users can't use user ID to give Bastion Currencies anymore, to prevent giving currencies to users from other servers and spamming their DM.",
     "Improvements to `stats` command. It will now list all the owners of the bot.",
-    "Updated some strings"
+    "Updated some strings",
+    "Code improvements"
   ],
   "added": [
     "Added `bastionCurrency` command. Now you can see your account balance, without having to show your entire profile.",
