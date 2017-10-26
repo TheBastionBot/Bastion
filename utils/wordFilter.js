@@ -7,7 +7,7 @@
 /**
  * Handles filtering of specific words in messages
  * @param {Message} message Discord.js message object
- * @returns {void}
+ * @returns {Promise<true>} If the message was filtered
  */
 module.exports = async message => {
   try {
@@ -37,10 +37,11 @@ module.exports = async message => {
     for (let word of filteredWords) {
       if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
         if (message.deletable) {
-          return message.delete().catch(e => {
+          message.delete().catch(e => {
             message.client.log.error(e);
           });
         }
+        return true;
       }
     }
   }

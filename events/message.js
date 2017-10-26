@@ -31,7 +31,7 @@ module.exports = async message => {
     /**
      * Filter specific words from the message
      */
-    wordFilter(message);
+    if (await wordFilter(message)) return;
 
     /**
      * Filter links from the message
