@@ -36,7 +36,7 @@ module.exports = async message => {
     /**
      * Filter links from the message
      */
-    linkFilter(message);
+    if (await linkFilter(message)) return;
 
     /**
      * Filter Discord server invites from the message

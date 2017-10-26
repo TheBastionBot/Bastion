@@ -7,12 +7,12 @@
 /**
  * Handles filtering of links in messages
  * @param {Message} message Discord.js message object
- * @returns {void}
+ * @returns {Promise<true>} If the message was filtered
  */
 module.exports = async message => {
   try {
     let query = `SELECT filterLink, linkFilterWhitelistChannels, linkFilterWhitelistRoles, whitelistDomains FROM guildSettings LEFT OUTER JOIN whitelists ON guildSettings.guildID = whitelists.guildID WHERE guildSettings.guildId='${message.guild.id}'`;
-    let guild = await message.client.db.get(query);
+    let guild = await message.client.db.get(query), filtered = false;
 
     // If link filter is disabled, return
     if (!guild.filterLink) return;
@@ -47,6 +47,8 @@ module.exports = async message => {
     // If there are no `links` left, return
     if (!links.length) return;
 
+    // If the code reaches here, the message contains links that needs to be filtered
+    filtered = true;
     // Delete the message
     if (message.deletable) {
       message.delete().catch(e => {
@@ -67,10 +69,10 @@ module.exports = async message => {
 
     // Log the links that are filtered
     let guildSettings = await message.guild.client.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guildSettings || !guildSettings.modLog) return;
+    if (!guildSettings || !guildSettings.modLog) return filtered;
 
     let modLogChannel = message.guild.channels.get(guildSettings.modLog);
-    if (!modLogChannel) return;
+    if (!modLogChannel) return filtered;
 
     modLogChannel.send({
       embed: {
@@ -97,6 +99,7 @@ module.exports = async message => {
     }).catch(e => {
       guild.client.log.error(e);
     });
+    return filtered;
   }
   catch (e) {
     message.client.log.error(e);
