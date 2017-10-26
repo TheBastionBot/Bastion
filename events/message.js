@@ -41,7 +41,7 @@ module.exports = async message => {
     /**
      * Filter Discord server invites from the message
      */
-    inviteFilter(message);
+    if (await inviteFilter(message)) return;
 
     try {
       if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {

@@ -4,7 +4,7 @@
     "Fixed an issues that caused running of multiple trivia and acrophobia games in a channel."
   ],
   "improved": [
-    "Improvements to link filter. Bastion won't accept commands if the user's message is filtered.",
+    "Improvements to link filter and invite filter. Bastion won't accept commands if the user's message is filtered.",
     "Updated some strings"
   ],
   "added": [
