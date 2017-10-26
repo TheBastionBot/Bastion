@@ -24,7 +24,6 @@
     "favSongsNotFound": "Er zijn geen favorieten in de lijst toegevoegd.",
     "gamblingCooldown": "%var% je hebt recentelijk gegokt met dit spel, wacht minimaal %var% seconden om opnieuw te gokken in dit spel.",
     "giveLimit": "Je kunt niet meer dan %var%% van je %_currencyName% geven.",
-    "giveNoUser": "Je moet de ontvanger van de %_currencyName% taggen of zijn/haar user-ID gebruiken.",
     "giveYourself": "Je kan jezelf geen %currencyName% geven.",
     "indexRange": "De index die je hebt ingevoerd is buiten bereik.",
     "insufficientBalance": "Je hebt niet genoeg geld in je account... Je bezit op dit moment *%var%*%currencySymbol%.",

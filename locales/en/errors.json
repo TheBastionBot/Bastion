@@ -29,7 +29,7 @@
     "favSongsNotFound": "There is no songs in your favourite songs list.",
     "gamblingCooldown": "%var% you have recently gambled in this game, please wait at least %var% seconds before gambling again.",
     "giveLimit": "You cannot give more than %var%% of your %_currencyName%.",
-    "giveNoUser": "You need to mention the user or give their ID to whom you want to give %_currencyName%.",
+    "giveNoUser": "You need to mention the user to whom you want to give %_currencyName%.",
     "giveYourself": "You cannot give yourself %currencyName%.",
     "indexRange": "The index you entered is out of range.",
     "insufficientBalance": "You do not have sufficient balance in your account. Your current account balance is *%var%* %currencySymbol%.",

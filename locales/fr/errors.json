@@ -24,7 +24,6 @@
     "favSongsNotFound": "Il n'y a aucune musiques dans votre liste de chansons favorites.",
     "gamblingCooldown": "%var% vous avez joué récemment à ce jeu, veuillez patienter au moins %var% secondes avant de jouer à nouveau.",
     "giveLimit": "Vous ne pouvez pas donner plus de %var% % de votre %_currencyName%.",
-    "giveNoUser": "Vous devez mentionner l'utilisateur ou donner son ID auquel vous souhaitez donner des %_currencyName%.",
     "giveYourself": "Vous ne pouvez pas vous donner %currencyName% à vous-même.",
     "indexRange": "L’index que vous avez entré est trop grand.",
     "insufficientBalance": "Vous n’avez pas un solde suffisant sur votre compte. Le solde de votre compte actuellement est de *%var%* %currencySymbol%.",

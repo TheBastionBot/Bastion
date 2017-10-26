@@ -24,7 +24,6 @@
     "favSongsNotFound": "En sevdiğiniz şarkı listesine şarkı yok.",
     "gamblingCooldown": "Son zamanlarda bu oyunda kumar oynadı %var% lütfen bekleyin daha önce yine kumar en az %var% saniye.",
     "giveLimit": "%_currencyName% 'nizin% var %var%' dan fazlasını veremezsiniz.",
-    "giveNoUser": "Kullanıcıdan söz etmeniz veya vermek istediğiniz kimlik numarasını %_currencyName% olarak vermeniz gerekiyor.",
     "giveYourself": "Kendinize %currencyName% Name.",
     "indexRange": "Girdiğiniz dizin dışında bir aralıktır.",
     "insufficientBalance": "Hesabınızda yeterli bakiyeniz yok. Cari hesap bakiyeniz: %var% %currencySymbol%.",
