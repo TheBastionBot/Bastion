@@ -62,8 +62,13 @@ exports.run = async (Bastion, message, args) => {
             winners = giveawayMessage.reactions.get(reaction).users.filter(user => !user.bot).map(u => u.id);
           }
 
-          let winner = winners[Math.floor(Math.random() * winners.length)];
-          winner = Bastion.users.get(winner);
+          let winner;
+          while (!winner && winners.length) {
+            winner = winners[Math.floor(Math.random() * winners.length)];
+            winners.splice(winners.indexOf(winner), 1);
+            winner = await Bastion.fetchUser(winner).catch(() => {});
+          }
+
           if (winner) {
             /**
             * User's account is debited with `args.amount` Bastion Currencies
@@ -76,6 +81,17 @@ exports.run = async (Bastion, message, args) => {
                 color: Bastion.colors.BLUE,
                 title: 'Giveaway event ended',
                 description: `${winner} won the giveaway! And has been awarded with **${args.amount}** Bastion Currencies.\nThank you everyone for participating. Better luck next time.`
+              }
+            }).catch(e => {
+              Bastion.log.error(e);
+            });
+          }
+          else {
+            giveawayMessage.edit('', {
+              embed: {
+                color: Bastion.colors.RED,
+                title: 'Giveaway event ended',
+                description: 'Unfortunately, no one participated and apparently there\'s no winner. 😕'
               }
             }).catch(e => {
               Bastion.log.error(e);

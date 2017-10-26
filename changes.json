@@ -7,6 +7,7 @@
     "Improvements to link filter, invite filter, word filter and credentials filter. Bastion won't accept commands if the user's message is filtered.",
     "Improvements to regex for image url in `setAvatar` and `createEmoji` commands.",
     "Improvements to `give` command. Users can't use user ID to give Bastion Currencies anymore, to prevent giving currencies to users from other servers and spamming their DM.",
+    "Improvements to `giveaway` command. Will now show an error message when no one participates.",
     "Improvements to `stats` command. It will now list all the owners of the bot.",
     "Updated some strings",
     "Code improvements"
