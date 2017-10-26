@@ -38,5 +38,6 @@ module.exports = async message => {
     }).catch(e => {
       message.client.log.error(e);
     });
+    return true;
   }
 };

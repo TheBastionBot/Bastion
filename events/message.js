@@ -20,7 +20,7 @@ module.exports = async message => {
   /**
    * Filter Bastion's credentials from the message
    */
-  credentialsFilter(message);
+  if (await credentialsFilter(message)) return;
 
   /**
    * If the message author is a bot, ignore it.
