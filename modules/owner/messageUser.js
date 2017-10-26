@@ -4,32 +4,64 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
+exports.run = async (Bastion, message, args) => {
+  try {
+    if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    }
 
-  if (!(parseInt(args[0]) < 9223372036854775807)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+    if (!args.length || !(parseInt(args[0]) < 9223372036854775807)) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  if (Bastion.users.get(args[0])) {
-    Bastion.users.get(args[0]).send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        description: args.slice(1).join(' ')
-      }
-    }).catch(e => {
+    let user = await Bastion.fetchUser(args[0]);
+
+    if (user) {
+      user.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          description: args.slice(1).join(' ')
+        }
+      }).catch(e => {
+        if (e.code === 50007) {
+          /**
+          * Error condition is encountered.
+          * @fires error
+          */
+          Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'Can\'t send message to this user. They might have disabled their DM or they don\'t share a server with me.', message.channel);
+        }
+        else {
+          Bastion.log.error(e);
+        }
+      });
+    }
+    else {
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'user'), message.channel);
+    }
+  }
+  catch (e) {
+    if (e.code === 10013) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'user'), message.channel);
+    }
+    else {
       Bastion.log.error(e);
-    });
+    }
   }
 };
 
