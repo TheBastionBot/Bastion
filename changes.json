@@ -6,6 +6,7 @@
   "improved": [
     "Improvements to link filter, invite filter, word filter and credentials filter. Bastion won't accept commands if the user's message is filtered.",
     "Improvements to regex for image url in `setAvatar` and `createEmoji` commands.",
+    "Improvements to `stats` command. It will now list all the owners of the bot.",
     "Updated some strings"
   ],
   "added": [

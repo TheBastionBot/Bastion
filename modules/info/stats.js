@@ -4,7 +4,13 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.run = async (Bastion, message) => {
+  let owners = [];
+  for (let userID of Bastion.credentials.ownerId) {
+    let user = await Bastion.fetchUser(userID);
+    owners.push(user.tag);
+  }
+
   let uptime = Bastion.uptime;
   let seconds = uptime / 1000;
   let days = parseInt(seconds / 86400);
@@ -54,8 +60,8 @@ exports.run = (Bastion, message) => {
           inline: true
         },
         {
-          name: 'Owner',
-          value: Bastion.users.get(Bastion.credentials.ownerId[0]).tag,
+          name: `Owner${Bastion.credentials.ownerId.length > 1 ? 's' : ''}`,
+          value: owners.join('\n'),
           inline: true
         },
         {
