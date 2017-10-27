@@ -46,18 +46,8 @@ exports.run = async (Bastion, message) => {
             inline: true
           },
           {
-            name: 'Library',
-            value: Bastion.package.library,
-            inline: true
-          },
-          {
             name: 'BOT ID',
             value: Bastion.credentials.botId,
-            inline: true
-          },
-          {
-            name: 'Default Prefix',
-            value: Bastion.config.prefix,
             inline: true
           },
           {
@@ -71,15 +61,25 @@ exports.run = async (Bastion, message) => {
             inline: true
           },
           {
-            name: 'Presence',
-            value: `${Bastion.guilds.size.toHumanString()} Servers\n`
-            + `${Bastion.channels.filter(channel => channel.type === 'text').size.toHumanString()} Text Channels\n`
-            + `${Bastion.channels.filter(channel => channel.type === 'voice').size.toHumanString()} Voice Channels`,
+            name: 'Default Prefix',
+            value: Bastion.config.prefix,
             inline: true
           },
           {
             name: 'Uptime',
             value: uptime,
+            inline: true
+          },
+          {
+            name: 'Shards',
+            value: Bastion.shard ? `${Bastion.shard.count} Shards` : 'None',
+            inline: true
+          },
+          {
+            name: Bastion.shard ? `Shard ${Bastion.shard.id} Presence` : 'Presence',
+            value: `${Bastion.guilds.size.toHumanString()} Servers\n`
+            + `${Bastion.channels.filter(channel => channel.type === 'text').size.toHumanString()} Text Channels\n`
+            + `${Bastion.channels.filter(channel => channel.type === 'voice').size.toHumanString()} Voice Channels`,
             inline: true
           },
           {
