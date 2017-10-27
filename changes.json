@@ -9,7 +9,7 @@
     "Improvements to `give` command. Users can't use user ID to give Bastion Currencies anymore, to prevent giving currencies to users from other servers and spamming their DM.",
     "Improvements to `giveaway` command. Will now show an error message when no one participates.",
     "Improvements to `messageUser` command. Will now show proper error if the unable to send a message to any user.",
-    "Improvements to `stats` command. It will now list all the owners of the bot. Will also show no. of shards and shard presence instead of overall presence if sharding is enabled.",
+    "Improvements to `stats` command. It will now list all the owners of the bot. Shard status, current shard and memory used by all shards if sharding is enabled.",
     "Updated some strings",
     "Code improvements"
   ],
