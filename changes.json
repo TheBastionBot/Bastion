@@ -1,25 +1,26 @@
 {
   "date": "October 27, 2017",
   "fixed": [
-    "Fixed an issues that caused running of multiple trivia and acrophobia games in a channel."
+    "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel."
   ],
   "improved": [
-    "Improvements to link filter, invite filter, word filter and credentials filter. Bastion won't accept commands if the user's message is filtered.",
-    "Improvements to regex for image url in `setAvatar` and `createEmoji` commands.",
-    "Improvements to `changelog` command. Change logs will now show if there're any known issues, so users can be worry free that the issues they find are known by us and will be fixed soon™.",
-    "Improvements to `give` command. Users can't use user ID to give Bastion Currencies anymore, to prevent giving currencies to users from other servers and spamming their DM.",
-    "Improvements to `giveaway` command. Will now show an error message when no one participates.",
-    "Improvements to `leave` command. Will now show proper message after leaving a guild or if no guild was found.",
-    "Improvements to `messageUser` command. Will now show proper error if the unable to send a message to any user.",
-    "Improvements to `searchServer` command. It will now show the server ID along with the name. Will also show the shard it searched if sharding is enabled.",
-    "Improvements to `stats` command. It will now list all the owners of the bot. Shard status, current shard and memory used by all shards if sharding is enabled.",
-    "Updated some strings",
-    "Code improvements"
+    "Bastion won't accept commands if the user's message's filtered by link, invite, word & credentials filter.",
+    "Improvements to regex for image url in `setAvatar` & `createEmoji` commands.",
+    "`changelog` command'll show if there're any known issues, so users can be worry free that the issues they find are known by us & will be fixed soon™.",
+    "Users can't use user ID to give Bastion Currencies anymore, to prevent giving currencies to users from other servers & spamming their DM.",
+    "`giveaway` command'll show an error message when no one participates.",
+    "`leave` command'll show proper message after leaving a guild or if no guild was found.",
+    "`messageUser` command'll show proper error if unable to send a message to any user.",
+    "`searchServer` command'll show the server ID along with the name. And'll only search in the current shard.",
+    "`stats` command'll list all the owners of the bot. Along with shard status, current shard & memory used by all shards if sharding's enabled.",
+    "Code & string improvements"
   ],
   "added": [
-    "Added `bastionCurrency` command. Now you can see your account balance, without having to show your entire profile.",
-    "Added `battlefield1` command"
+    "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
+    "Brag about your Battlefield 1 skill using the all new `battlefield1` command."
   ],
   "removed": [],
-  "issues": []
+  "issues": [
+    "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which con the official server."
+  ]
 }
