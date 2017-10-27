@@ -21,6 +21,6 @@
   ],
   "removed": [],
   "issues": [
-    "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which con the official server."
+    "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
   ]
 }
