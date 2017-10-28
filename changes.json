@@ -1,7 +1,8 @@
 {
   "date": "October 27, 2017",
   "fixed": [
-    "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel."
+    "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
+    "Fixed an issues with `messageChannel` accepting commands even without the second argument."
   ],
   "improved": [
     "Bastion won't accept commands if the user's message's filtered by link, invite, word & credentials filter.",
