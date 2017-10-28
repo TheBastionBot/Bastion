@@ -182,7 +182,6 @@
   "owner": {
     "addTrigger": "Ajoute un déclencheur de message et une réponse. Lorsqu'un message est envoyé contenant ce mot/phrase déclencheur, Bastion répond avec la réponse que vous avez définie.",
     "announce": "Envoyer un message à la chaîne d'annonces de tous les serveurs auxquels Bastion est connecté.",
-    "bastionLog": "Active l'enregistrement de divers événements de Bastion dans le canal.",
     "deleteAllTriggers": "Supprime tous les déclencheurs et les réponses que vous avez définis.",
     "deleteTodo": "Supprime l'élément spécifié de votre liste TODO.",
     "deleteTrigger": "Supprime le déclencheur de message spécifié.",

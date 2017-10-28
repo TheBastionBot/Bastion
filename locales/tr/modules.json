@@ -182,7 +182,6 @@
   "owner": {
     "addTrigger": "Bir ileti tetikleyici ve bir yanıt ekler. Bu tetikleyici kelime/cümle içeren bir ileti gönderildiğinde, Bastion cevaplar yanıt ile ayarladığınız.",
     "announce": "Duyuru kanalına Bastion bağlandığı tüm sunucuların bir ileti gönderin.",
-    "bastionLog": "Sunucudaki çeşitli etkinliklerin günlüğünü açıp kapatır.",
     "deleteAllTriggers": "Tüm triggerlerı ve ayarladığınız yanıtı siler.",
     "deleteTodo": "Belirtilen öğe, TODO listenizden siler.",
     "deleteTrigger": "Belirtilen ileti tetikleyici siler.",

@@ -182,7 +182,6 @@
   "owner": {
     "addTrigger": "Voegt een berichttrigger en antwoord toe. Als een bepaald bericht word verstuurt met een triggerend woord, zal Bastion antwoorden met het ingestelde antwoord.",
     "announce": "Verstuurt een bericht naar het aankondigingskanaal van alle servers waar Bastion word gebruikt.",
-    "bastionLog": "Schakelt het log-systeem aan of uit voor diverse evenementen in dit kanaal.",
     "deleteAllTriggers": "Verwijdert alle triggers en antwoorden die jij hebt ingesteld.",
     "deleteTodo": "Verwijdert een specifiek item van je To Do lijst.",
     "deleteTrigger": "Verwijdert de specifieke berichttrigger.",

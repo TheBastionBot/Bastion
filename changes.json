@@ -20,7 +20,9 @@
     "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
     "Brag about your Battlefield 1 skill using the all new `battlefield1` command."
   ],
-  "removed": [],
+  "removed": [
+    "Removed `bastionLog` command."
+  ],
   "issues": [
     "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
   ]

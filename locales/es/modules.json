@@ -182,7 +182,6 @@
   "owner": {
     "addTrigger": "Agrega un disparador de mensaje y una respuesta. Cuando se envía un mensaje que contenga esa palabra / frase, Bastion responde con la respuesta que ha establecido.",
     "announce": "Enviar un mensaje al canal de anuncio de todos los servidores Bastion está conectado.",
-    "bastionLog": "Activa el registro de varios eventos de Bastion en el canal.",
     "deleteAllTriggers": "Elimina todos los disparadores y respuestas que ha establecido.",
     "deleteTodo": "Elimina el elemento especificado de su lista TO/DO.",
     "deleteTrigger": "Elimina el activador de mensaje especificado.",

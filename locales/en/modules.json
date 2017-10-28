@@ -198,7 +198,6 @@
   "owner": {
     "addTrigger": "Adds a message trigger and a response. When a message is sent that contains that triggering word/phrase, Bastion replies with the response you have set.",
     "announce": "Send a message to announcement channel of all the servers Bastion is connected to.",
-    "bastionLog": "Toggles logging of various events of Bastion in the channel.",
     "deleteAllTriggers": "Deletes all the triggers and responses you have set.",
     "deleteTodo": "Deletes the specified item from your TODO list.",
     "deleteTrigger": "Deletes the specified message trigger.",
