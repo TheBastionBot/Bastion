@@ -24,32 +24,23 @@ exports.run = async (Bastion, message, args) => {
 
     let user = await Bastion.fetchUser(args[0]);
 
-    if (user) {
-      user.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          description: args.slice(1).join(' ')
-        }
-      }).catch(e => {
-        if (e.code === 50007) {
-          /**
-          * Error condition is encountered.
-          * @fires error
-          */
-          Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'Can\'t send message to this user. They might have disabled their DM or they don\'t share a server with me.', message.channel);
-        }
-        else {
-          Bastion.log.error(e);
-        }
-      });
-    }
-    else {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'user'), message.channel);
-    }
+    user.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        description: args.slice(1).join(' ')
+      }
+    }).catch(e => {
+      if (e.code === 50007) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'Can\'t send message to this user. They might have disabled their DM or they don\'t share a server with me.', message.channel);
+      }
+      else {
+        Bastion.log.error(e);
+      }
+    });
   }
   catch (e) {
     if (e.code === 10013) {
