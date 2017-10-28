@@ -13,6 +13,7 @@ const BASTION = new Discord.Client({
     'RELATIONSHIP_REMOVE'
   ]
 });
+BASTION.Webhook = Discord.WebhookClient;
 
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
