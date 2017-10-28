@@ -42,7 +42,7 @@
     "overwatch-js": "^1.6.0",
     "rainbowsix-api-node": "^0.0.1",
     "request": "^2.83.0",
-    "snekfetch": "^3.5.3",
+    "snekfetch": "^3.5.8",
     "sqlite": "^2.8.0",
     "weather-js": "^2.0.0",
     "webshot": "^0.18.0",
