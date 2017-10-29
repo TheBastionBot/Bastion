@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+process.title = 'BastionBot';
 const Discord = require('discord.js');
 const BASTION = new Discord.Client({
   disabledEvents: [
