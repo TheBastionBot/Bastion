@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-process.title = 'BastionBot';
 const Discord = require('discord.js');
 const BASTION = new Discord.Client({
   disabledEvents: [
@@ -14,6 +13,13 @@ const BASTION = new Discord.Client({
     'RELATIONSHIP_REMOVE'
   ]
 });
+
+if (BASTION.shard) {
+  process.title = `Bastion-Shard-${BASTION.shard.id}`;
+}
+else {
+  process.title = 'BastionBot';
+}
 
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
