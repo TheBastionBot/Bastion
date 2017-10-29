@@ -75,9 +75,6 @@ module.exports = async db => {
     '(ownerID TEXT NOT NULL UNIQUE,' +
     'list TEXT NOT NULL DEFAULT \'[]\')');
 
-  await db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
-    '(logChannel TEXT)');
-
   await db.run('CREATE TABLE IF NOT EXISTS scheduledCommands' +
     '(cronExp TEXT NOT NULL,' +
     'command TEXT NOT NULL,' +
