@@ -4,8 +4,9 @@
  * @license MIT
  */
 
-module.exports = db => {
-  db.get('SELECT language FROM guildSettings').catch(() => {
+module.exports = async db => {
+  await db.get('SELECT language FROM guildSettings').catch(() => {
     db.run('ALTER TABLE guildSettings ADD language TEXT DEFAULT \'en\'').catch(() => {});
   });
+  await db.run('DROP TABLE IF EXISTS bastionSettings').catch(() => {});
 };
