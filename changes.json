@@ -1,5 +1,5 @@
 {
-  "date": "October 28, 2017",
+  "date": "October 29, 2017",
   "fixed": [
     "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
     "Fixed an issues with `messageChannel` accepting commands even without the second argument."
@@ -21,7 +21,7 @@
     "Brag about your Battlefield 1 skill using the all new `battlefield1` command."
   ],
   "removed": [
-    "Removed `bastionLog` command."
+    "Removed `bastionLog` event & command."
   ],
   "issues": [
     "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
