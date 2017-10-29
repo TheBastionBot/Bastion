@@ -122,11 +122,6 @@ module.exports = Bastion => {
   Bastion.on('warn', LOAD_EVENTS('warn'));
 
   /**
-  * Emitted whenever a bastion log event fires.
-  * @listens bastionLog
-  */
-  Bastion.on('bastionLog', LOAD_EVENTS('bastionLog'));
-  /**
   * Emitted whenever Bastion doesn't have the required permission(s).
   * @listens bastionMissingPermissions
   */
