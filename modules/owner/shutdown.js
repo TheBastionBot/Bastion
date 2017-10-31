@@ -38,8 +38,19 @@ exports.run = async (Bastion, message) => {
             }
           });
 
-          await Bastion.destroy();
-          process.exit(0);
+          if (Bastion.shard) {
+            await Bastion.shard.broadcastEval('this.destroy().then(() => process.exitCode = 0)');
+          }
+          else {
+            await Bastion.destroy();
+            process.exitCode = 0;
+            setTimeout(() => {
+              process.exit(0);
+            }, 5000);
+          }
+
+          Bastion.log.console('\n');
+          Bastion.log.info('GoodBye! See you next time.');
         }
         else {
           await message.channel.send({
