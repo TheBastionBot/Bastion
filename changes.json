@@ -1,21 +1,22 @@
 {
-  "date": "October 31, 2017",
+  "date": "November 1, 2017",
   "fixed": [
     "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
     "Fixed an issues with `messageChannel` accepting commands even without the second argument.",
-    "Fixed an issues with `addTrigger` command not adding the triggers."
+    "Fixed an issues with `addTrigger` command not adding the triggers.",
+    "Fixed RegEx for image url in `setAvatar` & `createEmoji` commands."
   ],
   "improved": [
     "Bastion won't accept commands if the user's message's filtered by link, invite, word & credentials filter.",
-    "Improvements to regex for image url in `setAvatar` & `createEmoji` commands.",
     "`changelog` command'll show if there're any known issues, so users can be worry free that the issues they find are known by us & will be fixed soon™.",
-    "Users can't use user ID to give Bastion Currencies anymore, to prevent giving currencies to users from other servers & spamming their DM.",
+    "Using `--delete` option with the `eval` command'll delete the command & output after 10s. See the help for example.",
+    "`give` command will only accept mentions. Can't use user IDs anymore.",
     "`giveaway` command'll show an error message when no one participates.",
     "`leave` command'll show proper message after leaving a guild or if no guild was found.",
     "`messageUser` command'll show proper error if unable to send a message to any user.",
     "`searchServer` command'll show the server ID along with the name. And'll only search in the current shard.",
     "`stats` command'll list all the owners of the bot. Along with shard status, current shard & memory used by all shards if sharding's enabled.",
-    "Code & string improvements"
+    "Code improvements"
   ],
   "added": [
     "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
