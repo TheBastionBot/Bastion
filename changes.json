@@ -19,7 +19,8 @@
   ],
   "added": [
     "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
-    "Brag about your Battlefield 1 skill using the all new `battlefield1` command."
+    "Brag about your Battlefield 1 skill using the all new `battlefield1` command.",
+    "Just wanted to know the ID of a role? Simply use the `roleID` command."
   ],
   "removed": [
     "Removed `bastionLog` event & command."

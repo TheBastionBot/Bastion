@@ -133,6 +133,7 @@
     "inRole": "Shows members that have a specifed role in your Discord server.",
     "ping": "Shows the response time and average WebSocket ping of Bastion.",
     "profile": "Shows Bastion user profile of a specified user of your Discord server.",
+    "roleID": "Shows the ID of a specified role of your Discord server.",
     "roleInfo": "Shows information of a specified role of your Discord server.",
     "roles": "Lists all the roles of your Discord server.",
     "serverID": "Shows the ID of your Discord server.",
