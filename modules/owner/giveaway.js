@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-let activeChannel;
+let giveaway, activeChannel;
 
 exports.run = async (Bastion, message, args) => {
   if (!Bastion.credentials.ownerId.includes(message.author.id)) {
@@ -15,15 +15,15 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (!args.amount || isNaN(args.amount)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
   if (!activeChannel) {
+    if (!args.amount || isNaN(args.amount)) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     /**
      * Time in hour(s) the giveaway event should go on.
      * @constant
@@ -51,7 +51,7 @@ exports.run = async (Bastion, message, args) => {
       let giveawayMessageID = giveawayMessage.id;
       activeChannel = message.channel.id;
 
-      setTimeout(async () => {
+      giveaway = Bastion.setTimeout(async () => {
         try {
           let giveawayMessage = await message.channel.fetchMessage(giveawayMessageID);
 
@@ -79,7 +79,7 @@ exports.run = async (Bastion, message, args) => {
             giveawayMessage.edit('', {
               embed: {
                 color: Bastion.colors.BLUE,
-                title: 'Giveaway event ended',
+                title: 'Giveaway Event Ended',
                 description: `${winner} won the giveaway! And has been awarded with **${args.amount}** Bastion Currencies.\nThank you everyone for participating. Better luck next time.`
               }
             }).catch(e => {
@@ -90,7 +90,7 @@ exports.run = async (Bastion, message, args) => {
             giveawayMessage.edit('', {
               embed: {
                 color: Bastion.colors.RED,
-                title: 'Giveaway event ended',
+                title: 'Giveaway Event Ended',
                 description: 'Unfortunately, no one participated and apparently there\'s no winner. 😕'
               }
             }).catch(e => {
@@ -110,11 +110,27 @@ exports.run = async (Bastion, message, args) => {
     }
   }
   else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'giveaway'), message.channel);
+    if (args.end) {
+      Bastion.clearTimeout(giveaway);
+      activeChannel = null;
+
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          title: 'Giveaway Event Ended',
+          description: `The giveaway event was abruptly ended by ${message.author.tag}. Sorry, no giveaways this time!`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'giveaway'), message.channel);
+    }
   }
 };
 
@@ -122,7 +138,8 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'amount', type: Number, alias: 'a', multiple: true, defaultOption: true }
+    { name: 'amount', type: Number, multiple: true, defaultOption: true },
+    { name: 'end', type: Boolean, alias: 'e' }
   ]
 };
 
@@ -130,6 +147,6 @@ exports.help = {
   name: 'giveaway',
   botPermission: '',
   userPermission: 'BOT_OWNER',
-  usage: 'giveaway <amount>',
-  example: [ 'giveaway 10' ]
+  usage: 'giveaway <amount | --end>',
+  example: [ 'giveaway 10', 'giveaway --end' ]
 };
