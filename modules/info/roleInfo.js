@@ -19,6 +19,15 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (role) {
+
+    let permissions = [];
+    let serializedPermissions = role.serialize();
+    for (let permission in serializedPermissions) {
+      if (serializedPermissions[permission]) {
+        permissions.push(permission.replace(/_/g, ' ').toTitleCase());
+      }
+    }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -53,6 +62,10 @@ exports.run = (Bastion, message, args) => {
             name: 'Users',
             value: role.members.size,
             inline: true
+          },
+          {
+            name: 'Permissions',
+            value: permissions.length ? permissions.join(', ') : 'None'
           }
         ],
         thumbnail: {
