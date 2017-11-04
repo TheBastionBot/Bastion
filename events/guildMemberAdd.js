@@ -7,13 +7,36 @@
 const greetMessages = require('../data/greetingMessages.json');
 
 module.exports = async member => {
-  member.client.emit('serverLog', member.client, member.guild, 'guildMemberAdd', {
-    member: member
-  });
-
   try {
-    let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetPrivate, greetPrivateMessage, autoAssignableRoles FROM guildSettings WHERE guildID=${member.guild.id}`);
+    let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetPrivate, greetPrivateMessage, autoAssignableRoles, log FROM guildSettings WHERE guildID=${member.guild.id}`);
     if (!guild) return;
+
+    if (guild.log) {
+      let logChannel = member.guild.channels.get(guild.log);
+      if (logChannel) {
+        logChannel.send({
+          embed: {
+            color: member.guild.client.colors.GREEN,
+            title: 'User Joined',
+            fields: [
+              {
+                name: 'User',
+                value: member.user.tag,
+                inline: true
+              },
+              {
+                name: 'User ID',
+                value: member.id,
+                inline: true
+              }
+            ],
+            timestamp: new Date()
+          }
+        }).catch(e => {
+          member.guild.client.log.error(e);
+        });
+      }
+    }
 
     if (guild.greet) {
       let greetMessage;
