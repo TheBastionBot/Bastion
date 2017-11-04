@@ -29,13 +29,13 @@ module.exports = async (oldChannel, newChannel) => {
         title: title,
         fields: [
           {
-            name: 'Old Channel Name',
-            value: oldChannel.name,
+            name: 'New Channel Name',
+            value: newChannel.name,
             inline: true
           },
           {
-            name: 'New Channel Name',
-            value: newChannel.name,
+            name: 'Old Channel Name',
+            value: oldChannel.name,
             inline: true
           },
           {

@@ -20,13 +20,13 @@ module.exports = async (oldRole, newRole) => {
         title: newRole.guild.client.strings.events(newRole.guild.language, 'roleUpdate'),
         fields: [
           {
-            name: 'Old Role Name',
-            value: oldRole.name,
+            name: 'New Role Name',
+            value: newRole.name,
             inline: true
           },
           {
-            name: 'New Role Name',
-            value: newRole.name,
+            name: 'Old Role Name',
+            value: oldRole.name,
             inline: true
           },
           {

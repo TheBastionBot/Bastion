@@ -20,13 +20,13 @@ module.exports = async (oldGuild, newGuild) => {
         title: newGuild.client.strings.events(newGuild.language, 'guildUpdate'),
         fields: [
           {
-            name: 'Old Server Name',
-            value: oldGuild.name,
+            name: 'New Server Name',
+            value: newGuild.name,
             inline: true
           },
           {
-            name: 'New Server Name',
-            value: newGuild.name,
+            name: 'Old Server Name',
+            value: oldGuild.name,
             inline: true
           },
           {
