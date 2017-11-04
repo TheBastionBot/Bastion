@@ -4,6 +4,7 @@
     "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
     "Fixed an issues with `messageChannel` accepting commands even without the second argument.",
     "Fixed an issues with `addTrigger` command not adding the triggers.",
+    "Fixed an issues with `overwatch` command that showed `undefined` stats.",
     "Fixed RegEx for image url in `setAvatar` & `createEmoji` commands.",
     "Fixed an issue in `setLanguage` commands that tried to set server language when trying to list the available languages.",
     "Bastion won't accept commands if the user's message's filtered by link, invite, word & credentials filter."
