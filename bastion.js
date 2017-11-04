@@ -31,7 +31,7 @@ require('./utils/String.prototype');
 require('./utils/Number.prototype');
 
 const WebhookHandler = require('./handlers/webhookHandler.js');
-BASTION.Webhook = new WebhookHandler(BASTION.credentials.webhooks);
+BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
 BASTION.log = require('./handlers/logHandler');
 BASTION.functions = require('./handlers/functionHandler');
 const LanguageHandler = require('./handlers/languageHandler');
