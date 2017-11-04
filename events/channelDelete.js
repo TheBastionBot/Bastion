@@ -14,12 +14,12 @@ module.exports = async channel => {
     let logChannel = channel.guild.channels.get(guildSettings.log);
     if (!logChannel) return;
 
-    let title = 'Channel Deleted';
+    let title = channel.client.strings.events(channel.guild.language, 'channelDelete');
     if (channel.type === 'text') {
-      title = 'Text Channel Deleted';
+      title = channel.client.strings.events(channel.guild.language, 'textChannelDelete');
     }
     else if (channel.type === 'voice') {
-      title = 'Voice Channel Deleted';
+      title = channel.client.strings.events(channel.guild.language, 'voiceChannelDelete');
     }
 
     logChannel.send({

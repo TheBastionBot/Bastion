@@ -15,12 +15,12 @@ module.exports = async (oldChannel, newChannel) => {
     let logChannel = newChannel.guild.channels.get(guildSettings.log);
     if (!logChannel) return;
 
-    let title = 'Channel Renamed';
+    let title = newChannel.client.strings.events(newChannel.guild.language, 'channelUpdate');
     if (newChannel.type === 'text') {
-      title = 'Text Channel Renamed';
+      title = newChannel.client.strings.events(newChannel.guild.language, 'textChannelUpdate');
     }
     else if (newChannel.type === 'voice') {
-      title = 'Voice Channel Renamed';
+      title = newChannel.client.strings.events(newChannel.guild.language, 'voiceChannelUpdate');
     }
 
     logChannel.send({
