@@ -113,7 +113,7 @@ module.exports = class LanguageHandler {
       if (locale === 'en') {
         return `No string found for '${command}' command in ${module} module.`;
       }
-      return command('en', module, command);
+      return this.command('en', module, command);
     }
 
     return this.locales.get(locale).modules[module][command];
