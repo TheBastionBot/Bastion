@@ -14,8 +14,9 @@ module.exports = class WebhookHandler {
    */
   constructor(webhooks) {
     if (!webhooks) return null;
-
+    this.webhooks = [];
     for (let hook of Object.keys(webhooks)) {
+      this.webhooks.push(hook);
       let webhookCredentials = webhooks[hook].split('/').slice(-2);
       this[hook] = {
         url: webhooks[hook],
@@ -34,14 +35,14 @@ module.exports = class WebhookHandler {
    * @returns {void}
    */
   send(webhook, content) {
-    if (webhook === 'bastionLog') {
+    if (this.webhooks.includes(webhook)) {
       if (typeof content === 'object' && !(content instanceof Array)) {
         content = {
           embeds: [ content ]
         };
       }
       if (content) {
-        this.bastionLog.client.send(content);
+        this[webhook].client.send(content).catch(() => {});
       }
     }
   }
