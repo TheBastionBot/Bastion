@@ -22,7 +22,7 @@ exports.run = async (Bastion, message, args) => {
   }
 
   if (args.list) {
-    message.channel.send({
+    return message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Available Languages',
