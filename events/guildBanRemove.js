@@ -15,7 +15,7 @@ module.exports = async (guild, user) => {
     logChannel.send({
       embed: {
         color: guild.client.colors.GREEN,
-        title: 'User Unbanned',
+        title: guild.client.strings.events(guild.language, 'guildBanRemove'),
         fields: [
           {
             name: 'User',

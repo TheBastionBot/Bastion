@@ -18,7 +18,7 @@ module.exports = async member => {
         logChannel.send({
           embed: {
             color: member.guild.client.colors.RED,
-            title: 'User Left',
+            title: member.guild.client.strings.events(member.guild.language, 'guildMemberRemove'),
             fields: [
               {
                 name: 'User',
