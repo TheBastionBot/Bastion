@@ -17,7 +17,7 @@ module.exports = async (oldRole, newRole) => {
     logChannel.send({
       embed: {
         color: newRole.client.colors.ORANGE,
-        title: 'Role Renamed',
+        title: newRole.guild.client.strings.events(newRole.guild.language, 'roleUpdate'),
         fields: [
           {
             name: 'Old Role Name',

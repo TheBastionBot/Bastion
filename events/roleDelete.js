@@ -15,7 +15,7 @@ module.exports = async role => {
     logChannel.send({
       embed: {
         color: role.client.colors.RED,
-        title: 'Role Deleted',
+        title: role.guild.client.strings.events(role.guild.language, 'roleDelete'),
         fields: [
           {
             name: 'Role Name',
