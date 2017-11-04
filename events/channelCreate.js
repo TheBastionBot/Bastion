@@ -4,10 +4,47 @@
  * @license MIT
  */
 
-module.exports = channel => {
+module.exports = async channel => {
   if (!channel.guild) return;
 
-  channel.client.emit('serverLog', channel.client, channel.guild, 'channelCreate', {
-    channel: channel
-  });
+  try {
+    let guildSettings = await channel.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${channel.guild.id}`);
+    if (!guildSettings || !guildSettings.log) return;
+
+    let logChannel = channel.guild.channels.get(guildSettings.log);
+    if (!logChannel) return;
+
+    let title = 'Channel Created';
+    if (channel.type === 'text') {
+      title = 'Text Channel Created';
+    }
+    else if (channel.type === 'voice') {
+      title = 'Voice Channel Created';
+    }
+
+    logChannel.send({
+      embed: {
+        color: channel.client.colors.GREEN,
+        title: title,
+        fields: [
+          {
+            name: 'Channel Name',
+            value: channel.name,
+            inline: true
+          },
+          {
+            name: 'Channel ID',
+            value: channel.id,
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }
+    }).catch(e => {
+      channel.client.log.error(e);
+    });
+  }
+  catch (e) {
+    channel.client.log.error(e);
+  }
 };
