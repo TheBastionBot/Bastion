@@ -17,6 +17,7 @@
     "blockText": "Sends the given text as text emojis.",
     "cat": "Shows a random picture of a cat.",
     "catFact": "Shows a random fact about cats.",
+    "catify": "Generates a random kitten image from the given string or your Discord tag if no string is specified.",
     "crimeCoefficient": "Find the crime coefficient of a user.",
     "dog": "Shows a random picture of a dog.",
     "echo": "Sends the same message that you had sent. Just like an echo!",
