@@ -28,7 +28,7 @@ case $1 in
   if [[ $(screengrepname) ]]; then
     echo -e "${ORANGE}$NAME is already running.${NC} Use '$0 --stop' to stop it before you run it in dubug mode!"
   else
-    node .
+    node bastion.js
   fi
 ;;
 
