@@ -1,5 +1,5 @@
 {
-  "date": "November 4, 2017",
+  "date": "November 5, 2017",
   "fixed": [
     "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
     "Fixed an issues with `messageChannel` accepting commands even without the second argument.",
@@ -16,13 +16,14 @@
     "Can now end giveaway using the `--end` option with the `giveaway` command.",
     "`leave` command'll show proper message after leaving a guild or if no guild was found.",
     "`messageUser` command'll show proper error if unable to send a message to any user.",
-    "`roleInfo` command'll now show the permissions a role has got.",
+    "`roleInfo` command'll now show the permissions the role has got.",
     "`searchServer` command'll show the server ID along with the name. And'll only search in the current shard.",
     "`stats` command'll list all the owners of the bot. Along with shard status, current shard & memory used by all shards if sharding's enabled."
   ],
   "added": [
     "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
     "Brag about your Battlefield 1 skill using the all new `battlefield1` command.",
+    "Liked the `robotify` command? Mate, you're gonna love the new `catify` command. Because it's never enough.",
     "Just wanted to know the ID of a role? Simply use the `roleID` command."
   ],
   "removed": [
