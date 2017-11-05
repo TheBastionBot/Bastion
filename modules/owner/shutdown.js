@@ -21,8 +21,7 @@ exports.run = async (Bastion, message) => {
       }
     });
 
-    const collector = confirmation.channel.createMessageCollector(m =>
-      Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
+    const collector = confirmation.channel.createMessageCollector(m => Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
       {
         time: 30 * 1000,
         maxMatches: 1
