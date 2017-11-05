@@ -92,7 +92,7 @@ module.exports = async Bastion => {
       Bastion.webhook.send('bastionLog', {
         color: Bastion.colors.BLUE,
         title: 'I\'m Ready to Roll!',
-        description: `Connected to **${guilds}** servers${Bastion.shard ? ` in ${Bastion.shard.count} shards` : ''}.`,
+        description: `Connected to ${guilds} servers${Bastion.shard ? ` in ${Bastion.shard.count} shards` : ''}.`,
         footer: {
           icon_url: 'https://resources.bastionbot.org/logos/BastionLogo-Eye.png',
           text: `Bastion v${Bastion.package.version}`
