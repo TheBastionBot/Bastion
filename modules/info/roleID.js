@@ -1,5 +1,5 @@
 /**
- * @file roleInfo command
+ * @file roleID command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -19,22 +19,12 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (role) {
-
-    let permissions = [];
-    let serializedPermissions = role.serialize();
-    for (let permission in serializedPermissions) {
-      if (serializedPermissions[permission]) {
-        permissions.push(permission.replace(/_/g, ' ').toTitleCase());
-      }
-    }
-
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
-        title: 'Role info',
         fields: [
           {
-            name: 'Name',
+            name: 'Role Name',
             value: role.name,
             inline: true
           },
@@ -42,35 +32,8 @@ exports.run = (Bastion, message, args) => {
             name: 'ID',
             value: role.id,
             inline: true
-          },
-          {
-            name: 'Hoisted',
-            value: role.hoist ? 'Yes' : 'No',
-            inline: true
-          },
-          {
-            name: 'External',
-            value: role.managed ? 'Yes' : 'No',
-            inline: true
-          },
-          {
-            name: 'Created At',
-            value: role.createdAt.toUTCString(),
-            inline: true
-          },
-          {
-            name: 'Users',
-            value: role.members.size,
-            inline: true
-          },
-          {
-            name: 'Permissions',
-            value: permissions.length ? permissions.join(', ') : 'None'
           }
-        ],
-        thumbnail: {
-          url: `https://dummyimage.com/250/${role.hexColor.slice(1)}/&text=%20`
-        }
+        ]
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -86,12 +49,12 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'rinfo' ],
+  aliases: [ 'rid' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'roleInfo',
+  name: 'roleID',
   botPermission: '',
   userPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',

@@ -126,7 +126,7 @@ exports.run = (Bastion, message, args) => {
           url: Bastion.user.displayAvatarURL
         },
         footer: {
-          text: 'Copyright © 2017 Sankarsan Kampa'
+          text: 'Copyright © 2017 - The Bastion Bot Project'
         }
       }
     }).catch(e => {

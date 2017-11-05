@@ -1,16 +1,15 @@
 {
   "name": "bastion",
-  "version": "5.2.0",
+  "version": "6.0.0",
   "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
-  "url": "https://BastionBot.org/",
-  "main": "bastion.js",
+  "url": "https://bastionbot.org/",
+  "main": "index.js",
   "scripts": {
     "test:lint": "./node_modules/.bin/eslint .",
     "test:boot": "node tests/boot.js",
     "test": "npm run test:lint && npm run test:boot",
-    "start": "node bastion.js"
+    "start": "node index.js"
   },
-  "library": "discord.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/TheBastionBot/Bastion.git"
@@ -42,7 +41,7 @@
     "overwatch-js": "^1.6.0",
     "rainbowsix-api-node": "^0.0.1",
     "request": "^2.83.0",
-    "snekfetch": "^3.5.3",
+    "snekfetch": "^3.5.8",
     "sqlite": "^2.8.0",
     "weather-js": "^2.0.0",
     "webshot": "^0.18.0",

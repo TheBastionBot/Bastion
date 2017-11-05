@@ -5,8 +5,17 @@
  */
 
 const request = require('request');
+let activeChannels = [];
 
 exports.run = (Bastion, message) => {
+  if (activeChannels.includes(message.channel.id))  {
+    /**
+     * Error condition is encountered.
+     * @fires error
+     */
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isGameInUse', true, 'trivia'), message.channel);
+  }
+
   let options = {
     method: 'GET',
     url: 'https://opentdb.com/api.php?amount=1&type=boolean&encode=url3986'
@@ -50,6 +59,8 @@ exports.run = (Bastion, message) => {
             }
           });
 
+          activeChannels.push(message.channel.id);
+
           let validAnswers = [
             'true',
             'false'
@@ -82,6 +93,8 @@ exports.run = (Bastion, message) => {
           });
 
           trivia.on('end', (answers, reason) => {
+            activeChannels.splice(activeChannels.indexOf(message.channel.id), 1);
+
             if (reason === 'time') {
               message.channel.send({
                 embed: {

@@ -14,9 +14,6 @@ exports.run = async (Bastion, message, args) => {
   }
 
   let user = message.mentions.users.first();
-  if (parseInt(args[1]) < 9223372036854775807) {
-    user = Bastion.users.get(args[1]);
-  }
   if (!user) {
     /**
      * Error condition is encountered.

@@ -14,6 +14,13 @@ const BASTION = new Discord.Client({
   ]
 });
 
+if (BASTION.shard) {
+  process.title = `Bastion-Shard-${BASTION.shard.id}`;
+}
+else {
+  process.title = 'BastionBot';
+}
+
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
 BASTION.config = require('./settings/config.json');
@@ -23,6 +30,8 @@ BASTION.colors = Discord.Constants.Colors;
 require('./utils/String.prototype');
 require('./utils/Number.prototype');
 
+const WebhookHandler = require('./handlers/webhookHandler.js');
+BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
 BASTION.log = require('./handlers/logHandler');
 BASTION.functions = require('./handlers/functionHandler');
 const LanguageHandler = require('./handlers/languageHandler');

@@ -5,43 +5,63 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
+  try {
+    if (!Bastion.credentials.ownerId.includes(message.author.id)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    }
 
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  let guildSettings = await Bastion.db.all('SELECT announcementChannel FROM guildSettings');
-  let announcementChannels = guildSettings.map(guild => guild.announcementChannel).filter(channel => channel);
+    let guildSettings = await Bastion.db.all('SELECT announcementChannel FROM guildSettings');
+    let announcementChannels = guildSettings.map(guild => guild.announcementChannel).filter(channel => channel);
 
-  for (let channel of announcementChannels) {
-    await Bastion.channels.get(channel).send({
+    for (let channel of announcementChannels) {
+      if (Bastion.shard) {
+        await Bastion.shard.broadcastEval(`
+          let channel = this.channels.get('${channel}');
+          if (channel) {
+            channel.send({
+              embed: {
+                color: this.colors.BLUE,
+                description: '${args.join(' ').replace('\'', '\\\'')}'
+              }
+            }).catch(this.log.error);
+          }
+        `);
+      }
+      else {
+        await Bastion.channels.get(channel).send({
+          embed: {
+            color: Bastion.colors.BLUE,
+            description: args.join(' ')
+          }
+        }).catch(() => {});
+      }
+    }
+
+    message.channel.send({
       embed: {
-        color: Bastion.colors.BLUE,
+        color: Bastion.colors.GREEN,
+        title: 'Announced',
         description: args.join(' ')
       }
-    }).catch(() => {});
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.GREEN,
-      title: 'Announced',
-      description: args.join(' ')
-    }
-  }).catch(e => {
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

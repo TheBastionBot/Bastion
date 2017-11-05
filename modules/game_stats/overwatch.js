@@ -64,43 +64,43 @@ exports.run = (Bastion, message, args) => {
         value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
       },
       {
-        name: 'Eliminations - Average',
-        value: `${data.quickplay.global.eliminations_average}`,
+        name: 'Eliminations',
+        value: `${data.quickplay.global.eliminations}`,
         inline: true
       },
       {
-        name: 'Damage Done - Average',
-        value: `${data.quickplay.global.damage_done_average}`,
+        name: 'Damage Done',
+        value: `${data.quickplay.global.all_damage_done}`,
         inline: true
       },
       {
-        name: 'Deaths - Average',
-        value: `${data.quickplay.global.deaths_average}`,
+        name: 'Deaths',
+        value: `${data.quickplay.global.deaths}`,
         inline: true
       },
       {
-        name: 'Final Blows - Average',
-        value: `${data.quickplay.global.final_blows_average}`,
+        name: 'Final Blows',
+        value: `${data.quickplay.global.final_blows}`,
         inline: true
       },
       {
-        name: 'Healing Done - Average',
-        value: `${data.quickplay.global.healing_done_average}`,
+        name: 'Healing Done',
+        value: `${data.quickplay.global.healing_done}`,
         inline: true
       },
       {
-        name: 'Objective Kills - Average',
-        value: `${data.quickplay.global.objective_kills_average}`,
+        name: 'Objective Kills',
+        value: `${data.quickplay.global.objective_kills}`,
         inline: true
       },
       {
-        name: 'Objective Time - Average',
-        value: `${data.quickplay.global.objective_time_average}`,
+        name: 'Objective Time',
+        value: `${data.quickplay.global.objective_time}`,
         inline: true
       },
       {
-        name: 'Solo Kills - Average',
-        value: `${data.quickplay.global.solo_kills_average}`,
+        name: 'Solo Kills',
+        value: `${data.quickplay.global.solo_kills}`,
         inline: true
       }
     );
@@ -111,43 +111,43 @@ exports.run = (Bastion, message, args) => {
           value: `${args[1]} has won **${data.competitive.global.games_won}** games out of **${data.competitive.global.games_played}** played games.`
         },
         {
-          name: 'Eliminations - Average',
-          value: `${data.competitive.global.eliminations_average}`,
+          name: 'Eliminations',
+          value: `${data.competitive.global.eliminations}`,
           inline: true
         },
         {
-          name: 'Damage Done - Average',
-          value: `${data.competitive.global.damage_done_average}`,
+          name: 'Damage Done',
+          value: `${data.competitive.global.all_damage_done}`,
           inline: true
         },
         {
-          name: 'Deaths - Average',
-          value: `${data.competitive.global.deaths_average}`,
+          name: 'Deaths',
+          value: `${data.competitive.global.deaths}`,
           inline: true
         },
         {
-          name: 'Final Blows - Average',
-          value: `${data.competitive.global.final_blows_average}`,
+          name: 'Final Blows',
+          value: `${data.competitive.global.final_blows}`,
           inline: true
         },
         {
-          name: 'Healing Done - Average',
-          value: `${data.competitive.global.healing_done_average}`,
+          name: 'Healing Done',
+          value: `${data.competitive.global.healing_done}`,
           inline: true
         },
         {
-          name: 'Objective Kills - Average',
-          value: `${data.competitive.global.objective_kills_average}`,
+          name: 'Objective Kills',
+          value: `${data.competitive.global.objective_kills}`,
           inline: true
         },
         {
-          name: 'Objective Time - Average',
-          value: `${data.competitive.global.objective_time_average}`,
+          name: 'Objective Time',
+          value: `${data.competitive.global.objective_time}`,
           inline: true
         },
         {
           name: 'Solo Kills - Average',
-          value: `${data.competitive.global.solo_kills_average}`,
+          value: `${data.competitive.global.solo_kills}`,
           inline: true
         }
       );

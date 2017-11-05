@@ -7,7 +7,7 @@
 /**
  * Handles filtering of Discord server invites in messages
  * @param {Message} message Discord.js message object
- * @returns {void}
+ * @returns {Promise<true>} If the message was filtered
  */
 module.exports = async message => {
   try {
@@ -68,7 +68,7 @@ function hasDiscordInvite(string) {
  * Deletes the message with the invite URL (if Bastion has permission)
  * and warns the user
  * @param {String} message Discord.js message object
- * @returns {void}
+ * @returns {true} If the message was filtered
  */
 function deleteInvite(message) {
   if (message.deletable) {
@@ -87,4 +87,5 @@ function deleteInvite(message) {
   }).catch(e => {
     message.client.log.error(e);
   });
+  return true;
 }

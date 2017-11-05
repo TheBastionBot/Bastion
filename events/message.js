@@ -20,7 +20,7 @@ module.exports = async message => {
   /**
    * Filter Bastion's credentials from the message
    */
-  credentialsFilter(message);
+  if (await credentialsFilter(message)) return;
 
   /**
    * If the message author is a bot, ignore it.
@@ -31,17 +31,17 @@ module.exports = async message => {
     /**
      * Filter specific words from the message
      */
-    wordFilter(message);
+    if (await wordFilter(message)) return;
 
     /**
      * Filter links from the message
      */
-    linkFilter(message);
+    if (await linkFilter(message)) return;
 
     /**
      * Filter Discord server invites from the message
      */
-    inviteFilter(message);
+    if (await inviteFilter(message)) return;
 
     try {
       if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {

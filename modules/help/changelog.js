@@ -32,6 +32,12 @@ exports.run = (Bastion, message) => {
       value: `- ${CHANGES.removed.join('\n- ')}`
     });
   }
+  if (CHANGES.issues.length !== 0) {
+    changes.push({
+      name: 'Known Issues:',
+      value: `- ${CHANGES.issues.join('\n- ')}`
+    });
+  }
 
   message.channel.send({
     embed: {

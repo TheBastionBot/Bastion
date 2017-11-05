@@ -7,13 +7,37 @@
 module.exports = async member => {
   // Commented this out as using requires BAN_MEMBERS perms and not everyone would've given the bot perms
   // member.guild.fetchBans().then(users => {if (users.has(member.id)) return;}).catch(e => {member.client.log(e);})
-  member.client.emit('serverLog', member.client, member.guild, 'guildMemberRemove', {
-    member: member
-  });
 
   try {
-    let guild = await member.client.db.get(`SELECT farewell, farewellMessage, farewellTimeout FROM guildSettings WHERE guildID=${member.guild.id}`);
+    let guild = await member.client.db.get(`SELECT farewell, farewellMessage, farewellTimeout, log FROM guildSettings WHERE guildID=${member.guild.id}`);
     if (!guild) return;
+
+    if (guild.log) {
+      let logChannel = member.guild.channels.get(guild.log);
+      if (logChannel) {
+        logChannel.send({
+          embed: {
+            color: member.guild.client.colors.RED,
+            title: member.guild.client.strings.events(member.guild.language, 'guildMemberRemove'),
+            fields: [
+              {
+                name: 'User',
+                value: member.user.tag,
+                inline: true
+              },
+              {
+                name: 'User ID',
+                value: member.id,
+                inline: true
+              }
+            ],
+            timestamp: new Date()
+          }
+        }).catch(e => {
+          member.guild.client.log.error(e);
+        });
+      }
+    }
 
     if (guild.farewell) {
       let farewellMessage = 'May we meet again.';

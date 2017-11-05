@@ -51,7 +51,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
 
     switch (action) {
       case 'addrole':
-        action = 'Added Role';
+        action = guild.client.strings.events(guild.language, 'addRole');
         color = guild.client.colors.GREEN;
         logData.unshift(
           {
@@ -62,12 +62,12 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         break;
 
       case 'ban':
-        action = 'Banned User';
+        action = guild.client.strings.events(guild.language, 'guildBanAdd');
         color = guild.client.colors.RED;
         break;
 
       case 'clear':
-        action = 'Cleared Messages';
+        action = guild.client.strings.events(guild.language, 'messageClear');
         color = guild.client.colors.RED;
         logData.splice(0, 3,
           {
@@ -88,17 +88,17 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         break;
 
       case 'deafen':
-        action = 'Deafened User';
+        action = guild.client.strings.events(guild.language, 'deafAdd');
         color = guild.client.colors.ORANGE;
         break;
 
       case 'kick':
-        action = 'Kicked User';
+        action = guild.client.strings.events(guild.language, 'kick');
         color = guild.client.colors.RED;
         break;
 
       case 'mute':
-        action = 'Muted User';
+        action = guild.client.strings.events(guild.language, 'voiceMuteAdd');
         color = guild.client.colors.ORANGE;
         break;
 
@@ -111,12 +111,12 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
       */
 
       case 'removeallroles':
-        action = 'Removed All Roles';
+        action = guild.client.strings.events(guild.language, 'removeAllRole');
         color = guild.client.colors.RED;
         break;
 
       case 'removerole':
-        action = 'Removed Role';
+        action = guild.client.strings.events(guild.language, 'removeRole');
         color = guild.client.colors.RED;
         logData.unshift(
           {
@@ -127,7 +127,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         break;
 
       case 'report':
-        action = 'Reported User';
+        action = guild.client.strings.events(guild.language, 'userReport');
         color = guild.client.colors.ORANGE;
         logData.splice(logData.length - 2, 2,
           {
@@ -144,12 +144,12 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         break;
 
       case 'softban':
-        action = 'Soft Banned User';
+        action = guild.client.strings.events(guild.language, 'userSoftBan');
         color = guild.client.colors.RED;
         break;
 
       case 'textmute':
-        action = 'Text Muted User';
+        action = guild.client.strings.events(guild.language, 'textMuteAdd');
         color = guild.client.colors.ORANGE;
         logData.splice(logData.length - 2, 0,
           {
@@ -160,7 +160,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         break;
 
       case 'textunmute':
-        action = 'Text Unmuted User';
+        action = guild.client.strings.events(guild.language, 'textMuteRemove');
         color = guild.client.colors.GREEN;
         logData.splice(logData.length - 2, 0,
           {
@@ -171,22 +171,22 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         break;
 
       case 'undeafen':
-        action = 'Undeafen User';
+        action = guild.client.strings.events(guild.language, 'deafRemove');
         color = guild.client.colors.GREEN;
         break;
 
       case 'unmute':
-        action = 'Unmuted User';
+        action = guild.client.strings.events(guild.language, 'voiceMuteRemove');
         color = guild.client.colors.GREEN;
         break;
 
       case 'warn':
-        action = 'Warned User';
+        action = guild.client.strings.events(guild.language, 'userWarnAdd');
         color = guild.client.colors.ORANGE;
         break;
 
       case 'clearWarn':
-        action = 'Cleared Warnings';
+        action = guild.client.strings.events(guild.language, 'userWarnRemove');
         color = guild.client.colors.GREEN;
         break;
 

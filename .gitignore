@@ -3,6 +3,7 @@ settings/credentials.json
 settings/config.json
 data/Bastion.sqlite
 data/playlist.json
+modules/plugins
 
 ### Logs ###
 screenlog.*

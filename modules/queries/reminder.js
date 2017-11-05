@@ -50,7 +50,7 @@ exports.run = (Bastion, message, args) => {
   }
 
   remindUsers[message.author.id] = Bastion.setTimeout(() => {
-    Bastion.users.get(message.author.id).send({
+    message.author.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Reminder',

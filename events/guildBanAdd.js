@@ -4,9 +4,37 @@
  * @license MIT
  */
 
-module.exports = (guild, user) => {
-  guild.client.emit('serverLog', guild.client, guild, 'guildBanAdd', {
-    guild: guild,
-    user: user
-  });
+module.exports = async (guild, user) => {
+  try {
+    let guildSettings = await guild.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${guild.id}`);
+    if (!guildSettings || !guildSettings.log) return;
+
+    let logChannel = guild.channels.get(guildSettings.log);
+    if (!logChannel) return;
+
+    logChannel.send({
+      embed: {
+        color: guild.client.colors.RED,
+        title: guild.client.strings.events(guild.language, 'guildBanAdd'),
+        fields: [
+          {
+            name: 'User',
+            value: user.tag,
+            inline: true
+          },
+          {
+            name: 'User ID',
+            value: user.id,
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }
+    }).catch(e => {
+      guild.client.log.error(e);
+    });
+  }
+  catch (e) {
+    guild.client.log.error(e);
+  }
 };

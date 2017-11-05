@@ -1,21 +1,35 @@
 {
-  "date": "October 22, 2017",
+  "date": "November 5, 2017",
   "fixed": [
-    "Minor fixes"
+    "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
+    "Fixed an issues with `messageChannel` accepting commands even without the second argument.",
+    "Fixed an issues with `addTrigger` command not adding the triggers.",
+    "Fixed an issues with `overwatch` command that showed `undefined` stats.",
+    "Fixed RegEx for image url in `setAvatar` & `createEmoji` commands.",
+    "Fixed an issue in `setLanguage` commands that tried to set server language when trying to list the available languages.",
+    "Bastion won't accept commands if the user's message's filtered by link, invite, word & credentials filter."
   ],
   "improved": [
-    "Changes to `echo`, `sendEmbed` and `selfDestruct` command to distinguish it from Bastion's official messages.",
-    "Had a hard time finding the right reaction for the currency giveaway? Worry not, Bastion will now automatically add the right reaction to make it easy for you.",
-    "Had to use `textMute` command in every channel if you needed to mute a user globally? The pain's gone! `textMute` can now mute users across the server if you use the `--server` (or simply `-s`) flag along with the `textMute` command.",
-    "Music outputs will now have direct links to the video, if the source is YouTube. Now you can directly go from music to video in seconds!",
-    "Only one user will win the currency `giveaway`. And the winner's name will be shown after the giveaway."
+    "`changelog` command'll show if there're any known issues, so users can be worry free that the issues they find are known by us & will be fixed soon™.",
+    "Using `--delete` option with the `eval` command'll delete the command & output after 10s. See the help for example.",
+    "`give` command will only accept mentions. Can't use user IDs anymore.",
+    "Can now end giveaway using the `--end` option with the `giveaway` command.",
+    "`leave` command'll show proper message after leaving a guild or if no guild was found.",
+    "`messageUser` command'll show proper error if unable to send a message to any user.",
+    "`roleInfo` command'll now show the permissions the role has got.",
+    "`searchServer` command'll show the server ID along with the name. And'll only search in the current shard.",
+    "`stats` command'll list all the owners of the bot. Along with shard status, current shard & memory used by all shards if sharding's enabled."
   ],
   "added": [
-    "Added `fidgetSpinner` command. Brag your fidget spinning skills (well, it's just random).",
-    "Added `lyrics` command. Get the lyrics of the song you're trying to sing, and sing it without any mistakes!",
-    "Added `muteList` command. Now you can see who's been muted server-wide with ease.",
-    "Added `roleColor` command. Change the color of any role without even touching the mouse.",
-    "Wanted to disable some commands/modules in a specific channel? Now can do that; and the best part about it, is that you don't need to use any command for that. Read the [FAQ](https://bastionbot.org/faq) to know how you can do that."
+    "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
+    "Brag about your Battlefield 1 skill using the all new `battlefield1` command.",
+    "Liked the `robotify` command? Mate, you're gonna love the new `catify` command. Because it's never enough.",
+    "Just wanted to know the ID of a role? Simply use the `roleID` command."
   ],
-  "removed": []
+  "removed": [
+    "Removed `bastionLog` event & command."
+  ],
+  "issues": [
+    "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
+  ]
 }

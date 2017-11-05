@@ -9,7 +9,7 @@ const config = require('../settings/config.json');
 module.exports = async db => {
   await db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
     '(guildID TEXT NOT NULL UNIQUE,' +
-    `prefix TEXT NOT NULL DEFAULT '${config.prefix}',` +
+    `prefix TEXT NOT NULL DEFAULT '${config.prefix || '!'}',` +
     'language TEXT DEFAULT \'en\',' +
     'greet TEXT,' +
     'greetMessage BLOB,' +
@@ -74,9 +74,6 @@ module.exports = async db => {
   await db.run('CREATE TABLE IF NOT EXISTS todo' +
     '(ownerID TEXT NOT NULL UNIQUE,' +
     'list TEXT NOT NULL DEFAULT \'[]\')');
-
-  await db.run('CREATE TABLE IF NOT EXISTS bastionSettings' +
-    '(logChannel TEXT)');
 
   await db.run('CREATE TABLE IF NOT EXISTS scheduledCommands' +
     '(cronExp TEXT NOT NULL,' +

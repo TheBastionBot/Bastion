@@ -13,7 +13,7 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
 
-  if (args.length < 1) {
+  if (!args.code) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -22,7 +22,8 @@ exports.run = async (Bastion, message, args) => {
   }
 
   try {
-    let evaled = eval(args.join(' '));
+    args.code = args.code.join(' ');
+    let evaled = eval(args.code);
     if (typeof evaled !== 'string') {
       evaled = require('util').inspect(evaled);
     }
@@ -33,7 +34,7 @@ exports.run = async (Bastion, message, args) => {
         fields: [
           {
             name: ':inbox_tray:  INPUT',
-            value: `\`\`\`js\n${args.join(' ')}\n\`\`\``
+            value: `\`\`\`js\n${args.code}\n\`\`\``
           },
           {
             name: ':outbox_tray:  OUTPUT',
@@ -43,7 +44,10 @@ exports.run = async (Bastion, message, args) => {
       }
     });
 
-    output.delete(10000).catch(() => {});
+    if (args.delete) {
+      output.delete(10000).catch(() => {});
+      message.delete(1000).catch(() => {});
+    }
   }
   catch(e) {
     let error = await message.channel.send({
@@ -60,21 +64,28 @@ exports.run = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
-    error.delete(10000).catch(() => {});
+    if (args.delete) {
+      error.delete(10000).catch(() => {});
+      message.delete(1000).catch(() => {});
+    }
   }
 };
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'code', type: String, multiple: true, defaultOption: true },
+    { name: 'delete', type: Boolean }
+  ]
 };
 
 exports.help = {
   name: 'eval',
   botPermission: '',
   userPermission: 'BOT_OWNER',
-  usage: 'eval <JavaScript code>',
-  example: [ 'eval message.guild.members.size' ]
+  usage: 'eval <JavaScript code> [--delete]',
+  example: [ 'eval message.guild.members.size', 'eval Bastion.users.size --delete' ]
 };
 
 /**
