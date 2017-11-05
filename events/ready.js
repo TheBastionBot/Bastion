@@ -72,23 +72,22 @@ module.exports = async Bastion => {
         timestamp: new Date()
       });
     }
-    else {
-      Bastion.log.console('\n');
-      Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
-      Bastion.log.console(COLOR.green('[Author URL] ') + Bastion.package.authorUrl);
-      Bastion.log.console(`${COLOR.green('[Bot]')} Bastion v${Bastion.package.version}`);
-      Bastion.log.console(COLOR.green('[Bot ID] ') + Bastion.credentials.botId);
-      Bastion.log.console(COLOR.green('[Owner IDs] ') + Bastion.credentials.ownerId.join(', '));
-      Bastion.log.console(COLOR.green('[Servers] ') + Bastion.guilds.size);
-      Bastion.log.console(COLOR.green('[Prefix] ') + Bastion.config.prefix);
-      Bastion.log.console(`${COLOR.cyan(`\n[${Bastion.user.username}]:`)} I'm ready to roll! o7`);
-    }
 
     if (!Bastion.shard || process.env.SHARDS_READY) {
       let guilds = Bastion.shard ? await Bastion.shard.broadcastEval('this.guilds.size') : Bastion.guilds.size;
       if (guilds instanceof Array) {
         guilds = guilds.reduce((sum, val) => sum + val, 0);
       }
+
+      Bastion.log.console('\n');
+      Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
+      Bastion.log.console(`${COLOR.green('[Bot]')} Bastion v${Bastion.package.version}`);
+      Bastion.log.console(COLOR.green('[URL] ') + Bastion.package.url);
+      Bastion.log.console(COLOR.green('[Bot ID] ') + Bastion.credentials.botId);
+      Bastion.log.console(COLOR.green('[Owner IDs] ') + Bastion.credentials.ownerId.join(', '));
+      Bastion.log.console(COLOR.green('[Servers] ') + guilds);
+      Bastion.log.console(COLOR.green('[Prefix] ') + Bastion.config.prefix);
+      Bastion.log.console(`${COLOR.cyan(`\n[${Bastion.user.username}]:`)} I'm ready to roll! o7`);
 
       Bastion.webhook.send('bastionLog', {
         color: Bastion.colors.BLUE,
