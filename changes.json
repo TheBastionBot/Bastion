@@ -1,34 +1,11 @@
 {
-  "date": "November 5, 2017",
+  "date": "November 6, 2017",
   "fixed": [
-    "Fixed an issues that caused running of multiple trivia & acrophobia games in a channel.",
-    "Fixed an issues with `messageChannel` accepting commands even without the second argument.",
-    "Fixed an issues with `addTrigger` command not adding the triggers.",
-    "Fixed an issues with `overwatch` command that showed `undefined` stats.",
-    "Fixed RegEx for image url in `setAvatar` & `createEmoji` commands.",
-    "Fixed an issue in `setLanguage` commands that tried to set server language when trying to list the available languages.",
-    "Bastion won't accept commands if the user's message's filtered by link, invite, word & credentials filter."
+    "Fixed an issue with `announce` command that didn't allowed sending message with multiple lines."
   ],
-  "improved": [
-    "`changelog` command'll show if there're any known issues, so users can be worry free that the issues they find are known by us & will be fixed soon™.",
-    "Using `--delete` option with the `eval` command'll delete the command & output after 10s. See the help for example.",
-    "`give` command will only accept mentions. Can't use user IDs anymore.",
-    "Can now end giveaway using the `--end` option with the `giveaway` command.",
-    "`leave` command'll show proper message after leaving a guild or if no guild was found.",
-    "`messageUser` command'll show proper error if unable to send a message to any user.",
-    "`roleInfo` command'll now show the permissions the role has got.",
-    "`searchServer` command'll show the server ID along with the name. And'll only search in the current shard.",
-    "`stats` command'll list all the owners of the bot. Along with shard status, current shard & memory used by all shards if sharding's enabled."
-  ],
-  "added": [
-    "Now you can see your account balance, without having to show your entire profile, with the `bastionCurrency` command.",
-    "Brag about your Battlefield 1 skill using the all new `battlefield1` command.",
-    "Liked the `robotify` command? Mate, you're gonna love the new `catify` command. Because it's never enough.",
-    "Just wanted to know the ID of a role? Simply use the `roleID` command."
-  ],
-  "removed": [
-    "Removed `bastionLog` event & command."
-  ],
+  "improved": [],
+  "added": [],
+  "removed": [],
   "issues": [
     "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
   ]
