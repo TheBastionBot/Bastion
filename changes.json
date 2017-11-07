@@ -1,9 +1,11 @@
 {
-  "date": "November 6, 2017",
+  "date": "November 7, 2017",
   "fixed": [
     "Fixed an issue with `announce` command that didn't allowed sending message with multiple lines."
   ],
-  "improved": [],
+  "improved": [
+    "Code improvements"
+  ],
   "added": [],
   "removed": [],
   "issues": [

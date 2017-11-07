@@ -26,11 +26,21 @@ for (let module of modules) {
     for (let alias of file.config.aliases) {
       aliases.set(alias.toLowerCase(), file.help.name);
     }
+
+    if (process.stdout.moveCursor) {
+      process.stdout.moveCursor(0, -1);
+    }
+    if (process.stdout.clearLine) {
+      process.stdout.clearLine();
+    }
+  }
+
+  if (process.stdout.moveCursor) {
     process.stdout.moveCursor(0, -1);
+  }
+  if (process.stdout.clearLine) {
     process.stdout.clearLine();
   }
-  process.stdout.moveCursor(0, -1);
-  process.stdout.clearLine();
 }
 
 exports.commands = commands;
