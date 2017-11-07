@@ -24,6 +24,7 @@ exports.run = async (Bastion, message, args) => {
 
     let guildSettings = await Bastion.db.all('SELECT announcementChannel FROM guildSettings');
     let announcementChannels = guildSettings.map(guild => guild.announcementChannel).filter(channel => channel);
+    let announcementMessage = args.join(' ');
 
     for (let channel of announcementChannels) {
       if (Bastion.shard) {
@@ -33,7 +34,7 @@ exports.run = async (Bastion, message, args) => {
             channel.send({
               embed: {
                 color: this.colors.BLUE,
-                description: '${args.join(' ').replace('\'', '\\\'')}'
+                description: \`${announcementMessage.replace('\'', '\\\'')}\`
               }
             }).catch(this.log.error);
           }
@@ -43,7 +44,7 @@ exports.run = async (Bastion, message, args) => {
         await Bastion.channels.get(channel).send({
           embed: {
             color: Bastion.colors.BLUE,
-            description: args.join(' ')
+            description: announcementMessage
           }
         }).catch(() => {});
       }
@@ -53,7 +54,7 @@ exports.run = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.GREEN,
         title: 'Announced',
-        description: args.join(' ')
+        description: announcementMessage
       }
     }).catch(e => {
       Bastion.log.error(e);

@@ -31,13 +31,23 @@ for (let language of languages) {
     process.stdout.write(`${color.cyan('[Bastion]:')} Loading strings for ${file}...\n`);
     stringFile = require(`../locales/${language}/${stringFile}`);
     strings[file] = stringFile;
-    process.stdout.moveCursor(0, -1);
-    process.stdout.clearLine();
+
+    if (process.stdout.moveCursor) {
+      process.stdout.moveCursor(0, -1);
+    }
+    if (process.stdout.clearLine) {
+      process.stdout.clearLine();
+    }
   }
 
   locales.set(language, strings);
-  process.stdout.moveCursor(0, -1);
-  process.stdout.clearLine();
+
+  if (process.stdout.moveCursor) {
+    process.stdout.moveCursor(0, -1);
+  }
+  if (process.stdout.clearLine) {
+    process.stdout.clearLine();
+  }
 }
 
 /**
