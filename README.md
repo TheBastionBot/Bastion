@@ -1,4 +1,5 @@
 # Bastion: Discord Bot
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7cac2730252247819a559caa2aad4fab)](https://www.codacy.com/app/snkrsnkampa/Bastion?utm_source=github.com&utm_medium=referral&utm_content=TheBastionBot/Bastion&utm_campaign=badger)
 [![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
 [![GitHub release](https://img.shields.io/github/release/TheBastionBot/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
 [![Build Status](https://travis-ci.org/TheBastionBot/Bastion.svg?branch=master)](https://travis-ci.org/TheBastionBot/Bastion)
