@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/TheBastionBot/Bastion.svg?branch=master)](https://travis-ci.org/TheBastionBot/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/bastion/localized.svg)](http://i18n.bastionbot.org/project/bastion)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7cac2730252247819a559caa2aad4fab)](https://www.codacy.com/app/snkrsnkampa/Bastion?utm_source=github.com&utm_medium=referral&utm_content=TheBastionBot/Bastion&utm_campaign=badger)
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
 [![Website](https://img.shields.io/website-up-down-green-red/https/BastionBot.org.svg?label=Website)](https://BastionBot.org)
 <!-- [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion) -->
