@@ -57,6 +57,9 @@ module.exports = async message => {
     message.client.log.console(COLOR.green('[COMMAND]: ') + usedPrefix + command);
     message.client.log.console(COLOR.green('[ARGUMENTs]: ') + (args.join(' ') || COLOR.yellow('No arguments to execute')));
     message.client.log.console(COLOR.green('[MODULE]: ') + mdl);
+    if (message.client.shard) {
+      message.client.log.console(`${COLOR.green('[SHARD]:')} ${message.client.shard.id}`);
+    }
     message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
     message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);

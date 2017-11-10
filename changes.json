@@ -4,6 +4,7 @@
     "Fixed an issue with webhook handler that crashed Bastion if no `webhooks` key is present in the credentials."
   ],
   "improved": [
+    "Command logs will show the shard id, if sharding is enabled.",
     "Under-the-hood changes."
   ],
   "added": [],
