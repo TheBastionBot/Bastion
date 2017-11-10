@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const Kitsu = require('kitsu.js');
+const Kitsu = require('kitsu');
 const kitsu = new Kitsu();
 
 exports.run = async (Bastion, message, args) => {
@@ -16,13 +16,20 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let manga = await kitsu.searchManga(args.name);
+  let { data: manga } = await kitsu.fetch('manga', {
+    filter: {
+      text: args.name
+    },
+    fields: {
+      manga: 'titles,slug,synopsis,startDate,endDate,posterImage'
+    }
+  });
   manga = manga[0];
 
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: manga.titles.en || manga.titles.enJp || manga.titles.canonicalTitle,
+      title: Object.values(manga.titles)[0],
       url: `https://kitsu.io/manga/${manga.slug}`,
       description: manga.synopsis,
       fields: [

@@ -3,7 +3,9 @@
   "fixed": [
     "Fixed an issue with webhook handler that crashed Bastion if no `webhooks` key is present in the credentials."
   ],
-  "improved": [],
+  "improved": [
+    "Under-the-hood changes."
+  ],
   "added": [],
   "removed": [],
   "issues": [
