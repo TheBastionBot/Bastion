@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const Kitsu = require('kitsu.js');
+const Kitsu = require('kitsu');
 const kitsu = new Kitsu();
 
 exports.run = async (Bastion, message, args) => {
@@ -16,13 +16,20 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let anime = await kitsu.searchAnime(args.name);
+  let { data: anime } = await kitsu.fetch('anime', {
+    filter: {
+      text: args.name
+    },
+    fields: {
+      anime: 'titles,slug,synopsis,startDate,endDate,ageRating,ageRatingGuide,nsfw,posterImage'
+    }
+  });
   anime = anime[0];
 
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: anime.titles.english,
+      title: Object.values(anime.titles)[0],
       url: `https://kitsu.io/anime/${anime.slug}`,
       description: anime.synopsis,
       fields: [

@@ -35,7 +35,7 @@ module.exports = class WebhookHandler {
    * @returns {void}
    */
   send(webhook, content) {
-    if (this.webhooks.includes(webhook)) {
+    if (this.webhooks && this.webhooks.includes(webhook)) {
       if (typeof content === 'object' && !(content instanceof Array)) {
         content = {
           embeds: [ content ]
