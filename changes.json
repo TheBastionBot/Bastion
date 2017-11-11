@@ -1,15 +1,10 @@
 {
-  "date": "November 10, 2017",
-  "fixed": [
-    "Fixed an issue with webhook handler that crashed Bastion if no `webhooks` key is present in the credentials."
-  ],
+  "date": "November 11, 2017",
+  "fixed": [],
   "improved": [
-    "Command logs will show the shard id, if sharding is enabled.",
     "Under-the-hood changes."
   ],
   "added": [],
   "removed": [],
-  "issues": [
-    "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
-  ]
+  "issues": []
 }
