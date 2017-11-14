@@ -17,16 +17,20 @@ module.exports = async message => {
   try {
     let guild = await message.client.db.get(`SELECT prefix, language, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
+    // Add guild's prefix to the discord.js guild object to minimize database reads.
     if (!message.guild.prefix || message.guild.prefix.join(' ') !== guild.prefix) {
       message.guild.prefix = guild.prefix.trim().split(' ');
     }
+    // Add guild's language to the discord.js guild object to minimize database reads.
     if (!message.guild.language || message.guild.language !== guild.language) {
       message.guild.language = guild.language;
     }
 
+    // The prefix used by the user to call the command.
     let usedPrefix;
     if (!message.guild.prefix.some(prefix => message.content.startsWith(usedPrefix = prefix))) return;
 
+    // Ignore commands from ignored roles & channels. Doesn't affect the guild administrator.
     if (!message.member.hasPermission('ADMINISTRATOR')) {
       if (guild.ignoredChannels) {
         if (guild.ignoredChannels.split(' ').includes(message.channel.id)) return;
@@ -40,9 +44,14 @@ module.exports = async message => {
       }
     }
 
+    /**
+     * @var {String} args The arguments used with the command.
+     * @var {String} command The command name.
+     */
     let args = message.content.split(' ');
     let command = args.shift().slice(usedPrefix.length).toLowerCase();
 
+    // Resolves command name to the actual command (if any).
     let cmd;
     if (message.client.commands.has(command)) {
       cmd = message.client.commands.get(command);
@@ -51,8 +60,15 @@ module.exports = async message => {
       cmd = message.client.commands.get(message.client.aliases.get(command).toLowerCase());
     }
     else return;
+
+    /**
+     * @var {String} mdl The module that the command belongs to.
+     */
     let mdl = cmd.config.module;
 
+    /**
+     * Command log messages
+     */
     message.client.log.console(`\n[${new Date()}]`);
     message.client.log.console(COLOR.green('[COMMAND]: ') + usedPrefix + command);
     message.client.log.console(COLOR.green('[ARGUMENTs]: ') + (args.join(' ') || COLOR.yellow('No arguments to execute')));
@@ -68,6 +84,10 @@ module.exports = async message => {
       return message.client.log.info('This command is disabled.');
     }
 
+    /**
+     * Bastion's hidden way of allowing users to enable/disable commands in a
+     * specific channel.
+     */
     if (message.channel.topic) {
       let parsedTopic = message.channel.topic.split('\n').filter(str => str.length);
       parsedTopic = parsedTopic[parsedTopic.length - 1];
@@ -107,6 +127,9 @@ module.exports = async message => {
       }
     }
 
+    /**
+     * Command cooldown handler
+     */
     if (cmd.config.userCooldown && typeof cmd.config.userCooldown === 'number' && cmd.config.userCooldown >= 1 && cmd.config.userCooldown <= 1440) {
       if (!activeUsers.hasOwnProperty(cmd.help.name)) {
         activeUsers[cmd.help.name] = [];
