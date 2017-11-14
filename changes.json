@@ -1,10 +1,12 @@
 {
-  "date": "November 11, 2017",
+  "date": "November 14, 2017",
   "fixed": [],
   "improved": [
     "Under-the-hood changes."
   ],
-  "added": [],
+  "added": [
+    "Have fun removing stuffs you don't like with the `remove` command. Won't be real though!"
+  ],
   "removed": [],
   "issues": []
 }

@@ -31,6 +31,7 @@
     "pirateSpeak": "Sends the same message that you had sent, but as pirate speak.",
     "punch": "Give a punch to another user.",
     "quotes": "Shows a quote to get you inspired.",
+    "remove": "Have fun removing stuffs you don't like. Specify the item(s) you want to remove. Won't be real though!",
     "reputation": "Give reputations to other users. You can give reputation only once in 12 hours.",
     "reverse": "Sends the same message that you had sent, but reversed.",
     "robotify": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
