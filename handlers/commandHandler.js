@@ -125,6 +125,9 @@ module.exports = async message => {
     if (isSuccessRun === true) {
       if (activeUsers.hasOwnProperty(cmd.help.name)) {
         activeUsers[cmd.help.name].push(message.author.id);
+        message.client.setTimeout(() => {
+          activeUsers.splice(activeUsers.indexOf(message.author.id), 1);
+        }, cmd.config.userCooldown * 1000);
       }
     }
   }
