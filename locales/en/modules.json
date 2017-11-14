@@ -228,6 +228,7 @@
     "setStream": "Sets the video stream of Bastion.",
     "setUsername": "Changes the username of Bastion.",
     "shutdown": "Shuts down bastion and terminates the process.",
+    "sql": "Execute SQL query on Bastion's database.",
     "todo": "Adds an specified item to your TODO list.",
     "updateDatabase": "Updates Bastion's Database to the current release, if required.",
     "userBlacklist": "Adds/Removes a specified user to Bastion's blacklist. Blacklisted users can not use any of the Bastion's commands."

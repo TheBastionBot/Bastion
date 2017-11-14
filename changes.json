@@ -5,7 +5,8 @@
     "Under-the-hood changes."
   ],
   "added": [
-    "Have fun removing stuffs you don't like with the `remove` command. Won't be real though!"
+    "Have fun removing stuffs you don't like with the `remove` command. Won't be real though!",
+    "No need to make a connection to your server, if you just want to execute some SQL query on Bastion's database. Now we've the `sql` command for ya!"
   ],
   "removed": [],
   "issues": []
