@@ -156,7 +156,7 @@ module.exports = async message => {
 
     // Checks if Bastion has the required permission
     if (cmd.help.botPermission) {
-      if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+      if (!message.channel.permissionsFor(message.guild.me).has(cmd.help.botPermission)) {
         /**
         * Bastion has missing permissions.
         * @fires bastionMissingPermissions
