@@ -12,13 +12,6 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
-  if (!message.channel.permissionsFor(message.member).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
 
   try {
     let invite = await message.channel.createInvite({

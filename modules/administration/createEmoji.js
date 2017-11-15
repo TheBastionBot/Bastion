@@ -12,13 +12,7 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
+
   if (!args.url || !/^(https?:\/\/)((([a-z0-9]{1,})?(-?)+[a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9_\-~#%])+\/)+)?([a-z0-9_\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args.url) || !args.name) {
     /**
      * The command was ran with invalid parameters.
