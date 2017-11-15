@@ -128,6 +128,44 @@ module.exports = async message => {
     }
 
     /**
+     * Command permissions handler
+     */
+    // Checks if the user has the required permission
+    if (cmd.help.userPermission) {
+      // Checks native Discord permissions
+      if (Object.keys(message.client.permissions).includes(cmd.help.userPermission)) {
+        if (!message.channel.permissionsFor(message.member).has(cmd.help.userPermission)) {
+          /**
+           * User has missing permissions.
+           * @fires userMissingPermissions
+           */
+          return message.client.emit('userMissingPermissions', cmd.help.userPermission);
+        }
+      }
+      // Checks bot owner permission
+      else if (cmd.help.userPermission === 'BOT_OWNER') {
+        if (!message.client.credentials.ownerId.includes(message.author.id)) {
+          /**
+           * User has missing permissions.
+           * @fires userMissingPermissions
+           */
+          return message.client.emit('userMissingPermissions', cmd.help.userPermission);
+        }
+      }
+    }
+
+    // Checks if Bastion has the required permission
+    if (cmd.help.botPermission) {
+      if (!message.guild.me.hasPermission(cmd.help.botPermission)) {
+        /**
+        * Bastion has missing permissions.
+        * @fires bastionMissingPermissions
+        */
+        return message.client.emit('bastionMissingPermissions', cmd.help.botPermission, message);
+      }
+    }
+
+    /**
      * Command cooldown handler
      */
     if (cmd.config.userCooldown && typeof cmd.config.userCooldown === 'number' && cmd.config.userCooldown >= 1 && cmd.config.userCooldown <= 1440) {
