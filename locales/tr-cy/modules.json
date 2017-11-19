@@ -17,7 +17,7 @@
     "blockText": "Verilen metni, metin emojisi olarak gönderir.",
     "cat": "Rastgele bir kedi resmi gösterir.",
     "catFact": "Kediler hakkında rastgele özellikleri gösterir.",
-    "catify": "Belirtilen dizgeden veya belirtilmemişse Discord etiketinizden rasgele bir robot görüntüsü üretir.",
+    "catify": "Hiçbir dize belirtilirse bir rasgele yavru kedi resim Belirtilen dizgeyi ya da anlaşmazlık etiketi oluşturur.",
     "crimeCoefficient": "Bir kullanıcının suç katsayısını bulun.",
     "dog": "Rastgele bir köpek resmi gösterir.",
     "echo": "Gönderdiğiniz mesajı gönderir. Tıpkı bir yankı gibi!",
@@ -31,7 +31,7 @@
     "pirateSpeak": "Gönderdiğiniz mesajı ancak korsan konuştıkça gönderir.",
     "punch": "Başka bir kullanıcıya yumruk atın.",
     "quotes": "İlham almak için bir teklif gösterir.",
-    "remove": "Hoşuna gitmeyen maddeleri kaldırma iyi eğlenceler. Kaldırmak istediğiniz öğeleri belirtin. Gerçek olsa da olmayacak!",
+    "remove": "Hoşuna gitmeyen maddeleri kaldırma iyi eğlenceler. Kaldırmak istediğiniz öğeleri belirtin. Gerçek olsa da olmayacakta!",
     "reputation": "Namı diğer kullanıcılara vermek. 12 saat içinde yalnızca bir kez itibar vermebirsiniz.",
     "reverse": "Gönderdiğiniz mesajı aynı mesajı gönderir, ancak tersine çevirir.",
     "rip": "Bir şey (ya da her şey) için başsağlığı göster.",
@@ -123,7 +123,7 @@
     "donate": "Bastion Bot projenin geliştirilmesi mali destek hakkında talimatlar.",
     "guide": "Nasıl kurulum ve özel Bastion Bot yüklemek Kılavuzu gösterir. Ve resmi destek sunucusuna bağlantılar.",
     "help": "Belirtilen komutla ilgili yardım gösterir.",
-    "support": "Bastion için davet link gönderir: Discord sunucu.",
+    "support": "Bastion için davet link gönderir: Discord sunucusu.",
     "terms": "Bastion'ın hizmet şartları okuyun."
   },
   "info": {
@@ -229,7 +229,7 @@
     "setStream": "Bastion video akışı ayarlar.",
     "setUsername": "Bastion adını değiştirir.",
     "shutdown": "Bastion kapatır ve işlemi sonlandırır.",
-    "sql": "SQL sorgusu için Bastion'ın veritabanı yürütür.",
+    "sql": "SQL sorgusu yürütmek Bastion'ın veritabanı kullanır.",
     "todo": "Belirtilen öğe, TODO listesine ekler.",
     "updateDatabase": "Gerekirse Veri veritabanını geçerli sürüme güncelleştirir.",
     "userBlacklist": "Bastion'ın kara liste için belirtilen bir kullanıcı ekler veya kaldırır. Kara listeye kullanıcılar Tabyası'nın komutlardan herhangi birini kullanamazsınız."

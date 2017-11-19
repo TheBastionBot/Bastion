@@ -1,15 +1,15 @@
 {
-  "date": "November 10, 2017",
-  "fixed": [
-    "Fixed an issue with webhook handler that crashed Bastion if no `webhooks` key is present in the credentials."
-  ],
+  "date": "November 19, 2017",
+  "fixed": [],
   "improved": [
-    "Command logs will show the shard id, if sharding is enabled.",
     "Under-the-hood changes."
   ],
-  "added": [],
+  "added": [
+    "Added Turkish (Cyprus).",
+    "Have fun removing stuffs you don't like with the `remove` command. Won't be real though!",
+    "No need to make a connection to your server, if you just want to execute some SQL query on Bastion's database. Now we've the `sql` command for ya.",
+    "May everyone's soul rest in peace with the all new `rip` command."
+  ],
   "removed": [],
-  "issues": [
-    "Bastion profile won't show badges if the `profile` command's used in shards other than the shard which contains the official server."
-  ]
+  "issues": []
 }

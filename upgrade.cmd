@@ -23,7 +23,7 @@ ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
 choco upgrade chocolatey -y
 choco upgrade ffmpeg -y
-CALL npm install --production >nul 2>update.log
+CALL npm install --only=production >nul 2>update.log
 ECHO [Bastion]: Done.
 ECHO [Bastion]: If you get any errors please check the update.log file for errors while updating.
 ECHO [Bastion]: Ready to boot up and start running.

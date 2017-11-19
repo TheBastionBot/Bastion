@@ -12,13 +12,6 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
 
   if (!Bastion.resolver.resolveColor(args.color)) {
     args.color = 0;

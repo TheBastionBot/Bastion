@@ -31,8 +31,10 @@
     "pirateSpeak": "Sends the same message that you had sent, but as pirate speak.",
     "punch": "Give a punch to another user.",
     "quotes": "Shows a quote to get you inspired.",
+    "remove": "Have fun removing stuffs you don't like. Specify the item(s) you want to remove. Won't be real though!",
     "reputation": "Give reputations to other users. You can give reputation only once in 12 hours.",
     "reverse": "Sends the same message that you had sent, but reversed.",
+    "rip": "Show your condolences for something (or everything).",
     "robotify": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
     "selfDestruct": "Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.",
     "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/tools/embed_builder/).*",
@@ -227,6 +229,7 @@
     "setStream": "Sets the video stream of Bastion.",
     "setUsername": "Changes the username of Bastion.",
     "shutdown": "Shuts down bastion and terminates the process.",
+    "sql": "Execute SQL query on Bastion's database.",
     "todo": "Adds an specified item to your TODO list.",
     "updateDatabase": "Updates Bastion's Database to the current release, if required.",
     "userBlacklist": "Adds/Removes a specified user to Bastion's blacklist. Blacklisted users can not use any of the Bastion's commands."

@@ -11,6 +11,7 @@
     "noCredentials": "No Credentials",
     "notFound": "Not Found",
     "parseError": "Parse Error",
+    "sqliteError": "SQL Error",
     "unknown": "Unknown Error"
   },
   "descriptions": {

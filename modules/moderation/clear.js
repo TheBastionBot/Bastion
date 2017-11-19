@@ -12,13 +12,6 @@ exports.run = async (Bastion, message, args) => {
      */
     return Bastion.emit('userMissingPermissions', this.help.userPermission);
   }
-  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
 
   let user = message.mentions.users.first();
   let limit = parseInt(args[0]) ? args[0] : args[1];
