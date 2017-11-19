@@ -1,6 +1,7 @@
 {
   "administration": {
     "createChannel": "Yeni bir metin veya ses kanalı anlaşmazlık sunucunuzda oluşturur.",
+    "createEmoji": "Discord Sunucunuzda yeni bir emoji oluşturur.",
     "createRole": "Yeni bir rol oluşturur discord sunucunuzda.",
     "deleteChannel": "Belirtilen metin veya sesli kanalı Discord sunucunuzdan siler.",
     "deleteRole": "Belirtilen rolü Discord sunucunuzdan siler.",
@@ -8,6 +9,7 @@
     "iAmNot": "Belirtilen kendinden atanabilir rolü kullanıcıya geri çevirin.",
     "renameChannel": "Belirtilen metin veya sesli kanal anlaşmazlık sunucunuzun yeniden adlandırır.",
     "renameRole": "Belirtilen rolü Discord sunucunuzdan tekrar isimlendirir.",
+    "roleColor": "Discord Sunucunuzda, belirtilen rolün rengini değiştirir.",
     "setTopic": "Discord sunucunuzun belirtilen metin kanalının kanal konusunu ayarlar."
   },
   "fun": {
@@ -15,11 +17,13 @@
     "blockText": "Verilen metni, metin emojisi olarak gönderir.",
     "cat": "Rastgele bir kedi resmi gösterir.",
     "catFact": "Kediler hakkında rastgele özellikleri gösterir.",
+    "catify": "Belirtilen dizgeden veya belirtilmemişse Discord etiketinizden rasgele bir robot görüntüsü üretir.",
     "crimeCoefficient": "Bir kullanıcının suç katsayısını bulun.",
     "dog": "Rastgele bir köpek resmi gösterir.",
     "echo": "Gönderdiğiniz mesajı gönderir. Tıpkı bir yankı gibi!",
     "edgeLord": "Bir kenar efendisinden bir mesaj gösterir.",
     "emoji": "Belirtilen emojinin büyük bir sürümünü gönderir.",
+    "fidgetSpinner": "Sizin için bir fidget spinner'ı döndürür ve ne kadar süre döndüğünü gösterir.",
     "flipText": "Gönderdiğiniz mesajı gönderir ancak aynı mesajı gönderir.",
     "fortune": "Size bir şans kurabiyesi birinden bir servet gösterir.",
     "hello": "Bastion'dan tebrikler alın.",
@@ -27,8 +31,10 @@
     "pirateSpeak": "Gönderdiğiniz mesajı ancak korsan konuştıkça gönderir.",
     "punch": "Başka bir kullanıcıya yumruk atın.",
     "quotes": "İlham almak için bir teklif gösterir.",
+    "remove": "Hoşuna gitmeyen maddeleri kaldırma iyi eğlenceler. Kaldırmak istediğiniz öğeleri belirtin. Gerçek olsa da olmayacak!",
     "reputation": "Namı diğer kullanıcılara vermek. 12 saat içinde yalnızca bir kez itibar vermebirsiniz.",
     "reverse": "Gönderdiğiniz mesajı aynı mesajı gönderir, ancak tersine çevirir.",
+    "rip": "Bir şey (ya da her şey) için başsağlığı göster.",
     "robotify": "Belirtilen dizgeden veya belirtilmemişse Discord etiketinizden rasgele bir robot görüntüsü üretir.",
     "selfDestruct": "Gönderdiğiniz mesajı gönderir ancak belirli bir süre sonra otomatik silinir.",
     "sendEmbed": "Belirtilen embed (JavaScript) nesnesinden bir embed iletisi gönderir. Grafik, bir embed nesne oluşturmak için [tıklayınız] (https://bastionbot.org/tools/embed_builder/). *",
@@ -43,6 +49,7 @@
     "sweep": "Metin kanalından rasgele bir kullanıcı gösterir."
   },
   "game_stats": {
+    "battlefield1": "Bir Battlefield 1 oyuncusunun istatistiklerini alın.",
     "battlefield4": "Bir Battlefield 4 oyuncusunun istatistiklerini alın.",
     "callOfDuty4": "Herhangi bir Call of Duty 4'ün istatistiklerini alın: Modern Warfare oyun sunucusu.",
     "counterStrikeGlobalOffensive": "Herhangi bir Counter-Strike: Global Saldırı oyun sunucusunun durumunu öğrenin.",
@@ -63,6 +70,7 @@
     "russianRoulette": "Son şans oyunu - Rus ruleti oynuyor! Yaşa veya öl bakalım.",
     "slots": "Slot makinesidir silindirler spin ve sonucunu gösterir.",
     "thisOrThat": "Bu soruyu sorar. Sen ve arkadaşların nasıl seçim bakın!",
+    "trivia": "Bir önemsiz soru sorar. Yanıtlayın ve her şey hakkında ne kadar çok bilgiye sahip olduğunuzu görün.",
     "typingGame": "Bir yazma hızı yarışma başlayacak. Makale belirli parça yazın ve verilen süre içinde göndermek için ilk kazanır.",
     "wouldYouRather": "Durumunuzu tercih eder misiniz? Siz ve arkadaşlarınızın buna nasıl cevap verdiğini görün!"
   },
@@ -99,14 +107,18 @@
     "removeSelfAssignableRole": "Bir rol kendi kendine atanabilir roller listesinden siler.",
     "removeWhitelistDomain": "Bir etki alanı beyaz liste etki alanları listesinden siler.",
     "serverSettings": "Sunucunuzun konfigüre edilmiş ayarlar durumunu gösterir.",
+    "setLanguage": "Basitonun bu sunucudaki dilini ayarlar.",
     "setPrefix": "Basitonun bu sunucudaki prefixini ayarlar.",
     "starboard": "Sunucunun bu kanaldaki yıldızlı iletilerinin günlüğünü kapatır.",
     "slowMode": "Sunucu yavaş modunu etkinleştirir. Onlar çok hızlı iletiler gönderdiğinizde kullanıcılara bildirilir. Ve kullanıcıların çok spam niteliğinde e alırsanız, geçici olarak kanalda sessiz metin vardır.",
+    "streamerRole": "Rol olarak flama rol ekler. (En az bir role) bir lonca üyesinin akışı başladığında, flama rol verilir.",
+    "streamers": "Ekler/kaldırır/flamalar listesini almak notified ne zaman onlar are için sunucu tarafından takip görüntüler canlı.",
     "whitelistChannel": "Ekle/kanal davet filtre, bağlantı filtre veya sözcük filtresi için beyaz liste üzerinden Kaldır.",
     "whitelistRole": "Ekle/bir rol davet filtre, bağlantı filtre veya sözcük filtresi için beyaz liste üzerinden Kaldır."
   },
   "help": {
     "changelog": "Bastion Bot geçerli sürümünde yapılan değişiklikleri gösterir.",
+    "commands": "Doğrudan tüm komutları veya belirli modüllerle komutlar listesi ile iletir.",
     "commandSearch": "Belirtilen metni içeren bir komut için arama.",
     "donate": "Bastion Bot projenin geliştirilmesi mali destek hakkında talimatlar.",
     "guide": "Nasıl kurulum ve özel Bastion Bot yüklemek Kılavuzu gösterir. Ve resmi destek sunucusuna bağlantılar.",
@@ -122,7 +134,9 @@
     "discrim": "Anlaşmazlık sunucunuz belirtilen Ayrıştırıcı için kullanıcıları arar.",
     "emojiInfo": "Belirtilen emoji anlaşmazlık sunucunuzun bilgilerini gösterir.",
     "inRole": "Discord sunucu belirtilen rolü olan üyeleri gösterir.",
+    "ping": "Ortalama WebSocket ve Bastion'un pingini gösterir.",
     "profile": "Belirtilen kullanıcı anlaşmazlık sunucunuzun Bastion kullanıcı profilini gösterir.",
+    "roleID": "Discord sunucunuzun belirli bir kullanıcısının İD'sini gösterir.",
     "roleInfo": "Discord sunucunuzun belirli bir rolünün bilgilerini gösterir.",
     "roles": "Yeni bir rol oluşturur discord sunucunuzda.",
     "serverID": "Discord sunucu kimliği gösterilir.",
@@ -130,7 +144,8 @@
     "setBio": "Bastion kullanıcı profilinde gösteren bio ayarlar.",
     "stats": "Bastion'un detaylı istatistiklerini ve bilgilerini gösterir.",
     "userID": "Discord sunucunuzun belirli bir kullanıcısının İD'sini gösterir.",
-    "userInfo": "Discord sunucunuzun belirli bir kullanıcısının bilgilerini gösterir."
+    "userInfo": "Discord sunucunuzun belirli bir kullanıcısının bilgilerini gösterir.",
+    "viewPermissions": "Sizin Sunucu/kanaldaki izinleri gösterir."
   },
   "moderation": {
     "addRole": "Belirtilen rol Discord sunucu belirtilen bir kullanıcı ekler.",
@@ -141,11 +156,13 @@
     "kick": "Belirtilen kullanıcıyı discord sununuzdan atar.",
     "listWarns": "Bir kullanıcının tüm uyarılarını gösterir.",
     "mute": "Belirtilen kullanıcı Sunucu Discord sunucu çapında sesini kapatır.",
+    "muteList": "Discord Sunucunuzdaki, Susturlmuş Kullanıcıları Gösterir.",
     "nickname": "Belirli kullanıcınin adını değistirir.",
     "removeAllRoles": "Tüm rolleri Discord sunucu belirtilen kullanıcıdan kaldırır.",
     "removeRole": "Belirtilen rol Discord sunucu belirtilen bir kullanıcının bağlantısını kaldırır.",
     "report": "Discord sunucunuzun bir kullanıcısını bildirir. * Denetleme günlüklerinin etkinleştirilmesi gerekiyor. *",
     "softBan": "Belirtilen kullanıcıyı Discord sunucunuzdan kaldırır ve ileti geçmişinin 7 gününü kaldırır.",
+    "textMute": "Metin belirtilen kullanıcı belirtilen metin kanal'larında sunucunuzun sesini kapatır.",
     "textUnMute": "Metin belirtilen kullanıcı belirtilen metin kanal anlaşmazlık sunucunuzun kapatýr.",
     "unDeafen": "Discord sunucunuzda sunucu çapında belirli bir kullanıcı susturmasını kaldırır.",
     "unMute": "Belirtilen kullanıcı Sunucu Discord sunucu çapında sesini açar.",
@@ -153,7 +170,9 @@
     "warnAction": "Sunucu uyar eylemi ayarlar."
   },
   "money": {
+    "bastionCurrency": "Belirtilen kullanıcının hesabında Bastion Currencies miktarını gösterir.",
     "buyGift": "Hediyeler Tabyası'nın Hediyelik eşya.",
+    "claim": "Günlük ödülünü Toplar.",
     "gift": "Hediyeler yanınızda Hediyelik eşyalar üzerinden diğer kullanıcılara gönderebilirsiniz.",
     "giftShop": "Kullanılabilen ürünler Hediyelik eşya ve onların fiyatı gösterir.",
     "give": "Bastion para belirtilen miktarı hesabınızdan belirtilen kullanıcıya vermek. Bot sahibi iseniz, herhangi bir miktarda Bastion para verebilirim.",
@@ -171,6 +190,7 @@
     "play": "Bastion, Discord sunucunuzda zaten oynuyorsa, bir şarkıyı çalar veya o şarkıyı geçerli müzik kuyruğuna ekler; ada veya bağlantıya göre veya en sevdiğiniz şarkılar listesinden veya bir YouTube çalma listesi bağlantısından belirtilir.",
     "playlist": "Belirli çalma listesine şarkı ekleme veya bir çalma listesindeki şarkı listesini görüntüler.",
     "queue": "Tüm şarkıların listesi Discord sunucu geçerli müzik sıraya gösterir.",
+    "removeSong": "Bir şarkı tarafından bu geçerli müzik sırasından kaldırır numarasını yerleştirin.",
     "repeat": "Geçerli kayıttan yürütme tamamlandıktan sonra bir kez daha tekrarlamak geçerli şarkıyı tekrar sırasına ekler.",
     "resume": "Daha önce duraklatılmış şarkıyı oynatır.",
     "shuffle": "Bastion'ın tüm müzik sıra anlaşmazlık sunucunuzun karıştırır.",
@@ -209,6 +229,7 @@
     "setStream": "Bastion video akışı ayarlar.",
     "setUsername": "Bastion adını değiştirir.",
     "shutdown": "Bastion kapatır ve işlemi sonlandırır.",
+    "sql": "SQL sorgusu için Bastion'ın veritabanı yürütür.",
     "todo": "Belirtilen öğe, TODO listesine ekler.",
     "updateDatabase": "Gerekirse Veri veritabanını geçerli sürüme güncelleştirir.",
     "userBlacklist": "Bastion'ın kara liste için belirtilen bir kullanıcı ekler veya kaldırır. Kara listeye kullanıcılar Tabyası'nın komutlardan herhangi birini kullanamazsınız."
@@ -218,6 +239,7 @@
     "calculate": "Herhangi bir matematiksel ifade değerlendirir.",
     "capture": "Belirtilen Web sayfası bir ekran görüntüsü yakalar.",
     "choose": "Bir dizi seçenek arasından bir seçenek belirlemek için bot sorar.",
+    "cite": "Herhangi bir ileti anlaşmazlık sunucunuzdan öngörmektedirler.",
     "colour": "'HEX' oluşum 'RGB', 'CMYK', 'HSL', 'HSV', 'HWB', 'LAB', 'ANSI16', 'ANSI256', 'XYZ', 'HCG', 'Elma', 'Gri' ve 'CSS' anahtar kelime (Approximates yakın renge) biçimlerinde sağlanan renk dönüştürün.",
     "date": "Yerel Tarih ve saat belirtilen herhangi bir şehrin gösterir.",
     "define": "İngilizce, Fransızca veya Almanca sözlükten belirtilen kelime arar.",
@@ -229,6 +251,7 @@
     "google": "Google, belirtilen sorgu için arama yapar ve en iyi sonuçlarını gösterir.",
     "live": "Kim şu anda akış Discord sunucu kullanıcıların listesini gösterir.",
     "lmgtfy": "Google, için belirtilen sorgu arar ve kullanıcılar Google'nın internet arama kullanmayı öğretir.",
+    "lyrics": "Belirtilen şarkının sözlerini gösterir.",
     "manga": "Bir Anime ayrıntılarını arar.",
     "map": "Belirtilen konum haritası olsun.",
     "morseCode": "Belirli bir metin Mors kodu olarak kodlar.",
