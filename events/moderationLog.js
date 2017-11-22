@@ -49,7 +49,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         }
       ];
 
-    switch (action) {
+    switch (action.toLowerCase()) {
       case 'addrole':
         action = guild.client.strings.events(guild.language, 'addRole');
         color = guild.client.colors.GREEN;

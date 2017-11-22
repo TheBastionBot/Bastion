@@ -1,6 +1,8 @@
 {
   "date": "November 22, 2017",
-  "fixed": [],
+  "fixed": [
+    "An issue with moderation log, not known until now, that caused some log events to get omitted."
+  ],
   "improved": [
     "Bastion won't show the commands to users they don't have permission to use in the channel/server, unless they use the `commands` command with the `--all` option.",
     "Under-the-hood changes."
