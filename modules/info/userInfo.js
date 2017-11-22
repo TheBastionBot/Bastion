@@ -123,6 +123,6 @@ exports.help = {
   name: 'userInfo',
   botPermission: '',
   userPermission: '',
-  usage: 'userInfo [@user-mention]',
-  example: [ 'userInfo @user#0001', 'userInfo' ]
+  usage: 'userInfo [@USER_MENTION | USER_ID]',
+  example: [ 'userInfo @user#0001', 'userInfo 167122669385743441', 'userInfo' ]
 };
