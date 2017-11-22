@@ -164,6 +164,7 @@
     "softBan": "Bans & unbans the specified user, immediately, from your Discord server, and removes 7 days of their message history.",
     "textMute": "Text mutes a specified user from the specified text channel or globally on your Discord server.",
     "textUnMute": "Text unmutes from specified user from the specified text channel of your Discord server.",
+    "unBan": "Unbans a specified user for your Discord server.",
     "unDeafen": "Undeafens a specified user server-wide in your Discord server.",
     "unMute": "Unmutes a specified user server-wide in your Discord server.",
     "warn": "Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.",

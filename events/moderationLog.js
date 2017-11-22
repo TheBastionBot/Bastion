@@ -170,6 +170,11 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         );
         break;
 
+      case 'unban':
+        action = guild.client.strings.events(guild.language, 'guildBanRemove');
+        color = guild.client.colors.GREEN;
+        break;
+
       case 'undeafen':
         action = guild.client.strings.events(guild.language, 'deafRemove');
         color = guild.client.colors.GREEN;
