@@ -9,7 +9,8 @@
     "Under-the-hood changes."
   ],
   "added": [
-    "No need to go to server settings just to unban someone, use the new handy `unban` command."
+    "No need to go to server settings just to unban someone, use the new handy `unban` command.",
+    "Wanted to reset the moderation log cases back to 1? Use the new `resetModLogs` command."
   ],
   "removed": [],
   "issues": []
