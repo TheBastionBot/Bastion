@@ -67,7 +67,7 @@ exports.run = async (Bastion, message, args) => {
         description: description,
         fields: fields,
         footer: {
-          text: `Server Prefix: ${message.guild.prefix[0]} | Total Commands: ${Bastion.commands.length}`
+          text: `Server Prefix: ${message.guild.prefix[0]} | Total Commands: ${Bastion.commands.size}`
         }
       }
     });
