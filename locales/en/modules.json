@@ -57,6 +57,7 @@
     "overwatch": "Get stats of any Overwatch player.",
     "paladins": "Get stats of any Paladins player.",
     "pubg": "Get stats of any PlayerUnknown's Battlegrounds player.",
+    "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server."
   },
