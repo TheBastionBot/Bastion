@@ -51,6 +51,7 @@ exports.help = {
   name: 'searchServer',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'searchServer <name>',
   example: [ 'searchServer Bastion' ]
 };

@@ -47,6 +47,7 @@ exports.help = {
   name: 'queue',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'queue',
   example: []
 };

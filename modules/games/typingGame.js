@@ -88,6 +88,7 @@ exports.help = {
   name: 'typingGame',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'typingGame',
   example: []
 };

@@ -43,6 +43,7 @@ exports.help = {
   name: 'discrim',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'discrim <discriminator>',
   example: [ 'discrim 8383' ]
 };

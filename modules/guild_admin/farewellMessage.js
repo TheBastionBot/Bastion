@@ -62,6 +62,7 @@ exports.help = {
   name: 'farewellMessage',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'farewellMessage [Message]',
   example: [ 'farewellMessage Goodbye $username. Hope to see you soon!' ]
 };

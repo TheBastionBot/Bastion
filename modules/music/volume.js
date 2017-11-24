@@ -57,6 +57,7 @@ exports.help = {
   name: 'volume',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'volume < + | - | amount >',
   example: [ 'volume +', 'volume -', 'volume 25' ]
 };

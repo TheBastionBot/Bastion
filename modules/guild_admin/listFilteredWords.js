@@ -62,6 +62,7 @@ exports.help = {
   name: 'listFilteredWords',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'listFilteredWords [page_no]',
   example: [ 'listFilteredWords', 'listFilteredWords 2' ]
 };

@@ -84,6 +84,7 @@ exports.help = {
   name: 'textUnMute',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'textUnMute @user-mention [Reason]',
   example: [ 'textUnMute @user#0001 Reason for the unmute.' ]
 };

@@ -81,6 +81,7 @@ exports.help = {
   name: 'shorten',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'shorten <URL>',
   example: [ 'shorten https://BastionBot.org/SomeLongURL' ]
 };

@@ -108,6 +108,7 @@ exports.help = {
   name: 'colour',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'colour <#hex-colour-code>',
   example: [ 'colour #dd0000' ]
 };

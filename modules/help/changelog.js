@@ -67,6 +67,7 @@ exports.help = {
   name: 'changelog',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'changelog',
   example: []
 };

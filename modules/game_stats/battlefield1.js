@@ -158,6 +158,7 @@ exports.help = {
   name: 'battlefield1',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'battlefield1 <player_name>',
   example: [ 'battlefield1 VVipe' ]
 };

@@ -45,6 +45,7 @@ exports.help = {
   name: 'slap',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'slap <@USER_MENTION>',
   example: [ 'slap @user#0001' ]
 };

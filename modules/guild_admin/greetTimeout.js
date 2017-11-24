@@ -40,6 +40,7 @@ exports.help = {
   name: 'greetTimeout',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'greetTimeout [time_in_seconds]',
   example: [ 'greetTimeout 120', 'greetTimeout' ]
 };

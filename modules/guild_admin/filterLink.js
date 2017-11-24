@@ -51,6 +51,7 @@ exports.help = {
   name: 'filterLink',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'filterLink',
   example: []
 };

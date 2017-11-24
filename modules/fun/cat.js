@@ -39,6 +39,7 @@ exports.help = {
   name: 'cat',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'cat',
   example: []
 };

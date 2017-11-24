@@ -79,6 +79,7 @@ exports.help = {
   name: 'cite',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'cite <MESSAGE_ID>',
   example: [ 'cite 221133446677558899' ]
 };

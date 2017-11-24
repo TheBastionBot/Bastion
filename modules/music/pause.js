@@ -51,6 +51,7 @@ exports.help = {
   name: 'pause',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'pause',
   example: []
 };

@@ -53,6 +53,7 @@ exports.help = {
   name: 'setNick',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'setNick [text]',
   example: [ 'setNick NewNick', 'setNick' ]
 };

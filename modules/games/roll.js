@@ -45,6 +45,7 @@ exports.help = {
   name: 'roll',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'roll [no_of_dice]',
   example: [ 'roll', 'roll 5' ]
 };

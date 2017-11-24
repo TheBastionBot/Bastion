@@ -80,6 +80,7 @@ exports.help = {
   name: 'disableCommand',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'disableCommand <command_name>',
   example: [ 'disableCommand echo' ]
 };

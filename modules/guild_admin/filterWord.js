@@ -51,6 +51,7 @@ exports.help = {
   name: 'filterWord',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'filterWord',
   example: []
 };

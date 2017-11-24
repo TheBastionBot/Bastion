@@ -35,6 +35,7 @@ exports.help = {
   name: 'zalgolize',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'zalgolize <text>',
   example: [ 'zalgolize It looks clumsy, but it\'s cool!' ]
 };

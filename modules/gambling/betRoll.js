@@ -112,6 +112,7 @@ exports.help = {
   name: 'betRoll',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'betroll < one/two/three/four/five/six > <-m amount>',
   example: [ 'betroll three -m 100' ]
 };

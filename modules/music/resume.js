@@ -51,6 +51,7 @@ exports.help = {
   name: 'resume',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'resume',
   example: []
 };

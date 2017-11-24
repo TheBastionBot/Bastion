@@ -63,6 +63,7 @@ exports.help = {
   name: 'enableCommand',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'enableCommand <command_name>',
   example: [ 'enableCommand echo' ]
 };

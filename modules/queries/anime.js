@@ -73,6 +73,7 @@ exports.help = {
   name: 'anime',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'anime <Anime Name>',
   example: [ 'anime One Piece' ]
 };

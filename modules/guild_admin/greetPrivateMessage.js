@@ -62,6 +62,7 @@ exports.help = {
   name: 'greetPrivateMessage',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'greetPrivateMessage [Message]',
   example: [ 'greetPrivateMessage Hello $user! Welcome to $server.' ]
 };

@@ -61,6 +61,7 @@ exports.help = {
   name: 'rps',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'rps <rock|paper|scissor>',
   example: [ 'rps Rock' ]
 };

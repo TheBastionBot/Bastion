@@ -46,6 +46,7 @@ exports.help = {
   name: 'repeat',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'repeat',
   example: []
 };

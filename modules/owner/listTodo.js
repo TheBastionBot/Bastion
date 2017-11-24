@@ -66,6 +66,7 @@ exports.help = {
   name: 'listTodo',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'listTodo [page_no]',
   example: [ 'listTodo', 'listTodo 2' ]
 };

@@ -40,6 +40,7 @@ exports.help = {
   name: 'farewellTimeout',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'farewellTimeout [time_in_seconds]',
   example: [ 'farewellTimeout 120', 'farewellTimeout' ]
 };

@@ -73,6 +73,7 @@ exports.help = {
   name: 'removeFilteredWord',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'removeFilteredWord <index>',
   example: [ 'removeFilteredWord 3' ]
 };

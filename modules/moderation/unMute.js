@@ -79,6 +79,7 @@ exports.help = {
   name: 'unMute',
   botPermission: 'MUTE_MEMBERS',
   userTextPermission: 'MUTE_MEMBERS',
+  userVoicePermission: '',
   usage: 'unMute @user-mention [Reason]',
   example: [ 'unMute @user#0001 Reason for the unmute.' ]
 };

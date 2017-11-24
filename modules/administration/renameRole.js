@@ -82,6 +82,7 @@ exports.help = {
   name: 'renameRole',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'renameRole < -o Old Role Name -n New Role Name >',
   example: [ 'renameRole -o Server Staffs -n Legendary Staffs' ]
 };

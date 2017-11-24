@@ -42,6 +42,7 @@ exports.help = {
   name: 'fidgetSpinner',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'fidgetSpinner',
   example: []
 };

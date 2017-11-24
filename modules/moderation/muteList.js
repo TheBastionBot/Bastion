@@ -61,6 +61,7 @@ exports.help = {
   name: 'muteList',
   botPermission: '',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'muteList [PAGE_NO]',
   example: [ 'muteList', 'muteList 2' ]
 };

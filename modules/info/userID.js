@@ -40,6 +40,7 @@ exports.help = {
   name: 'userID',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'userID [@user-mention]',
   example: [ 'userID @user#0001', 'userID' ]
 };

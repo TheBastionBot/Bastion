@@ -125,6 +125,7 @@ exports.help = {
   name: 'morseCode',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'morseCode <text>',
   example: [ 'morseCode Shh! This is a secret.' ]
 };

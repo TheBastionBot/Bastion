@@ -36,6 +36,7 @@ exports.help = {
   name: 'lmgtfy',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'lmgtfy <text>',
   example: [ 'lmgtfy How to shutdown a computer?' ]
 };

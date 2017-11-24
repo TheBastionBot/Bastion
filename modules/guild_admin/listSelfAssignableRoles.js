@@ -60,6 +60,7 @@ exports.help = {
   name: 'listSelfAssignableRoles',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'listSelfAssignableRoles [page_no]',
   example: [ 'listSelfAssignableRoles', 'listSelfAssignableRoles 2' ]
 };

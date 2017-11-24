@@ -28,6 +28,7 @@ exports.help = {
   name: 'fortune',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'fortune',
   example: []
 };

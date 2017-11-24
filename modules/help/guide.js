@@ -36,6 +36,7 @@ exports.help = {
   name: 'guide',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'guide',
   example: []
 };

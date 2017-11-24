@@ -64,6 +64,7 @@ exports.help = {
   name: 'forecast',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'forecast < city, country_code | zipcode >',
   example: [ 'forecast London, UK', 'forecast 94109' ]
 };

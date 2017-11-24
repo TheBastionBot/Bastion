@@ -30,6 +30,7 @@ exports.help = {
   name: 'rip',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'rip <text>',
   example: [ 'rip Grammar' ]
 };

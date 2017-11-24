@@ -83,6 +83,7 @@ exports.help = {
   name: 'urbanDictionary',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'urbanDictionary <word>',
   example: [ 'urbanDictionary pineapple' ]
 };

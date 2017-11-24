@@ -56,6 +56,7 @@ exports.help = {
   name: 'setStatus',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'setStatus [online|idle|dnd|invisible]',
   example: [ 'setStatus invisible', 'setStatus' ]
 };

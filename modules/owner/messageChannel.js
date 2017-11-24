@@ -70,6 +70,7 @@ exports.help = {
   name: 'messageChannel',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'messageChannel <channel_id> <message>',
   example: [ 'messageChannel CHANNEL_ID Hello everyone!' ]
 };

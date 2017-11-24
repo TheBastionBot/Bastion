@@ -136,6 +136,7 @@ exports.help = {
   name: 'trivia',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'trivia',
   example: []
 };

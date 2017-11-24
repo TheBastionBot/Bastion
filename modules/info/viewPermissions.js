@@ -35,6 +35,7 @@ exports.help = {
   name: 'viewPermissions',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'viewPermissions',
   example: []
 };

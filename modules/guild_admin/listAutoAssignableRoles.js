@@ -68,6 +68,7 @@ exports.help = {
   name: 'listAutoAssignableRoles',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'listAutoAssignableRoles [page_no]',
   example: [ 'listAutoAssignableRoles', 'listAutoAssignableRoles 2' ]
 };

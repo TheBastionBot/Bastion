@@ -81,6 +81,7 @@ exports.help = {
   name: 'deleteRole',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',
   example: [ 'deleteRole -m @Server Staffs', 'deleteRole -i 295982817647788032', 'deleteRole -n Server Staffs' ]
 };

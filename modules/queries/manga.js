@@ -68,6 +68,7 @@ exports.help = {
   name: 'manga',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'manga <Manga Name>',
   example: [ 'manga Death Note' ]
 };

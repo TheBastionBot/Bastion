@@ -97,6 +97,7 @@ exports.help = {
   name: 'scheduleCommand',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'scheduleCommand <CRON PATTERN> <-c COMMAND> [-a ARGUMENTS]',
   example: [ 'scheduleCommand 0 0 0 1 1 * -c echo -a Happy New Year!' ]
 };

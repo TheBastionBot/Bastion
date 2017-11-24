@@ -43,6 +43,7 @@ exports.help = {
   name: 'echo',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'echo <text>',
   example: [ 'echo Hello, world!' ]
 };

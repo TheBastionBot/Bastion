@@ -100,6 +100,7 @@ exports.help = {
   name: 'serverSettings',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'serverSettings',
   example: []
 };

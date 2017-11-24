@@ -72,6 +72,7 @@ exports.help = {
   name: 'warnAction',
   botPermission: '',
   userTextPermission: 'BAN_MEMBERS',
+  userVoicePermission: '',
   usage: 'warnAction < --kick | --softban | --ban | --none >',
   example: [ 'warnAction --kick', 'warnAction --none' ]
 };

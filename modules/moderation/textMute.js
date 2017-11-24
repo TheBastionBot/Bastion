@@ -109,6 +109,7 @@ exports.help = {
   name: 'textMute',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'textMute @user-mention [Reason] [--server]',
   example: [ 'textMute @user#0001 off topic discussions', 'textMute @user#0001 misbehaving others --server' ]
 };

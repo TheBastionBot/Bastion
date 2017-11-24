@@ -68,6 +68,7 @@ exports.help = {
   name: 'todo',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'todo <text>',
   example: [ 'todo Reconfigure my firewall' ]
 };

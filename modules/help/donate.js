@@ -29,6 +29,7 @@ exports.help = {
   name: 'donate',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'donate',
   example: []
 };

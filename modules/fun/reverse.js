@@ -33,6 +33,7 @@ exports.help = {
   name: 'reverse',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'reverse <text>',
   example: [ 'reverse !looc si sihT' ]
 };

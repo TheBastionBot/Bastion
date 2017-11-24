@@ -110,6 +110,7 @@ exports.help = {
   name: 'commands',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'commands [module names] [--all]',
   example: [ 'commands', 'commands --all', 'commands administration moderation' ]
 };

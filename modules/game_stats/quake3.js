@@ -112,6 +112,7 @@ exports.help = {
   name: 'quake3',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'quake3 <Q3_SERVER_IP>[:PORT]',
   example: [ 'quake3 139.59.31.128', 'quake3 139.59.31.128:27960' ]
 };

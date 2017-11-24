@@ -27,6 +27,7 @@ exports.help = {
   name: 'remove',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'remove <text>',
   example: [ 'remove Humanity' ]
 };

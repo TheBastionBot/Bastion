@@ -39,6 +39,7 @@ exports.help = {
   name: 'resetModLogs',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'resetModLogs',
   example: []
 };

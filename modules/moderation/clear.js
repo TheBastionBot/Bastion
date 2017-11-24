@@ -91,6 +91,7 @@ exports.help = {
   name: 'clear',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_MESSAGES',
+  userVoicePermission: '',
   usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',
   example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };

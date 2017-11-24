@@ -47,6 +47,7 @@ exports.help = {
   name: 'shuffle',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'shuffle',
   example: []
 };

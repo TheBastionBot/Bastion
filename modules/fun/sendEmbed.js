@@ -57,6 +57,7 @@ exports.help = {
   name: 'sendEmbed',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'sendEmbed <embedObject>',
   example: [ 'sendEmbed {"title": "Hello", "description": "Isn\'t it cool?"}' ]
 };

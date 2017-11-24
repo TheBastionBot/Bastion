@@ -51,6 +51,7 @@ exports.help = {
   name: 'levelUpMessage',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'levelUpMessage',
   example: []
 };

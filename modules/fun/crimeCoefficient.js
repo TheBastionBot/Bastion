@@ -46,6 +46,7 @@ exports.help = {
   name: 'crimeCoefficient',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'crimecoefficient [@user-mention]',
   example: [ 'crimecoefficient', 'crimecoefficient @user#0001' ]
 };

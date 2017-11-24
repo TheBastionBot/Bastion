@@ -52,6 +52,7 @@ exports.help = {
   name: 'hallOfFame',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'hallOfFame [--global]',
   example: [ 'hallOfFame', 'hallOfFame --global' ]
 };

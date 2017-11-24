@@ -149,6 +149,7 @@ exports.help = {
   name: 'stats',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'stats',
   example: []
 };

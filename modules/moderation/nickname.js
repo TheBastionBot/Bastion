@@ -62,6 +62,7 @@ exports.help = {
   name: 'nickname',
   botPermission: 'MANAGE_NICKNAMES',
   userTextPermission: 'MANAGE_NICKNAMES',
+  userVoicePermission: '',
   usage: 'nickname <@user-mention> [nick]',
   example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
 };

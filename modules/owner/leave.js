@@ -68,6 +68,7 @@ exports.help = {
   name: 'leave',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'leave <guild_id>',
   example: [ 'leave 441122339988775566' ]
 };

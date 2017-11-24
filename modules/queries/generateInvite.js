@@ -41,6 +41,7 @@ exports.help = {
   name: 'generateInvite',
   botPermission: 'CREATE_INSTANT_INVITE',
   userTextPermission: 'CREATE_INSTANT_INVITE',
+  userVoicePermission: '',
   usage: 'generateInvite [-u <NO_OF_USES>] [-a <INVITE_LINK_TIMEOUT_IN_MINUTES>]',
   example: [ 'generateInvite', 'generateInvite -u 1 -a 10' ]
 };

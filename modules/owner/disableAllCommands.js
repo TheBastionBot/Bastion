@@ -45,6 +45,7 @@ exports.help = {
   name: 'disableAllCommands',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'disableAllCommands',
   example: []
 };

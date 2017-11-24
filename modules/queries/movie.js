@@ -98,6 +98,7 @@ exports.help = {
   name: 'movie',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'movie <Movie Name>',
   example: [ 'movie John Wick' ]
 };

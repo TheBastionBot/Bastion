@@ -48,6 +48,7 @@ exports.help = {
   name: 'paladins',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'paladins <player_name>',
   example: [ 'paladins SaffronPants' ]
 };

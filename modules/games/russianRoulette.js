@@ -38,6 +38,7 @@ exports.help = {
   name: 'russianRoulette',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'russianRoulette [no_of_bullets]',
   example: [ 'russianRoulette', 'russianRoulette 7' ]
 };

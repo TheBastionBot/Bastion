@@ -74,6 +74,7 @@ exports.help = {
   name: 'announce',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'announce <message>',
   example: [ 'announce Just a random announcement.' ]
 };

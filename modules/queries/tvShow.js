@@ -97,6 +97,7 @@ exports.help = {
   name: 'tvShow',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'tvShow <TV Show Name>',
   example: [ 'tvShow The Flash' ]
 };

@@ -78,6 +78,7 @@ exports.help = {
   name: 'shutdown',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'shutdown',
   example: []
 };

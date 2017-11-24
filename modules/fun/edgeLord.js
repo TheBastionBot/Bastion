@@ -51,6 +51,7 @@ exports.help = {
   name: 'edgeLord',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'edgeLord',
   example: []
 };

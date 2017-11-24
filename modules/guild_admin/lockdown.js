@@ -70,6 +70,7 @@ exports.help = {
   name: 'lockdown',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'lockdown [--remove]',
   example: [ 'lockdown', 'lockdown --remove' ]
 };

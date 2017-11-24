@@ -147,6 +147,7 @@ exports.help = {
   name: 'summon',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'summon',
   example: []
 };

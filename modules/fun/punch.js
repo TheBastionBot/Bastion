@@ -44,6 +44,7 @@ exports.help = {
   name: 'punch',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'punch <@USER_MENTION>',
   example: [ 'punch @user#0001' ]
 };

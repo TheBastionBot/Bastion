@@ -26,6 +26,7 @@ exports.help = {
   name: 'thisOrThat',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'thisOrThat',
   example: []
 };

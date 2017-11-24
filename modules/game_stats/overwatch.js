@@ -193,6 +193,7 @@ exports.help = {
   name: 'overwatch',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
   example: [ 'overwatch us GH0S7#11143' ]
 };

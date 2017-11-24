@@ -178,6 +178,7 @@ exports.help = {
   name: 'warn',
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
+  userVoicePermission: '',
   usage: 'warn @user-mention [Reason]',
   example: [ 'warn @user#0001 Reason for the warning.' ]
 };

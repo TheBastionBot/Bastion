@@ -37,6 +37,7 @@ exports.help = {
   name: 'roles',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'roles',
   example: []
 };

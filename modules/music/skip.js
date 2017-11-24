@@ -64,6 +64,7 @@ exports.help = {
   name: 'skip',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'skip',
   example: []
 };

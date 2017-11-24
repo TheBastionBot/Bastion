@@ -70,6 +70,7 @@ exports.help = {
   name: 'quotes',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'quotes [ -n | -a Author Name]',
   example: [ 'quotes', 'quotes -n 189', 'quotes -a Albert Einstein' ]
 };

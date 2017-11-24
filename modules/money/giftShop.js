@@ -49,6 +49,7 @@ exports.help = {
   name: 'giftShop',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'giftShop',
   example: []
 };

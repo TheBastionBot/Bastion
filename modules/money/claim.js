@@ -69,6 +69,7 @@ exports.help = {
   name: 'claim',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'claim',
   example: []
 };

@@ -31,6 +31,7 @@ exports.help = {
   name: 'terms',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'terms',
   example: []
 };

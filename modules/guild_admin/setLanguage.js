@@ -74,6 +74,7 @@ exports.help = {
   name: 'setLanguage',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'setLanguage < Language Code | --list>',
   example: [ 'setLanguage es' ]
 };

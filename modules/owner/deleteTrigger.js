@@ -48,6 +48,7 @@ exports.help = {
   name: 'deleteTrigger',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'deleteTrigger <trigger>',
   example: [ 'deleteTrigger Hi, there?' ]
 };

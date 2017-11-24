@@ -25,6 +25,7 @@ exports.help = {
   name: 'serverID',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'serverID',
   example: []
 };

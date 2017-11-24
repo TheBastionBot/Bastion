@@ -43,6 +43,7 @@ exports.help = {
   name: 'clean',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'clean',
   example: []
 };

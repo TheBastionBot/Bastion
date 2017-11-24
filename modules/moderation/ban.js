@@ -100,6 +100,7 @@ exports.help = {
   name: 'ban',
   botPermission: 'BAN_MEMBERS',
   userTextPermission: 'BAN_MEMBERS',
+  userVoicePermission: '',
   usage: 'ban <@user-mention> [Reason].',
   example: [ 'ban @user#001 Reason for the ban.' ]
 };

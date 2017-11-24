@@ -39,6 +39,7 @@ exports.help = {
   name: 'ship',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'ship <USER_MENTION> <USER_MENTION> [...USER_MENTION]',
   example: [ 'ship user#0001 user#0002 user#0003' ]
 };

@@ -41,6 +41,7 @@ exports.help = {
   name: 'flip',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'flip [no_of_coins]',
   example: [ 'flip', 'flip 5' ]
 };

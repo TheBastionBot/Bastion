@@ -117,6 +117,7 @@ exports.help = {
   name: 'weather',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'weather <city [, country_code]|zipcode>',
   example: [ 'weather London, UK', 'weather 94109' ]
 };

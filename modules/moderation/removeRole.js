@@ -77,6 +77,7 @@ exports.help = {
   name: 'removeRole',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'removeRole [@user-mention] <Role Name>',
   example: [ 'removeRole @user#0001 Role Name', 'removeRole Role Name' ]
 };

@@ -73,6 +73,7 @@ exports.help = {
   name: 'setTopic',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
+  userVoicePermission: '',
   usage: 'setTopic [#channel-mention] [Channel Topic]',
   example: [ 'setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic' ]
 };

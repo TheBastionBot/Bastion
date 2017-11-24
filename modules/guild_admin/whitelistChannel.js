@@ -135,6 +135,7 @@ exports.help = {
   name: 'whitelistChannel',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'whitelistChannel < --invites | --links | --words > [--remove]',
   example: [ 'whitelistChannel --links', 'whitelistChannel --links --remove' ]
 };

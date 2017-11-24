@@ -147,6 +147,7 @@ exports.help = {
   name: 'giveaway',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'giveaway <amount | --end>',
   example: [ 'giveaway 10', 'giveaway --end' ]
 };

@@ -97,6 +97,7 @@ exports.help = {
   name: 'kick',
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
+  userVoicePermission: '',
   usage: 'kick @user-mention [Reason]',
   example: [ 'kick @user#0001 Reason for the kick.' ]
 };

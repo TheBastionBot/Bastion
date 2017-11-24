@@ -39,6 +39,7 @@ exports.help = {
   name: 'deleteAllTriggers',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'deleteAllTriggers',
   example: []
 };

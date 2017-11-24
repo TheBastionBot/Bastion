@@ -41,6 +41,7 @@ exports.help = {
   name: 'setUsername',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'setUsername <text>',
   example: [ 'setUsername NewUsername' ]
 };

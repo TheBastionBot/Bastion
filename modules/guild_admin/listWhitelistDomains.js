@@ -63,6 +63,7 @@ exports.help = {
   name: 'listWhitelistDomains',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'listWhitelistDomains [page_no]',
   example: [ 'listWhitelistDomains', 'listWhitelistDomains 2' ]
 };

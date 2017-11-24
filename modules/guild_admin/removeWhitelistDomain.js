@@ -72,6 +72,7 @@ exports.help = {
   name: 'removeWhitelistDomain',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'removeWhitelistDomain <index>',
   example: [ 'removeWhitelistDomain 3' ]
 };

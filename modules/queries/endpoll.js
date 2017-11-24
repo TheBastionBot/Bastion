@@ -21,6 +21,7 @@ exports.help = {
   name: 'endpoll',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'endpoll',
   example: []
 };

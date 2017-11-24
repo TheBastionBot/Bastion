@@ -66,6 +66,7 @@ exports.help = {
   name: 'disableModule',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'disableModule <module_name>',
   example: [ 'disableModule music' ]
 };

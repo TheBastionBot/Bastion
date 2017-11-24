@@ -47,6 +47,7 @@ exports.help = {
   name: 'setAvatar',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'setavatar <image_url>',
   example: [ 'setavatar https://example.com/avatar.jpeg' ]
 };

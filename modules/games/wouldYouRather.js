@@ -26,6 +26,7 @@ exports.help = {
   name: 'wouldYouRather',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'wouldYouRather',
   example: []
 };

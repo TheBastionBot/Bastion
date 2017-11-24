@@ -41,6 +41,7 @@ exports.help = {
   name: 'leet',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'leet <text>',
   example: [ 'leet Hello, Everyone!' ]
 };

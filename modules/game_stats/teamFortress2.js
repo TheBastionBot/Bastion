@@ -112,6 +112,7 @@ exports.help = {
   name: 'teamFortress2',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'teamFortress2 <TF2_SERVER_IP>[:PORT]',
   example: [ 'teamFortress2 139.59.31.129', 'teamFortress2 139.59.31.129:27019' ]
 };

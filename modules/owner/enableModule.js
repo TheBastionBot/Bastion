@@ -58,6 +58,7 @@ exports.help = {
   name: 'enableModule',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'enableModule <module_name>',
   example: [ 'enableModule music' ]
 };

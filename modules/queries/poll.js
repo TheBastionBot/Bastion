@@ -157,6 +157,7 @@ exports.help = {
   name: 'poll',
   botPermission: '',
   userTextPermission: 'MANAGE_MESSAGES',
+  userVoicePermission: '',
   usage: 'poll <question>;<option1>;<option2>[;<option3>[...]]',
   example: [ 'poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2' ]
 };

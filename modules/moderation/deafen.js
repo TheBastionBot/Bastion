@@ -79,6 +79,7 @@ exports.help = {
   name: 'deafen',
   botPermission: 'DEAFEN_MEMBERS',
   userTextPermission: 'DEAFEN_MEMBERS',
+  userVoicePermission: '',
   usage: 'deafen @user-mention [Reason]',
   example: [ 'deafen @user#0001 Reason for the deafening.' ]
 };

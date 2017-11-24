@@ -71,6 +71,7 @@ exports.help = {
   name: 'emoji',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'emoji < emoji_name | --list >',
   example: [ 'emoji yum', 'emoji --list' ]
 };

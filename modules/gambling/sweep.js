@@ -38,6 +38,7 @@ exports.help = {
   name: 'sweep',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'sweep',
   example: []
 };

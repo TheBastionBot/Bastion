@@ -26,6 +26,7 @@ exports.help = {
   name: 'live',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'live',
   example: []
 };

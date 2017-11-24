@@ -60,6 +60,7 @@ exports.help = {
   name: 'listScheduledCommands',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'listScheduledCommands [page_no]',
   example: [ 'listScheduledCommands', 'listScheduledCommands 2' ]
 };

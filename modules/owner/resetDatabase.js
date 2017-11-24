@@ -50,6 +50,7 @@ exports.help = {
   name: 'resetDatabase',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'resetDatabase < --profiles >',
   example: [ 'resetDatabase --profiles' ]
 };

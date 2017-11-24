@@ -71,6 +71,7 @@ exports.help = {
   name: 'capture',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'capture <url>',
   example: [ 'capture BastionBot.org' ]
 };

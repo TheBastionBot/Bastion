@@ -94,6 +94,7 @@ exports.help = {
   name: 'roleColor',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'roleColor <ROLE_NAME> <-c COLOR>',
   example: [ 'roleColor Server Staffs -c Dark Orange', 'roleColor Legendary Heroes -c Random' ]
 };

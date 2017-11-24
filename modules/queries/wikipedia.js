@@ -86,6 +86,7 @@ exports.help = {
   name: 'wikipedia',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'wikipedia <text>',
   example: [ 'wikipedia Steve Jobs' ]
 };

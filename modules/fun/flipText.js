@@ -40,6 +40,7 @@ exports.help = {
   name: 'flipText',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'fliptext <text>',
   example: [ 'fliptext This is Upside Down!' ]
 };

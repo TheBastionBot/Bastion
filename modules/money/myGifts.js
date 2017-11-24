@@ -62,6 +62,7 @@ exports.help = {
   name: 'myGifts',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'myGifts',
   example: []
 };

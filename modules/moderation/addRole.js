@@ -77,6 +77,7 @@ exports.help = {
   name: 'addRole',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'addRole [@user-mention] <Role Name>',
   example: [ 'addRole @user#001 Role Name', 'addRole Role Name' ]
 };

@@ -54,6 +54,7 @@ exports.help = {
   name: 'modLog',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'modLog',
   example: []
 };

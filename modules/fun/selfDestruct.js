@@ -66,6 +66,7 @@ exports.help = {
   name: 'selfDestruct',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'selfDestruct <content> [-t <seconds>]',
   example: [ 'selfDestruct This will destruct after 30 seconds', 'selfDestruct This will destruct after 10 seconds -t 10' ]
 };

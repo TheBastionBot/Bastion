@@ -47,6 +47,7 @@ exports.help = {
   name: 'stop',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'stop',
   example: []
 };

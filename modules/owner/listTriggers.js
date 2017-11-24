@@ -60,6 +60,7 @@ exports.help = {
   name: 'listTriggers',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'listTriggers [page_no]',
   example: [ 'listTriggers', 'listTriggers 2' ]
 };

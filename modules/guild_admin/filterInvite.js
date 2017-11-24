@@ -51,6 +51,7 @@ exports.help = {
   name: 'filterInvite',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'filterInvite',
   example: []
 };

@@ -101,6 +101,7 @@ exports.help = {
   name: 'take',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: [ 'take 100 @user#0001 Misbehaving', 'take 150 2233445566778899' ]
 };

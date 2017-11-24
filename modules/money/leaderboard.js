@@ -52,6 +52,7 @@ exports.help = {
   name: 'leaderboard',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'leaderboard [--global]',
   example: [ 'leaderboard', 'leaderboard --global' ]
 };

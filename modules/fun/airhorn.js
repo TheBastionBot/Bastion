@@ -91,6 +91,7 @@ exports.help = {
   name: 'airhorn',
   botPermission: '',
   userTextPermission: 'MUTE_MEMBERS',
+  userVoicePermission: '',
   usage: 'airhorn',
   example: []
 };

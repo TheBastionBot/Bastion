@@ -88,6 +88,7 @@ exports.help = {
   name: 'userBlacklist',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',
   example: [ 'userblacklist add @user#001 224433119988776655', 'userblacklist rem 224433119988776655 @user#0001', 'userblacklist + @user#001 224433119988776655', 'userblacklist - 224433119988776655 @user#0001' ]
 };

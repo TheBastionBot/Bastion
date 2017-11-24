@@ -40,6 +40,7 @@ exports.help = {
   name: 'blockText',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'blockText <text>',
   example: [ 'blockText Hello, world!' ]
 };

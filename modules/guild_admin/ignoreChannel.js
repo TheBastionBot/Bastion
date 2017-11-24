@@ -78,6 +78,7 @@ exports.help = {
   name: 'ignoreChannel',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'ignoreChannel [--remove]',
   example: [ 'ignoreChannel', 'ignoreChannel --remove' ]
 };

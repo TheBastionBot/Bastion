@@ -52,6 +52,7 @@ exports.help = {
   name: 'log',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'log',
   example: []
 };

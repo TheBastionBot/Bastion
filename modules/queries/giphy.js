@@ -33,6 +33,7 @@ exports.help = {
   name: 'giphy',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'giphy <query>',
   example: [ 'giphy iron man' ]
 };

@@ -148,6 +148,7 @@ exports.help = {
   name: 'help',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'help [command_name [--dm]]',
   example: [ 'help', 'help magic8ball', 'help acrophobia --dm' ]
 };

@@ -82,6 +82,7 @@ exports.help = {
   name: 'youtubeSearch',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'youtubeSearch <text>',
   example: [ 'youtubeSearch Call of Duty WW2' ]
 };

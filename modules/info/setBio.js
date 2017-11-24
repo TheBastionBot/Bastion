@@ -66,6 +66,7 @@ exports.help = {
   name: 'setBio',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'setBio <text>',
   example: [ 'setBio I\'m awesome. :sunglasses:' ]
 };

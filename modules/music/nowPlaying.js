@@ -42,6 +42,7 @@ exports.help = {
   name: 'nowPlaying',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'nowPlaying',
   example: []
 };

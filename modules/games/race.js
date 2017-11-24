@@ -105,6 +105,7 @@ exports.help = {
   name: 'race',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'race',
   example: [ 'race' ]
 };

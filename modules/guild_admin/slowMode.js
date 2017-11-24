@@ -51,6 +51,7 @@ exports.help = {
   name: 'slowMode',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'slowMode',
   example: []
 };

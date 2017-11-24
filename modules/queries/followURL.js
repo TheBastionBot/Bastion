@@ -55,6 +55,7 @@ exports.help = {
   name: 'followURL',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'followURL',
   example: []
 };

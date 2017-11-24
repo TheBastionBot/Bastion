@@ -125,6 +125,7 @@ exports.help = {
   name: 'softBan',
   botPermission: 'BAN_MEMBERS',
   userTextPermission: 'BAN_MEMBERS',
+  userVoicePermission: '',
   usage: 'softBan @user-mention [Reason]',
   example: [ 'softBan @user#0001 Reason for soft ban.' ]
 };

@@ -105,6 +105,7 @@ exports.help = {
   name: 'buyGift',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'buyGift <product> [-a amount]',
   example: [ 'buyGift icecream', 'buyGift chocolate -a 2' ]
 };

@@ -49,6 +49,7 @@ exports.help = {
   name: 'listWarns',
   botPermission: '',
   userTextPermission: 'KICK_MEMBERS',
+  userVoicePermission: '',
   usage: 'listWarns',
   example: []
 };

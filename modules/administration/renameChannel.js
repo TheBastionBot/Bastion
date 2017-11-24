@@ -99,6 +99,7 @@ exports.help = {
   name: 'renameChannel',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
+  userVoicePermission: '',
   usage: 'renameChannel [ -t | -v ] < -o Old Channel Name -n New Channel Name>',
   example: [ 'renameChannel -t -o bot-commands -n Songs Deck', 'renameChannel -v -o Music Zone -n Songs Deck' ]
 };

@@ -69,6 +69,7 @@ exports.help = {
   name: 'sql',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'sql <SQL Query>',
   example: [ 'sql ' ]
 };

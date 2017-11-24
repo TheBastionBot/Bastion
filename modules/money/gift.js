@@ -114,6 +114,7 @@ exports.help = {
   name: 'gift',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'gift <product> [-a amount] <@USER_MENTION>',
   example: [ 'gift icecream @user#0001', 'gift chocolate -a 2 @user#0001' ]
 };

@@ -40,6 +40,7 @@ exports.help = {
   name: 'robotify',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'robotify [Random String]',
   example: [ 'robotify', 'robotify isotope cattle hazily muzzle' ]
 };

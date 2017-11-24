@@ -52,6 +52,7 @@ exports.help = {
   name: 'iAm',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'iAm <role name>',
   example: [ 'iAm Looking to play' ]
 };

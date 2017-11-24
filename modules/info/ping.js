@@ -45,6 +45,7 @@ exports.help = {
   name: 'ping',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'ping',
   example: []
 };

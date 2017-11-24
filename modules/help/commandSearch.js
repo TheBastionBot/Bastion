@@ -49,6 +49,7 @@ exports.help = {
   name: 'commandSearch',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'commandSearch <keyword>',
   example: [ 'commandSearch user' ]
 };

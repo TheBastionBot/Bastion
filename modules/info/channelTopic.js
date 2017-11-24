@@ -30,6 +30,7 @@ exports.help = {
   name: 'channelTopic',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'channelTopic [#channel-mention]',
   example: [ 'channelTopic #channel-name', 'channelTopic' ]
 };

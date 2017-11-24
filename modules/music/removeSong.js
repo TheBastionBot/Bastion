@@ -72,6 +72,7 @@ exports.help = {
   name: 'removeSong',
   botPermission: '',
   userTextPermission: 'MUSIC_MASTER',
+  userVoicePermission: '',
   usage: 'removeSong [index]',
   example: [ 'removeSong 3' ]
 };

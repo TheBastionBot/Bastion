@@ -84,6 +84,7 @@ exports.help = {
   name: 'unBan',
   botPermission: 'BAN_MEMBERS',
   userTextPermission: 'BAN_MEMBERS',
+  userVoicePermission: '',
   usage: 'unBan <USER_ID> -r [Reason].',
   example: [ 'unBan 186640658873224631 -r Has apologized for his mistakes' ]
 };

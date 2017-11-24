@@ -94,6 +94,7 @@ exports.help = {
   name: 'profile',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'profile [@user-mention]',
   example: [ 'profle', 'profile @user#0001' ]
 };

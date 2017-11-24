@@ -89,6 +89,7 @@ exports.help = {
   name: 'playlist',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'playlist [Song Name] [-p Playlist Name]',
   example: [ 'playlist', 'playlist -p Jazz Collection', 'playlist Shape of You -p My Favs', 'playlist https://www.youtube.com/watch?v=JGwWNGJdvx8' ]
 };

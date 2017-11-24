@@ -59,6 +59,7 @@ exports.help = {
   name: 'chat',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'chat',
   example: []
 };

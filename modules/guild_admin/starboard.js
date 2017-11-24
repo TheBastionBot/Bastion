@@ -51,6 +51,7 @@ exports.help = {
   name: 'starboard',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'starboard',
   example: []
 };

@@ -62,6 +62,7 @@ exports.help = {
   name: 'musicChannel',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'musicChannel [VOICE_CHANNEL_ID]',
   example: [ 'musicChannel 308278968078041098', 'musicChannel' ]
 };

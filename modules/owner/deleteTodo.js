@@ -73,6 +73,7 @@ exports.help = {
   name: 'deleteTodo',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'deleteTodo <index>',
   example: [ 'deleteTodo 3' ]
 };

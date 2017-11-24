@@ -75,6 +75,7 @@ exports.help = {
   name: 'channelInfo',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',
   example: [ 'channelInfo #channel-name', 'channelInfo 221133445599667788', 'channelInfo' ]
 };

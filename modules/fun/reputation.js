@@ -64,6 +64,7 @@ exports.help = {
   name: 'reputation',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'reputation <@USER_MENTION>',
   example: [ 'reputation @k3rn31p4nic#8383' ]
 };

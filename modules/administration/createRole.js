@@ -73,6 +73,7 @@ exports.help = {
   name: 'createRole',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'createrole [[-n] Role Name] [-c hex-color-code]',
   example: [ 'createrole -n Role Name -c #dc143', 'createrole -c #dc143c', 'createrole Role Name', 'createrole' ]
 };

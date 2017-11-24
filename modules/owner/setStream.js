@@ -53,6 +53,7 @@ exports.help = {
   name: 'setStream',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'setStream <twitch> <Status text>',
   example: [ 'setStream https://twitch.tv/k3rn31p4nic Nothing' ]
 };

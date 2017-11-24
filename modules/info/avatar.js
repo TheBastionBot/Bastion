@@ -41,6 +41,7 @@ exports.help = {
   name: 'avatar',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'avatar [@user-mention]',
   example: [ 'avatar @user#001', 'avatar' ]
 };

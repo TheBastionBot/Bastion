@@ -71,6 +71,7 @@ exports.help = {
   name: 'clearWarn',
   botPermission: '',
   userTextPermission: 'KICK_MEMBERS',
+  userVoicePermission: '',
   usage: 'clearWarn @user-mention [Reason]',
   example: [ 'clearWarn @user#0001 Reason for clearing the warning.' ]
 };

@@ -80,6 +80,7 @@ exports.help = {
   name: 'createChannel',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
+  userVoicePermission: '',
   usage: 'createChannel [-t | -v] <Channel Name>',
   example: [ 'createChannel -t Text Channel Name', 'createChannel -v Voice Channel Name', 'createChannel Text Channel Name' ]
 };

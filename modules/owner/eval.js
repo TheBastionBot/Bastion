@@ -84,6 +84,7 @@ exports.help = {
   name: 'eval',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'eval <JavaScript code> [--delete]',
   example: [ 'eval message.guild.members.size', 'eval Bastion.users.size --delete' ]
 };

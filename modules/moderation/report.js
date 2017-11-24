@@ -47,6 +47,7 @@ exports.help = {
   name: 'report',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'report @user-mention [Reason]',
   example: [ 'report @user#0001 Reason for reporting.' ]
 };

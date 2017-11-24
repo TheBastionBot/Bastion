@@ -64,6 +64,7 @@ exports.help = {
   name: 'createEmoji',
   botPermission: 'MANAGE_EMOJIS',
   userTextPermission: 'MANAGE_EMOJIS',
+  userVoicePermission: '',
   usage: 'createEmoji <EmojiURL> -n <EmojiName>',
   example: [ 'createEmoji https://bastionbot.org/assets/images/bastion.png -n BastionBot' ]
 };

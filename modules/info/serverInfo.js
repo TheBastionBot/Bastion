@@ -86,6 +86,7 @@ exports.help = {
   name: 'serverInfo',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'serverInfo',
   example: []
 };

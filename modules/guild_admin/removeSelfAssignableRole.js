@@ -71,6 +71,7 @@ exports.help = {
   name: 'removeSelfAssignableRole',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'removeSelfAssignableRole <index>',
   example: [ 'removeSelfAssignableRole 3' ]
 };

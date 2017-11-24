@@ -54,6 +54,7 @@ exports.help = {
   name: 'announcementChannel',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'announcementChannel [--remove]',
   example: [ 'announcementChannel', 'announcementChannel --remove' ]
 };

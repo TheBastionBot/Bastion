@@ -58,6 +58,7 @@ exports.help = {
   name: 'addTrigger',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'addTrigger <-t trigger message> <-r response message>',
   example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]
 };

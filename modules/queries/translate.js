@@ -51,6 +51,7 @@ exports.help = {
   name: 'translate',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'translate <language_code> <text>',
   example: [ 'translate EN Je suis génial!' ]
 };

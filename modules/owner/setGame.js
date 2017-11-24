@@ -63,6 +63,7 @@ exports.help = {
   name: 'setGame',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'setGame [text]',
   example: [ 'setGame with minions!', 'setGame' ]
 };

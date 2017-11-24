@@ -65,6 +65,7 @@ exports.help = {
   name: 'messageUser',
   botPermission: '',
   userTextPermission: 'BOT_OWNER',
+  userVoicePermission: '',
   usage: 'messageUser <user_id> <message>',
   example: [ 'messageUser USER_ID Hello, how are you?' ]
 };

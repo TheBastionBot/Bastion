@@ -85,6 +85,7 @@ exports.help = {
   name: 'streamerRole',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'streamerRole [ROLE_ID] [--remove]',
   example: [ 'streamerRole', 'streamerRole 265419266104885248', 'streamerRole --remove' ]
 };

@@ -96,6 +96,7 @@ exports.help = {
   name: 'xkcd',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'xkcd [ --latest | -n comic_number ]',
   example: [ 'xkcd', 'xkcd --latest', 'xkcd -n 834' ]
 };

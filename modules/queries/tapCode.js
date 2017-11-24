@@ -68,6 +68,7 @@ exports.help = {
   name: 'tapCode',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'tapCode <text>',
   example: [ 'tapCode Knock Knock' ]
 };

@@ -76,6 +76,7 @@ exports.help = {
   name: 'streamers',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'streamers [user1 [user2]] [--remove]',
   example: [ 'streamers', 'streamers k3rn31p4nic Wipe Taafe', 'streamers k3rn31p4nic --remove' ]
 };

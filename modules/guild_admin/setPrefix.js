@@ -71,6 +71,7 @@ exports.help = {
   name: 'setPrefix',
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'setPrefix < prefix | --default >',
   example: [ 'setPrefix !', 'setPrefix --default' ]
 };

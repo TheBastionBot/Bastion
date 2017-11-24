@@ -52,6 +52,7 @@ exports.help = {
   name: 'slots',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'slots',
   example: []
 };

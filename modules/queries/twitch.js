@@ -110,6 +110,7 @@ exports.help = {
   name: 'twitch',
   botPermission: '',
   userTextPermission: '',
+  userVoicePermission: '',
   usage: 'twitch <username>',
   example: [ 'twitch k3rn31p4nic' ]
 };
