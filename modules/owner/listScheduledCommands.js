@@ -10,7 +10,7 @@ exports.run = async (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   try {
@@ -59,7 +59,7 @@ exports.config = {
 exports.help = {
   name: 'listScheduledCommands',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'listScheduledCommands [page_no]',
   example: [ 'listScheduledCommands', 'listScheduledCommands 2' ]
 };

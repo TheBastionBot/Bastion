@@ -268,7 +268,7 @@ exports.config = {
 exports.help = {
   name: 'play',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'play < name | song_link | -l <playlist_link> | -p [Playlist Name] >',
   example: [ 'play Shape of you', 'play -l https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -p My Favs', 'play -p' ]
 };

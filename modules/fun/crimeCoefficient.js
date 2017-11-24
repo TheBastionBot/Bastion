@@ -45,7 +45,7 @@ exports.config = {
 exports.help = {
   name: 'crimeCoefficient',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'crimecoefficient [@user-mention]',
   example: [ 'crimecoefficient', 'crimecoefficient @user#0001' ]
 };

@@ -113,7 +113,7 @@ exports.config = {
 exports.help = {
   name: 'gift',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'gift <product> [-a amount] <@USER_MENTION>',
   example: [ 'gift icecream @user#0001', 'gift chocolate -a 2 @user#0001' ]
 };

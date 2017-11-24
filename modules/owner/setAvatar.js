@@ -10,7 +10,7 @@ exports.run = async (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!/^(https?:\/\/)((([-a-z0-9]{1,})?(-?)+[-a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9._\-~#%])+\/)+)?([a-z0-9._\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args.join(' '))) {
@@ -46,7 +46,7 @@ exports.config = {
 exports.help = {
   name: 'setAvatar',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'setavatar <image_url>',
   example: [ 'setavatar https://example.com/avatar.jpeg' ]
 };

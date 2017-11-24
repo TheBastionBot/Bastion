@@ -29,7 +29,7 @@ exports.config = {
 exports.help = {
   name: 'channelTopic',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'channelTopic [#channel-mention]',
   example: [ 'channelTopic #channel-name', 'channelTopic' ]
 };

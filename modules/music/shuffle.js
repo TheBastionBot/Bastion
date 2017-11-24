@@ -20,7 +20,7 @@ exports.run = (Bastion, message) => {
     * User has missing permissions.
     * @fires userMissingPermissions
     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let nowPlaying = message.guild.music.songs.shift();
@@ -46,7 +46,7 @@ exports.config = {
 exports.help = {
   name: 'shuffle',
   botPermission: '',
-  userPermission: 'MUSIC_MASTER',
+  userTextPermission: 'MUSIC_MASTER',
   usage: 'shuffle',
   example: []
 };

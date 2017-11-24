@@ -25,7 +25,7 @@ exports.config = {
 exports.help = {
   name: 'thisOrThat',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'thisOrThat',
   example: []
 };

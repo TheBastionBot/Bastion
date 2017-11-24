@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let index = parseInt(args[0]);
@@ -71,7 +71,7 @@ exports.config = {
 exports.help = {
   name: 'removeAutoAssignableRole',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'removeAutoAssignableRole <index>',
   example: [ 'removeAutoAssignableRole 3' ]
 };

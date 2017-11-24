@@ -33,7 +33,7 @@ exports.config = {
 exports.help = {
   name: 'choose',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'choose <choice1>/<choice2>[/<choice3>][...]',
   example: [ 'choose Chocolate/Ice Cream/Cake' ]
 };

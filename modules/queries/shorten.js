@@ -80,7 +80,7 @@ exports.config = {
 exports.help = {
   name: 'shorten',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'shorten <URL>',
   example: [ 'shorten https://BastionBot.org/SomeLongURL' ]
 };

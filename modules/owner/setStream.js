@@ -10,7 +10,7 @@ exports.run = async (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) {
@@ -52,7 +52,7 @@ exports.config = {
 exports.help = {
   name: 'setStream',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'setStream <twitch> <Status text>',
   example: [ 'setStream https://twitch.tv/k3rn31p4nic Nothing' ]
 };

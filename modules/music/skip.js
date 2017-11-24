@@ -63,7 +63,7 @@ exports.config = {
 exports.help = {
   name: 'skip',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'skip',
   example: []
 };

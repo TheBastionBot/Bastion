@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.name && !args.list) {
@@ -73,7 +73,7 @@ exports.config = {
 exports.help = {
   name: 'setLanguage',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'setLanguage < Language Code | --list>',
   example: [ 'setLanguage es' ]
 };

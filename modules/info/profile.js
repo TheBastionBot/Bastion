@@ -93,7 +93,7 @@ exports.config = {
 exports.help = {
   name: 'profile',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'profile [@user-mention]',
   example: [ 'profle', 'profile @user#0001' ]
 };

@@ -7,12 +7,12 @@
 // This feature is absolutely useless because Discord already has audit logs. I'll probably remove this in future.
 
 exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let guildSettings = await Bastion.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
@@ -53,7 +53,7 @@ exports.config = {
 exports.help = {
   name: 'modLog',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'modLog',
   example: []
 };

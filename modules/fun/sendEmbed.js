@@ -5,12 +5,12 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (args.length < 1) {
@@ -56,7 +56,7 @@ exports.config = {
 exports.help = {
   name: 'sendEmbed',
   botPermission: '',
-  userPermission: 'MANAGE_GUILD',
+  userTextPermission: 'MANAGE_GUILD',
   usage: 'sendEmbed <embedObject>',
   example: [ 'sendEmbed {"title": "Hello", "description": "Isn\'t it cool?"}' ]
 };

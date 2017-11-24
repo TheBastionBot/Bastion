@@ -6,12 +6,12 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!message.member.hasPermission(this.help.userPermission)) {
+    if (!message.member.hasPermission(this.help.userTextPermission)) {
       /**
       * User has missing permissions.
       * @fires userMissingPermissions
       */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
     }
 
     if (!args.id) {
@@ -83,7 +83,7 @@ exports.config = {
 exports.help = {
   name: 'unBan',
   botPermission: 'BAN_MEMBERS',
-  userPermission: 'BAN_MEMBERS',
+  userTextPermission: 'BAN_MEMBERS',
   usage: 'unBan <USER_ID> -r [Reason].',
   example: [ 'unBan 186640658873224631 -r Has apologized for his mistakes' ]
 };

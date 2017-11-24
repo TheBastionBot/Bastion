@@ -10,7 +10,7 @@ exports.run = async (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.profiles) {
@@ -49,7 +49,7 @@ exports.config = {
 exports.help = {
   name: 'resetDatabase',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'resetDatabase < --profiles >',
   example: [ 'resetDatabase --profiles' ]
 };

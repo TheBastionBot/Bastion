@@ -10,7 +10,7 @@ exports.run = (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (args.length < 1) {
@@ -50,7 +50,7 @@ exports.config = {
 exports.help = {
   name: 'searchServer',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'searchServer <name>',
   example: [ 'searchServer Bastion' ]
 };

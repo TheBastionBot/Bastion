@@ -54,7 +54,7 @@ exports.config = {
 exports.help = {
   name: 'followURL',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'followURL',
   example: []
 };

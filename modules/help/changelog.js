@@ -66,7 +66,7 @@ exports.config = {
 exports.help = {
   name: 'changelog',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'changelog',
   example: []
 };

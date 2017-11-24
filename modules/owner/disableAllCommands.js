@@ -10,7 +10,7 @@ exports.run = (Bastion, message) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let forbiddenCommands = [
@@ -44,7 +44,7 @@ exports.config = {
 exports.help = {
   name: 'disableAllCommands',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'disableAllCommands',
   example: []
 };

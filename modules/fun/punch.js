@@ -43,7 +43,7 @@ exports.config = {
 exports.help = {
   name: 'punch',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'punch <@USER_MENTION>',
   example: [ 'punch @user#0001' ]
 };

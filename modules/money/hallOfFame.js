@@ -51,7 +51,7 @@ exports.config = {
 exports.help = {
   name: 'hallOfFame',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'hallOfFame [--global]',
   example: [ 'hallOfFame', 'hallOfFame --global' ]
 };

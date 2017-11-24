@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.invites && !args.links && !args.words) {
@@ -134,7 +134,7 @@ exports.config = {
 exports.help = {
   name: 'whitelistChannel',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'whitelistChannel < --invites | --links | --words > [--remove]',
   example: [ 'whitelistChannel --links', 'whitelistChannel --links --remove' ]
 };

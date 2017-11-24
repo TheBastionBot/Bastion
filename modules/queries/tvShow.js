@@ -96,7 +96,7 @@ exports.config = {
 exports.help = {
   name: 'tvShow',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'tvShow <TV Show Name>',
   example: [ 'tvShow The Flash' ]
 };

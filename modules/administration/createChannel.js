@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.name) {
@@ -79,7 +79,7 @@ exports.config = {
 exports.help = {
   name: 'createChannel',
   botPermission: 'MANAGE_CHANNELS',
-  userPermission: 'MANAGE_CHANNELS',
+  userTextPermission: 'MANAGE_CHANNELS',
   usage: 'createChannel [-t | -v] <Channel Name>',
   example: [ 'createChannel -t Text Channel Name', 'createChannel -v Voice Channel Name', 'createChannel Text Channel Name' ]
 };

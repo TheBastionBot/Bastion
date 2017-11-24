@@ -56,7 +56,7 @@ exports.config = {
 exports.help = {
   name: 'roleID',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'roleInfo <@role-mention|role_name>',
   example: [ 'roleInfo @Dark Knigths', 'roleInfo The Legends' ]
 };

@@ -39,7 +39,7 @@ exports.config = {
 exports.help = {
   name: 'catify',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'catify [Random String]',
   example: [ 'catify', 'catify isotope cattle hazily muzzle' ]
 };

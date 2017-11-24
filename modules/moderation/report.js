@@ -46,7 +46,7 @@ exports.config = {
 exports.help = {
   name: 'report',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'report @user-mention [Reason]',
   example: [ 'report @user#0001 Reason for reporting.' ]
 };

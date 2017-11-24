@@ -109,7 +109,7 @@ exports.config = {
 exports.help = {
   name: 'twitch',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'twitch <username>',
   example: [ 'twitch k3rn31p4nic' ]
 };

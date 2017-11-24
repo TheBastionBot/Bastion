@@ -43,7 +43,7 @@ exports.config = {
 exports.help = {
   name: 'map',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'map <location> [--zoom <amount>]',
   example: [ 'map New York, NY', 'map London Eye, London --zoom 18' ]
 };

@@ -10,7 +10,7 @@ exports.run = (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.name) {
@@ -57,7 +57,7 @@ exports.config = {
 exports.help = {
   name: 'enableModule',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'enableModule <module_name>',
   example: [ 'enableModule music' ]
 };

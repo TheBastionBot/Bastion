@@ -70,7 +70,7 @@ exports.config = {
 exports.help = {
   name: 'emoji',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'emoji < emoji_name | --list >',
   example: [ 'emoji yum', 'emoji --list' ]
 };

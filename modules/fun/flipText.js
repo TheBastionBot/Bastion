@@ -39,7 +39,7 @@ exports.config = {
 exports.help = {
   name: 'flipText',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'fliptext <text>',
   example: [ 'fliptext This is Upside Down!' ]
 };

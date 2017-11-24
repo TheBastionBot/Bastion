@@ -11,7 +11,7 @@ exports.run = async (Bastion, message, args) => {
       * User has missing permissions.
       * @fires userMissingPermissions
       */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
     }
 
     if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
@@ -100,7 +100,7 @@ exports.config = {
 exports.help = {
   name: 'take',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'take <amount> <@user-mention|user_id> [Reason]',
   example: [ 'take 100 @user#0001 Misbehaving', 'take 150 2233445566778899' ]
 };

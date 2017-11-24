@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   try {
@@ -84,7 +84,7 @@ exports.config = {
 exports.help = {
   name: 'streamerRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'streamerRole [ROLE_ID] [--remove]',
   example: [ 'streamerRole', 'streamerRole 265419266104885248', 'streamerRole --remove' ]
 };

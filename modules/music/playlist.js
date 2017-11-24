@@ -13,7 +13,7 @@ exports.run = (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.song) {
@@ -88,7 +88,7 @@ exports.config = {
 exports.help = {
   name: 'playlist',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'playlist [Song Name] [-p Playlist Name]',
   example: [ 'playlist', 'playlist -p Jazz Collection', 'playlist Shape of You -p My Favs', 'playlist https://www.youtube.com/watch?v=JGwWNGJdvx8' ]
 };

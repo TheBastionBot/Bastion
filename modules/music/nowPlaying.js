@@ -41,7 +41,7 @@ exports.config = {
 exports.help = {
   name: 'nowPlaying',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'nowPlaying',
   example: []
 };

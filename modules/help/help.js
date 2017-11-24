@@ -62,7 +62,7 @@ exports.run = (Bastion, message, args) => {
             },
             {
               name: 'User Permissions',
-              value: `\`${command.help.userPermission}\`` || '-',
+              value: `\`${command.help.userTextPermission}\`` || '-',
               inline: true
             },
             {
@@ -147,7 +147,7 @@ exports.config = {
 exports.help = {
   name: 'help',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'help [command_name [--dm]]',
   example: [ 'help', 'help magic8ball', 'help acrophobia --dm' ]
 };

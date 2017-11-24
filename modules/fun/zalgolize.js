@@ -34,7 +34,7 @@ exports.config = {
 exports.help = {
   name: 'zalgolize',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'zalgolize <text>',
   example: [ 'zalgolize It looks clumsy, but it\'s cool!' ]
 };

@@ -6,12 +6,12 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!message.member.hasPermission(this.help.userPermission)) {
+    if (!message.member.hasPermission(this.help.userTextPermission)) {
       /**
       * User has missing permissions.
       * @fires userMissingPermissions
       */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
     }
 
     if (!args.name || !args.color) {
@@ -93,7 +93,7 @@ exports.config = {
 exports.help = {
   name: 'roleColor',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MANAGE_ROLES',
   usage: 'roleColor <ROLE_NAME> <-c COLOR>',
   example: [ 'roleColor Server Staffs -c Dark Orange', 'roleColor Legendary Heroes -c Random' ]
 };

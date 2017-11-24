@@ -23,12 +23,12 @@ exports.run = async (Bastion, message, args) => {
     }
   }
 
-  if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {
+  if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
   if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
     /**
@@ -93,7 +93,7 @@ exports.config = {
 exports.help = {
   name: 'deleteChannel',
   botPermission: 'MANAGE_CHANNELS',
-  userPermission: 'MANAGE_CHANNELS',
+  userTextPermission: 'MANAGE_CHANNELS',
   usage: 'deleteChannel [ [-m] #channel-mention | -i CHANNEL_ID | -n Channel Name ]',
   example: [ 'deleteChannel -m #channel-name', 'deleteChannel -i 298889698368028672', 'deleteChannel -n Control Room' ]
 };

@@ -35,7 +35,7 @@ exports.config = {
 exports.help = {
   name: 'lmgtfy',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'lmgtfy <text>',
   example: [ 'lmgtfy How to shutdown a computer?' ]
 };

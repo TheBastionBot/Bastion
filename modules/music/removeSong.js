@@ -28,7 +28,7 @@ exports.run = (Bastion, message, args) => {
     * User has missing permissions.
     * @fires userMissingPermissions
     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (args.index > message.guild.music.songs.length || args.index < 1) {
@@ -71,7 +71,7 @@ exports.config = {
 exports.help = {
   name: 'removeSong',
   botPermission: '',
-  userPermission: 'MUSIC_MASTER',
+  userTextPermission: 'MUSIC_MASTER',
   usage: 'removeSong [index]',
   example: [ 'removeSong 3' ]
 };

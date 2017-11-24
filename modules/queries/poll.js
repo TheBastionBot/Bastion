@@ -7,12 +7,12 @@
 let activeChannels = {};
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+  if (!message.channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
@@ -156,7 +156,7 @@ exports.config = {
 exports.help = {
   name: 'poll',
   botPermission: '',
-  userPermission: 'MANAGE_MESSAGES',
+  userTextPermission: 'MANAGE_MESSAGES',
   usage: 'poll <question>;<option1>;<option2>[;<option3>[...]]',
   example: [ 'poll Which is the game of the week?;Call of Duty©: Infinity Warfare;Tom Clancy\'s Ghost Recon© Wildlands;Watch Dogs 2' ]
 };

@@ -146,7 +146,7 @@ exports.config = {
 exports.help = {
   name: 'summon',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'summon',
   example: []
 };

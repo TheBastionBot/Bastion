@@ -6,12 +6,12 @@
 
 exports.run = async (Bastion, message) => {
   if (message.guild.voiceConnection) {
-    if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+    if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
       /**
       * User has missing permissions.
       * @fires userMissingPermissions
       */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
     }
 
     if (message.guild.voiceConnection.speaking) {
@@ -33,12 +33,12 @@ exports.run = async (Bastion, message) => {
     message.guild.voiceConnection.playFile('./data/airhorn.wav', { passes: 1 });
   }
   else if (message.member.voiceChannel) {
-    if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userPermission)) {
+    if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userTextPermission)) {
       /**
       * User has missing permissions.
       * @fires userMissingPermissions
       */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
     }
 
     if (!message.member.voiceChannel.joinable) {
@@ -90,7 +90,7 @@ exports.config = {
 exports.help = {
   name: 'airhorn',
   botPermission: '',
-  userPermission: 'MUTE_MEMBERS',
+  userTextPermission: 'MUTE_MEMBERS',
   usage: 'airhorn',
   example: []
 };

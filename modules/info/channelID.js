@@ -39,7 +39,7 @@ exports.config = {
 exports.help = {
   name: 'channelID',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'channelID [#channel-mention]',
   example: [ 'channelID #channel-name', 'channelID' ]
 };

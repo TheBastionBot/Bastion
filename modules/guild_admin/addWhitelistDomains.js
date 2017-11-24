@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.domains || args.domains.length < 1) {
@@ -55,7 +55,7 @@ exports.config = {
 exports.help = {
   name: 'addWhitelistDomains',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'addWhitelistDomains [Domain] [anotherDomain] [someOtherDomain]',
   example: [ 'addWhitelistDomains https://BastionBot.org https://*.sankarsankampa.com' ]
 };

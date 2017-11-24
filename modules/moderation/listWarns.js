@@ -5,12 +5,12 @@
  */
 
 exports.run = (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
@@ -48,7 +48,7 @@ exports.config = {
 exports.help = {
   name: 'listWarns',
   botPermission: '',
-  userPermission: 'KICK_MEMBERS',
+  userTextPermission: 'KICK_MEMBERS',
   usage: 'listWarns',
   example: []
 };

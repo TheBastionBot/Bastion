@@ -69,7 +69,7 @@ exports.config = {
 exports.help = {
   name: 'quotes',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'quotes [ -n | -a Author Name]',
   example: [ 'quotes', 'quotes -n 189', 'quotes -a Albert Einstein' ]
 };

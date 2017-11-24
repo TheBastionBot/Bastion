@@ -39,7 +39,7 @@ exports.config = {
 exports.help = {
   name: 'robotify',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'robotify [Random String]',
   example: [ 'robotify', 'robotify isotope cattle hazily muzzle' ]
 };

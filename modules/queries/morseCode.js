@@ -124,7 +124,7 @@ exports.config = {
 exports.help = {
   name: 'morseCode',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'morseCode <text>',
   example: [ 'morseCode Shh! This is a secret.' ]
 };

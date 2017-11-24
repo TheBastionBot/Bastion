@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (args.length < 1) {
@@ -76,7 +76,7 @@ exports.config = {
 exports.help = {
   name: 'addSelfAssignableRoles',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'addSelfAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: [ 'addSelfAssignableRoles 443322110055998877 778899550011223344' ]
 };

@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.id || (!args.invites && !args.links && !args.words)) {
@@ -144,7 +144,7 @@ exports.config = {
 exports.help = {
   name: 'whitelistRole',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'whitelistRole <ROLE_ID> < --invites | --links | --words > [--remove]',
   example: [ 'whitelistRole 295982817647788032 --invites', 'whitelistRole 295982817647788032 --invites --remove' ]
 };

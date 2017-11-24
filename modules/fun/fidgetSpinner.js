@@ -41,7 +41,7 @@ exports.config = {
 exports.help = {
   name: 'fidgetSpinner',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'fidgetSpinner',
   example: []
 };

@@ -41,7 +41,7 @@ exports.config = {
 exports.help = {
   name: 'calculate',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'calculate <mathematical_expression>',
   example: [ 'calculate 9 * 10 - 11' ]
 };

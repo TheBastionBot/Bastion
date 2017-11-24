@@ -104,7 +104,7 @@ exports.config = {
 exports.help = {
   name: 'race',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'race',
   example: [ 'race' ]
 };

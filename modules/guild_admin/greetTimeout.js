@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
@@ -39,7 +39,7 @@ exports.config = {
 exports.help = {
   name: 'greetTimeout',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
   usage: 'greetTimeout [time_in_seconds]',
   example: [ 'greetTimeout 120', 'greetTimeout' ]
 };

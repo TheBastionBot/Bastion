@@ -37,7 +37,7 @@ exports.config = {
 exports.help = {
   name: 'sweep',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'sweep',
   example: []
 };

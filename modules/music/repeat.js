@@ -45,7 +45,7 @@ exports.config = {
 exports.help = {
   name: 'repeat',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'repeat',
   example: []
 };

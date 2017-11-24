@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.url || !/^(https?:\/\/)((([-a-z0-9]{1,})?(-?)+[-a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9._\-~#%])+\/)+)?([a-z0-9._\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args.url) || !args.name) {
@@ -63,7 +63,7 @@ exports.config = {
 exports.help = {
   name: 'createEmoji',
   botPermission: 'MANAGE_EMOJIS',
-  userPermission: 'MANAGE_EMOJIS',
+  userTextPermission: 'MANAGE_EMOJIS',
   usage: 'createEmoji <EmojiURL> -n <EmojiName>',
   example: [ 'createEmoji https://bastionbot.org/assets/images/bastion.png -n BastionBot' ]
 };

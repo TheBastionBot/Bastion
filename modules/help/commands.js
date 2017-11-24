@@ -28,14 +28,14 @@ exports.run = async (Bastion, message, args) => {
         // TODO: Make this more efficient.
         commands = Bastion.commands.filter(cmd => {
           if (cmd.config.module === modules[i]) {
-            if (cmd.help.userPermission) {
-              if (Object.keys(message.client.permissions).includes(cmd.help.userPermission)) {
-                if (message.channel.permissionsFor(message.member).has(cmd.help.userPermission)) {
+            if (cmd.help.userTextPermission) {
+              if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
+                if (message.channel.permissionsFor(message.member).has(cmd.help.userTextPermission)) {
                   return true;
                 }
                 return false;
               }
-              else if (cmd.help.userPermission === 'BOT_OWNER') {
+              else if (cmd.help.userTextPermission === 'BOT_OWNER') {
                 if (Bastion.credentials.ownerId.includes(message.author.id)) {
                   return true;
                 }
@@ -109,7 +109,7 @@ exports.config = {
 exports.help = {
   name: 'commands',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'commands [module names] [--all]',
   example: [ 'commands', 'commands --all', 'commands administration moderation' ]
 };

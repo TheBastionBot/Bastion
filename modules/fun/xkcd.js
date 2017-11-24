@@ -95,7 +95,7 @@ exports.config = {
 exports.help = {
   name: 'xkcd',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'xkcd [ --latest | -n comic_number ]',
   example: [ 'xkcd', 'xkcd --latest', 'xkcd -n 834' ]
 };

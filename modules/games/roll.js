@@ -44,7 +44,7 @@ exports.config = {
 exports.help = {
   name: 'roll',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'roll [no_of_dice]',
   example: [ 'roll', 'roll 5' ]
 };

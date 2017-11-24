@@ -207,7 +207,7 @@ exports.config = {
 
 exports.help = {
   name: 'acrophobia',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'acrophobia',
   example: []
 };

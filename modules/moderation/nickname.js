@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let user = message.mentions.users.first();
@@ -61,7 +61,7 @@ exports.config = {
 exports.help = {
   name: 'nickname',
   botPermission: 'MANAGE_NICKNAMES',
-  userPermission: 'MANAGE_NICKNAMES',
+  userTextPermission: 'MANAGE_NICKNAMES',
   usage: 'nickname <@user-mention> [nick]',
   example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
 };

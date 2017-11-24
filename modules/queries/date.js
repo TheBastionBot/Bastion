@@ -63,7 +63,7 @@ exports.config = {
 exports.help = {
   name: 'date',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'data < location name[, country code] | zip code >',
   example: [ 'date New York, US', 'date 94109' ]
 };

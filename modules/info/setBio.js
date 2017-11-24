@@ -65,7 +65,7 @@ exports.config = {
 exports.help = {
   name: 'setBio',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'setBio <text>',
   example: [ 'setBio I\'m awesome. :sunglasses:' ]
 };

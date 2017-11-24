@@ -68,7 +68,7 @@ exports.config = {
 exports.help = {
   name: 'claim',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'claim',
   example: []
 };

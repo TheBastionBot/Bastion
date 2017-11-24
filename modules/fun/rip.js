@@ -29,7 +29,7 @@ exports.config = {
 exports.help = {
   name: 'rip',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'rip <text>',
   example: [ 'rip Grammar' ]
 };

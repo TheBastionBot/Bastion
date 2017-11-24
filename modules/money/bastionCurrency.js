@@ -38,7 +38,7 @@ exports.config = {
 exports.help = {
   name: 'bastionCurrency',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'bastionCurrency [@user-mention]',
   example: [ 'bastionCurrency', 'bastionCurrency @user#0001' ]
 };

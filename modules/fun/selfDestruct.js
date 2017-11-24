@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.content) {
@@ -65,7 +65,7 @@ exports.config = {
 exports.help = {
   name: 'selfDestruct',
   botPermission: '',
-  userPermission: 'MANAGE_GUILD',
+  userTextPermission: 'MANAGE_GUILD',
   usage: 'selfDestruct <content> [-t <seconds>]',
   example: [ 'selfDestruct This will destruct after 30 seconds', 'selfDestruct This will destruct after 10 seconds -t 10' ]
 };

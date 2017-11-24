@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
@@ -78,7 +78,7 @@ exports.config = {
 exports.help = {
   name: 'unMute',
   botPermission: 'MUTE_MEMBERS',
-  userPermission: 'MUTE_MEMBERS',
+  userTextPermission: 'MUTE_MEMBERS',
   usage: 'unMute @user-mention [Reason]',
   example: [ 'unMute @user#0001 Reason for the unmute.' ]
 };

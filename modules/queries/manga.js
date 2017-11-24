@@ -67,7 +67,7 @@ exports.config = {
 exports.help = {
   name: 'manga',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'manga <Manga Name>',
   example: [ 'manga Death Note' ]
 };

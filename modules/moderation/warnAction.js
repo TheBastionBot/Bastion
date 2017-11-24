@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
+  if (!message.member.hasPermission(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
   if (Object.keys(args).length === 0) {
     /**
@@ -71,7 +71,7 @@ exports.config = {
 exports.help = {
   name: 'warnAction',
   botPermission: '',
-  userPermission: 'BAN_MEMBERS',
+  userTextPermission: 'BAN_MEMBERS',
   usage: 'warnAction < --kick | --softban | --ban | --none >',
   example: [ 'warnAction --kick', 'warnAction --none' ]
 };

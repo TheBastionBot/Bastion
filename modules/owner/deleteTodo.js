@@ -10,7 +10,7 @@ exports.run = async (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let index = parseInt(args[0]);
@@ -72,7 +72,7 @@ exports.config = {
 exports.help = {
   name: 'deleteTodo',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'deleteTodo <index>',
   example: [ 'deleteTodo 3' ]
 };

@@ -27,7 +27,7 @@ exports.config = {
 exports.help = {
   name: 'catFact',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'catfact',
   example: []
 };

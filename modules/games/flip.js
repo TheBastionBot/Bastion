@@ -40,7 +40,7 @@ exports.config = {
 exports.help = {
   name: 'flip',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'flip [no_of_coins]',
   example: [ 'flip', 'flip 5' ]
 };

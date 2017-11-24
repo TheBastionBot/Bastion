@@ -81,7 +81,7 @@ exports.config = {
 exports.help = {
   name: 'youtubeSearch',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'youtubeSearch <text>',
   example: [ 'youtubeSearch Call of Duty WW2' ]
 };

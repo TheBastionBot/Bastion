@@ -60,7 +60,7 @@ exports.config = {
 exports.help = {
   name: 'rps',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'rps <rock|paper|scissor>',
   example: [ 'rps Rock' ]
 };

@@ -10,7 +10,7 @@ exports.run = (Bastion, message, args) => {
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!args.trigger || !args.response) {
@@ -57,7 +57,7 @@ exports.config = {
 exports.help = {
   name: 'addTrigger',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: 'BOT_OWNER',
   usage: 'addTrigger <-t trigger message> <-r response message>',
   example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]
 };

@@ -135,7 +135,7 @@ exports.config = {
 exports.help = {
   name: 'trivia',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
   usage: 'trivia',
   example: []
 };

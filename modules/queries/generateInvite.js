@@ -5,12 +5,12 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
+  if (!message.channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   try {
@@ -40,7 +40,7 @@ exports.config = {
 exports.help = {
   name: 'generateInvite',
   botPermission: 'CREATE_INSTANT_INVITE',
-  userPermission: 'CREATE_INSTANT_INVITE',
+  userTextPermission: 'CREATE_INSTANT_INVITE',
   usage: 'generateInvite [-u <NO_OF_USES>] [-a <INVITE_LINK_TIMEOUT_IN_MINUTES>]',
   example: [ 'generateInvite', 'generateInvite -u 1 -a 10' ]
 };
