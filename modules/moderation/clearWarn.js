@@ -5,14 +5,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userTextPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   let user = message.mentions.users.first();
   if (!user) {
     /**

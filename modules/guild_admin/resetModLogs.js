@@ -6,14 +6,6 @@
 
 exports.run = async (Bastion, message) => {
   try {
-    if (!message.member.hasPermission(this.help.userTextPermission)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-    }
-
     await Bastion.db.run(`UPDATE guildSettings SET modCaseNo='1' WHERE guildID=${message.guild.id}`);
 
     message.channel.send({

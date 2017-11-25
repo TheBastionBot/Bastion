@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userTextPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (!args.domains || args.domains.length < 1) {
     /**
      * The command was ran with invalid parameters.

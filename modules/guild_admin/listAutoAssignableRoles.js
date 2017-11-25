@@ -6,14 +6,6 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!message.member.hasPermission(this.help.userTextPermission)) {
-      /**
-       * User has missing permissions.
-       * @fires userMissingPermissions
-       */
-      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-    }
-
     let guildSettings = await Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     if (!guildSettings || !guildSettings.autoAssignableRoles) {

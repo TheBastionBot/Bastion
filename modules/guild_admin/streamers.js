@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userTextPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   try {
     let streamers = await Bastion.db.get(`SELECT channelID, twitch FROM streamers WHERE guildID=${message.guild.id}`);
     let twitchStreamers = [], color, title, description;
