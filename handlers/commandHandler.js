@@ -130,21 +130,20 @@ module.exports = async message => {
     /**
      * Command permissions handler
      */
+    // Checks bot owner permission
+    if (cmd.config.ownerOnly) {
+      if (!message.client.credentials.ownerId.includes(message.author.id)) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.emit('userMissingPermissions', 'BOT_OWNER');
+      }
+    }
     // Checks if the user has the required permission
     if (cmd.help.userTextPermission) {
-      // Checks native Discord permissions
       if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
         if (!message.channel.permissionsFor(message.member).has(cmd.help.userTextPermission)) {
-          /**
-           * User has missing permissions.
-           * @fires userMissingPermissions
-           */
-          return message.client.emit('userMissingPermissions', cmd.help.userTextPermission);
-        }
-      }
-      // Checks bot owner permission
-      else if (cmd.config.ownerOnly) {
-        if (!message.client.credentials.ownerId.includes(message.author.id)) {
           /**
            * User has missing permissions.
            * @fires userMissingPermissions
