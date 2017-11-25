@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   try {
     if (args.length > 0) {
       await message.guild.members.get(Bastion.user.id).setNickname(args.join(' '));
@@ -46,13 +38,14 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'setn' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'setNick',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'setNick [text]',
   example: [ 'setNick NewNick', 'setNick' ]

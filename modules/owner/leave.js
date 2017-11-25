@@ -6,14 +6,6 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-    }
-
     if (!(parseInt(args[0]) < 9223372036854775807)) {
       /**
       * The command was ran with invalid parameters.
@@ -61,13 +53,14 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'leave',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'leave <guild_id>',
   example: [ 'leave 441122339988775566' ]

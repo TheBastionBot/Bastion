@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   try {
     let confirmation = await message.channel.send({
       embed: {
@@ -71,13 +63,14 @@ exports.run = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'die', 'turnoff' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'shutdown',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'shutdown',
   example: []

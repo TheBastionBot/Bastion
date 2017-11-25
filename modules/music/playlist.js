@@ -8,14 +8,6 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (!args.song) {
     db.reload();
     let title = 'Saved Playlists', playlist = db.getData('/');
@@ -82,13 +74,14 @@ exports.config = {
   argsDefinitions: [
     { name: 'song', type: String, multiple: true, defaultOption: true },
     { name: 'playlist', type: String, multiple: true, alias: 'p' }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'playlist',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'playlist [Song Name] [-p Playlist Name]',
   example: [ 'playlist', 'playlist -p Jazz Collection', 'playlist Shape of You -p My Favs', 'playlist https://www.youtube.com/watch?v=JGwWNGJdvx8' ]

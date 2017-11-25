@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   let index = parseInt(args[0]);
   if (!index || index <= 0) {
     /**
@@ -66,13 +58,14 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'deltodo' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'deleteTodo',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'deleteTodo <index>',
   example: [ 'deleteTodo 3' ]

@@ -143,15 +143,15 @@ module.exports = async message => {
         }
       }
       // Checks bot owner permission
-    //   else if (cmd.help.userTextPermission === 'BOT_OWNER') {
-    //     if (!message.client.credentials.ownerId.includes(message.author.id)) {
-    //       /**
-    //        * User has missing permissions.
-    //        * @fires userMissingPermissions
-    //        */
-    //       return message.client.emit('userMissingPermissions', cmd.help.userTextPermission);
-    //     }
-    //   }
+      else if (cmd.config.ownerOnly) {
+        if (!message.client.credentials.ownerId.includes(message.author.id)) {
+          /**
+           * User has missing permissions.
+           * @fires userMissingPermissions
+           */
+          return message.client.emit('userMissingPermissions', cmd.help.userTextPermission);
+        }
+      }
     }
 
     // Checks if Bastion has the required permission

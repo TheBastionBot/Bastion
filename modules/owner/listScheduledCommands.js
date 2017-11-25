@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   try {
     let scheduledCommands = await Bastion.db.all('SELECT cronExp, command, arguments FROM scheduledCommands');
 
@@ -53,13 +45,14 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'listScheduledCommands',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'listScheduledCommands [page_no]',
   example: [ 'listScheduledCommands', 'listScheduledCommands 2' ]

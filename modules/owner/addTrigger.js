@@ -5,14 +5,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (!args.trigger || !args.response) {
     /**
      * The command was ran with invalid parameters.
@@ -51,13 +43,14 @@ exports.config = {
   argsDefinitions: [
     { name: 'trigger', type: String, alias: 't', multiple: true, defaultOption: true },
     { name: 'response', type: String, alias: 'r', multiple: true }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'addTrigger',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'addTrigger <-t trigger message> <-r response message>',
   example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]

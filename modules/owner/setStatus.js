@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   try {
     if (args.status && /^(?:online|idle|dnd|invisible)$/i.test(args.status)) {
       await Bastion.user.setStatus(args.status);
@@ -49,13 +41,14 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'status', type: String, defaultOption: true }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'setStatus',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'setStatus [online|idle|dnd|invisible]',
   example: [ 'setStatus invisible', 'setStatus' ]

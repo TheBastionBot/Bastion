@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   try {
     await Bastion.db.all('DELETE FROM triggers');
 
@@ -32,13 +24,14 @@ exports.run = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'delalltriggers', 'deletealltrips', 'delalltrips' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'deleteAllTriggers',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'deleteAllTriggers',
   example: []

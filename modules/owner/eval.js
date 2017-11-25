@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (!args.code) {
     /**
      * The command was ran with invalid parameters.
@@ -77,13 +69,14 @@ exports.config = {
   argsDefinitions: [
     { name: 'code', type: String, multiple: true, defaultOption: true },
     { name: 'delete', type: Boolean }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'eval',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'eval <JavaScript code> [--delete]',
   example: [ 'eval message.guild.members.size', 'eval Bastion.users.size --delete' ]

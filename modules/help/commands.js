@@ -35,7 +35,7 @@ exports.run = async (Bastion, message, args) => {
                 }
                 return false;
               }
-              else if (cmd.help.userTextPermission === 'BOT_OWNER') {
+              else if (cmd.config.ownerOnly) {
                 if (Bastion.credentials.ownerId.includes(message.author.id)) {
                   return true;
                 }

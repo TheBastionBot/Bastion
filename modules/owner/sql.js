@@ -6,14 +6,6 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-    }
-
     if (!args.query) {
       /**
       * The command was ran with invalid parameters.
@@ -62,13 +54,14 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'query', type: String, multiple: true, defaultOption: true }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'sql',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'sql <SQL Query>',
   example: [ 'sql ' ]

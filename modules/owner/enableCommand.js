@@ -5,14 +5,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (!args.name) {
     /**
      * The command was ran with invalid parameters.
@@ -56,13 +48,14 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, defaultOption: true }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'enableCommand',
   botPermission: '',
-  userTextPermission: 'BOT_OWNER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'enableCommand <command_name>',
   example: [ 'enableCommand echo' ]
