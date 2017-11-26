@@ -241,11 +241,12 @@ exports.run = async (Bastion, message, args) => {
     });
   }
   catch (e) {
+    Bastion.log.error(e);
     /**
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), textChannel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'unknown'), Bastion.strings.error(message.guild.language, 'unknown', true), textChannel);
   }
 };
 
