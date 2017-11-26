@@ -11,9 +11,7 @@ const db = new jsonDB('./data/playlist', true, true);
 
 exports.run = async (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
-  if (message.guild.music) {
-    if (message.channel.id !== message.guild.music.textChannelID) return;
-  }
+  if (message.channel.id !== message.guild.music.textChannelID) return;
 
   if (!args.song && !args.ytpl && !args.playlist) {
     /**
@@ -74,17 +72,23 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('error', '', vcStats, message.channel);
   }
 
-  let song = '';
-  let musicObject = {
-    voiceChannel: voiceChannel,
-    textChannel: textChannel,
-    musicMasterRole: musicMasterRole,
-    songs: [],
-    playing: false,
-    repeat: false,
-    skipVotes: []
-  };
+  message.guild.music.voiceChannel = voiceChannel;
+  message.guild.music.textChannel = textChannel;
+  message.guild.music.musicMasterRole = musicMasterRole;
+  if (!message.guild.music.hasOwnProperty('songs')) {
+    message.guild.music.songs = [];
+  }
+  if (!message.guild.music.hasOwnProperty('playing')) {
+    message.guild.music.playing = false;
+  }
+  if (!message.guild.music.hasOwnProperty('repeat')) {
+    message.guild.music.repeat = false;
+  }
+  if (!message.guild.music.hasOwnProperty('skipVotes')) {
+    message.guild.music.skipVotes = [];
+  }
 
+  let song = '';
   try {
     if (args.song) {
       song = args.song.join(' ');
@@ -132,9 +136,6 @@ exports.run = async (Bastion, message, args) => {
           });
           // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
           info.forEach(e => {
-            if (!message.guild.music) {
-              message.guild.music = musicObject;
-            }
             message.guild.music.songs.push({
               url: `https://www.youtube.com/watch?v=${e.url}`,
               id: e.url,
@@ -175,9 +176,6 @@ exports.run = async (Bastion, message, args) => {
       // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
       playlist.forEach(e => {
         e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
-        if (!message.guild.music) {
-          message.guild.music = musicObject;
-        }
         yt.getInfo(e, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
           if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
           message.guild.music.songs.push({
@@ -191,7 +189,7 @@ exports.run = async (Bastion, message, args) => {
         });
       });
     }
-    else return delete message.guild.music;
+    else return;
 
     song = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(song) ? song : `ytsearch:${song}`;
 
@@ -205,10 +203,6 @@ exports.run = async (Bastion, message, args) => {
         }).catch(e => {
           Bastion.log.error(e);
         });
-      }
-
-      if (!message.guild.music) {
-        message.guild.music = musicObject;
       }
 
       message.guild.music.songs.push({
