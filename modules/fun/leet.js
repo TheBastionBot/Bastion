@@ -40,7 +40,8 @@ exports.config = {
 exports.help = {
   name: 'leet',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'leet <text>',
   example: [ 'leet Hello, Everyone!' ]
 };

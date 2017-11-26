@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!Bastion.credentials.cleverbotAPIkey) {
     /**
      * Error condition is encountered.
@@ -58,7 +50,8 @@ exports.config = {
 exports.help = {
   name: 'chat',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'chat',
   example: []
 };

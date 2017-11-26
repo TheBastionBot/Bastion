@@ -26,7 +26,8 @@ exports.config = {
 exports.help = {
   name: 'remove',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'remove <text>',
   example: [ 'remove Humanity' ]
 };

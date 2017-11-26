@@ -39,7 +39,8 @@ exports.config = {
 exports.help = {
   name: 'blockText',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'blockText <text>',
   example: [ 'blockText Hello, world!' ]
 };

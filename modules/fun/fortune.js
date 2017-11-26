@@ -27,7 +27,8 @@ exports.config = {
 exports.help = {
   name: 'fortune',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'fortune',
   example: []
 };

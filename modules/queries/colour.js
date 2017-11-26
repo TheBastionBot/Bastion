@@ -107,7 +107,8 @@ exports.config = {
 exports.help = {
   name: 'colour',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'colour <#hex-colour-code>',
   example: [ 'colour #dd0000' ]
 };

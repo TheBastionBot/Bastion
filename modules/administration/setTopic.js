@@ -15,12 +15,12 @@ exports.run = async (Bastion, message, args) => {
     topic = args.slice(1).join(' ').trim();
   }
 
-  if (!channel.permissionsFor(message.member).has(this.help.userPermission)) {
+  if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
     /**
      * User has missing permissions.
      * @fires userMissingPermissions
      */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
   if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
     /**
@@ -72,7 +72,8 @@ exports.config = {
 exports.help = {
   name: 'setTopic',
   botPermission: 'MANAGE_CHANNELS',
-  userPermission: 'MANAGE_CHANNELS',
+  userTextPermission: 'MANAGE_CHANNELS',
+  userVoicePermission: '',
   usage: 'setTopic [#channel-mention] [Channel Topic]',
   example: [ 'setTopic #channel-name New Topic', 'setTopic New Topic', 'setTopic' ]
 };

@@ -60,7 +60,8 @@ exports.config = {
 exports.help = {
   name: 'emojiInfo',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'emojiInfo [:emoji:]',
   example: [ 'emojiInfo :bastion:' ]
 };

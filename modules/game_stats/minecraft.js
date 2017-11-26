@@ -95,7 +95,8 @@ exports.config = {
 exports.help = {
   name: 'minecraft',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'minecraft <MC_SERVER_IP>[:PORT]',
   example: [ 'minecraft 139.59.31.129', 'minecraft 139.59.31.129:25565' ]
 };

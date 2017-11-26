@@ -37,7 +37,8 @@ exports.config = {
 exports.help = {
   name: 'russianRoulette',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'russianRoulette [no_of_bullets]',
   example: [ 'russianRoulette', 'russianRoulette 7' ]
 };

@@ -87,7 +87,8 @@ exports.config = {
 exports.help = {
   name: 'typingGame',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'typingGame',
   example: []
 };

@@ -15,7 +15,7 @@ const activeUsers = {};
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix, language, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guild = await message.client.db.get(`SELECT prefix, language, musicTextChannel, musicVoiceChannel, musicMasterRole, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     if (!message.guild.prefix || message.guild.prefix.join(' ') !== guild.prefix) {
@@ -25,6 +25,13 @@ module.exports = async message => {
     if (!message.guild.language || message.guild.language !== guild.language) {
       message.guild.language = guild.language;
     }
+    // Add music configs to the discord.js guild object to minimize database reads.
+    if (!message.guild.music) {
+      message.guild.music = {};
+    }
+    message.guild.music.textChannelID = guild.musicTextChannel;
+    message.guild.music.voiceChannelID = guild.musicVoiceChannel;
+    message.guild.music.masterRoleID = guild.musicMasterRole;
 
     // The prefix used by the user to call the command.
     let usedPrefix;
@@ -130,29 +137,28 @@ module.exports = async message => {
     /**
      * Command permissions handler
      */
-    // // Checks if the user has the required permission
-    // if (cmd.help.userPermission) {
-    //   // Checks native Discord permissions
-    //   if (Object.keys(message.client.permissions).includes(cmd.help.userPermission)) {
-    //     if (!message.channel.permissionsFor(message.member).has(cmd.help.userPermission)) {
-    //       /**
-    //        * User has missing permissions.
-    //        * @fires userMissingPermissions
-    //        */
-    //       return message.client.emit('userMissingPermissions', cmd.help.userPermission);
-    //     }
-    //   }
-    //   // Checks bot owner permission
-    //   else if (cmd.help.userPermission === 'BOT_OWNER') {
-    //     if (!message.client.credentials.ownerId.includes(message.author.id)) {
-    //       /**
-    //        * User has missing permissions.
-    //        * @fires userMissingPermissions
-    //        */
-    //       return message.client.emit('userMissingPermissions', cmd.help.userPermission);
-    //     }
-    //   }
-    // }
+    // Checks bot owner permission
+    if (cmd.config.ownerOnly) {
+      if (!message.client.credentials.ownerId.includes(message.author.id)) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.emit('userMissingPermissions', 'BOT_OWNER');
+      }
+    }
+    // Checks if the user has the required permission
+    if (cmd.help.userTextPermission) {
+      if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
+        if (!message.channel.permissionsFor(message.member).has(cmd.help.userTextPermission)) {
+          /**
+           * User has missing permissions.
+           * @fires userMissingPermissions
+           */
+          return message.client.emit('userMissingPermissions', cmd.help.userTextPermission);
+        }
+      }
+    }
 
     // Checks if Bastion has the required permission
     if (cmd.help.botPermission) {

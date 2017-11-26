@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   let user = message.mentions.users.first();
   if (!user) {
     /**
@@ -61,7 +53,8 @@ exports.config = {
 exports.help = {
   name: 'nickname',
   botPermission: 'MANAGE_NICKNAMES',
-  userPermission: 'MANAGE_NICKNAMES',
+  userTextPermission: 'MANAGE_NICKNAMES',
+  userVoicePermission: '',
   usage: 'nickname <@user-mention> [nick]',
   example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
 };

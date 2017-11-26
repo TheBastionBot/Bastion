@@ -58,7 +58,8 @@ exports.config = {
 exports.help = {
   name: 'magic8ball',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'magic8ball <Question>?',
   example: [ 'magic8ball Do I need a new lease on life?' ]
 };

@@ -32,7 +32,8 @@ exports.config = {
 exports.help = {
   name: 'giphy',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'giphy <query>',
   example: [ 'giphy iron man' ]
 };

@@ -51,7 +51,8 @@ exports.config = {
 exports.help = {
   name: 'slots',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'slots',
   example: []
 };

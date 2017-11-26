@@ -51,7 +51,8 @@ exports.config = {
 exports.help = {
   name: 'iAmNot',
   botPermission: 'MANAGE_ROLES',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'iAmNot <role name>',
   example: [ 'iAmNot Looking to play' ]
 };

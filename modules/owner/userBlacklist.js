@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -81,13 +73,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'ubl' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'userBlacklist',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'userblacklist <+|-|add|rem> <@user-mention|user_id>',
   example: [ 'userblacklist add @user#001 224433119988776655', 'userblacklist rem 224433119988776655 @user#0001', 'userblacklist + @user#001 224433119988776655', 'userblacklist - 224433119988776655 @user#0001' ]
 };

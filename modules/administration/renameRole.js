@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!args.old || !args.new) {
     /**
      * The command was ran with invalid parameters.
@@ -81,7 +73,8 @@ exports.config = {
 exports.help = {
   name: 'renameRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'renameRole < -o Old Role Name -n New Role Name >',
   example: [ 'renameRole -o Server Staffs -n Legendary Staffs' ]
 };

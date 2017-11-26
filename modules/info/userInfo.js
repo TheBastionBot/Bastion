@@ -4,8 +4,17 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
-  let user = message.mentions.users.first();
+exports.run = (Bastion, message, args) => {
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = message.guild.members.get(args.id);
+    if (user) {
+      user = user.user;
+    }
+  }
   if (!user) {
     user = message.author;
   }
@@ -104,13 +113,17 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'uinfo' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
   name: 'userInfo',
   botPermission: '',
-  userPermission: '',
-  usage: 'userInfo [@user-mention]',
-  example: [ 'userInfo @user#0001', 'userInfo' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'userInfo [@USER_MENTION | USER_ID]',
+  example: [ 'userInfo @user#0001', 'userInfo 167122669385743441', 'userInfo' ]
 };

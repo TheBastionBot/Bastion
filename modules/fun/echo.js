@@ -5,14 +5,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -42,7 +34,8 @@ exports.config = {
 exports.help = {
   name: 'echo',
   botPermission: '',
-  userPermission: 'MANAGE_GUILD',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'echo <text>',
   example: [ 'echo Hello, world!' ]
 };

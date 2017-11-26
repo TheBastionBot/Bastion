@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   try {
     let guildSettings = await Bastion.db.get(`SELECT filterWord FROM guildSettings WHERE guildID=${message.guild.id}`);
 
@@ -50,7 +42,8 @@ exports.config = {
 exports.help = {
   name: 'filterWord',
   botPermission: 'MANAGE_MESSAGES',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'filterWord',
   example: []
 };

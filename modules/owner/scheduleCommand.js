@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!args.cronExp || !args.command) {
     /**
      * The command was ran with invalid parameters.
@@ -90,13 +82,15 @@ exports.config = {
     { name: 'cronExp', type: String, multiple: true, defaultOption: true },
     { name: 'command', type: String, alias: 'c' },
     { name: 'arguments', type: String, alias: 'a', multiple: true, defaultValue: '' }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'scheduleCommand',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'scheduleCommand <CRON PATTERN> <-c COMMAND> [-a ARGUMENTS]',
   example: [ 'scheduleCommand 0 0 0 1 1 * -c echo -a Happy New Year!' ]
 };

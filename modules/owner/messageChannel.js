@@ -6,14 +6,6 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
-    }
-
     if (args.length < 2 || !(parseInt(args[0]) < 9223372036854775807)) {
       /**
       * The command was ran with invalid parameters.
@@ -63,13 +55,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'msgc' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'messageChannel',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'messageChannel <channel_id> <message>',
   example: [ 'messageChannel CHANNEL_ID Hello everyone!' ]
 };

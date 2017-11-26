@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   try {
     if (!(parseInt(args[0]) < 9223372036854775807)) {
       await Bastion.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
@@ -54,13 +46,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'musicmaster' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'musicMasterRole',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'musicMasterRole [ROLE_ID]',
   example: [ 'musicMasterRole 319225727067095043', 'musicMasterRole' ]
 };

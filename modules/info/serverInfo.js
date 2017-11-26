@@ -85,7 +85,8 @@ exports.config = {
 exports.help = {
   name: 'serverInfo',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'serverInfo',
   example: []
 };

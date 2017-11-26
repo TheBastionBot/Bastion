@@ -137,7 +137,8 @@ exports.config = {
 exports.help = {
   name: 'callOfDuty4',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',
   example: [ 'callOfDuty4 139.59.31.128', 'callOfDuty4 139.59.31.128:27016' ]
 };

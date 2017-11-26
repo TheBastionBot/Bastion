@@ -88,7 +88,8 @@ exports.config = {
 exports.help = {
   name: 'reminder',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'reminder <-d Duration> <Message>',
   example: [ 'reminder -d 10m30s Get back to work.' ]
 };

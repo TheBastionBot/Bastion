@@ -39,7 +39,8 @@ exports.config = {
 exports.help = {
   name: 'userID',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'userID [@user-mention]',
   example: [ 'userID @user#0001', 'userID' ]
 };

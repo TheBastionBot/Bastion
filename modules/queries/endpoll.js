@@ -20,7 +20,8 @@ exports.config = {
 exports.help = {
   name: 'endpoll',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'endpoll',
   example: []
 };

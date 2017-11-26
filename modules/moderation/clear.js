@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   let user = message.mentions.users.first();
   let limit = parseInt(args[0]) ? args[0] : args[1];
   let amount;
@@ -90,7 +82,8 @@ exports.config = {
 exports.help = {
   name: 'clear',
   botPermission: 'MANAGE_MESSAGES',
-  userPermission: 'MANAGE_MESSAGES',
+  userTextPermission: 'MANAGE_MESSAGES',
+  userVoicePermission: '',
   usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',
   example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };

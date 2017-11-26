@@ -44,7 +44,8 @@ exports.config = {
 exports.help = {
   name: 'ping',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'ping',
   example: []
 };

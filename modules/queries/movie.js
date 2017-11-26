@@ -97,7 +97,8 @@ exports.config = {
 exports.help = {
   name: 'movie',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'movie <Movie Name>',
   example: [ 'movie John Wick' ]
 };

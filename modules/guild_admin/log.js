@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   let guildSettings = await Bastion.db.get(`SELECT log FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });
@@ -51,7 +43,8 @@ exports.config = {
 exports.help = {
   name: 'log',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'log',
   example: []
 };

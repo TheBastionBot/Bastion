@@ -32,7 +32,8 @@ exports.config = {
 exports.help = {
   name: 'reverse',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'reverse <text>',
   example: [ 'reverse !looc si sihT' ]
 };

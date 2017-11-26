@@ -25,7 +25,8 @@ exports.config = {
 exports.help = {
   name: 'wouldYouRather',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'wouldYouRather',
   example: []
 };

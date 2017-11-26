@@ -192,7 +192,8 @@ exports.config = {
 exports.help = {
   name: 'overwatch',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'overwatch <region> <BattleTag#discriminator>',
   example: [ 'overwatch us GH0S7#11143' ]
 };

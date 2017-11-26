@@ -6,14 +6,6 @@
 
 exports.run = async (Bastion, message, args) => {
   try {
-    if (!message.member.hasPermission(this.help.userPermission)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userPermission);
-    }
-
     let guildSettings = await Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     if (!guildSettings || guildSettings.whitelistDomains === '[]') {
@@ -62,7 +54,8 @@ exports.config = {
 exports.help = {
   name: 'listWhitelistDomains',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'listWhitelistDomains [page_no]',
   example: [ 'listWhitelistDomains', 'listWhitelistDomains 2' ]
 };

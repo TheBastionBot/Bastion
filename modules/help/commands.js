@@ -14,9 +14,41 @@ exports.run = async (Bastion, message, args) => {
       }
     }
 
-    let fields = [];
+    let fields = [], description;
     for (let i = 0; i < modules.length; i++) {
-      let commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
+      let commands;
+      if (args.all) {
+        description = 'To get the list of all the commands with details click [here](https://bastionbot.org/commands).';
+        commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
+      }
+      else {
+        description = `Showing a list of commands you have permission for in the #${message.channel.name} channel in ${message.guild.name} server.\n` +
+                      'Run `commands --all` command in the server to see the complete list.\n' +
+                      'To get the list of all the commands with details click [here](https://bastionbot.org/commands).';
+        // TODO: Make this more efficient.
+        commands = Bastion.commands.filter(cmd => {
+          if (cmd.config.module === modules[i]) {
+            if (cmd.help.userTextPermission) {
+              if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
+                if (message.channel.permissionsFor(message.member).has(cmd.help.userTextPermission)) {
+                  return true;
+                }
+                return false;
+              }
+              else if (cmd.config.ownerOnly) {
+                if (Bastion.credentials.ownerId.includes(message.author.id)) {
+                  return true;
+                }
+                return false;
+              }
+              return true;
+            }
+            return true;
+          }
+          return false;
+        }).map(c => c.help.name);
+      }
+
       if (commands.length === 0) {
         continue;
       }
@@ -32,10 +64,10 @@ exports.run = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.GOLD,
         title: 'List of Commands',
-        description: 'To get a complete list of all the commands with details click [here](https://BastionBot.org/commands).',
+        description: description,
         fields: fields,
         footer: {
-          text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
+          text: `Server Prefix: ${message.guild.prefix[0]} | Total Commands: ${Bastion.commands.size}`
         }
       }
     });
@@ -69,14 +101,16 @@ exports.config = {
   aliases: [ 'cmds' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'modules', type: String, multiple: true, defaultOption: true }
+    { name: 'modules', type: String, multiple: true, defaultOption: true },
+    { name: 'all', type: Boolean, alias: 'a' }
   ]
 };
 
 exports.help = {
   name: 'commands',
   botPermission: '',
-  userPermission: '',
-  usage: 'commands [module names]',
-  example: [ 'commands administration moderation' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'commands [module names] [--all]',
+  example: [ 'commands', 'commands --all', 'commands administration moderation' ]
 };

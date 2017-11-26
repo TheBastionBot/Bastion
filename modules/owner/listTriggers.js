@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   try {
     let triggers = await Bastion.db.all('SELECT trigger FROM triggers');
 
@@ -53,13 +45,15 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'listTriggers',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'listTriggers [page_no]',
   example: [ 'listTriggers', 'listTriggers 2' ]
 };

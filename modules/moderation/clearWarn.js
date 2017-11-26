@@ -5,14 +5,6 @@
  */
 
 exports.run = (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   let user = message.mentions.users.first();
   if (!user) {
     /**
@@ -70,7 +62,8 @@ exports.config = {
 exports.help = {
   name: 'clearWarn',
   botPermission: '',
-  userPermission: 'KICK_MEMBERS',
+  userTextPermission: 'KICK_MEMBERS',
+  userVoicePermission: '',
   usage: 'clearWarn @user-mention [Reason]',
   example: [ 'clearWarn @user#0001 Reason for clearing the warning.' ]
 };

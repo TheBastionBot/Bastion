@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!args.profiles) {
     /**
      * The command was ran with invalid parameters.
@@ -43,13 +35,15 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'profiles', type: Boolean, alias: 'p' }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'resetDatabase',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'resetDatabase < --profiles >',
   example: [ 'resetDatabase --profiles' ]
 };

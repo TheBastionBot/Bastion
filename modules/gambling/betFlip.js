@@ -107,7 +107,8 @@ exports.config = {
 exports.help = {
   name: 'betFlip',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'betflip < heads/tails > <-m amount>',
   example: [ 'betflip heads -m 100' ]
 };

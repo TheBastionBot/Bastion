@@ -5,14 +5,6 @@
  */
 
 exports.run = (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   Bastion.commands.filter(cmd => {
     cmd.config.enabled = true;
   });
@@ -29,13 +21,15 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'enableallmodules', 'enableallcmds', 'enableallmdls' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'enableAllCommands',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'enableAllCommands',
   example: []
 };

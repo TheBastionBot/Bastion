@@ -78,7 +78,8 @@ exports.config = {
 exports.help = {
   name: 'cite',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'cite <MESSAGE_ID>',
   example: [ 'cite 221133446677558899' ]
 };

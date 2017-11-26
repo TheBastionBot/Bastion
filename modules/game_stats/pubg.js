@@ -229,7 +229,8 @@ exports.config = {
 exports.help = {
   name: 'pubg',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'pubg <player_name> <-m solo/duo/squad> [-c Performance/Skill Rating/Per Game/Combat/Survival/Distance/Support]',
   example: [ 'pubg vvipe -m squad', 'pubg spark -m duo -c Performance' ]
 };

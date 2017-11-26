@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (args.length < 1) {
     let guildSettings = await Bastion.db.get(`SELECT greetPrivateMessage FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
       Bastion.log.error(e);
@@ -61,7 +53,8 @@ exports.config = {
 exports.help = {
   name: 'greetPrivateMessage',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'greetPrivateMessage [Message]',
   example: [ 'greetPrivateMessage Hello $user! Welcome to $server.' ]
 };

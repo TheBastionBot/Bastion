@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   let index = parseInt(args[0]);
   if (!index || index <= 0) {
     /**
@@ -72,7 +64,8 @@ exports.config = {
 exports.help = {
   name: 'removeFilteredWord',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'removeFilteredWord <index>',
   example: [ 'removeFilteredWord 3' ]
 };

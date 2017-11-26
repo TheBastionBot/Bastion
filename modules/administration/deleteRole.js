@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!args.mention && !args.id && !args.name) {
     /**
      * The command was ran with invalid parameters.
@@ -80,7 +72,8 @@ exports.config = {
 exports.help = {
   name: 'deleteRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',
   example: [ 'deleteRole -m @Server Staffs', 'deleteRole -i 295982817647788032', 'deleteRole -n Server Staffs' ]
 };

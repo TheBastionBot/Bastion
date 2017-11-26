@@ -31,7 +31,7 @@
     "pirateSpeak": "Sends the same message that you had sent, but as pirate speak.",
     "punch": "Give a punch to another user.",
     "quotes": "Shows a quote to get you inspired.",
-    "remove": "Have fun removing stuffs you don't like. Specify the item(s) you want to remove. Won't be real though!",
+    "remove": "Have fun removing stuff you don't like. Specify the item(s) you want to remove. Won't be real though!",
     "reputation": "Give reputations to other users. You can give reputation only once in 12 hours.",
     "reverse": "Sends the same message that you had sent, but reversed.",
     "rip": "Show your condolences for something (or everything).",
@@ -40,7 +40,7 @@
     "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/tools/embed_builder/).*",
     "ship": "Combines two or more mentioned user's names.",
     "slap": "Give a slap to another user.",
-    "xkcd": "Shows a xkcd comics.",
+    "xkcd": "Shows a xkcd comic.",
     "zalgolize": "Sends the same message that you had sent, but zalgolized."
   },
   "gambling": {
@@ -57,6 +57,7 @@
     "overwatch": "Get stats of any Overwatch player.",
     "paladins": "Get stats of any Paladins player.",
     "pubg": "Get stats of any PlayerUnknown's Battlegrounds player.",
+    "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server."
   },
@@ -106,6 +107,7 @@
     "removeFilteredWord": "Deletes a word from the list of filtered words.",
     "removeSelfAssignableRole": "Deletes a role from the list of self-assignable roles.",
     "removeWhitelistDomain": "Deletes a domain from the list of whitelisted domains.",
+    "resetModLogs": "Resets the moderation log cases back to 1.",
     "serverSettings": "Shows the status of your server's configured settings.",
     "setLanguage": "Sets Bastion's language for the server.",
     "setPrefix": "Sets Bastion's prefix for the server.",
@@ -164,6 +166,7 @@
     "softBan": "Bans & unbans the specified user, immediately, from your Discord server, and removes 7 days of their message history.",
     "textMute": "Text mutes a specified user from the specified text channel or globally on your Discord server.",
     "textUnMute": "Text unmutes from specified user from the specified text channel of your Discord server.",
+    "unBan": "Unbans a specified user for your Discord server.",
     "unDeafen": "Undeafens a specified user server-wide in your Discord server.",
     "unMute": "Unmutes a specified user server-wide in your Discord server.",
     "warn": "Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.",

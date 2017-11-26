@@ -169,7 +169,8 @@ exports.config = {
 exports.help = {
   name: 'rainbow6',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',
   example: [ 'rainbow6 uplay SaffronPants' ]
 };

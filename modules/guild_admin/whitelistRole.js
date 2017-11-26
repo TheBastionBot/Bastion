@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!args.id || (!args.invites && !args.links && !args.words)) {
     /**
      * The command was ran with invalid parameters.
@@ -144,7 +136,8 @@ exports.config = {
 exports.help = {
   name: 'whitelistRole',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'whitelistRole <ROLE_ID> < --invites | --links | --words > [--remove]',
   example: [ 'whitelistRole 295982817647788032 --invites', 'whitelistRole 295982817647788032 --invites --remove' ]
 };

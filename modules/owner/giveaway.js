@@ -7,14 +7,6 @@
 let giveaway, activeChannel;
 
 exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!activeChannel) {
     if (!args.amount || isNaN(args.amount)) {
       /**
@@ -140,13 +132,15 @@ exports.config = {
   argsDefinitions: [
     { name: 'amount', type: Number, multiple: true, defaultOption: true },
     { name: 'end', type: Boolean, alias: 'e' }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'giveaway',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'giveaway <amount | --end>',
   example: [ 'giveaway 10', 'giveaway --end' ]
 };

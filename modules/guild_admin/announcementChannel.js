@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   try {
     let description, color;
 
@@ -53,7 +45,8 @@ exports.config = {
 exports.help = {
   name: 'announcementChannel',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'announcementChannel [--remove]',
   example: [ 'announcementChannel', 'announcementChannel --remove' ]
 };

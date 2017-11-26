@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   try {
     let guildSettings = await Bastion.db.get(`SELECT ignoredChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
     let ignoredChannels = guildSettings.ignoredChannels, isIgnored = false,
@@ -77,7 +69,8 @@ exports.config = {
 exports.help = {
   name: 'ignoreChannel',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'ignoreChannel [--remove]',
   example: [ 'ignoreChannel', 'ignoreChannel --remove' ]
 };

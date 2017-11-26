@@ -132,7 +132,8 @@ exports.config = {
 exports.help = {
   name: 'give',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'give <amount> <@user-mention|user_id>',
   example: [ 'give 100 @user#0001', 'give 150 2233445566778899' ]
 };

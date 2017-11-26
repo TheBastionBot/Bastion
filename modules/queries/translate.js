@@ -50,7 +50,8 @@ exports.config = {
 exports.help = {
   name: 'translate',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'translate <language_code> <text>',
   example: [ 'translate EN Je suis génial!' ]
 };

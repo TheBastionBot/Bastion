@@ -83,7 +83,8 @@ exports.config = {
 exports.help = {
   name: 'lyrics',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'lyrics <SONG_NAME> [Artist Name>]',
   example: [ 'lyrics Something just like this', 'lyrics Shape of you - Ed Sheeran' ]
 };

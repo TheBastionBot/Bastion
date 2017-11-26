@@ -148,7 +148,8 @@ exports.config = {
 exports.help = {
   name: 'stats',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'stats',
   example: []
 };

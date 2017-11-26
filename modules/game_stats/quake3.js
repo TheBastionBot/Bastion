@@ -1,10 +1,10 @@
 /**
- * @file counterStrikeGlobalOffensive command
+ * @file quake3 command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
-const CSGO = require('gamedig');
+const Q3 = require('gamedig');
 
 exports.run = (Bastion, message, args) => {
   if (args.length < 1 || !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args = args[0])) {
@@ -31,11 +31,11 @@ exports.run = (Bastion, message, args) => {
     port = parseInt(args[1]);
   }
   else {
-    port = 27015;
+    port = 27960;
   }
 
-  CSGO.query({
-    type: 'csgo',
+  Q3.query({
+    type: 'quake3',
     host: host,
     port: port
   }).then(data => {
@@ -56,8 +56,8 @@ exports.run = (Bastion, message, args) => {
         inline: true
       },
       {
-        name: 'Map',
-        value: data.map
+        name: 'Map/Gametype',
+        value: `${data.map} - ${data.raw.g_gametype}`
       }
     ];
 
@@ -68,7 +68,7 @@ exports.run = (Bastion, message, args) => {
         players.push(data.players[i].name);
       }
       for (let i = 0; i < data.players.length; i++) {
-        scores.push(data.players[i].score);
+        scores.push(data.players[i].frags);
       }
       stats.push(
         {
@@ -88,7 +88,7 @@ exports.run = (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.BLUE,
         title: data.name,
-        description: '[Counter-Strike: Global Offensive](https://store.steampowered.com/app/730/)',
+        description: '[Quake III Arena](https://store.steampowered.com/app/2200)',
         fields: stats
       }
     }).catch(e => {
@@ -104,15 +104,15 @@ exports.run = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'csgo' ],
+  aliases: [ 'q3' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'counterStrikeGlobalOffensive',
+  name: 'quake3',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'counterStrikeGlobalOffensive <CSGO_SERVER_IP>[:PORT]',
-  example: [ 'counterStrikeGlobalOffensive 139.59.31.128', 'counterStrikeGlobalOffensive 139.59.31.128:27016' ]
+  usage: 'quake3 <Q3_SERVER_IP>[:PORT]',
+  example: [ 'quake3 139.59.31.128', 'quake3 139.59.31.128:27960' ]
 };

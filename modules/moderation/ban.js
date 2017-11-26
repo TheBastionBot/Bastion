@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   let user = message.mentions.users.first();
   if (!user) {
@@ -99,7 +91,8 @@ exports.config = {
 exports.help = {
   name: 'ban',
   botPermission: 'BAN_MEMBERS',
-  userPermission: 'BAN_MEMBERS',
+  userTextPermission: 'BAN_MEMBERS',
+  userVoicePermission: '',
   usage: 'ban <@user-mention> [Reason].',
   example: [ 'ban @user#001 Reason for the ban.' ]
 };

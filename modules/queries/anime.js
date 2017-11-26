@@ -72,7 +72,8 @@ exports.config = {
 exports.help = {
   name: 'anime',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'anime <Anime Name>',
   example: [ 'anime One Piece' ]
 };

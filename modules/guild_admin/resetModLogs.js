@@ -1,17 +1,17 @@
 /**
- * @file deleteAllTriggers command
+ * @file resetModLogs command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
 exports.run = async (Bastion, message) => {
   try {
-    await Bastion.db.all('DELETE FROM triggers');
+    await Bastion.db.run(`UPDATE guildSettings SET modCaseNo='1' WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.RED,
-        description: 'Deleted all the triggers and responses.'
+        color: Bastion.colors.GREEN,
+        description: 'Moderation log case numbers has been successfully reset.'
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -23,16 +23,15 @@ exports.run = async (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [ 'delalltriggers', 'deletealltrips', 'delalltrips' ],
-  enabled: true,
-  ownerOnly: true
+  aliases: [],
+  enabled: true
 };
 
 exports.help = {
-  name: 'deleteAllTriggers',
+  name: 'resetModLogs',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'ADMINISTRATOR',
   userVoicePermission: '',
-  usage: 'deleteAllTriggers',
+  usage: 'resetModLogs',
   example: []
 };

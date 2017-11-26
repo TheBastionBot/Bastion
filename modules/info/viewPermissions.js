@@ -34,7 +34,8 @@ exports.config = {
 exports.help = {
   name: 'viewPermissions',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'viewPermissions',
   example: []
 };

@@ -5,14 +5,6 @@
  */
 
 exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
   try {
     let description, color;
 
@@ -84,7 +76,8 @@ exports.config = {
 exports.help = {
   name: 'streamerRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'ADMINISTRATOR',
+  userVoicePermission: '',
   usage: 'streamerRole [ROLE_ID] [--remove]',
   example: [ 'streamerRole', 'streamerRole 265419266104885248', 'streamerRole --remove' ]
 };

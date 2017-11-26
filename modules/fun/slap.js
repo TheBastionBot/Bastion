@@ -44,7 +44,8 @@ exports.config = {
 exports.help = {
   name: 'slap',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'slap <@USER_MENTION>',
   example: [ 'slap @user#0001' ]
 };

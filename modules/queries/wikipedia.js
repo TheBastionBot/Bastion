@@ -85,7 +85,8 @@ exports.config = {
 exports.help = {
   name: 'wikipedia',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'wikipedia <text>',
   example: [ 'wikipedia Steve Jobs' ]
 };

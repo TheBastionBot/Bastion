@@ -82,7 +82,8 @@ exports.config = {
 exports.help = {
   name: 'urbanDictionary',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'urbanDictionary <word>',
   example: [ 'urbanDictionary pineapple' ]
 };

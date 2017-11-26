@@ -62,7 +62,8 @@ exports.config = {
 exports.help = {
   name: 'define',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'define [language_code] <word>',
   example: [ 'define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre' ]
 };

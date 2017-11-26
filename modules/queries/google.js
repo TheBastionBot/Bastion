@@ -68,7 +68,8 @@ exports.config = {
 exports.help = {
   name: 'google',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'google <query>',
   example: [ 'google Bastion Bot' ]
 };

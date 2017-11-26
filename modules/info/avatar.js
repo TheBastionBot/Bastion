@@ -40,7 +40,8 @@ exports.config = {
 exports.help = {
   name: 'avatar',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'avatar [@user-mention]',
   example: [ 'avatar @user#001', 'avatar' ]
 };

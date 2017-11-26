@@ -47,7 +47,8 @@ exports.config = {
 exports.help = {
   name: 'paladins',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'paladins <player_name>',
   example: [ 'paladins SaffronPants' ]
 };

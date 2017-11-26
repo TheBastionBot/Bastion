@@ -28,7 +28,8 @@ exports.config = {
 exports.help = {
   name: 'donate',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'donate',
   example: []
 };

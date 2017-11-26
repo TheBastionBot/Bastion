@@ -70,7 +70,8 @@ exports.config = {
 exports.help = {
   name: 'capture',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'capture <url>',
   example: [ 'capture BastionBot.org' ]
 };

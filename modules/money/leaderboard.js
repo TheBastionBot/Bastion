@@ -51,7 +51,8 @@ exports.config = {
 exports.help = {
   name: 'leaderboard',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'leaderboard [--global]',
   example: [ 'leaderboard', 'leaderboard --global' ]
 };

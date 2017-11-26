@@ -157,7 +157,8 @@ exports.config = {
 exports.help = {
   name: 'battlefield1',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'battlefield1 <player_name>',
   example: [ 'battlefield1 VVipe' ]
 };

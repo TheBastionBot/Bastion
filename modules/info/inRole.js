@@ -62,7 +62,8 @@ exports.config = {
 exports.help = {
   name: 'inRole',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'inRole < Role Name | @role-mention > [-p <PAGE_NO>]',
   example: [ 'inRole Legends -p 2', 'inrole @Legendary Heroes' ]
 };

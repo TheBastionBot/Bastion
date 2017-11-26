@@ -42,7 +42,8 @@ exports.config = {
 exports.help = {
   name: 'discrim',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'discrim <discriminator>',
   example: [ 'discrim 8383' ]
 };

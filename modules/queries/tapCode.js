@@ -67,7 +67,8 @@ exports.config = {
 exports.help = {
   name: 'tapCode',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'tapCode <text>',
   example: [ 'tapCode Knock Knock' ]
 };
