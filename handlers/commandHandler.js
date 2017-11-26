@@ -15,7 +15,7 @@ const activeUsers = {};
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix, language, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guild = await message.client.db.get(`SELECT prefix, language, musicTextChannel, musicVoiceChannel, musicMasterRole, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     if (!message.guild.prefix || message.guild.prefix.join(' ') !== guild.prefix) {
@@ -25,6 +25,13 @@ module.exports = async message => {
     if (!message.guild.language || message.guild.language !== guild.language) {
       message.guild.language = guild.language;
     }
+    // Add music configs to the discord.js guild object to minimize database reads.
+    if (!message.guild.music) {
+      message.guild.music = {};
+    }
+    message.guild.music.textChannelID = guild.musicTextChannel;
+    message.guild.music.voiceChannelID = guild.musicVoiceChannel;
+    message.guild.music.masterRoleID = guild.musicMasterRole;
 
     // The prefix used by the user to call the command.
     let usedPrefix;
