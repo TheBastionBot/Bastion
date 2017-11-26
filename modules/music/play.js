@@ -12,7 +12,7 @@ const db = new jsonDB('./data/playlist', true, true);
 exports.run = async (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
   if (message.guild.music) {
-    if (message.channel.id !== message.guild.music.textChannel.id) return;
+    if (message.channel.id !== message.guild.music.textChannelID) return;
   }
 
   if (!args.song && !args.ytpl && !args.playlist) {
