@@ -3,7 +3,7 @@
   "fixed": [],
   "improved": [],
   "added": [
-    "Check your level without showing your entire profile, use the new `level` command."
+    "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands."
   ],
   "removed": [],
   "issues": []

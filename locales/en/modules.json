@@ -148,7 +148,8 @@
     "stats": "Shows detailed stats and info of Bastion.",
     "userID": "Shows ID of a specified user of your Discord server.",
     "userInfo": "Shows information of a specified user of your Discord server.",
-    "viewPermissions": "Shows the permissions you have in the server/channel."
+    "viewPermissions": "Shows the permissions you have in the server/channel.",
+    "xp": "Shows the experience points of the specified user's account."
   },
   "moderation": {
     "addRole": "Adds the specified role to a specified user of your Discord server.",
