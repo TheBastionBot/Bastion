@@ -136,6 +136,7 @@
     "discrim": "Searches for the users of your Discord server for the specifed discriminator.",
     "emojiInfo": "Shows information of a specifed emoji of your Discord server.",
     "inRole": "Shows members that have a specifed role in your Discord server.",
+    "level": "Shows the current level of the specified user's account.",
     "ping": "Shows the response time and average WebSocket ping of Bastion.",
     "profile": "Shows Bastion user profile of a specified user of your Discord server.",
     "roleID": "Shows the ID of a specified role of your Discord server.",

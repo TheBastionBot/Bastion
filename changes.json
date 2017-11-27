@@ -1,18 +1,9 @@
 {
-  "date": "November 26, 2017",
-  "fixed": [
-    "An issue with moderation log, not known until now, that caused some log events to get omitted.",
-    "Fixed `emoji` command not accepting emojis with upper (or mixed) case."
-  ],
-  "improved": [
-    "Bastion won't show the commands to users they don't have permission to use in the channel/server, unless they use the `commands` command with the `--all` option.",
-    "You can now check user info with the user ID in `userInfo` command. No more mentioning!",
-    "Under-the-hood changes."
-  ],
+  "date": "November 27, 2017",
+  "fixed": [],
+  "improved": [],
   "added": [
-    "No need to go to server settings just to unban someone, use the new handy `unban` command.",
-    "Wanted to reset the moderation log cases back to 1? Use the new `resetModLogs` command.",
-    "You a Quake III Arena player? You can now get your server stats too, use the `quake3` command."
+    "Check your level without showing your entire profile, use the new `level` command."
   ],
   "removed": [],
   "issues": []
