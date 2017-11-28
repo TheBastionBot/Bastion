@@ -1,7 +1,9 @@
 {
-  "date": "November 27, 2017",
+  "date": "November 28, 2017",
   "fixed": [],
-  "improved": [],
+  "improved": [
+    "Wanted to `ban` users who aren't already in the server? You can now do that using their ID."
+  ],
   "added": [
     "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands."
   ],
