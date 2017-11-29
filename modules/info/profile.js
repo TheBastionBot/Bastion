@@ -7,19 +7,29 @@
 const specialIDs = require('../../data/specialIDs.json');
 
 exports.run = async (Bastion, message, args) => {
-  if (!(args = message.mentions.users.first())) {
-    args = message.author;
-  }
-
   try {
-    let profile = await Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp * 1 > p1.xp * 1) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`);
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = message.guild.members.get(args.id);
+      if (user) {
+        user = user.user;
+      }
+    }
+    if (!user) {
+      user = message.author;
+    }
+
+    let profile = await Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp * 1 > p1.xp * 1) AS rank FROM profiles as p1 WHERE p1.userID=${user.id}`);
 
     if (!profile) {
-      if (args === message.author) {
+      if (user.id === message.author.id) {
         return message.channel.send({
           embed: {
             color: Bastion.colors.GREEN,
-            description: `Your profile is now created, <@${args.id}>`
+            description: `Your profile is now created, <@${user.id}>`
           }
         }).catch(e => {
           Bastion.log.error(e);
@@ -30,21 +40,21 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${args.id}>`), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${user.id}>`), message.channel);
     }
     if (profile.bio) {
       profile.bio = await Bastion.functions.decodeString(profile.bio);
     }
     else {
-      profile.bio = `No bio has been set. ${args.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+      profile.bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
     }
 
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         author: {
-          name: args.tag,
-          icon_url: getUserIcon(args)
+          name: user.tag,
+          icon_url: getUserIcon(user)
         },
         description: profile.bio,
         fields: [
@@ -70,7 +80,7 @@ exports.run = async (Bastion, message, args) => {
           }
         ],
         thumbnail: {
-          url: args.displayAvatarURL
+          url: user.displayAvatarURL.split('?')[0]
         },
         footer: {
           text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`
@@ -87,7 +97,10 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -95,8 +108,8 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'profile [@user-mention]',
-  example: [ 'profle', 'profile @user#0001' ]
+  usage: 'profile [@USER_MENTION | USER_ID]',
+  example: [ 'profle', 'profile @Bastion#0001', 'profile 167433345337713651' ]
 };
 
 /**
