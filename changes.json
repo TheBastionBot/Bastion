@@ -1,7 +1,8 @@
 {
   "date": "November 29, 2017",
   "fixed": [
-    "`lockdown` won't prevent adding reaction even after lockdown has been ended."
+    "`lockdown` won't prevent adding reaction even after lockdown has been ended.",
+    "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command."
   ],
   "improved": [
     "Wanted to `ban` users who aren't already in the server? You can now do that using their ID.",
