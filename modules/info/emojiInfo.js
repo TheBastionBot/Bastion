@@ -62,6 +62,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'emojiInfo [:emoji:]',
+  usage: 'emojiInfo <:emoji:>',
   example: [ 'emojiInfo :bastion:' ]
 };
