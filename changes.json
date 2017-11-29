@@ -7,7 +7,8 @@
     "Wanted to `ban` users who aren't already in the server? You can now do that using their ID.",
     "Random greeting messages will be shown even for private greetings.",
     "Bastion won't show User Left log if the user was banned.",
-    "`cite` will show the channel from where the message was cited."
+    "`cite` will show the channel from where the message was cited.",
+    "Under-the-hood changes & improvements."
   ],
   "added": [
     "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
