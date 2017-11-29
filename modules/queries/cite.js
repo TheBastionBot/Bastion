@@ -40,7 +40,7 @@ exports.run = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.BLUE,
         author: {
-          name: citedMessage.author.tag,
+          name: `${citedMessage.author.tag} in #${citedMessage.channel.name}`,
           icon_url: citedMessage.author.avatarURL
         },
         description: citedMessage.content,
