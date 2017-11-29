@@ -150,7 +150,7 @@ module.exports = async message => {
 
     // Checks for music master permission
     if (cmd.config.musicMasterOnly) {
-      if (!message.member.roles.has(message.guild.music.masterRoleID)) {
+      if (!message.client.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.masterRoleID)) {
         /**
         * User has missing permissions.
         * @fires userMissingPermissions
