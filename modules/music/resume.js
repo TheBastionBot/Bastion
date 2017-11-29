@@ -5,15 +5,15 @@
  */
 
 exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+  if (message.channel.id !== message.guild.music.textChannelID) return;
+
+  if (!message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
      */
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
-
-  if (message.channel.id !== message.guild.music.textChannelID) return;
 
   if (message.guild.voiceConnection.speaking) return;
 
