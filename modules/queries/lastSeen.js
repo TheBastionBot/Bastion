@@ -51,7 +51,7 @@ exports.run = (Bastion, message, args) => {
     }
     else {
       color = Bastion.colors.RED;
-      description = `I've not see ${user.tag} in a while.`;
+      description = `I've not seen ${user.tag} in a while.`;
     }
     message.channel.send({
       embed: {
