@@ -7,7 +7,6 @@
 const yt = require('youtube-dl');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
-// const db = new jsonDB('./data/favouriteSongs', true, true);
 
 exports.run = async (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
@@ -284,8 +283,8 @@ function startStreamDispatcher(guild, connection) {
         description: 'Exiting voice channel.'
       }
     }).then(() => {
+      guild.music.dispatcher.end();
       guild.music.voiceChannel.leave();
-      delete guild.music;
     }).catch(e => {
       guild.client.log.error(e);
     });
