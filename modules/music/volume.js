@@ -15,14 +15,6 @@ exports.run = (Bastion, message, args) => {
 
   if (message.channel.id !== message.guild.music.textChannelID) return;
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   let color = Bastion.colors.GREEN;
   if (args[0] === '+') {
     message.guild.voiceConnection.dispatcher.setVolume((message.guild.voiceConnection.dispatcher.volume * 50 + 2) / 50);
@@ -50,13 +42,14 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'volume',
   botPermission: '',
-  userTextPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'volume < + | - | amount >',
   example: [ 'volume +', 'volume -', 'volume 25' ]

@@ -15,14 +15,6 @@ exports.run = (Bastion, message) => {
 
   if (message.channel.id !== message.guild.music.textChannelID) return;
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (!message.guild.voiceConnection.speaking) return;
 
   message.guild.music.textChannel.send({
@@ -44,13 +36,14 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'pause',
   botPermission: '',
-  userTextPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'pause',
   example: []

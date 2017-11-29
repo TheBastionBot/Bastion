@@ -23,14 +23,6 @@ exports.run = (Bastion, message, args) => {
 
   if (message.channel.id !== message.guild.music.textChannelID) return;
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-
   if (args.index > message.guild.music.songs.length || args.index < 1) {
     /**
      * Error condition is encountered.
@@ -65,13 +57,14 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'index', type: Number, defaultOption: true }
-  ]
+  ],
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'removeSong',
   botPermission: '',
-  userTextPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'removeSong [index]',
   example: [ 'removeSong 3' ]
