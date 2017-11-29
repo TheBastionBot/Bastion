@@ -5,39 +5,9 @@
  */
 
 module.exports = async member => {
-  // Commented this out as using requires BAN_MEMBERS perms and not everyone would've given the bot perms
-  // member.guild.fetchBans().then(users => {if (users.has(member.id)) return;}).catch(e => {member.client.log(e);})
-
   try {
     let guild = await member.client.db.get(`SELECT farewell, farewellMessage, farewellTimeout, log FROM guildSettings WHERE guildID=${member.guild.id}`);
     if (!guild) return;
-
-    if (guild.log) {
-      let logChannel = member.guild.channels.get(guild.log);
-      if (logChannel) {
-        logChannel.send({
-          embed: {
-            color: member.guild.client.colors.RED,
-            title: member.guild.client.strings.events(member.guild.language, 'guildMemberRemove'),
-            fields: [
-              {
-                name: 'User',
-                value: member.user.tag,
-                inline: true
-              },
-              {
-                name: 'User ID',
-                value: member.id,
-                inline: true
-              }
-            ],
-            timestamp: new Date()
-          }
-        }).catch(e => {
-          member.guild.client.log.error(e);
-        });
-      }
-    }
 
     if (guild.farewell) {
       let farewellMessage = 'May we meet again.';
@@ -64,6 +34,38 @@ module.exports = async member => {
       }).catch(e => {
         member.client.log.error(e);
       });
+    }
+
+    if (guild.log) {
+      if (member.guild.permissionsFor(member.guild.me).has('BAN_MEMBERS')) {
+        let bannedUsers = await member.guild.fetchBans();
+        if (bannedUsers.has(member.id)) return;
+      }
+
+      let logChannel = member.guild.channels.get(guild.log);
+      if (logChannel) {
+        logChannel.send({
+          embed: {
+            color: member.guild.client.colors.RED,
+            title: member.guild.client.strings.events(member.guild.language, 'guildMemberRemove'),
+            fields: [
+              {
+                name: 'User',
+                value: member.user.tag,
+                inline: true
+              },
+              {
+                name: 'User ID',
+                value: member.id,
+                inline: true
+              }
+            ],
+            timestamp: new Date()
+          }
+        }).catch(e => {
+          member.guild.client.log.error(e);
+        });
+      }
     }
   }
   catch (e) {
