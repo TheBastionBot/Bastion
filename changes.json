@@ -8,7 +8,7 @@
     "Random greeting messages will be shown even for private greetings.",
     "Bastion won't show User Left log if the user was banned.",
     "`cite` will show the channel from where the message was cited.",
-    "You can now check Bastion profiles with the user ID in `profile` command. No more mentioning!"
+    "You can now check Bastion profiles and user avatars with the user ID, in `profile` and `avatar` command. No more mentioning!",
     "Under-the-hood changes & improvements."
   ],
   "added": [
