@@ -3,6 +3,7 @@
   "fixed": [
     "`lockdown` won't prevent adding reaction even after lockdown has been ended.",
     "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",
+    "Fixed `overwatch` stats error if a user has too many achievements.",
     "Under-the-hood fixes"
   ],
   "improved": [

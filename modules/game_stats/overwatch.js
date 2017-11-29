@@ -154,7 +154,7 @@ exports.run = (Bastion, message, args) => {
     }
     stats.push({
       name: 'Achievements',
-      value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ') || '-'
+      value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ').substring(0, 1024) || '-'
     });
     message.channel.send({
       embed: {
