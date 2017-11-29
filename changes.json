@@ -8,7 +8,8 @@
     "`cite` will show the channel from where the message was cited."
   ],
   "added": [
-    "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands."
+    "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
+    "Check when your buddies where last seen in Discord using the `lastSeen` command."
   ],
   "removed": [],
   "issues": []

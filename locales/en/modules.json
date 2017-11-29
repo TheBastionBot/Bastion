@@ -254,6 +254,7 @@
     "generateInvite": "Generates an invite link of the current text channel of your Discord server.",
     "giphy": "Searches animated GIFs on the web and sends a random GIF based on the given query.",
     "google": "Searches Google, for the specified query, and shows the top results.",
+    "lastSeen": "Shows the time since the specified user was last seen socializing in Discord.",
     "live": "Shows the list of users in your Discord server who are currently streaming.",
     "lmgtfy": "Searches Google, for the specified query, and teaches users how to use Google's internet search.",
     "lyrics": "Shows the lyrics of the specified song.",
