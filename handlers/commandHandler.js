@@ -137,7 +137,7 @@ module.exports = async message => {
     /**
      * Command permissions handler
      */
-    // Checks bot owner permission
+    // Checks for bot owner permission
     if (cmd.config.ownerOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id)) {
         /**
@@ -147,6 +147,18 @@ module.exports = async message => {
         return message.client.emit('userMissingPermissions', 'BOT_OWNER');
       }
     }
+
+    // Checks for music master permission
+    if (cmd.config.musicMasterOnly) {
+      if (!message.member.roles.has(message.guild.music.masterRoleID)) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.emit('userMissingPermissions', 'MUSIC_MASTER');
+      }
+    }
+
     // Checks if the user has the required permission
     if (cmd.help.userTextPermission) {
       if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
