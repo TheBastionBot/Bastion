@@ -173,14 +173,14 @@ exports.run = (Bastion, message, args) => {
       Bastion.log.error(e);
     });
   }).catch(e => {
-    Bastion.log.error(e);
-    if (e.stack.includes('NOT_FOUND')) {
+    if (e.stack.includes('PROFILE_NOT_FOUND')) {
       /**
        * Error condition is encountered.
        * @fires error
        */
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
     }
+    Bastion.log.error(e);
   });
 };
 
