@@ -1,5 +1,5 @@
 /**
- * @file echo command
+ * @file emoji command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -72,7 +72,7 @@ exports.config = {
 exports.help = {
   name: 'emoji',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'ADD_REACTIONS',
   userVoicePermission: '',
   usage: 'emoji < emoji_name | --list >',
   example: [ 'emoji yum', 'emoji --list' ]
