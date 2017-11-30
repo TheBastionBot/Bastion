@@ -5,7 +5,7 @@
     "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",
     "Fixed `overwatch` stats error if a user has too many achievements.",
     "Proper error message if trying to change server owner's nickname.",
-    "Under-the-hood fixes"
+    "Under-the-hood fixes."
   ],
   "improved": [
     "Wanted to `ban` users who aren't already in the server? You can now do that using their ID.",
@@ -13,6 +13,7 @@
     "Bastion won't show User Left log if the user was banned.",
     "`cite` will show the channel from where the message was cited.",
     "You can now check Bastion profiles and user avatars with the user ID, in `profile` and `avatar` command. No more mentioning!",
+    "`emoji` command now requires `ADD_REACTIONS` permission from users, to prevent spam",
     "Under-the-hood changes & improvements."
   ],
   "added": [
