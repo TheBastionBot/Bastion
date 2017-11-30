@@ -18,7 +18,8 @@
   ],
   "added": [
     "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
-    "Check when your buddies where last seen in Discord using the `lastSeen` command."
+    "Check when your buddies where last seen in Discord using the `lastSeen` command.",
+    "Paranoid about a site being breached? You can now use the `isBreached` command to check a site's breaches."
   ],
   "removed": [],
   "issues": []
