@@ -134,7 +134,8 @@ exports.run = async (Bastion, message, args) => {
     Bastion.log.error(e);
   });
 
-  user.send({
+  let DMChannel = await user.createDM();
+  DMChannel.send({
     embed: {
       color: Bastion.colors.ORANGE,
       title: 'Warning',

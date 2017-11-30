@@ -72,7 +72,8 @@ exports.run = async (Bastion, message, args) => {
     */
     Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, args.reason);
 
-    user.send({
+    let DMChannel = await user.createDM();
+    DMChannel.send({
       embed: {
         color: Bastion.colors.RED,
         description: `You've been banned from **${message.guild.name}** Server by **${message.author.tag}** for **${args.reason}**`

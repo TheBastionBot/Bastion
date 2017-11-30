@@ -60,7 +60,8 @@ exports.run = async (Bastion, message, args) => {
       });
     }
 
-    await message.author.send({
+    let authorDMChannel = await message.author.createDM();
+    authorDMChannel.send({
       embed: {
         color: Bastion.colors.GOLD,
         title: 'List of Commands',
