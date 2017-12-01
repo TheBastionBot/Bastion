@@ -14,6 +14,7 @@
     "`cite` will show the channel from where the message was cited.",
     "You can now check Bastion profiles and user avatars with the user ID, in `profile` and `avatar` command. No more mentioning!",
     "`emoji` command now requires `ADD_REACTIONS` permission from users, to prevent spam",
+    "Triggers can be now tripped with mixed cases! No more case sensitivity.",
     "Under-the-hood changes & improvements."
   ],
   "added": [

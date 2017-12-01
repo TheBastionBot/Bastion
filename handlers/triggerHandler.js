@@ -19,7 +19,7 @@ module.exports = async message => {
   let trigger = '';
   let response = [];
   for (let i = 0; i < triggers.length; i++) {
-    if (message.content === triggers[i].trigger) {
+    if (message.content.toLowerCase() === triggers[i].trigger.toLowerCase()) {
       trigger = triggers[i].trigger;
       response.push(triggers[i].response);
     }
