@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   let user = message.mentions.users.first();
   if (!user) {

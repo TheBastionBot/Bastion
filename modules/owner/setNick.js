@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length > 0) {
       await message.guild.members.get(Bastion.user.id).setNickname(args.join(' '));

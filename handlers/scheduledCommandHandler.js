@@ -53,7 +53,7 @@ module.exports = Bastion => {
             }
 
             if (cmd.config.enabled) {
-              cmd.run(Bastion, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+              cmd.exec(Bastion, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
             }
           },
           function () {},

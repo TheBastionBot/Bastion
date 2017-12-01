@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     args = message.mentions.users.first() || message.author;
 

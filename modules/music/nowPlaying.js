@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   if (message.channel.id !== message.guild.music.textChannelID) return;
 
   if (!message.guild.music.songs.length) {

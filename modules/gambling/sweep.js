@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let sweepedUser = message.channel.members.filter(m => !m.user.bot).random();
 
   message.channel.send({

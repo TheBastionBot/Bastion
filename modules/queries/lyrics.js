@@ -6,7 +6,7 @@
 
 const request = require('request');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!args.song) {
     /**
      * The command was ran with invalid parameters.

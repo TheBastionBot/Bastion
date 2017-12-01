@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
     args[0] = '0';
   }

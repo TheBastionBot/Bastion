@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   try {
     let owners = [];
     for (let userID of Bastion.credentials.ownerId) {

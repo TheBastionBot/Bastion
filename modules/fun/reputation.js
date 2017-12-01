@@ -7,7 +7,7 @@
 let recentUsers = [];
 const COOLDOWN = 12;
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (!recentUsers.includes(message.author.id)) {
     let user = message.mentions.users.first();
     if (!user) return;

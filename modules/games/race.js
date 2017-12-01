@@ -6,7 +6,7 @@
 
 const ProgressBar = require('../../utils/progress');
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let racers = [ [], [] ];
   const STEPS = 20;
   for (let i = 0; i < racers.length; i++) {

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     channel = message.channel;

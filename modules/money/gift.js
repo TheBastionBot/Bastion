@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let receiver = message.mentions.users.first();
   if (!args.product || !receiver) {
     /**

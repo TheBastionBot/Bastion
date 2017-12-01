@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     let profiles = await Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies * 1 DESC');
 

@@ -199,7 +199,7 @@ module.exports = async message => {
       }
     }
 
-    let isSuccessRun = await cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+    let isSuccessRun = await cmd.exec(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
 
     if (isSuccessRun === true) {
       if (activeUsers.hasOwnProperty(cmd.help.name)) {

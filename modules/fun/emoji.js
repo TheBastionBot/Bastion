@@ -6,7 +6,7 @@
 
 const fs = require('fs');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!args.name && !args.list) {
     /**
      * The command was ran with invalid parameters.

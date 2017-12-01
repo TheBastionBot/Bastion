@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   let outcomes = [
     'ROCK',
     'PAPER',

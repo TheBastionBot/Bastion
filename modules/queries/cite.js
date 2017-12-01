@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.message || !(parseInt(args.message) < 9223372036854775807)) {
     /**
      * The command was ran with invalid parameters.

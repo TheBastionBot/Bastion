@@ -6,7 +6,7 @@
 
 const request = require('request');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let baseURL = 'https://random.dog/';
   request(`${baseURL}woof`, function (error, response, body) {
     if (error) {

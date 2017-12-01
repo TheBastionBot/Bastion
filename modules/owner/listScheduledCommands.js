@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     let scheduledCommands = await Bastion.db.all('SELECT cronExp, command, arguments FROM scheduledCommands');
 

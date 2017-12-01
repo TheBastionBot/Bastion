@@ -6,7 +6,7 @@
 
 let activeChannels = {};
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
     /**
      * The command was ran with invalid parameters.

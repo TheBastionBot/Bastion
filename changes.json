@@ -1,5 +1,5 @@
 {
-  "date": "November 30, 2017",
+  "date": "December 1, 2017",
   "fixed": [
     "`lockdown` won't prevent adding reaction even after lockdown has been ended.",
     "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",

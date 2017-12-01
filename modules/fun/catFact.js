@@ -6,7 +6,7 @@
 
 const catFacts = require('../../data/catFacts.json');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,

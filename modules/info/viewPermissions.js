@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let fields = [];
   let permissions = message.member.permissions.serialize();
   for (let permission in permissions) {

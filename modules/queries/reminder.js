@@ -7,7 +7,7 @@
 const moment = require('moment');
 const remindUsers = {};
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.cancel) {
     Bastion.clearTimeout(remindUsers[message.author.id]);
     delete remindUsers[message.author.id];

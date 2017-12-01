@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let streamers = Array.from(message.guild.presences.filter(p => p.game && p.game.streaming === true).keys());
   message.channel.send({
     embed: {

@@ -7,7 +7,7 @@
 const request = require('request');
 let activeChannels = [];
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   if (activeChannels.includes(message.channel.id))  {
     /**
      * Error condition is encountered.

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   try {
     await Bastion.db.run(`UPDATE guildSettings SET modCaseNo='1' WHERE guildID=${message.guild.id}`);
 

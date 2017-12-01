@@ -6,7 +6,7 @@
 
 let giveaway, activeChannel;
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!activeChannel) {
     if (!args.amount || isNaN(args.amount)) {
       /**

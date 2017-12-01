@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let user = message.mentions.users.first();
   let limit = parseInt(args[0]) ? args[0] : args[1];
   let amount;

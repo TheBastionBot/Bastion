@@ -6,7 +6,7 @@
 
 const question = require('../../data/thisOrThat.json');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,

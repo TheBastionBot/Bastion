@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     if (parseInt(args[0]) < 9223372036854775807) {

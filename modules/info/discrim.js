@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
     /**
      * The command was ran with invalid parameters.
