@@ -5,6 +5,7 @@
     "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",
     "Fixed `overwatch` stats error if a user has too many achievements.",
     "Proper error message if trying to change server owner's nickname.",
+    "Fixed a bug with `pause`, `nowPlaying`, `removeSong` and `resume` commands that prevented it from working (was actually just a typo).",
     "Under-the-hood fixes."
   ],
   "improved": [

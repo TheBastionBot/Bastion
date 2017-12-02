@@ -19,7 +19,7 @@ exports.exec = (Bastion, message) => {
     embed: {
       color: Bastion.colors.BLUE,
       title: message.guild.music.dispatcher.paused ? 'Paused' : 'Now Playing',
-      url: message.guild.music.songs[0].id ? `https://youtu.be${message.guild.music.songs[0].id}` : '',
+      url: message.guild.music.songs[0].id ? `https://youtu.be/${message.guild.music.songs[0].id}` : '',
       description: message.guild.music.songs[0].title,
       thumbnail: {
         url: message.guild.music.songs[0].thumbnail
