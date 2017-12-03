@@ -4,8 +4,17 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
-  let user = message.mentions.users.first();
+exports.exec = (Bastion, message, args) => {
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = message.guild.members.get(args.id);
+    if (user) {
+      user = user.user;
+    }
+  }
   if (!user) {
     user = message.author;
   }
@@ -15,16 +24,12 @@ exports.run = (Bastion, message) => {
       color: Bastion.colors.BLUE,
       fields: [
         {
-          name: 'User',
+          name: 'Avatar',
           value: user.tag
-        },
-        {
-          name: 'Avatar URL',
-          value: user.displayAvatarURL
         }
       ],
       image: {
-        url: user.displayAvatarURL
+        url: user.displayAvatarURL.split('?')[0]
       }
     }
   }).catch(e => {
@@ -34,7 +39,10 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'av' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {

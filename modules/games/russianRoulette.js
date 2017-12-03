@@ -9,7 +9,7 @@ const outcomes = [
   'You got lucky, my friend.'
 ];
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   args = isNaN(args = parseInt(args[0])) ? 1 : args > 7 ? 7 : args;
   let outcome = '';
   for (let i = 0; i < args; i++) {

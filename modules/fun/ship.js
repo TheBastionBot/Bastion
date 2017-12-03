@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let users = message.mentions.users.map(u => u.username);
   if (users.length < 2) {
     /**

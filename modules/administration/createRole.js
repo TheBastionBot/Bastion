@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!Bastion.resolver.resolveColor(args.color)) {
     args.color = 0;
   }

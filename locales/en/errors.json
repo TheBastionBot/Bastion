@@ -15,6 +15,8 @@
     "unknown": "Unknown Error"
   },
   "descriptions": {
+    "ageAbove100": "Are you kidding me? You're more than 100 years old (and using Discord)! Try again with a valid age.",
+    "ageBelow13": "Sorry kid, you're not even allowed to use Discord until you turn 13.",
     "bastionMissingPermissions": "I need %var% permission to run this command.",
     "bioRange": "Bio should be fewer than %var% characters.",
     "channelNameLength": "Channel name should be between %var% and %var% characters.",
@@ -44,6 +46,7 @@
     "isEventInUse": "Cannot start the %var% event now. It is already running in this channel. Please wait for it to end.",
     "isGameInUse": "Cannot start the %var% game now. It is already running in this channel. Please wait for it to end.",
     "isSpeaking": "I am currently playing something in a voice channel. I cannot play another sound simultaneously.",
+    "locationRange": "Location should be fewer than %var% characters.",
     "lowerRole": "You do not have permission to use this command on that role.",
     "messageNotFound": "The specified message was not found.",
     "minBet": "Minimum bet amount is %var% %currencySymbol%.",

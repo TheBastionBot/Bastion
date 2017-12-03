@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let guildSettings = await Bastion.db.get(`SELECT log FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });

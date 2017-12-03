@@ -1,12 +1,12 @@
 /**
- * @file echo command
+ * @file emoji command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
 const fs = require('fs');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!args.name && !args.list) {
     /**
      * The command was ran with invalid parameters.
@@ -72,7 +72,7 @@ exports.config = {
 exports.help = {
   name: 'emoji',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'ADD_REACTIONS',
   userVoicePermission: '',
   usage: 'emoji < emoji_name | --list >',
   example: [ 'emoji yum', 'emoji --list' ]

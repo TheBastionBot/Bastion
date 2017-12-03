@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   if (message.deletable) {
     message.delete().catch(e => {
       Bastion.log.error(e);

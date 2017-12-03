@@ -6,7 +6,7 @@
 
 const convert = require('color-convert');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) {
     /**
      * The command was ran with invalid parameters.

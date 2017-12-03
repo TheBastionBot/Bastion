@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     let todo = await Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`);
 

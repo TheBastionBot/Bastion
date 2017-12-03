@@ -6,7 +6,7 @@
 
 const xkcd = require('xkcd');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.latest) {
     xkcd(function (data) {
       message.channel.send({

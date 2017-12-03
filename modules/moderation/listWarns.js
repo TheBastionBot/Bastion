@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
     return message.channel.send({
       embed: {

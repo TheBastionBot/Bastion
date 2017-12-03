@@ -7,7 +7,7 @@
 const RainbowSix = require('rainbowsix-api-node');
 const r6 = new RainbowSix();
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 2) {
     /**
      * The command was ran with invalid parameters.

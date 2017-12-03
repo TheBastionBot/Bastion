@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (message.guild.voiceConnection) {
     if (!message.guild.voiceConnection.channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
       /**

@@ -6,7 +6,7 @@
 
 const request = require('request');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   request('http://random.cat/meow', async function (error, response, body) {
     if (error) {
       /**

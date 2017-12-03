@@ -4,8 +4,8 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
-  let roles = message.guild.roles.filter(r => r.position !== 0).map(r => r.name).map((r, i) => `${i + 1}. ${r}`);
+exports.exec = (Bastion, message, args) => {
+  let roles = message.guild.roles.filter(r => r.position !== 0).map(r => `${r.name} - ${r.id}`).map((r, i) => `${i + 1}. ${r}`);
 
   let noOfPages = roles.length / 10;
   let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;

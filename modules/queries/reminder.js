@@ -7,7 +7,7 @@
 const moment = require('moment');
 const remindUsers = {};
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.cancel) {
     Bastion.clearTimeout(remindUsers[message.author.id]);
     delete remindUsers[message.author.id];
@@ -49,19 +49,23 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isReminderInUse', true, 'reminder --cancel'), message.channel);
   }
 
-  remindUsers[message.author.id] = Bastion.setTimeout(() => {
-    message.author.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Reminder',
-        description: args.message.join(' '),
-        timestamp: new Date()
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  remindUsers[message.author.id] = Bastion.setTimeout(async () => {
+    try {
+      let authorDMChannel = await message.author.createDM();
+      await authorDMChannel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Reminder',
+          description: args.message.join(' '),
+          timestamp: new Date()
+        }
+      });
 
-    delete remindUsers[message.author.id];
+      delete remindUsers[message.author.id];
+    }
+    catch (e) {
+      Bastion.log.error(e);
+    }
   }, duration);
 
   message.channel.send({

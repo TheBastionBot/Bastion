@@ -7,7 +7,7 @@
 const typingArticles = require('../../data/typingArticles.json');
 let activeChannels = [];
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (activeChannels.includes(message.channel.id)) {
     /**
      * Error condition is encountered.

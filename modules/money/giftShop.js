@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let gifts = {
     chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
     icecream: [ '🍦  Ice Cream', 10 ],

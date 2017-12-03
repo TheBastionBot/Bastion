@@ -4,31 +4,23 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
+  if (message.channel.id !== message.guild.music.textChannelID) return;
+
+  if (!message.guild.music.songs.length) {
+    /**
+    * Error condition is encountered.
+    * @fires error
+    */
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
+  }
+
   if (!args.index) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
      */
     return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (!message.guild.music) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
-  }
-
-  if (message.channel.id !== message.guild.music.textChannelID) return;
-
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (args.index > message.guild.music.songs.length || args.index < 1) {
@@ -46,7 +38,7 @@ exports.run = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.GREEN,
       title: 'Removed from the queue',
-      url: removedSong.id ? `https://youtu.be${removedSong.id}` : '',
+      url: removedSong.id ? `https://youtu.be/${removedSong.id}` : '',
       description: removedSong.title,
       thumbnail: {
         url: removedSong.thumbnail
@@ -65,13 +57,14 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'index', type: Number, defaultOption: true }
-  ]
+  ],
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'removeSong',
   botPermission: '',
-  userTextPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'removeSong [index]',
   example: [ 'removeSong 3' ]

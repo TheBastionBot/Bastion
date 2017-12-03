@@ -5,7 +5,7 @@
  */
 // I don't understand why this is even needed, but some fellows like this.
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let guildSettings = await Bastion.db.get(`SELECT farewell FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });

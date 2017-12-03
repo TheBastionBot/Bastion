@@ -6,7 +6,7 @@
 
 const request = require('request');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!args.player || !args.mode) {
     /**
      * The command was ran with invalid parameters.

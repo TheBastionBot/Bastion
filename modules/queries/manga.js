@@ -7,7 +7,7 @@
 const Kitsu = require('kitsu');
 const kitsu = new Kitsu();
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.name) {
     /**
      * The command was ran with invalid parameters.

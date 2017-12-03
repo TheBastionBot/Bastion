@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
   let user = message.mentions.users.first();
   if (!user) {
@@ -93,7 +93,8 @@ exports.run = async (Bastion, message, args) => {
     */
     Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
 
-    user.send({
+    let DMChannel = await user.createDM();
+    DMChannel.send({
       embed: {
         color: Bastion.colors.RED,
         title: `Soft-Banned from ${message.guild.name} Server`,

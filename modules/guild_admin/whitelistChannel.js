@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.invites && !args.links && !args.words) {
     /**
      * The command was ran with invalid parameters.

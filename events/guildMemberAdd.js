@@ -4,10 +4,9 @@
  * @license MIT
  */
 
-const greetMessages = require('../data/greetingMessages.json');
-
 module.exports = async member => {
   try {
+    const greetMessages = require('../data/greetingMessages.json');
     let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetPrivate, greetPrivateMessage, autoAssignableRoles, log FROM guildSettings WHERE guildID=${member.guild.id}`);
     if (!guild) return;
 
@@ -69,9 +68,12 @@ module.exports = async member => {
     }
 
     if (guild.greetPrivate) {
-      let greetPrivateMessage = 'Welcome to $server! Enjoy your time here.';
+      let greetPrivateMessage;
       if (guild.greetPrivateMessage) {
         greetPrivateMessage = await member.client.functions.decodeString(guild.greetPrivateMessage);
+      }
+      else {
+        greetPrivateMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
       }
       greetPrivateMessage = greetPrivateMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetPrivateMessage = greetPrivateMessage.replace(/\$server/ig, member.guild.name);

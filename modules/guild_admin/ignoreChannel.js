@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     let guildSettings = await Bastion.db.get(`SELECT ignoredChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
     let ignoredChannels = guildSettings.ignoredChannels, isIgnored = false,

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,

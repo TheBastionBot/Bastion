@@ -26,7 +26,7 @@
   "textChannelUpdate": "Text Channel Updated",
   "textMuteAdd": "Text Muted User",
   "textMuteRemove": "Text Unmuted User",
-  "userReport": "Soft-Banned User",
+  "userReport": "Reported User",
   "userSoftBan": "Soft-Banned User",
   "userUpdate": "User Updated",
   "userWarnAdd": "User Warned",

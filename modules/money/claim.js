@@ -7,7 +7,7 @@
 let claimedUsers = [];
 const specialIDs = require('../../data/specialIDs.json');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   if (!claimedUsers.includes(message.author.id)) {
     let rewardAmount;
 

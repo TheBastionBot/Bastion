@@ -4,23 +4,15 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+exports.exec = (Bastion, message) => {
+  if (message.channel.id !== message.guild.music.textChannelID) return;
+
+  if (!message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
      */
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
-  }
-
-  if (message.channel.id !== message.guild.music.textChannelID) return;
-
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   if (!message.guild.voiceConnection.speaking) return;
@@ -29,7 +21,7 @@ exports.run = (Bastion, message) => {
     embed: {
       color: Bastion.colors.ORANGE,
       title: 'Paused Playback',
-      url: message.guild.music.songs[0].id ? `https://youtu.be${message.guild.music.songs[0].id}` : '',
+      url: message.guild.music.songs[0].id ? `https://youtu.be/${message.guild.music.songs[0].id}` : '',
       description: message.guild.music.songs[0].title,
       footer: {
         text: `🔉 ${message.guild.music.dispatcher.volume * 50}% | ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
@@ -44,13 +36,14 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'pause',
   botPermission: '',
-  userTextPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'pause',
   example: []

@@ -65,6 +65,8 @@ module.exports = async db => {
     'level TEXT NOT NULL DEFAULT 0,' +
     'reputation TEXT NOT NULL DEFAULT 0,' +
     'bio BLOB,' +
+    'birthDate INTEGER,' +
+    'location TEXT,' +
     'PRIMARY KEY(userID))');
 
   await db.run('CREATE TABLE IF NOT EXISTS triggers' +

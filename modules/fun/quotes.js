@@ -6,7 +6,7 @@
 
 const quotes = require('../../data/quotes.json');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   /*
    * Get a random quote
    */

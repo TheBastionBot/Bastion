@@ -7,7 +7,7 @@
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!args.song) {
     db.reload();
     let title = 'Saved Playlists', playlist = db.getData('/');

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 2 || !(parseInt(args[0]) < 9223372036854775807)) {
       /**

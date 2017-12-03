@@ -4,8 +4,10 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+exports.exec = (Bastion, message) => {
+  if (message.channel.id !== message.guild.music.textChannelID) return;
+
+  if (!message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
@@ -13,13 +15,11 @@ exports.run = (Bastion, message) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
-  if (message.channel.id !== message.guild.music.textChannelID) return;
-
   message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: message.guild.music.dispatcher.paused ? 'Paused' : 'Now Playing',
-      url: message.guild.music.songs[0].id ? `https://youtu.be${message.guild.music.songs[0].id}` : '',
+      url: message.guild.music.songs[0].id ? `https://youtu.be/${message.guild.music.songs[0].id}` : '',
       description: message.guild.music.songs[0].title,
       thumbnail: {
         url: message.guild.music.songs[0].thumbnail

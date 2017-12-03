@@ -4,133 +4,54 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   try {
     let voiceChannel;
-    if (Bastion.credentials.ownerId.includes(message.author.id)) {
+    if (Bastion.credentials.ownerId.includes(message.author.id) || message.member.roles.has(message.guild.music.masterRoleID)) {
       voiceChannel = message.member.voiceChannel;
-
-      if (!voiceChannel || voiceChannel.type !== 'voice') {
+      if (!voiceChannel) {
         /**
         * Error condition is encountered.
         * @fires error
         */
         return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'userNoVC', true, message.author.tag), message.channel);
       }
+    }
+    else {
+      if (message.guild.music.textChannelID !== message.channel.id) return;
 
-      if (voiceChannel.joinable) {
-        let connection = await voiceChannel.join();
-
-        message.guild.members.get(Bastion.user.id).setMute(false).catch(() => {});
-        message.guild.members.get(Bastion.user.id).setDeaf(true).catch(() => {});
-
-        if (!voiceChannel.speakable) {
-          voiceChannel.leave();
-          /**
-          * Error condition is encountered.
-          * @fires error
-          */
-          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
-        }
-        else if (!connection.speaking) {
-          connection.playFile('./data/greeting.mp3', { passes: 1 });
-        }
-      }
-      else {
+      voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
+      if (!voiceChannel) {
         /**
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'invalidMusicChannel', true), message.channel);
       }
     }
-    else {
-      let guildSettings = await Bastion.db.get(`SELECT musicMasterRole, musicTextChannel, musicVoiceChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-      if (guildSettings.musicMasterRole) {
-        if (message.member.roles.has(guildSettings.musicMasterRole)) {
-          voiceChannel = message.member.voiceChannel;
+    if (!voiceChannel.joinable) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
+    }
+    if (!voiceChannel.speakable) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
+    }
 
-          if (!voiceChannel) {
-            /**
-            * Error condition is encountered.
-            * @fires error
-            */
-            return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'userNoVC', true, message.author.tag), message.channel);
-          }
+    let connection = await voiceChannel.join();
 
-          if (voiceChannel.joinable) {
-            let connection = await voiceChannel.join();
+    message.guild.members.get(Bastion.user.id).setMute(false).catch(() => {});
+    message.guild.members.get(Bastion.user.id).setDeaf(true).catch(() => {});
 
-            message.guild.members.get(Bastion.user.id).setMute(false).catch(() => {});
-            message.guild.members.get(Bastion.user.id).setDeaf(true).catch(() => {});
-
-            if (!voiceChannel.speakable) {
-              voiceChannel.leave();
-              /**
-              * Error condition is encountered.
-              * @fires error
-              */
-              return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
-            }
-            else if (!connection.speaking) {
-              connection.playFile('./data/greeting.mp3', { passes: 1 });
-            }
-          }
-          else {
-            /**
-            * Error condition is encountered.
-            * @fires error
-            */
-            return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
-          }
-        }
-      }
-      else {
-        if (guildSettings.musicTextChannel !== message.channel.id) return;
-
-        if (!guildSettings.musicVoiceChannel) {
-          /**
-          * Error condition is encountered.
-          * @fires error
-          */
-          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'musicChannelNotFound', true), message.channel);
-        }
-
-        if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel))) {
-          /**
-          * Error condition is encountered.
-          * @fires error
-          */
-          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'invalidMusicChannel', true), message.channel);
-        }
-
-        if (voiceChannel.joinable) {
-          let connection = await voiceChannel.join();
-
-          message.guild.members.get(Bastion.user.id).setMute(false).catch(() => {});
-          message.guild.members.get(Bastion.user.id).setDeaf(true).catch(() => {});
-
-          if (!voiceChannel.speakable) {
-            voiceChannel.leave();
-            /**
-            * Error condition is encountered.
-            * @fires error
-            */
-            return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
-          }
-          else if (!connection.speaking) {
-            connection.playFile('./data/greeting.mp3', { passes: 1 });
-          }
-        }
-        else {
-          /**
-          * Error condition is encountered.
-          * @fires error
-          */
-          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
-        }
-      }
+    if (!connection.speaking) {
+      connection.playFile('./data/greeting.mp3', { passes: 1 });
     }
   }
   catch (e) {

@@ -7,7 +7,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   request.get(`http://google.com/search?client=chrome&rls=en&ie=UTF-8&oe=UTF-8&q=${encodeURIComponent(args.query.join(' '))}`, (error, response, body) => {
     if (error) {
       /**

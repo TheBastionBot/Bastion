@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let guildSettings = await Bastion.db.get(`SELECT * FROM guildSettings WHERE guildID=${message.guild.id}`);
 
   message.channel.send({

@@ -6,7 +6,7 @@
 
 // This feature is absolutely useless because Discord already has audit logs. I'll probably remove this in future.
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let guildSettings = await Bastion.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
     Bastion.log.error(e);
   });

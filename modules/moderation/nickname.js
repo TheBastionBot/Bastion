@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let user = message.mentions.users.first();
   if (!user) {
     /**
@@ -16,17 +16,24 @@ exports.run = async (Bastion, message, args) => {
 
   if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
-  args = args.slice(1);
   let color;
   let nickStat = '';
-  if (args.length < 1) {
+  if (message.guild.ownerID === message.author.id) {
     color = Bastion.colors.RED;
-    nickStat = `${user}'s nickname removed.`;
+    nickStat = 'Can\'t change server owner\'s nickname.';
   }
   else {
-    color = Bastion.colors.GREEN;
-    nickStat = `${user}'s nickname changed.`;
+    args = args.slice(1);
+    if (args.length < 1) {
+      color = Bastion.colors.RED;
+      nickStat = `${user}'s nickname removed.`;
+    }
+    else {
+      color = Bastion.colors.GREEN;
+      nickStat = `${user}'s nickname changed.`;
+    }
   }
+
 
   try {
     await message.guild.members.get(user.id).setNickname(args.join(' '));

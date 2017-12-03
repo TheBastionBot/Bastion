@@ -1,18 +1,30 @@
 {
-  "date": "November 26, 2017",
+  "date": "December 3, 2017",
   "fixed": [
-    "An issue with moderation log, not known until now, that caused some log events to get omitted.",
-    "Fixed `emoji` command not accepting emojis with upper (or mixed) case."
+    "`lockdown` won't prevent adding reaction even after lockdown has been ended.",
+    "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",
+    "Fixed `overwatch` stats error if a user has too many achievements.",
+    "Proper error message if trying to change server owner's nickname.",
+    "Fixed a bug with `pause`, `nowPlaying`, `removeSong` and `resume` commands that prevented it from working (was actually just a typo).",
+    "Under-the-hood fixes."
   ],
   "improved": [
-    "Bastion won't show the commands to users they don't have permission to use in the channel/server, unless they use the `commands` command with the `--all` option.",
-    "You can now check user info with the user ID in `userInfo` command. No more mentioning!",
-    "Under-the-hood changes."
+    "Wanted to `ban` users who aren't already in the server? You can now do that using their ID.",
+    "Random greeting messages will be shown even for private greetings.",
+    "Bastion won't show User Left log if the user was banned.",
+    "`cite` will show the channel from where the message was cited.",
+    "You can now check Bastion profiles and user avatars with the user ID, in `profile` and `avatar` command. No more mentioning!",
+    "`emoji` command now requires `ADD_REACTIONS` permission from users, to prevent spam",
+    "Triggers can be now tripped with mixed cases! No more case sensitivity.",
+    "You can now see the default music channel if you don't pass any argument to the `musicChannel` command. For more option, see the command help: `help musicChannel`",
+    "You can now see your birthday and location in your bastion profile, if you've set it.",
+    "Under-the-hood changes & improvements."
   ],
   "added": [
-    "No need to go to server settings just to unban someone, use the new handy `unban` command.",
-    "Wanted to reset the moderation log cases back to 1? Use the new `resetModLogs` command.",
-    "You a Quake III Arena player? You can now get your server stats too, use the `quake3` command."
+    "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
+    "Check when your buddies where last seen in Discord using the `lastSeen` command.",
+    "Paranoid about a site being breached? You can now use the `isBreached` command to check a site's breaches.",
+    "You can now add your birthday and location to your Bastion profile, using the `setBirthDate` and `setLocation` commands respectively."
   ],
   "removed": [],
   "issues": []

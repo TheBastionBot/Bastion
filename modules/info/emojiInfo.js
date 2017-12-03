@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -62,6 +62,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'emojiInfo [:emoji:]',
+  usage: 'emojiInfo <:emoji:>',
   example: [ 'emojiInfo :bastion:' ]
 };

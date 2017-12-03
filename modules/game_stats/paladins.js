@@ -13,7 +13,7 @@ const hirez = new HiRez({
 
 let generatedSession = null;
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.player) {
     /**
      * The command was ran with invalid parameters.

@@ -6,7 +6,7 @@
 
 let recentUsers = [];
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let cooldown = 60;
 
   if (!recentUsers.includes(message.author.id)) {

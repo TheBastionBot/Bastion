@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     let streamers = await Bastion.db.get(`SELECT channelID, twitch FROM streamers WHERE guildID=${message.guild.id}`);
     let twitchStreamers = [], color, title, description;

@@ -4,23 +4,15 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
-  if (!message.guild.music) {
+exports.exec = (Bastion, message, args) => {
+  if (message.channel.id !== message.guild.music.textChannelID) return;
+
+  if (!message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
      */
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
-  }
-
-  if (message.channel.id !== message.guild.music.textChannelID) return;
-
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRole)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
   }
 
   let color = Bastion.colors.GREEN;
@@ -50,13 +42,14 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'volume',
   botPermission: '',
-  userTextPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'volume < + | - | amount >',
   example: [ 'volume +', 'volume -', 'volume 25' ]

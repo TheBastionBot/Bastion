@@ -6,7 +6,7 @@
 
 const dictionary = require('../../data/piratePhrases.json');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.

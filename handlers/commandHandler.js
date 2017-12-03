@@ -38,7 +38,7 @@ module.exports = async message => {
     if (!message.guild.prefix.some(prefix => message.content.startsWith(usedPrefix = prefix))) return;
 
     // Ignore commands from ignored roles & channels. Doesn't affect the guild administrator.
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
+    if (message.member && !message.member.hasPermission('ADMINISTRATOR')) {
       if (guild.ignoredChannels) {
         if (guild.ignoredChannels.split(' ').includes(message.channel.id)) return;
       }
@@ -137,7 +137,7 @@ module.exports = async message => {
     /**
      * Command permissions handler
      */
-    // Checks bot owner permission
+    // Checks for bot owner permission
     if (cmd.config.ownerOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id)) {
         /**
@@ -147,6 +147,18 @@ module.exports = async message => {
         return message.client.emit('userMissingPermissions', 'BOT_OWNER');
       }
     }
+
+    // Checks for music master permission
+    if (cmd.config.musicMasterOnly) {
+      if (!message.client.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.masterRoleID)) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.emit('userMissingPermissions', 'MUSIC_MASTER');
+      }
+    }
+
     // Checks if the user has the required permission
     if (cmd.help.userTextPermission) {
       if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
@@ -187,7 +199,7 @@ module.exports = async message => {
       }
     }
 
-    let isSuccessRun = await cmd.run(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+    let isSuccessRun = await cmd.exec(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
 
     if (isSuccessRun === true) {
       if (activeUsers.hasOwnProperty(cmd.help.name)) {

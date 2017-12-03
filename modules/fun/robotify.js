@@ -6,7 +6,7 @@
 
 const request = require('request');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   let string;
   if (args.length < 1) {
     string = message.author.tag;

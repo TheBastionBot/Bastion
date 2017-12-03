@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   let user;
   if (message.mentions.users.size) {
     user = message.mentions.users.first();
@@ -99,7 +99,7 @@ exports.run = (Bastion, message, args) => {
         }
       ],
       thumbnail: {
-        url: user.displayAvatarURL
+        url: user.displayAvatarURL.split('?')[0]
       },
       footer: {
         text: `${message.guild.ownerID === user.id ? 'Server Owner' : ''}`,

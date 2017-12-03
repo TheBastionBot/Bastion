@@ -7,11 +7,12 @@
 const yt = require('youtube-dl');
 const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
-// const db = new jsonDB('./data/favouriteSongs', true, true);
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
-  if (message.channel.id !== message.guild.music.textChannelID) return;
+  if (message.guild.music.textChannelID) {
+    if (message.channel.id !== message.guild.music.textChannelID) return;
+  }
 
   if (!args.song && !args.ytpl && !args.playlist) {
     /**
@@ -21,16 +22,14 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let guildSettings = await Bastion.db.get(`SELECT musicMasterRole, musicTextChannel, musicVoiceChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
-
   let voiceChannel, textChannel, vcStats;
   if (message.guild.voiceConnection) {
     voiceChannel = message.guild.voiceConnection.channel;
     textChannel = message.channel;
     vcStats = Bastion.strings.error(message.guild.language, 'userNoSameVC', true, message.author.tag);
   }
-  else if (guildSettings.musicTextChannel && guildSettings.musicVoiceChannel) {
-    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(guildSettings.musicVoiceChannel)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(guildSettings.musicTextChannel))) {
+  else if (message.guild.music.textChannelID && message.guild.music.voiceChannelID) {
+    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID))) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -61,8 +60,6 @@ exports.run = async (Bastion, message, args) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'musicChannelNotFound', true), message.channel);
   }
 
-  let musicMasterRole = guildSettings.musicMasterRole;
-
   if (textChannel.id !== message.channel.id) return;
   if (voiceChannel.members.get(message.author.id) === undefined) {
     /**
@@ -74,7 +71,7 @@ exports.run = async (Bastion, message, args) => {
 
   message.guild.music.voiceChannel = voiceChannel;
   message.guild.music.textChannel = textChannel;
-  message.guild.music.musicMasterRole = musicMasterRole;
+
   if (!message.guild.music.hasOwnProperty('songs')) {
     message.guild.music.songs = [];
   }
@@ -284,8 +281,8 @@ function startStreamDispatcher(guild, connection) {
         description: 'Exiting voice channel.'
       }
     }).then(() => {
+      guild.music.dispatcher.end();
       guild.music.voiceChannel.leave();
-      delete guild.music;
     }).catch(e => {
       guild.client.log.error(e);
     });

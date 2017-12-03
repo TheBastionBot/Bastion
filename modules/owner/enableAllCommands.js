@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   Bastion.commands.filter(cmd => {
     cmd.config.enabled = true;
   });

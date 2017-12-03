@@ -6,7 +6,7 @@
 
 let activeChannels = {};
 
-exports.run = async (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (activeChannels.hasOwnProperty(message.channel.id))  {
     /**
      * Error condition is encountered.

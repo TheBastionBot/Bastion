@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.length || !(parseInt(args[0]) < 9223372036854775807)) {
       /**
@@ -16,7 +16,8 @@ exports.run = async (Bastion, message, args) => {
 
     let user = await Bastion.fetchUser(args[0]);
 
-    user.send({
+    let DMChannel = await user.createDM();
+    DMChannel.send({
       embed: {
         color: Bastion.colors.BLUE,
         description: args.slice(1).join(' ')

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.run = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.message || !(parseInt(args.message) < 9223372036854775807)) {
     /**
      * The command was ran with invalid parameters.
@@ -40,7 +40,7 @@ exports.run = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.BLUE,
         author: {
-          name: citedMessage.author.tag,
+          name: `${citedMessage.author.tag} in #${citedMessage.channel.name}`,
           icon_url: citedMessage.author.avatarURL
         },
         description: citedMessage.content,
