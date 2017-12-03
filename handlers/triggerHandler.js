@@ -14,7 +14,7 @@ module.exports = async message => {
     message.client.db.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)');
   });
 
-  if (Object.keys(triggers).length === 0) return;
+  if (!Object.keys(triggers).length) return;
 
   let trigger = '';
   let response = [];
