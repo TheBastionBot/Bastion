@@ -1,5 +1,5 @@
 {
-  "date": "December 2, 2017",
+  "date": "December 3, 2017",
   "fixed": [
     "`lockdown` won't prevent adding reaction even after lockdown has been ended.",
     "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",
@@ -22,7 +22,8 @@
   "added": [
     "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
     "Check when your buddies where last seen in Discord using the `lastSeen` command.",
-    "Paranoid about a site being breached? You can now use the `isBreached` command to check a site's breaches."
+    "Paranoid about a site being breached? You can now use the `isBreached` command to check a site's breaches.",
+    "You can now add your birthday to your Bastion profile, use the `setBirthDate` command"
   ],
   "removed": [],
   "issues": []
