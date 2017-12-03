@@ -42,11 +42,50 @@ exports.exec = async (Bastion, message, args) => {
       */
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${user.id}>`), message.channel);
     }
+
     if (profile.bio) {
       profile.bio = await Bastion.functions.decodeString(profile.bio);
     }
     else {
       profile.bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+    }
+
+    let profileData = [
+      {
+        name: 'Bastion Currency',
+        value: profile.bastionCurrencies,
+        inline: true
+      },
+      {
+        name: 'Rank',
+        value: parseInt(profile.rank) + 1,
+        inline: true
+      },
+      {
+        name: 'Experience Points',
+        value: profile.xp,
+        inline: true
+      },
+      {
+        name: 'Level',
+        value: profile.level,
+        inline: true
+      }
+    ];
+
+    if (profile.birthDate) {
+      profileData.push({
+        name: 'Birthday',
+        value: new Date(profile.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
+        inline: true
+      });
+    }
+    if (profile.location) {
+      profileData.push({
+        name: 'Location',
+        value: profile.location,
+        inline: true
+      });
     }
 
     message.channel.send({
@@ -57,28 +96,7 @@ exports.exec = async (Bastion, message, args) => {
           icon_url: getUserIcon(user)
         },
         description: profile.bio,
-        fields: [
-          {
-            name: 'Bastion Currency',
-            value: profile.bastionCurrencies,
-            inline: true
-          },
-          {
-            name: 'Rank',
-            value: parseInt(profile.rank) + 1,
-            inline: true
-          },
-          {
-            name: 'Experience Points',
-            value: profile.xp,
-            inline: true
-          },
-          {
-            name: 'Level',
-            value: profile.level,
-            inline: true
-          }
-        ],
+        fields: profileData,
         thumbnail: {
           url: user.displayAvatarURL.split('?')[0]
         },

@@ -17,6 +17,7 @@
     "`emoji` command now requires `ADD_REACTIONS` permission from users, to prevent spam",
     "Triggers can be now tripped with mixed cases! No more case sensitivity.",
     "You can now see the default music channel if you don't pass any argument to the `musicChannel` command. For more option, see the command help: `help musicChannel`",
+    "You can now see your birthday and location in your bastion profile, if you've set it.",
     "Under-the-hood changes & improvements."
   ],
   "added": [
