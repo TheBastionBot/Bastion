@@ -46,7 +46,7 @@ exports.exec = async (Bastion, message, args) => {
   if (!user) {
     return message.channel.send({
       embed: {
-        description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your birth date.`
+        description: `<@${message.author.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your birth date.`
       }
     }).catch(e => {
       Bastion.log.error(e);
