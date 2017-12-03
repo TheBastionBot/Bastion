@@ -23,7 +23,7 @@
     "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
     "Check when your buddies where last seen in Discord using the `lastSeen` command.",
     "Paranoid about a site being breached? You can now use the `isBreached` command to check a site's breaches.",
-    "You can now add your birthday to your Bastion profile, use the `setBirthDate` command"
+    "You can now add your birthday and location to your Bastion profile, using the `setBirthDate` and `setLocation` commands respectively."
   ],
   "removed": [],
   "issues": []

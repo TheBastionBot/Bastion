@@ -46,6 +46,7 @@
     "isEventInUse": "Cannot start the %var% event now. It is already running in this channel. Please wait for it to end.",
     "isGameInUse": "Cannot start the %var% game now. It is already running in this channel. Please wait for it to end.",
     "isSpeaking": "I am currently playing something in a voice channel. I cannot play another sound simultaneously.",
+    "locationRange": "Location should be fewer than %var% characters.",
     "lowerRole": "You do not have permission to use this command on that role.",
     "messageNotFound": "The specified message was not found.",
     "minBet": "Minimum bet amount is %var% %currencySymbol%.",
