@@ -2,7 +2,8 @@
   "date": "December 5, 2017",
   "fixed": [],
   "improved": [
-    "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard."
+    "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard.",
+    "You won't see the channel name when you cite a message from the same channel. Simplicity is so nice."
   ],
   "added": [],
   "removed": [],
