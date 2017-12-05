@@ -8,6 +8,7 @@ let starredMessages = [];
 
 module.exports = async (reaction, user) => {
   try {
+    if (reaction.message.author.id === user.id) return;
     let guildSettings = await user.client.db.get(`SELECT starboard FROM guildSettings WHERE guildID=${reaction.message.guild.id}`);
     if (!guildSettings || !guildSettings.starboard) return;
     if (!reaction.message.content) return;
