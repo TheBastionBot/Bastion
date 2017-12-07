@@ -1,6 +1,8 @@
 {
-  "date": "December 5, 2017",
-  "fixed": [],
+  "date": "December 7, 2017",
+  "fixed": [
+    "Your *triggers* can be *triggered* with mixed cases *triggers*. Fixed the case sensitivity issue."
+  ],
   "improved": [
     "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard.",
     "You won't see the channel name when you cite a message from the same channel. Simplicity is so nice."
