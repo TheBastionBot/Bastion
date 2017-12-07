@@ -18,7 +18,7 @@ ECHO.
 
 ECHO [Bastion]: Deleting old files...
 RD /S /Q node_modules
-DEL /Q data/Bastion.sqlite
+DEL /Q data/Bastion.sqlite package-lock.json
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
 choco upgrade chocolatey -y
