@@ -1,12 +1,13 @@
 {
-  "date": "December 7, 2017",
+  "date": "December 8, 2017",
   "fixed": [
     "Your *triggers* can be *triggered* with mixed cases *triggers*. Fixed the case sensitivity issue.",
     "Server members were leaving the servers in a sneaky way. We fixed that; `USER_LEFT` events will now be logged without issues."
   ],
   "improved": [
     "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard.",
-    "You won't see the channel name when you cite a message from the same channel. Simplicity is so nice."
+    "You won't see the channel name when you cite a message from the same channel. Simplicity is so nice.",
+    "What if you forgot your server's prefix? So, Bastion'll always respond with the default prefix, no matter what the default prefix is."
   ],
   "added": [],
   "removed": [],

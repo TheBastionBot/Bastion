@@ -20,6 +20,7 @@ module.exports = async message => {
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     if (!message.guild.prefix || message.guild.prefix.join(' ') !== guild.prefix) {
       message.guild.prefix = guild.prefix.trim().split(' ');
+      message.guild.prefix.push(message.client.config.prefix);
     }
     // Add guild's language to the discord.js guild object to minimize database reads.
     if (!message.guild.language || message.guild.language !== guild.language) {
