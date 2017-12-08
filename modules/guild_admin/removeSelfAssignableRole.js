@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message, args) => {
     let deletedRoleID = roles[parseInt(args[0]) - 1];
     roles.splice(parseInt(args[0]) - 1, 1);
 
-    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${JSON.stringify(roles)}' WHERE guildID=${message.guild.id}`);
+    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${roles.join(' ')}' WHERE guildID=${message.guild.id}`);
 
     message.channel.send({
       embed: {
