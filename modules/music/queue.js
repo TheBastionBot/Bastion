@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = (Bastion, message, args) => {
   if (message.channel.id !== message.guild.music.textChannelID) return;
 
   if (!message.guild.music.songs.length) {
@@ -15,23 +15,30 @@ exports.exec = (Bastion, message) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
-  let fields = [ {
-    name: `▶ ${message.guild.music.songs[0].title}`,
-    value: `Requested by: ${message.guild.music.songs[0].requester}`
-  } ];
-  for (let i = 1; i < (message.guild.music.songs.length < 10 ? message.guild.music.songs.length : 9); i++) {
-    fields.push({
-      name: `${i}. ${message.guild.music.songs[i].title}`,
-      value: `Requested by: ${message.guild.music.songs[i].requester}`
-    });
-  }
+  let songs = message.guild.music.songs.slice(1);
+  songs = songs.map((song, i) => `**${i + 1}.** ${song.title}`);
+
+  let noOfPages = songs.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+  i = i - 1;
 
   message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Music queue',
-      description: `${message.guild.music.songs.length - 1} songs in queue`,
-      fields: fields
+      fields: [
+        {
+          name: 'Now Playing',
+          value: `${message.guild.music.songs[0].title}\n\n*Requested by ${message.guild.music.songs[0].requester}*`
+        },
+        {
+          name: 'Up next',
+          value: songs.slice(i * 10, (i * 10) + 10).join('\n\n') || 'Nothing\'s gonna play up next, add songs to the queue using the `play` command.'
+        }
+      ],
+      footer: {
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} | ${message.guild.music.songs.length - 1} songs in queue`
+      }
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -40,7 +47,10 @@ exports.exec = (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
+  ]
 };
 
 exports.help = {
@@ -48,6 +58,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'queue',
-  example: []
+  usage: 'queue <PAGE_NO>',
+  example: [ 'queue', 'queue 2' ]
 };
