@@ -3,7 +3,8 @@
   "fixed": [
     "Your *triggers* can be *triggered* with mixed cases *triggers*. Fixed the case sensitivity issue.",
     "Server members were leaving the servers in a sneaky way. We fixed that; `USER_LEFT` events will now be logged without issues.",
-    "`removeSelfAssignableRole` will not remove all your self-assignable roles anymore. A bug that was present since a long time ago, and no one noticed until now!"
+    "`removeSelfAssignableRole` will not remove all your self-assignable roles anymore. A bug that was present since a long time ago, and no one noticed until now!",
+    "`removeSong` won't allow you to remove the invisible song that it thought was present after the last song in the queue."
   ],
   "improved": [
     "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard.",

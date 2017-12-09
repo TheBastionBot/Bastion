@@ -23,7 +23,7 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (args.index > message.guild.music.songs.length || args.index < 1) {
+  if (args.index >= message.guild.music.songs.length || args.index < 1) {
     /**
      * Error condition is encountered.
      * @fires error
