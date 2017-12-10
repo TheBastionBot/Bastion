@@ -15,6 +15,8 @@
     "unknown": "Bilinmeyen hata"
   },
   "descriptions": {
+    "ageAbove100": "Şaka mı yapıyorsun? Sen 100 yaşındasın (ve discord kullanıyorsun)! Geçerli bir yaş ile yeniden deneyin.",
+    "ageBelow13": "Üzgünüm evlat, sen 13 girene kadar Discord kullanmamıza izin yok.",
     "bastionMissingPermissions": "Bu command'ı çalıştırmak için %var% izni gerekiyor.",
     "bioRange": "Biyo %var% karakterden az olmalıdır.",
     "channelNameLength": "Kanal adı %var% ve %var% karakter arasında olmalıdır.",
@@ -27,7 +29,7 @@
     "serverNotFound": "Bastion %var% 'da sunucuyu bulamıyor.\n• ** www **. Example.com yerine ** ww **. Example.com gibi yazım hataları için adresi kontrol edin.\n• Bağlantı zaman aşımına uğradı, daha sonra tekrar deneyin.",
     "deleteDefaultChannel": "Varsayılan olarak belirlenmiş kanalı silemezsiniz.",
     "eitherOneInVC": "En az bir kişi ses kanalında olmalı.",
-    "favSongsNotFound": "En sevdiğiniz şarkı listesine şarkı yok.",
+    "favSongsNotFound": "En sevdiğiniz şarkı listesinde şarkı yok.",
     "gamblingCooldown": "Son zamanlarda bu oyunda kumar oynadı %var% lütfen bekleyin daha önce yine kumar en az %var% saniye.",
     "giveLimit": "%_currencyName% 'nizin% var %var%' dan fazlasını veremezsiniz.",
     "giveNoUser": "%_currencyName% vermek istediğiniz kullanıcıdan bahsetmeniz gerekiyor.",
@@ -44,6 +46,7 @@
     "isEventInUse": "%var% olay şimdi başlatılamıyor. Bu kanalda zaten çalışıyor. Lütfen sonuna kadar bekleyin.",
     "isGameInUse": "%var% oyun şimdi başlatılamıyor. Bu kanalda zaten çalışıyor. Lütfen sonuna kadar bekleyin.",
     "isSpeaking": "Bir şey şu anda bir ses kanalı oynuyorum. Aynı anda başka bir ses çalamıyor.",
+    "locationRange": "Konumun %var% karakterden az olmalıdır.",
     "lowerRole": "Bu rolde bu komutu kullanmak için izniniz yok.",
     "messageNotFound": "Belirtilen kanal bulunamadı.",
     "minBet": "En düşük bahis miktarı %var% %currencySymbol% olduğunu.",
