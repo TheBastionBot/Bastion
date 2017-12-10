@@ -36,7 +36,7 @@ exports.exec = (Bastion, message, args) => {
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.GREEN,
+      color: Bastion.colors.RED,
       title: 'Removed from the queue',
       url: removedSong.id ? `https://youtu.be/${removedSong.id}` : '',
       description: removedSong.title,
