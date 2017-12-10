@@ -8,6 +8,13 @@ ECHO.
 SET cwd=%~dp0
 CD %cwd%
 
+IF EXIST data\Bastion.sqlite (
+  SETLOCAL ENABLEDELAYEDEXPANSION
+  FOR /F %%i in ('powershell -Command "Get-Date -format yyMMddHHmm (Get-Item data\Bastion.sqlite).LastWriteTime"') do SET modifiedDate=%%i
+  ECHO [Bastion]: Backing up database to backup_!modifiedDate!.sqlite...
+  REN data\Bastion.sqlite "backup_!modifiedDate!.sqlite"
+)
+
 ECHO [Bastion]: Updating Bastion Bot...
 git pull origin master 1>nul || (
   ECHO [Bastion]: Unable to update the bot.
@@ -18,7 +25,7 @@ ECHO.
 
 ECHO [Bastion]: Deleting old files...
 RD /S /Q node_modules
-DEL /Q data/Bastion.sqlite
+DEL /Q data/Bastion.sqlite package-lock.json
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
 choco upgrade chocolatey -y

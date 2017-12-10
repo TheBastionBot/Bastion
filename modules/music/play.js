@@ -220,7 +220,7 @@ exports.exec = (Bastion, message, args) => {
             url: info.thumbnail
           },
           footer: {
-            text: `Position: ${message.guild.music.songs.length} | Duration: ${info.duration} | Requester: ${message.author.tag}`
+            text: `Position: ${message.guild.music.songs.length} | Duration: ${info.duration || 'N/A'} | Requester: ${message.author.tag}`
           }
         }
       }).catch(e => {
@@ -301,7 +301,7 @@ function startStreamDispatcher(guild, connection) {
         url: guild.music.songs[0].thumbnail
       },
       footer: {
-        text: `🔉 ${guild.music.dispatcher.volume * 50}% | Duration: ${guild.music.songs[0].duration} | Requester: ${guild.music.songs[0].requester}`
+        text: `🔉 ${guild.music.dispatcher.volume * 50}% | Duration: ${guild.music.songs[0].duration || 'N/A'} | Requester: ${guild.music.songs[0].requester}`
       }
     }
   }).catch(e => {

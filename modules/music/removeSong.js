@@ -23,7 +23,7 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (args.index > message.guild.music.songs.length || args.index < 1) {
+  if (args.index >= message.guild.music.songs.length || args.index < 1) {
     /**
      * Error condition is encountered.
      * @fires error
@@ -36,7 +36,7 @@ exports.exec = (Bastion, message, args) => {
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.GREEN,
+      color: Bastion.colors.RED,
       title: 'Removed from the queue',
       url: removedSong.id ? `https://youtu.be/${removedSong.id}` : '',
       description: removedSong.title,

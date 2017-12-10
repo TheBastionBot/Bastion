@@ -1,31 +1,19 @@
 {
-  "date": "December 3, 2017",
+  "date": "December 10, 2017",
   "fixed": [
-    "`lockdown` won't prevent adding reaction even after lockdown has been ended.",
-    "Fixed GIF avatar support for `userInfo`, `profile` and `avatar` command.",
-    "Fixed `overwatch` stats error if a user has too many achievements.",
-    "Proper error message if trying to change server owner's nickname.",
-    "Fixed a bug with `pause`, `nowPlaying`, `removeSong` and `resume` commands that prevented it from working (was actually just a typo).",
-    "Under-the-hood fixes."
+    "Your *triggers* can be *triggered* with mixed cases *triggers*. Fixed the case sensitivity issue.",
+    "Server members were leaving the servers in a sneaky way. We fixed that; `USER_LEFT` events will now be logged without issues.",
+    "`removeSelfAssignableRole` will not remove all your self-assignable roles anymore. A bug that was present since a long time ago, and no one noticed until now!",
+    "`removeSong` won't allow you to remove the invisible song that it thought was present after the last song in the queue.",
+    "Songs not containing any information about the duration will show a friendly string rather than confusing `undefined`."
   ],
   "improved": [
-    "Wanted to `ban` users who aren't already in the server? You can now do that using their ID.",
-    "Random greeting messages will be shown even for private greetings.",
-    "Bastion won't show User Left log if the user was banned.",
-    "`cite` will show the channel from where the message was cited.",
-    "You can now check Bastion profiles and user avatars with the user ID, in `profile` and `avatar` command. No more mentioning!",
-    "`emoji` command now requires `ADD_REACTIONS` permission from users, to prevent spam",
-    "Triggers can be now tripped with mixed cases! No more case sensitivity.",
-    "You can now see the default music channel if you don't pass any argument to the `musicChannel` command. For more option, see the command help: `help musicChannel`",
-    "You can now see your birthday and location in your bastion profile, if you've set it.",
-    "Under-the-hood changes & improvements."
+    "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard.",
+    "You won't see the channel name when you cite a message from the same channel. Simplicity is so nice.",
+    "What if you forgot your server's prefix? So, Bastion'll always respond with the default prefix, no matter what the default prefix is.",
+    "Now you can even see the billionth song in your music queue, by passing the page no to the `queue` command. Because why not?"
   ],
-  "added": [
-    "Check current level and experience points without showing the entire profile, use the new `xp` and `level` commands.",
-    "Check when your buddies where last seen in Discord using the `lastSeen` command.",
-    "Paranoid about a site being breached? You can now use the `isBreached` command to check a site's breaches.",
-    "You can now add your birthday and location to your Bastion profile, using the `setBirthDate` and `setLocation` commands respectively."
-  ],
+  "added": [],
   "removed": [],
   "issues": []
 }

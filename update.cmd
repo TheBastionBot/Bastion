@@ -19,6 +19,7 @@ ECHO.
 ECHO [Bastion]: Updating dependencies...
 choco upgrade ffmpeg -y
 RD /S /Q node_modules
+DEL /Q package-lock.json
 CALL npm install --only=production >nul 2>update.log
 ECHO [Bastion]: Done.
 ECHO [Bastion]: If you get any errors please check the update.log file for errors while updating.

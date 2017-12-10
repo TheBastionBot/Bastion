@@ -17,7 +17,7 @@ module.exports = async member => {
       farewellMessage = farewellMessage.replace(/\$user/ig, `<@${member.id}>`);
       farewellMessage = farewellMessage.replace(/\$server/ig, member.guild.name);
       farewellMessage = farewellMessage.replace(/\$username/ig, member.displayName);
-      farewellMessage = farewellMessage.replace(/\$prefix/ig, member.guild.prefix[0] || member.client.config.prefix);
+      farewellMessage = farewellMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.config.prefix);
 
       member.guild.channels.get(guild.farewell).send({
         embed: {
@@ -37,7 +37,7 @@ module.exports = async member => {
     }
 
     if (guild.log) {
-      if (member.guild.permissionsFor(member.guild.me).has('BAN_MEMBERS')) {
+      if (member.guild.me.hasPermission('BAN_MEMBERS')) {
         let bannedUsers = await member.guild.fetchBans();
         if (bannedUsers.has(member.id)) return;
       }

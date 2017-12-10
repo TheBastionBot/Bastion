@@ -28,10 +28,10 @@ before_script:
 script:
   - npm test
 after_success:
-  - wget https://raw.githubusercontent.com/snkrsnkampa/travis-ci-discord-webhook/master/send.sh
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh success
+  - ./send.sh success $WEBHOOK_URL
 after_failure:
-  - wget https://raw.githubusercontent.com/snkrsnkampa/travis-ci-discord-webhook/master/send.sh
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh failure
+  - ./send.sh failure $WEBHOOK_URL

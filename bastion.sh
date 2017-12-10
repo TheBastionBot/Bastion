@@ -83,10 +83,10 @@ case $1 in
     echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 --stop' to stop it before running the update."
   else
     echo "Updating $NAME..."
-    git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\n" && exit 1)
+    git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\\n" && exit 1)
     echo "Updating dependencies..."
-    rm -fr node_modules
-    npm install --only=production 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
+    rm -fr node_modules package-lock.json
+    npm install --only=production 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\\n" && exit 1)
     echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
   fi
 ;;
@@ -95,20 +95,24 @@ case $1 in
   if [[ $(screengrepname) ]]; then
     echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 --stop' to stop it before running the update."
   else
+    if [ -r data/Bastion.sqlite ]; then
+      modifiedDate="$(date -r data/Bastion.sqlite -u +%y%m%d%H%M)"
+      echo "Backing up database to backup_${modifiedDate}.sqlite..."
+      mv data/Bastion.sqlite "data/backup_${modifiedDate}.sqlite"
+    fi
     echo "Deleting old files..."
-    rm -fr node_modules
-    rm -f data/Bastion.sqlite
+    rm -fr node_modules data/Bastion.sqlite package-lock.json
     echo "Updating $NAME..."
-    git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\n" && exit 1)
+    git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\\n" && exit 1)
     echo "Updating dependencies..."
-    npm install --only=production 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\n" && exit 1)
+    npm install --only=production 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\\n" && exit 1)
     echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
   fi
 ;;
 
 --fix-d)
   echo -e "${CYAN}[Bastion]:${NC} Fixing dependencies..."
-  rm -rf node_modules
+  rm -rf node_modules package-lock.json
   npm install --only=production
 ;;
 
