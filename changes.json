@@ -1,7 +1,10 @@
 {
   "date": "December 13, 2017",
   "fixed": [
-    "`createChannel` command will now work as expected."
+    "`createChannel` command will now work as expected.",
+    "`serverInfo` will work even if your server has huge no. of emojis.",
+    "`commands` command will now send all the commmands, removed the `--all` option.",
+    "`streamerRole` will show a friendly error if no streamer role was set, rather than being unresponsive."
   ],
   "improved": [],
   "added": [],
