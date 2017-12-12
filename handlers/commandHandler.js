@@ -163,7 +163,7 @@ module.exports = async message => {
     // Checks if the user has the required permission
     if (cmd.help.userTextPermission) {
       if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
-        if (!message.channel.permissionsFor(message.member).has(cmd.help.userTextPermission)) {
+        if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has(cmd.help.userTextPermission)) {
           /**
            * User has missing permissions.
            * @fires userMissingPermissions
@@ -175,7 +175,7 @@ module.exports = async message => {
 
     // Checks if Bastion has the required permission
     if (cmd.help.botPermission) {
-      if (!message.channel.permissionsFor(message.guild.me).has(cmd.help.botPermission)) {
+      if (!message.channel.permissionsFor(message.guild.me) || !message.channel.permissionsFor(message.guild.me).has(cmd.help.botPermission)) {
         /**
         * Bastion has missing permissions.
         * @fires bastionMissingPermissions
