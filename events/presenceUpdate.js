@@ -18,12 +18,12 @@ module.exports = async (oldMember, newMember) => {
 
     if (!newMember.user.presence.game || newMember.user.presence.game.type !== 1) {
       if (newMember.roles.has(streamerRole.id)) {
-        await newMember.removeRole(streamerRole, 'Stopped streaming');
+        await newMember.removeRole(streamerRole, 'Stopped streaming').catch(() => {});
       }
       return;
     }
 
-    await newMember.addRole(streamerRole, 'Started streaming');
+    await newMember.addRole(streamerRole, 'Started streaming').catch(() => {});
   }
   catch (e) {
     newMember.client.log.error(e);
