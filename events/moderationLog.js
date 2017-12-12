@@ -190,7 +190,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
         color = guild.client.colors.ORANGE;
         break;
 
-      case 'clearWarn':
+      case 'clearwarn':
         action = guild.client.strings.events(guild.language, 'userWarnRemove');
         color = guild.client.colors.GREEN;
         break;
