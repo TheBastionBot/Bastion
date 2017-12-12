@@ -50,21 +50,24 @@ module.exports = async member => {
       greetMessage = greetMessage.replace(/\$username/ig, member.displayName);
       greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.config.prefix);
 
-      member.guild.channels.get(guild.greet).send({
-        embed: {
-          color: member.client.colors.BLUE,
-          title: `Hello ${member.displayName}`,
-          description: greetMessage
-        }
-      }).then(m => {
-        if (guild.greetTimeout > 0) {
-          m.delete(1000 * parseInt(guild.greetTimeout)).catch(e => {
-            member.client.log.error(e);
-          });
-        }
-      }).catch(e => {
-        member.client.log.error(e);
-      });
+      let greetChannel = member.guild.channels.get(guild.greet);
+      if (greetChannel) {
+        greetChannel.send({
+          embed: {
+            color: member.client.colors.BLUE,
+            title: `Hello ${member.displayName}`,
+            description: greetMessage
+          }
+        }).then(m => {
+          if (guild.greetTimeout > 0) {
+            m.delete(1000 * parseInt(guild.greetTimeout)).catch(e => {
+              member.client.log.error(e);
+            });
+          }
+        }).catch(e => {
+          member.client.log.error(e);
+        });
+      }
     }
 
     if (guild.greetPrivate) {
