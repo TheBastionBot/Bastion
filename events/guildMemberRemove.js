@@ -19,21 +19,24 @@ module.exports = async member => {
       farewellMessage = farewellMessage.replace(/\$username/ig, member.displayName);
       farewellMessage = farewellMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.config.prefix);
 
-      member.guild.channels.get(guild.farewell).send({
-        embed: {
-          color: member.client.colors.BLUE,
-          title: `Goodbye ${member.displayName}!`,
-          description: farewellMessage
-        }
-      }).then(m => {
-        if (guild.farewellTimeout > 0) {
-          m.delete(1000 * parseInt(guild.farewellTimeout)).catch(e => {
-            member.client.log.error(e);
-          });
-        }
-      }).catch(e => {
-        member.client.log.error(e);
-      });
+      let farewellChannel = member.guild.channels.get(guild.farewell);
+      if (farewellChannel) {
+        farewellChannel.send({
+          embed: {
+            color: member.client.colors.BLUE,
+            title: `Goodbye ${member.displayName}!`,
+            description: farewellMessage
+          }
+        }).then(m => {
+          if (guild.farewellTimeout > 0) {
+            m.delete(1000 * parseInt(guild.farewellTimeout)).catch(e => {
+              member.client.log.error(e);
+            });
+          }
+        }).catch(e => {
+          member.client.log.error(e);
+        });
+      }
     }
 
     if (guild.log) {
