@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   try {
-    let channel = await message.guild.createChannel(args.name, 'channelType');
+    let channel = await message.guild.createChannel(args.name, channelType);
 
     await message.channel.send({
       embed: {
