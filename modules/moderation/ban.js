@@ -22,9 +22,10 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (message.guild.members.has(user.id)) {
-      if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+      let member = await message.guild.fetchMember(user.id);
+      if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
-      if (!message.guild.members.get(user.id).bannable) {
+      if (!member.bannable) {
         /**
         * Error condition is encountered.
         * @fires error

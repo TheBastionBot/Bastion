@@ -5,33 +5,33 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
-  let user = message.mentions.users.first();
-  if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
-
-  if (!message.guild.members.get(user.id).kickable) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'kick', user), message.channel);
-  }
-
-  let reason = args.slice(1).join(' ');
-  if (reason.length < 1) {
-    reason = 'No given reason';
-  }
-
   try {
-    let member = await message.guild.members.get(user.id).kick(reason);
+    let user = message.mentions.users.first();
+    if (!user) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let member = await message.guild.fetchMember(user.id);
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+
+    if (!member.kickable) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'kick', user), message.channel);
+    }
+
+    let reason = args.slice(1).join(' ');
+    if (reason.length < 1) {
+      reason = 'No given reason';
+    }
+
+    await member.kick(reason);
 
     message.channel.send({
       embed: {

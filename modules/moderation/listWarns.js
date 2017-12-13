@@ -4,32 +4,38 @@
  * @license MIT
  */
 
-exports.exec = (Bastion, message) => {
-  if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
-    return message.channel.send({
+exports.exec = async (Bastion, message) => {
+  try {
+    if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: 'No one has been warned yet.'
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+
+    let warnedUsers = [];
+    for (let userID of Object.keys(message.guild.warns)) {
+      let member = await message.guild.fetchMember(userID);
+      warnedUsers.push(`${member.user.tag} - ${message.guild.warns[userID]} Warnings`);
+    }
+
+    message.channel.send({
       embed: {
-        color: Bastion.colors.GREEN,
-        description: 'No one has been warned yet.'
+        color: Bastion.colors.ORANGE,
+        title: 'Warning List',
+        description: warnedUsers.join('\n')
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
-
-  let warnedUsers = [];
-  for (let userID of Object.keys(message.guild.warns)) {
-    warnedUsers.push(`${message.guild.members.get(userID).user.tag} - ${message.guild.warns[userID]} Warnings`);
-  }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.ORANGE,
-      title: 'Warning List',
-      description: warnedUsers.join('\n')
-    }
-  }).catch(e => {
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
