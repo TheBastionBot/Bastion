@@ -100,7 +100,7 @@ module.exports = async member => {
     }
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
     if (autoAssignableRoles.length) {
-      member.guild.members.get(member.id).addRoles(autoAssignableRoles).catch(e => {
+      member.addRoles(autoAssignableRoles).catch(e => {
         member.client.log.error(e);
       });
     }
