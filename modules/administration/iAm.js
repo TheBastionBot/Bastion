@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message, args) => {
 
     if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
-    await message.guild.members.get(message.author.id).addRole(role);
+    await message.member.addRole(role);
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
