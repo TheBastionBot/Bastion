@@ -4,37 +4,42 @@
  * @license MIT
  */
 
-exports.exec = (Bastion, message, args) => {
-  let user;
-  if (message.mentions.users.size) {
-    user = message.mentions.users.first();
-  }
-  else if (args.id) {
-    user = message.guild.members.get(args.id);
-    if (user) {
-      user = user.user;
+exports.exec = async (Bastion, message, args) => {
+  try {
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
     }
-  }
-  if (!user) {
-    user = message.author;
-  }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.BLUE,
-      fields: [
-        {
-          name: 'Avatar',
-          value: user.tag
-        }
-      ],
-      image: {
-        url: user.displayAvatarURL.split('?')[0]
+    else if (args.id) {
+      user = await message.guild.fetchMember(args.id);
+      if (user) {
+        user = user.user;
       }
     }
-  }).catch(e => {
+    if (!user) {
+      user = message.author;
+    }
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        fields: [
+          {
+            name: 'Avatar',
+            value: user.tag
+          }
+        ],
+        image: {
+          url: user.displayAvatarURL.split('?')[0]
+        }
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
