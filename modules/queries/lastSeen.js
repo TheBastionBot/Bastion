@@ -4,14 +4,14 @@
  * @license MIT
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     let user;
     if (message.mentions.users.size) {
       user = message.mentions.users.first();
     }
     else if (args.id) {
-      user = message.guild.members.get(args.id);
+      user = await message.guild.fetchMember(args.id);
       if (user) {
         user = user.user;
       }
@@ -53,6 +53,7 @@ exports.exec = (Bastion, message, args) => {
       color = Bastion.colors.RED;
       description = `I've not seen ${user.tag} in a while.`;
     }
+
     message.channel.send({
       embed: {
         color: color,
