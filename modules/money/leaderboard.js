@@ -11,12 +11,19 @@ exports.exec = async (Bastion, message, args) => {
     let fields = [];
 
     if (!args.global) {
-      profiles = profiles.filter(p => message.guild.members.get(p.userID));
+      profiles = profiles.filter(async p => await message.guild.fetchMember(p.userID).catch(() => {}));
     }
     profiles = profiles.slice(0, 10);
 
     for (let i = 0; i < profiles.length; i++) {
-      let user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? message.guild.members.get(profiles[i].userID).user.tag : profiles[i].userID;
+      let user;
+      if (message.guild.members.has(profiles[i].userID)) {
+        let member = await message.guild.fetchMember(profiles[i].userID);
+        user = member.user.tag;
+      }
+      else {
+        user = profiles[i].userID;
+      }
       fields.push({
         name: `${i + 1}. ${user}`,
         value: `${profiles[i].bastionCurrencies} Bastion Currencies`,
