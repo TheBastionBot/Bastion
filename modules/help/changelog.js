@@ -15,7 +15,7 @@ exports.exec = (Bastion, message) => {
   }
   if (CHANGES.improved.length !== 0) {
     changes.push({
-      name: 'THESE THINGS HAVE IMPROVED',
+      name: 'THESE ABILITIES HAVE ENHANCED',
       value: `- ${CHANGES.improved.join('\n- ')}`
     });
   }
