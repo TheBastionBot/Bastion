@@ -1,12 +1,18 @@
 {
-  "date": "December 13, 2017",
+  "date": "December 14, 2017",
   "fixed": [
     "`createChannel` command will now work as expected.",
     "`serverInfo` will work even if your server has huge no. of emojis.",
-    "`commands` command will now send all the commmands, removed the `--all` option.",
-    "`streamerRole` will show a friendly error if no streamer role was set, rather than being unresponsive."
+    "`streamerRole` will show a friendly error if no streamer role was set, rather than being unresponsive.",
+    "Killed the bugs that caused Bastion not to recognize uncached users and not respond to them.",
+    "Under-the-hood fixes"
   ],
-  "improved": [],
+  "improved": [
+    "`help` command won't suggest you to join the Bastion Discord Server if you use it in the Bastion Discord Server, it didn't made sense.",
+    "Rewritten `commands` command. `commands` will show the list of modules by default, specifying a module with the command will show the list of commands in that module.",
+    "Nifty changes to the `changeLog` command. Didn't you notice it already?",
+    "Under-the-hood improvements"
+  ],
   "added": [],
   "removed": [],
   "issues": []
