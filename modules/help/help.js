@@ -96,7 +96,9 @@ exports.exec = async (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.GOLD,
           title: 'Help',
-          description: `To get a list of commands, type \`${message.guild.prefix[0]}commands\`.\nTo get help about a specific command, type \`${message.guild.prefix[0]}help command_name\`.\n\nNeed help or support with Bastion Discord Bot?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt\n\nSee your DM from me, for invite links.`,
+          description: `To get a list of commands, type \`${message.guild.prefix[0]}commands\`.\nTo get help about a specific command, type \`${message.guild.prefix[0]}help command_name\`.` +
+                       `\n\nNeed help or support with Bastion Discord Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt'}` +
+                       '\n\nSee your DM from me, for invite links.',
           footer: {
             text: `Server Prefix: ${message.guild.prefix.join(' ')} | Total Commands: ${Bastion.commands.size}`
           }
