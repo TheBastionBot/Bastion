@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let description, color;
+    let description = `No role in your server has been set as the streamer role. To set a role as the streamer role, run the command \`${this.help.name} [ROLE_ID]\`.`, color = Bastion.colors.RED;
 
     if (args.role) {
       if (parseInt(args.message) >= 9223372036854775807) {
@@ -42,10 +42,6 @@ exports.exec = async (Bastion, message, args) => {
         if (streamerRole) {
           description = `The current streamer role is **${streamerRole.name}**`;
           color = Bastion.colors.BLUE;
-        }
-        else {
-          description = `No role in your server has been set as the streamer role. To set a role as the streamer role, run the command \`${this.help.name} [ROLE_ID]\`.`;
-          color = Bastion.colors.RED;
         }
       }
     }

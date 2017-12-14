@@ -5,35 +5,36 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let user = message.mentions.users.first();
-  let role;
-  if (!user) {
-    user = message.author;
-    role = args.join(' ');
-  }
-  else {
-    role = args.slice(1).join(' ');
-  }
-  role = message.guild.roles.find('name', role);
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
-  else if (!role) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
-  }
-
   try {
-    await message.guild.members.get(user.id).addRole(role);
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let user = message.mentions.users.first();
+    let role;
+    if (!user) {
+      user = message.author;
+      role = args.join(' ');
+    }
+    else {
+      role = args.slice(1).join(' ');
+    }
+    role = message.guild.roles.find('name', role);
+    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    else if (!role) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+    }
+
+    let member = await message.guild.fetchMember(user.id);
+    member.addRole(role);
 
     message.channel.send({
       embed: {

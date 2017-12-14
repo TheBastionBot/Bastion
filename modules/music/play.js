@@ -229,7 +229,7 @@ exports.exec = (Bastion, message, args) => {
       if (message.guild.music && message.guild.music.playing) return;
 
       voiceChannel.join().then(connection => {
-        message.guild.members.get(Bastion.user.id).setDeaf(true).catch(() => {});
+        message.guild.me.setDeaf(true).catch(() => {});
 
         startStreamDispatcher(message.guild, connection);
       }).catch(e => {

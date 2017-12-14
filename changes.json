@@ -1,19 +1,22 @@
 {
-  "date": "December 10, 2017",
+  "date": "December 15, 2017",
   "fixed": [
-    "Your *triggers* can be *triggered* with mixed cases *triggers*. Fixed the case sensitivity issue.",
-    "Server members were leaving the servers in a sneaky way. We fixed that; `USER_LEFT` events will now be logged without issues.",
-    "`removeSelfAssignableRole` will not remove all your self-assignable roles anymore. A bug that was present since a long time ago, and no one noticed until now!",
-    "`removeSong` won't allow you to remove the invisible song that it thought was present after the last song in the queue.",
-    "Songs not containing any information about the duration will show a friendly string rather than confusing `undefined`."
+    "`createChannel` command will now work as expected.",
+    "`serverInfo` will work even if your server has huge no. of emojis.",
+    "`streamerRole` will show a friendly error if no streamer role was set, rather than being unresponsive.",
+    "Killed the bugs that caused Bastion not to recognize uncached users and not respond to them.",
+    "Under-the-hood fixes"
   ],
   "improved": [
-    "You don't decide yourself if you're a star. Likewise, you can't post your own messages to starboard.",
-    "You won't see the channel name when you cite a message from the same channel. Simplicity is so nice.",
-    "What if you forgot your server's prefix? So, Bastion'll always respond with the default prefix, no matter what the default prefix is.",
-    "Now you can even see the billionth song in your music queue, by passing the page no to the `queue` command. Because why not?"
+    "`help` command won't suggest you to join the Bastion Discord Server if you use it in the Bastion Discord Server, it didn't made sense.",
+    "Rewritten `commands` command. `commands` will show the list of modules by default, specifying a module with the command will show the list of commands in that module.",
+    "Nifty changes to the `changeLog` command. Didn't you notice it already?",
+    "Meld `leaderboard` and `hallOfFame` commands!",
+    "Under-the-hood improvements"
   ],
   "added": [],
-  "removed": [],
+  "removed": [
+    "Still having the `hallOfFame` command after melding it with `leaderboard` command was useless."
+  ],
   "issues": []
 }

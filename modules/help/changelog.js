@@ -4,37 +4,36 @@
  * @license MIT
  */
 
-const CHANGES = require('../../changes.json');
-
 exports.exec = (Bastion, message) => {
+  const CHANGES = require('../../changes.json');
   let changes = [];
   if (CHANGES.fixed.length !== 0) {
     changes.push({
-      name: 'Fixed:',
+      name: 'THESE BUGS ARE DEAD',
       value: `- ${CHANGES.fixed.join('\n- ')}`
     });
   }
   if (CHANGES.improved.length !== 0) {
     changes.push({
-      name: 'Improved:',
+      name: 'THESE ABILITIES HAVE ENHANCED',
       value: `- ${CHANGES.improved.join('\n- ')}`
     });
   }
   if (CHANGES.added.length !== 0) {
     changes.push({
-      name: 'Added:',
+      name: 'NEW FEATURES!',
       value: `- ${CHANGES.added.join('\n- ')}`
     });
   }
   if (CHANGES.removed.length !== 0) {
     changes.push({
-      name: 'Removed:',
+      name: 'NOT AVAILABLE ANYMORE',
       value: `- ${CHANGES.removed.join('\n- ')}`
     });
   }
   if (CHANGES.issues.length !== 0) {
     changes.push({
-      name: 'Known Issues:',
+      name: 'BUGS HIDING IN THE CLOSET',
       value: `- ${CHANGES.issues.join('\n- ')}`
     });
   }

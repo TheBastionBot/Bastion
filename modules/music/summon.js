@@ -47,8 +47,8 @@ exports.exec = async (Bastion, message) => {
 
     let connection = await voiceChannel.join();
 
-    message.guild.members.get(Bastion.user.id).setMute(false).catch(() => {});
-    message.guild.members.get(Bastion.user.id).setDeaf(true).catch(() => {});
+    message.guild.me.setMute(false).catch(() => {});
+    message.guild.me.setDeaf(true).catch(() => {});
 
     if (!connection.speaking) {
       connection.playFile('./data/greeting.mp3', { passes: 1 });

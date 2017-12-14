@@ -157,8 +157,6 @@
     "gift": "Envoyez des cadeaux aux autres utilisateurs à partir des articles cadeaux que vous avez avec vous.",
     "giftShop": "Affiche les produits disponibles dans la boutique et leur prix.",
     "give": "Donner le montant spécifié de monnaie Bastion de votre compte à l'utilisateur spécifié. Si vous êtes le propriétaire du bot, vous pouvez donner n'importe quel montant de monnaie Bastion.",
-    "hallOfFame": "Affiche le classement top 10 avec le niveau le plus élevé et les points d'expérience.",
-    "leaderboard": "Montre le classement 10 le plus élevé avec le montant le plus élevé de monnaies Bastion.",
     "myGifts": "Indique les cadeaux que vous avez actuellement en votre possession.",
     "take": "Prenez le montant spécifié de monnaie Bastion à partir de l'utilisateur spécifié."
   },

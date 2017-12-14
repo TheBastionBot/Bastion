@@ -176,8 +176,6 @@
     "gift": "Enviar regalos a otros usuarios de los artículos de regalo que tiene con usted.",
     "giftShop": "Muestra los productos disponibles en la tienda de regalos, y su precio.",
     "give": "Entregue la cantidad especificada de Monedas Bastion de su cuenta al usuario especificado. Si usted es el propietario del bot, puede dar cualquier cantidad de monedas Bastion.",
-    "hallOfFame": "Muestra a los 10 usuarios con el más alto nivel y puntos de experiencia.",
-    "leaderboard": "Muestra la clasificación de los 10 primeros con la mayor cantidad de Monedas de Bastión.",
     "myGifts": "Muestra los regalos que actualmente tiene en su poder.",
     "take": "Tome la cantidad especificada de Monedas Bastion del usuario especificado."
   },

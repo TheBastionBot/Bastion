@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message, args) => {
       user = message.mentions.users.first();
     }
     else if (args.id) {
-      user = message.guild.members.get(args.id);
+      user = await message.guild.fetchMember(args.id);
       if (user) {
         user = user.user;
       }
@@ -93,7 +93,7 @@ exports.exec = async (Bastion, message, args) => {
         color: Bastion.colors.BLUE,
         author: {
           name: user.tag,
-          icon_url: getUserIcon(user)
+          icon_url: await getUserIcon(user)
         },
         description: profile.bio,
         fields: profileData,
@@ -136,56 +136,61 @@ exports.help = {
  * @param {User} user The user for which we need to get the icon
  * @returns {String} The url of the user's staff icon
  */
-function getUserIcon(user) {
-  const bastionGuildID = specialIDs.bastionGuild;
-  const bastionGuild = user.client.guilds.get(bastionGuildID);
-  if (!bastionGuild) return;
-  const bastionGuildMember = bastionGuild.members.get(user.id);
-  if (!bastionGuildMember) return;
+async function getUserIcon(user) {
+  try {
+    const bastionGuildID = specialIDs.bastionGuild;
+    const bastionGuild = user.client.guilds.get(bastionGuildID);
+    if (!bastionGuild) return;
+    const bastionGuildMember = await bastionGuild.fetchMember(user.id);
+    if (!bastionGuildMember) return;
 
-  const devRoleID = specialIDs.developerRole;
-  const contributorsRoleID = specialIDs.contributorsRole;
-  const donorsRoleID = specialIDs.donorsRole;
-  const modsRoleID = specialIDs.modsRole;
-  const patronsRoleID = specialIDs.patronsRole;
-  const supportRoleID = specialIDs.supportRole;
-  const testersRoleID = specialIDs.testersRole;
-  const translatorsRoleID = specialIDs.translatorsRole;
+    const devRoleID = specialIDs.developerRole;
+    const contributorsRoleID = specialIDs.contributorsRole;
+    const donorsRoleID = specialIDs.donorsRole;
+    const modsRoleID = specialIDs.modsRole;
+    const patronsRoleID = specialIDs.patronsRole;
+    const supportRoleID = specialIDs.supportRole;
+    const testersRoleID = specialIDs.testersRole;
+    const translatorsRoleID = specialIDs.translatorsRole;
 
-  const devIcon = 'https://i.imgur.com/ThSx8bZ.png';
-  const modsIcon = 'https://i.imgur.com/vntgkTs.png';
-  const contributorsIcon = 'https://i.imgur.com/kH49M8d.png';
-  const donorsIcon = 'https://i.imgur.com/0Jfh057.png';
-  const patronsIcon = 'https://i.imgur.com/VZePUfw.png';
-  const supportIcon = 'http://i.imgur.com/HM9UD6w.png';
-  const testersIcon = 'https://i.imgur.com/fVIW1Uy.png';
-  const translatorsIcon = 'https://i.imgur.com/COwpvnK.png';
-  // const partners = 'https://cdn.discordapp.com/emojis/314068430556758017.png';
-  // const hype = 'https://cdn.discordapp.com/emojis/314068430854684672.png';
-  // const nitro = 'https://cdn.discordapp.com/emojis/314068430611415041.png';
+    const devIcon = 'https://i.imgur.com/ThSx8bZ.png';
+    const modsIcon = 'https://i.imgur.com/vntgkTs.png';
+    const contributorsIcon = 'https://i.imgur.com/kH49M8d.png';
+    const donorsIcon = 'https://i.imgur.com/0Jfh057.png';
+    const patronsIcon = 'https://i.imgur.com/VZePUfw.png';
+    const supportIcon = 'http://i.imgur.com/HM9UD6w.png';
+    const testersIcon = 'https://i.imgur.com/fVIW1Uy.png';
+    const translatorsIcon = 'https://i.imgur.com/COwpvnK.png';
+    // const partners = 'https://cdn.discordapp.com/emojis/314068430556758017.png';
+    // const hype = 'https://cdn.discordapp.com/emojis/314068430854684672.png';
+    // const nitro = 'https://cdn.discordapp.com/emojis/314068430611415041.png';
 
-  if (bastionGuildMember.roles.has(devRoleID)) {
-    return devIcon;
+    if (bastionGuildMember.roles.has(devRoleID)) {
+      return devIcon;
+    }
+    if (bastionGuildMember.roles.has(modsRoleID)) {
+      return modsIcon;
+    }
+    else if (bastionGuildMember.roles.has(contributorsRoleID)) {
+      return contributorsIcon;
+    }
+    else if (bastionGuildMember.roles.has(supportRoleID)) {
+      return supportIcon;
+    }
+    else if (bastionGuildMember.roles.has(patronsRoleID)) {
+      return patronsIcon;
+    }
+    else if (bastionGuildMember.roles.has(donorsRoleID)) {
+      return donorsIcon;
+    }
+    else if (bastionGuildMember.roles.has(testersRoleID)) {
+      return testersIcon;
+    }
+    else if (bastionGuildMember.roles.has(translatorsRoleID)) {
+      return translatorsIcon;
+    }
   }
-  if (bastionGuildMember.roles.has(modsRoleID)) {
-    return modsIcon;
-  }
-  else if (bastionGuildMember.roles.has(contributorsRoleID)) {
-    return contributorsIcon;
-  }
-  else if (bastionGuildMember.roles.has(supportRoleID)) {
-    return supportIcon;
-  }
-  else if (bastionGuildMember.roles.has(patronsRoleID)) {
-    return patronsIcon;
-  }
-  else if (bastionGuildMember.roles.has(donorsRoleID)) {
-    return donorsIcon;
-  }
-  else if (bastionGuildMember.roles.has(testersRoleID)) {
-    return testersIcon;
-  }
-  else if (bastionGuildMember.roles.has(translatorsRoleID)) {
-    return translatorsIcon;
+  catch (e) {
+    process.stderr.write(`${e}\n`);
   }
 }

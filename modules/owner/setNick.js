@@ -7,7 +7,7 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length > 0) {
-      await message.guild.members.get(Bastion.user.id).setNickname(args.join(' '));
+      await message.guild.me.setNickname(args.join(' '));
 
       message.channel.send({
         embed: {
@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
     else {
-      await message.guild.members.get(Bastion.user.id).setNickname('');
+      await message.guild.me.setNickname('');
 
       message.channel.send({
         embed: {

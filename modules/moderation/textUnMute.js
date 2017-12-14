@@ -5,21 +5,21 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
-  let user = message.mentions.users.first();
-  if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+  try {
+    let user = message.mentions.users.first();
+    if (!user) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    let member = await message.guild.fetchMember(user.id);
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
-  let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
-  if (permissionOverwrites) {
-    try {
+    let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
+    if (permissionOverwrites) {
       await permissionOverwrites.delete();
 
       let reason = args.slice(1).join(' ');
@@ -61,9 +61,9 @@ exports.exec = async (Bastion, message, args) => {
         channel: message.channel
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
-    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

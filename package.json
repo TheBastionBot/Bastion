@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "6.3.1",
+  "version": "6.3.2",
   "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -33,11 +33,11 @@
     "gif-search": "^2.0.0",
     "google-translate-api": "github:k3rn31p4nic/google-translate-api",
     "hirez.js": "github:k3rn31p4nic/hirez.js",
-    "kitsu": "^3.1.3",
+    "kitsu": "^3.1.4",
     "lzutf8": "^0.4.7",
     "mathjs": "^3.17.0",
     "node-json-db": "^0.7.3",
-    "node-opus": "^0.2.7",
+    "opusscript": "0.0.6",
     "overwatch-js": "^1.6.0",
     "rainbowsix-api-node": "^0.0.1",
     "request": "^2.83.0",
@@ -52,5 +52,8 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0"
+  },
+  "optionalDependencies": {
+    "node-opus": "^0.2.7"
   }
 }

@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let profiles = await Bastion.db.all('SELECT userID, bastionCurrencies FROM profiles ORDER BY bastionCurrencies * 1 DESC');
+    let profiles = await Bastion.db.all('SELECT userID, level, xp, bastionCurrencies FROM profiles ORDER BY level * 1 DESC, xp * 1 DESC, bastionCurrencies * 1 DESC');
 
     let fields = [];
 
@@ -16,11 +16,17 @@ exports.exec = async (Bastion, message, args) => {
     profiles = profiles.slice(0, 10);
 
     for (let i = 0; i < profiles.length; i++) {
-      let user = message.guild.members.map(m => m.id).includes(profiles[i].userID) ? message.guild.members.get(profiles[i].userID).user.tag : profiles[i].userID;
+      let user;
+      if (message.guild.members.has(profiles[i].userID)) {
+        let member = await message.guild.fetchMember(profiles[i].userID);
+        user = member.user.tag;
+      }
+      else {
+        user = profiles[i].userID;
+      }
       fields.push({
         name: `${i + 1}. ${user}`,
-        value: `${profiles[i].bastionCurrencies} Bastion Currencies`,
-        inline: true
+        value: `Level: ${profiles[i].level}\tExperience Points: ${profiles[i].xp}\tBastion Currencies: ${profiles[i].bastionCurrencies}`
       });
     }
 
@@ -28,7 +34,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Leaderboard',
-        description: `Top ${profiles.length} users with highest Bastion Currencies`,
+        description: 'These are the users topping the chart!',
         fields: fields
       }
     }).catch(e => {
@@ -41,7 +47,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'lb' ],
+  aliases: [ 'lb', 'hallOfFame', 'hof' ],
   enabled: true,
   argsDefinitions: [
     { name: 'global', type: Boolean, alias: 'g' }
