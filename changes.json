@@ -11,6 +11,7 @@
     "`help` command won't suggest you to join the Bastion Discord Server if you use it in the Bastion Discord Server, it didn't made sense.",
     "Rewritten `commands` command. `commands` will show the list of modules by default, specifying a module with the command will show the list of commands in that module.",
     "Nifty changes to the `changeLog` command. Didn't you notice it already?",
+    "Meld `leaderboard` and `hallOfFame` commands!",
     "Under-the-hood improvements"
   ],
   "added": [],
