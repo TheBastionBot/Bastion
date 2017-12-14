@@ -15,6 +15,8 @@
     "Under-the-hood improvements"
   ],
   "added": [],
-  "removed": [],
+  "removed": [
+    "Still having the `hallOfFame` command after melding it with `leaderboard` command was useless."
+  ],
   "issues": []
 }
