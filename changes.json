@@ -1,5 +1,5 @@
 {
-  "date": "December 14, 2017",
+  "date": "December 15, 2017",
   "fixed": [
     "`createChannel` command will now work as expected.",
     "`serverInfo` will work even if your server has huge no. of emojis.",
