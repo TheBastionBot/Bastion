@@ -5,48 +5,40 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  let channel = message.mentions.channels.first();
-  if (!channel) {
-    channel = message.channel;
-    if (args.id) {
-      channel = message.guild.channels.get(args.id);
-    }
-    else if (args.name) {
-      channel = message.guild.channels.find('name', args.name.join(' '));
-    }
-    if (!channel) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
-    }
-  }
-
-  if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (channel.id === message.guild.defaultChannel.id) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'deleteDefaultChannel', true), message.channel);
-  }
-
   try {
+    let channel = message.mentions.channels.first();
+    if (!channel) {
+      channel = message.channel;
+      if (args.id) {
+        channel = message.guild.channels.get(args.id);
+      }
+      else if (args.name) {
+        channel = message.guild.channels.find('name', args.name.join(' '));
+      }
+      if (!channel) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
+      }
+    }
+
+    if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+    }
+    if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+      /**
+      * Bastion has missing permissions.
+      * @fires bastionMissingPermissions
+      */
+      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+    }
+
     await channel.delete();
 
     if (channel.id === message.channel.id) return;

@@ -1,6 +1,8 @@
 {
   "date": "December 16, 2017",
-  "fixed": [],
+  "fixed": [
+    "`deleteChannel` will now work as expected."
+  ],
   "improved": [
     "`roleColor` can now be used with `roleColour` too"
   ],
