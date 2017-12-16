@@ -27,7 +27,6 @@
     "connection": "Some error has occured while receiving data from the server. Please try again later.",
     "cooldown": "%var% you've recently used this command. Please try again later.\n`%var%` command can only be used once in **%var%** minutes.",
     "serverNotFound": "Bastion cannot find the server at %var%.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may have been timed out, try again later.",
-    "deleteDefaultChannel": "You cannot delete the default channel.",
     "eitherOneInVC": "Either one of us should be in a voice channel.",
     "favSongsNotFound": "There are no songs in your favourite songs list.",
     "gamblingCooldown": "%var% you have recently gambled in this game, please wait at least %var% seconds before gambling again.",

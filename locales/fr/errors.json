@@ -19,7 +19,6 @@
     "commandNoDisable": "Vous ne pouvez pas désactiver la commande %var%.",
     "connection": "Une erreur s’est produite lors de la réception de données depuis le serveur. Veuillez réessayer ultérieurement.",
     "serverNotFound": "Bastion ne peux pas trouver le serveur à l'adresse suivante : %var%.\n• Vérifiez l'adresse pour les fautes de frappe comme **ww**.example.com au lieu **www**.example.com\n• La connexion pourrait être expirée, veuillez réessayer plus tard.",
-    "deleteDefaultChannel": "Vous ne pouvez pas supprimer le canal par défaut.",
     "eitherOneInVC": "L'un de nous devrait être dans un canal vocal.",
     "favSongsNotFound": "Il n'y a aucune musiques dans votre liste de chansons favorites.",
     "gamblingCooldown": "%var% vous avez joué récemment à ce jeu, veuillez patienter au moins %var% secondes avant de jouer à nouveau.",

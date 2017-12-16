@@ -25,7 +25,6 @@
     "connection": "Ocurrió un error meintras recivia los datos del servidor. Por favor, inténtalo más tarde.",
     "cooldown": "%var% recientemente ha utilizado este comando. Por favor Inténtalo más tarde. '%var%' comando sólo puede ser utilizado una vez en ** %var% ** minutos.",
     "serverNotFound": "Bastion no puede encontrar el servidor en %var%.\n•Compruebe la dirección de los errores de escritura como ** ww **. Example.com en lugar de ** www **. Example.com\n•• Es posible que se haya agotado el tiempo de conexión, vuelva a intentarlo más tarde.",
-    "deleteDefaultChannel": "No puedes eliminar el canal predeterminado.",
     "eitherOneInVC": "Cualquiera de nosotros debería estar en un canal de voz.",
     "favSongsNotFound": "No hay canciones en tu lista de canciones favoritas.",
     "gamblingCooldown": "%var% has jugado recientemente en este juego, por favor, espera al menos %var% segundos antes de jugar de nuevo.",

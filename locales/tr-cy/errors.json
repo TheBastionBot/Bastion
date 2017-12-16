@@ -25,7 +25,6 @@
     "connection": "Sunucudan veri alınırken bir hata oluştu. Lütfen daha sonra yeniden deneyin.",
     "cooldown": "`%var%`, Son zamanlarda bu komutunu kullandınız. Lütfen daha sonra yeniden deneyin. '%var%' komutu yalnızca kullanılabilir bir kez içinde ** %var% Dakika Kullanılabilir.",
     "serverNotFound": "Bastion %var% 'da sunucuyu bulamıyor.\n• ** www **. Example.com yerine ** ww **. Example.com gibi yazım hataları için adresi kontrol edin.\n• Bağlantı zaman aşımına uğradı, daha sonra tekrar deneyin.",
-    "deleteDefaultChannel": "Varsayılan olarak belirlenmiş kanalı silemezsiniz.",
     "eitherOneInVC": "En az bir kişi ses kanalında olmalı.",
     "favSongsNotFound": "En sevdiğiniz şarkı listesine şarkı yok.",
     "gamblingCooldown": "Son zamanlarda bu oyunda kumar oynadı %var% lütfen bekleyin daha önce yine kumar en az %var% saniye.",
