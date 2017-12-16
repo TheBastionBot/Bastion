@@ -1,7 +1,9 @@
 {
   "date": "December 16, 2017",
   "fixed": [],
-  "improved": [],
+  "improved": [
+    "`roleColor` can now be used with `roleColour` too"
+  ],
   "added": [
     "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic."
   ],

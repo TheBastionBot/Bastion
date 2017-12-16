@@ -74,7 +74,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'roleColour' ],
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, multiple: true, defaultOption: true },
