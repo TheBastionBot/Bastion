@@ -26,6 +26,7 @@
     "fidgetSpinner": "Spins a fidget spinner for you and shows for how long it was spinning.",
     "flipText": "Sends the same message that you had sent, but flipped.",
     "fortune": "Shows you a fortune from a fortune cookie.",
+    "garfield": "Shows you a garfield comic.",
     "hello": "Get greetings from Bastion.",
     "leet": "Sends the same message that you had sent, but as leet text.",
     "pirateSpeak": "Sends the same message that you had sent, but as pirate speak.",
