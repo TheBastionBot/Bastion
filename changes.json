@@ -1,7 +1,8 @@
 {
-  "date": "December 16, 2017",
+  "date": "December 18, 2017",
   "fixed": [
-    "`deleteChannel` will now work as expected."
+    "`deleteChannel` will now work as expected.",
+    "Fixed module name case sensitivity for `commands` command. You can now pass the module name in mixed cases."
   ],
   "improved": [
     "`roleColor` can now be used with `roleColour` too"

@@ -8,7 +8,7 @@ exports.exec = async (Bastion, message, args) => {
   try {
     let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
     if (args.module) {
-      args.module = args.module.join('_');
+      args.module = args.module.join('_').toLowerCase();
       if (modules.includes(args.module)) {
         await message.channel.send({
           embed: {
