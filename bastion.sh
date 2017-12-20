@@ -122,13 +122,6 @@ case $1 in
   grep -qF "LC_ALL=\"$LANG\"" /etc/environment || echo "LC_ALL=\"$LANG\"" | sudo tee -a /etc/environment 1>/dev/null
 ;;
 
---fix-p)
-  echo -e "${CYAN}[Bastion]:${NC} Fixing permissions..."
-  (
-    cd .. && sudo chown -R "$USER":"$(id -gn "$USER")" Bastion .config
-  )
-;;
-
 *)
   echo
   echo -e "${CYAN}Bastion${NC}"
