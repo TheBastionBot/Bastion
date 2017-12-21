@@ -37,9 +37,7 @@ module.exports = async message => {
     for (let word of filteredWords) {
       if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
         if (message.deletable) {
-          message.delete().catch(e => {
-            message.client.log.error(e);
-          });
+          message.delete().catch(() => {});
         }
         return true;
       }
