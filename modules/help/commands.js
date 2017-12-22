@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
           embed: {
             color: Bastion.colors.GOLD,
             title: `List of Commands in ${args.module.replace(/_/g, ' ').toTitleCase()} Module`,
-            description: `To get the list of all the commands with details click [here](https://bastionbot.org/commands).\n\`\`\`${Bastion.commands.filter(cmd => cmd.config.module === args.module).map(cmd => cmd.help.name).join('\n')}\`\`\``
+            description: `To get the list of all the commands with details click [here](https://bastionbot.org/commands).\n\`\`\`css\n${Bastion.commands.filter(cmd => cmd.config.module === args.module).map(cmd => cmd.help.name).join('\n')}\`\`\``
           }
         });
       }
