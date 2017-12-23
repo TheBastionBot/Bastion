@@ -3,7 +3,8 @@
   "fixed": [
     "`deleteChannel` will now work as expected.",
     "Fixed module name case sensitivity for `commands` command. You can now pass the module name in mixed cases.",
-    "A command in every module was hiding *below the fold*, won't happen anymore. Every command is now displayed *ATF* (with colors)."
+    "A command in every module was hiding *below the fold*, won't happen anymore. Every command is now displayed *ATF* (with colors).",
+    "Under-the-hood changes"
   ],
   "improved": [
     "`roleColor` can now be used with `roleColour` too"

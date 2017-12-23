@@ -65,6 +65,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'data < location name[, country code] | zip code >',
+  usage: 'date < location name[, country code] | zip code >',
   example: [ 'date New York, US', 'date 94109' ]
 };
