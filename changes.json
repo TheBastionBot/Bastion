@@ -1,5 +1,5 @@
 {
-  "date": "December 26, 2017",
+  "date": "December 27, 2017",
   "fixed": [
     "`deleteChannel` will now work as expected.",
     "Fixed module name case sensitivity for `commands` command. You can now pass the module name in mixed cases.",
@@ -11,7 +11,8 @@
     "Bastion will now message the user personally after they have won the giveaway."
   ],
   "added": [
-    "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic."
+    "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic.",
+    "Added `destiny2` command for all gamers playing Destiny 2. Check out your and your stats right in Discord."
   ],
   "removed": [],
   "issues": []
