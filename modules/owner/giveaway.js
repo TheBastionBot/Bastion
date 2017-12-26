@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
      * @default
      */
     const TIMEOUT = 3;
-    let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁', '🎁' ];
+    let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁' ];
 
     reaction = reaction[Math.floor(Math.random() * reaction.length)];
 
@@ -77,6 +77,14 @@ exports.exec = async (Bastion, message, args) => {
             }).catch(e => {
               Bastion.log.error(e);
             });
+
+            winner.send({
+              embed: {
+                color: Bastion.colors.BLUE,
+                title: 'Congratulations',
+                description: `You won the giveaway in **${message.guild.name}** Server! And you've been awarded with **${args.amount}** Bastion Currencies.`
+              }
+            }).catch(() => {});
           }
           else {
             giveawayMessage.edit('', {

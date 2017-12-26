@@ -1,5 +1,5 @@
 {
-  "date": "December 23, 2017",
+  "date": "December 26, 2017",
   "fixed": [
     "`deleteChannel` will now work as expected.",
     "Fixed module name case sensitivity for `commands` command. You can now pass the module name in mixed cases.",
@@ -7,7 +7,8 @@
     "Under-the-hood changes"
   ],
   "improved": [
-    "`roleColor` can now be used with `roleColour` too"
+    "`roleColor` can now be used with `roleColour` too",
+    "Bastion will now message the user personally after they have won the giveaway."
   ],
   "added": [
     "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic."
