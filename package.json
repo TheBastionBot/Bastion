@@ -39,6 +39,7 @@
     "node-json-db": "^0.7.3",
     "opusscript": "0.0.6",
     "overwatch-js": "^1.6.1",
+    "pokedex-api": "^1.0.0",
     "rainbowsix-api-node": "^0.0.1",
     "request": "^2.83.0",
     "snekfetch": "^3.6.1",
