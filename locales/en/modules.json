@@ -248,6 +248,7 @@
     "capture": "Captures a screenshot of the specified webpage.",
     "choose": "Asks the bot to choose an option from a number of options.",
     "cite": "Cite any message from your Discord server.",
+    "coinMarketCap": "Shows market capitalization of the specified cryptocurrency.",
     "colour": "Convert the provided color in `HEX` format to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and `CSS` Keyword (Approximates to closest color) formats.",
     "date": "Shows the local date and time of any specified city.",
     "define": "Searches the definition of the specified word from English, French or German dictionary.",

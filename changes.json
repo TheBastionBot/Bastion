@@ -14,6 +14,7 @@
     "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic.",
     "Added `destiny2` command for all gamers playing Destiny 2. Check out your and your stats right in Discord.",
     "Added `pokemon` command for all those Pokémon fans. You can now get information on any Pokémon you want.",
+    "Added `coinMarketCap` command. Keep tabs on the market capitalization of various cryptocurrencies."
   ],
   "removed": [],
   "issues": []
