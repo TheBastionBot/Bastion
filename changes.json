@@ -1,5 +1,5 @@
 {
-  "date": "December 27, 2017",
+  "date": "December 28, 2017",
   "fixed": [
     "`deleteChannel` will now work as expected.",
     "Fixed module name case sensitivity for `commands` command. You can now pass the module name in mixed cases.",
@@ -14,7 +14,8 @@
     "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic.",
     "Added `destiny2` command for all gamers playing Destiny 2. Check out your and your stats right in Discord.",
     "Added `pokemon` command for all those Pokémon fans. You can now get information on any Pokémon you want.",
-    "Added `coinMarketCap` command. Keep tabs on the market capitalization of various cryptocurrencies."
+    "Added `coinMarketCap` command. Keep tabs on the market capitalization of various cryptocurrencies.",
+    "Easily see what permission Bastion has in a channel/server using the new `checkPermissions` command."
   ],
   "removed": [],
   "issues": []

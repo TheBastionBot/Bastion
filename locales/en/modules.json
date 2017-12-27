@@ -135,6 +135,7 @@
     "channelID": "Shows ID of a specified channel of your Discord server.",
     "channelInfo": "Shows information of a specified text or voice channel of your Discord server.",
     "channelTopic": "Shows the channel topic of text channel of your Discord server.",
+    "checkPermissions": "Shows the permissions Bastion has in the server/channel.",
     "discrim": "Searches for the users of your Discord server for the specifed discriminator.",
     "emojiInfo": "Shows information of a specifed emoji of your Discord server.",
     "inRole": "Shows members that have a specifed role in your Discord server.",
