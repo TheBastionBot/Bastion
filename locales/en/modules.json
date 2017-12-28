@@ -153,6 +153,7 @@
     "stats": "Shows detailed stats and info of Bastion.",
     "userID": "Shows ID of a specified user of your Discord server.",
     "userInfo": "Shows information of a specified user of your Discord server.",
+    "userLookup": "Fetches basic information of a user from Discord.",
     "viewPermissions": "Shows the permissions you have in the server/channel.",
     "xp": "Shows the experience points of the specified user's account."
   },
