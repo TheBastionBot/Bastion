@@ -8,7 +8,8 @@
   ],
   "improved": [
     "`roleColor` can now be used with `roleColour` too",
-    "Bastion will now message the user personally after they have won the giveaway."
+    "Bastion will now message the user personally after they have won the giveaway.",
+    "User permission in command help are now clearer."
   ],
   "added": [
     "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic.",
