@@ -18,6 +18,7 @@
     "Easily see what permission Bastion has in a channel/server using the new `checkPermissions` command.",
     "Added `giveXP` command so that bot owners can give experience points to anyone they want and increase their level anytime they want. Because they do what they want to do.",
     "Use the all new `userLookup` command to fetch basic information about a user from Discord, works for ANY (yeah, ANY) Discord user.",
+    "**Animated emoji!** Shake your booties, because you can now use the `animoji` command to use the animated emojis of your server. Oh yeah, anyone can use it, Nitro isn't required."
   ],
   "removed": [],
   "issues": []
