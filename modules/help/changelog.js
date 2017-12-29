@@ -43,7 +43,8 @@ exports.exec = (Bastion, message) => {
       color: Bastion.colors.BLUE,
       title: `Bastion Bot v${Bastion.package.version} Changelog`,
       url: 'https://github.com/TheBastionBot/Bastion/releases',
-      description: 'Missed an update? [Check out our previous change logs](https://github.com/TheBastionBot/Bastion/releases)',
+      description: 'Missed an update? [Check out our previous change logs](https://github.com/TheBastionBot/Bastion/releases)' +
+                   '\n\nSupport the development of Bastion and keep it running forever by [becoming a patron](https://patreon.com/snkrsnkampa) or [donating via PayPal](https://paypal.me/snkrsnkampa)',
       fields: changes,
       thumbnail: {
         url: Bastion.user.displayAvatarURL
