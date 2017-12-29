@@ -58,12 +58,12 @@ exports.exec = async (Bastion, message, args) => {
               },
               {
                 name: 'BOT Permissions',
-                value: `\`${command.help.botPermission}\`` || '-',
+                value: `\`${command.help.botPermission || '-'}\``,
                 inline: true
               },
               {
                 name: 'User Permissions',
-                value: `\`${command.help.userTextPermission}\`` || '-',
+                value: `\`${command.config.ownerOnly ? 'Bot Owner' : command.config.musicMasterOnly ? 'Music Master' : command.help.userTextPermission || '-'}\``,
                 inline: true
               },
               {

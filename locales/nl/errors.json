@@ -25,7 +25,6 @@
     "connection": "Een fout is opgetreden bij het ontvangen van gegevens van de server. Probeer het later nog eens.",
     "cooldown": "%var%, Je hebt recentelijk dit commando gebruikt... Probeer het later opnieuw.\nHet `%var%` commando kan alleen elke **%var%** minuten worden gebruikt.",
     "serverNotFound": "Bastion kan de server niet vinden op %var%.\n• Controleer het adres voor typefouten, zoals **ww**.voorbeeld.com in plaats van **www**.voorbeeld.com\n• Misschien is er een probleem met de verbinding, probeer het later opnieuw.",
-    "deleteDefaultChannel": "Je kunt het standaard kanaal niet verwijderen.",
     "eitherOneInVC": "Een van ons moet zich in een gesprekskanaal bevinden.",
     "favSongsNotFound": "Er zijn geen favorieten in de lijst toegevoegd.",
     "gamblingCooldown": "%var% je hebt recentelijk gegokt met dit spel, wacht minimaal %var% seconden om opnieuw te gokken in dit spel.",

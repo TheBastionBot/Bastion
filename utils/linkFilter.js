@@ -51,9 +51,7 @@ module.exports = async message => {
     filtered = true;
     // Delete the message
     if (message.deletable) {
-      message.delete().catch(e => {
-        message.client.log.error(e);
-      });
+      message.delete().catch(() => {});
     }
 
     message.channel.send({

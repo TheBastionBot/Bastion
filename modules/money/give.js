@@ -134,6 +134,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'give <amount> <@user-mention|user_id>',
-  example: [ 'give 100 @user#0001', 'give 150 2233445566778899' ]
+  usage: 'give <amount> <@USER_MENTION>',
+  example: [ 'give 100 @user#0001' ]
 };

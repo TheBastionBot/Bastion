@@ -8,7 +8,6 @@ const request = require('request');
 
 exports.exec = (Bastion, message, args) => {
   if (!args.name) {
-  // if (!args.player || !args.mode) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
