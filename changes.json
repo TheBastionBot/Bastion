@@ -9,7 +9,8 @@
   "improved": [
     "`roleColor` can now be used with `roleColour` too",
     "Bastion will now message the user personally after they have won the giveaway.",
-    "User permission in command help are now clearer."
+    "User permission in command help are now clearer.",
+    "Patrons and Donators (donating via PayPal) can now *get upto 15x more Bastion Currencies* when using the `daily` command."
   ],
   "added": [
     "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic.",

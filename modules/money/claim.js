@@ -12,13 +12,13 @@ exports.exec = (Bastion, message) => {
     let rewardAmount;
 
     if (message.member.roles.has(specialIDs.patronsRole)) {
-      rewardAmount = Bastion.functions.getRandomInt(50, 70);
+      rewardAmount = Bastion.functions.getRandomInt(100, 150);
     }
     else if (message.member.roles.has(specialIDs.donorsRole)) {
-      rewardAmount = Bastion.functions.getRandomInt(30, 50);
+      rewardAmount = Bastion.functions.getRandomInt(50, 100);
     }
     else {
-      rewardAmount = Bastion.functions.getRandomInt(10, 30);
+      rewardAmount = Bastion.functions.getRandomInt(10, 50);
     }
 
     Bastion.emit('userDebit', message.author, rewardAmount);
