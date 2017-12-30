@@ -1,27 +1,18 @@
 {
-  "date": "December 29, 2017",
+  "date": "December 30, 2017",
   "fixed": [
-    "`deleteChannel` will now work as expected.",
-    "Fixed module name case sensitivity for `commands` command. You can now pass the module name in mixed cases.",
-    "A command in every module was hiding *below the fold*, won't happen anymore. Every command is now displayed *ATF* (with colors).",
-    "Under-the-hood changes"
+    "Fixed `warn` command not warning users.",
+    "Fixed `muteList` command not working when using it if no one was ever muted in the server.",
+    "Fixed `listWarns` command not working when a warned user had left the server."
   ],
   "improved": [
-    "`roleColor` can now be used with `roleColour` too",
-    "Bastion will now message the user personally after they have won the giveaway.",
-    "User permission in command help are now clearer.",
-    "Patrons and Donators (donating via PayPal) can now *get up to 15x more Bastion Currencies* when using the `daily` command."
+    "Faster level ups! 1.5x less XP required for leveling up.",
+    "`nickname` command will show proper error if nickname length exceeds.",
+    "`anime` command will now show proper error if none was found.",
+    "`ping` command will now show the username of the bot.",
+    "Removed some unnecessary error logs."
   ],
-  "added": [
-    "Hey Garfield lovers, try the new `garfield` command for a cool garfield comic.",
-    "Added `destiny2` command for all gamers playing Destiny 2. Check out your and your stats right in Discord.",
-    "Added `pokemon` command for all those Pokémon fans. You can now get information on any Pokémon you want.",
-    "Added `coinMarketCap` command. Keep tabs on the market capitalization of various cryptocurrencies.",
-    "Easily see what permission Bastion has in a channel/server using the new `checkPermissions` command.",
-    "Added `giveXP` command so that bot owners can give experience points to anyone they want and increase their level anytime they want. Because they do what they want to do.",
-    "Use the all new `userLookup` command to fetch basic information about a user from Discord, works for ANY (yeah, ANY) Discord user.",
-    "**Animated emoji!** Shake your booties, because you can now use the `animoji` command to use the animated emojis of your server. Oh yeah, anyone can use it, Nitro isn't required."
-  ],
+  "added": [],
   "removed": [],
   "issues": []
 }

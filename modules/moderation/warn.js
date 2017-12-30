@@ -34,7 +34,7 @@ exports.exec = async (Bastion, message, args) => {
         let guildSettings = await Bastion.db.get(`SELECT warnAction FROM guildSettings WHERE guildID='${message.guild.id}'`);
 
         if (guildSettings.warnAction) {
-          let member, action;
+          let action;
           if (guildSettings.warnAction === 'kick') {
             if (!member.kickable) {
               /**
@@ -43,7 +43,7 @@ exports.exec = async (Bastion, message, args) => {
               */
               return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), `I don't have permissions to kick ${user}.`, message.channel);
             }
-            member = await member.kick('Warned 3 times!');
+            await member.kick('Warned 3 times!');
             action = 'Kicked';
           }
           if (guildSettings.warnAction === 'softban') {
@@ -54,7 +54,7 @@ exports.exec = async (Bastion, message, args) => {
               */
               return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), `I don't have permissions to soft-ban ${user}.`, message.channel);
             }
-            member = await member.ban('Warned 3 times!');
+            await member.ban('Warned 3 times!');
             await message.guild.unban(member.id);
             action = 'Soft-Banned';
           }
@@ -66,7 +66,7 @@ exports.exec = async (Bastion, message, args) => {
               */
               return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), `I don't have permissions to ban ${user}.`, message.channel);
             }
-            member = await member.ban('Warned 3 times!');
+            await member.ban('Warned 3 times!');
             action = 'Banned';
           }
 

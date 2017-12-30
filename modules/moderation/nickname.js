@@ -26,17 +26,24 @@ exports.exec = async (Bastion, message, args) => {
     }
     else {
       args = args.slice(1);
-      if (args.length < 1) {
+      args = args.join(' ');
+
+      if (args.length > 32) {
         color = Bastion.colors.RED;
-        nickStat = `${user}'s nickname removed.`;
+        nickStat = `Nickname can't be longer than 32 characters.`;
       }
       else {
-        color = Bastion.colors.GREEN;
-        nickStat = `${user}'s nickname changed.`;
+        if (args.length < 1) {
+          color = Bastion.colors.RED;
+          nickStat = `${user}'s nickname removed.`;
+        }
+        else {
+          color = Bastion.colors.GREEN;
+          nickStat = `${user}'s nickname changed.`;
+        }
       }
+      await member.setNickname(args);
     }
-
-    await member.setNickname(args.join(' '));
 
     message.channel.send({
       embed: {
