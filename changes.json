@@ -9,7 +9,8 @@
     "Faster level ups! 1.5x less XP required for leveling up.",
     "`nickname` command will show proper error if nickname length exceeds.",
     "`anime` command will now show proper error if none was found.",
-    "Removed some unnecessary error logs"
+    "`ping` command will now show the username of the bot.",
+    "Removed some unnecessary error logs."
   ],
   "added": [],
   "removed": [],
