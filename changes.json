@@ -2,7 +2,8 @@
   "date": "December 30, 2017",
   "fixed": [
     "Fixed `warn` command not warning users.",
-    "Fixed `muteList` command not working when using it if no one was ever muted in the server."
+    "Fixed `muteList` command not working when using it if no one was ever muted in the server.",
+    "Fixed `listWarns` command not working when a warned user had left the server."
   ],
   "improved": [
     "Faster level ups! 1.5x less XP required for leveling up.",
