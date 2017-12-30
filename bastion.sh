@@ -52,7 +52,7 @@ case $1 in
     echo -e "${CYAN}[Bastion]:${NC} Checking System..."
     if [ -r bastion.js ]; then
       echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
-      screen -dmS "$NAME" -L "bastion.log" /bin/bash -c "until node .; do sleep 1; done"
+      screen -dmS "$NAME" -L -Logfile "bastion.log" /bin/bash -c "until node .; do sleep 1; done"
       echo -e "${GREEN}$NAME was successfully started!${NC} If you have any problems, see the log using '$0 --show' or start $NAME in dubug mode using '$0 --debug'!"
     else
       echo -e "${RED}[ERROR] System Check Failed.${NC}" && echo -e "Check if you have Bastion Bot installed correctly." && exit 1
