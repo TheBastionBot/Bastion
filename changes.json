@@ -2,7 +2,8 @@
   "date": "December 30, 2017",
   "fixed": [],
   "improved": [
-    "Faster level ups! 1.5x less XP required for leveling up."
+    "Faster level ups! 1.5x less XP required for leveling up.",
+    "`nickname` command will show proper error if nickname length exceeds."
   ],
   "added": [],
   "removed": [],
