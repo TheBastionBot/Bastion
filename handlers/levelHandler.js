@@ -21,7 +21,7 @@ module.exports = async message => {
       profile.level = parseInt(profile.level);
       profile.bastionCurrencies = parseInt(profile.bastionCurrencies);
 
-      let currentLevel = Math.floor(0.1 * Math.sqrt(profile.xp + 1));
+      let currentLevel = Math.floor(0.15 * Math.sqrt(profile.xp + 1));
 
       if (currentLevel > profile.level) {
         await message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`);
