@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message) => {
     await responseMessage.edit({
       embed: {
         color: Bastion.colors.BLUE,
-        title: 'Bastion PING Statistics',
+        title: `${Bastion.user.username} PING Statistics`,
         fields: [
           {
             name: 'Response Time',
