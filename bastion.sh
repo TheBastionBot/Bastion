@@ -39,7 +39,7 @@ case $1 in
 
 --show)
   if [[ $(screengrepname) ]]; then
-    tail -f bastion.log
+    tail -f screenlog.0
   else
     echo -e "$NAME is currently ${RED}stopped${NC}!"
   fi
@@ -52,7 +52,7 @@ case $1 in
     echo -e "${CYAN}[Bastion]:${NC} Checking System..."
     if [ -r bastion.js ]; then
       echo -e "${CYAN}[Bastion]:${NC} System Checked. O7" && echo -e "${CYAN}[Bastion]:${NC} Booting up..."
-      screen -dmS "$NAME" -L -Logfile "bastion.log" /bin/bash -c "until node .; do sleep 1; done"
+      screen -dmS "$NAME" -L /bin/bash -c "until node .; do sleep 1; done"
       echo -e "${GREEN}$NAME was successfully started!${NC} If you have any problems, see the log using '$0 --show' or start $NAME in dubug mode using '$0 --debug'!"
     else
       echo -e "${RED}[ERROR] System Check Failed.${NC}" && echo -e "Check if you have Bastion Bot installed correctly." && exit 1
@@ -84,7 +84,7 @@ case $1 in
     echo "Updating $NAME..."
     git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\\n" && exit 1)
     echo "Updating dependencies..."
-    rm -fr node_modules package-lock.json bastion.log
+    rm -fr node_modules package-lock.json screenlog.0
     npm install --only=production --no-optional --no-package-lock 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\\n" && exit 1)
     echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."
   fi
@@ -100,7 +100,7 @@ case $1 in
       mv data/Bastion.sqlite "data/backup_${modifiedDate}.sqlite"
     fi
     echo "Deleting old files..."
-    rm -fr node_modules data/Bastion.sqlite package-lock.json bastion.log
+    rm -fr node_modules data/Bastion.sqlite package-lock.json screenlog.0
     echo "Updating $NAME..."
     git pull origin master 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\\n" && exit 1)
     echo "Updating dependencies..."
