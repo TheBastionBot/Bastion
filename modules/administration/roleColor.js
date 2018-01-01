@@ -64,7 +64,6 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: role.color,
-        title: 'Role Color Changed',
         description: `${message.author.tag} changed the color of **${role.name}** role to **${args.color.toTitleCase()}**.`
       }
     });
