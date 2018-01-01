@@ -63,7 +63,10 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        description: `${message.author.tag} renamed the ${channel.type} channel **${args.old}** to **${args.new}**`
+        description: `${message.author.tag} renamed the ${channel.type} channel **${args.old}** to **${args.new}**`,
+        footer: {
+          text: `ID: ${channel.id}`
+        }
       }
     });
   }
