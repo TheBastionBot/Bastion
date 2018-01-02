@@ -1,16 +1,12 @@
 {
-  "date": "December 30, 2017",
+  "date": "January 2, 2018",
   "fixed": [
-    "Fixed `warn` command not warning users.",
-    "Fixed `muteList` command not working when using it if no one was ever muted in the server.",
-    "Fixed `listWarns` command not working when a warned user had left the server."
+    "Fixed voice channel names forcing to have `-` in place of ` ` when using `createChannel`",
+    "Fixed music module command errors when used before using the `play` command"
   ],
   "improved": [
-    "Faster level ups! 1.5x less XP required for leveling up.",
-    "`nickname` command will show proper error if nickname length exceeds.",
-    "`anime` command will now show proper error if none was found.",
-    "`ping` command will now show the username of the bot.",
-    "Removed some unnecessary error logs."
+    "Under-the-hood changes",
+    "Code improvements"
   ],
   "added": [],
   "removed": [],
