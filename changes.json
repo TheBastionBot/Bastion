@@ -6,6 +6,7 @@
   ],
   "improved": [
     "Added genre and rating to `movie` & `tvShow` command. It was really a missing feature.",
+    "Bitrate of music, airhorn or any audio by Bastion will be automatically decided by the bitrate of the voice channel.",
     "Under-the-hood changes",
     "Code improvements"
   ],
