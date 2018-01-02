@@ -51,7 +51,7 @@ exports.exec = async (Bastion, message) => {
     message.guild.me.setDeaf(true).catch(() => {});
 
     if (!connection.speaking) {
-      connection.playFile('./data/greeting.mp3', { passes: 1 });
+      connection.playFile('./data/greeting.mp3', { passes: 1, bitrate: 'auto' });
     }
   }
   catch (e) {
