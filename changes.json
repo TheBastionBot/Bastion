@@ -5,6 +5,7 @@
     "Fixed music module command errors when used before using the `play` command"
   ],
   "improved": [
+    "Added genre and rating to `movie` & `tvShow` command. It was really a missing feature."
     "Under-the-hood changes",
     "Code improvements"
   ],
