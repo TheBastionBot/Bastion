@@ -54,7 +54,7 @@ exports.exec = async (Bastion, message, args) => {
     member.send({
       embed: {
         color: Bastion.colors.RED,
-        description: `${message.author.tag} kicked you from **${message.guild.name}** server with reason **${args.reason}**`
+        description: `${message.author.tag} kicked you from **${message.guild.name}** server with reason **${reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);
