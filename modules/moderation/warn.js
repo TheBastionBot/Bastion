@@ -123,8 +123,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        title: 'Warning',
-        description: `${user} have been warned by ${message.author} for **${reason}**.`
+        description: `${message.author.tag} warned ${user.tag} with reason **${reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -134,18 +133,7 @@ exports.exec = async (Bastion, message, args) => {
     DMChannel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        title: 'Warning',
-        description: 'You have been warned!',
-        fields: [
-          {
-            name: 'Reason',
-            value: reason
-          },
-          {
-            name: 'Server',
-            value: message.guild.name
-          }
-        ]
+        description: `${message.author.tag} warned you in **${message.guild.name}** server with reason **${reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);
