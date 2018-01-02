@@ -1,7 +1,7 @@
 {
   "date": "January 2, 2018",
   "fixed": [
-    "Fixed voice channel names forcing to have `-` in place of ` ` when using `createChannel`",
+    "Fixed voice channel names forcing to have `-` in place of space character when using `createChannel`",
     "Fixed music module command errors when used before using the `play` command"
   ],
   "improved": [
