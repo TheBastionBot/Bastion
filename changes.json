@@ -8,6 +8,7 @@
     "Added genre and rating to `movie` & `tvShow` command. It was really a missing feature.",
     "Bitrate of music, airhorn or any audio by Bastion will be automatically decided by the bitrate of the voice channel.",
     "Now you can claim Bastion Currencies every day. You don't have to wait 24 hours anymore.",
+    "`help` won't DM users anymore, will show the invite links in the channel itself.",
     "Under-the-hood changes",
     "Code improvements"
   ],

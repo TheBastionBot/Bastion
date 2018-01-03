@@ -96,24 +96,9 @@ exports.exec = async (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.GOLD,
           title: 'Help',
-          description: `To get a list of commands, type \`${message.guild.prefix[0]}commands\`.\nTo get help about a specific command, type \`${message.guild.prefix[0]}help command_name\`.` +
-                       `\n\nNeed help or support with Bastion Discord Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt'}` +
-                       '\n\nSee your DM from me, for invite links.',
-          footer: {
-            text: `Server Prefix: ${message.guild.prefix.join(' ')} | Total Commands: ${Bastion.commands.size}`
-          }
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-
-      let authorDMChannel = await message.author.createDM();
-      await authorDMChannel.send('https://discord.gg/fzx8fkt', {
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: 'Bastion: Discord Bot',
-          url: 'https://BastionBot.org',
-          description: 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.',
+          description: `To get the list of modules, type \`${message.guild.prefix[0]}commands\`.\nTo get a list of commands in a module, type \`${message.guild.prefix[0]}commands <module name>\`` +
+                       `\nTo get help about a specific command, type \`${message.guild.prefix[0]}help <command_name>\`.` +
+                       `\n\nNeed help or support with Bastion Discord Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.\nhttps://discord.gg/fzx8fkt'}`,
           fields: [
             {
               name: 'Support Server Invite Link',
@@ -128,9 +113,11 @@ exports.exec = async (Bastion, message, args) => {
             url: Bastion.user.displayAvatarURL
           },
           footer: {
-            text: 'Copyright © 2017 - The Bastion Bot Project'
+            text: `Server Prefix: ${message.guild.prefix.join(' ')} | Total Commands: ${Bastion.commands.size}`
           }
         }
+      }).catch(e => {
+        Bastion.log.error(e);
       });
     }
   }
