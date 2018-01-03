@@ -1,5 +1,5 @@
 {
-  "date": "January 2, 2018",
+  "date": "January 3, 2018",
   "fixed": [
     "Fixed voice channel names forcing to have `-` in place of space character when using `createChannel`",
     "Fixed music module command errors when used before using the `play` command"
@@ -7,6 +7,7 @@
   "improved": [
     "Added genre and rating to `movie` & `tvShow` command. It was really a missing feature.",
     "Bitrate of music, airhorn or any audio by Bastion will be automatically decided by the bitrate of the voice channel.",
+    "Now you can claim Bastion Currencies every day. You don't have to wait 24 hours anymore.",
     "Under-the-hood changes",
     "Code improvements"
   ],

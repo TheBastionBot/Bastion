@@ -25,7 +25,7 @@ exports.exec = (Bastion, message) => {
     claimedUsers.push(message.author.id);
     setTimeout(() => {
       claimedUsers.splice(claimedUsers.indexOf(message.author.id), 1);
-    }, 24 * 60 * 60 * 1000);
+    }, Bastion.functions.msUntilMidnight());
 
     /**
     * Send a message in the channel to let the user know that the operation was successful.
