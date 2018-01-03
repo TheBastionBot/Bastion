@@ -21,23 +21,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Unbanned',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'ID',
-            value: user.id,
-            inline: true
-          },
-          {
-            name: 'Reason',
-            value: args.reason
-          }
-        ]
+        description: `${message.author.tag} unbanned ${user.tag} with reason **${args.reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);

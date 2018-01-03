@@ -7,7 +7,7 @@
 exports.exec = (Bastion, message) => {
   if (message.channel.id !== message.guild.music.textChannelID) return;
 
-  if (!message.guild.music.songs.length) {
+  if (!message.guild.music.songs || !message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error

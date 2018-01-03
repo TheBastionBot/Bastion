@@ -46,24 +46,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        title: 'Channel Deleted',
-        fields: [
-          {
-            name: 'Channel Name',
-            value: channel.name,
-            inline: true
-          },
-          {
-            name: 'Channel ID',
-            value: channel.id,
-            inline: true
-          },
-          {
-            name: 'Channel Type',
-            value: channel.type.toUpperCase(),
-            inline: true
-          }
-        ]
+        description: `${message.author.tag} removed the ${channel.type} channel **${channel.name}**`
       }
     });
   }

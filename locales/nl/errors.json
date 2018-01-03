@@ -19,7 +19,6 @@
     "bioRange": "Bio moet minder zijn dan %var% tekens.",
     "channelNameLength": "Kanaal naam moet tussen de %var% en %var% tekens bevatten.",
     "channelNotFound": "Het opgegeven kanaal werd niet gevonden.",
-    "claimCooldown": "%var%, je hebt recentelijk je dagelijkse beloning ontvangen, probeer het over een dag opnieuw... Je kan elke 24 uur een beloning ontvangen.",
     "commandNoDisable": "Het %var% commando kunt u niet uitschakelen.",
     "commandUsage": "Dat is niet hoe je het `%var%` commando moet gebruiken. Hier is een voorbeeld:",
     "connection": "Een fout is opgetreden bij het ontvangen van gegevens van de server. Probeer het later nog eens.",

@@ -21,7 +21,7 @@
     "bioRange": "Bio should be fewer than %var% characters.",
     "channelNameLength": "Channel name should be between %var% and %var% characters.",
     "channelNotFound": "The specified channel was not found.",
-    "claimCooldown": "%var% you have recently claimed your daily reward, please try again later. You can claim daily rewards only once in 24 hours.",
+    "claimCooldown": "%var% you have recently claimed your daily reward, please try again tomorrow. You can claim daily rewards only once every day.",
     "commandNoDisable": "You cannot disable %var% command.",
     "commandUsage": "That's not how you use the `%var%` command. See the usage below to know how to use the command.",
     "connection": "Some error has occured while receiving data from the server. Please try again later.",

@@ -21,7 +21,6 @@
     "bioRange": "Biyo %var% karakterden az olmalıdır.",
     "channelNameLength": "Kanal adı %var% ve %var% karakter arasında olmalıdır.",
     "channelNotFound": "Belirtilen kanal bulunamadı.",
-    "claimCooldown": "%var%, Son zamanlarda, günlük ödülünü aldın! Lütfen Yarın Tekrar deneyin. 24 saat içinde yanlızca bir kez günlük odülünğ alabilirsin.",
     "commandNoDisable": "Sen %var% komutunu kapatmasın.",
     "commandUsage": "`%var%` komutunu kullandığınızdan ötürü bu değil. Komutu nasıl kullanacağınızı öğrenmek için aşağıdaki kullanıma bakın.",
     "connection": "Sunucudan veri alınırken bir hata oluştu. Lütfen daha sonra yeniden deneyin.",

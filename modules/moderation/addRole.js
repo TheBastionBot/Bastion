@@ -39,8 +39,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Role Added',
-        description: `${user.tag} has now been given **${role.name}** role.`
+        description: `${message.author.tag} added the **${role.name}** role to ${user.tag}`
       }
     }).catch(e => {
       Bastion.log.error(e);

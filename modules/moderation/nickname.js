@@ -30,16 +30,16 @@ exports.exec = async (Bastion, message, args) => {
 
       if (args.length > 32) {
         color = Bastion.colors.RED;
-        nickStat = `Nickname can't be longer than 32 characters.`;
+        nickStat = 'Nickname can\'t be longer than 32 characters.';
       }
       else {
         if (args.length < 1) {
           color = Bastion.colors.RED;
-          nickStat = `${user}'s nickname removed.`;
+          nickStat = `${message.author.tag} removed the nickname of ${user.tag}`;
         }
         else {
           color = Bastion.colors.GREEN;
-          nickStat = `${user}'s nickname changed.`;
+          nickStat = `${message.author.tag} set the nickname of ${user.tag} to **${args}**`;
         }
       }
       await member.setNickname(args);

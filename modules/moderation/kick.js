@@ -36,24 +36,10 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        title: 'Kicked',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'ID',
-            value: user.id,
-            inline: true
-          },
-          {
-            name: 'Reason',
-            value: reason,
-            inline: false
-          }
-        ]
+        description: `${message.author.tag} kicked ${user.tag} with reason **${reason}**`,
+        footer: {
+          text: `ID ${user.id}`
+        }
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -68,8 +54,7 @@ exports.exec = async (Bastion, message, args) => {
     member.send({
       embed: {
         color: Bastion.colors.RED,
-        title: `Kicked from ${message.guild.name} Server`,
-        description: `**Reason:** ${reason}`
+        description: `${message.author.tag} kicked you from **${message.guild.name}** server with reason **${reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);

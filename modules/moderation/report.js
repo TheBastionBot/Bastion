@@ -25,7 +25,7 @@ exports.exec = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.GREEN,
       title: 'User Reported',
-      description: `You have reported **${user.tag}** to the moderators for **${reason}**. They will look into it.`
+      description: `You have reported ${user.tag} to the moderators with reason **${reason}**. Hold tight, they will look into it.`
     }
   }).catch(e => {
     Bastion.log.error(e);

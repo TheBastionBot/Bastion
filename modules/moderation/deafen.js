@@ -28,24 +28,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        title: 'Deafened',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'ID',
-            value: user.id,
-            inline: true
-          },
-          {
-            name: 'Reason',
-            value: reason,
-            inline: false
-          }
-        ]
+        description: `${message.author.tag} deafened ${user.tag} with reason **${reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);

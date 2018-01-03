@@ -42,8 +42,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Warnings Cleared',
-        description: `${user}, your warnings have been cleared by ${message.author} for **${reason}**.`
+        description: `${message.author.tag} cleared the warnings for ${user.tag} with reason **${reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);

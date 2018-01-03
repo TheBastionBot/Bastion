@@ -39,8 +39,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        title: 'Role Removed',
-        description: `${user.tag} has now been removed from **${role.name}** role.`
+        description: `${message.user.tag} removed the **${role.name}** role from ${user.tag}`
       }
     }).catch(e => {
       Bastion.log.error(e);

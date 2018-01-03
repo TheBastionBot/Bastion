@@ -19,7 +19,6 @@
     "bioRange": "Bio debe ser menor que %var% caracteres.",
     "channelNameLength": "El nombre del canal debe de ser entre %var% y %var% caracteres.",
     "channelNotFound": "El canal especificado no se encontró.",
-    "claimCooldown": "%var% recientemente han reclamado su recompensa diaria, inténtalo de nuevo mañana. Puede reclamar recompensas diarias una sola vez en 24 horas.",
     "commandNoDisable": "No es posible desactivar %var% comando.",
     "commandUsage": "Asi no se usa el comando '%var%'. Ver el uso a continuación para saber cómo utilizar el comando.",
     "connection": "Ocurrió un error meintras recivia los datos del servidor. Por favor, inténtalo más tarde.",

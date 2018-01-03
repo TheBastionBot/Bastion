@@ -46,6 +46,9 @@ exports.exec = (Bastion, message, args) => {
           return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'movie'), message.channel);
         }
 
+        // Hard coded genre IDs because they are not likely to change for v3 and dynamically getting them would mean sending another request, since it's a seperate endpoint.
+        let genre_list = { '28': 'Action', '12': 'Adventure', '16': 'Animation', '35': 'Comedy', '80': 'Crime', '99': 'Documentary', '18': 'Drama', '10751': 'Family', '14': 'Fantasy', '36': 'History', '27': 'Horror', '10402': 'Music', '9648': 'Mystery', '10749': 'Romance', '878': 'Science Fiction', '10770': 'TV Movie', '53': 'Thriller', '10752': 'War', '37': 'Western' };
+
         message.channel.send({
           embed: {
             color: Bastion.colors.BLUE,
@@ -54,8 +57,18 @@ exports.exec = (Bastion, message, args) => {
             description: movie.overview,
             fields: [
               {
+                name: 'Genre',
+                value: movie.genre_ids.map(id => genre_list[id]).join('\n'),
+                inline: true
+              },
+              {
                 name: 'Language',
                 value: movie.original_language.toUpperCase(),
+                inline: true
+              },
+              {
+                name: 'Rating',
+                value: `${movie.vote_average}`,
                 inline: true
               },
               {

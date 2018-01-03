@@ -5,77 +5,68 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.old || !args.new) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let minLength = 2, maxLength = 100;
-  args.old = args.old.join(' ');
-  args.new = args.new.join(' ');
-
-  if (args.new.length < minLength || args.new.length > maxLength) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'channelNameLength', true, minLength, maxLength), message.channel);
-  }
-
-  let channel = message.channel;
-  if (args.voice) {
-    channel = message.guild.channels.filter(c => c.type === 'voice').find('name', args.old);
-  }
-  else {
-    args.old = args.old.replace(' ', '-');
-    args.new = args.new.replace(' ', '-');
-    channel = message.guild.channels.filter(c => c.type === 'text').find('name', args.old);
-  }
-
-  if (!channel) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
-  }
-
-  if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-  }
-  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
   try {
+    if (!args.old || !args.new) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let minLength = 2, maxLength = 100;
+    args.old = args.old.join(' ');
+    args.new = args.new.join(' ');
+
+    if (args.new.length < minLength || args.new.length > maxLength) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'channelNameLength', true, minLength, maxLength), message.channel);
+    }
+
+    let channel = message.channel;
+    if (args.voice) {
+      channel = message.guild.channels.filter(c => c.type === 'voice').find('name', args.old);
+    }
+    else {
+      args.old = args.old.replace(' ', '-');
+      args.new = args.new.replace(' ', '-');
+      channel = message.guild.channels.filter(c => c.type === 'text').find('name', args.old);
+    }
+
+    if (!channel) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
+    }
+
+    if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+    }
+    if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+      /**
+      * Bastion has missing permissions.
+      * @fires bastionMissingPermissions
+      */
+      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+    }
+
     await channel.setName(args.new);
     await message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        title: `${channel.type.charAt(0).toUpperCase() + channel.type.substr(1)} Channel Renamed`,
-        fields: [
-          {
-            name: 'From',
-            value: args.old,
-            inline: true
-          },
-          {
-            name: 'To',
-            value: args.new,
-            inline: true
-          }
-        ]
+        description: `${message.author.tag} renamed the ${channel.type} channel **${args.old}** to **${args.new}**`,
+        footer: {
+          text: `ID: ${channel.id}`
+        }
       }
     });
   }
