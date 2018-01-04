@@ -75,7 +75,7 @@ exports.exec = async (Bastion, message) => {
         }
       ],
       footer: {
-        text: `Prefix: ${guildSettings.prefix} | Language: ${guildSettings.language.toUpperCase()}`
+        text: `Prefix: ${guildSettings.prefix} • Language: ${guildSettings.language.toUpperCase()}`
       }
     }
   }).catch(e => {

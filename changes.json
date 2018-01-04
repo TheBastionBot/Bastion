@@ -1,7 +1,9 @@
 {
   "date": "January 4, 2018",
   "fixed": [],
-  "improved": [],
+  "improved": [
+    "Under-the-hood changes"
+  ],
   "added": [
     "Howdy gamers! Use the new `fortnite` command to get Fortnite game stats of any player, in any platform."
   ],

@@ -44,7 +44,7 @@ exports.exec = (Bastion, message, args) => {
         url: removedSong.thumbnail
       },
       footer: {
-        text: `Position: ${args.index} | Requester: ${removedSong.requester}`
+        text: `Position: ${args.index} • Requester: ${removedSong.requester}`
       }
     }
   }).catch(e => {

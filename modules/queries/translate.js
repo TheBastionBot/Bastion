@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
         color: Bastion.colors.BLUE,
         description: result.text,
         footer: {
-          text: `Powered by Google | Translation from ${result.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
+          text: `Powered by Google • Translation from ${result.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
         }
       }
     }).catch(e => {

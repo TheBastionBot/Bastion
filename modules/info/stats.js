@@ -127,7 +127,7 @@ exports.exec = async (Bastion, message) => {
           url: Bastion.user.displayAvatarURL
         },
         footer: {
-          text: `${Bastion.shard ? `Shard: ${Bastion.shard.id} | ` : ''}WebSocket PING: ${parseInt(Bastion.ping)}ms`
+          text: `${Bastion.shard ? `Shard: ${Bastion.shard.id} • ` : ''}WebSocket PING: ${parseInt(Bastion.ping)}ms`
         },
         timestamp: new Date()
       }

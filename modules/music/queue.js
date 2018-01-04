@@ -37,7 +37,7 @@ exports.exec = (Bastion, message, args) => {
         }
       ],
       footer: {
-        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} | ${message.guild.music.songs.length - 1} songs in queue`
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} • ${message.guild.music.songs.length - 1} songs in queue`
       }
     }
   }).catch(e => {
