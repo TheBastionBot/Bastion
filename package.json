@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "6.4.2",
+  "version": "6.5.0",
   "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -42,6 +42,7 @@
     "pokedex-api": "^1.0.0",
     "rainbowsix-api-node": "^0.0.1",
     "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
     "snekfetch": "^3.6.1",
     "sqlite": "^2.9.0",
     "weather-js": "^2.0.0",
