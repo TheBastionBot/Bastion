@@ -73,7 +73,7 @@ exports.exec = (Bastion, message) => {
 
           trivia.on('collect', ans => {
             let color, description;
-            if (ans.content === body.correct_answer.toLowerCase()) {
+            if (ans.content.toLowerCase() === body.correct_answer.toLowerCase()) {
               color = Bastion.colors.BLUE;
               description = `${ans.author.tag} you're absolutely right.`;
             }

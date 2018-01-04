@@ -1,6 +1,8 @@
 {
   "date": "January 4, 2018",
-  "fixed": [],
+  "fixed": [
+    "Fixed trivia not accepting the answer in uppaer & mixed cases."
+  ],
   "improved": [
     "Under-the-hood changes"
   ],
