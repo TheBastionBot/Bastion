@@ -1,13 +1,15 @@
 {
-  "date": "January 4, 2018",
+  "date": "January 5, 2018",
   "fixed": [
     "Fixed trivia not accepting the answer in uppaer & mixed cases."
   ],
   "improved": [
+    "`giveaway` command is now accessible by server administrators and they can give away anything they want. Go ahead and give away amazing goodies to your server members.",
     "Under-the-hood changes"
   ],
   "added": [
-    "Howdy gamers! Use the new `fortnite` command to get Fortnite game stats of any player, in any platform."
+    "Howdy gamers! Use the new `fortnite` command to get Fortnite game stats of any player, in any platform.",
+    "Bot owners can now give away Bastion Currencies using the `currencyGiveaway` command."
   ],
   "removed": [],
   "issues": []
