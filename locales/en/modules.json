@@ -225,6 +225,7 @@
     "enableCommand": "Enables the specified command that was previously disabled.",
     "enableModule": "Enables the specified module that was previously disabled.",
     "eval": "Evaluates JavaScript code.",
+    "exec": "Executes a command in the Terminal (Linux/macOS) or Command Prompt (Windows) and shows the output. Note that it will terminate the command if it runs for more than 1 minute.",
     "giveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
     "leave": "Asks Bastion to leave a specified server.",
     "listScheduledCommands": "Lists all the scheduled commands.",

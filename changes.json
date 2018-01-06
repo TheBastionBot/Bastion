@@ -12,7 +12,8 @@
   ],
   "added": [
     "Howdy gamers! Use the new `fortnite` command to get Fortnite game stats of any player, in any platform.",
-    "Bot owners can now give away Bastion Currencies using the `currencyGiveaway` command."
+    "Bot owners can now give away Bastion Currencies using the `currencyGiveaway` command.",
+    "Do awesome stuff in your server and run commands in your system where Bastion is hosted, with the all new `exec` command."
   ],
   "removed": [],
   "issues": []
