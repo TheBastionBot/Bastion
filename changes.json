@@ -1,10 +1,11 @@
 {
-  "date": "January 5, 2018",
+  "date": "January 6, 2018",
   "fixed": [
     "Fixed trivia not accepting the answer in uppaer & mixed cases."
   ],
   "improved": [
     "`giveaway` command is now accessible by server administrators and they can give away anything they want. Go ahead and give away amazing goodies to your server members.",
+    "You can now see the IDs of server members in the `leaderboard` command.",
     "Under-the-hood changes"
   ],
   "added": [

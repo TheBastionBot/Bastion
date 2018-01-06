@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
       let user;
       if (message.guild.members.has(profiles[i].userID)) {
         let member = await message.guild.fetchMember(profiles[i].userID);
-        user = member.user.tag;
+        user = `${member.user.tag} - ${member.id}`;
       }
       else {
         user = profiles[i].userID;
