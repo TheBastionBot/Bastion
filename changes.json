@@ -2,6 +2,7 @@
   "date": "January 6, 2018",
   "fixed": [
     "Fixed trivia not accepting the answer in uppaer & mixed cases.",
+    "Fixed `musicChannel` showing music text channel name as the music voice channel name.",
     "Under-the-hood fixes"
   ],
   "improved": [
