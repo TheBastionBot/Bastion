@@ -169,6 +169,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'ADMINISTRATOR',
   userVoicePermission: '',
-  usage: 'giveaway < GIVEAWAY ITEM NAME | --end GIVEAWAY_NO > [-t TIMEOUT_IN_HOURS]',
-  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway --end 2' ]
+  usage: 'giveaway < GIVEAWAY ITEM NAME | --end > [-t TIMEOUT_IN_HOURS]',
+  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway --end' ]
 };
