@@ -56,7 +56,7 @@ exports.exec = async (Bastion, message, args) => {
         title: 'Scheduled Command',
         description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
         footer: {
-          text: 'Do not delete this message, as it is required by me run the scheduled command.'
+          text: 'Do not delete this message, it is required by me to run the scheduled command.'
         }
       }
     });
