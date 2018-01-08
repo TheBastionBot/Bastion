@@ -308,6 +308,15 @@ function startStreamDispatcher(guild, connection) {
     guild.client.log.error(e);
   });
 
+  if (guild.client.config.musicStatus) {
+    guild.client.user.setPresence({
+      status: guild.client.config.status,
+      game: {
+        name: guild.music.songs[0].title,
+        type: 0
+      }
+    });
+  }
 
   guild.music.dispatcher.on('end', () => {
     guild.music.playing = false;
