@@ -10,7 +10,8 @@
     "renameChannel": "Renames the specified text or voice channel of your Discord server.",
     "renameRole": "Renames the specified role of your Discord server.",
     "roleColor": "Changes the color of the specified role of your Discord server.",
-    "setTopic": "Sets channel topic of the specified text channel of your Discord server."
+    "setTopic": "Sets channel topic of the specified text channel of your Discord server.",
+    "suggest": "Posts a suggestions to the suggestion channel, if a suggestion channel has been set. Otherwise posts the suggestion in the current channel."
   },
   "fun": {
     "airhorn": "Plays an airhorn in a voice channel.",
@@ -119,6 +120,7 @@
     "slowMode": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.",
     "streamerRole": "Adds a role as the streamer role. When a guild member (who is at least in a single role) starts streaming, they are given the streamer role.",
     "streamers": "Adds/removes/displays the list of streamers followed by the server to get notified when they are live.",
+    "suggestionChannel": "Adds/removes the channel as the suggestion channel. If it's enabled, when user post a suggestion using the `suggest` command, it's are posted in this channel.",
     "whitelistChannel": "Add/remove the channel from the whitelist for invite filter, link filter or word filter.",
     "whitelistRole": "Add/remove a role from the whitelist for invite filter, link filter or word filter."
   },
