@@ -37,7 +37,7 @@
     "rip": "Bir şey (ya da her şey) için başsağlığı göster.",
     "robotify": "Belirtilen dizgeden veya belirtilmemişse Discord etiketinizden rasgele bir robot görüntüsü üretir.",
     "selfDestruct": "Gönderdiğiniz mesajı gönderir ancak belirli bir süre sonra otomatik silinir.",
-    "sendEmbed": "Belirtilen embed (JavaScript) nesnesinden bir embed iletisi gönderir. Grafik, bir embed nesne oluşturmak için [tıklayınız] (https://bastionbot.org/tools/embed_builder/). *",
+    "sendEmbed": "Belirtilen embed (JavaScript) nesnesinden bir embed iletisi gönderir. *Grafik, bir embed nesne oluşturmak için [tıklayınız](https://bastionbot.org/embedbuilder/).*",
     "ship": "İki veya daha fazla belirtilen kullanıcı adı birleştirir.",
     "slap": "Başka bir kullanıcıya tokat atın.",
     "xkcd": "Bir xkcd çizgi roman gösterir.",

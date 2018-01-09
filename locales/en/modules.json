@@ -40,7 +40,7 @@
     "rip": "Show your condolences for something (or everything).",
     "robotify": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
     "selfDestruct": "Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.",
-    "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/tools/embed_builder/).*",
+    "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/embedbuilder/).*",
     "ship": "Combines two or more mentioned user's names.",
     "slap": "Give a slap to another user.",
     "xkcd": "Shows a xkcd comic.",

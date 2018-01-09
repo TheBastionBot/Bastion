@@ -31,7 +31,7 @@
     "reverse": "Envoie le même message que vous avez envoyé, mais inversé.",
     "robotify": "Génère une image de robot aléatoire à partir de la chaîne donnée ou de votre étiquette Discord si aucune chaîne n'est spécifiée.",
     "selfDestruct": "Envoie le même message que vous avez envoyé, mais il sera supprimé automatiquement après un certain temps.",
-    "sendEmbed": "Envoie un message intégré à partir de l'objet incorporé (JavaScript) spécifié. * Pour créer un objet intégré, graphiquement, [cliquez ici] (https://bastion.js.org/tools/embed_builder/). *",
+    "sendEmbed": "Envoie un message intégré à partir de l'objet incorporé (JavaScript) spécifié. *Pour créer un objet intégré, graphiquement, [cliquez ici](https://bastionbot.org/embedbuilder/).*",
     "ship": "Combine deux ou plusieurs noms d'utilisateurs mentionnés.",
     "slap": "Donnez une claque à un autre utilisateur.",
     "xkcd": "Affiche une bande dessinée xkcd.",
