@@ -1,4 +1,4 @@
-![Bastion Logo Dark](https://resources.bastionbot.org/logos/BastionLogo_Text_Black.png)
+![Bastion Logo Dark](https://resources.bastionbot.org/logos/BastionLogo_Text_Dark_ON.png)
 
 # Bastion: Discord Bot
 [![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
@@ -8,10 +8,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/bastion/localized.svg)](http://i18n.bastionbot.org/project/bastion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7cac2730252247819a559caa2aad4fab)](https://www.codacy.com/app/snkrsnkampa/Bastion?utm_source=github.com&utm_medium=referral&utm_content=TheBastionBot/Bastion&utm_campaign=badger)
+[![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion)
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
-[![Website](https://img.shields.io/website-up-down-green-red/https/BastionBot.org.svg?label=Website)](https://BastionBot.org)
-<!-- [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion) -->
-<!-- [![Github All Releases](https://img.shields.io/github/downloads/TheBastionBot/Bastion/total.svg?style=flat-square)]()   -->
+[![Website](https://img.shields.io/website-up-down-green-red/https/bastionbot.org.svg?label=Website)](https://bastionbot.org)
+
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
 *Administration, Moderation, Searches, Game Server Stats, Player Stats,
 Music, Games, User Profiles, User Levels, Virtual Currencies, Humor?*  
@@ -20,7 +20,7 @@ Think no more, Bastion Bot can do it all (*and even more*).
 Seriously, what else do you need?  
 
 Bastion: The one Discord Bot you'll always need.  
-[Learn More](https://BastionBot.org 'Visit Bastion Bot website to Learn More')
+[Learn More](https://bastionbot.org 'Visit Bastion Bot website to Learn More')
 
 ## Test it before you use it
 If you just want to get the chill of Bastion or just want to play around with
@@ -40,7 +40,7 @@ Just keep an eye on the [#announcements]() channel.
 [Click Here](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
 to invite the public Bastion Bot to your Discord Server.  
 Or if you want to host it yourself and have access to all it's owner only
-commands, read the [Installation Guide](https://BastionBot.org/guide).
+commands, read the [Installation Guide](https://bastionbot.org).
 
 > *If you ever face any problems with Bastion Bot or you don't understand*
 > *something, or if you need any kind of help with it, just head over to the*
