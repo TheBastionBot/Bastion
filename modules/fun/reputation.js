@@ -8,18 +8,18 @@ let recentUsers = [];
 const COOLDOWN = 12;
 
 exports.exec = async (Bastion, message) => {
-  if (!recentUsers.includes(message.author.id)) {
-    let user = message.mentions.users.first();
-    if (!user) return;
-    if (user.id === message.author.id) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
-    }
+  try {
+    if (!recentUsers.includes(message.author.id)) {
+      let user = message.mentions.users.first();
+      if (!user) return;
+      if (user.id === message.author.id) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
+      }
 
-    try {
       let profile = await Bastion.db.get(`SELECT reputation FROM profiles WHERE userID=${user.id}`);
       if (!profile) {
         await Bastion.db.run('INSERT INTO profiles (userID, reputation) VALUES (?, ?)', [ user.id, 1 ]);
@@ -42,16 +42,16 @@ exports.exec = async (Bastion, message) => {
         Bastion.log.error(e);
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
+    else {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
     }
   }
-  else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

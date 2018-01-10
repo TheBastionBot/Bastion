@@ -14,26 +14,31 @@ const hirez = new HiRez({
 let generatedSession = null;
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.player) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
+  try {
+    if (!args.player) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    if (!generatedSession) {
+      let session = await hirez.paladins.session.generate().catch(e => {
+        Bastion.log.error(e);
+      });
+      generatedSession = session;
+
+      setTimeout(() => {
+        generatedSession = null;
+      }, 15 * 60 * 1000);
+    }
+
+    fetchAndSend(message, args);
   }
-
-  if (!generatedSession) {
-    let session = await hirez.paladins.session.generate().catch(e => {
-      Bastion.log.error(e);
-    });
-    generatedSession = session;
-
-    setTimeout(() => {
-      generatedSession = null;
-    }, 15 * 60 * 1000);
+  catch (e) {
+    Bastion.log.error(e);
   }
-
-  fetchAndSend(message, args);
 };
 
 exports.config = {

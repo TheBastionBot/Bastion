@@ -5,58 +5,58 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.product) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (/choco(?:late)?[-_ ]?(?:bar)?[s]?/i.test(args.product)) {
-    args.product = 'chocolate_bar';
-  }
-  else if (/ice[-_ ]?cream[s]?/i.test(args.product)) {
-    args.product = 'icecream';
-  }
-  else if (/cookie[s]?/i.test(args.product)) {
-    args.product = 'cookie';
-  }
-  else if (/cake[s]?/i.test(args.product)) {
-    args.product = 'cake';
-  }
-  else if (/ring[s]?/i.test(args.product)) {
-    args.product = 'ring';
-  }
-  else if (/crown[s]?/i.test(args.product)) {
-    args.product = 'crown';
-  }
-  else if (/gem[s]?/i.test(args.product)) {
-    args.product = 'gem';
-  }
-  else if (/heart[s]?/i.test(args.product)) {
-    args.product = 'heart';
-  }
-  else if (/love[-_ ]?letter[s]?/i.test(args.product)) {
-    args.product = 'love_letter';
-  }
-  else {
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
-  }
-
-  let gifts = {
-    chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
-    icecream: [ '🍦  Ice Cream', 10 ],
-    cookie: [ '🍪  Cookie', 5 ],
-    cake: [ '🍰  Cake', 20 ],
-    ring: [ '💍  Ring', 250 ],
-    crown: [ '👑  Crown', 500 ],
-    gem: [ '💎  Gem', 100 ],
-    gift_heart: [ '💝  Heart', 50 ],
-    love_letter: [ '💌  Love Letter', 5 ]
-  };
-
   try {
+    if (!args.product) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    if (/choco(?:late)?[-_ ]?(?:bar)?[s]?/i.test(args.product)) {
+      args.product = 'chocolate_bar';
+    }
+    else if (/ice[-_ ]?cream[s]?/i.test(args.product)) {
+      args.product = 'icecream';
+    }
+    else if (/cookie[s]?/i.test(args.product)) {
+      args.product = 'cookie';
+    }
+    else if (/cake[s]?/i.test(args.product)) {
+      args.product = 'cake';
+    }
+    else if (/ring[s]?/i.test(args.product)) {
+      args.product = 'ring';
+    }
+    else if (/crown[s]?/i.test(args.product)) {
+      args.product = 'crown';
+    }
+    else if (/gem[s]?/i.test(args.product)) {
+      args.product = 'gem';
+    }
+    else if (/heart[s]?/i.test(args.product)) {
+      args.product = 'heart';
+    }
+    else if (/love[-_ ]?letter[s]?/i.test(args.product)) {
+      args.product = 'love_letter';
+    }
+    else {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
+    }
+
+    let gifts = {
+      chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
+      icecream: [ '🍦  Ice Cream', 10 ],
+      cookie: [ '🍪  Cookie', 5 ],
+      cake: [ '🍰  Cake', 20 ],
+      ring: [ '💍  Ring', 250 ],
+      crown: [ '👑  Crown', 500 ],
+      gem: [ '💎  Gem', 100 ],
+      gift_heart: [ '💝  Heart', 50 ],
+      love_letter: [ '💌  Love Letter', 5 ]
+    };
+
     let userProfile = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID='${message.author.id}'`);
     let userBalance = parseInt(userProfile.bastionCurrencies);
     let requiredBalance = gifts[args.product][1] * args.amount;

@@ -7,15 +7,15 @@
 const translate = require('google-translate-api');
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 2) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
   try {
+    if (args.length < 2) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let result = await translate(args.slice(1).join(' '), { to: args[0] });
 
     message.channel.send({

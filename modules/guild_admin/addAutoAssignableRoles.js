@@ -5,29 +5,29 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  for (let i = 0; i < args.length; i++) {
-    if (!(parseInt(args[i]) < 9223372036854775807)) {
-      args.splice(args.indexOf(args[i]), 1);
-    }
-  }
-  args = args.filter(r => message.guild.roles.get(r));
-  if (args.length < 1) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
-  }
-
   try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    for (let i = 0; i < args.length; i++) {
+      if (!(parseInt(args[i]) < 9223372036854775807)) {
+        args.splice(args.indexOf(args[i]), 1);
+      }
+    }
+    args = args.filter(r => message.guild.roles.get(r));
+    if (args.length < 1) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+    }
+
     let guildSettings =  await Bastion.db.get(`SELECT autoAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     let roles = [];

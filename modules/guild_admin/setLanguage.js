@@ -5,37 +5,37 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.name && !args.list) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (args.list) {
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Available Languages',
-        description: Bastion.strings.availableLanguages.join(', ').toUpperCase()
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-
-  args.name = args.name.toLowerCase();
-  if (args.name) {
-    if (!Bastion.strings.availableLanguages.includes(args.name)) {
+  try {
+    if (!args.name && !args.list) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'notFound', true, 'Language Code'), message.channel);
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
 
-    try {
+    if (args.list) {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Available Languages',
+          description: Bastion.strings.availableLanguages.join(', ').toUpperCase()
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+
+    args.name = args.name.toLowerCase();
+    if (args.name) {
+      if (!Bastion.strings.availableLanguages.includes(args.name)) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'notFound', true, 'Language Code'), message.channel);
+      }
+
       await Bastion.db.run(`UPDATE guildSettings SET language='${args.name}' WHERE guildID=${message.guild.id}`);
 
       message.channel.send({
@@ -47,9 +47,9 @@ exports.exec = async (Bastion, message, args) => {
         Bastion.log.error(e);
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
-    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

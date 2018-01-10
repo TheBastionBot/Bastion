@@ -9,6 +9,7 @@
     "`giveaway` command is now accessible by server administrators and they can give away anything they want. Go ahead and give away amazing goodies to your server members.",
     "You can now see the IDs of server members in the `leaderboard` command.",
     "Bastion can now show the song name while it's playing music. By default this is enabled, it can be disabled in the config file.",
+    "Improved error handling",
     "Under-the-hood changes"
   ],
   "added": [

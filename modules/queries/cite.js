@@ -5,20 +5,20 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.message || !(parseInt(args.message) < 9223372036854775807)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let channel = message.mentions.channels.first();
-  if (!channel) {
-    channel = message.channel;
-  }
-
   try {
+    if (!args.message || !(parseInt(args.message) < 9223372036854775807)) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let channel = message.mentions.channels.first();
+    if (!channel) {
+      channel = message.channel;
+    }
+
     let citedMessage = await channel.fetchMessage(args.message);
 
     let image;

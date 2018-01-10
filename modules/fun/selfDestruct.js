@@ -5,30 +5,30 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.content) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let minTimeout = 5, maxTimeout = 600;
-  if (args.timeout < minTimeout || args.timeout > maxTimeout) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'selfDestructTimeout', true, minTimeout, maxTimeout), message.channel);
-  }
-
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-
   try {
+    if (!args.content) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let minTimeout = 5, maxTimeout = 600;
+    if (args.timeout < minTimeout || args.timeout > maxTimeout) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'selfDestructTimeout', true, minTimeout, maxTimeout), message.channel);
+    }
+
+    if (message.deletable) {
+      message.delete().catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+
     let secretMessage = await message.channel.send({
       embed: {
         color: Bastion.colors.DEFAULT,

@@ -5,17 +5,17 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  let user = message.mentions.users.first();
-  let limit = parseInt(args[0]) ? args[0] : args[1];
-  let amount;
-  if (user || args.includes('--bots')) {
-    amount = 100;
-  }
-  else {
-    amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
-  }
-
   try {
+    let user = message.mentions.users.first();
+    let limit = parseInt(args[0]) ? args[0] : args[1];
+    let amount;
+    if (user || args.includes('--bots')) {
+      amount = 100;
+    }
+    else {
+      amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
+    }
+
     let msgs = await message.channel.fetchMessages({
       limit: amount
     });

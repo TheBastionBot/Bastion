@@ -5,15 +5,15 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (Object.keys(args).length === 0) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
   try {
+    if (Object.keys(args).length === 0) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let guildSettings = await Bastion.db.get(`SELECT warnAction FROM guildSettings WHERE guildID=${message.guild.id}`);
     let warnAction = '', color = Bastion.colors.GREEN, description;
 
