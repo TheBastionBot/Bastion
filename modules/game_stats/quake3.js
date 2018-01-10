@@ -39,57 +39,101 @@ exports.exec = (Bastion, message, args) => {
     host: host,
     port: port
   }).then(data => {
+    let gametype = '';
+        if (data.raw.g_gametype === '0') {
+            gametype = 'FFA';
+        } else if (data.raw.g_gametype === '1') {
+            gametype = '1v1';
+        } else if (data.raw.g_gametype === '2') {
+            gametype = '2';
+        } else if (data.raw.g_gametype === '3') {
+            gametype = 'TDM';
+        } else if (data.raw.g_gametype === '4') {
+            gametype = 'CTF';
+        } else if (data.raw.g_gametype === '5') {
+            gametype = 'CPM';
+        } else {
+            gametype = data.raw.g_gametype;
+        }
     let stats = [
       {
-        name: 'Server IP',
-        value: `[${host}:${port}](steam://connect/${host}:${port})`,
-        inline: true
-      },
-      {
-        name: 'Private',
-        value: data.password,
+        name: 'Address',
+        value: '`' + host + ':' + port + '`',
         inline: true
       },
       {
         name: 'Players',
-        value: `${data.players.length}/${data.maxplayers}`,
+        value: '`' + data.players.length + '/' + data.maxplayers + '`',
         inline: true
       },
       {
-        name: 'Map/Gametype',
-        value: `${data.map} - ${data.raw.g_gametype}`
+        name: 'Map',
+        value: '`' + data.map + ' - ' + gametype + '`',
+        inline: true
       }
     ];
 
     if (data.players.length > 0) {
       let players = [];
       let scores = [];
+      let pings = [];
       for (let i = 0; i < data.players.length; i++) {
-        players.push(data.players[i].name);
+        players.push(data.players[i].name.substring(0, 12));
       }
       for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].frags);
       }
+      for (let i = 0; i < data.players.length; i++) {
+        pings.push(data.players[i].ping);
+      }
       stats.push(
         {
-          name: 'Player',
-          value: players.join('\n'),
+          name: 'Player Name',
+          value: '```http\n' + players.join('\n') + '```',
           inline: true
         },
         {
           name: 'Score',
-          value: scores.join('\n'),
+          value: '```http\n' + scores.join('\n') + '```',
+          inline: true
+        },
+        {
+          name: 'Ping',
+          value: '```http\n' + pings.join('\n') + '```',
           inline: true
         }
       );
     }
 
+    stats.push(
+      {
+        name: 'Join Server',
+        value: 'steam://connect/' + host + ':' + port,
+        inline: false
+      }  
+    );
+    
+    let lock = data.password;
+    let lock_icon = '';
+    if (lock == true) {
+      lock = 'Password required to join server';
+      lock_icon = 'https://resources.bastionbot.org/images/lock.png';
+    } 
+    else {
+       lock = '';
+       lock_icon = '';
+    }
+    
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: data.name,
         description: '[Quake III Arena](https://store.steampowered.com/app/2200)',
-        fields: stats
+        fields: stats,
+        footer: {
+          text: lock,
+          icon_url: lock_icon
+        }
       }
     }).catch(e => {
       Bastion.log.error(e);
