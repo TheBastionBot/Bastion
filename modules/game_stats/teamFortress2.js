@@ -1,5 +1,5 @@
 /**
- * @file teamFortress2 command
+ * @file counterStrikeGlobalOffensive command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -41,55 +41,84 @@ exports.exec = (Bastion, message, args) => {
   }).then(data => {
     let stats = [
       {
-        name: 'Server IP',
-        value: `[${host}:${port}](steam://connect/${host}:${port})`,
-        inline: true
-      },
-      {
-        name: 'Private',
-        value: data.password,
+        name: 'Address',
+        value: '`' + host + ':' + port + '`',
         inline: true
       },
       {
         name: 'Players',
-        value: `${data.players.length}/${data.maxplayers}`,
+        value: '`' + data.players.length + '/' + data.maxplayers + '`',
         inline: true
       },
       {
         name: 'Map',
-        value: data.map
+        value: '`' + data.map + '`',
+        inline: true
       }
     ];
 
     if (data.players.length > 0) {
       let players = [];
       let scores = [];
+      let times = [];
       for (let i = 0; i < data.players.length; i++) {
-        players.push(data.players[i].name);
+        players.push(data.players[i].name.substring(0, 12));
       }
       for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].score);
       }
+      for (let i = 0; i < data.players.length; i++) {
+        times.push(new Date(data.players[i].time * 1000).toISOString().substr(11, 8));
+      }
       stats.push(
         {
-          name: 'Player',
-          value: players.join('\n'),
+          name: 'Player Name',
+          value: '```http\n' + players.join('\n') + '\n```',
           inline: true
         },
         {
           name: 'Score',
-          value: scores.join('\n'),
+          value: '```http\n' + scores.join('\n') + '\n```',
+          inline: true
+        },
+        {
+          name: 'Time',
+          value: '```http\n' + times.join('\n') + '\n```',
           inline: true
         }
+        
       );
     }
-
+    
+    stats.push(
+      {
+        name: 'Join Server',
+        value: 'steam://connect/' + host + ':' + port,
+        inline: false
+      }  
+    );
+    
+    let lock = data.password;
+    let lock_icon = '';
+    if (lock == true) {
+      lock = 'Password required to join server';
+      lock_icon = 'https://resources.bastionbot.org/images/lock.png';
+    } 
+    else {
+       lock = '';
+       lock_icon = '';
+    }
+    
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: data.name,
-        description: '[Team Fortress 2](https://store.steampowered.com/app/440/)',
-        fields: stats
+        description: '[' + data.raw.game + '](https://store.steampowered.com/app/' + data.raw.gameid + '/)',
+        fields: stats,
+        footer: {
+          text: lock,
+          icon_url: lock_icon
+        }
       }
     }).catch(e => {
       Bastion.log.error(e);
