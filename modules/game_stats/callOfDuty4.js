@@ -65,17 +65,17 @@ exports.exec = (Bastion, message, args) => {
     let stats = [
       {
         name: 'Address',
-        value: '`' + host + ':' + port + '`',
+        value: `\\`${host}:${port}\\``,
         inline: true
       },
       {
         name: 'Players',
-        value: '`' + data.players.length + '/' + data.maxplayers + '`',
+        value: `\\`${data.players.length}/${data.maxplayers}\\``,
         inline: true
       },
       {
         name: 'Map',
-        value: '`' + data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1)) + ' - ' + gametype + '`',
+        value: `\\`${data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1))} - ${gametype}\\``,
         inline: true
       }
     ];
@@ -96,17 +96,17 @@ exports.exec = (Bastion, message, args) => {
       stats.push(
         {
           name: 'Player Name',
-          value: '```http\n' + players.join('\n') + '```',
+          value: `\\`\\`\\`http\n${players.join('\n')}\\`\\`\\``,
           inline: true
         },
         {
           name: 'Score',
-          value: '```http\n' + scores.join('\n') + '```',
+          value: `\\`\\`\\`http\n${scores.join('\n')}\\`\\`\\``,
           inline: true
         },
         {
           name: 'Ping',
-          value: '```http\n' + pings.join('\n') + '```',
+          value: `\\`\\`\\`http\n${pings.join('\n')}\\`\\`\\``,
           inline: true
         }
       );
@@ -114,15 +114,15 @@ exports.exec = (Bastion, message, args) => {
 
     let lock = data.password;
     let lock_icon = '';
-    if (lock == true) {
+    if (lock === true) {
       lock = 'Password required to join server | ';
       lock_icon = 'https://resources.bastionbot.org/images/lock.png';
     } 
     else {
-       lock = '';
-       lock_icon = '';
+      lock = '';
+      lock_icon = '';
     }
-    
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -130,7 +130,7 @@ exports.exec = (Bastion, message, args) => {
         description: '[Call of Duty 4®: Modern Warfare®](https://store.steampowered.com/app/7940)',
         fields: stats,
         footer: {
-          text: lock + `Server Uptime: ${data.raw.uptime}`,
+          text: `${lock} Server Uptime: ${data.raw.uptime}`,
           icon_url: lock_icon
         }
       }
