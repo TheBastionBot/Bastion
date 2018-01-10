@@ -44,19 +44,19 @@ exports.exec = (Bastion, message, args) => {
       gametype = 'Team Deathmatch';
     }
     else if (data.raw.g_gametype === 'dm') {
-      gametype = 'Free for All';
+      gametype = 'FFA';
     }
     else if (data.raw.g_gametype === 'sd') {
-      gametype = 'Search and Destroy';
+      gametype = 'S&D';
     }
     else if (data.raw.g_gametype === 'dom') {
-      gametype = 'Domination';
+      gametype = 'DOM';
     }
     else if (data.raw.g_gametype === 'koth') {
-      gametype = 'Headquarters';
+      gametype = 'HQ';
     }
     else if (data.raw.g_gametype === 'sab') {
-      gametype = 'Sabotage';
+      gametype = 'SAB';
     }
     else {
       gametype = data.raw.g_gametype;
@@ -64,49 +64,65 @@ exports.exec = (Bastion, message, args) => {
 
     let stats = [
       {
-        name: 'Server IP',
-        value: `[${host}:${port}](cod4://${host}:${port})`,
-        inline: true
-      },
-      {
-        name: 'Private',
-        value: data.password,
+        name: 'Address',
+        value: '`' + host + ':' + port + '`',
         inline: true
       },
       {
         name: 'Players',
-        value: `${data.players.length}/${data.maxplayers}`,
+        value: '`' + data.players.length + '/' + data.maxplayers + '`',
         inline: true
       },
       {
-        name: 'Map/Gametype',
-        value: `${data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1))} - ${gametype}`
+        name: 'Map',
+        value: '`' + data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1)) + ' - ' + gametype + '`',
+        inline: true
       }
     ];
 
     if (data.players.length > 0) {
       let players = [];
       let scores = [];
+      let pings = [];
       for (let i = 0; i < data.players.length; i++) {
-        players.push(data.players[i].name);
+        players.push(data.players[i].name.substring(0, 12));
       }
       for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].frags);
       }
+      for (let i = 0; i < data.players.length; i++) {
+        pings.push(data.players[i].ping);
+      }
       stats.push(
         {
-          name: 'Player',
-          value: players.join('\n'),
+          name: 'Player Name',
+          value: '```http\n' + players.join('\n') + '```',
           inline: true
         },
         {
           name: 'Score',
-          value: scores.join('\n'),
+          value: '```http\n' + scores.join('\n') + '```',
+          inline: true
+        },
+        {
+          name: 'Ping',
+          value: '```http\n' + pings.join('\n') + '```',
           inline: true
         }
       );
     }
 
+    let lock = data.password;
+    let lock_icon = '';
+    if (lock == true) {
+      lock = 'Password required to join server | ';
+      lock_icon = 'https://resources.bastionbot.org/images/lock.png';
+    } 
+    else {
+       lock = '';
+       lock_icon = '';
+    }
+    
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -114,7 +130,8 @@ exports.exec = (Bastion, message, args) => {
         description: '[Call of Duty 4®: Modern Warfare®](https://store.steampowered.com/app/7940)',
         fields: stats,
         footer: {
-          text: `Server Uptime: ${data.raw.uptime}`
+          text: lock + `Server Uptime: ${data.raw.uptime}`,
+          icon_url: lock_icon
         }
       }
     }).catch(e => {
