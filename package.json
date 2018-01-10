@@ -33,7 +33,7 @@
     "gif-search": "^2.0.1",
     "google-translate-api": "github:k3rn31p4nic/google-translate-api",
     "hirez.js": "github:k3rn31p4nic/hirez.js",
-    "kitsu": "^3.1.4",
+    "kitsu": "^4.1.0",
     "lzutf8": "^0.4.7",
     "mathjs": "^3.19.0",
     "node-json-db": "^0.7.3",
