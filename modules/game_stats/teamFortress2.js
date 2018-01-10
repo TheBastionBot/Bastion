@@ -1,5 +1,5 @@
 /**
- * @file counterStrikeGlobalOffensive command
+ * @file teamFortress2 command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
