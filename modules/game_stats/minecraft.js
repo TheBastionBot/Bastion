@@ -39,6 +39,16 @@ exports.exec = (Bastion, message, args) => {
     host: host,
     port: port
   }).then(data => {
+    let lock = data.password;
+    let lock_icon = '';
+    if (lock == true) {
+      lock = 'Password required to join server | ';
+      lock_icon = 'https://resources.bastionbot.org/images/lock.png';
+    } 
+    else {
+       lock = '';
+       lock_icon = '';
+    }
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -46,33 +56,29 @@ exports.exec = (Bastion, message, args) => {
         description: '[Minecraft](https://minecraft.net/)',
         fields: [
           {
-            name: 'Server IP',
-            value: `${host}:${port}`,
-            inline: true
-          },
-          {
-            name: 'Private',
-            value: data.password,
+            name: 'Address',
+            value: '`' + host + ':' + port + '`',
             inline: true
           },
           {
             name: 'Players',
-            value: `${data.players.length}/${data.maxplayers}`,
+            value: '`' + data.players.length + '/' + data.maxplayers + '`',
             inline: true
           },
           {
             name: 'Map',
-            value: data.raw.map,
+            value: '`' + data.raw.map + '`',
             inline: true
           },
           {
-            name: 'Gametype',
-            value: data.raw.gametype,
+            name: 'Mode',
+            value: '`' + data.raw.gametype + '`',
             inline: true
           }
         ],
         footer: {
-          text: `Version: ${data.raw.version}`
+          text: lock + `Version: ${data.raw.version}`,
+          icon_url: lock_icon,
         }
       }
     }).catch(e => {
