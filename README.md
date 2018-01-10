@@ -40,7 +40,7 @@ Just keep an eye on the [#announcements]() channel.
 [Click Here](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
 to invite the public Bastion Bot to your Discord Server.  
 Or if you want to host it yourself and have access to all it's owner only
-commands, read the [Installation Guide](https://bastionbot.org).
+commands, read the [Installation Guide](https://docs.bastionbot.org).
 
 > *If you ever face any problems with Bastion Bot or you don't understand*
 > *something, or if you need any kind of help with it, just head over to the*
