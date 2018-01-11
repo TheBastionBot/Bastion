@@ -4,59 +4,55 @@
  * @license MIT
  */
 
-const COD4 = require('gamedig');
+const source = require('gamedig');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1 || !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args = args[0])) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args.address)) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  args = args.split(':');
-  let host = args[0];
+    args.address = args.address.split(':');
+    let host = args.address[0];
 
-  if (host === '127.0.0.1') {
-    return message.channel.send({
-      embed: {
-        description: 'There is no place like `127.0.0.1`'
-      }
+    if (host === '127.0.0.1') {
+      return message.channel.send({
+        embed: {
+          description: 'There is no place like `127.0.0.1`'
+        }
+      });
+    }
+
+    let port;
+    if (args.address[1]) {
+      port = parseInt(args.address[1]);
+    }
+    else {
+      port = 28960;
+    }
+
+    let data = await source.query({
+      type: 'cod4',
+      host: host,
+      port: port
     });
-  }
 
-  let port;
-  if (args[1]) {
-    port = parseInt(args[1]);
-  }
-  else {
-    port = 28960;
-  }
+    let gametypes = {
+      war: 'Team Deathmatch',
+      dm: 'Free for All',
+      sd: 'Search and Destroy',
+      dom: 'Domination',
+      koth: 'Headquarters',
+      sab: 'Sabotage'
+    };
 
-  COD4.query({
-    type: 'cod4',
-    host: host,
-    port: port
-  }).then(data => {
-    let gametype = '';
-    if (data.raw.g_gametype === 'war') {
-      gametype = 'Team Deathmatch';
-    }
-    else if (data.raw.g_gametype === 'dm') {
-      gametype = 'FFA';
-    }
-    else if (data.raw.g_gametype === 'sd') {
-      gametype = 'S&D';
-    }
-    else if (data.raw.g_gametype === 'dom') {
-      gametype = 'DOM';
-    }
-    else if (data.raw.g_gametype === 'koth') {
-      gametype = 'HQ';
-    }
-    else if (data.raw.g_gametype === 'sab') {
-      gametype = 'SAB';
+    let gametype;
+    if (gametypes.hasOwnProperty(data.raw.g_gametype)) {
+      gametype = gametypes[data.raw.g_gametype];
     }
     else {
       gametype = data.raw.g_gametype;
@@ -64,19 +60,18 @@ exports.exec = (Bastion, message, args) => {
 
     let stats = [
       {
-        name: 'Address',
-        value: `\\`${host}:${port}\\``,
+        name: 'Server IP',
+        value: `\`${host}:${port}\``,
         inline: true
       },
       {
         name: 'Players',
-        value: `\\`${data.players.length}/${data.maxplayers}\\``,
+        value: `${data.players.length}/${data.maxplayers}`,
         inline: true
       },
       {
-        name: 'Map',
-        value: `\\`${data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1))} - ${gametype}\\``,
-        inline: true
+        name: 'Map/Gametype',
+        value: `${data.map.replace('mp_', '').split('_').map(e => e.charAt(0).toUpperCase() + e.slice(1))} - ${gametype}`
       }
     ];
 
@@ -85,42 +80,48 @@ exports.exec = (Bastion, message, args) => {
       let scores = [];
       let pings = [];
       for (let i = 0; i < data.players.length; i++) {
-        players.push(data.players[i].name.substring(0, 12));
+        players.push(data.players[i].name);
       }
       for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].frags);
       }
       for (let i = 0; i < data.players.length; i++) {
-        pings.push(data.players[i].ping);
+        pings.push(`${data.players[i].ping}ms`);
       }
       stats.push(
         {
-          name: 'Player Name',
-          value: `\\`\\`\\`http\n${players.join('\n')}\\`\\`\\``,
+          name: 'Player',
+          value: `\`\`\`http\n${players.join('\n')}\`\`\``,
           inline: true
         },
         {
           name: 'Score',
-          value: `\\`\\`\\`http\n${scores.join('\n')}\\`\\`\\``,
+          value: `\`\`\`http\n${scores.join('\n')}\`\`\``,
           inline: true
         },
         {
           name: 'Ping',
-          value: `\\`\\`\\`http\n${pings.join('\n')}\\`\\`\\``,
+          value: `\`\`\`http\n${pings.join('\n')}\`\`\``,
           inline: true
+        },
+        {
+          name: 'Join',
+          value: `<cod4://${host}:${port}>`
         }
       );
     }
 
-    let lock = data.password;
-    let lock_icon = '';
-    if (lock === true) {
-      lock = 'Password required to join server | ';
-      lock_icon = 'https://resources.bastionbot.org/images/lock.png';
-    } 
+    let footer;
+    if (data.password) {
+      footer = {
+        text: `Private Server • Uptime: ${data.raw.uptime}`,
+        icon_url: 'https://resources.bastionbot.org/images/lock.png'
+      };
+    }
     else {
-      lock = '';
-      lock_icon = '';
+      footer = {
+        text: `Server Uptime: ${data.raw.uptime}`
+      };
     }
 
     message.channel.send({
@@ -129,26 +130,26 @@ exports.exec = (Bastion, message, args) => {
         title: data.name,
         description: '[Call of Duty 4®: Modern Warfare®](https://store.steampowered.com/app/7940)',
         fields: stats,
-        footer: {
-          text: `${lock} Server Uptime: ${data.raw.uptime}`,
-          icon_url: lock_icon
-        }
+        footer: footer
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(() => {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
-  });
+  }
+  catch (e) {
+    if (e.toString() === 'UDP Watchdog Timeout') {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
   aliases: [ 'cod4' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'address', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -156,6 +157,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'callOfDuty4 <COD_SERVER_IP>[:PORT]',
-  example: [ 'callOfDuty4 139.59.31.128', 'callOfDuty4 139.59.31.128:27016' ]
+  usage: 'callOfDuty4 <COD_SERVER_IP:PORT>',
+  example: [ 'callOfDuty4 139.59.31.128:27016' ]
 };
