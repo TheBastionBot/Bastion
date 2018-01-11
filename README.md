@@ -1,16 +1,21 @@
 ![Bastion Logo Dark](https://resources.bastionbot.org/logos/BastionLogo_Text_Dark_ON.png)
 
 # Bastion: Discord Bot
-[![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
-[![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
 [![GitHub release](https://img.shields.io/github/release/TheBastionBot/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
+[![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
+[![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
+[![Website](https://img.shields.io/website-up-down-green-red/https/bastionbot.org.svg?label=Website)](https://bastionbot.org)  
+
+[![Patreon](https://img.shields.io/badge/be a-patron-orange.svg)](https://patreon.com/snkrsnkampa)
+[![PayPal](https://img.shields.io/badge/paypal-me-blue.svg)](https://paypal.me/snkrsnkampa)
+[![Bountysource](https://img.shields.io/bountysource/team/bastion/activity.svg)](https://salt.bountysource.com/teams/bastion)  
+
 [![Build Status](https://travis-ci.org/TheBastionBot/Bastion.svg?branch=master)](https://travis-ci.org/TheBastionBot/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/bastion/localized.svg)](http://i18n.bastionbot.org/project/bastion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7cac2730252247819a559caa2aad4fab)](https://www.codacy.com/app/snkrsnkampa/Bastion?utm_source=github.com&utm_medium=referral&utm_content=TheBastionBot/Bastion&utm_campaign=badger)
 [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion)
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
-[![Website](https://img.shields.io/website-up-down-green-red/https/bastionbot.org.svg?label=Website)](https://bastionbot.org)
 
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
 *Administration, Moderation, Searches, Game Server Stats, Player Stats,
