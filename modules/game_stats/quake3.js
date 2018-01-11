@@ -4,72 +4,73 @@
  * @license MIT
  */
 
-const Q3 = require('gamedig');
+const source = require('gamedig');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1 || !/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args = args[0])) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:0*(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9]))?$/.test(args.address)) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  args = args.split(':');
-  let host = args[0];
+    args.address = args.address.split(':');
+    let host = args.address[0];
 
-  if (host === '127.0.0.1') {
-    return message.channel.send({
-      embed: {
-        description: 'There is no place like `127.0.0.1`'
-      }
-    });
-  }
-
-  let port;
-  if (args[1]) {
-    port = parseInt(args[1]);
-  }
-  else {
-    port = 27960;
-  }
-
-  Q3.query({
-    type: 'quake3',
-    host: host,
-    port: port
-  }).then(data => {
-    let gametype = '';
-        if (data.raw.g_gametype === '0') {
-            gametype = 'FFA';
-        } else if (data.raw.g_gametype === '1') {
-            gametype = '1v1';
-        } else if (data.raw.g_gametype === '2') {
-            gametype = '2';
-        } else if (data.raw.g_gametype === '3') {
-            gametype = 'TDM';
-        } else if (data.raw.g_gametype === '4') {
-            gametype = 'CTF';
-        } else if (data.raw.g_gametype === '5') {
-            gametype = 'CPM';
-        } else {
-            gametype = data.raw.g_gametype;
+    if (host === '127.0.0.1') {
+      return message.channel.send({
+        embed: {
+          description: 'There is no place like `127.0.0.1`'
         }
+      });
+    }
+
+    let port;
+    if (args.address[1]) {
+      port = parseInt(args.address[1]);
+    }
+    else {
+      port = 27960;
+    }
+
+    let data = await source.query({
+      type: 'quake3',
+      host: host,
+      port: port
+    });
+
+    let gametypes = {
+      0: 'Free for All',
+      1: '1v1',
+      3: 'Team Deathmatch',
+      4: 'Capture the Flag',
+      5: 'CPM'
+    };
+
+    let gametype;
+    if (gametypes.hasOwnProperty(data.raw.g_gametype)) {
+      gametype = gametypes[data.raw.g_gametype];
+    }
+    else {
+      gametype = data.raw.g_gametype;
+    }
+
     let stats = [
       {
-        name: 'Address',
-        value: '`' + host + ':' + port + '`',
+        name: 'Server IP',
+        value: `\`${host}:${port}\``,
         inline: true
       },
       {
         name: 'Players',
-        value: '`' + data.players.length + '/' + data.maxplayers + '`',
+        value: `${data.players.length}/${data.maxplayers}`,
         inline: true
       },
       {
-        name: 'Map',
-        value: '`' + data.map + ' - ' + gametype + '`',
-        inline: true
+        name: 'Map/Gametype',
+        value: `${data.map} - ${gametype}`
       }
     ];
 
@@ -78,78 +79,71 @@ exports.exec = (Bastion, message, args) => {
       let scores = [];
       let pings = [];
       for (let i = 0; i < data.players.length; i++) {
-        players.push(data.players[i].name.substring(0, 12));
+        players.push(data.players[i].name);
       }
       for (let i = 0; i < data.players.length; i++) {
         scores.push(data.players[i].frags);
       }
       for (let i = 0; i < data.players.length; i++) {
-        pings.push(data.players[i].ping);
+        pings.push(`${data.players[i].ping}ms`);
       }
       stats.push(
         {
-          name: 'Player Name',
-          value: '```http\n' + players.join('\n') + '```',
+          name: 'Player',
+          value: `\`\`\`http\n${players.join('\n')}\`\`\``,
           inline: true
         },
         {
           name: 'Score',
-          value: '```http\n' + scores.join('\n') + '```',
+          value: `\`\`\`http\n${scores.join('\n')}\`\`\``,
           inline: true
         },
         {
           name: 'Ping',
-          value: '```http\n' + pings.join('\n') + '```',
+          value: `\`\`\`http\n${pings.join('\n')}\`\`\``,
           inline: true
+        },
+        {
+          name: 'Join',
+          value: `<steam://connect/${host}:${port}>`
         }
       );
     }
 
-    stats.push(
-      {
-        name: 'Join Server',
-        value: 'steam://connect/' + host + ':' + port,
-        inline: false
-      }  
-    );
-    
-    let lock = data.password;
-    let lock_icon = '';
-    if (lock == true) {
-      lock = 'Password required to join server';
-      lock_icon = 'https://resources.bastionbot.org/images/lock.png';
-    } 
-    else {
-       lock = '';
-       lock_icon = '';
+    let footer;
+    if (data.password === '1') {
+      footer = {
+        text: 'Private Server',
+        icon_url: 'https://resources.bastionbot.org/images/lock.png'
+      };
     }
-    
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: data.name,
         description: '[Quake III Arena](https://store.steampowered.com/app/2200)',
         fields: stats,
-        footer: {
-          text: lock,
-          icon_url: lock_icon
-        }
+        footer: footer
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(() => {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
-  });
+  }
+  catch (e) {
+    if (e.toString() === 'UDP Watchdog Timeout') {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
   aliases: [ 'q3' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'address', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -157,6 +151,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'quake3 <Q3_SERVER_IP>[:PORT]',
-  example: [ 'quake3 139.59.31.128', 'quake3 139.59.31.128:27960' ]
+  usage: 'quake3 <Q3_SERVER_IP:PORT>',
+  example: [ 'quake3 139.59.31.128:27960' ]
 };
