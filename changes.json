@@ -9,7 +9,7 @@
   "improved": [
     "`giveaway` command is now accessible by server administrators and they can give away anything they want. Go ahead and give away amazing goodies to your server members.",
     "You can now see the IDs of server members in the `leaderboard` command.",
-    "Bastion can now show the song name while it's playing music. By default this is enabled, it can be disabled in the config file.",
+    "Bastion can now show the song name while it's playing music. By default this is disabled, it can be enabled in the config file.",
     "`cod4` and `quake3` commands will now show the ping of the connected players.",
     "`csgo` and `tf2` commands will now show the play time of the connected players.",
     "Improved error handling",

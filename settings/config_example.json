@@ -3,5 +3,7 @@
   "prefix": "#!",
   "status": "online",
   "game": "with Ganymede",
-  "musicStatus": true
+  "music": {
+    "status": true
+  }
 }

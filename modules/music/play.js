@@ -275,6 +275,16 @@ exports.help = {
  */
 function startStreamDispatcher(guild, connection) {
   if (guild.music.songs[0] === undefined) {
+    if (guild.client.config.music && guild.client.config.music.status) {
+      guild.client.user.setPresence({
+        status: guild.client.config.status,
+        game: {
+          name: guild.client.config.game,
+          type: 0
+        }
+      });
+    }
+
     return guild.music.textChannel.send({
       embed: {
         color: guild.client.colors.RED,
@@ -308,7 +318,7 @@ function startStreamDispatcher(guild, connection) {
     guild.client.log.error(e);
   });
 
-  if (guild.client.config.musicStatus) {
+  if (guild.client.config.music && guild.client.config.music.status) {
     guild.client.user.setPresence({
       status: guild.client.config.status,
       game: {
