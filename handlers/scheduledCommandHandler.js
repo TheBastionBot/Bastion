@@ -21,7 +21,7 @@ module.exports = Bastion => {
 
       for (let i = 0; i < scheduledCommands.length; i++) {
         let cronExp = scheduledCommands[i].cronExp,
-          command = scheduledCommands[i].command, cmd,
+          command = scheduledCommands[i].command.toLowerCase(), cmd,
           channel = Bastion.channels.get(scheduledCommands[i].channelID);
         if (!channel) {
           removeScheduledCommandByChannelID(Bastion, scheduledCommands[i].channelID);
@@ -45,7 +45,7 @@ module.exports = Bastion => {
               cmd = Bastion.commands.get(command);
             }
             else if (Bastion.aliases.has(command)) {
-              cmd = Bastion.commands.get(Bastion.aliases.get(command));
+              cmd = Bastion.commands.get(Bastion.aliases.get(command).toLowerCase());
             }
             else {
               job.stop();

@@ -1,8 +1,9 @@
 {
-  "date": "January 11, 2018",
+  "date": "January 12, 2018",
   "fixed": [
     "Fixed trivia not accepting the answer in upper & mixed cases.",
     "Fixed `musicChannel` showing music text channel name as the music voice channel name.",
+    "Scheduled commands will now work fine with mixed cases command names",
     "Under-the-hood fixes"
   ],
   "improved": [
