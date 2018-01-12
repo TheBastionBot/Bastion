@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (!generatedSession) {
-      let session = await hirez.paladins.session.generate().catch(e => {
+      let session = await hirez.paladins('pc').session.generate().catch(e => {
         Bastion.log.error(e);
       });
       generatedSession = session;
@@ -67,9 +67,9 @@ exports.help = {
  */
 async function fetchAndSend(message, args) {
   try {
-    let player = await hirez.paladins.getPlayer(args.player);
-    let playerStatus = await hirez.paladins.getPlayerStatus(args.player);
-    let championRanks = await hirez.paladins.getChampionRanks(args.player);
+    let player = await hirez.paladins('pc').getPlayer(args.player);
+    let playerStatus = await hirez.paladins('pc').getPlayerStatus(args.player);
+    let championRanks = await hirez.paladins('pc').getChampionRanks(args.player);
 
     playerStatus = playerStatus[0];
 
