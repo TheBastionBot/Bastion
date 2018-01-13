@@ -298,7 +298,7 @@ function startStreamDispatcher(guild, connection) {
     });
   }
 
-  guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: 1, bitrate: 'auto' });
+  guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: (guild.client.config.music && guild.client.config.music.passes) || 1, bitrate: 'auto' });
   guild.music.playing = true;
 
   guild.music.textChannel.send({

@@ -12,6 +12,7 @@
     "Bastion can now show the song name while it's playing music. By default this is disabled, it can be enabled in the config file.",
     "`cod4` and `quake3` commands will now show the ping of the connected players.",
     "`csgo` and `tf2` commands will now show the play time of the connected players.",
+    "You can now specify the no. of passes Bastion will use for its audio streams (music, airhorn, etc.), in the `config` file.",
     "Improved error handling",
     "Under-the-hood changes"
   ],

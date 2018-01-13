@@ -4,6 +4,7 @@
   "status": "online",
   "game": "with Ganymede",
   "music": {
-    "status": true
+    "status": true,
+    "passes": 1
   }
 }
