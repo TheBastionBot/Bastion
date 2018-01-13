@@ -15,12 +15,12 @@ exports.exec = async (Bastion, message, args) => {
         'Big **reputation**, big **reputation**\nOoh, you and me would be a big conversation, ah\nAnd I heard about you, ooh',
         'I got a **reputation**, girl, that don\'t precede me\nI\'m one call away whenever you need me',
         'I got issues and chips on both of my shoulders\n**Reputation** precedes me, in rumors, I\'m knee-deep'
-      ]
+      ];
       return message.channel.send({
         embed: {
           description: reputationLyrics[Math.floor(Math.random() * reputationLyrics.length)]
         }
-      })
+      }).catch(() => {});
     }
 
     if (!recentUsers.includes(message.author.id)) {
