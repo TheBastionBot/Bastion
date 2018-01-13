@@ -1,5 +1,5 @@
 {
-  "date": "January 12, 2018",
+  "date": "January 13, 2018",
   "fixed": [
     "Fixed trivia not accepting the answer in upper & mixed cases.",
     "Fixed `musicChannel` showing music text channel name as the music voice channel name.",
@@ -19,7 +19,8 @@
     "Howdy gamers! Use the new `fortnite` command to get Fortnite game stats of any player, in any platform.",
     "Bot owners can now give away Bastion Currencies using the `currencyGiveaway` command.",
     "Do awesome stuff in your server and run commands in your system where Bastion is hosted, with the all new `exec` command.",
-    "You can now setup a suggestion channel in your server using the `suggestionChannel` command and your members can post suggestions with the `suggest` command."
+    "You can now setup a suggestion channel in your server using the `suggestionChannel` command and your members can post suggestions with the `suggest` command.",
+    "Added `smite`  command for all your Smite players. Now, go and check your stats!"
   ],
   "removed": [],
   "issues": []
