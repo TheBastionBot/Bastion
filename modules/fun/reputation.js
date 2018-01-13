@@ -7,8 +7,22 @@
 let recentUsers = [];
 const COOLDOWN = 12;
 
-exports.exec = async (Bastion, message) => {
+exports.exec = async (Bastion, message, args) => {
   try {
+    if (/^tay(?:lor)?(?: alison)?(?: swift)?$/i.test(args && args.join(' '))) {
+      let reputationLyrics = [
+        'Big **reputation**, big **reputation**\nOoh, you and me, we got big **reputations**, ah\nAnd you heard about me, ooh',
+        'Big **reputation**, big **reputation**\nOoh, you and me would be a big conversation, ah\nAnd I heard about you, ooh',
+        'I got a **reputation**, girl, that don\'t precede me\nI\'m one call away whenever you need me',
+        'I got issues and chips on both of my shoulders\n**Reputation** precedes me, in rumors, I\'m knee-deep'
+      ]
+      return message.channel.send({
+        embed: {
+          description: reputationLyrics[Math.floor(Math.random() * reputationLyrics.length)]
+        }
+      })
+    }
+
     if (!recentUsers.includes(message.author.id)) {
       let user = message.mentions.users.first();
       if (!user) return;
