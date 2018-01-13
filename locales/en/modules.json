@@ -64,6 +64,7 @@
     "pubg": "Get stats of any PlayerUnknown's Battlegrounds player.",
     "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
+    "smite": "Get stats of any Smite player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server."
   },
   "games": {
@@ -93,6 +94,7 @@
     "filterInvite": "Toggles automatic deleting of Discord server invites posted in the server.",
     "filterLink": "Toggles automatic deletion of any links posted in the server.",
     "filterWord": "Toggles automatic deletion of messages that contains any word that is being filtered.",
+    "giveaway": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is choosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.",
     "greet": "Toggles sending of greeting message for members who join the server.",
     "greetPrivate": "Toggles sending of greeting message as direct message for members who join the server.",
     "greetPrivateMessage": "Edits the greeting message that is sent as direct message when a member joins the server.",
@@ -217,6 +219,7 @@
   "owner": {
     "addTrigger": "Adds a message trigger and a response. When a message is sent that contains that triggering word/phrase, Bastion replies with the response you have set.",
     "announce": "Send a message to announcement channel of all the servers Bastion is connected to.",
+    "currencyGiveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
     "deleteAllTriggers": "Deletes all the triggers and responses you have set.",
     "deleteTodo": "Deletes the specified item from your TODO list.",
     "deleteTrigger": "Deletes the specified message trigger.",
@@ -228,7 +231,6 @@
     "enableModule": "Enables the specified module that was previously disabled.",
     "eval": "Evaluates JavaScript code.",
     "exec": "Executes a command in the Terminal (Linux/macOS) or Command Prompt (Windows) and shows the output. Note that it will terminate the command if it runs for more than 1 minute.",
-    "giveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
     "leave": "Asks Bastion to leave a specified server.",
     "listScheduledCommands": "Lists all the scheduled commands.",
     "listTodo": "Lists all the items in your TODO list.",
