@@ -5,19 +5,19 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  let gifts = {
-    chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
-    icecream: [ '🍦  Ice Cream', 10 ],
-    cookie: [ '🍪  Cookie', 5 ],
-    cake: [ '🍰  Cake', 20 ],
-    ring: [ '💍  Ring', 250 ],
-    crown: [ '👑  Crown', 500 ],
-    gem: [ '💎  Gem', 100 ],
-    gift_heart: [ '💝  Heart', 50 ],
-    love_letter: [ '💌  Love Letter', 5 ]
-  };
-
   try {
+    let gifts = {
+      chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
+      icecream: [ '🍦  Ice Cream', 10 ],
+      cookie: [ '🍪  Cookie', 5 ],
+      cake: [ '🍰  Cake', 20 ],
+      ring: [ '💍  Ring', 250 ],
+      crown: [ '👑  Crown', 500 ],
+      gem: [ '💎  Gem', 100 ],
+      gift_heart: [ '💝  Heart', 50 ],
+      love_letter: [ '💌  Love Letter', 5 ]
+    };
+
     let color, title, description, giftsField = [];
     let userGifts = await Bastion.db.get(`SELECT * FROM gifts WHERE userID='${message.author.id}'`);
     if (!userGifts) {

@@ -5,24 +5,24 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.id || (!args.invites && !args.links && !args.words)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let role = message.guild.roles.get(args.id);
-  if (!role) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
-  }
-
   try {
+    if (!args.id || (!args.invites && !args.links && !args.words)) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let role = message.guild.roles.get(args.id);
+    if (!role) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+    }
+
     let guild = await Bastion.db.get(`SELECT inviteFilterWhitelistRoles, linkFilterWhitelistRoles, wordFilterWhitelistRoles FROM whitelists WHERE guildID=${message.guild.id}`);
 
     let whitelistRoles, filter;

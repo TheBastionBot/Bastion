@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
           },
           {
             name: 'Music Voice Channel',
-            value: `**${musicTextChannel.name}** is now set as the default voice channel for music.`
+            value: `**${musicVoiceChannel.name}** is now set as the default voice channel for music.`
           }
         ];
       }
@@ -56,7 +56,7 @@ exports.exec = async (Bastion, message, args) => {
           },
           {
             name: 'Music Voice Channel',
-            value: `**${musicTextChannel.name}** is the default voice channel for music.`
+            value: `**${musicVoiceChannel.name}** is the default voice channel for music.`
           }
         ];
       }

@@ -1,5 +1,5 @@
 /**
- * @file giveaway command
+ * @file currencyGiveaway command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -7,27 +7,27 @@
 let giveaway, activeChannel;
 
 exports.exec = async (Bastion, message, args) => {
-  if (!activeChannel) {
-    if (!args.amount || isNaN(args.amount)) {
+  try {
+    if (!activeChannel) {
+      if (!args.amount || isNaN(args.amount)) {
+        /**
+        * The command was ran with invalid parameters.
+        * @fires commandUsage
+        */
+        return Bastion.emit('commandUsage', message, this.help);
+      }
+
       /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+      * Time in hour(s) the giveaway event should go on.
+      * @constant
+      * @type {number}
+      * @default
+      */
+      const TIMEOUT = 3;
+      let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁' ];
 
-    /**
-     * Time in hour(s) the giveaway event should go on.
-     * @constant
-     * @type {number}
-     * @default
-     */
-    const TIMEOUT = 3;
-    let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁' ];
+      reaction = reaction[Math.floor(Math.random() * reaction.length)];
 
-    reaction = reaction[Math.floor(Math.random() * reaction.length)];
-
-    try {
       let giveawayMessage = await message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
@@ -105,32 +105,32 @@ exports.exec = async (Bastion, message, args) => {
         }
       }, TIMEOUT * 60 * 60 * 1000);
     }
-    catch (e) {
-      Bastion.log.error(e);
+    else {
+      if (args.end) {
+        Bastion.clearTimeout(giveaway);
+        activeChannel = null;
+
+        message.channel.send({
+          embed: {
+            color: Bastion.colors.RED,
+            title: 'Giveaway Event Ended',
+            description: `The giveaway event was abruptly ended by ${message.author.tag}. Sorry, no giveaways this time!`
+          }
+        }).catch(e => {
+          Bastion.log.error(e);
+        });
+      }
+      else {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'giveaway'), message.channel);
+      }
     }
   }
-  else {
-    if (args.end) {
-      Bastion.clearTimeout(giveaway);
-      activeChannel = null;
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          title: 'Giveaway Event Ended',
-          description: `The giveaway event was abruptly ended by ${message.author.tag}. Sorry, no giveaways this time!`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    else {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'giveaway'), message.channel);
-    }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
@@ -145,10 +145,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'giveaway',
+  name: 'currencyGiveaway',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'giveaway <amount | --end>',
-  example: [ 'giveaway 10', 'giveaway --end' ]
+  usage: 'currencyGiveaway <amount | --end>',
+  example: [ 'currencyGiveaway 10', 'currencyGiveaway --end' ]
 };

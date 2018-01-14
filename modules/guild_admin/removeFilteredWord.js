@@ -5,17 +5,17 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  let index = parseInt(args[0]);
-  if (!index || index <= 0) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-  index -= 1;
-
   try {
+    let index = parseInt(args[0]);
+    if (!index || index <= 0) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+    index -= 1;
+
     let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     if (!guildSettings || !guildSettings.filteredWords) {

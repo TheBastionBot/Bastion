@@ -6,34 +6,33 @@
 // I don't understand why this is even needed, but some fellows like this.
 
 exports.exec = async (Bastion, message) => {
-  let guildSettings = await Bastion.db.get(`SELECT farewell FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT farewell FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-  let color, farewellStats;
-  if (guildSettings.farewell === message.channel.id) {
-    await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.RED;
-    farewellStats = 'Farewell Messages are now disabled.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.GREEN;
-    farewellStats = 'Farewell Messages are now enabled in this channel.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: farewellStats
+    let color, farewellStats;
+    if (guildSettings.farewell === message.channel.id) {
+      await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      farewellStats = 'Farewell Messages are now disabled.';
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      farewellStats = 'Farewell Messages are now enabled in this channel.';
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: farewellStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {

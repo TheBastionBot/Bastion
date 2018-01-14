@@ -5,7 +5,7 @@
  */
 
 exports.exec = (Bastion, message) => {
-  if (message.channel.id !== message.guild.music.textChannelID) return;
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
 
   if (!message.guild.music.songs || !message.guild.music.songs.length) {
     /**
@@ -25,7 +25,7 @@ exports.exec = (Bastion, message) => {
         url: message.guild.music.songs[0].thumbnail
       },
       footer: {
-        text: `🔉 ${message.guild.music.dispatcher.volume * 50}% | ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
+        text: `🔉 ${message.guild.music.dispatcher.volume * 50}% • ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
       }
     }
   }).catch(e => {

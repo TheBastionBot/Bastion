@@ -8,6 +8,9 @@ module.exports = async db => {
   await db.get('SELECT language FROM guildSettings').catch(() => {
     db.run('ALTER TABLE guildSettings ADD language TEXT DEFAULT \'en\'').catch(() => {});
   });
+  await db.get('SELECT suggestionChannel FROM guildSettings').catch(() => {
+    db.run('ALTER TABLE guildSettings ADD suggestionChannel TEXT').catch(() => {});
+  });
   await db.get('SELECT birthDate FROM profiles').catch(() => {
     db.run('ALTER TABLE profiles ADD birthDate INTEGER').catch(() => {});
   });

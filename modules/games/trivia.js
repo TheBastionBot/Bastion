@@ -22,17 +22,17 @@ exports.exec = (Bastion, message) => {
   };
 
   request(options, async (error, response, body) => {
-    if (error) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
-    }
+    try {
+      if (error) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+      }
 
-    if (response) {
-      if (response.statusCode === 200) {
-        try {
+      if (response) {
+        if (response.statusCode === 200) {
           body = JSON.parse(body);
           body = body.results[0];
 
@@ -73,7 +73,7 @@ exports.exec = (Bastion, message) => {
 
           trivia.on('collect', ans => {
             let color, description;
-            if (ans.content === body.correct_answer.toLowerCase()) {
+            if (ans.content.toLowerCase() === body.correct_answer.toLowerCase()) {
               color = Bastion.colors.BLUE;
               description = `${ans.author.tag} you're absolutely right.`;
             }
@@ -112,17 +112,17 @@ exports.exec = (Bastion, message) => {
             }
           });
         }
-        catch (e) {
-          Bastion.log.error(e);
+        else {
+          /**
+          * Error condition is encountered.
+          * @fires error
+          */
+          return Bastion.emit('error', response.statusCode, response.statusMessage, message.channel);
         }
       }
-      else {
-        /**
-         * Error condition is encountered.
-         * @fires error
-         */
-        return Bastion.emit('error', response.statusCode, response.statusMessage, message.channel);
-      }
+    }
+    catch (e) {
+      Bastion.log.error(e);
     }
   });
 };

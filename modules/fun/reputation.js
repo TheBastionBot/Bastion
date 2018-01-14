@@ -7,19 +7,33 @@
 let recentUsers = [];
 const COOLDOWN = 12;
 
-exports.exec = async (Bastion, message) => {
-  if (!recentUsers.includes(message.author.id)) {
-    let user = message.mentions.users.first();
-    if (!user) return;
-    if (user.id === message.author.id) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (/^tay(?:lor)?(?: alison)?(?: swift)?$/i.test(args.length && args.join(' '))) {
+      let reputationLyrics = [
+        'Big **reputation**, big **reputation**\nOoh, you and me, we got big **reputations**, ah\nAnd you heard about me, ooh',
+        'Big **reputation**, big **reputation**\nOoh, you and me would be a big conversation, ah\nAnd I heard about you, ooh',
+        'I got a **reputation**, girl, that don\'t precede me\nI\'m one call away whenever you need me',
+        'I got issues and chips on both of my shoulders\n**Reputation** precedes me, in rumors, I\'m knee-deep'
+      ];
+      return message.channel.send({
+        embed: {
+          description: reputationLyrics[Math.floor(Math.random() * reputationLyrics.length)]
+        }
+      }).catch(() => {});
     }
 
-    try {
+    if (!recentUsers.includes(message.author.id)) {
+      let user = message.mentions.users.first();
+      if (!user) return;
+      if (user.id === message.author.id) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
+      }
+
       let profile = await Bastion.db.get(`SELECT reputation FROM profiles WHERE userID=${user.id}`);
       if (!profile) {
         await Bastion.db.run('INSERT INTO profiles (userID, reputation) VALUES (?, ?)', [ user.id, 1 ]);
@@ -42,16 +56,16 @@ exports.exec = async (Bastion, message) => {
         Bastion.log.error(e);
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
+    else {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
     }
   }
-  else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

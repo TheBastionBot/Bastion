@@ -75,7 +75,7 @@ exports.config = {
     { name: 'song', type: String, multiple: true, defaultOption: true },
     { name: 'playlist', type: String, multiple: true, alias: 'p' }
   ],
-  ownerOnly: true
+  musicMasterOnly: true
 };
 
 exports.help = {

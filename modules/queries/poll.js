@@ -7,29 +7,29 @@
 let activeChannels = {};
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-  args = args.join(' ').split(';');
-
-  if (!activeChannels.hasOwnProperty(message.channel.id)) {
-    activeChannels[message.channel.id] = {};
-    activeChannels[message.channel.id].usersVoted = [];
-
-    let answers = [];
-    for (let i = 1; i < args.length; i++) {
-      answers.push({
-        name: `${i}.`,
-        value: `${args[i]}`,
-        inline: true
-      });
+  try {
+    if (args.length < 1 || !/^(.+( ?; ?.+[^;])+)$/i.test(args.join(' '))) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
+    args = args.join(' ').split(';');
 
-    try {
+    if (!activeChannels.hasOwnProperty(message.channel.id)) {
+      activeChannels[message.channel.id] = {};
+      activeChannels[message.channel.id].usersVoted = [];
+
+      let answers = [];
+      for (let i = 1; i < args.length; i++) {
+        answers.push({
+          name: `${i}.`,
+          value: `${args[i]}`,
+          inline: true
+        });
+      }
+
       let pollStatus = await message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
@@ -127,16 +127,16 @@ exports.exec = async (Bastion, message, args) => {
         });
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
+    else {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'poll'), message.channel);
     }
   }
-  else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'poll'), message.channel);
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 

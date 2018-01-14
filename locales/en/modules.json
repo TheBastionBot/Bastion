@@ -10,7 +10,8 @@
     "renameChannel": "Renames the specified text or voice channel of your Discord server.",
     "renameRole": "Renames the specified role of your Discord server.",
     "roleColor": "Changes the color of the specified role of your Discord server.",
-    "setTopic": "Sets channel topic of the specified text channel of your Discord server."
+    "setTopic": "Sets channel topic of the specified text channel of your Discord server.",
+    "suggest": "Posts a suggestions to the suggestion channel, if a suggestion channel has been set. Otherwise posts the suggestion in the current channel."
   },
   "fun": {
     "airhorn": "Plays an airhorn in a voice channel.",
@@ -39,7 +40,7 @@
     "rip": "Show your condolences for something (or everything).",
     "robotify": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
     "selfDestruct": "Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.",
-    "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/tools/embed_builder/).*",
+    "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/embedbuilder/).*",
     "ship": "Combines two or more mentioned user's names.",
     "slap": "Give a slap to another user.",
     "xkcd": "Shows a xkcd comic.",
@@ -56,12 +57,14 @@
     "callOfDuty4": "Get stats of any Call of Duty 4: Modern Warfare game server.",
     "counterStrikeGlobalOffensive": "Get stats of any Counter-Strike: Global Offensive game server.",
     "destiny2": "Get stats of any Destiny 2 player.",
+    "fortnite": "Get stats of any Fortnite player.",
     "minecraft": "Get stats of any Minecraft game server.",
     "overwatch": "Get stats of any Overwatch player.",
     "paladins": "Get stats of any Paladins player.",
     "pubg": "Get stats of any PlayerUnknown's Battlegrounds player.",
     "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
+    "smite": "Get stats of any Smite player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server."
   },
   "games": {
@@ -91,6 +94,7 @@
     "filterInvite": "Toggles automatic deleting of Discord server invites posted in the server.",
     "filterLink": "Toggles automatic deletion of any links posted in the server.",
     "filterWord": "Toggles automatic deletion of messages that contains any word that is being filtered.",
+    "giveaway": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is choosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.",
     "greet": "Toggles sending of greeting message for members who join the server.",
     "greetPrivate": "Toggles sending of greeting message as direct message for members who join the server.",
     "greetPrivateMessage": "Edits the greeting message that is sent as direct message when a member joins the server.",
@@ -118,6 +122,7 @@
     "slowMode": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.",
     "streamerRole": "Adds a role as the streamer role. When a guild member (who is at least in a single role) starts streaming, they are given the streamer role.",
     "streamers": "Adds/removes/displays the list of streamers followed by the server to get notified when they are live.",
+    "suggestionChannel": "Adds/removes the channel as the suggestion channel. If it's enabled, when user post a suggestion using the `suggest` command, it's are posted in this channel.",
     "whitelistChannel": "Add/remove the channel from the whitelist for invite filter, link filter or word filter.",
     "whitelistRole": "Add/remove a role from the whitelist for invite filter, link filter or word filter."
   },
@@ -214,6 +219,7 @@
   "owner": {
     "addTrigger": "Adds a message trigger and a response. When a message is sent that contains that triggering word/phrase, Bastion replies with the response you have set.",
     "announce": "Send a message to announcement channel of all the servers Bastion is connected to.",
+    "currencyGiveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
     "deleteAllTriggers": "Deletes all the triggers and responses you have set.",
     "deleteTodo": "Deletes the specified item from your TODO list.",
     "deleteTrigger": "Deletes the specified message trigger.",
@@ -224,7 +230,7 @@
     "enableCommand": "Enables the specified command that was previously disabled.",
     "enableModule": "Enables the specified module that was previously disabled.",
     "eval": "Evaluates JavaScript code.",
-    "giveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
+    "exec": "Executes a command in the Terminal (Linux/macOS) or Command Prompt (Windows) and shows the output. Note that it will terminate the command if it runs for more than 1 minute.",
     "leave": "Asks Bastion to leave a specified server.",
     "listScheduledCommands": "Lists all the scheduled commands.",
     "listTodo": "Lists all the items in your TODO list.",

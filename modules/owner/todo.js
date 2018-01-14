@@ -5,15 +5,15 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
   try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let todo = await Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`);
 
     if (!todo) {

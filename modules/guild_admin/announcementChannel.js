@@ -19,7 +19,6 @@ exports.exec = async (Bastion, message, args) => {
       color = Bastion.colors.GREEN;
     }
 
-
     message.channel.send({
       embed: {
         color: color,

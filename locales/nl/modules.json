@@ -37,7 +37,7 @@
     "rip": "Toon uw condoleances voor iets (of alles).",
     "robotify": "Genereerd een robotfoto van specifieke tekst, of je Discord naam als je geen specifieke tekst opgeeft.",
     "selfDestruct": "Verstuurd hetzelfde bericht, maar het word vanzelf verwijderd na een opgegeven tijd.",
-    "sendEmbed": "Verstuurt een geembed bericht van een (Javascript) object. *Om een Embed te maken, [klik hier] (https://bastionbot.org/tools/embed_builder/).*",
+    "sendEmbed": "Verstuurt een geembed bericht van een (Javascript) object. *Om een Embed te maken, [klik hier](https://bastionbot.org/embedbuilder/).*",
     "ship": "Combineert twee of meer getagde gebruikers zijn of haar namen.",
     "slap": "Slaat een andere gebruiker.",
     "xkcd": "Geeft een xkcd comic weer.",

@@ -11,7 +11,7 @@ const db = new jsonDB('./data/playlist', true, true);
 exports.exec = (Bastion, message, args) => {
   // TODO: Auto pause/resume playback
   if (message.guild.music.textChannelID) {
-    if (message.channel.id !== message.guild.music.textChannelID) return;
+    if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
   }
 
   if (!args.song && !args.ytpl && !args.playlist) {
@@ -220,7 +220,7 @@ exports.exec = (Bastion, message, args) => {
             url: info.thumbnail
           },
           footer: {
-            text: `Position: ${message.guild.music.songs.length} | Duration: ${info.duration || 'N/A'} | Requester: ${message.author.tag}`
+            text: `Position: ${message.guild.music.songs.length} • Duration: ${info.duration || 'N/A'} • Requester: ${message.author.tag}`
           }
         }
       }).catch(e => {
@@ -275,6 +275,16 @@ exports.help = {
  */
 function startStreamDispatcher(guild, connection) {
   if (guild.music.songs[0] === undefined) {
+    if (guild.client.config.music && guild.client.config.music.status) {
+      guild.client.user.setPresence({
+        status: guild.client.config.status,
+        game: {
+          name: guild.client.config.game,
+          type: 0
+        }
+      });
+    }
+
     return guild.music.textChannel.send({
       embed: {
         color: guild.client.colors.RED,
@@ -288,7 +298,7 @@ function startStreamDispatcher(guild, connection) {
     });
   }
 
-  guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: 1, bitrate: 'auto' });
+  guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: (guild.client.config.music && guild.client.config.music.passes) || 1, bitrate: 'auto' });
   guild.music.playing = true;
 
   guild.music.textChannel.send({
@@ -301,13 +311,22 @@ function startStreamDispatcher(guild, connection) {
         url: guild.music.songs[0].thumbnail
       },
       footer: {
-        text: `🔉 ${guild.music.dispatcher.volume * 50}% | Duration: ${guild.music.songs[0].duration || 'N/A'} | Requester: ${guild.music.songs[0].requester}`
+        text: `🔉 ${guild.music.dispatcher.volume * 50}% • Duration: ${guild.music.songs[0].duration || 'N/A'} • Requester: ${guild.music.songs[0].requester}`
       }
     }
   }).catch(e => {
     guild.client.log.error(e);
   });
 
+  if (guild.client.config.music && guild.client.config.music.status) {
+    guild.client.user.setPresence({
+      status: guild.client.config.status,
+      game: {
+        name: guild.music.songs[0].title,
+        type: 0
+      }
+    });
+  }
 
   guild.music.dispatcher.on('end', () => {
     guild.music.playing = false;

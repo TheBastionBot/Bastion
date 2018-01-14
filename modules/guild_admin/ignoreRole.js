@@ -5,23 +5,23 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.id) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (!message.guild.roles.get(args.id)) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
-  }
-
   try {
+    if (!args.id) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    if (!message.guild.roles.get(args.id)) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+    }
+
     let guildSettings = await Bastion.db.get(`SELECT ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
     let ignoredRoles = guildSettings.ignoredRoles, isIgnored = false,
       description = null, color = Bastion.colors.RED;

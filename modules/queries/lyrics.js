@@ -38,7 +38,7 @@ exports.exec = (Bastion, message, args) => {
               title: `${args.song.join(' ').toTitleCase()} - Lyrics`,
               description: body.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', `View full lyrics at [musixmatch.com](${body.message.body.lyrics.backlink_url} 'Musixmatch')`),
               footer: {
-                text: `Powered by Musixmatch | Language: ${body.message.body.lyrics.lyrics_language_description.toTitleCase()}`
+                text: `Powered by Musixmatch • Language: ${body.message.body.lyrics.lyrics_language_description.toTitleCase()}`
               }
             }
           }).catch(e => {

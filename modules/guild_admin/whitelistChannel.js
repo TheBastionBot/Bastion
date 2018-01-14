@@ -5,15 +5,15 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.invites && !args.links && !args.words) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
   try {
+    if (!args.invites && !args.links && !args.words) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let guild = await Bastion.db.get(`SELECT inviteFilterWhitelistChannels, linkFilterWhitelistChannels, wordFilterWhitelistChannels FROM whitelists WHERE guildID=${message.guild.id}`);
 
     let whitelistChannels, filter;

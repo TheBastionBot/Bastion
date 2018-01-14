@@ -1,5 +1,5 @@
 /**
- * @file paladins command
+ * @file smite command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (!generatedSession) {
-      let session = await hirez.paladins('pc').session.generate().catch(e => {
+      let session = await hirez.smite('pc').session.generate().catch(e => {
         Bastion.log.error(e);
       });
       generatedSession = session;
@@ -50,16 +50,16 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'paladins',
+  name: 'smite',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'paladins <player_name>',
-  example: [ 'paladins SaffronPants' ]
+  usage: 'smite <player_name>',
+  example: [ 'smite SaffronPants' ]
 };
 
 /**
- * Fetches a player's Paladins stats and sends it.
+ * Fetches a player's smite stats and sends it.
  * @function fetchAndSend
  * @param {Object} message The message object
  * @param {Object} args The args object
@@ -67,13 +67,13 @@ exports.help = {
  */
 async function fetchAndSend(message, args) {
   try {
-    let player = await hirez.paladins('pc').getPlayer(args.player);
-    let playerStatus = await hirez.paladins('pc').getPlayerStatus(args.player);
-    let championRanks = await hirez.paladins('pc').getChampionRanks(args.player);
+    let player = await hirez.smite('pc').getPlayer(args.player);
+    let playerStatus = await hirez.smite('pc').getPlayerStatus(args.player);
+    let godRanks = await hirez.smite('pc').getGodRanks(args.player);
 
     playerStatus = playerStatus[0];
 
-    if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || championRanks === 0) {
+    if (playerStatus.status_string.toLowerCase().includes('unknown') || player.length === 0 || godRanks === 0) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -82,7 +82,7 @@ async function fetchAndSend(message, args) {
     }
 
     player = player[0];
-    championRanks = championRanks[0];
+    godRanks = godRanks[0];
 
     message.channel.send({
       embed: {
@@ -133,10 +133,10 @@ async function fetchAndSend(message, args) {
             inline: true
           },
           {
-            name: 'Main Champion',
-            value: `${championRanks.champion} - Level ${championRanks.Rank}\n` +
-            `${championRanks.Kills} Kills, ${championRanks.Deaths} Deaths and ${championRanks.Assists} Assists (${(championRanks.Kills / championRanks.Deaths).toFixed(2)} K/D)\n` +
-            `${championRanks.Wins} Wins and ${championRanks.Losses} Losses (${(championRanks.Wins / (championRanks.Wins + championRanks.Losses) * 100).toFixed(2)} Win %)`,
+            name: 'Main God',
+            value: `${godRanks.god} - Level ${godRanks.Rank}\n` +
+            `${godRanks.Kills} Kills, ${godRanks.Deaths} Deaths and ${godRanks.Assists} Assists (${(godRanks.Kills / godRanks.Deaths).toFixed(2)} K/D)\n` +
+            `${godRanks.Wins} Wins and ${godRanks.Losses} Losses (${(godRanks.Wins / (godRanks.Wins + godRanks.Losses) * 100).toFixed(2)} Win %)`,
             inline: true
           }
         ],

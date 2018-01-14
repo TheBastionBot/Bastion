@@ -2,5 +2,9 @@
   "shardCount": 1,
   "prefix": "#!",
   "status": "online",
-  "game": "with Ganymede"
+  "game": "with Ganymede",
+  "music": {
+    "status": true,
+    "passes": 1
+  }
 }

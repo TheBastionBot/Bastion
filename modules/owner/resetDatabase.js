@@ -5,15 +5,15 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.profiles) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
   try {
+    if (!args.profiles) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     await Bastion.db.run('DELETE FROM profiles');
 
     message.channel.send({

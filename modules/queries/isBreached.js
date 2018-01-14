@@ -24,16 +24,16 @@ exports.exec = (Bastion, message, args) => {
     },
     method: 'GET'
   }, async function (err, res, body) {
-    if (err) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
-    }
+    try {
+      if (err) {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+      }
 
-    if (res && res.statusCode === 200) {
-      try {
+      if (res && res.statusCode === 200) {
         body = await JSON.parse(body);
         await message.channel.send({
           embed: {
@@ -64,16 +64,16 @@ exports.exec = (Bastion, message, args) => {
           }
         });
       }
-      catch (e) {
-        Bastion.log.error(e);
+      else {
+        /**
+        * Error condition is encountered.
+        * @fires error
+        */
+        return Bastion.emit('error', res.statusCode, res.statusMessage, message.channel);
       }
     }
-    else {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', res.statusCode, res.statusMessage, message.channel);
+    catch (e) {
+      Bastion.log.error(e);
     }
   });
 };

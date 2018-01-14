@@ -5,23 +5,23 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let user = [];
-  args.forEach(uid => {
-    if (parseInt(uid) < 9223372036854775807) {
-      user.push(uid);
-    }
-  });
-  user = user.concat(message.mentions.users.map(u => u.id));
-
   try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let user = [];
+    args.forEach(uid => {
+      if (parseInt(uid) < 9223372036854775807) {
+        user.push(uid);
+      }
+    });
+    user = user.concat(message.mentions.users.map(u => u.id));
+
     await Bastion.db.run('CREATE TABLE IF NOT EXISTS blacklistedUsers (userID TEXT NOT NULL UNIQUE, PRIMARY KEY(userID))');
 
     let blUsers = await Bastion.db.all('SELECT userID from blacklistedUsers');

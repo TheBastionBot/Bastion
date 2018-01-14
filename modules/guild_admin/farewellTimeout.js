@@ -5,22 +5,25 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
-    args[0] = '0';
-  }
-  await Bastion.db.run(`UPDATE guildSettings SET farewellTimeout=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.GREEN,
-      title: 'Farewell Timeout set to:',
-      description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] === 0 ? '∞' : `${args[0]} sec.`
+  try {
+    if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
+      args[0] = '0';
     }
-  }).catch(e => {
+    await Bastion.db.run(`UPDATE guildSettings SET farewellTimeout=${args[0]} WHERE guildID=${message.guild.id}`);
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Farewell Timeout set to:',
+        description: args[0] > 60 ? `${args[0] / 60} min.` : args[0] === 0 ? '∞' : `${args[0]} sec.`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
