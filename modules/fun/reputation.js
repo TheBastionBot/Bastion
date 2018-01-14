@@ -9,7 +9,7 @@ const COOLDOWN = 12;
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (/^tay(?:lor)?(?: alison)?(?: swift)?$/i.test(args && args.join(' '))) {
+    if (/^tay(?:lor)?(?: alison)?(?: swift)?$/i.test(args.length && args.join(' '))) {
       let reputationLyrics = [
         'Big **reputation**, big **reputation**\nOoh, you and me, we got big **reputations**, ah\nAnd you heard about me, ooh',
         'Big **reputation**, big **reputation**\nOoh, you and me would be a big conversation, ah\nAnd I heard about you, ooh',
