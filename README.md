@@ -18,7 +18,7 @@
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
 
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
-*Administration, Moderation, Searches, Game Server Stats, Player Stats,
+*Administration, Moderation, Giveaways, Suggestions, Searches, Game Server Stats, Player Stats,
 Music, Games, User Profiles, User Levels, Virtual Currencies, Humor?*  
 
 Think no more, Bastion Bot can do it all (*and even more*).
