@@ -5,7 +5,7 @@
  */
 
 exports.exec = (Bastion, message, args) => {
-  if (message.channel.id !== message.guild.music.textChannelID) return;
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
 
   if (!message.guild.music.songs || !message.guild.music.songs.length) {
     /**

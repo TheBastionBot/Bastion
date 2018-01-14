@@ -1,5 +1,5 @@
 {
-  "date": "January 13, 2018",
+  "date": "January 14, 2018",
   "fixed": [
     "Fixed trivia not accepting the answer in upper & mixed cases.",
     "Fixed `musicChannel` showing music text channel name as the music voice channel name.",
@@ -14,6 +14,7 @@
     "`csgo` and `tf2` commands will now show the play time of the connected players.",
     "You can now specify the no. of passes Bastion will use for its audio streams (music, airhorn, etc.), in the `config` file.",
     "Users in the music master role can now use the `playlist` command as well.",
+    "All commands in music module won't ignore you if music channels are not set."
     "Improved error handling",
     "Under-the-hood changes"
   ],
