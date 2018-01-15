@@ -7,4 +7,5 @@
     "status": true,
     "passes": 1
   }
+   "gameType": "WATCHING" //for Watching status type WATCHING for Listening status type LİSTENİNG
 }
