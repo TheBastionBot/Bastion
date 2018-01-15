@@ -6,7 +6,7 @@
 [![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
 [![Website](https://img.shields.io/website-up-down-green-red/https/bastionbot.org.svg?label=Website)](https://bastionbot.org)  
 
-[![Patreon](https://img.shields.io/badge/be a-patron-orange.svg)](https://patreon.com/snkrsnkampa)
+[![Patreon](https://img.shields.io/badge/be-patron-orange.svg)](https://patreon.com/snkrsnkampa)
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg)](https://paypal.me/snkrsnkampa)
 [![Bountysource](https://img.shields.io/bountysource/team/bastion/activity.svg)](https://salt.bountysource.com/teams/bastion)  
 
