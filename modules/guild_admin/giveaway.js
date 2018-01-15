@@ -121,7 +121,7 @@ exports.exec = async (Bastion, message, args) => {
     else if (args.end) {
       if (giveaways.has(message.guild.id)) {
         // Clear the giveaway timeout
-        Bastion.clearTimeout(giveaways.get(args.end));
+        Bastion.clearTimeout(giveaways.get(message.guild.id));
 
         // Remove the giveaway details from cache
         giveaways.delete(args.end);
@@ -130,7 +130,7 @@ exports.exec = async (Bastion, message, args) => {
           embed: {
             color: Bastion.colors.RED,
             title: 'Giveaway Cancelled',
-            description: `The giveaway event with ID **${args.end}** has been cancelled by ${message.author.tag}`
+            description: `The giveaway event with ID **${message.guild.id}** has been cancelled by ${message.author.tag}`
           }
         }).catch(e => {
           Bastion.log.error(e);
