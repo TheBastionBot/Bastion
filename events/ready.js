@@ -19,6 +19,8 @@ module.exports = async Bastion => {
         type: 0
       }
     });
+    
+    Bastion.user.setActivity('Bastion.config.game, { type: Bastion.config.gameType'});
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
     let guild = await Bastion.db.all('SELECT guildID from guildSettings');
