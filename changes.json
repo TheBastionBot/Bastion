@@ -1,8 +1,6 @@
 {
   "date": "January 15, 2018",
-  "fixed": [
-    "Fixed `giveaway --end` not ending the giveaway and showing up wrong ID."
-  ],
+  "fixed": [],
   "improved": [],
   "added": [],
   "removed": [],
