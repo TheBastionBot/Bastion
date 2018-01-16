@@ -6,35 +6,27 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.length >= 1) {
-      await Bastion.user.setPresence({
-        game: {
-          name: args.join(' '),
-          type: 0
-        }
-      });
+    if (args.name) {
+      args.name = args.name.join(' ');
+
+      await Bastion.user.setActivity(args.name, { type: args.type });
 
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `${Bastion.user.username}'s game is now set to **${args.join(' ')}**`
+          description: `My activity is now set to **${args.type} ${args.name}**`
         }
       }).catch(e => {
         Bastion.log.error(e);
       });
     }
     else {
-      await Bastion.user.setPresence({
-        game: {
-          name: Bastion.config.game.name,
-          type: Bastion.config.game.type
-        }
-      });
+      await Bastion.user.setActivity(Bastion.config.game.name, { type: Bastion.config.game.type });
 
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game.type} ${Bastion.config.game.name}**`
+          description: `My activity has been reset to the default: **${Bastion.config.game.type} ${Bastion.config.game.name}**`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -49,7 +41,11 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [ 'setGame' ],
   enabled: true,
-  ownerOnly: true
+  ownerOnly: true,
+  argsDefinitions: [
+    { name: 'name', type: String, multiple: true, defaultOption: true },
+    { name: 'type', type: String, alias: 't', defaultValue: 'Playing' }
+  ]
 };
 
 exports.help = {
@@ -57,6 +53,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'setActivity [text]',
-  example: [ 'setActivity with minions!', 'setActivity' ]
+  usage: 'setActivity [ ACTIVITY NAME [-t ACTIVITY_TYPE] ]',
+  example: [ 'setActivity minions! -t Watching', 'setActivity with you', 'setActivity' ]
 };
