@@ -1,8 +1,10 @@
 {
-  "date": "January 15, 2018",
+  "date": "January 16, 2018",
   "fixed": [],
   "improved": [],
-  "added": [],
+  "added": [
+    "Bastion now supports watching and listening activities."
+  ],
   "removed": [],
   "issues": []
 }
