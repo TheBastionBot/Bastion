@@ -37,7 +37,7 @@ exports.exec = async (Bastion, message, args) => {
       status = 'Do Not Disturb';
     }
     else {
-      status = 'Invisible';
+      status = 'Offline';
     }
     let activity;
     if (user.presence.game) {
