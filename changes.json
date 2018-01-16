@@ -8,7 +8,8 @@
     "Under-the-hood improvements"
   ],
   "added": [
-    "Bastion now supports watching and listening activities."
+    "Bastion now supports watching and listening activities.",
+    "You can now create channel categories using the `channelCategory` command."
   ],
   "removed": [],
   "issues": []

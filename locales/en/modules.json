@@ -1,5 +1,6 @@
 {
   "administration": {
+    "createCategory": "Creates a new channel category on your Discord server.",
     "createChannel": "Creates a new text or voice channel on your Discord server.",
     "createEmoji": "Creates a new emoji on your Discord server.",
     "createRole": "Creates a new role on your Discord server.",
