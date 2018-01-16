@@ -279,8 +279,8 @@ function startStreamDispatcher(guild, connection) {
       guild.client.user.setPresence({
         status: guild.client.config.status,
         game: {
-          name: guild.client.config.game,
-          type: 0
+          name: guild.client.config.game.name,
+          type: guild.client.config.game.type
         }
       });
     }

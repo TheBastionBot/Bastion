@@ -26,15 +26,15 @@ exports.exec = async (Bastion, message, args) => {
     else {
       await Bastion.user.setPresence({
         game: {
-          name: Bastion.config.game,
-          type: 0
+          name: Bastion.config.game.name,
+          type: Bastion.config.game.type
         }
       });
 
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game}**`
+          description: `${Bastion.user.username}'s game is now set to the default game **${Bastion.config.game.type} ${Bastion.config.game.name}**`
         }
       }).catch(e => {
         Bastion.log.error(e);
