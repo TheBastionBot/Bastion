@@ -24,6 +24,7 @@ else {
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
 BASTION.config = require('./settings/config.json');
+BASTION.Constants = Discord.Constants;
 BASTION.colors = Discord.Constants.Colors;
 BASTION.permissions = Discord.Permissions.FLAGS;
 
