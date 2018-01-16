@@ -25,8 +25,8 @@ module.exports = async message => {
 
     BOT.write(message.content, response => {
       message.channel.startTyping();
-      setTimeout(async () => {
-        await message.channel.send(response.output).catch(e => {
+      setTimeout(() => {
+        message.channel.send(response.output).catch(e => {
           message.client.log.error(e);
         });
         message.channel.stopTyping();
