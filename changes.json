@@ -9,7 +9,7 @@
   ],
   "added": [
     "Bastion now supports watching and listening activities.",
-    "You can now create channel categories using the `channelCategory` command."
+    "You can now create channel categories using the `createCategory` command."
   ],
   "removed": [],
   "issues": []
