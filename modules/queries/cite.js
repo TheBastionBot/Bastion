@@ -41,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
         color: Bastion.colors.BLUE,
         author: {
           name: `${citedMessage.author.tag} ${message.channel.id === citedMessage.channel.id ? '' : `in #${citedMessage.channel.name}`}`,
-          icon_url: citedMessage.author.avatarURL
+          icon_url: citedMessage.author.displayAvatarURL
         },
         description: citedMessage.content,
         image: {
