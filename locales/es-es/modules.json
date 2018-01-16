@@ -221,7 +221,6 @@
     "scheduleCommand": "Programe un comando como trabajos cron para ejecutarse en una planificación especificada.\n`Cron` formato de expresión: ```Segundo 0-59 o * o rango\nHora 0-23 o * o rango\nDía del mes 1-31 o * o rango\nMes 1-12 o * o rango\nDía de la semana 0-7 (0 o 7 es DOMINGO) o * o rango```",
     "searchServer": "Busca servidores de Discord, que contienen el texto especificado en su nombre, al cual Bastion está conectado.",
     "setAvatar": "Define el avatar de Bastion.",
-    "setGame": "Establece el juego de Bastión.",
     "setNick": "Establece el apodo de Bastion en el servidor de Discord actual.",
     "setStatus": "Establece el estado de Bastion.",
     "setStream": "Establece el stream de video de Bastion.",

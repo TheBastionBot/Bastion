@@ -221,7 +221,6 @@
     "scheduleCommand": "Plan een commando om uit te voeren in de ingestelde tijden.\n`crontab` formaat:```Seconden         0-59 of * of in\nMinuten         0-59 of * of in\nUren           0-23 of * of in\nDagen van de week    0-7 (0 of 7 is Zondag) of * of in\nDagen van de maand   1-31 of * of in\nMaanden          1-12 of * of in```",
     "searchServer": "Zoekt voor Discord server, met een specifieke tekst in de naam, waarmee Bastion is verbonden.",
     "setAvatar": "Verandert de Avatar van Bastion.",
-    "setGame": "Verandert de spelstatus van Bastion.",
     "setNick": "Verandert de nickname van Bastion in je Bastion server.",
     "setStatus": "Verandert de status van Bastion.",
     "setStream": "Verandert de streamstatus van Bastion.",

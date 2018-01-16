@@ -1,5 +1,5 @@
 /**
- * @file setGame command
+ * @file setActivity command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -47,16 +47,16 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'setg' ],
+  aliases: [ 'setGame' ],
   enabled: true,
   ownerOnly: true
 };
 
 exports.help = {
-  name: 'setGame',
+  name: 'setActivity',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'setGame [text]',
-  example: [ 'setGame with minions!', 'setGame' ]
+  usage: 'setActivity [text]',
+  example: [ 'setActivity with minions!', 'setActivity' ]
 };
