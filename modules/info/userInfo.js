@@ -96,7 +96,7 @@ exports.exec = async (Bastion, message, args) => {
           }
         ],
         thumbnail: {
-          url: user.displayAvatarURL.split('?')[0]
+          url: user.displayAvatarURL
         },
         footer: {
           text: `${message.guild.ownerID === user.id ? 'Server Owner' : ''}`,

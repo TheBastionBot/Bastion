@@ -30,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
           }
         ],
         image: {
-          url: user.displayAvatarURL.split('?')[0]
+          url: user.displayAvatarURL
         }
       }
     }).catch(e => {
