@@ -39,19 +39,12 @@ exports.exec = async (Bastion, message, args) => {
     else {
       status = 'Invisible';
     }
-    let isStream = 'Current Game';
-    if (user.presence.game && user.presence.game.streaming) {
-      isStream = 'Current Stream';
-    }
-    let game;
-    if (user.presence.game === null) {
-      game = '-';
-    }
-    else if (user.presence.game.streaming) {
-      game = `[${user.presence.game.name}](${user.presence.game.url})`;
+    let activity;
+    if (user.presence.game) {
+      activity = `${Bastion.Constants.ActivityTypes[user.presence.game.type]} ${user.presence.game.name}`;
     }
     else {
-      game = user.presence.game.name;
+      activity = 'None';
     }
     let roles = member.roles.map(r => r.name).slice(1).join('\n');
     if (roles.length === 0) roles = '-';
@@ -97,8 +90,8 @@ exports.exec = async (Bastion, message, args) => {
             inline: true
           },
           {
-            name: isStream,
-            value: game,
+            name: 'Activity',
+            value: activity,
             inline: true
           }
         ],

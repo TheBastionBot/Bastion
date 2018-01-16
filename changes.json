@@ -2,7 +2,8 @@
   "date": "January 16, 2018",
   "fixed": [],
   "improved": [
-    "Renamed `setGame` to `setActivity` since Bastion now supports watching and listening activities, and game isn't the right word for it. `setGame` is now an alias for it."
+    "Renamed `setGame` to `setActivity` since Bastion now supports watching and listening activities, and game isn't the right word for it. `setGame` is now an alias for it.",
+    "`userInfo` now supports watching and listening activities of users."
   ],
   "added": [
     "Bastion now supports watching and listening activities."
