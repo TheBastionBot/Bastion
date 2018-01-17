@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.BLUE,
+        color: 16345172,
         title: 'Patrons',
         description: 'These are the awesome people who support the development of the Bastion Bot project, on [Patreon](https://patreon.com/snkrsnkampa).',
         fields: [
