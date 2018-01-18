@@ -4,27 +4,28 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message) => {
-  let baseURL = 'https://random.dog/';
-  request(`${baseURL}woof`, function (error, response, body) {
-    if (error) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
-    }
+exports.exec = async (Bastion, message) => {
+  try {
+    let baseURL = 'http://random.dog';
 
-    if (response && response.statusCode === 200) {
-      message.channel.send({
-        files: [ baseURL + body ]
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    let options = {
+      url: `${baseURL}/woof`,
+      json: true
+    };
+    let response = await request(options);
+
+    await message.channel.send({
+      files: [ `${baseURL}/${response}` ]
+    });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-  });
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

@@ -4,30 +4,26 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message) => {
-  request('http://random.cat/meow', async function (error, response, body) {
-    if (error) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
-    }
+exports.exec = async (Bastion, message) => {
+  try {
+    let options = {
+      url: 'http://random.cat/meow',
+      json: true
+    };
+    let response = await request(options);
 
-    if (response && response.statusCode === 200) {
-      try {
-        let cat = await JSON.parse(body).file;
-        await message.channel.send({
-          files: [ cat ]
-        });
-      }
-      catch (e) {
-        return Bastion.log.error(e);
-      }
+    await message.channel.send({
+      files: [ response.file ]
+    });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-  });
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
