@@ -1,5 +1,5 @@
 {
-  "date": "January 17, 2018",
+  "date": "January 18, 2018",
   "fixed": [],
   "improved": [
     "Renamed `setGame` to `setActivity` since Bastion now supports watching and listening activities, and game isn't the right word for it. `setGame` is now an alias for it.",
@@ -10,7 +10,8 @@
   "added": [
     "Bastion now supports watching and listening activities.",
     "You can now create channel categories using the `createCategory` command.",
-    "Anyone can now see who supports the development of the Bastion Bot project on Patreon by using the `patrons` command."
+    "Anyone can now see who supports the development of the Bastion Bot project on Patreon by using the `patrons` command.",
+    "See the users who contribute to the development of the Bastion Bot on [GitHub](https://github.com/TheBastionBot/Bastion) using the `contributors` command."
   ],
   "removed": [],
   "issues": []
