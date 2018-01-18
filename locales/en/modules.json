@@ -197,7 +197,7 @@
     "giftShop": "Shows the products available in the gift shop, and their price.",
     "give": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
     "giveXP": "Give the specified amount of experience points to the specified user and increase their level.",
-    "leaderboard": "Shows the top 10 users topping the chart.",
+    "leaderboard": "Shows the users topping the chart of Bastion.",
     "myGifts": "Shows the gifts you currently have in your possession.",
     "take": "Take the specified amount of Bastion Currencies from the specified user."
   },

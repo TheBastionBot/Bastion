@@ -67,6 +67,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'leaderboard [--global]',
-  example: [ 'leaderboard', 'leaderboard --global' ]
+  usage: 'leaderboard [PAGE_NO] [--global]',
+  example: [ 'leaderboard', 'leaderboard 3', 'leaderboard --global', 'leaderboard 2 --global' ]
 };
