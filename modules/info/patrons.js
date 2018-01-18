@@ -7,29 +7,24 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     let patrons = await Bastion.functions.getPatrons(754397);
-    patrons = patrons.map(patron => patron.full_name).map((r, i) => `${i + 1}. ${r}`);
+    patrons = patrons.map(patron => patron.full_name);
 
-    let noOfPages = patrons.length / 10;
+    let noOfPages = patrons.length / 50;
     let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
     i = i - 1;
 
     message.channel.send({
       embed: {
         color: 16345172,
-        title: 'Patrons',
-        description: 'These are the awesome people who support the development of the Bastion Bot project, on [Patreon](https://patreon.com/snkrsnkampa).',
+        description: 'These are the awesome people who continuously support the development of the Bastion Bot project by being my patron on [Patreon](https://patreon.com/snkrsnkampa).',
         fields: [
           {
             name: 'Patrons',
-            value: patrons.slice(i * 10, (i * 10) + 10).join('\n')
-          },
-          {
-            name: 'Be my Patron',
-            value: 'If you want to support the development of the Bastion Bot project, and receive amazing rewards, please head over to my Patreon page: https://patreon.com/snkrsnkampa'
+            value: patrons.slice(i * 50, (i * 50) + 50).join(', ')
           }
         ],
         footer: {
-          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
+          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} • https://patreon.com/snkrsnkampa`
         }
       }
     }).catch(e => {

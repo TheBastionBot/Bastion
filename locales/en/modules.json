@@ -148,7 +148,7 @@
     "emojiInfo": "Shows information of a specifed emoji of your Discord server.",
     "inRole": "Shows members that have a specifed role in your Discord server.",
     "level": "Shows the current level of the specified user's account.",
-    "patrons": "Shows the list of people who supports the development of the Bastion Bot project on Patreon.",
+    "patrons": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on Patreon.",
     "ping": "Shows the response time and average WebSocket ping of Bastion.",
     "profile": "Shows Bastion user profile of a specified user of your Discord server.",
     "roleID": "Shows the ID of a specified role of your Discord server.",
