@@ -10,7 +10,7 @@
   "added": [
     "Bastion now supports watching and listening activities.",
     "You can now create channel categories using the `createCategory` command.",
-    "See the people who continuously supports the development of the Bastion Bot project, on Patreon, by using the `patrons` command.",
+    "See the people who continuously supports the development of the Bastion Bot project, on [Patreon](https://patreon.com/snkrsnkampa), by using the `patrons` command.",
     "See the users who contribute to the development of the Bastion Bot on [GitHub](https://github.com/TheBastionBot/Bastion) using the `contributors` command."
   ],
   "removed": [],
