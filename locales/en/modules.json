@@ -285,6 +285,7 @@
     "poll": "Starts a poll in the current text channel asking users to vote.",
     "reminder": "Bastion sets a reminder to remind you of specified message, via direct message, after a specified duration.",
     "shorten": "Shortens a specified URL using Google URL Shortner.",
+    "steam": "Browse the games in different categories of the Steam Store.",
     "tapCode": "Encodes a given text in Tap Code.",
     "translate": "Translates your message to the specified language.",
     "tvShow": "Searches for the details of a TV show.",
