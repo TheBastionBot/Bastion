@@ -178,6 +178,9 @@ exports.exec = async (Bastion, message, args) => {
         Bastion.log.error(e);
       });
     }
+    else if (response.error) {
+      Bastion.emit('error', 'PUBG API:', response.error, message.channel);
+    }
     else {
       Bastion.log.error(response);
     }
