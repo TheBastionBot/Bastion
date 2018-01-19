@@ -1,6 +1,8 @@
 {
-  "date": "January 18, 2018",
-  "fixed": [],
+  "date": "January 19, 2018",
+  "fixed": [
+    "`skip` command won't go rogue anymore. It won't skip multiple songs anymore; will skip one song at a time."
+  ],
   "improved": [
     "Renamed `setGame` to `setActivity` since Bastion now supports watching and listening activities, and game isn't the right word for it. `setGame` is now an alias for it.",
     "`userInfo` now supports watching and listening activities of users. And now, it will show *Offline* instead of *Invisible*.",
