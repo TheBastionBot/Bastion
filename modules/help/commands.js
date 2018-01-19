@@ -43,7 +43,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'cmds' ],
+  aliases: [ 'cmds', 'modules' ],
   enabled: true,
   argsDefinitions: [
     { name: 'module', type: String, multiple: true, defaultOption: true }
