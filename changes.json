@@ -8,7 +8,7 @@
     "`userInfo` now supports watching and listening activities of users. And now, it will show *Offline* instead of *Invisible*.",
     "`setActivity` command, now, also can set the activity type to *Playing* or *Watching*.",
     "You can now cycle through the entire leaderboard as `leaderboard` is now paginated.",
-    "`modules` is now an alias of `commands` command."
+    "`modules` is now an alias of `commands` command.",
     "Under-the-hood improvements"
   ],
   "added": [
