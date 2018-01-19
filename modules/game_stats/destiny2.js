@@ -4,143 +4,142 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
-  let membershipType = -1;
-  request({
-    headers: {
-      'X-API-Key': `${Bastion.credentials.bungieAPIKey}`
-    },
-    uri: `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${encodeURIComponent(args.name)}/ `
-  }, function (err, response, body) {
-    try {
-      body = JSON.parse(body);
-      if (body.ErrorCode !== 1) {
-        return Bastion.emit('error', body.ErrorStatus, body.Message, message.channel);
-      }
-      if (!body.Response.length) {
-        return Bastion.emit('error', 'Not Found', 'No players were found for the given name.', message.channel);
-      }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    let membershipType = -1;
 
-      body = body.Response[0];
-      let player = body;
+    let options = {
+      headers: {
+        'X-API-Key': `${Bastion.credentials.bungieAPIKey}`
+      },
+      url: `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${encodeURIComponent(args.name)}/`,
+      json: true
+    };
+    let player = await request(options);
 
-      request({
-        headers: {
-          'X-API-Key': `${Bastion.credentials.bungieAPIKey}`
-        },
-        uri: `https://www.bungie.net/Platform/Destiny2/${body.membershipType}/Account/${body.membershipId}/Stats?groups=General,Medals`
-      }, function (err, response, body) {
-        try {
-          body = JSON.parse(body);
-          if (body.ErrorCode !== 1) {
-            return Bastion.emit('error', body.ErrorStatus, body.Message, message.channel);
+    if (player.ErrorCode !== 1) {
+      return Bastion.emit('error', player.ErrorStatus, player.Message, message.channel);
+    }
+    if (!player.Response.length) {
+      return Bastion.emit('error', 'Not Found', 'No players were found for the given name.', message.channel);
+    }
+
+    player = player.Response[0];
+
+    options = {
+      headers: {
+        'X-API-Key': `${Bastion.credentials.bungieAPIKey}`
+      },
+      url: `https://www.bungie.net/Platform/Destiny2/${player.membershipType}/Account/${player.membershipId}/Stats?groups=General,Medals`,
+      json: true
+    };
+    let stats = await request(options);
+    if (stats.ErrorCode !== 1) {
+      return Bastion.emit('error', stats.ErrorStatus, stats.Message, message.channel);
+    }
+
+    stats = stats.Response.mergedAllCharacters.merged.allTime;
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: player.displayName,
+        description: `Played for ${stats.secondsPlayed.basic.displayValue} and has an efficiency of ${stats.efficiency.basic.displayValue}.`,
+        fields: [
+          {
+            name: 'Highest Character Level',
+            value: stats.highestCharacterLevel.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Highest Light Level',
+            value: stats.highestLightLevel.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Win Loss Ratio',
+            value: stats.winLossRatio.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Combat Rating',
+            value: stats.combatRating.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Score',
+            value: stats.score.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Team Score',
+            value: stats.teamScore.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Kills',
+            value: `${stats.kills.basic.displayValue} (${stats.precisionKills.basic.displayValue} Precision Kills)`,
+            inline: true
+          },
+          {
+            name: 'Assists',
+            value: stats.assists.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Deaths',
+            value: `${stats.deaths.basic.displayValue} (${stats.suicides.basic.displayValue} Suicides)`,
+            inline: true
+          },
+          {
+            name: 'KDR',
+            value: stats.killsDeathsRatio.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'KDA',
+            value: stats.killsDeathsAssists.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'KAD',
+            value: `${((stats.kills.basic.value + stats.assists.basic.value) / stats.deaths.basic.value).toFixed(2)}`,
+            inline: true
+          },
+          {
+            name: 'Best Weapon Type',
+            value: stats.weaponBestType.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Total Medals Earned',
+            value: stats.allMedalsEarned.basic.displayValue,
+            inline: true
+          },
+          {
+            name: 'Extras',
+            value: `${stats.objectivesCompleted.basic.displayValue} Objectives Completed\n${stats.adventuresCompleted.basic.displayValue} Adventures Completed\n${stats.heroicPublicEventsCompleted.basic.displayValue} Heroic Public Events Completed`
           }
-
-          body = body.Response.mergedAllCharacters.merged.allTime;
-
-          message.channel.send({
-            embed: {
-              color: Bastion.colors.BLUE,
-              title: player.displayName,
-              description: `Played for ${body.secondsPlayed.basic.displayValue} and has an efficiency of ${body.efficiency.basic.displayValue}.`,
-              fields: [
-                {
-                  name: 'Highest Character Level',
-                  value: body.highestCharacterLevel.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Highest Light Level',
-                  value: body.highestLightLevel.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Win Loss Ratio',
-                  value: body.winLossRatio.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Combat Rating',
-                  value: body.combatRating.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Score',
-                  value: body.score.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Team Score',
-                  value: body.teamScore.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Kills',
-                  value: `${body.kills.basic.displayValue} (${body.precisionKills.basic.displayValue} Precision Kills)`,
-                  inline: true
-                },
-                {
-                  name: 'Assists',
-                  value: body.assists.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Deaths',
-                  value: `${body.deaths.basic.displayValue} (${body.suicides.basic.displayValue} Suicides)`,
-                  inline: true
-                },
-                {
-                  name: 'KDR',
-                  value: body.killsDeathsRatio.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'KDA',
-                  value: body.killsDeathsAssists.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'KAD',
-                  value: `${((body.kills.basic.value + body.assists.basic.value) / body.deaths.basic.value).toFixed(2)}`,
-                  inline: true
-                },
-                {
-                  name: 'Best Weapon Type',
-                  value: body.weaponBestType.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Total Medals Earned',
-                  value: body.allMedalsEarned.basic.displayValue,
-                  inline: true
-                },
-                {
-                  name: 'Extras',
-                  value: `${body.objectivesCompleted.basic.displayValue} Objectives Completed\n${body.adventuresCompleted.basic.displayValue} Adventures Completed\n${body.heroicPublicEventsCompleted.basic.displayValue} Heroic Public Events Completed`
-                }
-              ],
-              thumbnail: {
-                url: 'https://i.imgur.com/QY1VTfB.jpg'
-              },
-              footer: {
-                text: 'Powered by Bungie'
-              }
-            }
-          }).catch(e => {
-            Bastion.log.error(e);
-          });
+        ],
+        thumbnail: {
+          url: 'https://i.imgur.com/QY1VTfB.jpg'
+        },
+        footer: {
+          text: 'Powered by Bungie'
         }
-        catch (e) {
-          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'parseError'), Bastion.strings.error(message.guild.language, 'parse', true), message.channel);
-        }
-      });
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-    catch (e) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'parseError'), Bastion.strings.error(message.guild.language, 'parse', true), message.channel);
-    }
-  });
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

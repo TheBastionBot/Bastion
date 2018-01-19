@@ -4,144 +4,116 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
-  if (!args.name) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  args.platform = args.platform.toLowerCase();
-  if (args.platform === 'xbox') {
-    args.platform = 1;
-  }
-  else if (args.platform === 'ps' || args.platform === 'playstation') {
-    args.platform = 2;
-  }
-  else {
-    args.platform = 3;
-  }
-
-  request({
-    headers: {
-      'TRN-Api-Key': Bastion.credentials.battlefieldAPIKey
-    },
-    uri: `https://battlefieldtracker.com/bf1/api/Stats/BasicStats?platform=${args.platform}&displayName=${args.name}&game=tunguska`
-  }, function (err, response, body) {
-    let player, url, color, platform, title = '', description = '', data = [], imageURL = '';
-
-    if (err) {
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!args.name) {
       /**
-       * Error condition is encountered.
-       * @fires error
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+      return Bastion.emit('commandUsage', message, this.help);
     }
-    else if (response.statusCode === 200) {
-      color = Bastion.colors.BLUE;
-      try {
-        body = JSON.parse(body);
 
-        title = 'Battlefield 1 - Stats';
-        player = body.profile.displayName;
-        url = body.profile.trackerUrl;
-        description = `Played ${(body.result.timePlayed / 60 / 60).toFixed(2)} hours`;
-        imageURL = body.result.rank.imageUrl.replace('[BB_PREFIX]', body.bbPrefix);
-        platform = body.profile.platform === 3 ? 'PC' : body.profile.platform === 2 ? 'PlayStation' : 'XBox';
-        data = [
+    args.platform = args.platform.toLowerCase();
+    if (args.platform === 'xbox') {
+      args.platform = 1;
+    }
+    else if (args.platform === 'ps' || args.platform === 'playstation') {
+      args.platform = 2;
+    }
+    else {
+      args.platform = 3;
+    }
+
+    let options = {
+      headers: {
+        'TRN-Api-Key': Bastion.credentials.battlefieldAPIKey
+      },
+      url: `https://battlefieldtracker.com/bf1/api/Stats/BasicStats?platform=${args.platform}&displayName=${args.name}&game=tunguska`,
+      json: true
+    };
+    let response = await request(options);
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Battlefield 1 - Stats',
+        author: {
+          name: response.profile.displayName,
+          url: response.profile.trackerUrl
+        },
+        description: `Played ${(response.result.timePlayed / 60 / 60).toFixed(2)} hours`,
+        fields: [
           {
             name: 'Rank',
-            value: body.result.rank.name,
+            value: response.result.rank.name,
             inline: true
           },
           {
             name: 'Skill',
-            value: `${body.result.skill}`,
+            value: `${response.result.skill}`,
             inline: true
           },
           {
             name: 'W/L',
-            value: `${(body.result.wins / body.result.losses).toFixed(2)}`,
+            value: `${(response.result.wins / response.result.losses).toFixed(2)}`,
             inline: true
           },
           {
             name: 'K/D',
-            value: `${(body.result.kills / body.result.deaths).toFixed(2)}`,
+            value: `${(response.result.kills / response.result.deaths).toFixed(2)}`,
             inline: true
           },
           {
             name: 'Wins',
-            value: `${body.result.wins}`,
+            value: `${response.result.wins}`,
             inline: true
           },
           {
             name: 'Losses',
-            value: `${body.result.losses}`,
+            value: `${response.result.losses}`,
             inline: true
           },
           {
             name: 'Kills',
-            value: `${body.result.kills}`,
+            value: `${response.result.kills}`,
             inline: true
           },
           {
             name: 'Deaths',
-            value: `${body.result.deaths}`,
+            value: `${response.result.deaths}`,
             inline: true
           },
           {
             name: 'SPM',
-            value: `${body.result.spm}`,
+            value: `${response.result.spm}`,
             inline: true
           },
           {
             name: 'KPM',
-            value: `${body.result.kpm}`,
+            value: `${response.result.kpm}`,
             inline: true
           }
-        ];
-      }
-      catch (e) {
-        /**
-         * Error condition is encountered.
-         * @fires error
-         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'parseError'), Bastion.strings.error(message.guild.language, 'parse', true), message.channel);
-      }
-    }
-    else {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', response.statusCode, response.statusMessage, message.channel);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        title: title,
-        author: {
-          name: player,
-          url: url
-        },
-        description: description,
-        fields: data,
+        ],
         thumbnail: {
-          url: imageURL
+          url: response.result.rank.imageUrl.replace('[BB_PREFIX]', response.bbPrefix)
         },
         footer: {
-          text: platform ? `Platform ${platform}` : ''
+          text: response.profile.platform === 3 ? 'PC' : response.profile.platform === 2 ? 'PlayStation' : 'XBox'
         }
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
