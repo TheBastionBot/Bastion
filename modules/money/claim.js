@@ -7,11 +7,14 @@
 let claimedUsers = [];
 const specialIDs = require('../../data/specialIDs.json');
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (!claimedUsers.includes(message.author.id)) {
     let rewardAmount;
 
-    if (message.member.roles.has(specialIDs.patronsRole)) {
+    let patrons = await Bastion.functions.getPatrons(754397);
+    patrons = patrons.map(patron => patron.discord_id);
+
+    if (patrons.includes(message.author.id)) {
       rewardAmount = Bastion.functions.getRandomInt(100, 150);
     }
     else if (message.member.roles.has(specialIDs.donorsRole)) {
