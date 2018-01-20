@@ -177,6 +177,7 @@
     "mute": "Mutes a specified user server-wide in your Discord server.",
     "muteList": "Lists all the server-wide muted users of your Discord Server.",
     "nickname": "Sets the nickname of the specified user of your Discord server.",
+    "reason": "Add/Update the reason for a moderation action, which is logged in the moderation log channel. Only the responsible moderator or anyone with administrator permissions can change the reason.",
     "removeAllRoles": "Removes all the roles from the specified user of your Discord server.",
     "removeRole": "Removes the specified role from a specified user of your Discord server.",
     "report": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*",
