@@ -1,5 +1,5 @@
 {
-  "date": "January 20, 2018",
+  "date": "January 21, 2018",
   "fixed": [
     "`skip` command won't go rogue anymore. It won't skip multiple songs; will skip one song at a time.",
     "Fixed an issue that prevented music commands from responding when the music channels and/or the music master role was removed from the server before removing it from Bastion."
@@ -10,6 +10,7 @@
     "`setActivity` command, now, also can set the activity type to *Playing* or *Watching*.",
     "You can now cycle through the entire leaderboard as `leaderboard` is now paginated.",
     "`modules` is now an alias of `commands` command.",
+    "The good old `commands` is back to how it worked earlier. We saw that new users were having trouble when it displayed modules instead of commands.",
     "Under-the-hood improvements"
   ],
   "added": [
