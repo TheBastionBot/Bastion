@@ -124,6 +124,7 @@
     "streamerRole": "Adds a role as the streamer role. When a guild member (who is at least in a single role) starts streaming, they are given the streamer role.",
     "streamers": "Adds/removes/displays the list of streamers followed by the server to get notified when they are live.",
     "suggestionChannel": "Adds/removes the channel as the suggestion channel. If it's enabled, when user post a suggestion using the `suggest` command, it's are posted in this channel.",
+    "votingChannels": "Adds/removes the channel as a voting channel. Any messages posted in this channel, by a user, that's not a command will be available for voting.",
     "whitelistChannel": "Add/remove the channel from the whitelist for invite filter, link filter or word filter.",
     "whitelistRole": "Add/remove a role from the whitelist for invite filter, link filter or word filter."
   },
