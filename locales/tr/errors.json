@@ -34,7 +34,7 @@
     "giveYourself": "Kendinize %currencyName% Name.",
     "indexRange": "Girdiğiniz dizin dışında bir aralıktır.",
     "insufficientBalance": "Hesabınızda yeterli bakiyeniz yok. Cari hesap bakiyeniz: %var% %currencySymbol%.",
-    "invalidEmbedObject": "Geçersiz bir gömme nesnesi girildi. Bir gömme nesnesi [burada] (%bastionSite%/tools/embed_builder/) oluşturabilirsiniz.",
+    "invalidEmbedObject": "Geçersiz bir gömme nesnesi girildi. Bir gömme nesnesi [burada](%bastionSite%/embedbuilder/) oluşturabilirsiniz.",
     "invalidInput": "Sizin tarafınızdan girilen %var% değeri geçerli değil.",
     "invalidIPPort": "İstatistikleri belirtilen sunucudan alınamıyor. IP adresi ve bağlantı noktası numarasını gözden geçirin ve yeniden denemeden önce sunucu çevrimiçi olup olmadığını.",
     "invalidMusicChannel": "Varsayılan ses kanalına katılamıyorum. Ya yanlış bir ses kanalı ayarlanmış ya da ses kanalı silinmiştir.",

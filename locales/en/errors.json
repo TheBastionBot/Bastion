@@ -35,7 +35,7 @@
     "giveYourself": "You cannot give yourself %currencyName%.",
     "indexRange": "The index you entered is out of range.",
     "insufficientBalance": "You do not have sufficient balance in your account. Your current account balance is *%var%* %currencySymbol%.",
-    "invalidEmbedObject": "The entered an invalid embed object. You can create an embed object [here](%bastionSite%/tools/embed_builder/).",
+    "invalidEmbedObject": "The entered an invalid embed object. You can create an embed object [here](%bastionSite%/embedbuilder/).",
     "invalidInput": "The *%var%* entered by you is not valid.",
     "invalidIPPort": "Cannot get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.",
     "invalidMusicChannel": "I am not able to join the default voice channel. Either a wrong voice channel has been set or the voice channel has been deleted.",

@@ -32,7 +32,7 @@
     "giveYourself": "Je kan jezelf geen %currencyName% geven.",
     "indexRange": "De index die je hebt ingevoerd is buiten bereik.",
     "insufficientBalance": "Je hebt niet genoeg geld in je account... Je bezit op dit moment *%var%*%currencySymbol%.",
-    "invalidEmbedObject": "Je hebt een incorrect Embed project ingevoerd. Je kan projecten [hier] (%bastionSite%/tools/embed_builder/) maken.",
+    "invalidEmbedObject": "Je hebt een incorrect Embed project ingevoerd. Je kan projecten [hier](%bastionSite%/embedbuilder/) maken.",
     "invalidInput": "De *%var%* die je hebt ingevoerd is incorrect.",
     "invalidIPPort": "Er konden geen statistieken worden gevonden van deze server. Check het IP adres en het POORT nummer, en kijk of de server actief is voordat je het opnieuw probeert.",
     "invalidMusicChannel": "Ik kan de standaard gesprekskanaal niet in. Misschien is het verkeerde kanaal op mij ingesteld, of bestaat het gesprekskanaal niet meer.",

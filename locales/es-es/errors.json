@@ -32,7 +32,7 @@
     "giveYourself": "No puede darse %currencyName%.",
     "indexRange": "El índice que ingresó está fuera de rango.",
     "insufficientBalance": "No tiene saldo suficiente en su cuenta. El saldo de su cuenta corriente es *%var%* %currencySymbol%.",
-    "invalidEmbedObject": "Se ha introducido un objeto incrustado no válido. Puede crear un objeto incrustado [here] (%bastionSite%/tools/embed_builder/).",
+    "invalidEmbedObject": "Se ha introducido un objeto incrustado no válido. Puede crear un objeto incrustado [here](%bastionSite%/embedbuilder/).",
     "invalidInput": "El *%var%* introducido por usted no es válido.",
     "invalidIPPort": "No se pueden obtener estadísticas del servidor especificado. Compruebe la dirección IP y el número PORT y si el servidor está en línea antes de intentarlo de nuevo.",
     "invalidMusicChannel": "No puedo unirme al canal de voz predeterminado. Se ha ajustado un canal de voz incorrecto o se ha eliminado el canal de voz.",

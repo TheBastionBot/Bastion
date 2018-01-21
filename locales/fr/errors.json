@@ -26,7 +26,7 @@
     "giveYourself": "Vous ne pouvez pas vous donner %currencyName% à vous-même.",
     "indexRange": "L’index que vous avez entré est trop grand.",
     "insufficientBalance": "Vous n’avez pas un solde suffisant sur votre compte. Le solde de votre compte actuellement est de *%var%* %currencySymbol%.",
-    "invalidEmbedObject": "Saisie d'un objet intégré invalide. Vous pouvez créer un objet intégré [Ici](%bastionSite%/tools/embed_builder/).",
+    "invalidEmbedObject": "Saisie d'un objet intégré invalide. Vous pouvez créer un objet intégré [Ici](%bastionSite%/embedbuilder/).",
     "invalidInput": "Le *%var%* que vous avez saisi n’est pas valide.",
     "invalidIPPort": "Impossible d’obtenir des statistiques du serveur spécifié. Veuillez vérifier l’adresse IP et le numéro de PORT et si le serveur est en ligne avant de réessayer.",
     "invalidMusicChannel": "Je ne suis pas en mesure de rejoindre le canal de voix par défaut. Soit un mauvais canal vocal a été réglé, soit le canal vocal a été supprimé.",
