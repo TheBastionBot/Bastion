@@ -48,3 +48,12 @@
 <!--
     Link any applicable Issues here
 -->
+
+
+<!--
+    Thank you for contributing to Bastion! Please review this checklist
+    before submitting your issue.
+
+    - Participation in this open source project is subject to Bastion's Code of Conduct:
+      https://github.com/TheBastionBot/Bastion/blob/master/.github/CODE_OF_CONDUCT.md
+-->
