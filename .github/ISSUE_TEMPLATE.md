@@ -9,7 +9,7 @@
   - [ ] A command is crashing Bastion
   - [ ] A command isn't doing what it's supposed to do
   - [ ] Feature request or command suggestion (_see below for feature requests_).
-  - [ ] Other:
+  - [ ] Other, please explain:
 
 #### What's going wrong?
 <!--
