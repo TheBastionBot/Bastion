@@ -20,7 +20,6 @@ exports.exec = async (Bastion, message, args) => {
       limit: amount
     });
 
-    msgs = msgs.filter(m => message.createdTimestamp - m.createdTimestamp < 1209600000);
     if (user) {
       msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
@@ -46,7 +45,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', error, message.channel);
     }
 
-    await message.channel.bulkDelete(msgs);
+    await message.channel.bulkDelete(msgs, true);
 
     message.channel.send({
       embed: {

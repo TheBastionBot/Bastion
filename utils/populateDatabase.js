@@ -36,6 +36,7 @@ module.exports = async db => {
     'autoAssignableRoles TEXT,' +
     'streamerRole TEXT,' +
     'suggestionChannel TEXT UNIQUE,' +
+    'votingChannels TEXT UNIQUE,' +
     'warnAction TEXT,' +
     'ignoredChannels TEXT,' +
     'ignoredRoles TEXT,' +

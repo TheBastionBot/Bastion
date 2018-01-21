@@ -13,7 +13,11 @@ exports.exec = async (Bastion, message, args) => {
     if (!args.global) {
       profiles = profiles.filter(p => message.guild.members.get(p.userID));
     }
-    profiles = profiles.slice(0, 10);
+
+    let noOfPages = profiles.length / 10;
+    let p = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+    p = p - 1;
+    profiles = profiles.slice(p * 10, (p * 10) + 10);
 
     for (let i = 0; i < profiles.length; i++) {
       let user;
@@ -25,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
         user = profiles[i].userID;
       }
       fields.push({
-        name: `${i + 1}. ${user}`,
+        name: `${i + 1 + (p * 10)}. ${user}`,
         value: `Level: ${profiles[i].level}\tExperience Points: ${profiles[i].xp}\tBastion Currencies: ${profiles[i].bastionCurrencies}`
       });
     }
@@ -35,7 +39,10 @@ exports.exec = async (Bastion, message, args) => {
         color: Bastion.colors.BLUE,
         title: 'Leaderboard',
         description: 'These are the users topping the chart!',
-        fields: fields
+        fields: fields,
+        footer: {
+          text: `Page: ${p + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
+        }
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -50,6 +57,7 @@ exports.config = {
   aliases: [ 'lb', 'hallOfFame', 'hof' ],
   enabled: true,
   argsDefinitions: [
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 },
     { name: 'global', type: Boolean, alias: 'g' }
   ]
 };
@@ -59,6 +67,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'leaderboard [--global]',
-  example: [ 'leaderboard', 'leaderboard --global' ]
+  usage: 'leaderboard [PAGE_NO] [--global]',
+  example: [ 'leaderboard', 'leaderboard 3', 'leaderboard --global', 'leaderboard 2 --global' ]
 };

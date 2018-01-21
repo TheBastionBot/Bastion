@@ -4,31 +4,36 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
-  let string;
-  if (args.length < 1) {
-    string = message.author.tag;
-  }
-  else {
-    string = args.join(' ');
-  }
-
-  let url = `https://robohash.org/${encodeURIComponent(string)}?set=set4`;
-  request({ url: url, encoding: null }, function (err, res, body) {
-    if (err) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+exports.exec = async (Bastion, message, args) => {
+  try {
+    let string;
+    if (args.length < 1) {
+      string = message.author.tag;
+    }
+    else {
+      string = args.join(' ');
     }
 
-    message.channel.send({ files: [ { attachment: body } ] }).catch(e => {
+    let options = {
+      url: `https://robohash.org/${encodeURIComponent(string)}?set=set4`,
+      encoding: null
+    };
+    let response = await request(options);
+
+    message.channel.send({
+      files: [ { attachment: response } ]
+    }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

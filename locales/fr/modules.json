@@ -201,7 +201,6 @@
     "scheduleCommand": "Planifiez une commande en tant que travaux cron pour exécuter à l'échéancier spécifié.\nMise en forme:`cron` `` `Seconde 0-59 ou * ou plage\nMinute                  0-59 ou * ou plage\nHeure                     0-23 ou * ou plage\nJour du mois          1-31 ou * ou plage\nMois                        1-12 ou * ou gamme\nJour de la semaine 0-7 (0 ou 7 est SUN) ou * ou plage```",
     "searchServer": "Recherche des serveurs Discord, contenant le texte spécifié dans leur nom, auquel Bastion est connecté.",
     "setAvatar": "Définit l'avatar de Bastion.",
-    "setGame": "Définit le jeu de Bastion.",
     "setNick": "Définit le surnom de Bastion dans le serveur actuel Discord.",
     "setStatus": "Définit le statut de Bastion.",
     "setStream": "Définit le flux vidéo de Bastion.",

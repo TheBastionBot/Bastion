@@ -33,7 +33,7 @@ module.exports = async (reaction, user) => {
           color: user.client.colors.GOLD,
           author: {
             name: reaction.message.author.tag,
-            icon_url: reaction.message.author.avatarURL || reaction.message.author.defaultAvatarURL
+            icon_url: reaction.message.author.displayAvatarURL
           },
           description: reaction.message.content,
           fields: [

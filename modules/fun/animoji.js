@@ -17,7 +17,7 @@ exports.exec = (Bastion, message, args) => {
 
   if (emoji) {
     message.channel.send({
-      files: [ emoji.url.replace(/\.png$/, '.gif') ]
+      files: [ emoji.url ]
     }).catch(() => {});
   }
 };

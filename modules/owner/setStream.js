@@ -14,12 +14,9 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    await Bastion.user.setPresence({
-      game: {
-        name: args.slice(1).join(' '),
-        type: 1,
-        url: args[0]
-      }
+    await Bastion.user.setActivity(args.slice(1).join(' '), {
+      type: 1,
+      url: args[0]
     });
 
     message.channel.send({

@@ -26,10 +26,22 @@ module.exports = async message => {
     if (!message.guild.language || message.guild.language !== guild.language) {
       message.guild.language = guild.language;
     }
-    // Add music configs to the discord.js guild object to minimize database reads.
+    // Add a music object to the discord.js guild object, to hold music configs.
     if (!message.guild.music) {
       message.guild.music = {};
     }
+    // If any of the music channels have been removed, delete them from the database.
+    if (!message.guild.channels.has(guild.musicTextChannel) || !message.guild.channels.has(guild.musicVoiceChannel)) {
+      await message.client.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
+      guild.musicMasterRole = null;
+    }
+    // If any of the music channels have been removed, delete them from the database.
+    if (!message.guild.roles.has(guild.musicMasterRole)) {
+      await message.client.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
+      guild.musicTextChannel = null;
+      guild.musicVoiceChannel = null;
+    }
+    // Add music configs to the guild music object.
     message.guild.music.textChannelID = guild.musicTextChannel;
     message.guild.music.voiceChannelID = guild.musicVoiceChannel;
     message.guild.music.masterRoleID = guild.musicMasterRole;

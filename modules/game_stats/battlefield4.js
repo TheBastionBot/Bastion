@@ -4,127 +4,95 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
-  if (!args.name) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  request({
-    uri: `https://api.bf4stats.com/api/playerInfo?plat=${args.platform}&name=${args.name}&output=json`
-  }, function (err, response, body) {
-    let player, url, color, title = '', description = '', data = [];
-
-    if (err) {
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!args.name) {
       /**
-       * Error condition is encountered.
-       * @fires error
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+      return Bastion.emit('commandUsage', message, this.help);
     }
-    else if (response.statusCode === 200) {
-      color = Bastion.colors.BLUE;
-      try {
-        body = JSON.parse(body);
 
-        player = `[${body.player.tag}] ${body.player.name}`;
-        url = body.player.blPlayer;
-        description = `Played ${(body.player.timePlayed / 60 / 60).toFixed(2)} hours`;
+    let options = {
+      url: `https://api.bf4stats.com/api/playerInfo?plat=${args.platform}&name=${args.name}&output=json`,
+      json: true
+    };
+    let response = await request(options);
 
-        data = [
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        author: {
+          name: `[${response.player.tag}] ${response.player.name}`,
+          url: response.player.blPlayer
+        },
+        title: 'Battlefield 4 - Stats',
+        description: `Played ${(response.player.timePlayed / 60 / 60).toFixed(2)} hours`,
+        fields: [
           {
             name: 'Country',
-            value: `:flag_${body.player.country.toLowerCase()}: ${body.player.countryName}`,
+            value: `:flag_${response.player.country.toLowerCase()}: ${response.player.countryName}`,
             inline: true
           },
           {
             name: 'Rank',
-            value: `${body.player.rank.nr} - ${body.player.rank.name}`,
+            value: `${response.player.rank.nr} - ${response.player.rank.name}`,
             inline: true
           },
           {
             name: 'Score',
-            value: `${body.player.score}`,
+            value: `${response.player.score}`,
             inline: true
           },
           {
             name: 'Skill',
-            value: `${body.stats.skill}`,
+            value: `${response.stats.skill}`,
             inline: true
           },
           {
             name: 'SPM',
-            value: `${(body.stats.extra.spm).toFixed(2)}`,
+            value: `${(response.stats.extra.spm).toFixed(2)}`,
             inline: true
           },
           {
             name: 'KPM',
-            value: `${(body.stats.extra.kpm).toFixed(2)}`,
+            value: `${(response.stats.extra.kpm).toFixed(2)}`,
             inline: true
           },
           {
             name: 'Wins',
-            value: `${body.stats.numWins}`,
+            value: `${response.stats.numWins}`,
             inline: true
           },
           {
             name: 'Losses',
-            value: `${body.stats.numLosses}`,
+            value: `${response.stats.numLosses}`,
             inline: true
           },
           {
             name: 'W/L',
-            value: `${(body.stats.extra.wlr).toFixed(2)}`,
+            value: `${(response.stats.extra.wlr).toFixed(2)}`,
             inline: true
           },
           {
             name: 'Kills',
-            value: `${body.stats.kills}`,
+            value: `${response.stats.kills}`,
             inline: true
           },
           {
             name: 'Deaths',
-            value: `${body.stats.deaths}`,
+            value: `${response.stats.deaths}`,
             inline: true
           },
           {
             name: 'K/D',
-            value: `${(body.stats.extra.kdr).toFixed(2)}`,
+            value: `${(response.stats.extra.kdr).toFixed(2)}`,
             inline: true
           }
-        ];
-      }
-      catch (e) {
-        /**
-         * Error condition is encountered.
-         * @fires error
-         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'parseError'), Bastion.strings.error(message.guild.language, 'parse', true), message.channel);
-      }
-    }
-    else {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        author: {
-          name: player,
-          url: url
-        },
-        title: title,
-        description: description,
-        fields: data,
+        ],
         footer: {
           text: 'Powered by Battlefield'
         }
@@ -132,7 +100,13 @@ exports.exec = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

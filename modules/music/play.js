@@ -276,13 +276,7 @@ exports.help = {
 function startStreamDispatcher(guild, connection) {
   if (guild.music.songs[0] === undefined) {
     if (guild.client.config.music && guild.client.config.music.status) {
-      guild.client.user.setPresence({
-        status: guild.client.config.status,
-        game: {
-          name: guild.client.config.game,
-          type: 0
-        }
-      });
+      guild.client.user.setActivity(guild.client.config.game.name, { type: guild.client.config.game.type });
     }
 
     return guild.music.textChannel.send({
@@ -319,13 +313,7 @@ function startStreamDispatcher(guild, connection) {
   });
 
   if (guild.client.config.music && guild.client.config.music.status) {
-    guild.client.user.setPresence({
-      status: guild.client.config.status,
-      game: {
-        name: guild.music.songs[0].title,
-        type: 0
-      }
-    });
+    guild.client.user.setActivity(guild.music.songs[0].title);
   }
 
   guild.music.dispatcher.on('end', () => {

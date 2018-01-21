@@ -4,28 +4,14 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 const cheerio = require('cheerio');
 
-exports.exec = (Bastion, message, args) => {
-  request.get(`http://google.com/search?client=chrome&rls=en&ie=UTF-8&oe=UTF-8&q=${encodeURIComponent(args.query.join(' '))}`, (error, response, body) => {
-    if (error) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
-    }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    let response = await request(`http://google.com/search?client=chrome&rls=en&ie=UTF-8&oe=UTF-8&q=${encodeURIComponent(args.query.join(' '))}`);
 
-    if (response.statusCode !== 200) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
-    }
-
-    let $ = cheerio.load(body);
+    let $ = cheerio.load(response);
     let results = [];
 
     $('.g').each((i) => {
@@ -54,7 +40,13 @@ exports.exec = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

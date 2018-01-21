@@ -7,43 +7,67 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
-    if (args.module) {
-      args.module = args.module.join('_').toLowerCase();
-      if (modules.includes(args.module)) {
-        await message.channel.send({
-          embed: {
-            color: Bastion.colors.GOLD,
-            title: `List of Commands in ${args.module.replace(/_/g, ' ').toTitleCase()} Module`,
-            description: `To get the list of all the commands with details click [here](https://bastionbot.org/commands).\n\`\`\`css\n${Bastion.commands.filter(cmd => cmd.config.module === args.module).map(cmd => cmd.help.name).join('\n')}\`\`\``
-          }
-        });
-      }
-      else {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'module'), message.channel);
+    if (args.modules) {
+      args.modules = args.modules.filter(module => modules.includes(module));
+      if (args.modules.length) {
+        modules = args.modules;
       }
     }
-    else {
-      await message.channel.send({
-        embed: {
-          color: Bastion.colors.GOLD,
-          title: 'List of Bastion Modules',
-          description: `To get a list of commands in a module, use the module name with the \`commands\` command, example: \`${message.guild.prefix[0]}commands game stats\`.` +
-                       `\n\`\`\`${modules.join('\n').replace(/_/g, ' ').toTitleCase()}\`\`\``
-        }
+
+    let fields = [];
+    for (let i = 0; i < modules.length; i++) {
+      let commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
+      if (commands.length === 0) {
+        continue;
+      }
+
+      fields.push({
+        name: modules[i].replace('_', ' ').toTitleCase(),
+        value: commands.join('\n'),
+        inline: true
       });
     }
+
+    let authorDMChannel = await message.author.createDM();
+    await authorDMChannel.send({
+      embed: {
+        color: Bastion.colors.GOLD,
+        title: 'List of Commands',
+        description: 'To get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands section: https://bastionbot.org/.',
+        fields: fields,
+        footer: {
+          text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
+        }
+      }
+    });
+
+    message.channel.send({
+      embed: {
+        description: `${message.author} Check your DM from me, I've sent you the list of commands${args.modules && args.modules.length ? ` in ${args.modules.join(', ')} modules` : ''}. You can also check out the commands section of [my website](https://bastionbot.org/) for the complete list of commands with details: https://bastionbot.org/`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
   catch (e) {
-    Bastion.log.error(e);
+    if (e.code === 50007) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: `${message.author} You need to **allow Direct Messages from your Privacy Settings** so that I'll be able to DM you with the commands.\nIf you don't prefer to change your privacy settings, you can check out the commands section of [my website](https://bastionbot.org/) for the complete list of commands with details: https://bastionbot.org/`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      Bastion.log.error(e);
+    }
   }
 };
 
 exports.config = {
-  aliases: [ 'cmds' ],
+  aliases: [ 'cmds', 'modules' ],
   enabled: true,
   argsDefinitions: [
     { name: 'module', type: String, multiple: true, defaultOption: true }

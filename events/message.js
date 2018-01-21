@@ -150,6 +150,18 @@ module.exports = async message => {
       */
       handleConversation(message);
     }
+
+    /**
+     * Set message for voting, if it's a voting channel.
+     */
+    let guildSettings = await message.client.db.get(`SELECT votingChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (!guildSettings || !guildSettings.votingChannels) return;
+    guildSettings.votingChannels = guildSettings.votingChannels.split(' ');
+    if (!guildSettings.votingChannels.includes(message.channel.id)) return;
+
+    // Add reactions for voting
+    await message.react('👍');
+    await message.react('👎');
   }
   else {
     /**

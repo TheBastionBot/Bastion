@@ -1,50 +1,67 @@
+#### I'm opening this issue because:
 <!--
-
-Have you read Bastion's Code of Conduct? By filing an Issue, you are expected to comply with it, including treating everyone with respect: https://github.com/TheBastionBot/Bastion/blob/master/.github/CODE_OF_CONDUCT.md
-
-Do you want to ask a question? Are you looking for support? The Bastion Bot Discord Server is the best place for getting support: https://discord.gg/fzx8fkt
-
-Do you want to suggest an enhancement, command or feature? The #suggestions channel in the Bastion Bot Discord Server is the best place for feature requests: https://discord.gg/fzx8fkt
-
+    Put an X between the brackets on the following lines if a statement is true.
 -->
 
-### Prerequisites
+  - [ ] Bastion is crashing
+  - [ ] Bastion is having issues during installation/update
+  - [ ] Bastion is doing something I don't understand
+  - [ ] A command is crashing Bastion
+  - [ ] A command isn't doing what it's supposed to do
+  - [ ] Feature request or command suggestion (_see below for feature requests_).
+  - [ ] Other, please explain:
 
-<!-- Put an X between the brackets on the following lines if you have done the stated step. -->
+#### What's going wrong?
+<!--
+    A simple description of what's the issue.
+-->
 
-- [ ] Checked the FAQs on the website for common solutions: <https://bastionbot.org/faq>
-- [ ] Checked that your issue isn't already filed: <https://github.com/TheBastionBot/Bastion/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen>
-- [ ] Checked that there is not already an open pull request that provides the described functionality: <https://github.com/TheBastionBot/Bastion/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20>
-- [ ] Reproduced the problem with the code in the (latest) `dev` branch
+#### How can we reproduce the problem?
+<!--
+    A complete description of how to reproduce the problem.
+-->
 
-### Description
+#### Supporting Information:
+<!--
+    Only required if you're hosting Bastion yourself.
+-->
+ - Bastion version:
+ - Node.JS version:
+ - `npm` version:
+ - Windows, OS X/macOS, or Linux?:
+ - Network issues:
+   - [ ] I use a proxy to connect to the web.
+   - [ ] I access the internet via a VPN.
+   - [ ] I have limited or unreliable internet access.
 
-[ Description of the issue ]
+<!--
+    Thank you for contributing to Bastion! Please review this checklist
+    before submitting your issue.
 
-### Steps to Reproduce
+    - Participation in this open source project is subject to Bastion's Code of Conduct:
+      https://github.com/TheBastionBot/Bastion/blob/master/.github/CODE_OF_CONDUCT.md
+-->
 
-1. [ First Step ]
-2. [ Second Step ]
-3. [ and so on... ]
 
-**Expected behavior:**  
-[ What you expect to happen ]
+<!--
+    Feature Requests
 
-**Actual behavior:**  
-[ What actually happens ]
+    For feature requests, delete everything above this section and uncomment the
+    section following this one.
+    But first, review the existing feature requests and make sure there isn't one
+    that already describes the feature you'd like to see added.
+-->
 
-**Reproduces how often:**  
-[ What percentage of the time does it reproduce? ]
+<!--
 
-### Additional Information
+#### What's the feature?
 
-Any additional information, screenshots, configuration or data that might be necessary to reproduce the issue.
+#### Please describe the feature in detail, how it will work, etc.?
 
-### Versions
+#### How will this feature help you or your community or the users of Discord in general?
 
-<!-- Required only if you are using Private Bastion (self hosting Bastion) -->
+#### Is this feature similar to an existing feature?
 
-- Bastion version: ``
-- Operating System (including version): ``
-- Node.js version: ``
-- npm version: ``
+#### Is this a feature you would like to implement, with support from the Bastion Bot team?
+
+-->

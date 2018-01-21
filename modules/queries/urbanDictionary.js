@@ -4,66 +4,44 @@
  * @license MIT
  */
 
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  request(`https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`, function (err, response, body) {
-    let color, description = '', data = [];
-
-    if (err) {
-      color = Bastion.colors.RED;
-      description = 'Some error has occured while getting data from the server. Please try again later.';
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
     }
-    else if (response.statusCode === 200) {
-      color = Bastion.colors.BLUE;
-      try {
-        body = JSON.parse(body).list[0];
 
-        data = [
-          {
-            name: 'Word',
-            value: body.word || args.join(' ')
-          },
-          {
-            name: 'Definition',
-            value: body.definition || '-'
-          },
-          {
-            name: 'Example',
-            value: body.example || '-'
-          }
-        ];
-      }
-      catch (e) {
-        color = Bastion.colors.RED;
-        description = 'Some error has occured while parsing the received data. Please try again later.';
-      }
-    }
-    else {
-      color = Bastion.colors.RED;
-      description = 'Some error has occured while getting data from the server.';
-      data = [
-        {
-          name: `${response.statusCode}`,
-          value: response.statusMessage
-        }
-      ];
-    }
+    let options = {
+      url: `https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`,
+      json: true
+    };
+    let response = await request(options);
+
+    response = response.list[0];
 
     message.channel.send({
       embed: {
-        color: color,
+        color: Bastion.colors.BLUE,
         title: 'Urban Dictionary',
-        description: description,
-        fields: data,
+        fields: [
+          {
+            name: 'Word',
+            value: response.word || args.join(' ')
+          },
+          {
+            name: 'Definition',
+            value: response.definition || '-'
+          },
+          {
+            name: 'Example',
+            value: response.example || '-'
+          }
+        ],
         footer: {
           text: 'Powered by Urban Dictionary'
         }
@@ -71,7 +49,13 @@ exports.exec = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {

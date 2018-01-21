@@ -11,6 +11,9 @@ module.exports = async db => {
   await db.get('SELECT suggestionChannel FROM guildSettings').catch(() => {
     db.run('ALTER TABLE guildSettings ADD suggestionChannel TEXT').catch(() => {});
   });
+  await db.get('SELECT votingChannels FROM guildSettings').catch(() => {
+    db.run('ALTER TABLE guildSettings ADD votingChannels TEXT').catch(() => {});
+  });
   await db.get('SELECT birthDate FROM profiles').catch(() => {
     db.run('ALTER TABLE profiles ADD birthDate INTEGER').catch(() => {});
   });

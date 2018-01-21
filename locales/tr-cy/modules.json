@@ -221,7 +221,6 @@
     "scheduleCommand": "Bir komut olarak çalıştırılacak cron işleri zamanlama bir belirtilen zamanlama. 'cron' ifade biçimi:'' ' ikinci 0-59 veya * veya dakika 0-59 aralığı veya * veya saat 0-23 Aralık veya * veya gün ay 1-31 Aralık veya * veya ay 1-12 Aralık veya * veya aralığı 0-7 Haftanın günü (0 veya 7 dir. güneş) veya * veya Aralık '''",
     "searchServer": "İsa adına belirtilen metni içeren, Bastion'un bağlı olduğu Discord sunucuları arar.",
     "setAvatar": "Bastionun avatarını Belirle.",
-    "setGame": "Bastion avatarını Belirle.",
     "setNick": "Bastion kullanıcı adı geçerli Discord sunucu ayarlar.",
     "setStatus": "Bastion durumunu ayarlarlar.",
     "setStream": "Bastion video akışı ayarlar.",

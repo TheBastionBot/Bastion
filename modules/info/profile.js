@@ -98,7 +98,7 @@ exports.exec = async (Bastion, message, args) => {
         description: profile.bio,
         fields: profileData,
         thumbnail: {
-          url: user.displayAvatarURL.split('?')[0]
+          url: user.displayAvatarURL
         },
         footer: {
           text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`

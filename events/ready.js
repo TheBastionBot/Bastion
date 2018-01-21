@@ -15,8 +15,8 @@ module.exports = async Bastion => {
     Bastion.user.setPresence({
       status: Bastion.config.status,
       game: {
-        name: Bastion.config.game,
-        type: 0
+        name: Bastion.config.game.name,
+        type: Bastion.config.game.type
       }
     });
 
