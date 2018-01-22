@@ -1,10 +1,12 @@
 {
-  "date": "January 21, 2018",
+  "date": "January 22, 2018",
   "fixed": [
     "Fixed crashes when Cleverbot API didn't returned any response.",
     "Fixed Bastion not stopping the typing event."
   ],
-  "improved": [],
+  "improved": [
+    "You can now give Bastion Currencies without having to mention them; just use their IDs. Yeah, less annoying."
+  ],
   "added": [],
   "removed": [],
   "issues": []

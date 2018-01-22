@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
+    if (!args.amount) {
       /**
        * The command was ran with invalid parameters.
        * @fires commandUsage
@@ -14,7 +14,16 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let user = message.mentions.users.first();
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await message.guild.fetchMember(args.id);
+      if (user) {
+        user = user.user;
+      }
+    }
     if (!user) {
       /**
        * Error condition is encountered.
@@ -24,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (Bastion.credentials.ownerId.includes(message.author.id)) {
-      Bastion.emit('userDebit', user, args[0]);
+      Bastion.emit('userDebit', user, args.amount);
 
       /**
         * Send a message in the channel to let the Bot Owner know that the operation was successful.
@@ -32,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `You've awarded **${args[0]}** Bastion Currencies to <@${user.id}>.`
+          description: `You've awarded **${args.amount}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -44,7 +53,7 @@ exports.exec = async (Bastion, message, args) => {
       user.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
+          description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -62,7 +71,7 @@ exports.exec = async (Bastion, message, args) => {
       let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
       sender.bastionCurrencies = parseInt(sender.bastionCurrencies);
 
-      if (sender.bastionCurrencies < args[0]) {
+      if (sender.bastionCurrencies < args.amount) {
         /**
          * Error condition is encountered.
          * @fires error
@@ -71,7 +80,7 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       let giveLimit = 0.5;
-      if (args[0] >= giveLimit * sender.bastionCurrencies) {
+      if (args.amount >= giveLimit * sender.bastionCurrencies) {
         /**
          * Error condition is encountered.
          * @fires error
@@ -79,8 +88,8 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveLimit', true, giveLimit * 100), message.channel);
       }
 
-      Bastion.emit('userDebit', user, args[0]);
-      Bastion.emit('userCredit', message.author, args[0]);
+      Bastion.emit('userDebit', user, args.amount);
+      Bastion.emit('userCredit', message.author, args.amount);
 
       /**
        * Send a message in the channel to let the user know that the operation was successful.
@@ -88,7 +97,7 @@ exports.exec = async (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `You have given **${args[0]}** Bastion Currencies to <@${user.id}>.`
+          description: `You have given **${args.amount}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -100,7 +109,7 @@ exports.exec = async (Bastion, message, args) => {
       user.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
+          description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -112,7 +121,7 @@ exports.exec = async (Bastion, message, args) => {
       message.author.send({
         embed: {
           color: Bastion.colors.RED,
-          description: `Your account has been credited with **${args[0]}** Bastion Currencies.`
+          description: `Your account has been credited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -126,7 +135,11 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'amount', type: Number, alias: 'n' }
+  ]
 };
 
 exports.help = {
@@ -134,6 +147,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'give <amount> <@USER_MENTION>',
-  example: [ 'give 100 @user#0001' ]
+  usage: 'give < @USER_MENTION | USER_ID > <-n AMOUNT>',
+  example: [ 'give @user#0001 -n 50', 'give 114312165731193137 -n 50' ]
 };
