@@ -17,7 +17,7 @@ exports.exec = async (Bastion, message) => {
     if (patrons.includes(message.author.id)) {
       rewardAmount = Bastion.functions.getRandomInt(100, 150);
     }
-    else if (message.member.roles.has(specialIDs.donorsRole)) {
+    else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
       rewardAmount = Bastion.functions.getRandomInt(50, 100);
     }
     else {
