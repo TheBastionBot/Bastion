@@ -24,13 +24,15 @@ module.exports = async message => {
     if (!guild.chat) return;
 
     BOT.write(message.content, response => {
-      message.channel.startTyping();
-      setTimeout(() => {
-        message.channel.send(response.output).catch(e => {
-          message.client.log.error(e);
-        });
-        message.channel.stopTyping();
-      }, response.output.length * 100);
+      if (response.output) {
+        message.channel.startTyping();
+        setTimeout(() => {
+          message.channel.send(response.output).catch(e => {
+            message.client.log.error(e);
+          });
+          message.channel.stopTyping();
+        }, response.output.length * 100);
+      }
     });
   }
   catch (e) {

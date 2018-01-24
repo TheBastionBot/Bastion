@@ -18,7 +18,9 @@ exports.exec = (Bastion, message, args) => {
   if (emoji) {
     message.channel.send({
       files: [ emoji.url ]
-    }).catch(() => {});
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

@@ -1,28 +1,16 @@
 {
-  "date": "January 21, 2018",
+  "date": "January 24, 2018",
   "fixed": [
-    "`skip` command won't go rogue anymore. It won't skip multiple songs; will skip one song at a time.",
-    "Fixed an issue that prevented music commands from responding when the music channels and/or the music master role was removed from the server before removing it from Bastion."
+    "Fixed crashes when Cleverbot API didn't returned any response.",
+    "Fixed Bastion not stopping the typing event.",
+    "Fixed `claim` not working for uncached guild members."
   ],
   "improved": [
-    "Renamed `setGame` to `setActivity` since Bastion now supports watching and listening activities, and game isn't the right word for it. `setGame` is now an alias for it.",
-    "`userInfo` now supports watching and listening activities of users. And now, it will show *Offline* instead of *Invisible*.",
-    "`setActivity` command, now, also can set the activity type to *Playing* or *Watching*.",
-    "You can now cycle through the entire leaderboard as `leaderboard` is now paginated.",
-    "`modules` is now an alias of `commands` command.",
-    "The good old `commands` is back to how it worked earlier. We saw that new users were having trouble when it displayed modules instead of commands.",
+    "You can now give Bastion Currencies without having to mention them; just use their IDs. Yeah, less annoying.",
+    "If there's no one in the voice channel, Bastion will automatically pause the music.",
     "Under-the-hood improvements"
   ],
-  "added": [
-    "Support for watching and listening activities.",
-    "Create channel categories using the `createCategory` command.",
-    "See the people who continuously supports the development of the Bastion Bot project, on [Patreon](https://patreon.com/snkrsnkampa), using the `patrons` command.",
-    "See the users who contribute to the code of the Bastion Bot using the `contributors` command.",
-    "Reload Bastion's settings using the `reloadSettings` command. No need to restart Bastion after you've modified the `config.json` or `credentials.json` files.",
-    "Browse the games in different categories of the Steam Store using the `steam` command.",
-    "Forgot to add a reason for a moderation action? Don't worry, you can now edit the reason of a moderation log using the `reason` command.",
-    "Organizing a competition, or any event, that need public votes? Bastion can do the heavy lifting for you. Set channels as voting channels using the `votingChannels` command and every new message in a voting channel will automatically get 👍 and 👎 reactions."
-  ],
+  "added": [],
   "removed": [],
   "issues": []
 }

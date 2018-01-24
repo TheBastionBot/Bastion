@@ -8,7 +8,8 @@
 
 [![Patreon](https://img.shields.io/badge/be-patron-orange.svg)](https://patreon.com/snkrsnkampa)
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg)](https://paypal.me/snkrsnkampa)
-[![Bountysource](https://img.shields.io/bountysource/team/bastion/activity.svg)](https://salt.bountysource.com/teams/bastion)  
+[![Bountysource](https://img.shields.io/bountysource/team/bastion/activity.svg)](https://salt.bountysource.com/teams/bastion)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/k3rn31p4nic)  
 
 [![Build Status](https://travis-ci.org/TheBastionBot/Bastion.svg?branch=master)](https://travis-ci.org/TheBastionBot/Bastion)
 [![Build status](https://ci.appveyor.com/api/projects/status/1nb6ed6j4j4eoy3w/branch/master?svg=true&retina=true)](https://ci.appveyor.com/project/k3rn31p4nic/bastion/branch/master)
@@ -55,7 +56,8 @@ commands, read the [Installation Guide](https://docs.bastionbot.org).
 
 ## Support Bastion Bot project and keep it alive forever
 If you like the Bastion Bot project you can **⭐ Star** it on
-[GitHub](https://github.com/TheBastionBot/Bastion).  
+[GitHub](https://github.com/TheBastionBot/Bastion) and/or
+[send a thank you note to me](https://saythanks.io/to/k3rn31p4nic).  
 
 If want to support the development of this project to keep this alive forever,
 you can send donations or contribute to it.  
