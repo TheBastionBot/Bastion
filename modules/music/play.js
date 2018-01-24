@@ -292,6 +292,23 @@ function startStreamDispatcher(guild, connection) {
     });
   }
 
+  if (connection.channel && connection.channel.members.size < 2) {
+    if (guild.client.config.music && guild.client.config.music.status) {
+      guild.client.user.setActivity(guild.client.config.game.name, { type: guild.client.config.game.type });
+    }
+
+    return guild.music.textChannel.send({
+      embed: {
+        color: guild.client.colors.ORANGE,
+        description: 'It appears I\'ve been by myself in this voice channel since the last song. The bandwidth patrol has asked me to pause the playback to save bandwidth. That stuff doesn\'t grow on trees!'
+      }
+    }).then(() => {
+      guild.music.dispatcher.pause();
+    }).catch(e => {
+      guild.client.log.error(e);
+    });
+  }
+
   guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: (guild.client.config.music && guild.client.config.music.passes) || 1, bitrate: 'auto' });
   guild.music.playing = true;
 
