@@ -14,7 +14,7 @@ module.exports = () => {
 
       let response = await request(options);
 
-      if (!response && response.data && response.data.length) {
+      if (response && response.data && response.data.length) {
         options = {
           headers: {
             'Authorization': `Bearer ${patreon ? patreon.creatorAccessToken : undefined}`
