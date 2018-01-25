@@ -1,15 +1,9 @@
 {
-  "date": "January 24, 2018",
+  "date": "January 25, 2018",
   "fixed": [
-    "Fixed crashes when Cleverbot API didn't returned any response.",
-    "Fixed Bastion not stopping the typing event.",
-    "Fixed `claim` not working for uncached guild members."
+    "Fixed `claim` crashes when there was no Patreon API key."
   ],
-  "improved": [
-    "You can now give Bastion Currencies without having to mention them; just use their IDs. Yeah, less annoying.",
-    "If there's no one in the voice channel, Bastion will automatically pause the music.",
-    "Under-the-hood improvements"
-  ],
+  "improved": [],
   "added": [],
   "removed": [],
   "issues": []
