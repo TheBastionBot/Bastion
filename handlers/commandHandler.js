@@ -96,7 +96,7 @@ module.exports = async message => {
     if (message.client.shard) {
       message.client.log.console(`${COLOR.green('[SHARD]:')} ${message.client.shard.id}`);
     }
-    message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(`<#${message.guild.id}>`)}`);
+    message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(message.guild.id)}`);
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
     message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
 
