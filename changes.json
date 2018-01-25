@@ -4,6 +4,7 @@
     "Fixed `claim` crashes when there was no Patreon API key."
   ],
   "improved": [
+    "Are you a Patreon creator and hosting Bastion yourself? The `patrons` command will now show your patrons and not the patrons of the Bastion bot project.",
     "Under-the-hood improvements"
   ],
   "added": [],
