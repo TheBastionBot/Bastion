@@ -62,6 +62,6 @@ exports.help = {
   botPermission: 'MUTE_MEMBERS',
   userTextPermission: 'MUTE_MEMBERS',
   userVoicePermission: '',
-  usage: 'mute @user-mention [Reason]',
-  example: [ 'mute @user#0001 Reason for the mute.' ]
+  usage: 'mute <@USER_MENTION | USER_ID> -r [Reason]',
+  example: [ 'mute @user#001 -r Shouting like crazy', 'mute 167147569575323761 -r Singing like a broken radio' ]
 };
