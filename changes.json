@@ -5,7 +5,7 @@
   ],
   "improved": [
     "Are you a Patreon creator and hosting Bastion yourself? The `patrons` command will now show your patrons and not the patrons of the Bastion bot project.",
-    "`removeAllRoles` and `deafen` commands can be used with the ID of the user. No need to mention them anymore.",
+    "`removeAllRoles`, `deafen` and `kick` commands can be used with the ID of the user. No need to mention them anymore.",
     "Under-the-hood improvements"
   ],
   "added": [],
