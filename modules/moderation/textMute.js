@@ -6,7 +6,13 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let user = message.mentions.users.first();
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await Bastion.fetchUser(args.id);
+    }
     if (!user) {
       /**
       * The command was ran with invalid parameters.
@@ -18,10 +24,7 @@ exports.exec = async (Bastion, message, args) => {
     let member = await message.guild.fetchMember(user.id);
     if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
-    if (args.reason) {
-      args.reason = args.reason.filter(str => !str.startsWith('<@') || !str.endsWith('>'));
-    }
-    args.reason = args.reason && args.reason.length ? args.reason.join(' ') : 'No reason given';
+    args.reason = args.reason.join(' ');
 
     if (args.server) {
       let mutedRole = message.guild.roles.find('name', 'Bastion:mute');
@@ -74,7 +77,8 @@ exports.config = {
   aliases: [ 'tm' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'reason', type: String, multiple: true, defaultOption: true },
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'reason', alias: 'r', type: String, multiple: true, defaultValue: [ 'No reason given.' ] },
     { name: 'server', type: Boolean, alias: 's' }
   ]
 };
@@ -84,6 +88,6 @@ exports.help = {
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',
-  usage: 'textMute @user-mention [Reason] [--server]',
-  example: [ 'textMute @user#0001 off topic discussions', 'textMute @user#0001 misbehaving others --server' ]
+  usage: 'textMute < @USER_MENTION | USER_ID > [-r Reason] [--server]',
+  example: [ 'textMute @user#0001 -r off topic discussions', 'textMute 167147569575323761 -r misbehaving with others --server' ]
 };
