@@ -6,7 +6,13 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let user = message.mentions.users.first();
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await Bastion.fetchUser(args.id);
+    }
     if (!user) {
       /**
       * The command was ran with invalid parameters.
@@ -25,24 +31,23 @@ exports.exec = async (Bastion, message, args) => {
       nickStat = 'Can\'t change server owner\'s nickname.';
     }
     else {
-      args = args.slice(1);
-      args = args.join(' ');
+      args.nick = args.nick.join(' ');
 
-      if (args.length > 32) {
+      if (args.nick > 32) {
         color = Bastion.colors.RED;
         nickStat = 'Nickname can\'t be longer than 32 characters.';
       }
       else {
-        if (args.length < 1) {
+        if (args.nick < 1) {
           color = Bastion.colors.RED;
           nickStat = `${message.author.tag} removed the nickname of ${user.tag}`;
         }
         else {
           color = Bastion.colors.GREEN;
-          nickStat = `${message.author.tag} set the nickname of ${user.tag} to **${args}**`;
+          nickStat = `${message.author.tag} set the nickname of ${user.tag} to **${args.nick}**`;
         }
       }
-      await member.setNickname(args);
+      await member.setNickname(args.nick);
     }
 
     message.channel.send({
@@ -61,7 +66,11 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'nick' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'nick', alias: 'n', type: String, multiple: true, defaultValue: [] }
+  ]
 };
 
 exports.help = {
@@ -69,6 +78,6 @@ exports.help = {
   botPermission: 'MANAGE_NICKNAMES',
   userTextPermission: 'MANAGE_NICKNAMES',
   userVoicePermission: '',
-  usage: 'nickname <@user-mention> [nick]',
-  example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
+  usage: 'nickname < @USER_MENTION | USER_ID > [-n nick]',
+  example: [ 'nickname @user#0001 -n The Legend', 'nickname 167147569575323761' ]
 };
