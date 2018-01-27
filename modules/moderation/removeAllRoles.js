@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.user) {
+    if (args.id) {
       /**
       * The command was ran with invalid parameters.
       * @fires commandUsage
@@ -57,7 +57,7 @@ exports.config = {
   aliases: [ 'removeallr' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'user', type: String, defaultOption: true }
+    { name: 'id', type: String, defaultOption: true }
   ]
 };
 
