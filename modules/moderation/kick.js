@@ -34,6 +34,8 @@ exports.exec = async (Bastion, message, args) => {
 
     await member.kick(args.reason);
 
+    args.reason = args.reason.join(' ');
+
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,

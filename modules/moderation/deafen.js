@@ -26,6 +26,8 @@ exports.exec = async (Bastion, message, args) => {
 
     await member.setDeaf(true);
 
+    args.reason = args.reason.join(' ');
+
     message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
