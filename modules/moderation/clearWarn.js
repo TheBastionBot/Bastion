@@ -77,5 +77,5 @@ exports.help = {
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',
   usage: 'clearWarn <@USER_MENTION | USER_ID> -r [Reason]',
-  example: [ 'clearWarn @user#001 -r Advertisement', 'clearWarn 167147569575323761 -r Invite links' ]
+  example: [ 'clearWarn @user#001 -r Apologized', 'clearWarn 167147569575323761 -r Forgiven' ]
 };
