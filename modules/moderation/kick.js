@@ -6,7 +6,13 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let user = message.mentions.users.first();
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await Bastion.fetchUser(args.id);
+    }
     if (!user) {
       /**
       * The command was ran with invalid parameters.
@@ -26,17 +32,14 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'kick', user), message.channel);
     }
 
-    let reason = args.slice(1).join(' ');
-    if (reason.length < 1) {
-      reason = 'No given reason';
-    }
+    await member.kick(args.reason);
 
-    await member.kick(reason);
+    args.reason = args.reason.join(' ');
 
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: `${message.author.tag} kicked ${user.tag} with reason **${reason}**`,
+        description: `${message.author.tag} kicked ${user.tag} with reason **${args.reason}**`,
         footer: {
           text: `ID ${user.id}`
         }
@@ -49,12 +52,12 @@ exports.exec = async (Bastion, message, args) => {
     * Logs moderation events if it is enabled
     * @fires moderationLog
     */
-    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, member, reason);
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, member, args.reason);
 
     member.send({
       embed: {
         color: Bastion.colors.RED,
-        description: `${message.author.tag} kicked you from **${message.guild.name}** server with reason **${reason}**`
+        description: `${message.author.tag} kicked you from **${message.guild.name}** server with reason **${args.reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -67,7 +70,11 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'k' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'reason', alias: 'r', type: String, multiple: true, defaultValue: [ 'No reason given.' ] }
+  ]
 };
 
 exports.help = {
@@ -75,6 +82,6 @@ exports.help = {
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',
-  usage: 'kick @user-mention [Reason]',
-  example: [ 'kick @user#0001 Reason for the kick.' ]
+  usage: 'kick <@USER_MENTION | USER_ID> -r [Reason]',
+  example: [ 'kick @user#001 -r Being rude to everyone.', 'kick 167147569575323761 -r Spamming' ]
 };

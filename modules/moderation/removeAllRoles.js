@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.length < 1) {
+    if (args.id) {
       /**
       * The command was ran with invalid parameters.
       * @fires commandUsage
@@ -14,7 +14,16 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let user = message.mentions.users.first();
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await message.guild.fetchMember(args.id);
+      if (user) {
+        user = user.user;
+      }
+    }
     if (!user) {
       user = message.author;
     }
@@ -46,7 +55,10 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'removeallr' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -54,6 +66,6 @@ exports.help = {
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',
-  usage: 'removeAllRoles [@user-mention]',
-  example: [ 'removeAllRoles @user#0001', 'removeAllRoles' ]
+  usage: 'removeAllRoles [ @USER_MENTION | USER_ID ]',
+  example: [ 'removeAllRoles @user#0001', 'removeAllRoles 282424753565461211', 'removeAllRoles' ]
 };
