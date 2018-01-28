@@ -98,6 +98,10 @@ module.exports = async db => {
     'gift_hearts TEXT,' +
     'love_letters TEXT)');
 
+  await db.run('CREATE TABLE IF NOT EXISTS guildShop' +
+    '(guildID TEXT NOT NULL UNIQUE,' +
+    'roles TEXT)');
+
   await db.run('CREATE TABLE IF NOT EXISTS transactions' +
     '(userID TEXT NOT NULL,' +
     'type TEXT NOT NULL,' +
