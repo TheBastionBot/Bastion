@@ -194,6 +194,7 @@
   "money": {
     "bastionCurrency": "Shows the amount of Bastion Currencies in the specified user's account.",
     "buyGift": "Buy gifts from Bastion's gift shop.",
+    "buyRole": "Buy role from the server's Role Store.",
     "claim": "Claim your daily rewards.",
     "gift": "Send gifts to other users from the gift items you have with you.",
     "giftShop": "Shows the products available in the gift shop, and their price.",
