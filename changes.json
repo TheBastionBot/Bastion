@@ -1,13 +1,7 @@
 {
-  "date": "January 27, 2018",
-  "fixed": [
-    "Fixed `claim` crashes when there was no Patreon API key."
-  ],
-  "improved": [
-    "Are you a Patreon creator and hosting Bastion yourself? The `patrons` command will now show your patrons and not the patrons of the Bastion bot project.",
-    "`clearWarn`, `deafen`, `kick`, `mute`, `nickname`, `removeAllRoles`, `softBan`, `textMute`, `textUnMute`, `unDeafen`, `unMute` and `warn` commands can be used with the ID of the user. No need to mention them anymore.",
-    "Under-the-hood improvements"
-  ],
+  "date": "January 28, 2018",
+  "fixed": [],
+  "improved": [],
   "added": [],
   "removed": [],
   "issues": []
