@@ -2,7 +2,10 @@
   "date": "January 28, 2018",
   "fixed": [],
   "improved": [],
-  "added": [],
+  "added": [
+    "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",
+    "Selling roles in your server? Server members can buy them using the `buyRole` command, provided they have enought Bastion Currencies."
+  ],
   "removed": [],
   "issues": []
 }
