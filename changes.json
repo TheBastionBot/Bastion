@@ -1,6 +1,8 @@
 {
-  "date": "January 28, 2018",
-  "fixed": [],
+  "date": "January 31, 2018",
+  "fixed": [
+    "Bastion won't respond to chat conversations if it has no content."
+  ],
   "improved": [],
   "added": [
     "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",
