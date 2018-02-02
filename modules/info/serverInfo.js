@@ -5,6 +5,9 @@
  */
 
 exports.exec = (Bastion, message) => {
+  let nonAnimatedEmojis = message.guild.emojis.filter(emoji => !emoji.animated);
+  let guildEmojis = nonAnimatedEmojis.size > 0 ? nonAnimatedEmojis.size > 25 ? `${nonAnimatedEmojis.map(e => `<:${e.name}:${e.id}>`).splice(0, 25).join(' ')} and ${nonAnimatedEmojis.size - 25} more.` : nonAnimatedEmojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-';
+
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
@@ -62,7 +65,7 @@ exports.exec = (Bastion, message) => {
         },
         {
           name: 'Server Emojis',
-          value: message.guild.emojis.size > 0 ? message.guild.emojis.size >= 25 ? `${message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).splice(0, 25).join(' ')} and ${message.guild.emojis.size - 25} more.` : message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-'
+          value: guildEmojis
         }
       ],
       thumbnail: {
