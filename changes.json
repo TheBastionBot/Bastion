@@ -9,7 +9,8 @@
   ],
   "added": [
     "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",
-    "Selling roles in your server? Server members can buy them using the `buyRole` command, provided they have enought Bastion Currencies."
+    "Selling roles in your server? Server members can buy them using the `buyRole` command, provided they have enought Bastion Currencies.",
+    "Rocket League players, you can now check your Rocket League stats using the `rocketLeague` command."
   ],
   "removed": [],
   "issues": []
