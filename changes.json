@@ -1,9 +1,11 @@
 {
-  "date": "January 31, 2018",
+  "date": "February 2, 2018",
   "fixed": [
     "Bastion won't respond to chat conversations if it has no content."
   ],
-  "improved": [],
+  "improved": [
+    "If server doesn't have an icon, Bastion would now show the server's acronym in instead of showing a generic Discord logo."
+  ],
   "added": [
     "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",
     "Selling roles in your server? Server members can buy them using the `buyRole` command, provided they have enought Bastion Currencies."

@@ -66,7 +66,7 @@ exports.exec = (Bastion, message) => {
         }
       ],
       thumbnail: {
-        url: message.guild.iconURL ? message.guild.iconURL : 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png'
+        url: message.guild.icon ? message.guild.iconURL : `https://dummyimage.com/128/7289DA/FFFFFF/&text=${encodeURIComponent(message.guild.nameAcronym)}`
       },
       image: {
         url: message.guild.splash ? message.guild.splashURL : null
