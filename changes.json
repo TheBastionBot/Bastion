@@ -4,6 +4,7 @@
     "Bastion won't respond to chat conversations if it has no content.",
     "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis.",
     "Fixed `urbanDictionary` command not responding when a word was not found.",
+    "`userLookup` won't give errors if you don't provide arguemnts.",
     "Under-the-hood fixes"
   ],
   "improved": [
