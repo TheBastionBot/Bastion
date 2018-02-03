@@ -7,7 +7,7 @@
 const ow = require('overwatch-js');
 
 exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
+  if (args.length < 2) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
