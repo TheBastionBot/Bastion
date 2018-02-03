@@ -75,7 +75,9 @@ exports.exec = async (Bastion, message, args) => {
                 }
               }
             }).catch(e => {
-              Bastion.log.error(e);
+              if (e.code !== 50001) {
+                Bastion.log.error(e);
+              }
             });
 
             // Let the winner know via DM
@@ -103,7 +105,9 @@ exports.exec = async (Bastion, message, args) => {
                 }
               }
             }).catch(e => {
-              Bastion.log.error(e);
+              if (e.code !== 50001) {
+                Bastion.log.error(e);
+              }
             });
           }
 
