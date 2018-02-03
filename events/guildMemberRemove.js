@@ -40,7 +40,7 @@ module.exports = async member => {
     }
 
     if (guild.log) {
-      if (member.guild.me.hasPermission('BAN_MEMBERS')) {
+      if (member.guild.me && member.guild.me.hasPermission('BAN_MEMBERS')) {
         let bannedUsers = await member.guild.fetchBans();
         if (bannedUsers.has(member.id)) return;
       }
