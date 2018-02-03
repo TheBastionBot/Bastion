@@ -5,6 +5,7 @@
     "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis.",
     "Fixed `urbanDictionary` command not responding when a word was not found.",
     "`userLookup` won't give errors if you don't provide arguemnts.",
+    "`createEmoji` will now let you know if image file size exceeds the limit.",
     "Under-the-hood fixes"
   ],
   "improved": [
