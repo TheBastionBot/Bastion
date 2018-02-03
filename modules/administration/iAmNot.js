@@ -28,7 +28,13 @@ exports.exec = async (Bastion, message, args) => {
 
     if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
-    await message.member.removeRole(role);
+    let member = message.member;
+    if (!member) {
+      member = await message.guild.fetchMember(message.author.id);
+    }
+
+    await member.removeRole(role);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,

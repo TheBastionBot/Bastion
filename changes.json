@@ -7,7 +7,7 @@
     "`userLookup` won't give errors if you don't provide arguemnts.",
     "`createEmoji` will now let you know if image file size exceeds the limit.",
     "Fixed message reaction event triggering for reactions in DM",
-    "Fixed `iAm` command not working when the server member is not cached.",
+    "Fixed `iAm` and `iAmNot` commands not working when the server member is not cached.",
     "Under-the-hood fixes"
   ],
   "improved": [
