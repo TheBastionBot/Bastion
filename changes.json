@@ -1,11 +1,13 @@
 {
-  "date": "February 2, 2018",
+  "date": "February 3, 2018",
   "fixed": [
     "Bastion won't respond to chat conversations if it has no content.",
     "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis."
   ],
   "improved": [
-    "If server doesn't have an icon, Bastion would now show the server's acronym in instead of showing a generic Discord logo."
+    "If server doesn't have an icon, Bastion would now show the server's acronym in instead of showing a generic Discord logo.",
+    "You can now report silently by using user IDs instead of mentioning them and notifying them.",
+    "Successful user reports will automatically be deleted to make it more silent."
   ],
   "added": [
     "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",

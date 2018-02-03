@@ -4,13 +4,27 @@
  * @license MIT
  */
 
-exports.exec = (Bastion, message, args) => {
-  let user = message.mentions.users.first();
-  if (!user) {
+exports.exec = async (Bastion, message, args) => {
+  if (args.length < 2) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
      */
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args[0]) {
+    user = await Bastion.fetchUser(args[0]);
+  }
+  if (!user) {
+    /**
+    * The command was ran with invalid parameters.
+    * @fires commandUsage
+    */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -27,6 +41,8 @@ exports.exec = (Bastion, message, args) => {
       title: 'User Reported',
       description: `You have reported ${user.tag} to the moderators with reason **${reason}**. Hold tight, they will look into it.`
     }
+  }).then(message => {
+    message.delete(5000).catch(() => {});
   }).catch(e => {
     Bastion.log.error(e);
   });
@@ -48,6 +64,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'report @user-mention [Reason]',
-  example: [ 'report @user#0001 Reason for reporting.' ]
+  usage: 'report < @USER_MENTION | USER_ID > <REASON >',
+  example: [ 'report 215052539542571701 Reason for reporting.', 'report @user#0001 Reason for reporting.' ]
 };
