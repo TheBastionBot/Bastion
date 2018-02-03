@@ -2,7 +2,8 @@
   "date": "February 3, 2018",
   "fixed": [
     "Bastion won't respond to chat conversations if it has no content.",
-    "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis."
+    "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis.",
+    "Under-the-hood fixes"
   ],
   "improved": [
     "If server doesn't have an icon, Bastion would now show the server's acronym in instead of showing a generic Discord logo.",
