@@ -98,6 +98,8 @@ module.exports = async Bastion => {
           text: `Bastion v${Bastion.package.version}`
         },
         timestamp: new Date()
+      }).catch(e => {
+        Bastion.log.error(e);
       });
     }
   }
