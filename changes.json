@@ -9,6 +9,7 @@
     "Fixed message reaction event triggering for reactions in DM",
     "Fixed `iAm` and `iAmNot` commands not working when the server member is not cached.",
     "Fixed an issue with buying the Heart from the Gift Shop.",
+    "Fixed an issue that caused music channels and music master roles to sneakily get deleted.",
     "Under-the-hood fixes"
   ],
   "improved": [
