@@ -14,7 +14,8 @@
     "If server doesn't have an icon, Bastion would now show the server's acronym in instead of showing a generic Discord logo.",
     "You can now report silently by using user IDs instead of mentioning them and notifying them.",
     "Successful user reports will automatically be deleted to make it more silent.",
-    "Paginated the `steam` command."
+    "Paginated the `steam` command.",
+    "Under-the-hood improvements"
   ],
   "added": [
     "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",
