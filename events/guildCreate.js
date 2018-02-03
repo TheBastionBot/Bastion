@@ -38,5 +38,7 @@ module.exports = guild => {
       url: guild.icon ? guild.iconURL : `https://dummyimage.com/128/7289DA/FFFFFF/&text=${encodeURIComponent(guild.nameAcronym)}`
     },
     timestamp: new Date()
+  }).catch(e => {
+    guild.client.log.error(e);
   });
 };
