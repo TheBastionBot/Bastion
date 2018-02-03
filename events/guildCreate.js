@@ -25,7 +25,7 @@ module.exports = guild => {
       },
       {
         name: 'Server Owner',
-        value: guild.owner.user.tag,
+        value: guild.owner ? guild.owner.user.tag : 'Unknown',
         inline: true
       },
       {
