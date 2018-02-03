@@ -22,6 +22,10 @@ exports.exec = async (Bastion, message, args) => {
         return message.client.emit('userMissingPermissions', 'MANAGE_ROLES');
       }
 
+      if (Object.keys(rolesInStore).length >= 25) {
+        return Bastion.emit('error', '', 'You can\'t add more than 25 roles for sale.', message.channel);
+      }
+
       args.add = Math.abs(args.add);
 
       let role = message.guild.roles.get(args.role);
