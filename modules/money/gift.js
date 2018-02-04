@@ -37,7 +37,7 @@ exports.exec = async (Bastion, message, args) => {
       args.product = 'gem';
     }
     else if (/heart[s]?/i.test(args.product)) {
-      args.product = 'heart';
+      args.product = 'gift_heart';
     }
     else if (/love[-_ ]?letter[s]?/i.test(args.product)) {
       args.product = 'love_letter';
@@ -45,6 +45,8 @@ exports.exec = async (Bastion, message, args) => {
     else {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
     }
+
+    args.amount = Math.abs(args.amount);
 
     let gifts = {
       chocolate_bar: [ '🍫  Chocolate Bar', 20 ],

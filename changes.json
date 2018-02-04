@@ -1,14 +1,31 @@
 {
-  "date": "January 27, 2018",
+  "date": "February 4, 2018",
   "fixed": [
-    "Fixed `claim` crashes when there was no Patreon API key."
+    "Bastion won't respond to chat conversations if it has no content.",
+    "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis.",
+    "Fixed `urbanDictionary` command not responding when a word was not found.",
+    "`userLookup` won't give errors if you don't provide arguemnts.",
+    "`createEmoji` will now let you know if image file size exceeds the limit.",
+    "Fixed message reaction event triggering for reactions in DM",
+    "Fixed `iAm` and `iAmNot` commands not working when the server member is not cached.",
+    "Fixed an issue with buying the Heart from the Gift Shop.",
+    "Fixed an issue that caused music channels and music master roles to sneakily get deleted.",
+    "A workaround for a Discord bug - that allowed empty role names - that errored `roleCreate`, `roleDelete` and `roleUpdate` events.",
+    "Under-the-hood fixes"
   ],
   "improved": [
-    "Are you a Patreon creator and hosting Bastion yourself? The `patrons` command will now show your patrons and not the patrons of the Bastion bot project.",
-    "`clearWarn`, `deafen`, `kick`, `mute`, `nickname`, `removeAllRoles`, `softBan`, `textMute`, `textUnMute`, `unDeafen`, `unMute` and `warn` commands can be used with the ID of the user. No need to mention them anymore.",
+    "If server doesn't have an icon, Bastion would now show the server's acronym in instead of showing a generic Discord logo.",
+    "You can now report silently by using user IDs instead of mentioning them and notifying them.",
+    "Successful user reports will automatically be deleted to make it more silent.",
+    "Paginated the `steam` command.",
     "Under-the-hood improvements"
   ],
-  "added": [],
+  "added": [
+    "You can now sell roles in your server using the new `roleStore` command. `roleStore` also lists the roles for sale in your server.",
+    "Selling roles in your server? Server members can buy them using the `buyRole` command, provided they have enought Bastion Currencies.",
+    "Rocket League players, you can now check your Rocket League stats using the `rocketLeague` command.",
+    "You can now search for any game details you want using the new `game` command. Want to show a game to a friend while chatting, just use the `game` command."
+  ],
   "removed": [],
   "issues": []
 }

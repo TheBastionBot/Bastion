@@ -25,7 +25,7 @@ module.exports = guild => {
       },
       {
         name: 'Server Owner',
-        value: guild.owner.user.tag,
+        value: guild.owner ? guild.owner.user.tag : 'Unknown',
         inline: true
       },
       {
@@ -35,7 +35,7 @@ module.exports = guild => {
       }
     ],
     thumbnail: {
-      url: guild.iconURL || 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png'
+      url: guild.icon ? guild.iconURL : `https://dummyimage.com/128/7289DA/FFFFFF/&text=${encodeURIComponent(guild.nameAcronym)}`
     },
     timestamp: new Date()
   });

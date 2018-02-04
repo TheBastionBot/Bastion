@@ -33,6 +33,7 @@ exports.exec = async (Bastion, message, args) => {
       reason = 'No reason given.';
     }
 
+    args[0] = Math.abs(args[0]);
     Bastion.emit('userCredit', user, args[0]);
     /**
     * Send a message in the channel to let the Bot Owner know that the operation was successful.

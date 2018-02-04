@@ -21,12 +21,12 @@ module.exports = async (oldRole, newRole) => {
         fields: [
           {
             name: 'New Role Name',
-            value: newRole.name,
+            value: newRole.name || '`None`',
             inline: true
           },
           {
             name: 'Old Role Name',
-            value: oldRole.name,
+            value: oldRole.name || '`None`',
             inline: true
           },
           {

@@ -6,6 +6,14 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    if (!args.id) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let user = await Bastion.fetchUser(args.id);
 
     message.channel.send({

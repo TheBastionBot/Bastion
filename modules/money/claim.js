@@ -48,7 +48,9 @@ exports.exec = (Bastion, message) => {
         description: `Your account has been debited with **${rewardAmount}** Bastion Currencies.`
       }
     }).catch(e => {
-      Bastion.log.error(e);
+      if (e.code !== 50007) {
+        Bastion.log.error(e);
+      }
     });
   }
   else {

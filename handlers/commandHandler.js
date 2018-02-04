@@ -33,13 +33,13 @@ module.exports = async message => {
     // If any of the music channels have been removed, delete them from the database.
     if (!message.guild.channels.has(guild.musicTextChannel) || !message.guild.channels.has(guild.musicVoiceChannel)) {
       await message.client.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
-      guild.musicMasterRole = null;
+      guild.musicTextChannel = null;
+      guild.musicVoiceChannel = null;
     }
     // If any of the music channels have been removed, delete them from the database.
     if (!message.guild.roles.has(guild.musicMasterRole)) {
       await message.client.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
-      guild.musicTextChannel = null;
-      guild.musicVoiceChannel = null;
+      guild.musicMasterRole = null;
     }
     // Add music configs to the guild music object.
     message.guild.music.textChannelID = guild.musicTextChannel;

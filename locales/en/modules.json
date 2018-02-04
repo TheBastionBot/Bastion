@@ -65,6 +65,7 @@
     "pubg": "Get stats of any PlayerUnknown's Battlegrounds player.",
     "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
+    "rocketLeague": "Get stats of any Rocket League player.",
     "smite": "Get stats of any Smite player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server."
   },
@@ -194,6 +195,7 @@
   "money": {
     "bastionCurrency": "Shows the amount of Bastion Currencies in the specified user's account.",
     "buyGift": "Buy gifts from Bastion's gift shop.",
+    "buyRole": "Buy role from the server's Role Store.",
     "claim": "Claim your daily rewards.",
     "gift": "Send gifts to other users from the gift items you have with you.",
     "giftShop": "Shows the products available in the gift shop, and their price.",
@@ -201,6 +203,7 @@
     "giveXP": "Give the specified amount of experience points to the specified user and increase their level.",
     "leaderboard": "Shows the users topping the chart of Bastion.",
     "myGifts": "Shows the gifts you currently have in your possession.",
+    "roleStore": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with Bastion Currencies, in your server using the `buyRole` command.",
     "take": "Take the specified amount of Bastion Currencies from the specified user."
   },
   "music": {
@@ -271,6 +274,7 @@
     "endpoll": "Ends a currently running poll in the same text channel channel and shows the result.",
     "followURL": "Follows a URL to until it reaches the last URL and shows you the the followed URL. Useful for getting past shortened URLs.",
     "forecast": "Shows the weather forecast for 5 days of the specified city.",
+    "game": "Searches for the details of a Game.",
     "generateInvite": "Generates an invite link of the current text channel of your Discord server.",
     "giphy": "Searches animated GIFs on the web and sends a random GIF based on the given query.",
     "google": "Searches Google, for the specified query, and shows the top results.",

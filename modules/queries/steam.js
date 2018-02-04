@@ -28,6 +28,12 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'category'), message.channel);
     }
 
+    let games = response[args.category].items.map(item => `[${item.name}](https://store.steampowered.com/app/${item.id})`);
+
+    let noOfPages = games.length / 10;
+    let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+    i = i - 1;
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -36,9 +42,9 @@ exports.exec = async (Bastion, message, args) => {
           url: 'https://store.steampowered.com'
         },
         title: response[args.category].name,
-        description: response[args.category].items.map(item => `[${item.name}](https://store.steampowered.com/app/${item.id})`).join('\n'),
+        description: games.slice(i * 10, (i * 10) + 10).join('\n'),
         footer: {
-          text: 'Powered by Steam'
+          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} • Powered by Steam`
         }
       }
     }).catch(e => {
@@ -57,7 +63,8 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'category', type: String, multiple: true, defaultOption: true }
+    { name: 'category', type: String, multiple: true, defaultOption: true },
+    { name: 'page', type: Number, alias: 'p', defaultValue: 1 }
   ]
 };
 

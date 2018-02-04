@@ -21,9 +21,14 @@ exports.exec = async (Bastion, message, args) => {
         color: Bastion.colors.GREEN,
         description: `${message.author.tag} created the emoji **${emoji.name}**`
       }
+    }).catch(e => {
+      Bastion.log.error(e);
     });
   }
   catch (e) {
+    if (e.code === 50035) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), 'File cannot be larger than 256 KB.', message.channel);
+    }
     Bastion.log.error(e);
   }
 };

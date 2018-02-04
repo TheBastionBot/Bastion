@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
       args.product = 'gem';
     }
     else if (/heart[s]?/i.test(args.product)) {
-      args.product = 'heart';
+      args.product = 'gift_heart';
     }
     else if (/love[-_ ]?letter[s]?/i.test(args.product)) {
       args.product = 'love_letter';
