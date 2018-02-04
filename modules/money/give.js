@@ -32,6 +32,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveNoUser', true), message.channel);
     }
 
+    args.amount = Math.abs(args.amount);
     if (Bastion.credentials.ownerId.includes(message.author.id)) {
       Bastion.emit('userDebit', user, args.amount);
 
