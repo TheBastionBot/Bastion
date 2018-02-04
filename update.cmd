@@ -9,7 +9,7 @@ SET cwd=%~dp0
 CD %cwd%
 
 ECHO [Bastion]: Updating Bastion Bot...
-git pull origin master 1>nul || (
+git pull origin stable 1>nul || (
   ECHO [Bastion]: Unable to update the bot.
   GOTO :EXIT
 )
