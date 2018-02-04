@@ -46,6 +46,8 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The specified product was not found in the gift shop. To check the available products, run `giftShop` command.', message.channel);
     }
 
+    args.amount = Math.abs(args.amount);
+
     let gifts = {
       chocolate_bar: [ '🍫  Chocolate Bar', 20 ],
       icecream: [ '🍦  Ice Cream', 10 ],
