@@ -19,7 +19,7 @@ module.exports = async role => {
         fields: [
           {
             name: 'Role Name',
-            value: role.name,
+            value: role.name || '`None`',
             inline: true
           },
           {

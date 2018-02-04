@@ -1,5 +1,5 @@
 {
-  "date": "February 3, 2018",
+  "date": "February 4, 2018",
   "fixed": [
     "Bastion won't respond to chat conversations if it has no content.",
     "Fixed a bug that prevented `sinfo` command from showing emojis in a server that had animated emojis.",
@@ -10,6 +10,7 @@
     "Fixed `iAm` and `iAmNot` commands not working when the server member is not cached.",
     "Fixed an issue with buying the Heart from the Gift Shop.",
     "Fixed an issue that caused music channels and music master roles to sneakily get deleted.",
+    "A workaround for a Discord bug - that allowed empty role names - that errored `roleCreate`, `roleDelete` and `roleUpdate` events.",
     "Under-the-hood fixes"
   ],
   "improved": [
