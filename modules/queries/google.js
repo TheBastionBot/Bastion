@@ -9,7 +9,17 @@ const cheerio = require('cheerio');
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let response = await request(`http://google.com/search?client=chrome&rls=en&ie=UTF-8&oe=UTF-8&q=${encodeURIComponent(args.query.join(' '))}`);
+    let options = {
+      headers: {
+        'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
+      },
+      url: 'http://google.com/search',
+      qs: {
+        q: encodeURIComponent(args.query.join(' ')),
+        safe: 'active'
+      }
+    };
+    let response = await request(options);
 
     let $ = cheerio.load(response);
     let results = [];
