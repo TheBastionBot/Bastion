@@ -203,7 +203,7 @@
     "giveXP": "Give the specified amount of experience points to the specified user and increase their level.",
     "leaderboard": "Shows the users topping the chart of Bastion.",
     "myGifts": "Shows the gifts you currently have in your possession.",
-    "roleStore": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with Bastion Currencies, in your server using the `buyRole` command.",
+    "roleStore": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with Bastion Currencies, in your server using the `buyRole` command. When users buy roles, the server owner get's 90% of the profit.",
     "take": "Take the specified amount of Bastion Currencies from the specified user."
   },
   "music": {

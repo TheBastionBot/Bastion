@@ -5,7 +5,8 @@
   ],
   "improved": [
     "`google` command will now filter explicit contents. Safe search activated!",
-    "Bastion will auto stop music and leave the music channel, instead of pausing and staying in the channel, if there's no one in the voice channel."
+    "Bastion will auto stop music and leave the music channel, instead of pausing and staying in the channel, if there's no one in the voice channel.",
+    "Buying roles can now be profitable for server owners. Server owners will now get 90% of the profit from role store. So, go and start selling a bunch of roles in your server."
   ],
   "added": [],
   "removed": [],
