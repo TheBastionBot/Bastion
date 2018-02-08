@@ -1,10 +1,11 @@
 {
-  "date": "February 7, 2018",
+  "date": "February 8, 2018",
   "fixed": [
     "Fixed `commands` command not accepting the module name argument. You can now choose to see the commands in a single module."
   ],
   "improved": [
-    "`google` command will now filter explicit contents. Safe search activated!"
+    "`google` command will now filter explicit contents. Safe search activated!",
+    "Bastion will auto stop music and leave the music channel, instead of pausing and staying in the channel, if there's no one in the voice channel."
   ],
   "added": [],
   "removed": [],
