@@ -12,7 +12,14 @@ const pokedex = new Pokedex({
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.number) {
+    let pokemon;
+    if (args.name) {
+      pokemon = await pokedex.getPokemonByName(encodeURIComponent(args.name.join(' ')));
+    }
+    else if (args.number) {
+      pokemon = await pokedex.getPokemonByNumber(args.number);
+    }
+    else {
       /**
       * The command was ran with invalid parameters.
       * @fires commandUsage
@@ -20,7 +27,6 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let pokemon = await pokedex.getPokemonByNumber(args.number);
     pokemon = pokemon[0];
 
     let fields = [
@@ -128,7 +134,8 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'number', type: Number, defaultOption: true }
+    { name: 'name', type: String, multiple: true, defaultOption: true },
+    { name: 'number', type: Number, alias: 'n' }
   ]
 };
 
@@ -137,6 +144,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'pokemon <POKEDEX_NUMBER>',
-  example: [ 'pokemon 658' ]
+  usage: 'pokemon < POKEMON NAME | -n POKEDEX_NUMBER >',
+  example: [ 'pokemon Pikachu', 'pokemon -n 658' ]
 };

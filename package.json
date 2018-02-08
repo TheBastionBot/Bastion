@@ -39,7 +39,7 @@
     "node-json-db": "~0.7.3",
     "opusscript": "~0.0.6",
     "overwatch-js": "~1.6.1",
-    "pokedex-api": "~1.0.0",
+    "pokedex-api": "~1.1.0",
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.83.0",
     "request-promise-native": "~1.0.5",
