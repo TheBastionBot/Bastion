@@ -26,11 +26,14 @@ module.exports = async message => {
     BOT.write(message.content, response => {
       if (response.output) {
         message.channel.startTyping();
-        setTimeout(() => {
-          message.channel.send(response.output).catch(e => {
+        setTimeout(async () => {
+          try {
+            message.channel.stopTyping(true);
+            await message.channel.send(response.output);
+          }
+          catch (e) {
             message.client.log.error(e);
-          });
-          message.channel.stopTyping();
+          }
         }, response.output.length * 100);
       }
     });
