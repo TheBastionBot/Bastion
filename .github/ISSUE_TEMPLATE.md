@@ -6,10 +6,13 @@
   - [ ] Bastion is crashing
   - [ ] Bastion is having issues during installation/update
   - [ ] Bastion is doing something I don't understand
-  - [ ] A command is crashing Bastion
+  - [ ] A command is crashing
   - [ ] A command isn't doing what it's supposed to do
-  - [ ] Feature request or command suggestion (_see below for feature requests_).
   - [ ] Other, please explain:
+
+<!--
+    For feature request or suggestions see the 'Feature Request' section below.
+-->
 
 #### What's going wrong?
 <!--
@@ -44,7 +47,7 @@
 
 
 <!--
-    Feature Requests
+    FEATURE REQUEST
 
     For feature requests, delete everything above this section and uncomment the
     section following this one.
@@ -54,9 +57,7 @@
 
 <!--
 
-#### What's the feature?
-
-#### Please describe the feature in detail, how it will work, etc.?
+#### What's the feature? Please describe the feature in detail, how it will work, etc.
 
 #### How will this feature help you or your community or the users of Discord in general?
 
