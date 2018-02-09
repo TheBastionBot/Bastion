@@ -1,7 +1,8 @@
 {
-  "date": "February 8, 2018",
+  "date": "February 9, 2018",
   "fixed": [
-    "Fixed `commands` command not accepting the module name argument. You can now choose to see the commands in a single module."
+    "Fixed `commands` command not accepting the module name argument. You can now choose to see the commands in a single module.",
+    "Bastion really won't respond to chat conversations if it has no content."
   ],
   "improved": [
     "`google` command will now filter explicit contents. Safe search activated!",

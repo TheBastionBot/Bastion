@@ -18,7 +18,7 @@ BOT.configure({
  */
 module.exports = async message => {
   try {
-    if (message.content.length <= `${message.client.user}  `.length) ;
+    if (message.content.length <= `${message.client.user}  `.length) return;
 
     let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
     if (!guild.chat) return;
