@@ -9,7 +9,6 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
 exports.exec = (Bastion, message, args) => {
-  // TODO: Auto pause/resume playback
   if (message.guild.music.textChannelID) {
     if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
   }
@@ -274,36 +273,27 @@ exports.help = {
  * @returns {void}
  */
 function startStreamDispatcher(guild, connection) {
-  if (guild.music.songs[0] === undefined) {
+  if ((connection.channel && connection.channel.members.size < 2) || guild.music.songs[0] === undefined) {
     if (guild.client.config.music && guild.client.config.music.status) {
       guild.client.user.setActivity(guild.client.config.game.name, { type: guild.client.config.game.type });
+    }
+
+    let description;
+    if (guild.music.songs[0] === undefined) {
+      description = 'Exiting voice channel.';
+    }
+    else {
+      description = 'It appears I\'ve been by myself in this voice channel since the last song. The bandwidth patrol has asked me to stop the playback to save bandwidth. That stuff doesn\'t grow on trees!';
     }
 
     return guild.music.textChannel.send({
       embed: {
         color: guild.client.colors.RED,
-        description: 'Exiting voice channel.'
+        description: description
       }
     }).then(() => {
       guild.music.dispatcher.end();
       guild.music.voiceChannel.leave();
-    }).catch(e => {
-      guild.client.log.error(e);
-    });
-  }
-
-  if (connection.channel && connection.channel.members.size < 2) {
-    if (guild.client.config.music && guild.client.config.music.status) {
-      guild.client.user.setActivity(guild.client.config.game.name, { type: guild.client.config.game.type });
-    }
-
-    return guild.music.textChannel.send({
-      embed: {
-        color: guild.client.colors.ORANGE,
-        description: 'It appears I\'ve been by myself in this voice channel since the last song. The bandwidth patrol has asked me to pause the playback to save bandwidth. That stuff doesn\'t grow on trees!'
-      }
-    }).then(() => {
-      guild.music.dispatcher.pause();
     }).catch(e => {
       guild.client.log.error(e);
     });

@@ -18,7 +18,7 @@ BOT.configure({
  */
 module.exports = async message => {
   try {
-    if (message.content.length <= `${message.client.user}  `.length) ;
+    if (message.content.length <= `${message.client.user}  `.length) return;
 
     let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
     if (!guild.chat) return;
@@ -26,11 +26,14 @@ module.exports = async message => {
     BOT.write(message.content, response => {
       if (response.output) {
         message.channel.startTyping();
-        setTimeout(() => {
-          message.channel.send(response.output).catch(e => {
+        setTimeout(async () => {
+          try {
+            message.channel.stopTyping(true);
+            await message.channel.send(response.output);
+          }
+          catch (e) {
             message.client.log.error(e);
-          });
-          message.channel.stopTyping();
+          }
         }, response.output.length * 100);
       }
     });

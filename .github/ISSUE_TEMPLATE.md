@@ -1,15 +1,21 @@
 #### I'm opening this issue because:
 <!--
     Put an X between the brackets on the following lines if a statement is true.
+    e.g.
+        [X] - This statement is true.
+        [ ] - This statement is false.
 -->
 
   - [ ] Bastion is crashing
   - [ ] Bastion is having issues during installation/update
   - [ ] Bastion is doing something I don't understand
-  - [ ] A command is crashing Bastion
+  - [ ] A command is crashing
   - [ ] A command isn't doing what it's supposed to do
-  - [ ] Feature request or command suggestion (_see below for feature requests_).
   - [ ] Other, please explain:
+
+<!--
+    For feature request or suggestions see the 'Feature Request' section below.
+-->
 
 #### What's going wrong?
 <!--
@@ -25,9 +31,9 @@
 <!--
     Only required if you're hosting Bastion yourself.
 -->
- - Bastion version:
- - Node.JS version:
- - `npm` version:
+ - Bastion version:  <!-- Use `stats` command in your Discord server to get the Bastion version. -->
+ - Node.JS version:  <!-- Run `node -v` in your console to get the node version. -->
+ - `npm` version:  <!-- Run `npm -v` in your console to get the npm version. -->
  - Windows, OS X/macOS, or Linux?:
  - Network issues:
    - [ ] I use a proxy to connect to the web.
@@ -44,7 +50,7 @@
 
 
 <!--
-    Feature Requests
+    FEATURE REQUEST
 
     For feature requests, delete everything above this section and uncomment the
     section following this one.
@@ -54,9 +60,7 @@
 
 <!--
 
-#### What's the feature?
-
-#### Please describe the feature in detail, how it will work, etc.?
+#### What's the feature? Please describe the feature in detail, how it will work, etc.
 
 #### How will this feature help you or your community or the users of Discord in general?
 

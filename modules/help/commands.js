@@ -7,10 +7,11 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
-    if (args.modules) {
-      args.modules = args.modules.filter(module => modules.includes(module));
-      if (args.modules.length) {
-        modules = args.modules;
+
+    if (args.module) {
+      args.module = args.module.join('_').toLowerCase();
+      if (modules.includes(args.module)) {
+        modules = [ args.module ];
       }
     }
 
@@ -43,7 +44,7 @@ exports.exec = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        description: `${message.author} Check your DM from me, I've sent you the list of commands${args.modules && args.modules.length ? ` in ${args.modules.join(', ')} modules` : ''}. You can also check out the commands section of [my website](https://bastionbot.org/) for the complete list of commands with details: https://bastionbot.org/`
+        description: `${message.author} Check your DM from me, I've sent you the list of commands${args.module ? ` in ${args.module} module` : ''}. You can also check out the commands section of [my website](https://bastionbot.org/) for the complete list of commands with details: https://bastionbot.org/`
       }
     }).catch(e => {
       Bastion.log.error(e);
