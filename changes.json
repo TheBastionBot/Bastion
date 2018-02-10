@@ -1,5 +1,5 @@
 {
-  "date": "February 9, 2018",
+  "date": "February 10, 2018",
   "fixed": [
     "Fixed `commands` command not accepting the module name argument. You can now choose to see the commands in a single module.",
     "Bastion really won't respond to chat conversations if it has no content.",
@@ -8,7 +8,8 @@
   "improved": [
     "`google` command will now filter explicit contents. Safe search activated!",
     "Bastion will auto stop music and leave the music channel, instead of pausing and staying in the channel, if there's no one in the voice channel.",
-    "Buying roles can now be profitable for server owners. Server owners will now get 90% of the profit from role store. So, go and start selling a bunch of roles in your server."
+    "Buying roles can now be profitable for server owners. Server owners will now get 90% of the profit from role store. So, go and start selling a bunch of roles in your server.",
+    "Under-the-hood improvements"
   ],
   "added": [],
   "removed": [],
