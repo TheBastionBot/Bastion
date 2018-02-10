@@ -11,7 +11,7 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'pollend' ],
   enabled: true
 };
 
