@@ -41,14 +41,11 @@ exports.exec = async (Bastion, message, args) => {
       });
 
       message.channel.poll.collector = message.channel.createMessageCollector(
-        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !message.channel.poll.usersVoted.includes(m.author.id)) || ((m.author === message.author || m.author.id === message.guild.ownerID) && m.content === `${message.guild.prefix[0]}endpoll`),
+        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < args.length && !message.channel.poll.usersVoted.includes(m.author.id)),
         { time: 6 * 60 * 60 * 1000 }
       );
 
       message.channel.poll.collector.on('collect', (msg, votes) => {
-        if (msg.content === `${message.guild.prefix[0]}endpoll`) {
-          return votes.stop();
-        }
         if (msg.deletable) {
           msg.delete().catch(e => {
             Bastion.log.error(e);
@@ -69,11 +66,8 @@ exports.exec = async (Bastion, message, args) => {
         });
       });
 
-      message.channel.poll.collector.on('end', (pollRes, reason) => {
+      message.channel.poll.collector.on('end', (pollRes) => {
         pollRes = pollRes.map(r => r.content);
-        if (reason === 'user') {
-          pollRes.splice(pollRes.indexOf(`${message.guild.prefix[0]}endpoll`), 1);
-        }
         pollRes = pollRes.filter(res => parseInt(res) && parseInt(res) > 0 && parseInt(res) < args.length);
         if (pollRes.length === 0) {
           return message.channel.send({

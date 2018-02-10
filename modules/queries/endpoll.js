@@ -5,10 +5,8 @@
  */
 
 exports.exec = (Bastion, message) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
+  if (message.channel.poll && message.channel.poll.collector) {
+    message.channel.poll.collector.stop();
   }
 };
 
@@ -20,7 +18,7 @@ exports.config = {
 exports.help = {
   name: 'endpoll',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_MESSAGES',
   userVoicePermission: '',
   usage: 'endpoll',
   example: []
