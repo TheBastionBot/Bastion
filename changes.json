@@ -1,15 +1,7 @@
 {
-  "date": "February 10, 2018",
-  "fixed": [
-    "Fixed `commands` command not accepting the module name argument. You can now choose to see the commands in a single module.",
-    "Bastion really won't respond to chat conversations if it has no content.",
-    "Fixed an issue that caused Bastion to not stop typing in a channel when it's been asked multiple times. Bastion didn't liked when someone mentioned him multiple, so he went rogue."
-  ],
+  "date": "February 11, 2018",
+  "fixed": [],
   "improved": [
-    "`google` command will now filter explicit contents. Safe search activated!",
-    "Bastion will auto stop music and leave the music channel, instead of pausing and staying in the channel, if there's no one in the voice channel.",
-    "Buying roles can now be profitable for server owners. Server owners will now get 90% of the profit from role store. So, go and start selling a bunch of roles in your server.",
-    "`endpoll` command can now be accessed with `pollend`. For those users who tend to forget the command name!",
     "Under-the-hood improvements"
   ],
   "added": [],
