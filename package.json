@@ -22,6 +22,7 @@
   },
   "homepage": "https://bastionbot.org",
   "dependencies": {
+    "@k3rn31p4nic/google-translate-api": "^1.0.2",
     "chalk": "~2.3.0",
     "cheerio": "~1.0.0-rc.2",
     "cleverbot-node": "github:k3rn31p4nic/cleverbot-node",
@@ -31,7 +32,6 @@
     "discord.js": "~11.3.0",
     "gamedig": "~1.0.37",
     "gif-search": "~2.0.1",
-    "google-translate-api": "github:k3rn31p4nic/google-translate-api",
     "hirez.js": "~2.0.0",
     "kitsu": "^4.5.2",
     "lzutf8": "~0.4.7",
