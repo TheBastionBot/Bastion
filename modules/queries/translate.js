@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const translate = require('google-translate-api');
+const translate = require('@k3rn31p4nic/google-translate-api');
 
 exports.exec = async (Bastion, message, args) => {
   try {
