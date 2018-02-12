@@ -96,10 +96,12 @@ exports.exec = async (Bastion, message, args) => {
           count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]] + 1 : 1;
         }
         let result = [];
+        let totalVotes = (pollRes.length - (pollMessage.length - 1));
         for (let i = 1; i < pollMessage.length; i++) {
+          let numOfVotes = count[Object.keys(count)[i - 1]] - 1;
           result.push({
             name: pollMessage[i],
-            value: `${((count[Object.keys(count)[i - 1]] - 1) / (pollRes.length - (pollMessage.length - 1))) * 100}%`,
+            value: `${(numOfVotes / totalVotes) * 100}% (${numOfVotes} of ${totalVotes})`,
             inline: true
           });
         }
