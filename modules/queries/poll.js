@@ -14,6 +14,8 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
     let pollMessage = args.pollMessage.join(' ').split(';');
+    args.time = Math.abs(args.time);
+    args.time = args.time && args.time < 360 ? args.time : 60;
 
     if (!message.channel.hasOwnProperty('poll')) {
       message.channel.poll = {};
@@ -35,14 +37,14 @@ exports.exec = async (Bastion, message, args) => {
           description: `A poll has been started by ${message.author}.\n\n**${pollMessage[0]}**`,
           fields: answers,
           footer: {
-            text: 'Vote by typing the corresponding number of the option.'
+            text: `Vote by sending the corresponding number of the option. • Poll ends in ${args.time} minutes.`
           }
         }
       });
 
       message.channel.poll.collector = message.channel.createMessageCollector(
         m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < pollMessage.length && !message.channel.poll.usersVoted.includes(m.author.id)),
-        { time: 6 * 60 * 60 * 1000 }
+        { time: args.time * 60 * 1000 }
       );
 
       message.channel.poll.collector.on('collect', (msg, votes) => {
@@ -136,7 +138,8 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'pollMessage', type: String, multiple: true, defaultOption: true }
+    { name: 'pollMessage', type: String, multiple: true, defaultOption: true },
+    { name: 'time', type: Number, alias: 't', defaultValue: 60 }
   ]
 };
 

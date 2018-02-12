@@ -253,7 +253,6 @@
     "map": "Geeft een kaart van de opgegeven locatie.",
     "morseCode": "Codeert een gegeven tekst naar Morse. Beep Boop.",
     "movie": "Zoekt naar de details van een film.",
-    "poll": "Start een stemronde in dit tekstkanaal, en vraagt gebruikers te stemmen.",
     "reminder": "Bastion stelt een herinnering in om je te herinneren met een opgegeven bericht, via een persoonlijk bericht.",
     "shorten": "Verkort een URL met het gebruik van Google URL Shortner.",
     "tapCode": "Codeert een gegeven tekst in Tap code.",

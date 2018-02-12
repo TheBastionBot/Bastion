@@ -230,7 +230,6 @@
     "map": "Obtenez la carte de l'emplacement spécifié.",
     "morseCode": "Encode un texte donné en langage Morse.",
     "movie": "Recherche les détails d'un film.",
-    "poll": "Démarre un sondage dans la canal de texte en cours demandant aux utilisateurs de voter.",
     "reminder": "Bastion établit un rappel pour vous rappeler un message spécifié, via un message privé, après une durée spécifiée.",
     "shorten": "Raccourcit un URL spécifié à l'aide de Google URL Shortner.",
     "tapCode": "Encode un texte donné en langage Tap.",

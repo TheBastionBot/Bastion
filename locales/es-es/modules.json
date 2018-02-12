@@ -253,7 +253,6 @@
     "map": "Obtener el mapa de la ubicación especificada.",
     "morseCode": "Codifica un texto determinado en el código Morse.",
     "movie": "Busca los detalles de una película.",
-    "poll": "Inicia una encuesta en el canal de texto actual para que los usuarios voten.",
     "reminder": "Bastion establece un recordatorio para recordarle el mensaje especificado, vía mensaje directo, después de una duración especificada.",
     "shorten": "Acorta una URL especificada mediante el URL Shortner de Google.",
     "tapCode": "Codifica un texto determinado en Tap Code.",
