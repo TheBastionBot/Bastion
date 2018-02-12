@@ -49,6 +49,8 @@ exports.exec = async (Bastion, message, args) => {
     let roles = member.roles.map(r => r.name).slice(1).join('\n');
     if (roles.length === 0) roles = '-';
 
+    let mutualGuilds = await Bastion.functions.getMutualGuilds(user);
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -99,7 +101,7 @@ exports.exec = async (Bastion, message, args) => {
           url: user.displayAvatarURL
         },
         footer: {
-          text: `${message.guild.ownerID === user.id ? 'Server Owner' : ''}`,
+          text: `${message.guild.ownerID === user.id ? 'Server Owner •' : ''} Shares ${mutualGuilds} servers with me.`,
           icon_url: `${message.guild.ownerID === user.id ? 'https://i.imgur.com/2ogsleu.png' : ''}`
         }
       }

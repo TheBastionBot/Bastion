@@ -2,6 +2,7 @@
   "date": "February 12, 2018",
   "fixed": [],
   "improved": [
+    "You can now see how many server Bastion share with a user in the `userInfo` command.",
     "Under-the-hood improvements"
   ],
   "added": [],
