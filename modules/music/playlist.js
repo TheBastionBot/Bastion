@@ -10,20 +10,28 @@ const db = new jsonDB('./data/playlist', true, true);
 exports.exec = (Bastion, message, args) => {
   if (!args.song) {
     db.reload();
-    let title = 'Saved Playlists', playlist = db.getData('/');
+    let title = 'Saved Playlists', color = Bastion.colors.BLUE, playlist = db.getData('/');
 
     if (!args.playlist) {
       playlist = Object.keys(playlist);
     }
     else {
-      title = 'Saved Songs';
-      playlist = playlist[args.playlist.join(' ')];
+      if (args.remove) {
+        db.delete(`/${args.playlist.join(' ')}`);
+        title = 'Deleted Playlist';
+        color = Bastion.colors.RED;
+        playlist = [ args.playlist.join(' ') ];
+      }
+      else {
+        title = 'Saved Songs';
+        playlist = playlist[args.playlist.join(' ')];
+      }
     }
 
     if (playlist && playlist.length !== 0) {
       message.channel.send({
         embed: {
-          color: Bastion.colors.BLUE,
+          color: color,
           title: title,
           description: playlist.join('\n')
         }
@@ -73,7 +81,8 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'song', type: String, multiple: true, defaultOption: true },
-    { name: 'playlist', type: String, multiple: true, alias: 'p' }
+    { name: 'playlist', type: String, multiple: true, alias: 'p' },
+    { name: 'remove', type: Boolean, alias: 'r' }
   ],
   musicMasterOnly: true
 };
@@ -83,6 +92,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'playlist [Song Name] [-p Playlist Name]',
-  example: [ 'playlist', 'playlist -p Jazz Collection', 'playlist Shape of You -p My Favs', 'playlist https://www.youtube.com/watch?v=JGwWNGJdvx8' ]
+  usage: 'playlist [Song Name] [ -p Playlist Name [ --remove ] ]',
+  example: [ 'playlist', 'playlist -p Jazz Collection', 'playlist -p Jazz Collection --remove', 'playlist Shape of You -p My Favs', 'playlist https://www.youtube.com/watch?v=JGwWNGJdvx8' ]
 };

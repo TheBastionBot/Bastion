@@ -3,6 +3,7 @@
   "fixed": [],
   "improved": [
     "You can now see how many server Bastion share with a user in the `userInfo` command.",
+    "You can now remove playlists using the new `--remove` options of the `playlist` command.",
     "Under-the-hood improvements"
   ],
   "added": [],
