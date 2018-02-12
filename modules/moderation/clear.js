@@ -21,10 +21,10 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     if (user) {
-      msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
+      msgs = Array.from(msgs.filter(m => m.author.id === user.id).values()).slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     else if (args.includes('--bots')) {
-      msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
+      msgs = Array.from(msgs.filter(m => m.author.bot).values()).slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     if (args.includes('--nonpinned')) {
       msgs = msgs.filter(m => !m.pinned);

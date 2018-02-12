@@ -1,8 +1,7 @@
 {
-  "date": "February 11, 2018",
+  "date": "February 12, 2018",
   "fixed": [],
   "improved": [
-    "Improvements to the commands handler.",
     "Under-the-hood improvements"
   ],
   "added": [],
