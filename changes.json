@@ -6,6 +6,7 @@
     "You can now remove playlists using the new `--remove` options of the `playlist` command.",
     "You can now run polls for a specified amount of minutes using the `--time` (or `-t`) option in the `poll` command. Remember, you still can't run polls for more than 6 hours.",
     "Poll results will now have the vote count too, so you get a better insight.",
+    "You can now specify the difficulty of trivia questions using the `--difficulty` (or `-d`) option in the `trivia` command.",
     "Under-the-hood improvements"
   ],
   "added": [
