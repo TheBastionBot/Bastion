@@ -26,6 +26,7 @@
     "echo": "Sends the same message that you had sent. Just like an echo!",
     "edgeLord": "Shows a message from an edge lord.",
     "emoji": "Sends a large version of the specified emoji.",
+    "fakeBan": "Bans a user for the server*. Oh, not really though, just to mess with them.",
     "fidgetSpinner": "Spins a fidget spinner for you and shows for how long it was spinning.",
     "flipText": "Sends the same message that you had sent, but flipped.",
     "fortune": "Shows you a fortune from a fortune cookie.",

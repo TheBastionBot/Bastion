@@ -1,5 +1,5 @@
 {
-  "date": "February 12, 2018",
+  "date": "February 13, 2018",
   "fixed": [],
   "improved": [
     "You can now see how many server Bastion share with a user in the `userInfo` command.",
@@ -8,7 +8,9 @@
     "Poll results will now have the vote count too, so you get a better insight.",
     "Under-the-hood improvements"
   ],
-  "added": [],
+  "added": [
+    "You can now prank your friends by showing that you're trying to ban them from the server, but not really, using the `fakeBan` command. Don't do that much though, maybe they will *really* ban you for that."
+  ],
   "removed": [],
   "issues": []
 }
