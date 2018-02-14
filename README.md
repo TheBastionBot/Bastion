@@ -16,6 +16,7 @@
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/bastion/localized.svg)](http://i18n.bastionbot.org/project/bastion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7cac2730252247819a559caa2aad4fab)](https://www.codacy.com/app/snkrsnkampa/Bastion?utm_source=github.com&utm_medium=referral&utm_content=TheBastionBot/Bastion&utm_campaign=badger)
 [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion)
+[![Known Vulnerabilities](https://snyk.io/test/github/thebastionbot/bastion/badge.svg?targetFile=package.json)](https://snyk.io/test/github/thebastionbot/bastion?targetFile=package.json)
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
 
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
