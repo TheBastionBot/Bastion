@@ -128,7 +128,7 @@ exports.exec = async (Bastion, message, args) => {
         Bastion.clearTimeout(giveaways.get(message.guild.id));
 
         // Remove the giveaway details from cache
-        giveaways.delete(args.end);
+        giveaways.delete(message.guild.id);
 
         message.channel.send({
           embed: {

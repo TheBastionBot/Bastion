@@ -1,6 +1,8 @@
 {
-  "date": "February 13, 2018",
-  "fixed": [],
+  "date": "February 15, 2018",
+  "fixed": [
+    "Fixed an issue that caused the giveaway events not really end, if it was forcefully ended."
+  ],
   "improved": [
     "You can now see how many server Bastion share with a user in the `userInfo` command.",
     "You can now remove playlists using the new `--remove` options of the `playlist` command.",
