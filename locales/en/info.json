@@ -34,5 +34,10 @@
   "voiceMute": "%var% voice-muted **%var%** with the reason **%var%**",
   "voiceUnmute": "%var% voice-unmuted **%var%** with the reason **%var%**",
   "warn": "%var% warned **%var%** with the reason **%var%**",
-  "warnDM": "%var% warned you from **%var%** server with the reason **%var%**"
+  "warnDM": "%var% warned you from **%var%** server with the reason **%var%**",
+
+  "lastSeen": "%var% was last seen %var% ago.",
+  "notSeen": "I've not seen %var% in a while.",
+  "deleteReminder": "%var% your reminders have been deleted.",
+  "addReminder": "%var% I will remind you to **%var%** after **%var%**."
 }
