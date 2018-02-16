@@ -49,8 +49,7 @@
     "webshot": "~0.18.0",
     "word-definition": "~2.1.6",
     "xkcd": "~1.1.3",
-    "youtube-dl": "github:przemyslawpluta/node-youtube-dl",
-    "zalgolize": "~1.2.4"
+    "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
     "eslint": "^4.16.0"
