@@ -1,0 +1,14 @@
+{
+  "createChannel": "%var% created a %var% channel **%var%**",
+  "createEmoji": "%var% created the emoji **%var%**",
+  "createRole": "%var% created the role **%var%**",
+  "deleteChannel": "%var% deleted the %var% channel **%var%**",
+  "deleteChannelTopic": "%var% deleted the topic the **%var%** channel.",
+  "deleteRole": "%var% deleted the role **%var%**",
+  "renameChannel": "%var% renamed the %var% %var% channel **%var%** to **%var%**",
+  "renameRole": "%var% renamed the %var% role **%var%** to **%var%**",
+  "selfAssignRole": "%var% you've been given the **%var%** role.",
+  "selfRemoveRole": "%var% you've been removed from the **%var%** role.",
+  "updateChannelTopic": "%var% updated the topic the **%var%** channel to: ```\n%var%```",
+  "updateRoleColor": "%var% updated the color of **%var%** role to **%var%**"
+}
