@@ -1,7 +1,8 @@
 {
-  "date": "February 15, 2018",
+  "date": "February 16, 2018",
   "fixed": [
-    "Fixed an issue that caused the giveaway events not really end, if it was forcefully ended."
+    "Fixed an issue that caused the giveaway events not really end, if it was forcefully ended.",
+    "Fixed the music being skipped multiple times when the `skip` command was used."
   ],
   "improved": [
     "You can now see how many server Bastion share with a user in the `userInfo` command.",
