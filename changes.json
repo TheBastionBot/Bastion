@@ -1,8 +1,9 @@
 {
-  "date": "February 16, 2018",
+  "date": "February 17, 2018",
   "fixed": [
     "Fixed an issue that caused the giveaway events not really end, if it was forcefully ended.",
-    "Fixed the music being skipped multiple times when the `skip` command was used."
+    "Fixed the music being skipped multiple times when the `skip` command was used.",
+    "`emojiInfo` will respond with better error response when the specified emoji is not available."
   ],
   "improved": [
     "You can now see how many server Bastion share with a user in the `userInfo` command.",

@@ -22,6 +22,11 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
   args = message.guild.emojis.find('name', args);
+
+  if (!args) {
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'emoji'), message.channel);
+  }
+
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
