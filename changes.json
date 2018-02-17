@@ -14,6 +14,7 @@
     "Poll results will now have the vote count too, so you get a better insight.",
     "You can now specify the difficulty of trivia questions using the `--difficulty` (or `-d`) option in the `trivia` command.",
     "When no role is specified to buy with the `buyRole` command, it will show the command usage.",
+    "When the search query is not specified with the `google` command, it will show the command usage.",
     "Under-the-hood improvements"
   ],
   "added": [

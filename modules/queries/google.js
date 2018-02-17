@@ -9,6 +9,14 @@ const cheerio = require('cheerio');
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    if (!args.query) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let options = {
       headers: {
         'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
