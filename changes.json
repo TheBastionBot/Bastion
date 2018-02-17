@@ -16,6 +16,7 @@
     "You can now specify the difficulty of trivia questions using the `--difficulty` (or `-d`) option in the `trivia` command.",
     "When no role is specified to buy with the `buyRole` command, it will show the command usage.",
     "When the search query is not specified with the `google` command, it will show the command usage.",
+    "Gifs are now shown in an embed when you use the `giphy` command.",
     "Under-the-hood improvements"
   ],
   "added": [

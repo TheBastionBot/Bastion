@@ -4,24 +4,52 @@
  * @license MIT
  */
 
-const gifSearch = require('gif-search');
+const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  gifSearch.random(args.join(' ')).then(gifURL => {
+    let options = {
+      url: 'http://api.giphy.com/v1/gifs/search',
+      qs: {
+        q: encodeURI(args.join('+')),
+        api_key: 'dc6zaTOxFJmzC',
+        limit: 10,
+        offset: 0
+      },
+      json: true
+    };
+
+    let response = await request(options);
+
     message.channel.send({
-      files: [ { attachment: gifURL } ]
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: `GIF Search for ${args.join(' ')}`.slice(0, 256),
+        image: {
+          url: response.data[Math.floor(Math.random() * response.data.length)].images.original.url
+        },
+        footer: {
+          text: 'Powered by GIPHY'
+        }
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
