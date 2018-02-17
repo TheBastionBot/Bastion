@@ -27,6 +27,10 @@ exports.exec = async (Bastion, message, args) => {
     };
     let response = await request(options);
 
+    if (!response) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+    }
+
     response = response.results[0];
 
     let question = await message.channel.send({
