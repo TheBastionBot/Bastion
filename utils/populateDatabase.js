@@ -43,6 +43,8 @@ module.exports = async db => {
     'starboard TEXT UNIQUE,' +
     'modLog TEXT UNIQUE,' +
     'modCaseNo TEXT NOT NULL DEFAULT \'1\',' +
+    'disabledCommands TEXT,' +
+    'disabledModules TEXT,' +
     'PRIMARY KEY(guildID))');
 
   await db.run('CREATE TABLE IF NOT EXISTS whitelists' +
