@@ -22,6 +22,8 @@
   "added": [
     "You can now prank your friends by showing that you're trying to ban them from the server, but not really, using the `fakeBan` command. Don't do that much though, maybe they will *really* ban you for that."
   ],
-  "removed": [],
+  "removed": [
+    "Removed `disableModule`, `disableAllCommands`, `disableCommand`, `enableModule`, `enableAllCommands` and `enableModule` commands from `Bot Owner` module, in favour of it arriving in `Server Admin` module."
+  ],
   "issues": []
 }
