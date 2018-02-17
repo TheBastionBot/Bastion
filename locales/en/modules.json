@@ -91,6 +91,8 @@
     "addWhitelistDomains": "Adds a domain to the whitelist for link filter.",
     "announcementChannel": "Adds/removes an announcement channel. You will receive announcements made by the bot owner in this channel.",
     "chat": "Toggles Bastion's chatting module.",
+    "disableCommand": "Disable command/module in your server.",
+    "enableCommand": "Enable disabled command/module in your server.",
     "farewell": "Toggles sending of farewell message for members who left the server.",
     "farewellMessage": "Edits the farewell message that shows when a member leaves the server.",
     "farewellTimeout": "Sets the time after which farewell message will be automatically deleted.",
