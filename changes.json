@@ -23,7 +23,8 @@
     "You can now prank your friends by showing that you're trying to ban them from the server, but not really, using the `fakeBan` command. Don't do that much though, maybe they will *really* ban you for that."
   ],
   "removed": [
-    "Removed Bastion's hidden way of allowing admins to enable/disable command using channel topic in favor native support for it."
+    "Removed Bastion's hidden way of allowing admins to enable/disable command using channel topic in favor native support for it.",
+    "Removed `disableModule`, `disableAllCommands`, `disableCommand`, `enableModule`, `enableAllCommands` and `enableModule` commands from `Bot Owner` module, in favor of it arriving in `Server Admin` module."
   ],
   "issues": []
 }

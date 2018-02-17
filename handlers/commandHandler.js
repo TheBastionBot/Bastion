@@ -100,10 +100,6 @@ module.exports = async message => {
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
     message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
 
-    if (!cmd.config.enabled) {
-      return message.client.log.info('This command is disabled.');
-    }
-
     /**
      * Command permissions handler
      */
