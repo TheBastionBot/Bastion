@@ -8,9 +8,6 @@ module.exports = async db => {
   await db.get('SELECT disabledCommands FROM guildSettings').catch(() => {
     db.run('ALTER TABLE guildSettings ADD disabledCommands TEXT').catch(() => {});
   });
-  await db.get('SELECT disabledModules FROM guildSettings').catch(() => {
-    db.run('ALTER TABLE guildSettings ADD disabledModules TEXT').catch(() => {});
-  });
   await db.get('SELECT language FROM guildSettings').catch(() => {
     db.run('ALTER TABLE guildSettings ADD language TEXT DEFAULT \'en\'').catch(() => {});
   });
