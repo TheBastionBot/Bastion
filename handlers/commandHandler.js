@@ -15,7 +15,7 @@ const activeUsers = {};
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix, language, musicTextChannel, musicVoiceChannel, musicMasterRole, ignoredChannels, ignoredRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guild = await message.client.db.get(`SELECT prefix, language, musicTextChannel, musicVoiceChannel, musicMasterRole, ignoredChannels, ignoredRoles, disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     if (!message.guild.prefix || message.guild.prefix.join(' ') !== `${guild.prefix} ${message.client.config.prefix}`) {
@@ -99,6 +99,13 @@ module.exports = async message => {
     message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(message.guild.id)}`);
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
     message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
+
+    if (guild.disabledCommands) {
+      guild.disabledCommands = guild.disabledCommands.split(' ');
+      if (guild.disabledCommands.includes(command.toLowerCase())) {
+        return message.client.log.info('This command is disabled.');
+      }
+    }
 
     /**
      * Command permissions handler
