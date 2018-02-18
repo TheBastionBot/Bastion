@@ -98,6 +98,7 @@
     "farewellTimeout": "Sets the time after which farewell message will be automatically deleted.",
     "filterInvite": "Toggles automatic deleting of Discord server invites posted in the server.",
     "filterLink": "Toggles automatic deletion of any links posted in the server.",
+    "filterMentionSpam": "Toggles filtering of mention spams in the server and also set the threshold and action to be taken.",
     "filterWord": "Toggles automatic deletion of messages that contains any word that is being filtered.",
     "giveaway": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is choosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.",
     "greet": "Toggles sending of greeting message for members who join the server.",
