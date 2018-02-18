@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-const zalgo = require('zalgolize');
-
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
@@ -19,7 +17,7 @@ exports.exec = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Zalgolized Text:',
-      description: zalgo(args.join(' '))
+      description: Bastion.functions.zalgolize(args.join(' '))
     }
   }).catch(e => {
     Bastion.log.error(e);

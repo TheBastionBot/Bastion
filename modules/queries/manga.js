@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const Kitsu = require('kitsu');
+const Kitsu = require('kitsu/node');
 const kitsu = new Kitsu();
 
 exports.exec = async (Bastion, message, args) => {

@@ -5,6 +5,15 @@
  */
 
 module.exports = async db => {
+  await db.get('SELECT mentionSpamThreshold FROM guildSettings').catch(() => {
+    db.run('ALTER TABLE guildSettings ADD mentionSpamThreshold INTEGER').catch(() => {});
+  });
+  await db.get('SELECT mentionSpamAction FROM guildSettings').catch(() => {
+    db.run('ALTER TABLE guildSettings ADD mentionSpamAction TEXT').catch(() => {});
+  });
+  await db.get('SELECT disabledCommands FROM guildSettings').catch(() => {
+    db.run('ALTER TABLE guildSettings ADD disabledCommands TEXT').catch(() => {});
+  });
   await db.get('SELECT language FROM guildSettings').catch(() => {
     db.run('ALTER TABLE guildSettings ADD language TEXT DEFAULT \'en\'').catch(() => {});
   });

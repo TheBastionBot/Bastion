@@ -7,7 +7,7 @@
 const request = require('request-promise-native');
 let activeChannels = [];
 
-exports.exec = async (Bastion, message) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     if (activeChannels.includes(message.channel.id))  {
       /**
@@ -17,12 +17,19 @@ exports.exec = async (Bastion, message) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isGameInUse', true, 'trivia'), message.channel);
     }
 
+    let difficulties = [ 'easy', 'medium', 'hard' ];
+    args.difficulty = difficulties.includes(args.difficulty.toLowerCase()) ? args.difficulty.toLowerCase() : 'easy';
+
     let options = {
       method: 'GET',
-      url: 'https://opentdb.com/api.php?amount=1&type=boolean&encode=url3986',
+      url: `https://opentdb.com/api.php?amount=1&type=boolean&difficulty=${args.difficulty}&encode=url3986`,
       json: true
     };
     let response = await request(options);
+
+    if (!response) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+    }
 
     response = response.results[0];
 
@@ -112,7 +119,10 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'difficulty', type: String, alias: 'd', defaultValue: 'easy', defaultOption: true }
+  ]
 };
 
 exports.help = {

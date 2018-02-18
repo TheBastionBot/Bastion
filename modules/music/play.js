@@ -332,7 +332,9 @@ function startStreamDispatcher(guild, connection) {
     else {
       guild.music.repeat = false;
     }
-    startStreamDispatcher(guild, connection);
+    setTimeout(() => {
+      startStreamDispatcher(guild, connection);
+    }, 500);
   });
 
   guild.music.dispatcher.on('error', (err) => {

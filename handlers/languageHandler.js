@@ -149,4 +149,25 @@ module.exports = class LanguageHandler {
     }
     return this.locales.get(locale).events[event];
   }
+
+  /**
+   * Returns the info strings for the given key.
+   * @function info
+   * @param {String} locale The locale of the string
+   * @param {String} key The key for the required info string
+   * @returns {String} The info string
+   */
+  info(locale, key, ...vars) {
+    if (!this.locales.has(locale)) {
+      locale = 'en';
+    }
+
+    if (!this.locales.get(locale).info[key]) {
+      if (locale === 'en') {
+        return `No string found for the '${key}' event.`;
+      }
+      return this.events('en', key);
+    }
+    return this.locales.get(locale).info[key].substitute(...vars);
+  }
 };
