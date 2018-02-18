@@ -8,6 +8,7 @@ const credentialsFilter = require('../utils/credentialsFilter');
 const wordFilter = require('../utils/wordFilter');
 const linkFilter = require('../utils/linkFilter');
 const inviteFilter = require('../utils/inviteFilter');
+const mentionSpamFilter = require('../utils/mentionSpamFilter');
 const handleTrigger = require('../handlers/triggerHandler');
 const handleUserLevel = require('../handlers/levelHandler');
 const handleCommand = require('../handlers/commandHandler');
@@ -42,6 +43,11 @@ module.exports = async message => {
      * Filter Discord server invites from the message
      */
     if (await inviteFilter(message)) return;
+
+    /**
+     * Moderate mention spams in the message
+     */
+    if (await mentionSpamFilter(message)) return;
 
     try {
       if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
