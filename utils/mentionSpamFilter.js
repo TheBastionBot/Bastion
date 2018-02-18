@@ -11,7 +11,7 @@
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT mentionSpamThreshold FROM guildSettings WHERE guildId='${message.guild.id}'`), filtered = false;
+    let guild = await message.client.db.get(`SELECT mentionSpamThreshold, mentionSpamAction FROM guildSettings WHERE guildId='${message.guild.id}'`), filtered = false;
 
     // If mention spam threshold is not set, return
     if (!guild.mentionSpamThreshold) return filtered;
@@ -28,10 +28,21 @@ module.exports = async message => {
         message.delete().catch(() => {});
       }
 
+      // Action on the user
+      let action = 'did nothing with';
+      if (guild.mentionSpamAction === 'kick' && message.member.kickable) {
+        await message.member.kick('Mention Spam');
+        action = 'kicked';
+      }
+      else if (guild.mentionSpamAction === 'ban' && message.member.bannable) {
+        await message.member.ban('Mention Spam');
+        action = 'banned';
+      }
+
       message.channel.send({
         embed: {
           color: message.client.colors.ORANGE,
-          description: `Filtered a mention spam from ${message.author} with **${message.mentions.users.size}** mentions.`
+          description: `Filtered a mention spam from ${message.author} with **${message.mentions.users.size}** mentions and ${action} him.`
         }
       }).catch(e => {
         message.client.log.error(e);
