@@ -30,6 +30,7 @@ module.exports = async db => {
     'filteredWords TEXT,' +
     'slowMode INTEGER NOT NULL DEFAULT 0,' +
     'mentionSpamThreshold INTEGER,' +
+    'mentionSpamAction TEXT,' +
     'announcementChannel TEXT,' +
     'chat INTEGER NOT NULL DEFAULT 0,' +
     'levelUpMessage INTEGER NOT NULL DEFAULT 0,' +
