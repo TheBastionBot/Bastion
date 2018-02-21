@@ -1,10 +1,12 @@
 {
-  "date": "February 19, 2018",
+  "date": "February 21, 2018",
   "fixed": [
     "Fixed an issue with the mutual server count in the `uinfo` command."
   ],
   "improved": [],
-  "added": [],
+  "added": [
+    "You can sell anything you want to sell in your server, using the new `shop` command."
+  ],
   "removed": [],
   "issues": []
 }
