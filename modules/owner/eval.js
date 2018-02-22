@@ -15,7 +15,15 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     args.code = args.code.join(' ');
-    let evaled = eval(args.code);
+
+    let evaled;
+    if (args.broadcast && Bastion.shard) {
+      evaled = await Bastion.shard.broadcastEval(args.code);
+    }
+    else {
+      evaled = eval(args.code);
+    }
+
     if (typeof evaled !== 'string') {
       evaled = require('util').inspect(evaled);
     }
@@ -68,6 +76,7 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'code', type: String, multiple: true, defaultOption: true },
+    { name: 'broadcast', type: Boolean },
     { name: 'delete', type: Boolean }
   ],
   ownerOnly: true
