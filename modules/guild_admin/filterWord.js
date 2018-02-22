@@ -42,7 +42,7 @@ exports.config = {
 exports.help = {
   name: 'filterWord',
   botPermission: 'MANAGE_MESSAGES',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'filterWord',
   example: []

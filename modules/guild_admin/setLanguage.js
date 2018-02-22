@@ -65,7 +65,7 @@ exports.config = {
 exports.help = {
   name: 'setLanguage',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'setLanguage < Language Code | --list>',
   example: [ 'setLanguage es' ]

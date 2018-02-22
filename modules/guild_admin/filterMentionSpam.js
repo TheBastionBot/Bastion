@@ -53,7 +53,7 @@ exports.config = {
 exports.help = {
   name: 'filterMentionSpam',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'filterMentionSpam [ MENTION_THRESHOLD [ --action KICK|BAN ] ]',
   example: [ 'filterMentionSpam 5', 'filterMentionSpam 5 --action kick', 'filterMentionSpam' ]

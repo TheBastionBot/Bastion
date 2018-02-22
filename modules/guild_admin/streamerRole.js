@@ -72,7 +72,7 @@ exports.config = {
 exports.help = {
   name: 'streamerRole',
   botPermission: 'MANAGE_ROLES',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'streamerRole [ROLE_ID] [--remove]',
   example: [ 'streamerRole', 'streamerRole 265419266104885248', 'streamerRole --remove' ]

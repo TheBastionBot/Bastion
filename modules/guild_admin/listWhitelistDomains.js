@@ -54,7 +54,7 @@ exports.config = {
 exports.help = {
   name: 'listWhitelistDomains',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'listWhitelistDomains [page_no]',
   example: [ 'listWhitelistDomains', 'listWhitelistDomains 2' ]

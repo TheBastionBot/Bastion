@@ -34,7 +34,7 @@ exports.config = {
 exports.help = {
   name: 'greetTimeout',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'greetTimeout [time_in_seconds]',
   example: [ 'greetTimeout 120', 'greetTimeout' ]

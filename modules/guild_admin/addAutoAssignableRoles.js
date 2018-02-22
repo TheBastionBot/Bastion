@@ -68,7 +68,7 @@ exports.config = {
 exports.help = {
   name: 'addAutoAssignableRoles',
   botPermission: 'MANAGE_ROLES',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addAutoAssignableRoles <RoleID> [RoleID] [RoleID]',
   example: [ 'addAutoAssignableRoles 443322110055998877 778899550011223344' ]

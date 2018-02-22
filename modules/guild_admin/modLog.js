@@ -44,7 +44,7 @@ exports.config = {
 exports.help = {
   name: 'modLog',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'modLog',
   example: []

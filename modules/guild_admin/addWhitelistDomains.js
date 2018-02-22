@@ -48,7 +48,7 @@ exports.config = {
 exports.help = {
   name: 'addWhitelistDomains',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addWhitelistDomains [Domain] [anotherDomain] [someOtherDomain]',
   example: [ 'addWhitelistDomains https://BastionBot.org https://*.sankarsankampa.com' ]

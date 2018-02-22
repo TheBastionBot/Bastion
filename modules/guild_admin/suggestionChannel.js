@@ -42,7 +42,7 @@ exports.config = {
 exports.help = {
   name: 'suggestionChannel',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'suggestionChannel',
   example: []

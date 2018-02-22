@@ -42,7 +42,7 @@ exports.config = {
 exports.help = {
   name: 'starboard',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'starboard',
   example: []

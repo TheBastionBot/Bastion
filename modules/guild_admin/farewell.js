@@ -43,7 +43,7 @@ exports.config = {
 exports.help = {
   name: 'farewell',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'farewell',
   example: []

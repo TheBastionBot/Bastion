@@ -126,7 +126,7 @@ exports.config = {
 exports.help = {
   name: 'whitelistChannel',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'whitelistChannel < --invites | --links | --words > [--remove]',
   example: [ 'whitelistChannel --links', 'whitelistChannel --links --remove' ]

@@ -171,7 +171,7 @@ exports.config = {
 exports.help = {
   name: 'giveaway',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'giveaway < GIVEAWAY ITEM NAME | --end > [-t TIMEOUT_IN_HOURS]',
   example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway --end' ]

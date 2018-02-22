@@ -48,7 +48,7 @@ exports.config = {
 exports.help = {
   name: 'addFilteredWords',
   botPermission: 'MANAGE_MESSAGES',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addFilteredWords word [anotherWord] [someOtherWord]',
   example: [ 'addFilteredWords cast creed race religion' ]

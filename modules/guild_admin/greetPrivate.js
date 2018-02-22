@@ -42,7 +42,7 @@ exports.config = {
 exports.help = {
   name: 'greetPrivate',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'greetPrivate',
   example: []

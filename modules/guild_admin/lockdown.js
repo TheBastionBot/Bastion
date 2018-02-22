@@ -61,7 +61,7 @@ exports.config = {
 exports.help = {
   name: 'lockdown',
   botPermission: 'MANAGE_ROLES',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'lockdown [--remove]',
   example: [ 'lockdown', 'lockdown --remove' ]
