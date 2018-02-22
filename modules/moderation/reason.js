@@ -41,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
           timestamp: modMessage.embeds[0].createdTimestamp
         };
 
-        if (!message.channel.permissionsFor(message.member).has('ADMINISTRATOR') && (newEmbed.fields.filter(field => field.name === 'Moderator ID').length && message.author.id !== newEmbed.fields.filter(field => field.name === 'Moderator ID')[0].value)) return;
+        if (!message.channel.permissionsFor(message.member).has('MANAGE_GUILD') && (newEmbed.fields.filter(field => field.name === 'Moderator ID').length && message.author.id !== newEmbed.fields.filter(field => field.name === 'Moderator ID')[0].value)) return;
 
         args.reason = args.reason.join(' ');
         newEmbed.fields.filter(field => field.name === 'Reason')[0].value = args.reason;
