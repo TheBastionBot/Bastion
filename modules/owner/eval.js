@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       evaled = await Bastion.shard.broadcastEval(args.code);
     }
     else {
-      evaled = eval(args.code);
+      evaled = Bastion._eval(args.code);
     }
 
     if (typeof evaled !== 'string') {
