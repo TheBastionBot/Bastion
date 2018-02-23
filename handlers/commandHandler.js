@@ -105,7 +105,7 @@ module.exports = async message => {
      */
     if (guild.disabledCommands) {
       guild.disabledCommands = guild.disabledCommands.split(' ');
-      if (guild.disabledCommands.includes(command.toLowerCase())) {
+      if (guild.disabledCommands.includes(cmd.help.name.toLowerCase())) {
         return message.client.log.info('This command is disabled.');
       }
     }
