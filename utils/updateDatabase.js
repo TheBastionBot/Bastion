@@ -5,6 +5,9 @@
  */
 
 module.exports = async db => {
+  await db.get('SELECT levelUpRoles FROM guildSettings').catch(() => {
+    db.run('ALTER TABLE guildSettings ADD levelUpRoles TEXT').catch(() => {});
+  });
   await db.get('SELECT custom FROM guildShop').catch(() => {
     db.run('ALTER TABLE guildShop ADD custom TEXT').catch(() => {});
   });
