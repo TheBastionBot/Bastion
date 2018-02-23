@@ -109,6 +109,7 @@
     "ignoreChannel": "Adds or removes a channel to/from the ignored channels' list. Bastion doesn't accept any commands in the channel that are being ignored.",
     "ignoreRole": "Adds or removes a role to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored.",
     "levelUpMessage": "Toggles sending messages when someone levels up in the server.",
+    "levelUpRoles": "Add/Remove/Show level up roles. Level up roles are roles that are added to server members when they level up.",
     "listAutoAssignableRoles": "Lists all auto-assignable roles.",
     "listFilteredWords": "Lists all filtered words.",
     "listSelfAssignableRoles": "Lists all self-assignable roles.",

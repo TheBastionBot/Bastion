@@ -12,7 +12,8 @@
   ],
   "added": [
     "You can sell anything you want to sell in your server, using the new `shop` command.",
-    "And you can buy the items listed in the shop using the `buy` command. And when you buy items from the shop, the server owner will get 90% of the profit."
+    "And you can buy the items listed in the shop using the `buy` command. And when you buy items from the shop, the server owner will get 90% of the profit.",
+    "You can now add roles to users when they level up in your server, using the new `levelUpRoles` command."
   ],
   "removed": [],
   "issues": []
