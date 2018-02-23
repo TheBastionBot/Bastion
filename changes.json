@@ -1,7 +1,8 @@
 {
   "date": "February 23, 2018",
   "fixed": [
-    "Fixed an issue with the mutual server count in the `uinfo` command."
+    "Fixed an issue with the mutual server count in the `uinfo` command.",
+    "`ddisableCommands` is now `disableCommands`. Fixed that typo!"
   ],
   "improved": [
     "You don't need to make administrators if you wanted your server managers to be able to use the command in Guild Admin module, the Manage Server permission will now suffice.",

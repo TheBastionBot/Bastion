@@ -95,7 +95,7 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'ddisableCommand',
+  name: 'disableCommand',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
