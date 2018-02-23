@@ -42,6 +42,19 @@ module.exports = async message => {
       else {
         await message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`);
       }
+
+      // Level up roles
+      let guildSettings = await message.client.db.get(`SELECT levelUpRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+      if (guildSettings && guildSettings.levelUpRoles) {
+        let levelUpRoles = await message.client.functions.decodeString(guildSettings.levelUpRoles);
+        levelUpRoles = JSON.parse(levelUpRoles);
+
+        let level = `${currentLevel}`;
+        if (levelUpRoles.hasOwnProperty(level)) {
+          let roles = levelUpRoles[level].split(' ');
+          await message.member.addRoles(roles);
+        }
+      }
     }
   }
   catch (e) {
