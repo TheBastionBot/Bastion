@@ -16,8 +16,8 @@ module.exports = async message => {
     // If mention spam threshold is not set, return
     if (!guild.mentionSpamThreshold) return filtered;
 
-    // If the user is an admin, return
-    if (message.member && message.member.hasPermission('ADMINISTRATOR')) return filtered;
+    // If the user has Manage Server permission, return
+    if (message.member && message.member.hasPermission('MANAGE_GUILD')) return filtered;
 
     if (message.mentions.users.size >= guild.mentionSpamThreshold) {
       // If the code reaches here, the message is a mention spam.
