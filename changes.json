@@ -7,7 +7,6 @@
     "You don't need to make administrators if you wanted your server managers to be able to use the command in Guild Admin module, the Manage Server permission will now suffice.",
     "Users with Manage Server permissions can also now change the reason of moderation logs.",
     "You can now evaluate JS on all shards using the `--broadcast` option in the `eval` command.",
-    "`Bastion` is now available as `this` in the `eval` command.",
     "Spam filters will now ignore users with Manage Server permission too."
   ],
   "added": [
