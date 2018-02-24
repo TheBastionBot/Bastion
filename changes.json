@@ -11,6 +11,7 @@
     "Users with Manage Server permissions can also now change the reason of moderation logs.",
     "You can now evaluate JS on all shards using the `--broadcast` option in the `eval` command.",
     "Spam filters will now ignore users with Manage Server permission too.",
+    "When text muting users in a channel, you can automatically unmute them after a specified amount of minutes if you use the `--timeout` option with the `textMute` command.",
     "Under-the-hood improvements"
   ],
   "added": [

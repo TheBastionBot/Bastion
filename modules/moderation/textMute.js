@@ -49,12 +49,30 @@ exports.exec = async (Bastion, message, args) => {
         SEND_MESSAGES: false,
         ADD_REACTIONS: false
       }, args.reason);
+
+      if (args.timeout) {
+        args.timeout = Math.abs(args.timeout);
+
+        if (!args.timeout || args.timeout > 1440) args.timeout = 1440;
+
+        Bastion.setTimeout(async () => {
+          try {
+            let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
+            if (permissionOverwrites) {
+              await permissionOverwrites.delete();
+            }
+          }
+          catch (e) {
+            Bastion.log.error(e);
+          }
+        }, args.timeout * 60 * 1000);
+      }
     }
 
     message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        description: `${message.author.tag} text-muted ${user.tag} with reason **${args.reason}**`
+        description: `${message.author.tag} text-muted ${user.tag}${args.timeout ? ` for ${args.timeout} minutes ` : ' '}with reason **${args.reason}**`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -89,6 +107,6 @@ exports.help = {
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',
-  usage: 'textMute < @USER_MENTION | USER_ID > [-r Reason] [--server]',
-  example: [ 'textMute @user#0001 -r off topic discussions', 'textMute 167147569575323761 -r misbehaving with others --server' ]
+  usage: 'textMute < @USER_MENTION | USER_ID > [-r Reason] [--server] [-t MINUTES]',
+  example: [ 'textMute @user#0001 -r off topic discussions -t 15', 'textMute 167147569575323761 -r misbehaving with others --server' ]
 };

@@ -168,7 +168,6 @@
     "removeRole": "Belirtilen rol Discord sunucu belirtilen bir kullanıcının bağlantısını kaldırır.",
     "report": "Discord sunucunuzun bir kullanıcısını bildirir. * Denetleme günlüklerinin etkinleştirilmesi gerekiyor. *",
     "softBan": "Belirtilen kullanıcıyı Discord sunucunuzdan kaldırır ve ileti geçmişinin 7 gününü kaldırır.",
-    "textMute": "Metin belirtilen kullanıcı belirtilen metin kanal'larında sunucunuzun sesini kapatır.",
     "textUnMute": "Metin belirtilen kullanıcı belirtilen metin kanal anlaşmazlık sunucunuzun kapatýr.",
     "unBan": "Belirtilen kullanıcıyı discord sununuzdan unbanlar.",
     "unDeafen": "Discord sunucunuzda sunucu çapında belirli bir kullanıcı susturmasını kaldırır.",

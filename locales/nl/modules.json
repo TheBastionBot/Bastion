@@ -162,7 +162,6 @@
     "removeRole": "Verwijdert een specifieke rol van een gebruiker van je Discord server.",
     "report": "Rapporteer een gebruiker van de Discord server. *Staf-log moet aangezet zijn.*",
     "softBan": "Verban en ontban een gebruiker van je Discord server, en verwijdert de laatste 7 dagen van zijn/haar berichten.",
-    "textMute": "Dempt een gebruiker in een specifieke tekstkanaal, of je hele Discord server.",
     "textUnMute": "Ontdempt een gebruiker van bepaalde tekstkanalen in je Discord server.",
     "unDeafen": "Ontdempt een specifieke gebruiker in je hele Discord server.",
     "unMute": "Ontdempt een specifieke gebruiker in je hele Discord server.",

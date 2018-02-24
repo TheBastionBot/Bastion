@@ -162,7 +162,6 @@
     "removeRole": "Elimina la función especificada de un usuario especificado de su servidor de Discord.",
     "report": "Reporta a un usuario de tu servidor Discord. *Los registros de moderación deben estar habilitados.*",
     "softBan": "Banea & desbanea a el usuario especificado, inmediatamente, de su servidor Discord, y elimina 7 días de su historial de mensajes.",
-    "textMute": "Texto silencia un usuario específico desde el canal de texto especificado o globalmente en el servidor de la Discord.",
     "textUnMute": "El texto desmutea al usuario especificado desde el canal de texto especificado de su servidor Discord.",
     "unDeafen": "Enumera todas las palabras filtradas.",
     "unMute": "Mutea a un usuario del server en todo el servidor de Discord.",

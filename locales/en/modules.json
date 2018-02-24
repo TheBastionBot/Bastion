@@ -189,7 +189,7 @@
     "removeRole": "Removes the specified role from a specified user of your Discord server.",
     "report": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*",
     "softBan": "Bans & unbans the specified user, immediately, from your Discord server, and removes 7 days of their message history.",
-    "textMute": "Text mutes a specified user from the specified text channel or globally on your Discord server.",
+    "textMute": "Text mutes a specified user from the specified text channel (for specified minutes) or globally on your Discord server.",
     "textUnMute": "Text unmutes from specified user from the specified text channel of your Discord server.",
     "unBan": "Unbans a specified user for your Discord server.",
     "unDeafen": "Undeafens a specified user server-wide in your Discord server.",
