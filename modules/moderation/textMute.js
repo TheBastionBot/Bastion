@@ -48,7 +48,7 @@ exports.exec = async (Bastion, message, args) => {
       await message.channel.overwritePermissions(user, {
         SEND_MESSAGES: false,
         ADD_REACTIONS: false
-      });
+      }, args.reason);
     }
 
     message.channel.send({
@@ -79,7 +79,8 @@ exports.config = {
   argsDefinitions: [
     { name: 'id', type: String, defaultOption: true },
     { name: 'reason', alias: 'r', type: String, multiple: true, defaultValue: [ 'No reason given.' ] },
-    { name: 'server', type: Boolean, alias: 's' }
+    { name: 'server', type: Boolean, alias: 's' },
+    { name: 'timeout', type: Number, alias: 't' }
   ]
 };
 
