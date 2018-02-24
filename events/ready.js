@@ -15,10 +15,21 @@ module.exports = async Bastion => {
     Bastion.user.setPresence({
       status: Bastion.config.status,
       game: {
-        name: Bastion.config.game.name,
+        name: typeof Bastion.config.game.name === 'string' ? Bastion.config.game.name : Bastion.config.game.name.length ? Bastion.config.game.name[0] : null,
         type: Bastion.config.game.type
       }
     });
+
+    if (typeof Bastion.config.game.name !== 'string' && Bastion.config.game.name.length) {
+      Bastion.setInterval(async () => {
+        try {
+          await Bastion.user.setActivity(Bastion.config.game.name[Math.floor(Math.random() * Bastion.config.game.name.length)], { type: Bastion.config.game.type });
+        }
+        catch (e) {
+          Bastion.log.error(e);
+        }
+      }, 60 * 60 * 1000);
+    }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
     let guild = await Bastion.db.all('SELECT guildID from guildSettings');
