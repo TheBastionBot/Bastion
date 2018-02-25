@@ -86,7 +86,7 @@ exports.config = {
 exports.help = {
   name: 'ignoreRole',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'ignoreRole <ROLE_ID> [--remove]',
   example: [ 'ignoreRole 295982817647788032', 'ignoreRole 295982817647788032 --remove' ]

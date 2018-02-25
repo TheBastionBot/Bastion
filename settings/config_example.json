@@ -4,7 +4,9 @@
   "status": "online",
   "game": {
     "type": "Playing",
-    "name": "with Ganymede"
+    "name": [
+      "with Ganymede"
+    ]
   },
   "music": {
     "status": true,

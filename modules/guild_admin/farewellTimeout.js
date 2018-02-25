@@ -34,7 +34,7 @@ exports.config = {
 exports.help = {
   name: 'farewellTimeout',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'farewellTimeout [time_in_seconds]',
   example: [ 'farewellTimeout 120', 'farewellTimeout' ]

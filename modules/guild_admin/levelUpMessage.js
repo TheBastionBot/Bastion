@@ -42,7 +42,7 @@ exports.config = {
 exports.help = {
   name: 'levelUpMessage',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'levelUpMessage',
   example: []

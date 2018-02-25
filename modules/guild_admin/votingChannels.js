@@ -85,7 +85,7 @@ exports.config = {
 exports.help = {
   name: 'votingChannels',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'votingChannels [ --add | --remove | --prune ]',
   example: [ 'votingChannels', 'votingChannels --add', 'votingChannels --remove', 'votingChannels --prune' ]

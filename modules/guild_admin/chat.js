@@ -50,7 +50,7 @@ exports.config = {
 exports.help = {
   name: 'chat',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'chat',
   example: []

@@ -44,7 +44,7 @@ exports.config = {
 exports.help = {
   name: 'announcementChannel',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'announcementChannel [--remove]',
   example: [ 'announcementChannel', 'announcementChannel --remove' ]

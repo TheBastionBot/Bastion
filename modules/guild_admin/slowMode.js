@@ -42,7 +42,7 @@ exports.config = {
 exports.help = {
   name: 'slowMode',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'slowMode',
   example: []

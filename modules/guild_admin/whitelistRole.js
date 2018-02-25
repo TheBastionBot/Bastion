@@ -136,7 +136,7 @@ exports.config = {
 exports.help = {
   name: 'whitelistRole',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'whitelistRole <ROLE_ID> < --invites | --links | --words > [--remove]',
   example: [ 'whitelistRole 295982817647788032 --invites', 'whitelistRole 295982817647788032 --invites --remove' ]

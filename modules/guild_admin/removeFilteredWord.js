@@ -64,7 +64,7 @@ exports.config = {
 exports.help = {
   name: 'removeFilteredWord',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'removeFilteredWord <index>',
   example: [ 'removeFilteredWord 3' ]

@@ -30,7 +30,7 @@ exports.config = {
 exports.help = {
   name: 'resetModLogs',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'resetModLogs',
   example: []

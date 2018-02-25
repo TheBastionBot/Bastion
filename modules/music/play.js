@@ -9,9 +9,7 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
 exports.exec = (Bastion, message, args) => {
-  if (message.guild.music.textChannelID) {
-    if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
-  }
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
 
   if (!args.song && !args.ytpl && !args.playlist) {
     /**

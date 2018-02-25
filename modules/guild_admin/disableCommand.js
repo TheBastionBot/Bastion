@@ -95,9 +95,9 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'ddisableCommand',
+  name: 'disableCommand',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'disableCommand [ COMMAND_NAME | --module MODULE NAME | --all ]',
   example: [ 'disableCommand echo', 'disableCommand --module game stats', 'disableCommand --all' ]

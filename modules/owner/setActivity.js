@@ -21,12 +21,13 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
     else {
-      await Bastion.user.setActivity(Bastion.config.game.name, { type: Bastion.config.game.type });
+      let game = typeof Bastion.config.game.name === 'string' ? Bastion.config.game.name : Bastion.config.game.name.length ? Bastion.config.game.name[0] : null;
+      await Bastion.user.setActivity(game, { type: Bastion.config.game.type });
 
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `My activity has been reset to the default: **${Bastion.config.game.type} ${Bastion.config.game.name}**`
+          description: `My activity has been reset to the default: **${Bastion.config.game.type} ${game}**`
         }
       }).catch(e => {
         Bastion.log.error(e);

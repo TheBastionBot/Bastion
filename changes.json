@@ -1,33 +1,27 @@
 {
-  "date": "February 18, 2018",
+  "date": "February 25, 2018",
   "fixed": [
-    "Fixed an issue that caused the giveaway events not really end, if it was forcefully ended.",
-    "Fixed the music being skipped multiple times when the `skip` command was used.",
-    "`emojiInfo` will respond with better error response when the specified emoji is not available.",
-    "Fixed `removeRole` role command secretly the success message after the role has been removed.",
-    "Fixed `game` command crashes when searcing for an unreleased game.",
-    "Fixed `trivia` command crashes when server didn't respond with any question."
+    "Fixed an issue with the mutual server count in the `uinfo` command.",
+    "`ddisableCommands` is now `disableCommands`. Fixed that typo!",
+    "Fixed an issue that allowed disabled commands to work when used with their alias.",
+    "Fixed reason not working when text muting members in a single channel."
   ],
   "improved": [
-    "You can now see how many server Bastion share with a user in the `userInfo` command.",
-    "You can now remove playlists using the new `--remove` options of the `playlist` command.",
-    "You can now run polls for a specified amount of minutes using the `--time` (or `-t`) option in the `poll` command. Remember, you still can't run polls for more than 6 hours.",
-    "Poll results will now have the vote count too, so you get a better insight.",
-    "You can now specify the difficulty of trivia questions using the `--difficulty` (or `-d`) option in the `trivia` command.",
-    "When no role is specified to buy with the `buyRole` command, it will show the command usage.",
-    "When the search query is not specified with the `google` command, it will show the command usage.",
-    "Gifs are now shown in an embed when you use the `giphy` command.",
+    "You don't need to make administrators if you wanted your server managers to be able to use the command in Guild Admin module, the Manage Server permission will now suffice.",
+    "Users with Manage Server permissions can also now change the reason of moderation logs.",
+    "You can now evaluate JS on all shards using the `--broadcast` option in the `eval` command.",
+    "Spam filters will now ignore users with Manage Server permission too.",
+    "When text muting users in a channel, you can automatically unmute them after a specified amount of minutes if you use the `--timeout` option with the `textMute` command.",
+    "Added link to Bastion's [translation site](https://18n.bastionbot.org) in `setLanguage` command. So anyone wanting to help in the translation can do so.",
+    "Some design improvements to the command list you get when you use the `commands` command.",
     "Under-the-hood improvements"
   ],
   "added": [
-    "You can now prank your friends by showing that you're trying to ban them from the server, but not really, using the `fakeBan` command. Don't do that much though, maybe they will *really* ban you for that.",
-    "You can now disable the commands you don't want to use, in your server, using the new `disableCommand` command.",
-    "And if you changed your mind and want to use it again, enable it using the new `disableCommand` command.",
-    "You can now filter mention spams in your server, including the amount of mentions to be considered as a spam and the action that should be taken, using the new `filterMentionSpam` command."
+    "You can sell anything you want to sell in your server, using the new `shop` command.",
+    "And you can buy the items listed in the shop using the `buy` command. And when you buy items from the shop, the server owner will get 90% of the profit.",
+    "You can now add roles to users when they level up in your server, using the new `levelUpRoles` command.",
+    "Added support for multiple game status."
   ],
-  "removed": [
-    "Removed Bastion's hidden way of allowing admins to enable/disable command using channel topic in favor native support for it.",
-    "Removed `disableModule`, `disableAllCommands`, `disableCommand`, `enableModule`, `enableAllCommands` and `enableModule` commands from `Bot Owner` module, in favor of it arriving in `Server Admin` module."
-  ],
+  "removed": [],
   "issues": []
 }

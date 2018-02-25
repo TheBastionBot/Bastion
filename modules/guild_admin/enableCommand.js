@@ -74,7 +74,7 @@ exports.config = {
 exports.help = {
   name: 'enableCommand',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'enableCommand < COMMAND_NAME | --all >',
   example: [ 'enableCommand echo', 'enableCommand --all' ]

@@ -69,7 +69,7 @@ exports.config = {
 exports.help = {
   name: 'ignoreChannel',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'ignoreChannel [--remove]',
   example: [ 'ignoreChannel', 'ignoreChannel --remove' ]

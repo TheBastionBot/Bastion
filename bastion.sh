@@ -82,7 +82,7 @@ case $1 in
     echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 --stop' to stop it before running the update."
   else
     echo "Updating $NAME..."
-    git pull origin stable 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\\n" && exit 1)
+    git pull origin stable 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection or if you've made any modifications, revert them.\\n" && exit 1)
     echo "Updating dependencies..."
     rm -fr node_modules package-lock.json screenlog.0
     npm i --only=production --no-package-lock 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\\n" && exit 1)
@@ -102,7 +102,7 @@ case $1 in
     echo "Deleting old files..."
     rm -fr node_modules data/Bastion.sqlite package-lock.json screenlog.0
     echo "Updating $NAME..."
-    git pull origin stable 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection.\\n" && exit 1)
+    git pull origin stable 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection or if you've made any modifications, revert them.\\n" && exit 1)
     echo "Updating dependencies..."
     npm i --only=production --no-package-lock 1>/dev/null 2>update.log || (echo -e "${CYAN}[Bastion]: ${RED} Failed installing dependencies. Please see update.log file and report it, if it's really an issue.\\n" && exit 1)
     echo -e "${CYAN}[Bastion]:${NC} Ready to boot up and start running."

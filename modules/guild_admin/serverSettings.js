@@ -96,7 +96,7 @@ exports.config = {
 exports.help = {
   name: 'serverSettings',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'serverSettings',
   example: []

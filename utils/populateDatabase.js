@@ -39,6 +39,7 @@ module.exports = async db => {
     'streamerRole TEXT,' +
     'suggestionChannel TEXT UNIQUE,' +
     'votingChannels TEXT UNIQUE,' +
+    'levelUpRoles TEXT,' +
     'warnAction TEXT,' +
     'ignoredChannels TEXT,' +
     'ignoredRoles TEXT,' +
@@ -103,7 +104,8 @@ module.exports = async db => {
 
   await db.run('CREATE TABLE IF NOT EXISTS guildShop' +
     '(guildID TEXT NOT NULL UNIQUE,' +
-    'roles TEXT)');
+    'roles TEXT,' +
+    'custom TEXT)');
 
   await db.run('CREATE TABLE IF NOT EXISTS transactions' +
     '(userID TEXT NOT NULL,' +

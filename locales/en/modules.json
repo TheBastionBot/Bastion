@@ -109,6 +109,7 @@
     "ignoreChannel": "Adds or removes a channel to/from the ignored channels' list. Bastion doesn't accept any commands in the channel that are being ignored.",
     "ignoreRole": "Adds or removes a role to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored.",
     "levelUpMessage": "Toggles sending messages when someone levels up in the server.",
+    "levelUpRoles": "Add/Remove/Show level up roles. Level up roles are roles that are added to server members when they level up.",
     "listAutoAssignableRoles": "Lists all auto-assignable roles.",
     "listFilteredWords": "Lists all filtered words.",
     "listSelfAssignableRoles": "Lists all self-assignable roles.",
@@ -188,7 +189,7 @@
     "removeRole": "Removes the specified role from a specified user of your Discord server.",
     "report": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*",
     "softBan": "Bans & unbans the specified user, immediately, from your Discord server, and removes 7 days of their message history.",
-    "textMute": "Text mutes a specified user from the specified text channel or globally on your Discord server.",
+    "textMute": "Text mutes a specified user from the specified text channel (for specified minutes) or globally on your Discord server.",
     "textUnMute": "Text unmutes from specified user from the specified text channel of your Discord server.",
     "unBan": "Unbans a specified user for your Discord server.",
     "unDeafen": "Undeafens a specified user server-wide in your Discord server.",
@@ -198,6 +199,7 @@
   },
   "money": {
     "bastionCurrency": "Shows the amount of Bastion Currencies in the specified user's account.",
+    "buy": "Buy items from the server's shop.",
     "buyGift": "Buy gifts from Bastion's gift shop.",
     "buyRole": "Buy role from the server's Role Store.",
     "claim": "Claim your daily rewards.",
@@ -207,7 +209,8 @@
     "giveXP": "Give the specified amount of experience points to the specified user and increase their level.",
     "leaderboard": "Shows the users topping the chart of Bastion.",
     "myGifts": "Shows the gifts you currently have in your possession.",
-    "roleStore": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with Bastion Currencies, in your server using the `buyRole` command. When users buy roles, the server owner get's 90% of the profit.",
+    "roleStore": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with Bastion Currencies, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
+    "shop": "Lists/Adds/Removes items from the your server's shop. Listed items in the shop can be bought by anyone, with Bastion Currencies, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit.",
     "take": "Take the specified amount of Bastion Currencies from the specified user."
   },
   "music": {

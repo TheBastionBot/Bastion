@@ -62,7 +62,7 @@ exports.config = {
 exports.help = {
   name: 'removeSelfAssignableRole',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'removeSelfAssignableRole <index>',
   example: [ 'removeSelfAssignableRole 3' ]

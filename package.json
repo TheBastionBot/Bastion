@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "6.8.0",
+  "version": "6.9.0",
   "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -51,7 +51,7 @@
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^4.16.0"
+    "eslint": "^4.18.1"
   },
   "optionalDependencies": {
     "node-opus": "~0.2.7"

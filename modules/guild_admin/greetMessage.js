@@ -54,7 +54,7 @@ exports.config = {
 exports.help = {
   name: 'greetMessage',
   botPermission: '',
-  userTextPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'greetMessage [Message]',
   example: [ 'greetMessage Hello $user! Welcome to $server.' ]

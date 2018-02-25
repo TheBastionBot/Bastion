@@ -100,9 +100,12 @@ module.exports = async message => {
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
     message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
 
+    /**
+     * Check if a command is disabled
+     */
     if (guild.disabledCommands) {
       guild.disabledCommands = guild.disabledCommands.split(' ');
-      if (guild.disabledCommands.includes(command.toLowerCase())) {
+      if (guild.disabledCommands.includes(cmd.help.name.toLowerCase())) {
         return message.client.log.info('This command is disabled.');
       }
     }
