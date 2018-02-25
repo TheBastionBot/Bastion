@@ -1,5 +1,5 @@
 {
-  "date": "February 24, 2018",
+  "date": "February 25, 2018",
   "fixed": [
     "Fixed an issue with the mutual server count in the `uinfo` command.",
     "`ddisableCommands` is now `disableCommands`. Fixed that typo!",
@@ -12,6 +12,7 @@
     "You can now evaluate JS on all shards using the `--broadcast` option in the `eval` command.",
     "Spam filters will now ignore users with Manage Server permission too.",
     "When text muting users in a channel, you can automatically unmute them after a specified amount of minutes if you use the `--timeout` option with the `textMute` command.",
+    "Added link to Bastion's [translation site](https://18n.bastionbot.org) in `setLanguage` command. So anyone wanting to help in the translation can do so.",
     "Under-the-hood improvements"
   ],
   "added": [
