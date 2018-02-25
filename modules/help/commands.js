@@ -24,8 +24,7 @@ exports.exec = async (Bastion, message, args) => {
 
       fields.push({
         name: modules[i].replace('_', ' ').toTitleCase(),
-        value: commands.join('\n'),
-        inline: true
+        value: `\`\`\`css\n${commands.join('\n')}\`\`\``
       });
     }
 
