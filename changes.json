@@ -1,6 +1,8 @@
 {
   "date": "February 26, 2018",
-  "fixed": [],
+  "fixed": [
+    "Fixed an issue that allowed users to buy items from server shop even if they didn't had enough balance, which decreased their balance below 0."
+  ],
   "improved": [
     "The items you buy from server shop won't go in vain now. All of them are preserved in your items list."
   ],
