@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message) => {
     if (userItems.length) {
       color = Bastion.colors.BLUE;
       title = `Items available with ${message.author.tag}`;
-      description = userItems.join(' ');
+      description = userItems.join(', ');
     }
     else {
       color = Bastion.colors.RED;
