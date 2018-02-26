@@ -102,6 +102,13 @@ module.exports = async db => {
     'gift_hearts TEXT,' +
     'love_letters TEXT)');
 
+  await db.run('CREATE TABLE IF NOT EXISTS shop_items' +
+    '(userID TEXT NOT NULL UNIQUE,' +
+    'guildID TEXT NOT NULL UNIQUE,' +
+    'custom_items TEXT,' +
+    'FOREIGN KEY (guildID) REFERENCES guildSettings (guildID) ON DELETE CASCADE,' +
+    'FOREIGN KEY (userID) REFERENCES profiles (userID) ON DELETE CASCADE)');
+
   await db.run('CREATE TABLE IF NOT EXISTS guildShop' +
     '(guildID TEXT NOT NULL UNIQUE,' +
     'roles TEXT,' +
