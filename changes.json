@@ -1,7 +1,9 @@
 {
   "date": "February 26, 2018",
   "fixed": [],
-  "improved": [],
+  "improved": [
+    "The items you buy from server shop won't go in vain now. All of them are preserved in your items list."
+  ],
   "added": [
     "You can now see the items you've brought from the server shop using the `myItems` command."
   ],
