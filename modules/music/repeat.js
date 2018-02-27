@@ -38,7 +38,7 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'loop' ],
   enabled: true
 };
 

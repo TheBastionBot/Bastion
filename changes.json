@@ -1,10 +1,11 @@
 {
-  "date": "February 26, 2018",
+  "date": "February 27, 2018",
   "fixed": [
     "Fixed an issue that allowed users to buy items from server shop even if they didn't had enough balance, which decreased their balance below 0."
   ],
   "improved": [
-    "The items you buy from server shop won't go in vain now. All of them are preserved in your items list."
+    "The items you buy from server shop won't go in vain now. All of them are preserved in your items list.",
+    "Added `loop` as an alias of `repeat` command."
   ],
   "added": [
     "You can now see the items you've brought from the server shop using the `myItems` command."
