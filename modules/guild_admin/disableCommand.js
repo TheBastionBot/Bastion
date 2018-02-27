@@ -57,6 +57,12 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name).join(' ').toLowerCase();
+
+    let guildSettings = await Bastion.db.get(`SELECT disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (guildSettings.disabledCommands) {
+      disabledCommands += ` ${guildSettings.disabledCommands}`;
+    }
+
     description = `Disabled all commands, in \`${args.module}\` modules, in this server.`;
 
     await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
