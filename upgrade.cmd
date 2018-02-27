@@ -6,7 +6,7 @@ COLOR 0F
 ECHO.
 
 SET cwd=%~dp0
-CD %cwd%
+CD /D %cwd%
 
 IF EXIST data\Bastion.sqlite (
   SETLOCAL ENABLEDELAYEDEXPANSION

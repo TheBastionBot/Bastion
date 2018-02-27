@@ -6,7 +6,7 @@ COLOR 0F
 ECHO.
 
 SET cwd=%~dp0
-CD %cwd%
+CD /D %cwd%
 
 ECHO [Bastion]: Updating Bastion Bot...
 git pull origin stable 1>nul || (
