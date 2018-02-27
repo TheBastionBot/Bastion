@@ -74,7 +74,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'clr' ],
+  aliases: [ 'clr', 'purge' ],
   enabled: true
 };
 
