@@ -1,5 +1,5 @@
 {
-  "date": "February 27, 2018",
+  "date": "February 28, 2018",
   "fixed": [
     "Fixed an issue that allowed users to buy items from server shop even if they didn't had enough balance, which decreased their balance below 0.",
     "Fixed an issue that enabled previously disabled commands when disabling an entire module using the `disableCommand` command."
@@ -7,7 +7,8 @@
   "improved": [
     "The items you buy from server shop won't go in vain now. All of them are preserved in your items list.",
     "Added `loop` as an alias of `repeat` command.",
-    "Added `purge` as an alias of `clear` command."
+    "Added `purge` as an alias of `clear` command.",
+    "You can now check rank using the new `rank` command. No need to show your entire profile if you just wanted to see the rank."
   ],
   "added": [
     "You can now see the items you've brought from the server shop using the `myItems` command."
