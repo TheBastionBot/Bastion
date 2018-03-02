@@ -20,12 +20,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.chat) {
       await Bastion.db.run(`UPDATE guildSettings SET chat=0 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      chatStats = 'Disabled chat in this server. Now I\'m gonna miss talking with you. :disappointed:';
+      chatStats = Bastion.strings.info(message.guild.language, 'disableChat', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET chat=1 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
+      chatStats = Bastion.strings.info(message.guild.language, 'enableChat', message.author.tag);
     }
 
     message.channel.send({

@@ -42,7 +42,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `Prefix for your server is now set to: \`${prefix}\``
+        description: Bastion.strings.info(message.guild.language, 'setPrefix', message.author.tag, prefix)
       }
     }).catch(e => {
       Bastion.log.error(e);

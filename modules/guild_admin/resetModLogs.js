@@ -11,7 +11,7 @@ exports.exec = async (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: 'Moderation log case numbers has been successfully reset.'
+        description: Bastion.strings.info(message.guild.language, 'resetModerationLogCases', message.author.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);

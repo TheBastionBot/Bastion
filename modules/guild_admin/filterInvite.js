@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.filterInvite) {
       await Bastion.db.run(`UPDATE guildSettings SET filterInvite=0 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
+      filterInviteStats = Bastion.strings.info(message.guild.language, 'disableInviteFilter', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET filterInvite=1 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
+      filterInviteStats = Bastion.strings.info(message.guild.language, 'enableInviteFilter', message.author.tag);
     }
 
     message.channel.send({

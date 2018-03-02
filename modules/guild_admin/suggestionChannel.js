@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.suggestionChannel) {
       await Bastion.db.run(`UPDATE guildSettings SET suggestionChannel=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      suggestionChannelStats = 'Suggestion channel has beed removed. Users can now post suggestions in any channel.';
+      suggestionChannelStats = Bastion.strings.info(message.guild.language, 'disableSuggestionChannel', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET suggestionChannel=${message.channel.id} WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      suggestionChannelStats = 'This channel has now been set as the suggestion channel. When users post a suggestions using the `suggest` command, it will be logged in this channel.';
+      suggestionChannelStats = Bastion.strings.info(message.guild.language, 'enableSuggestionChannel', message.author.tag);
     }
 
     message.channel.send({
