@@ -86,7 +86,7 @@
   "musicChannels": "**%var%** text channel is the 'Music Text Channel' for using music commands and **%var%** voice channel is the 'Music Voice Channel' for listening to music.",
   "removeMusicChannels": "%var% removed the default 'Music Channels'.",
   "removeMusicMasterRole": "%var% removed the 'Music Master Role'.",
-  "repeatSong": "%var% added the current song to repeat once.",
+  "repeatSong": "%var% set the current song to repeat once.",
 
   "lastSeen": "%var% was last seen %var% ago.",
   "notSeen": "I've not seen %var% in a while.",
