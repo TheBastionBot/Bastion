@@ -53,7 +53,7 @@ exports.exec = async (Bastion, message, args) => {
         message.channel.send({
           embed: {
             color: Bastion.colors.GREEN,
-            description: `Updated the reason for **Moderation ${newEmbed.footer.text}** to **${args.reason}**.`
+            description: Bastion.strings.info(message.guild.language, 'updateReason', message.author.tag, newEmbed.footer.text, args.reason)
           }
         }).catch(e => {
           Bastion.log.error(e);

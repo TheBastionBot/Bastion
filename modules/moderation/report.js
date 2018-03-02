@@ -40,7 +40,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.GREEN,
         title: 'User Reported',
-        description: `You have reported ${user.tag} to the moderators with reason **${reason}**. Hold tight, they will look into it.`
+        description: Bastion.strings.info(message.guild.language, 'report', message.author.tag, user.tag, reason)
       }
     }).then(message => {
       message.delete(5000).catch(() => {});

@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `${message.author.tag} voice-unmuted ${user.tag} with reason **${args.reason}**`
+        description: Bastion.strings.info(message.guild.language, 'voiceUnmute', message.author.tag, user.tag, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);
