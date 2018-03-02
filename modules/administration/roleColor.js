@@ -64,7 +64,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: role.color,
-        description: `${message.author.tag} changed the color of **${role.name}** role to **${args.color.toTitleCase()}**.`
+        description: Bastion.strings.info(message.guild.language, 'updateRoleColor', message.author.tag, role.name, args.color.toTitleCase())
       }
     });
   }

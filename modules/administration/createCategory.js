@@ -29,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `${message.author.tag} created a channel category **${category.name}**`,
+        description: Bastion.strings.info(message.guild.language, 'createChannel', message.author.tag, 'category', category.name),
         footer: {
           text: `ID: ${category.id}`
         }
