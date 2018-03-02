@@ -51,8 +51,8 @@
   "disableStarboard": "%var% disabled starboard in this server.",
   "enableStarboard": "%var% enabled starboard is this channel. If anyone stars any message is this server, I'll post that starred message here.",
   "streamerRole": "The current streamer role is set to **%var%**",
-  "disableStreamerRole": "%var% set the streamer role to **%var%**",
-  "enableStreamerRole": "%var% removed the streamer role in this server.",
+  "disableStreamerRole": "%var% removed the streamer role in this server.",
+  "enableStreamerRole": "%var% set the streamer role to **%var%**",
   "disableSuggestionChannel": "%var% removed the suggestion channel in this server. Users can now post suggestions in any channel.",
   "enableSuggestionChannel": "%var% set this channel as the suggestion channel in this server. When users post a suggestions using the `suggest` command, it will be logged in this channel.",
 
