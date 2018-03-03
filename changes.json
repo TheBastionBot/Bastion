@@ -11,6 +11,7 @@
     "Added `purge` as an alias of `clear` command.",
     "You can now check rank using the new `rank` command. No need to show your entire profile if you just wanted to see the rank.",
     "Some (action) commands will show who used it so that even if they delete their message, you can know who used that sneakily.",
+    "Patrons who have been declined by Patreon, won't show up in the `patrons` command.",
     "Under-the-hood improvements."
   ],
   "added": [
