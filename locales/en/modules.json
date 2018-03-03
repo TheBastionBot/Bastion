@@ -17,6 +17,7 @@
   "fun": {
     "airhorn": "Plays an airhorn in a voice channel.",
     "animoji": "Sends a large version of the specified animated emoji of your Discord server. And Nitro isn't required.",
+    "beLikeBill": "Sends a be like bill meme to make you feel morally superior to others.",
     "blockText": "Sends the given text as text emojis.",
     "cat": "Shows a random picture of a cat.",
     "catFact": "Shows a random fact about cats.",
