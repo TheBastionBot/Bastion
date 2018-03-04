@@ -1,27 +1,26 @@
 {
-  "date": "February 25, 2018",
-  "fixed": [
-    "Fixed an issue with the mutual server count in the `uinfo` command.",
-    "`ddisableCommands` is now `disableCommands`. Fixed that typo!",
-    "Fixed an issue that allowed disabled commands to work when used with their alias.",
-    "Fixed reason not working when text muting members in a single channel."
+  "date": "March 4, 2018",
+  "THESE BUGS ARE DEAD": [
+    "Fixed an issue that allowed users to buy items from server shop even if they didn't had enough balance, which decreased their balance below 0.",
+    "Fixed an issue that enabled previously disabled commands when disabling an entire module using the `disableCommand` command.",
+    "Fixed `patrons` command not working when a Patron hadn't connected their Discord account to Patreon.",
+    "Fixed `giveXP` not adding XP to the previous XP of the user but replacing it.",
+    "Fixed an issue that prevented setting Bastion's game to default after music is ended (if music status was enabled)."
   ],
-  "improved": [
-    "You don't need to make administrators if you wanted your server managers to be able to use the command in Guild Admin module, the Manage Server permission will now suffice.",
-    "Users with Manage Server permissions can also now change the reason of moderation logs.",
-    "You can now evaluate JS on all shards using the `--broadcast` option in the `eval` command.",
-    "Spam filters will now ignore users with Manage Server permission too.",
-    "When text muting users in a channel, you can automatically unmute them after a specified amount of minutes if you use the `--timeout` option with the `textMute` command.",
-    "Added link to Bastion's [translation site](https://18n.bastionbot.org) in `setLanguage` command. So anyone wanting to help in the translation can do so.",
-    "Some design improvements to the command list you get when you use the `commands` command.",
-    "Under-the-hood improvements"
+  "THESE ABILITIES HAVE ENHANCED": [
+    "The items you buy from server shop won't go in vain now. All of them are preserved in your items list.",
+    "Added `loop` as an alias of `repeat` command.",
+    "Added `purge` as an alias of `clear` command.",
+    "Some (action) commands will show who used it so that even if they delete their message, you can know who used that sneakily.",
+    "Patrons who have been declined by Patreon, won't show up in the `patrons` command.",
+    "Under-the-hood improvements."
   ],
-  "added": [
-    "You can sell anything you want to sell in your server, using the new `shop` command.",
-    "And you can buy the items listed in the shop using the `buy` command. And when you buy items from the shop, the server owner will get 90% of the profit.",
-    "You can now add roles to users when they level up in your server, using the new `levelUpRoles` command.",
-    "Added support for multiple game status."
+  "NEW FEATURES!": [
+    "You can now see the items you've brought from the server shop using the `myItems` command.",
+    "You can now check rank using the new `rank` command. No need to show your entire profile if you just wanted to see the rank.",
+    "Feel morally superior to others by seeing a be like bill meme, using the new `beLikeBill` command.",
+    "You can now see the most used commands in your server using the `commandAnalytics` command."
   ],
-  "removed": [],
-  "issues": []
+  "NOT AVAILABLE ANYMORE": [],
+  "BUGS HIDING IN THE CLOSET": []
 }

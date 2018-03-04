@@ -14,12 +14,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.modLog) {
       await Bastion.db.run(`UPDATE guildSettings SET modLog=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      modLogStats = 'Moderation audit logging is now disabled.';
+      modLogStats = Bastion.strings.info(message.guild.language, 'disableModerationLog', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET modLog=${message.channel.id} WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      modLogStats = 'Moderation audit logging is now enabled in this channel.';
+      modLogStats = Bastion.strings.info(message.guild.language, 'enableModerationLog', message.author.tag);
     }
 
     message.channel.send({

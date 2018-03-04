@@ -46,7 +46,7 @@ exports.exec = async (Bastion, message, args) => {
     guildSettings.disabledCommands = [ ...new Set(guildSettings.disabledCommands) ];
 
     disabledCommands = guildSettings.disabledCommands.join(' ').toLowerCase();
-    description = `\`${command.help.name}\` command has been disabled is this server. You can enable this command using \`enableCommand ${command.help.name}\`.`;
+    description = Bastion.strings.info(message.guild.language, 'disableCommand', message.author.tag, command.help.name);
 
     await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
   }
@@ -57,13 +57,19 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name).join(' ').toLowerCase();
-    description = `Disabled all commands, in \`${args.module}\` modules, in this server.`;
+
+    let guildSettings = await Bastion.db.get(`SELECT disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (guildSettings.disabledCommands) {
+      disabledCommands += ` ${guildSettings.disabledCommands}`;
+    }
+
+    description = Bastion.strings.info(message.guild.language, 'disableModule', message.author.tag, args.module);
 
     await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
   }
   else if (args.all) {
     disabledCommands = Bastion.commands.filter(c => ![ 'owner', 'guild_admin' ].includes(c.config.module)).map(c => c.help.name).join(' ').toLowerCase();
-    description = 'Disabled all commands in this server.';
+    description = Bastion.strings.info(message.guild.language, 'disableAllCommands', message.author.tag);
 
     await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
   }

@@ -63,7 +63,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        description: `${message.author.tag} renamed the ${channel.type} channel **${args.old}** to **${args.new}**`,
+        description: Bastion.strings.info(message.guild.language, 'renameChannel', message.author.tag, channel.type, args.old, args.new),
         footer: {
           text: `ID: ${channel.id}`
         }

@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.slowMode) {
       await Bastion.db.run(`UPDATE guildSettings SET slowMode=0 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      slowModeStats = 'Slow mode is now disabled. Everyone, get spicy!';
+      slowModeStats = Bastion.strings.info(message.guild.language, 'disableSlowMode', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET slowMode=1 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      slowModeStats = 'Slow mode is now enabled. Beware spammers!';
+      slowModeStats = Bastion.strings.info(message.guild.language, 'enableSlowMode', message.author.tag);
     }
 
     message.channel.send({

@@ -40,11 +40,11 @@ exports.exec = async (Bastion, message, args) => {
       else {
         if (args.nick < 1) {
           color = Bastion.colors.RED;
-          nickStat = `${message.author.tag} removed the nickname of ${user.tag}`;
+          nickStat = Bastion.strings.info(message.guild.language, 'removeNickname', message.author.tag, user.tag);
         }
         else {
           color = Bastion.colors.GREEN;
-          nickStat = `${message.author.tag} set the nickname of ${user.tag} to **${args.nick}**`;
+          nickStat = Bastion.strings.info(message.guild.language, 'setNickname', message.author.tag, user.tag, args.nick);
         }
       }
       await member.setNickname(args.nick);

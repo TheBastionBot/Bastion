@@ -6,7 +6,7 @@ COLOR 0F
 ECHO.
 
 SET cwd=%~dp0
-CD %cwd%
+CD /D %cwd%
 
 ECHO [Bastion]: Updating Bastion Bot...
 git pull origin stable 1>nul || (
@@ -18,8 +18,8 @@ ECHO.
 
 ECHO [Bastion]: Updating dependencies...
 choco upgrade ffmpeg -y
-RD /S /Q node_modules
-DEL /Q package-lock.json
+RD /S /Q node_modules 2>nul
+DEL /Q package-lock.json 2>nul
 CALL npm i --only=production --no-package-lock >nul 2>update.log
 ECHO [Bastion]: Done.
 ECHO [Bastion]: If you get any errors please check the update.log file for errors while updating.

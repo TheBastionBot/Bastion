@@ -13,12 +13,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.farewell === message.channel.id) {
       await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      farewellStats = 'Farewell Messages are now disabled.';
+      farewellStats = Bastion.strings.info(message.guild.language, 'disableFarewellMessages', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      farewellStats = 'Farewell Messages are now enabled in this channel.';
+      farewellStats = Bastion.strings.info(message.guild.language, 'enableFarewellMessages', message.author.tag);
     }
 
     message.channel.send({

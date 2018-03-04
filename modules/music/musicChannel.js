@@ -6,12 +6,12 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let musicTextChannel, musicVoiceChannel, color, description, fields;
+    let musicTextChannel, musicVoiceChannel, color, description;
 
     if (args.remove) {
       await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      description = 'Default music channels have been removed.';
+      description = Bastion.strings.info(message.guild.language, 'removeMusicChannels', message.author.tag);
     }
     else if (args.id) {
       musicTextChannel = message.channel;
@@ -19,16 +19,7 @@ exports.exec = async (Bastion, message, args) => {
       if (musicVoiceChannel) {
         await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=${musicTextChannel.id}, musicVoiceChannel=${musicVoiceChannel.id} WHERE guildID=${message.guild.id}`);
         color = Bastion.colors.GREEN;
-        fields = [
-          {
-            name: 'Music Text Channel',
-            value: `${musicTextChannel} is now set as the default text channel for music.`
-          },
-          {
-            name: 'Music Voice Channel',
-            value: `**${musicVoiceChannel.name}** is now set as the default voice channel for music.`
-          }
-        ];
+        description = Bastion.strings.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
       }
       else {
         color = Bastion.colors.RED;
@@ -49,16 +40,7 @@ exports.exec = async (Bastion, message, args) => {
       }
       else {
         color = Bastion.colors.BLUE;
-        fields = [
-          {
-            name: 'Music Text Channel',
-            value: `${musicTextChannel} is the default text channel for music.`
-          },
-          {
-            name: 'Music Voice Channel',
-            value: `**${musicVoiceChannel.name}** is the default voice channel for music.`
-          }
-        ];
+        description = Bastion.strings.info(message.guild.language, 'addMusicChannels', musicTextChannel, musicVoiceChannel.name);
       }
     }
 
@@ -66,8 +48,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: color,
         title: 'Music Channel',
-        description: description,
-        fields: fields
+        description: description
       }
     }).catch(e => {
       Bastion.log.error(e);

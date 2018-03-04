@@ -27,12 +27,12 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       await Bastion.db.run(`UPDATE guildSettings SET streamerRole='${role.id}' WHERE guildID=${message.guild.id}`);
-      description = `${role.name} has been set as the streamer role.`;
+      description = Bastion.strings.info(message.guild.language, 'enableStreamerRole', message.author.tag, role.name);
       color = Bastion.colors.GREEN;
     }
     else if (args.remove) {
       await Bastion.db.run(`UPDATE guildSettings SET streamerRole=null WHERE guildID=${message.guild.id}`);
-      description = 'The streamer role has been removed.';
+      description = Bastion.strings.info(message.guild.language, 'disableStreamerRole', message.author.tag);
       color = Bastion.colors.RED;
     }
     else {
@@ -40,7 +40,7 @@ exports.exec = async (Bastion, message, args) => {
       if (guildSettings.streamerRole) {
         let streamerRole = message.guild.roles.get(guildSettings.streamerRole);
         if (streamerRole) {
-          description = `The current streamer role is **${streamerRole.name}**`;
+          description = Bastion.strings.info(message.guild.language, 'streamerRole', message.author.tag, streamerRole.name);
           color = Bastion.colors.BLUE;
         }
       }

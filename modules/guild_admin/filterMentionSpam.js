@@ -19,12 +19,12 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       color = Bastion.colors.GREEN;
-      mentionSpamStats = `Auto moderation of mention spam is now enabled and the threshold is set to **${args.amount}** mentions and action is set to **${args.action}**. Beware spammers!`;
+      mentionSpamStats = Bastion.strings.info(message.guild.language, 'enableMentionSpamFilter', message.author.tag, args.amount, args.action);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET mentionSpamThreshold=NULL, mentionSpamAction=NULL WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      mentionSpamStats = 'Auto moderation of mention spam is now disabled.';
+      mentionSpamStats = Bastion.strings.info(message.guild.language, 'disableMentionSpamFilter', message.author.tag);
     }
 
     message.channel.send({

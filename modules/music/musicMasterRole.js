@@ -12,7 +12,7 @@ exports.exec = async (Bastion, message, args) => {
       return message.channel.send({
         embed: {
           color: Bastion.colors.RED,
-          description: 'Music Master role has been removed.'
+          description: Bastion.strings.info(message.guild.language, 'removeMusicMasterRole', message.author.tag)
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `**${role.name}** has been set as the Music Master role.`
+        description: Bastion.strings.info(message.guild.language, 'addMusicMasterRole', message.author.tag, role.name)
       }
     }).catch(e => {
       Bastion.log.error(e);

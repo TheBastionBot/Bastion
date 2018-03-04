@@ -38,11 +38,11 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
 
-    description = `\`${command.help.name}\` command has been enabled in this server.`;
+    description = Bastion.strings.info(message.guild.language, 'enableCommand', message.author.tag, command.help.name);
   }
   else if (args.all) {
     await Bastion.db.run(`UPDATE guildSettings SET disabledCommands=NULL WHERE guildID=${message.guild.id}`);
-    description = 'All commands have been enabled in this server.';
+    description = Bastion.strings.info(message.guild.language, 'enableAllCommands', message.author.tag);
   }
   else {
     /**

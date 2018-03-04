@@ -44,7 +44,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: `${message.author.tag} banned ${user.tag} with reason **${args.reason}**`,
+        description: Bastion.strings.info(message.guild.language, 'ban', message.author.tag, user.tag, args.reason),
         footer: {
           text: `ID ${user.id}`
         }
@@ -63,7 +63,7 @@ exports.exec = async (Bastion, message, args) => {
     DMChannel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: `${message.author.tag} banned you from **${message.guild.name}** server with reason **${args.reason}**`
+        description: Bastion.strings.info(message.guild.language, 'banDM', message.author.tag, message.guild.name, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);

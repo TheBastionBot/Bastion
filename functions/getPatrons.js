@@ -39,7 +39,7 @@ module.exports = () => {
             full_name: user.attributes.full_name,
             vanity: user.attributes.vanity,
             email: user.attributes.email,
-            discord_id: user.attributes.social_connections.discord.user_id,
+            discord_id: user.attributes.social_connections.discord ? user.attributes.social_connections.discord.user_id : null,
             amount_cents: pledge.attributes.amount_cents,
             created_at: pledge.attributes.created_at,
             declined_since: pledge.attributes.declined_since,

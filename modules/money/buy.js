@@ -32,7 +32,31 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
     }
 
+    // Check if user has sufficient balance
+    let userProfile = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID='${message.author.id}'`);
+    let userBalance = parseInt(userProfile.bastionCurrencies);
 
+    if (userBalance < parseInt(itemsInShop[args.index].value)) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, userBalance), message.channel);
+    }
+
+    // Add item to user's item list
+    let userItems = await Bastion.db.get(`SELECT custom_items FROM shop_items WHERE userID='${message.author.id}' AND guildID='${message.guild.id}'`);
+    if (userItems && userItems.custom_items) {
+      userItems = await Bastion.functions.decodeString(userItems.custom_items);
+      userItems = JSON.parse(userItems);
+    }
+    else {
+      userItems = [];
+    }
+
+    userItems.push(itemsInShop[args.index].name);
+    userItems = JSON.stringify(userItems);
+    userItems = await Bastion.functions.encodeString(userItems);
+
+    await Bastion.db.run('INSERT OR REPLACE INTO shop_items (userID, guildID, custom_items) VALUES(?, ?, ?)', [ message.author.id, message.guild.id, userItems ]);
+
+    // Transaction
     Bastion.emit('userCredit', message.author, itemsInShop[args.index].value);
 
     if (message.author.id !== message.guild.owner.id) {

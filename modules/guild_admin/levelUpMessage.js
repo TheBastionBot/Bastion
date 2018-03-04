@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.levelUpMessage) {
       await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage=0 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      levelUpMessageStats = 'I won\'t any send messages when someone levels up from now on.';
+      levelUpMessageStats = Bastion.strings.info(message.guild.language, 'disableLevelUpMessages', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage=1 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      levelUpMessageStats = 'I will now send messages when someone levels up.';
+      levelUpMessageStats = Bastion.strings.info(message.guild.language, 'enableLevelUpMessages', message.author.tag);
     }
 
     message.channel.send({

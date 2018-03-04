@@ -180,6 +180,7 @@
   },
   "music": {
     "clean": "Tüm rolleri Discord sunucu belirtilen kullanıcıdan kaldırır.",
+    "lyrics": "Belirtilen şarkının sözlerini gösterir.",
     "musicChannel": "Kimliği ve metin kanal (Bu komut içinde kullanılan kanal) tarafından belirtilen bir ses kanalı sizin Discord sunucu müzik modül için varsayılan olarak ekler. Yani, Bastion yalnızca metin kanal müzik komutları kabul eder ve herhangi bir ses kanalı katılmaya isterse, otomatik olarak belirtilen ses kanalı katılacak.",
     "musicMasterRole": "Bastion, müzik yüksek lisans rolü anlaşmazlık sunucunuzda olarak onun kimliği tarafından belirtilen rol ekler. Kullanıcılar bu rolü ile 'çağırmak', 'oyun', vb gibi sınırlı müzik komutlara erişmek ve çağırmak ve Discord sunucu herhangi bir ses kanalı müzik çalmak.",
     "nowPlaying": "Şu anda, Discord sunucu oynanan şarkı ayrıntılarını gösterir.",
@@ -241,7 +242,6 @@
     "google": "Google, belirtilen sorgu için arama yapar ve en iyi sonuçlarını gösterir.",
     "live": "Kim şu anda akış Discord sunucu kullanıcıların listesini gösterir.",
     "lmgtfy": "Google, için belirtilen sorgu arar ve kullanıcılar Google'nın internet arama kullanmayı öğretir.",
-    "lyrics": "Belirtilen şarkının sözlerini gösterir.",
     "manga": "Bir Anime ayrıntılarını arar.",
     "map": "Belirtilen konum haritası olsun.",
     "morseCode": "Belirli bir metin Mors kodu olarak kodlar.",

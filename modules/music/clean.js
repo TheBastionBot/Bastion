@@ -19,7 +19,7 @@ exports.exec = (Bastion, message) => {
   message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.GREEN,
-      description: 'Cleaned up the queue.'
+      description: Bastion.strings.info(message.guild.language, 'cleanQueue', message.author.tag)
     }
   }).catch(e => {
     Bastion.log.error(e);

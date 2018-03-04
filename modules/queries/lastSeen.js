@@ -47,11 +47,11 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       color = Bastion.colors.BLUE;
-      description = `${user.tag} was last seen ${lastSeen} ago.`;
+      description = Bastion.strings.info(message.guild.language, 'lastSeen', user.tag, lastSeen);
     }
     else {
       color = Bastion.colors.RED;
-      description = `I've not seen ${user.tag} in a while.`;
+      description = Bastion.strings.info(message.guild.language, 'notSeen', user.tag);
     }
 
     message.channel.send({

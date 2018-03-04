@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.filterWord) {
       await Bastion.db.run(`UPDATE guildSettings SET filterWord=0 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      filterWordStats = 'Disabled word filter in this server.';
+      filterWordStats = Bastion.strings.info(message.guild.language, 'disableWordFilter', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET filterWord=1 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      filterWordStats = 'Enabled word filter in this server.';
+      filterWordStats = Bastion.strings.info(message.guild.language, 'enableWordFilter', message.author.tag);
     }
 
     message.channel.send({

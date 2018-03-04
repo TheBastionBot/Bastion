@@ -31,24 +31,12 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
     }
 
-    let color;
-    let action;
-    if (topic.length < 2) {
-      topic = ' ';
-      action = 'removed';
-      color = Bastion.colors.RED;
-    }
-    else {
-      action = 'changed';
-      color = Bastion.colors.ORANGE;
-    }
-
     await channel.setTopic(topic);
 
     await message.channel.send({
       embed: {
-        color: color,
-        description: `${message.author.tag} ${action} the topic of the text channel **${channel.name}** ${channel.topic.length > 1 ? `to\n\`\`\`${channel.topic}\`\`\`` : ''}`
+        color: Bastion.colors.ORANGE,
+        description: Bastion.strings.info(message.guild.language, 'updateChannelTopic', message.author.tag, channel.name, channel.topic)
       }
     });
   }

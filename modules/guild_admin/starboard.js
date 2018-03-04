@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.starboard) {
       await Bastion.db.run(`UPDATE guildSettings SET starboard=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      starboardStats = 'Starboard is now disabled.';
+      starboardStats = Bastion.strings.info(message.guild.language, 'disableStarboard', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET starboard=${message.channel.id} WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      starboardStats = 'Starboard is now enabled in this channel.';
+      starboardStats = Bastion.strings.info(message.guild.language, 'enableStarboard', message.author.tag);
     }
 
     message.channel.send({

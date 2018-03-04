@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.log) {
       await Bastion.db.run(`UPDATE guildSettings SET log=null WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      logStats = 'Logging is now disabled.';
+      logStats = Bastion.strings.info(message.guild.language, 'disableServerLog', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET log=${message.channel.id} WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      logStats = 'Logging is now enabled in this channel.';
+      logStats = Bastion.strings.info(message.guild.language, 'enableServerLog', message.author.tag);
     }
 
     message.channel.send({

@@ -15,7 +15,7 @@ exports.exec = (Bastion, message, args) => {
     return message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: 'Your reminders have been cancelled.'
+        description: Bastion.strings.info(message.guild.language, 'deleteReminder', message.author.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -72,7 +72,7 @@ exports.exec = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.GREEN,
       title: 'Reminder Set',
-      description: `I will remind you to *${args.message.join(' ')}* after *${moment.duration(duration).humanize()}*.`
+      description: Bastion.strings.info(message.guild.language, 'addReminder', message.author.tag, args.message.join(' '), moment.duration(duration).humanize())
     }
   }).catch(e => {
     Bastion.log.error(e);

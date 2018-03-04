@@ -7,7 +7,7 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     let patrons = await Bastion.functions.getPatrons();
-    patrons = patrons.map(patron => patron.full_name);
+    patrons = patrons.filter(patron => !patron.declined_since).map(patron => patron.full_name);
 
     let noOfPages = patrons.length / 50;
     let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;

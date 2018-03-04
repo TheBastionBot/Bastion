@@ -12,12 +12,12 @@ exports.exec = async (Bastion, message) => {
     if (guildSettings.filterLink) {
       await Bastion.db.run(`UPDATE guildSettings SET filterLink=0 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.RED;
-      filterLinkStats = 'Disabled automatic deletion of links posted in this server.';
+      filterLinkStats = Bastion.strings.info(message.guild.language, 'disableLinkFilter', message.author.tag);
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET filterLink=1 WHERE guildID=${message.guild.id}`);
       color = Bastion.colors.GREEN;
-      filterLinkStats = 'Enabled automatic deletion of links posted in this server.';
+      filterLinkStats = Bastion.strings.info(message.guild.language, 'enableLinkFilter', message.author.tag);
     }
 
     message.channel.send({

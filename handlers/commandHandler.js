@@ -160,6 +160,14 @@ module.exports = async message => {
     }
 
     /**
+     * Command stats
+     */
+    if (!message.guild.hasOwnProperty('commandAnalytics')) {
+      message.guild.commandAnalytics = {};
+    }
+    message.guild.commandAnalytics[cmd.help.name] = message.guild.commandAnalytics.hasOwnProperty(cmd.help.name) ? message.guild.commandAnalytics[cmd.help.name] + 1 : 1;
+
+    /**
      * Command cooldown handler
      */
     if (cmd.config.userCooldown && typeof cmd.config.userCooldown === 'number' && cmd.config.userCooldown >= 1 && cmd.config.userCooldown <= 1440) {

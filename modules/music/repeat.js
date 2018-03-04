@@ -24,7 +24,7 @@ exports.exec = (Bastion, message) => {
   else {
     color = Bastion.colors.GREEN;
     message.guild.music.repeat = true;
-    repeatStat = 'Added the current song to the repeat queue.';
+    repeatStat = Bastion.strings.info(message.guild.language, 'repeatSong', message.author.tag);
   }
 
   message.guild.music.textChannel.send({
@@ -38,7 +38,7 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'loop' ],
   enabled: true
 };
 

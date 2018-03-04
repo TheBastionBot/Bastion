@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `${message.author.tag} created the role **${role.name}**`,
+        description: Bastion.strings.info(message.guild.language, 'createRole', message.author.tag, role.name),
         footer: {
           text: `ID: ${role.id}`
         }

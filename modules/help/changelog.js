@@ -6,36 +6,17 @@
 
 exports.exec = (Bastion, message) => {
   const CHANGES = require('../../changes.json');
+
   let changes = [];
-  if (CHANGES.fixed.length !== 0) {
-    changes.push({
-      name: 'THESE BUGS ARE DEAD',
-      value: `- ${CHANGES.fixed.join('\n- ')}`
-    });
-  }
-  if (CHANGES.improved.length !== 0) {
-    changes.push({
-      name: 'THESE ABILITIES HAVE ENHANCED',
-      value: `- ${CHANGES.improved.join('\n- ')}`
-    });
-  }
-  if (CHANGES.added.length !== 0) {
-    changes.push({
-      name: 'NEW FEATURES!',
-      value: `- ${CHANGES.added.join('\n- ')}`
-    });
-  }
-  if (CHANGES.removed.length !== 0) {
-    changes.push({
-      name: 'NOT AVAILABLE ANYMORE',
-      value: `- ${CHANGES.removed.join('\n- ')}`
-    });
-  }
-  if (CHANGES.issues.length !== 0) {
-    changes.push({
-      name: 'BUGS HIDING IN THE CLOSET',
-      value: `- ${CHANGES.issues.join('\n- ')}`
-    });
+  for (let section in CHANGES) {
+    if (CHANGES.hasOwnProperty(section)) {
+      if (section === 'date' || !CHANGES[section].length) continue;
+
+      changes.push({
+        name: section,
+        value: `- ${CHANGES[section].join('\n- ')}`
+      });
+    }
   }
 
   message.channel.send({

@@ -10,12 +10,12 @@ exports.exec = async (Bastion, message, args) => {
 
     if (args.remove) {
       await Bastion.db.run(`UPDATE guildSettings SET announcementChannel=null WHERE guildID=${message.guild.id}`);
-      description = 'The announcement channel has been removed.';
+      description = Bastion.strings.info(message.guild.language, 'disableAnnouncementChannel', message.author.tag);
       color = Bastion.colors.RED;
     }
     else {
       await Bastion.db.run(`UPDATE guildSettings SET announcementChannel='${message.channel.id}' WHERE guildID=${message.guild.id}`);
-      description = 'This channel has been set as the announcement channel for Bastion.';
+      description = Bastion.strings.info(message.guild.language, 'enableAnnouncementChannel', message.author.tag);
       color = Bastion.colors.GREEN;
     }
 
