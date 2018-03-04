@@ -1,26 +1,8 @@
 {
   "date": "March 4, 2018",
-  "THESE BUGS ARE DEAD": [
-    "Fixed an issue that allowed users to buy items from server shop even if they didn't had enough balance, which decreased their balance below 0.",
-    "Fixed an issue that enabled previously disabled commands when disabling an entire module using the `disableCommand` command.",
-    "Fixed `patrons` command not working when a Patron hadn't connected their Discord account to Patreon.",
-    "Fixed `giveXP` not adding XP to the previous XP of the user but replacing it.",
-    "Fixed an issue that prevented setting Bastion's game to default after music is ended (if music status was enabled)."
-  ],
-  "THESE ABILITIES HAVE ENHANCED": [
-    "The items you buy from server shop won't go in vain now. All of them are preserved in your items list.",
-    "Added `loop` as an alias of `repeat` command.",
-    "Added `purge` as an alias of `clear` command.",
-    "Some (action) commands will show who used it so that even if they delete their message, you can know who used that sneakily.",
-    "Patrons who have been declined by Patreon, won't show up in the `patrons` command.",
-    "Under-the-hood improvements."
-  ],
-  "NEW FEATURES!": [
-    "You can now see the items you've brought from the server shop using the `myItems` command.",
-    "You can now check rank using the new `rank` command. No need to show your entire profile if you just wanted to see the rank.",
-    "Feel morally superior to others by seeing a be like bill meme, using the new `beLikeBill` command.",
-    "You can now see the most used commands in your server using the `commandAnalytics` command."
-  ],
+  "THESE BUGS ARE DEAD": [],
+  "THESE ABILITIES HAVE ENHANCED": [],
+  "NEW FEATURES!": [],
   "NOT AVAILABLE ANYMORE": [],
   "BUGS HIDING IN THE CLOSET": []
 }
