@@ -45,7 +45,7 @@
   "disableModerationLog": "%var% disabled logging of moderation actions in this server.",
   "enableModerationLog": "%var% enabled logging of moderation actions, in this channel.",
   "resetModerationLogCases": "%var% reset the moderation log case numbers in this server.",
-  "setPrefix": "Prefix for your server is now set to `%var%`",
+  "setPrefix": "%var% changed the prefix for the server to `%var%`",
   "disableSlowMode": "%var% disabled slow mode in this server. Everyone, get spicy!",
   "enableSlowMode": "%var% enabled slow mode in this server. Beware spammers!",
   "disableStarboard": "%var% disabled starboard in this server.",
