@@ -1,6 +1,8 @@
 {
   "date": "March 4, 2018",
-  "THESE BUGS ARE DEAD": [],
+  "THESE BUGS ARE DEAD": [
+    "Fixed output of `setPrefix` command showing the username of who used the command instead of the prefix."
+  ],
   "THESE ABILITIES HAVE ENHANCED": [],
   "NEW FEATURES!": [],
   "NOT AVAILABLE ANYMORE": [],
