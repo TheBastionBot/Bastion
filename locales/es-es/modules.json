@@ -180,6 +180,7 @@
   },
   "music": {
     "clean": "Elimina todas las canciones de la lista actual de su servidor Discord.",
+    "lyrics": "Muestra la letra de la canción especificada.",
     "musicChannel": "Añade un canal de voz especificado por el ID y un canal de texto (el canal en el que se utilizó este comando) de su servidor Discord como predeterminado para el módulo de música. Es decir, Bastion sólo aceptará comandos de música en ese canal de texto y si alguien le pide que se una a un canal de voz, se unirá automáticamente al canal de voz especificado.",
     "musicMasterRole": "Añade un rol especificado por su ID como el rol de Maestro de Música de Bastion, en su servidor Discord. Los usuarios con esta función obtienen acceso a comandos de música restringida como `summon`, `play`, etc. y pueden convocar y reproducir música en cualquier canal de voz de su servidor Discord.",
     "nowPlaying": "Muestra los detalles de la canción que está siendo reproducida, por Bastion, en su servidor Discord.",
@@ -241,7 +242,6 @@
     "google": "Busca en Google, para la consulta especificada, y muestra los resultados principales.",
     "live": "Muestra la lista de usuarios de su servidor Discord que están actualmente en transmisión.",
     "lmgtfy": "Busca en Google, para la consulta especificada, y enseña a los usuarios cómo utilizar la búsqueda de Google en Internet.",
-    "lyrics": "Muestra la letra de la canción especificada.",
     "manga": "Busca los detalles de una Manga.",
     "map": "Obtener el mapa de la ubicación especificada.",
     "morseCode": "Codifica un texto determinado en el código Morse.",

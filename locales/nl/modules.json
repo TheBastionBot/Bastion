@@ -180,6 +180,7 @@
   },
   "music": {
     "clean": "Verwijderd alle liedjes van de afspeellijst op je Discord server.",
+    "lyrics": "Geeft de lyrics van een liedje weer.",
     "musicChannel": "Voegt een gesprekskanaal gespecificeerd door de ID en een tekstkanaal (het kanaal waar het commando word uitgevoerd) van je Discord server als standaard muziekkanaal. Bastion accepteert alleen muziekcommando's op dat tekstkanaal, en zal in alleen die gesprekskanaal komen.",
     "musicMasterRole": "Voegt een rol toe, gespecificeerd bij de ID als de \"Music Master\" rol van Bastion in je Discord Server. Gebruikers met die rol, krijgen toegang tot specifieke commando's zoals `summon`, `play`, etc. en kan dus gebruik maken van Bastion's muziek in elk gesprekskanaal.",
     "nowPlaying": "Geeft details weer van het liedje dat word afgespeeld door Bastion in je Discord server.",
@@ -241,7 +242,6 @@
     "google": "Zoekt op Google, en geeft je de bovenste resultaten.",
     "live": "Geeft een lijst van gebruikers in je Discord server dat aan het streamen zijn.",
     "lmgtfy": "Zoekt op Google, en laat je zien hoe je moet zoeken op Google's magische website.",
-    "lyrics": "Geeft de lyrics van een liedje weer.",
     "manga": "Zoekt naar de details van een Manga.",
     "map": "Geeft een kaart van de opgegeven locatie.",
     "morseCode": "Codeert een gegeven tekst naar Morse. Beep Boop.",
