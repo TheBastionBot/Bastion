@@ -17,7 +17,8 @@
   "NEW FEATURES!": [
     "You can now see the items you've brought from the server shop using the `myItems` command.",
     "You can now check rank using the new `rank` command. No need to show your entire profile if you just wanted to see the rank.",
-    "Feel morally superior to others by seeing a be like bill meme, using the new `beLikeBill` command."
+    "Feel morally superior to others by seeing a be like bill meme, using the new `beLikeBill` command.",
+    "You can now see the most used commands in your server using the `commandAnalytics` command."
   ],
   "NOT AVAILABLE ANYMORE": [],
   "BUGS HIDING IN THE CLOSET": []
