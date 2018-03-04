@@ -273,7 +273,9 @@ exports.help = {
 function startStreamDispatcher(guild, connection) {
   if ((connection.channel && connection.channel.members.size < 2) || guild.music.songs[0] === undefined) {
     if (guild.client.config.music && guild.client.config.music.status) {
-      guild.client.user.setActivity(guild.client.config.game.name, { type: guild.client.config.game.type });
+      guild.client.user.setActivity(typeof guild.client.config.game.name === 'string' ? guild.client.config.game.name : guild.client.config.game.name.length ? guild.client.config.game.name[0] : null,
+        { type: guild.client.config.game.type }
+      );
     }
 
     let description;
