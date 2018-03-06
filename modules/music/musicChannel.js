@@ -40,7 +40,7 @@ exports.exec = async (Bastion, message, args) => {
       }
       else {
         color = Bastion.colors.BLUE;
-        description = Bastion.strings.info(message.guild.language, 'addMusicChannels', musicTextChannel, musicVoiceChannel.name);
+        description = Bastion.strings.info(message.guild.language, 'musicChannels', musicTextChannel, musicVoiceChannel.name);
       }
     }
 
