@@ -1,8 +1,7 @@
 {
-  "date": "March 5, 2018",
+  "date": "March 6, 2018",
   "THESE BUGS ARE DEAD": [
-    "Fixed output of `setPrefix` command showing the username of who used the command instead of the prefix.",
-    "Fixed a gateway connection issues that caused Bastion to go down sneakily."
+    "Fixed `musicChannel` command's output showing messed up information."
   ],
   "THESE ABILITIES HAVE ENHANCED": [],
   "NEW FEATURES!": [],
