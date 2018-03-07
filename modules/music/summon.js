@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message) => {
       }
     }
     else {
-      if (message.guild.music.textChannelID !== message.channel.id) return;
+      if (message.guild.music.textChannelID !== message.channel.id) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
 
       voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
       if (!voiceChannel) {
