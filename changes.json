@@ -1,9 +1,11 @@
 {
-  "date": "March 6, 2018",
+  "date": "March 7, 2018",
   "THESE BUGS ARE DEAD": [
     "Fixed `musicChannel` command's output showing messed up information."
   ],
-  "THESE ABILITIES HAVE ENHANCED": [],
+  "THESE ABILITIES HAVE ENHANCED": [
+    "If music channels have been set and music commands are not used in the music text channel, it will show proper info. in the logs instead of ignoring it completely."
+  ],
   "NEW FEATURES!": [],
   "NOT AVAILABLE ANYMORE": [],
   "BUGS HIDING IN THE CLOSET": []
