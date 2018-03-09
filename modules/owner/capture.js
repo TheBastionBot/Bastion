@@ -64,7 +64,8 @@ exports.exec = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {

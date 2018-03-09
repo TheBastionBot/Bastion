@@ -228,7 +228,6 @@
   "queries": {
     "anime": "Bir Anime ayrıntılarını arar.",
     "calculate": "Herhangi bir matematiksel ifade değerlendirir.",
-    "capture": "Belirtilen Web sayfası bir ekran görüntüsü yakalar.",
     "choose": "Bir dizi seçenek arasından bir seçenek belirlemek için bot sorar.",
     "cite": "Herhangi bir ileti anlaşmazlık sunucunuzdan öngörmektedirler.",
     "colour": "'HEX' oluşum 'RGB', 'CMYK', 'HSL', 'HSV', 'HWB', 'LAB', 'ANSI16', 'ANSI256', 'XYZ', 'HCG', 'Elma', 'Gri' ve 'CSS' anahtar kelime (Approximates yakın renge) biçimlerinde sağlanan renk dönüştürün.",

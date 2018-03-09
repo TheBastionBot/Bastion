@@ -207,7 +207,6 @@
   "queries": {
     "anime": "Recherche les détails d'un Anime.",
     "calculate": "Évalue toute expression mathématique.",
-    "capture": "Capture une capture d'écran de la page Web spécifiée.",
     "choose": "Demande au bot de choisir une option à partir d'un certain nombre d'options.",
     "colour": "Convertir la couleur fournie en `HEX` format to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and `CSS`Les formats de mots-clés (Approximative à la couleur la plus proche).",
     "date": "Indique la date et l'heure locales de toute ville spécifiée.",

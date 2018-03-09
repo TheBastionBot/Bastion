@@ -228,7 +228,6 @@
   "queries": {
     "anime": "Zoekt naar de details van een Anime serie.",
     "calculate": "Evalueert een wiskundige expressie.",
-    "capture": "Maakt een schermafbeelding van een website.",
     "choose": "Vraagt Bastion om een keuze te maken aan een gegeven aantal opties.",
     "cite": "Herstuurt een bericht van je Discord server.",
     "colour": "Converteer kleuren in `HEX` formaat naar `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` en `CSS` keywordformaten (Approximeert de dichtbijzijnste kleur).",
