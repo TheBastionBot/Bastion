@@ -9,7 +9,7 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
 exports.exec = (Bastion, message, args) => {
-  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return;
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
 
   if (!args.song && !args.ytpl && !args.playlist) {
     /**
@@ -57,7 +57,7 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'musicChannelNotFound', true), message.channel);
   }
 
-  if (textChannel.id !== message.channel.id) return;
+  if (textChannel.id !== message.channel.id) return Bastion.log.info(`Music commands will only work in ${textChannel.name} for this session.`);
   if (voiceChannel.members.get(message.author.id) === undefined) {
     /**
     * Error condition is encountered.
