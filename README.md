@@ -1,4 +1,4 @@
-![Bastion Logo Dark](https://resources.bastionbot.org/logos/BastionLogo_Text_Dark_ON.png)
+![Bastion Logo Dark](https://resources.bastionbot.org/logos/Bastion_Logotype_CD.png)
 
 # Bastion: Discord Bot
 [![GitHub release](https://img.shields.io/github/release/TheBastionBot/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
