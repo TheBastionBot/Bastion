@@ -1,6 +1,5 @@
 ![Bastion Logo Dark](https://resources.bastionbot.org/logos/Bastion_Logotype_CD.png)
 
-# Bastion: Discord Bot
 [![GitHub release](https://img.shields.io/github/release/TheBastionBot/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
 [![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
 [![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
