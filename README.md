@@ -7,7 +7,7 @@
 [![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
 [![Website](https://img.shields.io/website-up-down-green-red/https/bastionbot.org.svg?label=Website)](https://bastionbot.org)  
 
-[![Patreon](https://img.shields.io/badge/be-patron-orange.svg)](https://patreon.com/snkrsnkampa)
+[![Patreon](https://img.shields.io/badge/be-patron-orange.svg)](https://patreon.com/bastionbot)
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg)](https://paypal.me/snkrsnkampa)
 [![Bountysource](https://img.shields.io/bountysource/team/bastion/activity.svg)](https://salt.bountysource.com/teams/bastion)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/k3rn31p4nic)  
@@ -68,11 +68,11 @@ you can send donations or contribute to it.
 Your donations will ensure the development of this project and I'll make sure
 this project stays active forever. You can donate via Patreon or via PayPal:
 
-<a href="https://www.patreon.com/snkrsnkampa" title="Pledge for the Bastion Bot Project">
+<a href="https://www.patreon.com/bastionbot" title="Pledge for the Bastion Bot Project">
 <img src="https://s7.postimg.org/m5awszoyz/patreon.jpg" alt="Pledge for the Bastion Bot Project" height="100" />
 </a>
 <a href="https://paypal.me/snkrsnkampa" title="Donate via PayPal">
 <img src="https://s1.postimg.org/wbhh3ef5b/paypal.jpg" alt="Donate via PayPal" height="100" />
 </a>
-<!-- [![patreon.jpg](https://s7.postimg.org/m5awszoyz/patreon.jpg)](https://www.patreon.com/snkrsnkampa) -->
+<!-- [![patreon.jpg](https://s7.postimg.org/m5awszoyz/patreon.jpg)](https://www.patreon.com/bastionbot) -->
 <!-- [![paypal.jpg](https://s1.postimg.org/wbhh3ef5b/paypal.jpg)](https://paypal.me/snkrsnkampa) -->
