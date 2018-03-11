@@ -1,5 +1,7 @@
 ![Bastion Logo Dark](https://resources.bastionbot.org/logos/Bastion_Logotype_CD.png)
 
+<div align='center'>
+
 [![GitHub release](https://img.shields.io/github/release/TheBastionBot/Bastion.svg?style=flat&label=Bastion)](https://github.com/TheBastionBot/Bastion/releases)
 [![Bastion Bot: Discord Server](https://discordapp.com/api/guilds/267022940967665664/embed.png)](https://discord.gg/fzx8fkt)
 [![Bastion Bot](https://discordbots.org/api/widget/status/267035345537728512.svg)](https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=2146958463)
@@ -17,6 +19,8 @@
 [![Dependencies](https://david-dm.org/TheBastionBot/Bastion.svg)](https://david-dm.org/TheBastionBot/Bastion)
 [![Known Vulnerabilities](https://snyk.io/test/github/thebastionbot/bastion/badge.svg?targetFile=package.json)](https://snyk.io/test/github/thebastionbot/bastion?targetFile=package.json)
 [![license](https://img.shields.io/github/license/TheBastionBot/Bastion.svg)](LICENSE)
+
+</div>
 
 ## What are the features you need in a [Discord](https://discordapp.com) Bot?
 *Administration, Moderation, Giveaways, Suggestions, Searches, Game Server Stats, Player Stats,
