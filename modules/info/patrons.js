@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let description;
     if (Bastion.user.id === '267035345537728512') {
-      description = 'These are the awesome people who continuously support the development of the Bastion bot project, by being my patron, on [Patreon](https://patreon.com/snkrsnkampa).\nIf you want to support the development of Bastion too, [be my Patron](https://patreon.com/bePatron?c=754397)';
+      description = 'These are the awesome people who continuously support the development of the Bastion bot project, by being my patron, on [Patreon](https://patreon.com/bastionbot).\nIf you want to support the development of Bastion too, [be my Patron](https://patreon.com/bePatron?c=754397)';
     }
     else {
       description = 'These are the awesome people who continuously support us, by being our patron, on Patreon.';

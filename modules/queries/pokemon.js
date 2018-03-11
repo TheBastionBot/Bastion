@@ -117,14 +117,8 @@ exports.exec = async (Bastion, message, args) => {
     });
   }
   catch (e) {
-    if (e.statusCode) {
-      if (e.statusCode === 404) {
-        return Bastion.emit('error', e.error.error, e.error.message.replace('You should head home: https://pokedevs.bastionbot.org', ''), message.channel);
-      }
-      else if (e.statusCode === 429) {
-        return Bastion.emit('error', e.error.error, e.error.message, message.channel);
-      }
-      return Bastion.emit('error', e.statusCode, e.message, message.channel);
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
     Bastion.log.error(e);
   }

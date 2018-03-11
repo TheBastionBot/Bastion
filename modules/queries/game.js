@@ -62,7 +62,7 @@ exports.exec = async (Bastion, message, args) => {
           },
           {
             name: 'Links',
-            value: response.websites.map(website => website.url).join('\n')
+            value: response.websites ? response.websites.map(website => website.url).join('\n') : '-'
           }
         ],
         image: {
