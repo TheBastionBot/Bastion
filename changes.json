@@ -1,6 +1,8 @@
 {
-  "date": "March 9, 2018",
-  "THESE BUGS ARE DEAD": [],
+  "date": "March 11, 2018",
+  "THESE BUGS ARE DEAD": [
+    "Fixed `pokemon` command not showing proper error when a Pokémon was not found."
+  ],
   "THESE ABILITIES HAVE ENHANCED": [
     "`capture` command is now a bot owner only command, for security reasons."
   ],
