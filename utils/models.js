@@ -35,12 +35,10 @@ module.exports = (Sequelize, database) => {
     },
     language: {
       type: Sequelize.STRING,
-      defaultValue: 'en_us'
+      defaultValue: 'en'
     },
     greet: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
+      type: Sequelize.STRING
     },
     greetMessage: {
       type: Sequelize.BLOB
@@ -59,9 +57,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.BLOB
     },
     farewell: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
+      type: Sequelize.STRING
     },
     farewellMessage: {
       type: Sequelize.BLOB
