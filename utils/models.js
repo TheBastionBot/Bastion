@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const config = require('../settings/config.json');
+const { prefix } = require('../settings/config.json');
 
 module.exports = (Sequelize, database) => {
   // Models
@@ -31,7 +31,7 @@ module.exports = (Sequelize, database) => {
     prefix: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: config.prefix || '!'
+      defaultValue: prefix || '!'
     },
     language: {
       type: Sequelize.STRING,
