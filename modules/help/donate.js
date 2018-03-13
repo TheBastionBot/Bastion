@@ -12,7 +12,7 @@ exports.exec = (Bastion, message) => {
       url: 'https://BastionBot.org/',
       description: 'To support and send donations for the Bastion Bot, ' +
                    'you can either pledge for The Bastion Bot project ' +
-                   'on **Patreon**: https://patreon.com/snkrsnkampa\nOR\nSend ' +
+                   'on **Patreon**: https://patreon.com/bastionbot\nOR\nSend ' +
                    'one off donations via **PayPal**: https://paypal.me/snkrsnkampa'
     }
   }).catch(e => {

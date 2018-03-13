@@ -157,7 +157,7 @@
     "emojiInfo": "Shows information of a specifed emoji of your Discord server.",
     "inRole": "Shows members that have a specifed role in your Discord server.",
     "level": "Shows the current level of the specified user's account.",
-    "patrons": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](https://patreon.com/snkrsnkampa). But if you're hosting Bastion yourself, and you're a Patreon creator, it will show the list of your Patrons.",
+    "patrons": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](https://patreon.com/bastionbot). But if you're hosting Bastion yourself, and you're a Patreon creator, it will show the list of your Patrons.",
     "ping": "Shows the response time and average WebSocket ping of Bastion.",
     "profile": "Shows Bastion user profile of a specified user of your Discord server.",
     "xp": "Shows the rank of the specified user's account.",
@@ -239,6 +239,7 @@
   "owner": {
     "addTrigger": "Adds a message trigger and a response. When a message is sent that contains that triggering word/phrase, Bastion replies with the response you have set.",
     "announce": "Send a message to announcement channel of all the servers Bastion is connected to.",
+    "capture": "Captures a screenshot of the specified webpage.",
     "currencyGiveaway": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
     "deleteAllTriggers": "Deletes all the triggers and responses you have set.",
     "deleteTodo": "Deletes the specified item from your TODO list.",
@@ -270,7 +271,6 @@
   "queries": {
     "anime": "Searches for the details of an Anime.",
     "calculate": "Evaluates any mathematical expression.",
-    "capture": "Captures a screenshot of the specified webpage.",
     "choose": "Asks the bot to choose an option from a number of options.",
     "cite": "Cite any message from your Discord server.",
     "coinMarketCap": "Shows market capitalization of the specified cryptocurrency.",

@@ -66,6 +66,11 @@
 
 #### Is this feature similar to an existing feature?
 
-#### Is this a feature you would like to implement, with support from the Bastion Bot team?
+-->
 
+
+<!--
+    If this is a fix or feature you'd like to implement it on your own, feel
+    free to open a pull request with your changes, and our team will look
+    into it.
 -->

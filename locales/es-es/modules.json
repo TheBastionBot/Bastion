@@ -228,7 +228,6 @@
   "queries": {
     "anime": "Busca los detalles de un Anime.",
     "calculate": "Evalúa cualquier expresión matemática.",
-    "capture": "Captura una captura de pantalla de la página web especificada.",
     "choose": "Pide al bot que elija una opción de varias opciones.",
     "cite": "Citar cualquier mensaje desde el servidor de la discordia.",
     "colour": "Convierte el color proporcionado en formato `HEX` a` RGB`, `CMYK`,` HSL`, `HSV`,` HWB`, `LAB`,` ANSI16`, `ANSI256`,` XYZ`, `HCG`, `Apple`,` Gray` y `CSS` (Aproxima al color más cercano).",
