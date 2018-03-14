@@ -15,13 +15,19 @@
  */
 module.exports = async (guild, executor, action, target, reason, extras) => {
   try {
-    let guildSettings = await guild.client.db.get(`SELECT modLog, modCaseNo FROM guildSettings WHERE guildID=${guild.id}`);
-    if (!guildSettings || !guildSettings.modLog) return;
+    let guildModel = await guild.client.database.models.guild.findOne({
+      attributes: [ 'moderationLog', 'moderationCaseNo' ],
+      where: {
+        guildID: guild.id
+      }
+    });
 
-    let modLogChannel = guild.channels.get(guildSettings.modLog);
+    if (!guildModel || !guildModel.dataValues.moderationLog) return;
+
+    let modLogChannel = guild.channels.get(guildModel.dataValues.moderationLog);
     if (!modLogChannel) return;
 
-    let modCaseNo = parseInt(guildSettings.modCaseNo), color,
+    let modCaseNo = parseInt(guildModel.dataValues.moderationCaseNo), color,
       logData = [
         {
           name: 'User',
@@ -213,7 +219,17 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
       guild.client.log.error(e);
     });
 
-    await guild.client.db.run(`UPDATE guildSettings SET modCaseNo='${modCaseNo + 1}' WHERE guildID=${guild.id}`);
+    await guild.client.database.models.guild.update({
+      moderationCaseNo: modCaseNo + 1
+    },
+    {
+      where: {
+        guildID: guild.id
+      },
+      fields: [
+        'moderationCaseNo'
+      ]
+    });
   }
   catch (e) {
     guild.client.log.error(e);
