@@ -5,13 +5,19 @@
  */
 
 module.exports = async channel => {
-  if (!channel.guild) return;
-
   try {
-    let guildSettings = await channel.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${channel.guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    if (!channel.guild) return;
 
-    let logChannel = channel.guild.channels.get(guildSettings.log);
+    let guildModel = await channel.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: channel.guild.id
+      }
+    });
+
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = channel.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
     let title = channel.client.strings.events(channel.guild.language, 'channelDelete');
