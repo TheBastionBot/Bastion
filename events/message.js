@@ -51,8 +51,13 @@ module.exports = async message => {
 
     try {
       if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
-        let guildSettings = await message.client.db.get(`SELECT slowMode FROM guildSettings WHERE guildID=${message.guild.id}`);
-        if (guildSettings && guildSettings.slowMode) {
+        let guildModel = await message.client.database.models.guild.findOne({
+          attributes: [ 'slowMode' ],
+          where: {
+            guildID: message.guild.id
+          }
+        });
+        if (guildModel && guildModel.dataValues.slowMode) {
           if (recentUsers.hasOwnProperty(message.author.id)) {
             let title, description;
 
@@ -121,8 +126,16 @@ module.exports = async message => {
     handleTrigger(message);
 
     try {
-      let users = await message.client.db.all('SELECT userID FROM blacklistedUsers');
-      if (users.map(u => u.userID).includes(message.author.id)) return;
+      let settingsModel = await message.client.database.models.settings.findOne({
+        attributes: [ 'blacklistedUsers' ],
+        where: {
+          botID: message.client.user.id
+        }
+      });
+
+      if (settingsModel && settingsModel.dataValues.blacklistedUsers) {
+        if (settingsModel.dataValues.blacklistedUsers.split(' ').includes(message.author.id)) return;
+      }
     }
     catch (e) {
       message.client.log.error(e);
@@ -160,10 +173,14 @@ module.exports = async message => {
     /**
      * Set message for voting, if it's a voting channel.
      */
-    let guildSettings = await message.client.db.get(`SELECT votingChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guildSettings || !guildSettings.votingChannels) return;
-    guildSettings.votingChannels = guildSettings.votingChannels.split(' ');
-    if (!guildSettings.votingChannels.includes(message.channel.id)) return;
+    let textChannelModel = await message.client.database.models.textChannel.findOne({
+      attributes: [ 'votingChannel' ],
+      where: {
+        channelID: message.channel.id,
+        guildID: message.guild.id
+      }
+    });
+    if (!textChannelModel || !textChannelModel.dataValues.votingChannel) return;
 
     // Add reactions for voting
     await message.react('👍');
