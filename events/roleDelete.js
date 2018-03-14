@@ -6,10 +6,16 @@
 
 module.exports = async role => {
   try {
-    let guildSettings = await role.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${role.guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    let guildModel = await role.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: role.guild.id
+      }
+    });
 
-    let logChannel = role.guild.channels.get(guildSettings.log);
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = role.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
     logChannel.send({
