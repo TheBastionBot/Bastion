@@ -286,6 +286,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    ignoreStarboard: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     disabledCommands: {
       type: Sequelize.TEXT
     },
