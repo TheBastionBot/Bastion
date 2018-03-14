@@ -7,11 +7,17 @@
 module.exports = async member => {
   try {
     const greetMessages = require('../data/greetingMessages.json');
-    let guild = await member.client.db.get(`SELECT greet, greetMessage, greetTimeout, greetPrivate, greetPrivateMessage, autoAssignableRoles, log FROM guildSettings WHERE guildID=${member.guild.id}`);
-    if (!guild) return;
 
-    if (guild.log) {
-      let logChannel = member.guild.channels.get(guild.log);
+    let guildModel = await member.client.database.models.guild.findOne({
+      attributes: [ 'greet', 'greetMessage', 'greetTimeout', 'greetPrivate', 'greetPrivateMessage', 'autoAssignableRoles', 'serverLog' ],
+      where: {
+        guildID: member.guild.id
+      }
+    });
+    if (!guildModel) return;
+
+    if (guildModel.dataValues.serverLog) {
+      let logChannel = member.guild.channels.get(guildModel.dataValues.serverLog);
       if (logChannel) {
         logChannel.send({
           embed: {
@@ -37,10 +43,10 @@ module.exports = async member => {
       }
     }
 
-    if (guild.greet) {
+    if (guildModel.dataValues.greet) {
       let greetMessage;
-      if (guild.greetMessage) {
-        greetMessage = await member.client.functions.decodeString(guild.greetMessage);
+      if (guildModel.dataValues.greetMessage) {
+        greetMessage = await member.client.functions.decodeString(guildModel.dataValues.greetMessage);
       }
       else {
         greetMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
@@ -50,7 +56,7 @@ module.exports = async member => {
       greetMessage = greetMessage.replace(/\$username/ig, member.displayName);
       greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.config.prefix);
 
-      let greetChannel = member.guild.channels.get(guild.greet);
+      let greetChannel = member.guild.channels.get(guildModel.dataValues.greet);
       if (greetChannel) {
         greetChannel.send({
           embed: {
@@ -59,8 +65,8 @@ module.exports = async member => {
             description: greetMessage
           }
         }).then(m => {
-          if (guild.greetTimeout > 0) {
-            m.delete(1000 * parseInt(guild.greetTimeout)).catch(e => {
+          if (guildModel.dataValues.greetTimeout > 0) {
+            m.delete(1000 * parseInt(guildModel.dataValues.greetTimeout)).catch(e => {
               member.client.log.error(e);
             });
           }
@@ -70,10 +76,10 @@ module.exports = async member => {
       }
     }
 
-    if (guild.greetPrivate) {
+    if (guildModel.dataValues.greetPrivate) {
       let greetPrivateMessage;
-      if (guild.greetPrivateMessage) {
-        greetPrivateMessage = await member.client.functions.decodeString(guild.greetPrivateMessage);
+      if (guildModel.dataValues.greetPrivateMessage) {
+        greetPrivateMessage = await member.client.functions.decodeString(guildModel.dataValues.greetPrivateMessage);
       }
       else {
         greetPrivateMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
@@ -95,8 +101,8 @@ module.exports = async member => {
     }
 
     let autoAssignableRoles = [];
-    if (guild.autoAssignableRoles) {
-      autoAssignableRoles = guild.autoAssignableRoles.split(' ');
+    if (guildModel.dataValues.autoAssignableRoles) {
+      autoAssignableRoles = guildModel.dataValues.autoAssignableRoles.split(' ');
     }
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
     if (autoAssignableRoles.length) {
