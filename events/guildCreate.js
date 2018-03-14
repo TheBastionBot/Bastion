@@ -5,7 +5,23 @@
  */
 
 module.exports = guild => {
-  guild.client.db.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [ guild.id ]).catch(e => {
+  /**
+   * TODO: Use <Model>.create() when Sequelize supports ignore option with it,
+   * which isn't yet supported because PostgreSQL doesn't support
+   * 'INSERT OR IGNORE' query yet.
+   * @example
+   * await guild.client.database.models.guild.create({
+   *   where: {
+   *     guildID: guild.id;
+   *   },
+   *   ignore: true
+   * });
+   */
+  guild.client.database.models.guild.findOrCreate({
+    where: {
+      guildID: guild.id
+    }
+  }).catch(e => {
     guild.client.log.error(e);
   });
 
