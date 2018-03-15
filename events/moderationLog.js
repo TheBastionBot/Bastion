@@ -226,9 +226,7 @@ module.exports = async (guild, executor, action, target, reason, extras) => {
       where: {
         guildID: guild.id
       },
-      fields: [
-        'moderationCaseNo'
-      ]
+      fields: [ 'moderationCaseNo' ]
     });
   }
   catch (e) {

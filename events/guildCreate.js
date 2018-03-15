@@ -7,8 +7,8 @@
 module.exports = guild => {
   /**
    * TODO: Use <Model>.create() when Sequelize supports ignore option with it,
-   * which isn't yet supported because PostgreSQL doesn't support
-   * 'INSERT OR IGNORE' query yet.
+   * which isn't supported yet because PostgreSQL doesn't support
+   * 'INSERT OR IGNORE' query, yet.
    * @example
    * await guild.client.database.models.guild.create({
    *   where: {

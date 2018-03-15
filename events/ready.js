@@ -51,8 +51,8 @@ module.exports = async Bastion => {
       if (found === false) {
         /**
          * TODO: Use <Model>.bulkCreate() when Sequelize supports bulk ignore
-         * option with it, which isn't yet supported because PostgreSQL doesn't
-         * support 'INSERT OR IGNORE' query yet.
+         * option with it, which isn't supported yet because PostgreSQL doesn't
+         * support 'INSERT OR IGNORE' query, yet.
          * @example
          * await Bastion.database.models.guild.bulkCreate(
          *   Bastion.guilds.map(guild => {
@@ -63,6 +63,9 @@ module.exports = async Bastion => {
          */
         await Bastion.database.models.guild.create({
           guildID: bastionGuilds[i]
+        },
+        {
+          fields: [ 'guildID' ]
         });
       }
     }
