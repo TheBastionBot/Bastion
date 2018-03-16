@@ -32,7 +32,7 @@ module.exports = async message => {
       ]
     });
 
-    // If invite filter is disabled, return
+    // If link filter is disabled, return
     if (!guildModel || !guildModel.dataValues.filterLinks) return;
 
     // If the channel is whitelisted, return
