@@ -9,7 +9,7 @@ const request = require('request-promise-native');
 exports.exec = async (Bastion, message) => {
   try {
     let options = {
-      url: 'http://random.cat/meow',
+      url: 'https://aws.random.cat/meow',
       json: true
     };
     let response = await request(options);
