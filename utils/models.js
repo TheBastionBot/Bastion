@@ -134,6 +134,12 @@ module.exports = (Sequelize, database) => {
     filteredWords: {
       type: Sequelize.TEXT
     },
+    whitelistedDomains: {
+      type: Sequelize.TEXT
+    },
+    whitelistedInvites: {
+      type: Sequelize.TEXT
+    },
     slowMode: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
