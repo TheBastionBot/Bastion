@@ -11,29 +11,48 @@
  */
 module.exports = async message => {
   try {
-    let query = `SELECT filterWord, filteredWords, wordFilterWhitelistChannels, wordFilterWhitelistRoles FROM guildSettings LEFT OUTER JOIN whitelists ON guildSettings.guildID = whitelists.guildID WHERE guildSettings.guildId='${message.guild.id}'`;
-    let guild = await message.client.db.get(query);
-
-    if (!guild.filterWord) return;
-    // If the channel is whitelisted, return
-    if (guild.wordFilterWhitelistChannels) {
-      let whitelistChannels = guild.wordFilterWhitelistChannels.split(' ');
-      if (whitelistChannels.includes(message.channel.id)) return;
-    }
-    // If the user is in a whitelisted role, return
-    if (guild.wordFilterWhitelistRoles) {
-      let whitelistRoles = guild.wordFilterWhitelistRoles.split(' ');
-      for (let whitelistRole of whitelistRoles) {
-        if (message.member.roles.has(whitelistRole)) return;
-      }
-    }
     // If the user has Manage Server permission, return
     if (message.member && message.member.hasPermission('MANAGE_GUILD')) return;
 
-    let filteredWords = [];
-    if (guild.filteredWords) {
-      filteredWords = guild.filteredWords.split(' ');
+    // Fetch filter data from database
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'guildID', 'filteredWords' ],
+      where: {
+        guildID: message.guild.id,
+        filterWords: true
+      },
+      include: [
+        {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreWordFilter' ]
+        },
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'ignoreWordFilter' ]
+        }
+      ]
+    });
+
+    // If word filter is disabled, return
+    if (!guildModel) return;
+
+    // If the channel is whitelisted, return
+    if (guildModel.textChannels.
+      filter(channel => channel.dataValues.ignoreWordFilter).
+      map(channel => channel.dataValues.channelID).
+      includes(message.channel.id)) return;
+
+    // If the user is in a whitelisted role, return
+    let whitelistedRoles = guildModel.roles.
+      filter(role => role.dataValues.ignoreWordFilter).
+      map(role => role.dataValues.roleID);
+
+    for (let role of whitelistedRoles) {
+      if (message.member.roles.has(role)) return;
     }
+
+    let filteredWords = guildModel.dataValues.filteredWords ? guildModel.dataValues.filteredWords.split(' ') : [];
+
     for (let word of filteredWords) {
       if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
         if (message.deletable) {
