@@ -382,9 +382,20 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.TEXT,
       allowNull: false
     },
-    response: {
-      type: Sequelize.TEXT,
-      allowNull: false
+    responseMessage: {
+      type: Sequelize.TEXT
+    },
+    responseReactions: {
+      type: Sequelize.TEXT
+    }
+  },
+  {
+    validate: {
+      atLeastOne() {
+        if ((this.responseMessage === null) && (this.responseReactions === null)) {
+          throw new Error('At least one response type (message/reaction) is required.');
+        }
+      }
     }
   });
 
