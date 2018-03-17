@@ -71,7 +71,7 @@ module.exports = Bastion => {
                   * streamer is live.
                   */
                   if (!guild.lastStreamers.includes(stream._id)) {
-                    await Bastion.channels.get(streamers.channel).send({
+                    await Bastion.channels.get(streamers.channelID).send({
                       embed: {
                         color: Bastion.colors.PURPLE,
                         author: {

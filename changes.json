@@ -1,7 +1,7 @@
 {
   "date": "March 17, 2018",
   "THESE BUGS ARE DEAD": [
-    "Fixed Twitch stream notification not working for some servers."
+    "Fixed Twitch stream notification not working for some servers and not sending messages to the stream channel."
   ],
   "THESE ABILITIES HAVE ENHANCED": [],
   "NEW FEATURES!": [],
