@@ -6,6 +6,9 @@ ORANGE='\033[0;33m'
 GREEN='\033[0;32m';
 CYAN='\033[0;36m';
 
+echo -e "${CYAN}[Bastion]:${NC} Welcome, $USER!"
+echo
+
 if ! [ -z "$SUDO_USER" ]; then
   echo -e "${CYAN}[Bastion]: ${RED}[ERROR] I do not need root permissions.${NC} Please run without sudo."
   exit 1
@@ -158,3 +161,8 @@ case $1 in
 ;;
 
 esac
+
+echo -e "${CYAN}[Bastion]:${NC} If you faced any issues during any steps, join my official server and our amazing support staffs will help you out."
+echo -e "${CYAN}[Bastion]:${NC} Stay updated about new releases, important announcements, a lot of other things and giveaways too!"
+echo -e "${CYAN}[Bastion]:${NC} https://discord.gg/fzx8fkt"
+echo

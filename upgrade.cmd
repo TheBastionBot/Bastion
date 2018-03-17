@@ -8,6 +8,9 @@ ECHO.
 SET cwd=%~dp0
 CD /D %cwd%
 
+ECHO [Bastion]: Welcome, %USERNAME%!
+ECHO.
+
 IF EXIST data\Bastion.sqlite (
   SETLOCAL ENABLEDELAYEDEXPANSION
   FOR /F %%i in ('powershell -Command "Get-Date -format yyMMddHHmm (Get-Item data\Bastion.sqlite).LastWriteTime"') do SET modifiedDate=%%i
@@ -39,6 +42,10 @@ ECHO.
 EXIT /B 0
 
 :EXIT
+ECHO.
+ECHO [Bastion]: If you faced any issues during any steps, join my official server and our amazing support staffs will help you out.
+ECHO [Bastion]: Stay updated about new releases, important announcements, a lot of other things and giveaways too!
+ECHO [Bastion]: https://discord.gg/fzx8fkt
 ECHO.
 ECHO [Bastion]: Press any key to exit.
 PAUSE >nul 2>&1
