@@ -33,7 +33,7 @@ EXIT /B 0
 
 :EXIT
 ECHO.
-ECHO [Bastion]: Join my official server if you faced any problem during update and our amazing support staffs will help you out.
+ECHO [Bastion]: If you faced any issues during any steps, join my official server and our amazing support staffs will help you out.
 ECHO [Bastion]: Stay updated about new releases, important announcements, a lot of other things and giveaways too!
 ECHO [Bastion]: https://discord.gg/fzx8fkt
 ECHO.
