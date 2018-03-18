@@ -19,9 +19,15 @@ module.exports = Bastion => {
         try {
           for (let guild of Bastion.guilds) {
             guild = guild[1];
-            let streamers = await Bastion.db.get(`SELECT * FROM streamers WHERE guildID=${guild.id}`);
-            if (streamers && streamers.channelID) {
-              let twitchStreamers = streamers.twitch.split(' ');
+            let streamersModel = await Bastion.database.models.streamers.findOne({
+              attributes: [ 'channelID', 'twitch' ],
+              where: {
+                guildID: guild.id
+              }
+            });
+            if (streamersModel && streamersModel.channelID) {
+              let twitchStreamers = streamersModel.dataValues.twitch ? streamersModel.dataValues.twitch.split(' ') : [];
+              if (!twitchStreamers.length) continue;
 
               let options = {
                 headers: {
@@ -71,7 +77,7 @@ module.exports = Bastion => {
                   * streamer is live.
                   */
                   if (!guild.lastStreamers.includes(stream._id)) {
-                    await Bastion.channels.get(streamers.channel).send({
+                    await Bastion.channels.get(streamersModel.dataValues.channelID).send({
                       embed: {
                         color: Bastion.colors.PURPLE,
                         author: {
