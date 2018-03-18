@@ -14,7 +14,7 @@ const request = require('request-promise-native');
  */
 module.exports = Bastion => {
   try {
-    let job = new CronJob('* * * * * *',
+    let job = new CronJob('0 * * * * *',
       async () => {
         try {
           for (let guild of Bastion.guilds) {
