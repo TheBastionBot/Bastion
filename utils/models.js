@@ -243,7 +243,7 @@ module.exports = (Sequelize, database) => {
     location: {
       type: Sequelize.STRING
     },
-    blacklist: {
+    blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
@@ -300,7 +300,7 @@ module.exports = (Sequelize, database) => {
     disabledCommands: {
       type: Sequelize.TEXT
     },
-    blacklist: {
+    blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
@@ -350,7 +350,7 @@ module.exports = (Sequelize, database) => {
     level: {
       type: Sequelize.STRING
     },
-    blacklist: {
+    blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
