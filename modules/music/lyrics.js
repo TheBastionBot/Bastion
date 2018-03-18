@@ -25,18 +25,31 @@ exports.exec = async (Bastion, message, args) => {
     };
     let response = await request(options);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: `${args.song.join(' ').toTitleCase()} - Lyrics`,
-        description: response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', `View full lyrics at [musixmatch.com](${response.message.body.lyrics.backlink_url} 'Musixmatch')`),
-        footer: {
-          text: `Powered by Musixmatch • Language: ${response.message.body.lyrics.lyrics_language_description.toTitleCase()}`
+    if (response.message.header.status_code === 200) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: `${args.song.join(' ').toTitleCase()} - Lyrics`,
+          description: response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', `View full lyrics at [musixmatch.com](${response.message.body.lyrics.backlink_url} 'Musixmatch')`),
+          footer: {
+            text: `Powered by Musixmatch • Language: ${response.message.body.lyrics.lyrics_language_description.toTitleCase()}`
+          }
         }
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else if (response.message.header.status_code === 404) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          title: 'Not Found',
+          description: `No lyrics was found for **${args.song.join(' ').toTitleCase()}**.\nIf you think you are searching for the right song, try adding the artist's name to the search term and try again.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
   }
   catch (e) {
     if (e.response) {

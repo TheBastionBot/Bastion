@@ -1,7 +1,7 @@
 {
   "name": "bastion",
-  "version": "6.10.5",
-  "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
+  "version": "6.10.6",
+  "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
   "scripts": {
