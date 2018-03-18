@@ -1,11 +1,11 @@
 {
-  "date": "March 17, 2018",
+  "date": "March 18, 2018",
   "THESE BUGS ARE DEAD": [
-    "Fixed `cat` command not giving you cat pics! There was an issue with the origin server."
+    "Fixed Twitch stream notification not working for some servers and not sending messages to the stream channel.",
+    "Fixed `game` command not working for unreleased games.",
+    "Proper errors will be shown when no image is found for the `giphy` query."
   ],
-  "THESE ABILITIES HAVE ENHANCED": [
-    "Under-the-hood improvements"
-  ],
+  "THESE ABILITIES HAVE ENHANCED": [],
   "NEW FEATURES!": [],
   "NOT AVAILABLE ANYMORE": [],
   "BUGS HIDING IN THE CLOSET": []
