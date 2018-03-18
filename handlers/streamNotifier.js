@@ -36,26 +36,14 @@ module.exports = Bastion => {
               if (response._total > 0 && response.streams.length > 0) {
                 let streams = response.streams;
 
-                /*
-                * For the first run, when there no known live streamers.
-                */
-                if (!guild.lastStreamers) {
-                  /*
-                  * Add the streamers currently live to `lastStreamers`,
-                  * so that the notification doesn't gets triggered as
-                  * soon as Bastion gets online.
-                  */
-                  guild.lastStreamers = streams.map(stream => stream._id);
+                if (!guild.hasOwnProperty('lastStreamers')) {
+                  guild.lastStreamers = [];
                 }
-                /*
-                * For the rest of the iteration, where there might or
-                * might not be any known live streamers.
-                */
                 else {
                   /*
-                  * If any live streamers (`lastStreamers`) have
-                  * stopped streaming, remove them from `lastStreamers`.
-                  */
+                   * If any live streamers (`lastStreamers`) have
+                   * stopped streaming, remove them from `lastStreamers`.
+                   */
                   guild.lastStreamers.forEach(stream => {
                     if (!streams.map(stream => stream._id).includes(stream)) {
                       guild.lastStreamers.splice(guild.lastStreamers.indexOf(stream), 1);
@@ -65,11 +53,11 @@ module.exports = Bastion => {
 
                 for (let stream of streams) {
                   /*
-                  * If the (recently fetched) live streamer is not
-                  * known, i.e. stored in `lastStreamers`, add them.
-                  * And notify in the specified channel that the
-                  * streamer is live.
-                  */
+                   * If the (recently fetched) live streamer is not
+                   * known, i.e. stored in `lastStreamers`, notify in the
+                   * specified channel that the streamer is live, and add them
+                   * to `lastStreamers`.
+                   */
                   if (!guild.lastStreamers.includes(stream._id)) {
                     await Bastion.channels.get(streamers.channelID).send({
                       embed: {
@@ -81,16 +69,16 @@ module.exports = Bastion => {
                         },
                         title: stream.channel.status,
                         url: stream.channel.url,
-                        description: `${stream.display_name} is now live!`,
+                        description: `${stream.channel.display_name} is now live!`,
                         fields: [
                           {
                             name: 'Game',
-                            value: response.stream.game,
+                            value: stream.game,
                             inline: true
                           },
                           {
                             name: 'Viewers',
-                            value: response.stream.viewers,
+                            value: stream.viewers,
                             inline: true
                           }
                         ],
@@ -100,6 +88,7 @@ module.exports = Bastion => {
                         timestamp: new Date(stream.created_at)
                       }
                     });
+
                     guild.lastStreamers.push(stream._id);
                   }
                 }
