@@ -14,11 +14,17 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT suggestionChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'suggestionChannel' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (!guildModel || !guildModel.dataValues.suggestionChannel) return;
 
     let suggestionChannel;
-    if (guildSettings.suggestionChannel) {
-      suggestionChannel = message.guild.channels.filter(channel => channel.type === 'text').get(guildSettings.suggestionChannel);
+    if (guildModel.dataValues.suggestionChannel) {
+      suggestionChannel = message.guild.channels.filter(channel => channel.type === 'text').get(guildModel.dataValues.suggestionChannel);
     }
 
     if (!suggestionChannel) {
