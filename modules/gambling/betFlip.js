@@ -36,15 +36,21 @@ exports.exec = async (Bastion, message, args) => {
       ];
       let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
 
-      let user = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
-      user.bastionCurrencies = parseInt(user.bastionCurrencies);
+      let guildMemberModel = await message.client.database.models.guildMember.findOne({
+        attributes: [ 'bastionCurrencies' ],
+        where: {
+          userID: message.author.id
+        }
+      });
 
-      if (args.money > user.bastionCurrencies) {
+      guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
+
+      if (args.money > guildMemberModel.dataValues.bastionCurrencies) {
         /**
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, user.bastionCurrencies), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, guildMemberModel.dataValues.bastionCurrencies), message.channel);
       }
 
       recentUsers.push(message.author.id);
