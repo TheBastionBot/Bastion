@@ -9,7 +9,16 @@ exports.exec = async (Bastion, message, args) => {
     let musicTextChannel, musicVoiceChannel, color, description;
 
     if (args.remove) {
-      await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
+      await message.client.database.models.guild.update({
+        musicTextChannels: null,
+        musicVoiceChannel: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
+      });
       color = Bastion.colors.RED;
       description = Bastion.strings.info(message.guild.language, 'removeMusicChannels', message.author.tag);
     }
@@ -17,7 +26,16 @@ exports.exec = async (Bastion, message, args) => {
       musicTextChannel = message.channel;
       musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(args.id);
       if (musicVoiceChannel) {
-        await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=${musicTextChannel.id}, musicVoiceChannel=${musicVoiceChannel.id} WHERE guildID=${message.guild.id}`);
+        await message.client.database.models.guild.update({
+          musicTextChannels: musicTextChannel.id,
+          musicVoiceChannel: musicVoiceChannel.id
+        },
+        {
+          where: {
+            guildID: message.guild.id
+          },
+          fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
+        });
         color = Bastion.colors.GREEN;
         description = Bastion.strings.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
       }
