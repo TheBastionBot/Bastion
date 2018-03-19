@@ -11,50 +11,106 @@
  */
 module.exports = async message => {
   try {
-    let profile = await message.client.db.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`);
+    /**
+     * Using <Model>.findOrCreate() won't require the use of
+     * <ModelInstance>.save() but <Model>.findOrBuild() is used instead because
+     * <Model>.findOrCreate() creates a race condition where a matching row is
+     * created by another connection after the `find` but before the `insert`
+     * call. However, it is not always possible to handle this case in SQLite,
+     * specifically if one transaction inserts and another tries to select
+     * before the first one has committed. TimeoutError is thrown instead.
+     */
+    let [ guildMemberModel, initialized ] = await message.client.database.models.guildMember.findOrBuild({
+      where: {
+        userID: message.author.id
+      },
+      defaults: {
+        guildID: message.guild.id,
+        experiencePoints: 1
+      }
+    });
+    if (initialized) {
+      return await guildMemberModel.save();
+    }
 
-    if (!profile) {
-      await message.client.db.run('INSERT INTO profiles (userID, xp) VALUES (?, ?)', [ message.author.id, 1 ]);
+    guildMemberModel.dataValues.experiencePoints = parseInt(guildMemberModel.dataValues.experiencePoints);
+    guildMemberModel.dataValues.level = parseInt(guildMemberModel.dataValues.level);
+    guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
+
+    let currentLevel = Math.floor(0.15 * Math.sqrt(guildMemberModel.dataValues.experiencePoints + 1));
+
+    if (currentLevel > guildMemberModel.dataValues.level) {
+      await message.client.database.models.guildMember.update({
+        bastionCurrencies: guildMemberModel.dataValues.bastionCurrencies + currentLevel * 5,
+        experiencePoints: guildMemberModel.dataValues.experiencePoints + 1,
+        level: currentLevel
+      },
+      {
+        where: {
+          userID: message.author.id
+        },
+        fields: [ 'bastionCurrencies', 'experiencePoints', 'level' ]
+      });
+
+      // Level up messages
+      let guildModel = await message.client.database.models.guild.findOne({
+        attributes: [ 'levelUpMessages' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
+      if (!guildModel || !guildModel.dataValues.levelUpMessages) return;
+
+      message.channel.send({
+        embed: {
+          color: message.client.colors.BLUE,
+          title: 'Leveled up',
+          description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
+        }
+      }).catch(e => {
+        message.client.log.error(e);
+      });
     }
     else {
-      profile.xp = parseInt(profile.xp);
-      profile.level = parseInt(profile.level);
-      profile.bastionCurrencies = parseInt(profile.bastionCurrencies);
+      await message.client.database.models.guildMember.update({
+        experiencePoints: guildMemberModel.dataValues.experiencePoints + 1
+      },
+      {
+        where: {
+          userID: message.author.id
+        },
+        fields: [ 'experiencePoints' ]
+      });
+    }
 
-      let currentLevel = Math.floor(0.15 * Math.sqrt(profile.xp + 1));
-
-      if (currentLevel > profile.level) {
-        await message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`);
-
-        let guildSettings = await message.client.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
-        if (!guildSettings.levelUpMessage) return;
-
-        message.channel.send({
-          embed: {
-            color: message.client.colors.BLUE,
-            title: 'Leveled up',
-            description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
-          }
-        }).catch(e => {
-          message.client.log.error(e);
-        });
-      }
-      else {
-        await message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`);
-      }
-
-      // Level up roles
-      let guildSettings = await message.client.db.get(`SELECT levelUpRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
-      if (guildSettings && guildSettings.levelUpRoles) {
-        let levelUpRoles = await message.client.functions.decodeString(guildSettings.levelUpRoles);
-        levelUpRoles = JSON.parse(levelUpRoles);
-
-        let level = `${currentLevel}`;
-        if (levelUpRoles.hasOwnProperty(level)) {
-          let roles = levelUpRoles[level].split(' ');
-          await message.member.addRoles(roles);
+    // Level up roles
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'guildID' ],
+      where: {
+        guildID: message.guild.id
+      },
+      include: [
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'level' ]
         }
+      ]
+    });
+
+    let levelUpRoles = guildModel.roles.filter(role => role.dataValues.level).map(role => role.dataValues);
+
+    let levelUpRoleIDs = {};
+    for (let role of levelUpRoles) {
+      if (!levelUpRoleIDs.hasOwnProperty(role.level)) {
+        levelUpRoleIDs[role.level] = [];
       }
+
+      levelUpRoleIDs[role.level].push(role.roleID);
+    }
+
+    let level = `${currentLevel}`;
+    if (levelUpRoleIDs.hasOwnProperty(level)) {
+      await message.member.addRoles(levelUpRoleIDs[level]).catch(() => {});
     }
   }
   catch (e) {
