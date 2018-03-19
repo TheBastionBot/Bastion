@@ -14,10 +14,15 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT modLog, modCaseNo FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guildSettings || !guildSettings.modLog) return;
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'moderationLog' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (!guildModel || !guildModel.dataValues.moderationLog) return;
 
-    let modLogChannel = message.guild.channels.get(guildSettings.modLog);
+    let modLogChannel = message.guild.channels.get(guildModel.dataValues.moderationLog);
     if (!modLogChannel) return;
 
     let modMessage = await modLogChannel.fetchMessage(args.id);
