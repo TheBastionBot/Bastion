@@ -7,7 +7,15 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!(parseInt(args[0]) < 9223372036854775807)) {
-      await Bastion.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
+      await message.client.database.models.guild.update({
+        musicMasterRole: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'musicMasterRole' ]
+      });
 
       return message.channel.send({
         embed: {
@@ -28,7 +36,15 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
     }
 
-    await Bastion.db.run(`UPDATE guildSettings SET musicMasterRole=${args[0]} WHERE guildID=${message.guild.id}`);
+    await message.client.database.models.guild.update({
+      musicMasterRole: role.id
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'musicMasterRole' ]
+    });
 
     message.channel.send({
       embed: {
