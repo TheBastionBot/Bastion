@@ -88,7 +88,7 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     musicTextChannels: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       unique: true
     },
     musicVoiceChannel: {
