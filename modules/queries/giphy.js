@@ -29,20 +29,25 @@ exports.exec = async (Bastion, message, args) => {
 
     let response = await request(options);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: `GIF Search for ${args.join(' ')}`.slice(0, 256),
-        image: {
-          url: response.data[Math.floor(Math.random() * response.data.length)].images.original.url
-        },
-        footer: {
-          text: 'Powered by GIPHY'
+    if (response.data.length) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: `GIF Search for ${args.join(' ')}`.slice(0, 256),
+          image: {
+            url: response.data[Math.floor(Math.random() * response.data.length)].images.original.url
+          },
+          footer: {
+            text: 'Powered by GIPHY'
+          }
         }
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'image'), message.channel);
+    }
   }
   catch (e) {
     if (e.response) {

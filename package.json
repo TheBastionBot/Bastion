@@ -1,7 +1,7 @@
 {
   "name": "bastion",
   "version": "7.0.0-alpha.1",
-  "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
+  "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://bastionbot.org",
   "dependencies": {
-    "@k3rn31p4nic/google-translate-api": "^1.0.4",
+    "@k3rn31p4nic/google-translate-api": "~1.0.4",
     "chalk": "~2.3.2",
     "cheerio": "~1.0.0-rc.2",
     "cleverbot.js": "~1.0.0",
@@ -38,7 +38,7 @@
     "node-json-db": "~0.7.5",
     "opusscript": "~0.0.6",
     "overwatch-js": "~1.6.1",
-    "pokedex-api": "~1.1.0",
+    "pokedex-api": "~1.1.1",
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.85.0",
     "request-promise-native": "~1.0.5",
