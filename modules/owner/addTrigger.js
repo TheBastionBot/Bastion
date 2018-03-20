@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.trigger || !args.response) {
       /**
@@ -14,7 +14,7 @@ exports.exec = (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    Bastion.database.models.trigger.create({
+    await Bastion.database.models.trigger.create({
       guildID: message.guild.id,
       trigger: args.trigger.join(' '),
       responseMessage: args.response.join(' ')
