@@ -11,36 +11,55 @@
  */
 module.exports = async message => {
   try {
-    let query = `SELECT filterLink, linkFilterWhitelistChannels, linkFilterWhitelistRoles, whitelistDomains FROM guildSettings LEFT OUTER JOIN whitelists ON guildSettings.guildID = whitelists.guildID WHERE guildSettings.guildId='${message.guild.id}'`;
-    let guild = await message.client.db.get(query), filtered = false;
-
-    // If link filter is disabled, return
-    if (!guild.filterLink) return;
-    // If the channel is whitelisted, return
-    if (guild.linkFilterWhitelistChannels) {
-      let whitelistChannels = guild.linkFilterWhitelistChannels.split(' ');
-      if (whitelistChannels.includes(message.channel.id)) return;
-    }
-    // If the user is in a whitelisted role, return
-    if (guild.linkFilterWhitelistRoles) {
-      let whitelistRoles = guild.linkFilterWhitelistRoles.split(' ');
-      for (let whitelistRole of whitelistRoles) {
-        if (message.member.roles.has(whitelistRole)) return;
-      }
-    }
     // If the user has Manage Server permission, return
     if (message.member && message.member.hasPermission('MANAGE_GUILD')) return;
 
-    let whitelistDomains = JSON.parse(guild.whitelistDomains),
-      links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi);
+    // Fetch filter data from database
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'guildID', 'filterLinks', 'whitelistedDomains', 'moderationLog' ],
+      where: {
+        guildID: message.guild.id
+      },
+      include: [
+        {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreLinkFilter' ]
+        },
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'ignoreLinkFilter' ]
+        }
+      ]
+    });
+
+    // If link filter is disabled, return
+    if (!guildModel || !guildModel.dataValues.filterLinks) return;
+
+    // If the channel is whitelisted, return
+    if (guildModel.textChannels.
+      filter(channel => channel.dataValues.ignoreLinkFilter).
+      map(channel => channel.dataValues.channelID).
+      includes(message.channel.id)) return;
+
+    // If the user is in a whitelisted role, return
+    let whitelistedRoles = guildModel.roles.
+      filter(role => role.dataValues.ignoreLinkFilter).
+      map(role => role.dataValues.roleID);
+
+    for (let role of whitelistedRoles) {
+      if (message.member.roles.has(role)) return;
+    }
+
+    let whitelistedDomains = guildModel.dataValues.whitelistedDomains ? guildModel.dataValues.whitelistedDomains.split(' ') : [];
+    let links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi);
 
     // If there are no links in the message content, return
     if (!links) return;
     // If some domains are whitelisted, remove them from `links`
-    if (whitelistDomains.length) {
+    if (whitelistedDomains.length) {
       let matches = [];
-      for (let i = 0; i < whitelistDomains.length; i++) {
-        matches[i] = links.filter(url => !message.client.functions.isSameDomain(whitelistDomains[i], url));
+      for (let i = 0; i < whitelistedDomains.length; i++) {
+        matches[i] = links.filter(url => !message.client.functions.isSameDomain(whitelistedDomains[i], url));
       }
       links = message.client.functions.intersect(...matches);
     }
@@ -48,7 +67,7 @@ module.exports = async message => {
     if (!links.length) return;
 
     // If the code reaches here, the message contains links that needs to be filtered
-    filtered = true;
+    let filtered = true;
     // Delete the message
     if (message.deletable) {
       message.delete().catch(() => {});
@@ -66,10 +85,9 @@ module.exports = async message => {
     });
 
     // Log the links that are filtered
-    let guildSettings = await message.guild.client.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guildSettings || !guildSettings.modLog) return filtered;
+    if (!guildModel.dataValues.moderationLog) return filtered;
 
-    let modLogChannel = message.guild.channels.get(guildSettings.modLog);
+    let modLogChannel = message.guild.channels.get(guildModel.dataValues.moderationLog);
     if (!modLogChannel) return filtered;
 
     modLogChannel.send({
@@ -95,7 +113,7 @@ module.exports = async message => {
         timestamp: new Date()
       }
     }).catch(e => {
-      guild.client.log.error(e);
+      message.client.log.error(e);
     });
     return filtered;
   }

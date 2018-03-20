@@ -32,40 +32,64 @@ module.exports = async Bastion => {
     }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
-    let guild = await Bastion.db.all('SELECT guildID from guildSettings');
-    guild = guild.map(r => r.guildID);
+    let guilds = await Bastion.database.models.guild.findAll({
+      attributes: [ 'guildID' ]
+    });
+    guilds = guilds.map(guild => guild.guildID);
 
     /*
-    * Add guilds to the DB which added Bastion when it was offline.
-    */
+     * Add guilds to the DB which was added Bastion when it was offline.
+     */
     for (let i = 0; i < bastionGuilds.length; i++) {
       let found = false;
-      for (let j = 0; j < guild.length; j++) {
-        if (bastionGuilds[i] === guild[j]){
+      for (let j = 0; j < guilds.length; j++) {
+        if (bastionGuilds[i] === guilds[j]) {
           found = true;
           break;
         }
       }
       if (found === false) {
-        await Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]);
+        /**
+         * TODO: Use <Model>.bulkCreate() when Sequelize supports bulk ignore
+         * option with it, which isn't supported yet because PostgreSQL doesn't
+         * support 'INSERT OR IGNORE' query, yet.
+         * @example
+         * await Bastion.database.models.guild.bulkCreate(
+         *   Bastion.guilds.map(guild => {
+         *     return { guildID: guild.id };
+         *   }),
+         *   { ignore: true }
+         * );
+         */
+        await Bastion.database.models.guild.create({
+          guildID: bastionGuilds[i]
+        },
+        {
+          fields: [ 'guildID' ]
+        });
       }
     }
 
-    /*
-    * Remove guilds from DB which removed Bastion when it was offline.
-    */
-    // for (let i = 0; i < guild.length; i++) {
-    //   let found = false;
-    //   for (let j = 0; j < bastionGuilds.length; j++) {
-    //     if (guild[i] === bastionGuilds[j]){
-    //       found = true;
-    //       break;
-    //     }
-    //   }
-    //   if (found === false) {
-    //     await Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${guild[i]}`);
-    //   }
-    // }
+    /**
+     * TODO: Remove guilds from DB which removed Bastion when it was offline.
+     * @example
+     * for (let i = 0; i < guilds.length; i++) {
+     *   let found = false;
+     *   for (let j = 0; j < bastionGuilds.length; j++) {
+     *     if (guilds[i] === bastionGuilds[j]){
+     *       found = true;
+     *       break;
+     *     }
+     *   }
+     *   if (found === false) {
+     *     await Bastion.database.models.guild.destroy({
+     *       where: {
+     *         guildID: guilds[i]
+     *       }
+     *     });
+     *   }
+     * }
+     */
 
     require('../handlers/scheduledCommandHandler')(Bastion);
     require('../handlers/streamNotifier')(Bastion);

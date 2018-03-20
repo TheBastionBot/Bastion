@@ -37,7 +37,7 @@ exports.exec = async (Bastion, message, args) => {
       }
       description = args.streamers.join(' ');
       twitchStreamers = [ ...new Set(twitchStreamers) ];
-      await Bastion.db.run('INSERT OR REPLACE INTO streamers(guildID, twitch) VALUES(?, ?)', [ message.guild.id, twitchStreamers.join(' ') ]);
+      await Bastion.db.run('INSERT OR REPLACE INTO streamers(guildID, channelID, twitch) VALUES(?, ?, ?)', [ message.guild.id, message.channel.id, twitchStreamers.join(' ') ]);
     }
 
     message.channel.send({

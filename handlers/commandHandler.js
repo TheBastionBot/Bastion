@@ -15,54 +15,72 @@ const activeUsers = {};
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix, language, musicTextChannel, musicVoiceChannel, musicMasterRole, ignoredChannels, ignoredRoles, disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'prefix', 'language', 'musicTextChannels', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
+      where: {
+        guildID: message.guild.id
+      },
+      include: [
+        {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'disabledCommands' ]
+        },
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'disabledCommands' ]
+        }
+      ]
+    });
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
-    if (!message.guild.prefix || message.guild.prefix.join(' ') !== `${guild.prefix} ${message.client.config.prefix}`) {
-      message.guild.prefix = guild.prefix.trim().split(' ');
+    if (!message.guild.prefix || message.guild.prefix.join(' ') !== `${guildModel.dataValues.prefix} ${message.client.config.prefix}`) {
+      message.guild.prefix = guildModel.dataValues.prefix.trim().split(' ');
       message.guild.prefix.push(message.client.config.prefix);
     }
     // Add guild's language to the discord.js guild object to minimize database reads.
-    if (!message.guild.language || message.guild.language !== guild.language) {
-      message.guild.language = guild.language;
+    if (!message.guild.language || message.guild.language !== guildModel.dataValues.language) {
+      message.guild.language = guildModel.dataValues.language;
     }
     // Add a music object to the discord.js guild object, to hold music configs.
     if (!message.guild.music) {
       message.guild.music = {};
     }
     // If any of the music channels have been removed, delete them from the database.
-    if (!message.guild.channels.has(guild.musicTextChannel) || !message.guild.channels.has(guild.musicVoiceChannel)) {
-      await message.client.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
-      guild.musicTextChannel = null;
-      guild.musicVoiceChannel = null;
+    if (!message.guild.channels.has(guildModel.dataValues.musicTextChannels) || !message.guild.channels.has(guildModel.dataValues.musicVoiceChannel)) {
+      await message.client.database.models.guild.update({
+        musicTextChannels: null,
+        musicVoiceChannel: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
+      });
+      guildModel.dataValues.musicTextChannels = null;
+      guildModel.dataValues.musicVoiceChannel = null;
     }
     // If any of the music channels have been removed, delete them from the database.
-    if (!message.guild.roles.has(guild.musicMasterRole)) {
-      await message.client.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
-      guild.musicMasterRole = null;
+    if (!message.guild.roles.has(guildModel.dataValues.musicMasterRole)) {
+      await message.client.database.models.guild.update({
+        musicMasterRole: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'musicMasterRole' ]
+      });
+      guildModel.dataValues.musicMasterRole = null;
     }
     // Add music configs to the guild music object.
-    message.guild.music.textChannelID = guild.musicTextChannel;
-    message.guild.music.voiceChannelID = guild.musicVoiceChannel;
-    message.guild.music.masterRoleID = guild.musicMasterRole;
+    message.guild.music.textChannelID = guildModel.dataValues.musicTextChannels;
+    message.guild.music.voiceChannelID = guildModel.dataValues.musicVoiceChannel;
+    message.guild.music.masterRoleID = guildModel.dataValues.musicMasterRole;
 
     // The prefix used by the user to call the command.
     let usedPrefix;
     if (!message.guild.prefix.some(prefix => message.content.startsWith(usedPrefix = prefix))) return;
-
-    // Ignore commands from ignored roles & channels. Doesn't affect the guild administrator.
-    if (message.member && !message.member.hasPermission('ADMINISTRATOR')) {
-      if (guild.ignoredChannels) {
-        if (guild.ignoredChannels.split(' ').includes(message.channel.id)) return;
-      }
-
-      if (guild.ignoredRoles) {
-        let ignoredRoles = guild.ignoredRoles.split(' ');
-        for (let roleID of ignoredRoles) {
-          if (message.member.roles.has(roleID)) return;
-        }
-      }
-    }
 
     /**
      * @var {String} args The arguments used with the command.
@@ -103,9 +121,9 @@ module.exports = async message => {
     /**
      * Check if a command is disabled
      */
-    if (guild.disabledCommands) {
-      guild.disabledCommands = guild.disabledCommands.split(' ');
-      if (guild.disabledCommands.includes(cmd.help.name.toLowerCase())) {
+    if (guildModel.dataValues.disabledCommands) {
+      guildModel.dataValues.disabledCommands = guildModel.dataValues.disabledCommands.split(' ');
+      if (guildModel.dataValues.disabledCommands.includes(cmd.help.name.toLowerCase())) {
         return message.client.log.info('This command is disabled.');
       }
     }

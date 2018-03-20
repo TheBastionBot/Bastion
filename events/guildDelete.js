@@ -5,7 +5,11 @@
  */
 
 module.exports = guild => {
-  guild.client.db.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+  guild.client.database.models.guild.destroy({
+    where: {
+      guildID: guild.id
+    }
+  }).catch(e => {
     guild.client.log.error(e);
   });
 

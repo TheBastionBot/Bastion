@@ -11,17 +11,33 @@
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT mentionSpamThreshold, mentionSpamAction FROM guildSettings WHERE guildId='${message.guild.id}'`), filtered = false;
-
-    // If mention spam threshold is not set, return
-    if (!guild.mentionSpamThreshold) return filtered;
-
     // If the user has Manage Server permission, return
-    if (message.member && message.member.hasPermission('MANAGE_GUILD')) return filtered;
+    if (message.member && message.member.hasPermission('MANAGE_GUILD')) return;
 
-    if (message.mentions.users.size >= guild.mentionSpamThreshold) {
+    // Fetch filter data from database
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'guildID', 'mentionSpamThreshold', 'mentionSpamAction' ],
+      where: {
+        guildID: message.guild.id,
+        filterMentions: true
+      },
+      include: [
+        {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreMentionFilter' ]
+        },
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'ignoreMentionFilter' ]
+        }
+      ]
+    });
+
+    // If mention spam disabled, return
+    if (!guildModel) return;
+
+    if (message.mentions.users.size >= guildModel.dataValues.mentionSpamThreshold) {
       // If the code reaches here, the message is a mention spam.
-      filtered = true;
 
       // Delete the message
       if (message.deletable) {
@@ -30,11 +46,11 @@ module.exports = async message => {
 
       // Action on the user
       let action = 'did nothing with';
-      if (guild.mentionSpamAction === 'kick' && message.member.kickable) {
+      if (guildModel.dataValues.mentionSpamAction === 'kick' && message.member.kickable) {
         await message.member.kick('Mention Spam');
         action = 'kicked';
       }
-      else if (guild.mentionSpamAction === 'ban' && message.member.bannable) {
+      else if (guildModel.dataValues.mentionSpamAction === 'ban' && message.member.bannable) {
         await message.member.ban('Mention Spam');
         action = 'banned';
       }
@@ -47,9 +63,8 @@ module.exports = async message => {
       }).catch(e => {
         message.client.log.error(e);
       });
+      return true;
     }
-
-    return filtered;
   }
   catch (e) {
     message.client.log.error(e);

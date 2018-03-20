@@ -52,7 +52,7 @@ exports.exec = async (Bastion, message, args) => {
         fields: [
           {
             name: 'Rating',
-            value: `${response.total_rating.toFixed(2) || '-'}`,
+            value: response.total_rating ? response.total_rating.toFixed(2) : '-',
             inline: true
           },
           {
