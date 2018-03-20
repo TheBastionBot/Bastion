@@ -5,36 +5,43 @@
  */
 
 exports.exec = (Bastion, message, args) => {
-  if (!args.trigger || !args.response) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  Bastion.db.run('INSERT INTO triggers (trigger, response) VALUES (?, ?)', [ args.trigger.join(' '), args.response.join(' ') ]).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.GREEN,
-      title: 'New Trigger Added',
-      fields: [
-        {
-          name: 'Trigger',
-          value: args.trigger.join(' ')
-        },
-        {
-          name: 'Response',
-          value: args.response.join(' ')
-        }
-      ]
+  try {
+    if (!args.trigger || !args.response) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
-  }).catch(e => {
+
+    Bastion.database.models.trigger.create({
+      guildID: message.guild.id,
+      trigger: args.trigger.join(' '),
+      responseMessage: args.response.join(' ')
+    });
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'New Trigger Added',
+        fields: [
+          {
+            name: 'Trigger',
+            value: args.trigger.join(' ')
+          },
+          {
+            name: 'Response',
+            value: args.response.join(' ')
+          }
+        ]
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
