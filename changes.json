@@ -6,7 +6,8 @@
     "A complete redesign/rewrite of Database"
   ],
   "NOT AVAILABLE ANYMORE": [
-    "Removed `todo`, `listTodo` and `deleteTodo` commands."
+    "Removed `todo`, `listTodo` and `deleteTodo` commands.",
+    "Removed `userBlacklist` commands."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
