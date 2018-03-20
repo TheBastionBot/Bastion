@@ -18,6 +18,9 @@ exports.exec = async (Bastion, message, args) => {
       guildID: message.guild.id,
       trigger: args.trigger.join(' '),
       responseMessage: args.response.join(' ')
+    },
+    {
+      fields: [ 'guildID', 'trigger', 'responseMessage' ]
     });
 
     message.channel.send({
