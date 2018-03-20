@@ -61,14 +61,17 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
-    await Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
-      [
-        args.cronExp,
-        message.channel.id,
-        scheduledStatus.id,
-        args.command,
-        args.arguments
-      ]);
+    await Bastion.database.models.scheduledCommand.create({
+      guildID: message.guild.id,
+      channelID: message.channel.id,
+      messageID: scheduledStatus.id,
+      cronExp: args.cronExp,
+      command: args.command,
+      arguments: args.arguments
+    },
+    {
+      fields: [ 'guildID', 'channelID', 'messageID', 'cronExp', 'command', 'arguments' ]
+    });
   }
   catch (e) {
     Bastion.log.error(e);
