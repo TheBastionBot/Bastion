@@ -1,10 +1,12 @@
 {
-  "date": "March 13, 2018",
+  "date": "March 20, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of Database"
   ],
-  "NOT AVAILABLE ANYMORE": [],
+  "NOT AVAILABLE ANYMORE": [
+    "Removed `todo`, `listTodo` and `deleteTodo` commands."
+  ],
   "BUGS HIDING IN THE CLOSET": []
 }
