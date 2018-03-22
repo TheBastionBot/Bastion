@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT filterWord FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'filterWords' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, filterWordStats;
-    if (guildSettings.filterWord) {
-      await Bastion.db.run(`UPDATE guildSettings SET filterWord=0 WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.filterWords) {
+      await Bastion.database.models.guild.update({
+        filterWords: false
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterWords' ]
+      });
       color = Bastion.colors.RED;
       filterWordStats = Bastion.strings.info(message.guild.language, 'disableWordFilter', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET filterWord=1 WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        filterWords: true
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterWords' ]
+      });
       color = Bastion.colors.GREEN;
       filterWordStats = Bastion.strings.info(message.guild.language, 'enableWordFilter', message.author.tag);
     }
