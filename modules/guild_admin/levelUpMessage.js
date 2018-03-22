@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'levelUpMessages' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, levelUpMessageStats;
-    if (guildSettings.levelUpMessage) {
-      await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage=0 WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.levelUpMessages) {
+      await Bastion.database.models.guild.update({
+        levelUpMessages: false
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'levelUpMessages' ]
+      });
       color = Bastion.colors.RED;
       levelUpMessageStats = Bastion.strings.info(message.guild.language, 'disableLevelUpMessages', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET levelUpMessage=1 WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        levelUpMessages: true
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'levelUpMessages' ]
+      });
       color = Bastion.colors.GREEN;
       levelUpMessageStats = Bastion.strings.info(message.guild.language, 'enableLevelUpMessages', message.author.tag);
     }
