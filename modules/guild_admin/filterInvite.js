@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'filterInvites' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, filterInviteStats;
-    if (guildSettings.filterInvite) {
-      await Bastion.db.run(`UPDATE guildSettings SET filterInvite=0 WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.filterInvites) {
+      await Bastion.database.models.guild.update({
+        filterInvites: false
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterInvites' ]
+      });
       color = Bastion.colors.RED;
       filterInviteStats = Bastion.strings.info(message.guild.language, 'disableInviteFilter', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET filterInvite=1 WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        filterInvites: true
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterInvites' ]
+      });
       color = Bastion.colors.GREEN;
       filterInviteStats = Bastion.strings.info(message.guild.language, 'enableInviteFilter', message.author.tag);
     }
