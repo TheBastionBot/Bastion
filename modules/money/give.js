@@ -69,19 +69,24 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'giveYourself', true), message.channel);
       }
 
-      let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
-      sender.bastionCurrencies = parseInt(sender.bastionCurrencies);
+      let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+        attributes: [ 'bastionCurrencies' ],
+        where: {
+          userID: message.author.id
+        }
+      });
+      guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
-      if (sender.bastionCurrencies < args.amount) {
+      if (guildMemberModel.dataValues.bastionCurrencies < args.amount) {
         /**
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, sender.bastionCurrencies), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, guildMemberModel.dataValues.bastionCurrencies), message.channel);
       }
 
       let giveLimit = 0.5;
-      if (args.amount >= giveLimit * sender.bastionCurrencies) {
+      if (args.amount >= giveLimit * guildMemberModel.dataValues.bastionCurrencies) {
         /**
          * Error condition is encountered.
          * @fires error
