@@ -8,10 +8,17 @@ exports.exec = async (Bastion, message, args) => {
   try {
     args = message.mentions.users.first() || message.author;
 
-    let profile = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${args.id}`), bastionCurrencies = 0;
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [ 'bastionCurrencies' ],
+      where: {
+        userID: args.id
+      }
+    });
 
-    if (profile && profile.bastionCurrencies) {
-      bastionCurrencies = profile.bastionCurrencies;
+    let bastionCurrencies = 0;
+
+    if (guildMemberModel) {
+      bastionCurrencies = guildMemberModel.dataValues.bastionCurrencies;
     }
 
     let description = message.author.id === args.id ? `**${args.tag}** you currently have **${bastionCurrencies}** Bastion Currencies in your account.` : `**${args.tag}** currently has **${bastionCurrencies}** Bastion Currencies in their account.`;
