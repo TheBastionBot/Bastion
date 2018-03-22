@@ -4,26 +4,25 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const followURL = require('../../functions/followURL');
 
-exports.run = async (Bastion, message, args) => {
-  let url = args.url.join(' ');
-
-  if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(url)) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'URL'), message.channel);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    let url = args.url.join(' ');
+
+    if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(url)) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'URL'), message.channel);
+    }
+
     let followedUrl = await followURL(url);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         fields: [
           {
             name: 'URL',
@@ -53,10 +52,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'followurl',
-  description: string('followURL', 'commandDescription'),
+  name: 'followURL',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'followURL',
   example: []
 };

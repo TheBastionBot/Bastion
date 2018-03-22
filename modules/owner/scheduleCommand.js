@@ -4,17 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   if (!args.cronExp || !args.command) {
     /**
      * The command was ran with invalid parameters.
@@ -36,7 +26,7 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', '`cron` expression'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, '`cron` expression'), message.channel);
   }
   for (let i = 0; i < cronExpLength; i++) {
     if (!cronConstraints[i].test(args.cronExp[i])) {
@@ -44,7 +34,7 @@ exports.run = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', '`cron` expression'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, '`cron` expression'), message.channel);
     }
   }
 
@@ -53,35 +43,36 @@ exports.run = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
   }
 
   args.cronExp = args.cronExp.join(' ');
   args.arguments = args.arguments.join(' ');
 
-  let scheduledStatus = await message.channel.send({
-    embed: {
-      color: Bastion.colors.blue,
-      title: 'Scheduled Command',
-      description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
-      footer: {
-        text: 'Do not delete this message, as it is required by me run the scheduled command.'
+  try {
+    let scheduledStatus = await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Scheduled Command',
+        description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
+        footer: {
+          text: 'Do not delete this message, it is required by me to run the scheduled command.'
+        }
       }
-    }
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
-    [
-      args.cronExp,
-      message.channel.id,
-      scheduledStatus.id,
-      args.command,
-      args.arguments
-    ]).catch(e => {
-      Bastion.log.error(e);
     });
+
+    await Bastion.db.run('INSERT INTO scheduledCommands (cronExp, channelID, messageID, command, arguments) VALUES (?, ?, ?, ?, ?)',
+      [
+        args.cronExp,
+        message.channel.id,
+        scheduledStatus.id,
+        args.command,
+        args.arguments
+      ]);
+  }
+  catch (e) {
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
@@ -91,14 +82,15 @@ exports.config = {
     { name: 'cronExp', type: String, multiple: true, defaultOption: true },
     { name: 'command', type: String, alias: 'c' },
     { name: 'arguments', type: String, alias: 'a', multiple: true, defaultValue: '' }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'schedulecommand',
-  description: string('scheduleCommand', 'commandDescription'),
+  name: 'scheduleCommand',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'scheduleCommand <CRON PATTERN> <-c COMMAND> [-a ARGUMENTS]',
   example: [ 'scheduleCommand 0 0 0 1 1 * -c echo -a Happy New Year!' ]
 };

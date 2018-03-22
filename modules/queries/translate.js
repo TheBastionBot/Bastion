@@ -4,27 +4,26 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-const translate = require('google-translate-api');
+const translate = require('@k3rn31p4nic/google-translate-api');
 
-exports.run = async (Bastion, message, args) => {
-  if (args.length < 2) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    if (args.length < 2) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let result = await translate(args.slice(1).join(' '), { to: args[0] });
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         description: result.text,
         footer: {
-          text: `Powered by Google | Translation from ${result.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
+          text: `Powered by Google • Translation from ${result.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
         }
       }
     }).catch(e => {
@@ -37,7 +36,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'language code'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'language code'), message.channel);
     }
     Bastion.log.error(e);
   }
@@ -50,9 +49,9 @@ exports.config = {
 
 exports.help = {
   name: 'translate',
-  description: string('translate', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'translate <language_code> <text>',
   example: [ 'translate EN Je suis génial!' ]
 };

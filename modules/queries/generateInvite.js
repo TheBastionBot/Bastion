@@ -4,24 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.channel.permissionsFor(message.member).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
     let invite = await message.channel.createInvite({
       maxAge: args.age * 60,
@@ -47,10 +30,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'generateinvite',
-  description: string('generateInvite', 'commandDescription'),
+  name: 'generateInvite',
   botPermission: 'CREATE_INSTANT_INVITE',
-  userPermission: 'CREATE_INSTANT_INVITE',
+  userTextPermission: 'CREATE_INSTANT_INVITE',
+  userVoicePermission: '',
   usage: 'generateInvite [-u <NO_OF_USES>] [-a <INVITE_LINK_TIMEOUT_IN_MINUTES>]',
   example: [ 'generateInvite', 'generateInvite -u 1 -a 10' ]
 };

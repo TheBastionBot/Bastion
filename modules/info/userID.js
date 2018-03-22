@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
     user = message.author;
@@ -14,10 +12,10 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       fields: [
         {
-          name: 'User',
+          name: `${user.bot ? 'Bot' : 'User'}`,
           value: user.tag,
           inline: true
         },
@@ -39,10 +37,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'userid',
-  description: string('userID', 'commandDescription'),
+  name: 'userID',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'userID [@user-mention]',
   example: [ 'userID @user#0001', 'userID' ]
 };

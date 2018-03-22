@@ -4,10 +4,9 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const wd = require('word-definition');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -32,7 +31,7 @@ exports.run = (Bastion, message, args) => {
     if (data.err) {
       embed = {
         embed: {
-          color: Bastion.colors.red,
+          color: Bastion.colors.RED,
           description: `No definition found for **${data.word}** in **${lang.toUpperCase()}** Dictionary.`
         }
       };
@@ -40,7 +39,7 @@ exports.run = (Bastion, message, args) => {
     else {
       embed = {
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: data.word,
           description: `*${data.category}*\n\n${data.definition}`,
           footer: {
@@ -62,9 +61,9 @@ exports.config = {
 
 exports.help = {
   name: 'define',
-  description: string('define', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'define [language_code] <word>',
   example: [ 'define Colonel', 'define de Soldat', 'define en Warrior', 'define fr Guerre' ]
 };

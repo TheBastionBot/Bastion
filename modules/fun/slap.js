@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
     /**
@@ -27,8 +25,8 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
-      description: `${message.author.username} slaped ${user.username}!`,
+      color: Bastion.colors.BLUE,
+      description: `${message.author.username} slapped ${user.username}!`,
       image: {
         url: slaps[Math.floor(Math.random() * slaps.length)]
       }
@@ -45,9 +43,9 @@ exports.config = {
 
 exports.help = {
   name: 'slap',
-  description: string('slap', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'slap <@USER_MENTION>',
   example: [ 'slap @user#0001' ]
 };

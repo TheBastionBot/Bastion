@@ -4,40 +4,59 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
-  let user = message.mentions.users.first();
-  if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (message.author.id === user.id) return;
-
-  let reason = args.slice(1).join(' ');
-  if (reason.length < 1) {
-    reason = 'No reason given';
-  }
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.green,
-      title: 'User Reported',
-      description: `You have reported **${user.tag}** to the moderators for **${reason}**. They will look into it.`
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 2) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
     }
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
 
-  /**
-   * Logs moderation events if it is enabled
-   * @fires moderationLog
-   */
-  Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args[0]) {
+      user = await Bastion.fetchUser(args[0]);
+    }
+    if (!user) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    if (message.author.id === user.id) return;
+
+    let reason = args.slice(1).join(' ');
+    if (reason.length < 1) {
+      reason = 'No reason given';
+    }
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'User Reported',
+        description: Bastion.strings.info(message.guild.language, 'report', message.author.tag, user.tag, reason)
+      }
+    }).then(message => {
+      message.delete(5000).catch(() => {});
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+
+    /**
+     * Logs moderation events if it is enabled
+     * @fires moderationLog
+     */
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
+  }
+  catch (e) {
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
@@ -47,9 +66,9 @@ exports.config = {
 
 exports.help = {
   name: 'report',
-  description: string('report', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
-  usage: 'report @user-mention [Reason]',
-  example: [ 'report @user#0001 Reason for reporting.' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'report < @USER_MENTION | USER_ID > <REASON >',
+  example: [ 'report 215052539542571701 Reason for reporting.', 'report @user#0001 Reason for reporting.' ]
 };

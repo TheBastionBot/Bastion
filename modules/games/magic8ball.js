@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 2 || !args.join(' ').endsWith('?')) {
     /**
      * The command was ran with invalid parameters.
@@ -40,7 +38,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: args.join(' '),
       description: outcomes[Math.floor(Math.random() * outcomes.length)],
       footer: {
@@ -59,9 +57,9 @@ exports.config = {
 
 exports.help = {
   name: 'magic8ball',
-  description: string('magic8ball', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'magic8ball <Question>?',
   example: [ 'magic8ball Do I need a new lease on life?' ]
 };

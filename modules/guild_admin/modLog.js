@@ -6,45 +6,34 @@
 
 // This feature is absolutely useless because Discord already has audit logs. I'll probably remove this in future.
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message) => {
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT modLog, modLogChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let color, modLogStats;
-  if (guildSettings.modLog === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET modLog='true', modLogChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    modLogStats = 'Moderation audit logging is now enabled in this channel.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET modLog='false', modLogChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    modLogStats = 'Moderation audit logging is now disabled.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: modLogStats
+    let color, modLogStats;
+    if (guildSettings.modLog) {
+      await Bastion.db.run(`UPDATE guildSettings SET modLog=null WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      modLogStats = Bastion.strings.info(message.guild.language, 'disableModerationLog', message.author.tag);
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET modLog=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      modLogStats = Bastion.strings.info(message.guild.language, 'enableModerationLog', message.author.tag);
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: modLogStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -53,10 +42,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'modlog',
-  description: string('modLog', 'commandDescription'),
+  name: 'modLog',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'modLog',
   example: []
 };

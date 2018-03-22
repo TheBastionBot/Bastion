@@ -4,12 +4,13 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = (Bastion, message) => {
+  let nonAnimatedEmojis = message.guild.emojis.filter(emoji => !emoji.animated);
+  let guildEmojis = nonAnimatedEmojis.size > 0 ? nonAnimatedEmojis.size > 25 ? `${nonAnimatedEmojis.map(e => `<:${e.name}:${e.id}>`).splice(0, 25).join(' ')} and ${nonAnimatedEmojis.size - 25} more.` : nonAnimatedEmojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-';
 
-exports.run = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Server Info',
       fields: [
         {
@@ -64,11 +65,11 @@ exports.run = (Bastion, message) => {
         },
         {
           name: 'Server Emojis',
-          value: message.guild.emojis.size > 0 ? message.guild.emojis.size >= 30 ? `${message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).splice(0, 30).join(' ')} and ${message.guild.emojis.size - 30} more.` : message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-'
+          value: guildEmojis
         }
       ],
       thumbnail: {
-        url: message.guild.iconURL ? message.guild.iconURL : 'https://discordapp.com/assets/2c21aeda16de354ba5334551a883b481.png'
+        url: message.guild.icon ? message.guild.iconURL : `https://dummyimage.com/128/7289DA/FFFFFF/&text=${encodeURIComponent(message.guild.nameAcronym)}`
       },
       image: {
         url: message.guild.splash ? message.guild.splashURL : null
@@ -85,10 +86,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'serverinfo',
-  description: string('serverInfo', 'commandDescription'),
+  name: 'serverInfo',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'serverInfo',
   example: []
 };

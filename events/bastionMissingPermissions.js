@@ -9,8 +9,8 @@ module.exports = (permissions, message) => {
 
   message.channel.send({
     embed: {
-      color: message.client.colors.red,
-      description: `I need **${permissions.replace('_', ' ')}** permission to run this command.`
+      color: message.client.colors.RED,
+      description: message.client.strings.error(message.guild.language, 'bastionMissingPermissions', true, permissions.replace('_', ' '))
     }
   }).catch(e => {
     message.client.log.error(e);

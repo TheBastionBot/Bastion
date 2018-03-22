@@ -4,11 +4,10 @@
  * @license MIT
  */
 
-const CLEVERBOT = require('cleverbot-node');
+const CLEVERBOT = require('cleverbot.js');
 const CREDENTIALS = require('../settings/credentials.json');
-const BOT = new CLEVERBOT;
-BOT.configure({
-  botapi: CREDENTIALS.cleverbotAPIkey
+const BOT = new CLEVERBOT({
+  APIKey: CREDENTIALS.cleverbotAPIkey
 });
 
 /**
@@ -18,23 +17,24 @@ BOT.configure({
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).chat;
+    if (message.content.length <= `${message.client.user}  `.length) return;
 
-    if (guild.chat === 'false') return;
+    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
+    if (!guild.chat) return;
 
-    let text = message.content.split(' ');
-    if (text.length < 1) return;
-    text = text.join(' ');
-
-    BOT.write(text, response => {
+    let response = await BOT.write(message.content);
+    if (response.output) {
       message.channel.startTyping();
       setTimeout(async () => {
-        await message.channel.send(response.output).catch(e => {
+        try {
+          message.channel.stopTyping(true);
+          await message.channel.send(response.output);
+        }
+        catch (e) {
           message.client.log.error(e);
-        });
-        message.channel.stopTyping();
+        }
       }, response.output.length * 100);
-    });
+    }
   }
   catch (e) {
     message.client.log.error(e);

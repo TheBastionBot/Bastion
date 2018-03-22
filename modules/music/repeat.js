@@ -4,27 +4,27 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = (Bastion, message) => {
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
 
-exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+  if (!message.guild.music.songs || !message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
   let color, repeatStat = '';
   if (message.guild.music.repeat) {
-    color = Bastion.colors.red;
+    color = Bastion.colors.RED;
     message.guild.music.repeat = false;
     repeatStat = 'Removed the current song from repeat queue.';
   }
   else {
-    color = Bastion.colors.green;
+    color = Bastion.colors.GREEN;
     message.guild.music.repeat = true;
-    repeatStat = 'Added the current song to the repeat queue.';
+    repeatStat = Bastion.strings.info(message.guild.language, 'repeatSong', message.author.tag);
   }
 
   message.guild.music.textChannel.send({
@@ -38,15 +38,15 @@ exports.run = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'loop' ],
   enabled: true
 };
 
 exports.help = {
   name: 'repeat',
-  description: string('repeat', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'repeat',
   example: []
 };

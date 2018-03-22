@@ -4,17 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
     let todo = await Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`);
 
@@ -23,7 +13,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'todoNotFound', true, message.author.username), message.channel);
     }
 
     let list = JSON.parse(todo.list);
@@ -35,7 +25,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.dark_grey,
+        color: Bastion.colors.BLUE,
         description: `${message.author.username}, here's your todo list.`,
         fields: [
           {
@@ -61,14 +51,15 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'listtodo',
-  description: string('listTodo', 'commandDescription'),
+  name: 'listTodo',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'listTodo [page_no]',
   example: [ 'listTodo', 'listTodo 2' ]
 };

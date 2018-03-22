@@ -4,10 +4,9 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const weather = require('weather-js');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -22,7 +21,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('weatherNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'weatherNotFound', true), message.channel);
     }
 
     if (!result || result.length < 1) {
@@ -30,75 +29,80 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
+
+    result = result[0];
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Current Weather',
         fields: [
           {
             name: 'Location',
-            value: result[0].location.name,
+            value: result.location.name,
             inline: true
           },
           {
             name: 'Coordinates',
-            value: `${result[0].location.lat}, ${result[0].location.long}`,
+            value: `${result.location.lat}, ${result.location.long}`,
             inline: true
           },
           {
             name: 'Time Zone',
-            value: `UTC${result[0].location.timezone >= 0 ? `+${result[0].location.timezone}` : result[0].location.timezone}`,
+            value: `UTC${result.location.timezone >= 0 ? `+${result.location.timezone}` : result.location.timezone}`,
             inline: true
           },
           {
             name: 'Condition',
-            value: result[0].current.skytext,
+            value: result.current.skytext,
             inline: true
           },
           {
             name: 'Temperature',
-            value: `${result[0].current.temperature} \u00B0${result[0].location.degreetype}`,
+            value: `${result.current.temperature} \u00B0${result.location.degreetype}`,
             inline: true
           },
           {
             name: 'Feels Like',
-            value: `${result[0].current.feelslike} \u00B0${result[0].location.degreetype}`,
+            value: `${result.current.feelslike} \u00B0${result.location.degreetype}`,
             inline: true
           },
           {
             name: 'Low',
-            value: `${result[0].forecast[1].low} \u00B0${result[0].location.degreetype}`,
+            value: `${result.forecast[1].low} \u00B0${result.location.degreetype}`,
             inline: true
           },
           {
             name: 'High',
-            value: `${result[0].forecast[1].high} \u00B0${result[0].location.degreetype}`,
+            value: `${result.forecast[1].high} \u00B0${result.location.degreetype}`,
             inline: true
           },
           {
             name: 'Windspeed',
-            value: result[0].current.winddisplay,
+            value: result.current.winddisplay,
             inline: true
           },
           {
             name: 'Humidity',
-            value: `${result[0].current.humidity}%`,
+            value: `${result.current.humidity}%`,
             inline: true
           },
           {
             name: 'Precipitation',
-            value: `${result[0].forecast[1].precip} cm`,
+            value: `${result.forecast[1].precip} cm`,
             inline: true
           },
           {
             name: 'Observation Time',
-            value: result[0].current.observationtime,
+            value: result.current.observationtime,
             inline: true
           }
         ],
+        thumbnail: {
+          url: `https://resources.bastionbot.org/images/weather/${result.current.skycode}.png`
+        },
         footer: {
           text: 'Powered by MSN Weather'
         }
@@ -116,9 +120,9 @@ exports.config = {
 
 exports.help = {
   name: 'weather',
-  description: string('weather', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'weather <city [, country_code]|zipcode>',
   example: [ 'weather London, UK', 'weather 94109' ]
 };

@@ -71,6 +71,11 @@ module.exports = Bastion => {
    */
   Bastion.on('guildMemberRemove', LOAD_EVENTS('guildMemberRemove'));
   /**
+   * Emitted whenever a member leaves a guild, or is kicked.
+   * @listens guildMemberRemove
+   */
+  Bastion.on('presenceUpdate', LOAD_EVENTS('presenceUpdate'));
+  /**
    * Emitted whenever a guild is updated - e.g. name change.
    * @listens guildUpdate
    */
@@ -80,6 +85,11 @@ module.exports = Bastion => {
    * @listens message
    */
   Bastion.on('message', LOAD_EVENTS('message'));
+  /**
+   * Emitted whenever a reaction is added to a message.
+   * @listens message
+   */
+  Bastion.on('messageReactionAdd', LOAD_EVENTS('messageReactionAdd'));
   /**
    * Emitted whenever a message is updated - e.g. embed or content change.
    * @listens messageUpdate
@@ -112,11 +122,6 @@ module.exports = Bastion => {
   Bastion.on('warn', LOAD_EVENTS('warn'));
 
   /**
-  * Emitted whenever a bastion log event fires.
-  * @listens bastionLog
-  */
-  Bastion.on('bastionLog', LOAD_EVENTS('bastionLog'));
-  /**
   * Emitted whenever Bastion doesn't have the required permission(s).
   * @listens bastionMissingPermissions
   */
@@ -131,11 +136,6 @@ module.exports = Bastion => {
    * @listens moderationLog
    */
   Bastion.on('moderationLog', LOAD_EVENTS('moderationLog'));
-  /**
-   * Emitted whenever a server log event fires.
-   * @listens serverLog
-   */
-  Bastion.on('serverLog', LOAD_EVENTS('serverLog'));
   /**
    * Emitted whenever Bastion Currency is credited from a user.
    * @listens userCredit

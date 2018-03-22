@@ -1,13 +1,12 @@
 /**
- * @file echo command
+ * @file emoji command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
 const fs = require('fs');
-const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!args.name && !args.list) {
     /**
      * The command was ran with invalid parameters.
@@ -16,7 +15,27 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (args.list) {
+  if (args.name) {
+    args.name = args.name.toLowerCase();
+    fs.stat(`./data/emojis/${args.name}.png`, (error, stat) => {
+      /**
+       * If the emoji doesn't exist or is not readable, just return.
+       */
+      if (error) return;
+
+      /**
+       * If the emoji exists, send the emoji.
+       */
+      if (stat) {
+        message.channel.send({
+          files: [ `./data/emojis/${args.name}.png` ]
+        }).catch(e => {
+          Bastion.log.error(e);
+        });
+      }
+    });
+  }
+  else {
     fs.readdir('./data/emojis', (error, emojis) => {
       if (error) return;
 
@@ -30,7 +49,7 @@ exports.run = (Bastion, message, args) => {
        */
       message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: 'Bastion Emojis',
           description: emojis.join(', ')
         }
@@ -39,24 +58,6 @@ exports.run = (Bastion, message, args) => {
       });
     });
   }
-
-  fs.stat(`./data/emojis/${args.name}.png`, (error, stat) => {
-    /**
-     * If the emoji doesn't exist or is not readable, just return.
-     */
-    if (error) return;
-
-    /**
-     * If the emoji exists, send the emoji.
-     */
-    if (stat) {
-      message.channel.send({
-        files: [ `./data/emojis/${args.name}.png` ]
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-  });
 };
 
 exports.config = {
@@ -70,9 +71,9 @@ exports.config = {
 
 exports.help = {
   name: 'emoji',
-  description: string('emoji', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: 'ADD_REACTIONS',
+  userVoicePermission: '',
   usage: 'emoji < emoji_name | --list >',
   example: [ 'emoji yum', 'emoji --list' ]
 };

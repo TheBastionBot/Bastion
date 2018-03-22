@@ -4,35 +4,29 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-const CHANGES = require('../../changes.json');
+exports.exec = (Bastion, message) => {
+  const CHANGES = require('../../changes.json');
 
-exports.run = (Bastion, message) => {
   let changes = [];
-  if (CHANGES.updated.length !== 0) {
-    changes.push({
-      name: 'Patched/Updated:',
-      value: `- ${CHANGES.updated.join('\n- ')}`
-    });
-  }
-  if (CHANGES.added.length !== 0) {
-    changes.push({
-      name: 'Added:',
-      value: `- ${CHANGES.added.join('\n- ')}`
-    });
-  }
-  if (CHANGES.removed.length !== 0) {
-    changes.push({
-      name: 'Removed:',
-      value: `- ${CHANGES.removed.join('\n- ')}`
-    });
+  for (let section in CHANGES) {
+    if (CHANGES.hasOwnProperty(section)) {
+      if (section === 'date' || !CHANGES[section].length) continue;
+
+      changes.push({
+        name: section,
+        value: `- ${CHANGES[section].join('\n- ')}`
+      });
+    }
   }
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
-      title: 'Changelog',
-      description: `Bastion Bot v${Bastion.package.version}`,
+      color: Bastion.colors.BLUE,
+      title: `Bastion Bot v${Bastion.package.version} Changelog`,
+      url: 'https://github.com/TheBastionBot/Bastion/releases',
+      description: 'Missed an update? [Check out our previous change logs](https://github.com/TheBastionBot/Bastion/releases)' +
+                   '\nJoin our [officia server](https://discord.gg/fzx8fkt) and never miss an update: https://discord.gg/fzx8fkt' +
+                   '\n\nSupport the development of Bastion and keep it running forever by [becoming a patron](https://patreon.com/bastionbot) or [donating via PayPal](https://paypal.me/snkrsnkampa)',
       fields: changes,
       thumbnail: {
         url: Bastion.user.displayAvatarURL
@@ -53,9 +47,9 @@ exports.config = {
 
 exports.help = {
   name: 'changelog',
-  description: string('changelog', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'changelog',
   example: []
 };

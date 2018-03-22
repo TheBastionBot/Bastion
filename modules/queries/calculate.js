@@ -4,10 +4,9 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const mathjs = require('mathjs');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -19,7 +18,7 @@ exports.run = (Bastion, message, args) => {
   try {
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Result:',
         description: mathjs.eval(args.join(' ')).toFixed(2)
       }
@@ -30,7 +29,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'mathematical expression'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'mathematical expression'), message.channel);
   }
 };
 
@@ -41,9 +40,9 @@ exports.config = {
 
 exports.help = {
   name: 'calculate',
-  description: string('calculate', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'calculate <mathematical_expression>',
   example: [ 'calculate 9 * 10 - 11' ]
 };

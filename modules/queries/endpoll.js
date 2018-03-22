@@ -4,26 +4,22 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
-  if (message.deletable) {
-    message.delete().catch(e => {
-      Bastion.log.error(e);
-    });
+exports.exec = (Bastion, message) => {
+  if (message.channel.poll && message.channel.poll.collector) {
+    message.channel.poll.collector.stop();
   }
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'pollend' ],
   enabled: true
 };
 
 exports.help = {
   name: 'endpoll',
-  description: string('endpoll', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: 'MANAGE_MESSAGES',
+  userVoicePermission: '',
   usage: 'endpoll',
   example: []
 };

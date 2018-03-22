@@ -1,18 +1,10 @@
 {
-  "date": "August 4, 2017",
-  "updated": [
-    "Invite filter now checks for URL redirections, no more hiding invites behind different URLs",
-    "Fixed `listTriggers` showing the list even if list was empty",
-    "Fixed `play` command always trying to play playlist",
-    "Fixed `skip` and `stop` commands not working sometimes",
-    "Removed perms to add reactions on channel lockdown",
-    "Minor fixes and improvements"
+  "date": "March 18, 2018",
+  "THESE BUGS ARE DEAD": [
+    "Fixed the `streamers` command. Déjà vu?"
   ],
-  "added": [
-    "Added `anime` command.",
-    "Added `manga` command.",
-    "Added `punch` command.",
-    "Added `slap` command."
-  ],
-  "removed": []
+  "THESE ABILITIES HAVE ENHANCED": [],
+  "NEW FEATURES!": [],
+  "NOT AVAILABLE ANYMORE": [],
+  "BUGS HIDING IN THE CLOSET": []
 }

@@ -4,63 +4,31 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (!Bastion.resolver.resolveColor(args.color)) {
-    args.color = 0;
-  }
-
-  let maxLength = 100;
-  if (args.name && args.name.join(' ').length > maxLength) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('roleNameLength', 'errorMessage', maxLength), message.channel);
-  }
-
-  let data = roleData(args.name.join(' '), args.color);
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    if (!Bastion.resolver.resolveColor(args.color)) {
+      args.color = 0;
+    }
+
+    let maxLength = 100;
+    if (args.name && args.name.join(' ').length > maxLength) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'roleNameLength', true, maxLength), message.channel);
+    }
+
+    let data = roleData(args.name.join(' '), args.color);
     let role = await message.guild.createRole(data);
 
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        title: 'Role Created',
-        fields: [
-          {
-            name: 'Role Name',
-            value: role.name,
-            inline: true
-          },
-          {
-            name: 'Role ID',
-            value: role.id,
-            inline: true
-          },
-          {
-            name: 'Color',
-            value: role.hexColor === '#000000' ? args.color : role.hexColor,
-            inline: true
-          }
-        ]
+        color: Bastion.colors.GREEN,
+        description: Bastion.strings.info(message.guild.language, 'createRole', message.author.tag, role.name),
+        footer: {
+          text: `ID: ${role.id}`
+        }
       }
     });
   }
@@ -79,10 +47,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'createrole',
-  description: string('createRole', 'commandDescription'),
+  name: 'createRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'createrole [[-n] Role Name] [-c hex-color-code]',
   example: [ 'createrole -n Role Name -c #dc143', 'createrole -c #dc143c', 'createrole Role Name', 'createrole' ]
 };

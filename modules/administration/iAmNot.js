@@ -4,43 +4,44 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     let guild = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
     if (!guild) return;
 
     let role = message.guild.roles.find('name', args.join(' '));
-    if (role === null) return;
+    if (!role) return;
 
-    let selfAssignableRoles = JSON.parse(guild.selfAssignableRoles);
+    let selfAssignableRoles = [];
+    if (guild.selfAssignableRoles) {
+      selfAssignableRoles = guild.selfAssignableRoles.split(' ');
+    }
     if (!selfAssignableRoles.includes(role.id)) return;
 
     if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
 
-    await message.guild.members.get(message.author.id).removeRole(role);
-    await message.channel.send({
+    let member = message.member;
+    if (!member) {
+      member = await message.guild.fetchMember(message.author.id);
+    }
+
+    await member.removeRole(role);
+
+    message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        description: `${message.author}, you have been removed from **${role.name}** role.`
+        color: Bastion.colors.RED,
+        description: Bastion.strings.info(message.guild.language, 'selfRemoveRole', message.author.tag, role.name)
       }
+    }).catch(e => {
+      Bastion.log.error(e);
     });
   }
   catch (e) {
@@ -54,10 +55,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'iamnot',
-  description: string('iAmNot', 'commandDescription'),
+  name: 'iAmNot',
   botPermission: 'MANAGE_ROLES',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'iAmNot <role name>',
   example: [ 'iAmNot Looking to play' ]
 };

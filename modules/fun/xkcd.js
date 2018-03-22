@@ -5,14 +5,13 @@
  */
 
 const xkcd = require('xkcd');
-const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.latest) {
     xkcd(function (data) {
       message.channel.send({
         embed: {
-          color: Bastion.colors.blue,
+          color: Bastion.colors.BLUE,
           title: data.title,
           description: data.alt,
           url: `https://xkcd.com/${data.num}`,
@@ -53,7 +52,7 @@ exports.run = (Bastion, message, args) => {
       xkcd(comicNumber, function (data) {
         message.channel.send({
           embed: {
-            color: Bastion.colors.blue,
+            color: Bastion.colors.BLUE,
             title: data.title,
             description: data.alt,
             url: `https://xkcd.com/${data.num}`,
@@ -95,9 +94,9 @@ exports.config = {
 
 exports.help = {
   name: 'xkcd',
-  description: string('xkcd', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'xkcd [ --latest | -n comic_number ]',
   example: [ 'xkcd', 'xkcd --latest', 'xkcd -n 834' ]
 };

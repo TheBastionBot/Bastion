@@ -4,45 +4,27 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  let user = message.mentions.users.first();
-  let limit = parseInt(args[0]) ? args[0] : args[1];
-  let amount;
-  if (user || args.includes('--bots')) {
-    amount = 100;
-  }
-  else {
-    amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    let user = message.mentions.users.first();
+    let limit = parseInt(args[0]) ? args[0] : args[1];
+    let amount;
+    if (user || args.includes('--bots')) {
+      amount = 100;
+    }
+    else {
+      amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
+    }
+
     let msgs = await message.channel.fetchMessages({
       limit: amount
     });
 
-    msgs = msgs.filter(m => message.createdTimestamp - m.createdTimestamp < 1209600000);
     if (user) {
-      msgs = msgs.filter(m => m.author.id === user.id).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
+      msgs = Array.from(msgs.filter(m => m.author.id === user.id).values()).slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     else if (args.includes('--bots')) {
-      msgs = msgs.filter(m => m.author.bot).array().slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
+      msgs = Array.from(msgs.filter(m => m.author.bot).values()).slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
     }
     if (args.includes('--nonpinned')) {
       msgs = msgs.filter(m => !m.pinned);
@@ -50,10 +32,10 @@ exports.run = async (Bastion, message, args) => {
     if (msgs.size < 2 || msgs.length < 2) {
       let error;
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
-        error = string('singleMessage', 'errorMessage');
+        error = Bastion.strings.error(message.guild.language, 'singleMessage', true);
       }
       else {
-        error = string('noDeletableMessage', 'errorMessage');
+        error = Bastion.strings.error(message.guild.language, 'noDeletableMessage', true);
       }
 
       /**
@@ -63,7 +45,18 @@ exports.run = async (Bastion, message, args) => {
       return Bastion.emit('error', '', error, message.channel);
     }
 
-    await message.channel.bulkDelete(msgs);
+    await message.channel.bulkDelete(msgs, true);
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: `I've cleared ${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}.`
+      }
+    }).then(msg => {
+      msg.delete(10000).catch(() => {});
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
 
     let reason = 'No reason given';
 
@@ -81,15 +74,15 @@ exports.run = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'clr' ],
+  aliases: [ 'clr', 'purge' ],
   enabled: true
 };
 
 exports.help = {
   name: 'clear',
-  description: string('clear', 'commandDescription'),
   botPermission: 'MANAGE_MESSAGES',
-  userPermission: 'MANAGE_MESSAGES',
+  userTextPermission: 'MANAGE_MESSAGES',
+  userVoicePermission: '',
   usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',
   example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
 };

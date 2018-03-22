@@ -4,19 +4,18 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const moment = require('moment');
 const remindUsers = {};
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.cancel) {
     Bastion.clearTimeout(remindUsers[message.author.id]);
     delete remindUsers[message.author.id];
 
     return message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        description: 'Your reminders have been cancelled.'
+        color: Bastion.colors.GREEN,
+        description: Bastion.strings.info(message.guild.language, 'deleteReminder', message.author.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -47,29 +46,33 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('busy', 'errors'), string('isReminderInUse', 'errorMessage', 'reminder --cancel'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isReminderInUse', true, 'reminder --cancel'), message.channel);
   }
 
-  remindUsers[message.author.id] = Bastion.setTimeout(() => {
-    Bastion.users.get(message.author.id).send({
-      embed: {
-        color: Bastion.colors.blue,
-        title: 'Reminder',
-        description: args.message.join(' '),
-        timestamp: new Date()
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  remindUsers[message.author.id] = Bastion.setTimeout(async () => {
+    try {
+      let authorDMChannel = await message.author.createDM();
+      await authorDMChannel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Reminder',
+          description: args.message.join(' '),
+          timestamp: new Date()
+        }
+      });
 
-    delete remindUsers[message.author.id];
+      delete remindUsers[message.author.id];
+    }
+    catch (e) {
+      Bastion.log.error(e);
+    }
   }, duration);
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Reminder Set',
-      description: `I will remind you to *${args.message.join(' ')}* after *${moment.duration(duration).humanize()}*.`
+      description: Bastion.strings.info(message.guild.language, 'addReminder', message.author.tag, args.message.join(' '), moment.duration(duration).humanize())
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -88,9 +91,9 @@ exports.config = {
 
 exports.help = {
   name: 'reminder',
-  description: string('reminder', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'reminder <-d Duration> <Message>',
   example: [ 'reminder -d 10m30s Get back to work.' ]
 };

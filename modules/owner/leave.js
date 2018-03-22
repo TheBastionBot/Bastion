@@ -4,42 +4,64 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!(parseInt(args[0]) < 9223372036854775807)) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    let guild, found = true;
+    if (Bastion.shard) {
+      guild = await Bastion.shard.broadcastEval(`this.guilds.get('${args[0]}') && this.guilds.get('${args[0]}').leave().catch(e => this.log.error(e))`);
+      guild = guild.filter(g => g);
+      if (!guild.length) {
+        found = false;
+      }
+    }
+    else {
+      guild = Bastion.guilds.get(args[0]);
+      if (!guild) {
+        found = false;
+      }
+      await guild.leave();
+    }
+
+    if (found) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: `I've left the${Bastion.shard ? ' ' : ` **${guild.name}** `}Discord server with the ID **${args[0]}**.`
+        }
+      });
+    }
+    else {
+      /**
+       * Error condition is encountered.
+       * @fires error
+       */
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'Discord server'), message.channel);
+    }
   }
-
-  if (!(parseInt(args[0]) < 9223372036854775807)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (Bastion.guilds.get(args[0]).available) {
-    Bastion.guilds.get(args[0]).leave().catch(e => {
-      Bastion.log.error(e);
-    });
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'leave',
-  description: string('leave', 'commandDescription'),
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'leave <guild_id>',
   example: [ 'leave 441122339988775566' ]
 };

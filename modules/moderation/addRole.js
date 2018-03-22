@@ -4,59 +4,42 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let user = message.mentions.users.first();
-  let role;
-  if (!user) {
-    user = message.author;
-    role = args.join(' ');
-  }
-  else {
-    role = args.slice(1).join(' ');
-  }
-  role = message.guild.roles.find('name', role);
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
-  else if (!role) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    await message.guild.members.get(user.id).addRole(role);
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let user = message.mentions.users.first();
+    let role;
+    if (!user) {
+      user = message.author;
+      role = args.join(' ');
+    }
+    else {
+      role = args.slice(1).join(' ');
+    }
+    role = message.guild.roles.find('name', role);
+    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    else if (!role) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+    }
+
+    let member = await message.guild.fetchMember(user.id);
+    member.addRole(role);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        title: 'Role Added',
-        description: `${user.tag} has now been given **${role.name}** role.`
+        color: Bastion.colors.GREEN,
+        description: Bastion.strings.info(message.guild.language, 'addRole', message.author.tag, role.name, user.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -83,10 +66,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'addrole',
-  description: string('addRole', 'commandDescription'),
+  name: 'addRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'addRole [@user-mention] <Role Name>',
   example: [ 'addRole @user#001 Role Name', 'addRole Role Name' ]
 };

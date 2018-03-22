@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const credentials = require('../../settings/credentials.json');
 const HiRez = require('hirez.js');
 const hirez = new HiRez({
@@ -14,27 +13,32 @@ const hirez = new HiRez({
 
 let generatedSession = null;
 
-exports.run = async (Bastion, message, args) => {
-  if (!args.player) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!args.player) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    if (!generatedSession) {
+      let session = await hirez.paladins('pc').session.generate().catch(e => {
+        Bastion.log.error(e);
+      });
+      generatedSession = session;
+
+      setTimeout(() => {
+        generatedSession = null;
+      }, 15 * 60 * 1000);
+    }
+
+    fetchAndSend(message, args);
   }
-
-  if (!generatedSession) {
-    let session = await hirez.paladins.session.generate().catch(e => {
-      Bastion.log.error(e);
-    });
-    generatedSession = session;
-
-    setTimeout(() => {
-      generatedSession = null;
-    }, 15 * 60 * 1000);
+  catch (e) {
+    Bastion.log.error(e);
   }
-
-  fetchAndSend(message, args);
 };
 
 exports.config = {
@@ -47,9 +51,9 @@ exports.config = {
 
 exports.help = {
   name: 'paladins',
-  description: string('paladins', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'paladins <player_name>',
   example: [ 'paladins SaffronPants' ]
 };
@@ -63,9 +67,9 @@ exports.help = {
  */
 async function fetchAndSend(message, args) {
   try {
-    let player = await hirez.paladins.getPlayer(args.player);
-    let playerStatus = await hirez.paladins.getPlayerStatus(args.player);
-    let championRanks = await hirez.paladins.getChampionRanks(args.player);
+    let player = await hirez.paladins('pc').getPlayer(args.player);
+    let playerStatus = await hirez.paladins('pc').getPlayerStatus(args.player);
+    let championRanks = await hirez.paladins('pc').getChampionRanks(args.player);
 
     playerStatus = playerStatus[0];
 
@@ -74,7 +78,7 @@ async function fetchAndSend(message, args) {
       * Error condition is encountered.
       * @fires error
       */
-      return message.client.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'player'), message.channel);
+      return message.client.emit('error', message.client.strings.error(message.guild.language, 'notFound'), message.client.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
     }
 
     player = player[0];
@@ -82,7 +86,7 @@ async function fetchAndSend(message, args) {
 
     message.channel.send({
       embed: {
-        color: message.client.colors.blue,
+        color: message.client.colors.BLUE,
         author: {
           name: player.Name
         },

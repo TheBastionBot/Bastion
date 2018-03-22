@@ -4,12 +4,10 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.yellow,
+      color: Bastion.colors.GOLD,
       title: 'Bastion Bot - Support Server',
       url: 'https://discord.gg/fzx8fkt',
       description: 'Need help or support with Bastion Discord Bot?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt',
@@ -32,9 +30,9 @@ exports.config = {
 
 exports.help = {
   name: 'support',
-  description: string('support', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'support',
   example: []
 };

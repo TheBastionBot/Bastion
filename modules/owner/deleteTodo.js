@@ -4,28 +4,18 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  let index = parseInt(args[0]);
-  if (!index || index <= 0) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-  index -= 1;
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    let index = parseInt(args[0]);
+    if (!index || index <= 0) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+    index -= 1;
+
     let todo = await Bastion.db.get(`SELECT * FROM todo WHERE ownerID=${message.author.id}`);
 
     if (!todo) {
@@ -33,7 +23,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', string('notFound', 'errors'), string('todoNotFound', 'errorMessage', message.author.username), message.channel);
+      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'todoNotFound', true, message.author.username), message.channel);
     }
     else {
       let list = JSON.parse(todo.list);
@@ -43,7 +33,7 @@ exports.run = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', string('notFound', 'errors'), string('indexRange', 'errorMessage'), message.channel);
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
       }
 
       let deletedItem = list[parseInt(args[0]) - 1];
@@ -53,7 +43,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.red,
+          color: Bastion.colors.RED,
           description: `${message.author.username}, I've deleted **${deletedItem}** from your todo list.`
         }
       }).catch(e => {
@@ -68,14 +58,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'deltodo' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'deletetodo',
-  description: string('deleteTodo', 'commandDescription'),
+  name: 'deleteTodo',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'deleteTodo <index>',
   example: [ 'deleteTodo 3' ]
 };

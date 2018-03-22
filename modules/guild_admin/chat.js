@@ -4,53 +4,42 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (!Bastion.credentials.cleverbotAPIkey) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('noCredentials', 'errors'), string('noCredentials', 'errorMessage', 'Cleverbot API'), message.channel);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let color, chatStats;
-  if (guildSettings.chat === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET chat='true' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    chatStats = 'Enabled chat in this server. Now I\'ll respond if anyone mentions me, Ain\'t that cool? :sunglasses:';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET chat='false' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    chatStats = 'Disabled chat in this server. Now I\'m gonna miss talking with you. :disappointed:';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: chatStats
+exports.exec = async (Bastion, message) => {
+  try {
+    if (!Bastion.credentials.cleverbotAPIkey) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'noCredentials'), Bastion.strings.error(message.guild.language, 'noCredentials', true, 'Cleverbot API'), message.channel);
     }
-  }).catch(e => {
+
+    let guildSettings = await Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
+
+    let color, chatStats;
+    if (guildSettings.chat) {
+      await Bastion.db.run(`UPDATE guildSettings SET chat=0 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      chatStats = Bastion.strings.info(message.guild.language, 'disableChat', message.author.tag);
+    }
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET chat=1 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      chatStats = Bastion.strings.info(message.guild.language, 'enableChat', message.author.tag);
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: chatStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -60,9 +49,9 @@ exports.config = {
 
 exports.help = {
   name: 'chat',
-  description: string('chat', 'commandDescription'),
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'chat',
   example: []
 };

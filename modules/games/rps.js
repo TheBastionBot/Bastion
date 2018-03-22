@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   let outcomes = [
     'ROCK',
     'PAPER',
@@ -46,7 +44,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
     }
   }).catch(e => {
@@ -61,9 +59,9 @@ exports.config = {
 
 exports.help = {
   name: 'rps',
-  description: string('rps', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'rps <rock|paper|scissor>',
   example: [ 'rps Rock' ]
 };

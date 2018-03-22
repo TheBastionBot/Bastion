@@ -4,140 +4,150 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!args.amount) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-exports.run = async (Bastion, message, args) => {
-  if (args.length < 2 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let user = message.mentions.users.first();
-  if (parseInt(args[1]) < 9223372036854775807) {
-    user = Bastion.users.get(args[1]);
-  }
-  if (!user) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('giveNoUser', 'errorMessage'), message.channel);
-  }
-
-  if (Bastion.credentials.ownerId.includes(message.author.id)) {
-    Bastion.emit('userDebit', user, args[0]);
-
-    /**
-     * Send a message in the channel to let the Bot Owner know that the operation was successful.
-     */
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
-        description: `You've awarded **${args[0]}** Bastion Currencies to <@${user.id}>.`
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await message.guild.fetchMember(args.id);
+      if (user) {
+        user = user.user;
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    /**
-     * Let the user know by DM that their account has been debited.
-     */
-    user.send({
-      embed: {
-        color: Bastion.colors.green,
-        description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
-    if (message.author.id === user.id) {
+    }
+    if (!user) {
       /**
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('forbidden', 'errors'), string('giveYourself', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveNoUser', true), message.channel);
     }
 
-    try {
-      let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+    args.amount = Math.abs(args.amount);
+    if (Bastion.credentials.ownerId.includes(message.author.id)) {
+      Bastion.emit('userDebit', user, args.amount);
 
-      if (sender.bastionCurrencies < args[0]) {
-        /**
-        * Error condition is encountered.
-        * @fires error
+      /**
+        * Send a message in the channel to let the Bot Owner know that the operation was successful.
         */
-        return Bastion.emit('error', string('insufficientBalance', 'errors'), string('insufficientBalance', 'errorMessage', sender.bastionCurrencies), message.channel);
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: `You've awarded **${args.amount}** Bastion Currencies to <@${user.id}>.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      /**
+        * Let the user know by DM that their account has been debited.
+        */
+      user.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      if (message.author.id === user.id) {
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'giveYourself', true), message.channel);
+      }
+
+      let sender = await Bastion.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${message.author.id}`);
+      sender.bastionCurrencies = parseInt(sender.bastionCurrencies);
+
+      if (sender.bastionCurrencies < args.amount) {
+        /**
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, sender.bastionCurrencies), message.channel);
       }
 
       let giveLimit = 0.5;
-      if (args[0] >= giveLimit * parseInt(sender.bastionCurrencies)) {
+      if (args.amount >= giveLimit * sender.bastionCurrencies) {
         /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        return Bastion.emit('error', string('invalidInput', 'errors'), string('giveLimit', 'errorMessage', giveLimit * 100), message.channel);
+         * Error condition is encountered.
+         * @fires error
+         */
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveLimit', true, giveLimit * 100), message.channel);
       }
 
-      Bastion.emit('userDebit', user, args[0]);
-      Bastion.emit('userCredit', message.author, args[0]);
+      Bastion.emit('userDebit', user, args.amount);
+      Bastion.emit('userCredit', message.author, args.amount);
 
       /**
-      * Send a message in the channel to let the user know that the operation was successful.
-      */
+       * Send a message in the channel to let the user know that the operation was successful.
+       */
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
-          description: `You have given **${args[0]}** Bastion Currencies to <@${user.id}>.`
+          color: Bastion.colors.GREEN,
+          description: `You have given **${args.amount}** Bastion Currencies to <@${user.id}>.`
         }
       }).catch(e => {
         Bastion.log.error(e);
       });
 
       /**
-      * Let the user receiving Bastion Currencies know by DM that their account has been debited.
-      */
+       * Let the user receiving Bastion Currencies know by DM that their account has been debited.
+       */
       user.send({
         embed: {
-          color: Bastion.colors.green,
-          description: `Your account has been debited with **${args[0]}** Bastion Currencies.`
+          color: Bastion.colors.GREEN,
+          description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
       });
 
       /**
-      * Let the user sending Bastion Currencies know by DM that their account has been credited.
-      */
+       * Let the user sending Bastion Currencies know by DM that their account has been credited.
+       */
       message.author.send({
         embed: {
-          color: Bastion.colors.green,
-          description: `Your account has been credited with **${args[0]}** Bastion Currencies.`
+          color: Bastion.colors.RED,
+          description: `Your account has been credited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
-    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'amount', type: Number, alias: 'n' }
+  ]
 };
 
 exports.help = {
   name: 'give',
-  description: string('give', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
-  usage: 'give <amount> <@user-mention|user_id>',
-  example: [ 'give 100 @user#0001', 'give 150 2233445566778899' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'give < @USER_MENTION | USER_ID > <-n AMOUNT>',
+  example: [ 'give @user#0001 -n 50', 'give 114312165731193137 -n 50' ]
 };

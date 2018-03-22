@@ -4,28 +4,28 @@
  * @license MIT
  */
 
-const request = require('request');
-const string = require('../../handlers/languageHandler');
+const request = require('request-promise-native');
 
-exports.run = (Bastion, message) => {
-  let baseURL = 'https://random.dog/';
-  request(`${baseURL}woof`, function (error, response, body) {
-    if (error) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
-    }
+exports.exec = async (Bastion, message) => {
+  try {
+    let baseURL = 'http://random.dog';
 
-    if (response && response.statusCode === 200) {
-      message.channel.send({
-        files: [ baseURL + body ]
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    let options = {
+      url: `${baseURL}/woof`,
+      json: true
+    };
+    let response = await request(options);
+
+    await message.channel.send({
+      files: [ `${baseURL}/${response}` ]
+    });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-  });
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
@@ -35,9 +35,9 @@ exports.config = {
 
 exports.help = {
   name: 'dog',
-  description: string('dog', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'dog',
   example: []
 };

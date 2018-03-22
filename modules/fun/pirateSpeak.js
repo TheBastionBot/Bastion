@@ -5,9 +5,8 @@
  */
 
 const dictionary = require('../../data/piratePhrases.json');
-const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -18,7 +17,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Pirate Speak:',
       description: translate(args.join(' '))
     }
@@ -33,10 +32,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'piratespeak',
-  description: string('pirateSpeak', 'commandDescription'),
+  name: 'pirateSpeak',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'pirateSpeak <text>',
   example: [ 'pirateSpeak You can always trust the untrustworthy because you can always trust that they will be untrustworthy. Its the trustworthy you can\'t trust.' ]
 };

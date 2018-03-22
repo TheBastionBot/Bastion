@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -17,8 +15,11 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
-      description: args.join(' ')
+      color: Bastion.colors.DEFAULT,
+      description: args.join(' '),
+      footer: {
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from Bastion or from it\'s creators.'}`
+      }
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -32,9 +33,9 @@ exports.config = {
 
 exports.help = {
   name: 'echo',
-  description: string('echo', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'echo <text>',
   example: [ 'echo Hello, world!' ]
 };

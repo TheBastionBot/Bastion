@@ -4,49 +4,51 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  let user = message.mentions.users.first();
-  if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
-
-  args = args.slice(1);
-  let color;
-  let nickStat = '';
-  if (args.length < 1) {
-    color = Bastion.colors.red;
-    nickStat = `${user}'s nickname removed.`;
-  }
-  else {
-    color = Bastion.colors.green;
-    nickStat = `${user}'s nickname changed.`;
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    await message.guild.members.get(user.id).setNickname(args.join(' '));
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await Bastion.fetchUser(args.id);
+    }
+    if (!user) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let member = await message.guild.fetchMember(user.id);
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+
+    let color;
+    let nickStat = '';
+    if (message.guild.ownerID === message.author.id) {
+      color = Bastion.colors.RED;
+      nickStat = 'Can\'t change server owner\'s nickname.';
+    }
+    else {
+      args.nick = args.nick.join(' ');
+
+      if (args.nick > 32) {
+        color = Bastion.colors.RED;
+        nickStat = 'Nickname can\'t be longer than 32 characters.';
+      }
+      else {
+        if (args.nick < 1) {
+          color = Bastion.colors.RED;
+          nickStat = Bastion.strings.info(message.guild.language, 'removeNickname', message.author.tag, user.tag);
+        }
+        else {
+          color = Bastion.colors.GREEN;
+          nickStat = Bastion.strings.info(message.guild.language, 'setNickname', message.author.tag, user.tag, args.nick);
+        }
+      }
+      await member.setNickname(args.nick);
+    }
 
     message.channel.send({
       embed: {
@@ -64,14 +66,18 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'nick' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'nick', alias: 'n', type: String, multiple: true, defaultValue: [] }
+  ]
 };
 
 exports.help = {
   name: 'nickname',
-  description: string('nickname', 'commandDescription'),
   botPermission: 'MANAGE_NICKNAMES',
-  userPermission: 'MANAGE_NICKNAMES',
-  usage: 'nickname <@user-mention> [nick]',
-  example: [ 'nickname @user#0001 The Legend', 'nickname @user#0001' ]
+  userTextPermission: 'MANAGE_NICKNAMES',
+  userVoicePermission: '',
+  usage: 'nickname < @USER_MENTION | USER_ID > [-n nick]',
+  example: [ 'nickname @user#0001 -n The Legend', 'nickname 167147569575323761' ]
 };

@@ -4,17 +4,15 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: 3050327,
+      color: Bastion.colors.DARK_GREEN,
       title: 'Support Bastion Bot project',
       url: 'https://BastionBot.org/',
       description: 'To support and send donations for the Bastion Bot, ' +
                    'you can either pledge for The Bastion Bot project ' +
-                   'on **Patreon**: https://patreon.com/snkrsnkampa\nOR\nSend ' +
+                   'on **Patreon**: https://patreon.com/bastionbot\nOR\nSend ' +
                    'one off donations via **PayPal**: https://paypal.me/snkrsnkampa'
     }
   }).catch(e => {
@@ -29,9 +27,9 @@ exports.config = {
 
 exports.help = {
   name: 'donate',
-  description: string('donate', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'donate',
   example: []
 };

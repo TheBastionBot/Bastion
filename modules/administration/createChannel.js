@@ -4,68 +4,44 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-  if (!args.name) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let minLength = 2, maxLength = 100;
-  args.name = args.name.join('-');
-  if (args.name.length < minLength || args.name.length > maxLength) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('channelNameLength', 'errorMessage', minLength, maxLength), message.channel);
-  }
-
-  let channelType = 'text';
-  if (!args.text && args.voice) {
-    channelType = 'voice';
-  }
-  else {
-    args.name = args.name.replace(' ', '-');
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    let channel = await message.guild.createChannel(args.name, 'channelType');
+    if (!args.name) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let minLength = 2, maxLength = 100;
+    args.name = args.name.join(' ');
+    if (args.name.length < minLength || args.name.length > maxLength) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'channelNameLength', true, minLength, maxLength), message.channel);
+    }
+
+    let channelType;
+    if (!args.text && args.voice) {
+      channelType = 'voice';
+    }
+    else {
+      channelType = 'text';
+      args.name = args.name.replace(' ', '-');
+    }
+
+    let channel = await message.guild.createChannel(args.name, channelType);
 
     await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        title: `${channelType.charAt(0).toUpperCase() + channelType.substr(1)} Channel Created`,
-        fields: [
-          {
-            name: 'Channel Name',
-            value: channel.name,
-            inline: true
-          },
-          {
-            name: 'Channel ID',
-            value: channel.id,
-            inline: true
-          }
-        ]
+        color: Bastion.colors.GREEN,
+        description: Bastion.strings.info(message.guild.language, 'createChannel', message.author.tag, channelType, channel.name),
+        footer: {
+          text: `ID: ${channel.id}`
+        }
       }
     });
   }
@@ -85,10 +61,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'createchannel',
-  description: string('createChannel', 'commandDescription'),
+  name: 'createChannel',
   botPermission: 'MANAGE_CHANNELS',
-  userPermission: 'MANAGE_CHANNELS',
+  userTextPermission: 'MANAGE_CHANNELS',
+  userVoicePermission: '',
   usage: 'createChannel [-t | -v] <Channel Name>',
   example: [ 'createChannel -t Text Channel Name', 'createChannel -v Voice Channel Name', 'createChannel Text Channel Name' ]
 };

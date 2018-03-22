@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     channel = message.channel;
@@ -14,7 +12,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       fields: [
         {
           name: 'Channel',
@@ -39,10 +37,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'channelid',
-  description: string('channelID', 'commandDescription'),
+  name: 'channelID',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'channelID [#channel-mention]',
   example: [ 'channelID #channel-name', 'channelID' ]
 };

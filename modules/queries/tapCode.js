@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -52,7 +50,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Tap Code',
       description: `**${args}**`
     }
@@ -67,10 +65,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'tapcode',
-  description: string('tapCode', 'commandDescription'),
+  name: 'tapCode',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'tapCode <text>',
   example: [ 'tapCode Knock Knock' ]
 };

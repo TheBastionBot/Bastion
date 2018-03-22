@@ -4,46 +4,45 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
+      let guildSettings = await Bastion.db.get(`SELECT greetMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (args.length < 1) {
-    let guildSettings = await Bastion.db.get(`SELECT greetMessage FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'Greeting message:',
-        description: guildSettings.greetMessage
+      let greetMessage = `Not set. Set greeting message using \`${this.help.name} <Message>\``;
+      if (guildSettings.greetMessage) {
+        greetMessage = await Bastion.functions.decodeString(guildSettings.greetMessage);
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET greetMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
-        title: 'Greeting message set to:',
-        description: args.join(' ')
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Greeting Message',
+          description: greetMessage
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      args = args.join(' ');
+
+      let greetMessage = await Bastion.functions.encodeString(args);
+      await Bastion.db.run('UPDATE guildSettings SET greetMessage=(?) WHERE guildID=(?)', [ greetMessage, message.guild.id ]);
+
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          title: 'Greeting Message Set',
+          description: args
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
@@ -53,10 +52,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'greetmessage',
-  description: string('greetMessage', 'commandDescription'),
+  name: 'greetMessage',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'greetMessage [Message]',
   example: [ 'greetMessage Hello $user! Welcome to $server.' ]
 };

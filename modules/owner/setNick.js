@@ -4,24 +4,14 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length > 0) {
-      await message.guild.members.get(Bastion.user.id).setNickname(args.join(' '));
+      await message.guild.me.setNickname(args.join(' '));
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
         }
       }).catch(e => {
@@ -29,11 +19,11 @@ exports.run = async (Bastion, message, args) => {
       });
     }
     else {
-      await message.guild.members.get(Bastion.user.id).setNickname('');
+      await message.guild.me.setNickname('');
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s nick has been reset on this guild.`
         }
       }).catch(e => {
@@ -48,14 +38,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'setn' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'setnick',
-  description: string('setNick', 'commandDescription'),
+  name: 'setNick',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'setNick [text]',
   example: [ 'setNick NewNick', 'setNick' ]
 };

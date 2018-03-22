@@ -1,12 +1,11 @@
 branches:
   only:
     - master
-    - dev
+    - stable
 skip_tags: true
 skip_commits:
   message: /(\[skip appveyor\]|\[appveyor skip\])/
 image:
-  - Visual Studio 2015
   - Visual Studio 2017
 clone_depth: 1
 install:

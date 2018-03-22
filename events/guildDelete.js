@@ -9,9 +9,34 @@ module.exports = guild => {
     guild.client.log.error(e);
   });
 
-  /**
-   * bastion join/leave log events, if enabled
-   * @fires bastionLog
-   */
-  guild.client.emit('bastionLog', guild.client, 'guildDelete', guild);
+  guild.client.webhook.send('bastionLog', {
+    color: guild.client.colors.RED,
+    title: guild.client.strings.events(guild.language, 'guildDelete'),
+    fields: [
+      {
+        name: 'Server Name',
+        value: guild.name,
+        inline: true
+      },
+      {
+        name: 'Server ID',
+        value: guild.id,
+        inline: true
+      },
+      {
+        name: 'Server Owner',
+        value: guild.owner ? guild.owner.user.tag : 'Unknown',
+        inline: true
+      },
+      {
+        name: 'Server Owner ID',
+        value: guild.ownerID,
+        inline: true
+      }
+    ],
+    thumbnail: {
+      url: guild.icon ? guild.iconURL : `https://dummyimage.com/128/7289DA/FFFFFF/&text=${encodeURIComponent(guild.nameAcronym)}`
+    },
+    timestamp: new Date()
+  });
 };

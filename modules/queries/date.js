@@ -4,10 +4,9 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const location = require('weather-js');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -22,7 +21,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'location'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'location'), message.channel);
     }
 
     if (!result || result.length < 1) {
@@ -30,7 +29,7 @@ exports.run = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
     }
 
     let date = Bastion.functions.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
@@ -38,7 +37,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         fields: [
           {
             name: 'Location',
@@ -63,9 +62,9 @@ exports.config = {
 
 exports.help = {
   name: 'date',
-  description: string('date', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
-  usage: 'data < location name[, country code] | zip code >',
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'date < location name[, country code] | zip code >',
   example: [ 'date New York, US', 'date 94109' ]
 };

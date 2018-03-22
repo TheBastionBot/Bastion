@@ -5,9 +5,8 @@
  */
 
 const flipText = require('../../data/flipText.json');
-const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -23,7 +22,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Flipped Text:',
       description: args.split('').reverse().join('')
     }
@@ -38,10 +37,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'fliptext',
-  description: string('flipText', 'commandDescription'),
+  name: 'flipText',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'fliptext <text>',
   example: [ 'fliptext This is Upside Down!' ]
 };

@@ -4,17 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -23,15 +13,15 @@ exports.run = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let guilds = Bastion.guilds.filter(g => g.name.toLowerCase().includes(args.join(' ').toLowerCase())).map(g => g.name);
+  let guilds = Bastion.guilds.filter(g => g.name.toLowerCase().includes(args.join(' ').toLowerCase())).map(g => `${g.name} - ${g.id}`);
   let total = guilds.length;
-  guilds = total > 0 ? guilds.slice(0, 10).join(', ') : 'None';
+  guilds = total > 0 ? guilds.slice(0, 10).join('\n') : 'None';
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.dark_grey,
+      color: Bastion.colors.BLUE,
       title: 'Server search',
-      description: `Found **${total}** servers with **${args.join(' ')}** in it's name.`,
+      description: `Found **${total}** servers${Bastion.shard ? `, in Shard ${Bastion.shard.id},` : ''} with **${args.join(' ')}** in it's name.`,
       fields: [
         {
           name: 'Servers',
@@ -46,14 +36,15 @@ exports.run = (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'servers' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'searchserver',
-  description: string('searchServer', 'commandDescription'),
+  name: 'searchServer',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'searchServer <name>',
   example: [ 'searchServer Bastion' ]
 };

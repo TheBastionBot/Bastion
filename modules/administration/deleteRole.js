@@ -4,70 +4,41 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (!args.mention && !args.id && !args.name) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let role = message.mentions.roles.first();
-  if (!role) {
-    if (args.id) {
-      role = message.guild.roles.get(args.id);
-    }
-    else if (args.name) {
-      role = message.guild.roles.find('name', args.name.join(' '));
-    }
-  }
-
-  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
-  else if (!role) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    let deletedRole = await role.delete();
+    if (!args.mention && !args.id && !args.name) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let role = message.mentions.roles.first();
+    if (!role) {
+      if (args.id) {
+        role = message.guild.roles.get(args.id);
+      }
+      else if (args.name) {
+        role = message.guild.roles.find('name', args.name.join(' '));
+      }
+    }
+
+    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+    else if (!role) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+    }
+
+    await role.delete();
 
     await message.channel.send({
       embed: {
-        color: Bastion.colors.red,
-        title: 'Role Deleted',
-        fields: [
-          {
-            name: 'Role Name',
-            value: deletedRole.name,
-            inline: true
-          },
-          {
-            name: 'Role ID',
-            value: deletedRole.id,
-            inline: true
-          }
-        ]
+        color: Bastion.colors.RED,
+        description: Bastion.strings.info(message.guild.language, 'deleteRole', message.author.tag, role.name)
       }
     });
   }
@@ -87,10 +58,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'deleterole',
-  description: string('deleteRole', 'commandDescription'),
+  name: 'deleteRole',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
   usage: 'deleteRole < [-m] @Role Mention | -i ROLE_ID | -n Role Name >',
   example: [ 'deleteRole -m @Server Staffs', 'deleteRole -i 295982817647788032', 'deleteRole -n Server Staffs' ]
 };

@@ -10,33 +10,39 @@
  * @returns {void}
  */
 module.exports = async message => {
-  /**
-  * Filter Discord client token
-  */
-  if (message.content.includes(message.client.token)) {
-    if (message.deletable) {
-      message.delete().catch(e => {
+  try {
+    /**
+    * Filter Discord client token
+    */
+    if (message.content.includes(message.client.token)) {
+      if (message.deletable) {
+        message.delete().catch(e => {
+          message.client.log.error(e);
+        });
+      }
+
+      let app = await message.client.fetchApplication();
+      let owner = await message.client.fetchUser(app.owner.id);
+
+      owner.send({
+        embed: {
+          color: message.client.colors.RED,
+          title: 'ATTENTION!',
+          description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
+          fields: [
+            {
+              name: 'Responsible user',
+              value: `${message.author.tag} - ${message.author.id}`
+            }
+          ]
+        }
+      }).catch(e => {
         message.client.log.error(e);
       });
+      return true;
     }
-
-    let app = await message.client.fetchApplication();
-    let owner = message.client.users.get(app.owner.id);
-
-    owner.send({
-      embed: {
-        color: message.client.colors.red,
-        title: 'ATTENTION!',
-        description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
-        fields: [
-          {
-            name: 'Responsible user',
-            value: `${message.author.tag} - ${message.author.id}`
-          }
-        ]
-      }
-    }).catch(e => {
-      message.client.log.error(e);
-    });
+  }
+  catch (e) {
+    message.client.log.error(e);
   }
 };

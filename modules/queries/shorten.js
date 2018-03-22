@@ -4,73 +4,64 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-const request = require('request');
+const request = require('request-promise-native');
 
-exports.run = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  args = encodeURI(args.join(' '));
-  if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args)) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', string('invalidInput', 'errors'), string('invalidInput', 'errorMessage', 'URL'), message.channel);
-  }
-
-  let options = {
-    uri: `https://www.googleapis.com/urlshortener/v1/url?key=${Bastion.credentials.googleAPIkey}`,
-    method: 'POST',
-    json: {
-      longUrl: args
-    }
-  };
-
-  request(options, function (error, response, body) {
-    if (error) {
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
-    if (response.statusCode === 200) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.blue,
-          fields: [
-            {
-              name: 'Long URL',
-              value: args
-            },
-            {
-              name: 'Short URL',
-              value: body.id
-            }
-          ],
-          footer: {
-            text: 'Powered by Google'
+
+    args = encodeURI(args.join(' '));
+    if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args)) {
+      /**
+      * Error condition is encountered.
+      * @fires error
+      */
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'URL'), message.channel);
+    }
+
+    let options = {
+      url: `https://www.googleapis.com/urlshortener/v1/url?key=${Bastion.credentials.googleAPIkey}`,
+      method: 'POST',
+      json: {
+        longUrl: args
+      }
+    };
+
+    let response = await request(options);
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        fields: [
+          {
+            name: 'Long URL',
+            value: args
+          },
+          {
+            name: 'Short URL',
+            value: response.id
           }
+        ],
+        footer: {
+          text: 'Powered by Google'
         }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-    else {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
-    }
-  });
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
@@ -80,9 +71,9 @@ exports.config = {
 
 exports.help = {
   name: 'shorten',
-  description: string('shorten', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'shorten <URL>',
   example: [ 'shorten https://BastionBot.org/SomeLongURL' ]
 };

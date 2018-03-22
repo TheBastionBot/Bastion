@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     channel = message.channel;
@@ -14,7 +12,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Channel Topic',
       description: (channel.topic === null || channel.topic.length < 2) ? 'No channel topic present' : channel.topic
     }
@@ -29,10 +27,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'channeltopic',
-  description: string('channelTopic', 'commandDescription'),
+  name: 'channelTopic',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'channelTopic [#channel-mention]',
   example: [ 'channelTopic #channel-name', 'channelTopic' ]
 };

@@ -4,34 +4,27 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = (Bastion, message) => {
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
 
-exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+  if (!message.guild.music.songs || !message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
-  }
-
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.musicMasterRoleID)) {
-    /**
-    * User has missing permissions.
-    * @fires userMissingPermissions
-    */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
   if (message.guild.voiceConnection.speaking) return;
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.green,
+      color: Bastion.colors.GREEN,
       title: 'Resumed Playback',
+      url: message.guild.music.songs[0].id ? `https://youtu.be/${message.guild.music.songs[0].id}` : '',
       description: message.guild.music.songs[0].title,
       footer: {
-        text: `🔉 ${message.guild.music.dispatcher.volume * 50}% | ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
+        text: `🔉 ${message.guild.music.dispatcher.volume * 50}% • ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
       }
     }
   }).then(() => {
@@ -43,14 +36,15 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  musicMasterOnly: true
 };
 
 exports.help = {
   name: 'resume',
-  description: string('resume', 'commandDescription'),
   botPermission: '',
-  userPermission: 'MUSIC_MASTER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'resume',
   example: []
 };

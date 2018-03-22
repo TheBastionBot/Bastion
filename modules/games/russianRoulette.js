@@ -4,13 +4,12 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const outcomes = [
   '🔫 BANG! You are dead, buddy.',
   'You got lucky, my friend.'
 ];
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   args = isNaN(args = parseInt(args[0])) ? 1 : args > 7 ? 7 : args;
   let outcome = '';
   for (let i = 0; i < args; i++) {
@@ -18,7 +17,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: `Round ${i + 1}`,
         description: outcome
       }
@@ -36,10 +35,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'russianroulette',
-  description: string('russianRoulette', 'commandDescription'),
+  name: 'russianRoulette',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'russianRoulette [no_of_bullets]',
   example: [ 'russianRoulette', 'russianRoulette 7' ]
 };

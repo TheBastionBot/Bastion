@@ -4,53 +4,40 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let filteredWords = JSON.parse(guildSettings.filteredWords);
-  filteredWords = filteredWords.concat(args);
-  filteredWords = [ ...new Set(filteredWords) ];
-
-  await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${JSON.stringify(filteredWords)}' WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.green,
-      title: 'Added Words to Filter List',
-      description: args.join(', ')
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
-  }).catch(e => {
+
+    let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
+
+    let filteredWords = [];
+    if (guildSettings.filteredWords) {
+      filteredWords = guildSettings.filteredWords.split(' ');
+    }
+    filteredWords = filteredWords.concat(args);
+    filteredWords = [ ...new Set(filteredWords) ];
+
+    await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${filteredWords.join(' ')}' WHERE guildID=${message.guild.id}`);
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Added Words to Filter List',
+        description: args.join(', ')
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -59,10 +46,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'addfilteredwords',
-  description: string('addFilteredWords', 'commandDescription'),
+  name: 'addFilteredWords',
   botPermission: 'MANAGE_MESSAGES',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'addFilteredWords word [anotherWord] [someOtherWord]',
   example: [ 'addFilteredWords cast creed race religion' ]
 };

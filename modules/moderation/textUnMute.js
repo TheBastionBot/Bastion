@@ -4,67 +4,36 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message, args) => {
+  try {
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await Bastion.fetchUser(args.id);
+    }
+    if (!user) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-exports.run = async (Bastion, message, args) => {
-  if (!message.channel.permissionsFor(message.member).has(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
+    let member = await message.guild.fetchMember(user.id);
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
 
-  if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
-  let user = message.mentions.users.first();
-  if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
-
-  let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
-  if (permissionOverwrites) {
-    try {
+    let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
+    if (permissionOverwrites) {
       await permissionOverwrites.delete();
 
-      let reason = args.slice(1).join(' ');
-      if (reason.length < 1) {
-        reason = 'No reason given';
-      }
+      args.reason = args.reason.join(' ');
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
-          title: 'Text unmuted',
-          fields: [
-            {
-              name: 'User',
-              value: user.tag,
-              inline: true
-            },
-            {
-              name: 'ID',
-              value: user.id,
-              inline: true
-            },
-            {
-              name: 'Reason',
-              value: reason,
-              inline: false
-            }
-          ]
+          color: Bastion.colors.GREEN,
+          description: Bastion.strings.info(message.guild.language, 'textUnmute', message.author.tag, user.tag, args.reason)
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -74,26 +43,30 @@ exports.run = async (Bastion, message, args) => {
       * Logs moderation events if it is enabled
       * @fires moderationLog
       */
-      Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason, {
+      Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, args.reason, {
         channel: message.channel
       });
     }
-    catch (e) {
-      Bastion.log.error(e);
-    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
 exports.config = {
   aliases: [ 'tum' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'reason', alias: 'r', type: String, multiple: true, defaultValue: [ 'No reason given.' ] }
+  ]
 };
 
 exports.help = {
-  name: 'textunmute',
-  description: string('textUnMute', 'commandDescription'),
+  name: 'textUnMute',
   botPermission: 'MANAGE_ROLES',
-  userPermission: 'MANAGE_ROLES',
-  usage: 'textUnMute @user-mention [Reason]',
-  example: [ 'textUnMute @user#0001 Reason for the unmute.' ]
+  userTextPermission: 'MANAGE_ROLES',
+  userVoicePermission: '',
+  usage: 'textUnMute <@USER_MENTION | USER_ID> -r [Reason]',
+  example: [ 'textUnMute @user#001 -r Apologized', 'textUnMute 167147569575323761 -r Forgiven' ]
 };

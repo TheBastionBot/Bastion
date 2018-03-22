@@ -4,29 +4,32 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-const request = require('request');
+const request = require('request-promise-native');
 const cheerio = require('cheerio');
 
-exports.run = (Bastion, message, args) => {
-  request.get(`http://google.com/search?client=chrome&rls=en&ie=UTF-8&oe=UTF-8&q=${encodeURIComponent(args.query.join(' '))}`, (error, response, body) => {
-    if (error) {
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!args.query) {
       /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', string('connection', 'errors'), string('connection', 'errorMessage'), message.channel);
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
 
-    if (response.statusCode !== 200) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
-      return Bastion.emit('error', `${response.statusCode}`, response.statusMessage, message.channel);
-    }
+    let options = {
+      headers: {
+        'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
+      },
+      url: 'http://google.com/search',
+      qs: {
+        q: encodeURIComponent(args.query.join(' ')),
+        safe: 'active'
+      }
+    };
+    let response = await request(options);
 
-    let $ = cheerio.load(body);
+    let $ = cheerio.load(response);
     let results = [];
 
     $('.g').each((i) => {
@@ -44,7 +47,7 @@ exports.run = (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: `Search results for ${args.query.join(' ')}`,
         url: `https://www.google.com/search?q=${encodeURIComponent(args.query.join(' '))}`,
         fields: results,
@@ -55,7 +58,13 @@ exports.run = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  });
+  }
+  catch (e) {
+    if (e.response) {
+      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+    }
+    Bastion.log.error(e);
+  }
 };
 
 exports.config = {
@@ -68,9 +77,9 @@ exports.config = {
 
 exports.help = {
   name: 'google',
-  description: string('google', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'google <query>',
   example: [ 'google Bastion Bot' ]
 };

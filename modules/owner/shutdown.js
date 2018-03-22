@@ -4,27 +4,16 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message) => {
   try {
     let confirmation = await message.channel.send({
       embed: {
-        color: Bastion.colors.orange,
+        color: Bastion.colors.ORANGE,
         description: 'Are you sure you want to shut me down?'
       }
     });
 
-    const collector = confirmation.channel.createMessageCollector(m =>
-      Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
+    const collector = confirmation.channel.createMessageCollector(m => Bastion.credentials.ownerId.includes(m.author.id) && (m.content.toLowerCase().startsWith('yes') || m.content.toLowerCase().startsWith('no')),
       {
         time: 30 * 1000,
         maxMatches: 1
@@ -36,18 +25,27 @@ exports.run = async (Bastion, message) => {
         if (answer.content.toLowerCase().startsWith('yes')) {
           await message.channel.send({
             embed: {
-              color: Bastion.colors.dark_grey,
               description: 'GoodBye :wave:! See you soon.'
             }
           });
 
-          await Bastion.destroy();
-          process.exit(0);
+          if (Bastion.shard) {
+            await Bastion.shard.broadcastEval('this.destroy().then(() => process.exitCode = 0)');
+          }
+          else {
+            await Bastion.destroy();
+            process.exitCode = 0;
+            setTimeout(() => {
+              process.exit(0);
+            }, 5000);
+          }
+
+          Bastion.log.console('\n');
+          Bastion.log.info('GoodBye! See you next time.');
         }
         else {
           await message.channel.send({
             embed: {
-              color: Bastion.colors.dark_grey,
               description: 'Cool! I\'m here.'
             }
           });
@@ -65,14 +63,15 @@ exports.run = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'die', 'turnoff' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'shutdown',
-  description: string('shutdown', 'commandDescription'),
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'shutdown',
   example: []
 };

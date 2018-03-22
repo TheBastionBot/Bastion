@@ -1,53 +1,59 @@
 {
   "name": "bastion",
-  "version": "3.6.0",
-  "description": "Bastion: A Discord Bot that can do Administration, Moderation, Searches, can play Music, Games, has User Levels, Virtual Currencies, a good sense of Humor and can even talk with you!",
-  "url": "https://BastionBot.org/",
-  "main": "bastion.js",
+  "version": "6.10.7",
+  "description": "Give awesome perks to your Discord server!",
+  "url": "https://bastionbot.org/",
+  "main": "index.js",
   "scripts": {
     "test:lint": "./node_modules/.bin/eslint .",
     "test:boot": "node tests/boot.js",
     "test": "npm run test:lint && npm run test:boot",
-    "start": "node bastion.js"
+    "start": "node index.js"
   },
-  "library": "discord.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/snkrsnkampa/Bastion.git"
+    "url": "https://github.com/TheBastionBot/Bastion.git"
   },
   "author": "Sankarsan Kampa",
   "authorUrl": "https://sankarsankampa.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/snkrsnkampa/Bastion/issues"
+    "url": "https://github.com/TheBastionBot/Bastion/issues"
   },
-  "homepage": "https://github.com/snkrsnkampa/Bastion#readme",
+  "homepage": "https://bastionbot.org",
   "dependencies": {
-    "chalk": "^1.1.3",
-    "cleverbot-node": "github:snkrsnkampa/cleverbot-node",
-    "color-convert": "^1.9.0",
-    "command-line-args": "github:snkrsnkampa/command-line-args",
-    "cron": "^1.2.1",
-    "discord.js": "11.1.0",
-    "gamequery": "^1.0.16",
-    "google-translate-api": "github:snkrsnkampa/google-translate-api",
-    "hirez.js": "github:snkrsnkampa/hirez.js",
-    "kitsu.js": "^1.1.1",
-    "mathjs": "^3.15.0",
-    "node-json-db": "^0.7.3",
-    "node-opus": "^0.2.6",
-    "overwatch-js": "^1.5.4",
-    "rainbowsix-api-node": "^0.0.1",
-    "sqlite": "^2.8.0",
-    "weather-js": "^2.0.0",
-    "webshot": "^0.18.0",
-    "word-definition": "^2.1.6",
-    "xkcd": "^1.1.2",
-    "youtube-dl": "^1.11.1",
-    "zalgolize": "^1.2.4"
+    "@k3rn31p4nic/google-translate-api": "~1.0.4",
+    "chalk": "~2.3.2",
+    "cheerio": "~1.0.0-rc.2",
+    "cleverbot.js": "~1.0.0",
+    "color-convert": "~1.9.1",
+    "command-line-args": "github:k3rn31p4nic/command-line-args",
+    "cron": "~1.3.0",
+    "discord.js": "~11.3.2",
+    "gamedig": "~1.0.37",
+    "hirez.js": "~2.0.0",
+    "kitsu": "~5.0.4",
+    "lzutf8": "~0.4.7",
+    "mathjs": "~4.0.0",
+    "node-json-db": "~0.7.4",
+    "opusscript": "~0.0.6",
+    "overwatch-js": "~1.6.1",
+    "pokedex-api": "~1.1.1",
+    "rainbowsix-api-node": "~0.0.1",
+    "request": "~2.85.0",
+    "request-promise-native": "~1.0.5",
+    "snekfetch": "~3.6.1",
+    "sqlite": "~2.9.1",
+    "weather-js": "~2.0.0",
+    "webshot": "~0.18.0",
+    "word-definition": "~2.1.6",
+    "xkcd": "~1.1.3",
+    "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "eslint": "^4.18.2"
   },
-  "false": {}
+  "optionalDependencies": {
+    "node-opus": "~0.2.7"
+  }
 }

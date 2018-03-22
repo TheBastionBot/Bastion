@@ -4,45 +4,34 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message) => {
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT log FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT log, logChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let color, logStats;
-  if (guildSettings.log === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET log='true', logChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    logStats = 'Logging is now enabled in this channel.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET log='false', logChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    logStats = 'Logging is now disabled.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: logStats
+    let color, logStats;
+    if (guildSettings.log) {
+      await Bastion.db.run(`UPDATE guildSettings SET log=null WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      logStats = Bastion.strings.info(message.guild.language, 'disableServerLog', message.author.tag);
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET log=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      logStats = Bastion.strings.info(message.guild.language, 'enableServerLog', message.author.tag);
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: logStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -52,9 +41,9 @@ exports.config = {
 
 exports.help = {
   name: 'log',
-  description: string('log', 'commandDescription'),
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'log',
   example: []
 };

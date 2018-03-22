@@ -5,12 +5,11 @@
  */
 
 const fortuneCookies = require('../../data/fortuneCookies.json');
-const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Fortune:',
       description: fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
       // description: fortuneCookies.random()
@@ -27,9 +26,9 @@ exports.config = {
 
 exports.help = {
   name: 'fortune',
-  description: string('fortune', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'fortune',
   example: []
 };

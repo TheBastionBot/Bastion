@@ -4,46 +4,45 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
+      let guildSettings = await Bastion.db.get(`SELECT farewellMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (args.length < 1) {
-    let guildSettings = await Bastion.db.get(`SELECT farewellMessage FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.dark_grey,
-        title: 'Farewell message:',
-        description: guildSettings.farewellMessage
+      let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
+      if (guildSettings.farewellMessage) {
+        farewellMessage = await Bastion.functions.decodeString(guildSettings.farewellMessage);
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET farewellMessage="${args.join(' ').replace(/"/g, '\'')}" WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
-        title: 'Farewell message set to:',
-        description: args.join(' ')
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Farewell Message',
+          description: farewellMessage
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      args = args.join(' ');
+
+      let farewellMessage = await Bastion.functions.encodeString(args);
+      await Bastion.db.run('UPDATE guildSettings SET farewellMessage=(?) WHERE guildID=(?)', [ farewellMessage, message.guild.id ]);
+
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          title: 'Farewell Message Set',
+          description: args
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
@@ -53,10 +52,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'farewellmessage',
-  description: string('farewellMessage', 'commandDescription'),
+  name: 'farewellMessage',
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'farewellMessage [Message]',
   example: [ 'farewellMessage Goodbye $username. Hope to see you soon!' ]
 };

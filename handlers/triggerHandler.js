@@ -14,12 +14,12 @@ module.exports = async message => {
     message.client.db.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)');
   });
 
-  if (triggers.length === 0) return;
+  if (!Object.keys(triggers).length) return;
 
   let trigger = '';
   let response = [];
   for (let i = 0; i < triggers.length; i++) {
-    if (message.content === triggers[i].trigger) {
+    if (message.content.toLowerCase() === triggers[i].trigger.toLowerCase()) {
       trigger = triggers[i].trigger;
       response.push(triggers[i].response);
     }
@@ -27,7 +27,7 @@ module.exports = async message => {
 
   response = response[Math.floor(Math.random() * response.length)];
 
-  if (message.content === trigger) {
+  if (message.content.toLowerCase() === trigger.toLowerCase()) {
     response = response.replace(/\$user/ig, `<@${message.author.id}>`);
     response = response.replace(/\$username/ig, message.author.username);
     if (message.mentions.users.first()) {
@@ -37,7 +37,7 @@ module.exports = async message => {
       response = response.replace(/\$mention/ig, '');
     }
     response = response.replace(/\$server/ig, `**${message.guild.name}**`);
-    response = response.replace(/\$prefix/ig, message.guild.prefix);
+    response = response.replace(/\$prefix/ig, message.guild.prefix ? message.guild.prefix[0] : message.client.config.prefix );
 
     return message.channel.send(response).catch(e => {
       message.client.log.error(e);

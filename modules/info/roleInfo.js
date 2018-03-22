@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -21,9 +19,18 @@ exports.run = (Bastion, message, args) => {
   }
 
   if (role) {
+
+    let permissions = [];
+    let serializedPermissions = role.serialize();
+    for (let permission in serializedPermissions) {
+      if (serializedPermissions[permission]) {
+        permissions.push(permission.replace(/_/g, ' ').toTitleCase());
+      }
+    }
+
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: 'Role info',
         fields: [
           {
@@ -55,6 +62,10 @@ exports.run = (Bastion, message, args) => {
             name: 'Users',
             value: role.members.size,
             inline: true
+          },
+          {
+            name: 'Permissions',
+            value: permissions.length ? permissions.join(', ') : 'None'
           }
         ],
         thumbnail: {
@@ -70,7 +81,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('roleNotFound', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
   }
 };
 
@@ -80,10 +91,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'roleinfo',
-  description: string('roleInfo', 'commandDescription'),
+  name: 'roleInfo',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'roleInfo <@role-mention|role_name>',
   example: [ 'roleInfo @Dark Knigths', 'roleInfo The Legends' ]
 };

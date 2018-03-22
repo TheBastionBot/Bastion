@@ -4,34 +4,41 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = (Bastion, message, args) => {
+  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
 
-exports.run = (Bastion, message) => {
-  if (!message.guild.music) {
+  if (!message.guild.music.songs || !message.guild.music.songs.length) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('emptyQueue', 'errors'), string('notPlaying', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
   }
 
-  let fields = [ {
-    name: `▶ ${message.guild.music.songs[0].title}`,
-    value: `Requested by: ${message.guild.music.songs[0].requester}`
-  } ];
-  for (let i = 1; i < (message.guild.music.songs.length < 10 ? message.guild.music.songs.length : 9); i++) {
-    fields.push({
-      name: `${i}. ${message.guild.music.songs[i].title}`,
-      value: `Requested by: ${message.guild.music.songs[i].requester}`
-    });
-  }
+  let songs = message.guild.music.songs.slice(1);
+  songs = songs.map((song, i) => `**${i + 1}.** ${song.title}`);
+
+  let noOfPages = songs.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+  i = i - 1;
 
   message.guild.music.textChannel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Music queue',
-      description: `${message.guild.music.songs.length - 1} songs in queue`,
-      fields: fields
+      fields: [
+        {
+          name: 'Now Playing',
+          value: `${message.guild.music.songs[0].title}\n\n*Requested by ${message.guild.music.songs[0].requester}*`
+        },
+        {
+          name: 'Up next',
+          value: songs.slice(i * 10, (i * 10) + 10).join('\n\n') || 'Nothing\'s gonna play up next, add songs to the queue using the `play` command.'
+        }
+      ],
+      footer: {
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} • ${message.guild.music.songs.length - 1} songs in queue`
+      }
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -40,14 +47,17 @@ exports.run = (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
+  ]
 };
 
 exports.help = {
   name: 'queue',
-  description: string('queue', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
-  usage: 'queue',
-  example: []
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'queue <PAGE_NO>',
+  example: [ 'queue', 'queue 2' ]
 };

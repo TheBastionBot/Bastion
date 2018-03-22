@@ -14,72 +14,48 @@ const BASTION = new Discord.Client({
   ]
 });
 
-/**
- * Initial configurations
- */
+if (BASTION.shard) {
+  process.title = `Bastion-Shard-${BASTION.shard.id}`;
+}
+else {
+  process.title = 'BastionBot';
+}
+
 BASTION.package = require('./package.json');
 BASTION.credentials = require('./settings/credentials.json');
 BASTION.config = require('./settings/config.json');
-BASTION.colors = require('./settings/colors.json');
+BASTION.Constants = Discord.Constants;
+BASTION.colors = Discord.Constants.Colors;
+BASTION.permissions = Discord.Permissions.FLAGS;
 
-let languages = [
-  'english'
-];
-let language = 'english';
-if (languages.includes(BASTION.config.language)) {
-  language = BASTION.config.language;
-}
-process.env.LANG = language;
-
-BASTION.commands = new Discord.Collection();
-BASTION.aliases = new Discord.Collection();
-BASTION.functions = {};
-BASTION.db = require('sqlite');
-BASTION.db.open('./data/Bastion.sqlite').then(db => {
-  db.run('PRAGMA foreign_keys = ON');
-});
-
-/**
- * Load base class prototypes
- */
-// Will use after updating to `discord.js v11.2.0+` as `discord.js v11.1.0` has problems with send() when using array prototypes
 // require('./utils/Array.prototype');
 require('./utils/String.prototype');
 require('./utils/Number.prototype');
 
-/**
-* Function handler
-*/
-require('./handlers/functionHandler')(BASTION);
-/**
- * Log handler
- */
-require('./handlers/logHandler')(BASTION);
-/**
- * Event handler
- */
-require('./handlers/eventHandler')(BASTION);
-/**
- * Module handler
- */
-require('./handlers/moduleHandler')(BASTION);
-/**
- * Scheduled Commands handler
- */
-require('./handlers/scheduledCommandHandler')(BASTION);
+const WebhookHandler = require('./handlers/webhookHandler.js');
+BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
+BASTION.log = require('./handlers/logHandler');
+BASTION.functions = require('./handlers/functionHandler');
+const LanguageHandler = require('./handlers/languageHandler');
+BASTION.strings = new LanguageHandler();
+BASTION.db = require('sqlite');
+BASTION.db.open('./data/Bastion.sqlite').then(db => {
+  db.run('PRAGMA foreign_keys = ON');
+  require('./utils/populateDatabase')(BASTION.db);
+});
 
-/**
- * Log Bastion in as a Discord client.
- */
+require('./handlers/eventHandler')(BASTION);
+
+const Modules = require('./handlers/moduleHandler');
+BASTION.commands = Modules.commands;
+BASTION.aliases = Modules.aliases;
+
 BASTION.login(BASTION.credentials.token).catch(e => {
   BASTION.log.error(e.toString());
   process.exit(1);
 });
 
-/**
- * Handle unhandled rejections
- */
 process.on('unhandledRejection', rejection => {
   // eslint-disable-next-line no-console
-  console.warn('\n[unhandledRejection]\n\n', rejection, '\n\n[/unhandledRejection]\n');
+  console.warn(`\n[unhandledRejection]\n${rejection}\n[/unhandledRejection]\n`);
 });

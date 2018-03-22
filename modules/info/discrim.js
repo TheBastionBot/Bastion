@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
     /**
      * The command was ran with invalid parameters.
@@ -21,7 +19,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Discriminator search',
       description: `Found **${total}** users with discriminator **${args[0]}**`,
       fields: [
@@ -43,9 +41,9 @@ exports.config = {
 
 exports.help = {
   name: 'discrim',
-  description: string('discrim', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'discrim <discriminator>',
   example: [ 'discrim 8383' ]
 };

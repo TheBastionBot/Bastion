@@ -4,52 +4,34 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message) => {
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let color, filterInviteStats;
-  if (guildSettings.filterInvite === 'false') {
-    await Bastion.db.run(`UPDATE guildSettings SET filterInvite='true' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    filterInviteStats = 'Enabled automatic deletion of discord server invites posted in this server.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET filterInvite='false' WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    filterInviteStats = 'Disabled automatic deletion of discord server invites posted in this server.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: filterInviteStats
+    let color, filterInviteStats;
+    if (guildSettings.filterInvite) {
+      await Bastion.db.run(`UPDATE guildSettings SET filterInvite=0 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      filterInviteStats = Bastion.strings.info(message.guild.language, 'disableInviteFilter', message.author.tag);
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET filterInvite=1 WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      filterInviteStats = Bastion.strings.info(message.guild.language, 'enableInviteFilter', message.author.tag);
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: filterInviteStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -58,10 +40,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'filterinvite',
-  description: string('filterInvite', 'commandDescription'),
+  name: 'filterInvite',
   botPermission: 'MANAGE_MESSAGES',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'filterInvite',
   example: []
 };

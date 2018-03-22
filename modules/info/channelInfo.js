@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     if (parseInt(args[0]) < 9223372036854775807) {
@@ -25,7 +23,7 @@ exports.run = (Bastion, message, args) => {
     }
     message.channel.send({
       embed: {
-        color: Bastion.colors.blue,
+        color: Bastion.colors.BLUE,
         title: title,
         fields: [
           {
@@ -64,7 +62,7 @@ exports.run = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('channelNotFound', 'errorMessage'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
   }
 };
 
@@ -74,10 +72,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'channelinfo',
-  description: string('channelInfo', 'commandDescription'),
+  name: 'channelInfo',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'channelInfo [#channel-mention | CHANNEL_ID]',
   example: [ 'channelInfo #channel-name', 'channelInfo 221133445599667788', 'channelInfo' ]
 };

@@ -4,23 +4,13 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message) => {
   try {
     await Bastion.db.all('DELETE FROM triggers');
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         description: 'Deleted all the triggers and responses.'
       }
     }).catch(e => {
@@ -34,14 +24,15 @@ exports.run = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'delalltriggers', 'deletealltrips', 'delalltrips' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'deletealltriggers',
-  description: string('deleteAllTriggers', 'commandDescription'),
+  name: 'deleteAllTriggers',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'deleteAllTriggers',
   example: []
 };

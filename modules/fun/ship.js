@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let users = message.mentions.users.map(u => u.username);
   if (users.length < 2) {
     /**
@@ -23,7 +21,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Shipped Users',
       description: `${users.join(' + ')} = **${shippedName}**`
     }
@@ -39,9 +37,9 @@ exports.config = {
 
 exports.help = {
   name: 'ship',
-  description: string('ship', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'ship <USER_MENTION> <USER_MENTION> [...USER_MENTION]',
   example: [ 'ship user#0001 user#0002 user#0003' ]
 };

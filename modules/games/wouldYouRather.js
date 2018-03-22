@@ -4,13 +4,12 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const question = require('../../data/wouldYouRather.json');
 
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: question[Math.floor(Math.random() * question.length)]
     }
   }).catch(e => {
@@ -24,10 +23,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'wouldyourather',
-  description: string('wouldYouRather', 'commandDescription'),
+  name: 'wouldYouRather',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'wouldYouRather',
   example: []
 };

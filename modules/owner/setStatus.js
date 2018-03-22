@@ -4,25 +4,15 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.length >= 1 && (args === 'online' || args === 'idle' || args === 'dnd' || args === 'invisible') ) {
-      await Bastion.user.setStatus(args.join(' '));
+    if (args.status && /^(?:online|idle|dnd|invisible)$/i.test(args.status)) {
+      await Bastion.user.setStatus(args.status);
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
-          description: `${Bastion.user.username}'s status is now set to **${args.join(' ')}**`
+          color: Bastion.colors.GREEN,
+          description: `${Bastion.user.username}'s status is now set to **${args.status}**`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -33,7 +23,7 @@ exports.run = async (Bastion, message, args) => {
 
       message.channel.send({
         embed: {
-          color: Bastion.colors.green,
+          color: Bastion.colors.GREEN,
           description: `${Bastion.user.username}'s status is now set to the default status **${Bastion.config.status}**`
         }
       }).catch(e => {
@@ -48,14 +38,18 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'status', type: String, defaultOption: true }
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'setstatus',
-  description: string('setStatus', 'commandDescription'),
+  name: 'setStatus',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'setStatus [online|idle|dnd|invisible]',
   example: [ 'setStatus invisible', 'setStatus' ]
 };

@@ -4,42 +4,47 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message) => {
+  try {
+    if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: 'No one has been warned yet.'
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
 
-const warns = require('./warn').warns;
+    let warnedUsers = [];
+    for (let userID of Object.keys(message.guild.warns)) {
+      let member = await message.guild.fetchMember(userID).catch((e) => {
+        if (e.code !== 10007) {
+          Bastion.log.error(e);
+        }
+      });
+      if (member) {
+        warnedUsers.push(`${member.user.tag} - ${message.guild.warns[userID]} Warnings`);
+      }
+      else {
+        // TODO: Remove userID from warn list
+      }
+    }
 
-exports.run = (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (!warns[message.guild.id]) {
-    return message.channel.send({
-      color: Bastion.colors.green,
-      description: 'No one has been warned yet.'
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.ORANGE,
+        title: 'Warning List',
+        description: warnedUsers.length ? warnedUsers.join('\n') : 'No one has been warned yet.'
+      }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
-
-  let warnedUsers = [];
-  Object.keys(warns[message.guild.id]).forEach(id => {
-    warnedUsers.push(message.guild.members.get(id).user.tag);
-  });
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.orange,
-      title: 'Warning List',
-      description: warnedUsers.join('\n')
-    }
-  }).catch(e => {
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -48,10 +53,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'listwarns',
-  description: string('listWarns', 'commandDescription'),
+  name: 'listWarns',
   botPermission: '',
-  userPermission: 'KICK_MEMBERS',
+  userTextPermission: 'KICK_MEMBERS',
+  userVoicePermission: '',
   usage: 'listWarns',
   example: []
 };

@@ -4,10 +4,8 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
-  let roles = message.guild.roles.filter(r => r.position !== 0).map(r => r.name).map((r, i) => `${i + 1}. ${r}`);
+exports.exec = (Bastion, message, args) => {
+  let roles = message.guild.roles.filter(r => r.position !== 0).map(r => `${r.name} - ${r.id}`).map((r, i) => `${i + 1}. ${r}`);
 
   let noOfPages = roles.length / 10;
   let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
@@ -15,7 +13,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Roles',
       description: roles.slice(i * 10, (i * 10) + 10).join('\n'),
       footer: {
@@ -37,9 +35,9 @@ exports.config = {
 
 exports.help = {
   name: 'roles',
-  description: string('roles', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'roles',
   example: []
 };

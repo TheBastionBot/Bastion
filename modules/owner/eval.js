@@ -4,38 +4,37 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    let evaled = eval(args.join(' '));
+    if (!args.code) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    args.code = args.code.join(' ');
+
+    let evaled;
+    if (args.broadcast && Bastion.shard) {
+      evaled = await Bastion.shard.broadcastEval(args.code);
+    }
+    else {
+      evaled = eval(args.code);
+    }
+
     if (typeof evaled !== 'string') {
       evaled = require('util').inspect(evaled);
     }
 
     let output = await message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         fields: [
           {
             name: ':inbox_tray:  INPUT',
-            value: `\`\`\`js\n${args.join(' ')}\n\`\`\``
+            value: `\`\`\`js\n${args.code}\n\`\`\``
           },
           {
             name: ':outbox_tray:  OUTPUT',
@@ -45,12 +44,15 @@ exports.run = async (Bastion, message, args) => {
       }
     });
 
-    output.delete(3000).catch(() => {});
+    if (args.delete) {
+      output.delete(10000).catch(() => {});
+      message.delete(1000).catch(() => {});
+    }
   }
   catch(e) {
     let error = await message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         fields: [
           {
             name: ':no_entry:  ERROR',
@@ -62,22 +64,31 @@ exports.run = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
-    error.delete(3000).catch(() => {});
+    if (args.delete) {
+      error.delete(10000).catch(() => {});
+      message.delete(1000).catch(() => {});
+    }
   }
 };
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'code', type: String, multiple: true, defaultOption: true },
+    { name: 'broadcast', type: Boolean },
+    { name: 'delete', type: Boolean }
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
   name: 'eval',
-  description: string('eval', 'commandDescription'),
   botPermission: '',
-  userPermission: 'BOT_OWNER',
-  usage: 'eval <JavaScript code>',
-  example: [ 'eval message.guild.members.size' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'eval <JavaScript code> [--delete]',
+  example: [ 'eval message.guild.members.size', 'eval Bastion.users.size --delete' ]
 };
 
 /**

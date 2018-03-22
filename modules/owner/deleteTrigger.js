@@ -4,31 +4,21 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (!args[0]) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    if (!args[0]) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     await Bastion.db.run(`DELETE FROM triggers WHERE trigger="${args.join(' ').replace(/"/g, '\'')}"`);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
+        color: Bastion.colors.RED,
         title: 'Trigger deleted',
         description: args.join(' ')
       }
@@ -43,14 +33,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'deltrigger', 'deletetrip', 'deltrip' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'deletetrigger',
-  description: string('deleteTrigger', 'commandDescription'),
+  name: 'deleteTrigger',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'deleteTrigger <trigger>',
   example: [ 'deleteTrigger Hi, there?' ]
 };

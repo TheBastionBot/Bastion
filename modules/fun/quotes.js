@@ -5,9 +5,8 @@
  */
 
 const quotes = require('../../data/quotes.json');
-const string = require('../../handlers/languageHandler');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   /*
    * Get a random quote
    */
@@ -47,7 +46,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: `*"${quotes[index].quote}"*\n\n**${quotes[index].author}**`,
       footer: {
         text: `Quote Number: ${index}`
@@ -69,9 +68,9 @@ exports.config = {
 
 exports.help = {
   name: 'quotes',
-  description: string('quotes', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'quotes [ -n | -a Author Name]',
   example: [ 'quotes', 'quotes -n 189', 'quotes -a Albert Einstein' ]
 };

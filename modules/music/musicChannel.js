@@ -4,67 +4,76 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message, args) => {
+  try {
+    let musicTextChannel, musicVoiceChannel, color, description;
 
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
+    if (args.remove) {
+      await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      description = Bastion.strings.info(message.guild.language, 'removeMusicChannels', message.author.tag);
+    }
+    else if (args.id) {
+      musicTextChannel = message.channel;
+      musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(args.id);
+      if (musicVoiceChannel) {
+        await Bastion.db.run(`UPDATE guildSettings SET musicTextChannel=${musicTextChannel.id}, musicVoiceChannel=${musicVoiceChannel.id} WHERE guildID=${message.guild.id}`);
+        color = Bastion.colors.GREEN;
+        description = Bastion.strings.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
+      }
+      else {
+        color = Bastion.colors.RED;
+        description = 'Invalid voice channel ID for music channel.';
+      }
+    }
+    else {
+      if (message.guild.music.textChannelID) {
+        musicTextChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID);
+      }
+      if (message.guild.music.voiceChannelID) {
+        musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
+      }
 
-  if (!(parseInt(args[0]) < 9223372036854775807)) {
-    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=null, musicVoiceChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
+      if (!musicTextChannel || !musicVoiceChannel) {
+        color = Bastion.colors.RED;
+        description = 'Music channels have not been set.';
+      }
+      else {
+        color = Bastion.colors.BLUE;
+        description = Bastion.strings.info(message.guild.language, 'musicChannels', musicTextChannel, musicVoiceChannel.name);
+      }
+    }
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.red,
-        description: 'Default music channel removed.'
+        color: color,
+        title: 'Music Channel',
+        description: description
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET musicTextChannelID=${message.channel.id}, musicVoiceChannelID=${args[0]} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.green,
-        title: 'Default music channel set',
-        fields: [
-          {
-            name: 'Text channel for music commands',
-            value: `<#${message.channel.id}>`
-          },
-          {
-            name: 'Music channel',
-            value: message.guild.channels.filter(c => c.type === 'voice').get(args[0]) ? message.guild.channels.filter(c => c.type === 'voice').get(args[0]).name : 'Invalid'
-          }
-        ]
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'remove', alias: 'r', type: Boolean }
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'musicchannel',
-  description: string('musicChannel', 'commandDescription'),
+  name: 'musicChannel',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
-  usage: 'musicChannel [VOICE_CHANNEL_ID]',
-  example: [ 'musicChannel 308278968078041098', 'musicChannel' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'musicChannel [VOICE_CHANNEL_ID] [--remove]',
+  example: [ 'musicChannel 308278968078041098', 'musicChannel', 'musicChannel --remove' ]
 };

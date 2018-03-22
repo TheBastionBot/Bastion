@@ -4,31 +4,21 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (!args.profiles) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
+    if (!args.profiles) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
     await Bastion.db.run('DELETE FROM profiles');
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: 'Bastion `profiles` database was successfully reset.'
       }
     }).catch(e => {
@@ -45,14 +35,15 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'profiles', type: Boolean, alias: 'p' }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'resetdatabase',
-  description: string('resetDatabase', 'commandDescription'),
+  name: 'resetDatabase',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'resetDatabase < --profiles >',
   example: [ 'resetDatabase --profiles' ]
 };

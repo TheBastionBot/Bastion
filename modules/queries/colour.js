@@ -4,10 +4,9 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
 const convert = require('color-convert');
 
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (!/^#?[0-9a-fA-F]{6}$/.test(args[0])) {
     /**
      * The command was ran with invalid parameters.
@@ -18,7 +17,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       fields: [
         {
           name: 'HEX',
@@ -107,9 +106,9 @@ exports.config = {
 
 exports.help = {
   name: 'colour',
-  description: string('colour', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'colour <#hex-colour-code>',
   example: [ 'colour #dd0000' ]
 };

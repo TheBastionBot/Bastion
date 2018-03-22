@@ -4,45 +4,34 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message) => {
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT greet FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT greet, greetChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let color, greetStats;
-  if (guildSettings.greetChannelID === message.channel.id) {
-    Bastion.db.run(`UPDATE guildSettings SET greet='false', greetChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    greetStats = 'Greeting Messages are now disabled.';
-  }
-  else {
-    Bastion.db.run(`UPDATE guildSettings SET greet='true', greetChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    greetStats = 'Greeting Messages are now enabled in this channel.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: greetStats
+    let color, greetStats;
+    if (guildSettings.greet === message.channel.id) {
+      Bastion.db.run(`UPDATE guildSettings SET greet=null WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      greetStats = Bastion.strings.info(message.guild.language, 'disableGreetingMessages', message.author.tag);
     }
-  }).catch(e => {
+    else {
+      Bastion.db.run(`UPDATE guildSettings SET greet=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      greetStats = Bastion.strings.info(message.guild.language, 'enableGreetingMessages', message.author.tag);
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: greetStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -52,9 +41,9 @@ exports.config = {
 
 exports.help = {
   name: 'greet',
-  description: string('greet', 'commandDescription'),
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'greet',
   example: []
 };

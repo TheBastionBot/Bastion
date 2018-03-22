@@ -4,17 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
     let triggers = await Bastion.db.all('SELECT trigger FROM triggers');
 
@@ -23,7 +13,7 @@ exports.run = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', string('notFound', 'errors'), string('triggerNotFound', 'errorMessage'), message.channel);
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'triggerNotFound', true), message.channel);
     }
 
     triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);
@@ -34,7 +24,7 @@ exports.run = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.dark_grey,
+        color: Bastion.colors.BLUE,
         title: 'List of triggers',
         description: triggers.slice(i * 10, (i * 10) + 10).join('\n'),
         footer: {
@@ -55,14 +45,15 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
-  ]
+  ],
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'listtriggers',
-  description: string('listTriggers', 'commandDescription'),
+  name: 'listTriggers',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'listTriggers [page_no]',
   example: [ 'listTriggers', 'listTriggers 2' ]
 };

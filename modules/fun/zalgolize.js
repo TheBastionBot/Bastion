@@ -4,10 +4,7 @@
  * @license MIT
  */
 
-const zalgo = require('zalgolize');
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -18,9 +15,9 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Zalgolized Text:',
-      description: zalgo(args.join(' '))
+      description: Bastion.functions.zalgolize(args.join(' '))
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -34,9 +31,9 @@ exports.config = {
 
 exports.help = {
   name: 'zalgolize',
-  description: string('zalgolize', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'zalgolize <text>',
   example: [ 'zalgolize It looks clumsy, but it\'s cool!' ]
 };

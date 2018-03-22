@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
     user = message.author;
@@ -30,7 +28,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
       description: crimeStat
     }
@@ -45,10 +43,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'crimecoefficient',
-  description: string('crimeCoefficient', 'commandDescription'),
+  name: 'crimeCoefficient',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'crimecoefficient [@user-mention]',
   example: [ 'crimecoefficient', 'crimecoefficient @user#0001' ]
 };

@@ -1,6 +1,15 @@
 {
+  "shardCount": 1,
   "prefix": "#!",
   "status": "online",
-  "game": "with Ganymede",
-  "language": "english"
+  "game": {
+    "type": "Playing",
+    "name": [
+      "with Ganymede"
+    ]
+  },
+  "music": {
+    "status": true,
+    "passes": 1
+  }
 }

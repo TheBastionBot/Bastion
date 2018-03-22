@@ -4,47 +4,71 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-const Kitsu = require('kitsu.js');
+const Kitsu = require('kitsu/node');
 const kitsu = new Kitsu();
 
-exports.run = async (Bastion, message, args) => {
-  let anime = await kitsu.searchAnime(args.name);
-  anime = anime[0];
-
-  message.channel.send({
-    embed: {
-      color: Bastion.colors.blue,
-      title: anime.titles.english,
-      url: `https://kitsu.io/anime/${anime.slug}`,
-      description: anime.synopsis,
-      fields: [
-        {
-          name: 'Status',
-          value: anime.endDate ? 'Finished' : 'Airing',
-          inline: true
-        },
-        {
-          name: 'Aired',
-          value: anime.endDate ? `${anime.startDate} - ${anime.endDate}` : `${anime.startDate} - Present`,
-          inline: true
-        },
-        {
-          name: 'Rating',
-          value: `${anime.ageRating} - ${anime.ageRatingGuide} ${anime.nsfw ? '[NSFW]' : ''}`,
-          inline: true
-        }
-      ],
-      image: {
-        url: anime.posterImage.original
-      },
-      footer: {
-        text: 'Powered by Kitsu'
-      }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (!args.name) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
     }
-  }).catch(e => {
+
+    let { data: anime } = await kitsu.fetch('anime', {
+      filter: {
+        text: args.name
+      },
+      fields: {
+        anime: 'titles,slug,synopsis,startDate,endDate,ageRating,ageRatingGuide,nsfw,posterImage'
+      }
+    });
+    anime = anime[0];
+
+    if (anime) {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: Object.values(anime.titles)[0],
+          url: `https://kitsu.io/anime/${anime.slug}`,
+          description: anime.synopsis,
+          fields: [
+            {
+              name: 'Status',
+              value: anime.endDate ? 'Finished' : 'Airing',
+              inline: true
+            },
+            {
+              name: 'Aired',
+              value: anime.endDate ? `${anime.startDate} - ${anime.endDate}` : `${anime.startDate} - Present`,
+              inline: true
+            },
+            {
+              name: 'Rating',
+              value: `${anime.ageRating} - ${anime.ageRatingGuide} ${anime.nsfw ? '[NSFW]' : ''}`,
+              inline: true
+            }
+          ],
+          image: {
+            url: anime.posterImage.original
+          },
+          footer: {
+            text: 'Powered by Kitsu'
+          }
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'anime'), message.channel);
+    }
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -57,9 +81,9 @@ exports.config = {
 
 exports.help = {
   name: 'anime',
-  description: string('anime', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'anime <Anime Name>',
   example: [ 'anime One Piece' ]
 };

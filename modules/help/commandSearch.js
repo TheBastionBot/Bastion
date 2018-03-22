@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1 || args.join('').length < 2) {
     /**
      * The command was ran with invalid parameters.
@@ -16,24 +14,24 @@ exports.run = (Bastion, message, args) => {
   }
 
   args = args.join('').toLowerCase();
-  let commands = Bastion.commands.map(c => c.help.name).filter(c => c.includes(args));
+  let commands = Bastion.commands.map(c => c.help.name.toLowerCase()).filter(c => c.includes(args));
   if (commands.length === 0) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', string('notFound', 'errors'), string('notFound', 'errorMessage', 'command'), message.channel);
+    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
   }
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.yellow,
+      color: Bastion.colors.GOLD,
       title: 'Command Search',
       description: `Found ${commands.length} commands containing *${args}*.`,
       fields: [
         {
           name: 'Commands',
-          value: `${message.guild.prefix}${commands.join(`\n${message.guild.prefix}`)}`
+          value: `${message.guild.prefix[0]}${commands.join(`\n${message.guild.prefix[0]}`)}`
         }
       ]
     }
@@ -48,10 +46,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'commandsearch',
-  description: string('commandSearch', 'commandDescription'),
+  name: 'commandSearch',
   botPermission: '',
-  userPermission: '',
-  usage: 'commandSearch <text>',
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'commandSearch <keyword>',
   example: [ 'commandSearch user' ]
 };

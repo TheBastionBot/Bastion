@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let reel = [
     ':custard:',
     ':candy:',
@@ -33,7 +31,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Slot Machine',
       description: reels.join(' \u05C0 '),
       footer: {
@@ -52,9 +50,9 @@ exports.config = {
 
 exports.help = {
   name: 'slots',
-  description: string('slots', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'slots',
   example: []
 };

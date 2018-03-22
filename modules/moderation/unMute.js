@@ -4,65 +4,34 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-  if (!message.guild.me.hasPermission(this.help.botPermission)) {
-    /**
-     * Bastion has missing permissions.
-     * @fires bastionMissingPermissions
-     */
-    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-  }
-
-  if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
-  let user = message.mentions.users.first();
-  if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(message.guild.members.get(user.id).highestRole) <= 0) return Bastion.log.info(string('lowerRole', 'errorMessage'));
-
-  let reason = args.slice(1).join(' ');
-  if (reason.length < 1) {
-    reason = 'No reason given';
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    await message.guild.members.get(user.id).setMute(false);
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
+    else if (args.id) {
+      user = await Bastion.fetchUser(args.id);
+    }
+    if (!user) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    let member = await message.guild.fetchMember(user.id);
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+
+    args.reason = args.reason.join(' ');
+
+    await member.setMute(false);
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
-        title: 'Unmuted',
-        fields: [
-          {
-            name: 'User',
-            value: user.tag,
-            inline: true
-          },
-          {
-            name: 'ID',
-            value: user.id,
-            inline: true
-          },
-          {
-            name: 'Reason',
-            value: reason,
-            inline: false
-          }
-        ]
+        color: Bastion.colors.GREEN,
+        description: Bastion.strings.info(message.guild.language, 'voiceUnmute', message.author.tag, user.tag, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -72,7 +41,7 @@ exports.run = async (Bastion, message, args) => {
     * Logs moderation events if it is enabled
     * @fires moderationLog
     */
-    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, reason);
+    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, args.reason);
   }
   catch (e) {
     Bastion.log.error(e);
@@ -81,14 +50,18 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, defaultOption: true },
+    { name: 'reason', alias: 'r', type: String, multiple: true, defaultValue: [ 'No reason given.' ] }
+  ]
 };
 
 exports.help = {
-  name: 'unmute',
-  description: string('unMute', 'commandDescription'),
+  name: 'unMute',
   botPermission: 'MUTE_MEMBERS',
-  userPermission: 'MUTE_MEMBERS',
-  usage: 'unMute @user-mention [Reason]',
-  example: [ 'unMute @user#0001 Reason for the unmute.' ]
+  userTextPermission: 'MUTE_MEMBERS',
+  userVoicePermission: '',
+  usage: 'unMute <@USER_MENTION | USER_ID> -r [Reason]',
+  example: [ 'unMute @user#001 -r Apologized', 'unMute 167147569575323761 -r Forgiven' ]
 };

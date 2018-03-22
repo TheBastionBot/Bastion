@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message, args) => {
+exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
@@ -17,7 +15,7 @@ exports.run = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Reversed Text:',
       description: args.join(' ').split('').reverse().join('')
     }
@@ -33,9 +31,9 @@ exports.config = {
 
 exports.help = {
   name: 'reverse',
-  description: string('reverse', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'reverse <text>',
   example: [ 'reverse !looc si sihT' ]
 };

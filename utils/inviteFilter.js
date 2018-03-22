@@ -7,16 +7,33 @@
 /**
  * Handles filtering of Discord server invites in messages
  * @param {Message} message Discord.js message object
- * @returns {void}
+ * @returns {Promise<true>} If the message was filtered
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT filterInvite FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let query = `SELECT filterInvite, inviteFilterWhitelistChannels, inviteFilterWhitelistRoles FROM guildSettings LEFT OUTER JOIN whitelists ON guildSettings.guildID = whitelists.guildID WHERE guildSettings.guildId='${message.guild.id}'`;
+    let guild = await message.client.db.get(query);
 
-    if (guild.filterInvite !== 'true' || message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return;
+    // If invite filter is disabled, return
+    if (!guild.filterInvite) return;
+    // If the channel is whitelisted, return
+    if (guild.inviteFilterWhitelistChannels) {
+      let whitelistChannels = guild.inviteFilterWhitelistChannels.split(' ');
+      if (whitelistChannels.includes(message.channel.id)) return;
+    }
+    // If the user is in a whitelisted role, return
+    if (guild.inviteFilterWhitelistRoles) {
+      let whitelistRoles = guild.inviteFilterWhitelistRoles.split(' ');
+      for (let whitelistRole of whitelistRoles) {
+        if (message.member.roles.has(whitelistRole)) return;
+      }
+    }
+    // If the user has Manage Server permission, return
+    if (message.member && message.member.hasPermission('MANAGE_GUILD')) return;
 
+    // If message contains a discord invite, filter it
     if (hasDiscordInvite(message.content)) {
-      deleteInvite(message);
+      return deleteInvite(message);
     }
 
     let links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi);
@@ -26,7 +43,7 @@ module.exports = async message => {
       url = await message.client.functions.followURL(url);
 
       if (hasDiscordInvite(url)) {
-        deleteInvite(message);
+        return deleteInvite(message);
       }
     }
   }
@@ -51,18 +68,16 @@ function hasDiscordInvite(string) {
  * Deletes the message with the invite URL (if Bastion has permission)
  * and warns the user
  * @param {String} message Discord.js message object
- * @returns {void}
+ * @returns {true} If the message was filtered
  */
 function deleteInvite(message) {
   if (message.deletable) {
-    message.delete().catch(e => {
-      message.client.log.error(e);
-    });
+    message.delete().catch(() => {});
   }
 
   message.channel.send({
     embed: {
-      color: message.client.colors.orange,
+      color: message.client.colors.ORANGE,
       description: `${message.author} you are not allowed to post server invite links here.`
     }
   }).then(msg => {
@@ -70,4 +85,5 @@ function deleteInvite(message) {
   }).catch(e => {
     message.client.log.error(e);
   });
+  return true;
 }

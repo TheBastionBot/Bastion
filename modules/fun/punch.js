@@ -4,9 +4,7 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
     /**
@@ -26,7 +24,7 @@ exports.run = (Bastion, message) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       description: `${message.author.username} punched ${user.username}! :punch:`,
       image: {
         url: punches[Math.floor(Math.random() * punches.length)]
@@ -44,9 +42,9 @@ exports.config = {
 
 exports.help = {
   name: 'punch',
-  description: string('punch', 'commandDescription'),
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'punch <@USER_MENTION>',
   example: [ 'punch @user#0001' ]
 };

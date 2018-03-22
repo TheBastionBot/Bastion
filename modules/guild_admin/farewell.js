@@ -5,45 +5,34 @@
  */
 // I don't understand why this is even needed, but some fellows like this.
 
-const string = require('../../handlers/languageHandler');
+exports.exec = async (Bastion, message) => {
+  try {
+    let guildSettings = await Bastion.db.get(`SELECT farewell FROM guildSettings WHERE guildID=${message.guild.id}`);
 
-exports.run = async (Bastion, message) => {
-  if (!message.member.hasPermission(this.help.userPermission)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  let guildSettings = await Bastion.db.get(`SELECT farewell, farewellChannelID FROM guildSettings WHERE guildID=${message.guild.id}`).catch(e => {
-    Bastion.log.error(e);
-  });
-
-  let color, farewellStats;
-  if (guildSettings.farewellChannelID === message.channel.id) {
-    await Bastion.db.run(`UPDATE guildSettings SET farewell='false', farewellChannelID=null WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.red;
-    farewellStats = 'Farewell Messages are now disabled.';
-  }
-  else {
-    await Bastion.db.run(`UPDATE guildSettings SET farewell='true', farewellChannelID=${message.channel.id} WHERE guildID=${message.guild.id}`).catch(e => {
-      Bastion.log.error(e);
-    });
-    color = Bastion.colors.green;
-    farewellStats = 'Farewell Messages are now enabled in this channel.';
-  }
-
-  message.channel.send({
-    embed: {
-      color: color,
-      description: farewellStats
+    let color, farewellStats;
+    if (guildSettings.farewell === message.channel.id) {
+      await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.RED;
+      farewellStats = Bastion.strings.info(message.guild.language, 'disableFarewellMessages', message.author.tag);
     }
-  }).catch(e => {
+    else {
+      await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      color = Bastion.colors.GREEN;
+      farewellStats = Bastion.strings.info(message.guild.language, 'enableFarewellMessages', message.author.tag);
+    }
+
+    message.channel.send({
+      embed: {
+        color: color,
+        description: farewellStats
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  catch (e) {
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
@@ -53,9 +42,9 @@ exports.config = {
 
 exports.help = {
   name: 'farewell',
-  description: string('farewell', 'commandDescription'),
   botPermission: '',
-  userPermission: 'ADMINISTRATOR',
+  userTextPermission: 'MANAGE_GUILD',
+  userVoicePermission: '',
   usage: 'farewell',
   example: []
 };

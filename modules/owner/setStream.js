@@ -4,31 +4,24 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = async (Bastion, message, args) => {
-  if (!Bastion.credentials.ownerId.includes(message.author.id)) {
-    /**
-     * User has missing permissions.
-     * @fires userMissingPermissions
-     */
-    return Bastion.emit('userMissingPermissions', this.help.userPermission);
-  }
-
-  if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
+exports.exec = async (Bastion, message, args) => {
   try {
-    await Bastion.user.setGame(args.slice(1).join(' '), args[0]);
+    if (!/^((https:\/\/)(www\.)?(twitch\.tv)\/[a-z0-9-._]+)$/i.test(args[0]) || args.slice(1).join(' ').length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    await Bastion.user.setActivity(args.slice(1).join(' '), {
+      type: 1,
+      url: args[0]
+    });
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.green,
+        color: Bastion.colors.GREEN,
         description: `${Bastion.user.username} is now streaming **${args.slice(1).join(' ')}**`
       }
     }).catch(e => {
@@ -42,14 +35,15 @@ exports.run = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
-  name: 'setstream',
-  description: string('setStream', 'commandDescription'),
+  name: 'setStream',
   botPermission: '',
-  userPermission: 'BOT_OWNER',
-  usage: 'setStream <twitch> <text>',
-  example: [ 'setStream https://twitch.tv/TheGamerFDN The Gamer Foundation' ]
+  userTextPermission: '',
+  userVoicePermission: '',
+  usage: 'setStream <twitch> <Status text>',
+  example: [ 'setStream https://twitch.tv/k3rn31p4nic Nothing' ]
 };

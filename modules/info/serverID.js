@@ -4,12 +4,10 @@
  * @license MIT
  */
 
-const string = require('../../handlers/languageHandler');
-
-exports.run = (Bastion, message) => {
+exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
-      color: Bastion.colors.blue,
+      color: Bastion.colors.BLUE,
       title: 'Server ID',
       description: message.guild.id
     }
@@ -24,10 +22,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'serverid',
-  description: string('serverID', 'commandDescription'),
+  name: 'serverID',
   botPermission: '',
-  userPermission: '',
+  userTextPermission: '',
+  userVoicePermission: '',
   usage: 'serverID',
   example: []
 };
