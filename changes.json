@@ -10,7 +10,7 @@
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
     "Removed `userBlacklist` commands.",
-    "Removed `buyGift`, `gift` and `giftShop` command."
+    "Removed `buyGift`, `gift`, `giftShop` and `myGifts` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
