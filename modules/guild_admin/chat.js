@@ -14,16 +14,37 @@ exports.exec = async (Bastion, message) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'noCredentials'), Bastion.strings.error(message.guild.language, 'noCredentials', true, 'Cleverbot API'), message.channel);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'chat' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, chatStats;
-    if (guildSettings.chat) {
-      await Bastion.db.run(`UPDATE guildSettings SET chat=0 WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.chat) {
+      await Bastion.database.models.guild.update({
+        chat: false
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'chat' ]
+      });
       color = Bastion.colors.RED;
       chatStats = Bastion.strings.info(message.guild.language, 'disableChat', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET chat=1 WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        chat: true
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'chat' ]
+      });
       color = Bastion.colors.GREEN;
       chatStats = Bastion.strings.info(message.guild.language, 'enableChat', message.author.tag);
     }
