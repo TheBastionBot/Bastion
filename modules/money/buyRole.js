@@ -30,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
     let shopModel = await Bastion.database.models.shop.findOne({
       attributes: [ 'roles' ],
       where: {
-        userID: message.guild.id
+        guildID: message.guild.id
       }
     });
 
