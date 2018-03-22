@@ -14,16 +14,29 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'filteredWords' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let filteredWords = [];
-    if (guildSettings.filteredWords) {
-      filteredWords = guildSettings.filteredWords.split(' ');
+    if (guildModel.dataValues.filteredWords) {
+      filteredWords = guildModel.dataValues.filteredWords.split(' ');
     }
     filteredWords = filteredWords.concat(args);
     filteredWords = [ ...new Set(filteredWords) ];
 
-    await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${filteredWords.join(' ')}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      filteredWords: filteredWords.join(' ')
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'filteredWords' ]
+    });
 
     message.channel.send({
       embed: {
