@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT greet FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'greet' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, greetStats;
-    if (guildSettings.greet === message.channel.id) {
-      Bastion.db.run(`UPDATE guildSettings SET greet=null WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.greet === message.channel.id) {
+      await Bastion.database.models.guild.update({
+        greet: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'greet' ]
+      });
       color = Bastion.colors.RED;
       greetStats = Bastion.strings.info(message.guild.language, 'disableGreetingMessages', message.author.tag);
     }
     else {
-      Bastion.db.run(`UPDATE guildSettings SET greet=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        greet: message.channel.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'greet' ]
+      });
       color = Bastion.colors.GREEN;
       greetStats = Bastion.strings.info(message.guild.language, 'enableGreetingMessages', message.author.tag);
     }
