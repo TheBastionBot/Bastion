@@ -12,7 +12,8 @@
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
     "Removed `userBlacklist` commands.",
     "Removed `buyGift`, `gift`, `giftShop` and `myGifts` command.",
-    "Removed `ignoreChannel` and `ignoreRole` command."
+    "Removed `ignoreChannel` and `ignoreRole` command.",
+    "Removed `whitelistChannel` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
