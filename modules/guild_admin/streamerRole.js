@@ -26,19 +26,40 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
       }
 
-      await Bastion.db.run(`UPDATE guildSettings SET streamerRole='${role.id}' WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        streamerRole: role.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'streamerRole' ]
+      });
       description = Bastion.strings.info(message.guild.language, 'enableStreamerRole', message.author.tag, role.name);
       color = Bastion.colors.GREEN;
     }
     else if (args.remove) {
-      await Bastion.db.run(`UPDATE guildSettings SET streamerRole=null WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        streamerRole: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'streamerRole' ]
+      });
       description = Bastion.strings.info(message.guild.language, 'disableStreamerRole', message.author.tag);
       color = Bastion.colors.RED;
     }
     else {
-      let guildSettings = await Bastion.db.get(`SELECT streamerRole FROM guildSettings WHERE guildID=${message.guild.id}`);
-      if (guildSettings.streamerRole) {
-        let streamerRole = message.guild.roles.get(guildSettings.streamerRole);
+      let guildModel = await Bastion.database.models.guild.findOne({
+        attributes: [ 'streamerRole' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
+      if (guildModel.dataValues.streamerRole) {
+        let streamerRole = message.guild.roles.get(guildModel.dataValues.streamerRole);
         if (streamerRole) {
           description = Bastion.strings.info(message.guild.language, 'streamerRole', message.author.tag, streamerRole.name);
           color = Bastion.colors.BLUE;
