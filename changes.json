@@ -11,7 +11,8 @@
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
     "Removed `userBlacklist` commands.",
-    "Removed `buyGift`, `gift`, `giftShop` and `myGifts` command."
+    "Removed `buyGift`, `gift`, `giftShop` and `myGifts` command.",
+    "Removed `ignoreChannel` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
