@@ -7,16 +7,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT farewell FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'farewell' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, farewellStats;
-    if (guildSettings.farewell === message.channel.id) {
-      await Bastion.db.run(`UPDATE guildSettings SET farewell=null WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.farewell === message.channel.id) {
+      await Bastion.database.models.guild.update({
+        farewell: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'farewell' ]
+      });
       color = Bastion.colors.RED;
       farewellStats = Bastion.strings.info(message.guild.language, 'disableFarewellMessages', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET farewell=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        farewell: message.channel.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'farewell' ]
+      });
       color = Bastion.colors.GREEN;
       farewellStats = Bastion.strings.info(message.guild.language, 'enableFarewellMessages', message.author.tag);
     }
