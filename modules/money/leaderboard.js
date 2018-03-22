@@ -6,7 +6,18 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let profiles = await Bastion.db.all('SELECT userID, level, xp, bastionCurrencies FROM profiles ORDER BY level * 1 DESC, xp * 1 DESC, bastionCurrencies * 1 DESC');
+    let guildMemberModels = await Bastion.database.models.guildMember.findAll({
+      attributes: [ 'userID', 'bastionCurrencies', 'experiencePoints', 'level' ],
+      where: {
+        guildID: message.guild.id
+      },
+      order: [
+        [ Bastion.database.fn('ABS', Bastion.database.col('level')), 'DESC' ],
+        [ Bastion.database.fn('ABS', Bastion.database.col('experiencePoints')), 'DESC' ],
+        [ Bastion.database.fn('ABS', Bastion.database.col('bastionCurrencies')), 'DESC' ]
+      ]
+    });
+    let profiles = guildMemberModels.map(guildMember => guildMember.dataValues);
 
     let fields = [];
 
@@ -30,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
       }
       fields.push({
         name: `${i + 1 + (p * 10)}. ${user}`,
-        value: `Level: ${profiles[i].level}\tExperience Points: ${profiles[i].xp}\tBastion Currencies: ${profiles[i].bastionCurrencies}`
+        value: `Level: ${profiles[i].level}\tExperience Points: ${profiles[i].experiencePoints}\tBastion Currencies: ${profiles[i].bastionCurrencies}`
       });
     }
 
