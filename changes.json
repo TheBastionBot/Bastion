@@ -13,7 +13,7 @@
     "Removed `userBlacklist` commands.",
     "Removed `buyGift`, `gift`, `giftShop` and `myGifts` command.",
     "Removed `ignoreChannel` and `ignoreRole` command.",
-    "Removed `whitelistChannel` command."
+    "Removed `whitelistChannel` and `whitelistRole` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
