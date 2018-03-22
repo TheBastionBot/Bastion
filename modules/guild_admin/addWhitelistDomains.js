@@ -14,13 +14,26 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'whitelistedDomains' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    let whitelistDomains = JSON.parse(guildSettings.whitelistDomains);
+    let whitelistDomains = JSON.parse(guildModel.dataValues.whitelistedDomains);
     whitelistDomains = whitelistDomains.concat(args.domains);
     whitelistDomains = [ ...new Set(whitelistDomains) ];
 
-    await Bastion.db.run(`UPDATE guildSettings SET whitelistDomains='${JSON.stringify(whitelistDomains)}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      whitelistedDomains: JSON.stringify(whitelistDomains)
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'whitelistedDomains' ]
+    });
 
     message.channel.send({
       embed: {
