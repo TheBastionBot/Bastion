@@ -18,14 +18,27 @@ exports.exec = async (Bastion, message, args) => {
       args.id = message.mentions.users.first().id;
     }
 
-    let profile = await message.client.db.get(`SELECT xp FROM profiles WHERE userID=${args.id}`);
-    if (!profile) {
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [ 'experiencePoints' ],
+      where: {
+        userID: args.id
+      }
+    });
+    if (!guildMemberModel) {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${args.id}>`), message.channel);
     }
 
-    args.point = `${parseInt(profile.xp) + parseInt(args.points)}`;
+    args.points = `${parseInt(guildMemberModel.dataValues.experiencePoints) + parseInt(args.points)}`;
 
-    await message.client.db.run(`UPDATE profiles SET xp=${args.points} WHERE userID=${args.id}`);
+    await Bastion.database.models.guildMember.update({
+      experiencePoints: args.points
+    },
+    {
+      where: {
+        userID: args.id
+      },
+      fields: [ 'experiencePoints' ]
+    });
 
     message.channel.send({
       embed: {

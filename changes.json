@@ -2,7 +2,8 @@
   "date": "March 22, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
-    "Tons of under-the-hood improvements"
+    "Tons of under-the-hood improvements",
+    "Fixed `giveXP` working like set XP instead of give XP."
   ],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of Database"
