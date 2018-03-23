@@ -147,7 +147,6 @@ module.exports = (Sequelize, database) => {
     },
     mentionSpamThreshold: {
       type: Sequelize.INTEGER,
-      allowNull: false,
       defaultValue: 5
     },
     mentionSpamAction: {
