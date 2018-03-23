@@ -10,19 +10,37 @@ exports.exec = async (Bastion, message, args) => {
 
     let color, mentionSpamStats;
     if (args.amount) {
-      if (args.action && [ 'kick', 'ban' ].includes(args.action = args.action.toLowerCase())) {
-        await Bastion.db.run(`UPDATE guildSettings SET mentionSpamThreshold=${args.amount}, mentionSpamAction='${args.action}' WHERE guildID=${message.guild.id}`);
+      if (!args.action || ![ 'kick', 'ban' ].includes(args.action = args.action.toLowerCase())) {
+        args.action = null;
       }
-      else {
-        args.action = 'none';
-        await Bastion.db.run(`UPDATE guildSettings SET mentionSpamThreshold=${args.amount}, mentionSpamAction=NULL WHERE guildID=${message.guild.id}`);
-      }
+
+      await Bastion.database.models.guild.update({
+        filterMentions: true,
+        mentionSpamThreshold: args.amount,
+        mentionSpamAction: args.action
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterMentions', 'mentionSpamThreshold', 'mentionSpamAction' ]
+      });
 
       color = Bastion.colors.GREEN;
       mentionSpamStats = Bastion.strings.info(message.guild.language, 'enableMentionSpamFilter', message.author.tag, args.amount, args.action);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET mentionSpamThreshold=NULL, mentionSpamAction=NULL WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        filterMentions: false,
+        mentionSpamThreshold: null,
+        mentionSpamAction: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterMentions', 'mentionSpamThreshold', 'mentionSpamAction' ]
+      });
       color = Bastion.colors.RED;
       mentionSpamStats = Bastion.strings.info(message.guild.language, 'disableMentionSpamFilter', message.author.tag);
     }
