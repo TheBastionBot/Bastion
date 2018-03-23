@@ -7,11 +7,16 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 1) {
-      let guildSettings = await Bastion.db.get(`SELECT greetPrivateMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
+      let guildModel = await Bastion.database.models.guild.findOne({
+        attributes: [ 'greetPrivateMessage' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
 
       let greetPrivateMessage = `Not set. Set greeting private message using \`${this.help.name} <Message>\``;
-      if (guildSettings.greetPrivateMessage) {
-        greetPrivateMessage = await Bastion.functions.decodeString(guildSettings.greetPrivateMessage);
+      if (guildModel.dataValues.greetPrivateMessage) {
+        greetPrivateMessage = await Bastion.functions.decodeString(guildModel.dataValues.greetPrivateMessage);
       }
 
       message.channel.send({
@@ -28,7 +33,15 @@ exports.exec = async (Bastion, message, args) => {
       args = args.join(' ');
 
       let greetPrivateMessage = await Bastion.functions.encodeString(args);
-      await Bastion.db.run('UPDATE guildSettings SET greetPrivateMessage=(?) WHERE guildID=(?)', [ greetPrivateMessage, message.guild.id ]);
+      await Bastion.database.models.guild.update({
+        greetPrivateMessage: greetPrivateMessage
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'greetPrivateMessage' ]
+      });
 
       message.channel.send({
         embed: {
