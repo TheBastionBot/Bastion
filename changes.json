@@ -14,7 +14,8 @@
     "Removed `buyGift`, `gift`, `giftShop` and `myGifts` commands.",
     "Removed `ignoreChannel` and `ignoreRole` commands.",
     "Removed `whitelistChannel` and `whitelistRole` commands.",
-    "Removed `votingChannel` command."
+    "Removed `votingChannel` command.",
+    "Removed `serverSettings` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
