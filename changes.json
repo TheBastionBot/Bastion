@@ -16,7 +16,8 @@
     "Removed `whitelistChannel` and `whitelistRole` commands.",
     "Removed `votingChannel` command.",
     "Removed `serverSettings` command.",
-    "Removed `resetModLogs` command."
+    "Removed `resetModLogs` command.",
+    "Removed `levelUpRoles` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
