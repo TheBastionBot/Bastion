@@ -36,8 +36,15 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
 
-
-    await Bastion.db.run(`UPDATE guildSettings SET prefix='${prefix}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      prefix: prefix
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'prefix' ]
+    });
 
     message.channel.send({
       embed: {
