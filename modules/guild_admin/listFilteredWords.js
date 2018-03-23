@@ -6,9 +6,14 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'filteredWords' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (!guildSettings || !guildSettings.filteredWords) {
+    if (!guildModel || !guildModel.dataValues.filteredWords) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -16,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
     }
 
-    let filteredWords = guildSettings.filteredWords.split(' ');
+    let filteredWords = guildModel.dataValues.filteredWords.split(' ');
 
     filteredWords = filteredWords.map((r, i) => `${i + 1}. ${r}`);
 
