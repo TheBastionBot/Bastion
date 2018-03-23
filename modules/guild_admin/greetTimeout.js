@@ -9,7 +9,16 @@ exports.exec = async (Bastion, message, args) => {
     if (!/^(([0-2]?[0-9]?[0-9])|300)$/.test(args[0])) {
       args[0] = '0';
     }
-    await Bastion.db.run(`UPDATE guildSettings SET greetTimeout=${args[0]} WHERE guildID=${message.guild.id}`);
+
+    await Bastion.database.models.guild.update({
+      greetTimeout: args[0]
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'greetTimeout' ]
+    });
 
     message.channel.send({
       embed: {
