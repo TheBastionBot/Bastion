@@ -6,9 +6,14 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'selfAssignableRoles' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (!guildSettings || !guildSettings.selfAssignableRoles) {
+    if (!guildModel || !guildModel.dataValues.selfAssignableRoles) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -16,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'self-assignable roles'), message.channel);
     }
 
-    let roles = guildSettings.selfAssignableRoles.split(' ');
+    let roles = guildModel.dataValues.selfAssignableRoles.split(' ');
     roles = roles.filter(r => message.guild.roles.get(r));
     roles = [ ...new Set(roles) ];
 
