@@ -36,7 +36,15 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'notFound', true, 'Language Code'), message.channel);
       }
 
-      await Bastion.db.run(`UPDATE guildSettings SET language='${args.name}' WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        language: args.name
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'language' ]
+      });
 
       message.channel.send({
         embed: {
