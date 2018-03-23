@@ -15,7 +15,8 @@
     "Removed `ignoreChannel` and `ignoreRole` commands.",
     "Removed `whitelistChannel` and `whitelistRole` commands.",
     "Removed `votingChannel` command.",
-    "Removed `serverSettings` command."
+    "Removed `serverSettings` command.",
+    "Removed `resetModLogs` command."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
