@@ -16,9 +16,14 @@ exports.exec = async (Bastion, message, args) => {
     }
     index -= 1;
 
-    let guildSettings = await Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'whitelistedDomains' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (!guildSettings || guildSettings.whitelistDomains === '[]') {
+    if (!guildModel || guildModel.dataValues.whitelistedDomains === '[]') {
       /**
       * Error condition is encountered.
       * @fires error
@@ -26,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
       Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'whitelist domain'), message.channel);
     }
     else {
-      let whitelistDomains = JSON.parse(guildSettings.whitelistDomains);
+      let whitelistDomains = JSON.parse(guildModel.dataValues.whitelistedDomains);
 
       if (index >= whitelistDomains.length) {
         /**
@@ -39,7 +44,15 @@ exports.exec = async (Bastion, message, args) => {
       let removedDomain = whitelistDomains[parseInt(args[0]) - 1];
       whitelistDomains.splice(parseInt(args[0]) - 1, 1);
 
-      await Bastion.db.run(`UPDATE guildSettings SET whitelistDomains='${JSON.stringify(whitelistDomains)}' WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        whitelistedDomains: JSON.stringify(whitelistDomains)
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'whitelistedDomains' ]
+      });
 
       message.channel.send({
         embed: {
