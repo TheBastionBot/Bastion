@@ -6,11 +6,17 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let streamers = await Bastion.db.get(`SELECT channelID, twitch FROM streamers WHERE guildID=${message.guild.id}`);
+    let streamersModel = await Bastion.database.models.streamers.findOne({
+      attributes: [ 'channelID', 'twitch' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+
     let twitchStreamers = [], color, title, description;
 
-    if (streamers && streamers.twitch.split(' ').length) {
-      twitchStreamers = streamers.twitch.split(' ');
+    if (streamersModel && streamersModel.dataValues.twitch.split(' ').length) {
+      twitchStreamers = streamersModel.dataValues.twitch.split(' ');
     }
 
     if (!args.streamers) {
@@ -37,7 +43,18 @@ exports.exec = async (Bastion, message, args) => {
       }
       description = args.streamers.join(' ');
       twitchStreamers = [ ...new Set(twitchStreamers) ];
-      await Bastion.db.run('INSERT OR REPLACE INTO streamers(guildID, channelID, twitch) VALUES(?, ?, ?)', [ message.guild.id, message.channel.id, twitchStreamers.join(' ') ]);
+
+      await Bastion.database.models.streamers.upsert({
+        guildID: message.guild.id,
+        channelID: message.channel.id,
+        twitch: twitchStreamers.join(' ')
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'guildID', 'channelID', 'twitch' ]
+      });
     }
 
     message.channel.send({
