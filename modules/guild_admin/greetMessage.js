@@ -7,11 +7,16 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 1) {
-      let guildSettings = await Bastion.db.get(`SELECT greetMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
+      let guildModel = await Bastion.database.models.guild.findOne({
+        attributes: [ 'greetMessage' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
 
       let greetMessage = `Not set. Set greeting message using \`${this.help.name} <Message>\``;
-      if (guildSettings.greetMessage) {
-        greetMessage = await Bastion.functions.decodeString(guildSettings.greetMessage);
+      if (guildModel.dataValues.greetMessage) {
+        greetMessage = await Bastion.functions.decodeString(guildModel.dataValues.greetMessage);
       }
 
       message.channel.send({
@@ -28,7 +33,15 @@ exports.exec = async (Bastion, message, args) => {
       args = args.join(' ');
 
       let greetMessage = await Bastion.functions.encodeString(args);
-      await Bastion.db.run('UPDATE guildSettings SET greetMessage=(?) WHERE guildID=(?)', [ greetMessage, message.guild.id ]);
+      await Bastion.database.models.guild.update({
+        greetMessage: greetMessage
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'greetMessage' ]
+      });
 
       message.channel.send({
         embed: {
