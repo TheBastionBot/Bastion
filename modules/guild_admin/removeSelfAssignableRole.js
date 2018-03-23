@@ -16,16 +16,21 @@ exports.exec = async (Bastion, message, args) => {
     }
     index -= 1;
 
-    let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'selfAssignableRoles' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (!guildSettings || !guildSettings.selfAssignableRoles) {
+    if (!guildModel || !guildModel.dataValues.selfAssignableRoles) {
       /**
       * Error condition is encountered.
       * @fires error
       */
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'self-assignable roles'), message.channel);
     }
-    let roles = guildSettings.selfAssignableRoles.split(' ');
+    let roles = guildModel.dataValues.selfAssignableRoles.split(' ');
 
     if (index >= roles.length) {
       /**
@@ -38,7 +43,15 @@ exports.exec = async (Bastion, message, args) => {
     let deletedRoleID = roles[parseInt(args[0]) - 1];
     roles.splice(parseInt(args[0]) - 1, 1);
 
-    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${roles.join(' ')}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      selfAssignableRoles: roles.join(' ')
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'selfAssignableRoles' ]
+    });
 
     message.channel.send({
       embed: {
