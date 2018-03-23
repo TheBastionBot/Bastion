@@ -1,7 +1,7 @@
 {
-  "date": "March 18, 2018",
+  "date": "March 23, 2018",
   "THESE BUGS ARE DEAD": [
-    "Fixed the `streamers` command. Déjà vu?"
+    "Fixed the `giveXP` command not adding XP to the previous XP of the user but replacing it. Déjà vu?"
   ],
   "THESE ABILITIES HAVE ENHANCED": [],
   "NEW FEATURES!": [],
