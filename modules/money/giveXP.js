@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${args.id}>`), message.channel);
     }
 
-    args.point = `${parseInt(profile.xp) + parseInt(args.points)}`;
+    args.points = `${parseInt(profile.xp) + parseInt(args.points)}`;
 
     await message.client.db.run(`UPDATE profiles SET xp=${args.points} WHERE userID=${args.id}`);
 

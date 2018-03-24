@@ -1,9 +1,13 @@
 {
-  "date": "March 18, 2018",
+  "date": "March 24, 2018",
+  "image": "https://i.imgur.com/Y9Bf5Vy.gif",
   "THESE BUGS ARE DEAD": [
-    "Fixed the `streamers` command. Déjà vu?"
+    "Fixed the `giveXP` command not adding XP to the previous XP of the user but replacing it. Déjà vu?"
   ],
-  "THESE ABILITIES HAVE ENHANCED": [],
+  "THESE ABILITIES HAVE ENHANCED": [
+    "You can now run `poll` for a maximum of 24 hours.",
+    "Some changes to `changelog` command, in case you haven't noticed it yet!"
+  ],
   "NEW FEATURES!": [],
   "NOT AVAILABLE ANYMORE": [],
   "BUGS HIDING IN THE CLOSET": []
