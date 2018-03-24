@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message, args) => {
     }
     let pollMessage = args.pollMessage.join(' ').split(';');
     args.time = Math.abs(args.time);
-    args.time = args.time && args.time < 360 ? args.time : 60;
+    args.time = args.time && args.time < 1440 ? args.time : 60;
 
     if (!message.channel.hasOwnProperty('poll')) {
       message.channel.poll = {};
