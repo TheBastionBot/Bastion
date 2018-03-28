@@ -65,7 +65,26 @@ BASTION.database.authenticate().then(() => {
   BASTION.aliases = Modules.aliases;
 
   // Start Bastion
-  BASTION.login(BASTION.credentials.token).catch(e => {
+  BASTION.login(BASTION.credentials.token).then(() => {
+    /**
+     * Using <Model>.findOrCreate() won't require the use of
+     * <ModelInstance>.save() but <Model>.findOrBuild() is used instead because
+     * <Model>.findOrCreate() creates a race condition where a matching row is
+     * created by another connection after the `find` but before the `insert`
+     * call. However, it is not always possible to handle this case in SQLite,
+     * specifically if one transaction inserts and another tries to select
+     * before the first one has committed. TimeoutError is thrown instead.
+     */
+    BASTION.database.models.settings.findOrBuild({
+      where: {
+        botID: BASTION.user.id
+      }
+    }).spread((settingsModel, initialized) => {
+      if (initialized) {
+        return settingsModel.save();
+      }
+    }).catch(BASTION.log.error);
+  }).catch(e => {
     BASTION.log.error(e.toString());
     process.exit(1);
   });
