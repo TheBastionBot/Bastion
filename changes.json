@@ -1,6 +1,9 @@
 {
   "date": "March 28, 2018",
   "image": "https://i.imgur.com/tIYEujJ.gif",
+  "ENHANCEMENTS": [
+    "Under-the-hood improvements."
+  ],
   "NEW COMMANDS": [
     "Added `shardStats` commands."
   ]
