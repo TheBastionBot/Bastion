@@ -5,6 +5,7 @@
     "Under-the-hood improvements."
   ],
   "NEW COMMANDS": [
-    "Added `shardStats` commands."
+    "Added `shardStats` commands.",
+    "Added `pollStats` commands."
   ]
 }
