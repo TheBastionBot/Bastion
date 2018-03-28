@@ -15,10 +15,10 @@ module.exports = (Sequelize, database) => {
       primaryKey: true
     },
     blacklistedGuilds: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     blacklistedUsers: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     }
   });
 
