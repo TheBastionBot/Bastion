@@ -44,7 +44,7 @@ exports.exec = (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
-        title: 'Poll Ended',
+        title: 'Poll Status',
         description: `Poll results for **${pollMessage[0]}**`,
         fields: result
       }
