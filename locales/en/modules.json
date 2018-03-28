@@ -295,6 +295,7 @@
     "movie": "Searches for the details of a movie.",
     "pokemon": "Shows you information on the specified Pokémon.",
     "poll": "Starts a poll in the current text channel asking users to vote with the specified time. If no time is specified, poll ends in 60 minutes.",
+    "pollStats": "Shows the stats of the currently running poll in the channel.",
     "reminder": "Bastion sets a reminder to remind you of specified message, via direct message, after a specified duration.",
     "shorten": "Shortens a specified URL using Google URL Shortner.",
     "steam": "Browse the games in different categories of the Steam Store.",
