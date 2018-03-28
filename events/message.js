@@ -134,7 +134,7 @@ module.exports = async message => {
       });
 
       if (settingsModel && settingsModel.dataValues.blacklistedUsers) {
-        if (settingsModel.dataValues.blacklistedUsers.split(' ').includes(message.author.id)) return;
+        if (settingsModel.dataValues.blacklistedUsers.includes(message.author.id)) return;
       }
     }
     catch (e) {
