@@ -1,9 +1,7 @@
 {
   "date": "March 28, 2018",
   "image": "https://i.imgur.com/tIYEujJ.gif",
-  "THESE BUGS ARE DEAD": [],
-  "THESE ABILITIES HAVE ENHANCED": [],
-  "NEW FEATURES!": [],
-  "NOT AVAILABLE ANYMORE": [],
-  "BUGS HIDING IN THE CLOSET": []
+  "NEW COMMANDS": [
+    "Added `shardStatus` commands."
+  ]
 }
