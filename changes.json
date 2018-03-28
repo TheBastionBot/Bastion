@@ -1,5 +1,5 @@
 {
-  "date": "March 23, 2018",
+  "date": "March 28, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Tons of under-the-hood improvements.",
@@ -7,6 +7,9 @@
   ],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of the database."
+  ],
+  "NEW COMMANDS!": [
+    "Added `blacklist` command to blacklist users globally from using Bastion."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
