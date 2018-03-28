@@ -1,5 +1,5 @@
 /**
- * @file shardStatus command
+ * @file shardStats command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
@@ -29,7 +29,7 @@ exports.exec = (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
-        title: 'Shard Status',
+        title: 'Shard Stats',
         url: Bastion.package.url,
         fields: [
           {
@@ -81,10 +81,10 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'shardStatus',
+  name: 'shardStats',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'shardStatus',
+  usage: 'shardStats',
   example: []
 };

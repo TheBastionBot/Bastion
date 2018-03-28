@@ -2,6 +2,6 @@
   "date": "March 28, 2018",
   "image": "https://i.imgur.com/tIYEujJ.gif",
   "NEW COMMANDS": [
-    "Added `shardStatus` commands."
+    "Added `shardStats` commands."
   ]
 }
