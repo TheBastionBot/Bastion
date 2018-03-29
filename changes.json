@@ -10,7 +10,8 @@
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
-    "Added `ignoreChannels` command to ignore a server's text channel so that no commands can be used in that channel."
+    "Added `ignoreChannels` command to ignore a server's text channel so that no commands can be used in that channel.",
+    "Added `ignoreRoles` command to ignore a server's roles so that no commands can be used by anyone in that role."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
