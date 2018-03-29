@@ -6,11 +6,11 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.add || args.remove) {
+    if (args.add) {
       await Bastion.database.models.textChannel.upsert({
         channelID: message.channel.id,
         guildID: message.guild.id,
-        votingChannel: !!args.add
+        votingChannel: true
       },
       {
         where: {
@@ -20,20 +20,33 @@ exports.exec = async (Bastion, message, args) => {
         fields: [ 'channelID', 'guildID', 'votingChannel' ]
       });
 
-      let color, description;
-      if (args.add) {
-        color = Bastion.colors.GREEN;
-        description = `${message.channel} has been added to the list of voting channels.`;
-      }
-      else {
-        color = Bastion.colors.RED;
-        description = `${message.channel} has been removed from the list of voting channels.`;
-      }
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: `${message.channel} has been added to the list of voting channels.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else if (args.remove) {
+      await Bastion.database.models.textChannel.update({
+        channelID: message.channel.id,
+        guildID: message.guild.id,
+        votingChannel: false
+      },
+      {
+        where: {
+          channelID: message.channel.id,
+          guildID: message.guild.id
+        },
+        fields: [ 'channelID', 'guildID', 'votingChannel' ]
+      });
 
       message.channel.send({
         embed: {
-          color: color,
-          description: description
+          color: Bastion.colors.RED,
+          description: `${message.channel} has been removed from the list of voting channels.`
         }
       }).catch(e => {
         Bastion.log.error(e);
