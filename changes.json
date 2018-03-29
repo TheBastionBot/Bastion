@@ -1,5 +1,5 @@
 {
-  "date": "March 28, 2018",
+  "date": "March 29, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Tons of under-the-hood improvements.",
@@ -9,7 +9,8 @@
     "A complete redesign/rewrite of the database."
   ],
   "NEW COMMANDS!": [
-    "Added `blacklist` command to blacklist users globally from using Bastion."
+    "Added `blacklist` command to blacklist users globally from using Bastion.",
+    "Added `ignoreChannels` command to ignore a server's text channel so that no commands can be used in that channel."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
