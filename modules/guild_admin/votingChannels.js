@@ -40,7 +40,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
     else if (args.purge) {
-      await Bastion.database.models.textChannel.upsert({
+      await Bastion.database.models.textChannel.update({
         guildID: message.guild.id,
         votingChannel: false
       },
