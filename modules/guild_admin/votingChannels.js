@@ -122,5 +122,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'votingChannels [ --add | --remove | --purge ]',
-  example: [ 'votingChannels', 'votingChannels --add', 'votingChannels --remove', 'votingChannel --purge' ]
+  example: [ 'votingChannels', 'votingChannels --add', 'votingChannels --remove', 'votingChannels --purge' ]
 };
