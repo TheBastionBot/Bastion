@@ -2,8 +2,7 @@
   "date": "March 31, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
-    "Tons of under-the-hood improvements.",
-    "Fixed `giveXP` command working like set XP instead of give XP."
+    "Tons of under-the-hood improvements."
   ],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of the database.",
@@ -11,18 +10,17 @@
     "You can add any number of level up roles. No limitations here, too!"
   ],
   "NEW COMMANDS!": [
-    "Added `blacklist` command to blacklist users globally from using Bastion.",
-    "Added `ignoreChannels` command to ignore a server's text channel so that no commands can be used in that channel.",
-    "Added `ignoreRoles` command to ignore a server's roles so that no commands can be used by anyone in that role.",
-    "Added `votingChannels` command to set a channel as a voting channel. Any messages posted in the votingChannel are available for upvote/downvote."
+    "Added `blacklist` command to blacklist users globally from using Bastion."
+  ],
+  "RENAMED COMMANDS": [
+    "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
+    "Renamed the `votingChannel` command to `votingChannels`."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
-    "Removed `userBlacklist` command.",
-    "Removed `buyGift`, `gift`, `giftShop` and `myGifts` commands.",
-    "Removed `ignoreChannel` and `ignoreRole` commands.",
+    "Removed the `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
+    "Removed the `buyGift`, `gift`, `giftShop` and `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
     "Removed `whitelistChannel` and `whitelistRole` commands.",
-    "Removed `votingChannel` command.",
     "Removed `serverSettings` command.",
     "Removed `resetModLogs` command."
   ],
