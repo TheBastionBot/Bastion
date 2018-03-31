@@ -92,8 +92,6 @@
     "greetPrivateMessage": "Edita el mensaje de saludo que se envía como mensaje directo cuando un miembro se une al servidor.",
     "greetMessage": "Edita el mensaje de bienvenida que muestra cuándo un miembro se une al servidor.",
     "greetTimeout": "Establece el tiempo el cual automaticamente eliminara el mensaje de bienvenida.",
-    "ignoreChannel": "Añade o quita un canal a / de la lista de canales ignorados. Bastion no acepta ningún comando en el canal que se esté ignorando.",
-    "ignoreRole": "Agrega o quita un rol a / de la lista de roles ignorados. Bastion no acepta ningún comando de los roles que se están ignorando.",
     "levelUpMessage": "Activa el envío de mensajes cuando alguien sube de nivel en el servidor.",
     "listAutoAssignableRoles": "Enumera todas las funciones auto-asignables.",
     "listFilteredWords": "Enumera todas las palabras filtradas.",
@@ -170,12 +168,8 @@
   },
   "money": {
     "bastionCurrency": "Muestra la cantidad de monedas de bastión en la cuenta del usuario especificado.",
-    "buyGift": "Compre regalos de la tienda de regalos de Bastion.",
     "claim": "Reclamar sus recompensas diarias.",
-    "gift": "Enviar regalos a otros usuarios de los artículos de regalo que tiene con usted.",
-    "giftShop": "Muestra los productos disponibles en la tienda de regalos, y su precio.",
     "give": "Entregue la cantidad especificada de Monedas Bastion de su cuenta al usuario especificado. Si usted es el propietario del bot, puede dar cualquier cantidad de monedas Bastion.",
-    "myGifts": "Muestra los regalos que actualmente tiene en su poder.",
     "take": "Tome la cantidad especificada de Monedas Bastion del usuario especificado."
   },
   "music": {
@@ -222,8 +216,7 @@
     "shutdown": "Cierra Bastion y termina el proceso.",
     "sql": "Ejecutar consulta SQL sobre la base de datos de bastión.",
     "todo": "Agrega un elemento especificado a su lista TO/DO.",
-    "updateDatabase": "Actualiza la base de datos de Bastion a la versión actual, si es necesario.",
-    "userBlacklist": "Agrega / elimina un usuario especificado a la lista negra de Bastion. Los usuarios de la lista negra no pueden usar ninguno de los comandos del Bastion."
+    "updateDatabase": "Actualiza la base de datos de Bastion a la versión actual, si es necesario."
   },
   "queries": {
     "anime": "Busca los detalles de un Anime.",
