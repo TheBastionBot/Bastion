@@ -7,7 +7,8 @@
   ],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of the database.",
-    "You can now set any number of channels as voting channels. No limitations!"
+    "You can now set any number of channels as voting channels. No limitations!",
+    "You can add any number of level up roles. No limitations here, too!"
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
