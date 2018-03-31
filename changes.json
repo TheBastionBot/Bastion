@@ -14,14 +14,14 @@
   ],
   "RENAMED COMMANDS": [
     "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
-    "Renamed the `votingChannel` command to `votingChannels`."
+    "Renamed the `votingChannel` command to `votingChannels`.",
+    "Renamed the `resetModLogs` command to `resetModerationLogs`."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` and `deleteTodo` commands.",
     "Removed the `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
     "Removed the `buyGift`, `gift`, `giftShop` and `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
-    "Removed `whitelistChannel` and `whitelistRole` commands.",
-    "Removed `resetModLogs` command."
+    "Removed `whitelistChannel` and `whitelistRole` commands."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
