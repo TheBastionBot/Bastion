@@ -1,12 +1,13 @@
 {
-  "date": "March 29, 2018",
+  "date": "March 31, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Tons of under-the-hood improvements.",
     "Fixed `giveXP` command working like set XP instead of give XP."
   ],
   "NEW FEATURES!": [
-    "A complete redesign/rewrite of the database."
+    "A complete redesign/rewrite of the database.",
+    "You can now set any number of channels as voting channels. No limitations!"
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
