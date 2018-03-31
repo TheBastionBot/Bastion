@@ -31,16 +31,15 @@ exports.exec = async (Bastion, message, args) => {
     }
     else if (args.remove) {
       await Bastion.database.models.textChannel.update({
-        channelID: message.channel.id,
-        guildID: message.guild.id,
         votingChannel: false
       },
       {
         where: {
           channelID: message.channel.id,
-          guildID: message.guild.id
+          guildID: message.guild.id,
+          votingChannel: true
         },
-        fields: [ 'channelID', 'guildID', 'votingChannel' ]
+        fields: [ 'votingChannel' ]
       });
 
       message.channel.send({
@@ -54,14 +53,14 @@ exports.exec = async (Bastion, message, args) => {
     }
     else if (args.purge) {
       await Bastion.database.models.textChannel.update({
-        guildID: message.guild.id,
         votingChannel: false
       },
       {
         where: {
-          guildID: message.guild.id
+          guildID: message.guild.id,
+          votingChannel: true
         },
-        fields: [ 'guildID', 'votingChannel' ]
+        fields: [ 'votingChannel' ]
       });
 
       message.channel.send({
