@@ -73,7 +73,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
     else {
-      let guildModel = await Bastion.database.models.textChannel.findAll({
+      let textChannelModel = await Bastion.database.models.textChannel.findAll({
         attributes: [ 'channelID' ],
         where: {
           guildID: message.guild.id,
@@ -82,11 +82,11 @@ exports.exec = async (Bastion, message, args) => {
       });
 
       let votingChannels, description;
-      if (!guildModel || !guildModel.length) {
+      if (!textChannelModel || !textChannelModel.length) {
         description = 'No voting channels have been set in this server.';
       }
       else {
-        votingChannels = guildModel.map(guild => guild.dataValues.channelID);
+        votingChannels = textChannelModel.map(guild => guild.dataValues.channelID);
         description = `Messages posted in the voting channels can are available for upvote/downvote by users.\n\nThese channels have been set as the voting channels:\n\n<#${votingChannels.join('>, <#')}>`;
       }
 
