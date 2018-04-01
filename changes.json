@@ -1,8 +1,11 @@
 {
-  "date": "March 28, 2018",
+  "date": "April 1, 2018",
   "image": "https://i.imgur.com/tIYEujJ.gif",
   "ENHANCEMENTS": [
     "Under-the-hood improvements."
+  ],
+  "NEW FEATURES": [
+    "You can now set the interval at which Bastion's activity changes."
   ],
   "NEW COMMANDS": [
     "Added `shardStats` command.",
