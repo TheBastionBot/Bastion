@@ -1,14 +1,11 @@
 {
   "date": "April 1, 2018",
-  "image": "https://i.imgur.com/tIYEujJ.gif",
+  "image": "https://i.imgur.com/fYmAcXh.gif",
+  "THESE BUGS ARE DEAD": [
+    "Fixed the issue that caused Bastion to go offline after a few moments, if you had set the activity interval."
+  ],
   "ENHANCEMENTS": [
-    "Under-the-hood improvements."
-  ],
-  "NEW FEATURES": [
-    "You can now set the interval at which Bastion's activity changes."
-  ],
-  "NEW COMMANDS": [
-    "Added `shardStats` command.",
-    "Added `pollStats` command."
+    "You can now set the streaming status from config too! Forget the `setStream` command. Who needs it anyway!",
+    "Some under-the-hood changes & improvements."
   ]
 }

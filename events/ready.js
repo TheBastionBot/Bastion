@@ -16,19 +16,24 @@ module.exports = async Bastion => {
       status: Bastion.config.status,
       game: {
         name: typeof Bastion.config.game.name === 'string' ? Bastion.config.game.name : Bastion.config.game.name.length ? Bastion.config.game.name[0] : null,
-        type: Bastion.config.game.type
+        type: Bastion.config.game.type,
+        url: Bastion.config.game.url
       }
     });
 
     if (typeof Bastion.config.game.name !== 'string' && Bastion.config.game.name.length) {
       Bastion.setInterval(async () => {
         try {
-          await Bastion.user.setActivity(Bastion.config.game.name[Math.floor(Math.random() * Bastion.config.game.name.length)], { type: Bastion.config.game.type });
+          await Bastion.user.setActivity(Bastion.config.game.name[Math.floor(Math.random() * Bastion.config.game.name.length)],
+            {
+              type: Bastion.config.game.type,
+              url: Bastion.config.game.url
+            });
         }
         catch (e) {
           Bastion.log.error(e);
         }
-      }, typeof Bastion.config.game.interval === 'number' && Bastion.config.game.interval || 60 * 60 * 1000);
+      }, ((typeof Bastion.config.game.interval === 'number' && Bastion.config.game.interval) || 60) * 60 * 1000);
     }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
