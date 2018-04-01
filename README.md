@@ -69,10 +69,8 @@ Your donations will ensure the development of this project and I'll make sure
 this project stays active forever. You can donate via Patreon or via PayPal:
 
 <a href="https://www.patreon.com/bastionbot" title="Pledge for the Bastion Bot Project">
-<img src="https://s7.postimg.org/m5awszoyz/patreon.jpg" alt="Pledge for the Bastion Bot Project" height="100" />
+<img src="https://i.imgur.com/NBMyXjO.jpg" alt="Pledge for the Bastion Bot Project" height="100" />
 </a>
 <a href="https://paypal.me/snkrsnkampa" title="Donate via PayPal">
-<img src="https://s1.postimg.org/wbhh3ef5b/paypal.jpg" alt="Donate via PayPal" height="100" />
+<img src="https://i.imgur.com/Dyfpicq.jpg" alt="Donate via PayPal" height="100" />
 </a>
-<!-- [![patreon.jpg](https://s7.postimg.org/m5awszoyz/patreon.jpg)](https://www.patreon.com/bastionbot) -->
-<!-- [![paypal.jpg](https://s1.postimg.org/wbhh3ef5b/paypal.jpg)](https://paypal.me/snkrsnkampa) -->

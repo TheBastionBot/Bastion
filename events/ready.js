@@ -28,7 +28,7 @@ module.exports = async Bastion => {
         catch (e) {
           Bastion.log.error(e);
         }
-      }, 60 * 60 * 1000);
+      }, typeof Bastion.config.game.interval === 'number' && Bastion.config.game.interval || 60 * 60 * 1000);
     }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);

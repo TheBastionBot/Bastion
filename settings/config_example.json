@@ -6,7 +6,8 @@
     "type": "Playing",
     "name": [
       "with Ganymede"
-    ]
+    ],
+    "interval": 60
   },
   "music": {
     "status": true,

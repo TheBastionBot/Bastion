@@ -13,19 +13,21 @@ exports.exec = async (Bastion, message, args) => {
       */
       return Bastion.emit('commandUsage', message, this.help);
     }
-    let pollMessage = args.pollMessage.join(' ').split(';');
-    args.time = Math.abs(args.time);
-    args.time = args.time && args.time < 1440 ? args.time : 60;
 
     if (!message.channel.hasOwnProperty('poll')) {
       message.channel.poll = {};
       message.channel.poll.usersVoted = [];
 
+      // let pollMessage = args.pollMessage.join(' ').split(';');
+      message.channel.poll.message = args.pollMessage.join(' ').split(';');
+      args.time = Math.abs(args.time);
+      args.time = args.time && args.time < 1440 ? args.time : 60;
+
       let answers = [];
-      for (let i = 1; i < pollMessage.length; i++) {
+      for (let i = 1; i < message.channel.poll.message.length; i++) {
         answers.push({
           name: `${i}.`,
-          value: `${pollMessage[i]}`,
+          value: `${message.channel.poll.message[i]}`,
           inline: true
         });
       }
@@ -34,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.BLUE,
           title: 'Poll started',
-          description: `A poll has been started by ${message.author}.\n\n**${pollMessage[0]}**`,
+          description: `A poll has been started by ${message.author}.\n\n**${message.channel.poll.message[0]}**`,
           fields: answers,
           footer: {
             text: `Vote by sending the corresponding number of the option. • Poll ends in ${args.time} minutes.`
@@ -43,7 +45,7 @@ exports.exec = async (Bastion, message, args) => {
       });
 
       message.channel.poll.collector = message.channel.createMessageCollector(
-        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < pollMessage.length && !message.channel.poll.usersVoted.includes(m.author.id)),
+        m => (!m.author.bot && parseInt(m.content) > 0 && parseInt(m.content) < message.channel.poll.message.length && !message.channel.poll.usersVoted.includes(m.author.id)),
         { time: args.time * 60 * 1000 }
       );
 
@@ -70,7 +72,7 @@ exports.exec = async (Bastion, message, args) => {
 
       message.channel.poll.collector.on('end', (pollRes) => {
         pollRes = pollRes.map(r => r.content);
-        pollRes = pollRes.filter(res => parseInt(res) && parseInt(res) > 0 && parseInt(res) < pollMessage.length);
+        pollRes = pollRes.filter(res => parseInt(res) && parseInt(res) > 0 && parseInt(res) < message.channel.poll.message.length);
         if (pollRes.length === 0) {
           return message.channel.send({
             embed: {
@@ -88,7 +90,7 @@ exports.exec = async (Bastion, message, args) => {
           });
         }
 
-        for (let i = pollMessage.length - 1; i > 0; i--) {
+        for (let i = message.channel.poll.message.length - 1; i > 0; i--) {
           pollRes.unshift(i);
         }
         let count = {};
@@ -96,11 +98,11 @@ exports.exec = async (Bastion, message, args) => {
           count[pollRes[i]] = count[pollRes[i]] ? count[pollRes[i]] + 1 : 1;
         }
         let result = [];
-        let totalVotes = (pollRes.length - (pollMessage.length - 1));
-        for (let i = 1; i < pollMessage.length; i++) {
+        let totalVotes = (pollRes.length - (message.channel.poll.message.length - 1));
+        for (let i = 1; i < message.channel.poll.message.length; i++) {
           let numOfVotes = count[Object.keys(count)[i - 1]] - 1;
           result.push({
-            name: pollMessage[i],
+            name: message.channel.poll.message[i],
             value: `${(numOfVotes / totalVotes) * 100}% (${numOfVotes} of ${totalVotes})`,
             inline: true
           });
@@ -110,7 +112,7 @@ exports.exec = async (Bastion, message, args) => {
           embed: {
             color: Bastion.colors.BLUE,
             title: 'Poll Ended',
-            description: `Poll results for **${pollMessage[0]}**`,
+            description: `Poll results for **${message.channel.poll.message[0]}**`,
             fields: result
           }
         }).then(() => {
