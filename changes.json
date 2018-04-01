@@ -5,6 +5,7 @@
     "Fixed the issue that caused Bastion to go offline after a few moments, if you had set the activity interval."
   ],
   "ENHANCEMENTS": [
-    "You can now set the streaming status from config too! Forget the `setStream` command. Who needs it anyway!"
+    "You can now set the streaming status from config too! Forget the `setStream` command. Who needs it anyway!",
+    "Some under-the-hood changes & improvements."
   ]
 }
