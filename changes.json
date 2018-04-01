@@ -1,7 +1,7 @@
 {
   "date": "April 1, 2018",
   "image": "https://i.imgur.com/tIYEujJ.gif",
-  "ENHANCEMENTS": [],
-  "NEW FEATURES": [],
-  "NEW COMMANDS": []
+  "THESE BUGS ARE DEAD": [
+    "Fixed the issue that caused Bastion to go offline after a few moments, if you had set the activity interval."
+  ]
 }
