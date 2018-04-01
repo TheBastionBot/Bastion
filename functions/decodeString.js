@@ -8,7 +8,7 @@ const lzutf8 = require('lzutf8');
 module.exports = (string) => {
   return new Promise((resolve, reject) => {
     let options = {
-      inputEncoding: 'BinaryString'
+      inputEncoding: 'StorageBinaryString'
     };
 
     let callback = function (data, error) {
