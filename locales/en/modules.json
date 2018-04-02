@@ -111,6 +111,7 @@
     "ignoreInviteFilter": "Add/remove channels/roles to/from the invite filter ignored list. Bastion will not filter invites posted in these channels or by these roles.",
     "ignoreLinkFilter": "Add/remove channels/roles to/from the link filter ignored list. Bastion will not filter links posted in these channels or by these roles.",
     "ignoreRoles": "Adds or removes roles to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored.",
+    "ignoreWordFilter": "Add/remove channels/roles to/from the word filter ignored list. Bastion will not filter words posted in these channels or by these roles.",
     "levelUpMessage": "Toggles sending messages when someone levels up in the server.",
     "levelUpRoles": "Add/Remove/Show level up roles. Level up roles are roles that are added to server members when they level up.",
     "listAutoAssignableRoles": "Lists all auto-assignable roles.",
