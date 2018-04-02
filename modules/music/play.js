@@ -283,6 +283,7 @@ function startStreamDispatcher(guild, connection) {
       description = 'Exiting voice channel.';
     }
     else {
+      guild.music.songs = [];
       description = 'It appears I\'ve been by myself in this voice channel since the last song. The bandwidth patrol has asked me to stop the playback to save bandwidth. That stuff doesn\'t grow on trees!';
     }
 
