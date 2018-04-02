@@ -605,12 +605,12 @@ module.exports = (Sequelize, database) => {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
   });
-  GuildMember.Items = GuildMember.hasMany(Items, {
+  User.Items = User.hasMany(Items, {
     foreignKey: 'userID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
   });
-  GuildMember.Transactions = GuildMember.hasMany(Transaction, {
+  User.Transactions = User.hasMany(Transaction, {
     foreignKey: 'userID',
     onDelete: 'NO ACTION',
     onUpdate: 'CASCADE'
