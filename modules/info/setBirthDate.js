@@ -42,14 +42,14 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'ageBelow13', true), message.channel);
     }
 
-    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+    let userModel = await Bastion.database.models.user.findOne({
       attributes: [ 'birthDate' ],
       where: {
         userID: message.author.id
       }
     });
 
-    if (!guildMemberModel) {
+    if (!userModel) {
       return message.channel.send({
         embed: {
           description: `<@${message.author.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your birth date.`
@@ -59,7 +59,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
 
-    await Bastion.database.models.guildMember.update({
+    await Bastion.database.models.user.update({
       birthDate: args.date
     },
     {

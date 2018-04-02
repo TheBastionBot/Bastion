@@ -26,14 +26,14 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'bioRange', true, charLimit), message.channel);
     }
 
-    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+    let userModel = await Bastion.database.models.user.findOne({
       attributes: [ 'bio' ],
       where: {
         userID: message.author.id
       }
     });
 
-    if (!guildMemberModel) {
+    if (!userModel) {
       return message.channel.send({
         embed: {
           description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
@@ -43,7 +43,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
 
-    await Bastion.database.models.guildMember.update({
+    await Bastion.database.models.user.update({
       bio: bio
     },
     {
