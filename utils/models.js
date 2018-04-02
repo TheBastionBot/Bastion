@@ -256,15 +256,6 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: '0'
     },
-    bio: {
-      type: Sequelize.BLOB
-    },
-    birthDate: {
-      type: Sequelize.DATEONLY
-    },
-    location: {
-      type: Sequelize.STRING
-    },
     blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
