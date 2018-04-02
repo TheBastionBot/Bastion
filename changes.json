@@ -11,7 +11,8 @@
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
-    "Added `ignoreInviteFilter` command. You can now set channels and/or roles to be ignored by the invite filter."
+    "Added `ignoreInviteFilter` command. You can now set channels and/or roles to be ignored by the invite filter.",
+    "Added `ignoreLinkFilter` command. You can now set channels and/or roles to be ignored by the invite filter."
   ],
   "RENAMED COMMANDS": [
     "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
