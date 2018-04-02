@@ -1,5 +1,5 @@
 {
-  "date": "March 31, 2018",
+  "date": "April 2, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Tons of under-the-hood improvements."
@@ -10,7 +10,8 @@
     "You can add any number of level up roles. No limitations here, too!"
   ],
   "NEW COMMANDS!": [
-    "Added `blacklist` command to blacklist users globally from using Bastion."
+    "Added `blacklist` command to blacklist users globally from using Bastion.",
+    "Added `ignoreInviteFilter` command. You can now set channels and/or roles to be ignored by the invite filter."
   ],
   "RENAMED COMMANDS": [
     "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
