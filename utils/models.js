@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+const logger = require('../handlers/logHandler');
 const { prefix } = require('../settings/config.json');
 
 module.exports = (Sequelize, database) => {
@@ -268,6 +269,44 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    }
+  },
+  {
+    hooks: {
+      beforeCreate: async (user) => {
+        await User.upsert({
+          userID: user.dataValues.userID
+        },
+        {
+          where: {
+            userID: user.dataValues.userID
+          },
+          fields: [ 'userID' ]
+        }).catch(e => {
+          logger.error(e);
+        });
+      },
+      afterDestroy: async (user) => {
+        try {
+          let guildMemberModel = await GuildMember.findOne({
+            where: {
+              userID: user.dataValues.userID
+            }
+          });
+
+          // If the user is not present in any guild, remove all user data.
+          if (!guildMemberModel) {
+            await User.destroy({
+              where: {
+                userID: user.dataValues.userID
+              }
+            });
+          }
+        }
+        catch (e) {
+          logger.error(e);
+        }
+      }
     }
   });
 
