@@ -202,6 +202,28 @@ module.exports = (Sequelize, database) => {
     }
   });
 
+  const User = database.define('user', {
+    userID: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      primaryKey: true
+    },
+    bio: {
+      type: Sequelize.BLOB
+    },
+    birthDate: {
+      type: Sequelize.DATEONLY
+    },
+    location: {
+      type: Sequelize.STRING
+    },
+    blacklisted: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
+  });
+
   const GuildMember = database.define('guildMember', {
     userID: {
       type: Sequelize.STRING,
@@ -552,6 +574,13 @@ module.exports = (Sequelize, database) => {
   GuildMember.Transactions = GuildMember.hasMany(Transaction, {
     foreignKey: 'userID',
     onDelete: 'NO ACTION',
+    onUpdate: 'CASCADE'
+  });
+  User.Guild = User.belongsToMany(Guild, {
+    through: 'guildMember',
+    foreignKey: 'userID',
+    otherKey: 'guildID',
+    onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
   });
 
