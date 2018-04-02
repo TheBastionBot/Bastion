@@ -1,8 +1,10 @@
 {
   "date": "April 2, 2018",
   "image": "https://i.imgur.com/dp3ZKEL.gif",
+  "FIXES": [
+    "Under-the-hood fixes."
+  ],
   "ENHANCEMENTS": [
     "Clear the queue when Bastion leaves the voice channel, when no one's there."
-  ],
-  "ENHANCEMENTS": []
+  ]
 }
