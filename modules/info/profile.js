@@ -31,6 +31,13 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
+    let userModel = await Bastion.database.models.user.findOne({
+      attributes: [ 'bio', 'birthDate', 'location' ],
+      where: {
+        userID: user.id
+      }
+    });
+
     if (!guildMemberModel) {
       /**
       * Error condition is encountered.
@@ -39,11 +46,12 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${user.id}>`), message.channel);
     }
 
-    if (guildMemberModel.dataValues.bio) {
-      guildMemberModel.dataValues.bio = await Bastion.functions.decodeString(guildMemberModel.dataValues.bio);
+    let bio;
+    if (userModel && userModel.dataValues.bio) {
+      bio = await Bastion.functions.decodeString(guildMemberModel.dataValues.bio);
     }
     else {
-      guildMemberModel.dataValues.bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+      bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
     }
 
     let profileData = [
@@ -69,17 +77,17 @@ exports.exec = async (Bastion, message, args) => {
       }
     ];
 
-    if (guildMemberModel.dataValues.birthDate) {
+    if (userModel && userModel.dataValues.birthDate) {
       profileData.push({
         name: 'Birthday',
-        value: new Date(guildMemberModel.dataValues.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
+        value: new Date(userModel.dataValues.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
         inline: true
       });
     }
-    if (guildMemberModel.dataValues.location) {
+    if (userModel && userModel.dataValues.location) {
       profileData.push({
         name: 'Location',
-        value: guildMemberModel.dataValues.location,
+        value: userModel.dataValues.location,
         inline: true
       });
     }
@@ -91,7 +99,7 @@ exports.exec = async (Bastion, message, args) => {
           name: user.tag,
           icon_url: await getUserIcon(user)
         },
-        description: guildMemberModel.dataValues.bio,
+        description: bio,
         fields: profileData,
         thumbnail: {
           url: user.displayAvatarURL
