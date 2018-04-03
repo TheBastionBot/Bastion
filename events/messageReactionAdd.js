@@ -10,18 +10,29 @@ module.exports = async (reaction, user) => {
   try {
     if (!reaction.message.guild) return;
     if (reaction.message.author.id === user.id) return;
+
     let guildModel = await user.client.database.models.guild.findOne({
       attributes: [ 'starboard' ],
       where: {
         guildID: reaction.message.guild.id
-      }
+      },
+      include: [
+        {
+          model: user.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreStarboard' ]
+        }
+      ]
     });
+
     if (!guildModel || !guildModel.dataValues.starboard) return;
     if (!reaction.message.content) return;
     if (starredMessages.includes(reaction.message.id)) return;
 
     let stars = [ '🌟', '⭐' ];
     if (!stars.includes(reaction.emoji.name)) return;
+
+    let starboardIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.channelID);
+    if (starboardIgnoredChannels.includes(reaction.message.channel.id)) return;
 
     let image;
     if (reaction.message.attachments.size) {
