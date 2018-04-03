@@ -18,45 +18,46 @@ let recentLevelUps = [];
 let recentUsers = {};
 
 module.exports = async message => {
-  /**
-   * Filter Bastion's credentials from the message
-   */
-  if (await credentialsFilter(message)) return;
-
-  /**
-   * If the message author is a bot, ignore it.
-   */
-  if (message.author.bot) return;
-
-  if (message.guild) {
+  try {
     /**
-     * Filter specific words from the message
+     * Filter Bastion's credentials from the message
      */
-    if (await wordFilter(message)) return;
+    if (await credentialsFilter(message)) return;
 
     /**
-     * Filter links from the message
+     * If the message author is a bot, ignore it.
      */
-    if (await linkFilter(message)) return;
+    if (message.author.bot) return;
 
-    /**
-     * Filter Discord server invites from the message
-     */
-    if (await inviteFilter(message)) return;
+    if (message.guild) {
+      /**
+       * Filter specific words from the message
+       */
+      if (await wordFilter(message)) return;
 
-    /**
-     * Moderate mention spams in the message
-     */
-    if (await mentionSpamFilter(message)) return;
+      /**
+       * Filter links from the message
+       */
+      if (await linkFilter(message)) return;
 
-    try {
+      /**
+       * Filter Discord server invites from the message
+       */
+      if (await inviteFilter(message)) return;
+
+      /**
+       * Moderate mention spams in the message
+       */
+      if (await mentionSpamFilter(message)) return;
+
+      let guildModel = await message.client.database.models.guild.findOne({
+        attributes: [ 'slowMode' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
+
       if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
-        let guildModel = await message.client.database.models.guild.findOne({
-          attributes: [ 'slowMode' ],
-          where: {
-            guildID: message.guild.id
-          }
-        });
         if (guildModel && guildModel.dataValues.slowMode) {
           if (recentUsers.hasOwnProperty(message.author.id)) {
             let title, description;
@@ -115,81 +116,81 @@ module.exports = async message => {
           }
         }
       }
-    }
-    catch (e) {
-      message.client.log.error(e);
-    }
 
-    /**
-     * Check if the message contains a trigger and respond to it
-     */
-    handleTrigger(message);
+      /**
+       * Check if the message contains a trigger and respond to it
+       */
+      handleTrigger(message);
 
-    try {
-      let settingsModel = await message.client.database.models.settings.findOne({
-        attributes: [ 'blacklistedUsers' ],
+      try {
+        let settingsModel = await message.client.database.models.settings.findOne({
+          attributes: [ 'blacklistedUsers' ],
+          where: {
+            botID: message.client.user.id
+          }
+        });
+
+        if (settingsModel && settingsModel.dataValues.blacklistedUsers) {
+          if (settingsModel.dataValues.blacklistedUsers.includes(message.author.id)) return;
+        }
+      }
+      catch (e) {
+        message.client.log.error(e);
+      }
+
+      /**
+      * Cooldown for experience points, to prevent spam
+      */
+      if (!recentLevelUps.includes(message.author.id)) {
+        recentLevelUps.push(message.author.id);
+        setTimeout(function () {
+          recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
+        }, 20 * 1000);
+        /**
+        * Increase experience and level up user
+        */
+        handleUserLevel(message);
+      }
+
+      /**
+      * Handles Bastion's commands
+      */
+      handleCommand(message);
+
+      /**
+      * Check if the message starts with mentioning Bastion
+      */
+      if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
+        /**
+        * Handles conversations with Bastion
+        */
+        handleConversation(message);
+      }
+
+      /**
+       * Set message for voting, if it's a voting channel.
+       */
+      let textChannelModel = await message.client.database.models.textChannel.findOne({
+        attributes: [ 'votingChannel' ],
         where: {
-          botID: message.client.user.id
+          channelID: message.channel.id,
+          guildID: message.guild.id
         }
       });
+      if (!textChannelModel || !textChannelModel.dataValues.votingChannel) return;
 
-      if (settingsModel && settingsModel.dataValues.blacklistedUsers) {
-        if (settingsModel.dataValues.blacklistedUsers.includes(message.author.id)) return;
-      }
+      // Add reactions for voting
+      await message.react('👍');
+      await message.react('👎');
     }
-    catch (e) {
-      message.client.log.error(e);
-    }
-
-    /**
-    * Cooldown for experience points, to prevent spam
-    */
-    if (!recentLevelUps.includes(message.author.id)) {
-      recentLevelUps.push(message.author.id);
-      setTimeout(function () {
-        recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
-      }, 20 * 1000);
+    else {
       /**
-      * Increase experience and level up user
-      */
-      handleUserLevel(message);
+       * Handles direct messages sent to Bastion
+       */
+      handleDirectMessage(message);
     }
-
-    /**
-    * Handles Bastion's commands
-    */
-    handleCommand(message);
-
-    /**
-    * Check if the message starts with mentioning Bastion
-    */
-    if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
-      /**
-      * Handles conversations with Bastion
-      */
-      handleConversation(message);
-    }
-
-    /**
-     * Set message for voting, if it's a voting channel.
-     */
-    let textChannelModel = await message.client.database.models.textChannel.findOne({
-      attributes: [ 'votingChannel' ],
-      where: {
-        channelID: message.channel.id,
-        guildID: message.guild.id
-      }
-    });
-    if (!textChannelModel || !textChannelModel.dataValues.votingChannel) return;
-
-    // Add reactions for voting
-    await message.react('👍');
-    await message.react('👎');
   }
-  else {
-    /**
-     * Handles direct messages sent to Bastion
-     */
-    handleDirectMessage(message);
+  catch (e) {
+    message.client.log.error(e);
   }
 };
