@@ -70,7 +70,7 @@ module.exports = async message => {
       let slowModeIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreSlowMode).map(model => model.dataValues.channelID);
       let slowModeIgnoredRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.ignoreSlowMode).map(model => model.dataValues.roleID);
 
-      if (!slowModeIgnoredChannels.includes(message.channel.id) || !message.member.roles.some(role => slowModeIgnoredRoles.includes(role))) {
+      if (!slowModeIgnoredChannels.includes(message.channel.id) || !message.member.roles.some(role => slowModeIgnoredRoles.includes(role.id))) {
         if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
           if (guildModel && guildModel.dataValues.slowMode) {
             if (recentUsers.hasOwnProperty(message.author.id)) {
