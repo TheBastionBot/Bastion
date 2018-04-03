@@ -1,5 +1,5 @@
 {
-  "date": "April 2, 2018",
+  "date": "April 3, 2018",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Tons of under-the-hood improvements."
@@ -14,7 +14,8 @@
     "Added `ignoreInviteFilter` command. You can now set channels and/or roles to be ignored by the invite filter.",
     "Added `ignoreLinkFilter` command. You can now set channels and/or roles to be ignored by the link filter.",
     "Added `ignoreWordFilter` command. You can now set channels and/or roles to be ignored by the word filter.",
-    "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter."
+    "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter.",
+    "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode."
   ],
   "RENAMED COMMANDS": [
     "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
