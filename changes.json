@@ -15,7 +15,8 @@
     "Added `ignoreLinkFilter` command. You can now set channels and/or roles to be ignored by the link filter.",
     "Added `ignoreWordFilter` command. You can now set channels and/or roles to be ignored by the word filter.",
     "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter.",
-    "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode."
+    "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode.",
+    "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard."
   ],
   "RENAMED COMMANDS": [
     "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",

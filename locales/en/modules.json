@@ -113,6 +113,7 @@
     "ignoreMentionFilter": "Add/remove channels/roles to/from the mention filter ignored list. Bastion will not filter mention spams in these channels or by these roles.",
     "ignoreRoles": "Adds or removes roles to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored.",
     "ignoreSlowMode": "Add/remove channels/roles to/from the slow mode ignored list. Bastion will not enable slow mode in these channels or for these roles.",
+    "ignoreStarboard": "Add/remove channels/roles to/from the starboard ignored list. Bastion will not log starred messages from these channels or roles.",
     "ignoreWordFilter": "Add/remove channels/roles to/from the word filter ignored list. Bastion will not filter words posted in these channels or by these roles.",
     "levelUpMessage": "Toggles sending messages when someone levels up in the server.",
     "levelUpRoles": "Add/Remove/Show level up roles. Level up roles are roles that are added to server members when they level up.",
