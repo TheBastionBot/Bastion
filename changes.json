@@ -7,6 +7,7 @@
   ],
   "ENHANCEMENTS": [
     "Clear the queue when Bastion leaves the voice channel, when no one's there.",
+    "If streaming activity & music status is set in the config, Bastion should use the streaming activity after music is over.",
     "Under-the-hood improvements"
   ]
 }
