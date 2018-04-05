@@ -1,11 +1,13 @@
 {
-  "date": "April 1, 2018",
-  "image": "https://i.imgur.com/fYmAcXh.gif",
-  "THESE BUGS ARE DEAD": [
-    "Fixed the issue that caused Bastion to go offline after a few moments, if you had set the activity interval."
+  "date": "April 5, 2018",
+  "image": "https://i.imgur.com/dp3ZKEL.gif",
+  "FIXES": [
+    "Fixed Bastion activity not showing completely if activity URL is not set in the config.",
+    "Under-the-hood fixes."
   ],
   "ENHANCEMENTS": [
-    "You can now set the streaming status from config too! Forget the `setStream` command. Who needs it anyway!",
-    "Some under-the-hood changes & improvements."
+    "Clear the queue when Bastion leaves the voice channel, when no one's there.",
+    "If streaming activity & music status is set in the config, Bastion should use the streaming activity after music is over.",
+    "Under-the-hood improvements"
   ]
 }

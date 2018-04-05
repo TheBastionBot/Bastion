@@ -18,38 +18,38 @@ let recentLevelUps = [];
 let recentUsers = {};
 
 module.exports = async message => {
-  /**
-   * Filter Bastion's credentials from the message
-   */
-  if (await credentialsFilter(message)) return;
-
-  /**
-   * If the message author is a bot, ignore it.
-   */
-  if (message.author.bot) return;
-
-  if (message.guild) {
+  try {
     /**
-     * Filter specific words from the message
+     * Filter Bastion's credentials from the message
      */
-    if (await wordFilter(message)) return;
+    if (await credentialsFilter(message)) return;
 
     /**
-     * Filter links from the message
+     * If the message author is a bot, ignore it.
      */
-    if (await linkFilter(message)) return;
+    if (message.author.bot) return;
 
-    /**
-     * Filter Discord server invites from the message
-     */
-    if (await inviteFilter(message)) return;
+    if (message.guild) {
+      /**
+       * Filter specific words from the message
+       */
+      if (await wordFilter(message)) return;
 
-    /**
-     * Moderate mention spams in the message
-     */
-    if (await mentionSpamFilter(message)) return;
+      /**
+       * Filter links from the message
+       */
+      if (await linkFilter(message)) return;
 
-    try {
+      /**
+       * Filter Discord server invites from the message
+       */
+      if (await inviteFilter(message)) return;
+
+      /**
+       * Moderate mention spams in the message
+       */
+      if (await mentionSpamFilter(message)) return;
+
       if (!message.channel.permissionsFor(message.member) || !message.channel.permissionsFor(message.member).has('MANAGE_ROLES')) {
         let guildSettings = await message.client.db.get(`SELECT slowMode FROM guildSettings WHERE guildID=${message.guild.id}`);
         if (guildSettings && guildSettings.slowMode) {
@@ -110,69 +110,69 @@ module.exports = async message => {
           }
         }
       }
-    }
-    catch (e) {
-      message.client.log.error(e);
-    }
 
-    /**
-     * Check if the message contains a trigger and respond to it
-     */
-    handleTrigger(message);
-
-    try {
-      let users = await message.client.db.all('SELECT userID FROM blacklistedUsers');
-      if (users.map(u => u.userID).includes(message.author.id)) return;
-    }
-    catch (e) {
-      message.client.log.error(e);
-    }
-
-    /**
-    * Cooldown for experience points, to prevent spam
-    */
-    if (!recentLevelUps.includes(message.author.id)) {
-      recentLevelUps.push(message.author.id);
-      setTimeout(function () {
-        recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
-      }, 20 * 1000);
       /**
-      * Increase experience and level up user
-      */
-      handleUserLevel(message);
-    }
+       * Check if the message contains a trigger and respond to it
+       */
+      handleTrigger(message);
 
-    /**
-    * Handles Bastion's commands
-    */
-    handleCommand(message);
+      try {
+        let users = await message.client.db.all('SELECT userID FROM blacklistedUsers');
+        if (users.map(u => u.userID).includes(message.author.id)) return;
+      }
+      catch (e) {
+        message.client.log.error(e);
+      }
 
-    /**
-    * Check if the message starts with mentioning Bastion
-    */
-    if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
       /**
-      * Handles conversations with Bastion
+      * Cooldown for experience points, to prevent spam
       */
-      handleConversation(message);
+      if (!recentLevelUps.includes(message.author.id)) {
+        recentLevelUps.push(message.author.id);
+        setTimeout(function () {
+          recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
+        }, 20 * 1000);
+        /**
+        * Increase experience and level up user
+        */
+        handleUserLevel(message);
+      }
+
+      /**
+      * Handles Bastion's commands
+      */
+      handleCommand(message);
+
+      /**
+      * Check if the message starts with mentioning Bastion
+      */
+      if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
+        /**
+        * Handles conversations with Bastion
+        */
+        handleConversation(message);
+      }
+
+      /**
+       * Set message for voting, if it's a voting channel.
+       */
+      let guildSettings = await message.client.db.get(`SELECT votingChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
+      if (!guildSettings || !guildSettings.votingChannels) return;
+      guildSettings.votingChannels = guildSettings.votingChannels.split(' ');
+      if (!guildSettings.votingChannels.includes(message.channel.id)) return;
+
+      // Add reactions for voting
+      await message.react('👍');
+      await message.react('👎');
     }
-
-    /**
-     * Set message for voting, if it's a voting channel.
-     */
-    let guildSettings = await message.client.db.get(`SELECT votingChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guildSettings || !guildSettings.votingChannels) return;
-    guildSettings.votingChannels = guildSettings.votingChannels.split(' ');
-    if (!guildSettings.votingChannels.includes(message.channel.id)) return;
-
-    // Add reactions for voting
-    await message.react('👍');
-    await message.react('👎');
+    else {
+      /**
+       * Handles direct messages sent to Bastion
+       */
+      handleDirectMessage(message);
+    }
   }
-  else {
-    /**
-     * Handles direct messages sent to Bastion
-     */
-    handleDirectMessage(message);
+  catch (e) {
+    message.client.log.error(e);
   }
 };
