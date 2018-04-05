@@ -2,6 +2,7 @@
   "date": "April 5, 2018",
   "image": "https://i.imgur.com/dp3ZKEL.gif",
   "FIXES": [
+    "Fixed Bastion activity not showing completely if activity URL is not set in the config.",
     "Under-the-hood fixes."
   ],
   "ENHANCEMENTS": [
