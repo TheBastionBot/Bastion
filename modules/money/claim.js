@@ -9,16 +9,17 @@ const specialIDs = require('../../data/specialIDs.json');
 
 exports.exec = (Bastion, message) => {
   if (!claimedUsers.includes(message.author.id)) {
-    let rewardAmount;
+    let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
-    if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
-      rewardAmount = Bastion.functions.getRandomInt(100, 150);
-    }
-    else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
-      rewardAmount = Bastion.functions.getRandomInt(50, 100);
-    }
-    else {
-      rewardAmount = Bastion.functions.getRandomInt(10, 50);
+    if (message.guild.id === specialIDs.bastionGuild) {
+      rewardAmount *= 2;
+
+      if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
+        rewardAmount += 500;
+      }
+      else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
+        rewardAmount += 100;
+      }
     }
 
     Bastion.emit('userDebit', message.author, rewardAmount);
