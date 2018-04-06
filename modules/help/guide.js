@@ -10,14 +10,14 @@ exports.exec = (Bastion, message) => {
       color: Bastion.colors.GOLD,
       title: 'Bastion Bot',
       url: 'https://bastionbot.org/',
-      description: 'Need help installing and setting up Private Bastion Bot? No worries, we have made an amazing guide to help you out on that. And if you don\'t understand that or you need any more help or maybe if you just have a simple question, just join our Support Server on Discord.',
+      description: 'Need help installing and setting up Private Bastion Bot? No worries, we have made an amazing guide to help you out on that. And if you don\'t understand that or you need any more help or maybe if you just have a simple question, just join the Bastion HQ on Discord.',
       fields: [
         {
-          name: 'Bastion Bot - Installation Guide',
+          name: 'Bastion Bot - Documentation',
           value: 'https://docs.bastionbot.org/'
         },
         {
-          name: 'Bastion Bot - Support Server',
+          name: 'Bastion HQ Invite Link',
           value: 'https://discord.gg/fzx8fkt'
         }
       ]

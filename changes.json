@@ -5,5 +5,8 @@
     "You can now get upto 100 Bastion currencies, per day, when you use the `claim`/`daily` command.",
     "If you've ever [donated to Bastion](https://paypal.me/snkrsnkampa), another 100 Bastion currencies will be added to that.",
     "And if you're a [Patron of Bastion](https://patreon.com/bastionbot), another 500 Bastion currencies will be added to that instead."
+  ],
+  "CHANGES": [
+    "Some under-the-hood changes."
   ]
 }

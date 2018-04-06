@@ -8,13 +8,13 @@ exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.GOLD,
-      title: 'Bastion Bot - Support Server',
+      title: 'Bastion HQ',
       url: 'https://discord.gg/fzx8fkt',
       description: 'Need help or support with Bastion Discord Bot?\nJoin Bastion Support Server for any help you need.\nhttps://discord.gg/fzx8fkt',
       fields: [
         {
           name: 'Website',
-          value: 'https://BastionBot.org/'
+          value: 'https://bastionbot.org/'
         }
       ]
     }

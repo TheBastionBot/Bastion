@@ -98,14 +98,14 @@ exports.exec = async (Bastion, message, args) => {
           title: 'Help',
           description: `To get the list of commands, type \`${message.guild.prefix[0]}commands\`.` +
                        `\nTo get help about a specific command, type \`${message.guild.prefix[0]}help <command_name>\`.` +
-                       `\n\nNeed help or support with Bastion Discord Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join [**Bastion Support Server**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.\nhttps://discord.gg/fzx8fkt'}`,
+                       `\n\nNeed help or support with Bastion Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join [**Bastion HQ**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.\nhttps://discord.gg/fzx8fkt'}`,
           fields: [
             {
-              name: 'Support Server Invite Link',
+              name: 'Bastion HQ Invite Link',
               value: 'https://discord.gg/fzx8fkt'
             },
             {
-              name: 'BOT Invite Link',
+              name: 'Bastion Bot Invite Link',
               value: `https://discordapp.com/oauth2/authorize?client_id=${Bastion.user.id}&scope=bot&permissions=2146958463`
             }
           ],
