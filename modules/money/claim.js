@@ -11,15 +11,27 @@ exports.exec = (Bastion, message) => {
   if (!claimedUsers.includes(message.author.id)) {
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
-    if (message.guild.id === specialIDs.bastionGuild) {
-      rewardAmount *= 2;
+    let claimMessage, rewardMessage;
+    if (Bastion.user.id === '267035345537728512') {
+      claimMessage = `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.\n\n*If you want to get more Bastion Currencies when you use this command, check out the [FAQ](https://bastionbot.org/faq) on **How can I get more Bastion Currency with the claim/daily command?***`;
 
-      if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
-        rewardAmount += 500;
+      if (message.guild.id === specialIDs.bastionGuild) {
+        rewardAmount *= 2;
+        if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
+          rewardAmount += 500;
+        }
+        else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
+          rewardAmount += 100;
+        }
+
+        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
       }
-      else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
-        rewardAmount += 100;
+      else {
+        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\nUse the \`claim\`/\`daily\` command in [Bastion HQ](https://discord.gg/fzx8fkt) to get 2x more rewards.`;
       }
+    }
+    else {
+      claimMessage = `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.`;
     }
 
     Bastion.emit('userDebit', message.author, rewardAmount);
@@ -34,7 +46,7 @@ exports.exec = (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.\n\n*If you want to get more Bastion Currencies when you use this command, check out the [FAQ](https://bastionbot.org/faq) on **How can I get more Bastion Currency with the claim/daily command?***`
+        description: claimMessage
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -43,17 +55,10 @@ exports.exec = (Bastion, message) => {
     /**
     * Let the user know by DM that their account has been debited.
     */
-    let description;
-    if (Bastion.user.id === '267035345537728512' && message.guild.id !== specialIDs.bastionGuild) {
-      description = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\nUse the \`claim\`/\`daily\` command in [Bastion HQ](https://discord.gg/fzx8fkt) to get 2x more rewards.`;
-    }
-    else {
-      description = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
-    }
     message.author.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: description
+        description: rewardMessage
       }
     }).catch(e => {
       if (e.code !== 50007) {
