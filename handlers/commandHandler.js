@@ -107,16 +107,50 @@ module.exports = async message => {
     /**
      * Command log messages
      */
-    message.client.log.console(`\n[${new Date()}]`);
-    message.client.log.console(COLOR.green('[COMMAND]: ') + usedPrefix + command);
-    message.client.log.console(COLOR.green('[ARGUMENTs]: ') + (args.join(' ') || COLOR.yellow('No arguments to execute')));
-    message.client.log.console(COLOR.green('[MODULE]: ') + mdl);
-    if (message.client.shard) {
-      message.client.log.console(`${COLOR.green('[SHARD]:')} ${message.client.shard.id}`);
+    if (message.client.config.logLevel === 1) {
+      message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {cyan ${message.author.tag}} #${message.channel.name} {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(message.guild.id)}`);
-    message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
-    message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
+    else if (message.client.config.logLevel === 2) {
+      message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {green ${message.guild.name}} > {yellow #${message.channel.name}}`);
+      message.client.log.console(COLOR`{cyan ${message.author.tag}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else if (message.client.config.logLevel === 3) {
+      message.client.log.console(`\n${new Date()}`);
+      message.client.log.console(COLOR`{green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
+      message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else if (message.client.config.logLevel === 4) {
+      message.client.log.console(`\n${new Date()}`);
+      if (message.client.shard) {
+        message.client.log.console(COLOR`{green Shard ${message.client.shard.id}} > {green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
+      }
+      else {
+        message.client.log.console(COLOR`{green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
+      }
+      message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}}`);
+      message.client.log.console(COLOR`{yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else if (message.client.config.logLevel === 5) {
+      message.client.log.console(`\n[${new Date()}]`);
+      if (message.client.shard) {
+        message.client.log.console(COLOR`{green [  SHARD]:} ${message.client.shard.id}`);
+      }
+      message.client.log.console(COLOR`{green [ SERVER]:} ${message.guild.name} / {cyan ${message.guild.id}}`);
+      message.client.log.console(COLOR`{green [CHANNEL]:} ${message.channel.name} / {cyan ${message.channel.id}}`);
+      message.client.log.console(COLOR`{green [   USER]:} ${message.author.tag} / {cyan ${message.author.id}}`);
+      message.client.log.console(COLOR`{green [COMMAND]:} {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else {
+      message.client.log.console(`\n[${new Date()}]`);
+      if (message.client.shard) {
+        message.client.log.console(COLOR`{green [    SHARD]:} ${message.client.shard.id}`);
+      }
+      message.client.log.console(COLOR`{green [   SERVER]:} ${message.guild.name} / {cyan ${message.guild.id}}`);
+      message.client.log.console(COLOR`{green [  CHANNEL]:} ${message.channel.name} / {cyan ${message.channel.id}}`);
+      message.client.log.console(COLOR`{green [     USER]:} ${message.author.tag} / {cyan ${message.author.id}}`);
+      message.client.log.console(COLOR`{green [  COMMAND]:} ${usedPrefix}${command} / {cyan ${mdl}}`);
+      message.client.log.console(COLOR`{green [ARGUMENTS]:} ${args.join(' ')}`);
+    }
 
     /**
      * Check if a command is used in a blacklisted channel or by a blacklisted
