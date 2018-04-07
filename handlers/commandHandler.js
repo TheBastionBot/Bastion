@@ -23,11 +23,11 @@ module.exports = async message => {
       include: [
         {
           model: message.client.database.models.textChannel,
-          attributes: [ 'channelID', 'disabledCommands' ]
+          attributes: [ 'channelID', 'disabledCommands', 'blacklisted' ]
         },
         {
           model: message.client.database.models.role,
-          attributes: [ 'roleID', 'disabledCommands' ]
+          attributes: [ 'roleID', 'disabledCommands', 'blacklisted' ]
         }
       ]
     });
@@ -117,6 +117,15 @@ module.exports = async message => {
     message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(message.guild.id)}`);
     message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
     message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
+
+    /**
+     * Check if a command is used in a blacklisted channel or by a blacklisted
+     * role.
+     */
+    let blacklistedChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.blacklisted).map(model => model.dataValues.channelID);
+    let blacklistedRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.blacklisted).map(model => model.dataValues.roleID);
+
+    if (blacklistedChannels.includes(message.channel.id) || message.member.roles.some(role => blacklistedRoles.includes(role.id))) return message.client.log.info('The command is either used in a blacklisted channel or the user is in a blacklisted role.');
 
     /**
      * Check if a command is disabled
