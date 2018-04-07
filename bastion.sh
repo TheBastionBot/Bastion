@@ -162,6 +162,7 @@ case $1 in
 
 esac
 
+echo
 echo -e "${CYAN}[Bastion]:${NC} If you faced any issues during any steps, join my official server and our amazing support staffs will help you out."
 echo -e "${CYAN}[Bastion]:${NC} Stay updated about new releases, important announcements, a lot of other things and giveaways too!"
 echo -e "${CYAN}[Bastion]:${NC} https://discord.gg/fzx8fkt"

@@ -1,7 +1,7 @@
 {
-  "branchPrefix": "deps/",
+  "branchPrefix": "dep/",
   "devDependencies": {
-    "branchPrefix": "dev-deps/"
+    "branchPrefix": "dev-dep/"
   },
   "enabled": true,
   "ignorePaths": [
@@ -15,7 +15,7 @@
     "dependencies"
   ],
   "optionalDependencies": {
-    "branchPrefix": "opt-deps/"
+    "branchPrefix": "opt-dep/"
   },
   "patch": {
     "automerge": true,

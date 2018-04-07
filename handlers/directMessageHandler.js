@@ -20,16 +20,16 @@ module.exports = message => {
       return message.channel.send({
         embed: {
           color: message.client.colors.BLUE,
-          title: 'Bastion: Discord Bot',
+          title: 'The Bastion Bot',
           url: 'https://BastionBot.org',
-          description: 'Join [**Bastion: Discord Server**](https://discord.gg/fzx8fkt) to test Bastion and it\'s commands, for giveaway events, for chatting and for a lot of fun!',
+          description: 'Join [**Bastion HQ**](https://discord.gg/fzx8fkt) to test Bastion and it\'s commands, for giveaway events, for chatting and for a lot of fun!',
           fields: [
             {
-              name: 'Bastion: Discord Server Invite Link',
+              name: 'Bastion HQ Invite Link',
               value: 'https://discord.gg/fzx8fkt'
             },
             {
-              name: 'Bastion: Bot Invite Link',
+              name: 'Bastion Bot Invite Link',
               value: `https://discordapp.com/oauth2/authorize?client_id=${message.client.user.id}&scope=bot&permissions=2146958463`
             }
           ],

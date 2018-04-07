@@ -10,7 +10,7 @@ exports.exec = (Bastion, message) => {
   let changes = [];
   for (let section in CHANGES) {
     if (CHANGES.hasOwnProperty(section)) {
-      if (section === 'date' || !CHANGES[section].length) continue;
+      if (section === 'date' || section === 'image' || !CHANGES[section].length) continue;
 
       changes.push({
         name: section,
@@ -28,8 +28,8 @@ exports.exec = (Bastion, message) => {
                    '\nJoin our [officia server](https://discord.gg/fzx8fkt) and never miss an update: https://discord.gg/fzx8fkt' +
                    '\n\nSupport the development of Bastion and keep it running forever by [becoming a patron](https://patreon.com/bastionbot) or [donating via PayPal](https://paypal.me/snkrsnkampa)',
       fields: changes,
-      thumbnail: {
-        url: Bastion.user.displayAvatarURL
+      image: {
+        url: CHANGES.image
       },
       footer: {
         text: CHANGES.date

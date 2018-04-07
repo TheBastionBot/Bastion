@@ -32,7 +32,7 @@
     "discord.js": "~11.3.2",
     "gamedig": "~1.0.45",
     "hirez.js": "~2.0.0",
-    "kitsu": "~5.0.6",
+    "kitsu": "~5.1.0",
     "lzutf8": "~0.5.0",
     "mathjs": "~4.0.1",
     "node-json-db": "~0.7.5",
@@ -53,7 +53,7 @@
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^4.19.0"
+    "eslint": "^4.19.1"
   },
   "optionalDependencies": {
     "node-opus": "~0.2.7"

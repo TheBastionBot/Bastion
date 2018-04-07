@@ -146,9 +146,9 @@
     "commands": "Direct Messages you with a list of all the commands, or the commands in specific modules.",
     "commandSearch": "Search for a command with the given text.",
     "donate": "Instructions on how to financially support the development of the Bastion Bot project.",
-    "guide": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the official support server.",
+    "guide": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the Bastion HQ.",
     "help": "Shows help on the specifed command.",
-    "support": "Sends the invite link to Bastion: Discord Server.",
+    "support": "Sends the invite link to Bastion HQ.",
     "terms": "Read Bastion's Terms of Service."
   },
   "info": {
@@ -175,6 +175,7 @@
     "setBio": "Sets your bio that shows up in the Bastion user profile.",
     "setBirthDate": "Sets your birth date that shows up in the Bastion user profile. Don't worry Bastion will never show your age/year to public.",
     "setLocation": "Sets your location that shows up in the Bastion user profile.",
+    "shardStats": "Shows detailed stats and info of the shard the command was used in.",
     "stats": "Shows detailed stats and info of Bastion.",
     "userID": "Shows ID of a specified user of your Discord server.",
     "userInfo": "Shows information of a specified user of your Discord server.",
@@ -296,6 +297,7 @@
     "movie": "Searches for the details of a movie.",
     "pokemon": "Shows you information on the specified Pokémon.",
     "poll": "Starts a poll in the current text channel asking users to vote with the specified time. If no time is specified, poll ends in 60 minutes.",
+    "pollStats": "Shows the stats of the currently running poll in the channel.",
     "reminder": "Bastion sets a reminder to remind you of specified message, via direct message, after a specified duration.",
     "shorten": "Shortens a specified URL using Google URL Shortner.",
     "steam": "Browse the games in different categories of the Steam Store.",
