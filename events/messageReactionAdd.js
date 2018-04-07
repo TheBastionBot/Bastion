@@ -36,9 +36,9 @@ module.exports = async (reaction, user) => {
     if (!stars.includes(reaction.emoji.name)) return;
 
     let starboardIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.channelID);
-    if (starboardIgnoredChannels.includes(reaction.message.channel.id)) return;
+    if (starboardIgnoredChannels && starboardIgnoredChannels.includes(reaction.message.channel.id)) return;
     let starboardIgnoredRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.roleID);
-    if (reaction.message.member.roles.some(role => starboardIgnoredRoles.includes(role.id))) return;
+    if (starboardIgnoredRoles && reaction.message.member.roles.some(role => starboardIgnoredRoles.includes(role.id))) return;
 
     let image;
     if (reaction.message.attachments.size) {
