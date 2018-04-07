@@ -276,7 +276,7 @@ function startStreamDispatcher(guild, connection) {
       guild.client.user.setActivity(typeof guild.client.config.game.name === 'string' ? guild.client.config.game.name : guild.client.config.game.name.length ? guild.client.config.game.name[0] : null,
         {
           type: guild.client.config.game.type,
-          url: guild.client.config.game.url.trim().length ? guild.client.config.game.url : null
+          url: guild.client.config.game.url && guild.client.config.game.url.trim().length ? guild.client.config.game.url : null
         }
       );
     }
