@@ -32,6 +32,7 @@ exports.exec = (Bastion, message) => {
     }
     else {
       claimMessage = `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.`;
+      rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
     }
 
     Bastion.emit('userDebit', message.author, rewardAmount);
