@@ -3,5 +3,8 @@
   "image": "https://i.imgur.com/xIt8xbz.gif",
   "BUG FIXES": [
     "Fixed an issue where Bastion didn't wanted to let you know how much currency you got when you used the `claim` command."
+  ],
+  "IMROVEMENTS": [
+    "Under-the-hood improvements."
   ]
 }
