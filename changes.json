@@ -1,18 +1,4 @@
 {
   "date": "April 8, 2018",
-  "image": "https://i.imgur.com/WcdQK6g.gif",
-  "MORE CURRENCY": [
-    "You can now get upto 100 Bastion currencies, per day, when you use the `claim`/`daily` command.",
-    "If you've ever [donated to Bastion](https://paypal.me/snkrsnkampa), another 100 Bastion currencies will be added to that.",
-    "And if you're a [Patron of Bastion](https://patreon.com/bastionbot), another 500 Bastion currencies will be added to that instead."
-  ],
-  "NEW LANGUAGES": [
-    "Added support for Italian and Indonesian language."
-  ],
-  "BUG FIXES": [
-    "Fixed startup crashes when config doesn't had the url field."
-  ],
-  "CHANGES": [
-    "Some under-the-hood changes."
-  ]
+  "image": "https://i.imgur.com/xIt8xbz.gif"
 }
