@@ -119,15 +119,20 @@ module.exports = async Bastion => {
         guilds = guilds.reduce((sum, val) => sum + val, 0);
       }
 
-      Bastion.log.console('\n');
-      Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
-      Bastion.log.console(`${COLOR.green('[Bot]')} Bastion v${Bastion.package.version}`);
-      Bastion.log.console(COLOR.green('[URL] ') + Bastion.package.url);
-      Bastion.log.console(COLOR.green('[Bot ID] ') + Bastion.credentials.botId);
-      Bastion.log.console(COLOR.green('[Owner IDs] ') + Bastion.credentials.ownerId.join(', '));
-      Bastion.log.console(COLOR.green('[Servers] ') + guilds);
-      Bastion.log.console(COLOR.green('[Prefix] ') + Bastion.config.prefix);
-      Bastion.log.console(`${COLOR.cyan(`\n[${Bastion.user.username}]:`)} I'm ready to roll! o7`);
+      Bastion.log.console(COLOR`\n{cyan Bastion} v${Bastion.package.version}`);
+      Bastion.log.console(COLOR`{gray ${Bastion.package.url}}`);
+
+      Bastion.log.console(COLOR`\n{gray </> with ❤ by The Bastion Bot Team & Contributors}`);
+      Bastion.log.console(COLOR`{gray Copyright (C) 2017-2018 The Bastion Bot Project}`);
+
+      Bastion.log.console(COLOR`\n{cyan [${Bastion.user.username}]:} I'm ready to roll! 🚀\n`);
+
+      if (Bastion.shard) {
+        Bastion.log.console(COLOR`{green [   SHARDS]:} ${Bastion.shard.count}`);
+      }
+      Bastion.log.console(COLOR`{green [  SERVERS]:} ${guilds}`);
+      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.config.prefix}`);
+      Bastion.log.console(COLOR`{green [ COMMANDS]:} ${Bastion.commands.size}`);
 
       Bastion.webhook.send('bastionLog', {
         color: Bastion.colors.BLUE,
