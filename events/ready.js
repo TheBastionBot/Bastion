@@ -17,7 +17,7 @@ module.exports = async Bastion => {
       game: {
         name: typeof Bastion.config.game.name === 'string' ? Bastion.config.game.name : Bastion.config.game.name.length ? Bastion.config.game.name[0] : null,
         type: Bastion.config.game.type,
-        url: Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
+        url: Bastion.config.game.url && Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
       }
     });
 
@@ -27,7 +27,7 @@ module.exports = async Bastion => {
           await Bastion.user.setActivity(Bastion.config.game.name[Math.floor(Math.random() * Bastion.config.game.name.length)],
             {
               type: Bastion.config.game.type,
-              url: Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
+              url: Bastion.config.game.url && Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
             });
         }
         catch (e) {

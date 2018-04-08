@@ -1,13 +1,18 @@
 {
-  "date": "April 5, 2018",
-  "image": "https://i.imgur.com/dp3ZKEL.gif",
-  "FIXES": [
-    "Fixed Bastion activity not showing completely if activity URL is not set in the config.",
-    "Under-the-hood fixes."
+  "date": "April 8, 2018",
+  "image": "https://i.imgur.com/WcdQK6g.gif",
+  "MORE CURRENCY": [
+    "You can now get upto 100 Bastion currencies, per day, when you use the `claim`/`daily` command.",
+    "If you've ever [donated to Bastion](https://paypal.me/snkrsnkampa), another 100 Bastion currencies will be added to that.",
+    "And if you're a [Patron of Bastion](https://patreon.com/bastionbot), another 500 Bastion currencies will be added to that instead."
   ],
-  "ENHANCEMENTS": [
-    "Clear the queue when Bastion leaves the voice channel, when no one's there.",
-    "If streaming activity & music status is set in the config, Bastion should use the streaming activity after music is over.",
-    "Under-the-hood improvements"
+  "NEW LANGUAGES": [
+    "Added support for Italian and Indonesian language."
+  ],
+  "BUG FIXES": [
+    "Fixed startup crashes when config doesn't had the url field."
+  ],
+  "CHANGES": [
+    "Some under-the-hood changes."
   ]
 }
