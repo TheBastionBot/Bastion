@@ -164,9 +164,9 @@ module.exports = class LanguageHandler {
 
     if (!this.locales.get(locale).info[key]) {
       if (locale === 'en') {
-        return `No string found for the '${key}' event.`;
+        return `No info string found for the key '${key}'.`;
       }
-      return this.events('en', key);
+      return this.info('en', key, ...vars);
     }
     return this.locales.get(locale).info[key].substitute(...vars);
   }
