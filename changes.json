@@ -1,8 +1,9 @@
 {
-  "date": "April 8, 2018",
+  "date": "April 9, 2018",
   "image": "https://i.imgur.com/xIt8xbz.gif",
   "BUG FIXES": [
-    "Fixed an issue where Bastion didn't wanted to let you know how much currency you got when you used the `claim` command."
+    "Fixed an issue where Bastion didn't wanted to let you know how much currency you got when you used the `claim` command.",
+    "Fixed an issue that prevented command strings to fall back to English when a string is not available in other languages."
   ],
   "IMROVEMENTS": [
     "Under-the-hood improvements."
