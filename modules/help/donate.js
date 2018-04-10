@@ -9,7 +9,7 @@ exports.exec = (Bastion, message) => {
     embed: {
       color: Bastion.colors.DARK_GREEN,
       title: 'Support Bastion Bot project',
-      url: 'https://BastionBot.org/',
+      url: 'https://bastionbot.org/',
       description: 'To support and send donations for the Bastion Bot, ' +
                    'you can either pledge for The Bastion Bot project ' +
                    'on **Patreon**: https://patreon.com/bastionbot\nOR\nSend ' +
