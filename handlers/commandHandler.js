@@ -149,7 +149,7 @@ module.exports = async message => {
       message.client.log.console(COLOR`{green [  CHANNEL]:} ${message.channel.name} / {cyan ${message.channel.id}}`);
       message.client.log.console(COLOR`{green [     USER]:} ${message.author.tag} / {cyan ${message.author.id}}`);
       message.client.log.console(COLOR`{green [  COMMAND]:} ${usedPrefix}${command} / {cyan ${mdl}}`);
-      message.client.log.console(COLOR`{green [ARGUMENTS]:} ${args.join(' ')}`);
+      message.client.log.console(COLOR`{green [ARGUMENTS]:} ${args.join(' ') || COLOR`{yellow No arguments to execute}`}`);
     }
 
     /**
