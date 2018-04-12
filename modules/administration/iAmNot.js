@@ -27,7 +27,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let selfAssignableRoles = [];
     if (guildModel.dataValues.selfAssignableRoles) {
-      selfAssignableRoles = guildModel.dataValues.selfAssignableRoles.split(' ');
+      selfAssignableRoles = guildModel.dataValues.selfAssignableRoles;
     }
     if (!selfAssignableRoles.includes(role.id)) return;
 
