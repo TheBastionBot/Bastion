@@ -102,7 +102,7 @@ module.exports = async member => {
 
     let autoAssignableRoles = [];
     if (guildModel.dataValues.autoAssignableRoles) {
-      autoAssignableRoles = guildModel.dataValues.autoAssignableRoles.split(' ');
+      autoAssignableRoles = guildModel.dataValues.autoAssignableRoles;
     }
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
     if (autoAssignableRoles.length) {
