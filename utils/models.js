@@ -105,7 +105,7 @@ module.exports = (Sequelize, database) => {
       unique: true
     },
     selfAssignableRoles: {
-      type: Sequelize.TEXT,
+      type: Sequelize.JSON,
       unique: true
     },
     streamerRole: {
