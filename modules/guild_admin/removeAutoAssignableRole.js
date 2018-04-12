@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'auto-assignable roles'), message.channel);
     }
 
-    let roles = guildModel.dataValues.autoAssignableRoles.split(' ');
+    let roles = guildModel.dataValues.autoAssignableRoles;
 
     if (index >= roles.length) {
       /**
@@ -45,7 +45,7 @@ exports.exec = async (Bastion, message, args) => {
     roles.splice(parseInt(args[0]) - 1, 1);
 
     await Bastion.database.models.guild.update({
-      autoAssignableRoles: roles.join(' ')
+      autoAssignableRoles: roles
     },
     {
       where: {

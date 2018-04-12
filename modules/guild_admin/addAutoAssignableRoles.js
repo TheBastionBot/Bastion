@@ -37,14 +37,14 @@ exports.exec = async (Bastion, message, args) => {
 
     let roles = [];
     if (guildModel.dataValues.autoAssignableRoles) {
-      roles = guildModel.dataValues.autoAssignableRoles.split(' ');
+      roles = guildModel.dataValues.autoAssignableRoles;
     }
     roles = roles.concat(args);
     roles = roles.filter(r => message.guild.roles.get(r));
     roles = [ ...new Set(roles) ];
 
     await Bastion.database.models.guild.update({
-      autoAssignableRoles: roles.join(' ')
+      autoAssignableRoles: roles
     },
     {
       where: {

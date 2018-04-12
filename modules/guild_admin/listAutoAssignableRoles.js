@@ -21,8 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'auto-assignable roles'), message.channel);
     }
 
-    let roles = guildModel.dataValues.autoAssignableRoles.split(' ');
-    roles = roles.filter(r => message.guild.roles.get(r));
+    let roles = guildModel.dataValues.autoAssignableRoles.filter(r => message.guild.roles.get(r));
     roles = [ ...new Set(roles) ];
 
     let roleNames = [];
