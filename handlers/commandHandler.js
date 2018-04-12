@@ -6,6 +6,7 @@
 
 const parseArgs = require('command-line-args');
 const COLOR = require('chalk');
+const _ = require('lodash/core');
 const activeUsers = {};
 
 /**
@@ -33,9 +34,9 @@ module.exports = async message => {
     });
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
-    if (!message.guild.prefix || message.guild.prefix.join(' ') !== `${guildModel.dataValues.prefix} ${message.client.config.prefix}`) {
-      message.guild.prefix = guildModel.dataValues.prefix.trim().split(' ');
-      message.guild.prefix.push(message.client.config.prefix);
+    guildModel.dataValues.prefix.push(message.client.config.prefix);
+    if (!message.guild.prefix || !_.isEqual(message.guild.prefix, guildModel.dataValues.prefix)) {
+      message.guild.prefix = [ ...new Set(guildModel.dataValues.prefix) ];
     }
     // Add guild's language to the discord.js guild object to minimize database reads.
     if (!message.guild.language || message.guild.language !== guildModel.dataValues.language) {

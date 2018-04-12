@@ -30,9 +30,9 @@ module.exports = (Sequelize, database) => {
       primaryKey: true
     },
     prefix: {
-      type: Sequelize.STRING,
+      type: Sequelize.JSON,
       allowNull: false,
-      defaultValue: prefix || '!'
+      defaultValue: [ prefix ] || [ '!' ]
     },
     language: {
       type: Sequelize.STRING,
