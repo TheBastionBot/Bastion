@@ -51,7 +51,7 @@ module.exports = async message => {
       if (message.member.roles.has(role)) return;
     }
 
-    let filteredWords = guildModel.dataValues.filteredWords ? guildModel.dataValues.filteredWords.split(' ') : [];
+    let filteredWords = guildModel.dataValues.filteredWords ? guildModel.dataValues.filteredWords : [];
 
     for (let word of filteredWords) {
       if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {

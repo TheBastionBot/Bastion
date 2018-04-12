@@ -133,7 +133,7 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     filteredWords: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     whitelistedDomains: {
       type: Sequelize.TEXT
