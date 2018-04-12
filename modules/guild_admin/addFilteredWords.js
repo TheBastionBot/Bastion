@@ -23,13 +23,13 @@ exports.exec = async (Bastion, message, args) => {
 
     let filteredWords = [];
     if (guildModel.dataValues.filteredWords) {
-      filteredWords = guildModel.dataValues.filteredWords.split(' ');
+      filteredWords = guildModel.dataValues.filteredWords;
     }
     filteredWords = filteredWords.concat(args);
     filteredWords = [ ...new Set(filteredWords) ];
 
     await Bastion.database.models.guild.update({
-      filteredWords: filteredWords.join(' ')
+      filteredWords: filteredWords
     },
     {
       where: {

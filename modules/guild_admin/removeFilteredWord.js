@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
       Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
     }
     else {
-      let filteredWords = guildModel.dataValues.filteredWords.split(' ');
+      let filteredWords = guildModel.dataValues.filteredWords;
 
       if (index >= filteredWords.length) {
         /**
@@ -45,7 +45,7 @@ exports.exec = async (Bastion, message, args) => {
       filteredWords.splice(parseInt(args[0]) - 1, 1);
 
       await Bastion.database.models.guild.update({
-        filteredWords: filteredWords.join(' ')
+        filteredWords: filteredWords
       },
       {
         where: {

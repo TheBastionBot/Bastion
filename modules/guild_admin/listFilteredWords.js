@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
     }
 
-    let filteredWords = guildModel.dataValues.filteredWords.split(' ');
+    let filteredWords = guildModel.dataValues.filteredWords;
 
     filteredWords = filteredWords.map((r, i) => `${i + 1}. ${r}`);
 
