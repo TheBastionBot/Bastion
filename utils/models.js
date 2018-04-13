@@ -423,7 +423,7 @@ module.exports = (Sequelize, database) => {
       allowNull: false
     },
     messageID: {
-      type: Sequelize.TEXT,
+      type: Sequelize.STRING,
       allowNull: false,
       unique: true
     }
