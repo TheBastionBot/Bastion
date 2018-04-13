@@ -15,8 +15,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let rolesInStore;
     if (shopModel && shopModel.dataValues.roles) {
-      rolesInStore = await Bastion.functions.decodeString(shopModel.dataValues.roles);
-      rolesInStore = JSON.parse(rolesInStore);
+      rolesInStore = shopModel.dataValues.roles;
     }
     else {
       rolesInStore = {};
@@ -40,9 +39,6 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       rolesInStore[role.id] = args.add;
-
-      rolesInStore = JSON.stringify(rolesInStore);
-      rolesInStore = await Bastion.functions.encodeString(rolesInStore);
 
       await Bastion.database.models.shop.upsert({
         guildID: message.guild.id,
@@ -70,9 +66,6 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       delete rolesInStore[args.role];
-
-      rolesInStore = JSON.stringify(rolesInStore);
-      rolesInStore = await Bastion.functions.encodeString(rolesInStore);
 
       await Bastion.database.models.shop.upsert({
         guildID: message.guild.id,

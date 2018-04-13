@@ -36,8 +36,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let rolesInStore;
     if (shopModel && shopModel.dataValues.roles) {
-      rolesInStore = await Bastion.functions.decodeString(shopModel.dataValues.roles);
-      rolesInStore = JSON.parse(rolesInStore);
+      rolesInStore = shopModel.dataValues.roles;
     }
     else {
       rolesInStore = {};
