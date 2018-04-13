@@ -491,7 +491,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.JSON
     },
     custom: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     }
   });
 
