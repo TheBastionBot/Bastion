@@ -136,7 +136,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.JSON
     },
     whitelistedDomains: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     whitelistedInvites: {
       type: Sequelize.TEXT

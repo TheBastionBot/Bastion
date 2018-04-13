@@ -50,7 +50,7 @@ module.exports = async message => {
       if (message.member.roles.has(role)) return;
     }
 
-    let whitelistedDomains = guildModel.dataValues.whitelistedDomains ? guildModel.dataValues.whitelistedDomains.split(' ') : [];
+    let whitelistedDomains = guildModel.dataValues.whitelistedDomains ? guildModel.dataValues.whitelistedDomains : [];
     let links = message.content.match(/(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/gi);
 
     // If there are no links in the message content, return
