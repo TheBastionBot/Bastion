@@ -551,7 +551,7 @@ module.exports = (Sequelize, database) => {
       unique: 'guildMember'
     },
     custom: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     }
   });
 
