@@ -18,8 +18,7 @@ exports.exec = async (Bastion, message) => {
 
     let userItems;
     if (itemsModel) {
-      userItems = await Bastion.functions.decodeString(itemsModel.dataValues.custom);
-      userItems = JSON.parse(userItems);
+      userItems = itemsModel.dataValues.custom;
     }
     else {
       userItems = [];

@@ -60,16 +60,13 @@ exports.exec = async (Bastion, message, args) => {
 
     let userItems;
     if (itemsModel && itemsModel.dataValues.custom) {
-      userItems = await Bastion.functions.decodeString(itemsModel.dataValues.custom);
-      userItems = JSON.parse(userItems);
+      userItems = itemsModel.dataValues.custom;
     }
     else {
       userItems = [];
     }
 
     userItems.push(itemsInShop[args.index].name);
-    userItems = JSON.stringify(userItems);
-    userItems = await Bastion.functions.encodeString(userItems);
 
     await Bastion.database.models.items.upsert({
       userID: message.author.id,
