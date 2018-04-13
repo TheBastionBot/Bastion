@@ -349,7 +349,7 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     disabledCommands: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     blacklisted: {
       type: Sequelize.BOOLEAN,
@@ -401,7 +401,7 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     disabledCommands: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     level: {
       type: Sequelize.STRING
