@@ -139,7 +139,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.JSON
     },
     whitelistedInvites: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     slowMode: {
       type: Sequelize.BOOLEAN,
