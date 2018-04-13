@@ -15,8 +15,8 @@ exports.exec = async (Bastion, message, args) => {
 
     let twitchStreamers = [], color, title, description;
 
-    if (streamersModel && streamersModel.dataValues.twitch.split(' ').length) {
-      twitchStreamers = streamersModel.dataValues.twitch.split(' ');
+    if (streamersModel && streamersModel.dataValues.twitch) {
+      twitchStreamers = streamersModel.dataValues.twitch;
     }
 
     if (!args.streamers) {
@@ -47,7 +47,7 @@ exports.exec = async (Bastion, message, args) => {
       await Bastion.database.models.streamers.upsert({
         guildID: message.guild.id,
         channelID: message.channel.id,
-        twitch: twitchStreamers.join(' ')
+        twitch: twitchStreamers
       },
       {
         where: {
