@@ -189,7 +189,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING
     },
     disabledCommands: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     onlyMembersWithRoles: {
       type: Sequelize.BOOLEAN,

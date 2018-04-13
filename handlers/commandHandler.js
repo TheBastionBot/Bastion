@@ -166,7 +166,6 @@ module.exports = async message => {
      * Check if a command is disabled
      */
     if (guildModel.dataValues.disabledCommands) {
-      guildModel.dataValues.disabledCommands = guildModel.dataValues.disabledCommands.split(' ');
       if (guildModel.dataValues.disabledCommands.includes(cmd.help.name.toLowerCase())) {
         return message.client.log.info('This command is disabled.');
       }
