@@ -26,7 +26,7 @@ module.exports = Bastion => {
               }
             });
             if (streamersModel && streamersModel.channelID) {
-              let twitchStreamers = streamersModel.dataValues.twitch ? streamersModel.dataValues.twitch.split(' ') : [];
+              let twitchStreamers = streamersModel.dataValues.twitch ? streamersModel.dataValues.twitch : [];
               if (!twitchStreamers.length) continue;
 
               let options = {

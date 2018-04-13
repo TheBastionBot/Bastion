@@ -507,13 +507,13 @@ module.exports = (Sequelize, database) => {
       unique: true
     },
     mixer: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     twitch: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     youtube: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     }
   });
 
