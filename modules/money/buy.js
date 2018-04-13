@@ -23,8 +23,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let itemsInShop;
     if (shopModel && shopModel.dataValues.custom) {
-      itemsInShop = await Bastion.functions.decodeString(shopModel.dataValues.custom);
-      itemsInShop = JSON.parse(itemsInShop);
+      itemsInShop = shopModel.dataValues.custom;
     }
     else {
       itemsInShop = [];
