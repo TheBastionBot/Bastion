@@ -33,13 +33,11 @@ exports.exec = async (Bastion, message, args) => {
         }
       });
       if (guildModel.dataValues.disabledCommands) {
-        guildModel.dataValues.disabledCommands = guildModel.dataValues.disabledCommands.split(' ');
-
         if (guildModel.dataValues.disabledCommands.includes(command.help.name.toLowerCase())) {
           guildModel.dataValues.disabledCommands.splice(guildModel.dataValues.disabledCommands.indexOf(command.help.name.toLowerCase()), 1);
 
           await Bastion.database.models.guild.update({
-            disabledCommands: guildModel.dataValues.disabledCommands.join(' ').toLowerCase()
+            disabledCommands: guildModel.dataValues.disabledCommands
           },
           {
             where: {
