@@ -21,12 +21,11 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
-    let whitelistDomains = JSON.parse(guildModel.dataValues.whitelistedDomains);
-    whitelistDomains = whitelistDomains.concat(args.domains);
+    let whitelistDomains = guildModel.dataValues.whitelistedDomains.concat(args.domains);
     whitelistDomains = [ ...new Set(whitelistDomains) ];
 
     await Bastion.database.models.guild.update({
-      whitelistedDomains: JSON.stringify(whitelistDomains)
+      whitelistedDomains: whitelistDomains
     },
     {
       where: {

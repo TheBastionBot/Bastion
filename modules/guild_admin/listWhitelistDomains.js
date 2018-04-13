@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
-    if (!guildModel || guildModel.dataValues.whitelistDomains === '[]') {
+    if (!guildModel || !guildModel.dataValues.whitelistedDomains) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -21,8 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'whitelisted domain'), message.channel);
     }
 
-    let whitelistDomains = JSON.parse(guildModel.dataValues.whitelistDomains);
-    whitelistDomains = [ ...new Set(whitelistDomains) ];
+    let whitelistDomains = [ ...new Set(guildModel.dataValues.whitelistedDomains) ];
 
     whitelistDomains = whitelistDomains.map((r, i) => `${i + 1}. ${r}`);
 
