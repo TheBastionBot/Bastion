@@ -488,7 +488,7 @@ module.exports = (Sequelize, database) => {
       primaryKey: true
     },
     roles: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     custom: {
       type: Sequelize.TEXT
