@@ -4,6 +4,7 @@
   "BUG FIXES": [],
   "IMROVEMENTS": [
     "Bastion is now more expressive with the `generateInvite` command.",
-    "Auto delete level up messages."
+    "Auto delete level up messages.",
+    "Under-the-hood improvements"
   ]
 }
