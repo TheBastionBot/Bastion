@@ -11,7 +11,10 @@ exports.exec = async (Bastion, message, args) => {
       maxUses: args.uses
     });
 
-    message.channel.send(`discord.gg/${invite.code}`).catch(e => {
+    message.channel.send('Hello. Beep. Boop.\n'
+      + 'If you wanna invite friends to this server, share the following invite'
+      + ' link with your friends.\nBeep!\n' +
+      `https://discord.gg/${invite.code}`).catch(e => {
       Bastion.log.error(e);
     });
   }

@@ -2,5 +2,7 @@
   "date": "April 15, 2018",
   "image": "https://i.imgur.com/R5rQ4qG.gif",
   "BUG FIXES": [],
-  "IMROVEMENTS": []
+  "IMROVEMENTS": [
+    "Bastion is now more expressive with the `generateInvite` command."
+  ]
 }
