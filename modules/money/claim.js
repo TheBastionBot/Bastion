@@ -12,7 +12,7 @@ exports.exec = (Bastion, message) => {
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
     let rewardMessage;
-    if (Bastion.user.id !== '267035345537728512') {
+    if (Bastion.user.id === '267035345537728512') {
       if (message.guild.id === specialIDs.bastionGuild) {
         rewardAmount *= 2;
         if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
