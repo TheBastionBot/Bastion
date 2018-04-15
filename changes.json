@@ -3,6 +3,7 @@
   "image": "https://i.imgur.com/R5rQ4qG.gif",
   "BUG FIXES": [],
   "IMROVEMENTS": [
-    "Bastion is now more expressive with the `generateInvite` command."
+    "Bastion is now more expressive with the `generateInvite` command.",
+    "Auto delete level up messages."
   ]
 }
