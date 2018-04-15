@@ -26,7 +26,7 @@ exports.exec = (Bastion, message) => {
       }
       else {
         rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
-          + 'You can get 2x more Bastion Currencies if you use the `claim` or `daily` command in [Bastion HQ](https://discord.gg/fzx8fkt): https://discord.gg/fzx8fkt';
+          + '💡 **Pro Tip**\nYou can get **2x** more Bastion Currencies when you use the `claim` or `daily` command in [Bastion HQ](https://discord.gg/fzx8fkt): https://discord.gg/fzx8fkt';
       }
     }
     else {
