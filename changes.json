@@ -2,5 +2,7 @@
   "date": "April 18, 2018",
   "image": "https://i.imgur.com/7NU3da3.gif",
   "BUG FIXES": [],
-  "IMROVEMENTS": []
+  "IMROVEMENTS": [
+    "If no garfield comic was found for a date, let it be known istead of keeping quite."
+  ]
 }
