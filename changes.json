@@ -1,10 +1,6 @@
 {
-  "date": "April 15, 2018",
-  "image": "https://i.imgur.com/R5rQ4qG.gif",
+  "date": "April 18, 2018",
+  "image": "https://i.imgur.com/7NU3da3.gif",
   "BUG FIXES": [],
-  "IMROVEMENTS": [
-    "Bastion is now more expressive with the `generateInvite` command.",
-    "Auto delete level up messages.",
-    "Under-the-hood improvements"
-  ]
+  "IMROVEMENTS": []
 }
