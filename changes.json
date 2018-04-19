@@ -3,7 +3,7 @@
   "image": "https://i.imgur.com/7NU3da3.gif",
   "BUG FIXES": [],
   "IMROVEMENTS": [
-    "`lmgtfy` now has a `lmstfy` (lemme search that for you) alias.",
+    "`lmgtfy` now has `lmstfy` (lemme search that for you) and `lmdtfy` (lemme DuckDuckGo that for you) aliases.",
     "If no garfield comic was found for a date, let it be known istead of keeping quite.",
     "The `lmstfy` command will use [DuckDuckGo](https://duckduckgo.com) from now, because we *[Spread Privacy](https://spreadprivacy.com)*!"
   ]
