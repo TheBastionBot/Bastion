@@ -1,8 +1,9 @@
 {
-  "date": "April 18, 2018",
+  "date": "April 19, 2018",
   "image": "https://i.imgur.com/7NU3da3.gif",
   "BUG FIXES": [],
   "IMROVEMENTS": [
+    "`lmgtfy` now has a `lmstfy` (lemme search that for you) alias.",
     "If no garfield comic was found for a date, let it be known istead of keeping quite."
   ]
 }
