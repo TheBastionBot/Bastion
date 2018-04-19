@@ -288,7 +288,7 @@
     "isBreached": "Check if a site has been breached in the past.",
     "lastSeen": "Shows the time since the specified user was last seen socializing in Discord.",
     "live": "Shows the list of users in your Discord server who are currently streaming.",
-    "lmgtfy": "Searches Google, for the specified query, and teaches users how to use Google's internet search.",
+    "lmgtfy": "Teach users how to do an internet search and get answers to their questions.",
     "manga": "Searches for the details of a Manga.",
     "map": "Get the map of the specified location.",
     "morseCode": "Encodes a given text in Morse Code.",
