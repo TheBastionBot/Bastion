@@ -50,7 +50,7 @@ exports.exec = (Bastion, message) => {
         },
         {
           name: 'Members',
-          value: `${message.guild.members.filter(m => !m.user.bot).size} Users\n${message.guild.members.filter(m => m.user.bot).size} BOTs`,
+          value: `${message.guild.members.filter(m => !m.user.bot).size} Cached Users\n${message.guild.members.filter(m => m.user.bot).size} Cached BOTs`,
           inline: true
         },
         {
