@@ -22,6 +22,9 @@ exports.exec = (Bastion, message) => {
   message.channel.send({
     files: [ `https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${year}/${year}-${month}-${date}.gif` ]
   }).catch(e => {
+    if (e.status === 404) {
+      return Bastion.emit('error', '', 'I\'m sorry. I was unable to react Garfield at that moment. Could you try again?', message.channel);
+    }
     Bastion.log.error(e);
   });
 };

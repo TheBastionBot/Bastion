@@ -67,6 +67,8 @@ module.exports = async message => {
           title: 'Leveled up',
           description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
         }
+      }).then(msg => {
+        msg.delete(5000).catch(() => {});
       }).catch(e => {
         message.client.log.error(e);
       });

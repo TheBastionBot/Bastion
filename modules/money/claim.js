@@ -11,10 +11,8 @@ exports.exec = (Bastion, message) => {
   if (!claimedUsers.includes(message.author.id)) {
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
-    let claimMessage, rewardMessage;
+    let rewardMessage;
     if (Bastion.user.id === '267035345537728512') {
-      claimMessage = `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.\n\n*If you want to get more Bastion Currencies when you use this command, check out the [FAQ](https://bastionbot.org/faq) on **How can I get more Bastion Currency with the claim/daily command?***`;
-
       if (message.guild.id === specialIDs.bastionGuild) {
         rewardAmount *= 2;
         if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
@@ -27,11 +25,11 @@ exports.exec = (Bastion, message) => {
         rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
       }
       else {
-        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\nUse the \`claim\`/\`daily\` command in [Bastion HQ](https://discord.gg/fzx8fkt) to get 2x more rewards.`;
+        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
+          + '💡 **Pro Tip**\nYou can get **2x** more Bastion Currencies when you use the `claim` or `daily` command in [Bastion HQ](https://discord.gg/fzx8fkt): https://discord.gg/fzx8fkt';
       }
     }
     else {
-      claimMessage = `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.`;
       rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
     }
 
@@ -47,7 +45,7 @@ exports.exec = (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: claimMessage
+        description: `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.`
       }
     }).catch(e => {
       Bastion.log.error(e);
