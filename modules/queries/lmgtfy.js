@@ -16,8 +16,8 @@ exports.exec = (Bastion, message, args) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Let me Google that for you:',
-      description: `https://lmgtfy.com/?q=${encodeURIComponent(args.join(' '))}`,
+      title: 'Let me search that for you:',
+      description: `https://lmgtfy.com/?s=d&q=${encodeURIComponent(args.join(' '))}`,
       footer: {
         text: 'Powered by lmgtfy'
       }
@@ -28,7 +28,7 @@ exports.exec = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'lmstfy', 'lmdtfy' ],
   enabled: true
 };
 
