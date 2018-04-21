@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT suggestionChannel FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'suggestionChannel' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, suggestionChannelStats;
-    if (guildSettings.suggestionChannel) {
-      await Bastion.db.run(`UPDATE guildSettings SET suggestionChannel=null WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.suggestionChannel) {
+      await Bastion.database.models.guild.update({
+        suggestionChannel: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'suggestionChannel' ]
+      });
       color = Bastion.colors.RED;
       suggestionChannelStats = Bastion.strings.info(message.guild.language, 'disableSuggestionChannel', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET suggestionChannel=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        suggestionChannel: message.channel.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'suggestionChannel' ]
+      });
       color = Bastion.colors.GREEN;
       suggestionChannelStats = Bastion.strings.info(message.guild.language, 'enableSuggestionChannel', message.author.tag);
     }

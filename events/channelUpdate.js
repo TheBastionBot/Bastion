@@ -5,14 +5,20 @@
  */
 
 module.exports = async (oldChannel, newChannel) => {
-  if (!oldChannel.guild) return;
-  if (oldChannel.name === newChannel.name) return;
-
   try {
-    let guildSettings = await newChannel.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${newChannel.guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    if (!oldChannel.guild) return;
+    if (oldChannel.name === newChannel.name) return;
 
-    let logChannel = newChannel.guild.channels.get(guildSettings.log);
+    let guildModel = await newChannel.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: newChannel.guild.id
+      }
+    });
+
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = newChannel.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
     let title = newChannel.client.strings.events(newChannel.guild.language, 'channelUpdate');

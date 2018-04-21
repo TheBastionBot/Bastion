@@ -11,25 +11,45 @@
  */
 module.exports = async message => {
   try {
-    let query = `SELECT filterInvite, inviteFilterWhitelistChannels, inviteFilterWhitelistRoles FROM guildSettings LEFT OUTER JOIN whitelists ON guildSettings.guildID = whitelists.guildID WHERE guildSettings.guildId='${message.guild.id}'`;
-    let guild = await message.client.db.get(query);
-
-    // If invite filter is disabled, return
-    if (!guild.filterInvite) return;
-    // If the channel is whitelisted, return
-    if (guild.inviteFilterWhitelistChannels) {
-      let whitelistChannels = guild.inviteFilterWhitelistChannels.split(' ');
-      if (whitelistChannels.includes(message.channel.id)) return;
-    }
-    // If the user is in a whitelisted role, return
-    if (guild.inviteFilterWhitelistRoles) {
-      let whitelistRoles = guild.inviteFilterWhitelistRoles.split(' ');
-      for (let whitelistRole of whitelistRoles) {
-        if (message.member.roles.has(whitelistRole)) return;
-      }
-    }
     // If the user has Manage Server permission, return
     if (message.member && message.member.hasPermission('MANAGE_GUILD')) return;
+
+    // Fetch filter data from database
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'guildID' ],
+      where: {
+        guildID: message.guild.id,
+        filterInvites: true
+      },
+      include: [
+        {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreInviteFilter' ]
+        },
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'ignoreInviteFilter' ]
+        }
+      ]
+    });
+
+    // If invite filter is disabled, return
+    if (!guildModel) return;
+
+    // If the channel is whitelisted, return
+    if (guildModel.textChannels.
+      filter(channel => channel.dataValues.ignoreInviteFilter).
+      map(channel => channel.dataValues.channelID).
+      includes(message.channel.id)) return;
+
+    // If the user is in a whitelisted role, return
+    let whitelistedRoles = guildModel.roles.
+      filter(role => role.dataValues.ignoreInviteFilter).
+      map(role => role.dataValues.roleID);
+
+    for (let role of whitelistedRoles) {
+      if (message.member.roles.has(role)) return;
+    }
 
     // If message contains a discord invite, filter it
     if (hasDiscordInvite(message.content)) {

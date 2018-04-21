@@ -1,12 +1,20 @@
 /**
- * @file resetModLogs command
+ * @file resetModerationLogs command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
 exports.exec = async (Bastion, message) => {
   try {
-    await Bastion.db.run(`UPDATE guildSettings SET modCaseNo='1' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      moderationCaseNo: 1
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'moderationCaseNo' ]
+    });
 
     message.channel.send({
       embed: {
@@ -23,15 +31,15 @@ exports.exec = async (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'resetModLogs' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'resetModLogs',
+  name: 'resetModerationLogs',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'resetModLogs',
+  usage: 'resetModerationLogs',
   example: []
 };

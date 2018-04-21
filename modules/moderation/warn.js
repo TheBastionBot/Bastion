@@ -34,11 +34,17 @@ exports.exec = async (Bastion, message, args) => {
     }
     else {
       if (message.guild.warns[user.id] >= 2) {
-        let guildSettings = await Bastion.db.get(`SELECT warnAction FROM guildSettings WHERE guildID='${message.guild.id}'`);
+        let guildModel = await message.client.database.models.guild.findOne({
+          attributes: [ 'warnAction' ],
+          where: {
+            guildID: message.guild.id
+          }
+        });
+        if (!guildModel || !guildModel.dataValues.warnAction) return;
 
-        if (guildSettings.warnAction) {
+        if (guildModel.dataValues.warnAction) {
           let action;
-          if (guildSettings.warnAction === 'kick') {
+          if (guildModel.dataValues.warnAction === 'kick') {
             if (!member.kickable) {
               /**
               * Error condition is encountered.
@@ -49,7 +55,7 @@ exports.exec = async (Bastion, message, args) => {
             await member.kick('Warned 3 times!');
             action = 'Kicked';
           }
-          if (guildSettings.warnAction === 'softban') {
+          if (guildModel.dataValues.warnAction === 'softban') {
             if (!member.bannable) {
               /**
               * Error condition is encountered.
@@ -61,7 +67,7 @@ exports.exec = async (Bastion, message, args) => {
             await message.guild.unban(member.id);
             action = 'Soft-Banned';
           }
-          if (guildSettings.warnAction === 'ban') {
+          if (guildModel.dataValues.warnAction === 'ban') {
             if (!member.bannable) {
               /**
               * Error condition is encountered.
@@ -100,7 +106,7 @@ exports.exec = async (Bastion, message, args) => {
             Bastion.log.error(e);
           });
 
-          Bastion.emit('moderationLog', message.guild, message.author, guildSettings.warnAction, user, 'Warned 3 times!');
+          Bastion.emit('moderationLog', message.guild, message.author, guildModel.dataValues.warnAction, user, 'Warned 3 times!');
 
           member.send({
             embed: {

@@ -25,9 +25,14 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'locationRange', true, charLimit), message.channel);
     }
 
-    let user = await Bastion.db.get(`SELECT location FROM profiles WHERE userID=${message.author.id}`).catch(() => {});
+    let userModel = await Bastion.database.models.user.findOne({
+      attributes: [ 'location' ],
+      where: {
+        userID: message.author.id
+      }
+    });
 
-    if (!user) {
+    if (!userModel) {
       return message.channel.send({
         embed: {
           description: `<@${message.author.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your location.`
@@ -37,7 +42,15 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
 
-    await Bastion.db.run('UPDATE profiles SET location=(?) WHERE userID=(?)', [ args.location, message.author.id ]);
+    await Bastion.database.models.user.update({
+      location: args.location
+    },
+    {
+      where: {
+        userID: message.author.id
+      },
+      fields: [ 'location' ]
+    });
 
     message.channel.send({
       embed: {

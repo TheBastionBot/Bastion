@@ -61,3 +61,16 @@ exports.message = message => {
 exports.console = (...message) => {
   console.log(...message);
 };
+
+/**
+ * Used to display database logs.
+ * @function Bastion.log.db
+ * @param {...string} message Message(s) to be logged in the console.
+ * @returns {void}
+ */
+exports.db = (...message) => {
+  console.log(COLOR.blue('[DATABASE]'));
+  console.log(...message);
+  console.trace();
+  console.log(COLOR.blue('[/DATABASE]'));
+};

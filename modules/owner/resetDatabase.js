@@ -14,7 +14,9 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    await Bastion.db.run('DELETE FROM profiles');
+    await Bastion.database.models.guildMember.destroy({
+      truncate: true
+    });
 
     message.channel.send({
       embed: {

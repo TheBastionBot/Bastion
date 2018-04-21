@@ -5,7 +5,36 @@
  */
 
 module.exports = guild => {
-  guild.client.db.run('INSERT OR IGNORE INTO guildSettings (guildID) VALUES (?)', [ guild.id ]).catch(e => {
+  /**
+   * TODO: Use <Model>.create() when Sequelize supports ignore option with it,
+   * which isn't supported yet because PostgreSQL doesn't support
+   * 'INSERT OR IGNORE' query, yet.
+   * @example
+   * await guild.client.database.models.guild.create({
+   *   where: {
+   *     guildID: guild.id;
+   *   },
+   *   ignore: true
+   * });
+   */
+  /**
+   * Using <Model>.findOrCreate() won't require the use of
+   * <ModelInstance>.save() but <Model>.findOrBuild() is used instead because
+   * <Model>.findOrCreate() creates a race condition where a matching row is
+   * created by another connection after the `find` but before the `insert`
+   * call. However, it is not always possible to handle this case in SQLite,
+   * specifically if one transaction inserts and another tries to select
+   * before the first one has committed. TimeoutError is thrown instead.
+   */
+  guild.client.database.models.guild.findOrBuild({
+    where: {
+      guildID: guild.id
+    }
+  }).spread((guildModel, initialized) => {
+    if (initialized) {
+      return guildModel.save();
+    }
+  }).catch(e => {
     guild.client.log.error(e);
   });
 

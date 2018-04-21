@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT filterLink FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'filterLinks' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, filterLinkStats;
-    if (guildSettings.filterLink) {
-      await Bastion.db.run(`UPDATE guildSettings SET filterLink=0 WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.filterLinks) {
+      await Bastion.database.models.guild.update({
+        filterLinks: false
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterLinks' ]
+      });
       color = Bastion.colors.RED;
       filterLinkStats = Bastion.strings.info(message.guild.language, 'disableLinkFilter', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET filterLink=1 WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        filterLinks: true
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filterLinks' ]
+      });
       color = Bastion.colors.GREEN;
       filterLinkStats = Bastion.strings.info(message.guild.language, 'enableLinkFilter', message.author.tag);
     }

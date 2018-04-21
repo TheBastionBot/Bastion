@@ -22,20 +22,23 @@ exports.exec = async (Bastion, message, args) => {
       user = message.author;
     }
 
-    let profile = await Bastion.db.get(`SELECT p1.*, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp * 1 > p1.xp * 1) AS rank FROM profiles as p1 WHERE p1.userID=${user.id}`);
-
-    if (!profile) {
-      if (user.id === message.author.id) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.GREEN,
-            description: `Your profile is now created, <@${user.id}>`
-          }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: Object.keys(Bastion.database.models.guildMember.attributes).concat([
+        [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers AS member WHERE member.experiencePoints * 1 > guildMember.experiencePoints * 1)'), 'rank' ]
+      ]),
+      where: {
+        userID: user.id
       }
+    });
 
+    let userModel = await Bastion.database.models.user.findOne({
+      attributes: [ 'bio', 'birthDate', 'location' ],
+      where: {
+        userID: user.id
+      }
+    });
+
+    if (!guildMemberModel) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -43,47 +46,48 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'profileNotCreated', true, `<@${user.id}>`), message.channel);
     }
 
-    if (profile.bio) {
-      profile.bio = await Bastion.functions.decodeString(profile.bio);
+    let bio;
+    if (userModel && userModel.dataValues.bio) {
+      bio = await Bastion.functions.decodeString(guildMemberModel.dataValues.bio);
     }
     else {
-      profile.bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+      bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
     }
 
     let profileData = [
       {
         name: 'Bastion Currency',
-        value: profile.bastionCurrencies,
+        value: guildMemberModel.dataValues.bastionCurrencies,
         inline: true
       },
       {
         name: 'Rank',
-        value: parseInt(profile.rank) + 1,
+        value: parseInt(guildMemberModel.dataValues.rank) + 1,
         inline: true
       },
       {
         name: 'Experience Points',
-        value: profile.xp,
+        value: guildMemberModel.dataValues.experiencePoints,
         inline: true
       },
       {
         name: 'Level',
-        value: profile.level,
+        value: guildMemberModel.dataValues.level,
         inline: true
       }
     ];
 
-    if (profile.birthDate) {
+    if (userModel && userModel.dataValues.birthDate) {
       profileData.push({
         name: 'Birthday',
-        value: new Date(profile.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
+        value: new Date(userModel.dataValues.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
         inline: true
       });
     }
-    if (profile.location) {
+    if (userModel && userModel.dataValues.location) {
       profileData.push({
         name: 'Location',
-        value: profile.location,
+        value: userModel.dataValues.location,
         inline: true
       });
     }
@@ -95,13 +99,13 @@ exports.exec = async (Bastion, message, args) => {
           name: user.tag,
           icon_url: await getUserIcon(user)
         },
-        description: profile.bio,
+        description: bio,
         fields: profileData,
         thumbnail: {
           url: user.displayAvatarURL
         },
         footer: {
-          text: `${profile.reputation} Reputation${parseInt(profile.reputation) === 1 ? '' : 's'}`
+          text: `${guildMemberModel.dataValues.reputations} Reputation${parseInt(guildMemberModel.dataValues.reputations) === 1 ? '' : 's'}`
         }
       }
     }).catch(e => {

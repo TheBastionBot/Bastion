@@ -37,40 +37,64 @@ module.exports = async Bastion => {
     }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
-    let guild = await Bastion.db.all('SELECT guildID from guildSettings');
-    guild = guild.map(r => r.guildID);
+    let guilds = await Bastion.database.models.guild.findAll({
+      attributes: [ 'guildID' ]
+    });
+    guilds = guilds.map(guild => guild.guildID);
 
     /*
-    * Add guilds to the DB which added Bastion when it was offline.
-    */
+     * Add guilds to the DB which was added Bastion when it was offline.
+     */
     for (let i = 0; i < bastionGuilds.length; i++) {
       let found = false;
-      for (let j = 0; j < guild.length; j++) {
-        if (bastionGuilds[i] === guild[j]){
+      for (let j = 0; j < guilds.length; j++) {
+        if (bastionGuilds[i] === guilds[j]) {
           found = true;
           break;
         }
       }
       if (found === false) {
-        await Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]);
+        /**
+         * TODO: Use <Model>.bulkCreate() when Sequelize supports bulk ignore
+         * option with it, which isn't supported yet because PostgreSQL doesn't
+         * support 'INSERT OR IGNORE' query, yet.
+         * @example
+         * await Bastion.database.models.guild.bulkCreate(
+         *   Bastion.guilds.map(guild => {
+         *     return { guildID: guild.id };
+         *   }),
+         *   { ignore: true }
+         * );
+         */
+        await Bastion.database.models.guild.create({
+          guildID: bastionGuilds[i]
+        },
+        {
+          fields: [ 'guildID' ]
+        });
       }
     }
 
-    /*
-    * Remove guilds from DB which removed Bastion when it was offline.
-    */
-    // for (let i = 0; i < guild.length; i++) {
-    //   let found = false;
-    //   for (let j = 0; j < bastionGuilds.length; j++) {
-    //     if (guild[i] === bastionGuilds[j]){
-    //       found = true;
-    //       break;
-    //     }
-    //   }
-    //   if (found === false) {
-    //     await Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${guild[i]}`);
-    //   }
-    // }
+    /**
+     * TODO: Remove guilds from DB which removed Bastion when it was offline.
+     * @example
+     * for (let i = 0; i < guilds.length; i++) {
+     *   let found = false;
+     *   for (let j = 0; j < bastionGuilds.length; j++) {
+     *     if (guilds[i] === bastionGuilds[j]){
+     *       found = true;
+     *       break;
+     *     }
+     *   }
+     *   if (found === false) {
+     *     await Bastion.database.models.guild.destroy({
+     *       where: {
+     *         guildID: guilds[i]
+     *       }
+     *     });
+     *   }
+     * }
+     */
 
     require('../handlers/scheduledCommandHandler')(Bastion);
     require('../handlers/streamNotifier')(Bastion);
@@ -95,19 +119,24 @@ module.exports = async Bastion => {
         guilds = guilds.reduce((sum, val) => sum + val, 0);
       }
 
-      Bastion.log.console('\n');
-      Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
-      Bastion.log.console(`${COLOR.green('[Bot]')} Bastion v${Bastion.package.version}`);
-      Bastion.log.console(COLOR.green('[URL] ') + Bastion.package.url);
-      Bastion.log.console(COLOR.green('[Bot ID] ') + Bastion.credentials.botId);
-      Bastion.log.console(COLOR.green('[Owner IDs] ') + Bastion.credentials.ownerId.join(', '));
-      Bastion.log.console(COLOR.green('[Servers] ') + guilds);
-      Bastion.log.console(COLOR.green('[Prefix] ') + Bastion.config.prefix);
-      Bastion.log.console(`${COLOR.cyan(`\n[${Bastion.user.username}]:`)} I'm ready to roll! o7`);
+      Bastion.log.console(COLOR`\n{cyan Bastion} v${Bastion.package.version}`);
+      Bastion.log.console(COLOR`{gray ${Bastion.package.url}}`);
+
+      Bastion.log.console(COLOR`\n{gray </> with ❤ by The Bastion Bot Team & Contributors}`);
+      Bastion.log.console(COLOR`{gray Copyright (C) 2017-2018 The Bastion Bot Project}`);
+
+      Bastion.log.console(COLOR`\n{cyan [${Bastion.user.username}]:} I'm ready to roll! 🚀\n`);
+
+      if (Bastion.shard) {
+        Bastion.log.console(COLOR`{green [   SHARDS]:} ${Bastion.shard.count}`);
+      }
+      Bastion.log.console(COLOR`{green [  SERVERS]:} ${guilds}`);
+      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.config.prefix}`);
+      Bastion.log.console(COLOR`{green [ COMMANDS]:} ${Bastion.commands.size}`);
 
       Bastion.webhook.send('bastionLog', {
         color: Bastion.colors.BLUE,
-        title: 'I\'m Ready to Roll!',
+        title: 'I\'m Ready to Roll!  🚀',
         description: `Connected to ${guilds} servers${Bastion.shard ? ` in ${Bastion.shard.count} shards` : ''}.`,
         footer: {
           icon_url: 'https://resources.bastionbot.org/logos/Bastion_Logomark_C.png',

@@ -14,15 +14,20 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guild = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guild) return;
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'selfAssignableRoles' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (!guildModel || !guildModel.dataValues.selfAssignableRoles) return;
 
     let role = message.guild.roles.find('name', args.join(' '));
     if (!role) return;
 
     let selfAssignableRoles = [];
-    if (guild.selfAssignableRoles) {
-      selfAssignableRoles = guild.selfAssignableRoles.split(' ');
+    if (guildModel.dataValues.selfAssignableRoles) {
+      selfAssignableRoles = guildModel.dataValues.selfAssignableRoles;
     }
     if (!selfAssignableRoles.includes(role.id)) return;
 

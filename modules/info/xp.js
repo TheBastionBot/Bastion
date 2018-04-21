@@ -8,10 +8,16 @@ exports.exec = async (Bastion, message, args) => {
   try {
     args = message.mentions.users.first() || message.author;
 
-    let profile = await Bastion.db.get(`SELECT xp FROM profiles WHERE userID=${args.id}`), xp = 0;
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [ 'experiencePoints' ],
+      where: {
+        userID: args.id
+      }
+    });
+    let xp = 0;
 
-    if (profile && profile.xp) {
-      xp = profile.xp;
+    if (guildMemberModel) {
+      xp = guildMemberModel.dataValues.experiencePoints;
     }
 
     let description = message.author.id === args.id ? `**${args.tag}** you have **${xp}** experience points.` : `**${args.tag}** has **${xp}** experience points.`;

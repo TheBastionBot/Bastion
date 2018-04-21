@@ -14,7 +14,11 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    await Bastion.db.run(`DELETE FROM triggers WHERE trigger="${args.join(' ').replace(/"/g, '\'')}"`);
+    await Bastion.database.models.trigger.destroy({
+      where: {
+        trigger: args.join(' ')
+      }
+    });
 
     message.channel.send({
       embed: {

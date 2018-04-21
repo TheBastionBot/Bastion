@@ -84,8 +84,6 @@
     "greetPrivateMessage": "Modifie le message d'accueil qui est envoyé en tant que message direct lorsqu'un membre rejoint le serveur.",
     "greetMessage": "Modifie le message d'accueil qui s'affiche lorsqu'un membre rejoint le serveur.",
     "greetTimeout": "Définit le temps après lequel le message d'accueil sera automatiquement supprimé.",
-    "ignoreChannel": "Ajoute ou supprime un canal dans la liste des canaux ignorés. Bastion n'accepte aucune commande dans le canal qui est ignorée.",
-    "ignoreRole": "Ajoute ou supprime un rôle dans la liste des rôles ignorés. Bastion n'accepte aucune commande des rôles ignorés.",
     "levelUpMessage": "Permet d'envoyer des messages lorsque quelqu'un passe un niveau sur le serveur.",
     "listAutoAssignableRoles": "Liste tous les rôles auto-assignables.",
     "listFilteredWords": "Liste tous les mots filtrés.",
@@ -153,11 +151,7 @@
     "warnAction": "Définit l'action d'avertissement pour le serveur."
   },
   "money": {
-    "buyGift": "Achetez des cadeaux dans la boutique de cadeaux de Bastion.",
-    "gift": "Envoyez des cadeaux aux autres utilisateurs à partir des articles cadeaux que vous avez avec vous.",
-    "giftShop": "Affiche les produits disponibles dans la boutique et leur prix.",
     "give": "Donner le montant spécifié de monnaie Bastion de votre compte à l'utilisateur spécifié. Si vous êtes le propriétaire du bot, vous pouvez donner n'importe quel montant de monnaie Bastion.",
-    "myGifts": "Indique les cadeaux que vous avez actuellement en votre possession.",
     "take": "Prenez le montant spécifié de monnaie Bastion à partir de l'utilisateur spécifié."
   },
   "music": {
@@ -201,8 +195,7 @@
     "setUsername": "Modifie le nom d'utilisateur de Bastion.",
     "shutdown": "Arrête bastion et met fin au processus.",
     "todo": "Ajoute un élément spécifié à votre liste TODO.",
-    "updateDatabase": "Mette à jour Bastion vers la version actuelle, si nécessaire.",
-    "userBlacklist": "Ajoute/Supprime un utilisateur spécifié à la liste noire de Bastion. Les utilisateurs de la liste noire ne peuvent utiliser aucune des commandes du Bastion."
+    "updateDatabase": "Mette à jour Bastion vers la version actuelle, si nécessaire."
   },
   "queries": {
     "anime": "Recherche les détails d'un Anime.",

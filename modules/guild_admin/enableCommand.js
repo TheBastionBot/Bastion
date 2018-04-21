@@ -26,14 +26,25 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (![ 'owner', 'guild_admin' ].includes(command.config.module)) {
-      let guildSettings = await Bastion.db.get(`SELECT disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
-      if (guildSettings.disabledCommands) {
-        guildSettings.disabledCommands = guildSettings.disabledCommands.split(' ');
+      let guildModel = await Bastion.database.models.guild.findOne({
+        attributes: [ 'disabledCommands' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
+      if (guildModel.dataValues.disabledCommands) {
+        if (guildModel.dataValues.disabledCommands.includes(command.help.name.toLowerCase())) {
+          guildModel.dataValues.disabledCommands.splice(guildModel.dataValues.disabledCommands.indexOf(command.help.name.toLowerCase()), 1);
 
-        if (guildSettings.disabledCommands.includes(command.help.name.toLowerCase())) {
-          guildSettings.disabledCommands.splice(guildSettings.disabledCommands.indexOf(command.help.name.toLowerCase()), 1);
-
-          await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${guildSettings.disabledCommands.join(' ').toLowerCase()}' WHERE guildID=${message.guild.id}`);
+          await Bastion.database.models.guild.update({
+            disabledCommands: guildModel.dataValues.disabledCommands
+          },
+          {
+            where: {
+              guildID: message.guild.id
+            },
+            fields: [ 'disabledCommands' ]
+          });
         }
       }
     }
@@ -41,7 +52,15 @@ exports.exec = async (Bastion, message, args) => {
     description = Bastion.strings.info(message.guild.language, 'enableCommand', message.author.tag, command.help.name);
   }
   else if (args.all) {
-    await Bastion.db.run(`UPDATE guildSettings SET disabledCommands=NULL WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      disabledCommands: null
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'disabledCommands' ]
+    });
     description = Bastion.strings.info(message.guild.language, 'enableAllCommands', message.author.tag);
   }
   else {

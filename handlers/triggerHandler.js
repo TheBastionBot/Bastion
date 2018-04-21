@@ -10,18 +10,18 @@
  * @returns {void}
  */
 module.exports = async message => {
-  let triggers = await message.client.db.all('SELECT trigger, response FROM triggers').catch(() => {
-    message.client.db.run('CREATE TABLE IF NOT EXISTS triggers (trigger TEXT NOT NULL, response TEXT NOT NULL)');
+  let triggerModels = await message.client.database.models.trigger.findAll({
+    attributes: [ 'guildID', 'trigger', 'responseMessage' ]
   });
 
-  if (!Object.keys(triggers).length) return;
+  if (!triggerModels.length) return;
 
   let trigger = '';
   let response = [];
-  for (let i = 0; i < triggers.length; i++) {
-    if (message.content.toLowerCase() === triggers[i].trigger.toLowerCase()) {
-      trigger = triggers[i].trigger;
-      response.push(triggers[i].response);
+  for (let i = 0; i < triggerModels.length; i++) {
+    if (message.content.toLowerCase() === triggerModels[i].dataValues.trigger.toLowerCase()) {
+      trigger = triggerModels[i].dataValues.trigger;
+      response.push(triggerModels[i].dataValues.responseMessage);
     }
   }
 

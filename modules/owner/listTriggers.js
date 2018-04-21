@@ -6,9 +6,11 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let triggers = await Bastion.db.all('SELECT trigger FROM triggers');
+    let triggerModels = await Bastion.database.models.trigger.findAll({
+      attributes: [ 'trigger' ]
+    });
 
-    if (triggers.length === 0) {
+    if (triggerModels.length === 0) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -16,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'triggerNotFound', true), message.channel);
     }
 
-    triggers = triggers.map((t, i) => `${i + 1}. ${t.trigger}`);
+    let triggers = triggerModels.map((t, i) => `${i + 1}. ${t.dataValues.trigger}`);
 
     let noOfPages = triggers.length / 10;
     let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;

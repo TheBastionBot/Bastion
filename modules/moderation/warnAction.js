@@ -14,7 +14,13 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT warnAction FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'warnAction' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+
     let warnAction = '', color = Bastion.colors.GREEN, description;
 
     if (args.kick) {
@@ -27,12 +33,20 @@ exports.exec = async (Bastion, message, args) => {
       warnAction = 'ban';
     }
 
-    if (guildSettings.warnAction === warnAction) {
+    if (guildModel.dataValues.warnAction === warnAction) {
       color = Bastion.colors.RED;
       description = `Warn action is already set to ${warnAction ? warnAction : 'none'}.`;
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET warnAction='${warnAction}' WHERE guildID=${message.guild.id}`);
+      await message.client.database.models.guild.update({
+        warnAction: warnAction
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'warnAction' ]
+      });
       description = `Warn action is now set to ${warnAction}.`;
     }
 

@@ -9,12 +9,28 @@ exports.exec = async (Bastion, message, args) => {
     let description, color;
 
     if (args.remove) {
-      await Bastion.db.run(`UPDATE guildSettings SET announcementChannel=null WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        announcementChannel: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'announcementChannel' ]
+      });
       description = Bastion.strings.info(message.guild.language, 'disableAnnouncementChannel', message.author.tag);
       color = Bastion.colors.RED;
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET announcementChannel='${message.channel.id}' WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        announcementChannel: message.channel.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'announcementChannel' ]
+      });
       description = Bastion.strings.info(message.guild.language, 'enableAnnouncementChannel', message.author.tag);
       color = Bastion.colors.GREEN;
     }

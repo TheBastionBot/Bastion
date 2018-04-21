@@ -6,66 +6,99 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT votingChannels FROM guildSettings WHERE guildID=${message.guild.id}`);
-
-    let color, title, votingChannelsStats;
-    if (guildSettings.votingChannels) {
-      guildSettings.votingChannels = guildSettings.votingChannels.split(' ');
-    }
-    else {
-      guildSettings.votingChannels = [];
-    }
-
     if (args.add) {
-      guildSettings.votingChannels.push(message.channel.id);
-      guildSettings.votingChannels = [ ...new Set(guildSettings.votingChannels) ];
+      await Bastion.database.models.textChannel.upsert({
+        channelID: message.channel.id,
+        guildID: message.guild.id,
+        votingChannel: true
+      },
+      {
+        where: {
+          channelID: message.channel.id,
+          guildID: message.guild.id
+        },
+        fields: [ 'channelID', 'guildID', 'votingChannel' ]
+      });
 
-      if (guildSettings.votingChannels.length > 3) {
-        color = Bastion.colors.RED;
-        votingChannelsStats = 'You can\'t set more than 3 voting channels in a server for now. Remove another voting channel before setting this channel as a voting channel.\nWe will increase this limit in the future.';
-      }
-      else {
-        await Bastion.db.run(`UPDATE guildSettings SET votingChannels='${guildSettings.votingChannels.join(' ')}' WHERE guildID=${message.guild.id}`);
-
-        color = Bastion.colors.GREEN;
-        votingChannelsStats = `${message.channel} has been added to the list of voting channels.`;
-      }
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: `${message.channel} has been added to the list of voting channels.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
     else if (args.remove) {
-      guildSettings.votingChannels.splice(guildSettings.votingChannels.indexOf(message.channel.id), 1);
-      await Bastion.db.run(`UPDATE guildSettings SET votingChannels='${guildSettings.votingChannels.join(' ')}' WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.textChannel.update({
+        votingChannel: false
+      },
+      {
+        where: {
+          channelID: message.channel.id,
+          guildID: message.guild.id,
+          votingChannel: true
+        },
+        fields: [ 'votingChannel' ]
+      });
 
-      color = Bastion.colors.RED;
-      votingChannelsStats = `${message.channel} has been removed from the list of voting channels.`;
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: `${message.channel} has been removed from the list of voting channels.`
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
-    else if (args.prune) {
-      await Bastion.db.run(`UPDATE guildSettings SET votingChannels=null WHERE guildID=${message.guild.id}`);
+    else if (args.purge) {
+      await Bastion.database.models.textChannel.update({
+        votingChannel: false
+      },
+      {
+        where: {
+          guildID: message.guild.id,
+          votingChannel: true
+        },
+        fields: [ 'votingChannel' ]
+      });
 
-      color = Bastion.colors.RED;
-      votingChannelsStats = 'All the channels have been removed from the list of voting channels.';
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: 'All the channels have been removed from the list of voting channels.'
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
     else {
-      if (guildSettings.votingChannels.length) {
-        guildSettings.votingChannels = guildSettings.votingChannels.map(channel => message.guild.channels.get(channel));
-        color = Bastion.colors.BLUE;
-        title = 'Voting Channels';
-        votingChannelsStats = `Messages posted in the voting channels can are available for upvote/downvote by users.\nThese channels have been set as the voting channels:\n\n${guildSettings.votingChannels.join('\n\n')}`;
+      let textChannelModel = await Bastion.database.models.textChannel.findAll({
+        attributes: [ 'channelID' ],
+        where: {
+          guildID: message.guild.id,
+          votingChannel: true
+        }
+      });
+
+      let votingChannels, description;
+      if (!textChannelModel || !textChannelModel.length) {
+        description = 'No voting channels have been set in this server.';
       }
       else {
-        color = Bastion.colors.RED;
-        votingChannelsStats = 'No voting channels have been set in this server.';
+        votingChannels = textChannelModel.map(guild => guild.dataValues.channelID);
+        description = `Messages posted in the voting channels can are available for upvote/downvote by users.\n\nThese channels have been set as the voting channels:\n\n<#${votingChannels.join('>, <#')}>`;
       }
-    }
 
-    message.channel.send({
-      embed: {
-        color: color,
-        title: title,
-        description: votingChannelsStats
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          description: description
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
   }
   catch (e) {
     Bastion.log.error(e);
@@ -73,12 +106,12 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'votingChannel' ],
   enabled: true,
   argsDefinitions: [
     { name: 'add', type: Boolean, alias: 'a' },
     { name: 'remove', type: Boolean, alias: 'r' },
-    { name: 'prune', type: Boolean, alias: 'p' }
+    { name: 'purge', type: Boolean, alias: 'p' }
   ]
 };
 
@@ -87,6 +120,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'votingChannels [ --add | --remove | --prune ]',
-  example: [ 'votingChannels', 'votingChannels --add', 'votingChannels --remove', 'votingChannels --prune' ]
+  usage: 'votingChannels [ --add | --remove | --purge ]',
+  example: [ 'votingChannels', 'votingChannels --add', 'votingChannels --remove', 'votingChannels --purge' ]
 };

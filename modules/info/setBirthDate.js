@@ -42,9 +42,14 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'ageBelow13', true), message.channel);
     }
 
-    let user = await Bastion.db.get(`SELECT birthDate FROM profiles WHERE userID=${message.author.id}`).catch(() => {});
+    let userModel = await Bastion.database.models.user.findOne({
+      attributes: [ 'birthDate' ],
+      where: {
+        userID: message.author.id
+      }
+    });
 
-    if (!user) {
+    if (!userModel) {
       return message.channel.send({
         embed: {
           description: `<@${message.author.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your birth date.`
@@ -54,7 +59,15 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
 
-    await Bastion.db.run('UPDATE profiles SET birthDate=(?) WHERE userID=(?)', [ args.date, message.author.id ]);
+    await Bastion.database.models.user.update({
+      birthDate: args.date
+    },
+    {
+      where: {
+        userID: message.author.id
+      },
+      fields: [ 'birthDate' ]
+    });
 
     message.channel.send({
       embed: {

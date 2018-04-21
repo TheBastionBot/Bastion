@@ -6,45 +6,28 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT levelUpRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
-
-    let levelUpRoles;
-    if (guildSettings && guildSettings.levelUpRoles) {
-      levelUpRoles = await Bastion.functions.decodeString(guildSettings.levelUpRoles);
-      levelUpRoles = JSON.parse(levelUpRoles);
-    }
-    else {
-      levelUpRoles = {};
-    }
-
-    if (args.level && args.role) {
+    if (args.level && args.add) {
       if (!message.member || !message.member.hasPermission('MANAGE_ROLES')) {
         return message.client.emit('userMissingPermissions', 'MANAGE_ROLES');
       }
 
-      if (Object.keys(levelUpRoles).length >= 25) {
-        return Bastion.emit('error', '', 'You can\'t add more than 25 level up roles.', message.channel);
-      }
-
-      args.level = Math.abs(args.level).toString();
-
-      let role = message.guild.roles.get(args.role);
-
+      let role = message.guild.roles.get(args.add);
       if (!role) {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
       }
 
-      if (levelUpRoles.hasOwnProperty(args.level)) {
-        levelUpRoles[args.level] += ` ${role.id}`;
-      }
-      else {
-        levelUpRoles[args.level] = role.id;
-      }
-
-      levelUpRoles = JSON.stringify(levelUpRoles);
-      levelUpRoles = await Bastion.functions.encodeString(levelUpRoles);
-
-      await Bastion.db.run('INSERT OR REPLACE INTO guildSettings(guildID, levelUpRoles) VALUES(?, ?)', [ message.guild.id, levelUpRoles ]);
+      await Bastion.database.models.role.upsert({
+        roleID: role.id,
+        guildID: message.guild.id,
+        level: args.level
+      },
+      {
+        where: {
+          roleID: role.id,
+          guildID: message.guild.id
+        },
+        fields: [ 'roleID', 'guildID', 'level' ]
+      });
 
       message.channel.send({
         embed: {
@@ -55,59 +38,76 @@ exports.exec = async (Bastion, message, args) => {
         Bastion.log.error(e);
       });
     }
-    else if (args.remove) {
-      delete levelUpRoles[args.remove];
+    else if (args.level && args.remove) {
+      if (!message.member || !message.member.hasPermission('MANAGE_ROLES')) {
+        return message.client.emit('userMissingPermissions', 'MANAGE_ROLES');
+      }
 
-      levelUpRoles = JSON.stringify(levelUpRoles);
-      levelUpRoles = await Bastion.functions.encodeString(levelUpRoles);
-
-      await Bastion.db.run('INSERT OR REPLACE INTO guildSettings(guildID, levelUpRoles) VALUES(?, ?)', [ message.guild.id, levelUpRoles ]);
+      await Bastion.database.models.role.update({
+        level: null
+      },
+      {
+        where: {
+          guildID: message.guild.id,
+          level: args.level
+        },
+        fields: [ 'level' ]
+      });
 
       message.channel.send({
         embed: {
           color: Bastion.colors.RED,
-          description: Bastion.strings.info(message.guild.language, 'removeLevelUpRoles', message.author.tag, args.remove)
+          description: Bastion.strings.info(message.guild.language, 'removeLevelUpRoles', message.author.tag, args.level)
         }
       }).catch(e => {
         Bastion.log.error(e);
       });
     }
     else {
-      if (Object.keys(levelUpRoles).length) {
-        let fields = [];
-
-        for (let level in levelUpRoles) {
-          if (levelUpRoles.hasOwnProperty(level)) {
-            let roles = levelUpRoles[level].split(' ').filter(role => message.guild.roles.has(role)).map(role => message.guild.roles.get(role).name);
-
-            fields.push({
-              name: `Level ${level}`,
-              value: roles.join(', ')
-            });
-          }
+      let roleModel = await Bastion.database.models.role.findAll({
+        attributes: [ 'roleID', 'level' ],
+        where: {
+          guildID: message.guild.id
         }
+      });
 
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.BLUE,
-            title: 'Level up Roles',
-            description: 'Roles to be added to users when they level up in this server.',
-            fields: fields
-          }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
+      let fields = [], color, description;
+      if (!roleModel || !roleModel.length) {
+        color = Bastion.colors.RED;
+        description = 'No level up roles are set in this server.';
       }
       else {
-        message.channel.send({
-          embed: {
-            color: Bastion.colors.RED,
-            description: 'No level up roles are set in this server.'
+        let levelUpRoles = {};
+        for (let role of roleModel) {
+          if (!levelUpRoles.hasOwnProperty(role.dataValues.level)) {
+            levelUpRoles[role.dataValues.level] = [];
           }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
+
+          levelUpRoles[role.dataValues.level].push(role.dataValues.roleID);
+        }
+
+        for (let level in levelUpRoles) {
+          let roles = levelUpRoles[level].filter(role => message.guild.roles.has(role)).map(role => message.guild.roles.get(role).name);
+
+          fields.push({
+            name: `Level ${level}`,
+            value: roles.join(', ')
+          });
+        }
+
+        color = Bastion.colors.BLUE;
+        description = 'Roles to be added to users when they level up in this server.';
       }
+
+      message.channel.send({
+        embed: {
+          color: color,
+          description: description,
+          fields: fields
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
   }
   catch (e) {
@@ -120,16 +120,16 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'level', type: Number, defaultOption: true },
-    { name: 'role', type: String, alias: 'r' },
-    { name: 'remove', type: String }
+    { name: 'add', type: String, alias: 'a' },
+    { name: 'remove', type: Boolean, alias: 'r' }
   ]
 };
 
 exports.help = {
   name: 'levelUpRoles',
-  botPermission: 'MANAGE_ROLES',
-  userTextPermission: '',
+  botPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'levelUpRoles [ LEVEL --role ROLE_ID ] [ --remove LEVEL ]',
-  example: [ 'levelUpRoles', 'levelUpRoles 10 --role 443322110055998877', 'levelUpRoles --remove 10' ]
+  usage: 'levelUpRoles [ LEVEL --add ROLE_ID ] [ LEVEL --remove ]',
+  example: [ 'levelUpRoles', 'levelUpRoles 10 --add 443322110055998877', 'levelUpRoles 10 --remove' ]
 };

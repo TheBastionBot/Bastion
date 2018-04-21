@@ -16,9 +16,14 @@ exports.exec = async (Bastion, message, args) => {
     }
     index -= 1;
 
-    let guildSettings = await Bastion.db.get(`SELECT filteredWords FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'filteredWords' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (!guildSettings || !guildSettings.filteredWords) {
+    if (!guildModel || !guildModel.dataValues.filteredWords) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -26,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
       Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
     }
     else {
-      let filteredWords = guildSettings.filteredWords.split(' ');
+      let filteredWords = guildModel.dataValues.filteredWords;
 
       if (index >= filteredWords.length) {
         /**
@@ -39,7 +44,15 @@ exports.exec = async (Bastion, message, args) => {
       let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];
       filteredWords.splice(parseInt(args[0]) - 1, 1);
 
-      await Bastion.db.run(`UPDATE guildSettings SET filteredWords='${filteredWords.join(' ')}' WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        filteredWords: filteredWords
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'filteredWords' ]
+      });
 
       message.channel.send({
         embed: {

@@ -6,9 +6,11 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let scheduledCommands = await Bastion.db.all('SELECT cronExp, command, arguments FROM scheduledCommands');
+    let scheduledCommandModels = await Bastion.database.models.scheduledCommand.findAll({
+      attributes: [ 'cronExp', 'command', 'arguments' ]
+    });
 
-    if (scheduledCommands.length === 0) {
+    if (scheduledCommandModels.length === 0) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -16,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'scheduledCommandsNotFound', true), message.channel);
     }
 
-    scheduledCommands = scheduledCommands.map((t, i) => `${i + 1}. \`${t.cronExp} ${t.command} ${t.arguments}\``);
+    let scheduledCommands = scheduledCommandModels.map((sc, i) => `${i + 1}. \`${sc.dataValues.cronExp} ${sc.dataValues.command} ${sc.dataValues.arguments}\``);
 
     let noOfPages = scheduledCommands.length / 10;
     let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;

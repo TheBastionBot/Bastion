@@ -6,12 +6,16 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildShop = await message.client.db.get(`SELECT roles FROM guildShop WHERE guildID=${message.guild.id}`);
+    let shopModel = await Bastion.database.models.shop.findOne({
+      attributes: [ 'roles' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let rolesInStore;
-    if (guildShop && guildShop.roles) {
-      rolesInStore = await Bastion.functions.decodeString(guildShop.roles);
-      rolesInStore = JSON.parse(rolesInStore);
+    if (shopModel && shopModel.dataValues.roles) {
+      rolesInStore = shopModel.dataValues.roles;
     }
     else {
       rolesInStore = {};
@@ -36,10 +40,16 @@ exports.exec = async (Bastion, message, args) => {
 
       rolesInStore[role.id] = args.add;
 
-      rolesInStore = JSON.stringify(rolesInStore);
-      rolesInStore = await Bastion.functions.encodeString(rolesInStore);
-
-      await Bastion.db.run('INSERT OR REPLACE INTO guildShop(guildID, roles) VALUES(?, ?)', [ message.guild.id, rolesInStore ]);
+      await Bastion.database.models.shop.upsert({
+        guildID: message.guild.id,
+        roles: rolesInStore
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'guildID', 'roles' ]
+      });
 
       message.channel.send({
         embed: {
@@ -57,10 +67,16 @@ exports.exec = async (Bastion, message, args) => {
 
       delete rolesInStore[args.role];
 
-      rolesInStore = JSON.stringify(rolesInStore);
-      rolesInStore = await Bastion.functions.encodeString(rolesInStore);
-
-      await Bastion.db.run('INSERT OR REPLACE INTO guildShop(guildID, roles) VALUES(?, ?)', [ message.guild.id, rolesInStore ]);
+      await Bastion.database.models.shop.upsert({
+        guildID: message.guild.id,
+        roles: rolesInStore
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'guildID', 'roles' ]
+      });
 
       let role;
       if (message.guild.roles.has(args.role)) {

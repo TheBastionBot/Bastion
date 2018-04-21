@@ -14,8 +14,11 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let guildSettings = await Bastion.db.all('SELECT announcementChannel FROM guildSettings');
-    let announcementChannels = guildSettings.map(guild => guild.announcementChannel).filter(channel => channel);
+    let guildModels = await Bastion.database.models.guild.findAll({
+      attributes: [ 'announcementChannel' ]
+    });
+
+    let announcementChannels = guildModels.filter(guildModel => guildModel.dataValues.announcementChannel).map(guildModel => guildModel.dataValues.announcementChannel);
     let announcementMessage = args.join(' ');
 
     for (let channel of announcementChannels) {
@@ -26,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
             channel.send({
               embed: {
                 color: this.colors.BLUE,
-                description: \`${announcementMessage.replace('\'', '\\\'')}\`
+                description: \`${announcementMessage}\`
               }
             }).catch(this.log.error);
           }

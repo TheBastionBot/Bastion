@@ -92,8 +92,6 @@
     "greetPrivateMessage": "Bir üye sunucu katılır doğrudan mesaj gönderdiği tebrik mesajı düzenler.",
     "greetMessage": "Bir üye sunucu katılır doğrudan mesaj gönderdiği tebrik mesajı düzenler.",
     "greetTimeout": "Sonra veda mesajı otomatik olarak silineceğini belirten süreyi ayarlar.",
-    "ignoreChannel": "Yoksayılan kanalların listesine bir kanal ekler veya bu kanalları kaldırır. Bastion, göz ardı edilen kanaldaki herhangi bir komutu kabul etmiyor.",
-    "ignoreRole": "Yoksayılan rollerin listesine bir rol ekler veya bu rolleri kaldırır. Bastion, göz ardı edilen rollerdeki komutları kabul etmiyor.",
     "levelUpMessage": "Birisi sunucudaki seviyeye yükseldiğinde mesaj göndermeyi açar / kapatır.",
     "listAutoAssignableRoles": "Tüm otomatik atanabilir rolleri listeler.",
     "listFilteredWords": "Tüm filtre uygulanmış sözcükleri listeler.",
@@ -170,12 +168,8 @@
   },
   "money": {
     "bastionCurrency": "Belirtilen kullanıcının hesabında Bastion Currencies miktarını gösterir.",
-    "buyGift": "Hediyeler Tabyası'nın Hediyelik eşya.",
     "claim": "Günlük ödülünü Toplar.",
-    "gift": "Hediyeler yanınızda Hediyelik eşyalar üzerinden diğer kullanıcılara gönderebilirsiniz.",
-    "giftShop": "Kullanılabilen ürünler Hediyelik eşya ve onların fiyatı gösterir.",
     "give": "Bastion para belirtilen miktarı hesabınızdan belirtilen kullanıcıya vermek. Bot sahibi iseniz, herhangi bir miktarda Bastion para verebilirim.",
-    "myGifts": "Hediyeler şu anda senin elinde var gösterir.",
     "take": "Belirtilen miktarda Bastion Currencies'ı belirtilen kullanıcıdan alın."
   },
   "music": {
@@ -222,8 +216,7 @@
     "shutdown": "Bastion kapatır ve işlemi sonlandırır.",
     "sql": "SQL sorgusu yürütmek Bastion'ın veritabanı kullanır.",
     "todo": "Belirtilen öğe, TODO listesine ekler.",
-    "updateDatabase": "Gerekirse Veri veritabanını geçerli sürüme güncelleştirir.",
-    "userBlacklist": "Bastion'ın kara liste için belirtilen bir kullanıcı ekler veya kaldırır. Kara listeye kullanıcılar Tabyası'nın komutlardan herhangi birini kullanamazsınız."
+    "updateDatabase": "Gerekirse Veri veritabanını geçerli sürüme güncelleştirir."
   },
   "queries": {
     "anime": "Bir Anime ayrıntılarını arar.",

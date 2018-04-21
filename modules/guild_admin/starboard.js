@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT starboard FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'starboard' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, starboardStats;
-    if (guildSettings.starboard) {
-      await Bastion.db.run(`UPDATE guildSettings SET starboard=null WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.starboard) {
+      await Bastion.database.models.guild.update({
+        starboard: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'starboard' ]
+      });
       color = Bastion.colors.RED;
       starboardStats = Bastion.strings.info(message.guild.language, 'disableStarboard', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET starboard=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        starboard: message.channel.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'starboard' ]
+      });
       color = Bastion.colors.GREEN;
       starboardStats = Bastion.strings.info(message.guild.language, 'enableStarboard', message.author.tag);
     }

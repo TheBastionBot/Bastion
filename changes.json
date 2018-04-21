@@ -1,11 +1,36 @@
 {
-  "date": "April 21, 2018",
-  "image": "https://i.imgur.com/7NU3da3.gif",
-  "BUG FIXES": [],
-  "IMROVEMENTS": [
-    "`lmgtfy` now has `lmstfy` (lemme search that for you) and `lmdtfy` (lemme DuckDuckGo that for you) aliases.",
-    "If no garfield comic was found for a date, let it be known istead of keeping quite.",
-    "The `lmstfy` command will use [DuckDuckGo](https://duckduckgo.com) from now, because we *[Spread Privacy](https://spreadprivacy.com)*!",
-    "Under-the-hood improvements"
-  ]
+  "date": "April 7, 2018",
+  "image": "https://i.imgur.com/zlOMqVD.gif",
+  "THESE BUGS ARE DEAD": [],
+  "THESE ABILITIES HAVE ENHANCED": [
+    "Logs are now much prettier, than it was already!",
+    "Tons of under-the-hood improvements."
+  ],
+  "NEW FEATURES!": [
+    "A complete redesign/rewrite of the database.",
+    "You can now set any number of channels as voting channels. No limitations!",
+    "You can add any number of level up roles. No limitations here, too!",
+    "You can now set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config."
+  ],
+  "NEW COMMANDS!": [
+    "Added `blacklist` command to blacklist users globally from using Bastion.",
+    "Added `ignoreInviteFilter` command. You can now set channels and/or roles to be ignored by the invite filter.",
+    "Added `ignoreLinkFilter` command. You can now set channels and/or roles to be ignored by the link filter.",
+    "Added `ignoreWordFilter` command. You can now set channels and/or roles to be ignored by the word filter.",
+    "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter.",
+    "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode.",
+    "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard."
+  ],
+  "RENAMED COMMANDS": [
+    "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
+    "Renamed the `votingChannel` command to `votingChannels`.",
+    "Renamed the `resetModLogs` command to `resetModerationLogs`."
+  ],
+  "NOT AVAILABLE ANYMORE": [
+    "Removed `todo`, `listTodo` and `deleteTodo` commands.",
+    "Removed the `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
+    "Removed the `buyGift`, `gift`, `giftShop` and `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
+    "Removed `whitelistChannel` and `whitelistRole` commands."
+  ],
+  "BUGS HIDING IN THE CLOSET": []
 }

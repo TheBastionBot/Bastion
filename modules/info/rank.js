@@ -7,13 +7,22 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     args = message.mentions.users.first() || message.author;
-    let profile = await Bastion.db.get(`SELECT (SELECT COUNT(*) FROM profiles) AS total, (SELECT COUNT(*) FROM profiles AS p2 WHERE p2.xp * 1 > p1.xp * 1) AS rank FROM profiles as p1 WHERE p1.userID=${args.id}`), rank = 0;
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [
+        [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers)'), 'total' ],
+        [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers AS member WHERE member.experiencePoints * 1 > guildMember.experiencePoints * 1)'), 'rank' ]
+      ],
+      where: {
+        userID: args.id
+      }
+    });
+    let rank = 0;
 
-    if (profile && profile.hasOwnProperty('rank')) {
-      rank = parseInt(profile.rank) + 1;
+    if (guildMemberModel) {
+      rank = parseInt(guildMemberModel.dataValues.rank) + 1;
     }
 
-    let description = message.author.id === args.id ? `**${args.tag}** your rank is **${rank}** of ${profile.total}.` : `**${args.tag}**'s rank is **${rank}** of ${profile.total}.`;
+    let description = message.author.id === args.id ? `**${args.tag}** your rank is **${rank}** of ${guildMemberModel.dataValues.total}.` : `**${args.tag}**'s rank is **${rank}** of ${guildMemberModel.dataValues.total}.`;
 
     message.channel.send({
       embed: {

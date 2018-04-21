@@ -8,11 +8,17 @@ exports.exec = async (Bastion, message) => {
   try {
     let color, title, description;
 
-    let userItems = await Bastion.db.get(`SELECT custom_items FROM shop_items WHERE userID='${message.author.id}' AND guildID='${message.guild.id}'`);
+    let itemsModel = await Bastion.database.models.items.findOne({
+      attributes: [ 'custom' ],
+      where: {
+        userID: message.author.id,
+        guildID: message.guild.id
+      }
+    });
 
-    if (userItems && userItems.custom_items) {
-      userItems = await Bastion.functions.decodeString(userItems.custom_items);
-      userItems = JSON.parse(userItems);
+    let userItems;
+    if (itemsModel) {
+      userItems = itemsModel.dataValues.custom;
     }
     else {
       userItems = [];

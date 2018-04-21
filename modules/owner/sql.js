@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let startTime = new Date();
-    let result = await Bastion.db.run(args.query.join(' '));
+    let result = await Bastion.database.query(args.query.join(' '));
     let endTime = new Date();
 
     message.channel.send({
@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
         fields: [
           {
             name: 'SQL Query',
-            value: `\`\`\`sql\n${result.stmt.sql}\`\`\``
+            value: `\`\`\`sql\n${result[1].sql}\`\`\``
           },
           {
             name: 'Execution Time',

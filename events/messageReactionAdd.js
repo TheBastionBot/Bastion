@@ -10,13 +10,35 @@ module.exports = async (reaction, user) => {
   try {
     if (!reaction.message.guild) return;
     if (reaction.message.author.id === user.id) return;
-    let guildSettings = await user.client.db.get(`SELECT starboard FROM guildSettings WHERE guildID=${reaction.message.guild.id}`);
-    if (!guildSettings || !guildSettings.starboard) return;
+
+    let guildModel = await user.client.database.models.guild.findOne({
+      attributes: [ 'starboard' ],
+      where: {
+        guildID: reaction.message.guild.id
+      },
+      include: [
+        {
+          model: user.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreStarboard' ]
+        },
+        {
+          model: user.client.database.models.role,
+          attributes: [ 'roleID', 'ignoreStarboard' ]
+        }
+      ]
+    });
+
+    if (!guildModel || !guildModel.dataValues.starboard) return;
     if (!reaction.message.content) return;
     if (starredMessages.includes(reaction.message.id)) return;
 
     let stars = [ '🌟', '⭐' ];
     if (!stars.includes(reaction.emoji.name)) return;
+
+    let starboardIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.channelID);
+    if (starboardIgnoredChannels && starboardIgnoredChannels.includes(reaction.message.channel.id)) return;
+    let starboardIgnoredRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.roleID);
+    if (starboardIgnoredRoles && reaction.message.member.roles.some(role => starboardIgnoredRoles.includes(role.id))) return;
 
     let image;
     if (reaction.message.attachments.size) {
@@ -27,7 +49,7 @@ module.exports = async (reaction, user) => {
 
     if (!image && !reaction.message.content) return;
 
-    let starboardChannel = reaction.message.guild.channels.get(guildSettings.starboard);
+    let starboardChannel = reaction.message.guild.channels.get(guildModel.dataValues.starboard);
     if (starboardChannel) {
       await starboardChannel.send({
         embed: {

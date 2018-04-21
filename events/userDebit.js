@@ -6,25 +6,53 @@
 
 module.exports = async (user, amount) => {
   try {
-    let userProfile = await user.client.db.get(`SELECT bastionCurrencies FROM profiles WHERE userID=${user.id}`);
+    let userModel = await user.client.database.models.guildMember.findOne({
+      attributes: [ 'bastionCurrencies' ],
+      where: {
+        userID: user.id
+      }
+    });
 
     /*
-    * If the user doesn't have a profile, create their profile
-    * & add Bastion Currencies.
-    */
-    if (!userProfile) {
-      return await user.client.db.run('INSERT INTO profiles (userID, bastionCurrencies) VALUES (?, ?)', [ user.id, parseInt(amount) ]);
+     * If the user doesn't have a profile, create their profile
+     * & add Bastion Currencies.
+     */
+    if (!userModel) {
+      return await user.client.database.models.guildMember.create({
+        userID: user.id,
+        guildID: 'ID', // TODO: Add support for guild ID.
+        bastionCurrencies: parseInt(amount)
+      },
+      {
+        fields: [ 'userID', 'guildID', 'bastionCurrencies' ]
+      });
     }
 
     /*
-    * Add the given amount of Bastion Currencies to the user's account.
-    */
-    await user.client.db.run(`UPDATE profiles SET bastionCurrencies=${parseInt(userProfile.bastionCurrencies) + parseInt(amount)} WHERE userID=${user.id}`);
+     * Add the given amount of Bastion Currencies to the user's account.
+     */
+    await user.client.database.models.guildMember.update({
+      bastionCurrencies: parseInt(userModel.dataValues.bastionCurrencies) + parseInt(amount)
+    },
+    {
+      where: {
+        userID: user.id
+      },
+      fields: [ 'bastionCurrencies' ]
+    });
 
     /*
-    * Add the transaction detail to transactions table.
-    */
-    await user.client.db.run('INSERT INTO transactions (userID, type, amount) VALUES (?, ?, ?)', [ user.id, 'userDebit', parseInt(amount) ]);
+     * Add the transaction detail to transactions table.
+     */
+    await user.client.database.models.transaction.create({
+      userID: user.id,
+      guildID: 'ID', // TODO: Add support for guild ID.
+      type: 'debit',
+      amount: parseInt(amount)
+    },
+    {
+      fields: [ 'userID', 'guildID', 'type', 'amount' ]
+    });
   }
   catch (e) {
     user.client.log.error(e);

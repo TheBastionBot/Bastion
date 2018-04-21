@@ -92,8 +92,6 @@
     "greetPrivateMessage": "Verandert het groetbericht dat als direct bericht word verstuurt naar mensen wanneer ze de voor het eerst binnen komen.",
     "greetMessage": "Verandert het groetbericht dat word gestuurd binnen de server.",
     "greetTimeout": "Verandert de tijd waarna het groetbericht verwijderd word in de server.",
-    "ignoreChannel": "Voegt toe/verwijdert een kanaal aan of van het genegeerde kanaalslijst. Bastion zal geen commando's accepteren in de tekstkanalen die worden genegeerd.",
-    "ignoreRole": "Voegt toe/verwijdert een rol aan of van de genegeerde rollen lijst. Bastion zal geen commando's accepteren van de rollen die genegeerd worden.",
     "levelUpMessage": "Schakelt het versturen van berichten wanneer zij een level up zijn.",
     "listAutoAssignableRoles": "Geeft een overzicht van alle automatisch toewijsbare rollen.",
     "listFilteredWords": "Geeft een overzicht van alle verbannen woorden.",
@@ -170,12 +168,8 @@
   },
   "money": {
     "bastionCurrency": "Geeft de hoeveelheid Bastion Currencies weer die iemand bezit.",
-    "buyGift": "Koop giften van de Bastion's gift shop.",
     "claim": "Claim je dagelijkse beloning.",
-    "gift": "Verstuur giften naar andere gebruikers van de gift items die jij hebt.",
-    "giftShop": "Laat de producten zien die beschikbaar zijn in de giftshop, en de prijzen ervan.",
     "give": "Geef een bepaalde hoeveelheid Bastion Currencies aan een ander. Als je de bot eigenaar bent, dan kan je een onbepaalde hoeveelheid Bastion Currencies geven.",
-    "myGifts": "Laat alle giften zien die jij hebt.",
     "take": "Neem een bepaalde hoeveelheid Bastion Currencies van een andere gebruiker."
   },
   "music": {
@@ -222,8 +216,7 @@
     "shutdown": "Bastion word afgesloten, en alle processen worden beëindigd.",
     "sql": "Voer SQL vraag uit op de Bastion's database.",
     "todo": "Voegt een item toe aan je To Do lijst.",
-    "updateDatabase": "Update Bastion's database naar de huidige versie, waar nodig.",
-    "userBlacklist": "Voegt toe/verwijdert een gebruiker van Bastion's zwarte lijst. Mensen in deze lijst kunnen geen gebruik maken van Bastion's commando's."
+    "updateDatabase": "Update Bastion's database naar de huidige versie, waar nodig."
   },
   "queries": {
     "anime": "Zoekt naar de details van een Anime serie.",

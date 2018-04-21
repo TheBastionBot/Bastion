@@ -6,16 +6,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT slowMode FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'slowMode' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, slowModeStats;
-    if (guildSettings.slowMode) {
-      await Bastion.db.run(`UPDATE guildSettings SET slowMode=0 WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.slowMode) {
+      await Bastion.database.models.guild.update({
+        slowMode: false
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'slowMode' ]
+      });
       color = Bastion.colors.RED;
       slowModeStats = Bastion.strings.info(message.guild.language, 'disableSlowMode', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET slowMode=1 WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        slowMode: true
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'slowMode' ]
+      });
       color = Bastion.colors.GREEN;
       slowModeStats = Bastion.strings.info(message.guild.language, 'enableSlowMode', message.author.tag);
     }

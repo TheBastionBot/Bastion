@@ -18,6 +18,6 @@ module.exports = (string) => {
       resolve(data);
     };
 
-    lzutf8.decompressAsync(string, options, callback);
+    lzutf8.decompressAsync(string.toString(), options, callback);
   });
 };

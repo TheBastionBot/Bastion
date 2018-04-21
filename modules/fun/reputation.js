@@ -34,12 +34,29 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
       }
 
-      let profile = await Bastion.db.get(`SELECT reputation FROM profiles WHERE userID=${user.id}`);
-      if (!profile) {
-        await Bastion.db.run('INSERT INTO profiles (userID, reputation) VALUES (?, ?)', [ user.id, 1 ]);
+      let [ guildMemberModel, initialized ] = await message.client.database.models.guildMember.findOrBuild({
+        where: {
+          userID: message.author.id
+        },
+        defaults: {
+          guildID: message.guild.id,
+          experiencePoints: 1,
+          reputations: 1
+        }
+      });
+      if (initialized) {
+        await guildMemberModel.save();
       }
       else {
-        await Bastion.db.run(`UPDATE profiles SET reputation=${parseInt(profile.reputation) + 1} WHERE userID=${user.id}`);
+        await message.client.database.models.guildMember.update({
+          reputations: parseInt(guildMemberModel.dataValues.reputations) + 1
+        },
+        {
+          where: {
+            userID: message.author.id
+          },
+          fields: [ 'reputations' ]
+        });
       }
 
       recentUsers.push(message.author.id);

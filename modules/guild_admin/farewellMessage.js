@@ -7,11 +7,16 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 1) {
-      let guildSettings = await Bastion.db.get(`SELECT farewellMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
+      let guildModel = await Bastion.database.models.guild.findOne({
+        attributes: [ 'farewellMessage' ],
+        where: {
+          guildID: message.guild.id
+        }
+      });
 
       let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
-      if (guildSettings.farewellMessage) {
-        farewellMessage = await Bastion.functions.decodeString(guildSettings.farewellMessage);
+      if (guildModel.dataValues.farewellMessage) {
+        farewellMessage = await Bastion.functions.decodeString(guildModel.dataValues.farewellMessage);
       }
 
       message.channel.send({
@@ -28,7 +33,15 @@ exports.exec = async (Bastion, message, args) => {
       args = args.join(' ');
 
       let farewellMessage = await Bastion.functions.encodeString(args);
-      await Bastion.db.run('UPDATE guildSettings SET farewellMessage=(?) WHERE guildID=(?)', [ farewellMessage, message.guild.id ]);
+      await Bastion.database.models.guild.update({
+        farewellMessage: farewellMessage
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'farewellMessage' ]
+      });
 
       message.channel.send({
         embed: {

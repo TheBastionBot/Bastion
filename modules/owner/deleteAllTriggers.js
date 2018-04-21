@@ -6,7 +6,9 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    await Bastion.db.all('DELETE FROM triggers');
+    await Bastion.database.models.trigger.destroy({
+      truncate: true
+    });
 
     message.channel.send({
       embed: {

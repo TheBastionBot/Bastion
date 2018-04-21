@@ -28,17 +28,30 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT selfAssignableRoles FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'selfAssignableRoles' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let roles = [];
-    if (guildSettings.selfAssignableRoles) {
-      roles = guildSettings.selfAssignableRoles.split(' ');
+    if (guildModel.dataValues.selfAssignableRoles) {
+      roles = guildModel.dataValues.selfAssignableRoles;
     }
     roles = roles.concat(args);
     roles = roles.filter(r => message.guild.roles.get(r));
     roles = [ ...new Set(roles) ];
 
-    await Bastion.db.run(`UPDATE guildSettings SET selfAssignableRoles='${roles.join(' ')}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      selfAssignableRoles: roles
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'selfAssignableRoles' ]
+    });
 
     let roleNames = [];
     for (let i = 0; i < args.length; i++) {

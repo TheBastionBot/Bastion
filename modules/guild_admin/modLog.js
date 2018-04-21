@@ -8,16 +8,37 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT modLog FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'moderationLog' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
     let color, modLogStats;
-    if (guildSettings.modLog) {
-      await Bastion.db.run(`UPDATE guildSettings SET modLog=null WHERE guildID=${message.guild.id}`);
+    if (guildModel.dataValues.moderationLog) {
+      await Bastion.database.models.guild.update({
+        moderationLog: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'moderationLog' ]
+      });
       color = Bastion.colors.RED;
       modLogStats = Bastion.strings.info(message.guild.language, 'disableModerationLog', message.author.tag);
     }
     else {
-      await Bastion.db.run(`UPDATE guildSettings SET modLog=${message.channel.id} WHERE guildID=${message.guild.id}`);
+      await Bastion.database.models.guild.update({
+        moderationLog: message.channel.id
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'moderationLog' ]
+      });
       color = Bastion.colors.GREEN;
       modLogStats = Bastion.strings.info(message.guild.language, 'enableModerationLog', message.author.tag);
     }

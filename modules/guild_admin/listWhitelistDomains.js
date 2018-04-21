@@ -6,9 +6,14 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildSettings = await Bastion.db.get(`SELECT whitelistDomains FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'whitelistedDomains' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (!guildSettings || guildSettings.whitelistDomains === '[]') {
+    if (!guildModel || !guildModel.dataValues.whitelistedDomains) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -16,8 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'whitelisted domain'), message.channel);
     }
 
-    let whitelistDomains = JSON.parse(guildSettings.whitelistDomains);
-    whitelistDomains = [ ...new Set(whitelistDomains) ];
+    let whitelistDomains = [ ...new Set(guildModel.dataValues.whitelistedDomains) ];
 
     whitelistDomains = whitelistDomains.map((r, i) => `${i + 1}. ${r}`);
 

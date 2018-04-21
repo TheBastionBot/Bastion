@@ -8,10 +8,16 @@ exports.exec = async (Bastion, message, args) => {
   try {
     args = message.mentions.users.first() || message.author;
 
-    let profile = await Bastion.db.get(`SELECT level FROM profiles WHERE userID=${args.id}`), level = 0;
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [ 'level' ],
+      where: {
+        userID: args.id
+      }
+    });
+    let level = 0;
 
-    if (profile && profile.level) {
-      level = profile.level;
+    if (guildMemberModel && guildMemberModel.dataValues.level) {
+      level = guildMemberModel.dataValues.level;
     }
 
     let description = message.author.id === args.id ? `**${args.tag}** you are currently in level **${level}**.` : `**${args.tag}** is currently in level **${level}**.`;

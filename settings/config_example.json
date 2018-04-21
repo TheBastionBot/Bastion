@@ -13,5 +13,6 @@
   "music": {
     "status": true,
     "passes": 1
-  }
+  },
+  "logLevel": 6
 }

@@ -33,22 +33,34 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'commandNoDisable', true, command.help.name), message.channel);
     }
 
-    let guildSettings = await Bastion.db.get(`SELECT disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'disabledCommands' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
 
-    if (guildSettings.disabledCommands) {
-      guildSettings.disabledCommands = guildSettings.disabledCommands.split(' ');
-      guildSettings.disabledCommands.push(command.help.name.toLowerCase());
+    if (guildModel.dataValues.disabledCommands) {
+      guildModel.dataValues.disabledCommands.push(command.help.name.toLowerCase());
     }
     else {
-      guildSettings.disabledCommands = [ command.help.name.toLowerCase() ];
+      guildModel.dataValues.disabledCommands = [ command.help.name.toLowerCase() ];
     }
 
-    guildSettings.disabledCommands = [ ...new Set(guildSettings.disabledCommands) ];
+    guildModel.dataValues.disabledCommands = [ ...new Set(guildModel.dataValues.disabledCommands) ];
 
-    disabledCommands = guildSettings.disabledCommands.join(' ').toLowerCase();
+    disabledCommands = guildModel.dataValues.disabledCommands;
     description = Bastion.strings.info(message.guild.language, 'disableCommand', message.author.tag, command.help.name);
 
-    await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      disabledCommands: disabledCommands
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'disabledCommands' ]
+    });
   }
   else if (args.module) {
     args.module = args.module.join('_').toLowerCase();
@@ -56,27 +68,53 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t disable commands in this module.', message.channel);
     }
 
-    disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name).join(' ').toLowerCase();
+    disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name.toLowerCase());
 
-    let guildSettings = await Bastion.db.get(`SELECT disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (guildSettings.disabledCommands) {
-      disabledCommands += ` ${guildSettings.disabledCommands}`;
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'disabledCommands' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (guildModel.dataValues.disabledCommands) {
+      disabledCommands = disabledCommands.concat(guildModel.dataValues.disabledCommands);
     }
 
     description = Bastion.strings.info(message.guild.language, 'disableModule', message.author.tag, args.module);
 
-    await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      disabledCommands: disabledCommands
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'disabledCommands' ]
+    });
   }
   else if (args.all) {
-    disabledCommands = Bastion.commands.filter(c => ![ 'owner', 'guild_admin' ].includes(c.config.module)).map(c => c.help.name).join(' ').toLowerCase();
+    disabledCommands = Bastion.commands.filter(c => ![ 'owner', 'guild_admin' ].includes(c.config.module)).map(c => c.help.name.toLowerCase());
     description = Bastion.strings.info(message.guild.language, 'disableAllCommands', message.author.tag);
 
-    await Bastion.db.run(`UPDATE guildSettings SET disabledCommands='${disabledCommands}' WHERE guildID=${message.guild.id}`);
+    await Bastion.database.models.guild.update({
+      disabledCommands: disabledCommands
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'disabledCommands' ]
+    });
   }
   else {
-    let guildSettings = await Bastion.db.get(`SELECT disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'disabledCommands' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
     title = 'Commands disabled in this server:';
-    description = guildSettings.disabledCommands ? guildSettings.disabledCommands.replace(/ /g, ', ') : 'No command has been disabled in this server. Check `help disableCommand` for more info.';
+    description = guildModel.dataValues.disabledCommands ? guildModel.dataValues.disabledCommands.join(', ') : 'No command has been disabled in this server. Check `help disableCommand` for more info.';
   }
 
   message.channel.send({
