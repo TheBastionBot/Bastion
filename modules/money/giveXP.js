@@ -59,7 +59,7 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [],
   enabled: true,
-  ownerOnly: true,
+  guildOwnerOnly: true,
   argsDefinitions: [
     { name: 'id', type: String, defaultOption: true },
     { name: 'points', alias: 'n', type: String }
