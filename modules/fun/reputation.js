@@ -36,10 +36,10 @@ exports.exec = async (Bastion, message, args) => {
 
       let [ guildMemberModel, initialized ] = await message.client.database.models.guildMember.findOrBuild({
         where: {
-          userID: message.author.id
+          userID: message.author.id,
+          guildID: message.guild.id
         },
         defaults: {
-          guildID: message.guild.id,
           experiencePoints: 1,
           reputations: 1
         }
@@ -53,7 +53,8 @@ exports.exec = async (Bastion, message, args) => {
         },
         {
           where: {
-            userID: message.author.id
+            userID: message.author.id,
+            guildID: message.guild.id
           },
           fields: [ 'reputations' ]
         });

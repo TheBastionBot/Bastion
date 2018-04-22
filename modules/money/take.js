@@ -88,7 +88,7 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [ 'fine' ],
   enabled: true,
-  ownerOnly: true
+  guildOwnerOnly: true
 };
 
 exports.help = {

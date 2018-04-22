@@ -9,7 +9,8 @@ module.exports = async (member, amount) => {
     let guildMemberModel = await member.client.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
-        userID: member.id
+        userID: member.id,
+        guildID: member.guild.id
       }
     });
 
@@ -20,7 +21,7 @@ module.exports = async (member, amount) => {
     if (!guildMemberModel) {
       return await member.client.database.models.guildMember.create({
         userID: member.id,
-        guildID: 'ID', // TODO: Add support for guild ID.
+        guildID: member.guild.id,
         bastionCurrencies: parseInt(amount)
       },
       {
@@ -36,7 +37,8 @@ module.exports = async (member, amount) => {
     },
     {
       where: {
-        userID: member.id
+        userID: member.id,
+        guildID: member.guild.id
       },
       fields: [ 'bastionCurrencies' ]
     });
@@ -46,7 +48,7 @@ module.exports = async (member, amount) => {
      */
     await member.client.database.models.transaction.create({
       userID: member.id,
-      guildID: 'ID', // TODO: Add support for guild ID.
+      guildID: member.guild.id,
       type: 'debit',
       amount: parseInt(amount)
     },

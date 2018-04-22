@@ -24,10 +24,11 @@ exports.exec = async (Bastion, message, args) => {
 
     let guildMemberModel = await Bastion.database.models.guildMember.findOne({
       attributes: Object.keys(Bastion.database.models.guildMember.attributes).concat([
-        [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers AS member WHERE member.experiencePoints * 1 > guildMember.experiencePoints * 1)'), 'rank' ]
+        [ Bastion.database.literal(`(SELECT COUNT(*) FROM guildMembers AS member WHERE member.guildID = ${message.guild.id} AND member.experiencePoints * 1 > guildMember.experiencePoints * 1)`), 'rank' ]
       ]),
       where: {
-        userID: user.id
+        userID: user.id,
+        guildID: message.guild.id
       }
     });
 

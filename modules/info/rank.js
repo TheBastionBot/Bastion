@@ -13,7 +13,8 @@ exports.exec = async (Bastion, message, args) => {
         [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers AS member WHERE member.experiencePoints * 1 > guildMember.experiencePoints * 1)'), 'rank' ]
       ],
       where: {
-        userID: args.id
+        userID: args.id,
+        guildID: message.guild.id
       }
     });
     let rank = 0;

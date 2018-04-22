@@ -11,7 +11,8 @@ exports.exec = async (Bastion, message, args) => {
     let guildMemberModel = await Bastion.database.models.guildMember.findOne({
       attributes: [ 'level' ],
       where: {
-        userID: args.id
+        userID: args.id,
+        guildID: message.guild.id
       }
     });
     let level = 0;

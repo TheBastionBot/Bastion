@@ -4,39 +4,31 @@
  * @license MIT
  */
 
-let claimedUsers = [];
 const specialIDs = require('../../data/specialIDs.json');
 
 exports.exec = (Bastion, message) => {
-  if (!claimedUsers.includes(message.author.id)) {
+  if (!message.guild.claimedUsers) {
+    message.guild.claimedUsers = [];
+  }
+
+  if (!message.guild.claimedUsers.includes(message.author.id)) {
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
-    let rewardMessage;
     if (Bastion.user.id === '267035345537728512') {
       if (message.guild.id === specialIDs.bastionGuild) {
-        rewardAmount *= 2;
         if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
           rewardAmount += 500;
         }
         else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
           rewardAmount += 100;
         }
-
-        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
       }
-      else {
-        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
-          + '💡 **Pro Tip**\nYou can get **2x** more Bastion Currencies when you use the `claim` or `daily` command in [Bastion HQ](https://discord.gg/fzx8fkt): https://discord.gg/fzx8fkt';
-      }
-    }
-    else {
-      rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
     }
 
     Bastion.emit('userDebit', message.member, rewardAmount);
-    claimedUsers.push(message.author.id);
+    message.guild.claimedUsers.push(message.author.id);
     setTimeout(() => {
-      claimedUsers.splice(claimedUsers.indexOf(message.author.id), 1);
+      message.guild.claimedUsers.splice(message.guild.claimedUsers.indexOf(message.author.id), 1);
     }, Bastion.functions.msUntilMidnight());
 
     /**
@@ -57,7 +49,7 @@ exports.exec = (Bastion, message) => {
     message.author.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: rewardMessage
+        description: `Your account, in **${message.guild.name}** Server, has been debited with **${rewardAmount}** Bastion Currencies.`
       }
     }).catch(e => {
       if (e.code !== 50007) {

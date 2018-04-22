@@ -21,7 +21,8 @@ exports.exec = async (Bastion, message, args) => {
     let guildMemberModel = await Bastion.database.models.guildMember.findOne({
       attributes: [ 'experiencePoints' ],
       where: {
-        userID: args.id
+        userID: args.id,
+        guildID: message.guild.id
       }
     });
     if (!guildMemberModel) {
@@ -35,7 +36,8 @@ exports.exec = async (Bastion, message, args) => {
     },
     {
       where: {
-        userID: args.id
+        userID: args.id,
+        guildID: message.guild.id
       },
       fields: [ 'experiencePoints' ]
     });
@@ -57,7 +59,7 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [],
   enabled: true,
-  ownerOnly: true,
+  guildOwnerOnly: true,
   argsDefinitions: [
     { name: 'id', type: String, defaultOption: true },
     { name: 'points', alias: 'n', type: String }
