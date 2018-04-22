@@ -4,11 +4,11 @@
  * @license MIT
  */
 
-let giveaway, activeChannel;
+let giveaway, activeGuilds = [];
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!activeChannel) {
+    if (!activeGuilds.includes(message.guild.id)) {
       if (!args.amount || isNaN(args.amount)) {
         /**
         * The command was ran with invalid parameters.
@@ -41,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
       await giveawayMessage.react(reaction);
 
       let giveawayMessageID = giveawayMessage.id;
-      activeChannel = message.channel.id;
+      activeGuilds.push(message.guild.id);
 
       giveaway = Bastion.setTimeout(async () => {
         try {
@@ -98,7 +98,7 @@ exports.exec = async (Bastion, message, args) => {
             });
           }
 
-          activeChannel = null;
+          activeGuilds.splice(activeGuilds.indexOf(message.guild.id), 1);
         }
         catch (e) {
           Bastion.log.error(e);
@@ -108,7 +108,7 @@ exports.exec = async (Bastion, message, args) => {
     else {
       if (args.end) {
         Bastion.clearTimeout(giveaway);
-        activeChannel = null;
+        activeGuilds.splice(activeGuilds.indexOf(message.guild.id), 1);
 
         message.channel.send({
           embed: {
@@ -141,7 +141,7 @@ exports.config = {
     { name: 'amount', type: Number, multiple: true, defaultOption: true },
     { name: 'end', type: Boolean, alias: 'e' }
   ],
-  ownerOnly: true
+  guildOwnerOnly: true
 };
 
 exports.help = {
