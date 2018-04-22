@@ -58,9 +58,9 @@ exports.exec = async (Bastion, message, args) => {
 
       message.member.addRole(role);
 
-      Bastion.emit('userCredit', message.author, rolesInStore[role.id]);
+      Bastion.emit('userCredit', message.member, rolesInStore[role.id]);
       if (message.author.id !== message.guild.owner.id) {
-        Bastion.emit('userDebit', message.guild.owner, (0.9) * rolesInStore[role.id]);
+        Bastion.emit('userDebit', message.guild.members.get(message.guild.owner.id), (0.9) * rolesInStore[role.id]);
       }
 
       message.channel.send({

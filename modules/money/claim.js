@@ -33,7 +33,7 @@ exports.exec = (Bastion, message) => {
       rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
     }
 
-    Bastion.emit('userDebit', message.author, rewardAmount);
+    Bastion.emit('userDebit', message.member, rewardAmount);
     claimedUsers.push(message.author.id);
     setTimeout(() => {
       claimedUsers.splice(claimedUsers.indexOf(message.author.id), 1);

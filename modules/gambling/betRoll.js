@@ -68,7 +68,7 @@ exports.exec = async (Bastion, message, args) => {
         * User's account is debited with Bastion Currencies
         * @fires userDebit
         */
-        Bastion.emit('userDebit', message.author, prize);
+        Bastion.emit('userDebit', message.member, prize);
       }
       else {
         result = 'Sorry, you lost the bet. Better luck next time.';
@@ -77,7 +77,7 @@ exports.exec = async (Bastion, message, args) => {
         * User's account is credited with Bastion Currencies
         * @fires userCredit
         */
-        Bastion.emit('userCredit', message.author, args.money);
+        Bastion.emit('userCredit', message.member, args.money);
       }
 
       await message.channel.send({

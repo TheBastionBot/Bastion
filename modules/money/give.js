@@ -34,7 +34,7 @@ exports.exec = async (Bastion, message, args) => {
 
     args.amount = Math.abs(args.amount);
     if (Bastion.credentials.ownerId.includes(message.author.id)) {
-      Bastion.emit('userDebit', user, args.amount);
+      Bastion.emit('userDebit', message.guild.members.get(user.id), args.amount);
 
       /**
         * Send a message in the channel to let the Bot Owner know that the operation was successful.
@@ -94,8 +94,8 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveLimit', true, giveLimit * 100), message.channel);
       }
 
-      Bastion.emit('userDebit', user, args.amount);
-      Bastion.emit('userCredit', message.author, args.amount);
+      Bastion.emit('userDebit', message.guild.members.get(user.id), args.amount);
+      Bastion.emit('userCredit', message.member, args.amount);
 
       /**
        * Send a message in the channel to let the user know that the operation was successful.

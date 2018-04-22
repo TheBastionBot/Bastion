@@ -66,7 +66,7 @@ exports.exec = async (Bastion, message, args) => {
             * User's account is debited with `args.amount` Bastion Currencies
             * @fires userDebit
             */
-            Bastion.emit('userDebit', winner, args.amount);
+            Bastion.emit('userDebit', message.guild.members.get(winner.id), args.amount);
 
             giveawayMessage.edit('', {
               embed: {
