@@ -9,7 +9,8 @@ module.exports = async (member, amount) => {
     let guildMemberModel = await member.client.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
-        userID: member.id
+        userID: member.id,
+        guildID: member.guild.id
       }
     });
 
@@ -29,7 +30,8 @@ module.exports = async (member, amount) => {
     },
     {
       where: {
-        userID: member.id
+        userID: member.id,
+        guildID: member.guild.id
       },
       fields: [ 'bastionCurrencies' ]
     });
