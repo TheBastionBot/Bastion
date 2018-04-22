@@ -22,15 +22,15 @@ exports.exec = (Bastion, message) => {
           rewardAmount += 100;
         }
 
-        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
+        rewardMessage = `Your account, in **${message.guild.name}** Server, has been debited with **${rewardAmount}** Bastion Currencies.`;
       }
       else {
-        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
+        rewardMessage = `Your account, in **${message.guild.name}** Server, has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
           + '💡 **Pro Tip**\nYou can get **2x** more Bastion Currencies when you use the `claim` or `daily` command in [Bastion HQ](https://discord.gg/fzx8fkt): https://discord.gg/fzx8fkt';
       }
     }
     else {
-      rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
+      rewardMessage = `Your account, in **${message.guild.name}** Server, has been debited with **${rewardAmount}** Bastion Currencies.`;
     }
 
     Bastion.emit('userDebit', message.member, rewardAmount);
