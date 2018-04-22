@@ -33,11 +33,11 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     args.amount = Math.abs(args.amount);
-    if (Bastion.credentials.ownerId.includes(message.author.id)) {
+    if (message.author.id === message.guild.ownerID) {
       Bastion.emit('userDebit', message.guild.members.get(user.id), args.amount);
 
       /**
-        * Send a message in the channel to let the Bot Owner know that the operation was successful.
+        * Send a message in the channel to let the Guild Owner know that the operation was successful.
         */
       message.channel.send({
         embed: {
@@ -54,7 +54,7 @@ exports.exec = async (Bastion, message, args) => {
       user.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
+          description: `Your account, in **${message.guild.name}** Server, has been debited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -116,7 +116,7 @@ exports.exec = async (Bastion, message, args) => {
       user.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `Your account has been debited with **${args.amount}** Bastion Currencies.`
+          description: `Your account, in **${message.guild.name}** Server, has been debited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -128,7 +128,7 @@ exports.exec = async (Bastion, message, args) => {
       message.author.send({
         embed: {
           color: Bastion.colors.RED,
-          description: `Your account has been credited with **${args.amount}** Bastion Currencies.`
+          description: `Your account, in **${message.guild.name}** Server, has been credited with **${args.amount}** Bastion Currencies.`
         }
       }).catch(e => {
         Bastion.log.error(e);
