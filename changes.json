@@ -1,16 +1,17 @@
 {
-  "date": "April 7, 2018",
+  "date": "April 22, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
-    "Tons of under-the-hood improvements."
+    "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of the database.",
     "You can now set any number of channels as voting channels. No limitations!",
     "You can add any number of level up roles. No limitations here, too!",
-    "You can now set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config."
+    "You can now set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config.",
+    "Levels and currencies aren't global anymore. Members have separate currency & level in every server."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
