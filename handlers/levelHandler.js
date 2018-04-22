@@ -22,10 +22,10 @@ module.exports = async message => {
      */
     let [ guildMemberModel, initialized ] = await message.client.database.models.guildMember.findOrBuild({
       where: {
-        userID: message.author.id
+        userID: message.author.id,
+        guildID: message.guild.id
       },
       defaults: {
-        guildID: message.guild.id,
         experiencePoints: 1
       }
     });
@@ -47,7 +47,8 @@ module.exports = async message => {
       },
       {
         where: {
-          userID: message.author.id
+          userID: message.author.id,
+          guildID: message.guild.id
         },
         fields: [ 'bastionCurrencies', 'experiencePoints', 'level' ]
       });
@@ -79,7 +80,8 @@ module.exports = async message => {
       },
       {
         where: {
-          userID: message.author.id
+          userID: message.author.id,
+          guildID: message.guild.id
         },
         fields: [ 'experiencePoints' ]
       });
