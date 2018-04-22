@@ -196,6 +196,17 @@ module.exports = async message => {
       }
     }
 
+    // Checks for guild owner permission
+    if (cmd.config.guildOwnerOnly) {
+      if (message.author.id !== message.guild.ownerID) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.emit('userMissingPermissions', 'GUILD_OWNER');
+      }
+    }
+
     // Checks if the user has the required permission
     if (cmd.help.userTextPermission) {
       if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {
