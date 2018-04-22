@@ -39,7 +39,7 @@ module.exports = async (member, amount) => {
      */
     await member.client.database.models.transaction.create({
       userID: member.id,
-      guildID: 'ID', // TODO: Add support for guild ID.
+      guildID: member.guild.id,
       type: 'credit',
       amount: parseInt(amount)
     },
