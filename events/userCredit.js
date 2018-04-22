@@ -4,16 +4,12 @@
  * @license MIT
  */
 
-module.exports = async (user, amount) => {
+module.exports = async (member, amount) => {
   try {
-    if (user.guild) {
-      user = user.user;
-    }
-
-    let userModel = await user.client.database.models.guildMember.findOne({
+    let guildMemberModel = await member.client.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
-        userID: user.id
+        userID: member.id
       }
     });
 
@@ -21,19 +17,19 @@ module.exports = async (user, amount) => {
      * If the user doesn't have a profile, yet, we don't allow
      * to deduct Bastion Currencies from them.
      */
-    if (!userModel) return;
+    if (!guildMemberModel) return;
 
     /*
      * Deduct the given amount of Bastion Currencies from the user's account.
      * Yes, if they have less Bastion Currencies then the given amount,
      * that will still be deducted from their account.
      */
-    await user.client.database.models.guildMember.update({
-      bastionCurrencies: parseInt(userModel.dataValues.bastionCurrencies) - parseInt(amount)
+    await member.client.database.models.guildMember.update({
+      bastionCurrencies: parseInt(guildMemberModel.dataValues.bastionCurrencies) - parseInt(amount)
     },
     {
       where: {
-        userID: user.id
+        userID: member.id
       },
       fields: [ 'bastionCurrencies' ]
     });
@@ -41,8 +37,8 @@ module.exports = async (user, amount) => {
     /*
      * Add the transaction detail to transactions table.
      */
-    await user.client.database.models.transaction.create({
-      userID: user.id,
+    await member.client.database.models.transaction.create({
+      userID: member.id,
       guildID: 'ID', // TODO: Add support for guild ID.
       type: 'credit',
       amount: parseInt(amount)
@@ -52,6 +48,6 @@ module.exports = async (user, amount) => {
     });
   }
   catch (e) {
-    user.client.log.error(e);
+    member.client.log.error(e);
   }
 };

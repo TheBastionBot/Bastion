@@ -4,16 +4,12 @@
  * @license MIT
  */
 
-module.exports = async (user, amount) => {
+module.exports = async (member, amount) => {
   try {
-    if (user.guild) {
-      user = user.user;
-    }
-
-    let userModel = await user.client.database.models.guildMember.findOne({
+    let guildMemberModel = await member.client.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
-        userID: user.id
+        userID: member.id
       }
     });
 
@@ -21,9 +17,9 @@ module.exports = async (user, amount) => {
      * If the user doesn't have a profile, create their profile
      * & add Bastion Currencies.
      */
-    if (!userModel) {
-      return await user.client.database.models.guildMember.create({
-        userID: user.id,
+    if (!guildMemberModel) {
+      return await member.client.database.models.guildMember.create({
+        userID: member.id,
         guildID: 'ID', // TODO: Add support for guild ID.
         bastionCurrencies: parseInt(amount)
       },
@@ -35,12 +31,12 @@ module.exports = async (user, amount) => {
     /*
      * Add the given amount of Bastion Currencies to the user's account.
      */
-    await user.client.database.models.guildMember.update({
-      bastionCurrencies: parseInt(userModel.dataValues.bastionCurrencies) + parseInt(amount)
+    await member.client.database.models.guildMember.update({
+      bastionCurrencies: parseInt(guildMemberModel.dataValues.bastionCurrencies) + parseInt(amount)
     },
     {
       where: {
-        userID: user.id
+        userID: member.id
       },
       fields: [ 'bastionCurrencies' ]
     });
@@ -48,8 +44,8 @@ module.exports = async (user, amount) => {
     /*
      * Add the transaction detail to transactions table.
      */
-    await user.client.database.models.transaction.create({
-      userID: user.id,
+    await member.client.database.models.transaction.create({
+      userID: member.id,
       guildID: 'ID', // TODO: Add support for guild ID.
       type: 'debit',
       amount: parseInt(amount)
@@ -59,6 +55,6 @@ module.exports = async (user, amount) => {
     });
   }
   catch (e) {
-    user.client.log.error(e);
+    member.client.log.error(e);
   }
 };
