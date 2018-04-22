@@ -6,6 +6,10 @@
 
 module.exports = async (user, amount) => {
   try {
+    if (user.guild) {
+      user = user.user;
+    }
+
     let userModel = await user.client.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
