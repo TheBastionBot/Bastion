@@ -4,11 +4,14 @@
  * @license MIT
  */
 
-let claimedUsers = [];
 const specialIDs = require('../../data/specialIDs.json');
 
 exports.exec = (Bastion, message) => {
-  if (!claimedUsers.includes(message.author.id)) {
+  if (!message.guild.claimedUsers) {
+    message.guild.claimedUsers = [];
+  }
+
+  if (!message.guild.claimedUsers.includes(message.author.id)) {
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
     let rewardMessage;
@@ -34,9 +37,9 @@ exports.exec = (Bastion, message) => {
     }
 
     Bastion.emit('userDebit', message.member, rewardAmount);
-    claimedUsers.push(message.author.id);
+    message.guild.claimedUsers.push(message.author.id);
     setTimeout(() => {
-      claimedUsers.splice(claimedUsers.indexOf(message.author.id), 1);
+      message.guild.claimedUsers.splice(message.guild.claimedUsers.indexOf(message.author.id), 1);
     }, Bastion.functions.msUntilMidnight());
 
     /**
