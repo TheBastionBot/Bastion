@@ -40,7 +40,8 @@ exports.exec = async (Bastion, message, args) => {
     let guildMemberModel = await Bastion.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
-        userID: message.author.id
+        userID: message.author.id,
+        guildID: message.guild.id
       }
     });
     let userBalance = parseInt(guildMemberModel.dataValues.bastionCurrencies);

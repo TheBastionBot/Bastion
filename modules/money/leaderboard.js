@@ -21,10 +21,6 @@ exports.exec = async (Bastion, message, args) => {
 
     let fields = [];
 
-    if (!args.global) {
-      profiles = profiles.filter(p => message.guild.members.get(p.userID));
-    }
-
     let noOfPages = profiles.length / 10;
     let p = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
     p = p - 1;
@@ -68,8 +64,7 @@ exports.config = {
   aliases: [ 'lb', 'hallOfFame', 'hof' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 },
-    { name: 'global', type: Boolean, alias: 'g' }
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
   ]
 };
 
@@ -78,6 +73,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'leaderboard [PAGE_NO] [--global]',
-  example: [ 'leaderboard', 'leaderboard 3', 'leaderboard --global', 'leaderboard 2 --global' ]
+  usage: 'leaderboard [PAGE_NO]',
+  example: [ 'leaderboard', 'leaderboard 3' ]
 };
