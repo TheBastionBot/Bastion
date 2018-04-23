@@ -131,7 +131,7 @@ module.exports = async Bastion => {
         Bastion.log.console(COLOR`{green [   SHARDS]:} ${Bastion.shard.count}`);
       }
       Bastion.log.console(COLOR`{green [  SERVERS]:} ${guilds}`);
-      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.config.prefix}`);
+      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.config.prefix.join(' ')}`);
       Bastion.log.console(COLOR`{green [ COMMANDS]:} ${Bastion.commands.size}`);
 
       Bastion.webhook.send('bastionLog', {
