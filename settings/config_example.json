@@ -1,6 +1,6 @@
 {
   "shardCount": 1,
-  "prefix": "#!",
+  "prefix": [ "#!" ],
   "status": "online",
   "game": {
     "type": "Playing",
