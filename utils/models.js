@@ -32,7 +32,7 @@ module.exports = (Sequelize, database) => {
     prefix: {
       type: Sequelize.JSON,
       allowNull: false,
-      defaultValue: [ prefix ] || [ '!' ]
+      defaultValue: prefix ? [].concat(prefix) : [ '!' ]
     },
     language: {
       type: Sequelize.STRING,
