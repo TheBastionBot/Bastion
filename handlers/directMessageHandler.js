@@ -10,7 +10,7 @@
  * @returns {void}
  */
 module.exports = message => {
-  let prefix = message.client.config.prefix;
+  let prefix = message.client.config.prefix[0];
 
   if (message.content.startsWith(prefix)) {
     let args = message.content.split(' ');
