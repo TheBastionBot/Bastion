@@ -90,8 +90,8 @@ exports.exec = async (Bastion, message) => {
             inline: true
           },
           {
-            name: 'Default Prefix',
-            value: Bastion.config.prefix,
+            name: 'Default Prefixes',
+            value: Bastion.config.prefix.join(' '),
             inline: true
           },
           {
