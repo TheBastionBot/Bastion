@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let prefix, maxPrefix = 5, prefixMaxLength = 8;
     if (args.default) {
-      prefix = [ Bastion.config.prefix ];
+      prefix = Bastion.config.prefix;
     }
     else {
       if (args.prefix.length > maxPrefix) {
