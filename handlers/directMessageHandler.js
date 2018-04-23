@@ -10,6 +10,8 @@
  * @returns {void}
  */
 module.exports = message => {
+  if (!message.content) return;
+
   if (message.content.toLowerCase().startsWith('help')) {
     return message.channel.send({
       embed: {
