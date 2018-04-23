@@ -10,7 +10,7 @@
  * @returns {void}
  */
 module.exports = message => {
-  if (message.content.startsWith('help')) {
+  if (message.content.toLowerCase().startsWith('help')) {
     return message.channel.send({
       embed: {
         color: message.client.colors.BLUE,
