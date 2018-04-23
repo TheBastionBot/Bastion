@@ -37,7 +37,7 @@ module.exports = async message => {
       response = response.replace(/\$mention/ig, '');
     }
     response = response.replace(/\$server/ig, `**${message.guild.name}**`);
-    response = response.replace(/\$prefix/ig, message.guild.prefix ? message.guild.prefix[0] : message.client.config.prefix );
+    response = response.replace(/\$prefix/ig, message.guild.prefix ? message.guild.prefix[0] : message.client.config.prefix[0]);
 
     return message.channel.send(response).catch(e => {
       message.client.log.error(e);
