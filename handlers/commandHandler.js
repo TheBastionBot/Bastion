@@ -34,7 +34,7 @@ module.exports = async message => {
     });
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
-    guildModel.dataValues.prefix.push(message.client.config.prefix);
+    guildModel.dataValues.prefix.concat(message.client.config.prefix);
     if (!message.guild.prefix || !_.isEqual(message.guild.prefix, guildModel.dataValues.prefix)) {
       message.guild.prefix = [ ...new Set(guildModel.dataValues.prefix) ];
     }
