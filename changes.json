@@ -1,9 +1,11 @@
 {
-  "date": "April 22, 2018",
+  "date": "April 23, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
+    "Commands that work in direct messages can now be used without a prefix.",
+    "Multiple prefixes can be set from the config too",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
