@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.id || !args.reason) {
+    if (!args.number || !args.reason) {
       /**
       * The command was ran with invalid parameters.
       * @fires commandUsage
@@ -18,14 +18,24 @@ exports.exec = async (Bastion, message, args) => {
       attributes: [ 'moderationLog' ],
       where: {
         guildID: message.guild.id
-      }
+      },
+      include: [
+        {
+          model: message.client.database.models.moderationCase,
+          attributes: [ 'guildID', 'number', 'messageID' ],
+          where: {
+            number: args.number
+          }
+        }
+      ]
     });
-    if (!guildModel || !guildModel.dataValues.moderationLog) return;
+
+    if (!guildModel || !guildModel.dataValues.moderationLog || !guildModel.moderationCases.length) return;
 
     let modLogChannel = message.guild.channels.get(guildModel.dataValues.moderationLog);
     if (!modLogChannel) return;
 
-    let modMessage = await modLogChannel.fetchMessage(args.id);
+    let modMessage = await modLogChannel.fetchMessage(guildModel.moderationCases[0].dataValues.messageID);
 
     if (modMessage && modMessage.embeds.length) {
       if (modMessage.embeds[0].fields.filter(field => field.name === 'Reason').length === 1) {
@@ -75,7 +85,7 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'id', type: String, defaultOption: true },
+    { name: 'number', type: String, defaultOption: true },
     { name: 'reason', type: String, alias: 'r', multiple: true }
   ]
 };
@@ -85,6 +95,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'reason <MOD_LOG_MESSAGE_ID> <-r NEW REASON>',
-  example: [ 'reason 210646349113751801 -r Bad behaviour' ]
+  usage: 'reason <MOD_LOG_CASE_NO> <-r NEW REASON>',
+  example: [ 'reason 1337 -r Bad behaviour' ]
 };
