@@ -221,6 +221,15 @@ module.exports = async (message, action, target, reason, extras) => {
       message.client.log.error(e);
     });
 
+    await message.client.database.models.moderationCase.create({
+      guildID: guild.id,
+      number: modCaseNo,
+      messageID: message.id
+    },
+    {
+      fields: [ 'guildID', 'number', 'messageID' ]
+    });
+
     await message.client.database.models.guild.update({
       moderationCaseNo: modCaseNo + 1
     },
