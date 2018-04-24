@@ -52,7 +52,7 @@ exports.exec = async (Bastion, message, args) => {
     * Logs moderation events if it is enabled
     * @fires moderationLog
     */
-    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, member, args.reason);
+    Bastion.emit('moderationLog', message, this.help.name, member, args.reason);
 
     member.send({
       embed: {
