@@ -186,6 +186,7 @@
   "moderation": {
     "addRole": "Adds the specified role to a specified user of your Discord server.",
     "ban": "Bans the specified user from your Discord server and removes 7 days of their message history.",
+    "case": "Fetches any moderation action, logged in the moderation log channel, using the moderation log case number.",
     "clear": "Deletes a bulk of specified messages from a text channel of your Discord server.",
     "clearWarn": "Clears all warnings from the given user.",
     "deafen": "Deafens a specified user server-wide in your Discord server.",
