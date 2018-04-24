@@ -5,16 +5,18 @@
  */
 
 /**
- * @param {Guild} guild The guild where this moderation action was fired
- * @param {User} executor The user who fired this moderation action
+ * @param {Message} message The message that fired this moderation action
  * @param {string} action The moderation action's name
  * @param {User|Channel} target The target on which this action was taken
  * @param {string} reason The reason for the moderation action
  * @param {object} extras An object containing any extra data of the moderation action
  * @returns {void}
  */
-module.exports = async (guild, executor, action, target, reason, extras) => {
+module.exports = async (message, action, target, reason, extras) => {
   try {
+    let guild = message.guild;
+    let executor = message.author;
+
     let guildModel = await guild.client.database.models.guild.findOne({
       attributes: [ 'moderationLog', 'moderationCaseNo' ],
       where: {
