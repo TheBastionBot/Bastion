@@ -6,12 +6,25 @@
 
 const specialIDs = require('../../data/specialIDs.json');
 
-exports.exec = (Bastion, message) => {
-  if (!message.guild.claimedUsers) {
-    message.guild.claimedUsers = [];
-  }
+exports.exec = async (Bastion, message) => {
+  try {
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [ 'lastClaimed' ],
+      where: {
+        userID: message.author.id,
+        guildID: message.guild.id
+      }
+    });
 
-  if (!message.guild.claimedUsers.includes(message.author.id)) {
+    /**
+     * If current date is same as the last claimed date, you can't use this!
+     */
+    if (guildMemberModel && guildMemberModel.dataValues.lastClaimed) {
+      if (guildMemberModel.dataValues.lastClaimed.toDateString() === new Date().toDateString()) {
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), Bastion.strings.error(message.guild.language, 'claimCooldown', true, message.author), message.channel);
+      }
+    }
+
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
     if (Bastion.user.id === '267035345537728512') {
@@ -26,14 +39,21 @@ exports.exec = (Bastion, message) => {
     }
 
     Bastion.emit('userDebit', message.member, rewardAmount);
-    message.guild.claimedUsers.push(message.author.id);
-    setTimeout(() => {
-      message.guild.claimedUsers.splice(message.guild.claimedUsers.indexOf(message.author.id), 1);
-    }, Bastion.functions.msUntilMidnight());
+
+    await Bastion.database.models.guildMember.update({
+      lastClaimed: Date.now()
+    },
+    {
+      where: {
+        userID: message.author.id,
+        guildID: message.guild.id
+      },
+      fields: [ 'lastClaimed' ]
+    });
 
     /**
-    * Send a message in the channel to let the user know that the operation was successful.
-    */
+     * Send a message in the channel to let the user know that the operation was successful.
+     */
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
@@ -44,8 +64,8 @@ exports.exec = (Bastion, message) => {
     });
 
     /**
-    * Let the user know by DM that their account has been debited.
-    */
+     * Let the user know by DM that their account has been debited.
+     */
     message.author.send({
       embed: {
         color: Bastion.colors.GREEN,
@@ -57,12 +77,8 @@ exports.exec = (Bastion, message) => {
       }
     });
   }
-  else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), Bastion.strings.error(message.guild.language, 'claimCooldown', true, message.author), message.channel);
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
