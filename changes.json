@@ -1,11 +1,12 @@
 {
-  "date": "April 23, 2018",
+  "date": "April 24, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
     "Commands that work in direct messages can now be used without a prefix.",
     "Multiple prefixes can be set from the config too",
+    "The `reason` command will now work with moderation case numbers, instead of moderation log message IDs.",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
@@ -16,7 +17,8 @@
     "Levels and currencies aren't global anymore. Members have separate currency & level in every server.",
     "If you're a server owner, you can now `give` and `take` any amount of Bastion Currencies to/from any member of your server.",
     "And you can also give as much experience points as you want to your server members, using the `giveXP` command.",
-    "Not to forget, you can do Bastion Currency giveaways in your server, using the `currencyGiveaway` command."
+    "Not to forget, you can do Bastion Currency giveaways in your server, using the `currencyGiveaway` command.",
+    "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any moderation action from the moderaion logs using the case number."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
