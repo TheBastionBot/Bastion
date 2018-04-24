@@ -207,7 +207,7 @@ module.exports = async (message, action, target, reason, extras) => {
         return message.client.log.error(`Moderation logging is not present for ${action} action.`);
     }
 
-    modLogChannel.send({
+    let modLogMessage = await modLogChannel.send({
       embed: {
         color: color,
         title: action,
@@ -217,14 +217,12 @@ module.exports = async (message, action, target, reason, extras) => {
         },
         timestamp: new Date()
       }
-    }).catch(e => {
-      message.client.log.error(e);
     });
 
     await message.client.database.models.moderationCase.create({
       guildID: guild.id,
       number: modCaseNo,
-      messageID: message.id
+      messageID: modLogMessage.id
     },
     {
       fields: [ 'guildID', 'number', 'messageID' ]
