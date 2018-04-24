@@ -262,7 +262,7 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     lastClaimed: {
-      type: Sequelize.INTEGER
+      type: Sequelize.DATE
     }
   },
   {
