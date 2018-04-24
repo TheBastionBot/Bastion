@@ -106,7 +106,7 @@ exports.exec = async (Bastion, message, args) => {
             Bastion.log.error(e);
           });
 
-          Bastion.emit('moderationLog', message.guild, message.author, guildModel.dataValues.warnAction, user, 'Warned 3 times!');
+          Bastion.emit('moderationLog', message, guildModel.dataValues.warnAction, user, 'Warned 3 times!');
 
           member.send({
             embed: {
@@ -152,7 +152,7 @@ exports.exec = async (Bastion, message, args) => {
     * Logs moderation events if it is enabled
     * @fires moderationLog
     */
-    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, args.reason);
+    Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
   }
   catch (e) {
     Bastion.log.error(e);

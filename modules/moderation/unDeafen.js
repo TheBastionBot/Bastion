@@ -41,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
     * Logs moderation events if it is enabled
     * @fires moderationLog
     */
-    Bastion.emit('moderationLog', message.guild, message.author, this.help.name, user, args.reason);
+    Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
   }
   catch (e) {
     Bastion.log.error(e);
