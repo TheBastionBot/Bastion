@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message) => {
        * Otherwise set the streak to 0.
        */
       let nextDay = moment(guildMemberModel.dataValues.lastClaimed).add(1, 'd');
-      if (moment().isSame(nextDay, 'day')) {
+      if (guildMemberModel.dataValues.claimStreak < 7 && moment().isSame(nextDay, 'day')) {
         guildMemberModel.dataValues.claimStreak++;
       }
       else {
