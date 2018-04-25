@@ -40,9 +40,20 @@ exports.exec = async (Bastion, message) => {
     }
 
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
+    let description = `${message.author} You've claimed your daily reward.`;
 
-    if (guildMemberModel.dataValues.claimStreak === 7) {
+    if (guildMemberModel.dataValues.claimStreak === 1) {
+      description = `${description}\n\nKeep using this command every day and you'll get a bonus reward on completion of your 7 day streak!`;
+    }
+    else if (guildMemberModel.dataValues.claimStreak > 1 && guildMemberModel.dataValues.claimStreak < 6) {
+      description = `${description}\n\n${7 - guildMemberModel.dataValues.claimStreak} days to get your bonus reward! Keep Going!`;
+    }
+    else if (guildMemberModel.dataValues.claimStreak === 6) {
+      description = `${description}\n\nJust one day left for your 7 day streak to complete!`;
+    }
+    else if (guildMemberModel.dataValues.claimStreak === 7) {
       rewardAmount += Bastion.functions.getRandomInt(350, 700);
+      description = `${description}\n\nCongratulations! You've completed your 7 day streak! Check for a DM from me for your bonus reward.`;
     }
 
     if (Bastion.user.id === '267035345537728512') {
@@ -76,7 +87,7 @@ exports.exec = async (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `${message.author} You've claimed your daily reward. Please check my message in your DM to see the reward amount.`
+        description: description
       }
     }).catch(e => {
       Bastion.log.error(e);
