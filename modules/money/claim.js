@@ -52,6 +52,7 @@ exports.exec = async (Bastion, message) => {
       description = `${description}\n\nJust one day left for your 7 day streak to complete!`;
     }
     else if (guildMemberModel.dataValues.claimStreak === 7) {
+      guildMemberModel.dataValues.claimStreak = 0;
       rewardAmount += Bastion.functions.getRandomInt(350, 700);
       description = `${description}\n\nCongratulations! You've completed your 7 day streak! Check for a DM from me for your bonus reward.`;
     }
