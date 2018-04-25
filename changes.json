@@ -1,5 +1,5 @@
 {
-  "date": "April 24, 2018",
+  "date": "April 25, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -19,7 +19,8 @@
     "If you're a server owner, you can now `give` and `take` any amount of Bastion Currencies to/from any member of your server.",
     "And you can also give as much experience points as you want to your server members, using the `giveXP` command.",
     "Not to forget, you can do Bastion Currency giveaways in your server, using the `currencyGiveaway` command.",
-    "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any moderation action from the moderaion logs using the case number."
+    "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any moderation action from the moderaion logs using the case number.",
+    "Using the `claim` or `daily` command daily will count towards your daily streaks. If you get a consecutive claim streak of 7, you'll can get a bonus of upto 700 BC."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
