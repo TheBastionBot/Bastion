@@ -41,6 +41,10 @@ exports.exec = async (Bastion, message) => {
 
     let rewardAmount = Bastion.functions.getRandomInt(50, 100);
 
+    if (guildMemberModel.dataValues.claimStreak === 7) {
+      rewardAmount += Bastion.functions.getRandomInt(350, 700);
+    }
+
     if (Bastion.user.id === '267035345537728512') {
       if (message.guild.id === specialIDs.bastionGuild) {
         if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
