@@ -4,24 +4,38 @@
  * @license MIT
  */
 
+const moment = require('moment');
 const specialIDs = require('../../data/specialIDs.json');
 
 exports.exec = async (Bastion, message) => {
   try {
     let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-      attributes: [ 'lastClaimed' ],
+      attributes: [ 'lastClaimed', 'claimStreak' ],
       where: {
         userID: message.author.id,
         guildID: message.guild.id
       }
     });
 
-    /**
-     * If current date is same as the last claimed date, you can't use this!
-     */
     if (guildMemberModel && guildMemberModel.dataValues.lastClaimed) {
+      /**
+       * If current date is same as the last claimed date, you can't use this!
+       */
       if (guildMemberModel.dataValues.lastClaimed.toDateString() === new Date().toDateString()) {
         return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), Bastion.strings.error(message.guild.language, 'claimCooldown', true, message.author), message.channel);
+      }
+
+
+      /**
+       * If it's a consecutive day, increase the claim streak of user.
+       * Otherwise set the streak to 0.
+       */
+      let nextDay = moment(guildMemberModel.dataValues.lastClaimed).add(1, 'd');
+      if (moment().isSame(nextDay, 'day')) {
+        guildMemberModel.dataValues.claimStreak++;
+      }
+      else {
+        guildMemberModel.dataValues.claimStreak = 0;
       }
     }
 
@@ -41,14 +55,15 @@ exports.exec = async (Bastion, message) => {
     Bastion.emit('userDebit', message.member, rewardAmount);
 
     await Bastion.database.models.guildMember.update({
-      lastClaimed: Date.now()
+      lastClaimed: Date.now(),
+      claimStreak: guildMemberModel.dataValues.claimStreak
     },
     {
       where: {
         userID: message.author.id,
         guildID: message.guild.id
       },
-      fields: [ 'lastClaimed' ]
+      fields: [ 'lastClaimed', 'claimStreak' ]
     });
 
     /**
