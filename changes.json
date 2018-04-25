@@ -1,5 +1,5 @@
 {
-  "date": "April 24, 2018",
+  "date": "April 25, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -12,14 +12,15 @@
   ],
   "NEW FEATURES!": [
     "A complete redesign/rewrite of the database.",
-    "You can now set any number of channels as voting channels. No limitations!",
-    "You can add any number of level up roles. No limitations here, too!",
-    "You can now set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config.",
+    "Set any number of channels as voting channels. No limitations!",
+    "Add any number of level up roles. No limitations here, too!",
+    "Set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config.",
     "Levels and currencies aren't global anymore. Members have separate currency & level in every server.",
-    "If you're a server owner, you can now `give` and `take` any amount of Bastion Currencies to/from any member of your server.",
-    "And you can also give as much experience points as you want to your server members, using the `giveXP` command.",
-    "Not to forget, you can do Bastion Currency giveaways in your server, using the `currencyGiveaway` command.",
-    "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any moderation action from the moderaion logs using the case number."
+    "You can now `give` and `take` any amount of Bastion Currencies to/from any member of your server.",
+    "Give as much XP as you want to your server members, using the `giveXP` command.",
+    "You can also do Bastion Currency giveaways in your server, using the `currencyGiveaway` command.",
+    "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any case from the moderation logs, using the case number.",
+    "Using the `claim` command daily will count towards your daily streak. If you get a consecutive streak of 7 days, you'll can get a bonus of upto 700 BC."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
