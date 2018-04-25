@@ -263,6 +263,10 @@ module.exports = (Sequelize, database) => {
     },
     lastClaimed: {
       type: Sequelize.DATE
+    },
+    claimStreak: {
+      type: Sequelize.TINYINT(3),
+      defaultValue: 0
     }
   },
   {
