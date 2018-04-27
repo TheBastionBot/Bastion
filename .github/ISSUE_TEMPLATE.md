@@ -1,76 +1,56 @@
+<!--
+    Thank you for opening an issue.
+
+    This issue tracker is for bugs and issues found within this repository, and
+    for feature requests/suggestions for this repository.
+    If you require general support or if you have some question, please ask in
+    the Bastion HQ: https://discord.gg/fzx8fkt
+
+
+    Please fill in as much of the template below as you're able.
+-->
+
+
 #### I'm opening this issue because:
 <!--
     Put an X between the brackets on the following lines if a statement is true.
-    e.g.
-        [X] - This statement is true.
-        [ ] - This statement is false.
+    For example,
+      -  [X] - This statement is true.
+      -  [ ] - This statement is false.
 -->
 
-  - [ ] Bastion is crashing
-  - [ ] Bastion is having issues during installation/update
-  - [ ] Bastion is doing something I don't understand
-  - [ ] A command is crashing
-  - [ ] A command isn't doing what it's supposed to do
-  - [ ] Other, please explain:
+ -  [ ] I want to report a bug/issue.
+ -  [ ] I want to request a feature or suggest something.
 
-<!--
-    For feature request or suggestions see the 'Feature Request' section below.
--->
-
-#### What's going wrong?
-<!--
-    A simple description of what's the issue.
--->
-
-#### How can we reproduce the problem?
-<!--
-    A complete description of how to reproduce the problem.
--->
 
 #### Supporting Information:
+<!-- Only required if you're reporting a bug/issue. -->
+
+<!-- Displayed in the output of Bastion's `stats` or `changelog` command -->
+ -  **Bastion Version**:
+
+<!-- Output of `node -v` -->
+ -  **Node.js Version**:
+
+<!-- Output of `npm -v` -->
+ -  **NPM Version**:
+
 <!--
-    Only required if you're hosting Bastion yourself.
+    In Linux/macOS, output of `uname -a` or the version of Windows.
+    And if your Operating System is 32-bit or 64-bit.
 -->
- - Bastion version:  <!-- Use `stats` command in your Discord server to get the Bastion version. -->
- - Node.JS version:  <!-- Run `node -v` in your console to get the node version. -->
- - `npm` version:  <!-- Run `npm -v` in your console to get the npm version. -->
- - Windows, OS X/macOS, or Linux?:
- - Network issues:
-   - [ ] I use a proxy to connect to the web.
-   - [ ] I access the internet via a VPN.
-   - [ ] I have limited or unreliable internet access.
-
-<!--
-    Thank you for contributing to Bastion! Please review this checklist
-    before submitting your issue.
-
-    - Participation in this open source project is subject to Bastion's Code of Conduct:
-      https://github.com/TheBastionBot/Bastion/blob/master/.github/CODE_OF_CONDUCT.md
--->
+ -  **Platform**:
 
 
 <!--
-    FEATURE REQUEST
+    Enter your issue details, in as much details as possible, after the end of
+    this section.
 
-    For feature requests, delete everything above this section and uncomment the
-    section following this one.
-    But first, review the existing feature requests and make sure there isn't one
-    that already describes the feature you'd like to see added.
--->
-
-<!--
-
-#### What's the feature? Please describe the feature in detail, how it will work, etc.
-
-#### How will this feature help you or your community or the users of Discord in general?
-
-#### Is this feature similar to an existing feature?
-
--->
-
-
-<!--
-    If this is a fix or feature you'd like to implement it on your own, feel
-    free to open a pull request with your changes, and our team will look
-    into it.
+    In case of filing a bug report, please provide us with the details so that
+    we can recreate the issue/problem on our own, keeping it as simple as
+    possible.
+    And, in case of a feature request/suggestion, please provide us with
+    enough detail so that we can understand what the feature should be able to
+    do so that we can understand your requirements and implement it as soon as
+    possible.
 -->
