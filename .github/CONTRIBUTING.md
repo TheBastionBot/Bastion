@@ -36,6 +36,13 @@ We want to deliver the Bastion Discord Bot in many different languages from many
 different countries. If you want to contribute on translations and bring it to the
 world, you can start doing that by going here: https://i18n.bastionbot.org
 
+## Additional Notes
+
+If you are going to make some changes to this repository, you might want to read
+these before you open a Pull Request.
+ -  [Setting up Development Environment](DEVELOPMENT_ENVIRONMENT.md)
+ -  [Testing Guide](TESTING.md)
+
 > If you have any questions, feel free to ask us in the [Bastion HQ].
 
 
