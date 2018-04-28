@@ -74,6 +74,7 @@
   "games": {
     "acrophobia": "Starts a acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.",
     "flip": "Flips the specified amount of coins and shows you the outcomes.",
+    "jumbledWord": "Unscramble the given jumbled word and increase your vocabulary skills while having fun with your friends.",
     "magic8ball": "Get answers to your polar (yes/no) questions from the Magic 8-Ball.",
     "race": "Start a race against Bastion.",
     "roll": "Rolls the specified amount of dice and shows you the outcomes.",
