@@ -44,7 +44,7 @@ module.exports = async message => {
       });
     }
 
-    if (response.message) {
+    if (response.message && Object.keys(response.message).length) {
       message.channel.send(response.message.text, { embed: response.message }).catch(e => {
         message.client.log.error(e);
 
