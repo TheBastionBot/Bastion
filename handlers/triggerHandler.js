@@ -11,7 +11,10 @@
  */
 module.exports = async message => {
   let triggerModels = await message.client.database.models.trigger.findAll({
-    attributes: [ 'guildID', 'trigger', 'responseMessage' ]
+    attributes: [ 'trigger', 'responseMessage' ],
+    where: {
+      guildID: message.guild.id
+    }
   });
 
   if (!triggerModels.length) return;
