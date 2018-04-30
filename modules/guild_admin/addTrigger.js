@@ -21,6 +21,10 @@ exports.exec = async (Bastion, message, args) => {
     }
     if (args.embed) {
       Object.assign(responseObject, JSON.parse(args.embed.join(' ')));
+
+      responseObject.footer = {
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
+      };
     }
 
     await Bastion.database.models.trigger.create({
