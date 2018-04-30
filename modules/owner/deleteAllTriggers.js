@@ -7,7 +7,9 @@
 exports.exec = async (Bastion, message) => {
   try {
     await Bastion.database.models.trigger.destroy({
-      truncate: true
+      where: {
+        guildID: message.guild.id
+      }
     });
 
     message.channel.send({
