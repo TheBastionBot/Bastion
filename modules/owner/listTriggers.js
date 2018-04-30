@@ -50,14 +50,13 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
-  ],
-  ownerOnly: true
+  ]
 };
 
 exports.help = {
   name: 'listTriggers',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'listTriggers [page_no]',
   example: [ 'listTriggers', 'listTriggers 2' ]

@@ -28,14 +28,13 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'delalltriggers', 'deletealltrips', 'delalltrips' ],
-  enabled: true,
-  ownerOnly: true
+  enabled: true
 };
 
 exports.help = {
   name: 'deleteAllTriggers',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'deleteAllTriggers',
   example: []

@@ -38,14 +38,13 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'deltrigger', 'deletetrip', 'deltrip' ],
-  enabled: true,
-  ownerOnly: true
+  enabled: true
 };
 
 exports.help = {
   name: 'deleteTrigger',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'deleteTrigger <trigger>',
   example: [ 'deleteTrigger Hi, there?' ]

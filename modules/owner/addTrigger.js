@@ -53,14 +53,13 @@ exports.config = {
   argsDefinitions: [
     { name: 'trigger', type: String, multiple: true, defaultOption: true },
     { name: 'text', type: String, alias: 't', multiple: true }
-  ],
-  ownerOnly: true
+  ]
 };
 
 exports.help = {
   name: 'addTrigger',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addTrigger <trigger text> <-t text response>',
   example: [ 'addTrigger Hi, there? -t Hello $user! :wave:' ]
