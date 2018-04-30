@@ -7,7 +7,10 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     let triggerModels = await Bastion.database.models.trigger.findAll({
-      attributes: [ 'trigger' ]
+      attributes: [ 'trigger' ],
+      where: {
+        guildID: message.guild.id
+      }
     });
 
     if (triggerModels.length === 0) {
