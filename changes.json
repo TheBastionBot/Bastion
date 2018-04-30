@@ -8,19 +8,20 @@
     "Multiple prefixes can be set from the config too",
     "The `reason` command will now work with moderation case numbers, instead of moderation log message IDs.",
     "Your daily reward claim cooldowns will be in effect even after Bastion restarts.",
+    "Set any number of channels as voting channels. No limitations!",
+    "Add any number of level up roles. No limitations here, too!",
+    "The `currencyGiveaway` command isn't bot owner only anymore! Now, you can use it, in your own servers, to do Bastion Currency giveaways.",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
-    "A complete redesign/rewrite of the database.",
-    "Set any number of channels as voting channels. No limitations!",
-    "Add any number of level up roles. No limitations here, too!",
     "Set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config.",
     "Levels and currencies aren't global anymore. Members have separate currency & level in every server.",
     "You can now `give` and `take` any amount of Bastion Currencies to/from any member of your server.",
     "Give as much XP as you want to your server members, using the `giveXP` command.",
-    "You can also do Bastion Currency giveaways in your server, using the `currencyGiveaway` command.",
     "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any case from the moderation logs, using the case number.",
-    "Using the `claim` command daily will count towards your daily streak. If you get a consecutive streak of 7 days, you'll can get a bonus of upto 700 BC."
+    "Using the `claim` command daily will count towards your daily streak. If you get a consecutive streak of 7 days, you'll can get a bonus of upto 700 BC.",
+    "Triggers aren't global anymore. There are now different triggers & responses for different servers.",
+    "Triggers are not bot owner only anymore! You can now set triggers & responses in the servers you manage."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
