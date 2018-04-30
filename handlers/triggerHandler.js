@@ -48,6 +48,12 @@ module.exports = async message => {
 
     return message.channel.send(response.text, { embed: response }).catch(e => {
       message.client.log.error(e);
+
+      if (e.code === 50035 && response.text) {
+        message.channel.send(response.text).catch(e => {
+          message.client.log.error(e);
+        });
+      }
     });
   }
 };
