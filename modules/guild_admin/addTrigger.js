@@ -20,7 +20,8 @@ exports.exec = async (Bastion, message, args) => {
       responseObject.text = args.text.join(' ');
     }
     if (args.embed) {
-      Object.assign(responseObject, JSON.parse(args.embed.join(' ')));
+      args.embed = args.embed.join(' ');
+      Object.assign(responseObject, JSON.parse(args.embed));
 
       responseObject.footer = {
         text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
