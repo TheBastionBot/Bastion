@@ -11,6 +11,7 @@
     "Set any number of channels as voting channels. No limitations!",
     "Add any number of level up roles. No limitations here, too!",
     "The `currencyGiveaway` command isn't bot owner only anymore! Now, you can use it, in your own servers, to do Bastion Currency giveaways.",
+    "Trigger response supports a whole bunch of variables now.",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
