@@ -32,18 +32,7 @@ module.exports = async message => {
 
   if (message.content.toLowerCase() === trigger.toLowerCase()) {
     response = JSON.stringify(response);
-
-    response = response.replace(/\$user/ig, `<@${message.author.id}>`);
-    response = response.replace(/\$username/ig, message.author.username);
-    if (message.mentions.users.first()) {
-      response = response.replace(/\$mention/ig, message.mentions.users.first());
-    }
-    else {
-      response = response.replace(/\$mention/ig, '');
-    }
-    response = response.replace(/\$server/ig, `**${message.guild.name}**`);
-    response = response.replace(/\$prefix/ig, message.guild.prefix ? message.guild.prefix[0] : message.client.config.prefix[0]);
-
+    response = message.client.functions.replaceVariables(response, message);
     response = JSON.parse(response);
 
     return message.channel.send(response.text, { embed: response }).catch(e => {
