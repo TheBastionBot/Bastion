@@ -446,7 +446,7 @@ module.exports = (Sequelize, database) => {
       allowNull: false
     },
     responseMessage: {
-      type: Sequelize.TEXT
+      type: Sequelize.JSON
     },
     responseReactions: {
       type: Sequelize.TEXT
