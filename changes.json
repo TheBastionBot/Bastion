@@ -22,8 +22,8 @@
     "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any case from the moderation logs, using the case number.",
     "Using the `claim` command daily will count towards your daily streak. If you get a consecutive streak of 7 days, you'll can get a bonus of upto 700 BC.",
     "Triggers aren't global anymore. There are now different triggers & responses for different servers.",
-    "Triggers are not bot owner only anymore! You can now set triggers & responses in the servers you manage.",
-    "Triggers can now respond with embeds along with plain text responses."
+    "Triggers aren't owner only anymore! You can now set triggers & responses in the servers you manage.",
+    "Triggers can now respond with reactions & embeds along with plain text responses."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
