@@ -46,7 +46,7 @@ module.exports = async message => {
 
     response = JSON.parse(response);
 
-    return message.channel.send(response.text).catch(e => {
+    return message.channel.send(response.text, { embed: response }).catch(e => {
       message.client.log.error(e);
     });
   }
