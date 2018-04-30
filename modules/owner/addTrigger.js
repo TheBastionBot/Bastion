@@ -17,7 +17,7 @@ exports.exec = async (Bastion, message, args) => {
     await Bastion.database.models.trigger.create({
       guildID: message.guild.id,
       trigger: args.trigger.join(' '),
-      responseMessage: args.response.join(' ')
+      responseMessage: { text: args.response.join(' ') }
     },
     {
       fields: [ 'guildID', 'trigger', 'responseMessage' ]
