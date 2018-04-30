@@ -45,7 +45,12 @@ module.exports = async message => {
     }
 
     if (response.message && Object.keys(response.message).length) {
-      message.channel.send(response.message.text, { embed: response.message }).catch(e => {
+      let text = response.message.text ? response.message.text : null;
+
+      delete response.message.text;
+      let embed = Object.keys(response.message).length ? response.message : null;
+
+      message.channel.send(text, { embed: embed }).catch(e => {
         message.client.log.error(e);
 
         if (e.code === 50035 && response.message.text) {
