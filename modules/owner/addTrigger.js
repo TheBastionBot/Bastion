@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.trigger || !args.response) {
+    if (!args.trigger || !args.text) {
       /**
       * The command was ran with invalid parameters.
       * @fires commandUsage
@@ -17,7 +17,7 @@ exports.exec = async (Bastion, message, args) => {
     await Bastion.database.models.trigger.create({
       guildID: message.guild.id,
       trigger: args.trigger.join(' '),
-      responseMessage: { text: args.response.join(' ') }
+      responseMessage: { text: args.text.join(' ') }
     },
     {
       fields: [ 'guildID', 'trigger', 'responseMessage' ]
@@ -34,7 +34,7 @@ exports.exec = async (Bastion, message, args) => {
           },
           {
             name: 'Response',
-            value: args.response.join(' ')
+            value: args.text.join(' ')
           }
         ]
       }
@@ -51,8 +51,8 @@ exports.config = {
   aliases: [ 'addtrip' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'trigger', type: String, alias: 't', multiple: true, defaultOption: true },
-    { name: 'response', type: String, alias: 'r', multiple: true }
+    { name: 'trigger', type: String, multiple: true, defaultOption: true },
+    { name: 'text', type: String, alias: 't', multiple: true }
   ],
   ownerOnly: true
 };
@@ -62,6 +62,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'addTrigger <-t trigger message> <-r response message>',
-  example: [ 'addTrigger -t Hi, there? -r Hello $user! :wave:' ]
+  usage: 'addTrigger <trigger text> <-t text response>',
+  example: [ 'addTrigger Hi, there? -t Hello $user! :wave:' ]
 };
