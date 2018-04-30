@@ -4,9 +4,11 @@
  * @license MIT
  */
 
+const emojis = require('../../data/emojis.json');
+
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.trigger || !(args.text || args.embed)) {
+    if (!args.trigger || !(args.text || args.embed || args.reaction)) {
       /**
        * The command was ran with invalid parameters.
        * @fires commandUsage
@@ -27,14 +29,24 @@ exports.exec = async (Bastion, message, args) => {
         text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
       };
     }
+    if (args.reaction) {
+      args.reaction = encodeURIComponent(args.reaction);
+
+      if (!emojis.includes(args.reaction)) {
+        if (!Object.keys(responseObject).size) {
+          return Bastion.emit('error', 'invalidInput', 'The emoji you entered is invalid. Note that custom emojis aren\'t supported currently.', message.channel);
+        }
+      }
+    }
 
     await Bastion.database.models.trigger.create({
       guildID: message.guild.id,
       trigger: args.trigger.join(' '),
-      responseMessage: responseObject
+      responseMessage: responseObject,
+      responseReactions: args.reaction
     },
     {
-      fields: [ 'guildID', 'trigger', 'responseMessage' ]
+      fields: [ 'guildID', 'trigger', 'responseMessage', 'responseReactions' ]
     });
 
     message.channel.send({
@@ -52,7 +64,9 @@ exports.exec = async (Bastion, message, args) => {
               ? args.embed.length > 1024
                 ? '*A Message Embed.*'
                 : `\`\`\`json\n${args.embed}\`\`\``
-              : args.text.join(' ')
+              : args.text
+                ? args.text.join(' ')
+                : decodeURIComponent(args.reaction)
           }
         ]
       }
@@ -71,7 +85,8 @@ exports.config = {
   argsDefinitions: [
     { name: 'trigger', type: String, multiple: true, defaultOption: true },
     { name: 'text', type: String, alias: 't', multiple: true },
-    { name: 'embed', type: String, alias: 'e', multiple: true }
+    { name: 'embed', type: String, alias: 'e', multiple: true },
+    { name: 'reaction', type: String, alias: 'r' }
   ]
 };
 
@@ -80,6 +95,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'addTrigger <trigger text> <-t text response | -e embed object> ',
-  example: [ 'addTrigger Hi, there? -t Hello $user! :wave:', 'addTrigger Hi, there? -e { "description": "Hello $user! :wave:"}' ]
+  usage: 'addTrigger <trigger text> <-t text response | -e embed object | -r reaction emoji> ',
+  example: [ 'addTrigger Hi, there? -t Hello $user! :wave:', 'addTrigger Hi, there? -e { "description": "Hello $user! :wave:"}', 'addTrigger Hi, there? -r :wave:' ]
 };
