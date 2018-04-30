@@ -16,7 +16,8 @@ exports.exec = async (Bastion, message, args) => {
 
     await Bastion.database.models.trigger.destroy({
       where: {
-        trigger: args.join(' ')
+        trigger: args.join(' '),
+        guildID: message.guild.id
       }
     });
 
