@@ -8,7 +8,7 @@ const request = require('request-promise-native');
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.player || !args.mode) {
+    if (!args.player || !args.region || !args.mode || !args.season) {
       /**
       * The command was ran with invalid parameters.
       * @fires commandUsage
@@ -16,160 +16,139 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    if (/^(na|eu|as|oc|sa)$/.test(args.region.toLowerCase())) {
-      args.region = 'agg';
+    let validSeasons = [
+      '2017-beta',
+      '2017-pre1', '2017-pre2', '2017-pre3', '2017-pre4', '2017-pre5', '2017-pre6', '2017-pre7', '2017-pre8', '2017-pre9',
+      '2018-01', '2018-02', '2018-03', '2018-04', '2018-05'
+    ];
+    let seasonRegExp = new RegExp(`^(${validSeasons.join('|')})$`, 'i');
+    if (!seasonRegExp.test(args.season)) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `You have entered an invalid season. Valid seasons are: ${validSeasons.join(', ').toUpperCase()}`, message.channel);
+    }
+
+    let availableRegions = [
+      'krjp', 'jp', 'na', 'eu', 'oc', 'kakao', 'sea', 'sa', 'as'
+    ];
+    let regionRegExp = new RegExp(`^(${availableRegions.join('|')})$`, 'i');
+    if (!regionRegExp.test(args.region)) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidRegion', true, availableRegions.join(', ').toUpperCase()), message.channel);
+    }
+
+    let gameModes = [
+      'solo', 'duo', 'squad', 'solo-fpp', 'duo-fpp', 'squad-fpp'
+    ];
+    let modeRegExp = new RegExp(`^(${gameModes.join('|')})$`, 'i');
+    if (!modeRegExp.test(args.mode)) {
+      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `You have entered an invalid game mode. Valid game modes are: ${gameModes.join(', ').toUpperCase()}`, message.channel);
     }
 
     let options = {
       headers: {
-        'TRN-Api-Key': Bastion.credentials.PUBGAPIKey
+        'Authorization': `Bearer ${Bastion.credentials.PUBGAPIKey}`
       },
-      url: `https://pubgtracker.com/api/profile/pc/${args.player}`,
+      url: `https://api.playbattlegrounds.com/shards/pc-${args.region.toLowerCase()}/players`,
+      qs: {
+        'filter[playerNames]': args.player
+      },
       json: true
     };
     let response = await request(options);
 
-    if (response.AccountId) {
-      let title = '', data = [];
+    if (response.data && response.data.length) {
+      let playerID = response.data[0].id;
 
-      response.Stats = response.Stats.filter(s => s.Region === args.region);
-      response.Stats = response.Stats.filter(s => s.Match === args.mode.toLowerCase());
+      options = {
+        headers: {
+          'Authorization': `Bearer ${Bastion.credentials.PUBGAPIKey}`
+        },
+        url: `https://api.playbattlegrounds.com/shards/pc-${args.region.toLowerCase()}/players/${playerID}/seasons/division.bro.official.${args.season.toLowerCase()}`,
+        json: true
+      };
+      response = await request(options);
 
-      if (response.Stats.length <= 0) {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'playerModeMismatch', true, args.player, args.mode), message.channel);
-      }
-      else {
-        let performance = response.Stats[0].Stats.filter(s => s.category === 'Performance');
-        let rating = response.Stats[0].Stats.filter(s => s.category === 'Skill Rating');
-        let perGame = response.Stats[0].Stats.filter(s => s.category === 'Per Game');
-        let combat = response.Stats[0].Stats.filter(s => s.category === 'Combat');
-        let survival = response.Stats[0].Stats.filter(s => s.category === 'Survival');
-        let distance = response.Stats[0].Stats.filter(s => s.category === 'Distance');
-        let support = response.Stats[0].Stats.filter(s => s.category === 'Support');
-
-        if (args.category) {
-          args.category = args.category.join(' ');
-
-          if (args.category.toLowerCase() === 'performance') {
-            title = 'Performance';
-            for (let i = 0; i < performance.length; i ++) {
-              data.push({
-                name: performance[i].label,
-                value: `${performance[i].displayValue} [Top ${performance[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-          else if (args.category.toLowerCase() === 'skill rating') {
-            title = 'Skill Rating';
-            for (let i = 0; i < rating.length; i ++) {
-              data.push({
-                name: rating[i].label,
-                value: `${rating[i].displayValue} [Top ${rating[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-          else if (args.category.toLowerCase() === 'per game') {
-            title = 'Per Game';
-            for (let i = 0; i < perGame.length; i ++) {
-              data.push({
-                name: perGame[i].label,
-                value: `${perGame[i].displayValue} [Top ${perGame[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-          else if (args.category.toLowerCase() === 'combat') {
-            title = 'Combat';
-            for (let i = 0; i < combat.length; i ++) {
-              data.push({
-                name: combat[i].label,
-                value: `${combat[i].displayValue} [Top ${combat[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-          else if (args.category.toLowerCase() === 'survival') {
-            title = 'Survival';
-            for (let i = 0; i < survival.length; i ++) {
-              data.push({
-                name: survival[i].label,
-                value: `${survival[i].displayValue} [Top ${survival[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-          else if (args.category.toLowerCase() === 'distance') {
-            title = 'Distance';
-            for (let i = 0; i < distance.length; i ++) {
-              data.push({
-                name: distance[i].label,
-                value: `${distance[i].displayValue} [Top ${distance[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-          else if (args.category.toLowerCase() === 'support') {
-            title = 'Support';
-            for (let i = 0; i < support.length; i ++) {
-              data.push({
-                name: support[i].label,
-                value: `${support[i].displayValue} [Top ${support[i].percentile}%]`,
-                inline: true
-              });
-            }
-          }
-        }
-        else {
-          data = [
-            {
-              name: 'Selected Region',
-              value: response.selectedRegion.toUpperCase(),
-              inline: true
-            },
-            {
-              name: 'Default Season',
-              value: response.defaultSeason,
-              inline: true
-            },
-            {
-              name: rating[0].label,
-              value: `${rating[0].displayValue} - #${rating[0].rank} in ${args.region.toUpperCase()} - Top ${rating[0].percentile}%`
-            },
-            {
-              name: performance[0].label,
-              value: performance[0].displayValue,
-              inline: true
-            },
-            {
-              name: performance[1].label,
-              value: performance[1].displayValue,
-              inline: true
-            },
-            {
-              name: performance[3].label,
-              value: performance[3].displayValue,
-              inline: true
-            }
-          ];
-        }
-      }
+      let stats = response.data.attributes.gameModeStats[args.mode.toLowerCase()];
 
       message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
           author: {
-            name: response.PlayerName,
-            icon_url: response.Avatar,
-            url: `https://pubgtracker.com/profile/pc/${args.player}/${args.mode}?region=${args.region}`
+            name: args.player
           },
-          title: title,
-          fields: data,
+          title: 'Season Stats',
+          description: `Won ${stats.wins} matches and lost ${stats.losses} matches out of the ${stats.roundsPlayed} matches played, in ${stats.days} days.`,
+          fields: [
+            {
+              name: 'Kills',
+              value: `${stats.kills} ${stats.headshotKills ? `(${stats.headshotKills} headshots)` : ''}`,
+              inline: true
+            },
+            {
+              name: 'Assists',
+              value: `${stats.assists}`,
+              inline: true
+            },
+            {
+              name: 'Win Points',
+              value: `${stats.winPoints.toFixed(2)}`,
+              inline: true
+            },
+            {
+              name: 'Kill Points',
+              value: `${stats.killPoints.toFixed(2)}`,
+              inline: true
+            },
+            {
+              name: 'Max. Kill Streaks',
+              value: `${stats.maxKillStreaks}`,
+              inline: true
+            },
+            {
+              name: 'Most Kills / Round',
+              value: `${stats.roundMostKills}`,
+              inline: true
+            },
+            {
+              name: 'Heals',
+              value: `${stats.heals}`,
+              inline: true
+            },
+            {
+              name: 'Revives',
+              value: `${stats.revives}`,
+              inline: true
+            },
+            {
+              name: 'Longest Kill',
+              value: `${stats.longestKill.toFixed(2)}m`,
+              inline: true
+            },
+            {
+              name: 'Damage Dealt',
+              value: `${stats.damageDealt.toFixed(2)}`,
+              inline: true
+            },
+            {
+              name: 'Time Survived',
+              value: `${(stats.timeSurvived / 60).toFixed(2)} min (${(stats.longestTimeSurvived / 60).toFixed(2)} min longest) ${stats.suicides ? `(${stats.suicides} suicides)` : ''}`
+            },
+            {
+              name: 'Distance Traveled',
+              value: `${stats.rideDistance.toFixed(2)}m on vehicle & ${stats.walkDistance.toFixed(2)}m on foot`
+            },
+            {
+              name: 'Weapons Acquired',
+              value: `${stats.weaponsAcquired}`,
+              inline: true
+            },
+            {
+              name: 'Vehicles Destroyed',
+              value: `${stats.vehicleDestroys}`,
+              inline: true
+            }
+          ],
+          thumbnail: {
+            url: 'https://res.cloudinary.com/teepublic/image/private/s--DpQVVZhi--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1513709841/production/designs/2198091_1.jpg'
+          },
           footer: {
             text: 'Powered by PlayerUnknown\'s Battlegrounds'
           }
@@ -198,9 +177,9 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'player', type: String, alias: 'p', defaultOption: true },
-    { name: 'region', type: String, alias: 'r', defaultValue: 'agg' },
+    { name: 'region', type: String, alias: 'r' },
     { name: 'mode', type: String, alias: 'm' },
-    { name: 'category', type: String, alias: 'c', multiple: true }
+    { name: 'season', type: String, alias: 's', defaultValue: '2018-04' }
   ]
 };
 
@@ -209,6 +188,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'pubg <player_name> <-m solo/duo/squad> [-c Performance/Skill Rating/Per Game/Combat/Survival/Distance/Support]',
-  example: [ 'pubg vvipe -m squad', 'pubg spark -m duo -c Performance' ]
+  usage: 'pubg <player_name> <-r region> <-m mode> <-s season>',
+  example: [ 'pubg VVipe -r EU -m squad -s 2018-04' ]
 };
