@@ -16,7 +16,8 @@ exports.exec = async (Bastion, message, args) => {
 
     await Bastion.database.models.trigger.destroy({
       where: {
-        trigger: args.join(' ')
+        trigger: args.join(' '),
+        guildID: message.guild.id
       }
     });
 
@@ -37,14 +38,13 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'deltrigger', 'deletetrip', 'deltrip' ],
-  enabled: true,
-  ownerOnly: true
+  enabled: true
 };
 
 exports.help = {
   name: 'deleteTrigger',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'deleteTrigger <trigger>',
   example: [ 'deleteTrigger Hi, there?' ]

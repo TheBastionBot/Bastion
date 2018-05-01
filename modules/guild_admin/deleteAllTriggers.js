@@ -7,7 +7,9 @@
 exports.exec = async (Bastion, message) => {
   try {
     await Bastion.database.models.trigger.destroy({
-      truncate: true
+      where: {
+        guildID: message.guild.id
+      }
     });
 
     message.channel.send({
@@ -26,14 +28,13 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'delalltriggers', 'deletealltrips', 'delalltrips' ],
-  enabled: true,
-  ownerOnly: true
+  enabled: true
 };
 
 exports.help = {
   name: 'deleteAllTriggers',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'deleteAllTriggers',
   example: []

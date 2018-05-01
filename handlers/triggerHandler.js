@@ -11,7 +11,10 @@
  */
 module.exports = async message => {
   let triggerModels = await message.client.database.models.trigger.findAll({
-    attributes: [ 'guildID', 'trigger', 'responseMessage' ]
+    attributes: [ 'trigger', 'responseMessage', 'responseReactions' ],
+    where: {
+      guildID: message.guild.id
+    }
   });
 
   if (!triggerModels.length) return;
@@ -21,26 +24,41 @@ module.exports = async message => {
   for (let i = 0; i < triggerModels.length; i++) {
     if (message.content.toLowerCase() === triggerModels[i].dataValues.trigger.toLowerCase()) {
       trigger = triggerModels[i].dataValues.trigger;
-      response.push(triggerModels[i].dataValues.responseMessage);
+      response.push({
+        message: triggerModels[i].dataValues.responseMessage,
+        reaction: triggerModels[i].dataValues.responseReactions
+      });
     }
   }
 
   response = response[Math.floor(Math.random() * response.length)];
 
   if (message.content.toLowerCase() === trigger.toLowerCase()) {
-    response = response.replace(/\$user/ig, `<@${message.author.id}>`);
-    response = response.replace(/\$username/ig, message.author.username);
-    if (message.mentions.users.first()) {
-      response = response.replace(/\$mention/ig, message.mentions.users.first());
-    }
-    else {
-      response = response.replace(/\$mention/ig, '');
-    }
-    response = response.replace(/\$server/ig, `**${message.guild.name}**`);
-    response = response.replace(/\$prefix/ig, message.guild.prefix ? message.guild.prefix[0] : message.client.config.prefix[0]);
+    response.message = JSON.stringify(response.message);
+    response.message = message.client.functions.replaceVariables(response.message, message);
+    response.message = JSON.parse(response.message);
 
-    return message.channel.send(response).catch(e => {
-      message.client.log.error(e);
-    });
+    if (response.reaction) {
+      message.react(response.reaction).catch((e) => {
+        message.client.log.error(e);
+      });
+    }
+
+    if (response.message && Object.keys(response.message).length) {
+      let text = response.message.text ? response.message.text : null;
+
+      delete response.message.text;
+      let embed = Object.keys(response.message).length ? response.message : null;
+
+      message.channel.send(text, { embed: embed }).catch(e => {
+        message.client.log.error(e);
+
+        if (e.code === 50035 && response.message.text) {
+          message.channel.send(response.message.text).catch(e => {
+            message.client.log.error(e);
+          });
+        }
+      });
+    }
   }
 };
