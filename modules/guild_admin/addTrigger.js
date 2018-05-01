@@ -16,6 +16,17 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
+    let triggerModels = await message.client.database.models.trigger.findAll({
+      attributes: [ [ message.client.database.fn('COUNT', message.client.database.col('trigger')), 'noOfTriggers' ] ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+
+    if (!Bastion.credentials.ownerId.includes(message.author.id) && triggerModels && triggerModels.dataValues.noOfTriggers >= 10) {
+      return Bastion.emit('error', 'forbidden', 'You can\'t set more than 10 triggers per server, for now. This limit will be increased in the future.', message.channel);
+    }
+
     let responseObject = {};
 
     if (args.text) {
