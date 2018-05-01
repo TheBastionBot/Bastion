@@ -56,7 +56,7 @@ exports.config = {
 exports.help = {
   name: 'listTriggers',
   botPermission: '',
-  userTextPermission: 'MANAGE_GUILD',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'listTriggers [page_no]',
   example: [ 'listTriggers', 'listTriggers 2' ]
