@@ -21,7 +21,7 @@ module.exports = async role => {
     logChannel.send({
       embed: {
         color: role.client.colors.GREEN,
-        title: role.guild.client.strings.events(role.guild.language, 'roleCreate'),
+        title: role.guild.client.i18n.event(role.guild.language, 'roleCreate'),
         fields: [
           {
             name: 'Role Name',

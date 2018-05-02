@@ -59,7 +59,7 @@ module.exports = async (message, action, target, reason, extras) => {
 
     switch (action.toLowerCase()) {
       case 'addrole':
-        action = message.client.strings.events(guild.language, 'addRole');
+        action = message.client.i18n.event(guild.language, 'addRole');
         color = message.client.colors.GREEN;
         logData.unshift(
           {
@@ -70,12 +70,12 @@ module.exports = async (message, action, target, reason, extras) => {
         break;
 
       case 'ban':
-        action = message.client.strings.events(guild.language, 'guildBanAdd');
+        action = message.client.i18n.event(guild.language, 'guildBanAdd');
         color = message.client.colors.RED;
         break;
 
       case 'clear':
-        action = message.client.strings.events(guild.language, 'messageClear');
+        action = message.client.i18n.event(guild.language, 'messageClear');
         color = message.client.colors.RED;
         logData.splice(0, 3,
           {
@@ -96,17 +96,17 @@ module.exports = async (message, action, target, reason, extras) => {
         break;
 
       case 'deafen':
-        action = message.client.strings.events(guild.language, 'deafAdd');
+        action = message.client.i18n.event(guild.language, 'deafAdd');
         color = message.client.colors.ORANGE;
         break;
 
       case 'kick':
-        action = message.client.strings.events(guild.language, 'kick');
+        action = message.client.i18n.event(guild.language, 'kick');
         color = message.client.colors.RED;
         break;
 
       case 'mute':
-        action = message.client.strings.events(guild.language, 'voiceMuteAdd');
+        action = message.client.i18n.event(guild.language, 'voiceMuteAdd');
         color = message.client.colors.ORANGE;
         break;
 
@@ -119,12 +119,12 @@ module.exports = async (message, action, target, reason, extras) => {
       */
 
       case 'removeallroles':
-        action = message.client.strings.events(guild.language, 'removeAllRole');
+        action = message.client.i18n.event(guild.language, 'removeAllRole');
         color = message.client.colors.RED;
         break;
 
       case 'removerole':
-        action = message.client.strings.events(guild.language, 'removeRole');
+        action = message.client.i18n.event(guild.language, 'removeRole');
         color = message.client.colors.RED;
         logData.unshift(
           {
@@ -135,7 +135,7 @@ module.exports = async (message, action, target, reason, extras) => {
         break;
 
       case 'report':
-        action = message.client.strings.events(guild.language, 'userReport');
+        action = message.client.i18n.event(guild.language, 'userReport');
         color = message.client.colors.ORANGE;
         logData.splice(logData.length - 2, 2,
           {
@@ -152,12 +152,12 @@ module.exports = async (message, action, target, reason, extras) => {
         break;
 
       case 'softban':
-        action = message.client.strings.events(guild.language, 'userSoftBan');
+        action = message.client.i18n.event(guild.language, 'userSoftBan');
         color = message.client.colors.RED;
         break;
 
       case 'textmute':
-        action = message.client.strings.events(guild.language, 'textMuteAdd');
+        action = message.client.i18n.event(guild.language, 'textMuteAdd');
         color = message.client.colors.ORANGE;
         logData.splice(logData.length - 2, 0,
           {
@@ -168,7 +168,7 @@ module.exports = async (message, action, target, reason, extras) => {
         break;
 
       case 'textunmute':
-        action = message.client.strings.events(guild.language, 'textMuteRemove');
+        action = message.client.i18n.event(guild.language, 'textMuteRemove');
         color = message.client.colors.GREEN;
         logData.splice(logData.length - 2, 0,
           {
@@ -179,27 +179,27 @@ module.exports = async (message, action, target, reason, extras) => {
         break;
 
       case 'unban':
-        action = message.client.strings.events(guild.language, 'guildBanRemove');
+        action = message.client.i18n.event(guild.language, 'guildBanRemove');
         color = message.client.colors.GREEN;
         break;
 
       case 'undeafen':
-        action = message.client.strings.events(guild.language, 'deafRemove');
+        action = message.client.i18n.event(guild.language, 'deafRemove');
         color = message.client.colors.GREEN;
         break;
 
       case 'unmute':
-        action = message.client.strings.events(guild.language, 'voiceMuteRemove');
+        action = message.client.i18n.event(guild.language, 'voiceMuteRemove');
         color = message.client.colors.GREEN;
         break;
 
       case 'warn':
-        action = message.client.strings.events(guild.language, 'userWarnAdd');
+        action = message.client.i18n.event(guild.language, 'userWarnAdd');
         color = message.client.colors.ORANGE;
         break;
 
       case 'clearwarn':
-        action = message.client.strings.events(guild.language, 'userWarnRemove');
+        action = message.client.i18n.event(guild.language, 'userWarnRemove');
         color = message.client.colors.GREEN;
         break;
 

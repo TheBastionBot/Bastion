@@ -40,7 +40,7 @@ module.exports = guild => {
 
   guild.client.webhook.send('bastionLog', {
     color: guild.client.colors.GREEN,
-    title: guild.client.strings.events(guild.language, 'guildCreate'),
+    title: guild.client.i18n.event(guild.language, 'guildCreate'),
     fields: [
       {
         name: 'Server Name',
