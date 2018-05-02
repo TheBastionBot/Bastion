@@ -11,7 +11,7 @@ const Discord = require('discord.js');
 const color = require('chalk');
 
 const locales = new Discord.Collection();
-const languages = fs.readdirSync('./locales/').filter(file => fs.statSync(path.join('./locales/', file)).isDirectory());
+const languages = fs.readdirSync('./strings/').filter(file => fs.statSync(path.join('./strings/', file)).isDirectory());
 const constants = {
   '%bastion%': 'Bastion',
   '%currencyName%': 'Bastion Currency',
@@ -24,12 +24,12 @@ const constants = {
 for (let language of languages) {
   process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${language.toUpperCase()} language...\n`);
   const strings = {};
-  let stringFiles = fs.readdirSync(`./locales/${language}`);
+  let stringFiles = fs.readdirSync(`./strings/${language}`);
 
   for (let stringFile of stringFiles) {
     let file = stringFile.substr(0, stringFile.length - 5);
     process.stdout.write(`${color.cyan('[Bastion]:')} Loading strings for ${file}...\n`);
-    stringFile = require(`../locales/${language}/${stringFile}`);
+    stringFile = require(`../strings/${language}/${stringFile}`);
     strings[file] = stringFile;
 
     if (process.stdout.moveCursor) {
