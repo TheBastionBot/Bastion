@@ -8,8 +8,7 @@ module.exports = (message, command) => {
   message.channel.send({
     embed: {
       color: message.client.colors.RED,
-      title: message.client.strings.error(message.guild.language, 'invalidUse'),
-      description: message.client.strings.error(message.guild.language, 'commandUsage', true, command.name),
+      description: message.client.i18n.error(message.guild.language, 'commandUsage', command.name),
       fields: [
         {
           name: 'Usage',
