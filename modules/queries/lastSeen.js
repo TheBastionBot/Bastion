@@ -47,11 +47,11 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       color = Bastion.colors.BLUE;
-      description = Bastion.strings.info(message.guild.language, 'lastSeen', user.tag, lastSeen);
+      description = Bastion.i18n.info(message.guild.language, 'lastSeen', user.tag, lastSeen);
     }
     else {
       color = Bastion.colors.RED;
-      description = Bastion.strings.info(message.guild.language, 'notSeen', user.tag);
+      description = Bastion.i18n.info(message.guild.language, 'notSeen', user.tag);
     }
 
     message.channel.send({

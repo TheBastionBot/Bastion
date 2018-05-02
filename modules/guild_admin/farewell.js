@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'farewell' ]
       });
       color = Bastion.colors.RED;
-      farewellStats = Bastion.strings.info(message.guild.language, 'disableFarewellMessages', message.author.tag);
+      farewellStats = Bastion.i18n.info(message.guild.language, 'disableFarewellMessages', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'farewell' ]
       });
       color = Bastion.colors.GREEN;
-      farewellStats = Bastion.strings.info(message.guild.language, 'enableFarewellMessages', message.author.tag);
+      farewellStats = Bastion.i18n.info(message.guild.language, 'enableFarewellMessages', message.author.tag);
     }
 
     message.channel.send({

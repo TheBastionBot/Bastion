@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: Bastion.strings.info(message.guild.language, 'addLevelUpRole', message.author.tag, role.name, args.level)
+          description: Bastion.i18n.info(message.guild.language, 'addLevelUpRole', message.author.tag, role.name, args.level)
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -57,7 +57,7 @@ exports.exec = async (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.RED,
-          description: Bastion.strings.info(message.guild.language, 'removeLevelUpRoles', message.author.tag, args.level)
+          description: Bastion.i18n.info(message.guild.language, 'removeLevelUpRoles', message.author.tag, args.level)
         }
       }).catch(e => {
         Bastion.log.error(e);

@@ -50,7 +50,7 @@ exports.exec = async (Bastion, message, args) => {
     guildModel.dataValues.disabledCommands = [ ...new Set(guildModel.dataValues.disabledCommands) ];
 
     disabledCommands = guildModel.dataValues.disabledCommands;
-    description = Bastion.strings.info(message.guild.language, 'disableCommand', message.author.tag, command.help.name);
+    description = Bastion.i18n.info(message.guild.language, 'disableCommand', message.author.tag, command.help.name);
 
     await Bastion.database.models.guild.update({
       disabledCommands: disabledCommands
@@ -80,7 +80,7 @@ exports.exec = async (Bastion, message, args) => {
       disabledCommands = disabledCommands.concat(guildModel.dataValues.disabledCommands);
     }
 
-    description = Bastion.strings.info(message.guild.language, 'disableModule', message.author.tag, args.module);
+    description = Bastion.i18n.info(message.guild.language, 'disableModule', message.author.tag, args.module);
 
     await Bastion.database.models.guild.update({
       disabledCommands: disabledCommands
@@ -94,7 +94,7 @@ exports.exec = async (Bastion, message, args) => {
   }
   else if (args.all) {
     disabledCommands = Bastion.commands.filter(c => ![ 'owner', 'guild_admin' ].includes(c.config.module)).map(c => c.help.name.toLowerCase());
-    description = Bastion.strings.info(message.guild.language, 'disableAllCommands', message.author.tag);
+    description = Bastion.i18n.info(message.guild.language, 'disableAllCommands', message.author.tag);
 
     await Bastion.database.models.guild.update({
       disabledCommands: disabledCommands

@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'filterWords' ]
       });
       color = Bastion.colors.RED;
-      filterWordStats = Bastion.strings.info(message.guild.language, 'disableWordFilter', message.author.tag);
+      filterWordStats = Bastion.i18n.info(message.guild.language, 'disableWordFilter', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'filterWords' ]
       });
       color = Bastion.colors.GREEN;
-      filterWordStats = Bastion.strings.info(message.guild.language, 'enableWordFilter', message.author.tag);
+      filterWordStats = Bastion.i18n.info(message.guild.language, 'enableWordFilter', message.author.tag);
     }
 
     message.channel.send({

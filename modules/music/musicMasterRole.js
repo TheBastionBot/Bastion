@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
       return message.channel.send({
         embed: {
           color: Bastion.colors.RED,
-          description: Bastion.strings.info(message.guild.language, 'removeMusicMasterRole', message.author.tag)
+          description: Bastion.i18n.info(message.guild.language, 'removeMusicMasterRole', message.author.tag)
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'addMusicMasterRole', message.author.tag, role.name)
+        description: Bastion.i18n.info(message.guild.language, 'addMusicMasterRole', message.author.tag, role.name)
       }
     }).catch(e => {
       Bastion.log.error(e);

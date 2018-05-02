@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'setPrefix', message.author.tag, prefix.join(' '))
+        description: Bastion.i18n.info(message.guild.language, 'setPrefix', message.author.tag, prefix.join(' '))
       }
     }).catch(e => {
       Bastion.log.error(e);

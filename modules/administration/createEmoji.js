@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'createEmoji', message.author.tag, emoji.name)
+        description: Bastion.i18n.info(message.guild.language, 'createEmoji', message.author.tag, emoji.name)
       }
     }).catch(e => {
       Bastion.log.error(e);

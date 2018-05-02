@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'resetModerationLogCases', message.author.tag)
+        description: Bastion.i18n.info(message.guild.language, 'resetModerationLogCases', message.author.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);

@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'serverLog' ]
       });
       color = Bastion.colors.RED;
-      logStats = Bastion.strings.info(message.guild.language, 'disableServerLog', message.author.tag);
+      logStats = Bastion.i18n.info(message.guild.language, 'disableServerLog', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'serverLog' ]
       });
       color = Bastion.colors.GREEN;
-      logStats = Bastion.strings.info(message.guild.language, 'enableServerLog', message.author.tag);
+      logStats = Bastion.i18n.info(message.guild.language, 'enableServerLog', message.author.tag);
     }
 
     message.channel.send({

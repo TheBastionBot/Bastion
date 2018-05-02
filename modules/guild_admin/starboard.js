@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'starboard' ]
       });
       color = Bastion.colors.RED;
-      starboardStats = Bastion.strings.info(message.guild.language, 'disableStarboard', message.author.tag);
+      starboardStats = Bastion.i18n.info(message.guild.language, 'disableStarboard', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'starboard' ]
       });
       color = Bastion.colors.GREEN;
-      starboardStats = Bastion.strings.info(message.guild.language, 'enableStarboard', message.author.tag);
+      starboardStats = Bastion.i18n.info(message.guild.language, 'enableStarboard', message.author.tag);
     }
 
     message.channel.send({

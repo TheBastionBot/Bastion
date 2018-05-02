@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'chat' ]
       });
       color = Bastion.colors.RED;
-      chatStats = Bastion.strings.info(message.guild.language, 'disableChat', message.author.tag);
+      chatStats = Bastion.i18n.info(message.guild.language, 'disableChat', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -46,7 +46,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'chat' ]
       });
       color = Bastion.colors.GREEN;
-      chatStats = Bastion.strings.info(message.guild.language, 'enableChat', message.author.tag);
+      chatStats = Bastion.i18n.info(message.guild.language, 'enableChat', message.author.tag);
     }
 
     message.channel.send({

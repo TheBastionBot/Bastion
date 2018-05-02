@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        description: Bastion.strings.info(message.guild.language, 'deafen', message.author.tag, user.tag, args.reason)
+        description: Bastion.i18n.info(message.guild.language, 'deafen', message.author.tag, user.tag, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);
