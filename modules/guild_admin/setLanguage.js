@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.BLUE,
           title: 'Available Languages',
-          description: `Bastion's translations are a community effort. If you want to see Bastion translated into another language we'd love your help. Visit our [translation site](https://i18n.bastionbot.org) for more info.\n\nCurrenty it's available in the following languages:\n${Bastion.strings.availableLanguages.join(', ').toUpperCase()}`
+          description: `Bastion's translations are a community effort. If you want to see Bastion translated into another language we'd love your help. Visit our [translation site](https://i18n.bastionbot.org) for more info.\n\nCurrenty it's available in the following languages:\n${Bastion.i18n._locales.join(', ').toUpperCase()}`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message, args) => {
 
     args.name = args.name.toLowerCase();
     if (args.name) {
-      if (!Bastion.strings.availableLanguages.includes(args.name)) {
+      if (!Bastion.i18n._locales.includes(args.name)) {
         /**
         * Error condition is encountered.
         * @fires error
