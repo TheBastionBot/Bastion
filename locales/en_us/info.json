@@ -13,9 +13,9 @@
   "updateRoleColor": "%var% updated the color of **%var%** role to **%var%**",
 
   "disableAnnouncementChannel": "%var% disabled the announcement channel.",
-  "enableAnnouncementChannel": "%var% enabled this channel as the announcement channel for Bastion.",
-  "disableChat": "%var% disabled Bastion chat in this server. I am going to miss talking with you all.",
-  "enableChat": "%var% enabled Bastion chat in this server. I will talk to you if you mention me! I am here anytime you need me.",
+  "enableAnnouncementChannel": "%var% enabled this channel as the announcement channel for %bastion%.",
+  "disableChat": "%var% disabled %bastion% chat in this server. I am going to miss talking with you all.",
+  "enableChat": "%var% enabled %bastion% chat in this server. I will talk to you if you mention me! I am here anytime you need me.",
   "disableAllCommands": "%var% disabled all commands in this server. You can enable all commands again using the `enableCommand --all` command.",
   "disableCommand": "%var% disabled `%var%` command in this server. You can enable the command again using the `enableCommand` command.",
   "disableModule": "%var% disabled all commands, in `%var%` module, in this server. You can enable the commands again using the `enableCommand` command.",
