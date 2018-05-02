@@ -39,6 +39,9 @@ BASTION.functions = require('./handlers/functionHandler');
 const LanguageHandler = require('./handlers/languageHandler');
 BASTION.strings = new LanguageHandler();
 
+const StringHandler = require('locke');
+BASTION.i18n = new StringHandler();
+
 const Sequelize = require('sequelize');
 BASTION.database = new Sequelize(BASTION.credentials.database.URI, {
   operatorsAliases: false,
