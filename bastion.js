@@ -39,7 +39,7 @@ BASTION.functions = require('./handlers/functionHandler');
 const LanguageHandler = require('./handlers/languageHandler');
 BASTION.strings = new LanguageHandler();
 
-const StringHandler = require('locke');
+const StringHandler = require('./handlers/stringHandler');
 BASTION.i18n = new StringHandler();
 
 const Sequelize = require('sequelize');
