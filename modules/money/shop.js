@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message, args) => {
       args.item = args.item.join(' ');
 
       if (args.item.length > 25) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), 'Name of the item should be less than 25 characters.', message.channel);
+        return Bastion.emit('error', '', 'Name of the item should be less than 25 characters.', message.channel);
       }
 
       itemsInShop.push({
@@ -71,7 +71,7 @@ exports.exec = async (Bastion, message, args) => {
       args.remove = Math.abs(args.remove);
 
       if (args.remove > itemsInShop.length) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
       }
 
       let deletedItem = itemsInShop.splice(args.remove - 1, 1);

@@ -22,14 +22,14 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let member = await message.guild.fetchMember(user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     if (!member.bannable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'soft-ban', user), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'soft-ban', user), message.channel);
     }
 
     args.reason = args.reason.join(' ');

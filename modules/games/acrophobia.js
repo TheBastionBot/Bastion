@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isGameInUse', true, 'acrophobia'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isGameInUse', 'acrophobia'), message.channel);
     }
 
     activeChannels[message.channel.id] = {};

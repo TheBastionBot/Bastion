@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'filtered words'), message.channel);
+      Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'filtered words'), message.channel);
     }
     else {
       let filteredWords = guildModel.dataValues.filteredWords;
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
       }
 
       let removedFilteredWord = filteredWords[parseInt(args[0]) - 1];

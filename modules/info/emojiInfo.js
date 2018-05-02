@@ -24,7 +24,7 @@ exports.exec = (Bastion, message, args) => {
   args = message.guild.emojis.find('name', args);
 
   if (!args) {
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'emoji'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'emoji'), message.channel);
   }
 
   message.channel.send({

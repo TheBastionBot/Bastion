@@ -43,7 +43,7 @@ exports.exec = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'Discord server'), message.channel);
+      Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'Discord server'), message.channel);
     }
   }
   catch (e) {

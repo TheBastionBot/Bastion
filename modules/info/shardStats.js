@@ -7,7 +7,7 @@
 exports.exec = (Bastion, message) => {
   try {
     if (!Bastion.shard) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidUse'), 'Bastion is not sharded. Run Bastion using the sharding manager.', message.channel);
+      return Bastion.emit('error', '', 'Bastion is not sharded. Run Bastion using the sharding manager.', message.channel);
     }
 
     let uptime = Bastion.uptime;

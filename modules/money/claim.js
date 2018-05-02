@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message) => {
        * If current date is same as the last claimed date, you can't use this!
        */
       if (guildMemberModel.dataValues.lastClaimed.toDateString() === new Date().toDateString()) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), Bastion.strings.error(message.guild.language, 'claimCooldown', true, message.author), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'claimCooldown', message.author), message.channel);
       }
 
 

@@ -23,7 +23,7 @@ exports.exec = (Bastion, message, args) => {
   if (message.guild.voiceConnection) {
     voiceChannel = message.guild.voiceConnection.channel;
     textChannel = message.channel;
-    vcStats = Bastion.strings.error(message.guild.language, 'userNoSameVC', true, message.author.tag);
+    vcStats = Bastion.i18n.error(message.guild.language, 'userNoSameVC', message.author.tag);
   }
   else if (message.guild.music.textChannelID && message.guild.music.voiceChannelID) {
     if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID))) {
@@ -31,30 +31,30 @@ exports.exec = (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidMusicChannel', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
     }
     if (!voiceChannel.joinable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'join', voiceChannel.name), message.channel);
     }
     if (!voiceChannel.speakable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'speak', `in ${voiceChannel.name}`), message.channel);
     }
-    vcStats = Bastion.strings.error(message.guild.language, 'userNoMusicChannel', true, message.author.tag, voiceChannel.name);
+    vcStats = Bastion.i18n.error(message.guild.language, 'userNoMusicChannel', message.author.tag, voiceChannel.name);
   }
   else {
     /**
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'musicChannelNotFound', true), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicChannelNotFound'), message.channel);
   }
 
   if (textChannel.id !== message.channel.id) return Bastion.log.info(`Music commands will only work in ${textChannel.name} for this session.`);
@@ -93,7 +93,7 @@ exports.exec = (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'YouTube Playlist URL'), textChannel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'YouTube Playlist URL'), textChannel);
       }
       message.channel.send({
         embed: {
@@ -110,7 +110,7 @@ exports.exec = (Bastion, message, args) => {
           * Error condition is encountered.
           * @fires error
           */
-          return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), textChannel);
+          return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), textChannel);
         }
         if (info) {
           if (info.length === 0) {
@@ -118,7 +118,7 @@ exports.exec = (Bastion, message, args) => {
             * Error condition is encountered.
             * @fires error
             */
-            return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'playlistNotFound', true), textChannel);
+            return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'playlistNotFound'), textChannel);
           }
           song = info.shift().title;
           message.channel.send({
@@ -154,7 +154,7 @@ exports.exec = (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'song/playlist'), textChannel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'song/playlist'), textChannel);
       }
 
       song = playlist.shift();
@@ -192,7 +192,7 @@ exports.exec = (Bastion, message, args) => {
         return message.channel.send({
           embed: {
             color: Bastion.colors.RED,
-            description: Bastion.strings.error(message.guild.language, 'notFound', true, 'result')
+            description: Bastion.i18n.error(message.guild.language, 'notFound', 'result')
           }
         }).catch(e => {
           Bastion.log.error(e);
@@ -240,7 +240,7 @@ exports.exec = (Bastion, message, args) => {
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'unknown'), Bastion.strings.error(message.guild.language, 'unknown', true), textChannel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'unknown'), textChannel);
   }
 };
 

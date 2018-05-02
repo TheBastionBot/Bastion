@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
     if ([ 'owner', 'guild_admin' ].includes(command.config.module)) {
@@ -30,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'commandNoDisable', true, command.help.name), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'commandNoDisable', command.help.name), message.channel);
     }
 
     let guildModel = await Bastion.database.models.guild.findOne({
@@ -65,7 +65,7 @@ exports.exec = async (Bastion, message, args) => {
   else if (args.module) {
     args.module = args.module.join('_').toLowerCase();
     if ([ 'owner', 'guild_admin' ].includes(args.module)) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t disable commands in this module.', message.channel);
+      return Bastion.emit('error', '', 'You can\'t disable commands in this module.', message.channel);
     }
 
     disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name.toLowerCase());

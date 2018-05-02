@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The message doesn\'t have any content that can be cited.', message.channel);
+      return Bastion.emit('error', '', 'The message doesn\'t have any content that can be cited.', message.channel);
     }
 
     message.channel.send({
@@ -59,7 +59,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'messageNotFound', true), message.channel);
+      Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'messageNotFound'), message.channel);
     }
     else {
       Bastion.log.error(e);

@@ -27,7 +27,7 @@ exports.exec = async (Bastion, message, args) => {
   }
   catch (e) {
     if (e.code === 50035) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), 'File cannot be larger than 256 KB.', message.channel);
+      return Bastion.emit('error', '', 'File cannot be larger than 256 KB.', message.channel);
     }
     Bastion.log.error(e);
   }

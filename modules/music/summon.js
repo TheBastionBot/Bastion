@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'userNoVC', true, message.author.tag), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'userNoVC', message.author.tag), message.channel);
       }
     }
     else {
@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'invalidMusicChannel', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
       }
     }
 
@@ -35,14 +35,14 @@ exports.exec = async (Bastion, message) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'join', voiceChannel.name), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'join', voiceChannel.name), message.channel);
     }
     if (!voiceChannel.speakable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'speak', `in ${voiceChannel.name}`), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'speak', `in ${voiceChannel.name}`), message.channel);
     }
 
     let connection = await voiceChannel.join();

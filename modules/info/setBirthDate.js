@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'date'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'date'), message.channel);
     }
 
     let age = Date.now() - args.date;
@@ -32,14 +32,14 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'ageAbove100', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'ageAbove100'), message.channel);
     }
     else if (age < 13 * year) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'ageBelow13', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'ageBelow13'), message.channel);
     }
 
     let userModel = await Bastion.database.models.user.findOne({

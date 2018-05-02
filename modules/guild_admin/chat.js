@@ -11,7 +11,7 @@ exports.exec = async (Bastion, message) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'noCredentials'), Bastion.strings.error(message.guild.language, 'noCredentials', true, 'Cleverbot API'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noCredentials', 'Cleverbot API'), message.channel);
     }
 
     let guildModel = await Bastion.database.models.guild.findOne({

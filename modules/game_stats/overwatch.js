@@ -21,14 +21,14 @@ exports.exec = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidRegion', true, '`US`, `EU`, `KR` and `CN`'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRegion', '`US`, `EU`, `KR` and `CN`'), message.channel);
   }
   if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'BattleTag'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'BattleTag'), message.channel);
   }
 
   ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
@@ -178,7 +178,7 @@ exports.exec = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
     }
     Bastion.log.error(e);
   });

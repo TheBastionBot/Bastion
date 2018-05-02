@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     let response = await request(options);
 
     if (!Object.keys(response).includes(args.category)) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'category'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'category'), message.channel);
     }
 
     let games = response[args.category].items.map(item => `[${item.name}](https://store.steampowered.com/app/${item.id})`);

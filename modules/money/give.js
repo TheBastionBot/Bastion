@@ -29,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveNoUser', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'giveNoUser'), message.channel);
     }
 
     args.amount = Math.abs(args.amount);
@@ -66,7 +66,7 @@ exports.exec = async (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'giveYourself', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'giveYourself'), message.channel);
       }
 
       let guildMemberModel = await Bastion.database.models.guildMember.findOne({
@@ -83,7 +83,7 @@ exports.exec = async (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, guildMemberModel.dataValues.bastionCurrencies), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'insufficientBalance', guildMemberModel.dataValues.bastionCurrencies), message.channel);
       }
 
       let giveLimit = 0.5;
@@ -92,7 +92,7 @@ exports.exec = async (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'giveLimit', true, giveLimit * 100), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'giveLimit', giveLimit * 100), message.channel);
       }
 
       Bastion.emit('userDebit', message.guild.members.get(user.id), args.amount);

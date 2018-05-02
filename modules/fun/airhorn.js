@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isSpeaking', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isSpeaking'), message.channel);
       }
 
       if (!message.guild.voiceConnection.channel.speakable) {
@@ -74,7 +74,7 @@ exports.exec = async (Bastion, message) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'eitherOneInVC', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'eitherOneInVC'), message.channel);
     }
   }
   catch (e) {

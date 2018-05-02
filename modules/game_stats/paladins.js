@@ -78,7 +78,7 @@ async function fetchAndSend(message, args) {
       * Error condition is encountered.
       * @fires error
       */
-      return message.client.emit('error', message.client.strings.error(message.guild.language, 'notFound'), message.client.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
+      return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
     }
 
     player = player[0];

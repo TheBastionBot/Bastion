@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, '`cron` expression'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', '`cron` expression'), message.channel);
   }
   for (let i = 0; i < cronExpLength; i++) {
     if (!cronConstraints[i].test(args.cronExp[i])) {
@@ -34,7 +34,7 @@ exports.exec = async (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, '`cron` expression'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', '`cron` expression'), message.channel);
     }
   }
 
@@ -43,7 +43,7 @@ exports.exec = async (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
   }
 
   args.cronExp = args.cronExp.join(' ');

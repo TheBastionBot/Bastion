@@ -12,7 +12,7 @@ exports.exec = (Bastion, message, args) => {
     * Error condition is encountered.
     * @fires error
     */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
   if (!args.index) {
@@ -28,7 +28,7 @@ exports.exec = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
   }
 
   let removedSong = message.guild.music.songs.splice(args.index, 1);

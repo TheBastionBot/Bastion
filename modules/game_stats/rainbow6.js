@@ -20,14 +20,14 @@ exports.exec = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidPlatform', true, '`Uplay`, `PS4` and `XOne`'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidPlatform', '`Uplay`, `PS4` and `XOne`'), message.channel);
   }
   if (!/^[a-zA-Z][\w-. ]{2,14}$/.test(args[1] = args.slice(1).join(' '))) {
     /**
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'username'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'username'), message.channel);
   }
 
   r6.stats(args[1], args[0]).then(data => {
@@ -157,7 +157,7 @@ exports.exec = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
   });
 };
 
