@@ -27,10 +27,8 @@ for (let file of commandFiles) {
     Aliases.set(alias.toLowerCase(), file.help.name);
   }
 
-  if (process.stdout.moveCursor) {
+  if (process.stdout.moveCursor && process.stdout.clearLine) {
     process.stdout.moveCursor(0, -1);
-  }
-  if (process.stdout.clearLine) {
     process.stdout.clearLine();
   }
 }
