@@ -53,7 +53,7 @@ exports.exec = async (Bastion, message, args) => {
               },
               {
                 name: 'Description',
-                value: Bastion.strings.command(message.guild.language, command.config.module, command.help.name),
+                value: Bastion.i18n.command(message.guild.language, command.help.name).description,
                 inline: false
               },
               {
