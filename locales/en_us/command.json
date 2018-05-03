@@ -116,7 +116,7 @@
     "module": "fun"
   },
   "garfield": {
-    "description": "Shows you a garfield comic.",
+    "description": "Shows you a Garfield comic.",
     "module": "fun"
   },
   "hello": {
@@ -148,7 +148,7 @@
     "module": "fun"
   },
   "reverse": {
-    "description": "Sends the same message that you had sent, but reversed.",
+    "description": "Sends the same message that you had sent but reversed.",
     "module": "fun"
   },
   "rip": {
@@ -256,7 +256,7 @@
     "module": "game_stats"
   },
   "acrophobia": {
-    "description": "Starts a acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.",
+    "description": "Starts an acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.",
     "module": "games"
   },
   "flip": {
@@ -844,7 +844,7 @@
     "module": "music"
   },
   "play": {
-    "description": "Plays a song or adds the song to the current music queue if Bastion is already playing in your Discord server, specified either by the name, or the link, or from your favourite songs list, or from a YouTube playlist link.",
+    "description": "Plays a song or adds the song to the current music queue if Bastion is already playing in your Discord server, specified either by the name, or the link, or from your favorite songs list, or from a YouTube playlist link.",
     "module": "music"
   },
   "playlist": {
@@ -880,7 +880,7 @@
     "module": "music"
   },
   "summon": {
-    "description": "Asks Bastion to join a voice channel in you Discord server. It joins the default voice channel (if one is set by the Bot Owner) or any channel you are in (if you are the Bot Owner or you have are in the Music Master role).",
+    "description": "Asks Bastion to join a voice channel in you Discord server. It joins the default voice channel (if one is set by the Bot Owner) or any channel you are in (if you are the Bot Owner or you are in the Music Master role).",
     "module": "music"
   },
   "volume": {
@@ -896,7 +896,7 @@
     "module": "owner"
   },
   "blacklist": {
-    "description": "Adds/Removes a specified user to %bastion%'s blacklist. Blacklisted users can not use any of %bastion%'s commands.",
+    "description": "Adds/Removes a specified user to %bastion%'s blacklist. Blacklisted users cannot use any of %bastion%'s commands.",
     "module": "owner"
   },
   "capture": {
@@ -956,7 +956,7 @@
     "module": "owner"
   },
   "scheduleCommand": {
-    "description": "Schedule a command as cron jobs to run at a the specified schedule.\n`cron` expression format:```Second         0-59 or * or range\nMinute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```",
+    "description": "Schedule a command as cron jobs to run at the specified schedule.\n`cron` expression format:```Second         0-59 or * or range\nMinute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```",
     "module": "owner"
   },
   "searchServer": {
@@ -996,7 +996,7 @@
     "module": "owner"
   },
   "todo": {
-    "description": "Adds an specified item to your TODO list.",
+    "description": "Adds a specified item to your TODO list.",
     "module": "owner"
   },
   "updateDatabase": {
