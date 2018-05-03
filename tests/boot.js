@@ -29,8 +29,9 @@ const WebhookHandler = require('../handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
 BASTION.log = require('../handlers/logHandler');
 BASTION.functions = require('../handlers/functionHandler');
-const LanguageHandler = require('../handlers/languageHandler');
-BASTION.strings = new LanguageHandler();
+
+const StringHandler = require('../handlers/stringHandler');
+BASTION.i18n = new StringHandler();
 
 const Sequelize = require('sequelize');
 BASTION.database = new Sequelize(BASTION.credentials.database.URI, {
