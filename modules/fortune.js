@@ -1,18 +1,18 @@
 /**
- * @file catFact command
+ * @file fortune command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
-const catFacts = require('../../data/catFacts.json');
+const fortuneCookies = require('../data/fortuneCookies.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Cat Fact:',
-      description: catFacts[Math.floor(Math.random() * catFacts.length)]
-      // description: catFacts.random()
+      title: 'Fortune:',
+      description: fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
+      // description: fortuneCookies.random()
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -20,15 +20,15 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'cookie' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'catFact',
+  name: 'fortune',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'catfact',
+  usage: 'fortune',
   example: []
 };

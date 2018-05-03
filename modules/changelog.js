@@ -5,7 +5,7 @@
  */
 
 exports.exec = (Bastion, message) => {
-  const CHANGES = require('../../changes.json');
+  const CHANGES = require('../changes.json');
 
   let changes = [];
   for (let section in CHANGES) {

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const emojis = require('../../data/emojis.json');
+const emojis = require('../data/emojis.json');
 
 exports.exec = async (Bastion, message, args) => {
   try {

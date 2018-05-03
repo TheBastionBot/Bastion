@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const quotes = require('../../data/quotes.json');
+const quotes = require('../data/quotes.json');
 
 exports.exec = (Bastion, message, args) => {
   /*

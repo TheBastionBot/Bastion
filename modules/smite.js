@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const credentials = require('../../settings/credentials.json');
+const credentials = require('../settings/credentials.json');
 const HiRez = require('hirez.js');
 const hirez = new HiRez({
   devId: credentials.HiRezDevId,

@@ -1,10 +1,10 @@
 /**
- * @file wouldYouRather command
+ * @file thisOrThat command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
-const question = require('../../data/wouldYouRather.json');
+const question = require('../data/thisOrThat.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({
@@ -18,15 +18,15 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [ 'wouldyou' ],
+  aliases: [ 'thisthat' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'wouldYouRather',
+  name: 'thisOrThat',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'wouldYouRather',
+  usage: 'thisOrThat',
   example: []
 };

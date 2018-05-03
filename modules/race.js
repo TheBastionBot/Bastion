@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const ProgressBar = require('../../utils/progress');
+const ProgressBar = require('../utils/progress');
 
 exports.exec = async (Bastion, message) => {
   try {

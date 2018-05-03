@@ -1,18 +1,16 @@
 /**
- * @file fortune command
+ * @file wouldYouRather command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
-const fortuneCookies = require('../../data/fortuneCookies.json');
+const question = require('../data/wouldYouRather.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Fortune:',
-      description: fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
-      // description: fortuneCookies.random()
+      description: question[Math.floor(Math.random() * question.length)]
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -20,15 +18,15 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [ 'cookie' ],
+  aliases: [ 'wouldyou' ],
   enabled: true
 };
 
 exports.help = {
-  name: 'fortune',
+  name: 'wouldYouRather',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'fortune',
+  usage: 'wouldYouRather',
   example: []
 };

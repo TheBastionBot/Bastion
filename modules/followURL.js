@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const followURL = require('../../functions/followURL');
+const followURL = require('../functions/followURL');
 
 exports.exec = async (Bastion, message, args) => {
   try {
