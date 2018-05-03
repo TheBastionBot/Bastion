@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
     // Include mentioned users too.
     args.users = args.users.concat(message.mentions.users.map(user => user.id));
     if (!args.users.length) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'notFound', true, 'user'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'user'), message.channel);
     }
 
     let settingsModel = await Bastion.database.models.settings.findOne({

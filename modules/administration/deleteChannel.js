@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'channelNotFound', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNotFound'), message.channel);
       }
     }
 
@@ -46,7 +46,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: Bastion.strings.info(message.guild.language, 'deleteChannel', message.author.tag, channel.type, channel.name)
+        description: Bastion.i18n.info(message.guild.language, 'deleteChannel', message.author.tag, channel.type, channel.name)
       }
     });
   }

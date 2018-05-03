@@ -24,13 +24,13 @@ exports.exec = async (Bastion, message, args) => {
       role = args.slice(1).join(' ');
     }
     role = message.guild.roles.find('name', role);
-    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
     else if (!role) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
     }
 
     let member = await message.guild.fetchMember(user.id);
@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'addRole', message.author.tag, role.name, user.tag)
+        description: Bastion.i18n.info(message.guild.language, 'addRole', message.author.tag, role.name, user.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);

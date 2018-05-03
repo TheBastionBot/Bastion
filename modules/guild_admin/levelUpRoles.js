@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message, args) => {
 
       let role = message.guild.roles.get(args.add);
       if (!role) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
       }
 
       await Bastion.database.models.role.upsert({
@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: Bastion.strings.info(message.guild.language, 'addLevelUpRole', message.author.tag, role.name, args.level)
+          description: Bastion.i18n.info(message.guild.language, 'addLevelUpRole', message.author.tag, role.name, args.level)
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -57,7 +57,7 @@ exports.exec = async (Bastion, message, args) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.RED,
-          description: Bastion.strings.info(message.guild.language, 'removeLevelUpRoles', message.author.tag, args.level)
+          description: Bastion.i18n.info(message.guild.language, 'removeLevelUpRoles', message.author.tag, args.level)
         }
       }).catch(e => {
         Bastion.log.error(e);

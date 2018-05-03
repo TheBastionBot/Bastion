@@ -30,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
     }
 
     await role.delete();
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: Bastion.strings.info(message.guild.language, 'deleteRole', message.author.tag, role.name)
+        description: Bastion.i18n.info(message.guild.language, 'deleteRole', message.author.tag, role.name)
       }
     });
   }

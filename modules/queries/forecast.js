@@ -20,7 +20,7 @@ exports.exec = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'weatherNotFound', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'weatherNotFound'), message.channel);
     }
 
     if (!result || result.length < 1) {
@@ -28,7 +28,7 @@ exports.exec = (Bastion, message, args) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), message.channel);
     }
 
     let fields = [];

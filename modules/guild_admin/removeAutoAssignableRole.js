@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'auto-assignable roles'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'auto-assignable roles'), message.channel);
     }
 
     let roles = guildModel.dataValues.autoAssignableRoles;
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
     }
 
     let deletedRoleID = roles[parseInt(args[0]) - 1];

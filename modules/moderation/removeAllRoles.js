@@ -29,14 +29,14 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let member = await message.guild.fetchMember(user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     await member.removeRoles(member.roles);
 
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: Bastion.strings.info(message.guild.language, 'removeAllRoles', message.author.tag, user.tag)
+        description: Bastion.i18n.info(message.guild.language, 'removeAllRoles', message.author.tag, user.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);

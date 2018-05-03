@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
     ];
     let seasonRegExp = new RegExp(`^(${validSeasons.join('|')})$`, 'i');
     if (!seasonRegExp.test(args.season)) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `You have entered an invalid season. Valid seasons are: ${validSeasons.join(', ').toUpperCase()}`, message.channel);
+      return Bastion.emit('error', '', `You have entered an invalid season. Valid seasons are: ${validSeasons.join(', ').toUpperCase()}`, message.channel);
     }
 
     let availableRegions = [
@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
     ];
     let regionRegExp = new RegExp(`^(${availableRegions.join('|')})$`, 'i');
     if (!regionRegExp.test(args.region)) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidRegion', true, availableRegions.join(', ').toUpperCase()), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRegion', availableRegions.join(', ').toUpperCase()), message.channel);
     }
 
     let gameModes = [
@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
     ];
     let modeRegExp = new RegExp(`^(${gameModes.join('|')})$`, 'i');
     if (!modeRegExp.test(args.mode)) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `You have entered an invalid game mode. Valid game modes are: ${gameModes.join(', ').toUpperCase()}`, message.channel);
+      return Bastion.emit('error', '', `You have entered an invalid game mode. Valid game modes are: ${gameModes.join(', ').toUpperCase()}`, message.channel);
     }
 
     let options = {

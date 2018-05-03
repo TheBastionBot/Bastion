@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'command'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
     if (![ 'owner', 'guild_admin' ].includes(command.config.module)) {
@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
 
-    description = Bastion.strings.info(message.guild.language, 'enableCommand', message.author.tag, command.help.name);
+    description = Bastion.i18n.info(message.guild.language, 'enableCommand', message.author.tag, command.help.name);
   }
   else if (args.all) {
     await Bastion.database.models.guild.update({
@@ -61,7 +61,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       fields: [ 'disabledCommands' ]
     });
-    description = Bastion.strings.info(message.guild.language, 'enableAllCommands', message.author.tag);
+    description = Bastion.i18n.info(message.guild.language, 'enableAllCommands', message.author.tag);
   }
   else {
     /**

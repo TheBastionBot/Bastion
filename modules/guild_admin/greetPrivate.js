@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'greetPrivate' ]
       });
       color = Bastion.colors.RED;
-      greetPrivateStats = Bastion.strings.info(message.guild.language, 'disablePrivateGreetingMessages', message.author.tag);
+      greetPrivateStats = Bastion.i18n.info(message.guild.language, 'disablePrivateGreetingMessages', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'greetPrivate' ]
       });
       color = Bastion.colors.GREEN;
-      greetPrivateStats = Bastion.strings.info(message.guild.language, 'enablePrivateGreetingMessages', message.author.tag);
+      greetPrivateStats = Bastion.i18n.info(message.guild.language, 'enablePrivateGreetingMessages', message.author.tag);
     }
 
     message.channel.send({

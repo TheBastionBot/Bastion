@@ -11,7 +11,7 @@ exports.exec = async (Bastion, message, args) => {
     if (args.item) {
       // Allow only one giveaway event per server
       if (giveaways.has(message.guild.id)) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'giveaway'), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isEventInUse', 'giveaway'), message.channel);
       }
 
       // Giveaway item name
@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
 
       // Check if timeout is withing 12 hours
       if (args.timeout < 1 || args.timeout > 12) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), 'Giveaway can only run for at least an hour and at most 12 hours.', message.channel);
+        return Bastion.emit('error', '', 'Giveaway can only run for at least an hour and at most 12 hours.', message.channel);
       }
 
       // Generate a random reaction for the giveaway message
@@ -141,7 +141,7 @@ exports.exec = async (Bastion, message, args) => {
         });
       }
       else {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'There\'s no giveaway running in this server right now.', message.channel);
+        return Bastion.emit('error', '', 'There\'s no giveaway running in this server right now.', message.channel);
       }
     }
     else {

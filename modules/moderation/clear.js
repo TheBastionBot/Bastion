@@ -32,10 +32,10 @@ exports.exec = async (Bastion, message, args) => {
     if (msgs.size < 2 || msgs.length < 2) {
       let error;
       if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
-        error = Bastion.strings.error(message.guild.language, 'singleMessage', true);
+        error = Bastion.i18n.error(message.guild.language, 'singleMessage');
       }
       else {
-        error = Bastion.strings.error(message.guild.language, 'noDeletableMessage', true);
+        error = Bastion.i18n.error(message.guild.language, 'noDeletableMessage');
       }
 
       /**

@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'roleNameLength', true, maxLength), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
     }
 
     let role = message.guild.roles.find('name', args.old);
@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
     }
 
     await role.setName(args.new);
@@ -40,7 +40,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
-        description: Bastion.strings.info(message.guild.language, 'renameRole', message.author.tag, args.old, args.new),
+        description: Bastion.i18n.info(message.guild.language, 'renameRole', message.author.tag, args.old, args.new),
         footer: {
           text: `ID: ${role.id}`
         }

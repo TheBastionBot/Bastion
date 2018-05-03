@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     response = response.list[0];
 
     if (!response) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'word'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'word'), message.channel);
     }
 
     message.channel.send({

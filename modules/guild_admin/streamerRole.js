@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
          * Error condition is encountered.
          * @fires error
          */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
       }
 
       await Bastion.database.models.guild.update({
@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         fields: [ 'streamerRole' ]
       });
-      description = Bastion.strings.info(message.guild.language, 'enableStreamerRole', message.author.tag, role.name);
+      description = Bastion.i18n.info(message.guild.language, 'enableStreamerRole', message.author.tag, role.name);
       color = Bastion.colors.GREEN;
     }
     else if (args.remove) {
@@ -48,7 +48,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         fields: [ 'streamerRole' ]
       });
-      description = Bastion.strings.info(message.guild.language, 'disableStreamerRole', message.author.tag);
+      description = Bastion.i18n.info(message.guild.language, 'disableStreamerRole', message.author.tag);
       color = Bastion.colors.RED;
     }
     else {
@@ -61,7 +61,7 @@ exports.exec = async (Bastion, message, args) => {
       if (guildModel.dataValues.streamerRole) {
         let streamerRole = message.guild.roles.get(guildModel.dataValues.streamerRole);
         if (streamerRole) {
-          description = Bastion.strings.info(message.guild.language, 'streamerRole', message.author.tag, streamerRole.name);
+          description = Bastion.i18n.info(message.guild.language, 'streamerRole', message.author.tag, streamerRole.name);
           color = Bastion.colors.BLUE;
         }
       }

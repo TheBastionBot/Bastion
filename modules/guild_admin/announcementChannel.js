@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         fields: [ 'announcementChannel' ]
       });
-      description = Bastion.strings.info(message.guild.language, 'disableAnnouncementChannel', message.author.tag);
+      description = Bastion.i18n.info(message.guild.language, 'disableAnnouncementChannel', message.author.tag);
       color = Bastion.colors.RED;
     }
     else {
@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         fields: [ 'announcementChannel' ]
       });
-      description = Bastion.strings.info(message.guild.language, 'enableAnnouncementChannel', message.author.tag);
+      description = Bastion.i18n.info(message.guild.language, 'enableAnnouncementChannel', message.author.tag);
       color = Bastion.colors.GREEN;
     }
 

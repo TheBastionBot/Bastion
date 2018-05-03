@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message, args) => {
       let role = message.guild.roles.get(args.role);
 
       if (!role) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
       }
 
       rolesInStore[role.id] = args.add;

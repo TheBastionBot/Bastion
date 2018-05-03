@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message) => {
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isGameInUse', true, 'jumbled word'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isGameInUse', 'jumbled word'), message.channel);
     }
 
     let words = require('../../data/words.json');

@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
       let platforms = [ 'pc', 'xbl', 'psn' ]; // Available platforms for the game
       // If the platform is not valid, return the available platforms
       if (!platforms.includes(args.platform = args.platform.toLowerCase())) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidPlatform', true, `${platforms.join(', ').toUpperCase()}`), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidPlatform', `${platforms.join(', ').toUpperCase()}`), message.channel);
       }
     }
 

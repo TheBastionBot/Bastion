@@ -21,12 +21,12 @@ module.exports = async (oldChannel, newChannel) => {
     let logChannel = newChannel.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
-    let title = newChannel.client.strings.events(newChannel.guild.language, 'channelUpdate');
+    let title = newChannel.client.i18n.event(newChannel.guild.language, 'channelUpdate');
     if (newChannel.type === 'text') {
-      title = newChannel.client.strings.events(newChannel.guild.language, 'textChannelUpdate');
+      title = newChannel.client.i18n.event(newChannel.guild.language, 'textChannelUpdate');
     }
     else if (newChannel.type === 'voice') {
-      title = newChannel.client.strings.events(newChannel.guild.language, 'voiceChannelUpdate');
+      title = newChannel.client.i18n.event(newChannel.guild.language, 'voiceChannelUpdate');
     }
 
     logChannel.send({

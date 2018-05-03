@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let member = await message.guild.fetchMember(user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     args.reason = args.reason.join(' ');
 
@@ -31,21 +31,21 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'Everyone is decent here, no one has been warned.', message.channel);
+      return Bastion.emit('error', '', 'Everyone is decent here, no one has been warned.', message.channel);
     }
     if (!message.guild.warns.hasOwnProperty(user.id)) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), `Nah, ${user.tag} is good guy, he hasn't been warned.`, message.channel);
+      return Bastion.emit('error', '', `Nah, ${user.tag} is good guy, he hasn't been warned.`, message.channel);
     }
 
     delete message.guild.warns[user.id];
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'clearWarn', message.author.tag, user.tag, args.reason)
+        description: Bastion.i18n.info(message.guild.language, 'clearWarn', message.author.tag, user.tag, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);

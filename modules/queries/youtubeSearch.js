@@ -18,20 +18,18 @@ exports.exec = (Bastion, message, args) => {
   args = `ytsearch:${args.join(' ')}`;
   yt.getInfo(args, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
     if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-      let error, errorMessage;
+      let errorMessage;
       if (err && err.stack.includes('No video results')) {
-        error = Bastion.strings.error(message.guild.language, 'notFound');
-        errorMessage = Bastion.strings.error(message.guild.language, 'notFound', true, 'video');
+        errorMessage = Bastion.i18n.error(message.guild.language, 'notFound', 'video');
       }
       else {
-        error = Bastion.strings.error(message.guild.language, 'connection');
-        errorMessage = Bastion.strings.error(message.guild.language, 'connection', true);
+        errorMessage = Bastion.i18n.error(message.guild.language, 'connection');
       }
       /**
        * Error condition is encountered.
        * @fires error
        */
-      return Bastion.emit('error', error, errorMessage, message.channel);
+      return Bastion.emit('error', '', errorMessage, message.channel);
     }
 
     message.channel.send({

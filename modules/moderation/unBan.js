@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'unban', message.author.tag, user.tag, args.reason)
+        description: Bastion.i18n.info(message.guild.language, 'unban', message.author.tag, user.tag, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'user'), message.channel);
+      Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'user'), message.channel);
     }
     else {
       Bastion.log.error(e);

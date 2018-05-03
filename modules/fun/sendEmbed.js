@@ -36,7 +36,7 @@ exports.exec = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `${Bastion.strings.error(message.guild.language, 'invalidEmbedObject', true)}\`\`\`${e.toString()}\`\`\``, message.channel);
+    return Bastion.emit('error', '', `${Bastion.i18n.error(message.guild.language, 'invalidEmbedObject')}\`\`\`${e.toString()}\`\`\``, message.channel);
   }
 };
 

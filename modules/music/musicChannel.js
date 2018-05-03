@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
         fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
       });
       color = Bastion.colors.RED;
-      description = Bastion.strings.info(message.guild.language, 'removeMusicChannels', message.author.tag);
+      description = Bastion.i18n.info(message.guild.language, 'removeMusicChannels', message.author.tag);
     }
     else if (args.id) {
       musicTextChannel = message.channel;
@@ -37,7 +37,7 @@ exports.exec = async (Bastion, message, args) => {
           fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
         });
         color = Bastion.colors.GREEN;
-        description = Bastion.strings.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
+        description = Bastion.i18n.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
       }
       else {
         color = Bastion.colors.RED;
@@ -58,7 +58,7 @@ exports.exec = async (Bastion, message, args) => {
       }
       else {
         color = Bastion.colors.BLUE;
-        description = Bastion.strings.info(message.guild.language, 'musicChannels', musicTextChannel, musicVoiceChannel.name);
+        description = Bastion.i18n.info(message.guild.language, 'musicChannels', musicTextChannel, musicVoiceChannel.name);
       }
     }
 

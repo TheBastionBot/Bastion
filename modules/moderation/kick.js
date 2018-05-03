@@ -22,14 +22,14 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let member = await message.guild.fetchMember(user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     if (!member.kickable) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), Bastion.strings.error(message.guild.language, 'noPermission', true, 'kick', user), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'kick', user), message.channel);
     }
 
     await member.kick(args.reason);
@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: Bastion.strings.info(message.guild.language, 'kick', message.author.tag, user.tag, args.reason),
+        description: Bastion.i18n.info(message.guild.language, 'kick', message.author.tag, user.tag, args.reason),
         footer: {
           text: `ID ${user.id}`
         }
@@ -57,7 +57,7 @@ exports.exec = async (Bastion, message, args) => {
     member.send({
       embed: {
         color: Bastion.colors.RED,
-        description: Bastion.strings.info(message.guild.language, 'kickDM', message.author.tag, message.guild.name, args.reason)
+        description: Bastion.i18n.info(message.guild.language, 'kickDM', message.author.tag, message.guild.name, args.reason)
       }
     }).catch(e => {
       Bastion.log.error(e);

@@ -15,7 +15,7 @@ exports.exec = (Bastion, message, args) => {
     return message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'deleteReminder', message.author.tag)
+        description: Bastion.i18n.info(message.guild.language, 'deleteReminder', message.author.tag)
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -46,7 +46,7 @@ exports.exec = (Bastion, message, args) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isReminderInUse', true, 'reminder --cancel'), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isReminderInUse', 'reminder --cancel'), message.channel);
   }
 
   remindUsers[message.author.id] = Bastion.setTimeout(async () => {
@@ -72,7 +72,7 @@ exports.exec = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.GREEN,
       title: 'Reminder Set',
-      description: Bastion.strings.info(message.guild.language, 'addReminder', message.author.tag, args.message.join(' '), moment.duration(duration).humanize())
+      description: Bastion.i18n.info(message.guild.language, 'addReminder', message.author.tag, args.message.join(' '), moment.duration(duration).humanize())
     }
   }).catch(e => {
     Bastion.log.error(e);

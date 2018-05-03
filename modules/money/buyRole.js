@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
       role = message.guild.roles.find('name', args.role);
     }
     if (!role) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
     }
 
     let shopModel = await Bastion.database.models.shop.findOne({
@@ -54,7 +54,7 @@ exports.exec = async (Bastion, message, args) => {
       guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
       if (rolesInStore[role.id] > guildMemberModel.dataValues.bastionCurrencies) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, guildMemberModel.dataValues.bastionCurrencies), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'insufficientBalance', guildMemberModel.dataValues.bastionCurrencies), message.channel);
       }
 
       message.member.addRole(role);

@@ -10,7 +10,7 @@ module.exports = (permissions, message) => {
   message.channel.send({
     embed: {
       color: message.client.colors.RED,
-      description: message.client.strings.error(message.guild.language, 'bastionMissingPermissions', true, permissions.replace('_', ' '))
+      description: message.client.i18n.error(message.guild.language, 'bastionMissingPermissions', permissions.replace('_', ' '))
     }
   }).catch(e => {
     message.client.log.error(e);

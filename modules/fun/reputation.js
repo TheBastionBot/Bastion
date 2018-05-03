@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'forbidden'), 'You can\'t give reputation to yourself!', message.channel);
+        return Bastion.emit('error', '', 'You can\'t give reputation to yourself!', message.channel);
       }
 
       let [ guildMemberModel, initialized ] = await message.client.database.models.guildMember.findOrBuild({
@@ -79,7 +79,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'cooldown'), `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
+      return Bastion.emit('error', '', `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
     }
   }
   catch (e) {

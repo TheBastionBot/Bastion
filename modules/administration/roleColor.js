@@ -44,7 +44,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidRoleColor', true, colors.join(', ').replace(/_/g, ' ').toTitleCase()), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRoleColor', colors.join(', ').replace(/_/g, ' ').toTitleCase()), message.channel);
     }
 
     args.name = args.name.join(' ');
@@ -56,7 +56,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'roleNotFound', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
     }
 
     await role.setColor(args.color);
@@ -64,7 +64,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: role.color,
-        description: Bastion.strings.info(message.guild.language, 'updateRoleColor', message.author.tag, role.name, args.color.toTitleCase())
+        description: Bastion.i18n.info(message.guild.language, 'updateRoleColor', message.author.tag, role.name, args.color.toTitleCase())
       }
     });
   }

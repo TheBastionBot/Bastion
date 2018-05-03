@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'roleNameLength', true, maxLength), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
     }
 
     let data = roleData(args.name.join(' '), args.color);
@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'createRole', message.author.tag, role.name),
+        description: Bastion.i18n.info(message.guild.language, 'createRole', message.author.tag, role.name),
         footer: {
           text: `ID: ${role.id}`
         }

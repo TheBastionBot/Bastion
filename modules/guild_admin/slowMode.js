@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'slowMode' ]
       });
       color = Bastion.colors.RED;
-      slowModeStats = Bastion.strings.info(message.guild.language, 'disableSlowMode', message.author.tag);
+      slowModeStats = Bastion.i18n.info(message.guild.language, 'disableSlowMode', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'slowMode' ]
       });
       color = Bastion.colors.GREEN;
-      slowModeStats = Bastion.strings.info(message.guild.language, 'enableSlowMode', message.author.tag);
+      slowModeStats = Bastion.i18n.info(message.guild.language, 'enableSlowMode', message.author.tag);
     }
 
     message.channel.send({

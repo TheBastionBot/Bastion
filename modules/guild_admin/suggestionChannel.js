@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'suggestionChannel' ]
       });
       color = Bastion.colors.RED;
-      suggestionChannelStats = Bastion.strings.info(message.guild.language, 'disableSuggestionChannel', message.author.tag);
+      suggestionChannelStats = Bastion.i18n.info(message.guild.language, 'disableSuggestionChannel', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'suggestionChannel' ]
       });
       color = Bastion.colors.GREEN;
-      suggestionChannelStats = Bastion.strings.info(message.guild.language, 'enableSuggestionChannel', message.author.tag);
+      suggestionChannelStats = Bastion.i18n.info(message.guild.language, 'enableSuggestionChannel', message.author.tag);
     }
 
     message.channel.send({

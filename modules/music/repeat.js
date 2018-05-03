@@ -12,7 +12,7 @@ exports.exec = (Bastion, message) => {
      * Error condition is encountered.
      * @fires error
      */
-    return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'emptyQueue'), Bastion.strings.error(message.guild.language, 'notPlaying', true), message.channel);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
   let color, repeatStat = '';
@@ -24,7 +24,7 @@ exports.exec = (Bastion, message) => {
   else {
     color = Bastion.colors.GREEN;
     message.guild.music.repeat = true;
-    repeatStat = Bastion.strings.info(message.guild.language, 'repeatSong', message.author.tag);
+    repeatStat = Bastion.i18n.info(message.guild.language, 'repeatSong', message.author.tag);
   }
 
   message.guild.music.textChannel.send({

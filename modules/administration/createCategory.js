@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'channelNameLength', true, minLength, maxLength), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
     }
 
     let category = await message.guild.createChannel(args.name, 'category');
@@ -29,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'createChannel', message.author.tag, 'category', category.name),
+        description: Bastion.i18n.info(message.guild.language, 'createChannel', message.author.tag, 'category', category.name),
         footer: {
           text: `ID: ${category.id}`
         }

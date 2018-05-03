@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'filterInvites' ]
       });
       color = Bastion.colors.RED;
-      filterInviteStats = Bastion.strings.info(message.guild.language, 'disableInviteFilter', message.author.tag);
+      filterInviteStats = Bastion.i18n.info(message.guild.language, 'disableInviteFilter', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'filterInvites' ]
       });
       color = Bastion.colors.GREEN;
-      filterInviteStats = Bastion.strings.info(message.guild.language, 'enableInviteFilter', message.author.tag);
+      filterInviteStats = Bastion.i18n.info(message.guild.language, 'enableInviteFilter', message.author.tag);
     }
 
     message.channel.send({

@@ -11,7 +11,7 @@ exports.exec = async (Bastion, message) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'noCredentials'), Bastion.strings.error(message.guild.language, 'noCredentials', true, 'Cleverbot API'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noCredentials', 'Cleverbot API'), message.channel);
     }
 
     let guildModel = await Bastion.database.models.guild.findOne({
@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'chat' ]
       });
       color = Bastion.colors.RED;
-      chatStats = Bastion.strings.info(message.guild.language, 'disableChat', message.author.tag);
+      chatStats = Bastion.i18n.info(message.guild.language, 'disableChat', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -46,7 +46,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'chat' ]
       });
       color = Bastion.colors.GREEN;
-      chatStats = Bastion.strings.info(message.guild.language, 'enableChat', message.author.tag);
+      chatStats = Bastion.i18n.info(message.guild.language, 'enableChat', message.author.tag);
     }
 
     message.channel.send({

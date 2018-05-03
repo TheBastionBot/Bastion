@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'greet' ]
       });
       color = Bastion.colors.RED;
-      greetStats = Bastion.strings.info(message.guild.language, 'disableGreetingMessages', message.author.tag);
+      greetStats = Bastion.i18n.info(message.guild.language, 'disableGreetingMessages', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'greet' ]
       });
       color = Bastion.colors.GREEN;
-      greetStats = Bastion.strings.info(message.guild.language, 'enableGreetingMessages', message.author.tag);
+      greetStats = Bastion.i18n.info(message.guild.language, 'enableGreetingMessages', message.author.tag);
     }
 
     message.channel.send({

@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     args.index = args.index - 1;
 
     if (args.index > itemsInShop.length) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'indexRange', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
     }
 
     // Check if user has sufficient balance
@@ -47,7 +47,7 @@ exports.exec = async (Bastion, message, args) => {
     let userBalance = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
     if (userBalance < parseInt(itemsInShop[args.index].value)) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'insufficientBalance'), Bastion.strings.error(message.guild.language, 'insufficientBalance', true, userBalance), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'insufficientBalance', userBalance), message.channel);
     }
 
     // Add item to user's item list

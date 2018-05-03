@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'levelUpMessages' ]
       });
       color = Bastion.colors.RED;
-      levelUpMessageStats = Bastion.strings.info(message.guild.language, 'disableLevelUpMessages', message.author.tag);
+      levelUpMessageStats = Bastion.i18n.info(message.guild.language, 'disableLevelUpMessages', message.author.tag);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message) => {
         fields: [ 'levelUpMessages' ]
       });
       color = Bastion.colors.GREEN;
-      levelUpMessageStats = Bastion.strings.info(message.guild.language, 'enableLevelUpMessages', message.author.tag);
+      levelUpMessageStats = Bastion.i18n.info(message.guild.language, 'enableLevelUpMessages', message.author.tag);
     }
 
     message.channel.send({

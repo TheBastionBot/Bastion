@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isGameInUse', true, 'trivia'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isGameInUse', 'trivia'), message.channel);
     }
 
     let difficulties = [ 'easy', 'medium', 'hard' ];
@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message, args) => {
     let response = await request(options);
 
     if (!response) {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'connection'), Bastion.strings.error(message.guild.language, 'connection', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), message.channel);
     }
 
     response = response.results[0];

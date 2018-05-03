@@ -251,7 +251,7 @@ module.exports = async message => {
          * Error condition is encountered.
          * @fires error
          */
-        return message.client.emit('error', message.client.strings.error(message.guild.language, 'cooldown'), message.client.strings.error(message.guild.language, 'cooldown', true, `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
+        return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'cooldown', `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
       }
     }
 

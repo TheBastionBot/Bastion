@@ -23,7 +23,7 @@ module.exports = async (oldGuild, newGuild) => {
     logChannel.send({
       embed: {
         color: newGuild.client.colors.ORANGE,
-        title: newGuild.client.strings.events(newGuild.language, 'guildUpdate'),
+        title: newGuild.client.i18n.event(newGuild.language, 'guildUpdate'),
         fields: [
           {
             name: 'New Server Name',

@@ -27,7 +27,7 @@ exports.exec = async (Bastion, message, args) => {
       });
 
       color = Bastion.colors.GREEN;
-      mentionSpamStats = Bastion.strings.info(message.guild.language, 'enableMentionSpamFilter', message.author.tag, args.amount, args.action);
+      mentionSpamStats = Bastion.i18n.info(message.guild.language, 'enableMentionSpamFilter', message.author.tag, args.amount, args.action);
     }
     else {
       await Bastion.database.models.guild.update({
@@ -42,7 +42,7 @@ exports.exec = async (Bastion, message, args) => {
         fields: [ 'filterMentions', 'mentionSpamThreshold', 'mentionSpamAction' ]
       });
       color = Bastion.colors.RED;
-      mentionSpamStats = Bastion.strings.info(message.guild.language, 'disableMentionSpamFilter', message.author.tag);
+      mentionSpamStats = Bastion.i18n.info(message.guild.language, 'disableMentionSpamFilter', message.author.tag);
     }
 
     message.channel.send({

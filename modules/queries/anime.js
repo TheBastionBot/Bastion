@@ -63,7 +63,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
     else {
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notFound', true, 'anime'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'anime'), message.channel);
     }
   }
   catch (e) {

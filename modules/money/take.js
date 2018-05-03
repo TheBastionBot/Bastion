@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'takeNoUser', true), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'takeNoUser'), message.channel);
     }
     let reason;
     if (args[2]) {
@@ -77,7 +77,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'takeNoUser', true), message.channel);
+      Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'takeNoUser'), message.channel);
     }
     else {
       Bastion.log.error(e);

@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), Bastion.strings.error(message.guild.language, 'notSet', true, 'whitelisted domain'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'whitelisted domain'), message.channel);
     }
 
     let whitelistDomains = [ ...new Set(guildModel.dataValues.whitelistedDomains) ];

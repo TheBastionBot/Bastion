@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), `You can only add a maximum of ${maxPrefix} prefixes.`, message.channel);
+        return Bastion.emit('error', '', `You can only add a maximum of ${maxPrefix} prefixes.`, message.channel);
       }
       prefix = args.prefix;
       if (args.prefix.some(prefix => prefix.length > prefixMaxLength)) {
@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
         * Error condition is encountered.
         * @fires error
         */
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'prefixRange', true, prefixMaxLength), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'prefixRange', prefixMaxLength), message.channel);
       }
     }
 
@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: Bastion.strings.info(message.guild.language, 'setPrefix', message.author.tag, prefix.join(' '))
+        description: Bastion.i18n.info(message.guild.language, 'setPrefix', message.author.tag, prefix.join(' '))
       }
     }).catch(e => {
       Bastion.log.error(e);

@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), Bastion.strings.error(message.guild.language, 'invalidInput', true, 'language code'), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'language code'), message.channel);
     }
     Bastion.log.error(e);
   }

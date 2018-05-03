@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let member = await message.guild.fetchMember(user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.strings.error(message.guild.language, 'lowerRole', true));
+    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     let color;
     let nickStat = '';
@@ -40,11 +40,11 @@ exports.exec = async (Bastion, message, args) => {
       else {
         if (args.nick < 1) {
           color = Bastion.colors.RED;
-          nickStat = Bastion.strings.info(message.guild.language, 'removeNickname', message.author.tag, user.tag);
+          nickStat = Bastion.i18n.info(message.guild.language, 'removeNickname', message.author.tag, user.tag);
         }
         else {
           color = Bastion.colors.GREEN;
-          nickStat = Bastion.strings.info(message.guild.language, 'setNickname', message.author.tag, user.tag, args.nick);
+          nickStat = Bastion.i18n.info(message.guild.language, 'setNickname', message.author.tag, user.tag, args.nick);
         }
       }
       await member.setNickname(args.nick);

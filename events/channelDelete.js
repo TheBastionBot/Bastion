@@ -20,12 +20,12 @@ module.exports = async channel => {
     let logChannel = channel.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
-    let title = channel.client.strings.events(channel.guild.language, 'channelDelete');
+    let title = channel.client.i18n.event(channel.guild.language, 'channelDelete');
     if (channel.type === 'text') {
-      title = channel.client.strings.events(channel.guild.language, 'textChannelDelete');
+      title = channel.client.i18n.event(channel.guild.language, 'textChannelDelete');
     }
     else if (channel.type === 'voice') {
-      title = channel.client.strings.events(channel.guild.language, 'voiceChannelDelete');
+      title = channel.client.i18n.event(channel.guild.language, 'voiceChannelDelete');
     }
 
     logChannel.send({
