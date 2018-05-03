@@ -120,7 +120,7 @@
     "module": "fun"
   },
   "hello": {
-    "description": "Get greetings from Bastion.",
+    "description": "Get greetings from %bastion%.",
     "module": "fun"
   },
   "leet": {
@@ -184,11 +184,11 @@
     "module": "fun"
   },
   "betFlip": {
-    "description": "Bet a specified amount of Bastion currency on prediction of the outcome of flipping a coin. If you win, you get more Bastion Currencies. If you lose, you lose the amount of currency you have bet.",
+    "description": "Bet %currency.name_plural% on prediction of the outcome of flipping a coin. If you win, you get more of it. But if you lose, you lose the amount you have bet.",
     "module": "gambling"
   },
   "betRoll": {
-    "description": "Bet a specified amount of Bastion currency on prediction of the outcome of rolling a dice. If you win, you get more Bastion Currencies. If you lose, you lose the amount of currency you have bet.",
+    "description": "Bet %currency.name_plural% on prediction of the outcome of rolling a dice. If you win, you get more of it. But if you lose, you lose the amount you have bet.",
     "module": "gambling"
   },
   "sweep": {
@@ -276,7 +276,7 @@
     "module": "games"
   },
   "race": {
-    "description": "Start a race against Bastion.",
+    "description": "Start a race against %bastion%.",
     "module": "games"
   },
   "roll": {
@@ -284,7 +284,7 @@
     "module": "games"
   },
   "rps": {
-    "description": "Play the classic *rock paper scissor* game with Bastion.",
+    "description": "Play the classic *rock paper scissor* game with %bastion%.",
     "module": "games"
   },
   "russianRoulette": {
@@ -332,7 +332,7 @@
     "module": "guild_admin"
   },
   "chat": {
-    "description": "Toggles Bastion's chatting module.",
+    "description": "Toggles %bastion%'s chatting module.",
     "module": "guild_admin"
   },
   "disableCommand": {
@@ -488,11 +488,11 @@
     "module": "guild_admin"
   },
   "setLanguage": {
-    "description": "Sets Bastion's language for the server.",
+    "description": "Sets %bastion%'s language for the server.",
     "module": "guild_admin"
   },
   "setPrefix": {
-    "description": "Sets Bastion's prefix for the server.",
+    "description": "Sets %bastion%'s prefix for the server.",
     "module": "guild_admin"
   },
   "starboard": {
@@ -556,7 +556,7 @@
     "module": "help"
   },
   "terms": {
-    "description": "Read Bastion's Terms of Service.",
+    "description": "Read %bastion%'s Terms of Service.",
     "module": "help"
   },
   "avatar": {
@@ -608,7 +608,7 @@
     "module": "info"
   },
   "ping": {
-    "description": "Shows the response time and average WebSocket ping of Bastion.",
+    "description": "Shows the response time and average WebSocket ping of %bastion%.",
     "module": "info"
   },
   "profile": {
@@ -656,7 +656,7 @@
     "module": "info"
   },
   "stats": {
-    "description": "Shows detailed stats and info of Bastion.",
+    "description": "Shows detailed stats and info of %bastion%.",
     "module": "info"
   },
   "userID": {
@@ -772,7 +772,7 @@
     "module": "moderation"
   },
   "bastionCurrency": {
-    "description": "Shows the amount of Bastion Currencies in the specified user's account.",
+    "description": "Shows the amount of %currency.name_plural% in the specified user's account.",
     "module": "money"
   },
   "buy": {
@@ -788,11 +788,11 @@
     "module": "money"
   },
   "currencyGiveaway": {
-    "description": "Starts a giveaway event for a specific time, users receive the specified amount of Bastion Currencies after the event is concluded.",
+    "description": "Starts a giveaway event for a specific time, users receive the specified amount of %currency.name_plural% after the event is concluded.",
     "module": "money"
   },
   "give": {
-    "description": "Give the specified amount of Bastion Currencies from your account to the specified user. If you are the bot owner, you can give any amount of Bastion Currencies.",
+    "description": "Give the specified amount of %currency.name_plural% from your account to the specified user. If you are the bot owner, you can give any amount of %currency.name_plural%.",
     "module": "money"
   },
   "giveXP": {
@@ -800,7 +800,7 @@
     "module": "money"
   },
   "leaderboard": {
-    "description": "Shows the users topping the chart of Bastion.",
+    "description": "Shows the users topping the chart of %bastion%.",
     "module": "money"
   },
   "myItems": {
@@ -808,15 +808,15 @@
     "module": "money"
   },
   "roleStore": {
-    "description": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with Bastion Currencies, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
+    "description": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with %currency.name_plural%, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
     "module": "money"
   },
   "shop": {
-    "description": "Lists/Adds/Removes items from your server's shop. Listed items in the shop can be bought by anyone, with Bastion Currencies, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit.",
+    "description": "Lists/Adds/Removes items from your server's shop. Listed items in the shop can be bought by anyone, with %currency.name_plural%, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit.",
     "module": "money"
   },
   "take": {
-    "description": "Take the specified amount of Bastion Currencies from the specified user.",
+    "description": "Take the specified amount of %currency.name_plural% from the specified user.",
     "module": "money"
   },
   "clean": {
@@ -832,11 +832,11 @@
     "module": "music"
   },
   "musicMasterRole": {
-    "description": "Adds a role specified by its ID as the Music Master role of Bastion, in your Discord server. Users with this role get access to restricted music commands like `summon`, `play`, etc. and can summon and play music in any voice channel of your Discord server.",
+    "description": "Adds a role specified by its ID as the Music Master role of %bastion%, in your Discord server. Users with this role get access to restricted music commands like `summon`, `play`, etc. and can summon and play music in any voice channel of your Discord server.",
     "module": "music"
   },
   "nowPlaying": {
-    "description": "Shows details of the song currently being played, by Bastion, in your Discord server.",
+    "description": "Shows details of the song currently being played, by %bastion%, in your Discord server.",
     "module": "music"
   },
   "pause": {
@@ -868,7 +868,7 @@
     "module": "music"
   },
   "shuffle": {
-    "description": "Shuffles Bastion's entire music queue of your Discord server.",
+    "description": "Shuffles %bastion%'s entire music queue of your Discord server.",
     "module": "music"
   },
   "skip": {
@@ -896,7 +896,7 @@
     "module": "owner"
   },
   "blacklist": {
-    "description": "Adds/Removes a specified user to Bastion's blacklist. Blacklisted users can not use any of Bastion's commands.",
+    "description": "Adds/Removes a specified user to %bastion%'s blacklist. Blacklisted users can not use any of %bastion%'s commands.",
     "module": "owner"
   },
   "capture": {
@@ -952,7 +952,7 @@
     "module": "owner"
   },
   "resetDatabase": {
-    "description": "Resets all the data from a specified table of Bastion's database.",
+    "description": "Resets all the data from a specified table of %bastion%'s database.",
     "module": "owner"
   },
   "scheduleCommand": {
@@ -964,11 +964,11 @@
     "module": "owner"
   },
   "setActivity": {
-    "description": "Sets the activity of Bastion.",
+    "description": "Sets the activity of %bastion%.",
     "module": "owner"
   },
   "setAvatar": {
-    "description": "Sets the avatar of Bastion.",
+    "description": "Sets the avatar of %bastion%.",
     "module": "owner"
   },
   "setNick": {
@@ -976,15 +976,15 @@
     "module": "owner"
   },
   "setStatus": {
-    "description": "Sets the status of Bastion.",
+    "description": "Sets the status of %bastion%.",
     "module": "owner"
   },
   "setStream": {
-    "description": "Sets the video stream of Bastion.",
+    "description": "Sets the video stream of %bastion%.",
     "module": "owner"
   },
   "setUsername": {
-    "description": "Changes the username of Bastion.",
+    "description": "Changes the username of %bastion%.",
     "module": "owner"
   },
   "shutdown": {
@@ -992,7 +992,7 @@
     "module": "owner"
   },
   "sql": {
-    "description": "Execute SQL query on Bastion's database.",
+    "description": "Execute SQL query on %bastion%'s database.",
     "module": "owner"
   },
   "todo": {
@@ -1000,7 +1000,7 @@
     "module": "owner"
   },
   "updateDatabase": {
-    "description": "Updates Bastion's Database to the current release, if required.",
+    "description": "Updates %bastion%'s Database to the current release, if required.",
     "module": "owner"
   },
   "anime": {
