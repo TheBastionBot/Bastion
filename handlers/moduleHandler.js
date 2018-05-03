@@ -7,32 +7,24 @@
 const fs = require('fs');
 const path = require('path');
 const color = require('chalk');
-const Discord = require('discord.js');
+const { Collection } = require('discord.js');
+const commandInfo = require('../locales/en_us/command.json');
 
 /* eslint-disable no-sync */
-let commands = new Discord.Collection();
-let aliases = new Discord.Collection();
-let modules = fs.readdirSync('./modules/').filter(file => fs.statSync(path.join('./modules/', file)).isDirectory());
+let Commands = new Collection();
+let Aliases = new Collection();
 
-for (let module of modules) {
-  let commandFiles = fs.readdirSync(`./modules/${module}`);
-  process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${module} module...\n`);
-  for (let file of commandFiles) {
-    file = file.substr(0, file.length - 3);
-    process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
-    file = require(`../modules/${module}/${file}`);
-    commands.set(file.help.name.toLowerCase(), file);
-    file.config.module = module;
-    for (let alias of file.config.aliases) {
-      aliases.set(alias.toLowerCase(), file.help.name);
-    }
+let commandFiles = fs.readdirSync(path.resolve('./modules/')).
+  filter(file => !fs.statSync(path.resolve('./modules/', file)).isDirectory());
 
-    if (process.stdout.moveCursor) {
-      process.stdout.moveCursor(0, -1);
-    }
-    if (process.stdout.clearLine) {
-      process.stdout.clearLine();
-    }
+for (let file of commandFiles) {
+  file = file.substr(0, file.length - 3);
+  process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
+  file = require(path.resolve(`./modules/${file}`));
+  Commands.set(file.help.name.toLowerCase(), file);
+  file.config.module = commandInfo[file.help.name].module;
+  for (let alias of file.config.aliases) {
+    Aliases.set(alias.toLowerCase(), file.help.name);
   }
 
   if (process.stdout.moveCursor) {
@@ -43,5 +35,5 @@ for (let module of modules) {
   }
 }
 
-exports.commands = commands;
-exports.aliases = aliases;
+exports.commands = Commands;
+exports.aliases = Aliases;
