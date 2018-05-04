@@ -6,8 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test:lint": "./node_modules/.bin/eslint .",
+    "test:modules": "node tests/modules.js",
     "test:boot": "node tests/boot.js",
-    "test": "npm run test:lint && npm run test:boot",
+    "test": "npm run test:lint && npm run test:modules && npm run test:boot",
     "start": "node index.js"
   },
   "repository": {
