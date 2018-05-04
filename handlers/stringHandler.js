@@ -1,3 +1,9 @@
+/**
+ * @file stringHandler
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 const Locke = require('locke');
 
 const StringHandler = class StringHandler extends Locke {
