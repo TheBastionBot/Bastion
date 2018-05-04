@@ -1,7 +1,7 @@
 /**
  * @file garfield command
  * @author Freako#4817 (249044688571465729)
- * @license MIT
+ * @license GPL-3.0
  */
 
 exports.exec = (Bastion, message) => {

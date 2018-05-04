@@ -1,3 +1,9 @@
+/**
+ * @file Test script to test if commands have been described.
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 const path = require('path');
 const _ = require('lodash');
 let chalk = require('chalk');

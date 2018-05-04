@@ -1,7 +1,7 @@
 /**
  * @file modLog command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 // This feature is absolutely useless because Discord already has audit logs. I'll probably remove this in future.

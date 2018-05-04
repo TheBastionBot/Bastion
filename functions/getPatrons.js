@@ -1,3 +1,9 @@
+/**
+ * @file getPatrons
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 const request = require('request-promise-native');
 const patreon = require('../settings/credentials.json').patreon;
 
