@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const specialIDs = require('../../data/specialIDs.json');
+const specialIDs = require('../data/specialIDs.json');
 
 exports.exec = async (Bastion, message, args) => {
   try {

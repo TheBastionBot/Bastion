@@ -5,7 +5,7 @@
  */
 
 const moment = require('moment');
-const specialIDs = require('../../data/specialIDs.json');
+const specialIDs = require('../data/specialIDs.json');
 
 exports.exec = async (Bastion, message) => {
   try {

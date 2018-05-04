@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const dictionary = require('../../data/piratePhrases.json');
+const dictionary = require('../data/piratePhrases.json');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

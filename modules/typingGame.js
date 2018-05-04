@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const typingArticles = require('../../data/typingArticles.json');
+const typingArticles = require('../data/typingArticles.json');
 let activeChannels = [];
 
 exports.exec = async (Bastion, message) => {

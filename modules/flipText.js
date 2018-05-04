@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const flipText = require('../../data/flipText.json');
+const flipText = require('../data/flipText.json');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

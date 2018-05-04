@@ -1,16 +1,18 @@
 /**
- * @file thisOrThat command
+ * @file catFact command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license MIT
  */
 
-const question = require('../../data/thisOrThat.json');
+const catFacts = require('../data/catFacts.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      description: question[Math.floor(Math.random() * question.length)]
+      title: 'Cat Fact:',
+      description: catFacts[Math.floor(Math.random() * catFacts.length)]
+      // description: catFacts.random()
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -18,15 +20,15 @@ exports.exec = (Bastion, message) => {
 };
 
 exports.config = {
-  aliases: [ 'thisthat' ],
+  aliases: [],
   enabled: true
 };
 
 exports.help = {
-  name: 'thisOrThat',
+  name: 'catFact',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'thisOrThat',
+  usage: 'catfact',
   example: []
 };
