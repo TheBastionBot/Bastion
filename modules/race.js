@@ -1,7 +1,7 @@
 /**
  * @file race command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 const ProgressBar = require('../utils/progress');
