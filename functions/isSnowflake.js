@@ -1,3 +1,9 @@
+/**
+ * @file isSnowflake
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 const { Snowflake } = require('discord.js');
 
 module.exports = (snowflake) => {

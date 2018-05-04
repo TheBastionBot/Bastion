@@ -1,3 +1,9 @@
+/**
+ * @file msUntilMidnight
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 module.exports = () => {
   let midnight = new Date();
   midnight.setHours(24);

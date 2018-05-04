@@ -1,3 +1,9 @@
+/**
+ * @file replaceVariables
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 module.exports = (text, message) => {
   let vars = {
     '{prefix}': message.client.config.prefix[0],

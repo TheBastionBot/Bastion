@@ -1,3 +1,9 @@
+/**
+ * @file getContributors
+ * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @license GPL-3.0
+ */
+
 const request = require('request-promise-native');
 const github = require('../settings/credentials.json').github;
 
