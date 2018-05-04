@@ -3,18 +3,6 @@
     in as much of the template below as you're able.
 -->
 
-#### Purpose of this Pull Request
-<!-- Change [ ] to [X] if a statement is true. -->
-
-- [ ] Non-code changes (e.g. documentation, strings, readme, etc.)
-- [ ] Bug fixes
-- [ ] Improvements/enhancements
-- [ ] Add a feature/command
-- [ ] Remove a feature/command
-- [ ] Add something to the core
-- [ ] Remove something from the core
-- [ ] Other, please explain:
-
 #### Possible drawbacks
 <!--
     Are there any possible side-effects or negative impacts of the code change?
@@ -30,6 +18,6 @@
 #### Checklist
 <!-- For completed items, change [ ] to [x]. -->
 
-- [ ] Test scripts (if any) passes
-- [ ] documentation is changed or added
-- [ ] commit message follows commit guidelines
+- [ ] Test scripts passes
+- [ ] Documentation is changed or added (if applicable)
+- [ ] Commit message follows the [commit guidelines](https://dev.bastionbot.org/contributing/pulls/#commit-message-guidelines)
