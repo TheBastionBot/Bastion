@@ -160,7 +160,7 @@
     "patrons": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](https://patreon.com/bastionbot). But if you're hosting Bastion yourself, and you're a Patreon creator, it will show the list of your Patrons.",
     "ping": "Menunjukkan waktu respon dan rata-rata WebSocket ping dari Bastion.",
     "profile": "Menunjukkan profil pengguna Bastion dari pengguna server Discord anda yang ditentukan.",
-    "xp": "Menunjukkan poin pengalaman dari akun pengguna yang ditentukan.",
+    "rank": "Menunjukkan poin pengalaman dari akun pengguna yang ditentukan.",
     "roleID": "Menunjukkan ID peran tertentu dari server Discord anda.",
     "roleInfo": "Menampilkan informasi dari peran tertentu server Discord anda.",
     "roles": "Daftar semua peran (dengan ID mereka) dari server Discord anda.",
