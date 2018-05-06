@@ -1,7 +1,15 @@
 {
-  "date": "May 1, 2018",
-  "image": "https://i.imgur.com/Zg5ptwZ.gif",
-  "PUBG stats are back!": [
-    "Updated the `pubg` command to use the official PUBG API. Go checkout your PUBG stats! It's been a while."
+  "date": "May 6, 2018",
+  "image": "https://i.imgur.com/FRakJd5.gif",
+  "LEVEL UP FASTER!": [
+    "You will now earn 2 times more XP when you're active in [Bastion HQ](https://discord.gg/fzx8fkt)",
+    "Which, apparently, means that you level up 2 times faster when you're in [Bastion HQ](https://discord.gg/fzx8fkt)."
+  ],
+  "IMPROVEMENTS": [
+    "PUBG stats will now also show your overall points.",
+    "Under-the-hood improvements"
+  ],
+  "FIXES": [
+    "Under-the-hood-fixes"
   ]
 }

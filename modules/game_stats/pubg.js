@@ -74,8 +74,8 @@ exports.exec = async (Bastion, message, args) => {
           author: {
             name: args.player
           },
-          title: 'Season Stats',
-          description: `Won ${stats.wins} matches and lost ${stats.losses} matches out of the ${stats.roundsPlayed} matches played, in ${stats.days} days.`,
+          title: `Player Stats: Season ${args.season.toUpperCase()}`,
+          description: `Won **${stats.wins}** matches and lost **${stats.losses}** matches out of the **${stats.roundsPlayed}** matches played, in **${stats.days}** days, with **${(stats.winPoints + (stats.killPoints * 0.2)).toFixed(2)}** overall points.`,
           fields: [
             {
               name: 'Kills',
