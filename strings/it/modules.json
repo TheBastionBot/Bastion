@@ -160,7 +160,7 @@
     "patrons": "Mostra la lista di persone che supporta continuamente lo sviluppo del progetto del Bot di Bastion diventandone protettori, su [Patreon](https://patreon.com/bastionbot). Ma se stai ospitando da te Bastion e sei un creatore di Patreon, ti mostrerà la lista dei tuoi Pritettori.",
     "ping": "Mostra il tempo di risposta ed il ping medio di WebSocket di Bastion.",
     "profile": "Mostra il profilo utente di Bastion di un utente specificato del tuo server Discord.",
-    "xp": "Mostra i punti esperienza di un account utente specificato.",
+    "rank": "Mostra i punti esperienza di un account utente specificato.",
     "roleID": "Mostra l'ID di un ruolo specificato del tuo server di Discord.",
     "roleInfo": "Mostra informazioni su un ruolo specificato del tuo server di Discord.",
     "roles": "Elenca tutti i ruoli (con i loro ID) del tuo server di Discord.",
