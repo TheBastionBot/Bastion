@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const question = require('../data/thisOrThat.json');
+const question = require('../assets/thisOrThat.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({
