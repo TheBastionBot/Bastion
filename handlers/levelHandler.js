@@ -9,6 +9,9 @@
  * @param {Message} message Discord.js message object
  * @returns {void}
  */
+
+const { bastionGuild } = require('../data/specialIDs.json');
+
 module.exports = async message => {
   try {
     let profile = await message.client.db.get(`SELECT * FROM profiles WHERE userID=${message.author.id}`);
@@ -21,10 +24,12 @@ module.exports = async message => {
       profile.level = parseInt(profile.level);
       profile.bastionCurrencies = parseInt(profile.bastionCurrencies);
 
-      let currentLevel = Math.floor(0.15 * Math.sqrt(profile.xp + 1));
+      let incrementedXP = message.guild.id === bastionGuild ? profile.xp + 2 : profile.xp + 1;
+
+      let currentLevel = Math.floor(0.15 * Math.sqrt(incrementedXP));
 
       if (currentLevel > profile.level) {
-        await message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${profile.xp + 1}, level=${currentLevel} WHERE userID=${message.author.id}`);
+        await message.client.db.run(`UPDATE profiles SET bastionCurrencies=${profile.bastionCurrencies + currentLevel * 5}, xp=${incrementedXP}, level=${currentLevel} WHERE userID=${message.author.id}`);
 
         let guildSettings = await message.client.db.get(`SELECT levelUpMessage FROM guildSettings WHERE guildID=${message.guild.id}`);
         if (!guildSettings.levelUpMessage) return;
@@ -42,7 +47,7 @@ module.exports = async message => {
         });
       }
       else {
-        await message.client.db.run(`UPDATE profiles SET xp=${profile.xp + 1} WHERE userID=${message.author.id}`);
+        await message.client.db.run(`UPDATE profiles SET xp=${incrementedXP} WHERE userID=${message.author.id}`);
       }
 
       // Level up roles
