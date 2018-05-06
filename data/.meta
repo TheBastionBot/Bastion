@@ -1,0 +1,3 @@
+All the files that are dynamically generated when Bastion is in a running
+state are stored in this directory.
+Those files include database, playlist, etc.
