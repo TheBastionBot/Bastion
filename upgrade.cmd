@@ -11,11 +11,11 @@ CD /D %cwd%
 ECHO [Bastion]: Welcome, %USERNAME%!
 ECHO.
 
-IF EXIST data\Bastion.sqlite (
+IF EXIST data\Bastion.db (
   SETLOCAL ENABLEDELAYEDEXPANSION
-  FOR /F %%i in ('powershell -Command "Get-Date -format yyMMddHHmm (Get-Item data\Bastion.sqlite).LastWriteTime"') do SET modifiedDate=%%i
-  ECHO [Bastion]: Backing up database to backup_!modifiedDate!.sqlite...
-  REN data\Bastion.sqlite "backup_!modifiedDate!.sqlite"
+  FOR /F %%i in ('powershell -Command "Get-Date -format yyMMddHHmm (Get-Item data\Bastion.db).LastWriteTime"') do SET modifiedDate=%%i
+  ECHO [Bastion]: Backing up database to backup_!modifiedDate!.db...
+  REN data\Bastion.db "backup_!modifiedDate!.db"
 )
 
 ECHO [Bastion]: Updating Bastion Bot...
@@ -28,7 +28,7 @@ ECHO.
 
 ECHO [Bastion]: Deleting old files...
 RD /S /Q node_modules 2>nul
-DEL /Q data/Bastion.sqlite package-lock.json 2>nul
+DEL /Q data/Bastion.db package-lock.json 2>nul
 ECHO [Bastion]: Done.
 ECHO [Bastion]: Installing new files...
 choco upgrade chocolatey -y

@@ -97,13 +97,13 @@ case $1 in
   if [[ $(screengrepname) ]]; then
     echo -e "${ORANGE}$NAME is currently running.${NC} Use '$0 --stop' to stop it before running the update."
   else
-    if [ -r data/Bastion.sqlite ]; then
-      modifiedDate="$(date -r data/Bastion.sqlite -u +%y%m%d%H%M)"
-      echo "Backing up database to backup_${modifiedDate}.sqlite..."
-      mv data/Bastion.sqlite "data/backup_${modifiedDate}.sqlite"
+    if [ -r data/Bastion.db ]; then
+      modifiedDate="$(date -r data/Bastion.db -u +%y%m%d%H%M)"
+      echo "Backing up database to backup_${modifiedDate}.db..."
+      mv data/Bastion.db "data/backup_${modifiedDate}.db"
     fi
     echo "Deleting old files..."
-    rm -fr node_modules data/Bastion.sqlite package-lock.json screenlog.0
+    rm -fr node_modules data/Bastion.db package-lock.json screenlog.0
     echo "Updating $NAME..."
     git pull origin stable 1>/dev/null || (echo -e "${CYAN}[Bastion]: ${RED} Unable to download update files. Please check your internet connection or if you've made any modifications, revert them.\\n" && exit 1)
     echo "Updating dependencies..."
