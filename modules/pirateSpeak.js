@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const dictionary = require('../data/piratePhrases.json');
+const dictionary = require('../assets/piratePhrases.json');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

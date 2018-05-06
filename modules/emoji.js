@@ -17,7 +17,7 @@ exports.exec = (Bastion, message, args) => {
 
   if (args.name) {
     args.name = args.name.toLowerCase();
-    fs.stat(`./data/emojis/${args.name}.png`, (error, stat) => {
+    fs.stat(`./assets/emojis/${args.name}.png`, (error, stat) => {
       /**
        * If the emoji doesn't exist or is not readable, just return.
        */
@@ -28,7 +28,7 @@ exports.exec = (Bastion, message, args) => {
        */
       if (stat) {
         message.channel.send({
-          files: [ `./data/emojis/${args.name}.png` ]
+          files: [ `./assets/emojis/${args.name}.png` ]
         }).catch(e => {
           Bastion.log.error(e);
         });
@@ -36,7 +36,7 @@ exports.exec = (Bastion, message, args) => {
     });
   }
   else {
-    fs.readdir('./data/emojis', (error, emojis) => {
+    fs.readdir('./assets/emojis', (error, emojis) => {
       if (error) return;
 
       /**
