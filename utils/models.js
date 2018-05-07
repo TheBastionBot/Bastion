@@ -36,7 +36,7 @@ module.exports = (Sequelize, database) => {
     },
     language: {
       type: Sequelize.STRING,
-      defaultValue: 'en'
+      defaultValue: 'en_us'
     },
     greet: {
       type: Sequelize.STRING
