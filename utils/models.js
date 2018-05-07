@@ -29,6 +29,19 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       primaryKey: true
     },
+    enabled: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    premium: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    description: {
+      type: Sequelize.BLOB
+    },
     prefix: {
       type: Sequelize.JSON,
       allowNull: false,
@@ -200,6 +213,16 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    celebrateBirthday: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    reactionPinsMessage: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   });
 
@@ -320,6 +343,30 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       unique: 'guildTextChannel'
     },
+    language: {
+      type: Sequelize.STRING,
+      defaultValue: 'en_us'
+    },
+    fileOnly: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    videoOnly: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    imageOnly: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    soundOnly: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     votingChannel: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -355,6 +402,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    ignoreXP: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     disabledCommands: {
       type: Sequelize.JSON
     },
@@ -376,6 +428,9 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING,
       allowNull: false,
       unique: 'role'
+    },
+    description: {
+      type: Sequelize.BLOB
     },
     ignoreInviteFilter: {
       type: Sequelize.BOOLEAN,
@@ -403,6 +458,11 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     ignoreStarboard: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    ignoreXP: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
