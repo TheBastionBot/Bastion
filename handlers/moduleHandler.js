@@ -14,13 +14,13 @@ const commandInfo = require('../locales/en_us/command.json');
 let Commands = new Collection();
 let Aliases = new Collection();
 
-let commandFiles = fs.readdirSync(path.resolve('./modules/')).
-  filter(file => !fs.statSync(path.resolve('./modules/', file)).isDirectory());
+let commandFiles = fs.readdirSync(path.resolve('./commands/')).
+  filter(file => !fs.statSync(path.resolve('./commands/', file)).isDirectory());
 
 for (let file of commandFiles) {
   file = file.substr(0, file.length - 3);
   process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
-  file = require(path.resolve(`./modules/${file}`));
+  file = require(path.resolve(`./commands/${file}`));
   Commands.set(file.help.name.toLowerCase(), file);
   file.config.module = commandInfo[file.help.name].module;
   for (let alias of file.config.aliases) {
