@@ -58,6 +58,6 @@
     "eslint": "^4.19.1"
   },
   "optionalDependencies": {
-    "node-opus": "~0.2.7"
+    "node-opus": "~0.3.0"
   }
 }
