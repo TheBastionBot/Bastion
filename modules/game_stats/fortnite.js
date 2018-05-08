@@ -29,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let options = {
-      uri: `https://api.fortnitetracker.com/v1/profile/${args.platform}/${args.player}`,
+      uri: `https://api.fortnitetracker.com/v1/profile/${args.platform}/${encodeURIComponent(args.player.join(' '))}`,
       headers: {
         'TRN-Api-Key': Bastion.credentials.fortniteAPIKey,
         'User-Agent': `Bastion/${Bastion.package.version} (${Bastion.user.tag}; ${Bastion.user.id}) https://bastionbot.org`
@@ -78,7 +78,7 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'player', type: String, defaultOption: true },
+    { name: 'player', type: String, multiple: true, defaultOption: true },
     { name: 'platform', type: String, alias: 'p', defaultValue: 'PC' }
   ]
 };
