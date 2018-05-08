@@ -214,6 +214,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    gambling: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     celebrateBirthday: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
