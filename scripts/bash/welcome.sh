@@ -1,4 +1,4 @@
 #!/bin/bash
 
-print-message "Hello, $USER!"
+print::message "Hello, $USER!"
 echo
