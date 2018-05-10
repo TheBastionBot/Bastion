@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd (dirname $0)
+
 echo
 source ./scripts/bash/definitions.sh
 source ./scripts/bash/logger.sh
