@@ -1,6 +1,13 @@
 #!/bin/bash
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
+  exit 1
+fi
+
+
 NAME="BastionBot";
+
 NC="\033[0m";
 RED="\033[0;31m";
 ORANGE="\033[0;33m"

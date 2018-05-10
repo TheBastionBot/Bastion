@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
+  exit 1
+fi
+
+
 function private::bastion_screen_name () {
   screen -ls | grep "\\.${NAME//./\\.}"
 }

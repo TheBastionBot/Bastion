@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
+  exit 1
+fi
+
+
 if ! hash screen &>/dev/null
 then
   print::error "'screen' was not found in your system"

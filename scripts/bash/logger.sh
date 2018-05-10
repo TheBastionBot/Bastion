@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
+  exit 1
+fi
+
+
 function print::message () {
   echo -e "${CYAN}[BASTION]:${NC} $@"
 }
