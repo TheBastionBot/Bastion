@@ -7,17 +7,17 @@ fi
 
 
 function print::message () {
-  echo -e "${CYAN}[BASTION]:${NC} $@"
+  echo -e "${CYAN}[BASTION]:${NC} $*"
 }
 
 function print::info () {
-  echo -e "${GREEN}[   INFO]:${NC} $@"
+  echo -e "${GREEN}[   INFO]:${NC} $*"
 }
 
 function print::warn () {
-  echo -e "${ORANGE}[WARNING]:${NC} $@"
+  echo -e "${ORANGE}[WARNING]:${NC} $*"
 }
 
 function print::error () {
-  echo -e "${RED}[  ERROR]:${NC} $@"
+  echo -e "${RED}[  ERROR]:${NC} $*"
 }
