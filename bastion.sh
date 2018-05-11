@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cd (dirname $0)
+cd "$(dirname "$0")" || cd . || echo "This script should be run where Bastion is located." && exit 1
+
 
 echo
 source ./scripts/bash/definitions.sh
