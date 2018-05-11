@@ -142,6 +142,7 @@ function method::stop () {
   fi
 }
 
+# shellcheck disable=SC2181
 function method::update () {
   if [[ $(private::bastion_screen_name) ]]
   then
@@ -151,7 +152,7 @@ function method::update () {
     print::message "Updating..."
 
     git pull
-    if ! [[ $? -eq 0 ]]
+    if ! [[ "$?" -eq 0 ]]
     then
       print::error "Failed to download files for updating."
       print::message "Contact Bastion Support for help."
@@ -162,7 +163,7 @@ function method::update () {
 
     rm -fr node_modules package-lock.json screenlog.0
     npm i --only=production --no-package-lock
-    if ! [[ $? -eq 0 ]]
+    if ! [[ "$?" -eq 0 ]]
     then
       print::error "Failed to install dependencies."
       print::message "Contact Bastion Support for help."
