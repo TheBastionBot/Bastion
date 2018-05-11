@@ -28,7 +28,7 @@ before_script:
   - cp settings/config_example.json settings/config.json
 script:
   - npm test
-  - shellcheck -x *.sh
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then shellcheck -x *.sh; fi
 after_success:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
