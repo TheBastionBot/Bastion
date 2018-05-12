@@ -478,6 +478,9 @@ module.exports = (Sequelize, database) => {
     level: {
       type: Sequelize.STRING
     },
+    price: {
+      type: Sequelize.TEXT
+    },
     blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -558,9 +561,6 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING,
       allowNull: false,
       primaryKey: true
-    },
-    roles: {
-      type: Sequelize.JSON
     },
     custom: {
       type: Sequelize.JSON

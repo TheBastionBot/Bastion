@@ -820,7 +820,7 @@
     "module": "info"
   },
   "roleStore": {
-    "description": "Lists/Adds/Removes roles from the Role Store of your server. Listed roles in the Role Store can be bought by anyone, with %currency.name_plural%, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
+    "description": "Lists the roles that are available for sale in the Role Store of the server. Listed roles in the Role Store can be bought by anyone, with %currency.name_plural%, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
     "module": "money"
   },
   "roles": {
@@ -850,6 +850,10 @@
   "selfDestruct": {
     "description": "Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.",
     "module": "fun"
+  },
+  "sellRole": {
+    "description": "Sell roles in your server so that server members can buy them with %currency.name_plural%, using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
+    "module": "money"
   },
   "sendEmbed": {
     "description": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](%website%/embedbuilder/).*",
