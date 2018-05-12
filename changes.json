@@ -1,5 +1,5 @@
 {
-  "date": "April 30, 2018",
+  "date": "May 12, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -32,10 +32,12 @@
     "Added `ignoreWordFilter` command. You can now set channels and/or roles to be ignored by the word filter.",
     "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter.",
     "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode.",
-    "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard."
+    "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard.",
+    "Added `sellRole` command to let server managers sell roles in their server's Role Store."
   ],
   "COMMANDS WITH NEW USAGE": [
-    "The `addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details."
+    "The `addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
+    "The `roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead."
   ],
   "RENAMED COMMANDS": [
     "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
