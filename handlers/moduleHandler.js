@@ -15,7 +15,8 @@ let Commands = new Collection();
 let Aliases = new Collection();
 
 let commandFiles = fs.readdirSync(path.resolve('./commands/')).
-  filter(file => !fs.statSync(path.resolve('./commands/', file)).isDirectory());
+  filter(file => !fs.statSync(path.resolve('./commands/', file)).isDirectory()).
+  filter(file => file.endsWith('.js'));
 
 for (let file of commandFiles) {
   file = file.substr(0, file.length - 3);
