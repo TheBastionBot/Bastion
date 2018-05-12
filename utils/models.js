@@ -562,9 +562,6 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       primaryKey: true
     },
-    roles: {
-      type: Sequelize.JSON
-    },
     custom: {
       type: Sequelize.JSON
     }
