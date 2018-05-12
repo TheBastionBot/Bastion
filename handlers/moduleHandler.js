@@ -15,14 +15,23 @@ let Commands = new Collection();
 let Aliases = new Collection();
 
 let commandFiles = fs.readdirSync(path.resolve('./commands/')).
-  filter(file => !fs.statSync(path.resolve('./commands/', file)).isDirectory());
+  filter(file => !fs.statSync(path.resolve('./commands/', file)).isDirectory()).
+  filter(file => file.endsWith('.js'));
 
 for (let file of commandFiles) {
   file = file.substr(0, file.length - 3);
   process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
+
   file = require(path.resolve(`./commands/${file}`));
   Commands.set(file.help.name.toLowerCase(), file);
-  file.config.module = commandInfo[file.help.name].module;
+
+  if (commandInfo[file.help.name]) {
+    file.config.module = commandInfo[file.help.name].module;
+  }
+  else {
+    throw new Error(`The \`${file.help.name}\` command has not been described in the default locale strings.`);
+  }
+
   for (let alias of file.config.aliases) {
     Aliases.set(alias.toLowerCase(), file.help.name);
   }
