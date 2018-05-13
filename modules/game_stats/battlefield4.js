@@ -93,6 +93,9 @@ exports.exec = async (Bastion, message, args) => {
             inline: true
           }
         ],
+        thumbnail: {
+          url: 'https://i.imgur.com/ox55mLK.jpg'
+        },
         footer: {
           text: 'Powered by Battlefield'
         }
