@@ -2,7 +2,7 @@
   "date": "May 13, 2018",
   "image": "https://i.imgur.com/Qw0wBiD.gif",
   "IMPROVEMENTS": [
-    "Under-the-hood improvements"
+    "Add game logos to some game stats commands."
   ],
   "FIXES": [
     "You can now see stats of Fortnite players with non-English usernames."
