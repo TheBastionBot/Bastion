@@ -1047,6 +1047,10 @@
     "description": "Adds a specified item to your TODO list.",
     "module": "owner"
   },
+  "toggleBastion": {
+    "description": "Enable or disable Bastion in your server. Disabling Bastion will prevent everyone, including the server owner, from using it. But if you have enabled any settings that does not need user interaction, it will still work, like starboard, filters, auto assignable roles etc.",
+    "module": "guild_admin"
+  },
   "translate": {
     "description": "Translates your message to the specified language.",
     "module": "queries"
