@@ -1,15 +1,11 @@
 {
-  "date": "May 6, 2018",
-  "image": "https://i.imgur.com/FRakJd5.gif",
-  "LEVEL UP FASTER!": [
-    "You will now earn 2 times more XP when you're active in [Bastion HQ](https://discord.gg/fzx8fkt)",
-    "Which, apparently, means that you level up 2 times faster when you're in [Bastion HQ](https://discord.gg/fzx8fkt)."
-  ],
+  "date": "May 13, 2018",
+  "image": "https://i.imgur.com/Qw0wBiD.gif",
   "IMPROVEMENTS": [
-    "PUBG stats will now also show your overall points.",
-    "Under-the-hood improvements"
+    "Add game logos to some game stats commands.",
+    "Some changes to this command, you just used to check the changelog, unless you haven't noticed it yet!"
   ],
   "FIXES": [
-    "Under-the-hood-fixes"
+    "You can now see stats of Fortnite players with non-English usernames."
   ]
 }

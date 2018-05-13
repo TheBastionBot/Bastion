@@ -29,7 +29,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let options = {
-      uri: `https://api.fortnitetracker.com/v1/profile/${args.platform}/${args.player}`,
+      uri: `https://api.fortnitetracker.com/v1/profile/${args.platform}/${encodeURIComponent(args.player.join(' '))}`,
       headers: {
         'TRN-Api-Key': Bastion.credentials.fortniteAPIKey,
         'User-Agent': `Bastion/${Bastion.package.version} (${Bastion.user.tag}; ${Bastion.user.id}) https://bastionbot.org`
@@ -58,6 +58,9 @@ exports.exec = async (Bastion, message, args) => {
         },
         title: `Fortnite Stats - ${player.platformNameLong}`,
         fields: stats,
+        thumbnail: {
+          url: 'https://i.imgur.com/dfgwClZ.jpg'
+        },
         footer: {
           text: 'Powered by Tracker Network'
         }
@@ -78,7 +81,7 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'player', type: String, defaultOption: true },
+    { name: 'player', type: String, multiple: true, defaultOption: true },
     { name: 'platform', type: String, alias: 'p', defaultValue: 'PC' }
   ]
 };
@@ -89,5 +92,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'fortnite <EPIC_NICKNAME> [ -p <PLATFORM> ]',
-  example: [ 'fortnite k3rn31p4nic -p PC' ]
+  example: [ 'fortnite k3rn31 -p PC' ]
 };
