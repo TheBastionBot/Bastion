@@ -17,7 +17,7 @@ const activeUsers = {};
 module.exports = async message => {
   try {
     let guildModel = await message.client.database.models.guild.findOne({
-      attributes: [ 'prefix', 'language', 'musicTextChannels', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
+      attributes: [ 'enabled', 'prefix', 'language', 'musicTextChannels', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
       where: {
         guildID: message.guild.id
       },
@@ -32,6 +32,8 @@ module.exports = async message => {
         }
       ]
     });
+
+    if (!guildModel.dataValues.enabled) return;
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     guildModel.dataValues.prefix.concat(message.client.config.prefix);
