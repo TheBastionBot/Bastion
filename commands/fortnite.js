@@ -58,6 +58,9 @@ exports.exec = async (Bastion, message, args) => {
         },
         title: `Fortnite Stats - ${player.platformNameLong}`,
         fields: stats,
+        thumbnail: {
+          url: 'https://i.imgur.com/dfgwClZ.jpg'
+        },
         footer: {
           text: 'Powered by Tracker Network'
         }
@@ -89,5 +92,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'fortnite <EPIC_NICKNAME> [ -p <PLATFORM> ]',
-  example: [ 'fortnite k3rn31p4nic -p PC' ]
+  example: [ 'fortnite k3rn31 -p PC' ]
 };
