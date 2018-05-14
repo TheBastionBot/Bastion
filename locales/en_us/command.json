@@ -859,6 +859,10 @@
     "description": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](%website%/embedbuilder/).*",
     "module": "fun"
   },
+  "serverDescription": {
+    "description": "Set a description for the server, which will be shown in the `serverInfo` command.",
+    "module": "info"
+  },
   "serverID": {
     "description": "Shows the ID of your Discord server.",
     "module": "info"
