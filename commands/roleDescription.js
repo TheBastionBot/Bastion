@@ -20,6 +20,7 @@ exports.exec = async (Bastion, message, args) => {
     let roleDescription = args.description && args.description.length
       ? args.join(' ')
       : null;
+    let messageDescription = roleDescription;
     let messageColor = Bastion.colors.RED;
     let messageTitle = 'Role Description Removed';
 
@@ -49,7 +50,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: messageColor,
         title: messageTitle,
-        description: roleDescription,
+        description: messageDescription,
         footer: {
           text: role.name
         }

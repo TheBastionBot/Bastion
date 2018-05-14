@@ -8,6 +8,7 @@ exports.exec = async (Bastion, message, args) => {
   try {
     let charLimit = 256;
     let serverDescription = args.length ? args.join(' ') : null;
+    let messageDescription = serverDescription;
     let messageColor = Bastion.colors.RED;
     let messageTitle = 'Server Description Removed';
 
@@ -35,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: messageColor,
         title: messageTitle,
-        description: serverDescription,
+        description: messageDescription,
         footer: {
           text: message.guild.name
         }
