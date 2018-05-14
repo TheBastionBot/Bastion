@@ -17,7 +17,7 @@ exports.exec = async (Bastion, message) => {
     });
     let guildDescription;
     if (guildModel && guildModel.dataValues.description) {
-      guildDescription = guildModel.dataValues.description;
+      guildDescription = await Bastion.functions.decodeString(guildModel.dataValues.description);
     }
 
     message.channel.send({

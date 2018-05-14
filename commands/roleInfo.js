@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
     });
     let roleDescription;
     if (roleModel && roleModel.dataValues.description) {
-      roleDescription = roleModel.dataValues.description;
+      roleDescription = await Bastion.functions.decodeString(roleModel.dataValues.description);
     }
 
     message.channel.send({
