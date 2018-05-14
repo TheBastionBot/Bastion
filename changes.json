@@ -1,5 +1,5 @@
 {
-  "date": "May 12, 2018",
+  "date": "May 14, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -12,6 +12,7 @@
     "Add any number of level up roles. No limitations here, too!",
     "The `currencyGiveaway` command isn't bot owner only anymore! Now, you can use it, in your own servers, to do Bastion Currency giveaways.",
     "Trigger response supports a whole bunch of variables now.",
+    "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
