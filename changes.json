@@ -13,6 +13,7 @@
     "The `currencyGiveaway` command isn't bot owner only anymore! Now, you can use it, in your own servers, to do Bastion Currency giveaways.",
     "Trigger response supports a whole bunch of variables now.",
     "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
+    "Show if a server is a Bastion premium server in the `serverInfo` command. Premium servers & perks are coming soon™!",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [

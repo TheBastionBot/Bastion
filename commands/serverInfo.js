@@ -10,7 +10,7 @@ exports.exec = async (Bastion, message) => {
     let guildEmojis = nonAnimatedEmojis.size > 0 ? nonAnimatedEmojis.size > 25 ? `${nonAnimatedEmojis.map(e => `<:${e.name}:${e.id}>`).splice(0, 25).join(' ')} and ${nonAnimatedEmojis.size - 25} more.` : nonAnimatedEmojis.map(e => `<:${e.name}:${e.id}>`).join(' ') : '-';
 
     let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'description' ],
+      attributes: [ 'premium', 'description' ],
       where: {
         guildID: message.guild.id
       }
@@ -34,6 +34,11 @@ exports.exec = async (Bastion, message) => {
           {
             name: 'ID',
             value: message.guild.id,
+            inline: true
+          },
+          {
+            name: 'Premium',
+            value: `[${guildModel && guildModel.dataValues.premium}](https://bastionbot.org 'Premium servers & perks are coming soon™')`.toUpperCase(),
             inline: true
           },
           {
