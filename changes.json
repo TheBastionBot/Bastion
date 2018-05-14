@@ -33,7 +33,8 @@
     "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter.",
     "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode.",
     "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard.",
-    "Added `sellRole` command to let server managers sell roles in their server's Role Store."
+    "Added `sellRole` command to let server managers sell roles in their server's Role Store.",
+    "Added `roleDescription` & `serverDescription` commands to set a description for the server & any role in the server."
   ],
   "COMMANDS WITH NEW USAGE": [
     "The `addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
