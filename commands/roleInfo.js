@@ -45,17 +45,20 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
+        author: {
+          name: role.name
+        },
         title: 'Role info',
         description: roleDescription,
         fields: [
           {
-            name: 'Name',
-            value: role.name,
+            name: 'ID',
+            value: role.id,
             inline: true
           },
           {
-            name: 'ID',
-            value: role.id,
+            name: 'Members',
+            value: role.members.size,
             inline: true
           },
           {
@@ -71,11 +74,6 @@ exports.exec = async (Bastion, message, args) => {
           {
             name: 'Created At',
             value: role.createdAt.toUTCString(),
-            inline: true
-          },
-          {
-            name: 'Users',
-            value: role.members.size,
             inline: true
           },
           {
