@@ -4,22 +4,24 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 1) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  let role = message.mentions.roles.first();
-  if (!role) {
-    role = message.guild.roles.find('name', args.join(' '));
-  }
+    let role = message.mentions.roles.first();
+    if (!role) {
+      role = message.guild.roles.find('name', args.join(' '));
+    }
 
-  if (role) {
-
+    if (!role) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+    }
     let permissions = [];
     let serializedPermissions = role.serialize();
     for (let permission in serializedPermissions) {
@@ -28,10 +30,23 @@ exports.exec = (Bastion, message, args) => {
       }
     }
 
+    let roleModel = await Bastion.database.models.role.findOne({
+      attributes: [ 'description' ],
+      where: {
+        roleID: role.id,
+        guildID: message.guild.id
+      }
+    });
+    let roleDescription;
+    if (roleModel && roleModel.dataValues.description) {
+      roleDescription = roleModel.dataValues.description;
+    }
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Role info',
+        description: roleDescription,
         fields: [
           {
             name: 'Name',
@@ -76,12 +91,8 @@ exports.exec = (Bastion, message, args) => {
       Bastion.log.error(e);
     });
   }
-  else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  catch (e) {
+    Bastion.log.error(e);
   }
 };
 
