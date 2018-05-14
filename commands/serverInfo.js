@@ -23,14 +23,12 @@ exports.exec = async (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
+        author: {
+          name: message.guild.name
+        },
         title: 'Server Info',
         description: guildDescription,
         fields: [
-          {
-            name: 'Name',
-            value: message.guild.name,
-            inline: true
-          },
           {
             name: 'ID',
             value: message.guild.id,
@@ -62,13 +60,13 @@ exports.exec = async (Bastion, message) => {
             inline: true
           },
           {
-            name: 'Roles',
-            value: message.guild.roles.size - 1,
+            name: 'Members',
+            value: `${message.guild.members.filter(m => !m.user.bot).size} Cached Users\n${message.guild.members.filter(m => m.user.bot).size} Cached BOTs`,
             inline: true
           },
           {
-            name: 'Members',
-            value: `${message.guild.members.filter(m => !m.user.bot).size} Cached Users\n${message.guild.members.filter(m => m.user.bot).size} Cached BOTs`,
+            name: 'Roles',
+            value: message.guild.roles.size - 1,
             inline: true
           },
           {
