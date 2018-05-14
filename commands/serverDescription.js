@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', '', 'Server description is limited to 256 characters.', message.channel);
       }
 
-      serverDescription = await Bastion.functions.encodeString();
+      serverDescription = await Bastion.functions.encodeString(serverDescription);
       messageColor = Bastion.colors.GREEN;
       messageTitle = 'Server Description Set';
     }
