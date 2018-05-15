@@ -1,6 +1,8 @@
 {
   "date": "May 15, 2018",
   "image": "https://i.imgur.com/zAEeXZV.gif",
-  "IMPROVEMENTS": [],
+  "IMPROVEMENTS": [
+    "You can now send images along with your suggestions using the `suggest` command."
+  ],
   "FIXES": []
 }
