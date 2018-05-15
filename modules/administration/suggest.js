@@ -29,6 +29,9 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         title: 'Suggestion',
         description: args.description.join(' '),
+        image: {
+          url: message.attachments.size && message.attachments.first().height && message.attachments.first().url
+        },
         footer: {
           text: `Suggested by ${message.author.tag}`
         }
