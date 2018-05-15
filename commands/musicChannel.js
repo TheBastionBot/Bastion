@@ -10,14 +10,14 @@ exports.exec = async (Bastion, message, args) => {
 
     if (args.remove) {
       await message.client.database.models.guild.update({
-        musicTextChannels: null,
+        musicTextChannel: null,
         musicVoiceChannel: null
       },
       {
         where: {
           guildID: message.guild.id
         },
-        fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
+        fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
       });
       color = Bastion.colors.RED;
       description = Bastion.i18n.info(message.guild.language, 'removeMusicChannels', message.author.tag);
@@ -27,14 +27,14 @@ exports.exec = async (Bastion, message, args) => {
       musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(args.id);
       if (musicVoiceChannel) {
         await message.client.database.models.guild.update({
-          musicTextChannels: musicTextChannel.id,
+          musicTextChannel: musicTextChannel.id,
           musicVoiceChannel: musicVoiceChannel.id
         },
         {
           where: {
             guildID: message.guild.id
           },
-          fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
+          fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
         });
         color = Bastion.colors.GREEN;
         description = Bastion.i18n.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);

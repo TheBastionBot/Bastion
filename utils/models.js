@@ -101,7 +101,7 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
-    musicTextChannels: {
+    musicTextChannel: {
       type: Sequelize.TEXT,
       unique: true
     },
