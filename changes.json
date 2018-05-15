@@ -1,11 +1,6 @@
 {
-  "date": "May 13, 2018",
-  "image": "https://i.imgur.com/Qw0wBiD.gif",
-  "IMPROVEMENTS": [
-    "Add game logos to some game stats commands.",
-    "Some changes to this command, you just used to check the changelog, unless you haven't noticed it yet!"
-  ],
-  "FIXES": [
-    "You can now see stats of Fortnite players with non-English usernames."
-  ]
+  "date": "May 15, 2018",
+  "image": "https://i.imgur.com/zAEeXZV.gif",
+  "IMPROVEMENTS": [],
+  "FIXES": []
 }
