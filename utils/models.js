@@ -102,7 +102,7 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     musicTextChannel: {
-      type: Sequelize.TEXT,
+      type: Sequelize.STRING,
       unique: true
     },
     musicVoiceChannel: {
