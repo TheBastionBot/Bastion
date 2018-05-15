@@ -42,7 +42,7 @@
     "overwatch-js": "~1.6.1",
     "pokedex-api": "~1.1.1",
     "rainbowsix-api-node": "~0.0.1",
-    "request": "~2.85.0",
+    "request": "~2.86.0",
     "request-promise-native": "~1.0.5",
     "sequelize": "~4.37.1",
     "snekfetch": "~4.0.0",
