@@ -12,13 +12,11 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
   }
 
-  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
+  if (message.guild.music.textChannelID && message.guild.music.textChannelID !== message.channel.id) {
+    return Bastion.log.info('Music channels have been set, so music commands will only work in the Music Text Channel.');
+  }
 
   if (!message.guild.music.songs || !message.guild.music.songs.length) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
