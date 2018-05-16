@@ -17,7 +17,7 @@ const activeUsers = {};
 module.exports = async message => {
   try {
     let guildModel = await message.client.database.models.guild.findOne({
-      attributes: [ 'enabled', 'prefix', 'language', 'musicTextChannel', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
+      attributes: [ 'enabled', 'prefix', 'language', 'music', 'musicTextChannel', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
       where: {
         guildID: message.guild.id
       },
@@ -48,6 +48,8 @@ module.exports = async message => {
     if (!message.guild.music) {
       message.guild.music = {};
     }
+    // Set music support status of the guild.
+    message.guild.music.enabled = guildModel.dataValues.music;
     // If any of the music channels have been removed, delete them from the database.
     if (!message.guild.channels.has(guildModel.dataValues.musicTextChannel) || !message.guild.channels.has(guildModel.dataValues.musicVoiceChannel)) {
       await message.client.database.models.guild.update({
