@@ -12,13 +12,11 @@ exports.exec = (Bastion, message) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
   }
 
-  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
+  if (message.guild.music.textChannelID && message.guild.music.textChannelID !== message.channel.id) {
+    return Bastion.log.info('Music channels have been set, so music commands will only work in the Music Text Channel.');
+  }
 
   if (!message.guild.music.songs || !message.guild.music.songs.length) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
@@ -26,7 +24,7 @@ exports.exec = (Bastion, message) => {
     if (!message.guild.music.skipVotes.includes(message.author.id)) {
       message.guild.music.skipVotes.push(message.author.id);
     }
-    if (message.guild.music.skipVotes.length >= parseInt((message.guild.voiceConnection.channel/* voiceChannel */.members.size - 1) / 2)) {
+    if (message.guild.music.skipVotes.length >= parseInt((message.guild.voiceConnection.channel.members.size - 1) / 2)) {
       message.guild.music.textChannel.send({
         embed: {
           color: Bastion.colors.GREEN,
@@ -41,7 +39,7 @@ exports.exec = (Bastion, message) => {
     else {
       message.guild.music.textChannel.send({
         embed: {
-          description: `${parseInt((message.guild.voiceConnection.channel/* voiceChannel */.members.size - 1) / 2) - message.guild.music.skipVotes.length} votes required to skip the current song.`
+          description: `${parseInt((message.guild.voiceConnection.channel.members.size - 1) / 2) - message.guild.music.skipVotes.length} votes required to skip the current song.`
         }
       }).catch(e => {
         Bastion.log.error(e);
