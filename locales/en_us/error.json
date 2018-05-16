@@ -10,6 +10,8 @@
   "commandUsage": "That's not how you use the `%var%` command. See the usage below to know how to use the command.",
   "connection": "Some error has occurred while receiving data from the server. Please try again later.",
   "cooldown": "%var% you've recently used this command. Please try again later.\n`%var%` command can only be used once in **%var%** minutes.",
+  "musicDisabled": "Music is not enabled in this server. Ask the bot owner to enable it before you can use music commands.",
+  "musicDisabledPublic": "Music is disabled in the Public Bastion due to the maintenance cost of supporting music in soooo many Discord servers that Bastion is in.\n\nBut don't worry, you can host Bastion yourself if you want music.\nOtherwise our team can host a private Bastion for you, if you [become a Patron](%patreon%) for the respective tier.\n\nFor more info. ask in [%bastion.hq.name%](%bastion.hq.invite%)",
   "serverNotFound": "%bastion% cannot find the server at %var%.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may have been timed out, try again later.",
   "eitherOneInVC": "Either one of us should be in a voice channel.",
   "favSongsNotFound": "There are no songs in your favorite songs list.",
