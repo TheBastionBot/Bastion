@@ -9,6 +9,13 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
 exports.exec = (Bastion, message, args) => {
+  if (!message.guild.music.enabled) {
+    if (Bastion.user.id === '267035345537728512') {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
+    }
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  }
+
   if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
 
   if (!args.song && !args.ytpl && !args.playlist) {

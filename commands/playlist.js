@@ -8,6 +8,13 @@ const jsonDB = require('node-json-db');
 const db = new jsonDB('./data/playlist', true, true);
 
 exports.exec = (Bastion, message, args) => {
+  if (!message.guild.music.enabled) {
+    if (Bastion.user.id === '267035345537728512') {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
+    }
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  }
+
   if (!args.song) {
     db.reload();
     let title = 'Saved Playlists', color = Bastion.colors.BLUE, playlist = db.getData('/');

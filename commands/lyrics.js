@@ -8,6 +8,13 @@ const request = require('request-promise-native');
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    if (!message.guild.music.enabled) {
+      if (Bastion.user.id === '267035345537728512') {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
+      }
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+    }
+
     if (!args.song) {
       /**
       * The command was ran with invalid parameters.
