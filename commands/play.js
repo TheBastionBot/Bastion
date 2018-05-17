@@ -4,11 +4,9 @@
  * @license GPL-3.0
  */
 
-const yt = require('youtube-dl');
-const jsonDB = require('node-json-db');
-const db = new jsonDB('./data/playlist', true, true);
+const youtubeDL = require('youtube-dl');
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!message.guild.music.enabled) {
     if (Bastion.user.id === '267035345537728512') {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
@@ -16,9 +14,12 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
   }
 
-  if (message.guild.music.textChannelID && message.channel.id !== message.guild.music.textChannelID) return Bastion.log.info('Music channels have been set, so music commands will only work in the music text channel.');
+  if (message.guild.music.textChannelID && message.guild.music.textChannelID !== message.channel.id) {
+    return Bastion.log.info('Music channels have been set, so music commands will only work in the Music Text Channel.');
+  }
 
-  if (!args.song && !args.ytpl && !args.playlist) {
+
+  if (!args.song) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -26,55 +27,62 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let voiceChannel, textChannel, vcStats;
-  if (message.guild.voiceConnection) {
-    voiceChannel = message.guild.voiceConnection.channel;
-    textChannel = message.channel;
+
+  let voiceConnection = message.guild.voiceConnection, voiceChannel, textChannel, vcStats;
+
+  if (voiceConnection) {
+    voiceChannel = voiceConnection.channel;
+    textChannel = message.guild.music.textChannel || message.channel;
+
     vcStats = Bastion.i18n.error(message.guild.language, 'userNoSameVC', message.author.tag);
   }
-  else if (message.guild.music.textChannelID && message.guild.music.voiceChannelID) {
-    if (!(voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID)) || !(textChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID))) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
+  else {
+    if (message.guild.music.textChannelID && message.guild.music.voiceChannelID) {
+      voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
+      textChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID);
+
+      if (!voiceChannel || !textChannel) {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
+      }
+
+      vcStats = Bastion.i18n.error(message.guild.language, 'userNoMusicChannel', message.author.tag, voiceChannel.name);
+    }
+    else if (Bastion.credentials.ownerId.includes(message.author.id) || message.member.roles.has(message.guild.music.masterRoleID)) {
+      voiceChannel = message.member.voiceChannel;
+      textChannel = message.channel;
+
+      if (!voiceChannel) {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'userNoVC', message.author.tag), message.channel);
+      }
+    }
+    else {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicChannelNotFound'), message.channel);
     }
     if (!voiceChannel.joinable) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'join', voiceChannel.name), message.channel);
     }
-    if (!voiceChannel.speakable) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'speak', `in ${voiceChannel.name}`), message.channel);
-    }
-    vcStats = Bastion.i18n.error(message.guild.language, 'userNoMusicChannel', message.author.tag, voiceChannel.name);
-  }
-  else {
-    /**
-    * Error condition is encountered.
-    * @fires error
-    */
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicChannelNotFound'), message.channel);
+
+    voiceConnection = await voiceChannel.join();
   }
 
-  if (textChannel.id !== message.channel.id) return Bastion.log.info(`Music commands will only work in ${textChannel.name} for this session.`);
-  if (voiceChannel.members.get(message.author.id) === undefined) {
-    /**
-    * Error condition is encountered.
-    * @fires error
-    */
+
+  if (!voiceChannel.speakable) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'speak', `in ${voiceChannel.name}`), message.channel);
+  }
+  if (textChannel.id !== message.channel.id) {
+    return Bastion.log.info(`Music commands will only work in the ${textChannel.name} text channel for this session.`);
+  }
+  if (!voiceChannel.members.get(message.author.id)) {
     return Bastion.emit('error', '', vcStats, message.channel);
   }
 
+  message.guild.me.setMute(false).catch(() => {});
+  message.guild.me.setDeaf(true).catch(() => {});
+
+
   message.guild.music.voiceChannel = voiceChannel;
   message.guild.music.textChannel = textChannel;
+
 
   if (!message.guild.music.hasOwnProperty('songs')) {
     message.guild.music.songs = [];
@@ -89,175 +97,65 @@ exports.exec = (Bastion, message, args) => {
     message.guild.music.skipVotes = [];
   }
 
-  let song = '';
-  try {
-    if (args.song) {
-      song = args.song.join(' ');
+
+  let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
+
+  let youtubeDLOptions = [
+    '--quiet',
+    '--ignore-errors',
+    '--simulate',
+    '--no-warnings',
+    '--format=bestaudio[protocol^=http]',
+    `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
+    '--referer=https://bastionbot.org',
+    '--youtube-skip-dash-manifest'
+  ];
+  youtubeDL.getInfo(songURL, youtubeDLOptions, (error, info) => {
+    if (error || !info.format_id || info.format_id.startsWith('0')) {
+      Bastion.log.error(error || info);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'result'), message.channel);
     }
-    else if (args.ytpl) {
-      if (!/^(http[s]?:\/\/)?(www\.)?youtube\.com\/playlist\?list=([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.ytpl)) {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'YouTube Playlist URL'), textChannel);
-      }
-      message.channel.send({
-        embed: {
-          description: 'Processing playlist...'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
 
-      yt.getInfo(args.ytpl, [ '-q', '-i', '--skip-download', '--no-warnings', '--flat-playlist', '--format=bestaudio[protocol^=http]' ], (err, info) => {
-        if (err) {
-          Bastion.log.error(err);
-          /**
-          * Error condition is encountered.
-          * @fires error
-          */
-          return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), textChannel);
-        }
-        if (info) {
-          if (info.length === 0) {
-            /**
-            * Error condition is encountered.
-            * @fires error
-            */
-            return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'playlistNotFound'), textChannel);
-          }
-          song = info.shift().title;
-          message.channel.send({
-            embed: {
-              description: `Adding ${info.length} songs to the queue...`
-            }
-          }).catch(e => {
-            Bastion.log.error(e);
-          });
-          // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-          info.forEach(e => {
-            message.guild.music.songs.push({
-              url: `https://www.youtube.com/watch?v=${e.url}`,
-              id: e.url,
-              title: e.title,
-              thumbnail: '',
-              duration: e.duration,
-              requester: message.author.tag
-            });
-          });
-        }
-      });
-    }
-    else if (args.playlist) {
-      let playlist;
 
-      db.reload();
-      playlist = db.getData('/');
-      playlist = playlist[args.playlist.join(' ')];
-
-      if (!playlist || playlist.length === 0) {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'song/playlist'), textChannel);
-      }
-
-      song = playlist.shift();
-
-      message.channel.send({
-        embed: {
-          description: `Adding ${playlist.length + 1} favourite songs to the queue...`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-
-      // TODO: This executes before `args` is added to the queue, so the first song (`args`) is added later in the queue. Using setTimeout or flags is inefficient, find an efficient way to fix this!
-      playlist.forEach(e => {
-        e = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(e) ? e : `ytsearch:${e}`;
-        yt.getInfo(e, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
-          if (err || info.format_id === undefined || info.format_id.startsWith('0')) return;
-          message.guild.music.songs.push({
-            url: info.formats[info.formats.length - 1].url,
-            id: info.id,
-            title: info.title,
-            thumbnail: info.thumbnail,
-            duration: info.duration,
-            requester: message.author.tag
-          });
-        });
-      });
-    }
-    else return;
-
-    song = /^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(song) ? song : `ytsearch:${song}`;
-
-    yt.getInfo(song, [ '-q', '-i', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
-      if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-        return message.channel.send({
-          embed: {
-            color: Bastion.colors.RED,
-            description: Bastion.i18n.error(message.guild.language, 'notFound', 'result')
-          }
-        }).catch(e => {
-          Bastion.log.error(e);
-        });
-      }
-
-      message.guild.music.songs.push({
-        url: info.formats[info.formats.length - 1].url,
-        id: info.id,
-        title: info.title,
-        thumbnail: info.thumbnail,
-        duration: info.duration,
-        requester: message.author.tag
-      });
-      textChannel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          title: 'Added to the queue',
-          url: info.id ? `https://youtu.be/${info.id}` : '',
-          description: info.title,
-          thumbnail: {
-            url: info.thumbnail
-          },
-          footer: {
-            text: `Position: ${message.guild.music.songs.length} • Duration: ${info.duration || 'N/A'} • Requester: ${message.author.tag}`
-          }
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-      if (message.guild.music && message.guild.music.playing) return;
-
-      voiceChannel.join().then(connection => {
-        message.guild.me.setDeaf(true).catch(() => {});
-
-        startStreamDispatcher(message.guild, connection);
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    message.guild.music.songs.push({
+      url: info.formats[info.formats.length - 1].url,
+      id: info.id,
+      title: info.title,
+      thumbnail: info.thumbnail,
+      duration: info.duration,
+      requester: message.author.tag
     });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-    /**
-    * Error condition is encountered.
-    * @fires error
-    */
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'unknown'), textChannel);
-  }
+
+    textChannel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Added to the queue',
+        url: info.id ? `https://youtu.be/${info.id}` : '',
+        description: info.title,
+        thumbnail: {
+          url: info.thumbnail
+        },
+        footer: {
+          text: `Position: ${message.guild.music.songs.length} • Duration: ${info.duration || 'N/A'} • Requester: ${message.author.tag}`
+        }
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+
+
+    if (message.guild.music.playing) return;
+
+
+    startStreamDispatcher(message.guild, voiceConnection);
+  });
 };
 
 exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'song', type: String, multiple: true, defaultOption: true },
-    { name: 'ytpl', type: String, alias: 'l' },
-    { name: 'playlist', type: String, multiple: true, alias: 'p', defaultValue: [ 'default' ] }
+    { name: 'song', type: String, multiple: true, defaultOption: true }
   ]
 };
 
@@ -266,8 +164,8 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'play < name | song_link | -l <playlist_link> | -p [Playlist Name] >',
-  example: [ 'play Shape of you', 'play -l https://www.youtube.com/playlist?list=PL4zQ6RXLMCJx4RD3pyzRX4QYFubtCdn_k', 'play -p My Favs', 'play -p' ]
+  usage: 'play < SONG NAME | SONG_LINK >',
+  example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=fNVUTgd4pio' ]
 };
 
 /**
@@ -278,7 +176,7 @@ exports.help = {
  * @returns {void}
  */
 function startStreamDispatcher(guild, connection) {
-  if ((connection.channel && connection.channel.members.size < 2) || guild.music.songs[0] === undefined) {
+  if (!guild.music.songs[0] || connection.channel.members.size <= 1) {
     if (guild.client.config.music && guild.client.config.music.status) {
       guild.client.user.setActivity(typeof guild.client.config.game.name === 'string' ? guild.client.config.game.name : guild.client.config.game.name.length ? guild.client.config.game.name[0] : null,
         {
@@ -289,7 +187,7 @@ function startStreamDispatcher(guild, connection) {
     }
 
     let description;
-    if (guild.music.songs[0] === undefined) {
+    if (!guild.music.songs[0]) {
       description = 'Exiting voice channel.';
     }
     else {
@@ -310,7 +208,12 @@ function startStreamDispatcher(guild, connection) {
     });
   }
 
-  guild.music.dispatcher = connection.playStream(yt(guild.music.songs[0].url), { passes: (guild.client.config.music && guild.client.config.music.passes) || 1, bitrate: 'auto' });
+  let stream = youtubeDL(guild.music.songs[0].url);
+  let streamOptions = {
+    passes: (guild.client.config.music && guild.client.config.music.passes) || 1,
+    bitrate: 'auto'
+  };
+  guild.music.dispatcher = connection.playStream(stream, streamOptions);
   guild.music.playing = true;
 
   guild.music.textChannel.send({
@@ -351,7 +254,7 @@ function startStreamDispatcher(guild, connection) {
   guild.music.dispatcher.on('error', (err) => {
     guild.music.playing = false;
     guild.music.songs.shift();
-    startStreamDispatcher(guild, connection);
-    return guild.client.log.error(err);
+    guild.client.log.error(err);
+    return startStreamDispatcher(guild, connection);
   });
 }
