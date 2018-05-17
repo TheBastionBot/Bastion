@@ -35,7 +35,7 @@
   "lowerRole": "You do not have permission to use this command on that role.",
   "messageNotFound": "The specified message was not found.",
   "minBet": "Minimum bet amount is %var% %currency.symbol%.",
-  "musicChannelNotFound": "No default music channels has been set. So, only the bot owner or users in the Music Master role can use this command.",
+  "musicChannelNotFound": "No default music channels has been set. So, only the bot owner or users in the Music Master role can use this command when I'm not already in a voice channel.",
   "noCredentials": "No credentials were found for %var%.",
   "noDeletableMessage": "No message was found that could be deleted.",
   "noLiveStream": "No live stream found for the channel %var%.",
