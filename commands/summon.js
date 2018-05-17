@@ -36,6 +36,9 @@ exports.exec = async (Bastion, message) => {
           return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
         }
       }
+      else {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicChannelNotFound'), message.channel);
+      }
 
       if (!voiceChannel) {
         return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'userNoVC', message.author.tag), message.channel);
