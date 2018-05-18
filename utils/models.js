@@ -539,6 +539,10 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING,
       allowNull: false
     },
+    creator: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     songs: {
       type: Sequelize.JSON
     }
