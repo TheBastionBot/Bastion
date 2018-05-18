@@ -97,7 +97,7 @@ exports.exec = async (Bastion, message, args) => {
     message.guild.music.skipVotes = [];
   }
 
-
+  args.song = args.song.join(' ');
   let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
 
   let youtubeDLOptions = [
@@ -118,7 +118,7 @@ exports.exec = async (Bastion, message, args) => {
 
 
     message.guild.music.songs.push({
-      url: info.formats[info.formats.length - 1].url,
+      url: info.url,
       id: info.id,
       title: info.title,
       thumbnail: info.thumbnail,
