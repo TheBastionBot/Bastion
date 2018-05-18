@@ -4,125 +4,131 @@
  * @license GPL-3.0
  */
 
+const util = require('util');
 const youtubeDL = require('youtube-dl');
+const getSongInfo = util.promisify(youtubeDL.getInfo);
 
 exports.exec = async (Bastion, message, args) => {
-  if (!message.guild.music.enabled) {
-    if (Bastion.user.id === '267035345537728512') {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
-    }
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
-  }
-
-  if (message.guild.music.textChannelID && message.guild.music.textChannelID !== message.channel.id) {
-    return Bastion.log.info('Music channels have been set, so music commands will only work in the Music Text Channel.');
-  }
-
-
-  if (!args.song) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
-
-
-  let voiceConnection = message.guild.voiceConnection, voiceChannel, textChannel, vcStats;
-
-  if (voiceConnection) {
-    voiceChannel = voiceConnection.channel;
-    textChannel = message.guild.music.textChannel || message.channel;
-
-    vcStats = Bastion.i18n.error(message.guild.language, 'userNoSameVC', message.author.tag);
-  }
-  else {
-    if (message.guild.music.textChannelID && message.guild.music.voiceChannelID) {
-      voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
-      textChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID);
-
-      if (!voiceChannel || !textChannel) {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
+  try {
+    if (!message.guild.music.enabled) {
+      if (Bastion.user.id === '267035345537728512') {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
       }
-
-      vcStats = Bastion.i18n.error(message.guild.language, 'userNoMusicChannel', message.author.tag, voiceChannel.name);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
     }
-    else if (Bastion.credentials.ownerId.includes(message.author.id) || message.member.roles.has(message.guild.music.masterRoleID)) {
-      voiceChannel = message.member.voiceChannel;
-      textChannel = message.channel;
 
-      if (!voiceChannel) {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'userNoVC', message.author.tag), message.channel);
-      }
+    if (message.guild.music.textChannelID && message.guild.music.textChannelID !== message.channel.id) {
+      return Bastion.log.info('Music channels have been set, so music commands will only work in the Music Text Channel.');
+    }
+
+
+    if (!args.song) {
+      /**
+      * The command was ran with invalid parameters.
+      * @fires commandUsage
+      */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+
+    let voiceConnection = message.guild.voiceConnection, voiceChannel, textChannel, vcStats;
+
+    if (voiceConnection) {
+      voiceChannel = voiceConnection.channel;
+      textChannel = message.guild.music.textChannel || message.channel;
+
+      vcStats = Bastion.i18n.error(message.guild.language, 'userNoSameVC', message.author.tag);
     }
     else {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicChannelNotFound'), message.channel);
+      if (message.guild.music.textChannelID && message.guild.music.voiceChannelID) {
+        voiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
+        textChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID);
+
+        if (!voiceChannel || !textChannel) {
+          return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidMusicChannel'), message.channel);
+        }
+
+        vcStats = Bastion.i18n.error(message.guild.language, 'userNoMusicChannel', message.author.tag, voiceChannel.name);
+      }
+      else if (Bastion.credentials.ownerId.includes(message.author.id) || message.member.roles.has(message.guild.music.masterRoleID)) {
+        voiceChannel = message.member.voiceChannel;
+        textChannel = message.channel;
+
+        if (!voiceChannel) {
+          return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'userNoVC', message.author.tag), message.channel);
+        }
+      }
+      else {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicChannelNotFound'), message.channel);
+      }
+
+      if (!voiceChannel.joinable) {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'join', voiceChannel.name), message.channel);
+      }
+
+      voiceConnection = await voiceChannel.join();
     }
-    if (!voiceChannel.joinable) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'join', voiceChannel.name), message.channel);
+
+
+    if (!voiceChannel.speakable) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'speak', `in ${voiceChannel.name}`), message.channel);
+    }
+    if (textChannel.id !== message.channel.id) {
+      return Bastion.log.info(`Music commands will only work in the ${textChannel.name} text channel for this session.`);
+    }
+    if (!voiceChannel.members.get(message.author.id)) {
+      return Bastion.emit('error', '', vcStats, message.channel);
     }
 
-    voiceConnection = await voiceChannel.join();
-  }
+    message.guild.me.setMute(false).catch(() => {});
+    message.guild.me.setDeaf(true).catch(() => {});
 
 
-  if (!voiceChannel.speakable) {
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'speak', `in ${voiceChannel.name}`), message.channel);
-  }
-  if (textChannel.id !== message.channel.id) {
-    return Bastion.log.info(`Music commands will only work in the ${textChannel.name} text channel for this session.`);
-  }
-  if (!voiceChannel.members.get(message.author.id)) {
-    return Bastion.emit('error', '', vcStats, message.channel);
-  }
-
-  message.guild.me.setMute(false).catch(() => {});
-  message.guild.me.setDeaf(true).catch(() => {});
+    message.guild.music.voiceChannel = voiceChannel;
+    message.guild.music.textChannel = textChannel;
 
 
-  message.guild.music.voiceChannel = voiceChannel;
-  message.guild.music.textChannel = textChannel;
+    if (!message.guild.music.hasOwnProperty('songs')) {
+      message.guild.music.songs = [];
+    }
+    if (!message.guild.music.hasOwnProperty('playing')) {
+      message.guild.music.playing = false;
+    }
+    if (!message.guild.music.hasOwnProperty('repeat')) {
+      message.guild.music.repeat = false;
+    }
+    if (!message.guild.music.hasOwnProperty('skipVotes')) {
+      message.guild.music.skipVotes = [];
+    }
 
 
-  if (!message.guild.music.hasOwnProperty('songs')) {
-    message.guild.music.songs = [];
-  }
-  if (!message.guild.music.hasOwnProperty('playing')) {
-    message.guild.music.playing = false;
-  }
-  if (!message.guild.music.hasOwnProperty('repeat')) {
-    message.guild.music.repeat = false;
-  }
-  if (!message.guild.music.hasOwnProperty('skipVotes')) {
-    message.guild.music.skipVotes = [];
-  }
+    args.song = args.song.join(' ');
+    let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
 
-  args.song = args.song.join(' ');
-  let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
+    let youtubeDLOptions = [
+      '--quiet',
+      '--ignore-errors',
+      '--simulate',
+      '--no-warnings',
+      '--format=bestaudio[protocol^=http]',
+      `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
+      '--referer=https://bastionbot.org',
+      '--youtube-skip-dash-manifest'
+    ];
 
-  let youtubeDLOptions = [
-    '--quiet',
-    '--ignore-errors',
-    '--simulate',
-    '--no-warnings',
-    '--format=bestaudio[protocol^=http]',
-    `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
-    '--referer=https://bastionbot.org',
-    '--youtube-skip-dash-manifest'
-  ];
-  youtubeDL.getInfo(songURL, youtubeDLOptions, (error, info) => {
-    if (error || !info.format_id || info.format_id.startsWith('0')) {
-      Bastion.log.error(error || info);
+    let songInfo = await getSongInfo(songURL, youtubeDLOptions);
+
+    if (!songInfo.format_id || songInfo.format_id.startsWith('0')) {
+      Bastion.log.error(songInfo);
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'result'), message.channel);
     }
 
-
     message.guild.music.songs.push({
-      url: info.url,
-      id: info.id,
-      title: info.title,
-      thumbnail: info.thumbnail,
-      duration: info.duration,
+      url: songInfo.url,
+      id: songInfo.id,
+      title: songInfo.title,
+      thumbnail: songInfo.thumbnail,
+      duration: songInfo.duration,
       requester: message.author.tag
     });
 
@@ -130,13 +136,13 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.GREEN,
         title: 'Added to the queue',
-        url: info.id ? `https://youtu.be/${info.id}` : '',
-        description: info.title,
+        url: songInfo.id ? `https://youtu.be/${songInfo.id}` : '',
+        description: songInfo.title,
         thumbnail: {
-          url: info.thumbnail
+          url: songInfo.thumbnail
         },
         footer: {
-          text: `Position: ${message.guild.music.songs.length} • Duration: ${info.duration || 'N/A'} • Requester: ${message.author.tag}`
+          text: `Position: ${message.guild.music.songs.length} • Duration: ${songInfo.duration || 'N/A'} • Requester: ${message.author.tag}`
         }
       }
     }).catch(e => {
@@ -144,11 +150,14 @@ exports.exec = async (Bastion, message, args) => {
     });
 
 
-    if (message.guild.music.playing) return;
-
-
-    startStreamDispatcher(message.guild, voiceConnection);
-  });
+    if (!message.guild.music.playing) {
+      startStreamDispatcher(message.guild, voiceConnection);
+    }
+  }
+  catch (e) {
+    Bastion.log.error(e);
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'result'), message.channel);
+  }
 };
 
 exports.config = {
