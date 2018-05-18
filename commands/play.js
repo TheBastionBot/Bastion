@@ -101,8 +101,13 @@ exports.exec = async (Bastion, message, args) => {
       message.guild.music.skipVotes = [];
     }
 
-
+    let playlist = false;
     args.song = args.song.join(' ');
+    if (/^http[s]?:[/]{2}(?:www\.)?youtube\.com\/(?:(?:playlist|watch)\?(?:[a-z0-9-_=&.]{1,2021})?list=[a-z0-9-_]{1,64}(?:[a-z0-9-_=&.]{1,2021})?)$/i.test(args.song)) {
+      // YouTube Playlist
+      playlist = true;
+    }
+
     let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
 
     let youtubeDLOptions = [
@@ -116,38 +121,64 @@ exports.exec = async (Bastion, message, args) => {
       '--youtube-skip-dash-manifest'
     ];
 
-    let songInfo = await getSongInfo(songURL, youtubeDLOptions);
+    let songInfo = await getSongInfo(
+      songURL,
+      playlist ? [ '--flat-playlist', '--yes-playlist' ].concat(youtubeDLOptions) : youtubeDLOptions
+    );
 
-    if (!songInfo.format_id || songInfo.format_id.startsWith('0')) {
+    if (!songInfo || (!playlist && (!songInfo.format_id || songInfo.format_id.startsWith('0')))) {
       Bastion.log.error(songInfo);
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'result'), message.channel);
     }
 
-    message.guild.music.songs.push({
-      url: songInfo.url,
-      id: songInfo.id,
-      title: songInfo.title,
-      thumbnail: songInfo.thumbnail,
-      duration: songInfo.duration,
-      requester: message.author.tag
-    });
+    if (playlist) {
+      songInfo.forEach(song => {
+        message.guild.music.songs.push({
+          url: `https://www.youtube.com/watch?v=${song.id}`,
+          id: song.id,
+          title: song.title,
+          thumbnail: '',
+          duration: 'N/A',
+          requester: message.author.tag
+        });
+      });
 
-    textChannel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        title: 'Added to the queue',
-        url: songInfo.id ? `https://youtu.be/${songInfo.id}` : '',
-        description: songInfo.title,
-        thumbnail: {
-          url: songInfo.thumbnail
-        },
-        footer: {
-          text: `Position: ${message.guild.music.songs.length} • Duration: ${songInfo.duration || 'N/A'} • Requester: ${message.author.tag}`
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          description: `Added ${songInfo.length} songs to the queue from the YouTube playlist.`
         }
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      message.guild.music.songs.push({
+        url: songInfo.url,
+        id: songInfo.id,
+        title: songInfo.title,
+        thumbnail: songInfo.thumbnail,
+        duration: songInfo.duration,
+        requester: message.author.tag
+      });
+
+      textChannel.send({
+        embed: {
+          color: Bastion.colors.GREEN,
+          title: 'Added to the queue',
+          url: songInfo.id ? `https://youtu.be/${songInfo.id}` : '',
+          description: songInfo.title,
+          thumbnail: {
+            url: songInfo.thumbnail
+          },
+          footer: {
+            text: `Position: ${message.guild.music.songs.length} • Duration: ${songInfo.duration || 'N/A'} • Requester: ${message.author.tag}`
+          }
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
 
 
     if (!message.guild.music.playing) {
@@ -173,7 +204,7 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'play < SONG NAME | SONG_LINK >',
+  usage: 'play < SONG NAME | SONG_LINK | YOUTUBE_PLAYLIST_LINK >',
   example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=fNVUTgd4pio' ]
 };
 
