@@ -66,6 +66,10 @@ exports.exec = async (Bastion, message) => {
         bitrate: 'auto'
       });
     }
+
+
+    voiceConnection.on('error', Bastion.log.error);
+    voiceConnection.on('failed', Bastion.log.error);
   }
   catch (e) {
     Bastion.log.error(e);
