@@ -217,6 +217,9 @@ exports.exec = async (Bastion, message, args) => {
     if (!message.guild.music.playing) {
       startStreamDispatcher(message.guild, voiceConnection);
     }
+
+    voiceConnection.on('error', Bastion.log.error);
+    voiceConnection.on('failed', Bastion.log.error);
   }
   catch (e) {
     Bastion.log.error(e);
