@@ -32,34 +32,32 @@ exports.exec = async (Bastion, message, args) => {
         creator: message.author.id
       },
       defaults: {
-        songs: [ args.song ]
+        songs: []
       }
     });
     if (initialized) {
-      if (!args.remove) {
-        await playlistModel.save();
-      }
+      await playlistModel.save();
+    }
+
+
+    if (args.remove) {
+      playlistModel.dataValues.songs = playlistModel.dataValues.songs.filter(song => !song.toLowerCase().includes(args.song.toLowerCase()));
     }
     else {
-      if (args.remove) {
-        playlistModel.dataValues.songs = playlistModel.dataValues.songs.filter(song => !song.toLowerCase().includes(args.song.toLowerCase()));
-      }
-      else {
-        playlistModel.dataValues.songs = playlistModel.dataValues.songs.concat(args.song);
-      }
-
-      await message.client.database.models.playlist.update({
-        songs: playlistModel.dataValues.songs
-      },
-      {
-        where: {
-          guildID: message.guild.id,
-          name: message.author.id,
-          creator: message.author.id
-        },
-        fields: [ 'songs' ]
-      });
+      playlistModel.dataValues.songs = playlistModel.dataValues.songs.concat(args.song);
     }
+
+    await message.client.database.models.playlist.update({
+      songs: playlistModel.dataValues.songs
+    },
+    {
+      where: {
+        guildID: message.guild.id,
+        name: message.author.id,
+        creator: message.author.id
+      },
+      fields: [ 'songs' ]
+    });
 
 
     message.channel.send({
