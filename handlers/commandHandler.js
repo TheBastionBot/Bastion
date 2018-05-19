@@ -17,7 +17,7 @@ const activeUsers = {};
 module.exports = async message => {
   try {
     let guildModel = await message.client.database.models.guild.findOne({
-      attributes: [ 'enabled', 'prefix', 'language', 'musicTextChannels', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
+      attributes: [ 'enabled', 'prefix', 'language', 'music', 'musicTextChannel', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
       where: {
         guildID: message.guild.id
       },
@@ -48,19 +48,21 @@ module.exports = async message => {
     if (!message.guild.music) {
       message.guild.music = {};
     }
+    // Set music support status of the guild.
+    message.guild.music.enabled = guildModel.dataValues.music;
     // If any of the music channels have been removed, delete them from the database.
-    if (!message.guild.channels.has(guildModel.dataValues.musicTextChannels) || !message.guild.channels.has(guildModel.dataValues.musicVoiceChannel)) {
+    if (!message.guild.channels.has(guildModel.dataValues.musicTextChannel) || !message.guild.channels.has(guildModel.dataValues.musicVoiceChannel)) {
       await message.client.database.models.guild.update({
-        musicTextChannels: null,
+        musicTextChannel: null,
         musicVoiceChannel: null
       },
       {
         where: {
           guildID: message.guild.id
         },
-        fields: [ 'musicTextChannels', 'musicVoiceChannel' ]
+        fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
       });
-      guildModel.dataValues.musicTextChannels = null;
+      guildModel.dataValues.musicTextChannel = null;
       guildModel.dataValues.musicVoiceChannel = null;
     }
     // If any of the music channels have been removed, delete them from the database.
@@ -77,7 +79,7 @@ module.exports = async message => {
       guildModel.dataValues.musicMasterRole = null;
     }
     // Add music configs to the guild music object.
-    message.guild.music.textChannelID = guildModel.dataValues.musicTextChannels;
+    message.guild.music.textChannelID = guildModel.dataValues.musicTextChannel;
     message.guild.music.voiceChannelID = guildModel.dataValues.musicVoiceChannel;
     message.guild.music.masterRoleID = guildModel.dataValues.musicMasterRole;
 

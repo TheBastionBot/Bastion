@@ -101,8 +101,8 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
-    musicTextChannels: {
-      type: Sequelize.TEXT,
+    musicTextChannel: {
+      type: Sequelize.STRING,
       unique: true
     },
     musicVoiceChannel: {
@@ -530,6 +530,24 @@ module.exports = (Sequelize, database) => {
     }
   });
 
+  const Playlist = database.define('playlist', {
+    guildID: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    creator: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    songs: {
+      type: Sequelize.JSON
+    }
+  });
+
   const ScheduledCommand = database.define('scheduledCommand', {
     guildID: {
       type: Sequelize.STRING,
@@ -669,6 +687,11 @@ module.exports = (Sequelize, database) => {
     onUpdate: 'CASCADE'
   });
   Guild.Triggers = Guild.hasMany(Trigger, {
+    foreignKey: 'guildID',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+  });
+  Guild.Playlist = Guild.hasMany(Playlist, {
     foreignKey: 'guildID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'

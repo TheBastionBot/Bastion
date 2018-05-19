@@ -3,7 +3,6 @@ settings/credentials.json
 settings/config.json
 data/bastion.db
 data/Bastion.sqlite
-data/playlist.json
 data/backup*
 
 # Lock file

@@ -1,31 +1,33 @@
 {
-  "date": "May 14, 2018",
+  "date": "May 19, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
-    "Commands that work in direct messages can now be used without a prefix.",
-    "Multiple prefixes can be set from the config too",
-    "The `reason` command will now work with moderation case numbers, instead of moderation log message IDs.",
-    "Your daily reward claim cooldowns will be in effect even after Bastion restarts.",
-    "Set any number of channels as voting channels. No limitations!",
-    "Add any number of level up roles. No limitations here, too!",
-    "The `currencyGiveaway` command isn't bot owner only anymore! Now, you can use it, in your own servers, to do Bastion Currency giveaways.",
-    "Trigger response supports a whole bunch of variables now.",
+    "Commands that work in direct messages doesn't need any prefix",
+    "Multiple prefixes can be set from the config too!",
+    "`reason` command will now work with moderation case nos., instead of moderation log message IDs",
+    "daily claim reward cooldowns still be in effect even after Bastion restarts",
+    "Set any no. of channels as voting channels. No limitations!",
+    "Add any no. of level up roles. No limitations here, too!",
+    "`currencyGiveaway` command isn't bot owner only anymore! You can now use it in your own servers to do Bastion Currency giveaways",
+    "Trigger response supports a whole bunch of variables now",
     "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
     "Show if a server is a Bastion premium server in the `serverInfo` command. Premium servers & perks are coming soon™!",
-    "Tons of under-the-hood improvements and changes."
+    "Adding music from user playlist to the queue is now faster than ever.",
+    "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
-    "Set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config.",
-    "Levels and currencies aren't global anymore. Members have separate currency & level in every server.",
-    "You can now `give` and `take` any amount of Bastion Currencies to/from any member of your server.",
-    "Give as much XP as you want to your server members, using the `giveXP` command.",
-    "Tired of looking through the moderation logs just to find a specific case? Don't worry, you can now use the `case` command to fetch any case from the moderation logs, using the case number.",
-    "Using the `claim` command daily will count towards your daily streak. If you get a consecutive streak of 7 days, you'll can get a bonus of upto 700 BC.",
-    "Triggers aren't global anymore. There are now different triggers & responses for different servers.",
-    "Triggers aren't owner only anymore! You can now set triggers & responses in the servers you manage.",
-    "Triggers can now respond with reactions & embeds along with plain text responses."
+    "Set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config",
+    "Levels & currencies aren't global anymore. Members have separate currency & level in every server",
+    "You can now `give` & `take` any amount of Bastion Currencies to/from any member of your server",
+    "Give as much XP as you want to your server members, using the `giveXP` command",
+    "Tired of looking through the moderation logs just to find a specific case? Use the `case` command to fetch any case from the moderation logs",
+    "Using the `claim` command daily will count towards your daily streak. If you get a streak of 7 days, you'll can get a bonus of upto 700 BC",
+    "Triggers aren't global anymore. There are now different triggers & responses for different servers",
+    "Triggers aren't owner only anymore! You can now set triggers & responses in the servers you manage",
+    "Triggers can now respond with reactions & embeds along with plain text responses",
+    "Users can now have different music playlists in different servers"
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
@@ -36,22 +38,23 @@
     "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode.",
     "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard.",
     "Added `sellRole` command to let server managers sell roles in their server's Role Store.",
-    "Added `roleDescription` & `serverDescription` commands to set a description for the server & any role in the server."
+    "Added `roleDescription` & `serverDescription` commands to set a description for the server & any role in the server.",
+    "Added `music` command to toggle music support for any specified server."
   ],
   "COMMANDS WITH NEW USAGE": [
-    "The `addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
-    "The `roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead."
+    "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
+    "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead."
   ],
   "RENAMED COMMANDS": [
-    "Renamed the `ignoreChannel` and `ignoreRole` commands to `ignoreChannels` and `ignoreRoles`, respectively.",
-    "Renamed the `votingChannel` command to `votingChannels`.",
-    "Renamed the `resetModLogs` command to `resetModerationLogs`."
+    "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
+    "Renamed `votingChannel` command to `votingChannels`.",
+    "Renamed `resetModLogs` command to `resetModerationLogs`."
   ],
   "NOT AVAILABLE ANYMORE": [
-    "Removed `todo`, `listTodo` and `deleteTodo` commands.",
-    "Removed the `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
-    "Removed the `buyGift`, `gift`, `giftShop` and `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
-    "Removed `whitelistChannel` and `whitelistRole` commands."
+    "Removed `todo`, `listTodo` & `deleteTodo` commands.",
+    "Removed `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
+    "Removed `buyGift`, `gift`, `giftShop` & `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
+    "Removed `whitelistChannel` & `whitelistRole` commands."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }
