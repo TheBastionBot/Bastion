@@ -4,6 +4,10 @@
  * @license GPL-3.0
  */
 
+const util = require('util');
+const youtubeDL = require('youtube-dl');
+const getSongInfo = util.promisify(youtubeDL.getInfo);
+
 exports.exec = async (Bastion, message, args) => {
   if (!message.guild.music.enabled) {
     if (Bastion.user.id === '267035345537728512') {
@@ -41,10 +45,31 @@ exports.exec = async (Bastion, message, args) => {
 
 
     if (args.remove) {
-      playlistModel.dataValues.songs = playlistModel.dataValues.songs.filter(song => !song.toLowerCase().includes(args.song.toLowerCase()));
+      playlistModel.dataValues.songs = playlistModel.dataValues.songs.filter(song => song && song.title && !song.title.toLowerCase().includes(args.song.toLowerCase()));
     }
     else {
-      playlistModel.dataValues.songs = playlistModel.dataValues.songs.concat(args.song);
+      let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
+      let youtubeDLOptions = [
+        '--quiet',
+        '--ignore-errors',
+        '--simulate',
+        '--no-warnings',
+        '--format=bestaudio[protocol^=http]',
+        `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
+        '--referer=https://bastionbot.org',
+        '--youtube-skip-dash-manifest'
+      ];
+
+      let songInfo = await getSongInfo(songURL, youtubeDLOptions);
+      args.song = songInfo.title;
+
+      playlistModel.dataValues.songs = playlistModel.dataValues.songs.concat({
+        url: songInfo.url,
+        id: songInfo.id,
+        title: songInfo.title,
+        thumbnail: songInfo.thumbnail,
+        duration: songInfo.duration
+      });
     }
 
     await message.client.database.models.playlist.update({
@@ -79,17 +104,17 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
-    if (!playlistModel) {
+    if (!playlistModel || !playlistModel.dataValues.songs.length) {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'playlistNotFound'), message.channel);
     }
 
-    let songs = playlistModel.dataValues.songs;
+    let songs = playlistModel.dataValues.songs.map(song => song && song.title);
 
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Bastion Music Playlist',
-        description: songs.join(', '),
+        description: songs.join('\n'),
         footer: {
           text: `Created by ${message.author.tag}`
         }
