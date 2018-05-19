@@ -59,6 +59,10 @@ exports.exec = async (Bastion, message) => {
       }
 
       let connection = await message.member.voiceChannel.join();
+
+      connection.on('error', Bastion.log.error);
+      connection.on('failed', Bastion.log.error);
+
       const dispatcher = connection.playFile('./assets/airhorn.wav', { passes: (Bastion.config.music && Bastion.config.music.passes) || 1, bitrate: 'auto' });
 
       dispatcher.on('error', error => {
