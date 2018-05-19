@@ -1,5 +1,5 @@
 {
-  "date": "May 16, 2018",
+  "date": "May 19, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -14,6 +14,7 @@
     "Trigger response supports a whole bunch of variables now.",
     "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
     "Show if a server is a Bastion premium server in the `serverInfo` command. Premium servers & perks are coming soon™!",
+    "Adding music from user playlist to the queue is now faster than ever.",
     "Tons of under-the-hood improvements and changes."
   ],
   "NEW FEATURES!": [
@@ -25,7 +26,8 @@
     "Using the `claim` command daily will count towards your daily streak. If you get a consecutive streak of 7 days, you'll can get a bonus of upto 700 BC.",
     "Triggers aren't global anymore. There are now different triggers & responses for different servers.",
     "Triggers aren't owner only anymore! You can now set triggers & responses in the servers you manage.",
-    "Triggers can now respond with reactions & embeds along with plain text responses."
+    "Triggers can now respond with reactions & embeds along with plain text responses.",
+    "Users can now have different music playlists in different servers."
   ],
   "NEW COMMANDS!": [
     "Added `blacklist` command to blacklist users globally from using Bastion.",
