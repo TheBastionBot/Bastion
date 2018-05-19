@@ -22,11 +22,11 @@ exports.exec = async (Bastion, message, args) => {
     }
 
 
-    if (!args.song) {
+    if (!args.song && !args.playlist) {
       /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -101,83 +101,116 @@ exports.exec = async (Bastion, message, args) => {
       message.guild.music.skipVotes = [];
     }
 
-    let playlist = false;
-    args.song = args.song.join(' ');
-    if (/^http[s]?:[/]{2}(?:www\.)?youtube\.com\/(?:(?:playlist|watch)\?(?:[a-z0-9-_=&.]{1,2021})?list=[a-z0-9-_]{1,64}(?:[a-z0-9-_=&.]{1,2021})?)$/i.test(args.song)) {
-      // YouTube Playlist
-      playlist = true;
-    }
-
-    let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
-
-    let youtubeDLOptions = [
-      '--quiet',
-      '--ignore-errors',
-      '--simulate',
-      '--no-warnings',
-      '--format=bestaudio[protocol^=http]',
-      `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
-      '--referer=https://bastionbot.org',
-      '--youtube-skip-dash-manifest'
-    ];
-
-    let songInfo = await getSongInfo(
-      songURL,
-      playlist ? [ '--flat-playlist', '--yes-playlist' ].concat(youtubeDLOptions) : youtubeDLOptions
-    );
-
-    if (!songInfo || (!playlist && (!songInfo.format_id || songInfo.format_id.startsWith('0')))) {
-      Bastion.log.error(songInfo);
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'result'), message.channel);
-    }
-
-    if (playlist) {
-      songInfo.forEach(song => {
-        message.guild.music.songs.push({
-          url: `https://www.youtube.com/watch?v=${song.id}`,
-          id: song.id,
-          title: song.title,
-          thumbnail: '',
-          duration: 'N/A',
-          requester: message.author.tag
-        });
+    if (args.playlist) {
+      // Bastion Playlist
+      let playlistModel = await Bastion.database.models.playlist.findOne({
+        attributes: [ 'songs' ],
+        where: {
+          guildID: message.guild.id,
+          name: message.author.id,
+          creator: message.author.id
+        }
       });
+
+      if (!playlistModel || !playlistModel.dataValues.songs.length) {
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'playlistNotFound'), message.channel);
+      }
+
+      let songs = playlistModel.dataValues.songs;
+
+      for (let song of songs) {
+        song.requester = message.author.tag;
+        message.guild.music.songs.push(song);
+      }
 
       message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
-          description: `Added ${songInfo.length} songs to the queue from the YouTube playlist.`
+          description: `Added ${songs.length} songs to the queue from your playlist.`
         }
       }).catch(e => {
         Bastion.log.error(e);
       });
     }
     else {
-      message.guild.music.songs.push({
-        url: songInfo.url,
-        id: songInfo.id,
-        title: songInfo.title,
-        thumbnail: songInfo.thumbnail,
-        duration: songInfo.duration,
-        requester: message.author.tag
-      });
+      let playlist = false;
+      args.song = args.song.join(' ');
+      if (/^http[s]?:[/]{2}(?:www\.)?youtube\.com\/(?:(?:playlist|watch)\?(?:[a-z0-9-_=&.]{1,2021})?list=[a-z0-9-_]{1,64}(?:[a-z0-9-_=&.]{1,2021})?)$/i.test(args.song)) {
+        // YouTube Playlist
+        playlist = true;
+      }
 
-      textChannel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          title: 'Added to the queue',
-          url: songInfo.id ? `https://youtu.be/${songInfo.id}` : '',
-          description: songInfo.title,
-          thumbnail: {
-            url: songInfo.thumbnail
-          },
-          footer: {
-            text: `Position: ${message.guild.music.songs.length} • Duration: ${songInfo.duration || 'N/A'} • Requester: ${message.author.tag}`
+      let songURL = /^http[s]?:[/]{2}(?:[a-z0-9](?:[a-zA-Z0-9-]{0,249}(?:[a-zA-Z0-9]))?\.?){1,127}[-a-z0-9@:%_+.~#?&/=]{0,2045}$/i.test(args.song) ? args.song : `ytsearch:${args.song}`;
+
+      let youtubeDLOptions = [
+        '--quiet',
+        '--ignore-errors',
+        '--simulate',
+        '--no-warnings',
+        '--format=bestaudio[protocol^=http]',
+        `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
+        '--referer=https://bastionbot.org',
+        '--youtube-skip-dash-manifest'
+      ];
+
+      let songInfo = await getSongInfo(
+        songURL,
+        playlist ? [ '--flat-playlist', '--yes-playlist' ].concat(youtubeDLOptions) : youtubeDLOptions
+      );
+
+      if (!songInfo || (!playlist && (!songInfo.format_id || songInfo.format_id.startsWith('0')))) {
+        Bastion.log.error(songInfo);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'result'), message.channel);
+      }
+
+      if (playlist) {
+        songInfo.forEach(song => {
+          message.guild.music.songs.push({
+            url: `https://www.youtube.com/watch?v=${song.id}`,
+            id: song.id,
+            title: song.title,
+            thumbnail: '',
+            duration: 'N/A',
+            requester: message.author.tag
+          });
+        });
+
+        message.channel.send({
+          embed: {
+            color: Bastion.colors.GREEN,
+            description: `Added ${songInfo.length} songs to the queue from the YouTube playlist.`
           }
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+        }).catch(e => {
+          Bastion.log.error(e);
+        });
+      }
+      else {
+        message.guild.music.songs.push({
+          url: songInfo.url,
+          id: songInfo.id,
+          title: songInfo.title,
+          thumbnail: songInfo.thumbnail,
+          duration: songInfo.duration,
+          requester: message.author.tag
+        });
+
+        textChannel.send({
+          embed: {
+            color: Bastion.colors.GREEN,
+            title: 'Added to the queue',
+            url: songInfo.id ? `https://youtu.be/${songInfo.id}` : '',
+            description: songInfo.title,
+            thumbnail: {
+              url: songInfo.thumbnail
+            },
+            footer: {
+              text: `Position: ${message.guild.music.songs.length} • Duration: ${songInfo.duration || 'N/A'} • Requester: ${message.author.tag}`
+            }
+          }
+        }).catch(e => {
+          Bastion.log.error(e);
+        });
+      }
     }
 
 
@@ -195,7 +228,8 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'song', type: String, multiple: true, defaultOption: true }
+    { name: 'song', type: String, multiple: true, defaultOption: true },
+    { name: 'playlist', type: Boolean, alias: 'p' }
   ]
 };
 
@@ -204,8 +238,8 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'play < SONG NAME | SONG_LINK | YOUTUBE_PLAYLIST_LINK >',
-  example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=fNVUTgd4pio' ]
+  usage: 'play < SONG NAME | SONG_LINK | YOUTUBE_PLAYLIST_LINK | --playlist >',
+  example: [ 'play Shape of you', 'play https://www.youtube.com/watch?v=fNVUTgd4pio', 'play --playlist' ]
 };
 
 /**
