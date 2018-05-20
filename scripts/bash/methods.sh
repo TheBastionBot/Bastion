@@ -103,7 +103,7 @@ function method::start () {
     print::info "$NAME is already started."
   else
     print::message "Checking Bastion System..."
-    if [ -r isndex.js ]
+    if [ -r index.js ]
     then
       print::message "System check successful."
       echo
