@@ -42,7 +42,7 @@
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.86.0",
     "request-promise-native": "~1.0.5",
-    "snekfetch": "~3.6.4",
+    "snekfetch": "~4.0.0",
     "sqlite": "~2.9.2",
     "weather-js": "~2.0.0",
     "webshot": "~0.18.0",
