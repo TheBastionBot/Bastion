@@ -1,11 +1,10 @@
 {
-  "date": "May 13, 2018",
-  "image": "https://i.imgur.com/Qw0wBiD.gif",
+  "date": "May 20, 2018",
+  "image": "https://i.imgur.com/Ef4ywII.gif",
   "IMPROVEMENTS": [
-    "Add game logos to some game stats commands.",
-    "Some changes to this command, you just used to check the changelog, unless you haven't noticed it yet!"
+    "You can now send images along with your suggestions using the `suggest` command."
   ],
-  "FIXES": [
-    "You can now see stats of Fortnite players with non-English usernames."
+  "NEW COMMANDS": [
+    "Added `disconnect` command to force Bastion to disconnect from any voice connection in a server."
   ]
 }
