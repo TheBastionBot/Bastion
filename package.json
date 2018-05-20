@@ -38,7 +38,7 @@
     "lzutf8": "~0.5.0",
     "mathjs": "~4.2.2",
     "node-json-db": "~0.7.5",
-    "opusscript": "~0.0.6",
+    "node-opus": "~0.3.0",
     "overwatch-js": "~1.6.5",
     "pokedex-api": "~1.1.1",
     "rainbowsix-api-node": "~0.0.1",
@@ -56,8 +56,5 @@
   },
   "devDependencies": {
     "eslint": "^4.19.1"
-  },
-  "optionalDependencies": {
-    "node-opus": "~0.3.0"
   }
 }
