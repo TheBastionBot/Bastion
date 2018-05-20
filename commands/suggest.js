@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
         title: 'Suggestion',
         description: args.description.join(' '),
         image: {
-          url: message.attachments.size && message.attachments.first().height && message.attachments.first().url
+          url: (message.attachments.size && message.attachments.first().height && message.attachments.first().url) || null
         },
         footer: {
           text: `Suggested by ${message.author.tag}`
