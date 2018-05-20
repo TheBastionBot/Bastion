@@ -263,6 +263,10 @@
     "description": "Disable command/module in your server.",
     "module": "guild_admin"
   },
+  "disconnect": {
+    "description": "Disconnect Bastion from any voice connection in the Discord server.",
+    "module": "music"
+  },
   "discrim": {
     "description": "Searches for the users of your Discord server for the specified discriminator.",
     "module": "info"
