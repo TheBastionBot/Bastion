@@ -1,6 +1,6 @@
 {
   "date": "May 20, 2018",
-  "image": "https://i.imgur.com/Ef4ywII.gif",
+  "image": "https://i.imgur.com/pX4j9zh.gif",
   "FIXES": [
     "Fixed an issue with the `suggest` command that prevented suggestions from being sent if the suggestion didn't had an image attachment.",
     "Fixed an issue that prevented the help message for the new `disconnect` command from being shown."
