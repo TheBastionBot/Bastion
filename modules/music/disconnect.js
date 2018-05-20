@@ -21,7 +21,7 @@ exports.exec = (Bastion, message) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        message: 'Disconnected from the voice connection of this server.'
+        description: 'Disconnected from the voice connection of this server.'
       }
     }).catch(e => {
       Bastion.log.error(e);
