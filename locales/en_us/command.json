@@ -247,10 +247,6 @@
     "description": "Deletes the specified role from your Discord server.",
     "module": "administration"
   },
-  "deleteTodo": {
-    "description": "Deletes the specified item from your TODO list.",
-    "module": "owner"
-  },
   "deleteTrigger": {
     "description": "Deletes the specified message trigger.",
     "module": "guild_admin"
@@ -538,10 +534,6 @@
   "listSelfAssignableRoles": {
     "description": "Lists all self-assignable roles.",
     "module": "guild_admin"
-  },
-  "listTodo": {
-    "description": "Lists all the items in your TODO list.",
-    "module": "owner"
   },
   "listTriggers": {
     "description": "Lists all the message triggers.",
@@ -1059,10 +1051,6 @@
     "description": "Asks a this or that question. See how you and your friends choose!",
     "module": "games"
   },
-  "todo": {
-    "description": "Adds a specified item to your TODO list.",
-    "module": "owner"
-  },
   "toggleBastion": {
     "description": "Enable or disable Bastion in your server. Disabling Bastion will prevent everyone, including the server owner, from using it. But if you have enabled any settings that does not need user interaction, it will still work, like starboard, filters, auto assignable roles etc.",
     "module": "guild_admin"
@@ -1098,10 +1086,6 @@
   "unMute": {
     "description": "Unmutes a specified user server-wide in your Discord server.",
     "module": "moderation"
-  },
-  "updateDatabase": {
-    "description": "Updates %bastion%'s Database to the current release, if required.",
-    "module": "owner"
   },
   "urbanDictionary": {
     "description": "Searches the Urban Dictionary for an urban definition of the specified word.",
@@ -1142,14 +1126,6 @@
   "weather": {
     "description": "Shows weather information of the specified location.",
     "module": "queries"
-  },
-  "whitelistChannel": {
-    "description": "Add/remove the channel from the whitelist for invite filter, link filter or word filter.",
-    "module": "guild_admin"
-  },
-  "whitelistRole": {
-    "description": "Add/remove a role from the whitelist for invite filter, link filter or word filter.",
-    "module": "guild_admin"
   },
   "wikipedia": {
     "description": "Searches Wikipedia for the specified article.",
