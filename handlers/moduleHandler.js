@@ -8,32 +8,37 @@ const fs = require('fs');
 const path = require('path');
 const color = require('chalk');
 const { Collection } = require('discord.js');
-const commandInfo = require('../locales/en_us/command.json');
 
 /* eslint-disable no-sync */
 let Commands = new Collection();
 let Aliases = new Collection();
 
-let commandFiles = fs.readdirSync(path.resolve('./commands/')).
-  filter(file => !fs.statSync(path.resolve('./commands/', file)).isDirectory()).
-  filter(file => file.endsWith('.js'));
+let modules = fs.readdirSync('./commands/').filter(file => fs.statSync(path.join('./commands/', file)).isDirectory());
 
-for (let file of commandFiles) {
-  file = file.substr(0, file.length - 3);
-  process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
+for (let module of modules) {
+  process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${module} module...\n`);
 
-  file = require(path.resolve(`./commands/${file}`));
-  Commands.set(file.help.name.toLowerCase(), file);
+  let commandFiles = fs.readdirSync(path.resolve(`./commands/${module}`)).
+    filter(file => !fs.statSync(path.resolve('./commands/', module, file)).isDirectory()).
+    filter(file => file.endsWith('.js'));
 
-  if (commandInfo[file.help.name]) {
-    file.config.module = commandInfo[file.help.name].module;
-  }
-  else {
-    throw new Error(`The \`${file.help.name}\` command has not been described in the default locale strings.`);
-  }
+  for (let file of commandFiles) {
+    file = file.substr(0, file.length - 3);
+    process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
 
-  for (let alias of file.config.aliases) {
-    Aliases.set(alias.toLowerCase(), file.help.name);
+    file = require(path.resolve('./commands/', module, file));
+    Commands.set(file.help.name.toLowerCase(), file);
+
+    file.config.module = module;
+
+    for (let alias of file.config.aliases) {
+      Aliases.set(alias.toLowerCase(), file.help.name);
+    }
+
+    if (process.stdout.moveCursor && process.stdout.clearLine) {
+      process.stdout.moveCursor(0, -1);
+      process.stdout.clearLine();
+    }
   }
 
   if (process.stdout.moveCursor && process.stdout.clearLine) {

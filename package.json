@@ -1,10 +1,12 @@
 {
   "name": "bastion",
-  "version": "7.0.0-alpha.14",
+  "version": "7.0.0-alpha.15",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
   "scripts": {
+    "build:commandStrings": "node utils/generateCommandStrings.js",
+    "build": "npm run build:commandStrings",
     "test:lint": "./node_modules/.bin/eslint .",
     "test:modules": "node tests/modules.js",
     "test:boot": "node tests/boot.js",
