@@ -26,7 +26,7 @@ for (let module of modules) {
 
     commands[file.help.name] = {
       description: file.help.description,
-      module: module
+      module: toTitleCase(module.replace('_', ' '))
     };
   }
 }
@@ -55,3 +55,21 @@ for (let command in sortedCommands) {
 writeFile(path.resolve('./locales', 'en_us', 'command.json'), JSON.stringify(sortedCommands, null, 2)).
   then(() => console.log('Successfully generated command list for string handler.')).
   catch(console.error);
+
+
+/**
+ * Convert a string to Title Case.
+ * @function toTitleCase
+ * @param {String} string the string to be converted
+ * @returns {String} the input string in Title Case
+ */
+function toTitleCase(string) {
+  let newstr = string.split(' ');
+  for (let i = 0; i < newstr.length; i++) {
+    if (newstr[i] === '') continue;
+    let copy = newstr[i].substring(1).toLowerCase();
+    newstr[i] = newstr[i][0].toUpperCase() + copy;
+  }
+  newstr = newstr.join(' ');
+  return newstr;
+}
