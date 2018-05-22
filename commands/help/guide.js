@@ -34,6 +34,7 @@ exports.config = {
 
 exports.help = {
   name: 'guide',
+  description: 'Shows you the guide on how to setup and install Private Bastion Bot. And links to the Bastion HQ.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

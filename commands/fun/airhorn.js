@@ -93,6 +93,7 @@ exports.config = {
 
 exports.help = {
   name: 'airhorn',
+  description: 'Plays an airhorn in a voice channel.',
   botPermission: '',
   userTextPermission: 'MUTE_MEMBERS',
   userVoicePermission: '',

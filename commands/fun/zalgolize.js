@@ -31,6 +31,7 @@ exports.config = {
 
 exports.help = {
   name: 'zalgolize',
+  description: 'Sends the same message that you had sent, but zalgolized.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

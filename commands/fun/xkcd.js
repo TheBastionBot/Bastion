@@ -94,6 +94,7 @@ exports.config = {
 
 exports.help = {
   name: 'xkcd',
+  description: 'Shows a xkcd comic.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

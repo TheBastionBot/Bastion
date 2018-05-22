@@ -154,6 +154,7 @@ exports.config = {
 
 exports.help = {
   name: 'callOfDuty4',
+  description: 'Get stats of any Call of Duty 4: Modern Warfare game server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

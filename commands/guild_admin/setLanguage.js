@@ -72,6 +72,7 @@ exports.config = {
 
 exports.help = {
   name: 'setLanguage',
+  description: 'Sets %bastion%\'s language for the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

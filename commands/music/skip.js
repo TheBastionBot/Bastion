@@ -67,6 +67,7 @@ exports.config = {
 
 exports.help = {
   name: 'skip',
+  description: 'Skips the currently playing song, in your Discord server, and moves to the next one in the queue.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

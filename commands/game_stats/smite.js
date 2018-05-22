@@ -51,6 +51,7 @@ exports.config = {
 
 exports.help = {
   name: 'smite',
+  description: 'Get stats of any Smite player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

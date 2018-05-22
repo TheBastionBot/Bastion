@@ -67,6 +67,7 @@ exports.config = {
 
 exports.help = {
   name: 'deleteChannel',
+  description: 'Deletes the specified text or voice channel from your Discord server.',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',

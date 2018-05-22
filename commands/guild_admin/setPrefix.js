@@ -71,6 +71,7 @@ exports.config = {
 
 exports.help = {
   name: 'setPrefix',
+  description: 'Sets %bastion%\'s prefix for the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

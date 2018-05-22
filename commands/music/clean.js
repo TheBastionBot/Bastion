@@ -39,6 +39,7 @@ exports.config = {
 
 exports.help = {
   name: 'clean',
+  description: 'Removes all the songs from the current queue of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

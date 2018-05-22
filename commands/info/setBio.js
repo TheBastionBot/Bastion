@@ -78,6 +78,7 @@ exports.config = {
 
 exports.help = {
   name: 'setBio',
+  description: 'Sets your bio that shows up in the Bastion user profile.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

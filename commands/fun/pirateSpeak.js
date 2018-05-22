@@ -33,6 +33,7 @@ exports.config = {
 
 exports.help = {
   name: 'pirateSpeak',
+  description: 'Sends the same message that you had sent, but as pirate speak.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

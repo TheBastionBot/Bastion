@@ -92,6 +92,7 @@ exports.config = {
 
 exports.help = {
   name: 'enableCommand',
+  description: 'Enable disabled command/module in your server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

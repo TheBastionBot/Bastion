@@ -36,6 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'reloadSettings',
+  description: 'Reloads Bastion settings, stored in the `settings` directory, from the cache. When you modify files in the `settings` directory, use this command to reload them without any need to restart.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

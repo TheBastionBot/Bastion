@@ -145,6 +145,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreLinkFilter',
+  description: 'Add/remove channels/roles to/from the link filter ignored list. Bastion will not filter links posted in these channels or by these roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

@@ -132,6 +132,7 @@ exports.config = {
 
 exports.help = {
   name: 'teamFortress2',
+  description: 'Get stats of any Team Fortress 2 game server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

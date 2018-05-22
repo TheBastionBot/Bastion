@@ -40,6 +40,7 @@ exports.config = {
 
 exports.help = {
   name: 'calculate',
+  description: 'Evaluates any mathematical expression.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

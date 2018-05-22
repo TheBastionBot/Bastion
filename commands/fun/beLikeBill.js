@@ -47,6 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'beLikeBill',
+  description: 'Sends a be like bill meme to make you feel morally superior to others.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'roll',
+  description: 'Rolls the specified amount of dice and shows you the outcomes.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

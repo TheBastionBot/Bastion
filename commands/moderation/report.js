@@ -66,6 +66,7 @@ exports.config = {
 
 exports.help = {
   name: 'report',
+  description: 'Reports a user of your Discord server. *Moderation logs needs to be enabled.*',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -127,6 +127,7 @@ exports.config = {
 
 exports.help = {
   name: 'battlefield1',
+  description: 'Get stats of any Battlefield 1 player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

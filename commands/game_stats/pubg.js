@@ -185,6 +185,7 @@ exports.config = {
 
 exports.help = {
   name: 'pubg',
+  description: 'Get stats of any PlayerUnknown\'s Battlegrounds player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

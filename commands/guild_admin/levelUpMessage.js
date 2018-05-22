@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'levelUpMessage',
+  description: 'Toggles sending messages when someone levels up in the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

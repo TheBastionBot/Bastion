@@ -26,6 +26,7 @@ exports.config = {
 
 exports.help = {
   name: 'fortune',
+  description: 'Shows you a fortune from a fortune cookie.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

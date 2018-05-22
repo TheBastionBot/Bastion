@@ -84,6 +84,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleColor',
+  description: 'Changes the color of the specified role of your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

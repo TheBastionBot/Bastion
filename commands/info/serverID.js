@@ -23,6 +23,7 @@ exports.config = {
 
 exports.help = {
   name: 'serverID',
+  description: 'Shows the ID of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

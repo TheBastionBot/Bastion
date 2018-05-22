@@ -89,6 +89,7 @@ exports.config = {
 
 exports.help = {
   name: 'buyRole',
+  description: 'Buy role from the server\'s Role Store.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

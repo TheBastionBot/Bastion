@@ -33,6 +33,7 @@ exports.config = {
 
 exports.help = {
   name: 'echo',
+  description: 'Sends the same message that you had sent. Just like an echo!',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

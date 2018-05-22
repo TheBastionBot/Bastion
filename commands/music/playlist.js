@@ -137,6 +137,7 @@ exports.config = {
 
 exports.help = {
   name: 'playlist',
+  description: 'Add a song to a given playlist or display the list of songs in a playlist.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

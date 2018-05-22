@@ -41,6 +41,7 @@ exports.config = {
 
 exports.help = {
   name: 'discrim',
+  description: 'Searches for the users of your Discord server for the specified discriminator.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

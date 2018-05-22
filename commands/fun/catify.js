@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'catify',
+  description: 'Generates a random kitten image from the given string or your Discord tag if no string is specified.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

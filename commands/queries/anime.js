@@ -81,6 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'anime',
+  description: 'Searches for the details of an Anime.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

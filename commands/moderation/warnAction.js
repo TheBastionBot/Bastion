@@ -77,6 +77,7 @@ exports.config = {
 
 exports.help = {
   name: 'warnAction',
+  description: 'Sets the warn action for the server.',
   botPermission: '',
   userTextPermission: 'BAN_MEMBERS',
   userVoicePermission: '',

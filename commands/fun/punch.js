@@ -42,6 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'punch',
+  description: 'Give a punch to another user.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -117,6 +117,7 @@ exports.config = {
 
 exports.help = {
   name: 'betRoll',
+  description: 'Bet %currency.name_plural% on prediction of the outcome of rolling a dice. If you win, you get more of it. But if you lose, you lose the amount you have bet.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -92,6 +92,7 @@ exports.config = {
 
 exports.help = {
   name: 'streamerRole',
+  description: 'Adds a role as the streamer role. When a guild member (who is at least in a single role) starts streaming, they are given the streamer role.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

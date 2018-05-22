@@ -49,6 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'translate',
+  description: 'Translates your message to the specified language.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

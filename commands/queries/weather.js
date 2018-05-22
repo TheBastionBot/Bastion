@@ -120,6 +120,7 @@ exports.config = {
 
 exports.help = {
   name: 'weather',
+  description: 'Shows weather information of the specified location.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

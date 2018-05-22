@@ -89,6 +89,7 @@ exports.config = {
 
 exports.help = {
   name: 'sellRole',
+  description: 'Sell roles in your server so that server members can buy them with %currency.name_plural%, using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

@@ -65,6 +65,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleStore',
+  description: 'Lists the roles that are available for sale in the Role Store of the server. Listed roles in the Role Store can be bought by anyone, with %currency.name_plural%, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

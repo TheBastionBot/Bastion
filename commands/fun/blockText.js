@@ -38,6 +38,7 @@ exports.config = {
 
 exports.help = {
   name: 'blockText',
+  description: 'Sends the given text as text emojis.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

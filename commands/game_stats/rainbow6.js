@@ -168,6 +168,7 @@ exports.config = {
 
 exports.help = {
   name: 'rainbow6',
+  description: 'Get stats of any Rainbow Six player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

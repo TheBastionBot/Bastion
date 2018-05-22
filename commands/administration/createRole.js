@@ -48,6 +48,7 @@ exports.config = {
 
 exports.help = {
   name: 'createRole',
+  description: 'Creates a new role on your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

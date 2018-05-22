@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'date',
+  description: 'Shows the local date and time of any specified city.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

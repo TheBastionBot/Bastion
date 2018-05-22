@@ -32,6 +32,7 @@ exports.config = {
 
 exports.help = {
   name: 'setUsername',
+  description: 'Changes the username of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

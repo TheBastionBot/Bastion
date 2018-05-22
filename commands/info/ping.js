@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'ping',
+  description: 'Shows the response time and average WebSocket ping of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

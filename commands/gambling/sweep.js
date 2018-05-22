@@ -36,6 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'sweep',
+  description: 'Shows a random user from the text channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

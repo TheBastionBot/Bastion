@@ -38,6 +38,7 @@ exports.config = {
 
 exports.help = {
   name: 'channelID',
+  description: 'Shows ID of a specified channel of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

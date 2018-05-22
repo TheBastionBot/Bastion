@@ -71,6 +71,7 @@ exports.config = {
 
 exports.help = {
   name: 'emoji',
+  description: 'Sends a large version of the specified emoji.',
   botPermission: '',
   userTextPermission: 'ADD_REACTIONS',
   userVoicePermission: '',

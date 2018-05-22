@@ -24,6 +24,7 @@ exports.config = {
 
 exports.help = {
   name: 'live',
+  description: 'Shows the list of users in your Discord server who are currently streaming.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

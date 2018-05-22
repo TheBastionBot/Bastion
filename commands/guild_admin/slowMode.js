@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'slowMode',
+  description: 'Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

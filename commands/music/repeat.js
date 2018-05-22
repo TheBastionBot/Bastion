@@ -49,6 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'repeat',
+  description: 'Adds the current song to the repeat queue, so it will repeat once again after the current playback is complete.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

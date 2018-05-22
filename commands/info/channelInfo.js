@@ -73,6 +73,7 @@ exports.config = {
 
 exports.help = {
   name: 'channelInfo',
+  description: 'Shows information of a specified text or voice channel of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

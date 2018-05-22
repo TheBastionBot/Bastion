@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'starboard',
+  description: 'Toggles logging of starred messages of the server in this channel.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

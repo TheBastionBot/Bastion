@@ -45,6 +45,7 @@ exports.config = {
 
 exports.help = {
   name: 'nowPlaying',
+  description: 'Shows details of the song currently being played, by %bastion%, in your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

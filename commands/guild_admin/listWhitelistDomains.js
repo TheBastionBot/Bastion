@@ -57,6 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listWhitelistDomains',
+  description: 'Lists all whitelisted domains for the link filter.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

@@ -29,6 +29,7 @@ exports.config = {
 
 exports.help = {
   name: 'terms',
+  description: 'Read %bastion%\'s Terms of Service.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

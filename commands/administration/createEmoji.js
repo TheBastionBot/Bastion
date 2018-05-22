@@ -44,6 +44,7 @@ exports.config = {
 
 exports.help = {
   name: 'createEmoji',
+  description: 'Creates a new emoji on your Discord server.',
   botPermission: 'MANAGE_EMOJIS',
   userTextPermission: 'MANAGE_EMOJIS',
   userVoicePermission: '',

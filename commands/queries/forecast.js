@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'forecast',
+  description: 'Shows the weather forecast for 5 days of the specified city.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

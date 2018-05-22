@@ -71,6 +71,7 @@ exports.config = {
 
 exports.help = {
   name: 'shorten',
+  description: 'Shortens a specified URL using Google URL Shortener.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -64,6 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'emojiInfo',
+  description: 'Shows information of a specified emoji of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

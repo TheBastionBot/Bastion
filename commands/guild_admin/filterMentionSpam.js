@@ -70,6 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'filterMentionSpam',
+  description: 'Toggles filtering of mention spams in the server and also set the threshold and action to be taken.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

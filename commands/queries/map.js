@@ -49,6 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'map',
+  description: 'Get the map of the specified location.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

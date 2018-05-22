@@ -135,6 +135,7 @@ exports.config = {
 
 exports.help = {
   name: 'pokemon',
+  description: 'Shows you information on the specified Pokémon.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'filterLink',
+  description: 'Toggles automatic deletion of any links posted in the server.',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

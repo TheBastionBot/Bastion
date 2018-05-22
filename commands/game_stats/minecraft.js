@@ -105,6 +105,7 @@ exports.config = {
 
 exports.help = {
   name: 'minecraft',
+  description: 'Get stats of any Minecraft game server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

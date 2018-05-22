@@ -38,6 +38,7 @@ exports.config = {
 
 exports.help = {
   name: 'flipText',
+  description: 'Sends the same message that you had sent, but flipped.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

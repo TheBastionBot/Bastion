@@ -36,6 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'russianRoulette',
+  description: 'Play the ultimate game of chance - Russian Roulette! Let\'s see if you live or die.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

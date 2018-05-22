@@ -86,6 +86,7 @@ exports.config = {
 
 exports.help = {
   name: 'shardStats',
+  description: 'Shows detailed stats and info of the shard the command was used in.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

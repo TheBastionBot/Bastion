@@ -70,6 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'chat',
+  description: 'Toggles %bastion%\'s chatting module.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

@@ -61,6 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'inRole',
+  description: 'Shows members that have a specified role in your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

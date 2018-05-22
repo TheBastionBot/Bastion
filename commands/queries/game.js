@@ -94,6 +94,7 @@ exports.config = {
 
 exports.help = {
   name: 'game',
+  description: 'Searches for the details of a Game.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

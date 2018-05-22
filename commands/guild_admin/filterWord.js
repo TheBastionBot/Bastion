@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'filterWord',
+  description: 'Toggles automatic deletion of messages that contains any word that is being filtered.',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

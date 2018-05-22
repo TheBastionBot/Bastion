@@ -44,6 +44,7 @@ exports.config = {
 
 exports.help = {
   name: 'xp',
+  description: 'Shows the experience points of the specified user\'s account.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

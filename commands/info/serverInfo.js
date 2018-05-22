@@ -107,6 +107,7 @@ exports.config = {
 
 exports.help = {
   name: 'serverInfo',
+  description: 'Shows information of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

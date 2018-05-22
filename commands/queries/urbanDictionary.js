@@ -69,6 +69,7 @@ exports.config = {
 
 exports.help = {
   name: 'urbanDictionary',
+  description: 'Searches the Urban Dictionary for an urban definition of the specified word.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

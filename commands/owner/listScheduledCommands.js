@@ -53,6 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'listScheduledCommands',
+  description: 'Lists all the scheduled commands.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

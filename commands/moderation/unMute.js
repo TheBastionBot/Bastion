@@ -59,6 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'unMute',
+  description: 'Unmutes a specified user server-wide in your Discord server.',
   botPermission: 'MUTE_MEMBERS',
   userTextPermission: 'MUTE_MEMBERS',
   userVoicePermission: '',

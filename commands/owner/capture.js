@@ -70,6 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'capture',
+  description: 'Captures a screenshot of the specified webpage.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

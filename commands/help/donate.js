@@ -27,6 +27,7 @@ exports.config = {
 
 exports.help = {
   name: 'donate',
+  description: 'Instructions on how to financially support the development of the Bastion Bot project.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

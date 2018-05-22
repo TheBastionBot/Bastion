@@ -81,6 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'jumbledWord',
+  description: 'Unscramble the given jumbled word and increase your vocabulary skills while having fun with your friends.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

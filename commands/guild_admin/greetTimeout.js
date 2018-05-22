@@ -42,6 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'greetTimeout',
+  description: 'Sets the time after which greeting message will be automatically deleted.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

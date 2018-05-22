@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'createChannel',
+  description: 'Creates a new text or voice channel on your Discord server.',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',

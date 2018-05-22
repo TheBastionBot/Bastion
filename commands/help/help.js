@@ -137,6 +137,7 @@ exports.config = {
 
 exports.help = {
   name: 'help',
+  description: 'Shows help on the specified command.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

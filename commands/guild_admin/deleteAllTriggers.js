@@ -33,6 +33,7 @@ exports.config = {
 
 exports.help = {
   name: 'deleteAllTriggers',
+  description: 'Deletes all the triggers and responses you have set.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

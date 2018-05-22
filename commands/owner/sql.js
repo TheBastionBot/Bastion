@@ -60,6 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'sql',
+  description: 'Execute SQL query on %bastion%\'s database.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

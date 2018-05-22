@@ -59,6 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'rps',
+  description: 'Play the classic *rock paper scissor* game with %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

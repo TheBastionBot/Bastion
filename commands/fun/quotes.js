@@ -68,6 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'quotes',
+  description: 'Shows a quote to get you inspired.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

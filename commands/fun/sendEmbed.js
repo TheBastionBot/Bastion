@@ -47,6 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'sendEmbed',
+  description: 'Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](%website%/embedbuilder/).*',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

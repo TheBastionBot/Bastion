@@ -53,6 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'followURL',
+  description: 'Follows a URL to until it reaches the last URL and shows you the followed URL. Useful for getting past shortened URLs.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

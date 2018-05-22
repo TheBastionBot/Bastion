@@ -26,6 +26,7 @@ exports.config = {
 
 exports.help = {
   name: 'hello',
+  description: 'Get greetings from %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

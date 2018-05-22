@@ -104,6 +104,7 @@ exports.config = {
 
 exports.help = {
   name: 'textMute',
+  description: 'Text mutes a specified user from the specified text channel (for specified minutes) or globally on your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

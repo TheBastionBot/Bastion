@@ -191,6 +191,7 @@ exports.config = {
 
 exports.help = {
   name: 'overwatch',
+  description: 'Get stats of any Overwatch player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

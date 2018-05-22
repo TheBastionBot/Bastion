@@ -70,6 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'steam',
+  description: 'Browse the games in different categories of the Steam Store.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

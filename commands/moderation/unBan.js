@@ -58,6 +58,7 @@ exports.config = {
 
 exports.help = {
   name: 'unBan',
+  description: 'Unbans a specified user for your Discord server.',
   botPermission: 'BAN_MEMBERS',
   userTextPermission: 'BAN_MEMBERS',
   userVoicePermission: '',

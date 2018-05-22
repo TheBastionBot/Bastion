@@ -57,6 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'serverDescription',
+  description: 'Set a description for the server, which will be shown in the `serverInfo` command.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

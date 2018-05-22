@@ -28,6 +28,7 @@ exports.config = {
 
 exports.help = {
   name: 'rip',
+  description: 'Show your condolences for something (or everything).',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

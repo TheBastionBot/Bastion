@@ -93,6 +93,7 @@ exports.config = {
 
 exports.help = {
   name: 'twitch',
+  description: 'Get streaming information of a live Twitch channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

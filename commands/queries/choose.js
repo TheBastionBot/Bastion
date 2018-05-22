@@ -32,6 +32,7 @@ exports.config = {
 
 exports.help = {
   name: 'choose',
+  description: 'Asks the bot to choose an option from a number of options.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

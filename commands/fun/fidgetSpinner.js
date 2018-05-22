@@ -40,6 +40,7 @@ exports.config = {
 
 exports.help = {
   name: 'fidgetSpinner',
+  description: 'Spins a fidget spinner for you and shows for how long it was spinning.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

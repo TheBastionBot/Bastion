@@ -71,6 +71,7 @@ exports.config = {
 
 exports.help = {
   name: 'manga',
+  description: 'Searches for the details of a Manga.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'robotify',
+  description: 'Generates a random robot image from the given string or your Discord tag if no string is specified.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

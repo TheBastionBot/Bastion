@@ -34,6 +34,7 @@ exports.config = {
 
 exports.help = {
   name: 'lmgtfy',
+  description: 'Teach users how to do an internet search and get answers to their questions.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

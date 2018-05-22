@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'filterInvite',
+  description: 'Toggles automatic deleting of Discord server invites posted in the server.',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

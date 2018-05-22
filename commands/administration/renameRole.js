@@ -63,6 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'renameRole',
+  description: 'Renames the specified role of your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

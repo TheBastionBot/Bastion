@@ -47,6 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'setStatus',
+  description: 'Sets the status of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

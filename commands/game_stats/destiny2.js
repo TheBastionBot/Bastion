@@ -153,6 +153,7 @@ exports.config = {
 
 exports.help = {
   name: 'destiny2',
+  description: 'Get stats of any Destiny 2 player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

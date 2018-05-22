@@ -60,6 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'queue',
+  description: 'Shows the list of all the songs in the current music queue of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -76,6 +76,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeFilteredWord',
+  description: 'Deletes a word from the list of filtered words.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

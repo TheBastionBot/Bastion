@@ -75,6 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleDescription',
+  description: 'Set a description for a role, which will be shown in the `roleInfo` command.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

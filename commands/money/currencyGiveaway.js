@@ -146,6 +146,7 @@ exports.config = {
 
 exports.help = {
   name: 'currencyGiveaway',
+  description: 'Starts a giveaway event for a specific time, users receive the specified amount of %currency.name_plural% after the event is concluded.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -220,6 +220,7 @@ exports.config = {
 
 exports.help = {
   name: 'acrophobia',
+  description: 'Starts an acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

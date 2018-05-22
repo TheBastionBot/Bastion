@@ -93,6 +93,7 @@ exports.config = {
 
 exports.help = {
   name: 'take',
+  description: 'Take the specified amount of %currency.name_plural% from the specified user.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

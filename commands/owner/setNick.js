@@ -44,6 +44,7 @@ exports.config = {
 
 exports.help = {
   name: 'setNick',
+  description: 'Sets the nickname of Bastion in the current Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

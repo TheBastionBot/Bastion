@@ -106,6 +106,7 @@ exports.config = {
 
 exports.help = {
   name: 'colour',
+  description: 'Convert the provided color in `HEX` format to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and `CSS` Keyword (Approximates to closest color) formats.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

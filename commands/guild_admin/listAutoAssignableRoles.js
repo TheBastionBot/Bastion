@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'listAutoAssignableRoles',
+  description: 'Lists all auto-assignable roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

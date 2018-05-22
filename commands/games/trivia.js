@@ -127,6 +127,7 @@ exports.config = {
 
 exports.help = {
   name: 'trivia',
+  description: 'Asks a trivia question. Answer and see how much knowledge you\'ve on everything.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -147,6 +147,7 @@ exports.config = {
 
 exports.help = {
   name: 'shop',
+  description: 'Lists/Adds/Removes items from your server\'s shop. Listed items in the shop can be bought by anyone, with %currency.name_plural%, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

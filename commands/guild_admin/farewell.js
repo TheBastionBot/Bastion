@@ -63,6 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'farewell',
+  description: 'Toggles sending of farewell message for members who left the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

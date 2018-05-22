@@ -68,6 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'giveXP',
+  description: 'Give the specified amount of experience points to the specified user and increase their level.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

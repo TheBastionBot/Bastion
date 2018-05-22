@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'suggestionChannel',
+  description: 'Adds/removes the channel as the suggestion channel. If it\'s enabled, when user post a suggestion using the `suggest` command, it\'s are posted in this channel.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

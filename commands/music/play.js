@@ -238,6 +238,7 @@ exports.config = {
 
 exports.help = {
   name: 'play',
+  description: 'Plays a song or adds the song to the current music queue if Bastion is already playing in your Discord server, specified either by the name, or the link, or from your favorite songs list, or from a YouTube playlist link.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

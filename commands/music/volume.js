@@ -53,6 +53,7 @@ exports.config = {
 
 exports.help = {
   name: 'volume',
+  description: 'Changes/sets the volume of current playback in your Discord.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

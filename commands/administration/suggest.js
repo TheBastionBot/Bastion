@@ -68,6 +68,7 @@ exports.config = {
 
 exports.help = {
   name: 'suggest',
+  description: 'Posts a suggestion to the suggestion channel, if a suggestion channel has been set. Otherwise posts the suggestion in the current channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

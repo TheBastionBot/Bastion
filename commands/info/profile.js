@@ -128,6 +128,7 @@ exports.config = {
 
 exports.help = {
   name: 'profile',
+  description: 'Shows Bastion user profile of a specified user of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -96,6 +96,7 @@ exports.config = {
 
 exports.help = {
   name: 'typingGame',
+  description: 'Starts a typing speed competition. The first one to type the given piece of article and send it, within the given time, wins.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

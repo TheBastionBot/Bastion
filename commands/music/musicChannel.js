@@ -96,6 +96,7 @@ exports.config = {
 
 exports.help = {
   name: 'musicChannel',
+  description: 'Shows/Removes/Adds a voice channel specified by the ID and a text channel (the channel this command was used in) of you Discord server as default for the music module. Bastion will only accept music commands in that text channel and if anyone asks him to join a voice channel, it will automatically join the specified voice channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -38,6 +38,7 @@ exports.config = {
 
 exports.help = {
   name: 'setAvatar',
+  description: 'Sets the avatar of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

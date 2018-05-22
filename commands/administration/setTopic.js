@@ -52,6 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'setTopic',
+  description: 'Sets channel topic of the specified text channel of your Discord server.',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',

@@ -56,6 +56,7 @@ exports.config = {
 
 exports.help = {
   name: 'toggleBastion',
+  description: 'Enable or disable Bastion in your server. Disabling Bastion will prevent everyone, including the server owner, from using it. But if you have enabled any settings that does not need user interaction, it will still work, like starboard, filters, auto assignable roles etc.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

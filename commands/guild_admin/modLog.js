@@ -64,6 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'modLog',
+  description: 'Toggles logging of various moderation events in the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

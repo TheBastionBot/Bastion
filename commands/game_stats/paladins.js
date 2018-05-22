@@ -51,6 +51,7 @@ exports.config = {
 
 exports.help = {
   name: 'paladins',
+  description: 'Get stats of any Paladins player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

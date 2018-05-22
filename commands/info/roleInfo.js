@@ -101,6 +101,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleInfo',
+  description: 'Shows information of a specified role of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

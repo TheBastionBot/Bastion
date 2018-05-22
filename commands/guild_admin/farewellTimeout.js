@@ -42,6 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'farewellTimeout',
+  description: 'Sets the time after which farewell message will be automatically deleted.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

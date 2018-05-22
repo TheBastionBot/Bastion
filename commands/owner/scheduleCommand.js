@@ -91,6 +91,7 @@ exports.config = {
 
 exports.help = {
   name: 'scheduleCommand',
+  description: 'Schedule a command as cron jobs to run at the specified schedule.\n`cron` expression format:```Second         0-59 or * or range\nMinute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

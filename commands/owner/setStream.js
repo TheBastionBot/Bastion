@@ -41,6 +41,7 @@ exports.config = {
 
 exports.help = {
   name: 'setStream',
+  description: 'Sets the video stream of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

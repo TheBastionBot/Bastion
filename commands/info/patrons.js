@@ -60,6 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'patrons',
+  description: 'Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](%patreon%). But if you\'re hosting Bastion yourself, and you\'re a Patreon creator, it will show the list of your Patrons.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

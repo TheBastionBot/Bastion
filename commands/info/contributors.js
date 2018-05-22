@@ -46,6 +46,7 @@ exports.config = {
 
 exports.help = {
   name: 'contributors',
+  description: 'Shows the list of people who contribute to the development of the Bastion Bot on [GitHub](%github.org%/Bastion).',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

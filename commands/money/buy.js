@@ -113,6 +113,7 @@ exports.config = {
 
 exports.help = {
   name: 'buy',
+  description: 'Buy items from the server\'s shop.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

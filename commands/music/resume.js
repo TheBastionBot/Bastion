@@ -47,6 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'resume',
+  description: 'Resumes the previously paused playback.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

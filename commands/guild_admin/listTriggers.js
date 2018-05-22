@@ -55,6 +55,7 @@ exports.config = {
 
 exports.help = {
   name: 'listTriggers',
+  description: 'Lists all the message triggers.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

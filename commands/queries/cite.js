@@ -77,6 +77,7 @@ exports.config = {
 
 exports.help = {
   name: 'cite',
+  description: 'Cite any message from your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

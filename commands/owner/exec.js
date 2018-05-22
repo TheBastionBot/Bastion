@@ -115,6 +115,7 @@ exports.config = {
 
 exports.help = {
   name: 'exec',
+  description: 'Executes a command in the Terminal (Linux/macOS) or Command Prompt (Windows) and shows the output. Note that it will terminate the command if it runs for more than 1 minute.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

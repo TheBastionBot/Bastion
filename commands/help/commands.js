@@ -76,6 +76,7 @@ exports.config = {
 
 exports.help = {
   name: 'commands',
+  description: 'Direct Messages you with a list of all the commands, or the commands in specific modules.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

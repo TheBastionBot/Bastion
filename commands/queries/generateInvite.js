@@ -34,6 +34,7 @@ exports.config = {
 
 exports.help = {
   name: 'generateInvite',
+  description: 'Generates an invite link of the current text channel of your Discord server.',
   botPermission: 'CREATE_INSTANT_INVITE',
   userTextPermission: 'CREATE_INSTANT_INVITE',
   userVoicePermission: '',

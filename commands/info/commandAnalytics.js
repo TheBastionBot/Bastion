@@ -30,6 +30,7 @@ exports.config = {
 
 exports.help = {
   name: 'commandAnalytics',
+  description: 'Shows the most used commands in the server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

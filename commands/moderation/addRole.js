@@ -67,6 +67,7 @@ exports.config = {
 
 exports.help = {
   name: 'addRole',
+  description: 'Adds the specified role to a specified user of your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

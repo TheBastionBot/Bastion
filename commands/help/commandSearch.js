@@ -47,6 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'commandSearch',
+  description: 'Search for a command with the given text.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

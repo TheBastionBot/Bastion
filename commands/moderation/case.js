@@ -75,6 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'case',
+  description: 'Fetches any moderation action, logged in the moderation log channel, using the moderation log case number.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

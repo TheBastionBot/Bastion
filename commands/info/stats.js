@@ -147,6 +147,7 @@ exports.config = {
 
 exports.help = {
   name: 'stats',
+  description: 'Shows detailed stats and info of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

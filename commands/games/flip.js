@@ -39,6 +39,7 @@ exports.config = {
 
 exports.help = {
   name: 'flip',
+  description: 'Flips the specified amount of coins and shows you the outcomes.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

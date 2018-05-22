@@ -60,6 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'userLookup',
+  description: 'Fetches basic information of a user from Discord.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

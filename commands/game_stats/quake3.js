@@ -148,6 +148,7 @@ exports.config = {
 
 exports.help = {
   name: 'quake3',
+  description: 'Get stats of any Quake III Arena game server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -57,6 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'magic8ball',
+  description: 'Get answers to your polar (yes/no) questions from the Magic 8-Ball.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

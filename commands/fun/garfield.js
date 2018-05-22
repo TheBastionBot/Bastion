@@ -36,6 +36,7 @@ exports.config = {
 
 exports.help = {
   name: 'garfield',
+  description: 'Shows you a Garfield comic.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

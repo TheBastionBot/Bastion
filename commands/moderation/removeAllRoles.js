@@ -63,6 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeAllRoles',
+  description: 'Removes all the roles from the specified user of your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

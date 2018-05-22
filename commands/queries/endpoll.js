@@ -17,6 +17,7 @@ exports.config = {
 
 exports.help = {
   name: 'endpoll',
+  description: 'Ends a currently running poll in the same text channel and shows the result.',
   botPermission: '',
   userTextPermission: 'MANAGE_MESSAGES',
   userVoicePermission: '',

@@ -81,6 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'jumbledSentence',
+  description: 'Unscramble the given jumbled sentence and increase your sentence building skills while having fun with your friends.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

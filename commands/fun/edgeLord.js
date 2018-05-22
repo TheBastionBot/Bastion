@@ -49,6 +49,7 @@ exports.config = {
 
 exports.help = {
   name: 'edgeLord',
+  description: 'Shows a message from an edge lord.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

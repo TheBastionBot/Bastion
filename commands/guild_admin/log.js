@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'log',
+  description: 'Toggles logging of various events in the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

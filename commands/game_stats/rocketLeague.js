@@ -100,6 +100,7 @@ exports.config = {
 
 exports.help = {
   name: 'rocketLeague',
+  description: 'Get stats of any Rocket League player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

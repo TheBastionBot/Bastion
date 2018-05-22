@@ -102,6 +102,7 @@ exports.config = {
 
 exports.help = {
   name: 'coinMarketCap',
+  description: 'Shows market capitalization of the specified cryptocurrency.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

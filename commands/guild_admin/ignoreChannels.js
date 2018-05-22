@@ -56,6 +56,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreChannels',
+  description: 'Adds or removes channels to/from the ignored channels\' list. Bastion doesn\'t accept any commands in the channel that\'s being ignored.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

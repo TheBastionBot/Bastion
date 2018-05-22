@@ -39,6 +39,7 @@ exports.config = {
 
 exports.help = {
   name: 'leet',
+  description: 'Sends the same message that you had sent, but as leet text.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -61,6 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'iAmNot',
+  description: 'Revoke the specified self-assignable role to the user.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: '',
   userVoicePermission: '',

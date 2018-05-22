@@ -44,6 +44,7 @@ exports.config = {
 
 exports.help = {
   name: 'level',
+  description: 'Shows the current level of the specified user\'s account.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

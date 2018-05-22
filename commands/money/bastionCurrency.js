@@ -45,6 +45,7 @@ exports.config = {
 
 exports.help = {
   name: 'bastionCurrency',
+  description: 'Shows the amount of %currency.name_plural% in the specified user\'s account.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

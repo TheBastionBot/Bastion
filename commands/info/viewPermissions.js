@@ -33,6 +33,7 @@ exports.config = {
 
 exports.help = {
   name: 'viewPermissions',
+  description: 'Shows the permissions you have in the server/channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -92,6 +92,7 @@ exports.config = {
 
 exports.help = {
   name: 'reason',
+  description: 'Add/Update the reason for a moderation action, which is logged in the moderation log channel. Only the responsible moderator or anyone with administrator permissions can change the reason.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

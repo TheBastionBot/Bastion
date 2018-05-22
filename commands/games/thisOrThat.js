@@ -24,6 +24,7 @@ exports.config = {
 
 exports.help = {
   name: 'thisOrThat',
+  description: 'Asks a this or that question. See how you and your friends choose!',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

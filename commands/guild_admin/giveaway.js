@@ -170,6 +170,7 @@ exports.config = {
 
 exports.help = {
   name: 'giveaway',
+  description: 'Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

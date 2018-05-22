@@ -34,6 +34,7 @@ exports.config = {
 
 exports.help = {
   name: 'animoji',
+  description: 'Sends a large version of the specified animated emoji of your Discord server. And Nitro isn\'t required.',
   botPermission: '',
   userTextPermission: 'ADD_REACTIONS',
   userVoicePermission: '',

@@ -88,6 +88,7 @@ exports.config = {
 
 exports.help = {
   name: 'fortnite',
+  description: 'Get stats of any Fortnite player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

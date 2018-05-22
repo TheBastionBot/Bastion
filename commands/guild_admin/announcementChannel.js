@@ -59,6 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'announcementChannel',
+  description: 'Adds/removes an announcement channel. You will receive announcements made by the bot owner in this channel.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

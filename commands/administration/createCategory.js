@@ -51,6 +51,7 @@ exports.config = {
 
 exports.help = {
   name: 'createCategory',
+  description: 'Creates a new channel category on your Discord server.',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',

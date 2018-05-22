@@ -57,6 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'myItems',
+  description: 'Shows the items you\'ve bought from the server\'s shop.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

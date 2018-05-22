@@ -96,6 +96,7 @@ exports.config = {
 
 exports.help = {
   name: 'movie',
+  description: 'Searches for the details of a movie.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

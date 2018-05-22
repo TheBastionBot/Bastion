@@ -54,6 +54,7 @@ exports.config = {
 
 exports.help = {
   name: 'listWarns',
+  description: 'Lists all the warned users of your Discord Server.',
   botPermission: '',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',

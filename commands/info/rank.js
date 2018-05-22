@@ -46,6 +46,7 @@ exports.config = {
 
 exports.help = {
   name: 'rank',
+  description: 'Shows the rank of the specified user\'s account.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

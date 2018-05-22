@@ -54,6 +54,7 @@ exports.config = {
 
 exports.help = {
   name: 'muteList',
+  description: 'Lists all the server-wide muted users of your Discord Server.',
   botPermission: '',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

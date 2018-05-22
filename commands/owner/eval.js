@@ -84,6 +84,7 @@ exports.config = {
 
 exports.help = {
   name: 'eval',
+  description: 'Evaluates JavaScript code.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

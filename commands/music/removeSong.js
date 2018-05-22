@@ -64,6 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeSong',
+  description: 'Removes a song from the current music queue by its position number.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

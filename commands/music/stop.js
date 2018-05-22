@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'stop',
+  description: 'Stops the current playback and cleans the music queue and exits the voice channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -76,6 +76,7 @@ exports.config = {
 
 exports.help = {
   name: 'isBreached',
+  description: 'Check if a site has been breached in the past.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

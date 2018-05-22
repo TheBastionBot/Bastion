@@ -64,6 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'giphy',
+  description: 'Searches animated GIFs on the web and sends a random GIF based on the given query.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

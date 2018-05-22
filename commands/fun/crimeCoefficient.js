@@ -44,6 +44,7 @@ exports.config = {
 
 exports.help = {
   name: 'crimeCoefficient',
+  description: 'Find the crime coefficient of a user.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

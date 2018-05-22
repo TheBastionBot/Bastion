@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'deleteTrigger',
+  description: 'Deletes the specified message trigger.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

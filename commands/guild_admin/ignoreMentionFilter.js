@@ -145,6 +145,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreMentionFilter',
+  description: 'Add/remove channels/roles to/from the mention filter ignored list. Bastion will not filter mention spams in these channels or by these roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

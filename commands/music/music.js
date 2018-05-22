@@ -62,6 +62,7 @@ exports.config = {
 
 exports.help = {
   name: 'music',
+  description: 'Toggle music support for a specified server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

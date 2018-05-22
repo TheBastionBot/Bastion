@@ -127,6 +127,7 @@ exports.config = {
 
 exports.help = {
   name: 'levelUpRoles',
+  description: 'Add/Remove/Show level up roles. Level up roles are roles that are added to server members when they level up.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

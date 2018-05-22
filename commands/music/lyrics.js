@@ -76,6 +76,7 @@ exports.config = {
 
 exports.help = {
   name: 'lyrics',
+  description: 'Shows the lyrics of the specified song.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -60,6 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'addFilteredWords',
+  description: 'Adds specified words to the list of filtered words. If someone sends a message containing these words, their message will be automatically deleted.',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

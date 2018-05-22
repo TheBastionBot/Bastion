@@ -60,6 +60,7 @@ exports.config = {
 
 exports.help = {
   name: 'lockdown',
+  description: 'Locks down a channel, preventing everyone to send messages who does not explicitly has permission for it.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

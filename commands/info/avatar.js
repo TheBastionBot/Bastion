@@ -52,6 +52,7 @@ exports.config = {
 
 exports.help = {
   name: 'avatar',
+  description: 'Shows avatar of a specified user of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

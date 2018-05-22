@@ -59,6 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'unDeafen',
+  description: 'Undeafens a specified user server-wide in your Discord server.',
   botPermission: 'DEAFEN_MEMBERS',
   userTextPermission: 'DEAFEN_MEMBERS',
   userVoicePermission: '',

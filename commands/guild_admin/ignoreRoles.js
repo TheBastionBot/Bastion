@@ -61,6 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreRoles',
+  description: 'Adds or removes roles to/from the ignored roles\' list. Bastion doesn\'t accept any commands from the roles that are being ignored.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

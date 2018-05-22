@@ -145,6 +145,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreSlowMode',
+  description: 'Add/remove channels/roles to/from the slow mode ignored list. Bastion will not enable slow mode in these channels or for these roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

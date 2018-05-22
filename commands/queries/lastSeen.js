@@ -79,6 +79,7 @@ exports.config = {
 
 exports.help = {
   name: 'lastSeen',
+  description: 'Shows the time since the specified user was last seen socializing in Discord.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

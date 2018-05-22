@@ -24,6 +24,7 @@ exports.config = {
 
 exports.help = {
   name: 'wouldYouRather',
+  description: 'Shows a would you rather situation. See how you and your friends answer that!',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

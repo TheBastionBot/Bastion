@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'slap',
+  description: 'Give a slap to another user.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

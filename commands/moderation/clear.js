@@ -80,6 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'clear',
+  description: 'Deletes a bulk of specified messages from a text channel of your Discord server.',
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_MESSAGES',
   userVoicePermission: '',

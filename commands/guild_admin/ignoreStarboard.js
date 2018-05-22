@@ -145,6 +145,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreStarboard',
+  description: 'Add/remove channels/roles to/from the starboard ignored list. Bastion will not log starred messages from these channels or roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

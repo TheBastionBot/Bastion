@@ -75,6 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'nickname',
+  description: 'Sets the nickname of the specified user of your Discord server.',
   botPermission: 'MANAGE_NICKNAMES',
   userTextPermission: 'MANAGE_NICKNAMES',
   userVoicePermission: '',

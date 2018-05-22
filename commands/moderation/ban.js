@@ -85,6 +85,7 @@ exports.config = {
 
 exports.help = {
   name: 'ban',
+  description: 'Bans the specified user from your Discord server and removes 7 days of their message history.',
   botPermission: 'BAN_MEMBERS',
   userTextPermission: 'BAN_MEMBERS',
   userVoicePermission: '',

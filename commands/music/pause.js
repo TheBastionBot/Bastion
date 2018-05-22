@@ -47,6 +47,7 @@ exports.config = {
 
 exports.help = {
   name: 'pause',
+  description: 'Pauses the current playback in your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

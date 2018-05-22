@@ -50,6 +50,7 @@ exports.config = {
 
 exports.help = {
   name: 'slots',
+  description: 'Spins the reels of the slot machine and shows you the result.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

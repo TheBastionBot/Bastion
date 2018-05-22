@@ -80,6 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'addAutoAssignableRoles',
+  description: 'Adds specified roles to the list of auto-assignable roles, anyone who joins the server gets these roles automatically.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

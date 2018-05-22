@@ -28,6 +28,7 @@ exports.config = {
 
 exports.help = {
   name: 'channelTopic',
+  description: 'Shows the channel topic of text channel of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -77,6 +77,7 @@ exports.config = {
 
 exports.help = {
   name: 'google',
+  description: 'Searches Google, for the specified query, and shows the top results.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

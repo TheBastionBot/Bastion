@@ -79,6 +79,7 @@ exports.config = {
 
 exports.help = {
   name: 'kick',
+  description: 'Kicks the specified user from your Discord server.',
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',

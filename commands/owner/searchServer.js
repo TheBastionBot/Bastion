@@ -42,6 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'searchServer',
+  description: 'Searches for Discord servers, containing the specified text in their name, that Bastion is connected to.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

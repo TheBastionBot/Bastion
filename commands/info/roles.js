@@ -35,6 +35,7 @@ exports.config = {
 
 exports.help = {
   name: 'roles',
+  description: 'Lists all the roles (with their IDs) of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

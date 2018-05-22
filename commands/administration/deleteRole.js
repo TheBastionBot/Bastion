@@ -59,6 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'deleteRole',
+  description: 'Deletes the specified role from your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

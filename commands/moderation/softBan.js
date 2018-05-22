@@ -108,6 +108,7 @@ exports.config = {
 
 exports.help = {
   name: 'softBan',
+  description: 'Bans & unbans the specified user, immediately, from your Discord server and removes 7 days of their message history.',
   botPermission: 'BAN_MEMBERS',
   userTextPermission: 'BAN_MEMBERS',
   userVoicePermission: '',

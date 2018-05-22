@@ -59,6 +59,7 @@ exports.config = {
 
 exports.help = {
   name: 'leave',
+  description: 'Asks Bastion to leave a specified server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

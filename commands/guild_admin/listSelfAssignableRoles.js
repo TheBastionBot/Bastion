@@ -63,6 +63,7 @@ exports.config = {
 
 exports.help = {
   name: 'listSelfAssignableRoles',
+  description: 'Lists all self-assignable roles.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -96,6 +96,7 @@ exports.config = {
 
 exports.help = {
   name: 'tvShow',
+  description: 'Searches for the details of a TV show.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

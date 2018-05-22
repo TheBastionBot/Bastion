@@ -25,6 +25,7 @@ exports.config = {
 
 exports.help = {
   name: 'remove',
+  description: 'Have fun removing stuff you don\'t like. Specify the item(s) you want to remove. Won\'t be real though!',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

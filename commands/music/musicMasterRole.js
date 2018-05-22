@@ -75,6 +75,7 @@ exports.config = {
 
 exports.help = {
   name: 'musicMasterRole',
+  description: 'Adds a role specified by its ID as the Music Master role of %bastion%, in your Discord server. Users with this role get access to restricted music commands like `summon`, `play`, etc. and can summon and play music in any voice channel of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

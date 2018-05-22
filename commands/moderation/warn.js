@@ -170,6 +170,7 @@ exports.config = {
 
 exports.help = {
   name: 'warn',
+  description: 'Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.',
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',

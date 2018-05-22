@@ -73,6 +73,7 @@ exports.config = {
 
 exports.help = {
   name: 'clearWarn',
+  description: 'Clears all warnings from the given user.',
   botPermission: '',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',

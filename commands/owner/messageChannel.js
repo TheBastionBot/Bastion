@@ -61,6 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'messageChannel',
+  description: 'Send a specified message to any specified text channel that Bastion has access to.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

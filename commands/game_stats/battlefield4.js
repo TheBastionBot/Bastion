@@ -123,6 +123,7 @@ exports.config = {
 
 exports.help = {
   name: 'battlefield4',
+  description: 'Get stats of any Battlefield 4 player.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

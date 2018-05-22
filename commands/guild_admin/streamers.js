@@ -83,6 +83,7 @@ exports.config = {
 
 exports.help = {
   name: 'streamers',
+  description: 'Adds/removes/displays the list of streamers followed by the server to get notified when they are live.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

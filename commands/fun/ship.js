@@ -37,6 +37,7 @@ exports.config = {
 
 exports.help = {
   name: 'ship',
+  description: 'Combines two or more mentioned user\'s names.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

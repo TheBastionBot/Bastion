@@ -88,6 +88,7 @@ exports.config = {
 
 exports.help = {
   name: 'renameChannel',
+  description: 'Renames the specified text or voice channel of your Discord server.',
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',

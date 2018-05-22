@@ -48,6 +48,7 @@ exports.config = {
 
 exports.help = {
   name: 'fakeBan',
+  description: 'Bans a user from the server*. Oh, not really though, just to mess with them.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

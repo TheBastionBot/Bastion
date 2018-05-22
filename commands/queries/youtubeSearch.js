@@ -78,6 +78,7 @@ exports.config = {
 
 exports.help = {
   name: 'youtubeSearch',
+  description: 'Searches for a video, for the specified query, on YouTube and shows the first result.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

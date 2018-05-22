@@ -70,6 +70,7 @@ exports.config = {
 
 exports.help = {
   name: 'leaderboard',
+  description: 'Shows the users topping the chart of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

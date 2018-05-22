@@ -117,6 +117,7 @@ exports.config = {
 
 exports.help = {
   name: 'votingChannels',
+  description: 'Adds/removes the channel as a voting channel. Any messages posted in this channel, by a user, will be available for voting.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

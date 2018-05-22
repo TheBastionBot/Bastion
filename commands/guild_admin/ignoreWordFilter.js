@@ -145,6 +145,7 @@ exports.config = {
 
 exports.help = {
   name: 'ignoreWordFilter',
+  description: 'Add/remove channels/roles to/from the word filter ignored list. Bastion will not filter words posted in these channels or by these roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

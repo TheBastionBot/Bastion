@@ -43,6 +43,7 @@ exports.config = {
 
 exports.help = {
   name: 'resetDatabase',
+  description: 'Resets all the data from a specified table of %bastion%\'s database.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

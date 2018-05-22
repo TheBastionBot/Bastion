@@ -61,6 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'define',
+  description: 'Searches the definition of the specified word from English, French or German dictionary.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

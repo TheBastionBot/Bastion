@@ -124,6 +124,7 @@ exports.config = {
 
 exports.help = {
   name: 'userInfo',
+  description: 'Shows information of a specified user of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

@@ -80,6 +80,7 @@ exports.config = {
 
 exports.help = {
   name: 'addSelfAssignableRoles',
+  description: 'Adds specified roles to the list of self-assignable roles, anyone could use `iAm`/`iAmNot` command to get/revoke these roles to themselves.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

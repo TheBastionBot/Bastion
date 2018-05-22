@@ -132,6 +132,7 @@ exports.config = {
 
 exports.help = {
   name: 'counterStrikeGlobalOffensive',
+  description: 'Get stats of any Counter-Strike: Global Offensive game server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

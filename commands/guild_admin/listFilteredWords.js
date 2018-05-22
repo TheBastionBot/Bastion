@@ -57,6 +57,7 @@ exports.config = {
 
 exports.help = {
   name: 'listFilteredWords',
+  description: 'Lists all filtered words.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

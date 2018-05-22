@@ -37,6 +37,7 @@ exports.config = {
 
 exports.help = {
   name: 'resetModerationLogs',
+  description: 'Resets the moderation log cases back to 1.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

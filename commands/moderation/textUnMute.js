@@ -64,6 +64,7 @@ exports.config = {
 
 exports.help = {
   name: 'textUnMute',
+  description: 'Text unmutes from specified user from the specified text channel of your Discord server.',
   botPermission: 'MANAGE_ROLES',
   userTextPermission: 'MANAGE_ROLES',
   userVoicePermission: '',

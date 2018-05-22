@@ -42,6 +42,7 @@ exports.config = {
 
 exports.help = {
   name: 'shuffle',
+  description: 'Shuffles %bastion%\'s entire music queue of your Discord server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

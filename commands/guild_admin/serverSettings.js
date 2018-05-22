@@ -114,6 +114,7 @@ exports.config = {
 
 exports.help = {
   name: 'serverSettings',
+  description: 'Shows the status of your server\'s configured settings.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

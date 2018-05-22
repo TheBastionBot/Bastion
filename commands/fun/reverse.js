@@ -31,6 +31,7 @@ exports.config = {
 
 exports.help = {
   name: 'reverse',
+  description: 'Sends the same message that you had sent but reversed.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

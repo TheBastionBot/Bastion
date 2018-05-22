@@ -56,6 +56,7 @@ exports.config = {
 
 exports.help = {
   name: 'selfDestruct',
+  description: 'Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

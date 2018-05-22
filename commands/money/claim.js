@@ -120,6 +120,7 @@ exports.config = {
 
 exports.help = {
   name: 'claim',
+  description: 'Claim your daily rewards.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

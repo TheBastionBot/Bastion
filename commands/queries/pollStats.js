@@ -61,6 +61,7 @@ exports.config = {
 
 exports.help = {
   name: 'pollStats',
+  description: 'Shows the stats of the currently running poll in the channel.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

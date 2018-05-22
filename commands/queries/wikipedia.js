@@ -73,6 +73,7 @@ exports.config = {
 
 exports.help = {
   name: 'wikipedia',
+  description: 'Searches Wikipedia for the specified article.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

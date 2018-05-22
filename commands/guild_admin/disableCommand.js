@@ -140,6 +140,7 @@ exports.config = {
 
 exports.help = {
   name: 'disableCommand',
+  description: 'Disable command/module in your server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

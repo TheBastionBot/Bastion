@@ -94,6 +94,7 @@ exports.config = {
 
 exports.help = {
   name: 'reputation',
+  description: 'Give reputations to other users. You can give reputation only once in 12 hours.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

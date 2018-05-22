@@ -51,6 +51,7 @@ exports.config = {
 
 exports.help = {
   name: 'setActivity',
+  description: 'Sets the activity of %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

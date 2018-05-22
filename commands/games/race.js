@@ -106,6 +106,7 @@ exports.config = {
 
 exports.help = {
   name: 'race',
+  description: 'Start a race against %bastion%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

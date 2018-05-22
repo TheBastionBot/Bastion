@@ -30,6 +30,7 @@ exports.config = {
 
 exports.help = {
   name: 'support',
+  description: 'Sends the invite link to Bastion HQ.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

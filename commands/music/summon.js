@@ -83,6 +83,7 @@ exports.config = {
 
 exports.help = {
   name: 'summon',
+  description: 'Asks Bastion to join a voice channel in you Discord server. It joins the default voice channel (if one is set by the Bot Owner) or any channel you are in (if you are the Bot Owner or you are in the Music Master role).',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

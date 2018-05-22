@@ -66,6 +66,7 @@ exports.config = {
 
 exports.help = {
   name: 'greetMessage',
+  description: 'Edits the greeting message that shows when a member joins the server.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',

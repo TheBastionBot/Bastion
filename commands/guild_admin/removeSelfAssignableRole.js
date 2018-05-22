@@ -74,6 +74,7 @@ exports.config = {
 
 exports.help = {
   name: 'removeSelfAssignableRole',
+  description: 'Deletes a role from the list of self-assignable roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
