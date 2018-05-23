@@ -1,5 +1,5 @@
 {
-  "date": "May 19, 2018",
+  "date": "May 23, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -30,16 +30,17 @@
     "Users can now have different music playlists in different servers"
   ],
   "NEW COMMANDS!": [
-    "Added `blacklist` command to blacklist users globally from using Bastion.",
-    "Added `ignoreInviteFilter` command. You can now set channels and/or roles to be ignored by the invite filter.",
-    "Added `ignoreLinkFilter` command. You can now set channels and/or roles to be ignored by the link filter.",
-    "Added `ignoreWordFilter` command. You can now set channels and/or roles to be ignored by the word filter.",
-    "Added `ignoreMentionFilter` command. You can now set channels and/or roles to be ignored by the mention filter.",
-    "Added `ignoreSlowMode` command. You can now set channels and/or roles to be ignored by the slow mode.",
-    "Added `ignoreStarboard` command. You can now set channels and/or roles to be ignored by the starboard.",
-    "Added `sellRole` command to let server managers sell roles in their server's Role Store.",
-    "Added `roleDescription` & `serverDescription` commands to set a description for the server & any role in the server.",
-    "Added `music` command to toggle music support for any specified server."
+    "`blacklist` - Blacklist users globally from using Bastion.",
+    "`ignoreInviteFilter` - Set channels and/or roles to be ignored by the invite filter.",
+    "`ignoreLinkFilter` - Set channels and/or roles to be ignored by the link filter.",
+    "`ignoreWordFilter` - Set channels and/or roles to be ignored by the word filter.",
+    "`ignoreMentionFilter` - Set channels and/or roles to be ignored by the mention filter.",
+    "`ignoreSlowMode` - Set channels and/or roles to be ignored by the slow mode.",
+    "`ignoreStarboard` - Set channels and/or roles to be ignored by the starboard.",
+    "`sellRole` - Sell roles in your server's Role Store.",
+    "`serverDescription` & `roleDescription` - Set a description for the server & any role in the server.",
+    "`music` - Toggle music support for any specified server.",
+    "`toggleBastion` - Toggle Bastion in the server."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
