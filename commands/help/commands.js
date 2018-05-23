@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
         description: 'To get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands section: https://bastionbot.org/commands.',
         fields: fields,
         footer: {
-          text: `Total Modules: ${modules.length} | Total Commands: ${Bastion.commands.size}`
+          text: `A Total of ${Bastion.commands.size} Commands!`
         }
       }
     });
