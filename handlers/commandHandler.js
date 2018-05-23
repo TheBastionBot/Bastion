@@ -33,7 +33,7 @@ module.exports = async message => {
       ]
     });
 
-    if (!guildModel.dataValues.enabled) return;
+    if (!guildModel.dataValues.enabled && !message.member.hasPermission('MANAGE_GUILD')) return;
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     guildModel.dataValues.prefix.concat(message.client.config.prefix);
