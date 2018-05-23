@@ -8,9 +8,9 @@ exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.description) {
       /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -20,10 +20,9 @@ exports.exec = async (Bastion, message, args) => {
         guildID: message.guild.id
       }
     });
-    if (!guildModel || !guildModel.dataValues.suggestionChannel) return;
 
     let suggestionChannel;
-    if (guildModel.dataValues.suggestionChannel) {
+    if (guildModel && guildModel.dataValues.suggestionChannel) {
       suggestionChannel = message.guild.channels.filter(channel => channel.type === 'text').get(guildModel.dataValues.suggestionChannel);
     }
 
