@@ -64,7 +64,7 @@ exports.exec = async (Bastion, message, args) => {
       args.song = songInfo.title;
 
       playlistModel.dataValues.songs = playlistModel.dataValues.songs.concat({
-        url: songInfo.url,
+        url: `https://youtu.be/${songInfo.id}`,
         id: songInfo.id,
         title: songInfo.title,
         thumbnail: songInfo.thumbnail,
