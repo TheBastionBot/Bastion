@@ -28,7 +28,7 @@ module.exports = async message => {
 
     response = response[Math.floor(Math.random() * response.length)];
 
-    if (message.content.toLowerCase() === trigger.toLowerCase()) {
+    if (response && message.content.toLowerCase() === trigger.toLowerCase()) {
       response = response.replace(/\$user/ig, `<@${message.author.id}>`);
       response = response.replace(/\$username/ig, message.author.username);
       if (message.mentions.users.first()) {
