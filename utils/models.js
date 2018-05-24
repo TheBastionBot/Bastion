@@ -246,6 +246,9 @@ module.exports = (Sequelize, database) => {
     location: {
       type: Sequelize.STRING
     },
+    color: {
+      type: Sequelize.STRING
+    },
     blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
