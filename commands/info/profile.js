@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'bio', 'birthDate', 'location' ],
+      attributes: [ 'bio', 'birthDate', 'color', 'location' ],
       where: {
         userID: user.id
       }
@@ -95,7 +95,7 @@ exports.exec = async (Bastion, message, args) => {
 
     message.channel.send({
       embed: {
-        color: Bastion.colors.BLUE,
+        color: userModel.dataValues.color ? userModel.dataValues.color : Bastion.colors.BLUE,
         author: {
           name: user.tag,
           icon_url: await getUserIcon(user)

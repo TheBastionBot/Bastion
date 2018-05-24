@@ -1,5 +1,5 @@
 {
-  "date": "May 23, 2018",
+  "date": "May 24, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -40,7 +40,8 @@
     "`sellRole` - Sell roles in your server's Role Store.",
     "`serverDescription` & `roleDescription` - Set a description for the server & any role in the server.",
     "`music` - Toggle music support for any specified server.",
-    "`toggleBastion` - Toggle Bastion in the server."
+    "`toggleBastion` - Toggle Bastion in the server.",
+    "`setColor` - Set User Color to use the specified color for yourself in appropriate places like in your Bastion Profile."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
