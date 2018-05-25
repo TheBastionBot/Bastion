@@ -19,7 +19,7 @@ exports.exec = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.BLUE,
+      color: parseInt(args.color, 16),
       fields: [
         {
           name: 'HEX',

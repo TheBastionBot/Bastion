@@ -2,6 +2,7 @@
   "date": "May 25, 2018",
   "image": "https://i.imgur.com/8q7V3Wq.gif",
   "IMPROVEMENTS": [
+    "Color command will use the specified color for the message embed too!",
     "Under-the-hood improvements"
   ],
   "FIXES": [
