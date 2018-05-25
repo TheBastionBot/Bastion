@@ -1,6 +1,9 @@
 {
-  "date": "May 24, 2018",
+  "date": "May 25, 2018",
   "image": "https://i.imgur.com/8q7V3Wq.gif",
+  "IMPROVEMENTS": [
+    "Under-the-hood improvements"
+  ],
   "FIXES": [
     "Under-the-hood fixes"
   ]
