@@ -21,6 +21,9 @@ module.exports = async channel => {
     else if (channel.type === 'voice') {
       title = channel.client.strings.events(channel.guild.language, 'voiceChannelCreate');
     }
+    else if (channel.type === 'category') {
+      title = channel.client.strings.events(channel.guild.language, 'categoryChannelCreate');
+    }
 
     logChannel.send({
       embed: {
