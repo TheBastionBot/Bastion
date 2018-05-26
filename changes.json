@@ -1,8 +1,12 @@
 {
-  "date": "May 20, 2018",
-  "image": "https://i.imgur.com/pX4j9zh.gif",
+  "date": "May 26, 2018",
+  "image": "https://i.imgur.com/8q7V3Wq.gif",
+  "IMPROVEMENTS": [
+    "Events for category channels are now properly distinguished from generic channel events!",
+    "Color command will use the specified color for the message embed too!",
+    "Under-the-hood improvements"
+  ],
   "FIXES": [
-    "Fixed an issue with the `suggest` command that prevented suggestions from being sent if the suggestion didn't had an image attachment.",
-    "Fixed an issue that prevented the help message for the new `disconnect` command from being shown."
+    "Under-the-hood fixes"
   ]
 }

@@ -21,6 +21,9 @@ module.exports = async channel => {
     else if (channel.type === 'voice') {
       title = channel.client.strings.events(channel.guild.language, 'voiceChannelDelete');
     }
+    else if (channel.type === 'category') {
+      title = channel.client.strings.events(channel.guild.language, 'categoryChannelDelete');
+    }
 
     logChannel.send({
       embed: {
