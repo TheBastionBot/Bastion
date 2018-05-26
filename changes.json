@@ -1,7 +1,8 @@
 {
-  "date": "May 25, 2018",
+  "date": "May 26, 2018",
   "image": "https://i.imgur.com/8q7V3Wq.gif",
   "IMPROVEMENTS": [
+    "Events for category channels are now properly distinguished from generic channel events!",
     "Color command will use the specified color for the message embed too!",
     "Under-the-hood improvements"
   ],
