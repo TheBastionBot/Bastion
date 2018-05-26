@@ -1,5 +1,8 @@
 {
   "addRole": "Added Role",
+  "categoryChannelCreate": "Category Channel Created",
+  "categoryChannelDelete": "Category Channel Deleted",
+  "categoryChannelUpdate": "Category Channel Updated",
   "channelCreate": "Channel Created",
   "channelDelete": "Channel Deleted",
   "channelUpdate": "Channel Updated",
