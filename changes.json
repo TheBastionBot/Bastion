@@ -1,6 +1,8 @@
 {
   "date": "June 1, 2018",
   "image": "https://i.imgur.com/356dk6S.gif",
-  "IMPROVEMENTS": [],
+  "IMPROVEMENTS": [
+    "`discrim` command will now show Discord user tag instead of user mentions."
+  ],
   "FIXES": []
 }
