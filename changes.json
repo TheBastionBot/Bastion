@@ -4,5 +4,7 @@
   "IMPROVEMENTS": [
     "`discrim` command will now show Discord user tag instead of user mentions."
   ],
-  "FIXES": []
+  "FIXES": [
+    "Fixed `streamerRole` command not showing the current Streamer Role."
+  ]
 }
