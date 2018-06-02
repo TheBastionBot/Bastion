@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const request = require('request-promise-native');
-const github = require('../settings/credentials.json').github;
+const request = xrequire('request-promise-native');
+const github = xrequire('./settings/credentials.json').github;
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {

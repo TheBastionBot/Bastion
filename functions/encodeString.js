@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const lzutf8 = require('lzutf8');
+const lzutf8 = xrequire('lzutf8');
 
 /**
  * Encodes/Compresses a string to BinaryString with LZUTF8

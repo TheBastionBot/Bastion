@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const request = require('request-promise-native');
-const patreon = require('../settings/credentials.json').patreon;
+const request = xrequire('request-promise-native');
+const patreon = xrequire('./settings/credentials.json').patreon;
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {

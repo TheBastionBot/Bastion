@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const { Snowflake } = require('discord.js');
+const { Snowflake } = xrequire('discord.js');
 
 module.exports = (snowflake) => {
   snowflake = Snowflake.deconstruct(snowflake);
