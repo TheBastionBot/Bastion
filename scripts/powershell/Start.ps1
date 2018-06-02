@@ -6,7 +6,7 @@ If (Test-Path ".\index.js") {
   Write-Host "[Bastion]: Booting up..."
   Write-Host
 
-  node .
+  node -r ./utils/globals.js .
 }
 Else {
   Write-Host "[Bastion]: System check failed."
