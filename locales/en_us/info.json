@@ -42,6 +42,8 @@
   "enableLevelUpMessages": "%var% enabled level up messages in this server. I will send messages, congratulating users, when they level up in this server.",
   "addLevelUpRole": "%var% added a level up role **%var%** to be added to users at level **%var%**.",
   "removeLevelUpRoles": "%var% removed all level up roles from level **%var%**.",
+  "disableLevelUps": "%var% disabled level ups in this server. Users won't be able to gain experience points and level up while chatting.",
+  "enableLevelUps": "%var% enabled level ups in this server. Users will now be able to gain experience points and level up as they chat.",
   "disableServerLog": "%var% disabled logging of server events.",
   "enableServerLog": "%var% enabled logging of server events, in this channel.",
   "disableModerationLog": "%var% disabled logging of moderation actions in this server.",

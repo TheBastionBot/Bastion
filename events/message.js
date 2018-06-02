@@ -51,7 +51,7 @@ module.exports = async message => {
       if (await mentionSpamFilter(message)) return;
 
       let guildModel = await message.client.database.models.guild.findOne({
-        attributes: [ 'slowMode' ],
+        attributes: [ 'slowMode', 'levelUps' ],
         where: {
           guildID: message.guild.id
         },
@@ -159,7 +159,7 @@ module.exports = async message => {
       /**
       * Cooldown for experience points, to prevent spam
       */
-      if (!recentLevelUps.includes(message.author.id)) {
+      if (guildModel.dataValues.levelUps && !recentLevelUps.includes(message.author.id)) {
         recentLevelUps.push(message.author.id);
         setTimeout(function () {
           recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
