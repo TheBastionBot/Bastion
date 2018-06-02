@@ -5,11 +5,11 @@ const path = require('path');
  * Except that it takes absolute path as arguments, unlike `require` which takes
  * relative paths to modules.
  */
-global.xrequire = module => {
-  if (module.startsWith('.')) {
-    return require(path.resolve(module));
+global.xrequire = (...module) => {
+  if (module[0] && module[0].startsWith('.')) {
+    return require(path.resolve(...module));
   }
-  return require(module);
+  return require(module[0]);
 };
 global.xrequire.cache = require.cache;
 global.xrequire.main = require.main;
