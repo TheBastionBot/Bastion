@@ -140,20 +140,18 @@ module.exports = async message => {
        */
       handleTrigger(message);
 
-      try {
-        let settingsModel = await message.client.database.models.settings.findOne({
-          attributes: [ 'blacklistedUsers' ],
-          where: {
-            botID: message.client.user.id
-          }
-        });
-
-        if (settingsModel && settingsModel.dataValues.blacklistedUsers) {
-          if (settingsModel.dataValues.blacklistedUsers.includes(message.author.id)) return;
+      /**
+       * Check if the message author is blacklisted
+       */
+      let settingsModel = await message.client.database.models.settings.findOne({
+        attributes: [ 'blacklistedUsers' ],
+        where: {
+          botID: message.client.user.id
         }
-      }
-      catch (e) {
-        message.client.log.error(e);
+      });
+
+      if (settingsModel && settingsModel.dataValues.blacklistedUsers) {
+        if (settingsModel.dataValues.blacklistedUsers.includes(message.author.id)) return;
       }
 
       /**
