@@ -6,32 +6,28 @@
 
 const ow = require('overwatch-js');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 2) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
-    return Bastion.emit('commandUsage', message, this.help);
-  }
+exports.exec = async (Bastion, message, args) => {
+  try {
+    if (args.length < 2) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
 
-  args[0] = args[0].toLowerCase();
-  if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRegion', '`US`, `EU`, `KR` and `CN`'), message.channel);
-  }
-  if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'BattleTag'), message.channel);
-  }
 
-  ow.getAll('pc', args[0], args[1].replace('#', '-')).then(data => {
+    args[0] = args[0].toLowerCase();
+    if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRegion', '`US`, `EU`, `KR` and `CN`'), message.channel);
+    }
+    if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'BattleTag'), message.channel);
+    }
+
+
+    let data = await ow.getAll('pc', args[0], args[1].replace('#', '-'));
+
     let stats = [
       {
         name: 'Level',
@@ -44,6 +40,7 @@ exports.exec = (Bastion, message, args) => {
         inline: true
       }
     ];
+
     if (data.profile.hasOwnProperty('season')) {
       stats.push(
         {
@@ -58,6 +55,7 @@ exports.exec = (Bastion, message, args) => {
         }
       );
     }
+
     stats.push(
       {
         name: 'Quick Play',
@@ -104,6 +102,7 @@ exports.exec = (Bastion, message, args) => {
         inline: true
       }
     );
+
     if (Object.keys(data.competitive.global).length > 1) {
       stats.push(
         {
@@ -152,10 +151,13 @@ exports.exec = (Bastion, message, args) => {
         }
       );
     }
+
     stats.push({
       name: 'Achievements',
       value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ').substring(0, 1024) || '-'
     });
+
+
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
@@ -172,16 +174,13 @@ exports.exec = (Bastion, message, args) => {
     }).catch(e => {
       Bastion.log.error(e);
     });
-  }).catch(e => {
+  }
+  catch (e) {
     if (e.stack.includes('PROFILE_NOT_FOUND')) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
     }
     Bastion.log.error(e);
-  });
+  }
 };
 
 exports.config = {
