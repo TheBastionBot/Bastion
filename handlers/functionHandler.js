@@ -4,10 +4,10 @@
  * @license GPL-3.0
  */
 
-const fs = require('fs');
+const fs = xrequire('fs');
 
 // eslint-disable-next-line no-sync
 let functions = fs.readdirSync('./functions/');
 for (let method of functions) {
-  exports[method.replace('.js', '')] = require(`../functions/${method}`);
+  exports[method.replace('.js', '')] = xrequire('./functions/', method);
 }

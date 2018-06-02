@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const CronJob = require('cron').CronJob;
-const request = require('request-promise-native');
+const CronJob = xrequire('cron').CronJob;
+const request = xrequire('request-promise-native');
 
 /**
  * Handles Bastion's scheduled commands

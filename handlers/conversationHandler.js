@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const CLEVERBOT = require('cleverbot.js');
-const CREDENTIALS = require('../settings/credentials.json');
+const CLEVERBOT = xrequire('cleverbot.js');
+const CREDENTIALS = xrequire('./settings/credentials.json');
 const BOT = new CLEVERBOT({
   APIKey: CREDENTIALS.cleverbotAPIkey
 });

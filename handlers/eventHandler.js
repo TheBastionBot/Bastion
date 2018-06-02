@@ -10,7 +10,7 @@
  * @param {string} event Name of the event.
  * @returns {function} The event's function.
  */
-const LOAD_EVENTS = event => require(`../events/${event}`);
+const LOAD_EVENTS = event => xrequire('./events/', event);
 
 /**
  * Handles/Loads all the events.
