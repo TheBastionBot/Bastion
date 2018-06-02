@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const COLOR = require('chalk');
+const COLOR = xrequire('chalk');
 
 module.exports = async Bastion => {
   try {
@@ -96,8 +96,8 @@ module.exports = async Bastion => {
      * }
      */
 
-    require('../handlers/scheduledCommandHandler')(Bastion);
-    require('../handlers/streamNotifier')(Bastion);
+    xrequire('./handlers/scheduledCommandHandler')(Bastion);
+    xrequire('./handlers/streamNotifier')(Bastion);
 
     if (Bastion.shard) {
       Bastion.log.console(`${COLOR.cyan(`[${Bastion.user.username}]:`)} Shard ${Bastion.shard.id} is ready with ${Bastion.guilds.size} servers.`);

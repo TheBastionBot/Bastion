@@ -4,16 +4,16 @@
  * @license GPL-3.0
  */
 
-const credentialsFilter = require('../utils/credentialsFilter');
-const wordFilter = require('../utils/wordFilter');
-const linkFilter = require('../utils/linkFilter');
-const inviteFilter = require('../utils/inviteFilter');
-const mentionSpamFilter = require('../utils/mentionSpamFilter');
-const handleTrigger = require('../handlers/triggerHandler');
-const handleUserLevel = require('../handlers/levelHandler');
-const handleCommand = require('../handlers/commandHandler');
-const handleConversation = require('../handlers/conversationHandler');
-const handleDirectMessage = require('../handlers/directMessageHandler');
+const credentialsFilter = xrequire('./utils/credentialsFilter');
+const wordFilter = xrequire('./utils/wordFilter');
+const linkFilter = xrequire('./utils/linkFilter');
+const inviteFilter = xrequire('./utils/inviteFilter');
+const mentionSpamFilter = xrequire('./utils/mentionSpamFilter');
+const handleTrigger = xrequire('./handlers/triggerHandler');
+const handleUserLevel = xrequire('./handlers/levelHandler');
+const handleCommand = xrequire('./handlers/commandHandler');
+const handleConversation = xrequire('./handlers/conversationHandler');
+const handleDirectMessage = xrequire('./handlers/directMessageHandler');
 let recentLevelUps = [];
 let recentUsers = {};
 
