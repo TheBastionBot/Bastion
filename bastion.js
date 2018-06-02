@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
+const Discord = xrequire('discord.js');
 const BASTION = new Discord.Client({
   disabledEvents: [
     'USER_NOTE_UPDATE',
@@ -21,47 +21,47 @@ else {
   process.title = 'BastionBot';
 }
 
-BASTION.package = require('./package.json');
-BASTION.credentials = require('./settings/credentials.json');
-BASTION.config = require('./settings/config.json');
+BASTION.package = xrequire('./package.json');
+BASTION.credentials = xrequire('./settings/credentials.json');
+BASTION.config = xrequire('./settings/config.json');
 BASTION.Constants = Discord.Constants;
 BASTION.colors = Discord.Constants.Colors;
 BASTION.permissions = Discord.Permissions.FLAGS;
 
-// require('./utils/Array.prototype');
-require('./utils/String.prototype');
-require('./utils/Number.prototype');
+// xrequire('./utils/Array.prototype');
+xrequire('./utils/String.prototype');
+xrequire('./utils/Number.prototype');
 
-const WebhookHandler = require('./handlers/webhookHandler.js');
+const WebhookHandler = xrequire('./handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
-BASTION.log = require('./handlers/logHandler');
-BASTION.functions = require('./handlers/functionHandler');
+BASTION.log = xrequire('./handlers/logHandler');
+BASTION.functions = xrequire('./handlers/functionHandler');
 
-const StringHandler = require('./handlers/stringHandler');
+const StringHandler = xrequire('./handlers/stringHandler');
 BASTION.i18n = new StringHandler();
 
-const Sequelize = require('sequelize');
+const Sequelize = xrequire('sequelize');
 BASTION.database = new Sequelize(BASTION.credentials.database.URI, {
   operatorsAliases: false,
   logging: false
 });
 BASTION.database.authenticate().then(() => {
   // Populate Database/Implement model definitions
-  require('./utils/models')(Sequelize, BASTION.database);
+  xrequire('./utils/models')(Sequelize, BASTION.database);
 
   // Load Bastion Database (Depricated)
   // Will be removed once new database is completely implemented
-  BASTION.db = require('sqlite');
+  BASTION.db = xrequire('sqlite');
   BASTION.db.open('./data/Bastion.sqlite').then(db => {
     db.run('PRAGMA foreign_keys = ON');
-    require('./utils/populateDatabase')(BASTION.db);
+    xrequire('./utils/populateDatabase')(BASTION.db);
   });
 
   // Load Bastion Events
-  require('./handlers/eventHandler')(BASTION);
+  xrequire('./handlers/eventHandler')(BASTION);
 
   // Load Bastion Modules
-  const Modules = require('./handlers/moduleHandler');
+  const Modules = xrequire('./handlers/moduleHandler');
   BASTION.commands = Modules.commands;
   BASTION.aliases = Modules.aliases;
 
