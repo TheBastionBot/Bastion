@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const logger = require('../handlers/logHandler');
-const { prefix } = require('../settings/config.json');
+const logger = xrequire('./handlers/logHandler');
+const { prefix } = xrequire('./settings/config.json');
 
 module.exports = (Sequelize, database) => {
   // Models

@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const config = require('../settings/config.json');
+const config = xrequire('./settings/config.json');
 
 module.exports = async db => {
   await db.run('CREATE TABLE IF NOT EXISTS guildSettings' +
@@ -127,5 +127,5 @@ module.exports = async db => {
     'youtube TEXT,' +
     'FOREIGN KEY (guildID) REFERENCES guildSettings (guildID) ON DELETE CASCADE)');
 
-  require('./updateDatabase')(db);
+  xrequire('./utils/updateDatabase')(db);
 };

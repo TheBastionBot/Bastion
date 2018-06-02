@@ -4,9 +4,9 @@
  * @license GPL-3.0
  */
 
-const fs = require('fs');
-const path = require('path');
-const util = require('util');
+const fs = xrequire('fs');
+const path = xrequire('path');
+const util = xrequire('util');
 const writeFile = util.promisify(fs.writeFile);
 
 /* eslint-disable no-sync */
@@ -22,7 +22,7 @@ for (let module of modules) {
   for (let file of commandFiles) {
     file = file.substr(0, file.length - 3);
 
-    file = require(path.resolve('./commands/', module, file));
+    file = xrequire('./commands/', module, file);
 
     commands[file.help.name] = {
       description: file.help.description,
