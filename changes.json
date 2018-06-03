@@ -1,8 +1,9 @@
 {
-  "date": "June 1, 2018",
+  "date": "June 3, 2018",
   "image": "https://i.imgur.com/356dk6S.gif",
   "IMPROVEMENTS": [
-    "`discrim` command will now show Discord user tag instead of user mentions."
+    "`discrim` command will now show Discord user tag instead of user mentions.",
+    "Under-the-hood-improvements"
   ],
   "FIXES": [
     "Fixed `streamerRole` command not showing the current Streamer Role."
