@@ -61,7 +61,7 @@ exports.exec = async (Bastion, message, args) => {
       if (guildModel.dataValues.streamerRole) {
         let streamerRole = message.guild.roles.get(guildModel.dataValues.streamerRole);
         if (streamerRole) {
-          description = Bastion.i18n.info(message.guild.language, 'streamerRole', message.author.tag, streamerRole.name);
+          description = Bastion.i18n.info(message.guild.language, 'streamerRole', streamerRole.name);
           color = Bastion.colors.BLUE;
         }
       }
