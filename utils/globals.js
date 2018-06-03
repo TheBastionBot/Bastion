@@ -14,13 +14,13 @@ global.xrequire = (...module) => {
 global.xrequire.cache = require.cache;
 global.xrequire.main = require.main;
 global.xrequire.resolve = (request, options = null) => {
-  if (module.startsWith('.')) {
+  if (request.startsWith('.')) {
     return require.resolve(path.resolve(request), options);
   }
   return require.resolve(request, options);
 };
 global.xrequire.resolve.paths = request => {
-  if (module.startsWith('.')) {
+  if (request.startsWith('.')) {
     return require.resolve.paths(path.resolve(request));
   }
   return require.resolve.paths(request);
