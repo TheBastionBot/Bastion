@@ -13,9 +13,9 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let members = message.guild.members.filter(m => m.user.discriminator === args[0]).map(m => m.user);
+  let members = message.guild.members.filter(m => m.user.discriminator === args[0]).map(m => m.user.tag);
   let total = members.length;
-  members = members.length > 0 ? members.slice(0, 10).join(', ') : 'None';
+  members = members.length > 0 ? members.slice(0, 10).join('\n') : 'None';
 
   message.channel.send({
     embed: {

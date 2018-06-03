@@ -40,7 +40,7 @@ exports.exec = async (Bastion, message, args) => {
       if (guildSettings.streamerRole) {
         let streamerRole = message.guild.roles.get(guildSettings.streamerRole);
         if (streamerRole) {
-          description = Bastion.strings.info(message.guild.language, 'streamerRole', message.author.tag, streamerRole.name);
+          description = Bastion.strings.info(message.guild.language, 'streamerRole', streamerRole.name);
           color = Bastion.colors.BLUE;
         }
       }

@@ -1,12 +1,11 @@
 {
-  "date": "May 26, 2018",
-  "image": "https://i.imgur.com/8q7V3Wq.gif",
+  "date": "June 3, 2018",
+  "image": "https://i.imgur.com/356dk6S.gif",
   "IMPROVEMENTS": [
-    "Events for category channels are now properly distinguished from generic channel events!",
-    "Color command will use the specified color for the message embed too!",
-    "Under-the-hood improvements"
+    "`discrim` command will now show Discord user tag instead of user mentions.",
+    "Under-the-hood-improvements"
   ],
   "FIXES": [
-    "Under-the-hood fixes"
+    "Fixed `streamerRole` command not showing the current Streamer Role."
   ]
 }
