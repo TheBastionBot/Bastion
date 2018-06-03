@@ -11,7 +11,8 @@
     "test:modules": "node -r ./utils/globals.js tests/modules.js",
     "test:boot": "node -r ./utils/globals.js tests/boot.js",
     "test": "npm run test:lint && npm run test:modules && npm run test:boot",
-    "start": "node -r ./utils/globals.js index.js"
+    "start": "node -r ./utils/globals.js index.js",
+    "start:noshard": "node -r ./utils/globals.js bastion.js"
   },
   "repository": {
     "type": "git",
