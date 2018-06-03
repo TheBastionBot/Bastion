@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const question = require('../../assets/wouldYouRather.json');
+const question = xrequire('./assets/wouldYouRather.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({

@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const xkcd = require('xkcd');
+const xkcd = xrequire('xkcd');
 
 exports.exec = (Bastion, message, args) => {
   if (args.latest) {

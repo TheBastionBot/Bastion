@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const credentials = require('../../settings/credentials.json');
-const HiRez = require('hirez.js');
+const credentials = xrequire('./settings/credentials.json');
+const HiRez = xrequire('hirez.js');
 const hirez = new HiRez({
   devId: credentials.HiRezDevId,
   authKey: credentials.HiRezAuthKey

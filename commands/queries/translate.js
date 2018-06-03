@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const translate = require('@k3rn31p4nic/google-translate-api');
+const translate = xrequire('@k3rn31p4nic/google-translate-api');
 
 exports.exec = async (Bastion, message, args) => {
   try {

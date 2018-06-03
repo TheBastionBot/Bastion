@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const util = xrequire('util');
+const exec = util.promisify(xrequire('child_process').exec);
 
 exports.exec = async (Bastion, message, args) => {
   try {

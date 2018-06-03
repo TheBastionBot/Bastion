@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const catFacts = require('../../assets/catFacts.json');
+const catFacts = xrequire('./assets/catFacts.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({

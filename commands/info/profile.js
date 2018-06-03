@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const specialIDs = require('../../assets/specialIDs.json');
+const specialIDs = xrequire('./assets/specialIDs.json');
 
 exports.exec = async (Bastion, message, args) => {
   try {

@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const Kitsu = require('kitsu/node');
+const Kitsu = xrequire('kitsu/node');
 const kitsu = new Kitsu();
 
 exports.exec = async (Bastion, message, args) => {

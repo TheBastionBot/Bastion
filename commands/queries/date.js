@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const location = require('weather-js');
+const location = xrequire('weather-js');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

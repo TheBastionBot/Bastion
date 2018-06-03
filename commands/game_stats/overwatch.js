@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const ow = require('overwatch-js');
+const ow = xrequire('overwatch-js');
 
 exports.exec = async (Bastion, message, args) => {
   try {

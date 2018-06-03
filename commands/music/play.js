@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const util = require('util');
-const youtubeDL = require('youtube-dl');
+const util = xrequire('util');
+const youtubeDL = xrequire('youtube-dl');
 const getSongInfo = util.promisify(youtubeDL.getInfo);
 
 exports.exec = async (Bastion, message, args) => {

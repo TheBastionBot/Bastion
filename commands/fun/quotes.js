@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const quotes = require('../../assets/quotes.json');
+const quotes = xrequire('./assets/quotes.json');
 
 exports.exec = (Bastion, message, args) => {
   /*

@@ -11,8 +11,8 @@ exports.exec = (Bastion, message) => {
     for (let file of settings) {
       delete require.cache[require.resolve(`../../settings/${file}`)];
     }
-    Bastion.config = require('../../settings/config.json');
-    Bastion.credentials = require('../../settings/credentials.json');
+    Bastion.config = xrequire('./settings/config.json');
+    Bastion.credentials = xrequire('./settings/credentials.json');
 
     message.channel.send({
       embed: {

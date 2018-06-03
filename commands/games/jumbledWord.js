@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isGameInUse', 'jumbled word'), message.channel);
     }
 
-    let words = require('../../assets/words.json');
+    let words = xrequire('./assets/words.json');
 
     let word = words[Math.floor(Math.random() * words.length)];
 

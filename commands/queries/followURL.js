@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const followURL = require('../../functions/followURL');
+const followURL = xrequire('./functions/followURL');
 
 exports.exec = async (Bastion, message, args) => {
   try {
