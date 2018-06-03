@@ -4,10 +4,10 @@
  * @license GPL-3.0
  */
 
-const fs = require('fs');
-const path = require('path');
-const color = require('chalk');
-const { Collection } = require('discord.js');
+const fs = xrequire('fs');
+const path = xrequire('path');
+const color = xrequire('chalk');
+const { Collection } = xrequire('discord.js');
 
 /* eslint-disable no-sync */
 let Commands = new Collection();
@@ -26,7 +26,7 @@ for (let module of modules) {
     file = file.substr(0, file.length - 3);
     process.stdout.write(`${color.cyan('[Bastion]:')} Loading ${file} command...\n`);
 
-    file = require(path.resolve('./commands/', module, file));
+    file = xrequire('./commands/', module, file);
     Commands.set(file.help.name.toLowerCase(), file);
 
     file.config.module = module;

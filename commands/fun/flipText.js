@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const flipText = require('../../assets/flipText.json');
+const flipText = xrequire('./assets/flipText.json');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

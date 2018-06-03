@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const wd = require('word-definition');
+const wd = xrequire('word-definition');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

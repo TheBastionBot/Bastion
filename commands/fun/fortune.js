@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const fortuneCookies = require('../../assets/fortuneCookies.json');
+const fortuneCookies = xrequire('./assets/fortuneCookies.json');
 
 exports.exec = (Bastion, message) => {
   message.channel.send({

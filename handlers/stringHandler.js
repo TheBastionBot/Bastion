@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const Locke = require('locke');
+const Locke = xrequire('locke');
 
 const StringHandler = class StringHandler extends Locke {
   /**

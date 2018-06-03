@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const convert = require('color-convert');
+const convert = xrequire('color-convert');
 
 exports.exec = (Bastion, message, args) => {
   if (!/^#?[0-9a-fA-F]{6}$/.test(args.color)) {

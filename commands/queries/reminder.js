@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const moment = require('moment');
+const moment = xrequire('moment');
 const remindUsers = {};
 
 exports.exec = (Bastion, message, args) => {

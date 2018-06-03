@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isGameInUse', 'jumbled sentence'), message.channel);
     }
 
-    let quotes = require('../../assets/quotes.json');
+    let quotes = xrequire('./assets/quotes.json');
 
     let quote = quotes[Bastion.functions.getRandomInt(1, Object.keys(quotes).length)];
 

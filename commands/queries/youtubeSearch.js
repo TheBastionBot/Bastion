@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const yt = require('youtube-dl');
+const yt = xrequire('youtube-dl');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

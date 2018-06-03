@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const capture = require('webshot');
+const capture = xrequire('webshot');
 
 exports.exec = (Bastion, message, args) => {
   if (args.length < 1) {

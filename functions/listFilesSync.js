@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const fs = require('fs');
+const fs = xrequire('fs');
 
 module.exports = dir => {
   // eslint-disable-next-line no-sync

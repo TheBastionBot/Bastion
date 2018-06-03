@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const emojis = require('../../assets/emojis.json');
+const emojis = xrequire('./assets/emojis.json');
 
 exports.exec = async (Bastion, message, args) => {
   try {

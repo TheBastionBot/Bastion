@@ -4,10 +4,10 @@
  * @license GPL-3.0
  */
 
-const credentialsFilter = require('../utils/credentialsFilter');
-const wordFilter = require('../utils/wordFilter');
-const linkFilter = require('../utils/linkFilter');
-const inviteFilter = require('../utils/inviteFilter');
+const credentialsFilter = xrequire('./utils/credentialsFilter');
+const wordFilter = xrequire('./utils/wordFilter');
+const linkFilter = xrequire('./utils/linkFilter');
+const inviteFilter = xrequire('./utils/inviteFilter');
 
 module.exports = (oldMessage, newMessage) => {
   // If message content hasn't been changed, do nothing

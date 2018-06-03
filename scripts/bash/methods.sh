@@ -17,7 +17,7 @@ function method::debug () {
     print::error "$NAME is already running!"
     print::info "Stop Bastion before you run it in dubug mode!"
   else
-    node .
+    node -r ./utils/globals.js .
   fi
 }
 
@@ -110,7 +110,7 @@ function method::start () {
 
       print::message "Booting up..."
 
-      screen -L -dmS "$NAME" /bin/bash -c "until node .; do sleep 1; done"
+      screen -L -dmS "$NAME" /bin/bash -c "until node -r ./utils/globals.js .; do sleep 1; done"
 
       print::info "$NAME was successfully started!"
     else

@@ -4,14 +4,14 @@
  * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
-const credentials = require('./settings/credentials.json');
-const config = require('./settings/config.json');
+const Discord = xrequire('discord.js');
+const credentials = xrequire('./settings/credentials.json');
+const config = xrequire('./settings/config.json');
 const Manager = new Discord.ShardingManager('./bastion.js', {
   totalShards: config.shardCount,
   token: credentials.token
 });
-const log = require('./handlers/logHandler');
+const log = xrequire('./handlers/logHandler');
 
 Manager.spawn();
 

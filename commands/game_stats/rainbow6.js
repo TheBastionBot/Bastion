@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const RainbowSix = require('rainbowsix-api-node');
+const RainbowSix = xrequire('rainbowsix-api-node');
 const r6 = new RainbowSix();
 
 exports.exec = (Bastion, message, args) => {

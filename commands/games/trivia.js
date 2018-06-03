@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const request = require('request-promise-native');
+const request = xrequire('request-promise-native');
 let activeChannels = [];
 
 exports.exec = async (Bastion, message, args) => {

@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
+const Discord = xrequire('discord.js');
 
 module.exports = class WebhookHandler {
   /**

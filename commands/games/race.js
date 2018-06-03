@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const ProgressBar = require('../../utils/progress');
+const ProgressBar = xrequire('./utils/progress');
 
 exports.exec = async (Bastion, message) => {
   try {

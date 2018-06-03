@@ -4,9 +4,9 @@
  * @license GPL-3.0
  */
 
-const parseArgs = require('command-line-args');
-const COLOR = require('chalk');
-const _ = require('lodash/core');
+const parseArgs = xrequire('command-line-args');
+const COLOR = xrequire('chalk');
+const _ = xrequire('lodash/core');
 const activeUsers = {};
 
 /**

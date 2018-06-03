@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const Pokedex = require('pokedex-api');
+const Pokedex = xrequire('pokedex-api');
 const pokedex = new Pokedex({
   userAgent: 'Bastion: Discord Bot (https://bastionbot.org)',
   version: 'v1'

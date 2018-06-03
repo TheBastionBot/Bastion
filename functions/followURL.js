@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const request = require('request-promise-native');
+const request = xrequire('request-promise-native');
 
 module.exports = (url) => {
   return new Promise(async (resolve, reject) => {

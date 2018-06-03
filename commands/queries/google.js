@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const request = require('request-promise-native');
-const cheerio = require('cheerio');
+const request = xrequire('request-promise-native');
+const cheerio = xrequire('cheerio');
 
 exports.exec = async (Bastion, message, args) => {
   try {

@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const source = require('gamedig');
+const source = xrequire('gamedig');
 
 exports.exec = async (Bastion, message, args) => {
   try {

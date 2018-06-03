@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (typeof evaled !== 'string') {
-      evaled = require('util').inspect(evaled);
+      evaled = xrequire('util').inspect(evaled);
     }
 
     let output = await message.channel.send({

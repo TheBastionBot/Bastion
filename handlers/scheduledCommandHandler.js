@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const CronJob = require('cron').CronJob;
-const parseArgs = require('command-line-args');
+const CronJob = xrequire('cron').CronJob;
+const parseArgs = xrequire('command-line-args');
 
 /**
  * Handles Bastion's scheduled commands

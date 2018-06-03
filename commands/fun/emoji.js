@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const fs = require('fs');
+const fs = xrequire('fs');
 
 exports.exec = (Bastion, message, args) => {
   if (!args.name && !args.list) {

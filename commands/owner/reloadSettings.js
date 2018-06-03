@@ -9,10 +9,10 @@ exports.exec = (Bastion, message) => {
     // eslint-disable-next-line no-sync
     let settings = Bastion.functions.listFilesSync('settings');
     for (let file of settings) {
-      delete require.cache[require.resolve(`../../settings/${file}`)];
+      delete xrequire.cache[xrequire.resolve(`./settings/${file}`)];
     }
-    Bastion.config = require('../../settings/config.json');
-    Bastion.credentials = require('../../settings/credentials.json');
+    Bastion.config = xrequire('./settings/config.json');
+    Bastion.credentials = xrequire('./settings/credentials.json');
 
     message.channel.send({
       embed: {

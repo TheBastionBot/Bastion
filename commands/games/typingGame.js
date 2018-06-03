@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-const typingArticles = require('../../assets/typingArticles.json');
+const typingArticles = xrequire('./assets/typingArticles.json');
 let activeChannels = [];
 
 exports.exec = async (Bastion, message) => {

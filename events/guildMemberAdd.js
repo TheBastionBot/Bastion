@@ -6,7 +6,7 @@
 
 module.exports = async member => {
   try {
-    const greetMessages = require('../assets/greetingMessages.json');
+    const greetMessages = xrequire('./assets/greetingMessages.json');
 
     let guildModel = await member.client.database.models.guild.findOne({
       attributes: [ 'greet', 'greetMessage', 'greetTimeout', 'greetPrivate', 'greetPrivateMessage', 'autoAssignableRoles', 'serverLog' ],

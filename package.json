@@ -1,17 +1,17 @@
 {
   "name": "bastion",
-  "version": "7.0.0-alpha.17",
+  "version": "7.0.0-alpha.18",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
   "scripts": {
-    "build:commandStrings": "node utils/generateCommandStrings.js",
+    "build:commandStrings": "node -r ./utils/globals.js utils/generateCommandStrings.js",
     "build": "npm run build:commandStrings",
     "test:lint": "./node_modules/.bin/eslint .",
-    "test:modules": "node tests/modules.js",
-    "test:boot": "node tests/boot.js",
+    "test:modules": "node -r ./utils/globals.js tests/modules.js",
+    "test:boot": "node -r ./utils/globals.js tests/boot.js",
     "test": "npm run test:lint && npm run test:modules && npm run test:boot",
-    "start": "node index.js"
+    "start": "node -r ./utils/globals.js index.js"
   },
   "repository": {
     "type": "git",

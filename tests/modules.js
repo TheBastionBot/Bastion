@@ -4,11 +4,10 @@
  * @license GPL-3.0
  */
 
-const path = require('path');
-const _ = require('lodash');
-let chalk = require('chalk');
-let moduleHandler = require(path.resolve('./handlers/moduleHandler'));
-const commandInfo = require(path.resolve('./locales/en_us/command.json'));
+const _ = xrequire('lodash');
+let chalk = xrequire('chalk');
+let moduleHandler = xrequire('./handlers/moduleHandler');
+const commandInfo = xrequire('./locales/en_us/command.json');
 
 let describedCommands = Object.keys(commandInfo);
 describedCommands = describedCommands.map(command => command.toLowerCase());

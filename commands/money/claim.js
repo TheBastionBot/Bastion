@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-const moment = require('moment');
-const specialIDs = require('../../assets/specialIDs.json');
+const moment = xrequire('moment');
+const specialIDs = xrequire('./assets/specialIDs.json');
 
 exports.exec = async (Bastion, message) => {
   try {
