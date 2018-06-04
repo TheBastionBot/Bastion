@@ -44,7 +44,8 @@
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
-    "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead."
+    "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead.",
+    "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details."
   ],
   "RENAMED COMMANDS": [
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
