@@ -40,6 +40,7 @@
   "noDeletableMessage": "No message was found that could be deleted.",
   "noLiveStream": "No live stream found for the channel %var%.",
   "noPermission": "I do not have permission to %var% %var%.",
+  "noReportChannel": "%var% your user report did not reach the server staffs. Please ask the server managers to enable user report channel using the `reportChannel` command.",
   "notFound": "No %var% was found for the specified parameters.",
   "notPlaying": "No song is currently being played.",
   "notSet": "You have not set any %var%.",

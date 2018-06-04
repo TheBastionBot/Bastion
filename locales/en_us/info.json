@@ -59,6 +59,8 @@
   "enableStreamerRole": "%var% set the streamer role to **%var%**",
   "disableSuggestionChannel": "%var% removed the suggestion channel of this server. Users can now post suggestions in any channel.",
   "enableSuggestionChannel": "%var% set this channel as the suggestion channel of this server. When users post a suggestion using the `suggest` command, it will be logged in this channel.",
+  "disableReportChannel": "%var% removed the report channel of this server. User reports won't be received anywhere, anymore.",
+  "enableReportChannel": "%var% set this channel as the report channel of this server. When users report any server member, using the `report` command, it will be posted in this channel.",
 
   "addRole": "%var% added the **%var%** role to **%var%**",
   "ban": "%var% banned **%var%** with the reason **%var%**",
@@ -70,7 +72,7 @@
   "removeAllRoles": "%var% removed all the roles from **%var%**",
   "removeNickname": "%var% removed the nickname of **%var%**",
   "removeRole": "%var% removed the **%var%** role from **%var%**",
-  "report": "%var% reported %var% to the moderators with the reason **%var%**. Hold tight, they will look into it.",
+  "report": "%var% you've successfully reported %var% to the server staffs with the reason **%var%**. Hold tight, they will look into it.",
   "setNickname": "%var% set the nickname of **%var%** to **%var%**",
   "softBan": "%var% soft-banned **%var%** with the reason **%var%**",
   "softBanDM": "%var% soft-banned you from **%var%** server with the reason **%var%**",
