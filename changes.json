@@ -31,10 +31,7 @@
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
-    "`ignoreInviteFilter` - Set channels and/or roles to be ignored by the invite filter.",
-    "`ignoreLinkFilter` - Set channels and/or roles to be ignored by the link filter.",
-    "`ignoreWordFilter` - Set channels and/or roles to be ignored by the word filter.",
-    "`ignoreMentionFilter` - Set channels and/or roles to be ignored by the mention filter.",
+    "`ignoreInviteFilter`, `ignoreLinkFilter`, `ignoreWordFilter`, `ignoreMentionFilter`,  - Set channels and/or roles to be ignored by the invite, link, word & mention filters, respectively.",
     "`ignoreSlowMode` - Set channels and/or roles to be ignored by the slow mode.",
     "`ignoreStarboard` - Set channels and/or roles to be ignored by the starboard.",
     "`sellRole` - Sell roles in your server's Role Store.",
