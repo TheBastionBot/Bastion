@@ -775,6 +775,10 @@
     "description": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*",
     "module": "Moderation"
   },
+  "reportChannel": {
+    "description": "Adds/removes the channel as the report channel. If it's enabled, when users report server members using the `report` command, the reports will be posted in this channel.",
+    "module": "Guild Admin"
+  },
   "reputation": {
     "description": "Give reputations to other users. You can give reputation only once in 12 hours.",
     "module": "Fun"
