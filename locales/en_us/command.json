@@ -581,6 +581,9 @@
   "report": {
     "description": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*"
   },
+  "reportChannel": {
+    "description": "Adds/removes the channel as the report channel. If it's enabled, when users report server members using the `report` command, the reports will be posted in this channel."
+  },
   "reputation": {
     "description": "Give reputations to other users. You can give reputation only once in 12 hours."
   },
