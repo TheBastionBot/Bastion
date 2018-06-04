@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       if (!user) {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'users'), message.channel);
+        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'user'), message.channel);
       }
 
       if (message.author.id === user.id) return;
