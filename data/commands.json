@@ -772,7 +772,7 @@
     "module": "Music"
   },
   "report": {
-    "description": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*",
+    "description": "Reports a user of your Discord server to the server staffs. *Report Channel needs to be set.*",
     "module": "Moderation"
   },
   "reportChannel": {
