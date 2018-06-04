@@ -1,5 +1,5 @@
 {
-  "date": "June 2, 2018",
+  "date": "June 4, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -42,7 +42,8 @@
     "`music` - Toggle music support for any specified server.",
     "`toggleBastion` - Toggle Bastion in the server.",
     "`setColor` - Set User Color to use the specified color for yourself in appropriate places like in your Bastion Profile.",
-    "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting."
+    "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting.",
+    "`reportChannel` - (Un)Set report channel of the server."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
