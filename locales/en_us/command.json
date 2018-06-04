@@ -579,7 +579,7 @@
     "description": "Adds the current song to the repeat queue, so it will repeat once again after the current playback is complete."
   },
   "report": {
-    "description": "Reports a user of your Discord server. *Moderation logs needs to be enabled.*"
+    "description": "Reports a user of your Discord server to the server staffs. *Report Channel needs to be set.*"
   },
   "reportChannel": {
     "description": "Adds/removes the channel as the report channel. If it's enabled, when users report server members using the `report` command, the reports will be posted in this channel."
