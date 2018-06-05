@@ -4,4 +4,4 @@ TITLE Bastion Discord Bot
 CLS
 ECHO.
 
-powershell .\scripts\powershell\Selection.ps1
+powershell -ExecutionPolicy Bypass .\scripts\powershell\Selection.ps1
