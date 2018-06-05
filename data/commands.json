@@ -719,6 +719,10 @@
     "description": "Shows the rank of the specified user's account.",
     "module": "Info"
   },
+  "reactionPinning": {
+    "description": "Toggles Reaction Pinning in the server. If Reaction Pinning is enabled, adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too.",
+    "module": "Guild Admin"
+  },
   "reason": {
     "description": "Add/Update the reason for a moderation action, which is logged in the moderation log channel. Only the responsible moderator or anyone with administrator permissions can change the reason.",
     "module": "Moderation"

@@ -224,7 +224,7 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
-    reactionPinsMessage: {
+    reactionPinning: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
