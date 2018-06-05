@@ -1,5 +1,5 @@
 {
-  "date": "June 4, 2018",
+  "date": "June 5, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -18,16 +18,16 @@
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
-    "Set the amount of data shown in the terminal logs by modifying the value of `logLevel` key in config",
+    "Set the amount of data shown in the terminal by modifying the value of `logLevel` key in config",
     "Levels & currencies aren't global anymore. Members have separate currency & level in every server",
     "You can now `give` & `take` any amount of Bastion Currencies to/from any member of your server",
     "Give as much XP as you want to your server members, using the `giveXP` command",
-    "Tired of looking through the moderation logs just to find a specific case? Use the `case` command to fetch any case from the moderation logs",
+    "Tired of looking through the moderation logs to find a specific case? Use the `case` command to fetch any case from the moderation logs",
     "Using the `claim` command daily will count towards your daily streak. If you get a streak of 7 days, you'll can get a bonus of upto 700 BC",
-    "Triggers aren't global anymore. There are now different triggers & responses for different servers",
-    "Triggers aren't owner only anymore! You can now set triggers & responses in the servers you manage",
-    "Triggers can now respond with reactions & embeds along with plain text responses",
-    "Users can now have different music playlists in different servers"
+    "Triggers aren't global & owner only anymore. There are now different triggers & responses for different servers & can be used by you in the servers you manage.",
+    "Trigger responses now support reactions & message embeds too!",
+    "Users can now have different music playlists in different servers",
+    "Members Only mode to allow only users with roles to use the commands."
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -40,7 +40,8 @@
     "`toggleBastion` - Toggle Bastion in the server.",
     "`setColor` - Set User Color to use the specified color for yourself in appropriate places like in your Bastion Profile.",
     "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting.",
-    "`reportChannel` - (Un)Set report channel of the server."
+    "`reportChannel` - (Un)Set report channel of the server.",
+    "`membersOnly` - Toggle Members Only mode."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
