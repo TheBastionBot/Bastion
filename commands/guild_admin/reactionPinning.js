@@ -44,7 +44,7 @@ exports.config = {
 
 exports.help = {
   name: 'reactionPinning',
-  description: 'Toggles Members Only mode of Bastion. If Members Only mode is enabled only users with at least one role in the server can use Bastion\'s Commands.',
+  description: 'Toggles Reaction Pinning in the server. If Reaction Pinning is enabled, adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
