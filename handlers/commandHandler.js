@@ -17,7 +17,7 @@ const activeUsers = {};
 module.exports = async message => {
   try {
     let guildModel = await message.client.database.models.guild.findOne({
-      attributes: [ 'enabled', 'prefix', 'language', 'music', 'musicTextChannel', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
+      attributes: [ 'enabled', 'prefix', 'language', 'membersOnly', 'music', 'musicTextChannel', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
       where: {
         guildID: message.guild.id
       },
@@ -34,6 +34,10 @@ module.exports = async message => {
     });
 
     if (!guildModel.dataValues.enabled && !message.member.hasPermission('MANAGE_GUILD')) return;
+
+    // Members Only mode. It's < 2 because the everyone has the @everyone role
+    // by default which counts as 1.
+    if (guildModel.dataValues.membersOnly && !message.member.hasPermission('MANAGE_GUILD') && message.member.roles.size < 2) return;
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
     guildModel.dataValues.prefix.concat(message.client.config.prefix);

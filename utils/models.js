@@ -204,7 +204,7 @@ module.exports = (Sequelize, database) => {
     disabledCommands: {
       type: Sequelize.JSON
     },
-    onlyMembersWithRoles: {
+    membersOnly: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false

@@ -579,6 +579,10 @@
     "description": "Get the map of the specified location.",
     "module": "Queries"
   },
+  "membersOnly": {
+    "description": "Toggles Members Only mode of Bastion. If Members Only mode is enabled only users with at least one role in the server can use Bastion's Commands.",
+    "module": "Guild Admin"
+  },
   "messageChannel": {
     "description": "Send a specified message to any specified text channel that Bastion has access to.",
     "module": "Owner"
