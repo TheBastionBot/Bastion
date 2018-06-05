@@ -134,23 +134,6 @@ module.exports = async (message, action, target, reason, extras) => {
         );
         break;
 
-      case 'report':
-        action = message.client.i18n.event(guild.language, 'userReport');
-        color = message.client.colors.ORANGE;
-        logData.splice(logData.length - 2, 2,
-          {
-            name: 'Reporter',
-            value: `${executor}`,
-            inline: true
-          },
-          {
-            name: 'Reporter ID',
-            value: executor.id,
-            inline: true
-          }
-        );
-        break;
-
       case 'softban':
         action = message.client.i18n.event(guild.language, 'userSoftBan');
         color = message.client.colors.RED;
