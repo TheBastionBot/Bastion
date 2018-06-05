@@ -87,7 +87,7 @@ module.exports = Bastion => {
   Bastion.on('message', LOAD_EVENTS('message'));
   /**
    * Emitted whenever a reaction is added to a message.
-   * @listens message
+   * @listens messageReactionAdd
    */
   Bastion.on('messageReactionAdd', LOAD_EVENTS('messageReactionAdd'));
   /**
