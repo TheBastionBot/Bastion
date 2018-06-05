@@ -21,7 +21,13 @@ $choices.Add((
     -ArgumentList `
       "&Reset Data",
       "Removes all the data stored by Bastion.
-    Useful when you want to start from scratch or if you have somehow corrupted the database.
+    Useful when you want to start from scratch or if you have somehow corrupted the database."
+))
+$choices.Add((
+  New-Object Management.Automation.Host.ChoiceDescription `
+    -ArgumentList `
+      "&Exit",
+      "Exit this script.
       "
 ))
 
@@ -37,5 +43,8 @@ switch($selection) {
   }
   2 {
     .\scripts\powershell\Reset.ps1
+  }
+  3 {
+    Exit
   }
 }
