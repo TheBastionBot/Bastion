@@ -11,7 +11,7 @@ module.exports = async (reaction, user) => {
     if (!reaction.message.guild) return;
 
     let guildModel = await user.client.database.models.guild.findOne({
-      attributes: [ 'starboard' ],
+      attributes: [ 'reactionPinning', 'starboard' ],
       where: {
         guildID: reaction.message.guild.id
       },
@@ -28,6 +28,17 @@ module.exports = async (reaction, user) => {
     });
 
     if (!guildModel) return;
+
+    if (guildModel.dataValues.reactionPinning) {
+      let pins = [ '📌', '📍' ];
+      if (!pins.includes(reaction.emoji.name)) return;
+
+      if (!reaction.message.channel.permissionsFor(user).has('MANAGE_MESSAGES')) return;
+
+      if (!reaction.message.pinned) {
+        await reaction.message.pin();
+      }
+    }
 
     if (guildModel.dataValues.starboard) {
       if (reaction.message.author.id === user.id) return;
