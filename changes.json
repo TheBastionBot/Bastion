@@ -19,15 +19,16 @@
   ],
   "NEW FEATURES!": [
     "Set the amount of data shown in the terminal by modifying the value of `logLevel` key in config",
-    "Levels & currencies aren't global anymore. Members have separate currency & level in every server",
+    "Members have separate currency & level in every server",
     "You can now `give` & `take` any amount of Bastion Currencies to/from any member of your server",
-    "Give as much XP as you want to your server members, using the `giveXP` command",
+    "Give as much XP as you want to your server members using the `giveXP` command",
     "Tired of looking through the moderation logs to find a specific case? Use the `case` command to fetch any case from the moderation logs",
     "Using the `claim` command daily will count towards your daily streak. If you get a streak of 7 days, you'll can get a bonus of upto 700 BC",
-    "Triggers aren't global & owner only anymore. There are now different triggers & responses for different servers & can be used by you in the servers you manage.",
+    "Each servers can have their own triggers & responses",
     "Trigger responses now support reactions & message embeds too!",
     "Users can now have different music playlists in different servers",
-    "Members Only mode to allow only users with roles to use the commands."
+    "Members Only mode to allow only users with roles to use the commands.",
+    "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message"
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -41,12 +42,14 @@
     "`setColor` - Set User Color to use the specified color for yourself in appropriate places like in your Bastion Profile.",
     "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting.",
     "`reportChannel` - (Un)Set report channel of the server.",
-    "`membersOnly` - Toggle Members Only mode."
+    "`membersOnly` - Toggle Members Only mode.",
+    "`reactionPinning` - Toggle Reaction Pinning."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
     "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead.",
-    "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details."
+    "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details.",
+    "Trigger commands can now be used by anyone with Manage Server permission."
   ],
   "RENAMED COMMANDS": [
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
