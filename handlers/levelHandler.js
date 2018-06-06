@@ -26,11 +26,11 @@ module.exports = async message => {
         guildID: message.guild.id
       },
       defaults: {
-        experiencePoints: 1
+        experiencePoints: 0
       }
     });
     if (initialized) {
-      return await guildMemberModel.save();
+      await guildMemberModel.save();
     }
 
     guildMemberModel.dataValues.experiencePoints = parseInt(guildMemberModel.dataValues.experiencePoints);
