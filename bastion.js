@@ -94,6 +94,9 @@ BASTION.database.authenticate().then(() => {
 });
 
 process.on('unhandledRejection', rejection => {
-  // eslint-disable-next-line no-console
-  console.warn(`\n[unhandledRejection]\n${rejection}\n[/unhandledRejection]\n`);
+  /* eslint-disable no-console */
+  console.warn('\n[unhandledRejection]');
+  console.warn(rejection);
+  console.warn('[/unhandledRejection]\n');
+  /* eslint-enable no-console */
 });
