@@ -5,9 +5,15 @@
  */
 
 const Tesseract = xrequire('tesseract');
+
+const configurations = xrequire('./settings/config_example.json');
+const credentials = xrequire('./settings/credentials_example.json');
+configurations.prefix = [ '!', '*' ];
+credentials.token = 'MxjfutRSdOfjOPvxbvTladhT.XTalmy.xStT_kjfuOTladfjOPvxbvtRSdx';
+
 const BASTION = new Tesseract.Client({
-  configurations: xrequire('./settings/config.json'),
-  credentials: xrequire('./settings/credentials.json'),
+  configurations,
+  credentials,
   disabledEvents: [
     'USER_NOTE_UPDATE',
     'TYPING_START',
