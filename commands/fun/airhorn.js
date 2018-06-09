@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message) => {
         return Bastion.emit('bastionMissingPermissions', 'SPEAK', message);
       }
 
-      message.guild.voiceConnection.playFile('./assets/airhorn.wav', { passes: (Bastion.config.music && Bastion.config.music.passes) || 1, bitrate: 'auto' });
+      message.guild.voiceConnection.playFile('./assets/airhorn.wav', { passes: (Bastion.configurations.music && Bastion.configurations.music.passes) || 1, bitrate: 'auto' });
     }
     else if (message.member.voiceChannel) {
       if (!message.member.voiceChannel.permissionsFor(message.member).has(this.help.userTextPermission)) {
@@ -63,7 +63,7 @@ exports.exec = async (Bastion, message) => {
       connection.on('error', Bastion.log.error);
       connection.on('failed', Bastion.log.error);
 
-      const dispatcher = connection.playFile('./assets/airhorn.wav', { passes: (Bastion.config.music && Bastion.config.music.passes) || 1, bitrate: 'auto' });
+      const dispatcher = connection.playFile('./assets/airhorn.wav', { passes: (Bastion.configurations.music && Bastion.configurations.music.passes) || 1, bitrate: 'auto' });
 
       dispatcher.on('error', error => {
         Bastion.log.error(error);

@@ -54,7 +54,7 @@ module.exports = async member => {
       greetMessage = greetMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetMessage = greetMessage.replace(/\$server/ig, member.guild.name);
       greetMessage = greetMessage.replace(/\$username/ig, member.displayName);
-      greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.config.prefix[0]);
+      greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
 
       let greetChannel = member.guild.channels.get(guildModel.dataValues.greet);
       if (greetChannel) {
@@ -87,7 +87,7 @@ module.exports = async member => {
       greetPrivateMessage = greetPrivateMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetPrivateMessage = greetPrivateMessage.replace(/\$server/ig, member.guild.name);
       greetPrivateMessage = greetPrivateMessage.replace(/\$username/ig, member.displayName);
-      greetPrivateMessage = greetPrivateMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.config.prefix[0]);
+      greetPrivateMessage = greetPrivateMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
 
       member.send({
         embed: {

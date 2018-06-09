@@ -4,8 +4,16 @@
  * @license GPL-3.0
  */
 
-const Discord = xrequire('discord.js');
-const BASTION = new Discord.Client({
+const Tesseract = xrequire('tesseract');
+
+const configurations = xrequire('./settings/config_example.json');
+const credentials = xrequire('./settings/credentials_example.json');
+configurations.prefix = [ '!', '*' ];
+credentials.token = 'MxjfutRSdOfjOPvxbvTladhT.XTalmy.xStT_kjfuOTladfjOPvxbvtRSdx';
+
+const BASTION = new Tesseract.Client({
+  configurations,
+  credentials,
   disabledEvents: [
     'USER_NOTE_UPDATE',
     'TYPING_START',
@@ -15,11 +23,9 @@ const BASTION = new Discord.Client({
 });
 
 BASTION.package = xrequire('./package.json');
-BASTION.credentials = xrequire('./settings/credentials.json');
-BASTION.config = xrequire('./settings/config.json');
-BASTION.Constants = Discord.Constants;
-BASTION.colors = Discord.Constants.Colors;
-BASTION.permissions = Discord.Permissions.FLAGS;
+BASTION.Constants = Tesseract.Constants;
+BASTION.colors = Tesseract.Constants.Colors;
+BASTION.permissions = Tesseract.Permissions.FLAGS;
 
 // xrequire('./utils/Array.prototype');
 xrequire('./utils/String.prototype');

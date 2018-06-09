@@ -40,7 +40,7 @@ module.exports = async message => {
     if (guildModel.dataValues.membersOnly && !message.member.hasPermission('MANAGE_GUILD') && message.member.roles.size < 2) return;
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
-    guildModel.dataValues.prefix.concat(message.client.config.prefix);
+    guildModel.dataValues.prefix.concat(message.client.configurations.prefix);
     if (!message.guild.prefix || !_.isEqual(message.guild.prefix, guildModel.dataValues.prefix)) {
       message.guild.prefix = [ ...new Set(guildModel.dataValues.prefix) ];
     }
@@ -116,19 +116,19 @@ module.exports = async message => {
     /**
      * Command log messages
      */
-    if (message.client.config.logLevel === 1) {
+    if (message.client.configurations.logLevel === 1) {
       message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {cyan ${message.author.tag}} #${message.channel.name} {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 2) {
+    else if (message.client.configurations.logLevel === 2) {
       message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {green ${message.guild.name}} > {yellow #${message.channel.name}}`);
       message.client.log.console(COLOR`{cyan ${message.author.tag}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 3) {
+    else if (message.client.configurations.logLevel === 3) {
       message.client.log.console(`\n${new Date()}`);
       message.client.log.console(COLOR`{green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
       message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 4) {
+    else if (message.client.configurations.logLevel === 4) {
       message.client.log.console(`\n${new Date()}`);
       if (message.client.shard) {
         message.client.log.console(COLOR`{green Shard ${message.client.shard.id}} > {green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
@@ -139,7 +139,7 @@ module.exports = async message => {
       message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}}`);
       message.client.log.console(COLOR`{yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 5) {
+    else if (message.client.configurations.logLevel === 5) {
       message.client.log.console(`\n[${new Date()}]`);
       if (message.client.shard) {
         message.client.log.console(COLOR`{green [  SHARD]:} ${message.client.shard.id}`);

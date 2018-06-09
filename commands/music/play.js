@@ -255,11 +255,11 @@ exports.help = {
  */
 function startStreamDispatcher(guild, connection) {
   if (!guild.music.songs[0] || connection.channel.members.size <= 1) {
-    if (guild.client.config.music && guild.client.config.music.status) {
-      guild.client.user.setActivity(typeof guild.client.config.game.name === 'string' ? guild.client.config.game.name : guild.client.config.game.name.length ? guild.client.config.game.name[0] : null,
+    if (guild.client.configurations.music && guild.client.configurations.music.status) {
+      guild.client.user.setActivity(typeof guild.client.configurations.game.name === 'string' ? guild.client.configurations.game.name : guild.client.configurations.game.name.length ? guild.client.configurations.game.name[0] : null,
         {
-          type: guild.client.config.game.type,
-          url: guild.client.config.game.url && guild.client.config.game.url.trim().length ? guild.client.config.game.url : null
+          type: guild.client.configurations.game.type,
+          url: guild.client.configurations.game.url && guild.client.configurations.game.url.trim().length ? guild.client.configurations.game.url : null
         }
       );
     }
@@ -288,7 +288,7 @@ function startStreamDispatcher(guild, connection) {
 
   let stream = youtubeDL(guild.music.songs[0].url);
   let streamOptions = {
-    passes: (guild.client.config.music && guild.client.config.music.passes) || 1,
+    passes: (guild.client.configurations.music && guild.client.configurations.music.passes) || 1,
     bitrate: 'auto'
   };
   guild.music.dispatcher = connection.playStream(stream, streamOptions);
@@ -311,7 +311,7 @@ function startStreamDispatcher(guild, connection) {
     guild.client.log.error(e);
   });
 
-  if (guild.client.config.music && guild.client.config.music.status) {
+  if (guild.client.configurations.music && guild.client.configurations.music.status) {
     guild.client.user.setActivity(guild.music.songs[0].title);
   }
 
