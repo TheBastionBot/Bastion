@@ -6,11 +6,11 @@
 
 module.exports = (text, message) => {
   let vars = {
-    '{prefix}': message.client.config.prefix[0],
+    '{prefix}': message.client.configurations.prefix[0],
     '{server}': message.guild.name,
     '{server.id}': message.guild.id,
     '{server.region}': message.guild.region,
-    '{server.prefix}': message.guild.prefix ? message.guild.prefix[0] : message.client.config.prefix[0],
+    '{server.prefix}': message.guild.prefix ? message.guild.prefix[0] : message.client.configurations.prefix[0],
     '{server.channels.size}': message.guild.channels.size,
     '{server.channels.text.size}': message.guild.channels.filter(channel => channel.type === 'text').size,
     '{server.channels.voice.size}': message.guild.channels.filter(channel => channel.type === 'voice').size,
