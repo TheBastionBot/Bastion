@@ -13,27 +13,27 @@ module.exports = async Bastion => {
     }
 
     Bastion.user.setPresence({
-      status: Bastion.config.status,
+      status: Bastion.configurations.status,
       game: {
-        name: typeof Bastion.config.game.name === 'string' ? Bastion.config.game.name : Bastion.config.game.name.length ? Bastion.config.game.name[0] : null,
-        type: Bastion.config.game.type,
-        url: Bastion.config.game.url && Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
+        name: typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name.length ? Bastion.configurations.game.name[0] : null,
+        type: Bastion.configurations.game.type,
+        url: Bastion.configurations.game.url && Bastion.configurations.game.url.trim().length ? Bastion.configurations.game.url : null
       }
     });
 
-    if (typeof Bastion.config.game.name !== 'string' && Bastion.config.game.name.length) {
+    if (typeof Bastion.configurations.game.name !== 'string' && Bastion.configurations.game.name.length) {
       Bastion.setInterval(async () => {
         try {
-          await Bastion.user.setActivity(Bastion.config.game.name[Math.floor(Math.random() * Bastion.config.game.name.length)],
+          await Bastion.user.setActivity(Bastion.configurations.game.name[Math.floor(Math.random() * Bastion.configurations.game.name.length)],
             {
-              type: Bastion.config.game.type,
-              url: Bastion.config.game.url && Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
+              type: Bastion.configurations.game.type,
+              url: Bastion.configurations.game.url && Bastion.configurations.game.url.trim().length ? Bastion.configurations.game.url : null
             });
         }
         catch (e) {
           Bastion.log.error(e);
         }
-      }, ((typeof Bastion.config.game.interval === 'number' && Bastion.config.game.interval) || 60) * 60 * 1000);
+      }, ((typeof Bastion.configurations.game.interval === 'number' && Bastion.configurations.game.interval) || 60) * 60 * 1000);
     }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
@@ -131,7 +131,7 @@ module.exports = async Bastion => {
         Bastion.log.console(COLOR`{green [   SHARDS]:} ${Bastion.shard.count}`);
       }
       Bastion.log.console(COLOR`{green [  SERVERS]:} ${guilds}`);
-      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.config.prefix.join(' ')}`);
+      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.configurations.prefix.join(' ')}`);
       Bastion.log.console(COLOR`{green [ COMMANDS]:} ${Bastion.commands.size}`);
 
       Bastion.webhook.send('bastionLog', {
