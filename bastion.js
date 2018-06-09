@@ -24,12 +24,6 @@ else {
 }
 
 BASTION.package = xrequire('./package.json');
-/**
- * Tesseract stores config in its configurations property, so the config
- * property is still present for backward compatibility. It'll be removed once
- * this property is replaced by the new one everywhere.
- */
-BASTION.config = xrequire('./settings/config.json');
 BASTION.Constants = Tesseract.Constants;
 BASTION.colors = Tesseract.Constants.Colors;
 BASTION.permissions = Tesseract.Permissions.FLAGS;
