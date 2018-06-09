@@ -29,9 +29,9 @@ for (let module of modules) {
     file = xrequire('./commands/', module, file);
     Commands.set(file.help.name.toLowerCase(), file);
 
-    file.configurations.module = module;
+    file.config.module = module;
 
-    for (let alias of file.configurations.aliases) {
+    for (let alias of file.config.aliases) {
       Aliases.set(alias.toLowerCase(), file.help.name);
     }
 

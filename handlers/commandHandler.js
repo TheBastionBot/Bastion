@@ -111,7 +111,7 @@ module.exports = async message => {
     /**
      * @var {String} mdl The module that the command belongs to.
      */
-    let mdl = cmd.configurations.module;
+    let mdl = cmd.config.module;
 
     /**
      * Command log messages
@@ -183,7 +183,7 @@ module.exports = async message => {
      * Command permissions handler
      */
     // Checks for bot owner permission
-    if (cmd.configurations.ownerOnly) {
+    if (cmd.config.ownerOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id)) {
         /**
         * User has missing permissions.
@@ -194,7 +194,7 @@ module.exports = async message => {
     }
 
     // Checks for music master permission
-    if (cmd.configurations.musicMasterOnly) {
+    if (cmd.config.musicMasterOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.masterRoleID)) {
         /**
         * User has missing permissions.
@@ -205,7 +205,7 @@ module.exports = async message => {
     }
 
     // Checks for guild owner permission
-    if (cmd.configurations.guildOwnerOnly) {
+    if (cmd.config.guildOwnerOnly) {
       if (message.author.id !== message.guild.ownerID) {
         /**
         * User has missing permissions.
@@ -250,7 +250,7 @@ module.exports = async message => {
     /**
      * Command cooldown handler
      */
-    if (cmd.configurations.userCooldown && typeof cmd.configurations.userCooldown === 'number' && cmd.configurations.userCooldown >= 1 && cmd.configurations.userCooldown <= 1440) {
+    if (cmd.config.userCooldown && typeof cmd.config.userCooldown === 'number' && cmd.config.userCooldown >= 1 && cmd.config.userCooldown <= 1440) {
       if (!activeUsers.hasOwnProperty(cmd.help.name)) {
         activeUsers[cmd.help.name] = [];
       }
@@ -259,18 +259,18 @@ module.exports = async message => {
          * Error condition is encountered.
          * @fires error
          */
-        return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'cooldown', `<@${message.author.id}>`, cmd.help.name, cmd.configurations.userCooldown), message.channel);
+        return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'cooldown', `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
       }
     }
 
-    let isSuccessRun = await cmd.exec(message.client, message, parseArgs(cmd.configurations.argsDefinitions, { argv: args, partial: true }));
+    let isSuccessRun = await cmd.exec(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
 
     if (isSuccessRun === true) {
       if (activeUsers.hasOwnProperty(cmd.help.name)) {
         activeUsers[cmd.help.name].push(message.author.id);
         message.client.setTimeout(() => {
           activeUsers.splice(activeUsers.indexOf(message.author.id), 1);
-        }, cmd.configurations.userCooldown * 1000);
+        }, cmd.config.userCooldown * 1000);
       }
     }
   }
