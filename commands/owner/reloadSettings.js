@@ -11,7 +11,7 @@ exports.exec = (Bastion, message) => {
     for (let file of settings) {
       delete xrequire.cache[xrequire.resolve(`./settings/${file}`)];
     }
-    Bastion.config = xrequire('./settings/config.json');
+    Bastion.configurations = xrequire('./settings/config.json');
     Bastion.credentials = xrequire('./settings/credentials.json');
 
     message.channel.send({

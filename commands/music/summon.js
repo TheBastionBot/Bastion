@@ -62,7 +62,7 @@ exports.exec = async (Bastion, message) => {
 
     if (!voiceConnection.speaking) {
       voiceConnection.playFile('./assets/greeting.mp3', {
-        passes: (Bastion.config.music && Bastion.config.music.passes) || 1,
+        passes: (Bastion.configurations.music && Bastion.configurations.music.passes) || 1,
         bitrate: 'auto'
       });
     }
