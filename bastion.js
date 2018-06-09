@@ -4,8 +4,10 @@
  * @license GPL-3.0
  */
 
-const Discord = xrequire('discord.js');
-const BASTION = new Discord.Client({
+const Tesseract = xrequire('tesseract');
+const BASTION = new Tesseract.Client({
+  configurations: xrequire('./settings/config.json'),
+  credentials: xrequire('./settings/credentials.json'),
   disabledEvents: [
     'USER_NOTE_UPDATE',
     'TYPING_START',
@@ -22,11 +24,15 @@ else {
 }
 
 BASTION.package = xrequire('./package.json');
-BASTION.credentials = xrequire('./settings/credentials.json');
+/**
+ * Tesseract stores config in its configurations property, so the config
+ * property is still present for backward compatibility. It'll be removed once
+ * this property is replaced by the new one everywhere.
+ */
 BASTION.config = xrequire('./settings/config.json');
-BASTION.Constants = Discord.Constants;
-BASTION.colors = Discord.Constants.Colors;
-BASTION.permissions = Discord.Permissions.FLAGS;
+BASTION.Constants = Tesseract.Constants;
+BASTION.colors = Tesseract.Constants.Colors;
+BASTION.permissions = Tesseract.Permissions.FLAGS;
 
 // xrequire('./utils/Array.prototype');
 xrequire('./utils/String.prototype');
