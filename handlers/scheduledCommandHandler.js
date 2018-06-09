@@ -54,8 +54,8 @@ module.exports = Bastion => {
               return removeScheduledCommandByCommandName(Bastion, command);
             }
 
-            if (cmd.config.enabled) {
-              cmd.exec(Bastion, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+            if (cmd.configurations.enabled) {
+              cmd.exec(Bastion, message, parseArgs(cmd.configurations.argsDefinitions, { argv: args, partial: true }));
             }
           },
           function () {},

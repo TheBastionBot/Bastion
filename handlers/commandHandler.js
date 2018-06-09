@@ -40,7 +40,7 @@ module.exports = async message => {
     if (guildModel.dataValues.membersOnly && !message.member.hasPermission('MANAGE_GUILD') && message.member.roles.size < 2) return;
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
-    guildModel.dataValues.prefix.concat(message.client.config.prefix);
+    guildModel.dataValues.prefix.concat(message.client.configurations.prefix);
     if (!message.guild.prefix || !_.isEqual(message.guild.prefix, guildModel.dataValues.prefix)) {
       message.guild.prefix = [ ...new Set(guildModel.dataValues.prefix) ];
     }
@@ -111,24 +111,24 @@ module.exports = async message => {
     /**
      * @var {String} mdl The module that the command belongs to.
      */
-    let mdl = cmd.config.module;
+    let mdl = cmd.configurations.module;
 
     /**
      * Command log messages
      */
-    if (message.client.config.logLevel === 1) {
+    if (message.client.configurations.logLevel === 1) {
       message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {cyan ${message.author.tag}} #${message.channel.name} {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 2) {
+    else if (message.client.configurations.logLevel === 2) {
       message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {green ${message.guild.name}} > {yellow #${message.channel.name}}`);
       message.client.log.console(COLOR`{cyan ${message.author.tag}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 3) {
+    else if (message.client.configurations.logLevel === 3) {
       message.client.log.console(`\n${new Date()}`);
       message.client.log.console(COLOR`{green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
       message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 4) {
+    else if (message.client.configurations.logLevel === 4) {
       message.client.log.console(`\n${new Date()}`);
       if (message.client.shard) {
         message.client.log.console(COLOR`{green Shard ${message.client.shard.id}} > {green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
@@ -139,7 +139,7 @@ module.exports = async message => {
       message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}}`);
       message.client.log.console(COLOR`{yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    else if (message.client.config.logLevel === 5) {
+    else if (message.client.configurations.logLevel === 5) {
       message.client.log.console(`\n[${new Date()}]`);
       if (message.client.shard) {
         message.client.log.console(COLOR`{green [  SHARD]:} ${message.client.shard.id}`);
@@ -183,7 +183,7 @@ module.exports = async message => {
      * Command permissions handler
      */
     // Checks for bot owner permission
-    if (cmd.config.ownerOnly) {
+    if (cmd.configurations.ownerOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id)) {
         /**
         * User has missing permissions.
@@ -194,7 +194,7 @@ module.exports = async message => {
     }
 
     // Checks for music master permission
-    if (cmd.config.musicMasterOnly) {
+    if (cmd.configurations.musicMasterOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id) && !message.member.roles.has(message.guild.music.masterRoleID)) {
         /**
         * User has missing permissions.
@@ -205,7 +205,7 @@ module.exports = async message => {
     }
 
     // Checks for guild owner permission
-    if (cmd.config.guildOwnerOnly) {
+    if (cmd.configurations.guildOwnerOnly) {
       if (message.author.id !== message.guild.ownerID) {
         /**
         * User has missing permissions.
@@ -250,7 +250,7 @@ module.exports = async message => {
     /**
      * Command cooldown handler
      */
-    if (cmd.config.userCooldown && typeof cmd.config.userCooldown === 'number' && cmd.config.userCooldown >= 1 && cmd.config.userCooldown <= 1440) {
+    if (cmd.configurations.userCooldown && typeof cmd.configurations.userCooldown === 'number' && cmd.configurations.userCooldown >= 1 && cmd.configurations.userCooldown <= 1440) {
       if (!activeUsers.hasOwnProperty(cmd.help.name)) {
         activeUsers[cmd.help.name] = [];
       }
@@ -259,18 +259,18 @@ module.exports = async message => {
          * Error condition is encountered.
          * @fires error
          */
-        return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'cooldown', `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
+        return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'cooldown', `<@${message.author.id}>`, cmd.help.name, cmd.configurations.userCooldown), message.channel);
       }
     }
 
-    let isSuccessRun = await cmd.exec(message.client, message, parseArgs(cmd.config.argsDefinitions, { argv: args, partial: true }));
+    let isSuccessRun = await cmd.exec(message.client, message, parseArgs(cmd.configurations.argsDefinitions, { argv: args, partial: true }));
 
     if (isSuccessRun === true) {
       if (activeUsers.hasOwnProperty(cmd.help.name)) {
         activeUsers[cmd.help.name].push(message.author.id);
         message.client.setTimeout(() => {
           activeUsers.splice(activeUsers.indexOf(message.author.id), 1);
-        }, cmd.config.userCooldown * 1000);
+        }, cmd.configurations.userCooldown * 1000);
       }
     }
   }
