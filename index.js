@@ -4,11 +4,11 @@
  * @license GPL-3.0
  */
 
-const Discord = xrequire('discord.js');
+const Tesseract = xrequire('tesseract');
 const credentials = xrequire('./settings/credentials.json');
-const config = xrequire('./settings/config.json');
-const Manager = new Discord.ShardingManager('./bastion.js', {
-  totalShards: config.shardCount,
+const configurations = xrequire('./settings/config.json');
+const Manager = new Tesseract.ShardingManager('./bastion.js', {
+  totalShards: configurations.shardCount,
   token: credentials.token
 });
 const log = xrequire('./handlers/logHandler');
