@@ -1,11 +1,9 @@
 {
-  "date": "June 3, 2018",
-  "image": "https://i.imgur.com/356dk6S.gif",
+  "date": "June 10, 2018",
+  "image": "https://i.imgur.com/MvpZk1P.gif",
   "IMPROVEMENTS": [
-    "`discrim` command will now show Discord user tag instead of user mentions.",
-    "Under-the-hood-improvements"
+    "`report` command will now remove your message too, and instantly! You don't need to delete your own message by yourself anymore if you wanted it removed.",
+    "Minor design improvements to the `pokemon` command."
   ],
-  "FIXES": [
-    "Fixed `streamerRole` command not showing the current Streamer Role."
-  ]
+  "FIXES": []
 }
