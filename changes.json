@@ -2,7 +2,8 @@
   "date": "June 10, 2018",
   "image": "https://i.imgur.com/MvpZk1P.gif",
   "IMPROVEMENTS": [
-    "`report` command will now remove your message too, and instantly! You don't need to delete your own message by yourself anymore if you wanted it removed."
+    "`report` command will now remove your message too, and instantly! You don't need to delete your own message by yourself anymore if you wanted it removed.",
+    "Minor design improvements to the `pokemon` command."
   ],
   "FIXES": []
 }
