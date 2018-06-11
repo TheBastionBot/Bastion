@@ -6,51 +6,39 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let user = message.mentions.users.first();
-    let limit = parseInt(args[0]) ? args[0] : args[1];
-    let amount;
-    if (user || args.includes('--bots')) {
-      amount = 100;
-    }
-    else {
-      amount = /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100;
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
     }
 
-    let msgs = await message.channel.fetchMessages({
-      limit: amount
+
+    args.amount = Math.abs(args.amount);
+    let messages = await message.channel.fetchMessages({
+      limit: args.amount && args.amount < 100 ? args.amount : 100
     });
 
+
     if (user) {
-      msgs = Array.from(msgs.filter(m => m.author.id === user.id).values()).slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
+      messages = messages.filter(message => message.author.id === user.id);
     }
-    else if (args.includes('--bots')) {
-      msgs = Array.from(msgs.filter(m => m.author.bot).values()).slice(0, /^[1-9][0-9]?$|^100$/.test(limit) ? parseInt(limit) : 100);
+    else if (args.bots) {
+      messages = messages.filter(message => message.author.bot);
     }
-    if (args.includes('--nonpinned')) {
-      msgs = msgs.filter(m => !m.pinned);
-    }
-    if (msgs.size < 2 || msgs.length < 2) {
-      let error;
-      if ((msgs.size === 1 || msgs.length === 1) && (user || args.includes('--bots'))) {
-        error = Bastion.i18n.error(message.guild.language, 'singleMessage');
-      }
-      else {
-        error = Bastion.i18n.error(message.guild.language, 'noDeletableMessage');
-      }
-
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', error, message.channel);
+    if (args.nonpinned) {
+      messages = messages.filter(message => !message.pinned);
     }
 
-    await message.channel.bulkDelete(msgs, true);
+
+    let clearedMessages = await message.channel.bulkDelete(messages, true);
+    if (!clearedMessages.size) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noDeletableMessage'), message.channel);
+    }
+
 
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `I've cleared ${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}.`
+        description: `I've cleared ${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}.`
       }
     }).then(msg => {
       msg.delete(10000).catch(() => {});
@@ -58,14 +46,10 @@ exports.exec = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
-    let reason = 'No reason given';
 
-    /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
+    let reason = 'No reason given';
     Bastion.emit('moderationLog', message, this.help.name, message.channel, reason, {
-      cleared: `${msgs.size || msgs.length}${args.includes('--nonpinned') ? ' non pinned' : ''} messages from ${user ? user : args.includes('--bots') ? 'BOTs' : 'everyone'}`
+      cleared: `${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}`
     });
   }
   catch (e) {
@@ -75,7 +59,12 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'clr', 'purge' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'amount', type: Number, alias: 'n', defaultValue: 100, defaultOption: true },
+    { name: 'bots', type: Boolean },
+    { name: 'nonpinned', type: Boolean }
+  ]
 };
 
 exports.help = {
@@ -84,6 +73,6 @@ exports.help = {
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_MESSAGES',
   userVoicePermission: '',
-  usage: 'clear [ @user-mention | --bots ] [--nonpinned] [no_of_messages]',
-  example: [ 'clear 50', 'clear @user#0001 5', 'clear --bots 10', 'clear' ]
+  usage: 'clear [NUMBER_OF_MESSAGES] [--nonpinned] [--bots] [@USER-MENTION]',
+  example: [ 'clear', 'clear 43', 'clear 13 @Barry#0001', 'clear 37 --bots', 'clear --nonpinned' ]
 };
