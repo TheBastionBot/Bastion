@@ -50,7 +50,8 @@
     "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead.",
     "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details.",
     "Trigger commands can now be used by anyone with Manage Server permission.",
-    "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, to see the new usage."
+    "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, to see the new usage.",
+    "`clear` command can now clear messages sent in the last specified minutes."
   ],
   "RENAMED COMMANDS": [
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",

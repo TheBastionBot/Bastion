@@ -26,6 +26,10 @@ exports.exec = async (Bastion, message, args) => {
     if (args.nonpinned) {
       messages = messages.filter(message => !message.pinned);
     }
+    if (args.time) {
+      let requiredTimestamp = message.createdTimestamp - (args.time * 60 * 1000);
+      messages = messages.filter(message => message.createdTimestamp >= requiredTimestamp);
+    }
 
 
     let clearedMessages = await message.channel.bulkDelete(messages, true);
@@ -37,7 +41,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `I've cleared ${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}.`
+        description: `I've cleared ${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}${args.time ? ` sent in the past ${args.time} minutes` : ''}.`
       }
     }).then(msg => {
       msg.delete(10000).catch(() => {});
@@ -48,7 +52,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let reason = 'No reason given';
     Bastion.emit('moderationLog', message, this.help.name, message.channel, reason, {
-      cleared: `${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}`
+      cleared: `${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}${args.time ? ` sent in the past ${args.time} minutes.` : ''}`
     });
   }
   catch (e) {
@@ -62,7 +66,8 @@ exports.config = {
   argsDefinitions: [
     { name: 'amount', type: Number, alias: 'n', defaultValue: 100, defaultOption: true },
     { name: 'bots', type: Boolean },
-    { name: 'nonpinned', type: Boolean }
+    { name: 'nonpinned', type: Boolean },
+    { name: 'time', type: Number, alias: 't' }
   ]
 };
 
@@ -72,6 +77,6 @@ exports.help = {
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_MESSAGES',
   userVoicePermission: '',
-  usage: 'clear [NUMBER_OF_MESSAGES] [--nonpinned] [--bots] [@USER-MENTION]',
-  example: [ 'clear', 'clear 43', 'clear 13 @Barry#0001', 'clear 37 --bots', 'clear --nonpinned' ]
+  usage: 'clear [NUMBER_OF_MESSAGES] [--nonpinned] [--bots] [@USER-MENTION] [--time TIMESPAN_IN_MINUTES]',
+  example: [ 'clear', 'clear 43', 'clear --time 3', 'clear 13 @Barry#0001', 'clear 37 --bots', 'clear --nonpinned' ]
 };
