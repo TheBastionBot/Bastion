@@ -6,6 +6,9 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    await message.delete().catch(() => {});
+
+
     args.amount = Math.abs(args.amount);
     let messages = await message.channel.fetchMessages({
       limit: args.amount && args.amount < 100 ? args.amount : 100
