@@ -6,16 +6,15 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-
-
     args.amount = Math.abs(args.amount);
     let messages = await message.channel.fetchMessages({
       limit: args.amount && args.amount < 100 ? args.amount : 100
     });
+
+    let user;
+    if (message.mentions.users.size) {
+      user = message.mentions.users.first();
+    }
 
 
     if (user) {
