@@ -34,7 +34,7 @@ module.exports = async message => {
     }
 
     let guildModel = await message.client.database.models.guild.findOne({
-      attributes: [ 'levelUpMessages' ],
+      attributes: [ 'levelUpMessages', 'levelUps' ],
       where: {
         guildID: message.guild.id
       },
@@ -47,52 +47,55 @@ module.exports = async message => {
     });
 
 
-    // Level Up
     guildMemberModel.dataValues.experiencePoints = parseInt(guildMemberModel.dataValues.experiencePoints);
     guildMemberModel.dataValues.level = parseInt(guildMemberModel.dataValues.level);
     guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
     let currentLevel = Math.floor(0.15 * Math.sqrt(guildMemberModel.dataValues.experiencePoints + 1));
 
-    if (currentLevel > guildMemberModel.dataValues.level) {
-      await message.client.database.models.guildMember.update({
-        bastionCurrencies: guildMemberModel.dataValues.bastionCurrencies + currentLevel * 5,
-        experiencePoints: guildMemberModel.dataValues.experiencePoints + 1,
-        level: currentLevel
-      },
-      {
-        where: {
-          userID: message.author.id,
-          guildID: message.guild.id
-        },
-        fields: [ 'bastionCurrencies', 'experiencePoints', 'level' ]
-      });
 
-      if (guildModel.dataValues.levelUpMessages) {
-        message.channel.send({
-          embed: {
-            color: message.client.colors.BLUE,
-            title: 'Leveled up',
-            description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
-          }
-        }).then(msg => {
-          msg.delete(5000).catch(() => {});
-        }).catch(e => {
-          message.client.log.error(e);
+    // Level Up
+    if (guildModel.dataValues.levelUps) {
+      if (currentLevel > guildMemberModel.dataValues.level) {
+        await message.client.database.models.guildMember.update({
+          bastionCurrencies: guildMemberModel.dataValues.bastionCurrencies + currentLevel * 5,
+          experiencePoints: guildMemberModel.dataValues.experiencePoints + 1,
+          level: currentLevel
+        },
+        {
+          where: {
+            userID: message.author.id,
+            guildID: message.guild.id
+          },
+          fields: [ 'bastionCurrencies', 'experiencePoints', 'level' ]
+        });
+
+        if (guildModel.dataValues.levelUpMessages) {
+          message.channel.send({
+            embed: {
+              color: message.client.colors.BLUE,
+              title: 'Leveled up',
+              description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
+            }
+          }).then(msg => {
+            msg.delete(5000).catch(() => {});
+          }).catch(e => {
+            message.client.log.error(e);
+          });
+        }
+      }
+      else {
+        await message.client.database.models.guildMember.update({
+          experiencePoints: guildMemberModel.dataValues.experiencePoints + 1
+        },
+        {
+          where: {
+            userID: message.author.id,
+            guildID: message.guild.id
+          },
+          fields: [ 'experiencePoints' ]
         });
       }
-    }
-    else {
-      await message.client.database.models.guildMember.update({
-        experiencePoints: guildMemberModel.dataValues.experiencePoints + 1
-      },
-      {
-        where: {
-          userID: message.author.id,
-          guildID: message.guild.id
-        },
-        fields: [ 'experiencePoints' ]
-      });
     }
 
 
