@@ -15,119 +15,53 @@ exports.exec = async (Bastion, message, args) => {
     }
     if (!user) {
       /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
+
 
     let member = await message.guild.fetchMember(user.id);
     if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     args.reason = args.reason.join(' ');
 
-    if (!message.guild.warns) {
-      message.guild.warns = {};
-    }
-    if (!message.guild.warns.hasOwnProperty(user.id)) {
-      message.guild.warns[user.id] = 1;
-    }
-    else {
-      if (message.guild.warns[user.id] >= 2) {
-        let guildModel = await message.client.database.models.guild.findOne({
-          attributes: [ 'warnAction' ],
-          where: {
-            guildID: message.guild.id
-          }
-        });
-        if (!guildModel || !guildModel.dataValues.warnAction) return;
 
-        if (guildModel.dataValues.warnAction) {
-          let action;
-          if (guildModel.dataValues.warnAction === 'kick') {
-            if (!member.kickable) {
-              /**
-              * Error condition is encountered.
-              * @fires error
-              */
-              return Bastion.emit('error', '', `I don't have permissions to kick ${user}.`, message.channel);
-            }
-            await member.kick('Warned 3 times!');
-            action = 'Kicked';
-          }
-          if (guildModel.dataValues.warnAction === 'softban') {
-            if (!member.bannable) {
-              /**
-              * Error condition is encountered.
-              * @fires error
-              */
-              return Bastion.emit('error', '', `I don't have permissions to soft-ban ${user}.`, message.channel);
-            }
-            await member.ban('Warned 3 times!');
-            await message.guild.unban(member.id);
-            action = 'Soft-Banned';
-          }
-          if (guildModel.dataValues.warnAction === 'ban') {
-            if (!member.bannable) {
-              /**
-              * Error condition is encountered.
-              * @fires error
-              */
-              return Bastion.emit('error', '', `I don't have permissions to ban ${user}.`, message.channel);
-            }
-            await member.ban('Warned 3 times!');
-            action = 'Banned';
-          }
-
-          delete message.guild.warns[user.id];
-          message.channel.send({
-            embed: {
-              color: Bastion.colors.RED,
-              title: action,
-              fields: [
-                {
-                  name: 'User',
-                  value: user.tag,
-                  inline: true
-                },
-                {
-                  name: 'ID',
-                  value: user.id,
-                  inline: true
-                },
-                {
-                  name: 'Reason',
-                  value: 'Warned 3 times!',
-                  inline: false
-                }
-              ]
-            }
-          }).catch(e => {
-            Bastion.log.error(e);
-          });
-
-          Bastion.emit('moderationLog', message, guildModel.dataValues.warnAction, user, 'Warned 3 times!');
-
-          member.send({
-            embed: {
-              color: Bastion.colors.RED,
-              title: `${action} from ${message.guild.name} Server`,
-              fields: [
-                {
-                  name: 'Reason',
-                  value: 'You have been warned 3 times!'
-                }
-              ]
-            }
-          }).catch(e => {
-            Bastion.log.error(e);
-          });
-        }
+    let guildMemberModel = await message.client.database.models.guildMember.findOne({
+      attributes: [ 'warnings' ],
+      where: {
+        userID: member.id,
+        guildID: message.guild.id
       }
-      else {
-        message.guild.warns[user.id] += 1;
-      }
+    });
+
+
+    if (!guildMemberModel.dataValues.warnings) {
+      guildMemberModel.dataValues.warnings = [];
     }
+
+    guildMemberModel.dataValues.warnings.push({
+      reason: args.reason,
+      executor: message.author.id,
+      time: Date.now()
+    });
+
+
+    await message.client.database.models.guildMember.update({
+      warnings: guildMemberModel.dataValues.warnings
+    },
+    {
+      where: {
+        userID: member.id,
+        guildID: message.guild.id
+      },
+      fields: [ 'warnings' ]
+    });
+
+
+    // TODO: Implement warn action and threshold.
+
 
     message.channel.send({
       embed: {
@@ -149,9 +83,9 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
+     * Logs moderation events if it is enabled
+     * @fires moderationLog
+     */
     Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
   }
   catch (e) {
@@ -170,10 +104,10 @@ exports.config = {
 
 exports.help = {
   name: 'warn',
-  description: 'Warns the specified user. If three warns are given, some action, specified by the `warnAction` command (previously), is taken.',
+  description: 'Warns the specified user.',
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',
-  usage: 'warn <@USER_MENTION | USER_ID> -r [Reason]',
-  example: [ 'warn @user#001 -r NSFW in non NSFW channels', 'warn 167147569575323761 -r Advertisements' ]
+  usage: 'warn < @USER-MENTION | USER_ID > -r [Reason]',
+  example: [ 'warn @user#001 -r Sharing NSFW contents', 'warn 167147569575323761 -r Advertisements' ]
 };
