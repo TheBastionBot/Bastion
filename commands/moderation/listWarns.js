@@ -6,7 +6,20 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    if (!message.guild.warns || Object.keys(message.guild.warns).length <= 0) {
+    let guildMemberModel = await message.client.database.models.guildMember.findAll({
+      attributes: [ 'userID', 'warnings' ],
+      where: {
+        guildID: message.guild.id,
+        warnings: {
+          [Bastion.database.Op.not]: null
+        }
+      }
+    });
+
+    let warnedMembers = guildMemberModel.map(model => model.dataValues);
+
+
+    if (warnedMembers.length === 0) {
       return message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
@@ -17,26 +30,23 @@ exports.exec = async (Bastion, message) => {
       });
     }
 
-    let warnedUsers = [];
-    for (let userID of Object.keys(message.guild.warns)) {
-      let member = await message.guild.fetchMember(userID).catch((e) => {
-        if (e.code !== 10007) {
-          Bastion.log.error(e);
-        }
-      });
-      if (member) {
-        warnedUsers.push(`${member.user.tag} - ${message.guild.warns[userID]} Warnings`);
+
+    let membersList = [];
+    for (let member of warnedMembers) {
+      if (message.guild.members.has(member.userID)) {
+        membersList.push(`${message.guild.members.get(member.userID).user.tag} - ${member.warnings.length} Warnings`);
       }
       else {
-        // TODO: Remove userID from warn list
+        membersList.push(`${member.userID} - ${member.warnings.length} Warnings`);
       }
     }
+
 
     message.channel.send({
       embed: {
         color: Bastion.colors.ORANGE,
         title: 'Warning List',
-        description: warnedUsers.length ? warnedUsers.join('\n') : 'No one has been warned yet.'
+        description: membersList.join('\n')
       }
     }).catch(e => {
       Bastion.log.error(e);
