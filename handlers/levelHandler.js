@@ -33,6 +33,21 @@ module.exports = async message => {
       await guildMemberModel.save();
     }
 
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'levelUpMessages' ],
+      where: {
+        guildID: message.guild.id
+      },
+      include: [
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'level' ]
+        }
+      ]
+    });
+
+
+    // Level Up
     guildMemberModel.dataValues.experiencePoints = parseInt(guildMemberModel.dataValues.experiencePoints);
     guildMemberModel.dataValues.level = parseInt(guildMemberModel.dataValues.level);
     guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
@@ -53,26 +68,19 @@ module.exports = async message => {
         fields: [ 'bastionCurrencies', 'experiencePoints', 'level' ]
       });
 
-      // Level up messages
-      let guildModel = await message.client.database.models.guild.findOne({
-        attributes: [ 'levelUpMessages' ],
-        where: {
-          guildID: message.guild.id
-        }
-      });
-      if (!guildModel || !guildModel.dataValues.levelUpMessages) return;
-
-      message.channel.send({
-        embed: {
-          color: message.client.colors.BLUE,
-          title: 'Leveled up',
-          description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
-        }
-      }).then(msg => {
-        msg.delete(5000).catch(() => {});
-      }).catch(e => {
-        message.client.log.error(e);
-      });
+      if (guildModel.dataValues.levelUpMessages) {
+        message.channel.send({
+          embed: {
+            color: message.client.colors.BLUE,
+            title: 'Leveled up',
+            description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
+          }
+        }).then(msg => {
+          msg.delete(5000).catch(() => {});
+        }).catch(e => {
+          message.client.log.error(e);
+        });
+      }
     }
     else {
       await message.client.database.models.guildMember.update({
@@ -87,20 +95,8 @@ module.exports = async message => {
       });
     }
 
-    // Level up roles
-    let guildModel = await message.client.database.models.guild.findOne({
-      attributes: [ 'guildID' ],
-      where: {
-        guildID: message.guild.id
-      },
-      include: [
-        {
-          model: message.client.database.models.role,
-          attributes: [ 'roleID', 'level' ]
-        }
-      ]
-    });
 
+    // Level up roles
     let levelUpRoles = guildModel.roles.filter(role => role.dataValues.level).map(role => role.dataValues);
 
     let levelUpRoleIDs = {};
