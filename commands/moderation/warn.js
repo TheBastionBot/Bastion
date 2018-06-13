@@ -60,33 +60,91 @@ exports.exec = async (Bastion, message, args) => {
     });
 
 
-    // TODO: Implement warn action and threshold.
-
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.ORANGE,
-        description: Bastion.i18n.info(message.guild.language, 'warn', message.author.tag, user.tag, args.reason)
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'warnAction', 'warnThreshold' ],
+      where: {
+        guildID: message.guild.id
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
 
-    let DMChannel = await user.createDM();
-    DMChannel.send({
-      embed: {
-        color: Bastion.colors.ORANGE,
-        description: Bastion.i18n.info(message.guild.language, 'warnDM', message.author.tag, message.guild.name, args.reason)
+    if (guildModel && guildModel.dataValues.warnAction && guildMemberModel.dataValues.warnings.length >= guildModel.dataValues.warnThreshold) {
+      let action, actionMessage = 'Warning threshold reached. Too many warnings!';
+      guildModel.dataValues.warnAction = guildModel.dataValues.warnAction.toLowerCase();
+      switch (guildModel.dataValues.warnAction) {
+        case 'kick':
+          if (member.kickable) {
+            await member.kick(actionMessage);
+          }
+          action = 'Kicked';
+          break;
+        case 'ban':
+          if (member.bannable) {
+            await member.ban(actionMessage);
+          }
+          action = 'Banned';
+          break;
+        case 'softban':
+          if (member.bannable) {
+            await member.ban(actionMessage);
+            await message.guild.unban(member.id);
+          }
+          action = 'Soft-Banned';
+          break;
+        default:
+          break;
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
 
-    /**
-     * Logs moderation events if it is enabled
-     * @fires moderationLog
-     */
-    Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.RED,
+          description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.warnAction, message.author.tag, user.tag, actionMessage),
+          footer: {
+            text: `ID ${user.id}`
+          }
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      Bastion.emit('moderationLog', message.guild, message.author, guildModel.dataValues.warnAction, user, actionMessage);
+
+      member.send({
+        embed: {
+          color: Bastion.colors.RED,
+          title: `${action} from ${message.guild.name} Server`,
+          fields: [
+            {
+              name: 'Reason',
+              value: actionMessage
+            }
+          ]
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+    else {
+      message.channel.send({
+        embed: {
+          color: Bastion.colors.ORANGE,
+          description: Bastion.i18n.info(message.guild.language, 'warn', message.author.tag, user.tag, args.reason)
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      let DMChannel = await user.createDM();
+      DMChannel.send({
+        embed: {
+          color: Bastion.colors.ORANGE,
+          description: Bastion.i18n.info(message.guild.language, 'warnDM', message.author.tag, message.guild.name, args.reason)
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+
+      Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
+    }
   }
   catch (e) {
     Bastion.log.error(e);
@@ -104,7 +162,7 @@ exports.config = {
 
 exports.help = {
   name: 'warn',
-  description: 'Warns the specified user.',
+  description: 'Warns the specified user. If warning threshold reaches for a user some action, specified by the `warnAction` command, is taken.',
   botPermission: 'KICK_MEMBERS',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',
