@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let fields = [
       {
-        name: 'Pokédex Number',
+        name: 'Number',
         value: pokemon.number,
         inline: true
       },
@@ -42,7 +42,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       {
         name: 'Types',
-        value: pokemon.types.join(', '),
+        value: pokemon.types.join('\n'),
         inline: true
       },
       {
@@ -52,12 +52,12 @@ exports.exec = async (Bastion, message, args) => {
       },
       {
         name: 'Egg Groups',
-        value: pokemon.eggGroups.join(', '),
+        value: pokemon.eggGroups.join('\n'),
         inline: true
       },
       {
-        name: 'Gender',
-        value: pokemon.gender.length ? `Male: ${pokemon.gender[0]}%\nFemale: ${pokemon.gender[1]}%` : 'Genderless',
+        name: 'Gender Ratio',
+        value: pokemon.gender.length ? `${pokemon.gender[0]}:${pokemon.gender[1]}` : 'Genderless',
         inline: true
       },
       {

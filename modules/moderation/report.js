@@ -42,8 +42,9 @@ exports.exec = async (Bastion, message, args) => {
         title: 'User Reported',
         description: Bastion.strings.info(message.guild.language, 'report', message.author.tag, user.tag, reason)
       }
-    }).then(message => {
-      message.delete(5000).catch(() => {});
+    }).then(reportMessage => {
+      message.delete().catch(() => {});
+      reportMessage.delete(5000).catch(() => {});
     }).catch(e => {
       Bastion.log.error(e);
     });
