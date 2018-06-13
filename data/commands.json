@@ -1136,7 +1136,7 @@
     "module": "Guild Admin"
   },
   "warn": {
-    "description": "Warns the specified user.",
+    "description": "Warns the specified user. If warning threshold reaches for a user some action, specified by the `warnAction` command, is taken.",
     "module": "Moderation"
   },
   "warnAction": {
