@@ -852,7 +852,7 @@
     "description": "Adds/removes the channel as a voting channel. Any messages posted in this channel, by a user, will be available for voting."
   },
   "warn": {
-    "description": "Warns the specified user."
+    "description": "Warns the specified user. If warning threshold reaches for a user some action, specified by the `warnAction` command, is taken."
   },
   "warnAction": {
     "description": "Sets the warn action for the server."
