@@ -15,33 +15,30 @@ exports.exec = async (Bastion, message, args) => {
     }
     if (!user) {
       /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
     let member = await message.guild.fetchMember(user.id);
     if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
+
+    await message.client.database.models.guildMember.update({
+      warnings: null
+    },
+    {
+      where: {
+        userID: member.id,
+        guildID: message.guild.id
+      },
+      fields: [ 'warnings' ]
+    });
+
+
     args.reason = args.reason.join(' ');
 
-    if (!message.guild.warns) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', 'Everyone is decent here, no one has been warned.', message.channel);
-    }
-    if (!message.guild.warns.hasOwnProperty(user.id)) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', `Nah, ${user.tag} is good guy, he hasn't been warned.`, message.channel);
-    }
-
-    delete message.guild.warns[user.id];
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
@@ -52,9 +49,9 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
+     * Logs moderation events if it is enabled
+     * @fires moderationLog
+     */
     Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
   }
   catch (e) {

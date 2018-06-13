@@ -298,6 +298,9 @@ module.exports = (Sequelize, database) => {
     claimStreak: {
       type: Sequelize.TINYINT(3),
       defaultValue: 0
+    },
+    warnings: {
+      type: Sequelize.JSON
     }
   },
   {
