@@ -1,5 +1,5 @@
 {
-  "date": "June 11, 2018",
+  "date": "June 13, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -13,8 +13,9 @@
     "`currencyGiveaway` command isn't bot owner only anymore! You can now use it in your own servers to do Bastion Currency giveaways",
     "Trigger response supports a whole bunch of variables now",
     "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
-    "Show if a server is a Bastion premium server in the `serverInfo` command. Premium servers & perks are coming soon™!",
+    "Show if a server is a Bastion premium server in the `serverInfo` command.",
     "Adding music from user playlist to the queue is now faster than ever.",
+    "Warnings are now permanently stored!",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
