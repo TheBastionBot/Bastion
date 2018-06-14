@@ -1,3 +1,4 @@
+#### Changes introduced by this PR
 <!--
     Thank you for your Pull Request. Please provide a description above and fill
     in as much of the template below as you're able.
@@ -9,7 +10,7 @@
     If yes, please, state them.
 -->
 
-#### Applicable Issues:
+#### Applicable Issues
 <!--
     Link any applicable Issues/PRs here. With a brief description explaining
     why.
