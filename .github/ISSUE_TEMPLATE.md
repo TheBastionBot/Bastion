@@ -11,7 +11,7 @@
 -->
 
 
-#### I'm opening this issue because:
+#### I'm opening this issue because
 <!--
     Put an X between the brackets on the following lines if a statement is true.
     For example,
@@ -19,29 +19,12 @@
       -  [ ] - This statement is false.
 -->
 
- -  [ ] I want to report a bug/issue.
- -  [ ] I want to request a feature or suggest something.
+ -  [ ] I want to report a bug/issue
+ -  [ ] I want to request a feature or suggest something
+ -  [ ] Other: 
 
 
-#### Supporting Information:
-<!-- Only required if you're reporting a bug/issue. -->
-
-<!-- Displayed in the output of Bastion's `stats` or `changelog` command -->
- -  **Bastion Version**:
-
-<!-- Output of `node -v` -->
- -  **Node.js Version**:
-
-<!-- Output of `npm -v` -->
- -  **NPM Version**:
-
-<!--
-    In Linux/macOS, output of `uname -a` or the version of Windows.
-    And if your Operating System is 32-bit or 64-bit.
--->
- -  **Platform**:
-
-
+#### Issue Details
 <!--
     Enter your issue details, in as much details as possible, after the end of
     this section.
@@ -54,3 +37,16 @@
     do so that we can understand your requirements and implement it as soon as
     possible.
 -->
+
+
+#### Supporting Information
+<!--
+    Only required if you're reporting a bug/issue.
+    Otherwise you can delete this section.
+-->
+
+ -  **Bastion Version**: <!-- Use Bastion's `stats` or `changelog` command -->
+ -  **Node.js Version**: <!-- Output of `node -v` -->
+ -  **NPM Version**: <!-- Output of `npm -v` -->
+ -  **Operating System**: <!-- Output of `uname -a` (Linux/macOS) or Windows version -->
+ -  **Architecture**: <!-- 32-bit or 64-bit Operating System -->
