@@ -29,7 +29,7 @@ module.exports = async (oldChannel, newChannel) => {
       title = newChannel.client.i18n.event(newChannel.guild.language, 'voiceChannelUpdate');
     }
     else if (newChannel.type === 'category') {
-      title = newChannel.client.strings.events(newChannel.guild.language, 'categoryChannelUpdate');
+      title = newChannel.client.i18n.event(newChannel.guild.language, 'categoryChannelUpdate');
     }
 
     logChannel.send({

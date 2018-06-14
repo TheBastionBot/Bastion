@@ -28,7 +28,7 @@ module.exports = async channel => {
       title = channel.client.i18n.event(channel.guild.language, 'voiceChannelDelete');
     }
     else if (channel.type === 'category') {
-      title = channel.client.strings.events(channel.guild.language, 'categoryChannelDelete');
+      title = channel.client.i18n.event(channel.guild.language, 'categoryChannelDelete');
     }
 
     logChannel.send({

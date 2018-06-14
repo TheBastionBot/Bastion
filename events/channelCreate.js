@@ -28,7 +28,7 @@ module.exports = async channel => {
       title = channel.client.i18n.event(channel.guild.language, 'voiceChannelCreate');
     }
     else if (channel.type === 'category') {
-      title = channel.client.strings.events(channel.guild.language, 'categoryChannelCreate');
+      title = channel.client.i18n.event(channel.guild.language, 'categoryChannelCreate');
     }
 
     logChannel.send({
