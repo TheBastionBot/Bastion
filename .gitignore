@@ -2,7 +2,6 @@
 settings/credentials.json
 settings/config.json
 data/bastion.db
-data/Bastion.sqlite
 data/backup*
 
 # Lock file
