@@ -48,17 +48,6 @@ BASTION.database.authenticate().then(() => {
   // Populate Database/Implement model definitions
   xrequire('./utils/models')(Sequelize, BASTION.database);
 
-  // Load Bastion Database (Depricated)
-  // Will be removed once new database is completely implemented
-  BASTION.db = xrequire('sqlite');
-  BASTION.db.open('./data/Bastion.sqlite').then(db => {
-    db.run('PRAGMA foreign_keys = ON');
-    xrequire('./utils/populateDatabase')(BASTION.db);
-  }).catch(e => {
-    BASTION.log.error(e.stack);
-    process.exit(1);
-  });
-
   // Load Bastion Events
   xrequire('./handlers/eventHandler')(BASTION);
 
