@@ -16,12 +16,8 @@ const BASTION = new Tesseract.Client({
   ]
 });
 
-if (BASTION.shard) {
-  process.title = `Bastion-Shard-${BASTION.shard.id}`;
-}
-else {
-  process.title = 'BastionBot';
-}
+if (BASTION.shard) process.title = `Bastion-Shard-${BASTION.shard.id}`;
+else process.title = 'BastionBot';
 
 BASTION.package = xrequire('./package.json');
 BASTION.Constants = Tesseract.Constants;
