@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
       * @default
       */
       const TIMEOUT = 3;
-      let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁' ];
+      let reaction = [ '📦', '🎈', '🎊', '🎉', '🎃', '🎁', '🔮', '🎀', '🎐', '🏮' ];
 
       reaction = reaction[Math.floor(Math.random() * reaction.length)];
 

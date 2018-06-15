@@ -4,16 +4,13 @@
  * @license GPL-3.0
  */
 
-let giveaways = new Map();
-
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.item) {
-      // Allow only one giveaway event per server
-      if (giveaways.has(message.guild.id)) {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'isEventInUse', 'giveaway'), message.channel);
-      }
+    if (!('giveaways' in message.guild)) {
+      message.guild.giveaways = new Map();
+    }
 
+    if (args.item) {
       // Giveaway item name
       args.item = args.item.join(' ');
 
@@ -23,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
       }
 
       // Generate a random reaction for the giveaway message
-      let reaction = [ '🎈', '🎊', '🎉', '🎃', '🎁', '🔮', '🎀', '🎐', '🏮' ];
+      let reaction = [ '📦', '🎈', '🎊', '🎉', '🎃', '🎁', '🔮', '🎀', '🎐', '🏮' ];
       reaction = reaction[Math.floor(Math.random() * reaction.length)];
 
       // Send the giveaway message and add the reaction to it
@@ -33,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
           title: '🎉 GIVEAWAY! 🎉',
           description: `Giveaway event started. React to this message with ${reaction} to get a chance to win **${args.item}**.`,
           footer: {
-            text: `Giveaway ID: ${message.guild.id} • Giveaway ends in ${args.timeout} hours from now.`
+            text: `Giveaway ends in ${args.timeout} hours from now.`
           }
         }
       });
@@ -71,7 +68,7 @@ exports.exec = async (Bastion, message, args) => {
                 title: 'Giveaway Event Ended',
                 description: `${winner} won **${args.item}**! And will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
                 footer: {
-                  text: `Giveaway ID: ${message.guild.id}`
+                  text: `Giveaway ID: ${giveawayMessageID}`
                 }
               }
             }).catch(e => {
@@ -101,7 +98,7 @@ exports.exec = async (Bastion, message, args) => {
                 title: 'Giveaway Event Ended',
                 description: `Unfortunately, no one participated and apparently there's no winner for **${args.item}**. 😕`,
                 footer: {
-                  text: `Giveaway ID: ${message.guild.id}`
+                  text: `Giveaway ID: ${giveawayMessageID}`
                 }
               }
             }).catch(e => {
@@ -112,7 +109,7 @@ exports.exec = async (Bastion, message, args) => {
           }
 
           // Remove the giveaway details from cache
-          giveaways.delete(message.guild.id);
+          message.guild.giveaways.delete(giveawayMessageID);
         }
         catch (e) {
           Bastion.log.error(e);
@@ -120,28 +117,32 @@ exports.exec = async (Bastion, message, args) => {
       }, args.timeout * 60 * 60 * 1000);
 
       // Store the giveaway information in cache.
-      giveaways.set(message.guild.id, giveaway);
+      message.guild.giveaways.set(giveawayMessageID, giveaway);
     }
     else if (args.end) {
-      if (giveaways.has(message.guild.id)) {
+      if (message.guild.giveaways.has(args.end)) {
         // Clear the giveaway timeout
-        Bastion.clearTimeout(giveaways.get(message.guild.id));
+        Bastion.clearTimeout(message.guild.giveaways.get(args.end));
 
         // Remove the giveaway details from cache
-        giveaways.delete(message.guild.id);
+        message.guild.giveaways.delete(args.end);
+
+        // Delete the giveaway message
+        let giveawayMessage = await message.channel.fetchMessage(args.end);
+        giveawayMessage.delete().catch(() => {});
 
         message.channel.send({
           embed: {
             color: Bastion.colors.RED,
             title: 'Giveaway Cancelled',
-            description: `The giveaway event with ID **${message.guild.id}** has been cancelled by ${message.author.tag}`
+            description: `The giveaway event with ID **${args.end}** has been cancelled by ${message.author.tag}`
           }
         }).catch(e => {
           Bastion.log.error(e);
         });
       }
       else {
-        return Bastion.emit('error', '', 'There\'s no giveaway running in this server right now.', message.channel);
+        return Bastion.emit('error', '', 'There\'s no giveaway running in this server for the specified ID.', message.channel);
       }
     }
     else {
@@ -163,7 +164,7 @@ exports.config = {
   argsDefinitions: [
     { name: 'item', type: String, multiple: true, defaultOption: true },
     { name: 'timeout', type: Number, alias: 't', defaultValue: 3 },
-    { name: 'end', type: Boolean }
+    { name: 'end', type: String, alias: 'e' }
   ],
   ownerOnly: false
 };
@@ -174,6 +175,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'giveaway < GIVEAWAY ITEM NAME | --end > [-t TIMEOUT_IN_HOURS]',
-  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway --end' ]
+  usage: 'giveaway < ITEM NAME [-t TIMEOUT_IN_HOURS] | --end GIVEAWAY_MESSAGE_ID >',
+  example: [ 'giveaway Bastion T-Shirts!', 'giveaway Awesome Goodies! -t 2', 'giveaway --end 153174267544338344' ]
 };

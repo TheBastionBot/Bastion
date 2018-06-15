@@ -1,5 +1,5 @@
 {
-  "date": "June 13, 2018",
+  "date": "June 15, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -29,7 +29,8 @@
     "Trigger responses now support reactions & message embeds too!",
     "Users can now have different music playlists in different servers",
     "Members Only mode to allow only users with roles to use the commands.",
-    "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message"
+    "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message",
+    "You can now run multiple giveaways"
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -51,8 +52,9 @@
     "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead.",
     "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details.",
     "Trigger commands can now be used by anyone with Manage Server permission.",
-    "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, to see the new usage.",
-    "`clear` command can now clear messages sent in the last specified minutes."
+    "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, for the new usage.",
+    "`clear` command can now clear messages sent in the last specified minutes.",
+    "`giveaway` command's usage syntax has been changed. See its help message, using the `help clear` command, for the new usage."
   ],
   "RENAMED COMMANDS": [
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
