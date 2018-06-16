@@ -487,6 +487,9 @@ module.exports = (Sequelize, database) => {
     price: {
       type: Sequelize.TEXT
     },
+    reaction: {
+      type: Sequelize.STRING
+    },
     blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
