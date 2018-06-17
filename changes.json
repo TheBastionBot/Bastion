@@ -1,7 +1,8 @@
 {
-  "date": "June 15, 2018",
+  "date": "June 17, 2018",
   "image": "https://i.imgur.com/rz7iXQ8.gif",
-  "PUBG": [
+  "IMPROVEMENTS": [
+    "`cite` will now show a *Link to Message* which will take you to the original message!",
     "PUBG stats now support stats for season 6 *and beyond*!"
   ]
 }

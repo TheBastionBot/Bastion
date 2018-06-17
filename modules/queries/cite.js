@@ -44,6 +44,12 @@ exports.exec = async (Bastion, message, args) => {
           icon_url: citedMessage.author.displayAvatarURL
         },
         description: citedMessage.content,
+        fields: [
+          {
+            name: 'Link to Message',
+            value: `https://discordapp.com/channels/${citedMessage.guild.id}/${citedMessage.channel.id}/${citedMessage.id}`
+          }
+        ],
         image: {
           url: image
         },
