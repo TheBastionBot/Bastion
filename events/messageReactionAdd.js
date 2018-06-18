@@ -10,6 +10,7 @@ module.exports = async (reaction, user) => {
   try {
     if (!reaction.message.guild) return;
 
+
     let guildModel = await user.client.database.models.guild.findOne({
       attributes: [ 'reactionPinning', 'starboard' ],
       where: {
@@ -27,71 +28,76 @@ module.exports = async (reaction, user) => {
       ]
     });
 
-    if (!guildModel) return;
 
-    if (guildModel.dataValues.reactionPinning) {
-      let pins = [ '📌', '📍' ];
-      if (!pins.includes(reaction.emoji.name)) return;
-
-      if (!reaction.message.channel.permissionsFor(user).has('MANAGE_MESSAGES')) return;
-
-      if (!reaction.message.pinned) {
-        await reaction.message.pin();
-      }
-    }
-
-    if (guildModel.dataValues.starboard) {
-      if (reaction.message.author.id === user.id) return;
-      if (!reaction.message.content) return;
-      if (starredMessages.includes(reaction.message.id)) return;
-
-      let stars = [ '🌟', '⭐' ];
-      if (!stars.includes(reaction.emoji.name)) return;
-
-      let starboardIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.channelID);
-      if (starboardIgnoredChannels && starboardIgnoredChannels.includes(reaction.message.channel.id)) return;
-      let starboardIgnoredRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.roleID);
-      if (starboardIgnoredRoles && reaction.message.member.roles.some(role => starboardIgnoredRoles.includes(role.id))) return;
-
-      let image;
-      if (reaction.message.attachments.size) {
-        if (reaction.message.attachments.first().height) {
-          image = reaction.message.attachments.first().url;
+    if (guildModel) {
+      if (guildModel.dataValues.reactionPinning) {
+        if ([ '📌', '📍' ].includes(reaction.emoji.name)) {
+          if (reaction.message.channel.permissionsFor(user).has('MANAGE_MESSAGES')) {
+            if (!reaction.message.pinned) {
+              await reaction.message.pin();
+            }
+          }
         }
       }
 
-      if (!image && !reaction.message.content) return;
 
-      let starboardChannel = reaction.message.guild.channels.get(guildModel.dataValues.starboard);
-      if (starboardChannel) {
-        await starboardChannel.send({
-          embed: {
-            color: user.client.colors.GOLD,
-            author: {
-              name: reaction.message.author.tag,
-              icon_url: reaction.message.author.displayAvatarURL
-            },
-            description: reaction.message.content,
-            fields: [
-              {
-                name: 'Channel',
-                value: reaction.message.channel.toString(),
-                inline: true
-              },
-              {
-                name: 'Message ID',
-                value: reaction.message.id,
-                inline: true
+      if (guildModel.dataValues.starboard) {
+        let isSameUser = reaction.message.author.id === user.id;
+        let hasContent = reaction.message.content && reaction.message.content.length;
+        let isStarred = [ '🌟', '⭐' ].includes(reaction.emoji.name);
+        let alreadyInStarboard = starredMessages.includes(reaction.message.id);
+
+        if (!isSameUser && hasContent && isStarred && !alreadyInStarboard) {
+          let starboardIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.channelID);
+          let isIgnoredChannel = starboardIgnoredChannels && starboardIgnoredChannels.includes(reaction.message.channel.id);
+
+          if (!isIgnoredChannel) {
+            let starboardIgnoredRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.roleID);
+            let isIgnoredRole = starboardIgnoredRoles && reaction.message.member.roles.some(role => starboardIgnoredRoles.includes(role.id));
+
+            if (!isIgnoredRole) {
+              let image;
+              if (reaction.message.attachments.size) {
+                if (reaction.message.attachments.first().height) {
+                  image = reaction.message.attachments.first().url;
+                }
               }
-            ],
-            image: {
-              url: image
-            },
-            timestamp: reaction.message.createdAt
+
+              if (image || reaction.message.content) {
+                if (reaction.message.guild.channels.has(guildModel.dataValues.starboard)) {
+                  await reaction.message.guild.channels.get(guildModel.dataValues.starboard).send({
+                    embed: {
+                      color: user.client.colors.GOLD,
+                      author: {
+                        name: reaction.message.author.tag,
+                        icon_url: reaction.message.author.displayAvatarURL
+                      },
+                      description: reaction.message.content,
+                      fields: [
+                        {
+                          name: 'Channel',
+                          value: reaction.message.channel.toString(),
+                          inline: true
+                        },
+                        {
+                          name: 'Message ID',
+                          value: reaction.message.id,
+                          inline: true
+                        }
+                      ],
+                      image: {
+                        url: image
+                      },
+                      timestamp: reaction.message.createdAt
+                    }
+                  });
+                }
+                starredMessages.push(reaction.message.id);
+              }
+            }
           }
-        });
+        }
       }
-      starredMessages.push(reaction.message.id);
     }
   }
   catch (e) {

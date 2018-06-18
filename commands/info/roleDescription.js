@@ -6,6 +6,15 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    if (!args.role) {
+      /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+
+    args.role = args.role.join(' ');
     let role;
     if (message.guild.roles.has(args.role)) {
       role = message.guild.roles.get(args.role);
@@ -18,7 +27,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let roleDescription = args.description && args.description.length
-      ? args.join(' ')
+      ? args.description.join(' ')
       : null;
     let messageDescription = roleDescription;
     let messageColor = Bastion.colors.RED;
@@ -37,13 +46,14 @@ exports.exec = async (Bastion, message, args) => {
 
     await Bastion.database.models.role.upsert({
       roleID: role.id,
+      guildID: message.guild.id,
       description: roleDescription
     },
     {
       where: {
         roleID: role.id
       },
-      fields: [ 'roleID', 'description' ]
+      fields: [ 'roleID', 'guildID', 'description' ]
     });
 
     message.channel.send({
