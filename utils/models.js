@@ -669,6 +669,11 @@ module.exports = (Sequelize, database) => {
     },
     reactionRoles: {
       type: Sequelize.JSON
+    },
+    mutuallyExclusive: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   });
 
