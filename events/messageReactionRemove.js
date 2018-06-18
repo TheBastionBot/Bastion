@@ -15,18 +15,19 @@ module.exports = async (reaction, user) => {
       }
     });
 
-    if (!guildModel) return;
+    if (guildModel) {
+      if (guildModel.dataValues.reactionPinning) {
+        let pins = [ '📌', '📍' ];
+        if (pins.includes(reaction.emoji.name)) {
+          let authorizedUsers = reaction.users.filter(user => reaction.message.channel.permissionsFor(user).has('MANAGE_MESSAGES'));
 
-    if (guildModel.dataValues.reactionPinning) {
-      let pins = [ '📌', '📍' ];
-      if (!pins.includes(reaction.emoji.name)) return;
-
-      let authorizedUsers = reaction.users.filter(user => reaction.message.channel.permissionsFor(user).has('MANAGE_MESSAGES'));
-
-      if (authorizedUsers.size === 0 && reaction.message.pinned) {
-        await reaction.message.unpin();
+          if (authorizedUsers.size === 0 && reaction.message.pinned) {
+            await reaction.message.unpin();
+          }
+        }
       }
     }
+
   }
   catch (e) {
     user.client.log.error(e);
