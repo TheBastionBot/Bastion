@@ -17,6 +17,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
 
+    args.role = args.role.join(' ');
     let role;
     if (message.guild.roles.has(args.role)) {
       role = message.guild.roles.get(args.role);
