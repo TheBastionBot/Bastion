@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
     let validSeasons = [
       '2017-beta',
       '2017-pre1', '2017-pre2', '2017-pre3', '2017-pre4', '2017-pre5', '2017-pre6', '2017-pre7', '2017-pre8', '2017-pre9',
-      '2018-01', '2018-02', '2018-03', '2018-04', '2018-05'
+      '2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'
     ];
     let seasonRegExp = new RegExp(`^(${validSeasons.join('|')})$`, 'i');
     if (!seasonRegExp.test(args.season)) {
