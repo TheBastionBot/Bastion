@@ -76,7 +76,7 @@ exports.exec = async (Bastion, message, args) => {
     });
 
 
-    let reactionRolesEmojis = roleModels.map(model => model.dataValues.emoji);
+    let reactionRolesEmojis = roleModels.filter(model => args.roles.includes(model.dataValues.roleID)).map(model => model.dataValues.emoji);
     for (let emoji of reactionRolesEmojis) {
       await reactionRolesMessage.react(emoji);
     }
