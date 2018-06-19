@@ -54,7 +54,10 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.BLUE,
         title: args.title && args.title.length ? args.title.join(' ') : 'Reaction Roles',
-        description: body
+        description: body,
+        footer: {
+          text: `${args.exclusive ? 'Mutually Exclusive' : ''} Reaction Roles • React with the emoji to get the corresponding role.`
+        }
       }
     });
 
