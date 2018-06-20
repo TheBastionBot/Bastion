@@ -23,7 +23,11 @@ module.exports = async (reaction, user) => {
         },
         {
           model: user.client.database.models.role,
-          attributes: [ 'roleID', 'ignoreStarboard' ]
+          attributes: [ 'roleID', 'ignoreStarboard', 'emoji' ]
+        },
+        {
+          model: user.client.database.models.reactionRolesGroup,
+          attributes: [ 'messageID', 'channelID', 'guildID', 'reactionRoles', 'mutuallyExclusive' ]
         }
       ]
     });
@@ -93,6 +97,35 @@ module.exports = async (reaction, user) => {
                   });
                 }
                 starredMessages.push(reaction.message.id);
+              }
+            }
+          }
+        }
+      }
+
+
+      if (guildModel.reactionRolesGroups && guildModel.reactionRolesGroups.length) {
+        if (user.id !== user.client.user.id) {
+          guildModel.reactionRolesGroups = guildModel.reactionRolesGroups.filter(model => model.dataValues.messageID === reaction.message.id && model.dataValues.channelID === reaction.message.channel.id && model.dataValues.guildID === reaction.message.guild.id);
+
+          if (guildModel.reactionRolesGroups.length) {
+            let reactionRolesGroupModel = guildModel.reactionRolesGroups[0];
+
+            let reactionRoleModels = guildModel.roles.filter(model => reactionRolesGroupModel.dataValues.reactionRoles.includes(model.dataValues.roleID));
+            let reactionRoleModelsForReaction = reactionRoleModels.filter(model => model.dataValues.emoji === encodeURIComponent(reaction.emoji.name));
+
+            let reactionRoles = reactionRoleModelsForReaction.map(model => model.dataValues.roleID);
+
+            if (reactionRoles.length) {
+              let member = await reaction.message.guild.fetchMember(user);
+
+              await member.addRoles(reactionRoles, 'Self-Assigned via reaction roles.').catch(() => {});
+
+              if (reactionRolesGroupModel.dataValues.mutuallyExclusive) {
+                let reactionRolesToBeUnassigned = reactionRoleModels.filter(model => !reactionRoles.includes(model.dataValues.roleID));
+                reactionRolesToBeUnassigned = reactionRolesToBeUnassigned.map(model => model.dataValues.roleID);
+
+                await member.removeRoles(reactionRolesToBeUnassigned, 'Auto-Unassigned because of mutually exclusive reaction roles.').catch(() => {});
               }
             }
           }
