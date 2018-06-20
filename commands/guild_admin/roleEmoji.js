@@ -81,7 +81,7 @@ exports.config = {
 
 exports.help = {
   name: 'roleEmoji',
-  description: 'Assign an emoji to a specified role.',
+  description: 'Assign an emoji to a specified role. The assigned emojis are used with Reaction Roles.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
