@@ -15,6 +15,18 @@ exports.exec = async (Bastion, message, args) => {
     }
 
 
+    let reactionRolesGroup = await Bastion.database.models.reactionRolesGroup.findAll({
+      fields: [ 'messageID' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+
+    if (reactionRolesGroup && reactionRolesGroup.length === 2) {
+      return Bastion.emit('error', '', 'You can\'t have more than 2 Reaction Roles Group, for now. Delete any previous Group of Reaction Roles to add new ones.', message.channel);
+    }
+
+
     let roleModels = await Bastion.database.models.role.findAll({
       attributes: [ 'roleID', 'emoji' ],
       where: {
