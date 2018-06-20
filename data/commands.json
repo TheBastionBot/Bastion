@@ -832,7 +832,7 @@
     "module": "Info"
   },
   "roleEmoji": {
-    "description": "Assign an emoji to a specified role.",
+    "description": "Assign an emoji to a specified role. The assigned emojis are used with Reaction Roles.",
     "module": "Guild Admin"
   },
   "roleID": {
