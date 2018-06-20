@@ -6,23 +6,38 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.roles) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-
-    let reactionRolesGroup = await Bastion.database.models.reactionRolesGroup.findAll({
+    let reactionRolesGroupModels = await Bastion.database.models.reactionRolesGroup.findAll({
       fields: [ 'messageID' ],
       where: {
         guildID: message.guild.id
       }
     });
 
-    if (reactionRolesGroup && reactionRolesGroup.length === 2) {
+
+    if (!args.roles) {
+      let reactionRolesGroups = reactionRolesGroupModels.map(model => model.dataValues.messageID);
+
+      if (!reactionRolesGroups.length) {
+        /**
+         * The command was ran with invalid parameters.
+         * @fires commandUsage
+         */
+        return Bastion.emit('commandUsage', message, this.help);
+      }
+
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Reaction Roles Groups',
+          description: reactionRolesGroups.map((group, index) => `${index + 1}. ${group}`).join('\n')
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
+    }
+
+
+    if (reactionRolesGroupModels && reactionRolesGroupModels.length === 2) {
       return Bastion.emit('error', '', 'You can\'t have more than 2 Reaction Roles Group, for now. Delete any previous Group of Reaction Roles to add new ones.', message.channel);
     }
 
@@ -118,6 +133,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'reactionRolesGroup < ROLE_ID_1, ROLE_ID_2, ... > [ -t Message Title ] [ -b Message Body ] [ --exclusive ]',
-  example: [ 'reactionRolesGroup 219101083619902983', 'reactionRolesGroup 219101083619902983 2494130541574845651 -t Self Assign -b React to Get Role', 'reactionRolesGroup 219101083619902983 2494130541574845651 --exclusive' ]
+  usage: 'reactionRolesGroup [ ROLE_ID_1, ROLE_ID_2, ... ] [ -t Message Title ] [ -b Message Body ] [ --exclusive ]',
+  example: [ 'reactionRolesGroup', 'reactionRolesGroup 219101083619902983 2494130541574845651 -t Self Assign -b React to Get Role', 'reactionRolesGroup 219101083619902983 2494130541574845651 --exclusive' ]
 };
