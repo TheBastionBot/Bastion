@@ -87,6 +87,7 @@ exports.exec = async (Bastion, message, args) => {
         }
       }
     });
+    await reactionRolesMessage.pin().catch(() => {});
 
 
     await Bastion.database.models.reactionRolesGroup.upsert({
