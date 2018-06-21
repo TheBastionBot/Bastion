@@ -98,6 +98,7 @@ module.exports = async Bastion => {
 
     xrequire('./handlers/scheduledCommandHandler')(Bastion);
     xrequire('./handlers/streamNotifier')(Bastion);
+    xrequire('./handlers/reactionRolesGroupsHandler')(Bastion);
 
     if (Bastion.shard) {
       Bastion.log.console(`${COLOR.cyan(`[${Bastion.user.username}]:`)} Shard ${Bastion.shard.id} is ready with ${Bastion.guilds.size} servers.`);
