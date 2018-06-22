@@ -53,6 +53,8 @@
   "disableModerationLog": "%var% disabled logging of moderation actions in this server.",
   "enableModerationLog": "%var% enabled logging of moderation actions, in this channel.",
   "resetModerationLogCases": "%var% reset the moderation log case numbers in this server.",
+  "setRoleEmoji": "%var% set the **%var%** role's emoji to %var%.",
+  "unsetRoleEmoji": "%var% removed the emoji for the **%var%** role.",
   "setPrefix": "%var% changed the prefix for the server to `%var%`",
   "disableSlowMode": "%var% disabled slow mode in this server. Everyone, get spicy!",
   "enableSlowMode": "%var% enabled slow mode in this server. Beware spammers!",

@@ -1,5 +1,5 @@
 {
-  "date": "June 15, 2018",
+  "date": "June 22, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -30,7 +30,8 @@
     "Users can now have different music playlists in different servers",
     "Members Only mode to allow only users with roles to use the commands.",
     "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message",
-    "You can now run multiple giveaways"
+    "You can now run multiple giveaways",
+    "Reaction Roles. Similar to self assignable roles, but instead of using commands, you just need to add/remove reactions to get roles"
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -45,7 +46,9 @@
     "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting.",
     "`reportChannel` - (Un)Set report channel of the server.",
     "`membersOnly` - Toggle Members Only mode.",
-    "`reactionPinning` - Toggle Reaction Pinning."
+    "`reactionPinning` - Toggle Reaction Pinning.",
+    "`roleEmoji` - Assign an emoji to a role.",
+    "`reactionRolesGroup` - Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",

@@ -542,6 +542,9 @@
   "reactionPinning": {
     "description": "Toggles Reaction Pinning in the server. If Reaction Pinning is enabled, adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too."
   },
+  "reactionRolesGroup": {
+    "description": "Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa."
+  },
   "reason": {
     "description": "Add/Update the reason for a moderation action, which is logged in the moderation log channel. Only the responsible moderator or anyone with administrator permissions can change the reason."
   },
@@ -619,6 +622,9 @@
   },
   "roleDescription": {
     "description": "Set a description for a role, which will be shown in the `roleInfo` command."
+  },
+  "roleEmoji": {
+    "description": "Assign an emoji to a specified role. The assigned emojis are used with Reaction Roles."
   },
   "roleID": {
     "description": "Shows the ID of a specified role of your Discord server."

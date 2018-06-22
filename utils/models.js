@@ -487,6 +487,9 @@ module.exports = (Sequelize, database) => {
     price: {
       type: Sequelize.TEXT
     },
+    emoji: {
+      type: Sequelize.STRING
+    },
     blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -651,6 +654,29 @@ module.exports = (Sequelize, database) => {
     }
   });
 
+  const ReactionRolesGroup = database.define('reactionRolesGroup', {
+    messageID: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    channelID: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    guildID: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    reactionRoles: {
+      type: Sequelize.JSON
+    },
+    mutuallyExclusive: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
+  });
+
   // Associations
   Guild.Items = Guild.hasMany(Items, {
     foreignKey: 'guildID',
@@ -698,6 +724,11 @@ module.exports = (Sequelize, database) => {
     onUpdate: 'CASCADE'
   });
   Guild.Playlist = Guild.hasMany(Playlist, {
+    foreignKey: 'guildID',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+  });
+  Guild.ReactionRolesGroup = Guild.hasMany(ReactionRolesGroup, {
     foreignKey: 'guildID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
