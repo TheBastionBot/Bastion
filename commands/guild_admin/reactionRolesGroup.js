@@ -17,6 +17,29 @@ exports.exec = async (Bastion, message, args) => {
     if (!args.roles) {
       let reactionRolesGroups = reactionRolesGroupModels.map(model => model.dataValues.messageID);
 
+
+      if (args.remove) {
+        if (reactionRolesGroups.includes(args.remove)) {
+          await Bastion.database.models.reactionRolesGroup.destroy({
+            where: {
+              messageID: args.remove,
+              guildID: message.guild.id
+            }
+          });
+
+          return message.channel.send({
+            embed: {
+              color: Bastion.colors.RED,
+              title: 'Reaction Roles Group Removed',
+              description: `The Reaction Roles Group associated with the message ${args.remove} has been successfully removed.`
+            }
+          }).catch(e => {
+            Bastion.log.error(e);
+          });
+        }
+      }
+
+
       if (!reactionRolesGroups.length) {
         /**
          * The command was ran with invalid parameters.
@@ -124,7 +147,8 @@ exports.config = {
     { name: 'roles', type: String, multiple: true, defaultOption: true },
     { name: 'title', type: String, alias: 't', muiltiple: true },
     { name: 'body', type: String, alias: 'b', multiple: true },
-    { name: 'exclusive', type: Boolean, alias: 'e', defaultValue: false }
+    { name: 'exclusive', type: Boolean, alias: 'e', defaultValue: false },
+    { name: 'remove', type: String, alias: 'r' }
   ]
 };
 
@@ -134,6 +158,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'reactionRolesGroup [ ROLE_ID_1, ROLE_ID_2, ... ] [ -t Message Title ] [ -b Message Body ] [ --exclusive ]',
+  usage: 'reactionRolesGroup [ ROLE_ID_1, ROLE_ID_2, ... ] [ -t Message Title ] [ -b Message Body ] [ --exclusive ] [ --remove MESSAGE_ID ]',
   example: [ 'reactionRolesGroup', 'reactionRolesGroup 219101083619902983 2494130541574845651 -t Self Assign -b React to Get Role', 'reactionRolesGroup 219101083619902983 2494130541574845651 --exclusive' ]
 };
