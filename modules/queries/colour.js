@@ -7,7 +7,13 @@
 const convert = require('color-convert');
 
 exports.exec = (Bastion, message, args) => {
-  if (!/^#?[0-9a-fA-F]{6}$/.test(args.color)) {
+  if (args.color && /^#?[0-9a-f]{6}$/i.test(args.color)) {
+    args.color = args.color.replace('#', '');
+  }
+  else if (args.random) {
+    args.color = '000000'.replace(/0/g, () => (~~(Math.random() * 16)).toString(16));
+  }
+  else {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -15,7 +21,6 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  args.color = args.color.replace('#', '');
 
   message.channel.send({
     embed: {
@@ -105,7 +110,8 @@ exports.config = {
   aliases: [ 'color' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'color', type: String, defaultOption: true }
+    { name: 'color', type: String, defaultOption: true },
+    { name: 'random', type: Boolean }
   ]
 };
 
