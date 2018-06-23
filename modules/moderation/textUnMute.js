@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
 
     if (args.server) {
       let mutedRole = message.guild.roles.find('name', 'Bastion:mute');
-      await member.removeRole(mutedRole, args.reason).catch(() => {});
+      await member.removeRole(mutedRole, args.reason);
     }
     else {
       let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
