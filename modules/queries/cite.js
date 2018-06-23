@@ -29,11 +29,25 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (!image && !citedMessage.content) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'The message doesn\'t have any content that can be cited.', message.channel);
+      return message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          author: {
+            name: `${citedMessage.author.tag} ${message.channel.id === citedMessage.channel.id ? '' : `in #${citedMessage.channel.name}`}`,
+            icon_url: citedMessage.author.displayAvatarURL
+          },
+          description: '*The message doesn\'t have any content that can be cited.*',
+          fields: [
+            {
+              name: 'Link to Message',
+              value: `https://discordapp.com/channels/${citedMessage.guild.id}/${citedMessage.channel.id}/${citedMessage.id}`
+            }
+          ],
+          timestamp: citedMessage.createdAt
+        }
+      }).catch(e => {
+        Bastion.log.error(e);
+      });
     }
 
     message.channel.send({
