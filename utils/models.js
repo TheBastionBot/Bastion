@@ -249,6 +249,11 @@ module.exports = (Sequelize, database) => {
     color: {
       type: Sequelize.STRING
     },
+    AFK: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     AFKMessage: {
       type: Sequelize.BLOB
     },
