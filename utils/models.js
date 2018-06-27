@@ -249,6 +249,9 @@ module.exports = (Sequelize, database) => {
     color: {
       type: Sequelize.STRING
     },
+    AFKMessage: {
+      type: Sequelize.BLOB
+    },
     blacklisted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
