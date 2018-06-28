@@ -193,11 +193,11 @@ module.exports = async message => {
           guildID: message.guild.id
         }
       });
-      if (!textChannelModel || !textChannelModel.dataValues.votingChannel) return;
-
-      // Add reactions for voting
-      await message.react('👍');
-      await message.react('👎');
+      if (textChannelModel && textChannelModel.dataValues.votingChannel) {
+        // Add reactions for voting
+        await message.react('👍');
+        await message.react('👎');
+      }
     }
     else {
       /**
