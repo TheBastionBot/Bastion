@@ -193,11 +193,30 @@ module.exports = async message => {
           guildID: message.guild.id
         }
       });
-      if (!textChannelModel || !textChannelModel.dataValues.votingChannel) return;
+      if (textChannelModel && textChannelModel.dataValues.votingChannel) {
+        // Add reactions for voting
+        await message.react('👍');
+        await message.react('👎');
+      }
 
-      // Add reactions for voting
-      await message.react('👍');
-      await message.react('👎');
+
+      /**
+       * AFK Mode
+       */
+      if (message.guild.usersAFK) {
+        // Delete message author from usersAFK if he's back.
+        if (message.guild.usersAFK.includes(message.author.id)) {
+          message.guild.usersAFK.splice(message.guild.usersAFK.indexOf(message.author.id), 1);
+        }
+
+        let usersAFK = message.mentions.users.filter(user => message.guild.usersAFK.includes(user.id) && message.channel.permissionsFor(user).has('MANAGE_GUILD'));
+        for (let user of usersAFK) {
+          user = user[1];
+          if ([ 'idle', 'offline' ].includes(user.presence.status)) {
+            message.channel.send(`**${user.tag}** is currently away from keyboard. He'll get back to you once he's back.`).catch(() => {});
+          }
+        }
+      }
     }
     else {
       /**
