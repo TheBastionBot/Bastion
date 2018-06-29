@@ -213,7 +213,7 @@ module.exports = async message => {
         for (let user of usersAFK) {
           user = user[1];
           if ([ 'idle', 'offline' ].includes(user.presence.status)) {
-            message.channel.send(`**${user.tag}** is currently away from keyboard. He'll get back to you once he's back.`).catch(() => {});
+            message.channel.send(`**${user.tag}** is currently away from keyboard. ${user.username} will get back to you later.`).catch(() => {});
           }
         }
       }
