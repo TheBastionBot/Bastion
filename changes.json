@@ -1,4 +1,7 @@
 {
   "date": "July 1, 2018",
-  "image": "https://i.imgur.com/rP079vR.gif"
+  "image": "https://i.imgur.com/rP079vR.gif",
+  "IMPROVEMENTS": [
+    "If a Overwatch profile is private, show that it's private instead of showing `undefined` stats."
+  ]
 }
