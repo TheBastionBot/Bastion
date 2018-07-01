@@ -26,12 +26,16 @@ exports.exec = (Bastion, message) => {
     },
     {
       name: 'Missed an update?',
-      value: '[Check out our previous change logs](https://github.com/TheBastionBot/Bastion/releases)'
-        + '\nJoin [Bastion HQ](https://discord.gg/fzx8fkt) and never miss an update: https://discord.gg/fzx8fkt'
+      value: '[Check out our previous change logs](https://github.com/TheBastionBot/Bastion/releases).'
+        + '\nJoin **Bastion HQ** and never miss an update: https://discord.gg/fzx8fkt'
+    },
+    {
+      name: 'Let\'s Connect...',
+      value: 'Connect with Bastion on [Twitter](https://twitter.com/TheBastionBot) and [Reddit](https://reddit.com/r/TheBastionBot).'
     },
     {
       name: 'Support Bastion\'s Development',
-      value: '[Support the development of Bastion](https://bastionbot.org/donate) and keep it running forever by [becoming a patron](https://patreon.com/bastionbot) or [donating via PayPal](https://paypal.me/snkrsnkampa) and get cool rewards!'
+      value: '[Support the development of Bastion](https://bastionbot.org/donate) to keep it running forever and get cool rewards!'
     }
   );
 
