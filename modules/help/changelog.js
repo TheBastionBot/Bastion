@@ -43,7 +43,7 @@ exports.exec = (Bastion, message) => {
     embed: {
       color: Bastion.colors.BLUE,
       title: `Bastion Bot v${Bastion.package.version} Changelog`,
-      url: 'https://github.com/TheBastionBot/Bastion/releases',
+      url: `https://github.com/TheBastionBot/Bastion/releases/v${Bastion.package.version}`,
       fields: changes,
       image: {
         url: CHANGES.image
