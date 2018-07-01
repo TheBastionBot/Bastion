@@ -1,12 +1,4 @@
 {
-  "date": "June 23, 2018",
-  "image": "https://i.imgur.com/cJmiUv8.gif",
-  "NEW FEATURES": [
-    "`color` command now has a `--random` option to generate random color instead of specifying a color.",
-    "`textUnMute` command now has a `--server` option to text unmute users who were text muted in the server globally, using the `--server` option of the `textMute` command.",
-    "Messages in starboard will now show a link to the original message."
-  ],
-  "IMPROVED FEATURES": [
-    "`cite` command will show the link to the message even if there's no content in the cited message."
-  ]
+  "date": "July 1, 2018",
+  "image": "https://i.imgur.com/rP079vR.gif"
 }
