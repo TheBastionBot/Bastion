@@ -1,4 +1,8 @@
 {
   "date": "July 2, 2018",
   "image": "https://i.imgur.com/IPGHdlN.gif",
+  "CATS EVERYWHERE!": [
+    "A whole bunch of new cats have come over! The `cat` command will now show you pictures of new cats!",
+    "The `cat` command won't give errors and prevent you from seeing cats anymore. You can now see cat pics whenever you want!"
+  ]
 }
