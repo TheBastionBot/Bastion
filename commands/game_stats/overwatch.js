@@ -55,54 +55,54 @@ exports.exec = async (Bastion, message, args) => {
         }
       );
     }
-
-    stats.push(
-      {
-        name: 'Quick Play',
-        value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
-      },
-      {
-        name: 'Eliminations',
-        value: `${data.quickplay.global.eliminations}`,
-        inline: true
-      },
-      {
-        name: 'Damage Done',
-        value: `${data.quickplay.global.all_damage_done}`,
-        inline: true
-      },
-      {
-        name: 'Deaths',
-        value: `${data.quickplay.global.deaths}`,
-        inline: true
-      },
-      {
-        name: 'Final Blows',
-        value: `${data.quickplay.global.final_blows}`,
-        inline: true
-      },
-      {
-        name: 'Healing Done',
-        value: `${data.quickplay.global.healing_done}`,
-        inline: true
-      },
-      {
-        name: 'Objective Kills',
-        value: `${data.quickplay.global.objective_kills}`,
-        inline: true
-      },
-      {
-        name: 'Objective Time',
-        value: `${data.quickplay.global.objective_time}`,
-        inline: true
-      },
-      {
-        name: 'Solo Kills',
-        value: `${data.quickplay.global.solo_kills}`,
-        inline: true
-      }
-    );
-
+    if (Object.keys(data.quickplay.global).length > 1) {
+      stats.push(
+        {
+          name: 'Quick Play',
+          value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
+        },
+        {
+          name: 'Eliminations',
+          value: `${data.quickplay.global.eliminations}`,
+          inline: true
+        },
+        {
+          name: 'Damage Done',
+          value: `${data.quickplay.global.all_damage_done}`,
+          inline: true
+        },
+        {
+          name: 'Deaths',
+          value: `${data.quickplay.global.deaths}`,
+          inline: true
+        },
+        {
+          name: 'Final Blows',
+          value: `${data.quickplay.global.final_blows}`,
+          inline: true
+        },
+        {
+          name: 'Healing Done',
+          value: `${data.quickplay.global.healing_done}`,
+          inline: true
+        },
+        {
+          name: 'Objective Kills',
+          value: `${data.quickplay.global.objective_kills}`,
+          inline: true
+        },
+        {
+          name: 'Objective Time',
+          value: `${data.quickplay.global.objective_time}`,
+          inline: true
+        },
+        {
+          name: 'Solo Kills',
+          value: `${data.quickplay.global.solo_kills}`,
+          inline: true
+        }
+      );
+    }
     if (Object.keys(data.competitive.global).length > 1) {
       stats.push(
         {
@@ -151,13 +151,18 @@ exports.exec = async (Bastion, message, args) => {
         }
       );
     }
-
-    stats.push({
-      name: 'Achievements',
-      value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ').substring(0, 1024) || '-'
-    });
-
-
+    if (data.achievements) {
+      stats.push({
+        name: 'Achievements',
+        value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ').substring(0, 1024) || '-'
+      });
+    }
+    if (Object.keys(data.quickplay.global).length <= 1 && Object.keys(data.competitive.global).length <= 1) {
+      stats.push({
+        name: 'THIS PROFILE IS PRIVATE',
+        value: 'Stats of private profiles can\'t be shown.\nProfiles are set to private by default. You can modify this setting in Overwatch under Options – Social.'
+      });
+    }
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
