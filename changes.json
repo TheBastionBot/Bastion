@@ -1,9 +1,4 @@
 {
-  "date": "July 1, 2018",
-  "image": "https://i.imgur.com/rP079vR.gif",
-  "IMPROVEMENTS": [
-    "If a Overwatch profile is private, show that it's private instead of showing `undefined` stats.",
-    "Link to the current version's changelog instead of the all releases' page.",
-    "Under-the-hood improvements"
-  ]
+  "date": "July 2, 2018",
+  "image": "https://i.imgur.com/IPGHdlN.gif",
 }
