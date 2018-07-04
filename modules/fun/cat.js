@@ -9,13 +9,14 @@ const request = require('request-promise-native');
 exports.exec = async (Bastion, message) => {
   try {
     let options = {
-      url: 'https://aws.random.cat/meow',
-      json: true
+      method: 'HEAD',
+      url: 'https://thecatapi.com/api/images/get',
+      followAllRedirects: true
     };
     let response = await request(options);
 
     await message.channel.send({
-      files: [ response.file ]
+      files: [ response.original_image ]
     });
   }
   catch (e) {
