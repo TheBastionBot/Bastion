@@ -4,6 +4,8 @@
  * @license GPL-3.0
  */
 
+const levelUpMessages = xrequire('./assets/levelUpMessages.json');
+
 /**
  * Handles user's experience points and levels
  * @param {Message} message Discord.js message object
@@ -71,14 +73,25 @@ module.exports = async message => {
         });
 
         if (guildModel.dataValues.levelUpMessages) {
+          let levelUpMessage = levelUpMessages[Math.floor(Math.random() * levelUpMessages.length)];
+
           message.channel.send({
             embed: {
               color: message.client.colors.BLUE,
-              title: 'Leveled up',
-              description: `:up: **${message.author.username}**#${message.author.discriminator} leveled up to **Level ${currentLevel}**`
+              title: 'LEVELED UP!',
+              description: levelUpMessage,
+              thumbnail: {
+                url: `https://dummyimage.com/250/40C4FB/&text=${currentLevel}`
+              },
+              fields: [
+                {
+                  name: `${message.author.tag} leveled up to Level ${currentLevel}`,
+                  value: '\u200B'
+                }
+              ]
             }
           }).then(msg => {
-            msg.delete(5000).catch(() => {});
+            msg.delete(90000).catch(() => {});
           }).catch(e => {
             message.client.log.error(e);
           });
