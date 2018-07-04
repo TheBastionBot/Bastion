@@ -17,11 +17,6 @@
   "optionalDependencies": {
     "branchPrefix": "opt-dep/"
   },
-  "patch": {
-    "automerge": true,
-    "automergeType": "branch-push",
-    "commitBody": "[skip ci]"
-  },
   "pinVersions": false,
   "rebaseStalePrs": false,
   "semanticCommitScope": null,
