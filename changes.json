@@ -1,5 +1,5 @@
 {
-  "date": "June 28, 2018",
+  "date": "July 4, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -32,7 +32,8 @@
     "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message",
     "You can now run multiple giveaways",
     "Reaction Roles. Similar to self assignable roles, but instead of using commands, you just need to add/remove reactions to get roles",
-    "AFK Mode. Users can now set themselves as AFK and anyone mentioning them, in a server they manage, will be responded by Bastion that the user is AFK."
+    "AFK Mode. Users can now set themselves as AFK and anyone mentioning them, in a server they manage, will be responded by Bastion that the user is AFK.",
+    "Level up messages will now show some inspirational texts."
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
