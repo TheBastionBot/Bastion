@@ -151,12 +151,6 @@ exports.exec = async (Bastion, message, args) => {
         }
       );
     }
-    if (data.achievements) {
-      stats.push({
-        name: 'Achievements',
-        value: data.achievements.filter(a => a.acquired === true).map(a => a.title).join(', ').substring(0, 1024) || '-'
-      });
-    }
     if (Object.keys(data.quickplay.global).length <= 1 && Object.keys(data.competitive.global).length <= 1) {
       stats.push({
         name: 'THIS PROFILE IS PRIVATE',
@@ -174,6 +168,9 @@ exports.exec = async (Bastion, message, args) => {
         fields: stats,
         thumbnail: {
           url: data.profile.avatar !== '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
+        },
+        image: {
+          url: `https://resources.bastionbot.org/images/overwatch/heros/${data.competitive.global.masteringHeroe || data.quickplay.global.masteringHeroe}.png`
         }
       }
     }).catch(e => {
