@@ -8,6 +8,10 @@ const request = require('request-promise-native');
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    if (!message.channel.nsfw) {
+      return Bastion.emit('error', '', 'Urban Dictionary may return results that are NSFW, so this command works only in NSFW channels.', message.channel);
+    }
+
     if (args.length < 1) {
       /**
        * The command was ran with invalid parameters.

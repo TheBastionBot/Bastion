@@ -1,12 +1,10 @@
 {
-  "date": "July 4, 2018",
-  "image": "https://i.imgur.com/IPGHdlN.gif",
-  "CATS EVERYWHERE!": [
-    "A whole bunch of new cats have come over! The `cat` command will now show you pictures of new cats!",
-    "The `cat` command won't give errors and prevent you from seeing cats anymore. You can now see cat pics whenever you want!"
+  "date": "July 9, 2018",
+  "image": "https://i.imgur.com/wa5j94o.gif",
+  "IMPROVEMENTS": [
+    "Since Urban Dictionary may return results that are NSFW, the `urbanDictionary` command will now only work in NSFW channels."
   ],
-  "Overwatch Overhauls": [
-    "You can now also see the hero that the player mains in competitive play or quick play in Overwatch, with the `overwatch` command.",
-    "Removed Achievements section from the Overwatch stats as that was not really necessary and just used too much space."
+  "PRETTY LITTLE TYPOS": [
+    "Fixed some typos in `sendEmbed`, `echo` and `selfDestruct` commands."
   ]
 }
