@@ -1,7 +1,10 @@
 {
-  "date": "July 8, 2018",
+  "date": "July 9, 2018",
   "image": "https://i.imgur.com/wa5j94o.gif",
   "IMPROVEMENTS": [
     "Since Urban Dictionary may return results that are NSFW, the `urbanDictionary` command will now only work in NSFW channels."
+  ],
+  "PRETTY LITTLE TYPOS": [
+    "Fixed some typos in `sendEmbed`, `echo` and `selfDestruct` commands."
   ]
 }
