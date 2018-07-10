@@ -1,5 +1,5 @@
 {
-  "date": "July 4, 2018",
+  "date": "July 10, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -33,7 +33,8 @@
     "You can now run multiple giveaways",
     "Reaction Roles. Similar to self assignable roles, but instead of using commands, you just need to add/remove reactions to get roles",
     "AFK Mode. Users can now set themselves as AFK and anyone mentioning them, in a server they manage, will be responded by Bastion that the user is AFK.",
-    "Level up messages will now show some inspirational texts."
+    "Level up messages will now show some inspirational texts.",
+    "You can now mass move members from one voice channel to another."
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -51,7 +52,8 @@
     "`reactionPinning` - Toggle Reaction Pinning.",
     "`roleEmoji` - Assign an emoji to a role.",
     "`reactionRolesGroup` - Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa.",
-    "`afk` - Sets AFK mode for the user."
+    "`afk` - Sets AFK mode for the user.",
+    "`moveMembers` - Moves all the members in a voice channel to another specified voice channel."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
