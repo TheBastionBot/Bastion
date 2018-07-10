@@ -607,6 +607,10 @@
     "description": "Encodes a given text in Morse Code.",
     "module": "Queries"
   },
+  "moveMembers": {
+    "description": "Moves all the members in a voice channel to another specified voice channel.",
+    "module": "Administration"
+  },
   "movie": {
     "description": "Searches for the details of a movie.",
     "module": "Queries"
