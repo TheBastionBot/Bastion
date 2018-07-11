@@ -1,5 +1,5 @@
 {
-  "date": "July 10, 2018",
+  "date": "July 11, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -16,6 +16,7 @@
     "Show if a server is a Bastion premium server in the `serverInfo` command.",
     "Adding music from user playlist to the queue is now faster than ever.",
     "Warnings are now permanently stored!",
+    "Server logging will now also log message update and message delete events.",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
