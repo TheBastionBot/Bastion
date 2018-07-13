@@ -9,15 +9,11 @@ module.exports = (message, command) => {
     embed: {
       color: message.client.colors.RED,
       title: message.client.strings.error(message.guild.language, 'invalidUse'),
-      description: message.client.strings.error(message.guild.language, 'commandUsage', true, command.name),
+      description: `That's not how you use the \`${command.name}\` command.`,
       fields: [
         {
-          name: 'Usage',
-          value: `\`\`\`${message.guild.prefix[0]}${command.usage}\`\`\``
-        },
-        {
           name: 'Get Help',
-          value: `\`\`\`${message.guild.prefix[0]}help ${command.name}\`\`\``
+          value: `Use the \`${message.guild.prefix[0]}help ${command.name}\` command to see usage and example of the \`${command.name}\` command.\nYou can also join **Bastion HQ** and our amazing support staff will help you out: https://discord.gg/fzx8fkt`
         }
       ]
     }
