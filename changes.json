@@ -1,5 +1,5 @@
 {
-  "date": "July 11, 2018",
+  "date": "July 13, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -54,7 +54,8 @@
     "`roleEmoji` - Assign an emoji to a role.",
     "`reactionRolesGroup` - Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa.",
     "`afk` - Sets AFK mode for the user.",
-    "`moveMembers` - Moves all the members in a voice channel to another specified voice channel."
+    "`moveMembers` - Moves all the members in a voice channel to another specified voice channel.",
+    "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
@@ -68,7 +69,8 @@
   "RENAMED COMMANDS": [
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
     "Renamed `votingChannel` command to `votingChannels`.",
-    "Renamed `resetModLogs` command to `resetModerationLogs`."
+    "Renamed `resetModLogs` command to `resetModerationLogs`.",
+    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` & `deleteTodo` commands.",
