@@ -404,6 +404,9 @@
   "listSelfAssignableRoles": {
     "description": "Lists all self-assignable roles."
   },
+  "listServers": {
+    "description": "Lists all Discord servers that Bastion is connected to, in the current shard."
+  },
   "listTriggers": {
     "description": "Lists all the message triggers."
   },
