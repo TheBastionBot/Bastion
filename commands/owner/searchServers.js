@@ -1,5 +1,5 @@
 /**
- * @file searchServer command
+ * @file searchServers command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license GPL-3.0
  */
@@ -35,17 +35,17 @@ exports.exec = (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'servers' ],
+  aliases: [ 'searchGuilds' ],
   enabled: true,
   ownerOnly: true
 };
 
 exports.help = {
-  name: 'searchServer',
+  name: 'searchServers',
   description: 'Searches for Discord servers, containing the specified text in their name, that Bastion is connected to.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'searchServer <name>',
-  example: [ 'searchServer Bastion' ]
+  usage: 'searchServers <name>',
+  example: [ 'searchServers Bastion' ]
 };
