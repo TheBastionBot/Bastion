@@ -539,6 +539,10 @@
     "description": "Lists all self-assignable roles.",
     "module": "Guild Admin"
   },
+  "listServers": {
+    "description": "Lists all Discord servers that Bastion is connected to, in the current shard.",
+    "module": "Owner"
+  },
   "listTriggers": {
     "description": "Lists all the message triggers.",
     "module": "Guild Admin"
