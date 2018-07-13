@@ -1,52 +1,18 @@
 <!--
     Thank you for opening an issue.
 
+
     This issue tracker is for bugs and issues found within this repository, and
     for feature requests/suggestions for this repository.
     If you require general support or if you have some question, please ask in
     the Bastion HQ: https://discord.gg/fzx8fkt
 
+    If you're reporting a bug or suggesting a feature, choose the right template
+    by going here - https://github.com/TheBastionBot/Bastion/issues/new/choose -
+    so that it makes it easy for you to write the report and easy for us to
+    understand and resolve it.
 
-    Please fill in as much of the template below as you're able.
+
+    If it's not an bug report or feature request/suggestion, enter your issue
+    details, in as much details as possible, after the end of this section.
 -->
-
-
-#### I'm opening this issue because
-<!--
-    Put an X between the brackets on the following lines if a statement is true.
-    For example,
-      -  [X] - This statement is true.
-      -  [ ] - This statement is false.
--->
-
- -  [ ] I want to report a bug/issue
- -  [ ] I want to request a feature or suggest something
- -  [ ] Other: 
-
-
-#### Issue Details
-<!--
-    Enter your issue details, in as much details as possible, after the end of
-    this section.
-
-    In case of filing a bug report, please provide us with the details so that
-    we can recreate the issue/problem on our own, keeping it as simple as
-    possible.
-    And, in case of a feature request/suggestion, please provide us with
-    enough detail so that we can understand what the feature should be able to
-    do so that we can understand your requirements and implement it as soon as
-    possible.
--->
-
-
-#### Supporting Information
-<!--
-    Only required if you're reporting a bug/issue.
-    Otherwise you can delete this section.
--->
-
- -  **Bastion Version**: <!-- Use Bastion's `stats` or `changelog` command -->
- -  **Node.js Version**: <!-- Output of `node -v` -->
- -  **NPM Version**: <!-- Output of `npm -v` -->
- -  **Operating System**: <!-- Output of `uname -a` (Linux/macOS) or Windows version -->
- -  **Architecture**: <!-- 32-bit or 64-bit Operating System -->
