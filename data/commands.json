@@ -1135,6 +1135,10 @@
     "description": "Unmutes a specified user server-wide in your Discord server.",
     "module": "Moderation"
   },
+  "unturned": {
+    "description": "Get stats of any Unturned game server.",
+    "module": "Game Stats"
+  },
   "urbanDictionary": {
     "description": "Searches the Urban Dictionary for an urban definition of the specified word.",
     "module": "Queries"
