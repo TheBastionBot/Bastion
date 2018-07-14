@@ -34,7 +34,7 @@ xrequire('./utils/Number.prototype');
 const WebhookHandler = xrequire('./handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
 BASTION.log = xrequire('./handlers/logHandler');
-BASTION.functions = xrequire('./handlers/methodHandler');
+BASTION.methods = xrequire('./handlers/methodHandler');
 
 const StringHandler = xrequire('./handlers/stringHandler');
 BASTION.i18n = new StringHandler();
