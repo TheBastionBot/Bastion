@@ -58,7 +58,8 @@
     "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard.",
     "`mentionRole` - Mentions any unmentionable role.",
     "`rust` - Get stats of any Rust game server.",
-    "`unturned` - Get stats of any Unturned game server."
+    "`unturned` - Get stats of any Unturned game server.",
+    "`callOfDutyModernWarfare3` - Get stats of any Call of Duty: Modern Warfare 3 game server."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
