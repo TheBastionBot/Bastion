@@ -21,6 +21,9 @@
 
 <div align='center'>
 
+<a href="https://commerce.coinbase.com/checkout/ff8b08ec-5d39-4910-89cd-8267cd5c3c54" title="Donate with Cryptocurrencies">
+<img src="https://i.imgur.com/LbIdL4A.jpg" alt="Donate with Cryptocurrencies" height="100" />
+</a>
 <a href="https://www.patreon.com/bastionbot" title="Pledge for The Bastion Bot Project">
 <img src="https://i.imgur.com/NBMyXjO.jpg" alt="Pledge for The Bastion Bot Project" height="100" />
 </a>
