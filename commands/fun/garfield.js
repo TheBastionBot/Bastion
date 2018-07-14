@@ -7,7 +7,7 @@
 exports.exec = (Bastion, message) => {
   let lastDate = Date.now() - 86400000;
   let startDate = 267062400000;
-  let comicDate = new Date(Bastion.functions.getRandomInt(startDate, lastDate));
+  let comicDate = new Date(Bastion.methods.getRandomInt(startDate, lastDate));
 
   let year = comicDate.getUTCFullYear();
   let month = comicDate.getUTCMonth() + 1;

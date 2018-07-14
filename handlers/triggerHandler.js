@@ -36,7 +36,7 @@ module.exports = async message => {
 
     if (response && message.content.toLowerCase() === trigger.toLowerCase()) {
       response.message = JSON.stringify(response.message);
-      response.message = message.client.functions.replaceVariables(response.message, message);
+      response.message = message.client.methods.replaceVariables(response.message, message);
       response.message = JSON.parse(response.message);
 
       if (response.reaction) {

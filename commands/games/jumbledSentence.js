@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message) => {
 
     let quotes = xrequire('./assets/quotes.json');
 
-    let quote = quotes[Bastion.functions.getRandomInt(1, Object.keys(quotes).length)];
+    let quote = quotes[Bastion.methods.getRandomInt(1, Object.keys(quotes).length)];
 
     let jumbledSentence = scramble(quote.quote);
 

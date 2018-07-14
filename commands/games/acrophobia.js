@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message) => {
     activeChannels[message.channel.id].usersVoted = [];
 
     let charPool = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
-    let acroLen = Bastion.functions.getRandomInt(2, 5);
+    let acroLen = Bastion.methods.getRandomInt(2, 5);
     let acronym = [];
     for (let i = 0; i < acroLen; i++) {
       acronym.push(charPool[Math.floor(Math.random() * charPool.length)]);

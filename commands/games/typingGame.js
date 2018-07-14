@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message) => {
       Bastion.log.error(e);
     });
 
-    let index = Bastion.functions.getRandomInt(1, Object.keys(typingArticles).length);
+    let index = Bastion.methods.getRandomInt(1, Object.keys(typingArticles).length);
     let articleMessage = await message.channel.send({
       embed: {
         description: typingArticles[index]

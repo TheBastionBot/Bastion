@@ -59,9 +59,9 @@ module.exports = async message => {
     if (whitelistedDomains.length) {
       let matches = [];
       for (let i = 0; i < whitelistedDomains.length; i++) {
-        matches[i] = links.filter(url => !message.client.functions.isSameDomain(whitelistedDomains[i], url));
+        matches[i] = links.filter(url => !message.client.methods.isSameDomain(whitelistedDomains[i], url));
       }
-      links = message.client.functions.intersect(...matches);
+      links = message.client.methods.intersect(...matches);
     }
     // If there are no `links` left, return
     if (!links.length) return;

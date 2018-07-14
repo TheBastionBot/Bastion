@@ -4,11 +4,11 @@
  * @license GPL-3.0
  */
 
-const credentialsFilter = xrequire('./utils/credentialsFilter');
-const wordFilter = xrequire('./utils/wordFilter');
-const linkFilter = xrequire('./utils/linkFilter');
-const inviteFilter = xrequire('./utils/inviteFilter');
-const mentionSpamFilter = xrequire('./utils/mentionSpamFilter');
+const credentialsFilter = xrequire('./filters/credentialsFilter');
+const wordFilter = xrequire('./filters/wordFilter');
+const linkFilter = xrequire('./filters/linkFilter');
+const inviteFilter = xrequire('./filters/inviteFilter');
+const mentionSpamFilter = xrequire('./filters/mentionSpamFilter');
 const handleTrigger = xrequire('./handlers/triggerHandler');
 const handleUserLevel = xrequire('./handlers/levelHandler');
 const handleCommand = xrequire('./handlers/commandHandler');

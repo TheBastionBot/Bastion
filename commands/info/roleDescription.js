@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
         return Bastion.emit('error', '', 'Role description is limited to 256 characters.', message.channel);
       }
 
-      roleDescription = await Bastion.functions.encodeString(roleDescription);
+      roleDescription = await Bastion.methods.encodeString(roleDescription);
       messageColor = Bastion.colors.GREEN;
       messageTitle = 'Role Description Set';
     }

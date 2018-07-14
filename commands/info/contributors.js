@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let contributors = await Bastion.functions.getContributors();
+    let contributors = await Bastion.methods.getContributors();
     contributors = contributors.map(contributor => `${contributor.username} - ${contributor.contributions} contributions`);
 
     let noOfPages = contributors.length / 25;

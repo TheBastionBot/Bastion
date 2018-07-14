@@ -46,7 +46,7 @@ exports.exec = (Bastion, message, args) => {
         comicNumber = args.number > data.num ? data.num : args.number;
       }
       else {
-        comicNumber = Bastion.functions.getRandomInt(1, data.num);
+        comicNumber = Bastion.methods.getRandomInt(1, data.num);
       }
 
       xkcd(comicNumber, function (data) {

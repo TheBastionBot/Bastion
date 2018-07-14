@@ -24,14 +24,14 @@ BASTION.Constants = Tesseract.Constants;
 BASTION.colors = Tesseract.Constants.Colors;
 BASTION.permissions = Tesseract.Permissions.FLAGS;
 
-// xrequire('./utils/Array.prototype');
-xrequire('./utils/String.prototype');
-xrequire('./utils/Number.prototype');
+// xrequire('./prototypes/Array.prototype');
+xrequire('./prototypes/String.prototype');
+xrequire('./prototypes/Number.prototype');
 
 const WebhookHandler = xrequire('./handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
 BASTION.log = xrequire('./handlers/logHandler');
-BASTION.functions = xrequire('./handlers/functionHandler');
+BASTION.methods = xrequire('./handlers/methodHandler');
 
 const StringHandler = xrequire('./handlers/stringHandler');
 BASTION.i18n = new StringHandler();

@@ -4,8 +4,6 @@
  * @license GPL-3.0
  */
 
-const followURL = xrequire('./functions/followURL');
-
 exports.exec = async (Bastion, message, args) => {
   try {
     let url = args.url.join(' ');
@@ -18,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'URL'), message.channel);
     }
 
-    let followedUrl = await followURL(url);
+    let followedUrl = await Bastion.methods.followURL(url);
 
     message.channel.send({
       embed: {

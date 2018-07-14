@@ -10,7 +10,7 @@ exports.exec = (Bastion, message, args) => {
   /*
    * Get a random quote
    */
-  let index = Bastion.functions.getRandomInt(1, Object.keys(quotes).length);
+  let index = Bastion.methods.getRandomInt(1, Object.keys(quotes).length);
 
   /**
    * If a quote number is provided, use that number.

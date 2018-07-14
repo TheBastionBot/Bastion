@@ -60,7 +60,7 @@ module.exports = async message => {
     if (!links) return;
 
     for (let url of links) {
-      url = await message.client.functions.followURL(url);
+      url = await message.client.methods.followURL(url);
 
       if (hasDiscordInvite(url)) {
         return deleteInvite(message);
