@@ -1,7 +1,8 @@
 {
-  "date": "July 13, 2018",
+  "date": "July 14, 2018",
   "image": "https://i.imgur.com/jANhUYn.gif",
   "IMPROVEMENTS": [
+    "Added cryptocurrencies donation method to `donate` command.",
     "Under-the-hood improvements"
   ]
 }
