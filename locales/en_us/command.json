@@ -80,6 +80,9 @@
   "callOfDuty4": {
     "description": "Get stats of any Call of Duty 4: Modern Warfare game server."
   },
+  "callOfDutyModernWarfare3": {
+    "description": "Get stats of any Call of Duty: Modern Warfare 3 game server."
+  },
   "capture": {
     "description": "Captures a screenshot of the specified webpage."
   },
