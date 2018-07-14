@@ -4,5 +4,8 @@
   "IMPROVEMENTS": [
     "Added cryptocurrencies donation method to `donate` command.",
     "Under-the-hood improvements"
+  ],
+  "FIXES": [
+    "Fixed a default greeting message not mentioning the user properly."
   ]
 }
