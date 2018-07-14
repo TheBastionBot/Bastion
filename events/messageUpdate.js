@@ -4,10 +4,10 @@
  * @license GPL-3.0
  */
 
-const credentialsFilter = xrequire('./utils/credentialsFilter');
-const wordFilter = xrequire('./utils/wordFilter');
-const linkFilter = xrequire('./utils/linkFilter');
-const inviteFilter = xrequire('./utils/inviteFilter');
+const credentialsFilter = xrequire('./filters/credentialsFilter');
+const wordFilter = xrequire('./filters/wordFilter');
+const linkFilter = xrequire('./filters/linkFilter');
+const inviteFilter = xrequire('./filters/inviteFilter');
 
 module.exports = async  (oldMessage, newMessage) => {
   try {
