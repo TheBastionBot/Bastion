@@ -6,8 +6,9 @@
 
 const fs = xrequire('fs');
 
+let methodDir = './functions/';
 // eslint-disable-next-line no-sync
-let functions = fs.readdirSync('./functions/');
+let functions = fs.readdirSync(methodDir);
 for (let method of functions) {
-  exports[method.replace('.js', '')] = xrequire('./functions/', method);
+  exports[method.replace('.js', '')] = xrequire(methodDir, method);
 }
