@@ -851,6 +851,9 @@
   "unMute": {
     "description": "Unmutes a specified user server-wide in your Discord server."
   },
+  "unturned": {
+    "description": "Get stats of any Unturned game server."
+  },
   "urbanDictionary": {
     "description": "Searches the Urban Dictionary for an urban definition of the specified word."
   },
