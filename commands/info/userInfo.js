@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
     let roles = member.roles.map(r => r.name).slice(1).join('\n');
     if (roles.length === 0) roles = '-';
 
-    let mutualGuilds = await Bastion.functions.getMutualGuilds(user);
+    let mutualGuilds = await Bastion.methods.getMutualGuilds(user);
 
     message.channel.send({
       embed: {

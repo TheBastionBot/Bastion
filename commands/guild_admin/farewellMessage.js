@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
 
       let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
       if (guildModel.dataValues.farewellMessage) {
-        farewellMessage = await Bastion.functions.decodeString(guildModel.dataValues.farewellMessage);
+        farewellMessage = await Bastion.methods.decodeString(guildModel.dataValues.farewellMessage);
       }
 
       message.channel.send({
@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
     else {
       args = args.join(' ');
 
-      let farewellMessage = await Bastion.functions.encodeString(args);
+      let farewellMessage = await Bastion.methods.encodeString(args);
       await Bastion.database.models.guild.update({
         farewellMessage: farewellMessage
       },

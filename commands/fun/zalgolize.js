@@ -17,7 +17,7 @@ exports.exec = (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Zalgolized Text:',
-      description: Bastion.functions.zalgolize(args.join(' '))
+      description: Bastion.methods.zalgolize(args.join(' '))
     }
   }).catch(e => {
     Bastion.log.error(e);

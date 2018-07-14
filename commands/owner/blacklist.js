@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     // Filter users with invalid snowflake.
-    args.users = args.users.filter(userID => Bastion.functions.isSnowflake(userID));
+    args.users = args.users.filter(userID => Bastion.methods.isSnowflake(userID));
     // Include mentioned users too.
     args.users = args.users.concat(message.mentions.users.map(user => user.id));
     if (!args.users.length) {

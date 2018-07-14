@@ -7,7 +7,7 @@
 exports.exec = (Bastion, message) => {
   try {
     // eslint-disable-next-line no-sync
-    let settings = Bastion.functions.listFilesSync('settings');
+    let settings = Bastion.methods.listFilesSync('settings');
     for (let file of settings) {
       delete xrequire.cache[xrequire.resolve(`./settings/${file}`)];
     }

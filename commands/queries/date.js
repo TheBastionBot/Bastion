@@ -32,7 +32,7 @@ exports.exec = (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), message.channel);
     }
 
-    let date = Bastion.functions.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
+    let date = Bastion.methods.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
     date = date.substring(0, date.length - 4);
 
     message.channel.send({
