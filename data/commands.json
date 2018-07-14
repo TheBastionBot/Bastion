@@ -107,6 +107,10 @@
     "description": "Get stats of any Call of Duty 4: Modern Warfare game server.",
     "module": "Game Stats"
   },
+  "callOfDutyModernWarfare3": {
+    "description": "Get stats of any Call of Duty: Modern Warfare 3 game server.",
+    "module": "Game Stats"
+  },
   "capture": {
     "description": "Captures a screenshot of the specified webpage.",
     "module": "Owner"
