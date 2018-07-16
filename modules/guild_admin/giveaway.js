@@ -4,16 +4,13 @@
  * @license MIT
  */
 
-let giveaways = new Map();
-
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (args.item) {
-      // Allow only one giveaway event per server
-      if (giveaways.has(message.guild.id)) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'busy'), Bastion.strings.error(message.guild.language, 'isEventInUse', true, 'giveaway'), message.channel);
-      }
+    if (!('giveaways' in message.guild)) {
+      message.guild.giveaways = new Map();
+    }
 
+    if (args.item) {
       // Giveaway item name
       args.item = args.item.join(' ');
 
@@ -33,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
           title: '🎉 GIVEAWAY! 🎉',
           description: `Giveaway event started. React to this message with ${reaction} to get a chance to win **${args.item}**.`,
           footer: {
-            text: `Giveaway ID: ${message.guild.id} • Giveaway ends in ${args.timeout} hours from now.`
+            text: `Giveaway ends in ${args.timeout} hours from now.`
           }
         }
       });
@@ -76,7 +73,7 @@ exports.exec = async (Bastion, message, args) => {
                   }
                 ],
                 footer: {
-                  text: `Giveaway ID: ${message.guild.id}`
+                  text: `Giveaway ID: ${giveawayMessageID}`
                 }
               }
             }).catch(e => {
@@ -104,7 +101,7 @@ exports.exec = async (Bastion, message, args) => {
           }
 
           // Remove the giveaway details from cache
-          giveaways.delete(message.guild.id);
+          message.guild.giveaways.delete(giveawayMessageID);
         }
         catch (e) {
           Bastion.log.error(e);
@@ -112,21 +109,25 @@ exports.exec = async (Bastion, message, args) => {
       }, args.timeout * 60 * 60 * 1000);
 
       // Store the giveaway information in cache.
-      giveaways.set(message.guild.id, giveaway);
+      message.guild.giveaways.set(giveawayMessageID, giveaway);
     }
     else if (args.end) {
-      if (giveaways.has(message.guild.id)) {
+      if (message.guild.giveaways.has(args.end)) {
         // Clear the giveaway timeout
-        Bastion.clearTimeout(giveaways.get(message.guild.id));
+        Bastion.clearTimeout(message.guild.giveaways.get(args.end));
 
         // Remove the giveaway details from cache
-        giveaways.delete(message.guild.id);
+        message.guild.giveaways.delete(args.end);
+
+        // Delete the giveaway message
+        let giveawayMessage = await message.channel.fetchMessage(args.end);
+        giveawayMessage.delete().catch(() => {});
 
         message.channel.send({
           embed: {
             color: Bastion.colors.RED,
             title: 'Giveaway Cancelled',
-            description: `The giveaway event with ID **${message.guild.id}** has been cancelled by ${message.author.tag}`
+            description: `The giveaway event with ID **${args.end}** has been cancelled by ${message.author.tag}`
           }
         }).catch(e => {
           Bastion.log.error(e);
@@ -138,9 +139,9 @@ exports.exec = async (Bastion, message, args) => {
     }
     else {
       /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
   }
@@ -156,7 +157,7 @@ exports.config = {
     { name: 'item', type: String, multiple: true, defaultOption: true },
     { name: 'timeout', type: Number, alias: 't', defaultValue: 3 },
     { name: 'winners', type: Number, alias: 'w', defaultValue: 1 },
-    { name: 'end', type: Boolean }
+    { name: 'end', type: String, alias: 'e' }
   ],
   ownerOnly: false
 };
@@ -166,6 +167,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'giveaway < GIVEAWAY ITEM NAME | --end > [-t TIMEOUT_IN_HOURS] [--winners COUNT]',
-  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway Bastion T-Shirt --winners 5', 'giveaway --end' ]
+  usage: 'giveaway < GIVEAWAY ITEM NAME [-t TIMEOUT_IN_HOURS] [--winners COUNT] | --end GIVEAWAY_MESSAGE_ID >',
+  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway Bastion T-Shirt --winners 5', 'giveaway --end 153174267544338344' ]
 };
