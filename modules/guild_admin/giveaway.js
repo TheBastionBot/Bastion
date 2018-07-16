@@ -17,9 +17,9 @@ exports.exec = async (Bastion, message, args) => {
       // Giveaway item name
       args.item = args.item.join(' ');
 
-      // Check if timeout is withing 12 hours
-      if (args.timeout < 1 || args.timeout > 12) {
-        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), 'Giveaway can only run for at least an hour and at most 12 hours.', message.channel);
+      // Check if timeout is withing 24 hours
+      if (args.timeout < 1 || args.timeout > 24) {
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'invalidInput'), 'Giveaway can only run for at least an hour and at most 24 hours.', message.channel);
       }
 
       // Generate a random reaction for the giveaway message
