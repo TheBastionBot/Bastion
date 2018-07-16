@@ -51,44 +51,36 @@ exports.exec = async (Bastion, message, args) => {
           // Get (only) the users who reacted to the giveaway message
           let participants;
           if (giveawayMessage.reactions.has(reaction)) {
-            participants = giveawayMessage.reactions.get(reaction).users.filter(user => !user.bot).map(u => u.id);
+            participants = giveawayMessage.reactions.get(reaction).users.filter(user => !user.bot).map(u => `**${u.tag}** / ${u.id}`);
           }
 
-          // Get a random user (winner) from the participants
-          let winner;
-          while (!winner && participants.length) {
-            winner = participants[Math.floor(Math.random() * participants.length)];
-            participants.splice(participants.indexOf(winner), 1);
-            winner = await Bastion.fetchUser(winner).catch(() => {});
+          // Get random users (winners) from the participants
+          let winners;
+          if (participants.length) {
+            winners = Bastion.functions.getRandomElements(participants, args.winners, true);
           }
 
-          // If there's a winner declare the result
-          if (winner) {
+          // If there're winners declare the result
+          if (winners) {
+            giveawayMessage.delete().catch(() => {});
             // Declare the result in the channel
-            giveawayMessage.edit({
+            giveawayMessage.channel.send({
               embed: {
                 color: Bastion.colors.BLUE,
                 title: 'Giveaway Event Ended',
-                description: `${winner} won **${args.item}**! And will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
+                description: `The following users have won **${args.item}**! And will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
+                fields: [
+                  {
+                    name: 'Winners',
+                    value: winners.join('\n')
+                  }
+                ],
                 footer: {
                   text: `Giveaway ID: ${message.guild.id}`
                 }
               }
             }).catch(e => {
               if (e.code !== 50001) {
-                Bastion.log.error(e);
-              }
-            });
-
-            // Let the winner know via DM
-            winner.send({
-              embed: {
-                color: Bastion.colors.BLUE,
-                title: 'Congratulations',
-                description: `You won the **${args.item}** in a giveaway you participated in **${message.guild.name}** Server!\nYou'll soon be contacted by ${message.author.tag} with your reward.`
-              }
-            }).catch(e => {
-              if (e.code !== 50007) {
                 Bastion.log.error(e);
               }
             });
@@ -163,6 +155,7 @@ exports.config = {
   argsDefinitions: [
     { name: 'item', type: String, multiple: true, defaultOption: true },
     { name: 'timeout', type: Number, alias: 't', defaultValue: 3 },
+    { name: 'winners', type: Number, alias: 'w', defaultValue: 1 },
     { name: 'end', type: Boolean }
   ],
   ownerOnly: false
@@ -173,6 +166,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'giveaway < GIVEAWAY ITEM NAME | --end > [-t TIMEOUT_IN_HOURS]',
-  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway --end' ]
+  usage: 'giveaway < GIVEAWAY ITEM NAME | --end > [-t TIMEOUT_IN_HOURS] [--winners COUNT]',
+  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway Bastion T-Shirt --winners 5', 'giveaway --end' ]
 };
