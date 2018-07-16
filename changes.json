@@ -2,7 +2,8 @@
   "date": "July 16, 2018",
   "image": "https://i.imgur.com/ijKLOEr.gif",
   "EXTENDED GIVEAWAYS": [
-    "`giveaway` can now run for a whole day, i.e. 24 hours!"
+    "`giveaway` can now run for a whole day, i.e. 24 hours!",
+    "There can now be multiple winners for a giveaway, which can be specified using the `--winners` option."
   ],
   "IMPROVEMENTS": [
     "Under-the-hood improvements"
