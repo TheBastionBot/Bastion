@@ -30,8 +30,8 @@ exports.exec = (Bastion, message) => {
         + '\nJoin **Bastion HQ** and never miss an update: https://discord.gg/fzx8fkt'
     },
     {
-      name: 'Let\'s Connect...',
-      value: 'Connect with Bastion on [Twitter](https://twitter.com/TheBastionBot) and [Reddit](https://reddit.com/r/TheBastionBot).'
+      name: 'Loving Bastion?',
+      value: 'Then why wait? Go ahead and express your feelings by tweeting him [@TheBastionBot](https://twitter.com/TheBastionBot) and your testimonial will be posted in [our testimonials page](https://bastionbot.org/testimonials).'
     },
     {
       name: 'Support Bastion\'s Development',
