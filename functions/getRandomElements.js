@@ -5,6 +5,10 @@
  */
 
 module.exports = (seed, count = 1, unique = false) => {
+  if (unique && seed.length < count) {
+    count = seed.length;
+  }
+
   let randomElements = [];
 
   for (let i = 0; i < count; i++) {
