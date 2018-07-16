@@ -1,11 +1,4 @@
 {
-  "date": "July 14, 2018",
-  "image": "https://i.imgur.com/jANhUYn.gif",
-  "IMPROVEMENTS": [
-    "Added cryptocurrencies donation method to `donate` command.",
-    "Under-the-hood improvements"
-  ],
-  "FIXES": [
-    "Fixed a default greeting message not mentioning the user properly."
-  ]
+  "date": "July 16, 2018",
+  "image": "https://i.imgur.com/ijKLOEr.gif"
 }
