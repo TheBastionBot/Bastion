@@ -68,11 +68,30 @@ exports.exec = (Bastion, message, args) => {
     }
   }, duration);
 
+  let seconds = duration / 1000;
+  let days = parseInt(seconds / 86400);
+  seconds = seconds % 86400;
+  let hours = parseInt(seconds / 3600);
+  seconds = seconds % 3600;
+  let minutes = parseInt(seconds / 60);
+  seconds = parseInt(seconds % 60);
+
+  duration = `${seconds} seconds`;
+  if (days) {
+    duration = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+  }
+  else if (hours) {
+    duration = `${hours} hours ${minutes} minutes ${seconds} seconds`;
+  }
+  else if (minutes) {
+    duration = `${minutes} minutes ${seconds} seconds`;
+  }
+
   message.channel.send({
     embed: {
       color: Bastion.colors.GREEN,
       title: 'Reminder Set',
-      description: Bastion.strings.info(message.guild.language, 'addReminder', message.author.tag, args.message.join(' '), moment.duration(duration).humanize())
+      description: Bastion.strings.info(message.guild.language, 'addReminder', message.author.tag, args.message.join(' '), duration)
     }
   }).catch(e => {
     Bastion.log.error(e);
