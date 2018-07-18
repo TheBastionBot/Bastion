@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message, args) => {
         embed: {
           color: Bastion.colors.BLUE,
           author: {
-            name: '🎉 GIVEAWAY! 🎉'
+            name: 'GIVEAWAY!'
           },
           title: args.item,
           description: `React to this message with ${reaction} to participate.`,
@@ -67,8 +67,11 @@ exports.exec = async (Bastion, message, args) => {
             giveawayMessage.edit({
               embed: {
                 color: Bastion.colors.BLUE,
-                title: 'Giveaway Event Ended',
-                description: `The following users have won **${args.item}**! And will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
+                author: {
+                  name: 'GIVEAWAY!'
+                },
+                title: args.item,
+                description: `The following users have won and will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
                 fields: [
                   {
                     name: 'Winners',
