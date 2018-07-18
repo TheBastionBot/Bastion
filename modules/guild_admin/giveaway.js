@@ -33,8 +33,9 @@ exports.exec = async (Bastion, message, args) => {
           title: args.item,
           description: `React to this message with ${reaction} to participate.`,
           footer: {
-            text: `Giveaway ends in ${args.timeout} hours from now.`
-          }
+            text: 'Ends'
+          },
+          timestamp: new Date(Date.now() + args.timeout * 60 * 60 * 1000)
         }
       });
       await giveawayMessage.react(reaction);
