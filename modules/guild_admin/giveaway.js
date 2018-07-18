@@ -27,8 +27,11 @@ exports.exec = async (Bastion, message, args) => {
       let giveawayMessage = await message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
-          title: '🎉 GIVEAWAY! 🎉',
-          description: `Giveaway event started. React to this message with ${reaction} to get a chance to win **${args.item}**.`,
+          author: {
+            name: '🎉 GIVEAWAY! 🎉'
+          },
+          title: args.item,
+          description: `React to this message with ${reaction} to participate.`,
           footer: {
             text: `Giveaway ends in ${args.timeout} hours from now.`
           }
