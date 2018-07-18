@@ -248,6 +248,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'giveaway < GIVEAWAY ITEM NAME [-t TIMEOUT_IN_HOURS] [--winners COUNT] | --end GIVEAWAY_MESSAGE_ID >',
-  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway Bastion T-Shirt --winners 5', 'giveaway --end 153174267544338344' ]
+  usage: 'giveaway < GIVEAWAY ITEM NAME [-t TIMEOUT_IN_HOURS] [--winners COUNT] | --reroll GIVEAWAY_MESSAGE_ID |--end GIVEAWAY_MESSAGE_ID >',
+  example: [ 'giveaway Awesome Goodies! -t 2', 'giveaway Bastion T-Shirt --winners 5', 'giveaway --reroll 133174241744538617', 'giveaway --end 153174267544338344' ]
 };
