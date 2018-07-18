@@ -112,10 +112,84 @@ exports.exec = async (Bastion, message, args) => {
         catch (e) {
           Bastion.log.error(e);
         }
-      }, args.timeout * 60 * 60 * 1000);
+      }, 10000);
+      // }, args.timeout * 60 * 60 * 1000);
 
       // Store the giveaway information in cache.
       message.guild.giveaways.set(giveawayMessageID, giveaway);
+    }
+    else if (args.reroll) {
+      if (message.guild.giveaways.has(args.reroll)) {
+        return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'notFound'), 'That giveaway is currently running in this server. You can only reroll concluded or abruptly stopped giveaways.', message.channel);
+      }
+
+      // Fetch the giveaway message to get new reactions
+      let giveawayMessage = await message.channel.fetchMessage(args.reroll);
+
+      // Check if it's a valid giveaway message
+      if (giveawayMessage.author.id !== Bastion.user.id || giveawayMessage.embeds.length !== 1 || !giveawayMessage.embeds[0].author.name.startsWith('GIVEAWAY')) return;
+
+      let giveawayItem = giveawayMessage.embeds[0].title;
+      let reaction = giveawayMessage.reactions.filter(reaction => reaction.me).first();
+      if (!reaction) return;
+      reaction = reaction.emoji.name;
+
+      // Get (only) the users who reacted to the giveaway message
+      let participants;
+      if (giveawayMessage.reactions.has(reaction)) {
+        participants = giveawayMessage.reactions.get(reaction).users.filter(user => !user.bot).map(u => `**${u.tag}** / ${u.id}`);
+      }
+
+      // Get random users (winners) from the participants
+      let winners;
+      if (participants.length) {
+        winners = Bastion.functions.getRandomElements(participants, args.winners, true);
+      }
+
+      // If there're winners declare the result
+      if (winners) {
+        // Declare the result in the channel
+        giveawayMessage.edit({
+          embed: {
+            color: Bastion.colors.BLUE,
+            author: {
+              name: 'GIVEAWAY Rerolled!'
+            },
+            title: giveawayItem,
+            description: `The following users have won and will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
+            fields: [
+              {
+                name: 'Winners',
+                value: winners.join('\n')
+              }
+            ],
+            footer: {
+              text: `Giveaway ID: ${giveawayMessage.id}`
+            }
+          }
+        }).catch(e => {
+          if (e.code !== 50001) {
+            Bastion.log.error(e);
+          }
+        });
+      }
+      // Otherwise state the unfortunate outcome
+      else {
+        giveawayMessage.edit({
+          embed: {
+            color: Bastion.colors.RED,
+            title: 'Giveaway Event Rerolled',
+            description: `Unfortunately, no one participated and apparently there's no winner for **${giveawayItem}**. 😕`,
+            footer: {
+              text: `Giveaway ID: ${giveawayMessage.id}`
+            }
+          }
+        }).catch(e => {
+          if (e.code !== 50001) {
+            Bastion.log.error(e);
+          }
+        });
+      }
     }
     else if (args.end) {
       if (message.guild.giveaways.has(args.end)) {
@@ -163,6 +237,7 @@ exports.config = {
     { name: 'item', type: String, multiple: true, defaultOption: true },
     { name: 'timeout', type: Number, alias: 't', defaultValue: 3 },
     { name: 'winners', type: Number, alias: 'w', defaultValue: 1 },
+    { name: 'reroll', type: String, alias: 'r' },
     { name: 'end', type: String, alias: 'e' }
   ],
   ownerOnly: false
