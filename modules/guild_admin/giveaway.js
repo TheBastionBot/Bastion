@@ -68,7 +68,7 @@ exports.exec = async (Bastion, message, args) => {
               embed: {
                 color: Bastion.colors.BLUE,
                 author: {
-                  name: 'GIVEAWAY!'
+                  name: 'GIVEAWAY Ended'
                 },
                 title: args.item,
                 description: `The following users have won and will be contacted by ${message.author.tag} with their reward.\nThank you everyone for participating. Better luck next time.`,
