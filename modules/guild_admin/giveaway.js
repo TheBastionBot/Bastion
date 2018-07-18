@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
           title: args.item,
           description: `React to this message with ${reaction} to participate.`,
           footer: {
-            text: 'Ends'
+            text: `${args.winners} Winners • Ends`
           },
           timestamp: new Date(Date.now() + args.timeout * 60 * 60 * 1000)
         }
