@@ -93,7 +93,7 @@ exports.exec = async (Bastion, message, args) => {
                 title: 'Giveaway Event Ended',
                 description: `Unfortunately, no one participated and apparently there's no winner for **${args.item}**. 😕`,
                 footer: {
-                  text: `Giveaway ID: ${message.guild.id}`
+                  text: `Giveaway ID: ${giveawayMessageID}`
                 }
               }
             }).catch(e => {
