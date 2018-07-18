@@ -64,7 +64,7 @@ exports.exec = async (Bastion, message, args) => {
           // If there're winners declare the result
           if (winners) {
             // Declare the result in the channel
-            giveawayMessage.channel.edit({
+            giveawayMessage.edit({
               embed: {
                 color: Bastion.colors.BLUE,
                 title: 'Giveaway Event Ended',
