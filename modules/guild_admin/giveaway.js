@@ -112,8 +112,7 @@ exports.exec = async (Bastion, message, args) => {
         catch (e) {
           Bastion.log.error(e);
         }
-      }, 10000);
-      // }, args.timeout * 60 * 60 * 1000);
+      }, args.timeout * 60 * 60 * 1000);
 
       // Store the giveaway information in cache.
       message.guild.giveaways.set(giveawayMessageID, giveaway);
