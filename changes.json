@@ -8,6 +8,10 @@
     "`giveaway` will now show the time it'll end instead of showing the remaining time, because some people wanted it.",
     "You can now reroll giveaways too, if you wanna change the winner(s) for some reason. We've added the new `--reroll` option to the `giveaway` command just for that."
   ],
+  "NEW GAME STATS": [
+    "Some games were getting very popular and we needed to add stats from them, so we've added the new `rust` and `unturned` commands to get stats from their game server.",
+    "We've also added the `callOfDutyModernWarfare3` command to check the stats from Call of Duty: Modern Warfare 3 game servers."
+  ],
   "IMPROVEMENTS": [
     "`reminder` will be a little more specific when showing the remaining time.",
     "Streamer Role won't work for bots from now.",
