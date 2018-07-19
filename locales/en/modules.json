@@ -58,6 +58,7 @@
     "battlefield1": "Get stats of any Battlefield 1 player.",
     "battlefield4": "Get stats of any Battlefield 4 player.",
     "callOfDuty4": "Get stats of any Call of Duty 4: Modern Warfare game server.",
+    "callOfDutyModernWarfare3": "Get stats of any Call of Duty: Modern Warfare 3 game server.",
     "counterStrikeGlobalOffensive": "Get stats of any Counter-Strike: Global Offensive game server.",
     "destiny2": "Get stats of any Destiny 2 player.",
     "fortnite": "Get stats of any Fortnite player.",
@@ -68,8 +69,10 @@
     "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
     "rocketLeague": "Get stats of any Rocket League player.",
+    "rust": "Get stats of any Rust game server.",
     "smite": "Get stats of any Smite player.",
-    "teamFortress2": "Get stats of any Team Fortress 2 game server."
+    "teamFortress2": "Get stats of any Team Fortress 2 game server.",
+    "unturned": "Get stats of any Unturned game server."
   },
   "games": {
     "acrophobia": "Starts a acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.",

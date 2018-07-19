@@ -6,6 +6,7 @@
 
 module.exports = async (oldMember, newMember) => {
   try {
+    if (newMember.user.bot) return;
     if (newMember.roles.size < 2) return;
     if (newMember.user.presence.status === 'offline') return;
     if (oldMember.frozenPresence.game && newMember.user.presence.game && oldMember.frozenPresence.game.type === newMember.user.presence.game.type) return;
@@ -17,10 +18,8 @@ module.exports = async (oldMember, newMember) => {
     if (!streamerRole) return;
 
     if (!newMember.user.presence.game || newMember.user.presence.game.type !== 1) {
-      if (newMember.roles.has(streamerRole.id)) {
-        await newMember.removeRole(streamerRole, 'Stopped streaming').catch(() => {});
-      }
-      return;
+      if (!newMember.roles.has(streamerRole.id)) return;
+      await newMember.removeRole(streamerRole, 'Stopped streaming').catch(() => {});
     }
 
     await newMember.addRole(streamerRole, 'Started streaming').catch(() => {});
