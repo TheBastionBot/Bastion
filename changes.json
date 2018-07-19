@@ -1,5 +1,5 @@
 {
-  "date": "July 14, 2018",
+  "date": "July 19, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -31,7 +31,6 @@
     "Users can now have different music playlists in different servers",
     "Members Only mode to allow only users with roles to use the commands.",
     "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message",
-    "You can now run multiple giveaways",
     "Reaction Roles. Similar to self assignable roles, but instead of using commands, you just need to add/remove reactions to get roles",
     "AFK Mode. Users can now set themselves as AFK and anyone mentioning them, in a server they manage, will be responded by Bastion that the user is AFK.",
     "Level up messages will now show some inspirational texts.",
@@ -56,10 +55,7 @@
     "`afk` - Sets AFK mode for the user.",
     "`moveMembers` - Moves all the members in a voice channel to another specified voice channel.",
     "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard.",
-    "`mentionRole` - Mentions any unmentionable role.",
-    "`rust` - Get stats of any Rust game server.",
-    "`unturned` - Get stats of any Unturned game server.",
-    "`callOfDutyModernWarfare3` - Get stats of any Call of Duty: Modern Warfare 3 game server."
+    "`mentionRole` - Mentions any unmentionable role."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
@@ -68,7 +64,7 @@
     "Trigger commands can now be used by anyone with Manage Server permission.",
     "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, for the new usage.",
     "`clear` command can now clear messages sent in the last specified minutes.",
-    "`giveaway` command's usage syntax has been changed. See its help message, using the `help clear` command, for the new usage."
+    "`giveaway` command's usage syntax has been changed. See its help message, using the `help giveaway` command, for the new usage."
   ],
   "RENAMED COMMANDS": [
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
