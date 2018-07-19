@@ -6,6 +6,7 @@
 
 module.exports = async (oldMember, newMember) => {
   try {
+    if (newMember.user.bot) return;
     if (newMember.roles.size < 2) return;
     if (newMember.user.presence.status === 'offline') return;
     if (oldMember.frozenPresence.game && newMember.user.presence.game && oldMember.frozenPresence.game.type === newMember.user.presence.game.type) return;
