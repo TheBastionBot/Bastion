@@ -68,6 +68,7 @@
     "quake3": "Get stats of any Quake III Arena game server.",
     "rainbow6": "Get stats of any Rainbow Six player.",
     "rocketLeague": "Get stats of any Rocket League player.",
+    "rust": "Get stats of any Rust game server.",
     "smite": "Get stats of any Smite player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server."
   },
