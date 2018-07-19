@@ -1,5 +1,5 @@
 {
-  "date": "July 18, 2018",
+  "date": "July 19, 2018",
   "image": "https://i.imgur.com/N81dQE9.gif",
   "EXTENDED GIVEAWAYS": [
     "`giveaway` can now run for a whole day, i.e. 24 hours!",
@@ -10,6 +10,7 @@
   ],
   "IMPROVEMENTS": [
     "`reminder` will be a little more specific when showing the remaining time.",
+    "Streamer Role won't work for bots from now.",
     "Under-the-hood improvements"
   ]
 }
