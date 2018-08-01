@@ -21,8 +21,9 @@ module.exports = async (oldMember, newMember) => {
       if (!newMember.roles.has(streamerRole.id)) return;
       await newMember.removeRole(streamerRole, 'Stopped streaming').catch(() => {});
     }
-
-    await newMember.addRole(streamerRole, 'Started streaming').catch(() => {});
+    else {
+      await newMember.addRole(streamerRole, 'Started streaming').catch(() => {});
+    }
   }
   catch (e) {
     newMember.client.log.error(e);
