@@ -1,10 +1,8 @@
 ### Bastion BOT settings ###
 settings/credentials.json
 settings/config.json
-data/Bastion.sqlite
-data/playlist.json
+data/bastion.db
 data/backup*
-modules/plugins
 
 # Lock file
 package-lock.json

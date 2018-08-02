@@ -1,28 +1,34 @@
 /**
  * @file channelCreate event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = async channel => {
-  if (!channel.guild) return;
-
   try {
-    let guildSettings = await channel.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${channel.guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    if (!channel.guild) return;
 
-    let logChannel = channel.guild.channels.get(guildSettings.log);
+    let guildModel = await channel.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: channel.guild.id
+      }
+    });
+
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = channel.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
-    let title = channel.client.strings.events(channel.guild.language, 'channelCreate');
+    let title = channel.client.i18n.event(channel.guild.language, 'channelCreate');
     if (channel.type === 'text') {
-      title = channel.client.strings.events(channel.guild.language, 'textChannelCreate');
+      title = channel.client.i18n.event(channel.guild.language, 'textChannelCreate');
     }
     else if (channel.type === 'voice') {
-      title = channel.client.strings.events(channel.guild.language, 'voiceChannelCreate');
+      title = channel.client.i18n.event(channel.guild.language, 'voiceChannelCreate');
     }
     else if (channel.type === 'category') {
-      title = channel.client.strings.events(channel.guild.language, 'categoryChannelCreate');
+      title = channel.client.i18n.event(channel.guild.language, 'categoryChannelCreate');
     }
 
     logChannel.send({

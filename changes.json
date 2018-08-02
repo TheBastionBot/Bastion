@@ -1,20 +1,82 @@
 {
   "date": "July 19, 2018",
-  "image": "https://i.imgur.com/N81dQE9.gif",
-  "EXTENDED GIVEAWAYS": [
-    "`giveaway` can now run for a whole day, i.e. 24 hours!",
-    "There can now be multiple winners for a giveaway, which can be specified using the `--winners` option.",
-    "You can now run multiple giveaways in a server.",
-    "`giveaway` will now show the time it'll end instead of showing the remaining time, because some people wanted it.",
-    "You can now reroll giveaways too, if you wanna change the winner(s) for some reason. We've added the new `--reroll` option to the `giveaway` command just for that."
+  "image": "https://i.imgur.com/zlOMqVD.gif",
+  "THESE BUGS ARE DEAD": [],
+  "THESE ABILITIES HAVE ENHANCED": [
+    "Logs are now much prettier, than it was already!",
+    "Commands that work in direct messages doesn't need any prefix",
+    "Multiple prefixes can be set from the config too!",
+    "`reason` command will now work with moderation case nos., instead of moderation log message IDs",
+    "daily claim reward cooldowns still be in effect even after Bastion restarts",
+    "Set any no. of channels as voting channels. No limitations!",
+    "Add any no. of level up roles. No limitations here, too!",
+    "`currencyGiveaway` command isn't bot owner only anymore! You can now use it in your own servers to do Bastion Currency giveaways",
+    "Trigger response supports a whole bunch of variables now",
+    "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
+    "Show if a server is a Bastion premium server in the `serverInfo` command.",
+    "Adding music from user playlist to the queue is now faster than ever.",
+    "Warnings are now permanently stored!",
+    "Server logging will now also log message update and message delete events.",
+    "Tons of under-the-hood improvements & changes."
   ],
-  "NEW GAME STATS": [
-    "Some games were getting very popular and we needed to add stats from them, so we've added the new `rust` and `unturned` commands to get stats from their game server.",
-    "We've also added the `callOfDutyModernWarfare3` command to check the stats from Call of Duty: Modern Warfare 3 game servers."
+  "NEW FEATURES!": [
+    "Set the amount of data shown in the terminal by modifying the value of `logLevel` key in config",
+    "Members have separate currency & level in every server",
+    "You can now `give` & `take` any amount of Bastion Currencies to/from any member of your server",
+    "Give as much XP as you want to your server members using the `giveXP` command",
+    "Tired of looking through the moderation logs to find a specific case? Use the `case` command to fetch any case from the moderation logs",
+    "Using the `claim` command daily will count towards your daily streak. If you get a streak of 7 days, you'll can get a bonus of upto 700 BC",
+    "Each servers can have their own triggers & responses",
+    "Trigger responses now support reactions & message embeds too!",
+    "Users can now have different music playlists in different servers",
+    "Members Only mode to allow only users with roles to use the commands.",
+    "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message",
+    "Reaction Roles. Similar to self assignable roles, but instead of using commands, you just need to add/remove reactions to get roles",
+    "AFK Mode. Users can now set themselves as AFK and anyone mentioning them, in a server they manage, will be responded by Bastion that the user is AFK.",
+    "Level up messages will now show some inspirational texts.",
+    "You can now mass move members from one voice channel to another."
   ],
-  "IMPROVEMENTS": [
-    "`reminder` will be a little more specific when showing the remaining time.",
-    "Streamer Role won't work for bots from now.",
-    "Under-the-hood improvements"
-  ]
+  "NEW COMMANDS!": [
+    "`blacklist` - Blacklist users globally from using Bastion.",
+    "`ignoreInviteFilter`, `ignoreLinkFilter`, `ignoreWordFilter`, `ignoreMentionFilter`,  - Set channels and/or roles to be ignored by the invite, link, word & mention filters, respectively.",
+    "`ignoreSlowMode` - Set channels and/or roles to be ignored by the slow mode.",
+    "`ignoreStarboard` - Set channels and/or roles to be ignored by the starboard.",
+    "`sellRole` - Sell roles in your server's Role Store.",
+    "`serverDescription` & `roleDescription` - Set a description for the server & any role in the server.",
+    "`music` - Toggle music support for any specified server.",
+    "`toggleBastion` - Toggle Bastion in the server.",
+    "`setColor` - Set User Color to use the specified color for yourself in appropriate places like in your Bastion Profile.",
+    "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting.",
+    "`reportChannel` - (Un)Set report channel of the server.",
+    "`membersOnly` - Toggle Members Only mode.",
+    "`reactionPinning` - Toggle Reaction Pinning.",
+    "`roleEmoji` - Assign an emoji to a role.",
+    "`reactionRolesGroup` - Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa.",
+    "`afk` - Sets AFK mode for the user.",
+    "`moveMembers` - Moves all the members in a voice channel to another specified voice channel.",
+    "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard.",
+    "`mentionRole` - Mentions any unmentionable role."
+  ],
+  "COMMANDS WITH NEW USAGE": [
+    "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
+    "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead.",
+    "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details.",
+    "Trigger commands can now be used by anyone with Manage Server permission.",
+    "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, for the new usage.",
+    "`clear` command can now clear messages sent in the last specified minutes.",
+    "`giveaway` command's usage syntax has been changed. See its help message, using the `help giveaway` command, for the new usage."
+  ],
+  "RENAMED COMMANDS": [
+    "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
+    "Renamed `votingChannel` command to `votingChannels`.",
+    "Renamed `resetModLogs` command to `resetModerationLogs`.",
+    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias."
+  ],
+  "NOT AVAILABLE ANYMORE": [
+    "Removed `todo`, `listTodo` & `deleteTodo` commands.",
+    "Removed `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
+    "Removed `buyGift`, `gift`, `giftShop` & `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
+    "Removed `whitelistChannel` & `whitelistRole` commands."
+  ],
+  "BUGS HIDING IN THE CLOSET": []
 }

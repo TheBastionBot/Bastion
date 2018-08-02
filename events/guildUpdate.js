@@ -1,23 +1,29 @@
 /**
  * @file guildUpdate event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = async (oldGuild, newGuild) => {
-  if (oldGuild.name === newGuild.name) return;
-
   try {
-    let guildSettings = await newGuild.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${newGuild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    if (oldGuild.name === newGuild.name) return;
 
-    let logChannel = newGuild.channels.get(guildSettings.log);
+    let guildModel = await newGuild.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: newGuild.id
+      }
+    });
+
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = newGuild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
     logChannel.send({
       embed: {
         color: newGuild.client.colors.ORANGE,
-        title: newGuild.client.strings.events(newGuild.language, 'guildUpdate'),
+        title: newGuild.client.i18n.event(newGuild.language, 'guildUpdate'),
         fields: [
           {
             name: 'New Server Name',

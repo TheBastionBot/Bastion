@@ -1,0 +1,1210 @@
+{
+  "acrophobia": {
+    "description": "Starts an acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.",
+    "module": "Games"
+  },
+  "addAutoAssignableRoles": {
+    "description": "Adds specified roles to the list of auto-assignable roles, anyone who joins the server gets these roles automatically.",
+    "module": "Guild Admin"
+  },
+  "addFilteredWords": {
+    "description": "Adds specified words to the list of filtered words. If someone sends a message containing these words, their message will be automatically deleted.",
+    "module": "Guild Admin"
+  },
+  "addRole": {
+    "description": "Adds the specified role to a specified user of your Discord server.",
+    "module": "Moderation"
+  },
+  "addSelfAssignableRoles": {
+    "description": "Adds specified roles to the list of self-assignable roles, anyone could use `iAm`/`iAmNot` command to get/revoke these roles to themselves.",
+    "module": "Guild Admin"
+  },
+  "addTrigger": {
+    "description": "Adds a message trigger and a response. When a message is sent that contains that triggering word/phrase, Bastion replies with the response you have set.",
+    "module": "Guild Admin"
+  },
+  "addWhitelistDomains": {
+    "description": "Adds a domain to the whitelist for link filter.",
+    "module": "Guild Admin"
+  },
+  "afk": {
+    "description": "Sets you as Away From Keyboard (AFK). So when someone mentions you, Bastion will let them know that you're AFK. It'll be automatically disabled once you are back.",
+    "module": "Info"
+  },
+  "airhorn": {
+    "description": "Plays an airhorn in a voice channel.",
+    "module": "Fun"
+  },
+  "anime": {
+    "description": "Searches for the details of an Anime.",
+    "module": "Queries"
+  },
+  "animoji": {
+    "description": "Sends a large version of the specified animated emoji of your Discord server. And Nitro isn't required.",
+    "module": "Fun"
+  },
+  "announce": {
+    "description": "Send a message to announcement channel of all the servers Bastion is connected to.",
+    "module": "Owner"
+  },
+  "announcementChannel": {
+    "description": "Adds/removes an announcement channel. You will receive announcements made by the bot owner in this channel.",
+    "module": "Guild Admin"
+  },
+  "avatar": {
+    "description": "Shows avatar of a specified user of your Discord server.",
+    "module": "Info"
+  },
+  "ban": {
+    "description": "Bans the specified user from your Discord server and removes 7 days of their message history.",
+    "module": "Moderation"
+  },
+  "bastionCurrency": {
+    "description": "Shows the amount of %currency.name_plural% in the specified user's account.",
+    "module": "Money"
+  },
+  "battlefield1": {
+    "description": "Get stats of any Battlefield 1 player.",
+    "module": "Game Stats"
+  },
+  "battlefield4": {
+    "description": "Get stats of any Battlefield 4 player.",
+    "module": "Game Stats"
+  },
+  "beLikeBill": {
+    "description": "Sends a be like bill meme to make you feel morally superior to others.",
+    "module": "Fun"
+  },
+  "betFlip": {
+    "description": "Bet %currency.name_plural% on prediction of the outcome of flipping a coin. If you win, you get more of it. But if you lose, you lose the amount you have bet.",
+    "module": "Gambling"
+  },
+  "betRoll": {
+    "description": "Bet %currency.name_plural% on prediction of the outcome of rolling a dice. If you win, you get more of it. But if you lose, you lose the amount you have bet.",
+    "module": "Gambling"
+  },
+  "blacklist": {
+    "description": "Adds/Removes a specified user to %bastion%'s blacklist. Blacklisted users cannot use any of %bastion%'s commands.",
+    "module": "Owner"
+  },
+  "blockText": {
+    "description": "Sends the given text as text emojis.",
+    "module": "Fun"
+  },
+  "buy": {
+    "description": "Buy items from the server's shop.",
+    "module": "Money"
+  },
+  "buyRole": {
+    "description": "Buy role from the server's Role Store.",
+    "module": "Money"
+  },
+  "calculate": {
+    "description": "Evaluates any mathematical expression.",
+    "module": "Queries"
+  },
+  "callOfDuty4": {
+    "description": "Get stats of any Call of Duty 4: Modern Warfare game server.",
+    "module": "Game Stats"
+  },
+  "callOfDutyModernWarfare3": {
+    "description": "Get stats of any Call of Duty: Modern Warfare 3 game server.",
+    "module": "Game Stats"
+  },
+  "capture": {
+    "description": "Captures a screenshot of the specified webpage.",
+    "module": "Owner"
+  },
+  "case": {
+    "description": "Fetches any moderation action, logged in the moderation log channel, using the moderation log case number.",
+    "module": "Moderation"
+  },
+  "cat": {
+    "description": "Shows a random picture of a cat.",
+    "module": "Fun"
+  },
+  "catFact": {
+    "description": "Shows a random fact about cats.",
+    "module": "Fun"
+  },
+  "catify": {
+    "description": "Generates a random kitten image from the given string or your Discord tag if no string is specified.",
+    "module": "Fun"
+  },
+  "changelog": {
+    "description": "Shows the changes made in the current version of Bastion Bot.",
+    "module": "Help"
+  },
+  "channelID": {
+    "description": "Shows ID of a specified channel of your Discord server.",
+    "module": "Info"
+  },
+  "channelInfo": {
+    "description": "Shows information of a specified text or voice channel of your Discord server.",
+    "module": "Info"
+  },
+  "channelTopic": {
+    "description": "Shows the channel topic of text channel of your Discord server.",
+    "module": "Info"
+  },
+  "chat": {
+    "description": "Toggles %bastion%'s chatting module.",
+    "module": "Guild Admin"
+  },
+  "checkPermissions": {
+    "description": "Shows the permissions Bastion has in the server/channel.",
+    "module": "Info"
+  },
+  "choose": {
+    "description": "Asks the bot to choose an option from a number of options.",
+    "module": "Queries"
+  },
+  "cite": {
+    "description": "Cite any message from your Discord server.",
+    "module": "Queries"
+  },
+  "claim": {
+    "description": "Claim your daily rewards.",
+    "module": "Money"
+  },
+  "clean": {
+    "description": "Removes all the songs from the current queue of your Discord server.",
+    "module": "Music"
+  },
+  "clear": {
+    "description": "Deletes a bulk of specified messages from a text channel of your Discord server.",
+    "module": "Moderation"
+  },
+  "clearWarn": {
+    "description": "Clears all warnings from the given user.",
+    "module": "Moderation"
+  },
+  "coinMarketCap": {
+    "description": "Shows market capitalization of the specified cryptocurrency.",
+    "module": "Queries"
+  },
+  "colour": {
+    "description": "Convert the provided color in `HEX` format to `RGB`, `CMYK`, `HSL`, `HSV`, `HWB`, `LAB`, `ANSI16`, `ANSI256`, `XYZ`, `HCG`, `Apple`, `Gray` and `CSS` Keyword (Approximates to closest color) formats.",
+    "module": "Queries"
+  },
+  "commandAnalytics": {
+    "description": "Shows the most used commands in the server.",
+    "module": "Info"
+  },
+  "commandSearch": {
+    "description": "Search for a command with the given text.",
+    "module": "Help"
+  },
+  "commands": {
+    "description": "Direct Messages you with a list of all the commands, or the commands in specific modules.",
+    "module": "Help"
+  },
+  "contributors": {
+    "description": "Shows the list of people who contribute to the development of the Bastion Bot on [GitHub](%github.org%/Bastion).",
+    "module": "Info"
+  },
+  "counterStrikeGlobalOffensive": {
+    "description": "Get stats of any Counter-Strike: Global Offensive game server.",
+    "module": "Game Stats"
+  },
+  "createCategory": {
+    "description": "Creates a new channel category on your Discord server.",
+    "module": "Administration"
+  },
+  "createChannel": {
+    "description": "Creates a new text or voice channel on your Discord server.",
+    "module": "Administration"
+  },
+  "createEmoji": {
+    "description": "Creates a new emoji on your Discord server.",
+    "module": "Administration"
+  },
+  "createRole": {
+    "description": "Creates a new role on your Discord server.",
+    "module": "Administration"
+  },
+  "crimeCoefficient": {
+    "description": "Find the crime coefficient of a user.",
+    "module": "Fun"
+  },
+  "currencyGiveaway": {
+    "description": "Starts a giveaway event for a specific time, users receive the specified amount of %currency.name_plural% after the event is concluded.",
+    "module": "Money"
+  },
+  "date": {
+    "description": "Shows the local date and time of any specified city.",
+    "module": "Queries"
+  },
+  "deafen": {
+    "description": "Deafens a specified user server-wide in your Discord server.",
+    "module": "Moderation"
+  },
+  "define": {
+    "description": "Searches the definition of the specified word from English, French or German dictionary.",
+    "module": "Queries"
+  },
+  "deleteAllTriggers": {
+    "description": "Deletes all the triggers and responses you have set.",
+    "module": "Guild Admin"
+  },
+  "deleteChannel": {
+    "description": "Deletes the specified text or voice channel from your Discord server.",
+    "module": "Administration"
+  },
+  "deleteRole": {
+    "description": "Deletes the specified role from your Discord server.",
+    "module": "Administration"
+  },
+  "deleteTrigger": {
+    "description": "Deletes the specified message trigger.",
+    "module": "Guild Admin"
+  },
+  "destiny2": {
+    "description": "Get stats of any Destiny 2 player.",
+    "module": "Game Stats"
+  },
+  "disableCommand": {
+    "description": "Disable command/module in your server.",
+    "module": "Guild Admin"
+  },
+  "disconnect": {
+    "description": "Disconnect Bastion from any voice connection in the Discord server.",
+    "module": "Music"
+  },
+  "discrim": {
+    "description": "Searches for the users of your Discord server for the specified discriminator.",
+    "module": "Info"
+  },
+  "dog": {
+    "description": "Shows a random picture of a dog.",
+    "module": "Fun"
+  },
+  "donate": {
+    "description": "Instructions on how to financially support the development of the Bastion Bot project.",
+    "module": "Help"
+  },
+  "echo": {
+    "description": "Sends the same message that you had sent. Just like an echo!",
+    "module": "Fun"
+  },
+  "edgeLord": {
+    "description": "Shows a message from an edge lord.",
+    "module": "Fun"
+  },
+  "emoji": {
+    "description": "Sends a large version of the specified emoji.",
+    "module": "Fun"
+  },
+  "emojiInfo": {
+    "description": "Shows information of a specified emoji of your Discord server.",
+    "module": "Info"
+  },
+  "enableCommand": {
+    "description": "Enable disabled command/module in your server.",
+    "module": "Guild Admin"
+  },
+  "endpoll": {
+    "description": "Ends a currently running poll in the same text channel and shows the result.",
+    "module": "Queries"
+  },
+  "eval": {
+    "description": "Evaluates JavaScript code.",
+    "module": "Owner"
+  },
+  "exec": {
+    "description": "Executes a command in the Terminal (Linux/macOS) or Command Prompt (Windows) and shows the output. Note that it will terminate the command if it runs for more than 1 minute.",
+    "module": "Owner"
+  },
+  "fakeBan": {
+    "description": "Bans a user from the server*. Oh, not really though, just to mess with them.",
+    "module": "Fun"
+  },
+  "farewell": {
+    "description": "Toggles sending of farewell message for members who left the server.",
+    "module": "Guild Admin"
+  },
+  "farewellMessage": {
+    "description": "Edits the farewell message that shows when a member leaves the server.",
+    "module": "Guild Admin"
+  },
+  "farewellTimeout": {
+    "description": "Sets the time after which farewell message will be automatically deleted.",
+    "module": "Guild Admin"
+  },
+  "fidgetSpinner": {
+    "description": "Spins a fidget spinner for you and shows for how long it was spinning.",
+    "module": "Fun"
+  },
+  "filterInvite": {
+    "description": "Toggles automatic deleting of Discord server invites posted in the server.",
+    "module": "Guild Admin"
+  },
+  "filterLink": {
+    "description": "Toggles automatic deletion of any links posted in the server.",
+    "module": "Guild Admin"
+  },
+  "filterMentionSpam": {
+    "description": "Toggles filtering of mention spams in the server and also set the threshold and action to be taken.",
+    "module": "Guild Admin"
+  },
+  "filterWord": {
+    "description": "Toggles automatic deletion of messages that contains any word that is being filtered.",
+    "module": "Guild Admin"
+  },
+  "flip": {
+    "description": "Flips the specified amount of coins and shows you the outcomes.",
+    "module": "Games"
+  },
+  "flipText": {
+    "description": "Sends the same message that you had sent, but flipped.",
+    "module": "Fun"
+  },
+  "followURL": {
+    "description": "Follows a URL to until it reaches the last URL and shows you the followed URL. Useful for getting past shortened URLs.",
+    "module": "Queries"
+  },
+  "forecast": {
+    "description": "Shows the weather forecast for 5 days of the specified city.",
+    "module": "Queries"
+  },
+  "fortnite": {
+    "description": "Get stats of any Fortnite player.",
+    "module": "Game Stats"
+  },
+  "fortune": {
+    "description": "Shows you a fortune from a fortune cookie.",
+    "module": "Fun"
+  },
+  "game": {
+    "description": "Searches for the details of a Game.",
+    "module": "Queries"
+  },
+  "garfield": {
+    "description": "Shows you a Garfield comic.",
+    "module": "Fun"
+  },
+  "generateInvite": {
+    "description": "Generates an invite link of the current text channel of your Discord server.",
+    "module": "Queries"
+  },
+  "giphy": {
+    "description": "Searches animated GIFs on the web and sends a random GIF based on the given query.",
+    "module": "Queries"
+  },
+  "give": {
+    "description": "Give the specified amount of %currency.name_plural% from your account to the specified user. If you are the bot owner, you can give any amount of %currency.name_plural%.",
+    "module": "Money"
+  },
+  "giveXP": {
+    "description": "Give the specified amount of experience points to the specified user and increase their level.",
+    "module": "Money"
+  },
+  "giveaway": {
+    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.",
+    "module": "Guild Admin"
+  },
+  "google": {
+    "description": "Searches Google, for the specified query, and shows the top results.",
+    "module": "Queries"
+  },
+  "greet": {
+    "description": "Toggles sending of greeting message for members who join the server.",
+    "module": "Guild Admin"
+  },
+  "greetMessage": {
+    "description": "Edits the greeting message that shows when a member joins the server.",
+    "module": "Guild Admin"
+  },
+  "greetPrivate": {
+    "description": "Toggles sending of greeting message as direct message for members who join the server.",
+    "module": "Guild Admin"
+  },
+  "greetPrivateMessage": {
+    "description": "Edits the greeting message that is sent as direct message when a member joins the server.",
+    "module": "Guild Admin"
+  },
+  "greetTimeout": {
+    "description": "Sets the time after which greeting message will be automatically deleted.",
+    "module": "Guild Admin"
+  },
+  "guide": {
+    "description": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the Bastion HQ.",
+    "module": "Help"
+  },
+  "hello": {
+    "description": "Get greetings from %bastion%.",
+    "module": "Fun"
+  },
+  "help": {
+    "description": "Shows help on the specified command.",
+    "module": "Help"
+  },
+  "iAm": {
+    "description": "Gives the specified self-assignable role to the user.",
+    "module": "Administration"
+  },
+  "iAmNot": {
+    "description": "Revoke the specified self-assignable role to the user.",
+    "module": "Administration"
+  },
+  "ignoreChannels": {
+    "description": "Adds or removes channels to/from the ignored channels' list. Bastion doesn't accept any commands in the channel that's being ignored.",
+    "module": "Guild Admin"
+  },
+  "ignoreInviteFilter": {
+    "description": "Add/remove channels/roles to/from the invite filter ignored list. Bastion will not filter invites posted in these channels or by these roles.",
+    "module": "Guild Admin"
+  },
+  "ignoreLinkFilter": {
+    "description": "Add/remove channels/roles to/from the link filter ignored list. Bastion will not filter links posted in these channels or by these roles.",
+    "module": "Guild Admin"
+  },
+  "ignoreMentionFilter": {
+    "description": "Add/remove channels/roles to/from the mention filter ignored list. Bastion will not filter mention spams in these channels or by these roles.",
+    "module": "Guild Admin"
+  },
+  "ignoreRoles": {
+    "description": "Adds or removes roles to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored.",
+    "module": "Guild Admin"
+  },
+  "ignoreSlowMode": {
+    "description": "Add/remove channels/roles to/from the slow mode ignored list. Bastion will not enable slow mode in these channels or for these roles.",
+    "module": "Guild Admin"
+  },
+  "ignoreStarboard": {
+    "description": "Add/remove channels/roles to/from the starboard ignored list. Bastion will not log starred messages from these channels or roles.",
+    "module": "Guild Admin"
+  },
+  "ignoreWordFilter": {
+    "description": "Add/remove channels/roles to/from the word filter ignored list. Bastion will not filter words posted in these channels or by these roles.",
+    "module": "Guild Admin"
+  },
+  "inRole": {
+    "description": "Shows members that have a specified role in your Discord server.",
+    "module": "Info"
+  },
+  "isBreached": {
+    "description": "Check if a site has been breached in the past.",
+    "module": "Queries"
+  },
+  "jumbledSentence": {
+    "description": "Unscramble the given jumbled sentence and increase your sentence building skills while having fun with your friends.",
+    "module": "Games"
+  },
+  "jumbledWord": {
+    "description": "Unscramble the given jumbled word and increase your vocabulary skills while having fun with your friends.",
+    "module": "Games"
+  },
+  "kick": {
+    "description": "Kicks the specified user from your Discord server.",
+    "module": "Moderation"
+  },
+  "lastSeen": {
+    "description": "Shows the time since the specified user was last seen socializing in Discord.",
+    "module": "Queries"
+  },
+  "leaderboard": {
+    "description": "Shows the users topping the chart of %bastion%.",
+    "module": "Money"
+  },
+  "leave": {
+    "description": "Asks Bastion to leave a specified server.",
+    "module": "Owner"
+  },
+  "leet": {
+    "description": "Sends the same message that you had sent, but as leet text.",
+    "module": "Fun"
+  },
+  "level": {
+    "description": "Shows the current level of the specified user's account.",
+    "module": "Info"
+  },
+  "levelUpMessage": {
+    "description": "Toggles sending messages when someone levels up in the server.",
+    "module": "Guild Admin"
+  },
+  "levelUpRoles": {
+    "description": "Add/Remove/Show level up roles. Level up roles are roles that are added to server members when they level up.",
+    "module": "Guild Admin"
+  },
+  "listAutoAssignableRoles": {
+    "description": "Lists all auto-assignable roles.",
+    "module": "Guild Admin"
+  },
+  "listFilteredWords": {
+    "description": "Lists all filtered words.",
+    "module": "Guild Admin"
+  },
+  "listScheduledCommands": {
+    "description": "Lists all the scheduled commands.",
+    "module": "Owner"
+  },
+  "listSelfAssignableRoles": {
+    "description": "Lists all self-assignable roles.",
+    "module": "Guild Admin"
+  },
+  "listServers": {
+    "description": "Lists all Discord servers that Bastion is connected to, in the current shard.",
+    "module": "Owner"
+  },
+  "listTriggers": {
+    "description": "Lists all the message triggers.",
+    "module": "Guild Admin"
+  },
+  "listWarns": {
+    "description": "Lists all the warned users of your Discord Server.",
+    "module": "Moderation"
+  },
+  "listWhitelistDomains": {
+    "description": "Lists all whitelisted domains for the link filter.",
+    "module": "Guild Admin"
+  },
+  "live": {
+    "description": "Shows the list of users in your Discord server who are currently streaming.",
+    "module": "Queries"
+  },
+  "lmgtfy": {
+    "description": "Teach users how to do an internet search and get answers to their questions.",
+    "module": "Queries"
+  },
+  "lockdown": {
+    "description": "Locks down a channel, preventing everyone to send messages who does not explicitly has permission for it.",
+    "module": "Guild Admin"
+  },
+  "log": {
+    "description": "Toggles logging of various events in the server.",
+    "module": "Guild Admin"
+  },
+  "lyrics": {
+    "description": "Shows the lyrics of the specified song.",
+    "module": "Music"
+  },
+  "magic8ball": {
+    "description": "Get answers to your polar (yes/no) questions from the Magic 8-Ball.",
+    "module": "Games"
+  },
+  "manga": {
+    "description": "Searches for the details of a Manga.",
+    "module": "Queries"
+  },
+  "map": {
+    "description": "Get the map of the specified location.",
+    "module": "Queries"
+  },
+  "membersOnly": {
+    "description": "Toggles Members Only mode of Bastion. If Members Only mode is enabled only users with at least one role in the server can use Bastion's Commands.",
+    "module": "Guild Admin"
+  },
+  "mentionRole": {
+    "description": "Mentions any unmentionable role.",
+    "module": "Administration"
+  },
+  "messageChannel": {
+    "description": "Send a specified message to any specified text channel that Bastion has access to.",
+    "module": "Owner"
+  },
+  "messageUser": {
+    "description": "Send a specified message to any specified user that Bastion has access to.",
+    "module": "Owner"
+  },
+  "minecraft": {
+    "description": "Get stats of any Minecraft game server.",
+    "module": "Game Stats"
+  },
+  "modLog": {
+    "description": "Toggles logging of various moderation events in the server.",
+    "module": "Guild Admin"
+  },
+  "morseCode": {
+    "description": "Encodes a given text in Morse Code.",
+    "module": "Queries"
+  },
+  "moveMembers": {
+    "description": "Moves all the members in a voice channel to another specified voice channel.",
+    "module": "Administration"
+  },
+  "movie": {
+    "description": "Searches for the details of a movie.",
+    "module": "Queries"
+  },
+  "music": {
+    "description": "Toggle music support for a specified server.",
+    "module": "Music"
+  },
+  "musicChannel": {
+    "description": "Shows/Removes/Adds a voice channel specified by the ID and a text channel (the channel this command was used in) of you Discord server as default for the music module. Bastion will only accept music commands in that text channel and if anyone asks him to join a voice channel, it will automatically join the specified voice channel.",
+    "module": "Music"
+  },
+  "musicMasterRole": {
+    "description": "Adds a role specified by its ID as the Music Master role of %bastion%, in your Discord server. Users with this role get access to restricted music commands like `summon`, `play`, etc. and can summon and play music in any voice channel of your Discord server.",
+    "module": "Music"
+  },
+  "mute": {
+    "description": "Mutes a specified user server-wide in your Discord server.",
+    "module": "Moderation"
+  },
+  "muteList": {
+    "description": "Lists all the server-wide muted users of your Discord Server.",
+    "module": "Moderation"
+  },
+  "myItems": {
+    "description": "Shows the items you've bought from the server's shop.",
+    "module": "Money"
+  },
+  "nickname": {
+    "description": "Sets the nickname of the specified user of your Discord server.",
+    "module": "Moderation"
+  },
+  "nowPlaying": {
+    "description": "Shows details of the song currently being played, by %bastion%, in your Discord server.",
+    "module": "Music"
+  },
+  "overwatch": {
+    "description": "Get stats of any Overwatch player.",
+    "module": "Game Stats"
+  },
+  "paladins": {
+    "description": "Get stats of any Paladins player.",
+    "module": "Game Stats"
+  },
+  "patrons": {
+    "description": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](%patreon%). But if you're hosting Bastion yourself, and you're a Patreon creator, it will show the list of your Patrons.",
+    "module": "Info"
+  },
+  "pause": {
+    "description": "Pauses the current playback in your Discord server.",
+    "module": "Music"
+  },
+  "ping": {
+    "description": "Shows the response time and average WebSocket ping of %bastion%.",
+    "module": "Info"
+  },
+  "pirateSpeak": {
+    "description": "Sends the same message that you had sent, but as pirate speak.",
+    "module": "Fun"
+  },
+  "play": {
+    "description": "Plays a song or adds the song to the current music queue if Bastion is already playing in your Discord server, specified either by the name, or the link, or from your favorite songs list, or from a YouTube playlist link.",
+    "module": "Music"
+  },
+  "playlist": {
+    "description": "Add a song to a given playlist or display the list of songs in a playlist.",
+    "module": "Music"
+  },
+  "pokemon": {
+    "description": "Shows you information on the specified Pokémon.",
+    "module": "Queries"
+  },
+  "poll": {
+    "description": "Starts a poll in the current text channel asking users to vote with the specified time. If no time is specified, poll ends in 60 minutes.",
+    "module": "Queries"
+  },
+  "pollStats": {
+    "description": "Shows the stats of the currently running poll in the channel.",
+    "module": "Queries"
+  },
+  "profile": {
+    "description": "Shows Bastion user profile of a specified user of your Discord server.",
+    "module": "Info"
+  },
+  "pubg": {
+    "description": "Get stats of any PlayerUnknown's Battlegrounds player.",
+    "module": "Game Stats"
+  },
+  "punch": {
+    "description": "Give a punch to another user.",
+    "module": "Fun"
+  },
+  "quake3": {
+    "description": "Get stats of any Quake III Arena game server.",
+    "module": "Game Stats"
+  },
+  "queue": {
+    "description": "Shows the list of all the songs in the current music queue of your Discord server.",
+    "module": "Music"
+  },
+  "quotes": {
+    "description": "Shows a quote to get you inspired.",
+    "module": "Fun"
+  },
+  "race": {
+    "description": "Start a race against %bastion%.",
+    "module": "Games"
+  },
+  "rainbow6": {
+    "description": "Get stats of any Rainbow Six player.",
+    "module": "Game Stats"
+  },
+  "rank": {
+    "description": "Shows the rank of the specified user's account.",
+    "module": "Info"
+  },
+  "reactionPinning": {
+    "description": "Toggles Reaction Pinning in the server. If Reaction Pinning is enabled, adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too.",
+    "module": "Guild Admin"
+  },
+  "reactionRolesGroup": {
+    "description": "Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa.",
+    "module": "Guild Admin"
+  },
+  "reason": {
+    "description": "Add/Update the reason for a moderation action, which is logged in the moderation log channel. Only the responsible moderator or anyone with administrator permissions can change the reason.",
+    "module": "Moderation"
+  },
+  "reloadSettings": {
+    "description": "Reloads Bastion settings, stored in the `settings` directory, from the cache. When you modify files in the `settings` directory, use this command to reload them without any need to restart.",
+    "module": "Owner"
+  },
+  "reminder": {
+    "description": "Bastion sets a reminder to remind you of specified message, via direct message, after a specified duration.",
+    "module": "Queries"
+  },
+  "remove": {
+    "description": "Have fun removing stuff you don't like. Specify the item(s) you want to remove. Won't be real though!",
+    "module": "Fun"
+  },
+  "removeAllRoles": {
+    "description": "Removes all the roles from the specified user of your Discord server.",
+    "module": "Moderation"
+  },
+  "removeAutoAssignableRole": {
+    "description": "Deletes a role from the list of auto-assignable roles.",
+    "module": "Guild Admin"
+  },
+  "removeFilteredWord": {
+    "description": "Deletes a word from the list of filtered words.",
+    "module": "Guild Admin"
+  },
+  "removeRole": {
+    "description": "Removes the specified role from a specified user of your Discord server.",
+    "module": "Moderation"
+  },
+  "removeSelfAssignableRole": {
+    "description": "Deletes a role from the list of self-assignable roles.",
+    "module": "Guild Admin"
+  },
+  "removeSong": {
+    "description": "Removes a song from the current music queue by its position number.",
+    "module": "Music"
+  },
+  "removeWhitelistDomain": {
+    "description": "Deletes a domain from the list of whitelisted domains.",
+    "module": "Guild Admin"
+  },
+  "renameChannel": {
+    "description": "Renames the specified text or voice channel of your Discord server.",
+    "module": "Administration"
+  },
+  "renameRole": {
+    "description": "Renames the specified role of your Discord server.",
+    "module": "Administration"
+  },
+  "repeat": {
+    "description": "Adds the current song to the repeat queue, so it will repeat once again after the current playback is complete.",
+    "module": "Music"
+  },
+  "report": {
+    "description": "Reports a user of your Discord server to the server staffs. *Report Channel needs to be set.*",
+    "module": "Moderation"
+  },
+  "reportChannel": {
+    "description": "Adds/removes the channel as the report channel. If it's enabled, when users report server members using the `report` command, the reports will be posted in this channel.",
+    "module": "Guild Admin"
+  },
+  "reputation": {
+    "description": "Give reputations to other users. You can give reputation only once in 12 hours.",
+    "module": "Fun"
+  },
+  "resetDatabase": {
+    "description": "Resets all the data from a specified table of %bastion%'s database.",
+    "module": "Owner"
+  },
+  "resetModerationLogs": {
+    "description": "Resets the moderation log cases back to 1.",
+    "module": "Guild Admin"
+  },
+  "resume": {
+    "description": "Resumes the previously paused playback.",
+    "module": "Music"
+  },
+  "reverse": {
+    "description": "Sends the same message that you had sent but reversed.",
+    "module": "Fun"
+  },
+  "rip": {
+    "description": "Show your condolences for something (or everything).",
+    "module": "Fun"
+  },
+  "robotify": {
+    "description": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
+    "module": "Fun"
+  },
+  "rocketLeague": {
+    "description": "Get stats of any Rocket League player.",
+    "module": "Game Stats"
+  },
+  "roleColor": {
+    "description": "Changes the color of the specified role of your Discord server.",
+    "module": "Administration"
+  },
+  "roleDescription": {
+    "description": "Set a description for a role, which will be shown in the `roleInfo` command.",
+    "module": "Info"
+  },
+  "roleEmoji": {
+    "description": "Assign an emoji to a specified role. The assigned emojis are used with Reaction Roles.",
+    "module": "Guild Admin"
+  },
+  "roleID": {
+    "description": "Shows the ID of a specified role of your Discord server.",
+    "module": "Info"
+  },
+  "roleInfo": {
+    "description": "Shows information of a specified role of your Discord server.",
+    "module": "Info"
+  },
+  "roleStore": {
+    "description": "Lists the roles that are available for sale in the Role Store of the server. Listed roles in the Role Store can be bought by anyone, with %currency.name_plural%, in your server using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
+    "module": "Money"
+  },
+  "roles": {
+    "description": "Lists all the roles (with their IDs) of your Discord server.",
+    "module": "Info"
+  },
+  "roll": {
+    "description": "Rolls the specified amount of dice and shows you the outcomes.",
+    "module": "Games"
+  },
+  "rps": {
+    "description": "Play the classic *rock paper scissor* game with %bastion%.",
+    "module": "Games"
+  },
+  "russianRoulette": {
+    "description": "Play the ultimate game of chance - Russian Roulette! Let's see if you live or die.",
+    "module": "Games"
+  },
+  "rust": {
+    "description": "Get stats of any Rust game server.",
+    "module": "Game Stats"
+  },
+  "scheduleCommand": {
+    "description": "Schedule a command as cron jobs to run at the specified schedule.\n`cron` expression format:```Second         0-59 or * or range\nMinute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```",
+    "module": "Owner"
+  },
+  "searchServers": {
+    "description": "Searches for Discord servers, containing the specified text in their name, that Bastion is connected to.",
+    "module": "Owner"
+  },
+  "selfDestruct": {
+    "description": "Sends the same message that you had sent, but it will get auto deleted after a specific amount of time.",
+    "module": "Fun"
+  },
+  "sellRole": {
+    "description": "Sell roles in your server so that server members can buy them with %currency.name_plural%, using the `buyRole` command. When users buy roles, the server owner gets 90% of the profit.",
+    "module": "Money"
+  },
+  "sendEmbed": {
+    "description": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](%website%/embedbuilder/).*",
+    "module": "Fun"
+  },
+  "serverDescription": {
+    "description": "Set a description for the server, which will be shown in the `serverInfo` command.",
+    "module": "Info"
+  },
+  "serverID": {
+    "description": "Shows the ID of your Discord server.",
+    "module": "Info"
+  },
+  "serverInfo": {
+    "description": "Shows information of your Discord server.",
+    "module": "Info"
+  },
+  "serverSettings": {
+    "description": "Shows the status of your server's configured settings.",
+    "module": "Guild Admin"
+  },
+  "setActivity": {
+    "description": "Sets the activity of %bastion%.",
+    "module": "Owner"
+  },
+  "setAvatar": {
+    "description": "Sets the avatar of %bastion%.",
+    "module": "Owner"
+  },
+  "setBio": {
+    "description": "Sets your bio that shows up in the Bastion user profile.",
+    "module": "Info"
+  },
+  "setBirthDate": {
+    "description": "Sets your birth date that shows up in the Bastion user profile. Don't worry Bastion will never show your age/year to public.",
+    "module": "Info"
+  },
+  "setColor": {
+    "description": "Sets your user color that is used in the Bastion user profile.",
+    "module": "Info"
+  },
+  "setLanguage": {
+    "description": "Sets %bastion%'s language for the server.",
+    "module": "Guild Admin"
+  },
+  "setLocation": {
+    "description": "Sets your location that shows up in the Bastion user profile.",
+    "module": "Info"
+  },
+  "setNick": {
+    "description": "Sets the nickname of Bastion in the current Discord server.",
+    "module": "Owner"
+  },
+  "setPrefix": {
+    "description": "Sets %bastion%'s prefix for the server.",
+    "module": "Guild Admin"
+  },
+  "setStatus": {
+    "description": "Sets the status of %bastion%.",
+    "module": "Owner"
+  },
+  "setStream": {
+    "description": "Sets the video stream of %bastion%.",
+    "module": "Owner"
+  },
+  "setTopic": {
+    "description": "Sets channel topic of the specified text channel of your Discord server.",
+    "module": "Administration"
+  },
+  "setUsername": {
+    "description": "Changes the username of %bastion%.",
+    "module": "Owner"
+  },
+  "shardStats": {
+    "description": "Shows detailed stats and info of the shard the command was used in.",
+    "module": "Info"
+  },
+  "ship": {
+    "description": "Combines two or more mentioned user's names.",
+    "module": "Fun"
+  },
+  "shop": {
+    "description": "Lists/Adds/Removes items from your server's shop. Listed items in the shop can be bought by anyone, with %currency.name_plural%, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit.",
+    "module": "Money"
+  },
+  "shorten": {
+    "description": "Shortens a specified URL using Google URL Shortener.",
+    "module": "Queries"
+  },
+  "shuffle": {
+    "description": "Shuffles %bastion%'s entire music queue of your Discord server.",
+    "module": "Music"
+  },
+  "shutdown": {
+    "description": "Shuts down bastion and terminates the process.",
+    "module": "Owner"
+  },
+  "skip": {
+    "description": "Skips the currently playing song, in your Discord server, and moves to the next one in the queue.",
+    "module": "Music"
+  },
+  "slap": {
+    "description": "Give a slap to another user.",
+    "module": "Fun"
+  },
+  "slots": {
+    "description": "Spins the reels of the slot machine and shows you the result.",
+    "module": "Games"
+  },
+  "slowMode": {
+    "description": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel.",
+    "module": "Guild Admin"
+  },
+  "smite": {
+    "description": "Get stats of any Smite player.",
+    "module": "Game Stats"
+  },
+  "softBan": {
+    "description": "Bans & unbans the specified user, immediately, from your Discord server and removes 7 days of their message history.",
+    "module": "Moderation"
+  },
+  "sql": {
+    "description": "Execute SQL query on %bastion%'s database.",
+    "module": "Owner"
+  },
+  "starboard": {
+    "description": "Toggles logging of starred messages of the server in this channel.",
+    "module": "Guild Admin"
+  },
+  "stats": {
+    "description": "Shows detailed stats and info of %bastion%.",
+    "module": "Info"
+  },
+  "steam": {
+    "description": "Browse the games in different categories of the Steam Store.",
+    "module": "Queries"
+  },
+  "stop": {
+    "description": "Stops the current playback and cleans the music queue and exits the voice channel.",
+    "module": "Music"
+  },
+  "streamerRole": {
+    "description": "Adds a role as the streamer role. When a guild member (who is at least in a single role) starts streaming, they are given the streamer role.",
+    "module": "Guild Admin"
+  },
+  "streamers": {
+    "description": "Adds/removes/displays the list of streamers followed by the server to get notified when they are live.",
+    "module": "Guild Admin"
+  },
+  "suggest": {
+    "description": "Posts a suggestion to the suggestion channel, if a suggestion channel has been set. Otherwise posts the suggestion in the current channel.",
+    "module": "Administration"
+  },
+  "suggestionChannel": {
+    "description": "Adds/removes the channel as the suggestion channel. If it's enabled, when user post a suggestion using the `suggest` command, it's are posted in this channel.",
+    "module": "Guild Admin"
+  },
+  "summon": {
+    "description": "Asks Bastion to join a voice channel in you Discord server. It joins the default voice channel (if one is set by the Bot Owner) or any channel you are in (if you are the Bot Owner or you are in the Music Master role).",
+    "module": "Music"
+  },
+  "support": {
+    "description": "Sends the invite link to Bastion HQ.",
+    "module": "Help"
+  },
+  "sweep": {
+    "description": "Shows a random user from the text channel.",
+    "module": "Gambling"
+  },
+  "take": {
+    "description": "Take the specified amount of %currency.name_plural% from the specified user.",
+    "module": "Money"
+  },
+  "tapCode": {
+    "description": "Encodes a given text in Tap Code.",
+    "module": "Queries"
+  },
+  "teamFortress2": {
+    "description": "Get stats of any Team Fortress 2 game server.",
+    "module": "Game Stats"
+  },
+  "terms": {
+    "description": "Read %bastion%'s Terms of Service.",
+    "module": "Help"
+  },
+  "textMute": {
+    "description": "Text mutes a specified user from the specified text channel (for specified minutes) or globally on your Discord server.",
+    "module": "Moderation"
+  },
+  "textUnMute": {
+    "description": "Text unmutes from specified user from the specified text channel of your Discord server.",
+    "module": "Moderation"
+  },
+  "thisOrThat": {
+    "description": "Asks a this or that question. See how you and your friends choose!",
+    "module": "Games"
+  },
+  "toggleBastion": {
+    "description": "Enable or disable Bastion in your server. Disabling Bastion will prevent everyone, including the server owner, from using it. But if you have enabled any settings that does not need user interaction, it will still work, like starboard, filters, auto assignable roles etc.",
+    "module": "Guild Admin"
+  },
+  "toggleLevelUps": {
+    "description": "Toggle level ups in the server. Turning off level ups will prevent users from gaining experience points and leveling up while chatting.",
+    "module": "Guild Admin"
+  },
+  "translate": {
+    "description": "Translates your message to the specified language.",
+    "module": "Queries"
+  },
+  "trivia": {
+    "description": "Asks a trivia question. Answer and see how much knowledge you've on everything.",
+    "module": "Games"
+  },
+  "tvShow": {
+    "description": "Searches for the details of a TV show.",
+    "module": "Queries"
+  },
+  "twitch": {
+    "description": "Get streaming information of a live Twitch channel.",
+    "module": "Queries"
+  },
+  "typingGame": {
+    "description": "Starts a typing speed competition. The first one to type the given piece of article and send it, within the given time, wins.",
+    "module": "Games"
+  },
+  "unBan": {
+    "description": "Unbans a specified user for your Discord server.",
+    "module": "Moderation"
+  },
+  "unDeafen": {
+    "description": "Undeafens a specified user server-wide in your Discord server.",
+    "module": "Moderation"
+  },
+  "unMute": {
+    "description": "Unmutes a specified user server-wide in your Discord server.",
+    "module": "Moderation"
+  },
+  "unturned": {
+    "description": "Get stats of any Unturned game server.",
+    "module": "Game Stats"
+  },
+  "urbanDictionary": {
+    "description": "Searches the Urban Dictionary for an urban definition of the specified word.",
+    "module": "Queries"
+  },
+  "userID": {
+    "description": "Shows ID of a specified user of your Discord server.",
+    "module": "Info"
+  },
+  "userInfo": {
+    "description": "Shows information of a specified user of your Discord server.",
+    "module": "Info"
+  },
+  "userLookup": {
+    "description": "Fetches basic information of a user from Discord.",
+    "module": "Info"
+  },
+  "viewPermissions": {
+    "description": "Shows the permissions you have in the server/channel.",
+    "module": "Info"
+  },
+  "volume": {
+    "description": "Changes/sets the volume of current playback in your Discord.",
+    "module": "Music"
+  },
+  "votingChannels": {
+    "description": "Adds/removes the channel as a voting channel. Any messages posted in this channel, by a user, will be available for voting.",
+    "module": "Guild Admin"
+  },
+  "warn": {
+    "description": "Warns the specified user. If warning threshold reaches for a user some action, specified by the `warnAction` command, is taken.",
+    "module": "Moderation"
+  },
+  "warnAction": {
+    "description": "Sets the warn action for the server.",
+    "module": "Moderation"
+  },
+  "weather": {
+    "description": "Shows weather information of the specified location.",
+    "module": "Queries"
+  },
+  "wikipedia": {
+    "description": "Searches Wikipedia for the specified article.",
+    "module": "Queries"
+  },
+  "wouldYouRather": {
+    "description": "Shows a would you rather situation. See how you and your friends answer that!",
+    "module": "Games"
+  },
+  "xkcd": {
+    "description": "Shows a xkcd comic.",
+    "module": "Fun"
+  },
+  "xp": {
+    "description": "Shows the experience points of the specified user's account.",
+    "module": "Info"
+  },
+  "youtubeSearch": {
+    "description": "Searches for a video, for the specified query, on YouTube and shows the first result.",
+    "module": "Queries"
+  },
+  "zalgolize": {
+    "description": "Sends the same message that you had sent, but zalgolized.",
+    "module": "Fun"
+  }
+}

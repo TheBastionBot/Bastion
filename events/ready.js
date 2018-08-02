@@ -1,10 +1,10 @@
 /**
  * @file ready event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const COLOR = require('chalk');
+const COLOR = xrequire('chalk');
 
 module.exports = async Bastion => {
   try {
@@ -13,67 +13,92 @@ module.exports = async Bastion => {
     }
 
     Bastion.user.setPresence({
-      status: Bastion.config.status,
+      status: Bastion.configurations.status,
       game: {
-        name: typeof Bastion.config.game.name === 'string' ? Bastion.config.game.name : Bastion.config.game.name.length ? Bastion.config.game.name[0] : null,
-        type: Bastion.config.game.type,
-        url: Bastion.config.game.url && Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
+        name: typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name.length ? Bastion.configurations.game.name[0] : null,
+        type: Bastion.configurations.game.type,
+        url: Bastion.configurations.game.url && Bastion.configurations.game.url.trim().length ? Bastion.configurations.game.url : null
       }
     });
 
-    if (typeof Bastion.config.game.name !== 'string' && Bastion.config.game.name.length) {
+    if (typeof Bastion.configurations.game.name !== 'string' && Bastion.configurations.game.name.length) {
       Bastion.setInterval(async () => {
         try {
-          await Bastion.user.setActivity(Bastion.config.game.name[Math.floor(Math.random() * Bastion.config.game.name.length)],
+          await Bastion.user.setActivity(Bastion.configurations.game.name[Math.floor(Math.random() * Bastion.configurations.game.name.length)],
             {
-              type: Bastion.config.game.type,
-              url: Bastion.config.game.url && Bastion.config.game.url.trim().length ? Bastion.config.game.url : null
+              type: Bastion.configurations.game.type,
+              url: Bastion.configurations.game.url && Bastion.configurations.game.url.trim().length ? Bastion.configurations.game.url : null
             });
         }
         catch (e) {
           Bastion.log.error(e);
         }
-      }, ((typeof Bastion.config.game.interval === 'number' && Bastion.config.game.interval) || 60) * 60 * 1000);
+      }, ((typeof Bastion.configurations.game.interval === 'number' && Bastion.configurations.game.interval) || 60) * 60 * 1000);
     }
 
     let bastionGuilds = Bastion.guilds.map(g => g.id);
-    let guild = await Bastion.db.all('SELECT guildID from guildSettings');
-    guild = guild.map(r => r.guildID);
+    let guilds = await Bastion.database.models.guild.findAll({
+      attributes: [ 'guildID' ]
+    });
+    guilds = guilds.map(guild => guild.guildID);
 
     /*
-    * Add guilds to the DB which added Bastion when it was offline.
-    */
+     * Add guilds to the DB which was added Bastion when it was offline.
+     */
     for (let i = 0; i < bastionGuilds.length; i++) {
       let found = false;
-      for (let j = 0; j < guild.length; j++) {
-        if (bastionGuilds[i] === guild[j]){
+      for (let j = 0; j < guilds.length; j++) {
+        if (bastionGuilds[i] === guilds[j]) {
           found = true;
           break;
         }
       }
       if (found === false) {
-        await Bastion.db.run('INSERT INTO guildSettings (guildID) VALUES (?)', [ bastionGuilds[i] ]);
+        /**
+         * TODO: Use <Model>.bulkCreate() when Sequelize supports bulk ignore
+         * option with it, which isn't supported yet because PostgreSQL doesn't
+         * support 'INSERT OR IGNORE' query, yet.
+         * @example
+         * await Bastion.database.models.guild.bulkCreate(
+         *   Bastion.guilds.map(guild => {
+         *     return { guildID: guild.id };
+         *   }),
+         *   { ignore: true }
+         * );
+         */
+        await Bastion.database.models.guild.create({
+          guildID: bastionGuilds[i]
+        },
+        {
+          fields: [ 'guildID' ]
+        });
       }
     }
 
-    /*
-    * Remove guilds from DB which removed Bastion when it was offline.
-    */
-    // for (let i = 0; i < guild.length; i++) {
-    //   let found = false;
-    //   for (let j = 0; j < bastionGuilds.length; j++) {
-    //     if (guild[i] === bastionGuilds[j]){
-    //       found = true;
-    //       break;
-    //     }
-    //   }
-    //   if (found === false) {
-    //     await Bastion.db.run(`DELETE FROM guildSettings WHERE guildID=${guild[i]}`);
-    //   }
-    // }
+    /**
+     * TODO: Remove guilds from DB which removed Bastion when it was offline.
+     * @example
+     * for (let i = 0; i < guilds.length; i++) {
+     *   let found = false;
+     *   for (let j = 0; j < bastionGuilds.length; j++) {
+     *     if (guilds[i] === bastionGuilds[j]){
+     *       found = true;
+     *       break;
+     *     }
+     *   }
+     *   if (found === false) {
+     *     await Bastion.database.models.guild.destroy({
+     *       where: {
+     *         guildID: guilds[i]
+     *       }
+     *     });
+     *   }
+     * }
+     */
 
-    require('../handlers/scheduledCommandHandler')(Bastion);
-    require('../handlers/streamNotifier')(Bastion);
+    xrequire('./handlers/scheduledCommandHandler')(Bastion);
+    xrequire('./handlers/streamNotifier')(Bastion);
+    xrequire('./handlers/reactionRolesGroupsHandler')(Bastion);
 
     if (Bastion.shard) {
       Bastion.log.console(`${COLOR.cyan(`[${Bastion.user.username}]:`)} Shard ${Bastion.shard.id} is ready with ${Bastion.guilds.size} servers.`);
@@ -95,19 +120,24 @@ module.exports = async Bastion => {
         guilds = guilds.reduce((sum, val) => sum + val, 0);
       }
 
-      Bastion.log.console('\n');
-      Bastion.log.console(COLOR.green('[Author] ') + Bastion.package.author);
-      Bastion.log.console(`${COLOR.green('[Bot]')} Bastion v${Bastion.package.version}`);
-      Bastion.log.console(COLOR.green('[URL] ') + Bastion.package.url);
-      Bastion.log.console(COLOR.green('[Bot ID] ') + Bastion.credentials.botId);
-      Bastion.log.console(COLOR.green('[Owner IDs] ') + Bastion.credentials.ownerId.join(', '));
-      Bastion.log.console(COLOR.green('[Servers] ') + guilds);
-      Bastion.log.console(COLOR.green('[Prefix] ') + Bastion.config.prefix);
-      Bastion.log.console(`${COLOR.cyan(`\n[${Bastion.user.username}]:`)} I'm ready to roll! o7`);
+      Bastion.log.console(COLOR`\n{cyan Bastion} v${Bastion.package.version}`);
+      Bastion.log.console(COLOR`{gray ${Bastion.package.url}}`);
+
+      Bastion.log.console(COLOR`\n{gray </> with ❤ by The Bastion Bot Team & Contributors}`);
+      Bastion.log.console(COLOR`{gray Copyright (C) 2017-2018 The Bastion Bot Project}`);
+
+      Bastion.log.console(COLOR`\n{cyan [${Bastion.user.username}]:} I'm ready to roll! 🚀\n`);
+
+      if (Bastion.shard) {
+        Bastion.log.console(COLOR`{green [   SHARDS]:} ${Bastion.shard.count}`);
+      }
+      Bastion.log.console(COLOR`{green [  SERVERS]:} ${guilds}`);
+      Bastion.log.console(COLOR`{green [   PREFIX]:} ${Bastion.configurations.prefix.join(' ')}`);
+      Bastion.log.console(COLOR`{green [ COMMANDS]:} ${Bastion.commands.size}`);
 
       Bastion.webhook.send('bastionLog', {
         color: Bastion.colors.BLUE,
-        title: 'I\'m Ready to Roll!',
+        title: 'I\'m Ready to Roll!  🚀',
         description: `Connected to ${guilds} servers${Bastion.shard ? ` in ${Bastion.shard.count} shards` : ''}.`,
         footer: {
           icon_url: 'https://resources.bastionbot.org/logos/Bastion_Logomark_C.png',

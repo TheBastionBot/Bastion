@@ -1,10 +1,10 @@
 /**
  * @file webhookHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
+const Discord = xrequire('discord.js');
 
 module.exports = class WebhookHandler {
   /**

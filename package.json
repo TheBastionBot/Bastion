@@ -1,14 +1,18 @@
 {
   "name": "bastion",
-  "version": "6.15.0",
+  "version": "7.0.0-alpha.36",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
   "scripts": {
+    "build:commandStrings": "node -r ./utils/globals.js utils/generateCommandStrings.js",
+    "build": "npm run build:commandStrings",
     "test:lint": "./node_modules/.bin/eslint .",
-    "test:boot": "node tests/boot.js",
-    "test": "npm run test:lint && npm run test:boot",
-    "start": "node index.js"
+    "test:modules": "node -r ./utils/globals.js tests/modules.js",
+    "test:boot": "node -r ./utils/globals.js tests/boot.js",
+    "test": "npm run test:lint && npm run test:modules && npm run test:boot",
+    "start": "node -r ./utils/globals.js index.js",
+    "start:noshard": "node -r ./utils/globals.js bastion.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +20,7 @@
   },
   "author": "Sankarsan Kampa",
   "authorUrl": "https://sankarsankampa.com",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/TheBastionBot/Bastion/issues"
   },
@@ -32,18 +36,22 @@
     "discord.js": "~11.3.2",
     "gamedig": "~1.0.46",
     "hirez.js": "~2.0.0",
-    "kitsu": "~5.1.1",
+    "kitsu": "~5.2.0",
+    "locke": "github:TheBastionBot/Locke#v0.9.0",
     "lzutf8": "~0.5.0",
     "mathjs": "~5.0.0",
     "node-json-db": "~0.7.5",
-    "opusscript": "~0.0.6",
+    "node-opus": "~0.3.0",
     "overwatch-js": "~1.8.0",
     "pokedex-api": "~1.1.1",
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.87.0",
     "request-promise-native": "~1.0.5",
+    "sequelize": "~4.38.0",
     "snekfetch": "~4.0.4",
     "sqlite": "~2.9.2",
+    "sqlite3": "~4.0.2",
+    "tesseract": "github:TheBastionBot/Tesseract#v0.0.2",
     "weather-js": "~2.0.0",
     "webshot": "~0.18.0",
     "word-definition": "~2.1.6",
@@ -51,9 +59,6 @@
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^5.0.1"
-  },
-  "optionalDependencies": {
-    "node-opus": "~0.3.0"
+    "eslint": "^5.0.0"
   }
 }

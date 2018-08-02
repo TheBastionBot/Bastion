@@ -1,29 +1,35 @@
 /**
  * @file channelUpdate event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = async (oldChannel, newChannel) => {
-  if (!oldChannel.guild) return;
-  if (oldChannel.name === newChannel.name) return;
-
   try {
-    let guildSettings = await newChannel.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${newChannel.guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    if (!oldChannel.guild) return;
+    if (oldChannel.name === newChannel.name) return;
 
-    let logChannel = newChannel.guild.channels.get(guildSettings.log);
+    let guildModel = await newChannel.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: newChannel.guild.id
+      }
+    });
+
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = newChannel.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
-    let title = newChannel.client.strings.events(newChannel.guild.language, 'channelUpdate');
+    let title = newChannel.client.i18n.event(newChannel.guild.language, 'channelUpdate');
     if (newChannel.type === 'text') {
-      title = newChannel.client.strings.events(newChannel.guild.language, 'textChannelUpdate');
+      title = newChannel.client.i18n.event(newChannel.guild.language, 'textChannelUpdate');
     }
     else if (newChannel.type === 'voice') {
-      title = newChannel.client.strings.events(newChannel.guild.language, 'voiceChannelUpdate');
+      title = newChannel.client.i18n.event(newChannel.guild.language, 'voiceChannelUpdate');
     }
     else if (newChannel.type === 'category') {
-      title = newChannel.client.strings.events(newChannel.guild.language, 'categoryChannelUpdate');
+      title = newChannel.client.i18n.event(newChannel.guild.language, 'categoryChannelUpdate');
     }
 
     logChannel.send({

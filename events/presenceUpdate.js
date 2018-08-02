@@ -1,7 +1,7 @@
 /**
  * @file presenceUpdate event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = async (oldMember, newMember) => {
@@ -11,10 +11,15 @@ module.exports = async (oldMember, newMember) => {
     if (newMember.user.presence.status === 'offline') return;
     if (oldMember.frozenPresence.game && newMember.user.presence.game && oldMember.frozenPresence.game.type === newMember.user.presence.game.type) return;
 
-    let guildSettings = await newMember.client.db.get(`SELECT streamerRole FROM guildSettings WHERE guildID=${newMember.guild.id}`);
-    if (!guildSettings || !guildSettings.streamerRole) return;
+    let guildModel = await newMember.client.database.models.guild.findOne({
+      attributes: [ 'streamerRole' ],
+      where: {
+        guildID: newMember.guild.id
+      }
+    });
+    if (!guildModel || !guildModel.dataValues.streamerRole) return;
 
-    let streamerRole = newMember.guild.roles.get(guildSettings.streamerRole);
+    let streamerRole = newMember.guild.roles.get(guildModel.dataValues.streamerRole);
     if (!streamerRole) return;
 
     if (!newMember.user.presence.game || newMember.user.presence.game.type !== 1) {

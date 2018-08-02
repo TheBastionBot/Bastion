@@ -9,7 +9,7 @@ image:
   - Visual Studio 2017
 clone_depth: 1
 install:
-  - choco install nodejs
+  - choco install nodejs-lts
   - npm install
 platform: x64
 build: off

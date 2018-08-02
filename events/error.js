@@ -1,10 +1,10 @@
 /**
  * @file error event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const COLOR = require('chalk');
+const COLOR = xrequire('chalk');
 
 module.exports = (error, description, channel) => {
   if (channel) {

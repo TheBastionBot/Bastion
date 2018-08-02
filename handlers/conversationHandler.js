@@ -1,11 +1,11 @@
 /**
  * @file conversationHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const CLEVERBOT = require('cleverbot.js');
-const CREDENTIALS = require('../settings/credentials.json');
+const CLEVERBOT = xrequire('cleverbot.js');
+const CREDENTIALS = xrequire('./settings/credentials.json');
 const BOT = new CLEVERBOT({
   APIKey: CREDENTIALS.cleverbotAPIkey
 });
@@ -19,8 +19,13 @@ module.exports = async message => {
   try {
     if (message.content.length <= `${message.client.user}  `.length) return;
 
-    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guild.chat) return;
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'chat' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (!guildModel.dataValues.chat) return;
 
     let response = await BOT.write(message.content);
     if (response.output) {

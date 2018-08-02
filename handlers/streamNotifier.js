@@ -1,11 +1,11 @@
 /**
  * @file streamNotifier
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
-*/
+ * @license GPL-3.0
+ */
 
-const CronJob = require('cron').CronJob;
-const request = require('request-promise-native');
+const CronJob = xrequire('cron').CronJob;
+const request = xrequire('request-promise-native');
 
 /**
  * Handles Bastion's scheduled commands
@@ -19,9 +19,15 @@ module.exports = Bastion => {
         try {
           for (let guild of Bastion.guilds) {
             guild = guild[1];
-            let streamers = await Bastion.db.get(`SELECT * FROM streamers WHERE guildID=${guild.id}`);
-            if (streamers && streamers.channelID) {
-              let twitchStreamers = streamers.twitch.split(' ');
+            let streamersModel = await Bastion.database.models.streamers.findOne({
+              attributes: [ 'channelID', 'twitch' ],
+              where: {
+                guildID: guild.id
+              }
+            });
+            if (streamersModel && streamersModel.channelID) {
+              let twitchStreamers = streamersModel.dataValues.twitch ? streamersModel.dataValues.twitch : [];
+              if (!twitchStreamers.length) continue;
 
               let options = {
                 headers: {
@@ -59,7 +65,7 @@ module.exports = Bastion => {
                    * to `lastStreamers`.
                    */
                   if (!guild.lastStreamers.includes(stream._id)) {
-                    await Bastion.channels.get(streamers.channelID).send({
+                    await Bastion.channels.get(streamersModel.dataValues.channelID).send({
                       embed: {
                         color: Bastion.colors.PURPLE,
                         author: {
