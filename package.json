@@ -33,7 +33,7 @@
     "gamedig": "~1.0.46",
     "hirez.js": "~2.0.0",
     "kitsu": "~5.1.1",
-    "lzutf8": "~0.5.0",
+    "lzutf8": "~0.5.5",
     "mathjs": "~5.0.0",
     "node-json-db": "~0.7.5",
     "opusscript": "~0.0.6",
