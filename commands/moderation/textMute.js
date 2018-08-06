@@ -51,7 +51,7 @@ exports.exec = async (Bastion, message, args) => {
 
         Bastion.setTimeout(async () => {
           try {
-            await member.removeRole(mutedRole);
+            await member.removeRole(mutedRole, 'User auto unmuted after timeout.');
           }
           catch (e) {
             Bastion.log.error(e);
