@@ -1,20 +1,10 @@
 {
-  "date": "July 19, 2018",
-  "image": "https://i.imgur.com/N81dQE9.gif",
-  "EXTENDED GIVEAWAYS": [
-    "`giveaway` can now run for a whole day, i.e. 24 hours!",
-    "There can now be multiple winners for a giveaway, which can be specified using the `--winners` option.",
-    "You can now run multiple giveaways in a server.",
-    "`giveaway` will now show the time it'll end instead of showing the remaining time, because some people wanted it.",
-    "You can now reroll giveaways too, if you wanna change the winner(s) for some reason. We've added the new `--reroll` option to the `giveaway` command just for that."
-  ],
-  "NEW GAME STATS": [
-    "Some games were getting very popular and we needed to add stats from them, so we've added the new `rust` and `unturned` commands to get stats from their game server.",
-    "We've also added the `callOfDutyModernWarfare3` command to check the stats from Call of Duty: Modern Warfare 3 game servers."
-  ],
+  "date": "August 6, 2018",
+  "image": "https://i.imgur.com/E93REkJ.gif",
   "IMPROVEMENTS": [
-    "`reminder` will be a little more specific when showing the remaining time.",
-    "Streamer Role won't work for bots from now.",
-    "Under-the-hood improvements"
+    "Under-the-hood improvements."
+  ],
+  "FIXES": [
+    "Fixed streamer role not being removed from the user after they stopped streaming. Actually it was being removed but was being added as soon as it was removed. Anyway, it doesn't matter, it's all fixed now."
   ]
 }
