@@ -43,6 +43,20 @@ exports.exec = async (Bastion, message, args) => {
           });
         }
       }
+      if (args.timeout) {
+        args.timeout = Math.abs(args.timeout);
+
+        if (!args.timeout || args.timeout > 1440) args.timeout = 1440;
+
+        Bastion.setTimeout(async () => {
+          try {
+            await member.removeRole(mutedRole);
+          }
+          catch (e) {
+            Bastion.log.error(e);
+          }
+        }, args.timeout * 60 * 1000);
+      }
     }
     else {
       await message.channel.overwritePermissions(user, {
