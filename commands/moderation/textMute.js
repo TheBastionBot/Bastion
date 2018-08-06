@@ -15,9 +15,9 @@ exports.exec = async (Bastion, message, args) => {
     }
     if (!user) {
       /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -43,6 +43,7 @@ exports.exec = async (Bastion, message, args) => {
           });
         }
       }
+
       if (args.timeout) {
         args.timeout = Math.abs(args.timeout);
 
@@ -93,9 +94,9 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
+     * Logs moderation events if it is enabled
+     * @fires moderationLog
+     */
     Bastion.emit('moderationLog', message, this.help.name, user, args.reason, {
       channel: message.channel
     });
