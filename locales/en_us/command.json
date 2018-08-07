@@ -626,6 +626,9 @@
   "rip": {
     "description": "Show your condolences for something (or everything)."
   },
+  "roblox": {
+    "description": "Get info of any Roblox player."
+  },
   "robotify": {
     "description": "Generates a random robot image from the given string or your Discord tag if no string is specified."
   },
