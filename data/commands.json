@@ -835,6 +835,10 @@
     "description": "Show your condolences for something (or everything).",
     "module": "Fun"
   },
+  "roblox": {
+    "description": "Get info of any Roblox player.",
+    "module": "Game Stats"
+  },
   "robotify": {
     "description": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
     "module": "Fun"
