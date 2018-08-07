@@ -219,6 +219,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    showPermsError: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     celebrateBirthday: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
