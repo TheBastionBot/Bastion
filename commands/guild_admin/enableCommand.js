@@ -66,7 +66,6 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
     if (guildModel.dataValues.disabledCommands) {
-      // disabledCommands = disabledCommands.concat(guildModel.dataValues.disabledCommands);
       disabledCommands = guildModel.dataValues.disabledCommands.filter(value => !disabledCommands.includes(value));
     }
 
