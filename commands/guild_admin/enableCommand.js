@@ -53,9 +53,6 @@ exports.exec = async (Bastion, message, args) => {
   }
   else if (args.module) {
     args.module = args.module.join('_').toLowerCase();
-    if ([ 'owner', 'guild_admin' ].includes(args.module)) {
-      return Bastion.emit('error', '', 'You can\'t disable commands in this module.', message.channel);
-    }
 
     disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name.toLowerCase());
 
