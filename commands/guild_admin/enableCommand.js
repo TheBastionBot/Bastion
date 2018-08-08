@@ -19,9 +19,9 @@ exports.exec = async (Bastion, message, args) => {
     }
     else {
       /**
-      * Error condition is encountered.
-      * @fires error
-      */
+       * Error condition is encountered.
+       * @fires error
+       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
@@ -63,7 +63,7 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
     if (guildModel.dataValues.disabledCommands) {
-      disabledCommands = guildModel.dataValues.disabledCommands.filter(value => !disabledCommands.includes(value));
+      disabledCommands = guildModel.dataValues.disabledCommands.filter(command => !disabledCommands.includes(command));
     }
 
     description = Bastion.i18n.info(message.guild.language, 'enableModule', message.author.tag, args.module);
