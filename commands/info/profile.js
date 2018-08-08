@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let bio;
     if (userModel && userModel.dataValues.bio) {
-      bio = await Bastion.methods.decodeString(guildMemberModel.dataValues.bio);
+      bio = await Bastion.methods.decodeString(userModel.dataValues.bio);
     }
     else {
       bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
