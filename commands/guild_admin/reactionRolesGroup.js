@@ -145,7 +145,7 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'roles', type: String, multiple: true, defaultOption: true },
-    { name: 'title', type: String, alias: 't', muiltiple: true },
+    { name: 'title', type: String, alias: 't', multiple: true },
     { name: 'body', type: String, alias: 'b', multiple: true },
     { name: 'exclusive', type: Boolean, alias: 'e', defaultValue: false },
     { name: 'remove', type: String, alias: 'r' }
