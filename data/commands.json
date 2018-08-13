@@ -51,6 +51,10 @@
     "description": "Adds/removes an announcement channel. You will receive announcements made by the bot owner in this channel.",
     "module": "Guild Admin"
   },
+  "apod": {
+    "description": "Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.",
+    "module": "Fun"
+  },
   "avatar": {
     "description": "Shows avatar of a specified user of your Discord server.",
     "module": "Info"
