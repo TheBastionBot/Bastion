@@ -23,7 +23,8 @@ exports.exec = async (Bastion, message) => {
       embed: {
         color: Bastion.colors.BLUE,
         author: {
-          name: 'Astronomy Picture of the Day'
+          name: 'Astronomy Picture of the Day',
+          url: 'http://apod.nasa.gov/'
         },
         title: response.title,
         description: response.explanation,
