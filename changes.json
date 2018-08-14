@@ -1,10 +1,4 @@
 {
-  "date": "August 6, 2018",
-  "image": "https://i.imgur.com/E93REkJ.gif",
-  "IMPROVEMENTS": [
-    "Under-the-hood improvements."
-  ],
-  "FIXES": [
-    "Fixed streamer role not being removed from the user after they stopped streaming. Actually it was being removed but was being added as soon as it was removed. Anyway, it doesn't matter, it's all fixed now."
-  ]
+  "date": "August 14, 2018",
+  "image": "https://i.imgur.com/yRsKWap.gif"
 }
