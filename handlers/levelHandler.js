@@ -24,7 +24,10 @@ module.exports = async message => {
       profile.level = parseInt(profile.level);
       profile.bastionCurrencies = parseInt(profile.bastionCurrencies);
 
-      let incrementedXP = message.guild.id === bastionGuild ? profile.xp + 2 : profile.xp + 1;
+      let incrementedXP = profile.xp + 1;
+      if (message.guild.id === bastionGuild && message.createdAt - message.member.joinedAt > 86400000) {
+        incrementedXP++;
+      }
 
       let currentLevel = Math.floor(0.15 * Math.sqrt(incrementedXP));
 
