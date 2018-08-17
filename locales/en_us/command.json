@@ -173,6 +173,9 @@
   "crimeCoefficient": {
     "description": "Find the crime coefficient of a user."
   },
+  "cuddle": {
+    "description": "Cuddle someone!"
+  },
   "currencyGiveaway": {
     "description": "Starts a giveaway event for a specific time, users receive the specified amount of %currency.name_plural% after the event is concluded."
   },
@@ -332,6 +335,9 @@
   "help": {
     "description": "Shows help on the specified command."
   },
+  "hug": {
+    "description": "Give a hug to someone!"
+  },
   "iAm": {
     "description": "Gives the specified self-assignable role to the user."
   },
@@ -376,6 +382,9 @@
   },
   "kick": {
     "description": "Kicks the specified user from your Discord server."
+  },
+  "kiss": {
+    "description": "Give a kiss to someone!"
   },
   "lastSeen": {
     "description": "Shows the time since the specified user was last seen socializing in Discord."
@@ -502,6 +511,9 @@
   },
   "paladins": {
     "description": "Get stats of any Paladins player."
+  },
+  "pat": {
+    "description": "Pat someone!"
   },
   "patrons": {
     "description": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](%patreon%). But if you're hosting Bastion yourself, and you're a Patreon creator, it will show the list of your Patrons."
@@ -829,6 +841,9 @@
   },
   "thisOrThat": {
     "description": "Asks a this or that question. See how you and your friends choose!"
+  },
+  "tickle": {
+    "description": "Tickle someone!"
   },
   "toggleBastion": {
     "description": "Enable or disable Bastion in your server. Disabling Bastion will prevent everyone, including the server owner, from using it. But if you have enabled any settings that does not need user interaction, it will still work, like starboard, filters, auto assignable roles etc."
