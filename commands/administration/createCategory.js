@@ -13,15 +13,15 @@ exports.exec = async (Bastion, message, args) => {
       */
       return Bastion.emit('commandUsage', message, this.help);
     }
-    
-    if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
+
+    if (!message.member.hasPermission(this.help.userTextPermission)) {
       /**
       * User has missing permissions.
       * @fires userMissingPermissions
       */
       return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
     }
-    if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    if (!message.guild.member(message.client.user).hasPermission(this.help.botPermission)) {
       /**
       * Bastion has missing permissions.
       * @fires bastionMissingPermissions

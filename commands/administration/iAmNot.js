@@ -13,7 +13,13 @@ exports.exec = async (Bastion, message, args) => {
       */
       return Bastion.emit('commandUsage', message, this.help);
     }
-
+    if (!message.guild.member(message.client.user).hasPermission(this.help.botPermission)) {
+      /**
+      * Bastion has missing permissions.
+      * @fires bastionMissingPermissions
+      */
+      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+    }
     let guildModel = await Bastion.database.models.guild.findOne({
       attributes: [ 'selfAssignableRoles' ],
       where: {

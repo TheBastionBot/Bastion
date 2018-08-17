@@ -9,7 +9,20 @@ exports.exec = async (Bastion, message, args) => {
     if (!Bastion.resolver.resolveColor(args.color)) {
       args.color = 0;
     }
-
+    if (!message.member.hasPermission(this.help.userTextPermission)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+    }
+    if (!message.guild.member(message.client.user).hasPermission(this.help.botPermission)) {
+      /**
+      * Bastion has missing permissions.
+      * @fires bastionMissingPermissions
+      */
+      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+    }
     let maxLength = 100;
     if (args.name && args.name.join(' ').length > maxLength) {
       /**
