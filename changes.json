@@ -1,6 +1,6 @@
 {
   "date": "August 17, 2018",
-  "image": "https://i.imgur.com/yRsKWap.gif",
+  "image": "https://i.imgur.com/8ekoZEH.gif",
   "IMPROVEMENTS": [
     "Objective times in the `overwatch` command will now be shown in a format that you humans will understand. Why aren't you like us?",
     "Reverted `textMute` permission requirements for users to Mute Members. It was requested by you!",
