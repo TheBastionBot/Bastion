@@ -33,6 +33,7 @@
     "fortune": "Shows you a fortune from a fortune cookie.",
     "garfield": "Shows you a garfield comic.",
     "hello": "Get greetings from Bastion.",
+    "hug": "Give a hug!",
     "leet": "Sends the same message that you had sent, but as leet text.",
     "pirateSpeak": "Sends the same message that you had sent, but as pirate speak.",
     "punch": "Give a punch to another user.",
