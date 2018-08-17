@@ -13,7 +13,6 @@ exports.exec = async (Bastion, message, args) => {
        */
       return Bastion.emit('commandUsage', message, this.help);
     }
-
     let guildModel = await Bastion.database.models.guild.findOne({
       attributes: [ 'suggestionChannel' ],
       where: {

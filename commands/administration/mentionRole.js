@@ -13,7 +13,20 @@ exports.exec = async (Bastion, message, args) => {
        */
       return Bastion.emit('commandUsage', message, this.help);
     }
-
+    if (!message.member.hasPermission(this.help.userTextPermission)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+    }
+    if (!message.guild.member(message.client.user).hasPermission(this.help.botPermission)) {
+      /**
+      * Bastion has missing permissions.
+      * @fires bastionMissingPermissions
+      */
+      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+    }
     args.role = args.role.join(' ');
 
     let role;
