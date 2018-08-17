@@ -13,7 +13,21 @@ exports.exec = async (Bastion, message, args) => {
       */
       return Bastion.emit('commandUsage', message, this.help);
     }
-
+    
+    if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
+      /**
+      * User has missing permissions.
+      * @fires userMissingPermissions
+      */
+      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+    }
+    if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+      /**
+      * Bastion has missing permissions.
+      * @fires bastionMissingPermissions
+      */
+      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+    }
     let minLength = 2, maxLength = 100;
     args.name = args.name.join(' ');
     if (args.name.length < minLength || args.name.length > maxLength) {
