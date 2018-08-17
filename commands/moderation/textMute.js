@@ -121,7 +121,7 @@ exports.help = {
   name: 'textMute',
   description: 'Text mutes a specified user from the specified text channel (for specified minutes) or globally on your Discord server.',
   botPermission: 'MANAGE_ROLES',
-  userTextPermission: 'MANAGE_ROLES',
+  userTextPermission: 'MUTE_MEMBERS',
   userVoicePermission: '',
   usage: 'textMute < @USER_MENTION | USER_ID > [-r Reason] [--server] [-t MINUTES]',
   example: [ 'textMute @user#0001 -r off topic discussions -t 15', 'textMute 167147569575323761 -r misbehaving with others --server' ]
