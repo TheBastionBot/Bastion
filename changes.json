@@ -1,10 +1,17 @@
 {
-  "date": "August 6, 2018",
-  "image": "https://i.imgur.com/E93REkJ.gif",
+  "date": "August 17, 2018",
+  "image": "https://i.imgur.com/8ekoZEH.gif",
   "IMPROVEMENTS": [
-    "Under-the-hood improvements."
+    "Objective times in the `overwatch` command will now be shown in a format that you humans will understand. Why aren't you like us?",
+    "Reverted `textMute` permission requirements for users to Mute Members. It was requested by you!",
+    "Bastion will now check for the time a user is a member of Bastion HQ before rewarding the bonus Bastion Currencies. So, only users who are a member for a specified amount of time are eligible for the 2x bonus Bastion Currencies.",
+    "The same applies for level ups too! Only members who are there in Bastion HQ for a while are eligible for fast level ups."
   ],
-  "FIXES": [
-    "Fixed streamer role not being removed from the user after they stopped streaming. Actually it was being removed but was being added as soon as it was removed. Anyway, it doesn't matter, it's all fixed now."
+  "NEW COMMANDS!": [
+    "Wanna cuddle someone but you're too far away to do so? Use the `cuddle` command to give an online cuddle!",
+    "Use the new `hug` command to give a hug and show your affection!",
+    "We've also added the `kiss` command so that you can give online kisses to your loved ones!",
+    "When someone needs a pat for their achievement, use the `pat` command.",
+    "Tickle someone whenever you want using the `tickle` command."
   ]
 }

@@ -14,15 +14,21 @@ exports.exec = (Bastion, message) => {
     let rewardMessage;
     if (Bastion.user.id === '267035345537728512') {
       if (message.guild.id === specialIDs.bastionGuild) {
-        rewardAmount *= 2;
-        if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
-          rewardAmount += 500;
-        }
-        else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
-          rewardAmount += 100;
-        }
+        if (message.createdAt - message.member.joinedAt > 86400000) {
+          rewardAmount *= 2;
+          if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
+            rewardAmount += 500;
+          }
+          else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
+            rewardAmount += 100;
+          }
 
-        rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
+          rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.`;
+        }
+        else {
+          rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
+            + '💡 **Pro Tip**\nYou need to be a member of [Bastion HQ](https://discord.gg/fzx8fkt) for at least a day to get **2x** Bastion Currencies bonus.';
+        }
       }
       else {
         rewardMessage = `Your account has been debited with **${rewardAmount}** Bastion Currencies.\n\n`
