@@ -1,4 +1,7 @@
 {
   "date": "August 22, 2018",
-  "image": "https://i.imgur.com/lIMVKJX.gif"
+  "image": "https://i.imgur.com/lIMVKJX.gif",
+  "IMPROVEMENTS": [
+    "Twitch live stream notification images won't use Discord's cache images anymore. Which means that Bastion will use only the new & updated images for stream notifications privided by Twitch."
+  ]
 }
