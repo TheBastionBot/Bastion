@@ -28,6 +28,17 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
 
+    if (args.platform === 'steam') {
+      let options = {
+        url: `https://peaceful-celsius.glitch.me/api/${args.player}`,
+        json: true
+      };
+
+      let { steamID64 } = await request(options);
+
+      args.player = steamID64;
+    }
+
     // eslint-disable-next-line require-jsdoc
     let requestURL = stat_type => `https://api.rocketleague.com/api/v1/${args.platform}/leaderboard/stats/${stat_type}/${args.player}`;
     let endpoints = [
