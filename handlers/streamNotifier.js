@@ -83,7 +83,7 @@ module.exports = Bastion => {
                           }
                         ],
                         image: {
-                          url: stream.preview.large
+                          url: `${stream.preview.large}?v=${Math.random()}`
                         },
                         timestamp: new Date(stream.created_at)
                       }
