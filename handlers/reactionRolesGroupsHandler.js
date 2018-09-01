@@ -21,6 +21,6 @@ module.exports = async Bastion => {
     }
   }
   catch (e) {
-    Bastion.error.log(e);
+    Bastion.log.error(e);
   }
 };
