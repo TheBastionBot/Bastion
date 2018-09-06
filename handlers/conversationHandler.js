@@ -4,11 +4,7 @@
  * @license GPL-3.0
  */
 
-const CLEVERBOT = xrequire('cleverbot.js');
-const CREDENTIALS = xrequire('./settings/credentials.json');
-const BOT = new CLEVERBOT({
-  APIKey: CREDENTIALS.cleverbotAPIkey
-});
+const request = require('request-promise-native');
 
 /**
  * Handles conversations with Bastion
@@ -27,18 +23,24 @@ module.exports = async message => {
     });
     if (!guildModel.dataValues.chat) return;
 
-    let response = await BOT.write(message.content);
-    if (response.output) {
-      message.channel.startTyping();
-      setTimeout(async () => {
-        try {
-          message.channel.stopTyping(true);
-          await message.channel.send(response.output);
-        }
-        catch (e) {
-          message.client.log.error(e);
-        }
-      }, response.output.length * 100);
+    message.channel.startTyping();
+
+    let options = {
+      url: 'https://bastion-cleverbot.glitch.me/api',
+      qs: {
+        message: message.content.replace(/<@!?[0-9]{1,20}> ?/i, '')
+      },
+      json: true
+    };
+    let response = await request(options);
+
+    if (response.status === 'success') {
+      message.channel.stopTyping(true);
+      await message.channel.send(response.response);
+    }
+    else {
+      message.channel.stopTyping(true);
+      await message.channel.send('Beep. Beep. Boop. Boop.');
     }
   }
   catch (e) {
