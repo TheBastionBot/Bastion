@@ -13,7 +13,9 @@ const request = require('request-promise-native');
  */
 module.exports = async message => {
   try {
-    if (message.content.length <= `${message.client.user}  `.length) return;
+    message.content = message.content.replace(/^<@!?[0-9]{1,20}> ?/i, '');
+
+    if (message.content.length < 2) return;
 
     let guildModel = await message.client.database.models.guild.findOne({
       attributes: [ 'chat' ],
@@ -28,18 +30,18 @@ module.exports = async message => {
     let options = {
       url: 'https://bastion-cleverbot.glitch.me/api',
       qs: {
-        message: message.content.replace(/<@!?[0-9]{1,20}> ?/i, '')
+        message: message.content
       },
       json: true
     };
     let response = await request(options);
 
+    message.channel.stopTyping(true);
+
     if (response.status === 'success') {
-      message.channel.stopTyping(true);
       await message.channel.send(response.response);
     }
     else {
-      message.channel.stopTyping(true);
       await message.channel.send('Beep. Beep. Boop. Boop.');
     }
   }
