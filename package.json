@@ -29,7 +29,6 @@
     "@k3rn31p4nic/google-translate-api": "~1.0.4",
     "chalk": "~2.4.1",
     "cheerio": "~1.0.0-rc.2",
-    "cleverbot.js": "~1.0.0",
     "color-convert": "~1.9.2",
     "command-line-args": "github:k3rn31p4nic/command-line-args",
     "cron": "~1.4.0",
