@@ -6,14 +6,6 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    if (!Bastion.credentials.cleverbotAPIkey) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noCredentials', 'Cleverbot API'), message.channel);
-    }
-
     let guildModel = await Bastion.database.models.guild.findOne({
       attributes: [ 'chat' ],
       where: {
