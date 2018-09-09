@@ -41,6 +41,9 @@
   "apod": {
     "description": "Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer."
   },
+  "ark": {
+    "description": "Get stats of any ARK: Survival Evolved game server."
+  },
   "avatar": {
     "description": "Shows avatar of a specified user of your Discord server."
   },
