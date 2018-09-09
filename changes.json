@@ -1,5 +1,5 @@
 {
-  "date": "August 13, 2018",
+  "date": "September 9, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -58,7 +58,8 @@
     "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard.",
     "`mentionRole` - Mentions any unmentionable role.",
     "`roblox` - Get info of any Roblox player.",
-    "`apod` - Get the Astronomy Picture of the Day from NASA."
+    "`apod` - Get the Astronomy Picture of the Day from NASA.",
+    "`ark` - Get stats of any ARK: Survival Evolved game server."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
