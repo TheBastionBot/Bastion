@@ -55,6 +55,10 @@
     "description": "Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.",
     "module": "Fun"
   },
+  "ark": {
+    "description": "Get stats of any ARK: Survival Evolved game server.",
+    "module": "Game Stats"
+  },
   "avatar": {
     "description": "Shows avatar of a specified user of your Discord server.",
     "module": "Info"
