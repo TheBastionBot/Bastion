@@ -987,6 +987,10 @@
     "description": "Sets %bastion%'s prefix for the server.",
     "module": "Guild Admin"
   },
+  "setProfilePicture": {
+    "description": "Sets your profile picture that shows up in the Bastion user profile.",
+    "module": "Info"
+  },
   "setStatus": {
     "description": "Sets the status of %bastion%.",
     "module": "Owner"

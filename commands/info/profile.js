@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'bio', 'birthDate', 'color', 'location' ],
+      attributes: [ 'avatar', 'bio', 'birthDate', 'color', 'location' ],
       where: {
         userID: user.id
       }
@@ -103,7 +103,7 @@ exports.exec = async (Bastion, message, args) => {
         description: bio,
         fields: profileData,
         thumbnail: {
-          url: user.displayAvatarURL
+          url: userModel && userModel.dataValues.avatar ? userModel.dataValues.avatar : user.displayAvatarURL
         },
         footer: {
           text: `${guildMemberModel.dataValues.reputations} Reputation${parseInt(guildMemberModel.dataValues.reputations) === 1 ? '' : 's'}`

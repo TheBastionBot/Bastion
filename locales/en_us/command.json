@@ -740,6 +740,9 @@
   "setPrefix": {
     "description": "Sets %bastion%'s prefix for the server."
   },
+  "setProfilePicture": {
+    "description": "Sets your profile picture that shows up in the Bastion user profile."
+  },
   "setStatus": {
     "description": "Sets the status of %bastion%."
   },
