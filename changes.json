@@ -1,5 +1,5 @@
 {
-  "date": "September 10, 2018",
+  "date": "September 11, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -59,7 +59,6 @@
     "`mentionRole` - Mentions any unmentionable role.",
     "`roblox` - Get info of any Roblox player.",
     "`apod` - Get the Astronomy Picture of the Day from NASA.",
-    "`ark` - Get stats of any ARK: Survival Evolved game server.",
     "`setProfilePicture` - Sets your profile picture that shows up in the Bastion user profile."
   ],
   "COMMANDS WITH NEW USAGE": [
