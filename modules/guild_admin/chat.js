@@ -6,14 +6,6 @@
 
 exports.exec = async (Bastion, message) => {
   try {
-    if (!Bastion.credentials.cleverbotAPIkey) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', Bastion.strings.error(message.guild.language, 'noCredentials'), Bastion.strings.error(message.guild.language, 'noCredentials', true, 'Cleverbot API'), message.channel);
-    }
-
     let guildSettings = await Bastion.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
 
     let color, chatStats;

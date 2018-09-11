@@ -1,8 +1,10 @@
 {
-  "date": "August 25, 2018",
-  "image": "https://i.imgur.com/lIMVKJX.gif",
+  "date": "September 11, 2018",
+  "image": "https://i.imgur.com/9jfMoDX.gif",
+  "NEW GAME STATS!": [
+    "Added `ark` command to get stats of any ARK: Survival Evolved game server."
+  ],
   "IMPROVEMENTS": [
-    "Twitch live stream notification images won't use Discord's cache images anymore. Which means that Bastion will use only the new & updated images for stream notifications privided by Twitch.",
-    "`rocketLeague` command will now work with Steam usernames too! Go check your stats now!"
+    "Bastion will always talk to you now, no matter what. No more hard feelings! Cleverbot API key isn't required to chat with Bastion anymore."
   ]
 }
