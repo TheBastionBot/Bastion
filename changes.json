@@ -1,6 +1,9 @@
 {
-  "date": "September 6, 2018",
+  "date": "September 11, 2018",
   "image": "https://i.imgur.com/MFKFBqg.gif",
+  "NEW GAME STATS!": [
+    "Added `ark` command to get stats of any ARK: Survival Evolved game server."
+  ],
   "IMPROVEMENTS": [
     "Bastion will always talk to you now, no matter what. No more hard feelings! Cleverbot API key isn't required to chat with Bastion anymore."
   ]
