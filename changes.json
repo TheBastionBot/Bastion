@@ -2,6 +2,7 @@
   "date": "September 15, 2018",
   "image": "https://i.imgur.com/YmjZU96.gif",
   "FIXES": [
+    "`levelUpRoles` command went rogue! When you used it, it deleted all other server settings. It's fixed now; big relief!",
     "Fixed an issue which only allowed only one shop to be active at once. You can now have both the role store as well as the custom server shop!"
   ]
 }
