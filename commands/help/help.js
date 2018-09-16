@@ -113,7 +113,7 @@ exports.exec = async (Bastion, message, args) => {
             url: Bastion.user.displayAvatarURL
           },
           footer: {
-            text: `Server Prefix: ${message.guild.prefix.join(' ')} • Total Commands: ${Bastion.commands.size}`
+            text: `Server Prefix: ${message.guild.prefix[0]} • Total Commands: ${Bastion.commands.size}`
           }
         }
       }).catch(e => {
