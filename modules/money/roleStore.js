@@ -6,7 +6,7 @@
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    let guildShop = await message.client.db.get(`SELECT roles FROM guildShop WHERE guildID=${message.guild.id}`);
+    let guildShop = await message.client.db.get(`SELECT roles, custom FROM guildShop WHERE guildID=${message.guild.id}`);
 
     let rolesInStore;
     if (guildShop && guildShop.roles) {
@@ -39,7 +39,11 @@ exports.exec = async (Bastion, message, args) => {
       rolesInStore = JSON.stringify(rolesInStore);
       rolesInStore = await Bastion.functions.encodeString(rolesInStore);
 
-      await Bastion.db.run('INSERT OR REPLACE INTO guildShop(guildID, roles) VALUES(?, ?)', [ message.guild.id, rolesInStore ]);
+      await Bastion.db.run('INSERT OR REPLACE INTO guildShop VALUES(?, ?, ?)', [
+        message.guild.id,
+        rolesInStore,
+        (guildShop && guildShop.custom) || null
+      ]);
 
       message.channel.send({
         embed: {
@@ -60,7 +64,11 @@ exports.exec = async (Bastion, message, args) => {
       rolesInStore = JSON.stringify(rolesInStore);
       rolesInStore = await Bastion.functions.encodeString(rolesInStore);
 
-      await Bastion.db.run('INSERT OR REPLACE INTO guildShop(guildID, roles) VALUES(?, ?)', [ message.guild.id, rolesInStore ]);
+      await Bastion.db.run('INSERT OR REPLACE INTO guildShop VALUES(?, ?, ?)', [
+        message.guild.id,
+        rolesInStore,
+        (guildShop && guildShop.custom) || null
+      ]);
 
       let role;
       if (message.guild.roles.has(args.role)) {

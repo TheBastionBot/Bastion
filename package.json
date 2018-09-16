@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "6.17.0",
+  "version": "6.17.1",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -35,6 +35,7 @@
     "kitsu": "~6.2.3",
     "lzutf8": "~0.5.5",
     "mathjs": "~5.1.0",
+    "moment": "^2.22.2",
     "node-json-db": "~0.7.5",
     "opusscript": "~0.0.6",
     "overwatch-js": "~1.8.0",

@@ -44,7 +44,7 @@ exports.exec = async (Bastion, message, args) => {
       levelUpRoles = JSON.stringify(levelUpRoles);
       levelUpRoles = await Bastion.functions.encodeString(levelUpRoles);
 
-      await Bastion.db.run('INSERT OR REPLACE INTO guildSettings(guildID, levelUpRoles) VALUES(?, ?)', [ message.guild.id, levelUpRoles ]);
+      await Bastion.db.run(`UPDATE guildSettings SET levelUpRoles='${levelUpRoles}' WHERE guildID='${message.guild.id}'`);
 
       message.channel.send({
         embed: {
@@ -61,7 +61,7 @@ exports.exec = async (Bastion, message, args) => {
       levelUpRoles = JSON.stringify(levelUpRoles);
       levelUpRoles = await Bastion.functions.encodeString(levelUpRoles);
 
-      await Bastion.db.run('INSERT OR REPLACE INTO guildSettings(guildID, levelUpRoles) VALUES(?, ?)', [ message.guild.id, levelUpRoles ]);
+      await Bastion.db.run(`UPDATE guildSettings SET levelUpRoles='${levelUpRoles}' WHERE guildID='${message.guild.id}'`);
 
       message.channel.send({
         embed: {
