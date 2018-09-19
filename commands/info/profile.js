@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'avatar', 'bio', 'birthDate', 'color', 'location' ],
+      attributes: [ 'avatar', 'info', 'birthDate', 'color', 'location' ],
       where: {
         userID: user.id
       }
@@ -48,8 +48,8 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let bio;
-    if (userModel && userModel.dataValues.bio) {
-      bio = await Bastion.methods.decodeString(userModel.dataValues.bio);
+    if (userModel && userModel.dataValues.info) {
+      bio = await Bastion.methods.decodeString(userModel.dataValues.info);
     }
     else {
       bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
