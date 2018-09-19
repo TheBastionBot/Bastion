@@ -27,7 +27,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'bio' ],
+      attributes: [ 'info' ],
       where: {
         userID: message.author.id
       }
@@ -44,13 +44,13 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     await Bastion.database.models.user.update({
-      bio: bio
+      info: bio
     },
     {
       where: {
         userID: message.author.id
       },
-      fields: [ 'bio' ]
+      fields: [ 'info' ]
     });
 
     message.channel.send({
