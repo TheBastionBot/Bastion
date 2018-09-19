@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
     });
 
     let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'avatar', 'bio', 'birthDate', 'color', 'location' ],
+      attributes: [ 'avatar', 'info', 'birthDate', 'color', 'location' ],
       where: {
         userID: user.id
       }
@@ -47,12 +47,12 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'profileNotCreated', `<@${user.id}>`), message.channel);
     }
 
-    let bio;
-    if (userModel && userModel.dataValues.bio) {
-      bio = await Bastion.methods.decodeString(userModel.dataValues.bio);
+    let info;
+    if (userModel && userModel.dataValues.info) {
+      info = await Bastion.methods.decodeString(userModel.dataValues.info);
     }
     else {
-      bio = `No bio has been set. ${user.id === message.author.id ? 'Set your bio using `setBio` command.' : ''}`;
+      info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setInfo` command.' : ''}`;
     }
 
     let profileData = [
@@ -100,7 +100,7 @@ exports.exec = async (Bastion, message, args) => {
           name: user.tag,
           icon_url: await getUserIcon(user)
         },
-        description: bio,
+        description: info,
         fields: profileData,
         thumbnail: {
           url: userModel && userModel.dataValues.avatar ? userModel.dataValues.avatar : user.displayAvatarURL

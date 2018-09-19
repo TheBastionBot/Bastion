@@ -1,5 +1,5 @@
 /**
- * @file setBio command
+ * @file setInfo command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license GPL-3.0
  */
@@ -16,18 +16,18 @@ exports.exec = async (Bastion, message, args) => {
     args = args.join(' ');
 
     let charLimit = 160;
-    let bio = await Bastion.methods.encodeString(args);
+    let info = await Bastion.methods.encodeString(args);
 
-    if (bio.length > charLimit) {
+    if (info.length > charLimit) {
       /**
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'bioRange', charLimit), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'infoRange', charLimit), message.channel);
     }
 
     let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'bio' ],
+      attributes: [ 'info' ],
       where: {
         userID: message.author.id
       }
@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
     if (!userModel) {
       return message.channel.send({
         embed: {
-          description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
+          description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your info.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -44,19 +44,19 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     await Bastion.database.models.user.update({
-      bio: bio
+      info: info
     },
     {
       where: {
         userID: message.author.id
       },
-      fields: [ 'bio' ]
+      fields: [ 'info' ]
     });
 
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Bio Set',
+        title: 'Info Set',
         description: args,
         footer: {
           text: args.tag
@@ -77,11 +77,11 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'setBio',
-  description: 'Sets your bio that shows up in the Bastion user profile.',
+  name: 'setInfo',
+  description: 'Sets your info that shows up in the Bastion user profile.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'setBio <text>',
-  example: [ 'setBio I\'m awesome. :sunglasses:' ]
+  usage: 'setInfo <text>',
+  example: [ 'setInfo I\'m awesome. :sunglasses:' ]
 };

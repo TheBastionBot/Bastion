@@ -1,5 +1,5 @@
 {
-  "date": "September 16, 2018",
+  "date": "September 19, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -74,7 +74,8 @@
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
     "Renamed `votingChannel` command to `votingChannels`.",
     "Renamed `resetModLogs` command to `resetModerationLogs`.",
-    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias."
+    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias.",
+    "Renamed `setBio` command to `setInfo`."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` & `deleteTodo` commands.",

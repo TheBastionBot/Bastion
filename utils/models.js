@@ -240,7 +240,7 @@ module.exports = (Sequelize, database) => {
     avatar: {
       type: Sequelize.STRING(2048)
     },
-    bio: {
+    info: {
       type: Sequelize.BLOB
     },
     birthDate: {
