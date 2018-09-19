@@ -959,16 +959,16 @@
     "description": "Sets the avatar of %bastion%.",
     "module": "Owner"
   },
-  "setBio": {
-    "description": "Sets your bio that shows up in the Bastion user profile.",
-    "module": "Info"
-  },
   "setBirthDate": {
     "description": "Sets your birth date that shows up in the Bastion user profile. Don't worry Bastion will never show your age/year to public.",
     "module": "Info"
   },
   "setColor": {
     "description": "Sets your user color that is used in the Bastion user profile.",
+    "module": "Info"
+  },
+  "setInfo": {
+    "description": "Sets your info that shows up in the Bastion user profile.",
     "module": "Info"
   },
   "setLanguage": {
