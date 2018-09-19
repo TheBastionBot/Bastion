@@ -23,7 +23,7 @@ exports.exec = async (Bastion, message, args) => {
       * Error condition is encountered.
       * @fires error
       */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'bioRange', charLimit), message.channel);
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'infoRange', charLimit), message.channel);
     }
 
     let userModel = await Bastion.database.models.user.findOne({

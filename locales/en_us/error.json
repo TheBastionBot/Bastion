@@ -2,7 +2,7 @@
   "ageAbove100": "Are you kidding me? You're more than 100 years old (and using Discord)! Try again with a valid age.",
   "ageBelow13": "Sorry kid, you're not even allowed to use Discord until you turn 13.",
   "bastionMissingPermissions": "I need %var% permission to run this command.",
-  "bioRange": "Bio should be fewer than %var% characters.",
+  "infoRange": "Info should be fewer than %var% characters.",
   "channelNameLength": "Channel name should be between %var% and %var% characters.",
   "channelNotFound": "The specified channel was not found.",
   "claimCooldown": "%var% you have recently claimed your daily reward, please try again tomorrow. You can claim daily rewards only once every day.",
