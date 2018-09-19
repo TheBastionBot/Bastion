@@ -52,7 +52,7 @@ exports.exec = async (Bastion, message, args) => {
       info = await Bastion.methods.decodeString(userModel.dataValues.info);
     }
     else {
-      info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setBio` command.' : ''}`;
+      info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setInfo` command.' : ''}`;
     }
 
     let profileData = [

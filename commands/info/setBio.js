@@ -1,5 +1,5 @@
 /**
- * @file setBio command
+ * @file setInfo command
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
  * @license GPL-3.0
  */
@@ -77,11 +77,11 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'setBio',
+  name: 'setInfo',
   description: 'Sets your info that shows up in the Bastion user profile.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'setBio <text>',
-  example: [ 'setBio I\'m awesome. :sunglasses:' ]
+  usage: 'setInfo <text>',
+  example: [ 'setInfo I\'m awesome. :sunglasses:' ]
 };
