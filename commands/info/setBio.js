@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
     if (!userModel) {
       return message.channel.send({
         embed: {
-          description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your bio.`
+          description: `<@${args.id}> you didn't had a profile yet. I've now created your profile. Now you can use the command again to set your info.`
         }
       }).catch(e => {
         Bastion.log.error(e);
@@ -56,7 +56,7 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Bio Set',
+        title: 'Info Set',
         description: args,
         footer: {
           text: args.tag
@@ -78,7 +78,7 @@ exports.config = {
 
 exports.help = {
   name: 'setBio',
-  description: 'Sets your bio that shows up in the Bastion user profile.',
+  description: 'Sets your info that shows up in the Bastion user profile.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
