@@ -719,14 +719,14 @@
   "setAvatar": {
     "description": "Sets the avatar of %bastion%."
   },
-  "setBio": {
-    "description": "Sets your bio that shows up in the Bastion user profile."
-  },
   "setBirthDate": {
     "description": "Sets your birth date that shows up in the Bastion user profile. Don't worry Bastion will never show your age/year to public."
   },
   "setColor": {
     "description": "Sets your user color that is used in the Bastion user profile."
+  },
+  "setInfo": {
+    "description": "Sets your info that shows up in the Bastion user profile."
   },
   "setLanguage": {
     "description": "Sets %bastion%'s language for the server."
