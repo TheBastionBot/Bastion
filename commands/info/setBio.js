@@ -16,9 +16,9 @@ exports.exec = async (Bastion, message, args) => {
     args = args.join(' ');
 
     let charLimit = 160;
-    let bio = await Bastion.methods.encodeString(args);
+    let info = await Bastion.methods.encodeString(args);
 
-    if (bio.length > charLimit) {
+    if (info.length > charLimit) {
       /**
       * Error condition is encountered.
       * @fires error
@@ -44,7 +44,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     await Bastion.database.models.user.update({
-      info: bio
+      info: info
     },
     {
       where: {
