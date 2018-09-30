@@ -1,4 +1,7 @@
 {
   "date": "September 30, 2018",
-  "image": "https://i.imgur.com/7kn7CS1.gif"
+  "image": "https://i.imgur.com/7kn7CS1.gif",
+  "BUGS ARE GONE": [
+    "`translate` command will now work again!"
+  ]
 }
