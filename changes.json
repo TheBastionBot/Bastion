@@ -1,12 +1,8 @@
 {
-  "date": "September 16, 2018",
-  "image": "https://i.imgur.com/YmjZU96.gif",
-  "NEW OVERWATCH HERO IS HERE!": [
-    "Hero portrait for Wrecking Ball is now available!"
-  ],
-  "KILLED THOSE BUGS!": [
-    "`levelUpRoles` command went rogue! When you used it, it deleted all other server settings. It's fixed now; big relief!",
-    "Fixed an issue which only allowed only one shop to be active at once. You can now have both the role store as well as the custom server shop!",
-    "Some under-the-hood fixes"
+  "date": "September 30, 2018",
+  "image": "https://i.imgur.com/7kn7CS1.gif",
+  "BUGS ARE GONE": [
+    "`translate` command will now work again!",
+    "Cats are back! You can now get back to seeing cats using the `cat` command."
   ]
 }

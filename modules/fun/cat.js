@@ -11,12 +11,13 @@ exports.exec = async (Bastion, message) => {
     let options = {
       method: 'HEAD',
       url: 'https://thecatapi.com/api/images/get',
-      followAllRedirects: true
+      followAllRedirects: true,
+      resolveWithFullResponse: true
     };
     let response = await request(options);
 
     await message.channel.send({
-      files: [ response.original_image ]
+      files: [ response.request.uri.href ]
     });
   }
   catch (e) {
