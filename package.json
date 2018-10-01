@@ -6,11 +6,11 @@
   "main": "index.js",
   "scripts": {
     "build:commandStrings": "node -r ./utils/globals.js utils/generateCommandStrings.js",
-    "build": "npm run build:commandStrings",
+    "build": "yarn run build:commandStrings",
     "test:lint": "./node_modules/.bin/eslint .",
     "test:modules": "node -r ./utils/globals.js tests/modules.js",
     "test:boot": "node -r ./utils/globals.js tests/boot.js",
-    "test": "npm run test:lint && npm run test:modules && npm run test:boot",
+    "test": "yarn run test:lint && yarn run test:modules && yarn run test:boot",
     "start": "node -r ./utils/globals.js index.js",
     "start:noshard": "node -r ./utils/globals.js bastion.js"
   },
