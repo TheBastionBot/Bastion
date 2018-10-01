@@ -99,6 +99,10 @@
     "description": "Sends the given text as text emojis.",
     "module": "Fun"
   },
+  "book": {
+    "description": "Searches for the details of a book",
+    "module": "Queries"
+  },
   "buy": {
     "description": "Buy items from the server's shop.",
     "module": "Money"
