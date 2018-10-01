@@ -10,7 +10,8 @@ image:
 clone_depth: 1
 install:
   - choco install nodejs-lts
-  - npm install
+  - npm install --global yarn
+  - yarn install
 platform: x64
 build: off
 before_test:
@@ -18,8 +19,8 @@ before_test:
   - cp settings\config_example.json settings\config.json
 test_script:
   - node --version
-  - npm --version
-  - npm test
+  - yarn --version
+  - yarn test
 on_success:
   - ps: Invoke-RestMethod https://raw.githubusercontent.com/k3rn31p4nic/appveyor-discord-webhook/master/send.ps1 -o send.ps1
   - ps: ./send.ps1 success $env:WEBHOOK_URL

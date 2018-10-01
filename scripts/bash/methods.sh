@@ -24,7 +24,7 @@ function method::debug () {
 function method::fix-dependencies () {
   print::message "Fixing dependencies..."
   rm -rf node_modules package-lock.json
-  npm i --only=production --no-package-lock
+  yarn install --production --no-lockfile
 }
 
 function method::fix-locales () {
@@ -162,7 +162,7 @@ function method::update () {
     echo "Updating dependencies..."
 
     rm -fr node_modules package-lock.json screenlog.0
-    npm i --only=production --no-package-lock
+    yarn install --production --no-lockfile
     if ! [[ "$?" -eq 0 ]]
     then
       print::error "Failed to install dependencies."

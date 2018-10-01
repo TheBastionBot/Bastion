@@ -1,5 +1,5 @@
 {
-  "date": "July 19, 2018",
+  "date": "September 30, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [],
   "THESE ABILITIES HAVE ENHANCED": [
@@ -17,6 +17,7 @@
     "Adding music from user playlist to the queue is now faster than ever.",
     "Warnings are now permanently stored!",
     "Server logging will now also log message update and message delete events.",
+    "You can now enable disabled modules using the `--module` option in the `enableCommand` command.",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
@@ -55,7 +56,10 @@
     "`afk` - Sets AFK mode for the user.",
     "`moveMembers` - Moves all the members in a voice channel to another specified voice channel.",
     "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard.",
-    "`mentionRole` - Mentions any unmentionable role."
+    "`mentionRole` - Mentions any unmentionable role.",
+    "`roblox` - Get info of any Roblox player.",
+    "`apod` - Get the Astronomy Picture of the Day from NASA.",
+    "`setProfilePicture` - Sets your profile picture that shows up in the Bastion user profile."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
@@ -70,7 +74,8 @@
     "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
     "Renamed `votingChannel` command to `votingChannels`.",
     "Renamed `resetModLogs` command to `resetModerationLogs`.",
-    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias."
+    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias.",
+    "Renamed `setBio` command to `setInfo`."
   ],
   "NOT AVAILABLE ANYMORE": [
     "Removed `todo`, `listTodo` & `deleteTodo` commands.",

@@ -5,6 +5,7 @@
  */
 
 const ow = xrequire('overwatch-js');
+const moment = xrequire('moment');
 
 exports.exec = async (Bastion, message, args) => {
   try {
@@ -93,7 +94,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         {
           name: 'Objective Time',
-          value: `${data.quickplay.global.objective_time}`,
+          value: `About ${moment.duration(data.quickplay.global.objective_time).humanize()}`,
           inline: true
         },
         {
@@ -141,7 +142,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         {
           name: 'Objective Time',
-          value: `${data.competitive.global.objective_time}`,
+          value: `About ${moment.duration(data.competitive.global.objective_time).humanize()}`,
           inline: true
         },
         {

@@ -242,7 +242,10 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       primaryKey: true
     },
-    bio: {
+    avatar: {
+      type: Sequelize.STRING(2048)
+    },
+    info: {
       type: Sequelize.BLOB
     },
     birthDate: {

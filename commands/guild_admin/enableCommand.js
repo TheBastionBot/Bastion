@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  let description;
+  let disabledCommands, description;
   if (args.name) {
     let command = args.name.toLowerCase();
 
@@ -19,9 +19,9 @@ exports.exec = async (Bastion, message, args) => {
     }
     else {
       /**
-      * Error condition is encountered.
-      * @fires error
-      */
+       * Error condition is encountered.
+       * @fires error
+       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
@@ -50,6 +50,33 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     description = Bastion.i18n.info(message.guild.language, 'enableCommand', message.author.tag, command.help.name);
+  }
+  else if (args.module) {
+    args.module = args.module.join('_').toLowerCase();
+
+    disabledCommands = Bastion.commands.filter(c => c.config.module === args.module).map(c => c.help.name.toLowerCase());
+
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'disabledCommands' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (guildModel.dataValues.disabledCommands) {
+      disabledCommands = guildModel.dataValues.disabledCommands.filter(command => !disabledCommands.includes(command));
+    }
+
+    description = Bastion.i18n.info(message.guild.language, 'enableModule', message.author.tag, args.module);
+
+    await Bastion.database.models.guild.update({
+      disabledCommands: disabledCommands
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'disabledCommands' ]
+    });
   }
   else if (args.all) {
     await Bastion.database.models.guild.update({
@@ -86,6 +113,7 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, defaultOption: true },
+    { name: 'module', type: String, multiple: true, alias: 'm' },
     { name: 'all', type: Boolean, alias: 'a' }
   ]
 };
@@ -96,6 +124,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'enableCommand < COMMAND_NAME | --all >',
-  example: [ 'enableCommand echo', 'enableCommand --all' ]
+  usage: 'enableCommand < COMMAND_NAME | --module MODULE NAME | --all >',
+  example: [ 'enableCommand echo', 'enableCommand --module game stats', 'enableCommand --all' ]
 };

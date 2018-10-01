@@ -51,6 +51,14 @@
     "description": "Adds/removes an announcement channel. You will receive announcements made by the bot owner in this channel.",
     "module": "Guild Admin"
   },
+  "apod": {
+    "description": "Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.",
+    "module": "Fun"
+  },
+  "ark": {
+    "description": "Get stats of any ARK: Survival Evolved game server.",
+    "module": "Game Stats"
+  },
   "avatar": {
     "description": "Shows avatar of a specified user of your Discord server.",
     "module": "Info"
@@ -225,6 +233,10 @@
   },
   "crimeCoefficient": {
     "description": "Find the crime coefficient of a user.",
+    "module": "Fun"
+  },
+  "cuddle": {
+    "description": "Cuddle someone!",
     "module": "Fun"
   },
   "currencyGiveaway": {
@@ -439,6 +451,10 @@
     "description": "Shows help on the specified command.",
     "module": "Help"
   },
+  "hug": {
+    "description": "Give a hug to someone!",
+    "module": "Fun"
+  },
   "iAm": {
     "description": "Gives the specified self-assignable role to the user.",
     "module": "Administration"
@@ -498,6 +514,10 @@
   "kick": {
     "description": "Kicks the specified user from your Discord server.",
     "module": "Moderation"
+  },
+  "kiss": {
+    "description": "Give a kiss to someone!",
+    "module": "Fun"
   },
   "lastSeen": {
     "description": "Shows the time since the specified user was last seen socializing in Discord.",
@@ -667,6 +687,10 @@
     "description": "Get stats of any Paladins player.",
     "module": "Game Stats"
   },
+  "pat": {
+    "description": "Pat someone!",
+    "module": "Fun"
+  },
   "patrons": {
     "description": "Shows the list of people who continuously supports the development of the Bastion Bot project, by being my patron, on [Patreon](%patreon%). But if you're hosting Bastion yourself, and you're a Patreon creator, it will show the list of your Patrons.",
     "module": "Info"
@@ -835,6 +859,10 @@
     "description": "Show your condolences for something (or everything).",
     "module": "Fun"
   },
+  "roblox": {
+    "description": "Get info of any Roblox player.",
+    "module": "Game Stats"
+  },
   "robotify": {
     "description": "Generates a random robot image from the given string or your Discord tag if no string is specified.",
     "module": "Fun"
@@ -931,16 +959,16 @@
     "description": "Sets the avatar of %bastion%.",
     "module": "Owner"
   },
-  "setBio": {
-    "description": "Sets your bio that shows up in the Bastion user profile.",
-    "module": "Info"
-  },
   "setBirthDate": {
     "description": "Sets your birth date that shows up in the Bastion user profile. Don't worry Bastion will never show your age/year to public.",
     "module": "Info"
   },
   "setColor": {
     "description": "Sets your user color that is used in the Bastion user profile.",
+    "module": "Info"
+  },
+  "setInfo": {
+    "description": "Sets your info that shows up in the Bastion user profile.",
     "module": "Info"
   },
   "setLanguage": {
@@ -958,6 +986,10 @@
   "setPrefix": {
     "description": "Sets %bastion%'s prefix for the server.",
     "module": "Guild Admin"
+  },
+  "setProfilePicture": {
+    "description": "Sets your profile picture that shows up in the Bastion user profile.",
+    "module": "Info"
   },
   "setStatus": {
     "description": "Sets the status of %bastion%.",
@@ -1098,6 +1130,10 @@
   "thisOrThat": {
     "description": "Asks a this or that question. See how you and your friends choose!",
     "module": "Games"
+  },
+  "tickle": {
+    "description": "Tickle someone!",
+    "module": "Fun"
   },
   "toggleBastion": {
     "description": "Enable or disable Bastion in your server. Disabling Bastion will prevent everyone, including the server owner, from using it. But if you have enabled any settings that does not need user interaction, it will still work, like starboard, filters, auto assignable roles etc.",
