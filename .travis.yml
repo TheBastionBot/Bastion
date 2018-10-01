@@ -21,13 +21,14 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g ffmpeg-binaries; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ffmpeg; fi
+  - npm install --global yarn
 install:
-  - npm install
+  - yarn install
 before_script:
   - cp settings/credentials_example.json settings/credentials.json
   - cp settings/config_example.json settings/config.json
 script:
-  - npm test
+  - yarn test
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then shellcheck -x *.sh; fi
 after_success:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
