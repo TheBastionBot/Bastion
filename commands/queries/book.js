@@ -7,9 +7,8 @@
 const request = xrequire('request-promise-native');
 
 exports.exec = async (Bastion, message, args) => {
-
   try {
-    if(!args.book) {
+    if (!args.book) {
       /**
        * The command was ran with invalid parameters.
        * @fires commandUsage
@@ -20,9 +19,10 @@ exports.exec = async (Bastion, message, args) => {
 
     const requestOptions = {
       method: 'GET',
-      url: `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(args.book)}&key=&query`,
+      url: 'https://www.googleapis.com/books/v1/volumes',
       qs: {
-        key: Bastion.credentials.googleAPIkey
+        key: Bastion.credentials.googleAPIkey,
+        q: encodeURIComponent(args.book.join(' '))
       },
       json: true
     };
@@ -30,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
     const books = await request(requestOptions);
 
     // Check if the book was found
-    if(books.totalItems < 1) {
+    if (books.totalItems < 1) {
       /**
        * No result for this query
        * @fires error
@@ -38,7 +38,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'book'), message.channel);
     }
 
-    const { items: [ book,,  ] } = books;
+    const { items: [ book ] } = books;
 
     message.channel.send({ embed: createEmbed(book.volumeInfo, Bastion) }).
       catch(e => {
@@ -57,55 +57,54 @@ exports.exec = async (Bastion, message, args) => {
 
 /**
  * Creates an embed with the book
- * @param {object} book
- * @param {object} Bastion
- * @returns {object}
+ * @method createEmbed
+ * @param {object} volumeInfo Details of the volume
+ * @param {object} Bastion Bastion client object
+ * @returns {object} The embed object of the book
  */
-const createEmbed = ({ title, description, categories, authors, pageCount, imageLinks: { smallThumbnail: imageUrl }, infoLink, averageRating }, Bastion) => {
-
+const createEmbed = (volumeInfo, Bastion) => {
   const embed = {
     color: Bastion.colors.BLUE,
-    title: title,
-    description: `${description.substring(0, 150)}...`,
+    title: volumeInfo.title,
+    description: `${volumeInfo.description.substring(0, 150)}...`,
     fields: [
       {
         name: 'Authors',
-        value: authors.join(', '),
+        value: volumeInfo.authors.join(', '),
         inline: true
       },
       {
         name: 'Number of pages',
-        value: pageCount,
+        value: volumeInfo.pageCount,
         inline: true
       },
       {
         name: 'Average rating',
-        value: `${averageRating}`,
+        value: `${volumeInfo.averageRating}`,
         inline: true
       },
       {
         name: 'Learn more about this book',
-        value: `[Click here](${infoLink})`
+        value: `[Click here](${volumeInfo.infoLink})`
       }
     ],
     footer: {
       text: 'Powered by Google Books'
     },
     thumbnail: {
-      url: imageUrl
+      url: volumeInfo.imageLinks.thumbnail
     }
   };
 
-  if(typeof categories !== 'undefined') {
+  if (volumeInfo.categories) {
     embed.fields.push({
       name: 'Categories',
-      value: categories.join(', '),
+      value: volumeInfo.categories.join(', '),
       inline: true
     });
   }
 
   return embed;
-
 };
 
 exports.config = {
