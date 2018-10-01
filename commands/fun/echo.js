@@ -18,7 +18,7 @@ exports.exec = (Bastion, message, args) => {
       color: Bastion.colors.DEFAULT,
       description: args.join(' '),
       footer: {
-        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.error(message.guild.language, 'endorsementMessage')}`
+        text: `${!Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
       }
     }
   }).catch(e => {
