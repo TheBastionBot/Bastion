@@ -80,7 +80,7 @@ const createEmbed = ({ title, description, categories, authors, pageCount, image
       },
       {
         name: 'Average rating',
-        value: toString(averageRating),
+        value: `${averageRating}`,
         inline: true
       },
       {
