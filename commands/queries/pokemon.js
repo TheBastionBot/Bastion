@@ -73,6 +73,10 @@ exports.exec = async (Bastion, message, args) => {
       {
         name: 'Evolution Line',
         value: pokemon.family.evolutionLine.join(' -> ')
+      },
+      {
+        name: 'Description',
+        value: pokemon.description
       }
     ];
 
