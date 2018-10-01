@@ -16,7 +16,7 @@ exports.exec = (Bastion, message, args) => {
 
     args = JSON.parse(args.join(' '));
     args.footer = {
-      text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from Bastion or from its creators.'}`
+      text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This content is neither created nor endorsed by Bastion.'}`
     };
 
     message.channel.send({

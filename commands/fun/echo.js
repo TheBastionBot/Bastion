@@ -18,7 +18,7 @@ exports.exec = (Bastion, message, args) => {
       color: Bastion.colors.DEFAULT,
       description: args.join(' '),
       footer: {
-        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from Bastion or from its creators.'}`
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This content is neither created nor endorsed by Bastion.'}`
       }
     }
   }).catch(e => {
