@@ -31,6 +31,10 @@ exports.exec = async (Bastion, message, args) => {
 
     let fields = [
       {
+        name: 'Description',
+        value: pokemon.description
+      },
+      {
         name: 'Number',
         value: pokemon.number,
         inline: true
