@@ -9,10 +9,14 @@ const request = xrequire('request-promise-native');
 exports.exec = async (Bastion, message, args) => {
 
   try {
-
     if(!args.book) {
+       /**
+       * The command was ran with invalid parameters.
+       * @fires commandUsage
+       */
       return Bastion.emit('commandUsage', message, this.help);
     }
+
 
     const requestOptions = {
       method: 'GET',
@@ -25,8 +29,12 @@ exports.exec = async (Bastion, message, args) => {
 
     const books = await request(requestOptions);
 
-
+    // Check if the book was found
     if(books.totalItems < 1) {
+      /**
+       * No result for this query
+       * @fires error
+       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'book'), message.channel);
     }
 
