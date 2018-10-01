@@ -74,6 +74,9 @@
   "blockText": {
     "description": "Sends the given text as text emojis."
   },
+  "book": {
+    "description": "Searches for the details of a book"
+  },
   "buy": {
     "description": "Buy items from the server's shop."
   },
