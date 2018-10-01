@@ -1,6 +1,6 @@
 /**
  * @file book command
- * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
+ * @author WebD
  * @license GPL-3.0
  */
 
