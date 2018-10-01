@@ -10,7 +10,7 @@ exports.exec = async (Bastion, message, args) => {
 
   try {
     if(!args.book) {
-       /**
+      /**
        * The command was ran with invalid parameters.
        * @fires commandUsage
        */
@@ -40,6 +40,8 @@ exports.exec = async (Bastion, message, args) => {
 
     const { items: [ book,,  ] } = books;
 
+    console.log(book.volumeInfo);
+
     message.channel.send({ embed: createEmbed(book.volumeInfo, Bastion) }).
       catch(e => {
         Bastion.log.error(e);
@@ -61,48 +63,52 @@ exports.exec = async (Bastion, message, args) => {
  * @param {object} Bastion
  * @returns {object}
  */
-const createEmbed = ({ title, description, categories, authors, publisher, pageCount, imageLinks: { smallThumbnail: imageUrl }, infoLink, averageRating }, Bastion) => ({
-  color: Bastion.colors.BLUE,
-  title: title,
-  description: `${description.substring(0, 150)}...`,
-  fields: [
-    {
+const createEmbed = ({ title, description, categories, authors, pageCount, imageLinks: { smallThumbnail: imageUrl }, infoLink, averageRating }, Bastion) => {
+
+  const embed = {
+    color: Bastion.colors.BLUE,
+    title: title,
+    description: `${description.substring(0, 150)}...`,
+    fields: [
+      {
+        name: 'Authors',
+        value: authors.join(', '),
+        inline: true
+      },
+      {
+        name: 'Number of pages',
+        value: pageCount,
+        inline: true
+      },
+      {
+        name: 'Average rating',
+        value: toString(averageRating),
+        inline: true
+      },
+      {
+        name: 'Learn more about this book',
+        value: `[Click here](${infoLink})`
+      }
+    ],
+    footer: {
+      text: 'Powered by Google Books'
+    },
+    thumbnail: {
+      url: imageUrl
+    }
+  };
+
+  if(typeof categories !== 'undefined') {
+    embed.fields.push({
       name: 'Categories',
       value: categories.join(', '),
       inline: true
-    },
-    {
-      name: 'Authors',
-      value: authors.join(', '),
-      inline: true
-    },
-    {
-      name: 'Publisher',
-      value: publisher,
-      inline: true
-    },
-    {
-      name: 'Number of pages',
-      value: pageCount,
-      inline: true
-    },
-    {
-      name: 'Average rating',
-      value: averageRating,
-      inline: true
-    },
-    {
-      name: 'Learn more about this book',
-      value: `[Click here](${infoLink})`
-    }
-  ],
-  footer: {
-    text: 'Powered by Google Books'
-  },
-  thumbnail: {
-    url: imageUrl
+    });
   }
-});
+
+  return embed;
+
+};
 
 exports.config = {
   aliases: [],
