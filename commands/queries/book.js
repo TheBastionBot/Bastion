@@ -40,8 +40,6 @@ exports.exec = async (Bastion, message, args) => {
 
     const { items: [ book,,  ] } = books;
 
-    console.log(book.volumeInfo);
-
     message.channel.send({ embed: createEmbed(book.volumeInfo, Bastion) }).
       catch(e => {
         Bastion.log.error(e);
