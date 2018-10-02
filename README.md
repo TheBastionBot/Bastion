@@ -25,7 +25,7 @@
 <img src="https://i.imgur.com/LbIdL4A.jpg" alt="Donate with Cryptocurrencies" height="100" />
 </a>
 <a href="https://www.patreon.com/bastionbot" title="Pledge for The Bastion Bot Project">
-<img src="https://i.imgur.com/NBMyXjO.jpg" alt="Pledge for The Bastion Bot Project" height="100" />
+<img src="https://i.imgur.com/NBMyXjO.jpg" alt="Pledge for The Bastion Bot Project" height="101" />
 </a>
 <a href="https://paypal.me/snkrsnkampa" title="Donate via PayPal">
 <img src="https://i.imgur.com/Dyfpicq.jpg" alt="Donate via PayPal" height="100" />
