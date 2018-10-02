@@ -10,7 +10,7 @@ exports.exec = (Bastion, message) => {
     embed: {
       color: Bastion.colors.DARK_PURPLE,
       title: 'Users Streaming',
-      description: streamers.length > 10 ? `<@${streamers.splice(0, 10).join('>\n<@')}>\nand ${streamers.length - 10} others are now live.` : `<@${streamers.join('>\n<@')}>`
+      description: !streamers.length ? 'No users currently streaming' : streamers.length > 10 ? `<@${streamers.splice(0, 10).join('>\n<@')}>\nand ${streamers.length - 10} others are now live.` : `<@${streamers.join('>\n<@')}>`
     }
   }).catch(e => {
     Bastion.log.error(e);
