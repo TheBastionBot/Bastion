@@ -81,32 +81,35 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let locale = args.region == 'us' ? 'en-us' : 'en-gb';
+    let locale = args.region === 'us' ? 'en-us' : 'en-gb';
 
     let requestUrl = `https://${args.region}.api.battle.net/wow/character/${args.realm}/${args.character}?fields=guild,items&locale=${locale}&apikey=${Bastion.credentials.battleNetApiKey}`;
 
-    options = {
+    let options = {
       url: requestUrl,
       json: true
     };
-    response = await request(options);
 
-    let factionIcon = `https://worldofwarcraft.akamaized.net/static/components/Logo/Logo-${response.faction == 0 ? 'alliance' : 'horde'}.png` + "";
+    let response = await request(options);
 
-    let avatar = `https://render-${args.region}.worldofwarcraft.com/character/${response.thumbnail}` + "";
+    let factionIcon = `https://worldofwarcraft.akamaized.net/static/components/Logo/Logo-${response.faction === 0 ? 'alliance' : 'horde'}.png`;
 
-    let stats = [{
-      name: 'Character',
-      value: `${response.level} ${wowConstants.race[response.race]} ${wowConstants.class[response.class]}`
-    },
-    {
-      name: 'Achievement Points',
-      value: response.achievementPoints
-    },
-    {
-      name: 'Item Level',
-      value: response.items.averageItemLevel
-    }];
+    let avatar = `https://render-${args.region}.worldofwarcraft.com/character/${response.thumbnail}`;
+
+    let stats = [
+      {
+        name: 'Character',
+        value: `${response.level} ${wowConstants.race[response.race]} ${wowConstants.class[response.class]}`
+      },
+      {
+        name: 'Achievement Points',
+        value: response.achievementPoints
+      },
+      {
+        name: 'Item Level',
+        value: response.items.averageItemLevel
+      }
+    ];
 
     if (response.guild) {
       stats.push(
@@ -114,7 +117,7 @@ exports.exec = async (Bastion, message, args) => {
           name: 'Guild',
           value: response.guild.name
         }
-      )
+      );
     }
 
     message.channel.send({
@@ -136,7 +139,7 @@ exports.exec = async (Bastion, message, args) => {
   }
   catch (e) {
     if (e.name === 'StatusCodeError') {
-      if (e.statusCode == '404') {
+      if (e.statusCode === '404') {
         return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
       }
       return Bastion.emit('error', e.statusCode, e.error.message, message.channel);
@@ -151,7 +154,7 @@ exports.config = {
   argsDefinitions: [
     { name: 'character', type: String, defaultOption: true },
     { name: 'realm', type: String, alias: 'r' },
-    { name: 'region', type: String, alias: 'e', defaultValue: 'us' },
+    { name: 'region', type: String, alias: 'e', defaultValue: 'us' }
   ]
 };
 
@@ -162,5 +165,7 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'wow <character> <realm> [-r <region>]',
-  example: ['wow Fallken -r Burning-Blade -e eu ']
+  example: [
+    'wow Fallken -r Burning-Blade -e eu '
+  ]
 };
