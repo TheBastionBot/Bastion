@@ -84,31 +84,35 @@ exports.exec = async (Bastion, message, args) => {
     args.region = args.region.toLowerCase();
     let locale = args.region === 'us' ? 'en-us' : 'en-gb';
 
-    let requestUrl = `https://${args.region}.api.battle.net/wow/character/${args.realm}/${args.character}?fields=guild,items&locale=${locale}&apikey=${Bastion.credentials.battleNetApiKey}`;
-
     let options = {
-      url: requestUrl,
+      url: `https://${args.region}.api.battle.net/wow/character/${args.realm}/${args.character}`,
+      qs: {
+        fields: 'guild,items',
+        locale: locale,
+        apikey: Bastion.credentials.battleNetApiKey
+      },
       json: true
     };
 
     let response = await request(options);
 
     let factionIcon = `https://worldofwarcraft.akamaized.net/static/components/Logo/Logo-${response.faction === 0 ? 'alliance' : 'horde'}.png`;
-
     let avatar = `https://render-${args.region}.worldofwarcraft.com/character/${response.thumbnail}`;
 
     let stats = [
       {
         name: 'Character',
-        value: `${response.level} ${wowConstants.race[response.race]} ${wowConstants.class[response.class]}`
+        value: `${response.level} - ${wowConstants.race[response.race]} - ${wowConstants.class[response.class]}`
       },
       {
         name: 'Achievement Points',
-        value: response.achievementPoints
+        value: response.achievementPoints,
+        inline: true
       },
       {
         name: 'Item Level',
-        value: response.items.averageItemLevel
+        value: response.items.averageItemLevel,
+        inline: true
       }
     ];
 
@@ -116,13 +120,15 @@ exports.exec = async (Bastion, message, args) => {
       stats.push(
         {
           name: 'Guild',
-          value: response.guild.name
+          value: response.guild.name,
+          inline: true
         }
       );
     }
 
     message.channel.send({
       embed: {
+        color: Bastion.colors.BLUE,
         author: {
           name: response.name,
           url: `https://worldofwarcraft.com/${locale}/character/${args.realm}/${args.character}`,
@@ -131,6 +137,9 @@ exports.exec = async (Bastion, message, args) => {
         fields: stats,
         thumbnail: {
           url: avatar
+        },
+        footer: {
+          text: 'Powered by Blizzard Battle.net'
         }
       }
     }).catch(e => {
@@ -167,6 +176,6 @@ exports.help = {
   userVoicePermission: '',
   usage: 'wow <CHARACTER> <--realm REALM> [-region <REGION>]',
   example: [
-    'wow Fallken --realm Burning-Blade --region us'
+    'wow Fallken --realm Burning-Blade --region EU'
   ]
 };
