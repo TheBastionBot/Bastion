@@ -81,6 +81,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
+    args.region = args.region.toLowerCase();
     let locale = args.region === 'us' ? 'en-us' : 'en-gb';
 
     let requestUrl = `https://${args.region}.api.battle.net/wow/character/${args.realm}/${args.character}?fields=guild,items&locale=${locale}&apikey=${Bastion.credentials.battleNetApiKey}`;
