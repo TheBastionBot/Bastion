@@ -1235,6 +1235,10 @@
     "description": "Shows a would you rather situation. See how you and your friends answer that!",
     "module": "Games"
   },
+  "wow": {
+    "description": "Get stats of any World of Warcraft character from the Armory.",
+    "module": "Game Stats"
+  },
   "xkcd": {
     "description": "Shows a xkcd comic.",
     "module": "Fun"
