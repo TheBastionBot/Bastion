@@ -154,7 +154,7 @@ exports.config = {
   argsDefinitions: [
     { name: 'character', type: String, defaultOption: true },
     { name: 'realm', type: String, alias: 'r' },
-    { name: 'region', type: String, alias: 'e', defaultValue: 'us' }
+    { name: 'region', type: String, defaultValue: 'us' }
   ]
 };
 
@@ -164,8 +164,8 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'wow <character> <realm> [-r <region>]',
+  usage: 'wow <CHARACTER> <--realm REALM> [-region <REGION>]',
   example: [
-    'wow Fallken -r Burning-Blade -e eu '
+    'wow Fallken --realm Burning-Blade --region us'
   ]
 };
