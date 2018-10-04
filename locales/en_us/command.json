@@ -923,6 +923,9 @@
   "wouldYouRather": {
     "description": "Shows a would you rather situation. See how you and your friends answer that!"
   },
+  "wow": {
+    "description": "Get stats of any World of Warcraft character from the Armory."
+  },
   "xkcd": {
     "description": "Shows a xkcd comic."
   },
