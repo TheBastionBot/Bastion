@@ -374,6 +374,9 @@
   "ignoreWordFilter": {
     "description": "Add/remove channels/roles to/from the word filter ignored list. Bastion will not filter words posted in these channels or by these roles."
   },
+  "ignoreXP": {
+    "description": "Add/remove channels/roles to/from the experience ignored list. Users will not gain experience in these channels or if they have these roles."
+  },
   "inRole": {
     "description": "Shows members that have a specified role in your Discord server."
   },

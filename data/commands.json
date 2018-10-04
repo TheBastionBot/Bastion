@@ -499,6 +499,10 @@
     "description": "Add/remove channels/roles to/from the word filter ignored list. Bastion will not filter words posted in these channels or by these roles.",
     "module": "Guild Admin"
   },
+  "ignoreXP": {
+    "description": "Add/remove channels/roles to/from the experience ignored list. Users will not gain experience in these channels or if they have these roles.",
+    "module": "Guild Admin"
+  },
   "inRole": {
     "description": "Shows members that have a specified role in your Discord server.",
     "module": "Info"
