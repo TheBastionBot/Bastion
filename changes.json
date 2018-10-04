@@ -62,7 +62,8 @@
     "`apod` - Get the Astronomy Picture of the Day from NASA.",
     "`setProfilePicture` - Sets your profile picture that shows up in the Bastion user profile.",
     "`book` - Shows details about the specified book.",
-    "`ignoreXP` - Set channels and/or roles to be ignored for experience."
+    "`ignoreXP` - Set channels and/or roles to be ignored for experience.",
+    "`wow` - Get stats of any World of Warcraft character from the Armory."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
