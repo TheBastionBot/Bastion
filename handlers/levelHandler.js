@@ -42,11 +42,26 @@ module.exports = async message => {
       },
       include: [
         {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'ignoreXP' ]
+        },
+        {
           model: message.client.database.models.role,
-          attributes: [ 'roleID', 'level' ]
+          attributes: [ 'roleID', 'level', 'ignoreXP' ]
         }
       ]
     });
+
+
+    let experienceIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreXP).map(model => model.dataValues.channelID);
+    let isIgnoredChannel = experienceIgnoredChannels && experienceIgnoredChannels.includes(message.channel.id);
+
+    if (isIgnoredChannel) return;
+
+    let experienceIgnoredRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.ignoreXP).map(model => model.dataValues.roleID);
+    let hasIgnoredRole = experienceIgnoredRoles && message.member.roles.some(role => experienceIgnoredRoles.includes(role.id));
+
+    if (hasIgnoredRole) return;
 
 
     guildMemberModel.dataValues.experiencePoints = parseInt(guildMemberModel.dataValues.experiencePoints);
