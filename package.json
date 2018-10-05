@@ -38,7 +38,7 @@
     "kitsu": "~6.4.0",
     "locke": "github:TheBastionBot/Locke#v0.9.0",
     "lzutf8": "~0.5.5",
-    "mathjs": "~5.1.0",
+    "mathjs": "~5.2.0",
     "node-opus": "~0.3.0",
     "overwatch-js": "~1.8.0",
     "pokedex-api": "~1.1.1",
