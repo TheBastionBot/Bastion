@@ -9,7 +9,7 @@
 <div align='center'>
 
 [![Add Bastion to Discord](https://i.imgur.com/RMXPGk9.png)](https://bastionbot.org/add 'Add Bastion to Discord')
-[![Join Bastion HQ](https://i.imgur.com/RiwFUY6.png)](https://discord.gg/fzx8fkt 'Join Bastion HQ')
+[![Join for Bastion HQ](https://i.imgur.com/RiwFUY6.png)](https://discord.gg/fzx8fkt 'Join Bastion HQ')
 
 </div>
 
