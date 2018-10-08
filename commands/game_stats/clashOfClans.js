@@ -52,6 +52,9 @@ const statStrings = {
 
 exports.exec = async (Bastion, message, args) => {
   try {
+    if (!args.type) {
+      args.type = 'clan';
+    }
     if (!args.type && !args.needle) {
       /**
        * The command was ran with invalid parameters.
