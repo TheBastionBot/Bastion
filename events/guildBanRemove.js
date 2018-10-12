@@ -1,21 +1,27 @@
 /**
  * @file guildBanRemove event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = async (guild, user) => {
   try {
-    let guildSettings = await guild.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    let guildModel = await guild.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: guild.id
+      }
+    });
 
-    let logChannel = guild.channels.get(guildSettings.log);
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
     logChannel.send({
       embed: {
         color: guild.client.colors.GREEN,
-        title: guild.client.strings.events(guild.language, 'guildBanRemove'),
+        title: guild.client.i18n.event(guild.language, 'guildBanRemove'),
         fields: [
           {
             name: 'User',

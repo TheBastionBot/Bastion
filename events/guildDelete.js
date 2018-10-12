@@ -1,17 +1,21 @@
 /**
  * @file guildDelete event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = guild => {
-  guild.client.db.run(`DELETE FROM guildSettings WHERE guildID=${guild.id}`).catch(e => {
+  guild.client.database.models.guild.destroy({
+    where: {
+      guildID: guild.id
+    }
+  }).catch(e => {
     guild.client.log.error(e);
   });
 
   guild.client.webhook.send('bastionLog', {
     color: guild.client.colors.RED,
-    title: guild.client.strings.events(guild.language, 'guildDelete'),
+    title: guild.client.i18n.event(guild.language, 'guildDelete'),
     fields: [
       {
         name: 'Server Name',

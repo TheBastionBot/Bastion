@@ -1,17 +1,17 @@
 /**
  * @file The starting point of Bastion
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
-const credentials = require('./settings/credentials.json');
-const config = require('./settings/config.json');
-const Manager = new Discord.ShardingManager('./bastion.js', {
-  totalShards: config.shardCount,
+const Tesseract = xrequire('tesseract');
+const credentials = xrequire('./settings/credentials.json');
+const configurations = xrequire('./settings/config.json');
+const Manager = new Tesseract.ShardingManager('./bastion.js', {
+  totalShards: configurations.shardCount,
   token: credentials.token
 });
-const log = require('./handlers/logHandler');
+const log = xrequire('./handlers/logHandler');
 
 Manager.spawn();
 

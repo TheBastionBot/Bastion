@@ -1,14 +1,14 @@
 /**
  * @file commandUsage event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = (message, command) => {
   message.channel.send({
     embed: {
       color: message.client.colors.RED,
-      title: message.client.strings.error(message.guild.language, 'invalidUse'),
+      title: 'Invalid Use',
       description: `That's not how you use the \`${command.name}\` command.`,
       fields: [
         {

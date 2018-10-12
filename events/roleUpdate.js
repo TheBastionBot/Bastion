@@ -1,23 +1,29 @@
 /**
  * @file roleUpdate event
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 module.exports = async (oldRole, newRole) => {
-  if (oldRole.name === newRole.name) return;
-
   try {
-    let guildSettings = await newRole.client.db.get(`SELECT log FROM guildSettings WHERE guildID=${newRole.guild.id}`);
-    if (!guildSettings || !guildSettings.log) return;
+    if (oldRole.name === newRole.name) return;
 
-    let logChannel = newRole.guild.channels.get(guildSettings.log);
+    let guildModel = await newRole.client.database.models.guild.findOne({
+      attributes: [ 'serverLog' ],
+      where: {
+        guildID: newRole.guild.id
+      }
+    });
+
+    if (!guildModel || !guildModel.dataValues.serverLog) return;
+
+    let logChannel = newRole.guild.channels.get(guildModel.dataValues.serverLog);
     if (!logChannel) return;
 
     logChannel.send({
       embed: {
         color: newRole.client.colors.ORANGE,
-        title: newRole.guild.client.strings.events(newRole.guild.language, 'roleUpdate'),
+        title: newRole.guild.client.i18n.event(newRole.guild.language, 'roleUpdate'),
         fields: [
           {
             name: 'New Role Name',

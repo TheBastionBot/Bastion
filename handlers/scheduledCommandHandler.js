@@ -1,11 +1,11 @@
 /**
  * @file scheduledCommandHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const CronJob = require('cron').CronJob;
-const parseArgs = require('command-line-args');
+const CronJob = xrequire('cron').CronJob;
+const parseArgs = xrequire('command-line-args');
 
 /**
  * Handles Bastion's scheduled commands
@@ -15,26 +15,28 @@ const parseArgs = require('command-line-args');
 module.exports = Bastion => {
   setTimeout(async () => {
     try {
-      let scheduledCommands = await Bastion.db.all('SELECT cronExp, command, channelID, messageID, arguments FROM scheduledCommands');
+      let scheduledCommandModel = await Bastion.database.models.scheduledCommand.findAll({
+        attributes: [ 'channelID', 'messageID', 'cronExp', 'command', 'arguments' ]
+      });
 
-      if (scheduledCommands.length === 0) return;
+      if (!scheduledCommandModel.length) return;
 
-      for (let i = 0; i < scheduledCommands.length; i++) {
-        let cronExp = scheduledCommands[i].cronExp,
-          command = scheduledCommands[i].command.toLowerCase(), cmd,
-          channel = Bastion.channels.get(scheduledCommands[i].channelID);
+      for (let i = 0; i < scheduledCommandModel.length; i++) {
+        let cronExp = scheduledCommandModel[i].dataValues.cronExp,
+          command = scheduledCommandModel[i].dataValues.command.toLowerCase(), cmd,
+          channel = Bastion.channels.get(scheduledCommandModel[i].dataValues.channelID);
         if (!channel) {
-          removeScheduledCommandByChannelID(Bastion, scheduledCommands[i].channelID);
+          removeScheduledCommandByChannelID(Bastion, scheduledCommandModel[i].dataValues.channelID);
           continue;
         }
-        let args = scheduledCommands[i].arguments ? scheduledCommands[i].arguments.split(' ') : '';
+        let args = scheduledCommandModel[i].dataValues.arguments ? scheduledCommandModel[i].dataValues.arguments.split(' ') : '';
 
         let job = new CronJob(cronExp,
           async function () {
-            let message = await channel.fetchMessage(scheduledCommands[i].messageID).catch(e => {
+            let message = await channel.fetchMessage(scheduledCommandModel[i].dataValues.messageID).catch(e => {
               if (e.toString().includes('Unknown Message')) {
                 job.stop();
-                removeScheduledCommandByMessageID(Bastion, scheduledCommands[i].messageID);
+                removeScheduledCommandByMessageID(Bastion, scheduledCommandModel[i].dataValues.messageID);
               }
               else {
                 Bastion.log.error(e);
@@ -75,7 +77,11 @@ module.exports = Bastion => {
  * @returns {void}
  */
 function removeScheduledCommandByChannelID(Bastion, channelID) {
-  Bastion.db.run(`DELETE FROM scheduledCommands WHERE channelID='${channelID}'`).catch(e => {
+  Bastion.database.models.scheduledCommand.destroy({
+    where: {
+      channelID: channelID
+    }
+  }).catch(e => {
     Bastion.log.error(e);
   });
 }
@@ -87,7 +93,11 @@ function removeScheduledCommandByChannelID(Bastion, channelID) {
  * @returns {void}
  */
 function removeScheduledCommandByMessageID(Bastion, messageID) {
-  Bastion.db.run(`DELETE FROM scheduledCommands WHERE messageID='${messageID}'`).catch(e => {
+  Bastion.database.models.scheduledCommand.destroy({
+    where: {
+      messageID: messageID
+    }
+  }).catch(e => {
     Bastion.log.error(e);
   });
 }
@@ -99,7 +109,11 @@ function removeScheduledCommandByMessageID(Bastion, messageID) {
  * @returns {void}
  */
 function removeScheduledCommandByCommandName(Bastion, commandName) {
-  Bastion.db.run(`DELETE FROM scheduledCommands WHERE command='${commandName}'`).catch(e => {
+  Bastion.database.models.scheduledCommand.destroy({
+    where: {
+      command: commandName
+    }
+  }).catch(e => {
     Bastion.log.error(e);
   });
 }
