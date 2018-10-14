@@ -32,3 +32,9 @@
 </a>
 
 </div>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/75JQJpb.png" alt="WARNING" />
+
+</div>
