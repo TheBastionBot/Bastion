@@ -78,7 +78,8 @@
     "rust": "Get stats of any Rust game server.",
     "smite": "Get stats of any Smite player.",
     "teamFortress2": "Get stats of any Team Fortress 2 game server.",
-    "unturned": "Get stats of any Unturned game server."
+    "unturned": "Get stats of any Unturned game server.",
+    "wow": "Get stats of any World of Warcraft character from the Armory."
   },
   "games": {
     "acrophobia": "Starts a acrophobia game. The user will have to make a sentence from the given acronym within the given time. After the submission is done, users can vote for the best sentence, the sentence to get highest number of votes win.",
