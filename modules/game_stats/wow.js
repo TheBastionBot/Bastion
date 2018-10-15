@@ -150,7 +150,7 @@ exports.exec = async (Bastion, message, args) => {
   catch (e) {
     if (e.name === 'StatusCodeError') {
       if (e.statusCode === 404) {
-         return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
+        return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'notFound', true, 'player'), message.channel);
       }
       return Bastion.emit('error', e.statusCode, e.error.message, message.channel);
     }
