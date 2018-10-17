@@ -1,11 +1,7 @@
 {
   "date": "October 15, 2018",
-  "image": "https://i.imgur.com/7kn7CS1.gif",
+  "image": "https://i.imgur.com/L2hHAUu.gif",
   "World of Warcraft": [
-    "`wow` - Get stats of any World of Warcraft character from the Armory."
-  ],
-  "BUGS ARE GONE": [
-    "`translate` command will now work again!",
-    "Cats are back! You can now get back to seeing cats using the `cat` command."
+    "You can now get stats of any World of Warcraft character from the Armory using the `wow` command."
   ]
 }
