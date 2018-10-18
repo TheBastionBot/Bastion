@@ -5,7 +5,12 @@
  */
 
 const request = xrequire('request-promise-native');
-const patreon = xrequire('./settings/credentials.json').patreon;
+const fs = require('fs');
+const YAML = require('yaml');
+
+// eslint-disable-next-line no-sync
+const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
+const { patreon } = YAML.parse(credentialsFile);
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {

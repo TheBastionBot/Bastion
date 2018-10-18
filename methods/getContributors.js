@@ -5,7 +5,12 @@
  */
 
 const request = xrequire('request-promise-native');
-const github = xrequire('./settings/credentials.json').github;
+const fs = require('fs');
+const YAML = require('yaml');
+
+// eslint-disable-next-line no-sync
+const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
+const { github } = YAML.parse(credentialsFile);
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {
