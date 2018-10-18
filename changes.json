@@ -4,6 +4,9 @@
   "WORLD OF WARCRAFT": [
     "You can now get stats of any World of Warcraft character from the Armory using the `wow` command."
   ],
+  "GET TO KNOW POKEMON BETTER": [
+    "When you use the `pokemon` command, you can now read a little bit about them."
+  ],
   "THE OTHER CATEGORY": [
     "Lots of under-the-hood improvements & fixes."
   ]
