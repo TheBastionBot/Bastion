@@ -1,6 +1,4 @@
-### Bastion BOT settings ###
-settings/credentials.json
-settings/config.json
+### Bastion settings ###
 settings/credentials.yaml
 settings/configurations.yaml
 data/bastion.db
