@@ -6,8 +6,7 @@
 
 const Tesseract = xrequire('tesseract');
 const BASTION = new Tesseract.Client({
-  configurations: xrequire('./settings/config.json'),
-  credentials: xrequire('./settings/credentials.json'),
+  settingsDirectory: './settings',
   disabledEvents: [
     'USER_NOTE_UPDATE',
     'TYPING_START',
