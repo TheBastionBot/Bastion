@@ -1,6 +1,8 @@
 ### Bastion BOT settings ###
 settings/credentials.json
 settings/config.json
+settings/credentials.yaml
+settings/configurations.yaml
 data/bastion.db
 data/backup*
 
