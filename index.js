@@ -5,8 +5,16 @@
  */
 
 const Tesseract = xrequire('tesseract');
-const credentials = xrequire('./settings/credentials.json');
-const configurations = xrequire('./settings/config.json');
+const fs = require('fs');
+const YAML = require('yaml');
+
+/* eslint-disable no-sync */
+const configurationsFile = fs.readFileSync('./settings/configurations.yaml', 'utf8');
+const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
+/* eslint-enable no-sync */
+const configurations = YAML.parse(configurationsFile);
+const credentials = YAML.parse(credentialsFile);
+
 const Manager = new Tesseract.ShardingManager('./bastion.js', {
   totalShards: configurations.shardCount,
   token: credentials.token
