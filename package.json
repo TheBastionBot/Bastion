@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "6.17.2",
+  "version": "6.18.0",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -25,21 +25,20 @@
     "@k3rn31p4nic/google-translate-api": "~1.0.5",
     "chalk": "~2.4.1",
     "cheerio": "~1.0.0-rc.2",
-    "cleverbot.js": "~1.0.0",
-    "color-convert": "~1.9.2",
+    "color-convert": "~1.9.3",
     "command-line-args": "github:k3rn31p4nic/command-line-args",
-    "cron": "~1.4.0",
-    "discord.js": "~11.3.2",
+    "cron": "~1.4.1",
+    "discord.js": "~11.4.2",
     "gamedig": "~1.0.46",
     "hirez.js": "~2.0.0",
-    "kitsu": "~6.2.3",
+    "kitsu": "~6.4.0",
     "lzutf8": "~0.5.5",
-    "mathjs": "~5.1.0",
+    "mathjs": "~5.2.0",
     "moment": "^2.22.2",
-    "node-json-db": "~0.7.5",
+    "node-json-db": "~0.9.1",
     "opusscript": "~0.0.6",
     "overwatch-js": "~1.8.0",
-    "pokedex-api": "~1.1.1",
+    "pokedex-api": "~1.1.2",
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.88.0",
     "request-promise-native": "~1.0.5",
@@ -51,7 +50,7 @@
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^5.0.1"
+    "eslint": "^5.7.0"
   },
   "optionalDependencies": {
     "node-opus": "~0.3.0"
