@@ -1,7 +1,10 @@
 {
-  "date": "October 15, 2018",
+  "date": "October 18, 2018",
   "image": "https://i.imgur.com/L2hHAUu.gif",
-  "World of Warcraft": [
+  "WORLD OF WARCRAFT": [
     "You can now get stats of any World of Warcraft character from the Armory using the `wow` command."
+  ],
+  "THE OTHER CATEGORY": [
+    "Lots of under-the-hood improvements & fixes."
   ]
 }
