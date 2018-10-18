@@ -25,9 +25,9 @@
     "@k3rn31p4nic/google-translate-api": "~1.0.5",
     "chalk": "~2.4.1",
     "cheerio": "~1.0.0-rc.2",
-    "color-convert": "~1.9.2",
+    "color-convert": "~1.9.3",
     "command-line-args": "github:k3rn31p4nic/command-line-args",
-    "cron": "~1.4.0",
+    "cron": "~1.4.1",
     "discord.js": "~11.4.2",
     "gamedig": "~1.0.46",
     "hirez.js": "~2.0.0",
@@ -38,7 +38,7 @@
     "node-json-db": "~0.9.1",
     "opusscript": "~0.0.6",
     "overwatch-js": "~1.8.0",
-    "pokedex-api": "~1.1.1",
+    "pokedex-api": "~1.1.2",
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.88.0",
     "request-promise-native": "~1.0.5",
@@ -50,7 +50,7 @@
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^5.0.1"
+    "eslint": "^5.7.0"
   },
   "optionalDependencies": {
     "node-opus": "~0.3.0"
