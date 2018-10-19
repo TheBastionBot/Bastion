@@ -4,7 +4,13 @@
  * @license GPL-3.0
  */
 
-const credentials = xrequire('./settings/credentials.json');
+const fs = require('fs');
+const YAML = require('yaml');
+
+// eslint-disable-next-line no-sync
+const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
+const credentials = YAML.parse(credentialsFile);
+
 const HiRez = xrequire('hirez.js');
 const hirez = new HiRez({
   devId: credentials.HiRezDevId,

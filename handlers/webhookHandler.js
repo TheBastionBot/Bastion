@@ -10,7 +10,7 @@ module.exports = class WebhookHandler {
   /**
    * Handles the webhooks sent by Bastion.
    * @constructor
-   * @param {Object} webhooks The webhooks object in the `credentials.json` file.
+   * @param {Object} webhooks The webhooks object in the `credentials.yaml` file.
    */
   constructor(webhooks) {
     if (!webhooks) return null;

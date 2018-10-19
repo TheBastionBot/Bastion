@@ -4,15 +4,14 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   try {
-    // eslint-disable-next-line no-sync
-    let settings = Bastion.methods.listFilesSync('settings');
-    for (let file of settings) {
-      delete xrequire.cache[xrequire.resolve(`./settings/${file}`)];
+    if (Bastion.shard) {
+      await Bastion.shard.broadcastEval('this.reloadSettings()');
     }
-    Bastion.configurations = xrequire('./settings/config.json');
-    Bastion.credentials = xrequire('./settings/credentials.json');
+    else {
+      Bastion.reloadSettings();
+    }
 
     message.channel.send({
       embed: {

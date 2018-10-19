@@ -15,8 +15,8 @@ install:
 platform: x64
 build: off
 before_test:
-  - cp settings\credentials_example.json settings\credentials.json
-  - cp settings\config_example.json settings\config.json
+  - cp settings\credentials.example.yaml settings\credentials.yaml
+  - cp settings\configurations.example.yaml settings\configurations.yaml
 test_script:
   - node --version
   - yarn --version
