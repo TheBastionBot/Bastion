@@ -31,6 +31,8 @@ const statStrings = {
     cos: 'Clash of Stats'
   },
   player: {
+    tag: 'Tag',
+    name: 'Name',
     expLevel: 'Exp level',
     league: 'League',
     trophies: 'Trophies',
