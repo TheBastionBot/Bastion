@@ -5,10 +5,9 @@
  */
 const request = xrequire('request-promise-native');
 const Discord = require('discord.js');
+const COC_API = 'https://api.clashofclans.com/v1/';
 const statStrings = {
   clan: {
-    tag: 'Tag',
-    name: 'Name',
     type: 'Type',
     description: 'Description',
     clanLevel: 'Clan level',
@@ -23,9 +22,15 @@ const statStrings = {
     isWarLogPublic: 'Is war log public?',
     members: 'Members'
   },
+  clanByName: {
+    clanLevel: 'Clan level',
+    members: 'Members',
+    clanPoints: 'Clan points',
+    requiredTrophies: 'Required Trophies',
+    type: 'Type',
+    cos: 'Clash of Stats'
+  },
   player: {
-    tag: 'Tag',
-    name: 'Name',
     expLevel: 'Exp level',
     league: 'League',
     trophies: 'Trophies',
@@ -47,24 +52,42 @@ const statStrings = {
     troops: 'Troops',
     heroes: 'Heroes',
     spells: 'Spells'
+  },
+  playerTag: {
+    townHallLevel: 'Town hall level',
+    expLevel: 'Exp',
+    trophies: 'Trophies',
+    clan: 'Clan',
+    role: 'Role in clan'
+  },
+  type: {
+    inviteOnly: 'Invite only',
+    open: 'Open',
+    closed:'Closed'
+  },
+  role: {
+    admin: 'Admin',
+    leader: 'Leader',
+    coLeader: 'Co-leader',
+    elder: 'Elder',
+    member: 'Member'
   }
 };
 
 exports.exec = async (Bastion, message, args) => {
   try {
-    if (!args.type) {
-      args.type = 'clan';
-    }
-    if (!args.type && !args.needle) {
+    if (!args.needle) {
       /**
        * The command was ran with invalid parameters.
        * @fires commandUsage
        */
       return Bastion.emit('commandUsage', message, this.help);
     }
-
-    // If user doesn't provide the platform, default to PC
-    if (args.needle && args.needle.length <= 3) {
+    // #VJUL28PP
+    if (
+      args.needle &&
+      (args.needle.charAt(0) !== '#' && args.needle.length <= 3)
+    ) {
       // API requires search string to be longer than three characters
       return Bastion.emit(
         'error',
@@ -73,66 +96,176 @@ exports.exec = async (Bastion, message, args) => {
         message.channel
       );
     }
+    // if (
+    //   args.needle &&
+    //   (args.needle.charAt(0) === '#' && args.needle.length !== 9)
+    // ) {
+    //   // TAG is 9 character long
+    //   return Bastion.emit(
+    //     'error',
+    //     '',
+    //     Bastion.i18n.error(message.guild.language, 'tagNotValid', '9'),
+    //     message.channel
+    //   );
+    // }
 
-    let searchUri =
-      args.type === 'clan'
-        ? `https://api.clashofclans.com/v1/clans?name=${encodeURIComponent(args.needle)}&limit=${
-          args.limit
-        }`
-        : `https://api.clashofclans.com/v1/players/${encodeURIComponent(args.needle)}`;
+    let tagSearch = args.needle.charAt(0) === '#';
+    let player = typeof args.searchplayer !== 'undefined';
+    let clanMemebers = typeof args.clanMembers !== 'undefined';
+    let searchUri = tagSearch
+      ? `clans/${encodeURIComponent(args.needle)}`
+      : `clans?name=${encodeURIComponent(args.needle)}&limit=6`;
+
+    if (player) {
+      searchUri = searchUri.replace(/clans\//gi, 'players/');
+    }
+    else if (clanMemebers) {
+      searchUri = `${searchUri}/members`;
+    }
 
     let options = {
-      uri: searchUri,
+      uri: COC_API + searchUri,
       headers: {
         Authorization: `Bearer ${Bastion.credentials.clashOfClansAPIKey}`,
-        'User-Agent': `Bastion/${Bastion.package.version} (${Bastion.user.tag}; ${
-          Bastion.user.id
-        }) https://bastionbot.org`
+        'User-Agent': `Bastion/${Bastion.package.version} (${
+          Bastion.user.tag
+        }; ${Bastion.user.id}) https://bastionbot.org`
       },
       json: true
     };
+
     let result = await request(options);
     if (result.error) {
-
       return Bastion.emit('error', 'Error', result.error, message.channel);
     }
 
-    if (args.type === 'clan') {
-      result.items.map(stat => {
-        let cocLink =
-          args.type === 'clan'
-            ? `https://clashofstats.com/clans/${stat.tag.replace('#', '')}`
-            : `https://clashofstats.com/players/${stat.tag.replace('#', '')}`;
-        let linkString =
-          args.type === 'clan'
-            ? `Check more at [Clash of Stats](${cocLink})`
-            : `[Player info](${cocLink}) | [Clan info](https://clashofstats.com/clans/${stat.clan.tag.replace(
-              '#',
-              ''
-            )} - (from Clash of Stats)`;
+    // Create embed
+    let embed = new Discord.RichEmbed().
+      setColor(Bastion.colors.BLUE).
+      setTimestamp();
 
-        let embed = new Discord.RichEmbed().
-          setTitle(`${args.type} search`).
-          setDescription(
-            `Here's ${result.items.length} search results for ${args.type} ${
-              args.needle
-            }. ${linkString}`
-          ).
-          setColor(Bastion.colors.BLUE).
-          setAuthor(stat.name).
-          setThumbnail(stat.badgeUrls.large).
-          setTimestamp();
-        Object.keys(stat).map(row => {
-          // Map only keys found in the statStrings variable
-          if (statStrings[args.type][row] !== undefined) {
-            embed.addField(statStrings[args.type][row], stat[row], true);
+    if (!tagSearch) {
+      embed.setDescription(`Showing ${result.items.length} results for '${args.needle}'`);
+      // Seach by string so several results maybe
+      result.items.map((searchResult, i) => {
+        if (i !== 0 && i % 2 === 0){
+          embed.addBlankField(true);
+        }
+        let keys = Object.keys(statStrings['clanByName']);
+
+        let cosLink =
+       `https://clashofstats.com/clans/${searchResult.tag.replace(
+         '#',
+         ''
+       )}/members`;
+
+
+        embed.addField(
+          `${searchResult.name} ${searchResult.tag}`,
+          keys.map(key => {
+            let value = searchResult[key];
+            if (key === 'members') {
+              value = `${value}/50`;
+            }
+            else if (key === 'type') {
+              value = statStrings['type'][value];
+            }
+            else if (key === 'cos') {
+              value = `[Here](${cosLink})`;
+            }
+            return `**${statStrings['clanByName'][key]}:** \t${value}`;
+          }),
+          true
+        );
+
+      });
+      if (result.items.length % 3 === 0) {
+        embed.addBlankField(true);
+      }
+    }
+    else {
+      // TODO
+      if (clanMemebers) {
+        // result.items.map((member) => {
+
+        let keys = Object.keys(statStrings['role']);
+        keys.map(role => {
+          if (result.items.some(member => member.role === role)) {
+
+            let memberList = result.items.
+              filter(member => member.role === role).
+              map(member =>  `** ${member.name} ** ${member.tag}`);
+
+            embed.addField(
+              statStrings['role'][role],
+              memberList,
+              false
+            );
           }
         });
 
-        message.channel.send({ embed }).catch(e => {
-          Bastion.log.error(e);
+      }
+      else {
+
+        let cosLink = !player
+          ? `https://clashofstats.com/clans/${result.tag.replace(
+            '#',
+            ''
+          )}/members`
+          : `https://clashofstats.com/players/${result.tag.replace('#', '')}`;
+
+        let cocLink = !player
+          ? `https://link.clashofclans.com/?action=OpenClanProfile&tag=${encodeURIComponent(
+            args.needle
+          )}`
+          : `https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${encodeURIComponent(
+            args.needle
+          )}`;
+
+        embed.setTitle(`${result.name} ${result.tag}`).setDescription(
+          `:mag: View all on Clash of Stats ${cosLink}\r\n\r\nOpen in Clash of Clans ${cocLink}\r\n
+          `
+        );
+
+        Object.keys(result).map(row => {
+        // clan or player?
+          const cp = player ? 'player' : 'clan';
+          // Map only keys found in the statStrings variable
+          if (statStrings[`${player ? 'player' : 'clan'}`][row] !== undefined) {
+            if (row === 'clan') {
+              embed.addField(
+                statStrings[cp][row],
+                `${result[row].name} ${result[row].name}`,
+                true
+              );
+            }
+            else if (row === 'league') {
+              embed.addField(statStrings[cp][row], result[row].name, true);
+            }
+            else if (Array.isArray(result[row])) {
+              embed.addField(
+                statStrings[cp][row],
+                result[row].length ? result[row].length : 0,
+                true
+              );
+            }
+            else {
+              embed.addField(
+                statStrings[cp][row],
+                result[row] ? result[row] : 0,
+                true
+              );
+            }
+          }
         });
-      });
+      }
+    }
+    message.channel.send({ embed }).catch(e => {
+      Bastion.log.error(e);
+    });
+    /*
+    if (args.type === 'clan') {
+
     }
     else {
       let cocLink = `https://clashofstats.com/players/${result.tag.replace('#', '')}`;
@@ -168,13 +301,46 @@ exports.exec = async (Bastion, message, args) => {
         Bastion.log.error(e);
       });
     }
+    */
   }
   catch (e) {
     if (e.name === 'StatusCodeError') {
-      if (e.error.reason === 'notFound') {
+      if (e.error.code === 404) {
         return Bastion.emit('error', 'No search results', '', message.channel);
       }
-      return Bastion.emit('error', e.statusCode, e.error.reason, message.channel);
+      else if (e.error.reason === 400) {
+        return Bastion.emit(
+          'error',
+          'Incorrect parameters',
+          '',
+          message.channel
+        );
+      }
+      else if (e.error.reason === 429) {
+        return Bastion.emit(
+          'error',
+          'Request was throttled',
+          '',
+          message.channel
+        );
+      }
+      else if (e.error.reason === 500) {
+        return Bastion.emit('error', 'Unknown error', '', message.channel);
+      }
+      else if (e.error.reason === 503) {
+        return Bastion.emit(
+          'error',
+          'Server temporary unavailable',
+          '',
+          message.channel
+        );
+      }
+      return Bastion.emit(
+        'error',
+        e.statusCode,
+        e.error.reason,
+        message.channel
+      );
     }
     Bastion.log.error(e);
   }
@@ -184,10 +350,9 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'type', type: String, alias: 't', defaultValue: 'clan' },
     { name: 'needle', type: String, defaultOption: true },
-    { name: 'limit', type: Number, alias: 'l', defaultValue: 3 },
-    { name: 'search', type: Boolean, alias: 's' }
+    { name: 'searchplayer', type: String, alias: 'p' },
+    { name: 'clanMembers', type: String, alias: 'm' }
   ]
 };
 
@@ -198,5 +363,9 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'coc <SEARCH_STRING|TAG> -s <clan|player> -l <max results>',
-  example: [ 'coc "My super good clan" -s -t clan -l 3', 'coc #8JRQ2VUL3 -t player' ]
+  example: [
+    'coc "My super good clan" -s -t clan -l 3',
+    'coc #8JRQ2VUL3 -t player'
+  ]
 };
+// coc <haku>
