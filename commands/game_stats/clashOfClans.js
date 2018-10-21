@@ -71,7 +71,8 @@ const statStrings = {
     coLeader: 'Co-leader',
     elder: 'Elder',
     member: 'Member'
-  }
+  },
+  upgrades: [ 'troops', 'spells', 'heroes' ]
 };
 
 exports.exec = async (Bastion, message, args) => {
@@ -96,30 +97,20 @@ exports.exec = async (Bastion, message, args) => {
         message.channel
       );
     }
-    // if (
-    //   args.needle &&
-    //   (args.needle.charAt(0) === '#' && args.needle.length !== 9)
-    // ) {
-    //   // TAG is 9 character long
-    //   return Bastion.emit(
-    //     'error',
-    //     '',
-    //     Bastion.i18n.error(message.guild.language, 'tagNotValid', '9'),
-    //     message.channel
-    //   );
-    // }
+
 
     let tagSearch = args.needle.charAt(0) === '#';
     let player = typeof args.searchplayer !== 'undefined';
-    let clanMemebers = typeof args.clanMembers !== 'undefined';
+    let clanMembers = typeof args.clanMembers !== 'undefined';
+    let upgrades = typeof args.upgrades !== 'undefined';
     let searchUri = tagSearch
       ? `clans/${encodeURIComponent(args.needle)}`
       : `clans?name=${encodeURIComponent(args.needle)}&limit=6`;
 
-    if (player) {
+    if (player || upgrades) {
       searchUri = searchUri.replace(/clans\//gi, 'players/');
     }
-    else if (clanMemebers) {
+    else if (clanMembers) {
       searchUri = `${searchUri}/members`;
     }
 
@@ -184,9 +175,10 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
     else {
-      // TODO
-      if (clanMemebers) {
+
+      if (clanMembers) {
         // result.items.map((member) => {
+        embed.setDescription(`Clan ${args.needle} has ${result.items.length} members:`);
 
         let keys = Object.keys(statStrings['role']);
         keys.map(role => {
@@ -206,58 +198,74 @@ exports.exec = async (Bastion, message, args) => {
 
       }
       else {
+        if (upgrades) {
 
-        let cosLink = !player
-          ? `https://clashofstats.com/clans/${result.tag.replace(
-            '#',
-            ''
-          )}/members`
-          : `https://clashofstats.com/players/${result.tag.replace('#', '')}`;
+          embed.setTitle(`${result.name} Upgrades`).
+            setDescription(
+              `:mag: ${result.name} ${result.tag} upgrades:\r\n`
+            );
 
-        let cocLink = !player
-          ? `https://link.clashofclans.com/?action=OpenClanProfile&tag=${encodeURIComponent(
-            args.needle
-          )}`
-          : `https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${encodeURIComponent(
-            args.needle
-          )}`;
+          statStrings.upgrades.map(upgrade => {
+            embed.addField(upgrade, result[upgrade].map(row => {
+              return `**${row.name}** lvl ${row.level}/${row.maxLevel}`;
+            }));
+          });
+        }
+        else {
 
-        embed.setTitle(`${result.name} ${result.tag}`).setDescription(
-          `:mag: View all on Clash of Stats ${cosLink}\r\n\r\nOpen in Clash of Clans ${cocLink}\r\n
+
+          let cosLink = !player
+            ? `https://clashofstats.com/clans/${result.tag.replace(
+              '#',
+              ''
+            )}/members`
+            : `https://clashofstats.com/players/${result.tag.replace('#', '')}`;
+
+          let cocLink = !player
+            ? `https://link.clashofclans.com/?action=OpenClanProfile&tag=${encodeURIComponent(
+              args.needle
+            )}`
+            : `https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${encodeURIComponent(
+              args.needle
+            )}`;
+
+          embed.setTitle(`${result.name} ${result.tag}`).setDescription(
+            `:mag: View all on Clash of Stats ${cosLink}\r\n\r\nOpen in Clash of Clans ${cocLink}\r\n
           `
-        );
+          );
 
-        Object.keys(result).map(row => {
-        // clan or player?
-          const cp = player ? 'player' : 'clan';
-          // Map only keys found in the statStrings variable
-          if (statStrings[`${player ? 'player' : 'clan'}`][row] !== undefined) {
-            if (row === 'clan') {
-              embed.addField(
-                statStrings[cp][row],
-                `${result[row].name} ${result[row].name}`,
-                true
-              );
+          Object.keys(result).map(row => {
+            // clan or player?
+            const cp = player ? 'player' : 'clan';
+            // Map only keys found in the statStrings variable
+            if (statStrings[`${player ? 'player' : 'clan'}`][row] !== undefined) {
+              if (row === 'clan') {
+                embed.addField(
+                  statStrings[cp][row],
+                  `${result[row].name} ${result[row].name}`,
+                  true
+                );
+              }
+              else if (row === 'league') {
+                embed.addField(statStrings[cp][row], result[row].name, true);
+              }
+              else if (Array.isArray(result[row])) {
+                embed.addField(
+                  statStrings[cp][row],
+                  result[row].length ? result[row].length : 0,
+                  true
+                );
+              }
+              else {
+                embed.addField(
+                  statStrings[cp][row],
+                  result[row] ? result[row] : 0,
+                  true
+                );
+              }
             }
-            else if (row === 'league') {
-              embed.addField(statStrings[cp][row], result[row].name, true);
-            }
-            else if (Array.isArray(result[row])) {
-              embed.addField(
-                statStrings[cp][row],
-                result[row].length ? result[row].length : 0,
-                true
-              );
-            }
-            else {
-              embed.addField(
-                statStrings[cp][row],
-                result[row] ? result[row] : 0,
-                true
-              );
-            }
-          }
-        });
+          });
+        }
       }
     }
     message.channel.send({ embed }).catch(e => {
@@ -308,7 +316,7 @@ exports.exec = async (Bastion, message, args) => {
       if (e.error.code === 404) {
         return Bastion.emit('error', 'No search results', '', message.channel);
       }
-      else if (e.error.reason === 400) {
+      else if (e.error.code === 400) {
         return Bastion.emit(
           'error',
           'Incorrect parameters',
@@ -316,7 +324,7 @@ exports.exec = async (Bastion, message, args) => {
           message.channel
         );
       }
-      else if (e.error.reason === 429) {
+      else if (e.error.code === 429) {
         return Bastion.emit(
           'error',
           'Request was throttled',
@@ -324,13 +332,20 @@ exports.exec = async (Bastion, message, args) => {
           message.channel
         );
       }
-      else if (e.error.reason === 500) {
+      else if (e.error.code === 500) {
         return Bastion.emit('error', 'Unknown error', '', message.channel);
       }
-      else if (e.error.reason === 503) {
+      else if (e.error.code === 503) {
         return Bastion.emit(
           'error',
           'Server temporary unavailable',
+          '',
+          message.channel
+        );
+      }
+      else if (e.error.reason === 'invalidIp') {
+        return Bastion.emit(
+          'error', 'Your IP address is not allowed to use the API key',
           '',
           message.channel
         );
@@ -352,7 +367,8 @@ exports.config = {
   argsDefinitions: [
     { name: 'needle', type: String, defaultOption: true },
     { name: 'searchplayer', type: String, alias: 'p' },
-    { name: 'clanMembers', type: String, alias: 'm' }
+    { name: 'clanMembers', type: String, alias: 'm' },
+    { name: 'upgrades', type: String, alias: 'u' }
   ]
 };
 
