@@ -103,6 +103,7 @@ exports.exec = async (Bastion, message, args) => {
     let player = typeof args.searchplayer !== 'undefined';
     let clanMembers = typeof args.clanMembers !== 'undefined';
     let upgrades = typeof args.upgrades !== 'undefined';
+    let warlog = typeof args.warlog !== 'undefined';
     let searchUri = tagSearch
       ? `clans/${encodeURIComponent(args.needle)}`
       : `clans?name=${encodeURIComponent(args.needle)}&limit=6`;
@@ -112,6 +113,9 @@ exports.exec = async (Bastion, message, args) => {
     }
     else if (clanMembers) {
       searchUri = `${searchUri}/members`;
+    }
+    else if (warlog && tagSearch) {
+      searchUri = `${searchUri}/warlog?limit=3`;
     }
 
     let options = {
@@ -124,7 +128,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       json: true
     };
-
+    console.log(options);
     let result = await request(options);
     if (result.error) {
       return Bastion.emit('error', 'Error', result.error, message.channel);
@@ -199,7 +203,7 @@ exports.exec = async (Bastion, message, args) => {
       }
       else {
         if (upgrades) {
-
+          // Print player upgrades
           embed.setTitle(`${result.name} Upgrades`).
             setDescription(
               `:mag: ${result.name} ${result.tag} upgrades:\r\n`
@@ -210,6 +214,27 @@ exports.exec = async (Bastion, message, args) => {
               return `**${row.name}** lvl ${row.level}/${row.maxLevel}`;
             }));
           });
+        }
+
+        else if (warlog) {
+          // Print clan warlog
+
+
+          embed.setTitle(`${args.needle} Warlog`);
+          embed.setThumbnail(result.items[0].clan.badgeUrls.large);
+
+          result.items.map(war => {
+            return embed.addField(`${war.result === 'lose' ? ':skull:' : ':trophy:'} against ${war.opponent.name} (${war.opponent.tag})`,
+              `:crossed_swords: ${war.teamSize} vs. ${war.teamSize}\r
+              :star: ${war.clan.stars} | ${war.opponent.stars}\r
+              :boom: ${war.clan.destructionPercentage} | ${war.opponent.destructionPercentage}\r`
+              , false);
+          });
+          // statStrings.upgrades.map(upgrade => {
+          //   embed.addField(upgrade, result[upgrade].map(row => {
+          //     return `**${row.name}** lvl ${row.level}/${row.maxLevel}`;
+          //   }));
+          // });
         }
         else {
 
@@ -271,52 +296,15 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({ embed }).catch(e => {
       Bastion.log.error(e);
     });
-    /*
-    if (args.type === 'clan') {
 
-    }
-    else {
-      let cocLink = `https://clashofstats.com/players/${result.tag.replace('#', '')}`;
-      let playerLink = `\n\r[Player info](${cocLink})`;
-      let clanLink =
-        result.clan !== undefined
-          ? ` | [Clan info](https://clashofstats.com/clans/${result.clan.tag.replace('#', '')})`
-          : '';
-      let fromLink = ' - (from Clash of Stats)';
-      let linkString = playerLink + clanLink + fromLink;
-
-      let embed = new Discord.RichEmbed().
-        setTitle('Player search').
-        setDescription(`Here's search results for ${args.needle}.  ${linkString}`).
-        setColor(Bastion.colors.BLUE).
-        setAuthor(result.name).
-        setThumbnail(
-          result.league !== undefined
-            ? result.league.iconUrls.large
-            : result.clan !== undefined
-              ? result.clan.badgeUrls.large
-              : ''
-        ).
-        setTimestamp();
-      Object.keys(result).map(row => {
-        // Map only keys found in the statStrings variable
-        if (statStrings[args.type][row] !== undefined) {
-          embed.addField(statStrings['player'][row], result[row], true);
-        }
-      });
-
-      message.channel.send({ embed }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    */
   }
   catch (e) {
     if (e.name === 'StatusCodeError') {
-      if (e.error.code === 404) {
+
+      if (e.statusCode === 404) {
         return Bastion.emit('error', 'No search results', '', message.channel);
       }
-      else if (e.error.code === 400) {
+      else if (e.statusCode === 400) {
         return Bastion.emit(
           'error',
           'Incorrect parameters',
@@ -324,7 +312,7 @@ exports.exec = async (Bastion, message, args) => {
           message.channel
         );
       }
-      else if (e.error.code === 429) {
+      else if (e.statusCode === 429) {
         return Bastion.emit(
           'error',
           'Request was throttled',
@@ -332,10 +320,10 @@ exports.exec = async (Bastion, message, args) => {
           message.channel
         );
       }
-      else if (e.error.code === 500) {
+      else if (e.statusCode === 500) {
         return Bastion.emit('error', 'Unknown error', '', message.channel);
       }
-      else if (e.error.code === 503) {
+      else if (e.statusCode === 503) {
         return Bastion.emit(
           'error',
           'Server temporary unavailable',
@@ -343,7 +331,7 @@ exports.exec = async (Bastion, message, args) => {
           message.channel
         );
       }
-      else if (e.error.reason === 'invalidIp') {
+      else if (e.error === 'invalidIp') {
         return Bastion.emit(
           'error', 'Your IP address is not allowed to use the API key',
           '',
@@ -353,7 +341,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit(
         'error',
         e.statusCode,
-        e.error.reason,
+        e.message,
         message.channel
       );
     }
@@ -368,7 +356,9 @@ exports.config = {
     { name: 'needle', type: String, defaultOption: true },
     { name: 'searchplayer', type: String, alias: 'p' },
     { name: 'clanMembers', type: String, alias: 'm' },
-    { name: 'upgrades', type: String, alias: 'u' }
+    { name: 'upgrades', type: String, alias: 'u' },
+    { name: 'warlog', type: Number, alias: 'w' }
+
   ]
 };
 
