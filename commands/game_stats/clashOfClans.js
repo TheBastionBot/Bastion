@@ -84,10 +84,10 @@ exports.exec = async (Bastion, message, args) => {
        */
       return Bastion.emit('commandUsage', message, this.help);
     }
-    // #VJUL28PP
+
     if (
       args.needle &&
-      (args.needle.charAt(0) !== '#' && args.needle.length <= 3)
+      (args.needle.charAt(0) !== '#' && `${args.needle} ${args._unknown && args._unknown.join(' ')}`  <= 3)
     ) {
       // API requires search string to be longer than three characters
       return Bastion.emit(
@@ -100,13 +100,14 @@ exports.exec = async (Bastion, message, args) => {
 
 
     let tagSearch = args.needle.charAt(0) === '#';
+    let needle = args._unknown ? `${args.needle} ${args._unknown && args._unknown.join(' ')}` : args.needle ;
     let player = typeof args.searchplayer !== 'undefined';
     let clanMembers = typeof args.clanMembers !== 'undefined';
     let upgrades = typeof args.upgrades !== 'undefined';
     let warlog = typeof args.warlog !== 'undefined';
     let searchUri = tagSearch
-      ? `clans/${encodeURIComponent(args.needle)}`
-      : `clans?name=${encodeURIComponent(args.needle)}&limit=6`;
+      ? `clans/${encodeURIComponent(needle)}`
+      : `clans?name=${encodeURIComponent(needle)}&limit=6`;
 
     if (player || upgrades) {
       searchUri = searchUri.replace(/clans\//gi, 'players/');
@@ -128,7 +129,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       json: true
     };
-    console.log(options);
+
     let result = await request(options);
     if (result.error) {
       return Bastion.emit('error', 'Error', result.error, message.channel);
@@ -140,12 +141,10 @@ exports.exec = async (Bastion, message, args) => {
       setTimestamp();
 
     if (!tagSearch) {
-      embed.setDescription(`Showing ${result.items.length} results for '${args.needle}'`);
+      embed.setDescription(`Showing ${result.items.length} results for **${needle}**`);
       // Seach by string so several results maybe
-      result.items.map((searchResult, i) => {
-        if (i !== 0 && i % 2 === 0){
-          embed.addBlankField(true);
-        }
+      result.items.map((searchResult) => {
+
         let keys = Object.keys(statStrings['clanByName']);
 
         let cosLink =
@@ -170,7 +169,7 @@ exports.exec = async (Bastion, message, args) => {
             }
             return `**${statStrings['clanByName'][key]}:** \t${value}`;
           }),
-          true
+          false
         );
 
       });
@@ -181,7 +180,7 @@ exports.exec = async (Bastion, message, args) => {
     else {
 
       if (clanMembers) {
-        // result.items.map((member) => {
+
         embed.setDescription(`Clan ${args.needle} has ${result.items.length} members:`);
 
         let keys = Object.keys(statStrings['role']);
@@ -218,8 +217,6 @@ exports.exec = async (Bastion, message, args) => {
 
         else if (warlog) {
           // Print clan warlog
-
-
           embed.setTitle(`${args.needle} Warlog`);
           embed.setThumbnail(result.items[0].clan.badgeUrls.large);
 
@@ -230,11 +227,7 @@ exports.exec = async (Bastion, message, args) => {
               :boom: ${war.clan.destructionPercentage} | ${war.opponent.destructionPercentage}\r`
               , false);
           });
-          // statStrings.upgrades.map(upgrade => {
-          //   embed.addField(upgrade, result[upgrade].map(row => {
-          //     return `**${row.name}** lvl ${row.level}/${row.maxLevel}`;
-          //   }));
-          // });
+
         }
         else {
 
@@ -364,14 +357,13 @@ exports.config = {
 
 exports.help = {
   name: 'coc',
-  description: 'Clash of Clans integration functions.',
+  description: 'Clash of Clans player and clan lookup.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'coc <SEARCH_STRING|TAG> -s <clan|player> -l <max results>',
+  usage: 'coc <SEARCH_STRING|TAG> [parameters]',
   example: [
-    'coc "My super good clan" -s -t clan -l 3',
-    'coc #8JRQ2VUL3 -t player'
+    'coc bestclan',
+    'coc #8JRQ2VUL3 -p'
   ]
 };
-// coc <haku>
