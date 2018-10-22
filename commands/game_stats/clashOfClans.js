@@ -101,8 +101,8 @@ exports.exec = async (Bastion, message, args) => {
 
     let tagSearch = args.needle.charAt(0) === '#';
     let needle = args._unknown ? `${args.needle} ${args._unknown && args._unknown.join(' ')}` : args.needle ;
-    let player = typeof args.searchplayer !== 'undefined';
-    let clanMembers = typeof args.clanMembers !== 'undefined';
+    let player = typeof args.player !== 'undefined';
+    let clanMembers = typeof args.members !== 'undefined';
     let upgrades = typeof args.upgrades !== 'undefined';
     let warlog = typeof args.warlog !== 'undefined';
     let searchUri = tagSearch
@@ -347,8 +347,8 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'needle', type: String, defaultOption: true },
-    { name: 'searchplayer', type: String, alias: 'p' },
-    { name: 'clanMembers', type: String, alias: 'm' },
+    { name: 'player', type: String, alias: 'p' },
+    { name: 'members', type: String, alias: 'm' },
     { name: 'upgrades', type: String, alias: 'u' },
     { name: 'warlog', type: Number, alias: 'w' }
 
@@ -357,13 +357,17 @@ exports.config = {
 
 exports.help = {
   name: 'coc',
-  description: 'Clash of Clans player and clan lookup.',
+  description: 'Clash of Clans player and clan lookup. ',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'coc <SEARCH_STRING|TAG> [parameters]',
+  usage: 'coc <SEARCH_STRING|TAG> [PARAMETERS]',
   example: [
-    'coc bestclan',
-    'coc #8JRQ2VUL3 -p'
+    'coc best clan',
+    'coc #RQJ22C0G',
+    'coc #RQJ22C0G -w',
+    'coc #RQJ22C0G -m',
+    'coc #URUGVPU9 -p',
+    'coc #URUGVPU9 -u'
   ]
 };
