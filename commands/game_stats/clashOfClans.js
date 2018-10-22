@@ -87,7 +87,7 @@ exports.exec = async (Bastion, message, args) => {
 
     if (
       args.needle &&
-      (args.needle.charAt(0) !== '#' && `${args.needle} ${args._unknown && args._unknown.join(' ')}`  <= 3)
+      (args.needle.charAt(0) !== '#' && `${args.needle} ${args._unknown && args._unknown.join(' ')}`.length  <= 3)
     ) {
       // API requires search string to be longer than three characters
       return Bastion.emit(
@@ -173,9 +173,7 @@ exports.exec = async (Bastion, message, args) => {
         );
 
       });
-      if (result.items.length % 3 === 0) {
-        embed.addBlankField(true);
-      }
+
     }
     else {
 
