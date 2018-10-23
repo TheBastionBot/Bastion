@@ -249,7 +249,10 @@ exports.exec = async (Bastion, message, args) => {
             `:mag: View all on Clash of Stats ${cosLink}\r\n\r\nOpen in Clash of Clans ${cocLink}\r\n
           `
           );
-
+          if (!player) {
+            // Set clan badge
+            embed.setThumbnail(result.badgeUrls.large);
+          }
           Object.keys(result).map(row => {
             // clan or player?
             const cp = player ? 'player' : 'clan';
