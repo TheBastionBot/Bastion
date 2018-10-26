@@ -26,6 +26,8 @@
   "invalidIPPort": "Cannot get stats from the specified server. Please check the IP address and PORT number and if the server is online before trying again.",
   "invalidMusicChannel": "I am not able to join the default voice channel. Either a wrong voice channel has been set or the voice channel has been deleted.",
   "invalidPlatform": "You have entered an invalid platform. Valid platforms are: %var%.",
+  "needleTooShort": "Your search string must be at least %var% characters long.",
+  "tagNotValid": "Tag does not seem to be required length. It should %var% chars long and start with `#`",
   "invalidRegion": "You have entered an invalid region. Valid regions are: %var%.",
   "invalidRoleColor": "The specified color is not available, please try one of these: ```%var%```",
   "isEventInUse": "Cannot start the %var% event now. It is already running in this channel. Please wait for it to end.",

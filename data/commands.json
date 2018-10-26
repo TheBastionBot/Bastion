@@ -191,6 +191,10 @@
     "description": "Clears all warnings from the given user.",
     "module": "Moderation"
   },
+  "coc": {
+    "description": "Get Clash Of Clans stats for clan/player.",
+    "module": "Game Stats"
+  },
   "coinMarketCap": {
     "description": "Shows market capitalization of the specified cryptocurrency.",
     "module": "Queries"

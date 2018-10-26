@@ -143,6 +143,9 @@
   "clearWarn": {
     "description": "Clears all warnings from the given user."
   },
+  "coc": {
+    "description": "Get Clash Of Clans stats for clan/player."
+  },
   "coinMarketCap": {
     "description": "Shows market capitalization of the specified cryptocurrency."
   },
