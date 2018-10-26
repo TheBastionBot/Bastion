@@ -25,6 +25,7 @@ exports.exec = (Bastion, message, args) => {
      */
     return Bastion.emit('commandUsage', message, this.help);
   }
+
   message.channel.send({
     embed: {
       color: Bastion.colors.DEFAULT,
