@@ -686,6 +686,9 @@
   "roll": {
     "description": "Rolls the specified amount of dice and shows you the outcomes."
   },
+  "rot13": {
+    "description": "Sends the message that you had sent, rot13 encoded."
+  },
   "rps": {
     "description": "Play the classic *rock paper scissor* game with %bastion%."
   },
