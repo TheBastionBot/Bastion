@@ -23,6 +23,7 @@ const log = xrequire('./handlers/logHandler');
 
 Manager.spawn();
 
+
 Manager.on('launch', shard => {
   log.info(`Launching Shard ${shard.id} [ ${shard.id + 1} of ${Manager.totalShards} ]`);
 });
