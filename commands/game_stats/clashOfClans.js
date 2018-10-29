@@ -362,13 +362,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'coc <SEARCH_STRING|TAG> [PARAMETERS]',
-  example: [
-    'coc best clan',
-    'coc #RQJ22C0G',
-    'coc #RQJ22C0G -w',
-    'coc #RQJ22C0G -m',
-    'coc #URUGVPU9 -p',
-    'coc #URUGVPU9 -u'
-  ]
+  usage: 'coc <SEARCH_STRING|TAG> [ -w | -m | -p | -u ]',
+  example: [ 'coc some clan', 'coc #RQJ22C0G', 'coc #RQJ22C0G -m' ]
 };
