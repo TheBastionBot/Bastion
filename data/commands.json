@@ -192,7 +192,7 @@
     "module": "Moderation"
   },
   "coc": {
-    "description": "Get Clash Of Clans stats for clan/player.",
+    "description": "Clash of Clans player and clan lookup. ",
     "module": "Game Stats"
   },
   "coinMarketCap": {
@@ -914,6 +914,10 @@
   "roll": {
     "description": "Rolls the specified amount of dice and shows you the outcomes.",
     "module": "Games"
+  },
+  "rot13": {
+    "description": "Sends the message that you had sent, rot13 encoded.",
+    "module": "Queries"
   },
   "rps": {
     "description": "Play the classic *rock paper scissor* game with %bastion%.",
