@@ -134,6 +134,9 @@
   "claim": {
     "description": "Claim your daily rewards."
   },
+  "clashOfClans": {
+    "description": "Get stats of any Clash of Clans player or lookup some clan."
+  },
   "clean": {
     "description": "Removes all the songs from the current queue of your Discord server."
   },
@@ -142,9 +145,6 @@
   },
   "clearWarn": {
     "description": "Clears all warnings from the given user."
-  },
-  "coc": {
-    "description": "Clash of Clans player and clan lookup. "
   },
   "coinMarketCap": {
     "description": "Shows market capitalization of the specified cryptocurrency."
