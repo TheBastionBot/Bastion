@@ -344,7 +344,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'coc' ],
   enabled: true,
   argsDefinitions: [
     { name: 'needle', type: String, defaultOption: true },
@@ -357,8 +357,8 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'coc',
-  description: 'Clash of Clans player and clan lookup. ',
+  name: 'clashOfClans',
+  description: 'Get stats of any Clash of Clans player or lookup some clan.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
