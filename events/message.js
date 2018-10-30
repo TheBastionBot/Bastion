@@ -14,6 +14,7 @@ const handleUserLevel = xrequire('./handlers/levelHandler');
 const handleCommand = xrequire('./handlers/commandHandler');
 const handleConversation = xrequire('./handlers/conversationHandler');
 const handleDirectMessage = xrequire('./handlers/directMessageHandler');
+const handleMethods = xrequire('./handlers/methodHandler');
 let recentLevelUps = [];
 let recentUsers = {};
 
@@ -222,7 +223,7 @@ module.exports = async message => {
       /**
        * Handles direct messages sent to Bastion
        */
-      handleDirectMessage(message);
+      handleDirectMessage(handleMethods, message);
     }
   }
   catch (e) {
