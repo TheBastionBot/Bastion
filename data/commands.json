@@ -915,6 +915,10 @@
     "description": "Rolls the specified amount of dice and shows you the outcomes.",
     "module": "Games"
   },
+  "rot13": {
+    "description": "Sends the message that you had sent, rot13 encoded.",
+    "module": "Queries"
+  },
   "rps": {
     "description": "Play the classic *rock paper scissor* game with %bastion%.",
     "module": "Games"
@@ -946,6 +950,10 @@
   "sendEmbed": {
     "description": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](%website%/embedbuilder/).*",
     "module": "Fun"
+  },
+  "sendSpoiler": {
+    "description": "Sends an encypted message to an channel and the instruction on how to decrypt it. It is destined to be used to hide spoilers. To get the ID of a channel, right click on it's name and select the 'Copy ID' option",
+    "module": "Queries"
   },
   "serverDescription": {
     "description": "Set a description for the server, which will be shown in the `serverInfo` command.",
