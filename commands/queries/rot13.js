@@ -16,7 +16,7 @@ exports.exec = (Bastion, message, args) => {
   message.channel.send({
     embed: {
       color: Bastion.colors.DEFAULT,
-      description: Bastion.methods.rotThirteen(args.join(' '))
+      description: Bastion.methods.rot13(args.join(' '))
     }
   }).catch(e => {
     Bastion.log.error(e);
