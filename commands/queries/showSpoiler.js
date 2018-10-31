@@ -13,13 +13,14 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  const firstLetterOfMessage = message.content.indexOf('3') + 1;
-  const text = message.content.substring(firstLetterOfMessage);
   return message.author.send({
     embed: {
       color: message.client.colors.BLUE,
-      title: 'Here is your decrypted spoiler',
-      description: Bastion.methods.rot13(text.trimLeft())
+      title: 'SPOILER ALERT!',
+      description: Bastion.methods.rot13(args.join(' ')),
+      footer: {
+        text: 'You chose to view this spoiler. Don\'t blame me!'
+      }
     }
   }).catch(e => {
     message.client.log.error(e);
@@ -33,10 +34,10 @@ exports.config = {
 
 exports.help = {
   name: 'showSpoiler',
-  description: 'Decodes the spoiler message and sends you the decoded message via DM.',
+  description: 'Decodes the spoiler message, sent via `sendSpoiler` command and sends you the decoded message via DM.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'showSpoiler <text>',
+  usage: 'showSpoiler <ENCODED SPOILER MESSAGE>',
   example: [ 'sendSpoiler encoded spoiler message.' ]
 };
