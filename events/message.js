@@ -14,7 +14,6 @@ const handleUserLevel = xrequire('./handlers/levelHandler');
 const handleCommand = xrequire('./handlers/commandHandler');
 const handleConversation = xrequire('./handlers/conversationHandler');
 const handleDirectMessage = xrequire('./handlers/directMessageHandler');
-const handleMethods = xrequire('./handlers/methodHandler');
 let recentLevelUps = [];
 let recentUsers = {};
 
@@ -156,31 +155,31 @@ module.exports = async message => {
       }
 
       /**
-      * Cooldown for experience points, to prevent spam
-      */
+       * Cooldown for experience points, to prevent spam
+       */
       if (!recentLevelUps.includes(message.author.id)) {
         recentLevelUps.push(message.author.id);
         setTimeout(function () {
           recentLevelUps.splice(recentLevelUps.indexOf(message.author.id), 1);
         }, 20 * 1000);
         /**
-        * Increase experience and level up user
-        */
+         * Increase experience and level up user
+         */
         handleUserLevel(message);
       }
 
       /**
-      * Handles Bastion's commands
-      */
+       * Handles Bastion's commands
+       */
       handleCommand(message);
 
       /**
-      * Check if the message starts with mentioning Bastion
-      */
+       * Check if the message starts with mentioning Bastion
+       */
       if (message.content.startsWith(`<@${message.client.credentials.botId}>`) || message.content.startsWith(`<@!${message.client.credentials.botId}>`)) {
         /**
-        * Handles conversations with Bastion
-        */
+         * Handles conversations with Bastion
+         */
         handleConversation(message);
       }
 
@@ -223,7 +222,7 @@ module.exports = async message => {
       /**
        * Handles direct messages sent to Bastion
        */
-      handleDirectMessage(handleMethods, message);
+      handleDirectMessage(message);
     }
   }
   catch (e) {
