@@ -37,6 +37,7 @@
     "Level up messages will now show some inspirational texts.",
     "You can now mass move members from one voice channel to another.",
     "Bastion's boot logs will now show how long it took Bastion to boot up completely.",
+    "You can now send ROT13 encoded message using the `ROT13` command.",
     "You can now send and view spoilers, without spoiling it for everyone, using the `sendSpoiler` and `showSpoiler` commands."
   ],
   "NEW COMMANDS!": [
