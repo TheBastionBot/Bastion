@@ -953,7 +953,7 @@
   },
   "sendSpoiler": {
     "description": "If you want to send a spoiler, not everyone wants to read it. So, it's better to use this command to send it. People who want to read the spoilers can then use the `showSpoiler` command to read it.",
-    "module": "Queries"
+    "module": "Fun"
   },
   "serverDescription": {
     "description": "Set a description for the server, which will be shown in the `serverInfo` command.",
@@ -1044,8 +1044,8 @@
     "module": "Queries"
   },
   "showSpoiler": {
-    "description": "Decodes the spoiler message and sends you the decoded message via DM.",
-    "module": "Queries"
+    "description": "Decodes the spoiler message, sent via `sendSpoiler` command and sends you the decoded message via DM.",
+    "module": "Fun"
   },
   "shuffle": {
     "description": "Shuffles %bastion%'s entire music queue of your Discord server.",
