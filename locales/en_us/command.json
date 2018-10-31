@@ -713,6 +713,9 @@
   "sendEmbed": {
     "description": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](%website%/embedbuilder/).*"
   },
+  "sendSpoiler": {
+    "description": "If you want to send a spoiler, not everyone wants to read it. So, it's better to use this command to send it. People who want to read the spoilers can then use the `showSpoiler` command to read it."
+  },
   "serverDescription": {
     "description": "Set a description for the server, which will be shown in the `serverInfo` command."
   },
@@ -778,6 +781,9 @@
   },
   "shorten": {
     "description": "Shortens a specified URL using Google URL Shortener."
+  },
+  "showSpoiler": {
+    "description": "Decodes the spoiler message, sent via `sendSpoiler` command and sends you the decoded message via DM."
   },
   "shuffle": {
     "description": "Shuffles %bastion%'s entire music queue of your Discord server."
