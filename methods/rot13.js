@@ -1,11 +1,7 @@
-
 /**
  * @file decodeString
- * @author Alexandre Hamel (a.k.a hamelatoire)
+ * @author Ruben Roy
  * @license GPL-3.0
- *
- * I just moved this function here so it can be used globally.
- * Author of this the original function: Ruben Roy
  */
 
 /**
