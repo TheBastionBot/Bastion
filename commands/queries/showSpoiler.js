@@ -39,5 +39,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'showSpoiler <ENCODED SPOILER MESSAGE>',
-  example: [ 'sendSpoiler encoded spoiler message.' ]
+  example: [ 'sendSpoiler Lbh xabj, Gunabf jnf xvyyrq ol...?' ]
 };
