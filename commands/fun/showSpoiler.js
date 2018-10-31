@@ -13,7 +13,7 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  return message.author.send({
+  message.author.send({
     embed: {
       color: message.client.colors.BLUE,
       title: 'SPOILER ALERT!',
@@ -22,6 +22,15 @@ exports.exec = (Bastion, message, args) => {
         text: 'You chose to view this spoiler. Don\'t blame me!'
       }
     }
+  }).then(() => {
+    message.channel.send({
+      embed: {
+        color: message.client.colors.BLUE,
+        description: 'Check your direct messages from me to see the spoiler.'
+      }
+    }).catch(e => {
+      message.client.log.error(e);
+    });
   }).catch(e => {
     message.client.log.error(e);
   });
