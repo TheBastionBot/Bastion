@@ -783,7 +783,7 @@
     "description": "Shortens a specified URL using Google URL Shortener."
   },
   "showSpoiler": {
-    "description": "Decodes the spoiler message and sends you the decoded message via DM."
+    "description": "Decodes the spoiler message, sent via `sendSpoiler` command and sends you the decoded message via DM."
   },
   "shuffle": {
     "description": "Shuffles %bastion%'s entire music queue of your Discord server."
