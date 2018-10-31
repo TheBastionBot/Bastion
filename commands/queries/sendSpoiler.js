@@ -53,10 +53,10 @@ exports.config = {
 
 exports.help = {
   name: 'sendSpoiler',
-  description: 'Sends the message that you had sent, rot13 encoded.',
+  description: 'If you want to send a spoiler, not everyone wants to read it. So, it\'s better to use this command to send it. People who want to read the spoilers can then use the `showSpoiler` command to read it.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'sendSpoiler <channelId> <text>',
-  example: [ 'sendSpoiler 99999999999999999 insert spoiler here' ]
+  usage: 'sendSpoiler <CHANNEL_ID> <SPOILER_TEXT>',
+  example: [ 'sendSpoiler 99999999999999999 You know, Thanos was killed by...?' ]
 };
