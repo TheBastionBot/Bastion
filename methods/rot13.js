@@ -1,5 +1,5 @@
 /**
- * @file decodeString
+ * @file rot13
  * @author Ruben Roy
  * @license GPL-3.0
  */
@@ -17,4 +17,3 @@ module.exports = (str) => {
   const lookup = input.reduce((m, k, i) => Object.assign(m, { [k]: output[i] }), {});
   return str.split('').map(x => lookup[x] || x).join('');
 };
-
