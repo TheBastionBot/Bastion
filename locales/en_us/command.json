@@ -782,6 +782,9 @@
   "shorten": {
     "description": "Shortens a specified URL using Google URL Shortener."
   },
+  "showSpoiler": {
+    "description": "Decrypts a message and DMs it to you"
+  },
   "shuffle": {
     "description": "Shuffles %bastion%'s entire music queue of your Discord server."
   },

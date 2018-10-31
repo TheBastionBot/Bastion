@@ -192,7 +192,7 @@
     "module": "Moderation"
   },
   "coc": {
-    "description": "Get Clash Of Clans stats for clan/player.",
+    "description": "Clash of Clans player and clan lookup. ",
     "module": "Game Stats"
   },
   "coinMarketCap": {
@@ -1041,6 +1041,10 @@
   },
   "shorten": {
     "description": "Shortens a specified URL using Google URL Shortener.",
+    "module": "Queries"
+  },
+  "showSpoiler": {
+    "description": "Decrypts a message and DMs it to you",
     "module": "Queries"
   },
   "shuffle": {
