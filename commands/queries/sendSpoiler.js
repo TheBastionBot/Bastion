@@ -4,36 +4,8 @@
  * @license GPL-3.0
  */
 
-/**
- * This function sends an encrypted message to an channel.
- * The message is usually a spoiler.
- * @param message
- * @param Bastion
- */
-function sendSpoiler(message, Bastion) {
-  const indexOfFirstSpace = message.content.indexOf(' ');
-  const indexOfSecondSpace = message.content.indexOf(' ', indexOfFirstSpace + 1);
-  const channelId = message.content.substring(indexOfFirstSpace, indexOfSecondSpace).trim();
-  const text = message.content.substring(indexOfSecondSpace).trimLeft();
-  message.client.channels.get(channelId).send({
-    embed: {
-      color: message.client.colors.BLUE,
-      title: `This message from ${message.author.username} contains spoilers, so I encrypted it`,
-      description: 'To decrypt the message, use the showSpoiler command followed by the spoiler and I\'ll DM you the decrypted text.',
-      fields: [
-        {
-          name: 'Here is the encrypted text',
-          value: Bastion.methods.rot13(text.trimLeft())
-        }
-      ]
-    }
-  }).catch(e => {
-    message.client.log.error(e);
-  });
-}
-
 exports.exec = (Bastion, message, args) => {
-  if (args.length < 2) {
+  if (args.length < 1) {
     /**
      * The command was ran with invalid parameters.
      * @fires commandUsage
@@ -41,7 +13,22 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  sendSpoiler(message, Bastion).catch(e => {
+  message.channel.send({
+    embed: {
+      color: message.client.colors.BLUE,
+      author: {
+        name: message.author.tag,
+        url: message.url
+      },
+      description: Bastion.methods.rot13(args.join(' ')),
+      fields: [
+        {
+          name: 'SPOILER ALERT!',
+          value: 'This message contains spoilers, so I encoded it. If you are okay with viewing the spoiler, copy the above message and use it with the `showSpoiler` command to see the real content of the message.'
+        }
+      ]
+    }
+  }).catch(e => {
     Bastion.log.error(e);
   });
 };
@@ -57,6 +44,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'sendSpoiler <CHANNEL_ID> <SPOILER_TEXT>',
-  example: [ 'sendSpoiler 99999999999999999 You know, Thanos was killed by...?' ]
+  usage: 'sendSpoiler <SPOILER TEXT>',
+  example: [ 'sendSpoiler You know, Thanos was killed by...?' ]
 };
