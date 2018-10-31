@@ -15,8 +15,15 @@ exports.exec = (Bastion, message, args) => {
 
   message.channel.send({
     embed: {
-      color: Bastion.colors.DEFAULT,
-      description: Bastion.methods.rot13(args.join(' '))
+      color: Bastion.colors.BLUE,
+      author: {
+        name: message.author.tag
+      },
+      title: 'ROT13 Encoded',
+      description: Bastion.methods.rot13(args.join(' ')),
+      footer: {
+        text: 'Encoded your message in ROT13.'
+      }
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -34,6 +41,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'rot13 <text>',
+  usage: 'rot13 <MESSAGE>',
   example: [ 'rot13 Hello, world!' ]
 };
