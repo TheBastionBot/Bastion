@@ -195,9 +195,6 @@
     "description": "Clears all warnings from the given user.",
     "module": "Moderation"
   },
-  "coc": {
-    "description": "Get Clash Of Clans stats for clan/player."
-  },
   "coinMarketCap": {
     "description": "Shows market capitalization of the specified cryptocurrency.",
     "module": "Queries"
@@ -955,7 +952,7 @@
     "module": "Fun"
   },
   "sendSpoiler": {
-    "description": "Sends an encypted message to an channel and the instruction on how to decrypt it. It is destined to be used to hide spoilers. To get the ID of a channel, right click on it's name and select the 'Copy ID' option",
+    "description": "If you want to send a spoiler, not everyone wants to read it. So, it's better to use this command to send it. People who want to read the spoilers can then use the `showSpoiler` command to read it.",
     "module": "Queries"
   },
   "serverDescription": {
@@ -1047,7 +1044,7 @@
     "module": "Queries"
   },
   "showSpoiler": {
-    "description": "Decrypts a message and DMs it to you",
+    "description": "Decodes the spoiler message and sends you the decoded message via DM.",
     "module": "Queries"
   },
   "shuffle": {
