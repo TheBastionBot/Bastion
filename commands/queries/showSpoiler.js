@@ -33,10 +33,10 @@ exports.config = {
 
 exports.help = {
   name: 'showSpoiler',
-  description: 'This command decrypt a message and DMs it to you.',
+  description: 'Decodes the spoiler message and sends you the decoded message via DM.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'showSpoiler <text>',
-  example: [ 'sendSpoiler insert spoiler here' ]
+  example: [ 'sendSpoiler encoded spoiler message.' ]
 };
