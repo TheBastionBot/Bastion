@@ -344,7 +344,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'coc' ],
   enabled: true,
   argsDefinitions: [
     { name: 'needle', type: String, defaultOption: true },
@@ -357,18 +357,11 @@ exports.config = {
 };
 
 exports.help = {
-  name: 'coc',
-  description: 'Clash of Clans player and clan lookup. ',
+  name: 'clashOfClans',
+  description: 'Get stats of any Clash of Clans player or lookup some clan.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'coc <SEARCH_STRING|TAG> [PARAMETERS]',
-  example: [
-    'coc best clan',
-    'coc #RQJ22C0G',
-    'coc #RQJ22C0G -w',
-    'coc #RQJ22C0G -m',
-    'coc #URUGVPU9 -p',
-    'coc #URUGVPU9 -u'
-  ]
+  usage: 'coc <SEARCH_STRING|TAG> [ -w | -m | -p | -u ]',
+  example: [ 'coc some clan', 'coc #RQJ22C0G', 'coc #RQJ22C0G -m' ]
 };

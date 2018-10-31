@@ -179,6 +179,10 @@
     "description": "Claim your daily rewards.",
     "module": "Money"
   },
+  "clashOfClans": {
+    "description": "Get stats of any Clash of Clans player or lookup some clan.",
+    "module": "Game Stats"
+  },
   "clean": {
     "description": "Removes all the songs from the current queue of your Discord server.",
     "module": "Music"
@@ -192,8 +196,7 @@
     "module": "Moderation"
   },
   "coc": {
-    "description": "Clash of Clans player and clan lookup. ",
-    "module": "Game Stats"
+    "description": "Get Clash Of Clans stats for clan/player."
   },
   "coinMarketCap": {
     "description": "Shows market capitalization of the specified cryptocurrency.",

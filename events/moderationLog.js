@@ -110,14 +110,6 @@ module.exports = async (message, action, target, reason, extras) => {
         color = message.client.colors.ORANGE;
         break;
 
-      /*
-      case 'nickname':
-        action = 'Updated User Nickname';
-        color = message.client.colors.ORANGE;
-        logData.push();
-        break;
-      */
-
       case 'removeallroles':
         action = message.client.i18n.event(guild.language, 'removeAllRole');
         color = message.client.colors.RED;
