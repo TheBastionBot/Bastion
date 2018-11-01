@@ -13,6 +13,7 @@ matrix:
       osx_image: xcode9.3beta
     - os: osx
       osx_image: xcode9.2
+    - os: windows
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python; fi
@@ -21,6 +22,11 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g ffmpeg-binaries; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ffmpeg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install visualstudio2017buildtools -y; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then npm config set msvs_version 2017 -y; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install python2 -y; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then npm config set python python2.7 -y; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install ffmpeg -y; fi
   - npm install --global yarn
 install:
   - yarn install
