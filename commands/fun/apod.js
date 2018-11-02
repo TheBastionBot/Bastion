@@ -9,12 +9,7 @@ const request = xrequire('request-promise-native');
 exports.exec = async (Bastion, message) => {
   try {
     let options = {
-      method: 'GET',
-      url: 'https://api.nasa.gov/planetary/apod',
-      qs: {
-        api_key: Bastion.credentials.NASAAPIKey || 'DEMO_KEY'
-      },
-      followAllRedirects: true,
+      url: 'https://api.bastionbot.org/nasa/apod',
       json: true
     };
     let response = await request(options);
