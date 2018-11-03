@@ -30,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
 
     if (args.platform === 'steam') {
       let options = {
-        url: `https://peaceful-celsius.glitch.me/api/${args.player}`,
+        url: `https://api.bastionbot.org/steam/profile/${args.player}`,
         json: true
       };
 
