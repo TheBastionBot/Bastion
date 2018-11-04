@@ -5,6 +5,7 @@
   "url": "https://bastionbot.org/",
   "main": "index.js",
   "scripts": {
+    "build:commands": "node ./utils/generateCommandsData",
     "test:lint": "./node_modules/.bin/eslint .",
     "test:boot": "node tests/boot.js",
     "test": "npm run test:lint && npm run test:boot",
