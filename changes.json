@@ -1,13 +1,13 @@
 {
-  "date": "October 18, 2018",
-  "image": "https://i.imgur.com/L2hHAUu.gif",
-  "WORLD OF WARCRAFT": [
-    "You can now get stats of any World of Warcraft character from the Armory using the `wow` command."
+  "date": "November 4, 2018",
+  "image": "https://i.imgur.com/aGfBWOx.gif",
+  "CREDIT WHERE CREDIT'S DUE": [
+    "`contributors` command will now show contributors across all repos of The Bastion Bot organization."
   ],
-  "GET TO KNOW POKEMON BETTER": [
-    "When you use the `pokemon` command, you can now read a little bit about them."
+  "THESE ISSUES ARE FIXED": [
+    "Fixed an issue that caused Bastion to ignore your first message when you haven't had a chat with Bastion in a while."
   ],
   "THE OTHER CATEGORY": [
-    "Lots of under-the-hood improvements & fixes."
+    "Lots of under-the-hood improvements."
   ]
 }
