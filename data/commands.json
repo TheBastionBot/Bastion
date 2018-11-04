@@ -216,7 +216,7 @@
     "module": "Help"
   },
   "contributors": {
-    "description": "Shows the list of people who contribute to the development of the Bastion Bot on [GitHub](%github.org%/Bastion).",
+    "description": "Shows the list of people who contribute to the development of The Bastion Bot Project on [GitHub](%github.org%).",
     "module": "Info"
   },
   "counterStrikeGlobalOffensive": {

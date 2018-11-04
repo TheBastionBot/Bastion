@@ -18,7 +18,6 @@
     "Warnings are now permanently stored!",
     "Server logging will now also log message update and message delete events.",
     "You can now enable disabled modules using the `--module` option in the `enableCommand` command.",
-    "`contributors` command will now show contributors across all repositories of The Bastion Bot Project.",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [

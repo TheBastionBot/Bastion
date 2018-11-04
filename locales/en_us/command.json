@@ -162,7 +162,7 @@
     "description": "Direct Messages you with a list of all the commands, or the commands in specific modules."
   },
   "contributors": {
-    "description": "Shows the list of people who contribute to the development of the Bastion Bot on [GitHub](%github.org%/Bastion)."
+    "description": "Shows the list of people who contribute to the development of The Bastion Bot Project on [GitHub](%github.org%)."
   },
   "counterStrikeGlobalOffensive": {
     "description": "Get stats of any Counter-Strike: Global Offensive game server."
