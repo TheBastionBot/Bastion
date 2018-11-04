@@ -7,7 +7,7 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     let contributors = await Bastion.functions.getContributors();
-    contributors = contributors.map(contributor => `${contributor.username} - ${contributor.contributions} contributions`);
+    contributors = contributors.map(contributor => `**${contributor.username}** - ${contributor.contributions} contributions`);
 
     let noOfPages = contributors.length / 25;
     let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
@@ -16,7 +16,9 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: 10181046,
-        description: 'These are the people who contribute to the development of the Bastion Bot on [GitHub](https://github.com/TheBastionBot/Bastion).',
+        title: 'The Bastion Bot Project',
+        url: 'https://github.com/TheBastionBot',
+        description: 'These are the people who contribute to the development of The Bastion Bot Project on [GitHub](https://github.com/TheBastionBot).',
         fields: [
           {
             name: 'Contributors',
@@ -24,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
           }
         ],
         footer: {
-          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} • https://github.com/TheBastionBot/Bastion`
+          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)} • https://github.com/TheBastionBot`
         }
       }
     }).catch(e => {
