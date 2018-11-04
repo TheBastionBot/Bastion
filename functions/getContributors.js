@@ -1,29 +1,29 @@
 const request = require('request-promise-native');
-const github = require('../settings/credentials.json').github;
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let options = {
         headers: {
-          'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)',
-          'Authorization': github ? `token ${github.accessToken}` : undefined
+          'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
         },
-        uri: 'https://api.github.com/repos/TheBastionBot/Bastion/contributors',
+        uri: 'https://api.bastionbot.org/github/contributors',
         json: true
       };
 
       let response = await request(options);
 
-      let contributors = response.map(contributor => {
-        return {
-          id: contributor.id,
-          username: contributor.login,
-          url: contributor.html_url,
-          contributions: contributor.contributions,
-          avatar_url: contributor.avatar_url
-        };
-      });
+      let contributors = [];
+      for (let contributor of Object.keys(response)) {
+        if (response[contributor].type === 'User') {
+          contributors.push({
+            username: response[contributor].login,
+            url: response[contributor].url,
+            avatar: response[contributor].avatar,
+            contributions: response[contributor].contributions
+          });
+        }
+      }
 
       resolve(contributors);
     }

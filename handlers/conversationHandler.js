@@ -23,7 +23,7 @@ module.exports = async message => {
     message.channel.startTyping();
 
     let options = {
-      url: 'https://bastion-cleverbot.glitch.me/api',
+      url: 'https://api.bastionbot.org/chat',
       qs: {
         message: message.content
       },
