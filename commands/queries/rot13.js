@@ -20,7 +20,7 @@ exports.exec = (Bastion, message, args) => {
         name: message.author.tag
       },
       title: 'ROT13 Encoded',
-      description: Bastion.methods.rot13(args.join(' ')),
+      description: Bastion.methods.rot(args.join(' '), 13),
       footer: {
         text: 'Encoded your message in ROT13.'
       }
