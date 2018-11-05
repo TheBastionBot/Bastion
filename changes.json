@@ -1,7 +1,9 @@
 {
-  "date": "November 4, 2018",
+  "date": "November 5, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
-  "THESE BUGS ARE DEAD": [],
+  "THESE BUGS ARE DEAD": [
+    "Automatically remove accidental extra spaces around command arguments."
+  ],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
     "Commands that work in direct messages doesn't need any prefix",
