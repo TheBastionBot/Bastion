@@ -17,7 +17,7 @@ exports.exec = (Bastion, message, args) => {
     embed: {
       color: message.client.colors.BLUE,
       title: 'SPOILER ALERT!',
-      description: Bastion.methods.rot13(args.join(' ')),
+      description: Bastion.methods.rot(args.join(' '), 13),
       footer: {
         text: 'You chose to view this spoiler. Don\'t blame me!'
       }
