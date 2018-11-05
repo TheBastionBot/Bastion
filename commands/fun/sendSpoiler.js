@@ -20,7 +20,7 @@ exports.exec = (Bastion, message, args) => {
         name: message.author.tag,
         url: message.url
       },
-      description: Bastion.methods.rot13(args.join(' ')),
+      description: Bastion.methods.rot(args.join(' '), 13),
       fields: [
         {
           name: 'SPOILER ALERT!',
