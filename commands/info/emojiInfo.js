@@ -21,7 +21,7 @@ exports.exec = (Bastion, message, args) => {
      */
     return Bastion.emit('commandUsage', message, this.help);
   }
-  args = message.guild.emojis.find('name', args);
+  args = message.guild.emojis.find(emoji => emoji.name === args);
 
   if (!args) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'emoji'), message.channel);

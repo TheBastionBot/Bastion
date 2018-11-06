@@ -15,7 +15,7 @@ exports.exec = (Bastion, message, args) => {
 
   let role = message.mentions.roles.first();
   if (!role) {
-    role = message.guild.roles.find('name', args.role.join(' '));
+    role = message.guild.roles.find(role => role.name === args.role.join(' '));
   }
 
   if (role) {
