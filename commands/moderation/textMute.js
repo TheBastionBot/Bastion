@@ -27,7 +27,7 @@ exports.exec = async (Bastion, message, args) => {
     args.reason = args.reason.join(' ');
 
     if (args.server) {
-      let mutedRole = message.guild.roles.find('name', 'Bastion:mute');
+      let mutedRole = message.guild.roles.find(role => role.name === 'Bastion:mute');
       if (!mutedRole) {
         mutedRole = await message.guild.createRole({ name:'Bastion:mute' });
       }

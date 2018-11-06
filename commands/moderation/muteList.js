@@ -7,7 +7,7 @@
 exports.exec = (Bastion, message, args) => {
   if (!message.guild.available) return Bastion.log.info(`${message.guild.name} Guild is not available. It generally indicates a server outage.`);
 
-  let muteRole = message.guild.roles.find('name', 'Bastion:mute'), mutedMembers = [];
+  let muteRole = message.guild.roles.find(role => role.name === 'Bastion:mute'), mutedMembers = [];
   if (muteRole) {
     mutedMembers = muteRole.members.map(member => member.user.tag);
   }

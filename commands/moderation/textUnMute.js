@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     if (args.server) {
-      let mutedRole = message.guild.roles.find('name', 'Bastion:mute');
+      let mutedRole = message.guild.roles.find(role => role.name === 'Bastion:mute');
       await member.removeRole(mutedRole, args.reason);
     }
     else {
