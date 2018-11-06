@@ -13,7 +13,7 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let emoji = message.guild.emojis.find('name', args.name);
+  let emoji = message.guild.emojis.find(emoji => emoji.name === args.name);
 
   if (emoji) {
     message.channel.send({
