@@ -25,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
     }
 
-    let role = message.guild.roles.find('name', args.old);
+    let role = message.guild.roles.find(role => role.name === args.old);
     if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
     else if (!role) {
       /**

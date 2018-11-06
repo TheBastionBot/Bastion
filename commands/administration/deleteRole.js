@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
         role = message.guild.roles.get(args.id);
       }
       else if (args.name) {
-        role = message.guild.roles.find('name', args.name.join(' '));
+        role = message.guild.roles.find(role => role.name === args.name.join(' '));
       }
     }
 

@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
       role = message.guild.roles.get(args.role);
     }
     else {
-      role = message.guild.roles.find('name', args.role);
+      role = message.guild.roles.find(role => role.name === args.role);
     }
 
     if (role.editable) {

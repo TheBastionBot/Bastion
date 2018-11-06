@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message, args) => {
         channel = message.guild.channels.get(args.id);
       }
       else if (args.name) {
-        channel = message.guild.channels.find('name', args.name.join(' '));
+        channel = message.guild.channels.find(channel => channel.name === args.name.join(' '));
       }
       if (!channel) {
         /**

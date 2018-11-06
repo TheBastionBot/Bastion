@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
     });
     if (!guildModel || !guildModel.dataValues.selfAssignableRoles) return;
 
-    let role = message.guild.roles.find('name', args.join(' '));
+    let role = message.guild.roles.find(role => role.name === args.join(' '));
     if (!role) return;
 
     let selfAssignableRoles = [];

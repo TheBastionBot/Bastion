@@ -28,12 +28,12 @@ exports.exec = async (Bastion, message, args) => {
 
     let channel = message.channel;
     if (args.voice) {
-      channel = message.guild.channels.filter(c => c.type === 'voice').find('name', args.old);
+      channel = message.guild.channels.filter(c => c.type === 'voice').find(channel => channel.name === args.old);
     }
     else {
       args.old = args.old.replace(' ', '-');
       args.new = args.new.replace(' ', '-');
-      channel = message.guild.channels.filter(c => c.type === 'text').find('name', args.old);
+      channel = message.guild.channels.filter(c => c.type === 'text').find(channel => channel.name === args.old);
     }
 
     if (!channel) {
