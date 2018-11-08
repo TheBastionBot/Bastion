@@ -51,7 +51,7 @@ module.exports = async (reaction, user) => {
             let reactionRoles = reactionRoleModelsForReaction.map(model => model.dataValues.roleID);
 
             if (reactionRoles.length) {
-              let member = await reaction.message.guild.fetchMember(user);
+              let member = await user.client.utils.fetchMember(reaction.message.guild, user.id);
 
               await member.removeRoles(reactionRoles, 'Self-Unassigned via reaction roles.').catch(() => {});
             }
