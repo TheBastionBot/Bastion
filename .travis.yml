@@ -5,7 +5,11 @@ node_js:
 addons:
   apt:
     update: true
+    sources:
+    - sourceline: 'deb http://dl.yarnpkg.com/debian/ stable main'
+      key_url: 'http://dl.yarnpkg.com/debian/pubkey.gpg'
     packages:
+    - yarn
     - ffmpeg
     - shellcheck
   homebrew:
@@ -22,7 +26,7 @@ matrix:
       os: osx
       osx_image: xcode10.1
 before_install:
-  - npm install --global yarn
+  - if [[ "$TRAVIS_OS_NAME" != "linux" ]]; then npm install --global yarn; fi
 install:
   - yarn install
 before_script:
