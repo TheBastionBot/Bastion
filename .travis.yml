@@ -13,9 +13,10 @@ addons:
     - ffmpeg
     - shellcheck
   homebrew:
-    packages:
-    - ffmpeg
     update: true
+    packages:
+    - yarn
+    - ffmpeg
 matrix:
   include:
     - name: "Linux"
@@ -25,8 +26,7 @@ matrix:
     - name: "macOS"
       os: osx
       osx_image: xcode10.1
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" != "linux" ]]; then npm install --global yarn; fi
+before_install: true
 install:
   - yarn install
 before_script:
