@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message, args) => {
       user = message.mentions.users.first();
     }
     else if (args.id) {
-      user = await message.guild.fetchMember(args.id);
+      user = await Bastion.utils.fetchMember(message.guild, args.id);
       if (user) {
         user = user.user;
       }
@@ -147,7 +147,7 @@ async function getUserIcon(user) {
     const bastionGuildID = specialIDs.bastionGuild;
     const bastionGuild = user.client.guilds.get(bastionGuildID);
     if (!bastionGuild) return;
-    const bastionGuildMember = await bastionGuild.fetchMember(user.id);
+    const bastionGuildMember = await user.client.utils.fetchMember(bastionGuild, user.id);
     if (!bastionGuildMember) return;
 
     const devRoleID = specialIDs.developerRole;
