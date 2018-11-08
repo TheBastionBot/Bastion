@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let member = message.member;
     if (!member) {
-      member = await message.guild.fetchMember(message.author.id);
+      member = await Bastion.utils.fetchMember(message.guild, message.author.id);
     }
 
     await member.removeRole(role);
