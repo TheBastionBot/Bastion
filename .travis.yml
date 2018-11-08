@@ -1,18 +1,15 @@
-os: linux
-dist: trusty
-sudo: required
 language: node_js
 node_js:
   - "8"
 matrix:
   include:
-    - os: linux
+    - name: "Linux"
+      os: linux
       dist: trusty
       sudo: required
-    - os: osx
-      osx_image: xcode9.3beta
-    - os: osx
-      osx_image: xcode9.2
+    - name: "macOS"
+      os: osx
+      osx_image: xcode10.1
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python; fi
