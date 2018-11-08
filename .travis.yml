@@ -17,7 +17,7 @@ matrix:
   include:
     - name: "Linux"
       os: linux
-      dist: trusty
+      dist: xenial
       sudo: required
     - name: "macOS"
       os: osx
