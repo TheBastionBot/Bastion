@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (message.guild.members.has(user.id)) {
-      let member = await message.guild.fetchMember(user.id);
+      let member = await message.guild.members.get(user.id);
       if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
       if (!member.bannable) {

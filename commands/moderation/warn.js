@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
 
-    let member = await message.guild.fetchMember(user.id);
+    let member = await Bastion.utils.fetchMember(message.guild, user.id);
     if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
     args.reason = args.reason.join(' ');
