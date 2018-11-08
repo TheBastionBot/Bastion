@@ -17,6 +17,7 @@ addons:
     packages:
     - yarn
     - ffmpeg
+    - shellcheck
 matrix:
   include:
     - name: "Linux"
@@ -34,7 +35,7 @@ before_script:
   - cp settings/configurations.example.yaml settings/configurations.yaml
 script:
   - yarn test
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then shellcheck -x *.sh; fi
+  - shellcheck -x *.sh
 after_success:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
