@@ -4,8 +4,6 @@ node_js:
 addons:
   apt:
     update: true
-    sources:
-    - sourceline: universe
     packages:
     - ffmpeg
     - shellcheck
