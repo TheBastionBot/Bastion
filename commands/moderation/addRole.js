@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
     }
 
-    let member = await message.guild.fetchMember(user.id);
+    let member = await Bastion.utils.fetchMember(message.guild, user.id);
     member.addRole(role);
 
     message.channel.send({

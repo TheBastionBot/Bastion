@@ -11,7 +11,7 @@ exports.exec = async (Bastion, message, args) => {
       user = message.mentions.users.first();
     }
     else if (args.id) {
-      member = await message.guild.fetchMember(args.id);
+      member = await Bastion.utils.fetchMember(message.guild, args.id);
       if (member) {
         user = member.user;
       }
@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
       user = message.author;
     }
     if (!member) {
-      member = await message.guild.fetchMember(user.id);
+      member = await Bastion.utils.fetchMember(message.guild, args.id);
     }
     let nick = member.nickname;
     if (!nick) {
