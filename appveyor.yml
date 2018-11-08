@@ -10,7 +10,6 @@ image:
 clone_depth: 1
 install:
   - choco install nodejs-lts
-  - npm install --global yarn
   - yarn install
 platform: x64
 build: off
