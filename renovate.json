@@ -1,5 +1,7 @@
 {
+  "automerge": false,
   "branchPrefix": "dep/",
+  "bumpVersion": "patch",
   "devDependencies": {
     "branchPrefix": "dev-dep/"
   },
@@ -17,8 +19,18 @@
   "optionalDependencies": {
     "branchPrefix": "opt-dep/"
   },
+  "patch": {
+    "commitBody": "[skip travis]\n[skip appveyor]"
+  },
   "pinVersions": false,
+  "rangeStrategy": "bump",
   "rebaseStalePrs": false,
-  "semanticCommitScope": null,
+  "reviewers": [
+    "k3rn31p4nic"
+  ],
+  "semanticCommitScope": "deps",
+  "separateMinorPatch": true,
+  "separateMultipleMajor": true,
+  "statusCheckVerify": true,
   "unpublishSafe": true
 }
