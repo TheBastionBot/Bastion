@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let info;
     if (userModel && userModel.dataValues.info) {
-      info = await Bastion.methods.decodeString(userModel.dataValues.info);
+      info = await Bastion.utils.decompressString(userModel.dataValues.info);
     }
     else {
       info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setInfo` command.' : ''}`;

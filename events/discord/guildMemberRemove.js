@@ -17,7 +17,7 @@ module.exports = async member => {
     if (guildModel.dataValues.farewell) {
       let farewellMessage = 'May we meet again.';
       if (guildModel.dataValues.farewellMessage) {
-        farewellMessage = await member.client.methods.decodeString(guildModel.dataValues.farewellMessage);
+        farewellMessage = await member.client.utils.decompressString(guildModel.dataValues.farewellMessage);
       }
       farewellMessage = farewellMessage.replace(/\$user/ig, `<@${member.id}>`);
       farewellMessage = farewellMessage.replace(/\$server/ig, member.guild.name);
