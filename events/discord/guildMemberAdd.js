@@ -46,7 +46,7 @@ module.exports = async member => {
     if (guildModel.dataValues.greet) {
       let greetMessage;
       if (guildModel.dataValues.greetMessage) {
-        greetMessage = await member.client.methods.decodeString(guildModel.dataValues.greetMessage);
+        greetMessage = await member.client.utils.decompressString(guildModel.dataValues.greetMessage);
       }
       else {
         greetMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
@@ -79,7 +79,7 @@ module.exports = async member => {
     if (guildModel.dataValues.greetPrivate) {
       let greetPrivateMessage;
       if (guildModel.dataValues.greetPrivateMessage) {
-        greetPrivateMessage = await member.client.methods.decodeString(guildModel.dataValues.greetPrivateMessage);
+        greetPrivateMessage = await member.client.utils.decompressString(guildModel.dataValues.greetPrivateMessage);
       }
       else {
         greetPrivateMessage = greetMessages[Math.floor(Math.random() * greetMessages.length)];
