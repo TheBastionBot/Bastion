@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
 
       let greetPrivateMessage = `Not set. Set greeting private message using \`${this.help.name} <Message>\``;
       if (guildModel.dataValues.greetPrivateMessage) {
-        greetPrivateMessage = await Bastion.methods.decodeString(guildModel.dataValues.greetPrivateMessage);
+        greetPrivateMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetPrivateMessage);
       }
 
       message.channel.send({
