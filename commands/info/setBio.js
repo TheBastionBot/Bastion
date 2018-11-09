@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
     args = args.join(' ');
 
     let charLimit = 160;
-    let info = await Bastion.methods.encodeString(args);
+    let info = await Bastion.utils.compressString(args);
 
     if (info.length > charLimit) {
       /**

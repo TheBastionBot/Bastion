@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
     else {
       args = args.join(' ');
 
-      let greetPrivateMessage = await Bastion.methods.encodeString(args);
+      let greetPrivateMessage = await Bastion.utils.compressString(args);
       await Bastion.database.models.guild.update({
         greetPrivateMessage: greetPrivateMessage
       },

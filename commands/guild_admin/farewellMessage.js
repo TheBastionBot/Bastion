@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
     else {
       args = args.join(' ');
 
-      let farewellMessage = await Bastion.methods.encodeString(args);
+      let farewellMessage = await Bastion.utils.compressString(args);
       await Bastion.database.models.guild.update({
         farewellMessage: farewellMessage
       },
