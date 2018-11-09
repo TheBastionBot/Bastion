@@ -774,7 +774,7 @@
     "description": "Shows detailed stats and info of the shard the command was used in."
   },
   "ship": {
-    "description": "Combines two or more mentioned user's names."
+    "description": "Combines two or more mentioned users' names."
   },
   "shop": {
     "description": "Lists/Adds/Removes items from your server's shop. Listed items in the shop can be bought by anyone, with %currency.name_plural%, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit."
