@@ -14,7 +14,7 @@ module.exports = message => {
     try {
       // Check if any credentials is found in the message
       if (message.content.includes(message.client.token)) resolve(true);
-      else return reject(false);
+      else return resolve(false);
 
       // Delete the message if possible to prevent further damage
       if (message.deletable) {
