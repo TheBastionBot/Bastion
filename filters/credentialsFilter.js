@@ -7,42 +7,43 @@
 /**
  * Handles filtering of Bastion's credentials contained in messages
  * @param {Message} message Discord.js message object
- * @returns {void}
+ * @returns {Promise<boolean>} Whether any credentials was found or not
  */
-module.exports = async message => {
-  try {
-    /**
-    * Filter Discord client token
-    */
-    if (message.content.includes(message.client.token)) {
+module.exports = message => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Check if any credentials is found in the message
+      if (message.content.includes(message.client.token)) resolve(true);
+      else return resolve(false);
+
+      // Delete the message if possible to prevent further damage
       if (message.deletable) {
         message.delete().catch(e => {
           message.client.log.error(e);
         });
       }
 
+      // Find the application owner
       let app = await message.client.fetchApplication();
       let owner = await message.client.fetchUser(app.owner.id);
 
-      owner.send({
+      // Let the application owner know about it
+      await owner.send({
         embed: {
           color: message.client.colors.RED,
-          title: 'ATTENTION!',
+          title: 'ATTENTION!!',
           description: 'My token has been been exposed! Please regenerate it **ASAP** to prevent my malicious use by others.',
           fields: [
             {
               name: 'Responsible user',
-              value: `${message.author.tag} - ${message.author.id}`
+              value: `${message.author.tag} / ${message.author.id}`
             }
           ]
         }
-      }).catch(e => {
-        message.client.log.error(e);
       });
-      return true;
     }
-  }
-  catch (e) {
-    message.client.log.error(e);
-  }
+    catch (e) {
+      reject(e);
+    }
+  });
 };
