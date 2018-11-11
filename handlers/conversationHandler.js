@@ -29,6 +29,9 @@ module.exports = async message => {
 
     let options = {
       url: 'https://api.bastionbot.org/chat',
+      headers: {
+        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+      },
       qs: {
         message: message.content
       },
