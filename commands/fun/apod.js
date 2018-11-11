@@ -10,6 +10,9 @@ exports.exec = async (Bastion, message) => {
   try {
     let options = {
       url: 'https://api.bastionbot.org/nasa/apod',
+      headers: {
+        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+      },
       json: true
     };
     let response = await request(options);
