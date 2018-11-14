@@ -1,4 +1,7 @@
 {
   "date": "November 14, 2018",
-  "image": "https://i.imgur.com/XoYGUZ3.gif"
+  "image": "https://i.imgur.com/XoYGUZ3.gif",
+  "IMPROVEMENTS": [
+    "Some under-the-hood improvements."
+  ]
 }
