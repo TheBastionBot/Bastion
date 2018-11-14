@@ -31,6 +31,9 @@ exports.exec = async (Bastion, message, args) => {
     if (args.platform === 'steam') {
       let options = {
         url: `https://api.bastionbot.org/steam/profile/${args.player}`,
+        headers: {
+          'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+        },
         json: true
       };
 
