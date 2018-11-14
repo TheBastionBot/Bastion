@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "7.0.0-alpha.67",
+  "version": "7.0.0-alpha.68",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
