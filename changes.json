@@ -1,13 +1,4 @@
 {
-  "date": "November 4, 2018",
-  "image": "https://i.imgur.com/3vVuSpp.gif",
-  "CREDIT WHERE CREDIT'S DUE": [
-    "`contributors` command will now show contributors across all repos of The Bastion Bot organization."
-  ],
-  "THESE ISSUES ARE FIXED": [
-    "Fixed an issue that caused Bastion to ignore your first message when you haven't had a chat with Bastion in a while."
-  ],
-  "THE OTHER CATEGORY": [
-    "Lots of under-the-hood changes & improvements."
-  ]
+  "date": "November 14, 2018",
+  "image": "https://i.imgur.com/XoYGUZ3.gif"
 }
