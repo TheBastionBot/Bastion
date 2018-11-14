@@ -96,6 +96,7 @@ module.exports = async message => {
      * @var {String} command The command name.
      */
     let args = message.content.trim().split(' ');
+    args = args.filter(arg => !!arg);
     let command = args.shift().slice(usedPrefix.length).toLowerCase();
 
     // Resolves command name to the actual command (if any).
