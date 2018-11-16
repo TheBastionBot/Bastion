@@ -25,38 +25,44 @@ exports.exec = async (Bastion, message, args) => {
 
     let options = {
       headers: {
-        'Accept': 'Accept: application/json'
+        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
       },
-      url: `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&q_track=${encodeURIComponent(args.song)}&apikey=${Bastion.credentials.musixmatchAPIKey}`,
+      url: `https://api.bastionbot.org/song/${args.song.join(' ')}`,
       json: true
     };
     let response = await request(options);
 
-    if (response.message.header.status_code === 200) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: `${args.song.join(' ').toTitleCase()} - Lyrics`,
-          description: response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', `View full lyrics at [musixmatch.com](${response.message.body.lyrics.backlink_url} 'Musixmatch')`),
-          footer: {
-            text: `Powered by Musixmatch • Language: ${response.message.body.lyrics.lyrics_language_description.toTitleCase()}`
-          }
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    else if (response.message.header.status_code === 404) {
-      message.channel.send({
+    if (response.error) {
+      return await message.channel.send({
         embed: {
           color: Bastion.colors.RED,
           title: 'Not Found',
           description: `No lyrics was found for **${args.song.join(' ').toTitleCase()}**.\nIf you think you are searching for the right song, try adding the artist's name to the search term and try again.`
         }
-      }).catch(e => {
-        Bastion.log.error(e);
       });
     }
+
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        author: {
+          name: response.artist.name,
+          icon_url: response.artist.image
+        },
+        title: response.name,
+        description: response.lyrics.length > 2048
+          ? `${response.lyrics.substring(0, 2045)}...`
+          : response.lyrics,
+        thumbnail: {
+          url: response.image
+        },
+        footer: {
+          text: 'Powered by Genius'
+        }
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
   catch (e) {
     if (e.response) {
@@ -80,6 +86,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'lyrics <SONG_NAME> [Artist Name>]',
+  usage: 'lyrics <SONG NAME> [ARTIST NAME]',
   example: [ 'lyrics Something just like this', 'lyrics Shape of you - Ed Sheeran' ]
 };

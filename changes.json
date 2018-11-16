@@ -1,5 +1,5 @@
 {
-  "date": "November 5, 2018",
+  "date": "November 16, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments."
@@ -20,6 +20,7 @@
     "Warnings are now permanently stored!",
     "Server logging will now also log message update and message delete events.",
     "You can now enable disabled modules using the `--module` option in the `enableCommand` command.",
+    "The `lyrics` command is much much better now. Just try it out.",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
