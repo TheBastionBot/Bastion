@@ -86,6 +86,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'lyrics <SONG_NAME> [Artist Name>]',
+  usage: 'lyrics <SONG NAME> [ARTIST NAME]',
   example: [ 'lyrics Something just like this', 'lyrics Shape of you - Ed Sheeran' ]
 };
