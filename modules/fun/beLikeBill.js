@@ -9,7 +9,7 @@ const request = require('request-promise-native');
 exports.exec = async (Bastion, message, args) => {
   try {
     let options = {
-      url: 'https://belikebill.azurewebsites.net/billgen-API.php',
+      url: 'https://belikebill.ga/billgen-API.php',
       qs: {
         default: 1,
         name: message.member.displayName
