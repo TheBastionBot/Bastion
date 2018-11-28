@@ -44,6 +44,8 @@ module.exports = async message => {
     }
   }
   catch (e) {
+    message.channel.stopTyping(true);
+
     message.client.log.error(e);
   }
 };
