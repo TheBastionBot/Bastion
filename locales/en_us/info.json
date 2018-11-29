@@ -46,6 +46,8 @@
   "enableLevelUps": "%var% enabled level ups in this server. Users will now be able to gain experience points and level up as they chat.",
   "disableMembersOnly": "%var% disabled Members Only mode in this server. Bastion's Commands can now be used by any member of this server.",
   "enableMembersOnly": "%var% enabled Members Only mode in this server. Bastion's Commands can now only be used by members with at least one role.",
+  "disableReactionAnnouncements": "%var% disabled Reaction Announcements in this server.",
+  "enableReactionAnnouncements": "%var% enabled Reaction Announcements in this server. Adding either 📣 or 📢 reaction to a message will send the message to the announcement channel, provided an announcement channel has been set.",
   "disableReactionPinning": "%var% disabled Reaction Pinning in this server.",
   "enableReactionPinning": "%var% enabled Reaction Pinning in this server. Adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too.",
   "disableServerLog": "%var% disabled logging of server events.",

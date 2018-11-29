@@ -775,6 +775,10 @@
     "description": "Shows the rank of the specified user's account.",
     "module": "Info"
   },
+  "reactionAnnouncements": {
+    "description": "Toggles Reaction Announcements in the server. Adding either 📣 or 📢 reaction to a message will send the message to the announcement channel, provided an announcement channel has been set.",
+    "module": "Guild Admin"
+  },
   "reactionPinning": {
     "description": "Toggles Reaction Pinning in the server. If Reaction Pinning is enabled, adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too.",
     "module": "Guild Admin"
