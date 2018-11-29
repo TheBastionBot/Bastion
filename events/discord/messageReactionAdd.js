@@ -12,7 +12,12 @@ module.exports = async (reaction, user) => {
 
 
     let guildModel = await user.client.database.models.guild.findOne({
-      attributes: [ 'reactionPinning', 'starboard' ],
+      attributes: [
+        'announcementChannel',
+        'reactionAnnouncements',
+        'reactionPinning',
+        'starboard'
+      ],
       where: {
         guildID: reaction.message.guild.id
       },
@@ -34,6 +39,26 @@ module.exports = async (reaction, user) => {
 
 
     if (guildModel) {
+      if (guildModel.dataValues.announcementChannel && guildModel.dataValues.reactionAnnouncements) {
+        if ([ '📣', '📢' ].includes(reaction.emoji.name)) {
+          if (reaction.message.channel.permissionsFor(user).has('MANAGE_GUILD')) {
+            await reaction.message.channel.send({
+              embed: {
+                color: user.client.colors.BLUE,
+                author: {
+                  name: reaction.message.author.tag
+                },
+                description: reaction.message.content,
+                footer: {
+                  text: `📣 Announcement made by ${user.tag}`
+                }
+              }
+            });
+          }
+        }
+      }
+
+
       if (guildModel.dataValues.reactionPinning) {
         if ([ '📌', '📍' ].includes(reaction.emoji.name)) {
           if (reaction.message.channel.permissionsFor(user).has('MANAGE_MESSAGES')) {
