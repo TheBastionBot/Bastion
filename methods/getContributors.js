@@ -4,20 +4,12 @@
  * @license GPL-3.0
  */
 
-const request = xrequire('request-promise-native');
+const makeBWAPIRequest = xrequire('./methods/makeBWAPIRequest');
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      let options = {
-        headers: {
-          'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
-        },
-        uri: 'https://api.bastionbot.org/github/contributors',
-        json: true
-      };
-
-      let response = await request(options);
+      let response = await makeBWAPIRequest('/github/contributors');
 
       let contributors = [];
       for (let contributor of Object.keys(response)) {
