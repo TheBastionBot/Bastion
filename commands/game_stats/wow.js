@@ -174,7 +174,7 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'wow <CHARACTER> <--realm REALM> [-region <REGION>]',
+  usage: 'wow <CHARACTER> <--realm REALM> [--region <REGION>]',
   example: [
     'wow Fallken --realm Burning-Blade --region EU'
   ]
