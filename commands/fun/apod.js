@@ -4,18 +4,9 @@
  * @license GPL-3.0
  */
 
-const request = xrequire('request-promise-native');
-
 exports.exec = async (Bastion, message) => {
   try {
-    let options = {
-      url: 'https://api.bastionbot.org/nasa/apod',
-      headers: {
-        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
-      },
-      json: true
-    };
-    let response = await request(options);
+    let response = await Bastion.methods.makeBWAPIRequest('/nasa/apod');
 
     await message.channel.send({
       embed: {

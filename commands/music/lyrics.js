@@ -4,8 +4,6 @@
  * @license GPL-3.0
  */
 
-const request = xrequire('request-promise-native');
-
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!message.guild.music.enabled) {
@@ -23,14 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let options = {
-      headers: {
-        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
-      },
-      url: `https://api.bastionbot.org/song/${args.song.join(' ')}`,
-      json: true
-    };
-    let response = await request(options);
+    let response = await Bastion.methods.makeBWAPIRequest(`/song/${args.song.join(' ')}`);
 
     if (response.error) {
       return await message.channel.send({
