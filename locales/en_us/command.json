@@ -581,6 +581,9 @@
   "rank": {
     "description": "Shows the rank of the specified user's account."
   },
+  "reactionAnnouncements": {
+    "description": "Toggles Reaction Announcements in the server. Adding either 📣 or 📢 reaction to a message will send the message to the announcement channel, provided an announcement channel has been set."
+  },
   "reactionPinning": {
     "description": "Toggles Reaction Pinning in the server. If Reaction Pinning is enabled, adding either 📌 or 📍 reaction to a message will pin the message to the channel and removing the reactions will unpin it too."
   },
@@ -774,7 +777,7 @@
     "description": "Shows detailed stats and info of the shard the command was used in."
   },
   "ship": {
-    "description": "Combines two or more mentioned users' names."
+    "description": "Combines two or more mentioned user's names."
   },
   "shop": {
     "description": "Lists/Adds/Removes items from your server's shop. Listed items in the shop can be bought by anyone, with %currency.name_plural%, in your server using the `buy` command. When users buy item, the server owner gets 90% of the profit."
