@@ -23,7 +23,7 @@ module.exports = async message => {
     message.channel.startTyping();
 
     let options = {
-      url: 'https://api.bastionbot.org/chat',
+      url: 'https://bchat.glitch.me/api',
       headers: {
         'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
       },
@@ -44,6 +44,8 @@ module.exports = async message => {
     }
   }
   catch (e) {
+    message.channel.stopTyping(true);
+
     message.client.log.error(e);
   }
 };
