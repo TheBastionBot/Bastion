@@ -1,5 +1,5 @@
 {
-  "date": "November 16, 2018",
+  "date": "November 29, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments."
@@ -41,7 +41,8 @@
     "You can now mass move members from one voice channel to another.",
     "Bastion's boot logs will now show how long it took Bastion to boot up completely.",
     "You can now send ROT13 encoded message using the `ROT13` command.",
-    "You can now send and view spoilers, without spoiling it for everyone, using the `sendSpoiler` and `showSpoiler` commands."
+    "You can now send and view spoilers, without spoiling it for everyone, using the `sendSpoiler` and `showSpoiler` commands.",
+    "You can now relay a message to the announcement channel just by adding either 📢 or 📣 reaction to a message.",
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -67,7 +68,8 @@
     "`apod` - Get the Astronomy Picture of the Day from NASA.",
     "`setProfilePicture` - Sets your profile picture that shows up in the Bastion user profile.",
     "`book` - Shows details about the specified book.",
-    "`ignoreXP` - Set channels and/or roles to be ignored for experience."
+    "`ignoreXP` - Set channels and/or roles to be ignored for experience.",
+    "`reactionAnnouncements` - Toggle Reaction Announcements."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
