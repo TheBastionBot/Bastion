@@ -116,7 +116,7 @@ exports.exec = async (Bastion, message, args) => {
   }
   catch (e) {
     if (e.toString() === 'UDP Watchdog Timeout') {
-      return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'invalidIPPort'), message.channel);
+      return Bastion.emit('error', '', Bastion.strings.error(message.guild.language, 'invalidIPPort', true), message.channel);
     }
     Bastion.log.error(e);
   }
