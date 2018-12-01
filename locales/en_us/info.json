@@ -102,6 +102,9 @@
   "removeMusicMasterRole": "%var% removed the **Music Master Role**.",
   "repeatSong": "%var% set the current song to repeat once.",
 
+  "disableDirectMessageReyals": "I will now stop relaying direct messages, sent to me, into your inbox.",
+  "enableDirectMessageReyals": "I will now relay every direct messages, sent to me, into your inbox.",
+
   "lastSeen": "%var% was last seen %var% ago.",
   "notSeen": "I have not seen %var% in a while.",
   "deleteReminder": "%var% your reminders have been deleted.",

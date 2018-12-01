@@ -20,6 +20,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       primaryKey: true
     },
+    relayDirectMessages: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     blacklistedGuilds: {
       type: Sequelize.JSON
     },
