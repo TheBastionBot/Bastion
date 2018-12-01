@@ -47,7 +47,7 @@ exports.help = {
   name: 'relayDirectMessages',
   description: 'Toggles relaying of direct messages, sent to Bastion, to your inbox.',
   botPermission: '',
-  userTextPermission: 'MANAGE_GUILD',
+  userTextPermission: '',
   userVoicePermission: '',
   usage: 'relayDirectMessages',
   example: []
