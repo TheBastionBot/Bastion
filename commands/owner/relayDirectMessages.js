@@ -39,7 +39,8 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'relayPrivateMessages', 'relayDMs', 'relayPMs' ],
-  enabled: true
+  enabled: true,
+  ownerOnly: true
 };
 
 exports.help = {
