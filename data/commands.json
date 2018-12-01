@@ -791,6 +791,10 @@
     "description": "Add/Update the reason for a moderation action, which is logged in the moderation log channel. Only the responsible moderator or anyone with administrator permissions can change the reason.",
     "module": "Moderation"
   },
+  "relayDirectMessages": {
+    "description": "Toggles relaying of direct messages, sent to Bastion, to your inbox.",
+    "module": "Owner"
+  },
   "reloadSettings": {
     "description": "Reloads Bastion settings, stored in the `settings` directory, from the cache. When you modify files in the `settings` directory, use this command to reload them without any need to restart.",
     "module": "Owner"
