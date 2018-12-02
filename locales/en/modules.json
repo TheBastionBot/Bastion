@@ -50,7 +50,7 @@
     "sendEmbed": "Sends an embed message from the specified embed (JavaScript) object. *To create an embed object, graphically, [click here](https://bastionbot.org/embedbuilder/).*",
     "ship": "Combines two or more mentioned user's names.",
     "slap": "Give a slap to another user.",
-    "ticke": "Tickle someone!",
+    "tickle": "Tickle someone!",
     "xkcd": "Shows a xkcd comic.",
     "zalgolize": "Sends the same message that you had sent, but zalgolized."
   },
