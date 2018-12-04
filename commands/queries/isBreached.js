@@ -4,8 +4,6 @@
  * @license GPL-3.0
  */
 
-const request = xrequire('request-promise-native');
-
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.name) {
@@ -18,37 +16,28 @@ exports.exec = async (Bastion, message, args) => {
 
     args.name = args.name.join('');
 
-    let options = {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'BastionBot/k3rn31p4nic',
-        'Accept': 'application/json'
-      },
-      url: `https://haveibeenpwned.com/api/v2/breach/${args.name}`,
-      json: true
-    };
-    let response = await request(options);
+    let breachedSite = await Bastion.methods.makeBWAPIRequest(`/pwned/site/${args.name}`);
 
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         author: {
-          name: response.Title,
-          url: `http://${response.Domain}`
+          name: breachedSite.Title,
+          url: `http://${breachedSite.Domain}`
         },
         fields: [
           {
             name: 'Compromised Data',
-            value: response.DataClasses.join(', ')
+            value: breachedSite.DataClasses.join(', ')
           },
           {
             name: 'Breach Date',
-            value: response.BreachDate,
+            value: breachedSite.BreachDate,
             inline: true
           },
           {
             name: 'Verified',
-            value: response.IsVerified,
+            value: breachedSite.IsVerified,
             inline: true
           }
         ],
