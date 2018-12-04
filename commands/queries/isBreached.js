@@ -49,7 +49,7 @@ exports.exec = async (Bastion, message, args) => {
   }
   catch (e) {
     if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+      return Bastion.emit('error', e.response.statusCode, e.response.statusCode === 404 ? 'We don\'t have data on any breaches for that site.' : e.response.statusMessage, message.channel);
     }
     Bastion.log.error(e);
   }
