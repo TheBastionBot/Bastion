@@ -4,9 +4,6 @@
  * @license GPL-3.0
  */
 
-const Kitsu = xrequire('kitsu/node');
-const kitsu = new Kitsu();
-
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.name) {
@@ -17,14 +14,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let { data: manga } = await kitsu.fetch('manga', {
-      filter: {
-        text: args.name
-      },
-      fields: {
-        manga: 'titles,slug,synopsis,startDate,endDate,posterImage'
-      }
-    });
+    let manga = await Bastion.methods.makeBWAPIRequest(`/kitsu/manga?name=${args.name}`);
     manga = manga[0];
 
     message.channel.send({
