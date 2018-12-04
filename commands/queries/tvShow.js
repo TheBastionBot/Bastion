@@ -4,8 +4,6 @@
  * @license GPL-3.0
  */
 
-const request = xrequire('request-promise-native');
-
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.tvshow) {
@@ -16,15 +14,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('commandUsage', message, this.help);
     }
 
-    let options = {
-      method: 'GET',
-      url: `https://api.themoviedb.org/3/search/tv?api_key=&query=${encodeURIComponent(args.tvshow)}`,
-      qs: {
-        api_key: Bastion.credentials.theMovieDBApiKey
-      },
-      json: true
-    };
-    let tvShow = await request(options);
+    let tvShow = await Bastion.methods.makeBWAPIRequest(`/tvshows/search/${args.tvshow}`);
 
     tvShow = tvShow.results[0];
 
