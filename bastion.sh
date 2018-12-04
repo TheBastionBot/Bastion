@@ -7,7 +7,7 @@ echo
 source ./scripts/bash/definitions.sh
 source ./scripts/bash/logger.sh
 
-if ! [ -z "$SUDO_USER" ]
+if [ -n "$SUDO_USER" ]
 then
   echo
   print::error "Root permission detected"
