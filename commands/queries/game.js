@@ -4,8 +4,6 @@
  * @license GPL-3.0
  */
 
-const request = xrequire('request-promise-native');
-
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.name || !args.name.length) {
@@ -18,24 +16,10 @@ exports.exec = async (Bastion, message, args) => {
 
     args.name = args.name.join(' ');
 
-    let options = {
-      headers: {
-        'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`,
-        'Accept': 'application/json',
-        'User-Key': Bastion.credentials.IGDBUserKey
-      },
-      url: 'https://api-2445582011268.apicast.io/games/',
-      qs: {
-        search: encodeURIComponent(args.name),
-        fields: '*',
-        limit: 1
-      },
-      json: true
-    };
-    let response = await request(options);
-    response = response[0];
+    let games = await Bastion.methods.makeBWAPIRequest(`/games/search/${args.name}`);
+    let game = games[0];
 
-    if (!response) {
+    if (!game) {
       /**
        * Error condition is encountered.
        * @fires error
@@ -46,27 +30,27 @@ exports.exec = async (Bastion, message, args) => {
     message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
-        title: response.name,
-        url: response.url,
-        description: response.summary,
+        title: game.name,
+        url: game.url,
+        description: game.summary,
         fields: [
           {
             name: 'Rating',
-            value: response.total_rating ? response.total_rating.toFixed(2) : '-',
+            value: game.total_rating ? game.total_rating.toFixed(2) : '-',
             inline: true
           },
           {
             name: 'Release Date',
-            value: new Date(response.first_release_date).toDateString(),
+            value: new Date(game.first_release_date).toDateString(),
             inline: true
           },
           {
             name: 'Links',
-            value: response.websites ? response.websites.map(website => website.url).join('\n') : '-'
+            value: game.websites ? game.websites.map(website => website.url).join('\n') : '-'
           }
         ],
         image: {
-          url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${response.cover.cloudinary_id}.jpg`
+          url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.cloudinary_id}.jpg`
         },
         footer: {
           text: 'Powered by IGDB'
