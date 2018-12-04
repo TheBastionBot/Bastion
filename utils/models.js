@@ -135,6 +135,11 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING,
       unique: true
     },
+    redirectWarnings: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     filterInvites: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
