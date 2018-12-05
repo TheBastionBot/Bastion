@@ -20,7 +20,7 @@ module.exports = async message => {
     let links = [];
     for (let link in sneakyLinks) {
       if (sneakyLinks.hasOwnProperty(link)) {
-        links.push(`${link} ➡ ${sneakyLinks[link]}`);
+        links.push(`${link} > ${sneakyLinks[link]}`);
       }
     }
 
@@ -28,7 +28,10 @@ module.exports = async message => {
       embed: {
         color: message.client.colors.ORANGE,
         title: 'Sneaky Links Found!',
-        description: links.join('\n')
+        description: links.join('\n'),
+        footer: {
+          text: `ID: ${message.id}`
+        }
       }
     });
   }
