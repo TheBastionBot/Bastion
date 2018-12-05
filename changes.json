@@ -1,5 +1,5 @@
 {
-  "date": "December 1, 2018",
+  "date": "December 5, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments."
@@ -43,7 +43,8 @@
     "You can now send ROT13 encoded message using the `ROT13` command.",
     "You can now send and view spoilers, without spoiling it for everyone, using the `sendSpoiler` and `showSpoiler` commands.",
     "You can now relay a message to the announcement channel just by adding either 📢 or 📣 reaction to a message.",
-    "Bastion can now relay every direct messages, sent to it, to your inbox."
+    "Bastion can now relay every direct messages, sent to it, to your inbox.",
+    "Bastion can warn you about sneaky links in messages sent in the server."
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -71,7 +72,8 @@
     "`book` - Shows details about the specified book.",
     "`ignoreXP` - Set channels and/or roles to be ignored for experience.",
     "`reactionAnnouncements` - Toggle Reaction Announcements.",
-    "`relayDirectMessages` - Toggles relaying of direct messages, sent to Bastion, to your inbox."
+    "`relayDirectMessages` - Toggles relaying of direct messages, sent to Bastion, to your inbox.",
+    "`uncoverSneakyLinks` - Toggle uncovering of sneaky links in the messages sent in the server."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",

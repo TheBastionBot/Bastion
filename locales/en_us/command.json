@@ -905,6 +905,9 @@
   "unMute": {
     "description": "Unmutes a specified user server-wide in your Discord server."
   },
+  "uncoverSneakyLinks": {
+    "description": "Toggle uncovering of sneaky links in the messages sent in the server. If enabled, Bastion will show details of all link that contains redirects to other locations, in every message sent in the server."
+  },
   "unturned": {
     "description": "Get stats of any Unturned game server."
   },
