@@ -135,7 +135,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING,
       unique: true
     },
-    redirectWarnings: {
+    uncoverSneakyLinks: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
