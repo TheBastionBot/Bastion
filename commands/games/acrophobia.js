@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message) => {
     activeChannels[message.channel.id].usersSubmitted = [];
     activeChannels[message.channel.id].usersVoted = [];
 
-    let acroLen = Bastion.methods.getRandomInt(2, 5);
+    let acroLen = Bastion.methods.getRandomInt(3, 6);
     let acronym = [];
     for (let i = 0; i < acroLen; i++) {
       acronym.push(Bastion.methods.getRandomChar(true).toUpperCase());
