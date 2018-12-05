@@ -40,6 +40,8 @@
   "enablePrivateGreetingMessages": "%var% enabled private greeting messages.",
   "disableLevelUpMessages": "%var% disabled level up messages in this server. I will not send any message when someone levels up in this server.",
   "enableLevelUpMessages": "%var% enabled level up messages in this server. I will send messages, congratulating users, when they level up in this server.",
+  "disableSneakyLinkWarnings": "%var% disabled warnings of sneaky links in the messages sent in the server.",
+  "enableSneakyLinkWarnings": "%var% enabled warnings of sneaky links in the messages sent in the server. I will now show details of all link that contains redirects to other locations, in every message sent in the server.",
   "addLevelUpRole": "%var% added a level up role **%var%** to be added to users at level **%var%**.",
   "removeLevelUpRoles": "%var% removed all level up roles from level **%var%**.",
   "disableLevelUps": "%var% disabled level ups in this server. Users won't be able to gain experience points and level up while chatting.",
