@@ -21,6 +21,7 @@
     "Server logging will now also log message update and message delete events.",
     "You can now enable disabled modules using the `--module` option in the `enableCommand` command.",
     "The `lyrics` command is much much better now. Just try it out.",
+    "The `acrophobia` command now uses relative frequencies of letters as the first word of English words to generate acronyms for the game.",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [
