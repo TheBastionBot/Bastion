@@ -14,11 +14,14 @@ const handleUserLevel = xrequire('./handlers/levelHandler');
 const handleCommand = xrequire('./handlers/commandHandler');
 const handleConversation = xrequire('./handlers/conversationHandler');
 const handleDirectMessage = xrequire('./handlers/directMessageHandler');
+const sneakyLinksHandler = xrequire('./handlers/sneakyLinksHandler');
 let recentLevelUps = [];
 let recentUsers = {};
 
 module.exports = async message => {
   try {
+    sneakyLinksHandler(message);
+
     /**
      * Filter Bastion's credentials from the message
      */
