@@ -25,6 +25,7 @@ BASTION.permissions = Tesseract.Permissions.FLAGS;
 
 xrequire('./prototypes/Array.prototype');
 xrequire('./prototypes/String.prototype');
+xrequire('./prototypes/Number');
 xrequire('./prototypes/Number.prototype');
 
 const WebhookHandler = xrequire('./handlers/webhookHandler.js');
