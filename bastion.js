@@ -23,10 +23,11 @@ BASTION.Constants = Tesseract.Constants;
 BASTION.colors = Tesseract.Constants.Colors;
 BASTION.permissions = Tesseract.Permissions.FLAGS;
 
-xrequire('./prototypes/Number');
 xrequire('./prototypes/Number.prototype');
+xrequire('./prototypes/Number');
 xrequire('./prototypes/String.prototype');
 xrequire('./prototypes/Array.prototype');
+xrequire('./prototypes/Array');
 
 const WebhookHandler = xrequire('./handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
