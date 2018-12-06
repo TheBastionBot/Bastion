@@ -1,3 +1,8 @@
+Number.prototype.inRange = function (lower = Number.MIN_SAFE_INTEGER, upper = Number.MAX_SAFE_INTEGER, inclusive = true) {
+  if (inclusive) return this >= lower && this <= upper;
+  return this > lower && this < upper;
+};
+
 Number.prototype.toHumanString = function() {
   let billion = 1000000000, million = 1000000, thousand = 1000;
 
