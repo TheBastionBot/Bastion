@@ -14,3 +14,14 @@ String.prototype.toTitleCase = function() {
   newstr = newstr.join(' ');
   return newstr;
 };
+
+String.prototype.truncate = function(length, terminator = '...') {
+  let string = this.valueOf();
+  let terminatorLength = terminator.length;
+
+  string = string.length > length
+    ? string.substring(0, length - terminatorLength) + terminator
+    : string;
+
+  return string;
+};
