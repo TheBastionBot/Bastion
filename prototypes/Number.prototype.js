@@ -1,3 +1,12 @@
+Number.prototype.clamp = function (lower = Number.MIN_SAFE_INTEGER, upper = Number.MAX_SAFE_INTEGER, inclusive = true) {
+  let number = this.valueOf();
+
+  number = number <= upper ? number : inclusive ? upper : upper - 1;
+  number = number >= lower ? number : inclusive ? lower : lower + 1;
+
+  return number;
+};
+
 Number.prototype.inRange = function (lower = Number.MIN_SAFE_INTEGER, upper = Number.MAX_SAFE_INTEGER, inclusive = true) {
   if (inclusive) return this >= lower && this <= upper;
   return this > lower && this < upper;
