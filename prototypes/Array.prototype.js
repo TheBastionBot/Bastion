@@ -1,4 +1,6 @@
-Array.prototype.unique = e => [ ...new Set(e) ];
+Array.prototype.unique = function() {
+  return [ ...new Set(this) ];
+};
 
 Array.prototype.random = function() {
   return this[Math.floor(Math.random() * this.length)];
