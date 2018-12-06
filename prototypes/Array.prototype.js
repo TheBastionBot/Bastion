@@ -16,6 +16,14 @@ Array.prototype.set = function(index, value) {
   return false;
 };
 
+Array.prototype.head = function() {
+  return this.get(0);
+};
+
+Array.prototype.tail = function() {
+  return this.get(-1);
+};
+
 Array.prototype.flatten = function() {
   // Removes array holes too
   return this.reduce((acc, val) => acc.concat(val), []);
