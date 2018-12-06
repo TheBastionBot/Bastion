@@ -16,6 +16,16 @@ Array.prototype.set = function(index, value) {
   return false;
 };
 
+Array.prototype.flatten = function() {
+  // Removes array holes too
+  return this.reduce((acc, val) => acc.concat(val), []);
+};
+
+Array.prototype.flattenDeep = function() {
+  // Removes array holes too
+  return this.reduce((acc, val) => Array.isArray(val) ? acc.concat(val.flattenDeep()) : acc.concat(val), []);
+};
+
 Array.prototype.unique = function() {
   return [ ...new Set(this) ];
 };
