@@ -20,7 +20,7 @@ Array.prototype.unique = function() {
   return [ ...new Set(this) ];
 };
 
-Array.prototype.random = function() {
+Array.prototype.getRandom = function() {
   return this[Math.floor(Math.random() * this.length)];
 };
 
