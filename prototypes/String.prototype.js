@@ -1,9 +1,3 @@
-String.prototype.substitute = function () {
-  let count = 0;
-  let args = arguments;
-  return this.replace(/%var%/g, () => args[count++]);
-};
-
 String.prototype.toTitleCase = function() {
   let newstr = this.split(' ');
   for (let i = 0; i < newstr.length; i++) {
@@ -13,4 +7,15 @@ String.prototype.toTitleCase = function() {
   }
   newstr = newstr.join(' ');
   return newstr;
+};
+
+String.prototype.truncate = function(length, terminator = '...') {
+  let string = this.valueOf();
+  let terminatorLength = terminator.length;
+
+  string = string.length > length
+    ? string.substring(0, length - terminatorLength) + terminator
+    : string;
+
+  return string;
 };
