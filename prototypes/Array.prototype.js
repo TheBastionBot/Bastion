@@ -52,7 +52,3 @@ Array.prototype.shuffle = function() {
   }
   return this;
 };
-
-Array.prototype.intersect = function(...a) {
-  return [ this, ...a ].reduce((p, c) => p.filter(e => c.includes(e)));
-};
