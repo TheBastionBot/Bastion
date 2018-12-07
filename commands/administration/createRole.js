@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
   let maxLength = 100;
   args.name = args.name.join(' ');
 
-  if (args.name.length.inRange(0, maxLength)) {
+  if (!args.name.length.inRange(0, maxLength)) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
   }
 
