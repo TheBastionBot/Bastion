@@ -4,10 +4,10 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let sweepedUser = message.channel.members.filter(m => !m.user.bot).random();
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Sweeped user',
@@ -24,8 +24,6 @@ exports.exec = (Bastion, message) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 
