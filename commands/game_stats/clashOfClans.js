@@ -78,10 +78,6 @@ const statStrings = {
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.needle) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -176,9 +172,7 @@ exports.exec = async (Bastion, message, args) => {
 
     }
     else {
-
       if (clanMembers) {
-
         embed.setDescription(`Clan ${args.needle} has ${result.items.length} members:`);
 
         let keys = Object.keys(statStrings['role']);
@@ -196,7 +190,6 @@ exports.exec = async (Bastion, message, args) => {
             );
           }
         });
-
       }
       else {
         if (upgrades) {
@@ -228,8 +221,6 @@ exports.exec = async (Bastion, message, args) => {
 
         }
         else {
-
-
           let cosLink = !player
             ? `https://clashofstats.com/clans/${result.tag.replace(
               '#',
@@ -287,14 +278,10 @@ exports.exec = async (Bastion, message, args) => {
         }
       }
     }
-    message.channel.send({ embed }).catch(e => {
-      Bastion.log.error(e);
-    });
-
+    await message.channel.send({ embed });
   }
   catch (e) {
     if (e.name === 'StatusCodeError') {
-
       if (e.statusCode === 404) {
         return Bastion.emit('error', 'No search results', '', message.channel);
       }
@@ -339,7 +326,7 @@ exports.exec = async (Bastion, message, args) => {
         message.channel
       );
     }
-    Bastion.log.error(e);
+    throw e;
   }
 };
 

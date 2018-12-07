@@ -74,10 +74,6 @@ const wowConstants = {
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.character || !args.realm) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -126,7 +122,7 @@ exports.exec = async (Bastion, message, args) => {
       );
     }
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         author: {
@@ -142,19 +138,15 @@ exports.exec = async (Bastion, message, args) => {
           text: 'Powered by Blizzard Battle.net'
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
-
   }
   catch (e) {
     if (e.name === 'StatusCodeError') {
       if (e.statusCode === '404') {
         return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
       }
-      return Bastion.emit('error', e.statusCode, e.error.message, message.channel);
     }
-    Bastion.log.error(e);
+    throw e;
   }
 };
 
