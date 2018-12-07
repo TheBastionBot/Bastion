@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.length < 2 || !args.join(' ').endsWith('?')) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -36,7 +32,7 @@ exports.exec = (Bastion, message, args) => {
     'Very doubtful'
   ];
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: args.join(' '),
@@ -45,8 +41,6 @@ exports.exec = (Bastion, message, args) => {
         text: '🎱 Magic 8-ball'
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

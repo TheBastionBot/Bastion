@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let reel = [
     ':custard:',
     ':candy:',
@@ -29,7 +29,7 @@ exports.exec = (Bastion, message) => {
     result = 'Congrats! You won.';
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Slot Machine',
@@ -38,8 +38,6 @@ exports.exec = (Bastion, message) => {
         text: result
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

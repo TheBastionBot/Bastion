@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let outcomes = [
     'ROCK',
     'PAPER',
@@ -13,10 +13,6 @@ exports.exec = (Bastion, message, args) => {
   let userOutcome = args.join(' ').toUpperCase();
 
   if (!outcomes.includes(userOutcome)) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -42,13 +38,11 @@ exports.exec = (Bastion, message, args) => {
     }
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       description: `You chose **${userOutcome}**, I chose **${botOutcome}**. *${result}*`
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 
