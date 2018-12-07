@@ -5,36 +5,35 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!Bastion.resolver.resolveColor(args.color)) {
-      args.color = 0;
-    }
+  if (!args.name) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let maxLength = 100;
-    if (args.name && args.name.join(' ').length > maxLength) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
-    }
+  if (!Bastion.resolver.resolveColor(args.color)) {
+    args.color = 0;
+  }
 
-    let data = roleData(args.name.join(' '), args.color);
-    let role = await message.guild.createRole(data);
+  let maxLength = 100;
+  args.name = args.name.join(' ');
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'createRole', message.author.tag, role.name),
-        footer: {
-          text: `ID: ${role.id}`
-        }
+  if (args.name.length.inRange(0, maxLength)) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
+  }
+
+  let data = roleData(args.name, args.color);
+  let role = await message.guild.createRole(data);
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'createRole', message.author.tag, role.name),
+      footer: {
+        text: `ID: ${role.id}`
       }
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
