@@ -5,36 +5,27 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.role) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    args.role = args.role.join(' ');
-
-    let role;
-    if (message.mentions.roles.size) {
-      role = message.mentions.roles.first();
-    }
-    else if (message.guild.roles.has(args.role)) {
-      role = message.guild.roles.get(args.role);
-    }
-    else {
-      role = message.guild.roles.find(role => role.name === args.role);
-    }
-
-    if (role.editable) {
-      await role.setMentionable(true, 'Role needs to be mentioned.');
-      await message.channel.send(`<@&${role.id}>`);
-      await role.setMentionable(false, 'Role doesn\'t needs to be mentioned anymore.');
-    }
+  if (!args.role) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
-    Bastion.log.error(e);
+
+  args.role = args.role.join(' ');
+
+  let role;
+  if (message.mentions.roles.size) {
+    role = message.mentions.roles.first();
+  }
+  else if (message.guild.roles.has(args.role)) {
+    role = message.guild.roles.get(args.role);
+  }
+  else {
+    role = message.guild.roles.find(role => role.name === args.role);
+  }
+
+  if (role.editable) {
+    await role.setMentionable(true, 'Role needs to be mentioned.');
+    await message.channel.send(`<@&${role.id}>`);
+    await role.setMentionable(false, 'Role doesn\'t needs to be mentioned anymore.');
   }
 };
 
