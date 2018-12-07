@@ -5,46 +5,35 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.mention && !args.id && !args.name) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let role = message.mentions.roles.first();
-    if (!role) {
-      if (args.id) {
-        role = message.guild.roles.get(args.id);
-      }
-      else if (args.name) {
-        role = message.guild.roles.find(role => role.name === args.name.join(' '));
-      }
-    }
-
-    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
-    else if (!role) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
-    }
-
-    await role.delete();
-
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, 'deleteRole', message.author.tag, role.name)
-      }
-    });
+  if (!args.mention && !args.id && !args.name) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
+
+  let role = message.mentions.roles.first();
+  if (!role) {
+    if (args.id) {
+      role = message.guild.roles.get(args.id);
+    }
+    else if (args.name) {
+      role = message.guild.roles.find(role => role.name === args.name.join(' '));
+    }
+  }
+
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  else if (!role) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
+
+  await role.delete();
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, 'deleteRole', message.author.tag, role.name)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
