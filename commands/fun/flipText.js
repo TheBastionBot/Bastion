@@ -6,12 +6,8 @@
 
 const flipText = xrequire('./assets/flipText.json');
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -20,14 +16,12 @@ exports.exec = (Bastion, message, args) => {
     args = args.replace(Object.keys(flipText)[i], flipText[Object.keys(flipText)[i]]);
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Flipped Text:',
       description: args.split('').reverse().join('')
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

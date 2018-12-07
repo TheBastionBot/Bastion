@@ -6,16 +6,13 @@
 
 const catFacts = xrequire('./assets/catFacts.json');
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Cat Fact:',
-      description: catFacts[Math.floor(Math.random() * catFacts.length)]
-      // description: catFacts.random()
+      title: 'Cat Fact',
+      description: catFacts.getRandom()
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

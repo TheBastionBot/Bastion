@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -26,9 +22,7 @@ exports.exec = (Bastion, message, args) => {
     replace(/9/g, ':nine:').
     replace(/0/g, ':zero:');
 
-  message.channel.send(blockedChars).catch(e => {
-    Bastion.log.error(e);
-  });
+  await message.channel.send(blockedChars);
 };
 
 exports.config = {

@@ -5,44 +5,29 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.content) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.content) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let minTimeout = 5, maxTimeout = 600;
-    if (args.timeout < minTimeout || args.timeout > maxTimeout) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'selfDestructTimeout', minTimeout, maxTimeout), message.channel);
-    }
+  let minTimeout = 5, maxTimeout = 600;
+  if (!args.timeout.inRange(minTimeout, maxTimeout)) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'selfDestructTimeout', minTimeout, maxTimeout), message.channel);
+  }
 
-    if (message.deletable) {
-      message.delete().catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+  if (message.deletable) {
+    await message.delete().catch(() => {});
+  }
 
-    let secretMessage = await message.channel.send({
-      embed: {
-        color: Bastion.colors.DEFAULT,
-        description: args.content.join(' '),
-        footer: {
-          text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
-        }
+  let secretMessage = await message.channel.send({
+    embed: {
+      color: Bastion.colors.DEFAULT,
+      description: args.content.join(' '),
+      footer: {
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
       }
-    });
-    await secretMessage.delete(args.timeout * 1000);
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+    }
+  });
+  await secretMessage.delete(args.timeout * 1000);
 };
 
 exports.config = {

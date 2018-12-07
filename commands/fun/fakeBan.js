@@ -5,37 +5,26 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-    else if (args.id) {
-      user = await Bastion.fetchUser(args.id);
-    }
-    if (!user) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = await Bastion.fetchUser(args.id);
+  }
+  if (!user) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: `**${message.author.tag}** has banned **${user.tag}** from this server.*`,
-        footer: {
-          text: '* Oh, just kidding! XD'
-        }
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: `**${message.author.tag}** has banned **${user.tag}** from this server.*`,
+      footer: {
+        text: '* Oh, just kidding! XD'
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+    }
+  });
 };
 
 exports.config = {

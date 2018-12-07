@@ -4,16 +4,12 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: message.client.colors.BLUE,
       author: {
@@ -28,8 +24,6 @@ exports.exec = (Bastion, message, args) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

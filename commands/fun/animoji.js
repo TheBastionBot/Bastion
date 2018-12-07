@@ -4,24 +4,18 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.name) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   let emoji = message.guild.emojis.find(emoji => emoji.name === args.name);
 
-  if (emoji) {
-    message.channel.send({
-      files: [ emoji.url ]
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
+  if (!emoji) return;
+
+  await message.channel.send({
+    files: [ emoji.url ]
+  });
 };
 
 exports.config = {

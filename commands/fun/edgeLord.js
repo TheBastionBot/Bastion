@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       description: 'What the heck did you just hecking say about me,' +
@@ -37,8 +37,6 @@ exports.exec = (Bastion, message) => {
                    'the price, you goddamn idiot. I will shit guilt all ' +
                    'over you and I will drown in it. I\'m fucking dead, kiddo.'
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

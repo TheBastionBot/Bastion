@@ -7,25 +7,17 @@
 const request = xrequire('request-promise-native');
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let options = {
-      method: 'HEAD',
-      url: 'https://thecatapi.com/api/images/get',
-      followAllRedirects: true,
-      resolveWithFullResponse: true
-    };
-    let response = await request(options);
+  let options = {
+    method: 'HEAD',
+    url: 'https://thecatapi.com/api/images/get',
+    followAllRedirects: true,
+    resolveWithFullResponse: true
+  };
+  let response = await request(options);
 
-    await message.channel.send({
-      files: [ response.request.uri.href ]
-    });
-  }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
-    }
-    Bastion.log.error(e);
-  }
+  await message.channel.send({
+    files: [ response.request.uri.href ]
+  });
 };
 
 exports.config = {

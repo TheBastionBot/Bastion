@@ -6,9 +6,9 @@
 
 const xkcd = xrequire('xkcd');
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.latest) {
-    xkcd(function (data) {
+    await xkcd((data) => {
       message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
@@ -40,16 +40,17 @@ exports.exec = (Bastion, message, args) => {
     });
   }
   else {
-    xkcd(function (data) {
+    await xkcd((data) => {
       let comicNumber;
       if (args.number && !isNaN(args.number)) {
         comicNumber = args.number > data.num ? data.num : args.number;
       }
       else {
         comicNumber = Bastion.methods.getRandomInt(1, data.num);
+        comicNumber = Number.random(1, data.num);
       }
 
-      xkcd(comicNumber, function (data) {
+      xkcd(comicNumber, (data) => {
         message.channel.send({
           embed: {
             color: Bastion.colors.BLUE,

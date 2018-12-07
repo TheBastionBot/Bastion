@@ -4,13 +4,9 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -23,7 +19,7 @@ exports.exec = (Bastion, message) => {
     'https://i.giphy.com/media/WLXO8OZmq0JK8/giphy.gif'
   ];
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       description: `${message.author.username} slapped ${user.username}!`,
@@ -31,8 +27,6 @@ exports.exec = (Bastion, message) => {
         url: slaps[Math.floor(Math.random() * slaps.length)]
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

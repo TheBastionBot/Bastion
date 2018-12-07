@@ -6,23 +6,17 @@
 
 const dictionary = xrequire('./assets/piratePhrases.json');
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Pirate Speak:',
+      title: 'Pirate Speak',
       description: translate(args.join(' '))
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 
