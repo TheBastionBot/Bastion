@@ -5,53 +5,44 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'selfAssignableRoles' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
-    if (!guildModel || !guildModel.dataValues.selfAssignableRoles) return;
-
-    let role = message.guild.roles.find(role => role.name === args.join(' '));
-    if (!role) return;
-
-    let selfAssignableRoles = [];
-    if (guildModel.dataValues.selfAssignableRoles) {
-      selfAssignableRoles = guildModel.dataValues.selfAssignableRoles;
-    }
-    if (!selfAssignableRoles.includes(role.id)) return;
-
-    if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
-
-    let member = message.member;
-    if (!member) {
-      member = await Bastion.utils.fetchMember(message.guild, message.author.id);
-    }
-
-    await member.addRole(role);
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'selfAssignRole', message.author.tag, role.name)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  if (args.length < 1) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
+
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'selfAssignableRoles' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+  if (!guildModel || !guildModel.dataValues.selfAssignableRoles) return;
+
+  let role = message.guild.roles.find(role => role.name === args.join(' '));
+  if (!role) return;
+
+  let selfAssignableRoles = [];
+  if (guildModel.dataValues.selfAssignableRoles) {
+    selfAssignableRoles = guildModel.dataValues.selfAssignableRoles;
+  }
+  if (!selfAssignableRoles.includes(role.id)) return;
+
+  if (message.guild.me.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('I don\'t have permission to use this command on that role.');
+
+  let member = message.member;
+  if (!member) {
+    member = await Bastion.utils.fetchMember(message.guild, message.author.id);
+  }
+
+  await member.addRole(role);
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'selfAssignRole', message.author.tag, role.name)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
