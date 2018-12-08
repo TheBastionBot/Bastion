@@ -5,45 +5,40 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let channels = message.mentions.channels.size ? message.mentions.channels : [ message.channel ];
-    channels = channels.map(channel => channel.id);
+  let channels = message.mentions.channels.size ? message.mentions.channels : [ message.channel ];
+  channels = channels.map(channel => channel.id);
 
-    for (let channelID of channels) {
-      await Bastion.database.models.textChannel.upsert({
+  for (let channelID of channels) {
+    await Bastion.database.models.textChannel.upsert({
+      channelID: channelID,
+      guildID: message.guild.id,
+      blacklisted: !args.remove
+    },
+    {
+      where: {
         channelID: channelID,
-        guildID: message.guild.id,
-        blacklisted: !args.remove
+        guildID: message.guild.id
       },
-      {
-        where: {
-          channelID: channelID,
-          guildID: message.guild.id
-        },
-        fields: [ 'channelID', 'guildID', 'blacklisted' ]
-      });
-    }
-
-    let description;
-    if (args.remove) {
-      description = 'I\'ll stop ignoring these channel, from now:';
-    }
-    else {
-      description = 'I\'ll ignore these channel, from now:';
-    }
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `${description}\n\n<#${channels.join('>, <#')}>`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'channelID', 'guildID', 'blacklisted' ]
     });
   }
-  catch (e) {
-    Bastion.log.error(e);
+
+  let description;
+  if (args.remove) {
+    description = 'I\'ll stop ignoring these channel, from now:';
   }
+  else {
+    description = 'I\'ll ignore these channel, from now:';
+  }
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: `${description}\n\n<#${channels.join('>, <#')}>`
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {

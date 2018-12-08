@@ -18,10 +18,6 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
     else {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
@@ -91,14 +87,10 @@ exports.exec = async (Bastion, message, args) => {
     description = Bastion.i18n.info(message.guild.language, 'enableAllCommands', message.author.tag);
   }
   else {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.GREEN,
       description: description

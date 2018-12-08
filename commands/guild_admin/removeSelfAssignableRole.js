@@ -5,66 +5,49 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let index = parseInt(args[0]);
-    if (!index || index <= 0) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
+  let index = parseInt(args[0]);
+  if (!index || index <= 0) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+  index -= 1;
+
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'selfAssignableRoles' ],
+    where: {
+      guildID: message.guild.id
     }
-    index -= 1;
+  });
 
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'selfAssignableRoles' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  if (!guildModel || !guildModel.dataValues.selfAssignableRoles) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'self-assignable roles'), message.channel);
+  }
+  let roles = guildModel.dataValues.selfAssignableRoles;
 
-    if (!guildModel || !guildModel.dataValues.selfAssignableRoles) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'self-assignable roles'), message.channel);
-    }
-    let roles = guildModel.dataValues.selfAssignableRoles;
+  if (index >= roles.length) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
+  }
 
-    if (index >= roles.length) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
-    }
+  let deletedRoleID = roles[parseInt(args[0]) - 1];
+  roles.splice(parseInt(args[0]) - 1, 1);
 
-    let deletedRoleID = roles[parseInt(args[0]) - 1];
-    roles.splice(parseInt(args[0]) - 1, 1);
-
-    await Bastion.database.models.guild.update({
-      selfAssignableRoles: roles
+  await Bastion.database.models.guild.update({
+    selfAssignableRoles: roles
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'selfAssignableRoles' ]
-    });
+    fields: [ 'selfAssignableRoles' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: `I've deleted **${message.guild.roles.get(deletedRoleID).name}** from self assignable roles.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: `I've deleted **${message.guild.roles.get(deletedRoleID).name}** from self assignable roles.`
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

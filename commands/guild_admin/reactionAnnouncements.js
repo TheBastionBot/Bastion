@@ -5,36 +5,31 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'reactionAnnouncements' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'reactionAnnouncements' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    await Bastion.database.models.guild.update({
-      reactionAnnouncements: !guildModel.dataValues.reactionAnnouncements
+  await Bastion.database.models.guild.update({
+    reactionAnnouncements: !guildModel.dataValues.reactionAnnouncements
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'reactionAnnouncements' ]
-    });
+    fields: [ 'reactionAnnouncements' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors[guildModel.dataValues.reactionAnnouncements ? 'RED' : 'GREEN'],
-        description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.reactionAnnouncements ? 'disableReactionAnnouncements' : 'enableReactionAnnouncements', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors[guildModel.dataValues.reactionAnnouncements ? 'RED' : 'GREEN'],
+      description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.reactionAnnouncements ? 'disableReactionAnnouncements' : 'enableReactionAnnouncements', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

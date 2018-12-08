@@ -5,54 +5,49 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'filterInvites' ],
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'filterInvites' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+
+  let color, filterInviteStats;
+  if (guildModel.dataValues.filterInvites) {
+    await Bastion.database.models.guild.update({
+      filterInvites: false
+    },
+    {
       where: {
         guildID: message.guild.id
-      }
-    });
-
-    let color, filterInviteStats;
-    if (guildModel.dataValues.filterInvites) {
-      await Bastion.database.models.guild.update({
-        filterInvites: false
       },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'filterInvites' ]
-      });
-      color = Bastion.colors.RED;
-      filterInviteStats = Bastion.i18n.info(message.guild.language, 'disableInviteFilter', message.author.tag);
-    }
-    else {
-      await Bastion.database.models.guild.update({
-        filterInvites: true
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'filterInvites' ]
-      });
-      color = Bastion.colors.GREEN;
-      filterInviteStats = Bastion.i18n.info(message.guild.language, 'enableInviteFilter', message.author.tag);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        description: filterInviteStats
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'filterInvites' ]
     });
+    color = Bastion.colors.RED;
+    filterInviteStats = Bastion.i18n.info(message.guild.language, 'disableInviteFilter', message.author.tag);
   }
-  catch (e) {
+  else {
+    await Bastion.database.models.guild.update({
+      filterInvites: true
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'filterInvites' ]
+    });
+    color = Bastion.colors.GREEN;
+    filterInviteStats = Bastion.i18n.info(message.guild.language, 'enableInviteFilter', message.author.tag);
+  }
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: filterInviteStats
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

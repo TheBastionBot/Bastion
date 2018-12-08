@@ -5,38 +5,33 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModels = await message.client.database.models.guild.findOne({
-      attributes: [ 'uncoverSneakyLinks' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let guildModels = await message.client.database.models.guild.findOne({
+    attributes: [ 'uncoverSneakyLinks' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    let sneakyLinkWarningsStatus = !guildModels.dataValues.uncoverSneakyLinks;
+  let sneakyLinkWarningsStatus = !guildModels.dataValues.uncoverSneakyLinks;
 
-    await message.client.database.models.guild.update({
-      uncoverSneakyLinks: sneakyLinkWarningsStatus
+  await message.client.database.models.guild.update({
+    uncoverSneakyLinks: sneakyLinkWarningsStatus
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'uncoverSneakyLinks' ]
-    });
+    fields: [ 'uncoverSneakyLinks' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: sneakyLinkWarningsStatus ? Bastion.colors.GREEN : Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, sneakyLinkWarningsStatus ? 'enableSneakyLinkWarnings' : 'disableSneakyLinkWarnings', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: sneakyLinkWarningsStatus ? Bastion.colors.GREEN : Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, sneakyLinkWarningsStatus ? 'enableSneakyLinkWarnings' : 'disableSneakyLinkWarnings', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

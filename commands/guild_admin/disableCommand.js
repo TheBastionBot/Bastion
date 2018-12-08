@@ -18,18 +18,10 @@ exports.exec = async (Bastion, message, args) => {
       }
     }
     else {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
     if ([ 'owner', 'guild_admin' ].includes(command.config.module)) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'commandNoDisable', command.help.name), message.channel);
     }
 
@@ -117,7 +109,7 @@ exports.exec = async (Bastion, message, args) => {
     description = guildModel.dataValues.disabledCommands ? guildModel.dataValues.disabledCommands.join(', ') : 'No command has been disabled in this server. Check `help disableCommand` for more info.';
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.RED,
       title: title,

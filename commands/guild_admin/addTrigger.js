@@ -7,87 +7,78 @@
 const emojis = xrequire('./assets/emojis.json');
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.trigger || !(args.text || args.embed || args.reaction)) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.trigger || !(args.text || args.embed || args.reaction)) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let triggerModels = await message.client.database.models.trigger.findAll({
-      attributes: [ [ message.client.database.fn('COUNT', message.client.database.col('trigger')), 'noOfTriggers' ] ],
-      where: {
-        guildID: message.guild.id
+  let triggerModels = await message.client.database.models.trigger.findAll({
+    attributes: [ [ message.client.database.fn('COUNT', message.client.database.col('trigger')), 'noOfTriggers' ] ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && triggerModels && triggerModels.dataValues.noOfTriggers >= 10) {
+    return Bastion.emit('error', 'forbidden', 'You can\'t set more than 10 triggers per server, for now. This limit will be increased in the future.', message.channel);
+  }
+
+  let responseObject = {};
+
+  if (args.text) {
+    responseObject.text = args.text.join(' ');
+  }
+  if (args.embed) {
+    args.embed = args.embed.join(' ');
+    Object.assign(responseObject, JSON.parse(args.embed));
+
+    responseObject.footer = {
+      text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
+    };
+  }
+  if (args.reaction) {
+    args.reaction = encodeURIComponent(args.reaction);
+
+    if (!emojis.includes(args.reaction)) {
+      if (!Object.keys(responseObject).size) {
+        return Bastion.emit('error', 'invalidInput', 'The emoji you entered is invalid. Note that custom emojis aren\'t supported currently.', message.channel);
       }
-    });
-
-    if (!Bastion.credentials.ownerId.includes(message.author.id) && triggerModels && triggerModels.dataValues.noOfTriggers >= 10) {
-      return Bastion.emit('error', 'forbidden', 'You can\'t set more than 10 triggers per server, for now. This limit will be increased in the future.', message.channel);
     }
+  }
 
-    let responseObject = {};
+  await Bastion.database.models.trigger.create({
+    guildID: message.guild.id,
+    trigger: args.trigger.join(' '),
+    responseMessage: responseObject,
+    responseReactions: args.reaction
+  },
+  {
+    fields: [ 'guildID', 'trigger', 'responseMessage', 'responseReactions' ]
+  });
 
-    if (args.text) {
-      responseObject.text = args.text.join(' ');
-    }
-    if (args.embed) {
-      args.embed = args.embed.join(' ');
-      Object.assign(responseObject, JSON.parse(args.embed));
-
-      responseObject.footer = {
-        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
-      };
-    }
-    if (args.reaction) {
-      args.reaction = encodeURIComponent(args.reaction);
-
-      if (!emojis.includes(args.reaction)) {
-        if (!Object.keys(responseObject).size) {
-          return Bastion.emit('error', 'invalidInput', 'The emoji you entered is invalid. Note that custom emojis aren\'t supported currently.', message.channel);
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      title: 'New Trigger Added',
+      fields: [
+        {
+          name: 'Trigger',
+          value: args.trigger.join(' ')
+        },
+        {
+          name: 'Response',
+          value: args.embed
+            ? args.embed.length > 1024
+              ? '*A Message Embed.*'
+              : `\`\`\`json\n${args.embed}\`\`\``
+            : args.text
+              ? args.text.join(' ')
+              : decodeURIComponent(args.reaction)
         }
-      }
+      ]
     }
-
-    await Bastion.database.models.trigger.create({
-      guildID: message.guild.id,
-      trigger: args.trigger.join(' '),
-      responseMessage: responseObject,
-      responseReactions: args.reaction
-    },
-    {
-      fields: [ 'guildID', 'trigger', 'responseMessage', 'responseReactions' ]
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        title: 'New Trigger Added',
-        fields: [
-          {
-            name: 'Trigger',
-            value: args.trigger.join(' ')
-          },
-          {
-            name: 'Response',
-            value: args.embed
-              ? args.embed.length > 1024
-                ? '*A Message Embed.*'
-                : `\`\`\`json\n${args.embed}\`\`\``
-              : args.text
-                ? args.text.join(' ')
-                : decodeURIComponent(args.reaction)
-          }
-        ]
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

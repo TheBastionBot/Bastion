@@ -5,54 +5,49 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'greetPrivate' ],
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'greetPrivate' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+
+  let color, greetPrivateStats;
+  if (guildModel.dataValues.greetPrivate) {
+    await Bastion.database.models.guild.update({
+      greetPrivate: false
+    },
+    {
       where: {
         guildID: message.guild.id
-      }
-    });
-
-    let color, greetPrivateStats;
-    if (guildModel.dataValues.greetPrivate) {
-      await Bastion.database.models.guild.update({
-        greetPrivate: false
       },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'greetPrivate' ]
-      });
-      color = Bastion.colors.RED;
-      greetPrivateStats = Bastion.i18n.info(message.guild.language, 'disablePrivateGreetingMessages', message.author.tag);
-    }
-    else {
-      await Bastion.database.models.guild.update({
-        greetPrivate: true
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'greetPrivate' ]
-      });
-      color = Bastion.colors.GREEN;
-      greetPrivateStats = Bastion.i18n.info(message.guild.language, 'enablePrivateGreetingMessages', message.author.tag);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        description: greetPrivateStats
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'greetPrivate' ]
     });
+    color = Bastion.colors.RED;
+    greetPrivateStats = Bastion.i18n.info(message.guild.language, 'disablePrivateGreetingMessages', message.author.tag);
   }
-  catch (e) {
+  else {
+    await Bastion.database.models.guild.update({
+      greetPrivate: true
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'greetPrivate' ]
+    });
+    color = Bastion.colors.GREEN;
+    greetPrivateStats = Bastion.i18n.info(message.guild.language, 'enablePrivateGreetingMessages', message.author.tag);
+  }
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: greetPrivateStats
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

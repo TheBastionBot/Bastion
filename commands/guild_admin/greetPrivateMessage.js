@@ -5,57 +5,52 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      let guildModel = await Bastion.database.models.guild.findOne({
-        attributes: [ 'greetPrivateMessage' ],
-        where: {
-          guildID: message.guild.id
-        }
-      });
-
-      let greetPrivateMessage = `Not set. Set greeting private message using \`${this.help.name} <Message>\``;
-      if (guildModel.dataValues.greetPrivateMessage) {
-        greetPrivateMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetPrivateMessage);
+  if (!args.length) {
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'greetPrivateMessage' ],
+      where: {
+        guildID: message.guild.id
       }
+    });
 
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: 'Greeting Private Message',
-          description: greetPrivateMessage
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    let greetPrivateMessage = `Not set. Set greeting private message using \`${this.help.name} <Message>\``;
+    if (guildModel.dataValues.greetPrivateMessage) {
+      greetPrivateMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetPrivateMessage);
     }
-    else {
-      args = args.join(' ');
 
-      let greetPrivateMessage = await Bastion.utils.compressString(args);
-      await Bastion.database.models.guild.update({
-        greetPrivateMessage: greetPrivateMessage
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'greetPrivateMessage' ]
-      });
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          title: 'Greeting Private Message Set',
-          description: args
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Greeting Private Message',
+        description: greetPrivateMessage
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
-  catch (e) {
-    Bastion.log.error(e);
+  else {
+    args = args.join(' ');
+
+    let greetPrivateMessage = await Bastion.utils.compressString(args);
+    await Bastion.database.models.guild.update({
+      greetPrivateMessage: greetPrivateMessage
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'greetPrivateMessage' ]
+    });
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Greeting Private Message Set',
+        description: args
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

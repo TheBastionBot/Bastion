@@ -5,36 +5,31 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'membersOnly' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'membersOnly' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    await Bastion.database.models.guild.update({
-      membersOnly: !guildModel.dataValues.membersOnly
+  await Bastion.database.models.guild.update({
+    membersOnly: !guildModel.dataValues.membersOnly
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'membersOnly' ]
-    });
+    fields: [ 'membersOnly' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors[guildModel.dataValues.membersOnly ? 'RED' : 'GREEN'],
-        description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.membersOnly ? 'disableMembersOnly' : 'enableMembersOnly', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors[guildModel.dataValues.membersOnly ? 'RED' : 'GREEN'],
+      description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.membersOnly ? 'disableMembersOnly' : 'enableMembersOnly', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

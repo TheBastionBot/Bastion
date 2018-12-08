@@ -5,72 +5,59 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.length) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    for (let i = 0; i < args.length; i++) {
-      if (!(parseInt(args[i]) < 9223372036854775807)) {
-        args.splice(args.indexOf(args[i]), 1);
-      }
+  for (let i = 0; i < args.length; i++) {
+    if (!(parseInt(args[i]) < 9223372036854775807)) {
+      args.splice(args.indexOf(args[i]), 1);
     }
-    args = args.filter(r => message.guild.roles.get(r));
-    if (args.length < 1) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
+  args = args.filter(r => message.guild.roles.get(r));
+  if (!args.length) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
+
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'selfAssignableRoles' ],
+    where: {
+      guildID: message.guild.id
     }
+  });
 
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'selfAssignableRoles' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let roles = [];
+  if (guildModel.dataValues.selfAssignableRoles) {
+    roles = guildModel.dataValues.selfAssignableRoles;
+  }
+  roles = roles.concat(args);
+  roles = roles.filter(r => message.guild.roles.get(r));
+  roles = [ ...new Set(roles) ];
 
-    let roles = [];
-    if (guildModel.dataValues.selfAssignableRoles) {
-      roles = guildModel.dataValues.selfAssignableRoles;
-    }
-    roles = roles.concat(args);
-    roles = roles.filter(r => message.guild.roles.get(r));
-    roles = [ ...new Set(roles) ];
-
-    await Bastion.database.models.guild.update({
-      selfAssignableRoles: roles
+  await Bastion.database.models.guild.update({
+    selfAssignableRoles: roles
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'selfAssignableRoles' ]
-    });
+    fields: [ 'selfAssignableRoles' ]
+  });
 
-    let roleNames = [];
-    for (let i = 0; i < args.length; i++) {
-      roleNames.push(message.guild.roles.get(args[i]).name);
+  let roleNames = [];
+  for (let i = 0; i < args.length; i++) {
+    roleNames.push(message.guild.roles.get(args[i]).name);
+  }
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      title: 'Added self assignable roles',
+      description: roleNames.join(', ')
     }
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        title: 'Added self assignable roles',
-        description: roleNames.join(', ')
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
