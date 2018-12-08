@@ -5,58 +5,45 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-    else if (args.id) {
-      user = await Bastion.fetchUser(args.id);
-    }
-    if (!user) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = await Bastion.fetchUser(args.id);
+  }
+  if (!user) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let member = await Bastion.utils.fetchMember(message.guild, user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
+  let member = await Bastion.utils.fetchMember(message.guild, user.id);
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
 
-    await message.client.database.models.guildMember.update({
-      warnings: null
+  await message.client.database.models.guildMember.update({
+    warnings: null
+  },
+  {
+    where: {
+      userID: member.id,
+      guildID: message.guild.id
     },
-    {
-      where: {
-        userID: member.id,
-        guildID: message.guild.id
-      },
-      fields: [ 'warnings' ]
-    });
+    fields: [ 'warnings' ]
+  });
 
 
-    args.reason = args.reason.join(' ');
+  args.reason = args.reason.join(' ');
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'clearWarn', message.author.tag, user.tag, args.reason)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    /**
-     * Logs moderation events if it is enabled
-     * @fires moderationLog
-     */
-    Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'clearWarn', message.author.tag, user.tag, args.reason)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
+
+  Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
 };
 
 exports.config = {

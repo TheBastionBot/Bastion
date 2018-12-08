@@ -5,58 +5,45 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-    else if (args.id) {
-      user = await Bastion.fetchUser(args.id);
-    }
-    if (!user) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let member = await Bastion.utils.fetchMember(message.guild, user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
-
-    if (args.server) {
-      let mutedRole = message.guild.roles.find(role => role.name === 'Bastion:mute');
-      await member.removeRole(mutedRole, args.reason);
-    }
-    else {
-      let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
-      if (permissionOverwrites) {
-        await permissionOverwrites.delete();
-      }
-    }
-
-    args.reason = args.reason.join(' ');
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'textUnmute', message.author.tag, user.tag, args.reason)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    /**
-     * Logs moderation events if it is enabled
-     * @fires moderationLog
-     */
-    Bastion.emit('moderationLog', message, this.help.name, user, args.reason, {
-      channel: message.channel
-    });
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
   }
-  catch (e) {
+  else if (args.id) {
+    user = await Bastion.fetchUser(args.id);
+  }
+  if (!user) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  let member = await Bastion.utils.fetchMember(message.guild, user.id);
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
+
+  if (args.server) {
+    let mutedRole = message.guild.roles.find(role => role.name === 'Bastion:mute');
+    await member.removeRole(mutedRole, args.reason);
+  }
+  else {
+    let permissionOverwrites = message.channel.permissionOverwrites.get(user.id);
+    if (permissionOverwrites) {
+      await permissionOverwrites.delete();
+    }
+  }
+
+  args.reason = args.reason.join(' ');
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'textUnmute', message.author.tag, user.tag, args.reason)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
+
+  Bastion.emit('moderationLog', message, this.help.name, user, args.reason, {
+    channel: message.channel
+  });
 };
 
 exports.config = {

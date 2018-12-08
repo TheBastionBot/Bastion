@@ -5,63 +5,54 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-    else if (args.id) {
-      user = await Bastion.fetchUser(args.id);
-    }
-    if (!user) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = await Bastion.fetchUser(args.id);
+  }
+  if (!user) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let member = await Bastion.utils.fetchMember(message.guild, user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
+  let member = await Bastion.utils.fetchMember(message.guild, user.id);
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
-    let color;
-    let nickStat = '';
-    if (message.guild.ownerID === message.author.id) {
+  let color;
+  let nickStat = '';
+  if (message.guild.ownerID === message.author.id) {
+    color = Bastion.colors.RED;
+    nickStat = 'Can\'t change server owner\'s nickname.';
+  }
+  else {
+    args.nick = args.nick.join(' ');
+
+    if (args.nick > 32) {
       color = Bastion.colors.RED;
-      nickStat = 'Can\'t change server owner\'s nickname.';
+      nickStat = 'Nickname can\'t be longer than 32 characters.';
     }
     else {
-      args.nick = args.nick.join(' ');
-
-      if (args.nick > 32) {
+      if (args.nick < 1) {
         color = Bastion.colors.RED;
-        nickStat = 'Nickname can\'t be longer than 32 characters.';
+        nickStat = Bastion.i18n.info(message.guild.language, 'removeNickname', message.author.tag, user.tag);
       }
       else {
-        if (args.nick < 1) {
-          color = Bastion.colors.RED;
-          nickStat = Bastion.i18n.info(message.guild.language, 'removeNickname', message.author.tag, user.tag);
-        }
-        else {
-          color = Bastion.colors.GREEN;
-          nickStat = Bastion.i18n.info(message.guild.language, 'setNickname', message.author.tag, user.tag, args.nick);
-        }
+        color = Bastion.colors.GREEN;
+        nickStat = Bastion.i18n.info(message.guild.language, 'setNickname', message.author.tag, user.tag, args.nick);
       }
-      await member.setNickname(args.nick);
     }
+    await member.setNickname(args.nick);
+  }
 
-    message.channel.send({
-      embed: {
-        color: color,
-        description: nickStat
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: nickStat
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

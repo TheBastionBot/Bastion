@@ -5,59 +5,42 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let user = message.mentions.users.first();
-    let role;
-    if (!user) {
-      user = message.author;
-      role = args.join(' ');
-    }
-    else {
-      role = args.slice(1).join(' ');
-    }
-    role = message.guild.roles.find(role => role.name === role);
-    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
-    else if (!role) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
-    }
-
-    let member = await Bastion.utils.fetchMember(message.guild, user.id);
-    member.addRole(role);
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'addRole', message.author.tag, role.name, user.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-
-    let reason = 'No reason given';
-
-    /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
-    Bastion.emit('moderationLog', message, this.help.name, user, reason, {
-      role: role
-    });
+  if (!args.length) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
+
+  let user = message.mentions.users.first();
+  let role;
+  if (!user) {
+    user = message.author;
+    role = args.join(' ');
+  }
+  else {
+    role = args.slice(1).join(' ');
+  }
+  role = message.guild.roles.find(role => role.name === role);
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
+  else if (!role) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
+
+  let member = await Bastion.utils.fetchMember(message.guild, user.id);
+  member.addRole(role);
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'addRole', message.author.tag, role.name, user.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
+
+  let reason = 'No reason given';
+
+  Bastion.emit('moderationLog', message, this.help.name, user, reason, {
+    role: role
+  });
 };
 
 exports.config = {

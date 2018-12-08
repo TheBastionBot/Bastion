@@ -5,96 +5,79 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-    else if (args.id) {
-      user = await Bastion.fetchUser(args.id);
-    }
-    if (!user) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = await Bastion.fetchUser(args.id);
+  }
+  if (!user) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let member = await Bastion.utils.fetchMember(message.guild, user.id);
-    if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
+  let member = await Bastion.utils.fetchMember(message.guild, user.id);
+  if (message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(member.highestRole) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
 
-    if (!member.bannable) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'soft-ban', user), message.channel);
-    }
+  if (!member.bannable) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noPermission', 'soft-ban', user), message.channel);
+  }
 
-    args.reason = args.reason.join(' ');
+  args.reason = args.reason.join(' ');
 
-    await member.ban({
-      days: 7,
-      reason: args.reason
-    });
+  await member.ban({
+    days: 7,
+    reason: args.reason
+  });
 
-    await message.guild.unban(user.id).catch(e => {
-      Bastion.log.error(e);
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          title: 'Soft-Ban Error',
-          description: 'Banned but unable to unban. Please unban the following user.',
-          fields: [
-            {
-              name: 'User',
-              value: user.tag,
-              inline: true
-            },
-            {
-              name: 'ID',
-              value: user.id,
-              inline: true
-            }
-          ]
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    });
-
+  await message.guild.unban(user.id).catch(e => {
+    Bastion.log.error(e);
     message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, 'softBan', message.author.tag, user.tag, args.reason),
-        footer: {
-          text: `ID ${user.id}`
-        }
+        title: 'Soft-Ban Error',
+        description: 'Banned but unable to unban. Please unban the following user.',
+        fields: [
+          {
+            name: 'User',
+            value: user.tag,
+            inline: true
+          },
+          {
+            name: 'ID',
+            value: user.id,
+            inline: true
+          }
+        ]
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
+  });
 
-    /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
-    Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
-
-    let DMChannel = await user.createDM();
-    DMChannel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, 'softBanDM', message.author.tag, message.guild.name, args.reason)
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, 'softBan', message.author.tag, user.tag, args.reason),
+      footer: {
+        text: `ID ${user.id}`
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
+
+  Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
+
+  let DMChannel = await user.createDM();
+  await DMChannel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, 'softBanDM', message.author.tag, message.guild.name, args.reason)
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {
