@@ -5,43 +5,34 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.color || !/^#?(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(args.color)) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.color || !/^#?(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(args.color)) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
 
-    args.color = args.color.replace('#', '');
-    args.color = args.color.length === 3 ? args.color.replace(/(.)/g, '$1$1') : args.color;
-    let color = parseInt(args.color, 16);
+  args.color = args.color.replace('#', '');
+  args.color = args.color.length === 3 ? args.color.replace(/(.)/g, '$1$1') : args.color;
+  let color = parseInt(args.color, 16);
 
-    await Bastion.database.models.user.update({
-      color: color
+  await Bastion.database.models.user.update({
+    color: color
+  },
+  {
+    where: {
+      userID: message.author.id
     },
-    {
-      where: {
-        userID: message.author.id
-      },
-      fields: [ 'color' ]
-    });
+    fields: [ 'color' ]
+  });
 
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `${message.author}, your User Color has been set to **#${args.color}** and will be used in appropriate places.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: `${message.author}, your User Color has been set to **#${args.color}** and will be used in appropriate places.`
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

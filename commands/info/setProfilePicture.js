@@ -5,53 +5,44 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    args = args.join(' ');
-    if (!/^(https?:\/\/)((([-a-z0-9]{1,})?(-?)+[-a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9._\-~#%])+\/)+)?([a-z0-9._\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args)) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
+  args = args.join(' ');
+  if (!/^(https?:\/\/)((([-a-z0-9]{1,})?(-?)+[-a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9._\-~#%])+\/)+)?([a-z0-9._\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args)) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  let userModel = await Bastion.database.models.user.findOne({
+    attributes: [ 'avatar' ],
+    where: {
+      userID: message.author.id
     }
+  });
 
-    let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'avatar' ],
-      where: {
-        userID: message.author.id
-      }
-    });
+  if (!userModel) return;
 
-    if (!userModel) return;
-
-    await Bastion.database.models.user.update({
-      avatar: args
+  await Bastion.database.models.user.update({
+    avatar: args
+  },
+  {
+    where: {
+      userID: message.author.id
     },
-    {
-      where: {
-        userID: message.author.id
-      },
-      fields: [ 'avatar' ]
-    });
+    fields: [ 'avatar' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        title: 'Profile Picture Set',
-        image: {
-          url: args
-        },
-        footer: {
-          text: message.author.tag
-        }
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      title: 'Profile Picture Set',
+      image: {
+        url: args
+      },
+      footer: {
+        text: message.author.tag
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

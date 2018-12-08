@@ -4,15 +4,13 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Server ID',
       description: message.guild.id
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

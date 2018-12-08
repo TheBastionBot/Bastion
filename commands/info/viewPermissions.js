@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let fields = [];
   let permissions = message.member.permissions.serialize();
   for (let permission in permissions) {
@@ -14,15 +14,14 @@ exports.exec = (Bastion, message) => {
       inline: true
     });
   }
-  message.channel.send({
+
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: `Permissions for ${message.author.tag}`,
       description: 'Permissions you have in this channel and server.',
       fields: fields
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

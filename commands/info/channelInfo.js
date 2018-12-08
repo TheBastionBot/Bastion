@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let channel = message.mentions.channels.first();
   if (!channel) {
     if (parseInt(args[0]) < 9223372036854775807) {
@@ -21,7 +21,7 @@ exports.exec = (Bastion, message, args) => {
     else {
       title = 'Voice Channel Info';
     }
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: title,
@@ -53,15 +53,9 @@ exports.exec = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
   else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNotFound'), message.channel);
   }
 };

@@ -4,13 +4,13 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
     user = message.author;
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       fields: [
@@ -26,8 +26,6 @@ exports.exec = (Bastion, message) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

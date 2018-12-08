@@ -5,49 +5,44 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let charLimit = 256;
-    let serverDescription = args.length ? args.join(' ') : null;
-    let messageDescription = serverDescription;
-    let messageColor = Bastion.colors.RED;
-    let messageTitle = 'Server Description Removed';
+  let charLimit = 256;
+  let serverDescription = args.length ? args.join(' ') : null;
+  let messageDescription = serverDescription;
+  let messageColor = Bastion.colors.RED;
+  let messageTitle = 'Server Description Removed';
 
-    if (serverDescription) {
-      if (serverDescription.length > charLimit) {
-        return Bastion.emit('error', '', 'Server description is limited to 256 characters.', message.channel);
-      }
-
-      serverDescription = await Bastion.utils.compressString(serverDescription);
-      messageColor = Bastion.colors.GREEN;
-      messageTitle = 'Server Description Set';
+  if (serverDescription) {
+    if (serverDescription.length > charLimit) {
+      return Bastion.emit('error', '', 'Server description is limited to 256 characters.', message.channel);
     }
 
-    await Bastion.database.models.guild.update({
-      description: serverDescription
-    },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'description' ]
-    });
+    serverDescription = await Bastion.utils.compressString(serverDescription);
+    messageColor = Bastion.colors.GREEN;
+    messageTitle = 'Server Description Set';
+  }
 
-    message.channel.send({
-      embed: {
-        color: messageColor,
-        title: messageTitle,
-        description: messageDescription,
-        footer: {
-          text: message.guild.name
-        }
+  await Bastion.database.models.guild.update({
+    description: serverDescription
+  },
+  {
+    where: {
+      guildID: message.guild.id
+    },
+    fields: [ 'description' ]
+  });
+
+  message.channel.send({
+    embed: {
+      color: messageColor,
+      title: messageTitle,
+      description: messageDescription,
+      footer: {
+        text: message.guild.name
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
