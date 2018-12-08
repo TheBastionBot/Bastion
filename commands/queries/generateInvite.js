@@ -5,22 +5,15 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let invite = await message.channel.createInvite({
-      maxAge: args.age * 60,
-      maxUses: args.uses
-    });
+  let invite = await message.channel.createInvite({
+    maxAge: args.age * 60,
+    maxUses: args.uses
+  });
 
-    message.channel.send('Hello. Beep. Boop.\n'
-      + 'If you wanna invite friends to this server, share the following invite'
-      + ' link with your friends.\nBeep!\n' +
-      `https://discord.gg/${invite.code}`).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+  await message.channel.send('Hello. Beep. Boop.\n'
+    + 'If you wanna invite friends to this server, share the following invite'
+    + ' link with your friends.\nBeep!\n' +
+    `https://discord.gg/${invite.code}`);
 };
 
 exports.config = {

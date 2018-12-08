@@ -6,35 +6,23 @@
 
 const weather = xrequire('weather-js');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  weather.find({ search: args.join(' '), degreeType: 'C' }, function(err, result) {
+  await weather.find({ search: args.join(' '), degreeType: 'C' }, async (err, result) => {
     if (err) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'weatherNotFound'), message.channel);
     }
 
-    if (!result || result.length < 1) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
+    if (!result || !result.length) {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), message.channel);
     }
 
     result = result[0];
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Current Weather',
@@ -107,8 +95,6 @@ exports.exec = (Bastion, message, args) => {
           text: 'Powered by MSN Weather'
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   });
 };

@@ -7,63 +7,49 @@
 const request = xrequire('request-promise-native');
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!message.channel.nsfw) {
-      return Bastion.emit('error', '', 'Urban Dictionary may return results that are NSFW, so this command works only in NSFW channels.', message.channel);
-    }
+  if (!message.channel.nsfw) {
+    return Bastion.emit('error', '', 'Urban Dictionary may return results that are NSFW, so this command works only in NSFW channels.', message.channel);
+  }
 
-    if (args.length < 1) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.length) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let options = {
-      url: `https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`,
-      json: true
-    };
-    let response = await request(options);
+  let options = {
+    url: `https://api.urbandictionary.com/v0/define?term=${args.join(' ')}`,
+    json: true
+  };
+  let response = await request(options);
 
-    response = response.list[0];
+  response = response.list[0];
 
-    if (!response) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'word'), message.channel);
-    }
+  if (!response) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'word'), message.channel);
+  }
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Urban Dictionary',
-        fields: [
-          {
-            name: 'Word',
-            value: response.word || args.join(' ')
-          },
-          {
-            name: 'Definition',
-            value: response.definition || '-'
-          },
-          {
-            name: 'Example',
-            value: response.example || '-'
-          }
-        ],
-        footer: {
-          text: 'Powered by Urban Dictionary'
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      title: 'Urban Dictionary',
+      fields: [
+        {
+          name: 'Word',
+          value: response.word || args.join(' ')
+        },
+        {
+          name: 'Definition',
+          value: response.definition || '-'
+        },
+        {
+          name: 'Example',
+          value: response.example || '-'
         }
+      ],
+      footer: {
+        text: 'Powered by Urban Dictionary'
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-    Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

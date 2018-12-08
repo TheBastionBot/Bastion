@@ -6,36 +6,24 @@
 
 const location = xrequire('weather-js');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  location.find({ search: args.join(' ') }, function(err, result) {
+  await location.find({ search: args.join(' ') }, async (err, result) => {
     if (err) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'location'), message.channel);
     }
 
-    if (!result || result.length < 1) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
+    if (!result || !result.length) {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'connection'), message.channel);
     }
 
     let date = Bastion.methods.timezoneOffsetToDate(parseFloat(result[0].location.timezone)).toUTCString();
     date = date.substring(0, date.length - 4);
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         fields: [
@@ -49,8 +37,6 @@ exports.exec = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   });
 };

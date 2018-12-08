@@ -7,10 +7,6 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.message || !(parseInt(args.message) < 9223372036854775807)) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -29,7 +25,7 @@ exports.exec = async (Bastion, message, args) => {
     }
 
     if (!image && !citedMessage.content) {
-      return message.channel.send({
+      return await message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
           author: {
@@ -45,12 +41,10 @@ exports.exec = async (Bastion, message, args) => {
           ],
           timestamp: citedMessage.createdAt
         }
-      }).catch(e => {
-        Bastion.log.error(e);
       });
     }
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         author: {
@@ -69,20 +63,14 @@ exports.exec = async (Bastion, message, args) => {
         },
         timestamp: citedMessage.createdAt
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
   catch (e) {
     if (e.toString().includes('Unknown Message')) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'messageNotFound'), message.channel);
     }
     else {
-      Bastion.log.error(e);
+      throw e;
     }
   }
 };

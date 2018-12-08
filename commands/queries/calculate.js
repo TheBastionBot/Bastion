@@ -6,17 +6,13 @@
 
 const mathjs = xrequire('mathjs');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   try {
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Result:',
@@ -25,10 +21,6 @@ exports.exec = (Bastion, message, args) => {
     });
   }
   catch (error) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'mathematical expression'), message.channel);
   }
 };

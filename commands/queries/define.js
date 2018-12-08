@@ -6,12 +6,8 @@
 
 const wd = xrequire('word-definition');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -26,7 +22,8 @@ exports.exec = (Bastion, message, args) => {
   else {
     args = args.slice(1).join(' ');
   }
-  wd.getDef(args, lang, null, function(data) {
+
+  await wd.getDef(args, lang, null, async (data) => {
     let embed = {};
     if (data.err) {
       embed = {
@@ -48,9 +45,8 @@ exports.exec = (Bastion, message, args) => {
         }
       };
     }
-    message.channel.send(embed).catch(e => {
-      Bastion.log.error(e);
-    });
+
+    await message.channel.send(embed);
   });
 };
 

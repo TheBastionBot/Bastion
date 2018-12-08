@@ -5,54 +5,42 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.name) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.name) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    args.name = args.name.join('');
+  args.name = args.name.join('');
 
-    let breachedSite = await Bastion.methods.makeBWAPIRequest(`/pwned/site/${args.name}`);
+  let breachedSite = await Bastion.methods.makeBWAPIRequest(`/pwned/site/${args.name}`);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        author: {
-          name: breachedSite.Title,
-          url: `http://${breachedSite.Domain}`
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      author: {
+        name: breachedSite.Title,
+        url: `http://${breachedSite.Domain}`
+      },
+      fields: [
+        {
+          name: 'Compromised Data',
+          value: breachedSite.DataClasses.join(', ')
         },
-        fields: [
-          {
-            name: 'Compromised Data',
-            value: breachedSite.DataClasses.join(', ')
-          },
-          {
-            name: 'Breach Date',
-            value: breachedSite.BreachDate,
-            inline: true
-          },
-          {
-            name: 'Verified',
-            value: breachedSite.IsVerified,
-            inline: true
-          }
-        ],
-        footer: {
-          text: 'Powered by Have I been pwned?'
+        {
+          name: 'Breach Date',
+          value: breachedSite.BreachDate,
+          inline: true
+        },
+        {
+          name: 'Verified',
+          value: breachedSite.IsVerified,
+          inline: true
         }
+      ],
+      footer: {
+        text: 'Powered by Have I been pwned?'
       }
-    });
-  }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusCode === 404 ? 'We don\'t have data on any breaches for that site.' : e.response.statusMessage, message.channel);
     }
-    Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
