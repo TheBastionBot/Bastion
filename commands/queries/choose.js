@@ -4,24 +4,19 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.length < 1 || !/^(.+( ?\/ ?.+[^/])+)$/i.test(args = args.join(' '))) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   args = args.split('/');
-  message.channel.send({
+
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'In my opinion',
-      description: args[Math.floor(Math.random() * args.length)]
+      description: args.getRandom()
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

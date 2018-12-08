@@ -7,25 +7,17 @@
 const request = xrequire('request-promise-native');
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let baseURL = 'http://random.dog';
+  let baseURL = 'http://random.dog';
 
-    let options = {
-      url: `${baseURL}/woof`,
-      json: true
-    };
-    let response = await request(options);
+  let options = {
+    url: `${baseURL}/woof`,
+    json: true
+  };
+  let response = await request(options);
 
-    await message.channel.send({
-      files: [ `${baseURL}/${response}` ]
-    });
-  }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
-    }
-    Bastion.log.error(e);
-  }
+  await message.channel.send({
+    files: [ `${baseURL}/${response}` ]
+  });
 };
 
 exports.config = {

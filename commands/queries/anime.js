@@ -5,59 +5,48 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.name) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let anime = await Bastion.methods.makeBWAPIRequest(`/kitsu/anime?name=${args.name}`);
-    anime = anime[0];
-
-    if (anime) {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: Object.values(anime.titles)[0],
-          url: `https://kitsu.io/anime/${anime.slug}`,
-          description: anime.synopsis,
-          fields: [
-            {
-              name: 'Status',
-              value: anime.endDate ? 'Finished' : 'Airing',
-              inline: true
-            },
-            {
-              name: 'Aired',
-              value: anime.endDate ? `${anime.startDate} - ${anime.endDate}` : `${anime.startDate} - Present`,
-              inline: true
-            },
-            {
-              name: 'Rating',
-              value: `${anime.ageRating} - ${anime.ageRatingGuide} ${anime.nsfw ? '[NSFW]' : ''}`,
-              inline: true
-            }
-          ],
-          image: {
-            url: anime.posterImage.original
-          },
-          footer: {
-            text: 'Powered by Kitsu'
-          }
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    else {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'anime'), message.channel);
-    }
+  if (!args.name) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
-    Bastion.log.error(e);
+
+  let anime = await Bastion.methods.makeBWAPIRequest(`/kitsu/anime?name=${args.name}`);
+  anime = anime[0];
+
+  if (anime) {
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: Object.values(anime.titles)[0],
+        url: `https://kitsu.io/anime/${anime.slug}`,
+        description: anime.synopsis,
+        fields: [
+          {
+            name: 'Status',
+            value: anime.endDate ? 'Finished' : 'Airing',
+            inline: true
+          },
+          {
+            name: 'Aired',
+            value: anime.endDate ? `${anime.startDate} - ${anime.endDate}` : `${anime.startDate} - Present`,
+            inline: true
+          },
+          {
+            name: 'Rating',
+            value: `${anime.ageRating} - ${anime.ageRatingGuide} ${anime.nsfw ? '[NSFW]' : ''}`,
+            inline: true
+          }
+        ],
+        image: {
+          url: anime.posterImage.original
+        },
+        footer: {
+          text: 'Powered by Kitsu'
+        }
+      }
+    });
+  }
+  else {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'anime'), message.channel);
   }
 };
 

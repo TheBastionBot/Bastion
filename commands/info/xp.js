@@ -5,36 +5,29 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    args = message.mentions.users.first() || message.author;
+  args = message.mentions.users.first() || message.author;
 
-    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-      attributes: [ 'experiencePoints' ],
-      where: {
-        userID: args.id,
-        guildID: message.guild.id
-      }
-    });
-    let xp = 0;
-
-    if (guildMemberModel) {
-      xp = guildMemberModel.dataValues.experiencePoints;
+  let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+    attributes: [ 'experiencePoints' ],
+    where: {
+      userID: args.id,
+      guildID: message.guild.id
     }
+  });
+  let xp = 0;
 
-    let description = message.author.id === args.id ? `**${args.tag}** you have **${xp}** experience points.` : `**${args.tag}** has **${xp}** experience points.`;
+  if (guildMemberModel) {
+    xp = guildMemberModel.dataValues.experiencePoints;
+  }
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        description: description
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+  let description = message.author.id === args.id ? `**${args.tag}** you have **${xp}** experience points.` : `**${args.tag}** has **${xp}** experience points.`;
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      description: description
+    }
+  });
 };
 
 exports.config = {

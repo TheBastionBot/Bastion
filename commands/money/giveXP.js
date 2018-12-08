@@ -5,55 +5,46 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.id || !args.points) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
+  if (!args.id || !args.points) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  if (message.mentions.users.size) {
+    args.id = message.mentions.users.first().id;
+  }
+
+  let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+    attributes: [ 'experiencePoints' ],
+    where: {
+      userID: args.id,
+      guildID: message.guild.id
     }
+  });
+  if (!guildMemberModel) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'profileNotCreated', `<@${args.id}>`), message.channel);
+  }
 
-    if (message.mentions.users.size) {
-      args.id = message.mentions.users.first().id;
-    }
+  args.points = `${parseInt(guildMemberModel.dataValues.experiencePoints) + parseInt(args.points)}`;
 
-    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-      attributes: [ 'experiencePoints' ],
-      where: {
-        userID: args.id,
-        guildID: message.guild.id
-      }
-    });
-    if (!guildMemberModel) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'profileNotCreated', `<@${args.id}>`), message.channel);
-    }
-
-    args.points = `${parseInt(guildMemberModel.dataValues.experiencePoints) + parseInt(args.points)}`;
-
-    await Bastion.database.models.guildMember.update({
-      experiencePoints: args.points
+  await Bastion.database.models.guildMember.update({
+    experiencePoints: args.points
+  },
+  {
+    where: {
+      userID: args.id,
+      guildID: message.guild.id
     },
-    {
-      where: {
-        userID: args.id,
-        guildID: message.guild.id
-      },
-      fields: [ 'experiencePoints' ]
-    });
+    fields: [ 'experiencePoints' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `<@${args.id}> has been awarded with **${args.points}** experience points.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: `<@${args.id}> has been awarded with **${args.points}** experience points.`
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

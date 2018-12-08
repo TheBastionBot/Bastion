@@ -6,16 +6,13 @@
 
 const fortuneCookies = xrequire('./assets/fortuneCookies.json');
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'Fortune:',
-      description: fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
-      // description: fortuneCookies.random()
+      title: 'Your fortune says...',
+      description: fortuneCookies.getRandom()
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

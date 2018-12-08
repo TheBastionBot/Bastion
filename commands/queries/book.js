@@ -7,52 +7,35 @@
 const request = xrequire('request-promise-native');
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.book) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-
-    const requestOptions = {
-      method: 'GET',
-      url: 'https://www.googleapis.com/books/v1/volumes',
-      qs: {
-        key: Bastion.credentials.googleAPIkey,
-        q: encodeURIComponent(args.book.join(' '))
-      },
-      json: true
-    };
-
-    const books = await request(requestOptions);
-
-    // Check if the book was found
-    if (books.totalItems < 1) {
-      /**
-       * No result for this query
-       * @fires error
-       */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'book'), message.channel);
-    }
-
-    const { items: [ book ] } = books;
-
-    message.channel.send({ embed: createEmbed(book.volumeInfo, Bastion) }).
-      catch(e => {
-        Bastion.log.error(e);
-      });
-
+  if (!args.book) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch(e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
-    }
+
+
+  const requestOptions = {
+    method: 'GET',
+    url: 'https://www.googleapis.com/books/v1/volumes',
+    qs: {
+      key: Bastion.credentials.googleAPIkey,
+      q: encodeURIComponent(args.book.join(' '))
+    },
+    json: true
+  };
+
+  const books = await request(requestOptions);
+
+  // Check if the book was found
+  if (books.totalItems < 1) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'book'), message.channel);
+  }
+
+  const { items: [ book ] } = books;
+
+  await message.channel.send({
+    embed: createEmbed(book.volumeInfo, Bastion)
+  }).catch(e => {
     Bastion.log.error(e);
-  }
-
+  });
 };
 
 /**

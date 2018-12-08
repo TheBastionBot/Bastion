@@ -4,40 +4,21 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    args = JSON.parse(args.join(' '));
-    args.footer = {
-      text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
-    };
-
-    message.channel.send({
-      embed: args
-    }).then(() => {
-      if (message.deletable) {
-        message.delete().catch(e => {
-          Bastion.log.error(e);
-        });
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
-    return Bastion.emit('error', '', `${Bastion.i18n.error(message.guild.language, 'invalidEmbedObject')}\`\`\`${e.toString()}\`\`\``, message.channel);
-  }
+
+  args = JSON.parse(args.join(' '));
+  args.footer = {
+    text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
+  };
+
+  await message.channel.send({
+    embed: args
+  });
+
+  if (message.deletable) await message.delete().catch(() => {});
 };
 
 exports.config = {

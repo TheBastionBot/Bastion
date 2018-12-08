@@ -85,7 +85,7 @@ exports.exec = async (Bastion, message, args) => {
     });
 
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors[args.remove ? 'RED' : 'GREEN'],
         description: args.remove ? `Removed all songs, matching **${args.song}**, from your playlist.` : `Added **${args.song}** to your playlist.`
@@ -110,7 +110,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let songs = playlistModel.dataValues.songs.map(song => song && song.title);
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Bastion Music Playlist',
@@ -119,8 +119,6 @@ exports.exec = async (Bastion, message, args) => {
           text: `Created by ${message.author.tag}`
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
 };

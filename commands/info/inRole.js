@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.role) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -25,7 +21,7 @@ exports.exec = (Bastion, message, args) => {
     let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
     i = i - 1;
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: `Members in ${role.name} role:\n`,
@@ -37,15 +33,9 @@ exports.exec = (Bastion, message, args) => {
           text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
   else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
   }
 };

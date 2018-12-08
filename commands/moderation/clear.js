@@ -5,62 +5,57 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    await message.delete().catch(() => {});
+  await message.delete().catch(() => {});
 
 
-    args.amount = Math.abs(args.amount);
-    let messages = await message.channel.fetchMessages({
-      limit: args.amount && args.amount < 100 ? args.amount : 100
-    });
+  args.amount = Math.abs(args.amount);
+  let messages = await message.channel.fetchMessages({
+    limit: args.amount && args.amount < 100 ? args.amount : 100
+  });
 
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
-    }
-
-
-    if (user) {
-      messages = messages.filter(message => message.author.id === user.id);
-    }
-    else if (args.bots) {
-      messages = messages.filter(message => message.author.bot);
-    }
-    if (args.nonpinned) {
-      messages = messages.filter(message => !message.pinned);
-    }
-    if (args.time) {
-      let requiredTimestamp = message.createdTimestamp - (args.time * 60 * 1000);
-      messages = messages.filter(message => message.createdTimestamp >= requiredTimestamp);
-    }
-
-
-    let clearedMessages = await message.channel.bulkDelete(messages, true);
-    if (!clearedMessages.size) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noDeletableMessage'), message.channel);
-    }
-
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `I've cleared ${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}${args.time ? ` sent in the past ${args.time} minutes` : ''}.`
-      }
-    }).then(msg => {
-      msg.delete(10000).catch(() => {});
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-
-
-    let reason = 'No reason given';
-    Bastion.emit('moderationLog', message, this.help.name, message.channel, reason, {
-      cleared: `${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}${args.time ? ` sent in the past ${args.time} minutes.` : ''}`
-    });
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
   }
-  catch (e) {
+
+
+  if (user) {
+    messages = messages.filter(message => message.author.id === user.id);
+  }
+  else if (args.bots) {
+    messages = messages.filter(message => message.author.bot);
+  }
+  if (args.nonpinned) {
+    messages = messages.filter(message => !message.pinned);
+  }
+  if (args.time) {
+    let requiredTimestamp = message.createdTimestamp - (args.time * 60 * 1000);
+    messages = messages.filter(message => message.createdTimestamp >= requiredTimestamp);
+  }
+
+
+  let clearedMessages = await message.channel.bulkDelete(messages, true);
+  if (!clearedMessages.size) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'noDeletableMessage'), message.channel);
+  }
+
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: `I've cleared ${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}${args.time ? ` sent in the past ${args.time} minutes` : ''}.`
+    }
+  }).then(msg => {
+    msg.delete(10000).catch(() => {});
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
+
+
+  let reason = 'No reason given';
+  Bastion.emit('moderationLog', message, this.help.name, message.channel, reason, {
+    cleared: `${clearedMessages.size}${args.nonpinned ? ' non pinned' : ''} messages from ${user ? user : args.bots ? 'BOTs' : 'everyone'}${args.time ? ` sent in the past ${args.time} minutes.` : ''}`
+  });
 };
 
 exports.config = {

@@ -5,57 +5,52 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      let guildModel = await Bastion.database.models.guild.findOne({
-        attributes: [ 'farewellMessage' ],
-        where: {
-          guildID: message.guild.id
-        }
-      });
-
-      let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
-      if (guildModel.dataValues.farewellMessage) {
-        farewellMessage = await Bastion.utils.decompressString(guildModel.dataValues.farewellMessage);
+  if (!args.length) {
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'farewellMessage' ],
+      where: {
+        guildID: message.guild.id
       }
+    });
 
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: 'Farewell Message',
-          description: farewellMessage
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
+    if (guildModel.dataValues.farewellMessage) {
+      farewellMessage = await Bastion.utils.decompressString(guildModel.dataValues.farewellMessage);
     }
-    else {
-      args = args.join(' ');
 
-      let farewellMessage = await Bastion.utils.compressString(args);
-      await Bastion.database.models.guild.update({
-        farewellMessage: farewellMessage
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'farewellMessage' ]
-      });
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          title: 'Farewell Message Set',
-          description: args
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Farewell Message',
+        description: farewellMessage
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
-  catch (e) {
-    Bastion.log.error(e);
+  else {
+    args = args.join(' ');
+
+    let farewellMessage = await Bastion.utils.compressString(args);
+    await Bastion.database.models.guild.update({
+      farewellMessage: farewellMessage
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'farewellMessage' ]
+    });
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Farewell Message Set',
+        description: args
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

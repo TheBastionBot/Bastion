@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       description: 'Hi! I\'m **Bastion**. \u{1F609}\n' +
@@ -14,8 +14,6 @@ exports.exec = (Bastion, message) => {
         text: `Type ${message.guild.prefix[0]}help to find out more about me.`
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

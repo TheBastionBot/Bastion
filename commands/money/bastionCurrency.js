@@ -5,37 +5,30 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    args = message.mentions.users.first() || message.author;
+  args = message.mentions.users.first() || message.author;
 
-    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-      attributes: [ 'bastionCurrencies' ],
-      where: {
-        userID: args.id,
-        guildID: message.guild.id
-      }
-    });
-
-    let bastionCurrencies = 0;
-
-    if (guildMemberModel) {
-      bastionCurrencies = guildMemberModel.dataValues.bastionCurrencies;
+  let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+    attributes: [ 'bastionCurrencies' ],
+    where: {
+      userID: args.id,
+      guildID: message.guild.id
     }
+  });
 
-    let description = message.author.id === args.id ? `**${args.tag}** you currently have **${bastionCurrencies}** Bastion Currencies in your account.` : `**${args.tag}** currently has **${bastionCurrencies}** Bastion Currencies in their account.`;
+  let bastionCurrencies = 0;
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        description: description
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  if (guildMemberModel) {
+    bastionCurrencies = guildMemberModel.dataValues.bastionCurrencies;
   }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+
+  let description = message.author.id === args.id ? `**${args.tag}** you currently have **${bastionCurrencies}** Bastion Currencies in your account.` : `**${args.tag}** currently has **${bastionCurrencies}** Bastion Currencies in their account.`;
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      description: description
+    }
+  });
 };
 
 exports.config = {

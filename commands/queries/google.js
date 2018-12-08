@@ -8,63 +8,49 @@ const request = xrequire('request-promise-native');
 const cheerio = xrequire('cheerio');
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.query) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let options = {
-      headers: {
-        'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
-      },
-      url: 'http://google.com/search',
-      qs: {
-        q: encodeURIComponent(args.query.join(' ')),
-        safe: 'active'
-      }
-    };
-    let response = await request(options);
-
-    let $ = cheerio.load(response);
-    let results = [];
-
-    $('.g').each((i) => {
-      results[i] = {};
-    });
-    $('.g>.r>a').each((i, e) => {
-      let raw = e.attribs['href'];
-      results[i]['name'] = `${getText(e)} - ${raw.substr(7, raw.indexOf('&sa=U') - 7)}`;
-    });
-    $('.g>.s>.st').each((i, e) => {
-      results[i]['value'] = getText(e);
-    });
-
-    results = results.filter(r => r.name && r.value).slice(0, 3);
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: `Search results for ${args.query.join(' ')}`,
-        url: `https://www.google.com/search?q=${encodeURIComponent(args.query.join(' '))}`,
-        fields: results,
-        footer: {
-          text: 'Powered by Google'
-        }
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  if (!args.query) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+
+  let options = {
+    headers: {
+      'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
+    },
+    url: 'http://google.com/search',
+    qs: {
+      q: encodeURIComponent(args.query.join(' ')),
+      safe: 'active'
     }
-    Bastion.log.error(e);
-  }
+  };
+  let response = await request(options);
+
+  let $ = cheerio.load(response);
+  let results = [];
+
+  $('.g').each((i) => {
+    results[i] = {};
+  });
+  $('.g>.r>a').each((i, e) => {
+    let raw = e.attribs['href'];
+    results[i]['name'] = `${getText(e)} - ${raw.substr(7, raw.indexOf('&sa=U') - 7)}`;
+  });
+  $('.g>.s>.st').each((i, e) => {
+    results[i]['value'] = getText(e);
+  });
+
+  results = results.filter(r => r.name && r.value).slice(0, 3);
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      title: `Search results for ${args.query.join(' ')}`,
+      url: `https://www.google.com/search?q=${encodeURIComponent(args.query.join(' '))}`,
+      fields: results,
+      footer: {
+        text: 'Powered by Google'
+      }
+    }
+  });
 };
 
 exports.config = {

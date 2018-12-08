@@ -7,10 +7,6 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.id) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -18,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
 
     let user = await message.guild.unban(args.id, args.reason);
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
         description: Bastion.i18n.info(message.guild.language, 'unban', message.author.tag, user.tag, args.reason)
@@ -27,22 +23,14 @@ exports.exec = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
-    /**
-    * Logs moderation events if it is enabled
-    * @fires moderationLog
-    */
     Bastion.emit('moderationLog', message, this.help.name, user, args.reason);
   }
   catch (e) {
     if (e.code === 10013) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'user'), message.channel);
     }
     else {
-      Bastion.log.error(e);
+      throw e;
     }
   }
 };

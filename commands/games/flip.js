@@ -4,12 +4,12 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let outcomes = [
     'Heads',
     'Tails'
   ];
-  let outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+  let outcome = outcomes.getRandom();
 
   if (args[0] && parseInt(args[0])) {
     args[0] = parseInt(args[0]);
@@ -17,18 +17,16 @@ exports.exec = (Bastion, message, args) => {
       args[0] = 50;
     }
     for (let i = 1; i < args[0]; i++) {
-      outcome += `, ${outcomes[Math.floor(Math.random() * outcomes.length)]}`;
+      outcome += `, ${outcomes.getRandom()}`;
     }
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'You flipped:',
+      title: 'Flipped',
       description: outcome
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

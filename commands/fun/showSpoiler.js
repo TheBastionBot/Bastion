@@ -4,16 +4,12 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.lengt) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  message.author.send({
+  await message.author.send({
     embed: {
       color: message.client.colors.BLUE,
       title: 'SPOILER ALERT!',
@@ -22,17 +18,15 @@ exports.exec = (Bastion, message, args) => {
         text: 'You chose to view this spoiler. Don\'t blame me!'
       }
     }
-  }).then(() => {
-    message.channel.send({
-      embed: {
-        color: message.client.colors.BLUE,
-        description: 'Check your direct messages from me to see the spoiler.'
-      }
-    }).catch(e => {
-      message.client.log.error(e);
-    });
+  });
+
+  await message.channel.send({
+    embed: {
+      color: message.client.colors.BLUE,
+      description: 'Check your direct messages from me to see the spoiler.'
+    }
   }).catch(e => {
-    message.client.log.error(e);
+    Bastion.log.error(e);
   });
 };
 

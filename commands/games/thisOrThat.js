@@ -6,14 +6,12 @@
 
 const question = xrequire('./assets/thisOrThat.json');
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       description: question[Math.floor(Math.random() * question.length)]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

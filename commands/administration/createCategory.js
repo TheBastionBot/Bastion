@@ -5,40 +5,30 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.name) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.name) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let minLength = 2, maxLength = 100;
-    args.name = args.name.join(' ');
-    if (args.name.length < minLength || args.name.length > maxLength) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
-    }
+  let minLength = 2, maxLength = 100;
+  args.name = args.name.join(' ');
 
-    let category = await message.guild.createChannel(args.name, 'category');
+  if (!args.name.length.inRange(minLength, maxLength)) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
+  }
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'createChannel', message.author.tag, 'category', category.name),
-        footer: {
-          text: `ID: ${category.id}`
-        }
+  let category = await message.guild.createChannel(args.name, 'category');
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'createChannel', message.author.tag, 'category', category.name),
+      footer: {
+        text: `ID: ${category.id}`
       }
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

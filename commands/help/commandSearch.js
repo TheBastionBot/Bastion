@@ -4,26 +4,18 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1 || args.join('').length < 2) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length || args.join('').length < 2) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   args = args.join('').toLowerCase();
   let commands = Bastion.commands.map(c => c.help.name.toLowerCase()).filter(c => c.includes(args));
   if (commands.length === 0) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.GOLD,
       title: 'Command Search',
@@ -35,8 +27,6 @@ exports.exec = (Bastion, message, args) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

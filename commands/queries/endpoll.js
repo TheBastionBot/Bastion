@@ -4,9 +4,9 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (message.channel.poll && message.channel.poll.collector) {
-    message.channel.poll.collector.stop();
+    await message.channel.poll.collector.stop();
   }
 };
 

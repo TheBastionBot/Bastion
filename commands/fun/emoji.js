@@ -8,53 +8,37 @@ const fs = xrequire('fs');
 
 exports.exec = (Bastion, message, args) => {
   if (!args.name && !args.list) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   if (args.name) {
     args.name = args.name.toLowerCase();
-    fs.stat(`./assets/emojis/${args.name}.png`, (error, stat) => {
-      /**
-       * If the emoji doesn't exist or is not readable, just return.
-       */
+    fs.stat(`./assets/emojis/${args.name}.png`, async (error, stat) => {
+      // If the emoji doesn't exist or is not readable, just return.
       if (error) return;
 
-      /**
-       * If the emoji exists, send the emoji.
-       */
+      // If the emoji exists, send the emoji.
       if (stat) {
-        message.channel.send({
+        await message.channel.send({
           files: [ `./assets/emojis/${args.name}.png` ]
-        }).catch(e => {
-          Bastion.log.error(e);
         });
       }
     });
   }
   else {
-    fs.readdir('./assets/emojis', (error, emojis) => {
+    fs.readdir('./assets/emojis', async (error, emojis) => {
       if (error) return;
 
-      /**
-       * Trim the extentions of the emojis.
-       */
+      // Trim the extentions of the emojis.
       emojis = emojis.map(e => e.substr(0, e.length - 4));
 
-      /**
-       * Send the list of emojis available.
-       */
-      message.channel.send({
+      // Send the list of emojis available.
+      await message.channel.send({
         embed: {
           color: Bastion.colors.BLUE,
           title: 'Bastion Emojis',
           description: emojis.join(', ')
         }
-      }).catch(e => {
-        Bastion.log.error(e);
       });
     });
   }

@@ -5,54 +5,49 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'filterLinks' ],
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'filterLinks' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+
+  let color, filterLinkStats;
+  if (guildModel.dataValues.filterLinks) {
+    await Bastion.database.models.guild.update({
+      filterLinks: false
+    },
+    {
       where: {
         guildID: message.guild.id
-      }
-    });
-
-    let color, filterLinkStats;
-    if (guildModel.dataValues.filterLinks) {
-      await Bastion.database.models.guild.update({
-        filterLinks: false
       },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'filterLinks' ]
-      });
-      color = Bastion.colors.RED;
-      filterLinkStats = Bastion.i18n.info(message.guild.language, 'disableLinkFilter', message.author.tag);
-    }
-    else {
-      await Bastion.database.models.guild.update({
-        filterLinks: true
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'filterLinks' ]
-      });
-      color = Bastion.colors.GREEN;
-      filterLinkStats = Bastion.i18n.info(message.guild.language, 'enableLinkFilter', message.author.tag);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        description: filterLinkStats
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'filterLinks' ]
     });
+    color = Bastion.colors.RED;
+    filterLinkStats = Bastion.i18n.info(message.guild.language, 'disableLinkFilter', message.author.tag);
   }
-  catch (e) {
+  else {
+    await Bastion.database.models.guild.update({
+      filterLinks: true
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'filterLinks' ]
+    });
+    color = Bastion.colors.GREEN;
+    filterLinkStats = Bastion.i18n.info(message.guild.language, 'enableLinkFilter', message.author.tag);
+  }
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: filterLinkStats
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

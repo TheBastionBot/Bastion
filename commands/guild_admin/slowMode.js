@@ -5,54 +5,49 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'slowMode' ],
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'slowMode' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+
+  let color, slowModeStats;
+  if (guildModel.dataValues.slowMode) {
+    await Bastion.database.models.guild.update({
+      slowMode: false
+    },
+    {
       where: {
         guildID: message.guild.id
-      }
-    });
-
-    let color, slowModeStats;
-    if (guildModel.dataValues.slowMode) {
-      await Bastion.database.models.guild.update({
-        slowMode: false
       },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'slowMode' ]
-      });
-      color = Bastion.colors.RED;
-      slowModeStats = Bastion.i18n.info(message.guild.language, 'disableSlowMode', message.author.tag);
-    }
-    else {
-      await Bastion.database.models.guild.update({
-        slowMode: true
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'slowMode' ]
-      });
-      color = Bastion.colors.GREEN;
-      slowModeStats = Bastion.i18n.info(message.guild.language, 'enableSlowMode', message.author.tag);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        description: slowModeStats
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'slowMode' ]
     });
+    color = Bastion.colors.RED;
+    slowModeStats = Bastion.i18n.info(message.guild.language, 'disableSlowMode', message.author.tag);
   }
-  catch (e) {
+  else {
+    await Bastion.database.models.guild.update({
+      slowMode: true
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'slowMode' ]
+    });
+    color = Bastion.colors.GREEN;
+    slowModeStats = Bastion.i18n.info(message.guild.language, 'enableSlowMode', message.author.tag);
+  }
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: slowModeStats
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

@@ -5,26 +5,21 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    if (Bastion.shard) {
-      await Bastion.shard.broadcastEval('this.reloadSettings()');
-    }
-    else {
-      Bastion.reloadSettings();
-    }
+  if (Bastion.shard) {
+    await Bastion.shard.broadcastEval('this.reloadSettings()');
+  }
+  else {
+    Bastion.reloadSettings();
+  }
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: 'Successfully reloaded all the settings.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: 'Successfully reloaded all the settings.'
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

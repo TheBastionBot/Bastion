@@ -5,36 +5,31 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'reactionPinning' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'reactionPinning' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    await Bastion.database.models.guild.update({
-      reactionPinning: !guildModel.dataValues.reactionPinning
+  await Bastion.database.models.guild.update({
+    reactionPinning: !guildModel.dataValues.reactionPinning
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'reactionPinning' ]
-    });
+    fields: [ 'reactionPinning' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors[guildModel.dataValues.reactionPinning ? 'RED' : 'GREEN'],
-        description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.reactionPinning ? 'disableReactionPinning' : 'enableReactionPinning', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors[guildModel.dataValues.reactionPinning ? 'RED' : 'GREEN'],
+      description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.reactionPinning ? 'disableReactionPinning' : 'enableReactionPinning', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let lastDate = Date.now() - 86400000;
   let startDate = 267062400000;
   let comicDate = new Date(Bastion.methods.getRandomInt(startDate, lastDate));
@@ -19,13 +19,8 @@ exports.exec = (Bastion, message) => {
     month = `0${date}`;
   }
 
-  message.channel.send({
+  await message.channel.send({
     files: [ `https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${year}/${year}-${month}-${date}.gif` ]
-  }).catch(e => {
-    if (e.status === 404) {
-      return Bastion.emit('error', '', 'I\'m sorry. I was unable to react Garfield at that moment. Could you try again?', message.channel);
-    }
-    Bastion.log.error(e);
   });
 };
 

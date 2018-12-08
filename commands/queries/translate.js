@@ -9,16 +9,12 @@ const translate = xrequire('@k3rn31p4nic/google-translate-api');
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 2) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
     let result = await translate(args.slice(1).join(' '), { to: args[0] });
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         description: result.text,
@@ -26,8 +22,6 @@ exports.exec = async (Bastion, message, args) => {
           text: `Powered by Google • Translation from ${result.from.language.iso.toUpperCase()} to ${args[0].toUpperCase()}`
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
   catch (e) {

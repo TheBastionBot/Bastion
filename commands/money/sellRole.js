@@ -5,75 +5,66 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.role || !(args.price || args.remove)) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    args.role = args.role.join(' ');
-
-    let role;
-    if (message.guild.roles.has(args.role)) {
-      role = message.guild.roles.get(args.role);
-    }
-    else {
-      role = message.guild.roles.find(role => role.name === args.role);
-    }
-    if (!role) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
-    }
-
-    if (args.remove) {
-      await Bastion.database.models.role.update({
-        price: null
-      },
-      {
-        where: {
-          roleID: role.id,
-          guildID: message.guild.id
-        },
-        fields: [ 'price' ]
-      });
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          description: `Unlisted **${role}** role from the Role Store.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    else {
-      await Bastion.database.models.role.upsert({
-        roleID: role.id,
-        guildID: message.guild.id,
-        price: Math.abs(args.price)
-      },
-      {
-        where: {
-          roleID: role.id,
-          guildID: message.guild.id
-        },
-        fields: [ 'roleID', 'guildID', 'price' ]
-      });
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          description: `Listed **${role.name}** role for sale in the Role Store for **${args.price}** Bastion Currencies.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+  if (!args.role || !(args.price || args.remove)) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
-    Bastion.log.error(e);
+
+  args.role = args.role.join(' ');
+
+  let role;
+  if (message.guild.roles.has(args.role)) {
+    role = message.guild.roles.get(args.role);
+  }
+  else {
+    role = message.guild.roles.find(role => role.name === args.role);
+  }
+  if (!role) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
+
+  if (args.remove) {
+    await Bastion.database.models.role.update({
+      price: null
+    },
+    {
+      where: {
+        roleID: role.id,
+        guildID: message.guild.id
+      },
+      fields: [ 'price' ]
+    });
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.RED,
+        description: `Unlisted **${role}** role from the Role Store.`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
+  }
+  else {
+    await Bastion.database.models.role.upsert({
+      roleID: role.id,
+      guildID: message.guild.id,
+      price: Math.abs(args.price)
+    },
+    {
+      where: {
+        roleID: role.id,
+        guildID: message.guild.id
+      },
+      fields: [ 'roleID', 'guildID', 'price' ]
+    });
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: `Listed **${role.name}** role for sale in the Role Store for **${args.price}** Bastion Currencies.`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

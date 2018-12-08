@@ -4,12 +4,12 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let mostUsedCommands = Object.keys(message.guild.commandAnalytics);
   mostUsedCommands = mostUsedCommands.slice(0, 10);
   mostUsedCommands = mostUsedCommands.map(command => `\`${command}\` - ${message.guild.commandAnalytics[command]} times`);
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Most used commands in this Server',
@@ -18,8 +18,6 @@ exports.exec = (Bastion, message) => {
         text: 'Command stats are cleared after restart.'
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

@@ -6,17 +6,13 @@
 
 const yt = xrequire('youtube-dl');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   args = `ytsearch:${args.join(' ')}`;
-  yt.getInfo(args, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], (err, info) => {
+  await yt.getInfo(args, [ '-q', '--skip-download', '--no-warnings', '--format=bestaudio[protocol^=http]' ], async (err, info) => {
     if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
       let errorMessage;
       if (err && err.stack.includes('No video results')) {
@@ -25,14 +21,10 @@ exports.exec = (Bastion, message, args) => {
       else {
         errorMessage = Bastion.i18n.error(message.guild.language, 'connection');
       }
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', errorMessage, message.channel);
     }
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         author: {
@@ -65,8 +57,6 @@ exports.exec = (Bastion, message, args) => {
           text: info.is_live ? 'Live Now' : `Duration: ${info.duration}`
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   });
 };

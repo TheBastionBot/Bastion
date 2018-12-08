@@ -5,33 +5,25 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let response = await Bastion.methods.makeBWAPIRequest('/nasa/apod');
+  let response = await Bastion.methods.makeBWAPIRequest('/nasa/apod');
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        author: {
-          name: 'Astronomy Picture of the Day',
-          url: 'http://apod.nasa.gov/'
-        },
-        title: response.title,
-        description: response.explanation,
-        image: {
-          url: response.hdurl || response.url
-        },
-        footer: {
-          text: `Powered by NASA • Image Credit & Copyright - ${response.copyright}`
-        }
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      author: {
+        name: 'Astronomy Picture of the Day',
+        url: 'http://apod.nasa.gov/'
+      },
+      title: response.title,
+      description: response.explanation,
+      image: {
+        url: response.hdurl || response.url
+      },
+      footer: {
+        text: `Powered by NASA • Image Credit & Copyright - ${response.copyright}`
       }
-    });
-  }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
     }
-    Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

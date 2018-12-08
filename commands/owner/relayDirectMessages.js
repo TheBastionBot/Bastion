@@ -5,36 +5,31 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let settingsModel = await Bastion.database.models.settings.findOne({
-      attributes: [ 'relayDirectMessages' ],
-      where: {
-        botID: Bastion.user.id
-      }
-    });
+  let settingsModel = await Bastion.database.models.settings.findOne({
+    attributes: [ 'relayDirectMessages' ],
+    where: {
+      botID: Bastion.user.id
+    }
+  });
 
-    await Bastion.database.models.settings.update({
-      relayDirectMessages: !settingsModel.dataValues.relayDirectMessages
+  await Bastion.database.models.settings.update({
+    relayDirectMessages: !settingsModel.dataValues.relayDirectMessages
+  },
+  {
+    where: {
+      botID: Bastion.user.id
     },
-    {
-      where: {
-        botID: Bastion.user.id
-      },
-      fields: [ 'relayDirectMessages' ]
-    });
+    fields: [ 'relayDirectMessages' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors[settingsModel.dataValues.relayDirectMessages ? 'RED' : 'GREEN'],
-        description: Bastion.i18n.info(message.guild.language, settingsModel.dataValues.relayDirectMessages ? 'disableDirectMessageReyals' : 'enableDirectMessageReyals', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors[settingsModel.dataValues.relayDirectMessages ? 'RED' : 'GREEN'],
+      description: Bastion.i18n.info(message.guild.language, settingsModel.dataValues.relayDirectMessages ? 'disableDirectMessageReyals' : 'enableDirectMessageReyals', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

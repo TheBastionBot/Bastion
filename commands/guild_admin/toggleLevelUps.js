@@ -5,38 +5,33 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModels = await message.client.database.models.guild.findOne({
-      attributes: [ 'levelUps' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let guildModels = await message.client.database.models.guild.findOne({
+    attributes: [ 'levelUps' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    let levelUpStatus = !guildModels.dataValues.levelUps;
+  let levelUpStatus = !guildModels.dataValues.levelUps;
 
-    await message.client.database.models.guild.update({
-      levelUps: levelUpStatus
+  await message.client.database.models.guild.update({
+    levelUps: levelUpStatus
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'levelUps' ]
-    });
+    fields: [ 'levelUps' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: levelUpStatus ? Bastion.colors.GREEN : Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, levelUpStatus ? 'enableLevelUps' : 'disableLevelUps', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: levelUpStatus ? Bastion.colors.GREEN : Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, levelUpStatus ? 'enableLevelUps' : 'disableLevelUps', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

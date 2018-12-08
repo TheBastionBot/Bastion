@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   const CHANGES = xrequire('./changes.json');
 
   let changes = [];
@@ -39,7 +39,7 @@ exports.exec = (Bastion, message) => {
     }
   );
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: `Bastion Bot v${Bastion.package.version} Changelog`,
@@ -52,8 +52,6 @@ exports.exec = (Bastion, message) => {
         text: CHANGES.date
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

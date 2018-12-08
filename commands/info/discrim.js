@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!/^\d{4}$/.test(args[0])) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -17,7 +13,7 @@ exports.exec = (Bastion, message, args) => {
   let total = members.length;
   members = members.length > 0 ? members.slice(0, 10).join('\n') : 'None';
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Discriminator search',
@@ -29,8 +25,6 @@ exports.exec = (Bastion, message, args) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

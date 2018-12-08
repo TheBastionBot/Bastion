@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.GOLD,
       title: 'Bastion HQ',
@@ -18,8 +18,6 @@ exports.exec = (Bastion, message) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

@@ -5,44 +5,33 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let triggerModels = await Bastion.database.models.trigger.findAll({
-      attributes: [ 'trigger' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
-
-    if (triggerModels.length === 0) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'triggerNotFound'), message.channel);
+  let triggerModels = await Bastion.database.models.trigger.findAll({
+    attributes: [ 'trigger' ],
+    where: {
+      guildID: message.guild.id
     }
+  });
 
-    let triggers = triggerModels.map((t, i) => `${i + 1}. ${t.dataValues.trigger}`);
+  if (!triggerModels.length) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'triggerNotFound'), message.channel);
+  }
 
-    let noOfPages = triggers.length / 10;
-    let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
-    i = i - 1;
+  let triggers = triggerModels.map((t, i) => `${i + 1}. ${t.dataValues.trigger}`);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'List of triggers',
-        description: triggers.slice(i * 10, (i * 10) + 10).join('\n'),
-        footer: {
-          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
-        }
+  let noOfPages = triggers.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+  i = i - 1;
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      title: 'List of triggers',
+      description: triggers.slice(i * 10, (i * 10) + 10).join('\n'),
+      footer: {
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+    }
+  });
 };
 
 exports.config = {

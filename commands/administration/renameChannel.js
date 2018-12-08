@@ -5,74 +5,51 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.old || !args.new) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.old || !args.new) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let minLength = 2, maxLength = 100;
-    args.old = args.old.join(' ');
-    args.new = args.new.join(' ');
+  let minLength = 2, maxLength = 100;
+  args.old = args.old.join(' ');
+  args.new = args.new.join(' ');
 
-    if (args.new.length < minLength || args.new.length > maxLength) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
-    }
+  if (!args.new.length.inRange(minLength, maxLength)) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
+  }
 
-    let channel = message.channel;
-    if (args.voice) {
-      channel = message.guild.channels.filter(c => c.type === 'voice').find(channel => channel.name === args.old);
-    }
-    else {
-      args.old = args.old.replace(' ', '-');
-      args.new = args.new.replace(' ', '-');
-      channel = message.guild.channels.filter(c => c.type === 'text').find(channel => channel.name === args.old);
-    }
+  let channel = message.channel;
+  if (args.voice) {
+    channel = message.guild.channels.filter(c => c.type === 'voice').find(channel => channel.name === args.old);
+  }
+  else {
+    args.old = args.old.replace(' ', '-');
+    args.new = args.new.replace(' ', '-');
+    channel = message.guild.channels.filter(c => c.type === 'text').find(channel => channel.name === args.old);
+  }
 
-    if (!channel) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNotFound'), message.channel);
-    }
+  if (!channel) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNotFound'), message.channel);
+  }
 
-    if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-    }
-    if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-      /**
-      * Bastion has missing permissions.
-      * @fires bastionMissingPermissions
-      */
-      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-    }
+  if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+  }
+  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+  }
 
-    await channel.setName(args.new);
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.ORANGE,
-        description: Bastion.i18n.info(message.guild.language, 'renameChannel', message.author.tag, channel.type, args.old, args.new),
-        footer: {
-          text: `ID: ${channel.id}`
-        }
+  await channel.setName(args.new);
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.ORANGE,
+      description: Bastion.i18n.info(message.guild.language, 'renameChannel', message.author.tag, channel.type, args.old, args.new),
+      footer: {
+        text: `ID: ${channel.id}`
       }
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

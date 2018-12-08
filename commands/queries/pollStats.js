@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (message.channel.poll && message.channel.poll.collector) {
     let pollRes = message.channel.poll.collector.collected;
     let pollMessage = message.channel.poll.message;
@@ -12,14 +12,12 @@ exports.exec = (Bastion, message) => {
     pollRes = pollRes.map(r => r.content);
     pollRes = pollRes.filter(res => parseInt(res) && parseInt(res) > 0 && parseInt(res) < pollMessage.length);
     if (pollRes.length === 0) {
-      return message.channel.send({
+      return await message.channel.send({
         embed: {
           color: Bastion.colors.RED,
           title: 'Poll Status',
           description: 'No votes have been given yet. You can vote by sending the corresponding number of the option.'
         }
-      }).catch(e => {
-        Bastion.log.error(e);
       });
     }
 
@@ -41,15 +39,13 @@ exports.exec = (Bastion, message) => {
       });
     }
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         title: 'Poll Status',
         description: `Poll results for **${pollMessage[0]}**`,
         fields: result
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
 };

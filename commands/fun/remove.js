@@ -4,17 +4,15 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  message.channel.send({
+exports.exec = async (Bastion, message, args) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: `${args.length ? args.join(' ') : 'You'} is being removed.`,
+      title: `${args.length ? `${args.join(' ')} is` : 'You are'} being removed.`,
       image: {
         url: 'https://resources.bastionbot.org/images/remove_button.gif'
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

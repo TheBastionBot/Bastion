@@ -7,115 +7,104 @@
 const specialIDs = xrequire('./assets/specialIDs.json');
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let user;
-    if (message.mentions.users.size) {
-      user = message.mentions.users.first();
+  let user;
+  if (message.mentions.users.size) {
+    user = message.mentions.users.first();
+  }
+  else if (args.id) {
+    user = await Bastion.utils.fetchMember(message.guild, args.id);
+    if (user) {
+      user = user.user;
     }
-    else if (args.id) {
-      user = await Bastion.utils.fetchMember(message.guild, args.id);
-      if (user) {
-        user = user.user;
-      }
-    }
-    if (!user) {
-      user = message.author;
-    }
+  }
+  if (!user) {
+    user = message.author;
+  }
 
-    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-      attributes: Object.keys(Bastion.database.models.guildMember.attributes).concat([
-        [ Bastion.database.literal(`(SELECT COUNT(*) FROM guildMembers AS member WHERE member.guildID = ${message.guild.id} AND member.experiencePoints * 1 > guildMember.experiencePoints * 1)`), 'rank' ]
-      ]),
-      where: {
-        userID: user.id,
-        guildID: message.guild.id
-      }
-    });
-
-    let userModel = await Bastion.database.models.user.findOne({
-      attributes: [ 'avatar', 'info', 'birthDate', 'color', 'location' ],
-      where: {
-        userID: user.id
-      }
-    });
-
-    if (!guildMemberModel) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'profileNotCreated', `<@${user.id}>`), message.channel);
+  let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+    attributes: Object.keys(Bastion.database.models.guildMember.attributes).concat([
+      [ Bastion.database.literal(`(SELECT COUNT(*) FROM guildMembers AS member WHERE member.guildID = ${message.guild.id} AND member.experiencePoints * 1 > guildMember.experiencePoints * 1)`), 'rank' ]
+    ]),
+    where: {
+      userID: user.id,
+      guildID: message.guild.id
     }
+  });
 
-    let info;
-    if (userModel && userModel.dataValues.info) {
-      info = await Bastion.utils.decompressString(userModel.dataValues.info);
+  let userModel = await Bastion.database.models.user.findOne({
+    attributes: [ 'avatar', 'info', 'birthDate', 'color', 'location' ],
+    where: {
+      userID: user.id
     }
-    else {
-      info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setInfo` command.' : ''}`;
-    }
+  });
 
-    let profileData = [
-      {
-        name: 'Bastion Currency',
-        value: guildMemberModel.dataValues.bastionCurrencies,
-        inline: true
-      },
-      {
-        name: 'Rank',
-        value: parseInt(guildMemberModel.dataValues.rank) + 1,
-        inline: true
-      },
-      {
-        name: 'Experience Points',
-        value: guildMemberModel.dataValues.experiencePoints,
-        inline: true
-      },
-      {
-        name: 'Level',
-        value: guildMemberModel.dataValues.level,
-        inline: true
-      }
-    ];
+  if (!guildMemberModel) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'profileNotCreated', `<@${user.id}>`), message.channel);
+  }
 
-    if (userModel && userModel.dataValues.birthDate) {
-      profileData.push({
-        name: 'Birthday',
-        value: new Date(userModel.dataValues.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
-        inline: true
-      });
-    }
-    if (userModel && userModel.dataValues.location) {
-      profileData.push({
-        name: 'Location',
-        value: userModel.dataValues.location,
-        inline: true
-      });
-    }
+  let info;
+  if (userModel && userModel.dataValues.info) {
+    info = await Bastion.utils.decompressString(userModel.dataValues.info);
+  }
+  else {
+    info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setInfo` command.' : ''}`;
+  }
 
-    message.channel.send({
-      embed: {
-        color: userModel.dataValues.color ? userModel.dataValues.color : Bastion.colors.BLUE,
-        author: {
-          name: user.tag,
-          icon_url: await getUserIcon(user)
-        },
-        description: info,
-        fields: profileData,
-        thumbnail: {
-          url: userModel && userModel.dataValues.avatar ? userModel.dataValues.avatar : user.displayAvatarURL
-        },
-        footer: {
-          text: `${guildMemberModel.dataValues.reputations} Reputation${parseInt(guildMemberModel.dataValues.reputations) === 1 ? '' : 's'}`
-        }
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+  let profileData = [
+    {
+      name: 'Bastion Currency',
+      value: guildMemberModel.dataValues.bastionCurrencies,
+      inline: true
+    },
+    {
+      name: 'Rank',
+      value: parseInt(guildMemberModel.dataValues.rank) + 1,
+      inline: true
+    },
+    {
+      name: 'Experience Points',
+      value: guildMemberModel.dataValues.experiencePoints,
+      inline: true
+    },
+    {
+      name: 'Level',
+      value: guildMemberModel.dataValues.level,
+      inline: true
+    }
+  ];
+
+  if (userModel && userModel.dataValues.birthDate) {
+    profileData.push({
+      name: 'Birthday',
+      value: new Date(userModel.dataValues.birthDate).toDateString().split(' ').splice(1, 2).join(' '),
+      inline: true
     });
   }
-  catch (e) {
-    Bastion.log.error(e);
+  if (userModel && userModel.dataValues.location) {
+    profileData.push({
+      name: 'Location',
+      value: userModel.dataValues.location,
+      inline: true
+    });
   }
+
+  await message.channel.send({
+    embed: {
+      color: userModel.dataValues.color ? userModel.dataValues.color : Bastion.colors.BLUE,
+      author: {
+        name: user.tag,
+        icon_url: await getUserIcon(user)
+      },
+      description: info,
+      fields: profileData,
+      thumbnail: {
+        url: userModel && userModel.dataValues.avatar ? userModel.dataValues.avatar : user.displayAvatarURL
+      },
+      footer: {
+        text: `${guildMemberModel.dataValues.reputations} Reputation${parseInt(guildMemberModel.dataValues.reputations) === 1 ? '' : 's'}`
+      }
+    }
+  });
 };
 
 exports.config = {

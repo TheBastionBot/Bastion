@@ -4,13 +4,9 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let users = message.mentions.users.map(u => u.username);
   if (users.length < 2) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -19,14 +15,12 @@ exports.exec = (Bastion, message) => {
     shippedName += `${users[i].substring(0, users[i].length / 2)}`;
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Shipped Users',
       description: `${users.join(' + ')} = **${shippedName}**`
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

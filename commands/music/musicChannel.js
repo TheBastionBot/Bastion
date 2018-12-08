@@ -5,20 +5,36 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!message.guild.music.enabled) {
-      if (Bastion.user.id === '267035345537728512') {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
-      }
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  if (!message.guild.music.enabled) {
+    if (Bastion.user.id === '267035345537728512') {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
     }
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  }
 
-    let musicTextChannel, musicVoiceChannel, color, description;
+  let musicTextChannel, musicVoiceChannel, color, description;
 
-    if (args.remove) {
+  if (args.remove) {
+    await message.client.database.models.guild.update({
+      musicTextChannel: null,
+      musicVoiceChannel: null
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
+    });
+    color = Bastion.colors.RED;
+    description = Bastion.i18n.info(message.guild.language, 'removeMusicChannels', message.author.tag);
+  }
+  else if (args.id) {
+    musicTextChannel = message.channel;
+    musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(args.id);
+    if (musicVoiceChannel) {
       await message.client.database.models.guild.update({
-        musicTextChannel: null,
-        musicVoiceChannel: null
+        musicTextChannel: musicTextChannel.id,
+        musicVoiceChannel: musicVoiceChannel.id
       },
       {
         where: {
@@ -26,62 +42,41 @@ exports.exec = async (Bastion, message, args) => {
         },
         fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
       });
-      color = Bastion.colors.RED;
-      description = Bastion.i18n.info(message.guild.language, 'removeMusicChannels', message.author.tag);
-    }
-    else if (args.id) {
-      musicTextChannel = message.channel;
-      musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(args.id);
-      if (musicVoiceChannel) {
-        await message.client.database.models.guild.update({
-          musicTextChannel: musicTextChannel.id,
-          musicVoiceChannel: musicVoiceChannel.id
-        },
-        {
-          where: {
-            guildID: message.guild.id
-          },
-          fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
-        });
-        color = Bastion.colors.GREEN;
-        description = Bastion.i18n.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
-      }
-      else {
-        color = Bastion.colors.RED;
-        description = 'Invalid voice channel ID for music channel.';
-      }
+      color = Bastion.colors.GREEN;
+      description = Bastion.i18n.info(message.guild.language, 'addMusicChannels', message.author.tag, musicTextChannel, musicVoiceChannel.name);
     }
     else {
-      if (message.guild.music.textChannelID) {
-        musicTextChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID);
-      }
-      if (message.guild.music.voiceChannelID) {
-        musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
-      }
-
-      if (!musicTextChannel || !musicVoiceChannel) {
-        color = Bastion.colors.RED;
-        description = 'Music channels have not been set.';
-      }
-      else {
-        color = Bastion.colors.BLUE;
-        description = Bastion.i18n.info(message.guild.language, 'musicChannels', musicTextChannel, musicVoiceChannel.name);
-      }
+      color = Bastion.colors.RED;
+      description = 'Invalid voice channel ID for music channel.';
+    }
+  }
+  else {
+    if (message.guild.music.textChannelID) {
+      musicTextChannel = message.guild.channels.filter(c => c.type === 'text').get(message.guild.music.textChannelID);
+    }
+    if (message.guild.music.voiceChannelID) {
+      musicVoiceChannel = message.guild.channels.filter(c => c.type === 'voice').get(message.guild.music.voiceChannelID);
     }
 
-    message.channel.send({
-      embed: {
-        color: color,
-        title: 'Music Channel',
-        description: description
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    if (!musicTextChannel || !musicVoiceChannel) {
+      color = Bastion.colors.RED;
+      description = 'Music channels have not been set.';
+    }
+    else {
+      color = Bastion.colors.BLUE;
+      description = Bastion.i18n.info(message.guild.language, 'musicChannels', musicTextChannel, musicVoiceChannel.name);
+    }
   }
-  catch (e) {
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      title: 'Music Channel',
+      description: description
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

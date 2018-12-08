@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -48,14 +44,12 @@ exports.exec = (Bastion, message, args) => {
   args = args.replace(/\. /g, ' x ');
   args = args.replace(/./g, x => `${tapCode[x]}\u2001`).trim();
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Tap Code',
       description: `**${args}**`
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

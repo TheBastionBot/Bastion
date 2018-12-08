@@ -5,25 +5,20 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    await Bastion.database.models.trigger.destroy({
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  await Bastion.database.models.trigger.destroy({
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: 'Deleted all the triggers and responses.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: 'Deleted all the triggers and responses.'
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

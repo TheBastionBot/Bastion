@@ -5,48 +5,43 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let description, color;
+  let description, color;
 
-    if (args.remove) {
-      await Bastion.database.models.guild.update({
-        announcementChannel: null
+  if (args.remove) {
+    await Bastion.database.models.guild.update({
+      announcementChannel: null
+    },
+    {
+      where: {
+        guildID: message.guild.id
       },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'announcementChannel' ]
-      });
-      description = Bastion.i18n.info(message.guild.language, 'disableAnnouncementChannel', message.author.tag);
-      color = Bastion.colors.RED;
-    }
-    else {
-      await Bastion.database.models.guild.update({
-        announcementChannel: message.channel.id
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'announcementChannel' ]
-      });
-      description = Bastion.i18n.info(message.guild.language, 'enableAnnouncementChannel', message.author.tag);
-      color = Bastion.colors.GREEN;
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        description: description
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'announcementChannel' ]
     });
+    description = Bastion.i18n.info(message.guild.language, 'disableAnnouncementChannel', message.author.tag);
+    color = Bastion.colors.RED;
   }
-  catch (e) {
+  else {
+    await Bastion.database.models.guild.update({
+      announcementChannel: message.channel.id
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'announcementChannel' ]
+    });
+    description = Bastion.i18n.info(message.guild.language, 'enableAnnouncementChannel', message.author.tag);
+    color = Bastion.colors.GREEN;
+  }
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: description
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

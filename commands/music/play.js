@@ -23,10 +23,6 @@ exports.exec = async (Bastion, message, args) => {
 
 
     if (!args.song && !args.playlist) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -123,7 +119,7 @@ exports.exec = async (Bastion, message, args) => {
         message.guild.music.songs.push(song);
       }
 
-      message.channel.send({
+      await message.channel.send({
         embed: {
           color: Bastion.colors.GREEN,
           description: `Added ${songs.length} songs to the queue from your playlist.`
@@ -175,7 +171,7 @@ exports.exec = async (Bastion, message, args) => {
           });
         });
 
-        message.channel.send({
+        await message.channel.send({
           embed: {
             color: Bastion.colors.GREEN,
             description: `Added ${songInfo.length} songs to the queue from the YouTube playlist.`
@@ -194,7 +190,7 @@ exports.exec = async (Bastion, message, args) => {
           requester: message.author.tag
         });
 
-        textChannel.send({
+        await textChannel.send({
           embed: {
             color: Bastion.colors.GREEN,
             title: 'Added to the queue',

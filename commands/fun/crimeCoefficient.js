@@ -4,17 +4,20 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   let user = message.mentions.users.first();
   if (!user) {
     user = message.author;
   }
   user = user.tag;
+
   let userHash = 0;
   for (let i = 0; i < user.length; i++) {
     userHash += parseInt(user[i].charCodeAt(0));
   }
+
   let crimeCoefficient = Math.round(parseFloat(`0.${String(userHash)}`) * 500) + 1;
+
   let crimeStat;
   if (crimeCoefficient < 100) {
     crimeStat = 'Suspect is not a target for enforcement action. The trigger of Dominator will be locked.';
@@ -26,14 +29,12 @@ exports.exec = (Bastion, message) => {
     crimeStat = 'Suspect poses a serious threat to the society. Lethal force is authorized. Dominator will automatically switch to Lethal Eliminator. Suspect that is hit by Lethal Eliminator will bloat and explode.';
   }
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: `Crime Coefficient of ${user} is ${crimeCoefficient}`,
       description: crimeStat
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

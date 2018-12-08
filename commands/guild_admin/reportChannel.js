@@ -5,36 +5,31 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'reportChannel' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'reportChannel' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
 
-    await Bastion.database.models.guild.update({
-      reportChannel: guildModel.dataValues.reportChannel ? null : message.channel.id
+  await Bastion.database.models.guild.update({
+    reportChannel: guildModel.dataValues.reportChannel ? null : message.channel.id
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'reportChannel' ]
-    });
+    fields: [ 'reportChannel' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: guildModel.dataValues.reportChannel ? Bastion.colors.RED : Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.reportChannel ? 'disableReportChannel' : 'enableReportChannel', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: guildModel.dataValues.reportChannel ? Bastion.colors.RED : Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.reportChannel ? 'disableReportChannel' : 'enableReportChannel', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

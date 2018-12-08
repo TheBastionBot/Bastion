@@ -10,10 +10,6 @@ const moment = xrequire('moment');
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 2) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -158,7 +154,7 @@ exports.exec = async (Bastion, message, args) => {
         value: 'Stats of private profiles can\'t be shown.\nProfiles are set to private by default. You can modify this setting in Overwatch under Options – Social.'
       });
     }
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         author: {
@@ -174,15 +170,13 @@ exports.exec = async (Bastion, message, args) => {
           url: `https://resources.bastionbot.org/images/overwatch/heros/${data.competitive.global.masteringHeroe || data.quickplay.global.masteringHeroe}.png`
         }
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
   catch (e) {
     if (e.stack.includes('PROFILE_NOT_FOUND')) {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
     }
-    Bastion.log.error(e);
+    throw e;
   }
 };
 

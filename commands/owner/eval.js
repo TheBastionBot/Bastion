@@ -7,10 +7,6 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.code) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -60,8 +56,6 @@ exports.exec = async (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
 
     if (args.delete) {

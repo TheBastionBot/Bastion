@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
-  message.channel.send({
+exports.exec = async (Bastion, message) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.DARK_GREEN,
       title: 'Support Bastion\'s development',
@@ -34,8 +34,6 @@ exports.exec = (Bastion, message) => {
         text: 'If everyone using Bastion gave $1, we could keep Bastion thriving for months to come.'
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

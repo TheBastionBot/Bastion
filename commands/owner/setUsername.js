@@ -5,22 +5,17 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.join(' ').length >= 1) {
-      await Bastion.user.setUsername(args.join(' '));
+  if (args.join(' ').length >= 1) {
+    await Bastion.user.setUsername(args.join(' '));
 
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          description: `${Bastion.user.username}'s username is now set to **${args.join(' ')}**`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-  }
-  catch (e) {
-    Bastion.log.error(e);
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: `${Bastion.user.username}'s username is now set to **${args.join(' ')}**`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

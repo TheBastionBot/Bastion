@@ -5,46 +5,35 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'filteredWords' ],
-      where: {
-        guildID: message.guild.id
-      }
-    });
-
-    if (!guildModel || !guildModel.dataValues.filteredWords) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'filtered words'), message.channel);
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'filteredWords' ],
+    where: {
+      guildID: message.guild.id
     }
+  });
 
-    let filteredWords = guildModel.dataValues.filteredWords;
+  if (!guildModel || !guildModel.dataValues.filteredWords) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notSet', 'filtered words'), message.channel);
+  }
 
-    filteredWords = filteredWords.map((r, i) => `${i + 1}. ${r}`);
+  let filteredWords = guildModel.dataValues.filteredWords;
 
-    let noOfPages = filteredWords.length / 10;
-    let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
-    i = i - 1;
+  filteredWords = filteredWords.map((r, i) => `${i + 1}. ${r}`);
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Filtered Words',
-        description: filteredWords.slice(i * 10, (i * 10) + 10).join('\n'),
-        footer: {
-          text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
-        }
+  let noOfPages = filteredWords.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+  i = i - 1;
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      title: 'Filtered Words',
+      description: filteredWords.slice(i * 10, (i * 10) + 10).join('\n'),
+      footer: {
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+    }
+  });
 };
 
 exports.config = {

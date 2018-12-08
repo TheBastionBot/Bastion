@@ -6,7 +6,7 @@
 
 const convert = xrequire('color-convert');
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (args.color && /^#?[0-9a-f]{6}$/i.test(args.color)) {
     args.color = args.color.replace('#', '');
   }
@@ -14,15 +14,11 @@ exports.exec = (Bastion, message, args) => {
     args.color = '000000'.replace(/0/g, () => (~~(Math.random() * 16)).toString(16));
   }
   else {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: parseInt(args.color, 16),
       fields: [
@@ -101,8 +97,6 @@ exports.exec = (Bastion, message, args) => {
         url: `https://dummyimage.com/250/${args.color}/&text=%20`
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

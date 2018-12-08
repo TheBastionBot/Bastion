@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -19,7 +15,7 @@ exports.exec = (Bastion, message, args) => {
   }
 
   if (role) {
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.BLUE,
         fields: [
@@ -35,15 +31,9 @@ exports.exec = (Bastion, message, args) => {
           }
         ]
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
   else {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
   }
 };

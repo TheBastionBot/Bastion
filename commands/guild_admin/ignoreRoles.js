@@ -5,49 +5,44 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.roles) return;
+  if (!args.roles) return;
 
-    let roles = args.roles;
-    roles = roles.filter(roleID => message.guild.roles.has(roleID));
+  let roles = args.roles;
+  roles = roles.filter(roleID => message.guild.roles.has(roleID));
 
-    for (let roleID of roles) {
-      await Bastion.database.models.role.upsert({
+  for (let roleID of roles) {
+    await Bastion.database.models.role.upsert({
+      roleID: roleID,
+      guildID: message.guild.id,
+      blacklisted: !args.remove
+    },
+    {
+      where: {
         roleID: roleID,
-        guildID: message.guild.id,
-        blacklisted: !args.remove
+        guildID: message.guild.id
       },
-      {
-        where: {
-          roleID: roleID,
-          guildID: message.guild.id
-        },
-        fields: [ 'roleID', 'guildID', 'blacklisted' ]
-      });
-    }
-
-    let description;
-    if (args.remove) {
-      description = 'I\'ll stop ignoring these roles, from now:';
-    }
-    else {
-      description = 'I\'ll ignore these roles, from now:';
-    }
-
-    roles = roles.map(roleID => message.guild.roles.get(roleID).name);
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `${description}\n\n${roles.join(', ')}`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'roleID', 'guildID', 'blacklisted' ]
     });
   }
-  catch (e) {
-    Bastion.log.error(e);
+
+  let description;
+  if (args.remove) {
+    description = 'I\'ll stop ignoring these roles, from now:';
   }
+  else {
+    description = 'I\'ll ignore these roles, from now:';
+  }
+
+  roles = roles.map(roleID => message.guild.roles.get(roleID).name);
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: `${description}\n\n${roles.join(', ')}`
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {

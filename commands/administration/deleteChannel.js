@@ -5,54 +5,39 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let channel = message.mentions.channels.first();
+  let channel = message.mentions.channels.first();
+  if (!channel) {
+    channel = message.channel;
+    if (args.id) {
+      channel = message.guild.channels.get(args.id);
+    }
+    else if (args.name) {
+      channel = message.guild.channels.find(channel => channel.name === args.name.join(' '));
+    }
     if (!channel) {
-      channel = message.channel;
-      if (args.id) {
-        channel = message.guild.channels.get(args.id);
-      }
-      else if (args.name) {
-        channel = message.guild.channels.find(channel => channel.name === args.name.join(' '));
-      }
-      if (!channel) {
-        /**
-        * Error condition is encountered.
-        * @fires error
-        */
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNotFound'), message.channel);
-      }
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNotFound'), message.channel);
     }
-
-    if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
-      /**
-      * User has missing permissions.
-      * @fires userMissingPermissions
-      */
-      return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
-    }
-    if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
-      /**
-      * Bastion has missing permissions.
-      * @fires bastionMissingPermissions
-      */
-      return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
-    }
-
-    await channel.delete();
-
-    if (channel.id === message.channel.id) return;
-
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, 'deleteChannel', message.author.tag, channel.type, channel.name)
-      }
-    });
   }
-  catch (e) {
+
+  if (!channel.permissionsFor(message.member).has(this.help.userTextPermission)) {
+    return Bastion.emit('userMissingPermissions', this.help.userTextPermission);
+  }
+  if (!channel.permissionsFor(message.guild.me).has(this.help.botPermission)) {
+    return Bastion.emit('bastionMissingPermissions', this.help.botPermission, message);
+  }
+
+  await channel.delete();
+
+  if (channel.id === message.channel.id) return;
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, 'deleteChannel', message.author.tag, channel.type, channel.name)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

@@ -5,51 +5,36 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.old || !args.new) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.old || !args.new) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let maxLength = 100;
-    args.old = args.old.join(' ');
-    args.new = args.new.join(' ');
-    if (args.new.length > maxLength) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
-    }
+  let maxLength = 100;
+  args.old = args.old.join(' ');
+  args.new = args.new.join(' ');
+  if (!args.new.length.inRange(0, maxLength)) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNameLength', maxLength), message.channel);
+  }
 
-    let role = message.guild.roles.find(role => role.name === args.old);
-    if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
-    else if (!role) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
-    }
+  let role = message.guild.roles.find(role => role.name === args.old);
+  if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info('User doesn\'t have permission to use this command on that role.');
+  else if (!role) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
 
-    await role.setName(args.new);
+  await role.setName(args.new);
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.ORANGE,
-        description: Bastion.i18n.info(message.guild.language, 'renameRole', message.author.tag, args.old, args.new),
-        footer: {
-          text: `ID: ${role.id}`
-        }
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.ORANGE,
+      description: Bastion.i18n.info(message.guild.language, 'renameRole', message.author.tag, args.old, args.new),
+      footer: {
+        text: `ID: ${role.id}`
       }
-    });
-  }
-  catch (e) {
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

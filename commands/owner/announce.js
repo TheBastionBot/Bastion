@@ -5,59 +5,50 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-    let guildModels = await Bastion.database.models.guild.findAll({
-      attributes: [ 'announcementChannel' ]
-    });
-
-    let announcementChannels = guildModels.filter(guildModel => guildModel.dataValues.announcementChannel).map(guildModel => guildModel.dataValues.announcementChannel);
-    let announcementMessage = args.join(' ');
-
-    for (let channel of announcementChannels) {
-      if (Bastion.shard) {
-        await Bastion.shard.broadcastEval(`
-          let channel = this.channels.get('${channel}');
-          if (channel) {
-            channel.send({
-              embed: {
-                color: this.colors.BLUE,
-                description: \`${announcementMessage}\`
-              }
-            }).catch(this.log.error);
-          }
-        `);
-      }
-      else {
-        await Bastion.channels.get(channel).send({
-          embed: {
-            color: Bastion.colors.BLUE,
-            description: announcementMessage
-          }
-        }).catch(() => {});
-      }
-    }
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        title: 'Announced',
-        description: announcementMessage
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  if (!args.length) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
+
+  let guildModels = await Bastion.database.models.guild.findAll({
+    attributes: [ 'announcementChannel' ]
+  });
+
+  let announcementChannels = guildModels.filter(guildModel => guildModel.dataValues.announcementChannel).map(guildModel => guildModel.dataValues.announcementChannel);
+  let announcementMessage = args.join(' ');
+
+  for (let channel of announcementChannels) {
+    if (Bastion.shard) {
+      await Bastion.shard.broadcastEval(`
+        let channel = this.channels.get('${channel}');
+        if (channel) {
+          channel.send({
+            embed: {
+              color: this.colors.BLUE,
+              description: \`${announcementMessage}\`
+            }
+          }).catch(this.log.error);
+        }
+      `);
+    }
+    else {
+      await Bastion.channels.get(channel).send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          description: announcementMessage
+        }
+      }).catch(() => {});
+    }
+  }
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      title: 'Announced',
+      description: announcementMessage
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

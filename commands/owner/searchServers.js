@@ -4,12 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -17,7 +13,7 @@ exports.exec = (Bastion, message, args) => {
   let total = guilds.length;
   guilds = total > 0 ? guilds.slice(0, 10).join('\n') : 'None';
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Server search',
@@ -29,8 +25,6 @@ exports.exec = (Bastion, message, args) => {
         }
       ]
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

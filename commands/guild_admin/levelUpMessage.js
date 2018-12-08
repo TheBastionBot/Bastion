@@ -5,54 +5,49 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'levelUpMessages' ],
+  let guildModel = await Bastion.database.models.guild.findOne({
+    attributes: [ 'levelUpMessages' ],
+    where: {
+      guildID: message.guild.id
+    }
+  });
+
+  let color, levelUpMessageStats;
+  if (guildModel.dataValues.levelUpMessages) {
+    await Bastion.database.models.guild.update({
+      levelUpMessages: false
+    },
+    {
       where: {
         guildID: message.guild.id
-      }
-    });
-
-    let color, levelUpMessageStats;
-    if (guildModel.dataValues.levelUpMessages) {
-      await Bastion.database.models.guild.update({
-        levelUpMessages: false
       },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'levelUpMessages' ]
-      });
-      color = Bastion.colors.RED;
-      levelUpMessageStats = Bastion.i18n.info(message.guild.language, 'disableLevelUpMessages', message.author.tag);
-    }
-    else {
-      await Bastion.database.models.guild.update({
-        levelUpMessages: true
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'levelUpMessages' ]
-      });
-      color = Bastion.colors.GREEN;
-      levelUpMessageStats = Bastion.i18n.info(message.guild.language, 'enableLevelUpMessages', message.author.tag);
-    }
-
-    message.channel.send({
-      embed: {
-        color: color,
-        description: levelUpMessageStats
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
+      fields: [ 'levelUpMessages' ]
     });
+    color = Bastion.colors.RED;
+    levelUpMessageStats = Bastion.i18n.info(message.guild.language, 'disableLevelUpMessages', message.author.tag);
   }
-  catch (e) {
+  else {
+    await Bastion.database.models.guild.update({
+      levelUpMessages: true
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'levelUpMessages' ]
+    });
+    color = Bastion.colors.GREEN;
+    levelUpMessageStats = Bastion.i18n.info(message.guild.language, 'enableLevelUpMessages', message.author.tag);
+  }
+
+  await message.channel.send({
+    embed: {
+      color: color,
+      description: levelUpMessageStats
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

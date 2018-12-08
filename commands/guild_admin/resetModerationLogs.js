@@ -5,29 +5,24 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    await Bastion.database.models.guild.update({
-      moderationCaseNo: 1
+  await Bastion.database.models.guild.update({
+    moderationCaseNo: 1
+  },
+  {
+    where: {
+      guildID: message.guild.id
     },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'moderationCaseNo' ]
-    });
+    fields: [ 'moderationCaseNo' ]
+  });
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: Bastion.i18n.info(message.guild.language, 'resetModerationLogCases', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: Bastion.i18n.info(message.guild.language, 'resetModerationLogCases', message.author.tag)
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

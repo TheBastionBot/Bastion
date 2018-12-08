@@ -5,57 +5,52 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 1) {
-      let guildModel = await Bastion.database.models.guild.findOne({
-        attributes: [ 'greetMessage' ],
-        where: {
-          guildID: message.guild.id
-        }
-      });
-
-      let greetMessage = `Not set. Set greeting message using \`${this.help.name} <Message>\``;
-      if (guildModel.dataValues.greetMessage) {
-        greetMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetMessage);
+  if (!args.length) {
+    let guildModel = await Bastion.database.models.guild.findOne({
+      attributes: [ 'greetMessage' ],
+      where: {
+        guildID: message.guild.id
       }
+    });
 
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: 'Greeting Message',
-          description: greetMessage
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    let greetMessage = `Not set. Set greeting message using \`${this.help.name} <Message>\``;
+    if (guildModel.dataValues.greetMessage) {
+      greetMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetMessage);
     }
-    else {
-      args = args.join(' ');
 
-      let greetMessage = await Bastion.utils.compressString(args);
-      await Bastion.database.models.guild.update({
-        greetMessage: greetMessage
-      },
-      {
-        where: {
-          guildID: message.guild.id
-        },
-        fields: [ 'greetMessage' ]
-      });
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          title: 'Greeting Message Set',
-          description: args
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+    message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Greeting Message',
+        description: greetMessage
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
-  catch (e) {
-    Bastion.log.error(e);
+  else {
+    args = args.join(' ');
+
+    let greetMessage = await Bastion.utils.compressString(args);
+    await Bastion.database.models.guild.update({
+      greetMessage: greetMessage
+    },
+    {
+      where: {
+        guildID: message.guild.id
+      },
+      fields: [ 'greetMessage' ]
+    });
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        title: 'Greeting Message Set',
+        description: args
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

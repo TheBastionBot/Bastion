@@ -5,46 +5,37 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.from || !args.to) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
-
-
-    let voiceChannels = message.guild.channels.filter(channel => channel.type === 'voice');
-    let sourceVoiceChannel = voiceChannels.get(args.from);
-    let destinationVoiceChannel = voiceChannels.get(args.to);
-
-    if (!sourceVoiceChannel || !destinationVoiceChannel) {
-      return Bastion.emit('error', '', 'Invalid voice channel(s). Please recheck the IDs of the Voice Channels.', message.channel);
-    }
-
-    if (!sourceVoiceChannel.permissionsFor(message.member).has('MOVE_MEMBERS')) return;
-    if (!destinationVoiceChannel.permissionsFor(message.member).has('MOVE_MEMBERS')) return;
-
-
-    let sourceVoiceChannelMembers = sourceVoiceChannel.members.array();
-    for (let member of sourceVoiceChannelMembers) {
-      await member.setVoiceChannel(destinationVoiceChannel).catch((e) => Bastion.log.error(e));
-    }
-
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `${message.author.tag} moved all the members from **${sourceVoiceChannel.name}** Voice Channel to **${destinationVoiceChannel.name}** Voice Channel.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  if (!args.from || !args.to) {
+    return Bastion.emit('commandUsage', message, this.help);
   }
-  catch (e) {
+
+
+  let voiceChannels = message.guild.channels.filter(channel => channel.type === 'voice');
+  let sourceVoiceChannel = voiceChannels.get(args.from);
+  let destinationVoiceChannel = voiceChannels.get(args.to);
+
+  if (!sourceVoiceChannel || !destinationVoiceChannel) {
+    return Bastion.emit('error', '', 'Invalid voice channel(s). Please recheck the IDs of the Voice Channels.', message.channel);
+  }
+
+  if (!sourceVoiceChannel.permissionsFor(message.member).has('MOVE_MEMBERS')) return;
+  if (!destinationVoiceChannel.permissionsFor(message.member).has('MOVE_MEMBERS')) return;
+
+
+  let sourceVoiceChannelMembers = sourceVoiceChannel.members.array();
+  for (let member of sourceVoiceChannelMembers) {
+    await member.setVoiceChannel(destinationVoiceChannel).catch((e) => Bastion.log.error(e));
+  }
+
+
+  message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: `${message.author.tag} moved all the members from **${sourceVoiceChannel.name}** Voice Channel to **${destinationVoiceChannel.name}** Voice Channel.`
+    }
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

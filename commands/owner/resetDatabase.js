@@ -5,31 +5,22 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.profiles) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
+  if (!args.profiles) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  await Bastion.database.models.guildMember.destroy({
+    truncate: true
+  });
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: 'Bastion `profiles` database was successfully reset.'
     }
-
-    await Bastion.database.models.guildMember.destroy({
-      truncate: true
-    });
-
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: 'Bastion `profiles` database was successfully reset.'
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
-  }
-  catch (e) {
+  }).catch(e => {
     Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {

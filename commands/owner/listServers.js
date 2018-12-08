@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   let guilds = Array.from(Bastion.guilds.values());
 
   let totalGuilds = guilds.length;
@@ -23,7 +23,7 @@ exports.exec = (Bastion, message, args) => {
   }
 
 
-  message.channel.send({
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: 'Server List',
@@ -33,8 +33,6 @@ exports.exec = (Bastion, message, args) => {
         text: `Page: ${p + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

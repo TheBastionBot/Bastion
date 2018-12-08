@@ -4,8 +4,8 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message, args) => {
-  message.channel.send({
+exports.exec = async (Bastion, message, args) => {
+  await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: `R.I.P ${args.length ? args.join(' ') : 'Everything'}`,
@@ -16,8 +16,6 @@ exports.exec = (Bastion, message, args) => {
         text: 'May the Soul Rest in Peace.'
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 
