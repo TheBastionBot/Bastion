@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (!message.guild.music.enabled) {
     if (Bastion.user.id === '267035345537728512') {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
@@ -20,7 +20,7 @@ exports.exec = (Bastion, message) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
-  message.guild.music.textChannel.send({
+  await message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.BLUE,
       title: message.guild.music.dispatcher.paused ? 'Paused' : 'Now Playing',
@@ -33,8 +33,6 @@ exports.exec = (Bastion, message) => {
         text: `🔉 ${message.guild.music.dispatcher.volume * 50}% • ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
       }
     }
-  }).catch(e => {
-    Bastion.log.error(e);
   });
 };
 

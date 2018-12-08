@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = (Bastion, message) => {
+exports.exec = async (Bastion, message) => {
   if (!message.guild.music.enabled) {
     if (Bastion.user.id === '267035345537728512') {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
@@ -22,7 +22,7 @@ exports.exec = (Bastion, message) => {
 
   if (message.guild.voiceConnection.speaking) return;
 
-  message.guild.music.textChannel.send({
+  await message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.GREEN,
       title: 'Resumed Playback',

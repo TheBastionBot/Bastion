@@ -5,62 +5,48 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!message.guild.music.enabled) {
-      if (Bastion.user.id === '267035345537728512') {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
-      }
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  if (!message.guild.music.enabled) {
+    if (Bastion.user.id === '267035345537728512') {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
     }
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  }
 
-    if (!args.song) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.song) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    let response = await Bastion.methods.makeBWAPIRequest(`/song/${args.song.join(' ')}`);
+  let response = await Bastion.methods.makeBWAPIRequest(`/song/${args.song.join(' ')}`);
 
-    if (response.error) {
-      return await message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          title: 'Not Found',
-          description: `No lyrics was found for **${args.song.join(' ').toTitleCase()}**.\nIf you think you are searching for the right song, try adding the artist's name to the search term and try again.`
-        }
-      });
-    }
-
-    message.channel.send({
+  if (response.error) {
+    return await message.channel.send({
       embed: {
-        color: Bastion.colors.BLUE,
-        author: {
-          name: response.artist.name,
-          icon_url: response.artist.image
-        },
-        title: response.name,
-        description: response.lyrics.length > 2048
-          ? `${response.lyrics.substring(0, 2045)}...`
-          : response.lyrics,
-        thumbnail: {
-          url: response.image
-        },
-        footer: {
-          text: 'Powered by Genius'
-        }
+        color: Bastion.colors.RED,
+        title: 'Not Found',
+        description: `No lyrics was found for **${args.song.join(' ').toTitleCase()}**.\nIf you think you are searching for the right song, try adding the artist's name to the search term and try again.`
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
-  catch (e) {
-    if (e.response) {
-      return Bastion.emit('error', e.response.statusCode, e.response.statusMessage, message.channel);
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      author: {
+        name: response.artist.name,
+        icon_url: response.artist.image
+      },
+      title: response.name,
+      description: response.lyrics.length > 2048
+        ? `${response.lyrics.substring(0, 2045)}...`
+        : response.lyrics,
+      thumbnail: {
+        url: response.image
+      },
+      footer: {
+        text: 'Powered by Genius'
+      }
     }
-    Bastion.log.error(e);
-  }
+  });
 };
 
 exports.config = {
