@@ -7,10 +7,6 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (args.length < 1 || (isNaN(args[0] = parseInt(args[0])) || args[0] < 1)) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -19,10 +15,6 @@ exports.exec = async (Bastion, message, args) => {
       user = await Bastion.fetchUser(args[1]);
     }
     if (!user) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'takeNoUser'), message.channel);
     }
     let reason;
@@ -35,10 +27,8 @@ exports.exec = async (Bastion, message, args) => {
 
     args[0] = Math.abs(args[0]);
     Bastion.emit('userCredit', message.guild.members.get(user.id), args[0]);
-    /**
-    * Send a message in the channel to let the Bot Owner know that the operation was successful.
-    */
-    message.channel.send({
+    // Send a message in the channel to let the Bot Owner know that the operation was successful.
+    await message.channel.send({
       embed: {
         color: Bastion.colors.RED,
         description: `${args[0]} Bastion Currencies has been taken from <@${user.id}>`,
@@ -53,10 +43,8 @@ exports.exec = async (Bastion, message, args) => {
       Bastion.log.error(e);
     });
 
-    /**
-    * Let the user know by DM that their account has been credited.
-    */
-    user.send({
+    // Let the user know by DM that their account has been credited.
+    await user.send({
       embed: {
         color: Bastion.colors.RED,
         description: `Your account has been credited with **${args[0]}** Bastion Currencies.`,
@@ -73,14 +61,10 @@ exports.exec = async (Bastion, message, args) => {
   }
   catch (e) {
     if (e.code === 10013) {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'takeNoUser'), message.channel);
     }
     else {
-      Bastion.log.error(e);
+      throw e;
     }
   }
 };

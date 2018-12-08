@@ -5,56 +5,47 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  try {
-    let buyableRoleModels = await Bastion.database.models.role.findAll({
-      attributes: [ 'roleID', 'price' ],
-      where: {
-        guildID: message.guild.id,
-        price: {
-          [Bastion.database.Op.not]: null
-        }
+  let buyableRoleModels = await Bastion.database.models.role.findAll({
+    attributes: [ 'roleID', 'price' ],
+    where: {
+      guildID: message.guild.id,
+      price: {
+        [Bastion.database.Op.not]: null
+      }
+    }
+  });
+
+  let rolesInStore = buyableRoleModels.
+    map(model => model.dataValues).
+    filter(role => message.guild.roles.has(role.roleID));
+
+  if (rolesInStore.length) {
+    let fields = [];
+
+    for (let role of rolesInStore) {
+      fields.push({
+        name: `${message.guild.roles.get(role.roleID).name} (${role.roleID})`,
+        value: `${role.price} Bastion Currencies`
+      });
+    }
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Role Store',
+        description: 'Buy a role using the `buyRole` command.\nUse `help buyRole` command for more info.',
+        fields: fields
       }
     });
-
-    let rolesInStore = buyableRoleModels.
-      map(model => model.dataValues).
-      filter(role => message.guild.roles.has(role.roleID));
-
-    if (rolesInStore.length) {
-      let fields = [];
-
-      for (let role of rolesInStore) {
-        fields.push({
-          name: `${message.guild.roles.get(role.roleID).name} (${role.roleID})`,
-          value: `${role.price} Bastion Currencies`
-        });
-      }
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          title: 'Role Store',
-          description: 'Buy a role using the `buyRole` command.\nUse `help buyRole` command for more info.',
-          fields: fields
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    else {
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          title: 'Role Store',
-          description: 'No role\'s for sale in this server at this time.'
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
   }
-  catch (e) {
-    Bastion.log.error(e);
+  else {
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.RED,
+        title: 'Role Store',
+        description: 'No role\'s for sale in this server at this time.'
+      }
+    });
   }
 };
 

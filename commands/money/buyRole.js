@@ -5,77 +5,68 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (!args.role) {
-      /**
-       * The command was ran with invalid parameters.
-       * @fires commandUsage
-       */
-      return Bastion.emit('commandUsage', message, this.help);
-    }
+  if (!args.role) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
 
-    args.role = args.role.join(' ');
+  args.role = args.role.join(' ');
 
-    let role;
-    if (message.guild.roles.has(args.role)) {
-      role = message.guild.roles.get(args.role);
-    }
-    else {
-      role = message.guild.roles.find(role => role.name === args.role);
-    }
-    if (!role) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
-    }
+  let role;
+  if (message.guild.roles.has(args.role)) {
+    role = message.guild.roles.get(args.role);
+  }
+  else {
+    role = message.guild.roles.find(role => role.name === args.role);
+  }
+  if (!role) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  }
 
-    let roleModel = await Bastion.database.models.role.findOne({
-      attributes: [ 'price' ],
+  let roleModel = await Bastion.database.models.role.findOne({
+    attributes: [ 'price' ],
+    where: {
+      roleID: role.id,
+      guildID: message.guild.id,
+      price: {
+        [Bastion.database.Op.not]: null
+      }
+    }
+  });
+
+  if (roleModel) {
+    let price = roleModel.dataValues.price;
+
+    let guildMemberModel = await Bastion.database.models.guildMember.findOne({
+      attributes: [ 'bastionCurrencies' ],
       where: {
-        roleID: role.id,
-        guildID: message.guild.id,
-        price: {
-          [Bastion.database.Op.not]: null
-        }
+        userID: message.author.id,
+        guildID: message.guild.id
       }
     });
+    guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
-    if (roleModel) {
-      let price = roleModel.dataValues.price;
-
-      let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-        attributes: [ 'bastionCurrencies' ],
-        where: {
-          userID: message.author.id,
-          guildID: message.guild.id
-        }
-      });
-      guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
-
-      if (price > guildMemberModel.dataValues.bastionCurrencies) {
-        return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'insufficientBalance', guildMemberModel.dataValues.bastionCurrencies), message.channel);
-      }
-
-      message.member.addRole(role);
-
-      Bastion.emit('userCredit', message.member, price);
-      if (message.author.id !== message.guild.owner.id) {
-        Bastion.emit('userDebit', message.guild.members.get(message.guild.owner.id), (0.9) * price);
-      }
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.BLUE,
-          description: `${message.author.tag} bought the **${role.name}** role for **${price}** Bastion Currencies.`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+    if (price > guildMemberModel.dataValues.bastionCurrencies) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'insufficientBalance', guildMemberModel.dataValues.bastionCurrencies), message.channel);
     }
-    else {
-      return Bastion.emit('error', 'Not for sale', `The **${role.name}** role is not for sale.`, message.channel);
+
+    await message.member.addRole(role);
+
+    Bastion.emit('userCredit', message.member, price);
+    if (message.author.id !== message.guild.owner.id) {
+      Bastion.emit('userDebit', message.guild.members.get(message.guild.owner.id), (0.9) * price);
     }
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        description: `${message.author.tag} bought the **${role.name}** role for **${price}** Bastion Currencies.`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
-  catch (e) {
-    Bastion.log.error(e);
+  else {
+    return Bastion.emit('error', 'Not for sale', `The **${role.name}** role is not for sale.`, message.channel);
   }
 };
 
