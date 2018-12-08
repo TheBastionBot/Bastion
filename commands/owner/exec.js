@@ -10,10 +10,6 @@ const exec = util.promisify(xrequire('child_process').exec);
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.length) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
     args = args.join(' ');
@@ -50,7 +46,7 @@ exports.exec = async (Bastion, message, args) => {
       });
     }
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: color,
         fields: output
@@ -91,7 +87,7 @@ exports.exec = async (Bastion, message, args) => {
         });
       }
 
-      message.channel.send({
+      await message.channel.send({
         embed: {
           color: color,
           fields: output

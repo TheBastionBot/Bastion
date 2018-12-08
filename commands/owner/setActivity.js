@@ -5,37 +5,32 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.name) {
-      args.name = args.name.join(' ');
+  if (args.name) {
+    args.name = args.name.join(' ');
 
-      await Bastion.user.setActivity(args.name, { type: args.type });
+    await Bastion.user.setActivity(args.name, { type: args.type });
 
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          description: `My activity is now set to **${args.type} ${args.name}**`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
-    else {
-      let game = typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name.length ? Bastion.configurations.game.name[0] : null;
-      await Bastion.user.setActivity(game, { type: Bastion.configurations.game.type });
-
-      message.channel.send({
-        embed: {
-          color: Bastion.colors.GREEN,
-          description: `My activity has been reset to the default: **${Bastion.configurations.game.type} ${game}**`
-        }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
-    }
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: `My activity is now set to **${args.type} ${args.name}**`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
-  catch (e) {
-    Bastion.log.error(e);
+  else {
+    let game = typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name.length ? Bastion.configurations.game.name[0] : null;
+    await Bastion.user.setActivity(game, { type: Bastion.configurations.game.type });
+
+    await message.channel.send({
+      embed: {
+        color: Bastion.colors.GREEN,
+        description: `My activity has been reset to the default: **${Bastion.configurations.game.type} ${game}**`
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 };
 

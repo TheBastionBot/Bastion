@@ -6,20 +6,12 @@
 
 const capture = xrequire('webshot');
 
-exports.exec = (Bastion, message, args) => {
-  if (args.length < 1) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
+exports.exec = async (Bastion, message, args) => {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
   if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(args[0])) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'URL'), message.channel);
   }
   let options = {
@@ -34,19 +26,16 @@ exports.exec = (Bastion, message, args) => {
     timeout: 15000,
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A'
   };
-  capture(args[0], options, function (err, renderStream) {
+
+  await capture(args[0], options, (err, renderStream) => {
     if (err) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'serverNotFound', args[0]), message.channel);
     }
     let imageBuffers = [];
-    renderStream.on('data', function (data) {
+    renderStream.on('data', (data) => {
       imageBuffers.push(data);
     });
-    renderStream.on('end', function () {
+    renderStream.on('end', () => {
       let imageBuffer = Buffer.concat(imageBuffers);
       if (imageBuffer.length > 0) {
         message.channel.send({

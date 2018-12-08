@@ -7,10 +7,6 @@
 exports.exec = async (Bastion, message, args) => {
   try {
     if (!args.query) {
-      /**
-      * The command was ran with invalid parameters.
-      * @fires commandUsage
-      */
       return Bastion.emit('commandUsage', message, this.help);
     }
 
@@ -18,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
     let result = await Bastion.database.query(args.query.join(' '));
     let endTime = new Date();
 
-    message.channel.send({
+    await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
         description: 'SQL query successfully executed.',
@@ -39,10 +35,6 @@ exports.exec = async (Bastion, message, args) => {
   }
   catch (e) {
     if (e.code === 'SQLITE_ERROR') {
-      /**
-      * Error condition is encountered.
-      * @fires error
-      */
       return Bastion.emit('error', 'SQLite Error', `\`\`\`${e.stack}\`\`\``, message.channel);
     }
     Bastion.log.error(e);

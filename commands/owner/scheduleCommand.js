@@ -6,10 +6,6 @@
 
 exports.exec = async (Bastion, message, args) => {
   if (!args.cronExp || !args.command) {
-    /**
-     * The command was ran with invalid parameters.
-     * @fires commandUsage
-     */
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -22,60 +18,43 @@ exports.exec = async (Bastion, message, args) => {
   cronConstraints[5] = new RegExp(/^[0-7]|\*|[0-7](?:,[0-7]){1,6}$/);
 
   if (args.cronExp.length !== cronExpLength) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', '`cron` expression'), message.channel);
   }
   for (let i = 0; i < cronExpLength; i++) {
     if (!cronConstraints[i].test(args.cronExp[i])) {
-      /**
-       * Error condition is encountered.
-       * @fires error
-       */
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', '`cron` expression'), message.channel);
     }
   }
 
   if (!Bastion.commands.has(args.command) && !Bastion.aliases.has(args.command)) {
-    /**
-     * Error condition is encountered.
-     * @fires error
-     */
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
   }
 
   args.cronExp = args.cronExp.join(' ');
   args.arguments = args.arguments.join(' ');
 
-  try {
-    let scheduledStatus = await message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Scheduled Command',
-        description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
-        footer: {
-          text: 'Do not delete this message, it is required by me to run the scheduled command.'
-        }
+  let scheduledStatus = await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      title: 'Scheduled Command',
+      description: `\`\`\`${args.cronExp} ${args.command} ${args.arguments}\`\`\``,
+      footer: {
+        text: 'Do not delete this message, it is required by me to run the scheduled command.'
       }
-    });
+    }
+  });
 
-    await Bastion.database.models.scheduledCommand.create({
-      guildID: message.guild.id,
-      channelID: message.channel.id,
-      messageID: scheduledStatus.id,
-      cronExp: args.cronExp,
-      command: args.command,
-      arguments: args.arguments
-    },
-    {
-      fields: [ 'guildID', 'channelID', 'messageID', 'cronExp', 'command', 'arguments' ]
-    });
-  }
-  catch (e) {
-    Bastion.log.error(e);
-  }
+  await Bastion.database.models.scheduledCommand.create({
+    guildID: message.guild.id,
+    channelID: message.channel.id,
+    messageID: scheduledStatus.id,
+    cronExp: args.cronExp,
+    command: args.command,
+    arguments: args.arguments
+  },
+  {
+    fields: [ 'guildID', 'channelID', 'messageID', 'cronExp', 'command', 'arguments' ]
+  });
 };
 
 exports.config = {
