@@ -5,25 +5,27 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  let url = args.url.join(' ');
-
-  if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(url)) {
+  if (!/^(http[s]?:\/\/)(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/i.test(args.url)) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'URL'), message.channel);
   }
 
-  let followedUrl = await Bastion.methods.followURL(url);
+  let url = await Bastion.methods.makeBWAPIRequest('/url/follow', {
+    qs: {
+      url: args.url
+    }
+  });
 
   await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
       fields: [
         {
-          name: 'URL',
-          value: url
+          name: 'Original URL',
+          value: url.originalURL
         },
         {
-          name: 'Followed URL',
-          value: followedUrl
+          name: 'Redirected URL',
+          value: url.followedURL
         }
       ]
     }
@@ -34,7 +36,7 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'url', type: String, multiple: true, defaultOption: true }
+    { name: 'url', type: String, defaultOption: true }
   ]
 };
 
