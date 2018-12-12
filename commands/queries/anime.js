@@ -9,7 +9,12 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  let anime = await Bastion.methods.makeBWAPIRequest(`/kitsu/anime?name=${args.name}`);
+  let anime = await Bastion.methods.makeBWAPIRequest('/kitsu/anime', {
+    qs: {
+      name: args.name
+    }
+  });
+
   anime = anime[0];
 
   if (anime) {
