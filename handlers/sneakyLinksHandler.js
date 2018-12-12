@@ -13,7 +13,11 @@ module.exports = async message => {
   try {
     if (!message.content.length) return;
 
-    let sneakyLinks = await message.client.methods.makeBWAPIRequest(`/text/redirects?text=${message.content}`);
+    let sneakyLinks = await message.client.methods.makeBWAPIRequest('/text/redirects', {
+      qs: {
+        text: message.content
+      }
+    });
 
     if (!Object.keys(sneakyLinks).length) return;
 
