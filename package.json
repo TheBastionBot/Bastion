@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "7.0.0-alpha.85",
+  "version": "7.0.0-alpha.86",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -27,7 +27,7 @@
   "homepage": "https://bastionbot.org",
   "dependencies": {
     "@k3rn31p4nic/google-translate-api": "~1.0.5",
-    "bwapi": "github:TheBastionBot/bwapi#1.0.0",
+    "bwapi": "github:TheBastionBot/bwapi#3.0.0",
     "chalk": "~2.4.1",
     "cheerio": "~1.0.0-rc.2",
     "color-convert": "~1.9.3",
