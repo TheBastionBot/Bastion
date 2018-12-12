@@ -65,9 +65,13 @@ module.exports = message => {
       if (!links) return;
 
       for (let url of links) {
-        url = await message.client.methods.followURL(url);
+        let { followedURL } = await message.client.methods.makeBWAPIRequest('/url/follow', {
+          qs: {
+            url: url
+          }
+        });
 
-        if (hasDiscordInvite(url)) {
+        if (hasDiscordInvite(followedURL)) {
           resolve(true);
           return deleteInvite(message);
         }
