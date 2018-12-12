@@ -11,10 +11,10 @@ const BWAPI = new BastionWebAPI({
   }
 });
 
-module.exports = (path) => {
+module.exports = (path, options) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let response = await BWAPI.request(path);
+      let response = await BWAPI.request(path, options);
 
       resolve(response);
     }
