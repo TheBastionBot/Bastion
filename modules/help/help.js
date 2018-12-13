@@ -101,12 +101,14 @@ exports.exec = async (Bastion, message, args) => {
                        `\n\nNeed help or support with Bastion Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join [**Bastion HQ**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.\nhttps://discord.gg/fzx8fkt'}`,
           fields: [
             {
-              name: 'Bastion HQ Invite Link',
-              value: 'https://discord.gg/fzx8fkt'
+              name: 'Bastion HQ',
+              value: '[Join](https://discord.gg/fzx8fkt)',
+              inline: true
             },
             {
-              name: 'Bastion Bot Invite Link',
-              value: `https://discordapp.com/oauth2/authorize?client_id=${Bastion.user.id}&scope=bot&permissions=2146958463`
+              name: 'Bastion Bot',
+              value: `[Invite](https://discordapp.com/oauth2/authorize?client_id=${Bastion.user.id}&scope=bot&permissions=8)`,
+              inline: true
             }
           ],
           thumbnail: {
