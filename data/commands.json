@@ -191,7 +191,7 @@
     "description": "Give a slap to another user.",
     "module": "Fun"
   },
-  "ticke": {
+  "tickle": {
     "description": "Tickle someone!",
     "module": "Fun"
   },

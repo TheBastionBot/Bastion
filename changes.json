@@ -1,11 +1,11 @@
 {
-  "date": "November 29, 2018",
-  "image": "https://i.imgur.com/0mtpeOK.gif",
-  "KILLED THOSE BUGS": [
-    "There was a bug that made Bastion keep on writing a book or something, if the Chat API didn't respond in time. Oh, well, it's fixed now.",
-    "Also fixed the `beLikeBill` command!"
+  "date": "December 13, 2018",
+  "image": "https://i.imgur.com/Xytiuj8.gif",
+  "IMPROVEMENTS": [
+    "Some under-the-hood improvements & fixes that makes Bastion more efficient."
   ],
-  "SOME OTHER CHANGES": [
-    "Some under-the-hood changes, as usual. No surprise here."
+  "HAPPY HOLIDAYS!": [
+    "Happy holidays to you and your family from The Bastion Bot Team.",
+    "Set your reminders for this new year. Bastion v7 is gonna be released!"
   ]
 }
