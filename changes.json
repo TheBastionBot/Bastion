@@ -1,11 +1,6 @@
 {
-  "date": "November 29, 2018",
-  "image": "https://i.imgur.com/0mtpeOK.gif",
-  "KILLED THOSE BUGS": [
-    "There was a bug that made Bastion keep on writing a book or something, if the Chat API didn't respond in time. Oh, well, it's fixed now.",
-    "Also fixed the `beLikeBill` command!"
-  ],
-  "SOME OTHER CHANGES": [
-    "Some under-the-hood changes, as usual. No surprise here."
-  ]
+  "date": "December 13, 2018",
+  "image": "https://i.imgur.com/Xytiuj8.gif",
+  "KILLED THOSE BUGS": [],
+  "SOME OTHER CHANGES": []
 }
