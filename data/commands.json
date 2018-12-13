@@ -125,7 +125,7 @@
   },
   "capture": {
     "description": "Captures a screenshot of the specified webpage.",
-    "module": "Owner"
+    "module": "Queries"
   },
   "case": {
     "description": "Fetches any moderation action, logged in the moderation log channel, using the moderation log case number.",
