@@ -30,7 +30,6 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [],
   enabled: true,
-  ownerOnly: true,
   argsDefinitions: [
     { name: 'url', type: String, defaultOption: true }
   ]
