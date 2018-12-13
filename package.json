@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "7.0.0-alpha.87",
+  "version": "7.0.0-alpha.88",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastionbot.org/",
   "main": "index.js",
@@ -36,7 +36,7 @@
     "discord.js": "~11.4.2",
     "gamedig": "~1.0.46",
     "hirez.js": "~2.0.0",
-    "kitsu": "~6.5.0",
+    "kitsu": "~6.5.1",
     "locke": "github:TheBastionBot/Locke#v0.9.0",
     "lzutf8": "~0.5.5",
     "mathjs": "~5.4.0",
@@ -52,12 +52,11 @@
     "sqlite3": "~4.0.2",
     "tesseract": "github:TheBastionBot/Tesseract#v0.0.9",
     "weather-js": "~2.0.0",
-    "webshot": "~0.18.0",
     "word-definition": "~2.1.6",
     "xkcd": "~1.1.3",
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^5.7.0"
+    "eslint": "^5.10.0"
   }
 }

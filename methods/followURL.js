@@ -10,14 +10,16 @@ module.exports = (url) => {
   return new Promise(async (resolve, reject) => {
     try {
       let options = {
-        method: 'HEAD',
-        url: url,
-        followAllRedirects: true,
-        resolveWithFullResponse: true
+        url: `https://api.bastionbot.org/url/follow?url=${url}`,
+        headers: {
+          'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+        },
+        json: true
       };
 
-      let response = await request(options);
-      resolve(response.request.href);
+      let { followedURL } = await request(options);
+
+      resolve(followedURL);
     }
     catch (e) {
       reject(e);
