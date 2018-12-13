@@ -6,7 +6,7 @@
 
 const request = require('request-promise-native');
 
-exports.exec = (Bastion, message, args) => {
+exports.exec = async (Bastion, message, args) => {
   if (!args.url) {
     /**
      * The command was ran with invalid parameters.
@@ -15,7 +15,7 @@ exports.exec = (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
-  if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(url)) {
+  if (!/^(http[s]?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(args.url)) {
     /**
      * Error condition is encountered.
      * @fires error
@@ -33,11 +33,11 @@ exports.exec = (Bastion, message, args) => {
   };
 
   let response = await request(options);
-  webshot = Buffer.from(response);
+  let webshot = Buffer.from(response);
 
   await message.channel.send({
     files: [ { attachment: webshot, name: 'capture.png' } ]
-});
+  });
 };
 
 exports.config = {
