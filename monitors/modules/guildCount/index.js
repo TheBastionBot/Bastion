@@ -5,6 +5,7 @@
  */
 
 const postToDiscordBots = require('./postToDiscordBots');
+const postToDiscordBotList = require('./postToDiscordBotList');
 
 /**
  * Monitors guild count of Bastion
@@ -15,4 +16,5 @@ module.exports = Bastion => {
   if (!Bastion.methods.isPublicBastion(Bastion)) return;
 
   Bastion.setInterval(postToDiscordBots, 5000, Bastion);
+  Bastion.setInterval(postToDiscordBotList, 5000, Bastion);
 };
