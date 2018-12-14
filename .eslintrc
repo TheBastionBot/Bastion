@@ -4,7 +4,8 @@
     node: true
   },
   globals: {
-    xrequire: false
+    xrequire: false,
+    BASTION_CLIENT_ID: false
   },
   extends: "eslint:recommended",
   parserOptions: {
