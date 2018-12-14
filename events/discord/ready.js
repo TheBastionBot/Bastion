@@ -8,6 +8,8 @@ const COLOR = xrequire('chalk');
 
 module.exports = async Bastion => {
   try {
+    Bastion.monitors.exec(__filename.slice(__dirname.length + 1, -3), Bastion);
+
     if (Bastion.shard && Bastion.shard.id + 1 === Bastion.shard.count) {
       await Bastion.shard.broadcastEval('process.env.SHARDS_READY = true');
     }
