@@ -50,7 +50,7 @@
     "snekfetch": "~4.0.4",
     "sqlite": "~3.0.0",
     "sqlite3": "~4.0.2",
-    "tesseract": "github:TheBastionBot/Tesseract#v0.0.9",
+    "tesseract": "github:TheBastionBot/Tesseract#v0.1.0",
     "weather-js": "~2.0.0",
     "word-definition": "~2.1.6",
     "xkcd": "~1.1.3",
