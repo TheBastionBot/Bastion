@@ -11,8 +11,8 @@ const postToDiscordBots = require('./postToDiscordBots');
  * @param {TesseractClient} Bastion Tesseract client object
  * @returns {void}
  */
-module.exports = async Bastion => {
+module.exports = Bastion => {
   if (!Bastion.methods.isPublicBastion(Bastion)) return;
 
-  await postToDiscordBots(Bastion);
+  Bastion.setInterval(postToDiscordBots, 5000, Bastion);
 };

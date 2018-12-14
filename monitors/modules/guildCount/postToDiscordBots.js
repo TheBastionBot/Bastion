@@ -12,27 +12,32 @@ const request = require('request-promise-native');
  * @returns {void}
  */
 module.exports = async Bastion => {
-  if (!Bastion.methods.isPublicBastion(Bastion)) return;
+  try {
+    if (!Bastion.methods.isPublicBastion(Bastion)) return;
 
-  let requestBody = {
-    guildCount: Bastion.guilds.size
-  };
+    let requestBody = {
+      guildCount: Bastion.guilds.size
+    };
 
-  if (Bastion.shard) {
-    requestBody.shardCount = Bastion.shard.count;
-    requestBody.shardId = Bastion.shard.id;
+    if (Bastion.shard) {
+      requestBody.shardCount = Bastion.shard.count;
+      requestBody.shardId = Bastion.shard.id;
+    }
+
+
+    let url = `https://adiscord.bots.gg/api/v1/bots/${BASTION_CLIENT_ID}/stats`;
+    let options = {
+      body: requestBody,
+      headers: {
+        'Authorization': Bastion.credentials.discordBotsAPIToken,
+        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+      },
+      json: true
+    };
+
+    return await request.post(url, options);
   }
-
-
-  let url = `https://discord.bots.gg/api/v1/bots/${BASTION_CLIENT_ID}/stats`;
-  let options = {
-    body: requestBody,
-    headers: {
-      'Authorization': Bastion.credentials.discordBotsAPIToken,
-      'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
-    },
-    json: true
-  };
-
-  return await request.post(url, options);
+  catch (e) {
+    Bastion.log.error(e);
+  }
 };
