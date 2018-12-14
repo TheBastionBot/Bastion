@@ -25,7 +25,7 @@ module.exports = async Bastion => {
     }
 
 
-    let url = `https://adiscord.bots.gg/api/v1/bots/${BASTION_CLIENT_ID}/stats`;
+    let url = `https://discord.bots.gg/api/v1/bots/${BASTION_CLIENT_ID}/stats`;
     let options = {
       body: requestBody,
       headers: {
