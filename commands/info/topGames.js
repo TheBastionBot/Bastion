@@ -19,6 +19,7 @@ exports.exec = async (Bastion, message) => {
 
   let topPlayedGames = Object.entries(message.guild.activities.games);
   topPlayedGames = topPlayedGames.sort((a, b) => b.tail().length - a.tail().length);
+  topPlayedGames = topPlayedGames.slice(0, 10);
 
   for (let game of topPlayedGames) {
     gameStats.push({
