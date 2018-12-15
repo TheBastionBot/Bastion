@@ -6,6 +6,8 @@
 
 module.exports = async (oldMember, newMember) => {
   try {
+    newMember.client.monitors.exec(__filename.slice(__dirname.length + 1, -3), oldMember, newMember);
+
     if (newMember.user.bot) return;
     if (newMember.roles.size < 2) return;
     if (newMember.user.presence.status === 'offline') return;
