@@ -1179,6 +1179,10 @@
     "description": "Shows the top most played games in the server.",
     "module": "Info"
   },
+  "topSongs": {
+    "description": "Shows the top most played songs, on Spotify, in the server.",
+    "module": "Info"
+  },
   "translate": {
     "description": "Translates your message to the specified language.",
     "module": "Queries"
