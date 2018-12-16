@@ -212,7 +212,7 @@
     "module": "Help"
   },
   "commands": {
-    "description": "Direct Messages you with a list of all the commands, or the commands in specific modules.",
+    "description": "Shows the list of command categories. And if a category is specified, Bastion will show a list of commands in that category.",
     "module": "Help"
   },
   "contributors": {
