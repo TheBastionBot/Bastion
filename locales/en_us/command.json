@@ -884,6 +884,9 @@
   "topGames": {
     "description": "Shows the top most played games in the server."
   },
+  "topSongs": {
+    "description": "Shows the top most played songs, on Spotify, in the server."
+  },
   "translate": {
     "description": "Translates your message to the specified language."
   },
