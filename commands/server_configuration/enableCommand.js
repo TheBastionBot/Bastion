@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
-    if (![ 'owner', 'guild_admin' ].includes(command.config.module)) {
+    if (![ 'enablecommand', 'disablecommand' ].includes(command.help.name.toLowerCase()) && !command.config.ownerOnly) {
       let guildModel = await Bastion.database.models.guild.findOne({
         attributes: [ 'disabledCommands' ],
         where: {
