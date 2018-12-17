@@ -159,7 +159,7 @@
     "description": "Search for a command with the given text."
   },
   "commands": {
-    "description": "Direct Messages you with a list of all the commands, or the commands in specific modules."
+    "description": "Shows the list of command categories. And if a category is specified, Bastion will show a list of commands in that category."
   },
   "contributors": {
     "description": "Shows the list of people who contribute to the development of The Bastion Bot Project on [GitHub](%github.org%)."

@@ -5,79 +5,81 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    let modules = [ ...new Set(Bastion.commands.map(c => c.config.module)) ];
+  let categories = Bastion.commands.map(c => c.config.module.toLowerCase()).unique();
 
-    if (args.module) {
-      args.module = args.module.join('_').toLowerCase();
-      if (modules.includes(args.module)) {
-        modules = [ args.module ];
-      }
-    }
-
-    let fields = [];
-    for (let i = 0; i < modules.length; i++) {
-      let commands = Bastion.commands.filter(c => c.config.module === modules[i]).map(c => c.help.name);
-      if (commands.length === 0) {
-        continue;
-      }
-
-      fields.push({
-        name: `${modules[i].replace('_', ' ').toTitleCase()} - ${commands.length} Commands`,
-        value: `\`\`\`css\n${commands.join('\n')}\`\`\``
-      });
-    }
-
-    let authorDMChannel = await message.author.createDM();
-    await authorDMChannel.send({
+  if (!args.category) {
+    return await message.channel.send({
       embed: {
         color: Bastion.colors.GOLD,
-        title: 'List of Commands',
+        title: 'List of Command Categories',
         description: 'To get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands section: https://bastionbot.org/commands.',
-        fields: fields,
+        fields: [
+          {
+            name: 'Command Categories',
+            value: categories.map(m => m.replace(/_/g, ' ').toTitleCase()).join('\n')
+          }
+        ],
         footer: {
-          text: `A Total of ${Bastion.commands.size} Commands!`
+          text: `Did you know? There are ${Bastion.commands.size} commands in this version of Bastion!`
         }
       }
     });
+  }
 
-    await message.channel.send({
+  args.category = args.category.join('_').toLowerCase();
+  if (!categories.includes(args.category)) {
+    return await message.channel.send({
       embed: {
-        description: `${message.author} Check your DM from me, I've sent you the list of commands${args.module ? ` in ${args.module} module` : ''}. You can also check out the commands section of [my website](https://bastionbot.org/) for the complete list of commands with details: https://bastionbot.org/commands`
+        color: Bastion.colors.RED,
+        title: 'Invalid Command Cateogry',
+        description: 'Use the `commands` command without any arguments to get a list of all the available command categories.'
       }
-    }).catch(e => {
-      Bastion.log.error(e);
     });
   }
-  catch (e) {
-    if (e.code === 50007) {
-      await message.channel.send({
-        embed: {
-          color: Bastion.colors.RED,
-          description: `${message.author} You need to **allow Direct Messages from your Privacy Settings** so that I'll be able to DM you with the commands.\nIf you don't prefer to change your privacy settings, you can check out the commands section of [my website](https://bastionbot.org/) for the complete list of commands with details: https://bastionbot.org/commands`
+
+  let commands = Bastion.commands.filter(c => c.config.module === args.category);
+  args.category = args.category.replace(/_/g, ' ').toTitleCase();
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GOLD,
+      title: `List of Commands in ${args.category} category`,
+      description: `Use the \`commands\` command to get a list of all the ${categories.length} command categories.`,
+      fields: [
+        {
+          name: `${commands.size} ${args.category} Commands`,
+          value: `\`\`\`css\n${commands.map(c => c.help.name).join('\n')}\`\`\``
+        },
+        {
+          name: 'Need more details?',
+          value: 'Check out the help message of the command, using the `help <command>` command.'
+        },
+        {
+          name: 'Want the complete list?',
+          value: 'To get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands page: https://bastionbot.org/commands.'
         }
-      });
+      ],
+      footer: {
+        text: `Did you know? There are ${Bastion.commands.size} commands in this version of Bastion!`
+      }
     }
-    else {
-      throw e;
-    }
-  }
+  });
 };
 
 exports.config = {
-  aliases: [ 'cmds', 'modules' ],
+  aliases: [ 'cmds' ],
   enabled: true,
   argsDefinitions: [
-    { name: 'module', type: String, multiple: true, defaultOption: true }
+    { name: 'category', type: String, multiple: true, defaultOption: true }
   ]
 };
 
 exports.help = {
   name: 'commands',
-  description: 'Direct Messages you with a list of all the commands, or the commands in specific modules.',
+  description: 'Shows the list of command categories. And if a category is specified, Bastion will show a list of commands in that category.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'commands [module name]',
+  usage: 'commands [category]',
   example: [ 'commands', 'commands game stats', 'commands moderation' ]
 };
