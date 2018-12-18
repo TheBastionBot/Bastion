@@ -4,185 +4,122 @@
  * @license GPL-3.0
  */
 
-const ow = xrequire('overwatch-js');
-const moment = xrequire('moment');
+// const moment = xrequire('moment');
 
 exports.exec = async (Bastion, message, args) => {
-  try {
-    if (args.length < 2) {
-      return Bastion.emit('commandUsage', message, this.help);
+  if (!args.battletag) {
+    return Bastion.emit('commandUsage', message, this.help);
+  }
+
+  if (args.region && !/^(us|eu|kr|cn)$/.test(args.region.toLowerCase())) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRegion', '`US`, `EU`, `KR` and `CN`'), message.channel);
+  }
+  if (args.platform && !/^(pc|psn|xbl)$/.test(args.platform.toLowerCase())) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidPlatform', '`PC`, `PSN`, `XBL`'), message.channel);
+  }
+
+
+  let stats = await Bastion.methods.makeBWAPIRequest(`/gamestats/overwatch/${args.platform}/${args.region}/${args.battletag.replace('#', '-')}`);
+
+  if (stats.error) {
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
+  }
+
+  let fieldsData = [
+    {
+      name: 'Level',
+      value: stats.prestige * 100 + stats.level,
+      inline: true
+    },
+    {
+      name: 'Rating',
+      value: stats.rating ? stats.rating : '-',
+      inline: true
+    },
+    {
+      name: 'Endorsement Level',
+      value: stats.endorsement,
+      inline: true
     }
+  ];
 
-
-    args[0] = args[0].toLowerCase();
-    if (!/^(us|eu|kr|cn)$/.test(args[0].toLowerCase())) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidRegion', '`US`, `EU`, `KR` and `CN`'), message.channel);
-    }
-    if (!/^\w{3,12}(#|-)\d{4,6}$/.test(args[1])) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'invalidInput', 'BattleTag'), message.channel);
-    }
-
-
-    let data = await ow.getAll('pc', args[0], args[1].replace('#', '-'));
-
-    let stats = [
+  if (stats.private) {
+    fieldsData.push({
+      name: 'THIS PROFILE IS PRIVATE',
+      value: 'Stats of private profiles can\'t be shown.\nProfiles are set to private by default. You can modify this setting in Overwatch under Options – Social.'
+    });
+  }
+  else {
+    fieldsData.push(
       {
-        name: 'Level',
-        value: data.profile.level,
+        name: 'Games Won',
+        value: stats.gamesWon,
+        inline: true
+      }
+    );
+  }
+
+  if (Object.keys(stats.quickPlayStats).length > 2) {
+    fieldsData.push(
+      {
+        name: 'Quick Play',
+        value: `${args.battletag} has won **${stats.quickPlayStats.games.won}** games.`
+      },
+      {
+        name: 'Match Awards',
+        value: `**${stats.quickPlayStats.awards.cards}** Cards\n**${stats.quickPlayStats.awards.medals}** Medals`,
         inline: true
       },
       {
-        name: 'Rank',
-        value: `${parseInt(data.profile.rank) ? data.profile.rank : '-'}`,
+        name: 'Medals',
+        value: `**${stats.quickPlayStats.awards.medalsBronze}** Bronze Medals\n**${stats.quickPlayStats.awards.medalsSilver}** Silver Medals\n**${stats.quickPlayStats.awards.medalsGold}** Gold Medals`,
         inline: true
       }
-    ];
-
-    if (data.profile.hasOwnProperty('season')) {
-      stats.push(
-        {
-          name: 'Season ID',
-          value: `${data.profile.season.id}`,
-          inline: true
-        },
-        {
-          name: 'Season Rank',
-          value: `${data.profile.season.rank}`,
-          inline: true
-        }
-      );
-    }
-    if (Object.keys(data.quickplay.global).length > 1) {
-      stats.push(
-        {
-          name: 'Quick Play',
-          value: `${args[1]} has won **${data.quickplay.global.games_won}** games.`
-        },
-        {
-          name: 'Eliminations',
-          value: `${data.quickplay.global.eliminations}`,
-          inline: true
-        },
-        {
-          name: 'Damage Done',
-          value: `${data.quickplay.global.all_damage_done}`,
-          inline: true
-        },
-        {
-          name: 'Deaths',
-          value: `${data.quickplay.global.deaths}`,
-          inline: true
-        },
-        {
-          name: 'Final Blows',
-          value: `${data.quickplay.global.final_blows}`,
-          inline: true
-        },
-        {
-          name: 'Healing Done',
-          value: `${data.quickplay.global.healing_done}`,
-          inline: true
-        },
-        {
-          name: 'Objective Kills',
-          value: `${data.quickplay.global.objective_kills}`,
-          inline: true
-        },
-        {
-          name: 'Objective Time',
-          value: `About ${moment.duration(data.quickplay.global.objective_time).humanize()}`,
-          inline: true
-        },
-        {
-          name: 'Solo Kills',
-          value: `${data.quickplay.global.solo_kills}`,
-          inline: true
-        }
-      );
-    }
-    if (Object.keys(data.competitive.global).length > 1) {
-      stats.push(
-        {
-          name: 'Competitive',
-          value: `${args[1]} has won **${data.competitive.global.games_won}** games out of **${data.competitive.global.games_played}** played games.`
-        },
-        {
-          name: 'Eliminations',
-          value: `${data.competitive.global.eliminations}`,
-          inline: true
-        },
-        {
-          name: 'Damage Done',
-          value: `${data.competitive.global.all_damage_done}`,
-          inline: true
-        },
-        {
-          name: 'Deaths',
-          value: `${data.competitive.global.deaths}`,
-          inline: true
-        },
-        {
-          name: 'Final Blows',
-          value: `${data.competitive.global.final_blows}`,
-          inline: true
-        },
-        {
-          name: 'Healing Done',
-          value: `${data.competitive.global.healing_done}`,
-          inline: true
-        },
-        {
-          name: 'Objective Kills',
-          value: `${data.competitive.global.objective_kills}`,
-          inline: true
-        },
-        {
-          name: 'Objective Time',
-          value: `About ${moment.duration(data.competitive.global.objective_time).humanize()}`,
-          inline: true
-        },
-        {
-          name: 'Solo Kills - Average',
-          value: `${data.competitive.global.solo_kills}`,
-          inline: true
-        }
-      );
-    }
-    if (Object.keys(data.quickplay.global).length <= 1 && Object.keys(data.competitive.global).length <= 1) {
-      stats.push({
-        name: 'THIS PROFILE IS PRIVATE',
-        value: 'Stats of private profiles can\'t be shown.\nProfiles are set to private by default. You can modify this setting in Overwatch under Options – Social.'
-      });
-    }
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        author: {
-          name: args[1],
-          url: data.profile.url,
-          icon_url: parseInt(data.profile.rank) ? data.profile.rankPicture : 'http://i.imgur.com/YZ4w2ey.png'
-        },
-        fields: stats,
-        thumbnail: {
-          url: data.profile.avatar !== '' ? data.profile.avatar : 'http://i.imgur.com/YZ4w2ey.png'
-        },
-        image: {
-          url: `https://resources.bastionbot.org/images/overwatch/heros/${data.competitive.global.masteringHeroe || data.quickplay.global.masteringHeroe}.png`
-        }
+    );
+  }
+  if (Object.keys(stats.competitiveStats).length > 2) {
+    fieldsData.push(
+      {
+        name: 'Competitive',
+        value: `${args.battletag} has won **${stats.competitiveStats.games.won}** games out of **${stats.competitiveStats.games.played}** games played.`
+      },
+      {
+        name: 'Match Awards',
+        value: `**${stats.competitiveStats.awards.cards}** Cards\n**${stats.competitiveStats.awards.medals}** Medals`,
+        inline: true
+      },
+      {
+        name: 'Medals',
+        value: `**${stats.competitiveStats.awards.medalsBronze}** Bronze Medals\n**${stats.competitiveStats.awards.medalsSilver}** Silver Medals\n**${stats.competitiveStats.awards.medalsGold}** Gold Medals`,
+        inline: true
       }
-    });
+    );
   }
-  catch (e) {
-    if (e.stack.includes('PROFILE_NOT_FOUND')) {
-      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.BLUE,
+      author: {
+        name: args.battletag,
+        url: `https://playoverwatch.com/en-us/career/${args.platform}/${args.region}/${args.battletag.replace('#', '-')}`,
+        icon_url: stats.ratingIcon ? stats.ratingIcon : stats.levelIcon
+      },
+      fields: fieldsData,
+      thumbnail: {
+        url: stats.icon ? stats.icon : 'http://i.imgur.com/YZ4w2ey.png'
+      }
     }
-    throw e;
-  }
+  });
 };
 
 exports.config = {
   aliases: [ 'ow' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'battletag', type: String, defaultOption: true },
+    { name: 'platform', type: String, alias: 'p', defaultValue: 'pc' },
+    { name: 'region', type: String, alias: 'r', defaultValue: 'us' }
+  ]
 };
 
 exports.help = {
@@ -191,6 +128,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'overwatch <region> <BattleTag#discriminator>',
-  example: [ 'overwatch us GH0S7#11143' ]
+  usage: 'overwatch <BattleTag> [-r region] [-p platform]',
+  example: [ 'overwatch k3rn31p4nic#1122', 'overwatch k3rn31p4nic#1122 -r EU', 'overwatch k3rn31p4nic#1122 -r US -p PC' ]
 };
