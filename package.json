@@ -41,7 +41,6 @@
     "lzutf8": "~0.5.5",
     "mathjs": "~5.4.0",
     "node-opus": "~0.3.0",
-    "overwatch-js": "~1.8.0",
     "pokedex-api": "~1.1.2",
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.88.0",
