@@ -60,8 +60,6 @@
   "setRoleEmoji": "%var% set the **%var%** role's emoji to %var%.",
   "unsetRoleEmoji": "%var% removed the emoji for the **%var%** role.",
   "setPrefix": "%var% changed the prefix for the server to `%var%`",
-  "disableSlowMode": "%var% disabled slow mode in this server. Everyone, get spicy!",
-  "enableSlowMode": "%var% enabled slow mode in this server. Beware spammers!",
   "disableStarboard": "%var% disabled starboard in this server.",
   "enableStarboard": "%var% enabled starboard. If anyone stars any message is this server, I will post that starred message here.",
   "streamerRole": "The current streamer role is set to **%var%**",
