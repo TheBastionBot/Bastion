@@ -53,11 +53,6 @@ exports.exec = async (Bastion, message) => {
           inline: true
         },
         {
-          name: 'Slow Mode',
-          value: guildModel.dataValues.slowMode ? 'Enabled' : 'Disabled',
-          inline: true
-        },
-        {
           name: 'Bastion Chat',
           value: guildModel.dataValues.chat ? 'Enabled' : 'Disabled',
           inline: true
