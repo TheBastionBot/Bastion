@@ -1,5 +1,5 @@
 {
-  "date": "December 16, 2018",
+  "date": "December 19, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments."
@@ -50,7 +50,6 @@
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
     "`ignoreInviteFilter`, `ignoreLinkFilter`, `ignoreWordFilter`, `ignoreMentionFilter`,  - Set channels and/or roles to be ignored by the invite, link, word & mention filters, respectively.",
-    "`ignoreSlowMode` - Set channels and/or roles to be ignored by the slow mode.",
     "`ignoreStarboard` - Set channels and/or roles to be ignored by the starboard.",
     "`sellRole` - Sell roles in your server's Role Store.",
     "`serverDescription` & `roleDescription` - Set a description for the server & any role in the server.",
@@ -98,7 +97,8 @@
     "Removed `todo`, `listTodo` & `deleteTodo` commands.",
     "Removed `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
     "Removed `buyGift`, `gift`, `giftShop` & `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
-    "Removed `whitelistChannel` & `whitelistRole` commands."
+    "Removed `whitelistChannel` & `whitelistRole` commands.",
+    "Removed `slowMode` command as slow mode is now an in-built feature in Discord."
   ],
   "BUGS HIDING IN THE CLOSET": []
 }

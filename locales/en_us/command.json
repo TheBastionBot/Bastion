@@ -368,9 +368,6 @@
   "ignoreRoles": {
     "description": "Adds or removes roles to/from the ignored roles' list. Bastion doesn't accept any commands from the roles that are being ignored."
   },
-  "ignoreSlowMode": {
-    "description": "Add/remove channels/roles to/from the slow mode ignored list. Bastion will not enable slow mode in these channels or for these roles."
-  },
   "ignoreStarboard": {
     "description": "Add/remove channels/roles to/from the starboard ignored list. Bastion will not log starred messages from these channels or roles."
   },
@@ -805,9 +802,6 @@
   },
   "slots": {
     "description": "Spins the reels of the slot machine and shows you the result."
-  },
-  "slowMode": {
-    "description": "Enables slow mode in the server. Users are notified when they send messages too quickly. And if users get too spammy, they are temporarily text muted in the channel."
   },
   "smite": {
     "description": "Get stats of any Smite player."
