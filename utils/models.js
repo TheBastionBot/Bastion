@@ -169,11 +169,6 @@ module.exports = (Sequelize, database) => {
     whitelistedInvites: {
       type: Sequelize.JSON
     },
-    slowMode: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
     mentionSpamThreshold: {
       type: Sequelize.INTEGER,
       defaultValue: 5
@@ -434,11 +429,6 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
-    ignoreSlowMode: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
     ignoreStarboard: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -490,11 +480,6 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     ignoreWordFilter: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    ignoreSlowMode: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
