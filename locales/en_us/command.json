@@ -435,7 +435,7 @@
     "description": "Lists all the message triggers."
   },
   "listWarns": {
-    "description": "Lists all the warned users of your Discord Server."
+    "description": "Lists all the warned users of your Discord Server. And if a specific user is specified, it'll list all the warnings issued to that user."
   },
   "listWhitelistDomains": {
     "description": "Lists all whitelisted domains for the link filter."
