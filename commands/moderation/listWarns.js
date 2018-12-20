@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = async (Bastion, message) => {
+exports.exec = async (Bastion, message, args) => {
   let guildMemberModel = await message.client.database.models.guildMember.findAll({
     attributes: [ 'userID', 'warnings' ],
     where: {
@@ -29,6 +29,9 @@ exports.exec = async (Bastion, message) => {
     });
   }
 
+  let noOfPages = warnedMembers.length / 10;
+  let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
+  i = i - 1;
 
   let membersList = [];
   for (let member of warnedMembers) {
@@ -45,7 +48,10 @@ exports.exec = async (Bastion, message) => {
     embed: {
       color: Bastion.colors.ORANGE,
       title: 'Warning List',
-      description: membersList.join('\n')
+      description: membersList.slice(i * 10, (i * 10) + 10).join('\n'),
+      footer: {
+        text: `Page: ${i + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
+      }
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -54,7 +60,10 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'warns' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
+  ]
 };
 
 exports.help = {
@@ -63,6 +72,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'KICK_MEMBERS',
   userVoicePermission: '',
-  usage: 'listWarns',
-  example: []
+  usage: 'listWarns [PAGE_NO]',
+  example: [ 'listWarns', 'listWarns 3' ]
 };
