@@ -50,6 +50,8 @@ exports.exec = async (Bastion, message, args) => {
     info = `No info has been set. ${user.id === message.author.id ? 'Set your info using `setInfo` command.' : ''}`;
   }
 
+  let rank = parseInt(guildMemberModel.dataValues.rank) + 1;
+
   let profileData = [
     {
       name: 'Bastion Currency',
@@ -58,12 +60,12 @@ exports.exec = async (Bastion, message, args) => {
     },
     {
       name: 'Rank',
-      value: parseInt(guildMemberModel.dataValues.rank) + 1,
+      value: rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank,
       inline: true
     },
     {
       name: 'Experience Points',
-      value: guildMemberModel.dataValues.experiencePoints,
+      value: `**${guildMemberModel.dataValues.experiencePoints}** / ${Bastion.methods.getRequiredExpForLevel(guildMemberModel.dataValues.level + 1) - 1}`,
       inline: true
     },
     {
