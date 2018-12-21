@@ -8,24 +8,29 @@ exports.exec = async (Bastion, message, args) => {
   args = message.mentions.users.first() || message.author;
 
   let guildMemberModel = await Bastion.database.models.guildMember.findOne({
-    attributes: [ 'level' ],
+    attributes: [ 'experiencePoints', 'level' ],
     where: {
       userID: args.id,
       guildID: message.guild.id
     }
   });
-  let level = 0;
+  let level = 0, xp = 0;
 
-  if (guildMemberModel && guildMemberModel.dataValues.level) {
+  if (guildMemberModel) {
     level = guildMemberModel.dataValues.level;
+    xp = guildMemberModel.dataValues.experiencePoints;
   }
 
   let description = message.author.id === args.id ? `**${args.tag}** you are currently in level **${level}**.` : `**${args.tag}** is currently in level **${level}**.`;
+  let footer = message.author.id === args.id ? `Wanna go to the next level? Just gain ${Bastion.methods.getRequiredExpForLevel(level + 1) - xp} more XP.` : null;
 
   await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      description: description
+      description: description,
+      footer: {
+        text: footer
+      }
     }
   });
 };
