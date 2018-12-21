@@ -17,8 +17,8 @@ exports.exec = async (Bastion, message, args) => {
   let level = 0, xp = 0;
 
   if (guildMemberModel) {
-    level = guildMemberModel.dataValues.level || 0;
-    xp = guildMemberModel.dataValues.experiencePoints || 0;
+    level = guildMemberModel.dataValues.level;
+    xp = guildMemberModel.dataValues.experiencePoints;
   }
 
   let description = message.author.id === args.id ? `**${args.tag}** you are currently in level **${level}**.` : `**${args.tag}** is currently in level **${level}**.`;
