@@ -51,7 +51,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   let rank = parseInt(guildMemberModel.dataValues.rank) + 1;
-  let totalExp = Bastion.methods.getRequiredExpForLevel(guildMemberModel.dataValues.level + 1) - 1;
+  let totalExp = Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10) + 1) - 1;
 
   let profileData = [
     {
