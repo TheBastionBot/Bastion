@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
     xp = guildMemberModel.dataValues.experiencePoints;
   }
 
-  let description = message.author.id === args.id ? `**${args.tag}** you have collected **${xp}** experience points out of ${Bastion.methods.getRequiredExpForLevel(level + 1) - 1} experience points required to cross this level.` : `**${args.tag}** has collected **${xp}** experience points.`;
+  let description = message.author.id === args.id ? `**${args.tag}** you have collected **${xp}** experience points out of ${Bastion.methods.getRequiredExpForLevel(parseInt(level, 10) + 1) - 1} that you can acquire in this level.` : `**${args.tag}** has collected **${xp}** experience points.`;
 
   message.channel.send({
     embed: {

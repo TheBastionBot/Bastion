@@ -5,30 +5,27 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length > 0) {
-    await message.guild.me.setNickname(args.join(' '));
+  if (!message.member.hasPermission('CHANGE_NICKNAME')) return;
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+  let description;
+
+  if (args.length) {
+    await message.guild.me.setNickname(args.join(' '));
+    description = `${Bastion.user.username}'s nick is now set to **${args.join(' ')}** on this server.`;
   }
   else {
     await message.guild.me.setNickname('');
-
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.GREEN,
-        description: `${Bastion.user.username}'s nick has been reset on this guild.`
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    description = `${Bastion.user.username}'s nick has been reset on this server.`;
   }
+
+  await message.channel.send({
+    embed: {
+      color: Bastion.colors.GREEN,
+      description: description
+    }
+  }).catch(e => {
+    Bastion.log.error(e);
+  });
 };
 
 exports.config = {
@@ -40,8 +37,8 @@ exports.config = {
 exports.help = {
   name: 'setNick',
   description: 'Sets the nickname of Bastion in the current Discord server.',
-  botPermission: '',
-  userTextPermission: '',
+  botPermission: 'CHANGE_NICKNAME',
+  userTextPermission: 'CHANGE_NICKNAME',
   userVoicePermission: '',
   usage: 'setNick [text]',
   example: [ 'setNick NewNick', 'setNick' ]

@@ -22,7 +22,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   let description = message.author.id === args.id ? `**${args.tag}** you are currently in level **${level}**.` : `**${args.tag}** is currently in level **${level}**.`;
-  let footer = message.author.id === args.id ? `Wanna go to the next level? Just gain ${Bastion.methods.getRequiredExpForLevel(level + 1) - xp} more XP.` : null;
+  let footer = message.author.id === args.id ? `Wanna go to the next level? Just gain ${Bastion.methods.getRequiredExpForLevel(parseInt(level, 10) + 1) - xp} more XP.` : null;
 
   await message.channel.send({
     embed: {

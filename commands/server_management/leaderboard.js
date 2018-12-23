@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message) => {
   let guildMemberModels = await Bastion.database.models.guildMember.findAll({
     attributes: [ 'userID', 'bastionCurrencies', 'experiencePoints', 'level' ],
     where: {
@@ -14,29 +14,26 @@ exports.exec = async (Bastion, message, args) => {
       [ Bastion.database.fn('ABS', Bastion.database.col('level')), 'DESC' ],
       [ Bastion.database.fn('ABS', Bastion.database.col('experiencePoints')), 'DESC' ],
       [ Bastion.database.fn('ABS', Bastion.database.col('bastionCurrencies')), 'DESC' ]
-    ]
+    ],
+    limit: 10
   });
+
   let profiles = guildMemberModels.map(guildMember => guildMember.dataValues);
 
   let fields = [];
-
-  let noOfPages = profiles.length / 10;
-  let p = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
-  p = p - 1;
-  profiles = profiles.slice(p * 10, (p * 10) + 10);
 
   for (let i = 0; i < profiles.length; i++) {
     let user;
     if (message.guild.members.has(profiles[i].userID)) {
       let member = await message.guild.members.get(profiles[i].userID);
-      user = `${member.user.tag} - ${member.id}`;
+      user = member.displayName === member.user.username ? `${member.displayName} / ${member.id}` : `${member.displayName} / ${member.user.tag} / ${member.id}`;
     }
     else {
       user = profiles[i].userID;
     }
     fields.push({
-      name: `${i + 1 + (p * 10)}. ${user}`,
-      value: `Level: ${profiles[i].level}\tExperience Points: ${profiles[i].experiencePoints}\tBastion Currencies: ${profiles[i].bastionCurrencies}`
+      name: `${i + 1}. ${user}`,
+      value: `Level ${profiles[i].level} • ${profiles[i].experiencePoints} Experience Points`
     });
   }
 
@@ -45,20 +42,14 @@ exports.exec = async (Bastion, message, args) => {
       color: Bastion.colors.BLUE,
       title: 'Leaderboard',
       description: 'These are the users topping the chart!',
-      fields: fields,
-      footer: {
-        text: `Page: ${p + 1} of ${noOfPages > parseInt(noOfPages) ? parseInt(noOfPages) + 1 : parseInt(noOfPages)}`
-      }
+      fields: fields
     }
   });
 };
 
 exports.config = {
   aliases: [ 'lb', 'hallOfFame', 'hof' ],
-  enabled: true,
-  argsDefinitions: [
-    { name: 'page', type: Number, alias: 'p', defaultOption: true, defaultValue: 1 }
-  ]
+  enabled: true
 };
 
 exports.help = {
