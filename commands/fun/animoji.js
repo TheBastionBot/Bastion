@@ -11,7 +11,7 @@ exports.exec = async (Bastion, message, args) => {
 
   let emoji = message.guild.emojis.find(emoji => emoji.name === args.name);
 
-  if (!emoji) return;
+  if (!emoji || !emoji.animated) return;
 
   await message.channel.send({
     files: [ emoji.url ]
