@@ -29,14 +29,14 @@ exports.exec = async (Bastion, message, args) => {
     let user;
     if (message.guild.members.has(profiles[i].userID)) {
       let member = await message.guild.members.get(profiles[i].userID);
-      user = `${member.user.tag} - ${member.id}`;
+      user = member.displayName === member.user.username ? `${member.displayName} / ${member.id}` : `${member.displayName} / ${member.user.tag} / ${member.id}`;
     }
     else {
       user = profiles[i].userID;
     }
     fields.push({
       name: `${i + 1 + (p * 10)}. ${user}`,
-      value: `Level: ${profiles[i].level}\tExperience Points: ${profiles[i].experiencePoints}\tBastion Currencies: ${profiles[i].bastionCurrencies}`
+      value: `Level ${profiles[i].level} • ${profiles[i].experiencePoints} Experience Points`
     });
   }
 
