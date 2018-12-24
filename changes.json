@@ -1,5 +1,5 @@
 {
-  "date": "December 19, 2018",
+  "date": "December 24, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments."
@@ -45,7 +45,8 @@
     "You can now send and view spoilers, without spoiling it for everyone, using the `sendSpoiler` and `showSpoiler` commands.",
     "You can now relay a message to the announcement channel just by adding either 📢 or 📣 reaction to a message.",
     "Bastion can now relay every direct messages, sent to it, to your inbox.",
-    "Bastion can warn you about sneaky links in messages sent in the server."
+    "Bastion can warn you about sneaky links in messages sent in the server.",
+    "Bastion can now auto play songs of it's choice when there's no song in the queue. Here's your ticket to a 24x7 music channel!"
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -75,7 +76,8 @@
     "`relayDirectMessages` - Toggles relaying of direct messages, sent to Bastion, to your inbox.",
     "`uncoverSneakyLinks` - Toggle uncovering of sneaky links in the messages sent in the server.",
     "`topGames` - Shows the top most played games in the server.",
-    "`topSongs` - Shows the top most played songs, on Spotify, in the server."
+    "`topSongs` - Shows the top most played songs, on Spotify, in the server.",
+    "`autoPlay` - Toggles auto playing of music."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
