@@ -44,6 +44,9 @@
   "ark": {
     "description": "Get stats of any ARK: Survival Evolved game server."
   },
+  "autoPlay": {
+    "description": "Toggles auto playing of music."
+  },
   "avatar": {
     "description": "Shows avatar of a specified user of your Discord server."
   },
