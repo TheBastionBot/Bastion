@@ -211,7 +211,7 @@ exports.exec = async (Bastion, message, args) => {
 
 
     if (!message.guild.music.playing) {
-      startStreamDispatcher(message.guild, voiceConnection);
+      await startStreamDispatcher(message.guild, voiceConnection);
     }
 
     voiceConnection.on('error', Bastion.log.error);
@@ -249,8 +249,38 @@ exports.help = {
  * @param {VoiceConnection} connection the VoiceConnection of Bastion in this guild
  * @returns {void}
  */
-function startStreamDispatcher(guild, connection) {
-  if (!guild.music.songs[0] || connection.channel.members.size <= 1) {
+async function startStreamDispatcher(guild, connection) {
+  if (!guild.music.songs[0] && guild.music.autoPlay) {
+    let songs = await guild.client.methods.makeBWAPIRequest('/google/youtube/topsongs');
+    let videoID = songs.getRandom();
+
+    let youtubeDLOptions = [
+      '--quiet',
+      '--ignore-errors',
+      '--simulate',
+      '--no-warnings',
+      '--format=bestaudio[protocol^=http]',
+      '--user-agent=BastionDiscordBot (https://bastionbot.org)',
+      '--referer=https://bastionbot.org',
+      '--youtube-skip-dash-manifest'
+    ];
+
+    let songInfo = await getSongInfo(`https://youtu.be/${videoID}`, youtubeDLOptions);
+
+    if (!songInfo) {
+      return guild.client.emit('error', '', guild.client.i18n.error(guild.language, 'notFound', 'result'), guild.music.textChannel);
+    }
+
+    guild.music.songs.push({
+      url: songInfo.url,
+      id: songInfo.id,
+      title: songInfo.title,
+      thumbnail: songInfo.thumbnail,
+      duration: songInfo.duration,
+      requester: guild.client.user.tag
+    });
+  }
+  else if (!guild.music.songs[0] || connection.channel.members.size <= 1) {
     if (guild.client.configurations.music && guild.client.configurations.music.status) {
       guild.client.user.setActivity(typeof guild.client.configurations.game.name === 'string' ? guild.client.configurations.game.name : guild.client.configurations.game.name.length ? guild.client.configurations.game.name[0] : null,
         {

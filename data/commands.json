@@ -59,6 +59,10 @@
     "description": "Get stats of any ARK: Survival Evolved game server.",
     "module": "Game Server_stats"
   },
+  "autoPlay": {
+    "description": "Toggles auto playing of music.",
+    "module": "Music"
+  },
   "avatar": {
     "description": "Shows avatar of a specified user of your Discord server.",
     "module": "Info"

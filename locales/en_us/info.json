@@ -94,6 +94,8 @@
   "warn": "%var% warned **%var%** with the reason **%var%**",
   "warnDM": "%var% warned you from **%var%** server with the reason **%var%**",
 
+  "disableMusicAutoPlay": "%var% disabled auto playing of music in this server.",
+  "enableMusicAutoPlay": "%var% enabled auto playing of music in this server. I will play songs of my choice when there's nothing in the queue.",
   "addMusicChannels": "%var% set the **%var%** text channel as the **Music Text Channel** for using music commands and **%var%** voice channel as the **Music Voice Channel** for listening to music.",
   "addMusicMasterRole": "%var% set the **%var%** role as the **Music Master Role**.",
   "cleanQueue": "%var% cleaned up the music queue.",
