@@ -111,6 +111,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    musicAutoPlay: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     musicTextChannel: {
       type: Sequelize.STRING,
       unique: true
