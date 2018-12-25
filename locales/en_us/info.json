@@ -96,6 +96,8 @@
 
   "disableMusicAutoPlay": "%var% disabled auto playing of music in this server.",
   "enableMusicAutoPlay": "%var% enabled auto playing of music in this server. I will play songs of my choice when there's nothing in the queue.",
+  "disableMusicAutoDisconnect": "%var% disabled auto disconnect, from voice channel, in this server. I will stay in the voice channel even when there is no one else to listen to me.",
+  "enableMusicAutoDisconnect": "%var% enabled auto disconnect, from voice channel, in this server. I will automatically disconnect from the voice channel when there is no one else to listen to me.",
   "addMusicChannels": "%var% set the **%var%** text channel as the **Music Text Channel** for using music commands and **%var%** voice channel as the **Music Voice Channel** for listening to music.",
   "addMusicMasterRole": "%var% set the **%var%** role as the **Music Master Role**.",
   "cleanQueue": "%var% cleaned up the music queue.",

@@ -20,19 +20,10 @@ exports.exec = async (Bastion, message) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
-  await message.guild.music.textChannel.send({
-    embed: {
-      color: Bastion.colors.RED,
-      description: 'Stopped Playback.'
-    }
-  }).then(() => {
-    if (message.guild.music) {
-      message.guild.music.songs = [];
-    }
-    message.guild.music.dispatcher.end();
-  }).catch(e => {
-    Bastion.log.error(e);
-  });
+  if (message.guild.music) {
+    message.guild.music.songs = [];
+    await message.guild.music.dispatcher.end();
+  }
 };
 
 exports.config = {

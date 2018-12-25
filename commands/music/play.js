@@ -250,7 +250,7 @@ exports.help = {
  * @returns {void}
  */
 async function startStreamDispatcher(guild, connection) {
-  if (!guild.music.songs[0] && guild.music.autoPlay) {
+  if (!guild.music.songs[0] && guild.music.autoPlay && connection.channel.members.size > 1) {
     let songs = await guild.client.methods.makeBWAPIRequest('/google/youtube/topsongs');
     let videoID = songs.getRandom();
 
@@ -292,7 +292,7 @@ async function startStreamDispatcher(guild, connection) {
 
     let description;
     if (!guild.music.songs[0]) {
-      description = 'Exiting voice channel.';
+      description = 'Stopping playback.';
     }
     else {
       guild.music.songs = [];
@@ -306,7 +306,7 @@ async function startStreamDispatcher(guild, connection) {
       }
     }).then(() => {
       guild.music.dispatcher.end();
-      guild.music.voiceChannel.leave();
+      if (guild.music.autoDisconnect) guild.music.voiceChannel.leave();
     }).catch(e => {
       guild.client.log.error(e);
     });
