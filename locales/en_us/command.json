@@ -44,6 +44,9 @@
   "ark": {
     "description": "Get stats of any ARK: Survival Evolved game server."
   },
+  "autoDisconnect": {
+    "description": "Toggles auto disconnect from voice channel. If enabled, Bastion will automatically leave the voice channel to save bandwidth when no one else is connected to it."
+  },
   "autoPlay": {
     "description": "Toggles auto playing of music."
   },
