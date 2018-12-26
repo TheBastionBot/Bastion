@@ -153,13 +153,15 @@ module.exports = async message => {
         await message.member.removeRoles(allLevelUpRoles, 'Level Up').catch(() => {});
       }
 
-      // HACK: When adding roles instantly after removing then just above this,
-      // a race condition occurs which adds the old roles back to the member as
-      // the cache hasn't been updated with the remove roles yet.
-      // Therefore, I'm using a timeout to wait for a while before adding new
-      // roles to prevent the race condition.
-      // This hack should be removed when it's fixed in a stable version of
-      // discord.js.
+      /**
+       * HACK: When adding roles instantly after removing then just above this,
+       * a race condition occurs which adds the old roles back to the member as
+       * the cache hasn't been updated with the remove roles yet.
+       * Therefore, I'm using a timeout to wait for a while before adding new
+       * roles to prevent the race condition.
+       * This hack should be removed when it's fixed in a stable version of
+       * discord.js.
+       */
       setTimeout(async () => {
         await message.member.addRoles(levelUpRoleIDs[level], 'Level Up').catch(() => {});
       }, 500);
