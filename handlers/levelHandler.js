@@ -68,7 +68,7 @@ module.exports = async message => {
     guildMemberModel.dataValues.level = parseInt(guildMemberModel.dataValues.level);
     guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
-    let currentLevel = Math.floor(0.15 * Math.sqrt(guildMemberModel.dataValues.experiencePoints + 1));
+    let currentLevel = Math.floor(0.15 * Math.sqrt(parseInt(guildMemberModel.dataValues.experiencePoints) + 1));
 
 
     // Level Up
@@ -141,7 +141,7 @@ module.exports = async message => {
 
     let level = `${currentLevel}`;
     if (levelUpRoleIDs.hasOwnProperty(level)) {
-      await message.member.addRoles(levelUpRoleIDs[level]).catch(() => {});
+      await message.member.addRoles(levelUpRoleIDs[level], 'Level Up').catch(() => {});
     }
   }
   catch (e) {
