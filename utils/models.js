@@ -510,6 +510,9 @@ module.exports = (Sequelize, database) => {
     level: {
       type: Sequelize.STRING
     },
+    exclusive: {
+      type: Sequelize.STRING
+    },
     price: {
       type: Sequelize.TEXT
     },
