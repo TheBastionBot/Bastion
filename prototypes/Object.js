@@ -9,3 +9,7 @@ Object.fromPairs = (pairs) => {
   }
   return result;
 };
+
+Object.filter = function (object, predicate) {
+  return Object.fromPairs(Object.entries(object).filter(predicate));
+};
