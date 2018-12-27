@@ -47,7 +47,7 @@ module.exports = async message => {
         },
         {
           model: message.client.database.models.role,
-          attributes: [ 'roleID', 'level', 'ignoreXP' ]
+          attributes: [ 'roleID', 'level', 'exclusive', 'ignoreXP' ]
         }
       ]
     });
@@ -68,7 +68,7 @@ module.exports = async message => {
     guildMemberModel.dataValues.level = parseInt(guildMemberModel.dataValues.level);
     guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
-    let currentLevel = Math.floor(0.15 * Math.sqrt(guildMemberModel.dataValues.experiencePoints + 1));
+    let currentLevel = Math.floor(0.15 * Math.sqrt(parseInt(guildMemberModel.dataValues.experiencePoints) + 1));
 
 
     // Level Up
@@ -131,17 +131,50 @@ module.exports = async message => {
     let levelUpRoles = guildModel.roles.filter(role => role.dataValues.level).map(role => role.dataValues);
 
     let levelUpRoleIDs = {};
+    let exclusiveLevels = [];
     for (let role of levelUpRoles) {
       if (!levelUpRoleIDs.hasOwnProperty(role.level)) {
         levelUpRoleIDs[role.level] = [];
       }
 
       levelUpRoleIDs[role.level].push(role.roleID);
+
+      if (role.exclusive) {
+        if (!exclusiveLevels.includes(role.level)) {
+          exclusiveLevels.push(role.level);
+        }
+      }
     }
 
     let level = `${currentLevel}`;
     if (levelUpRoleIDs.hasOwnProperty(level)) {
-      await message.member.addRoles(levelUpRoleIDs[level]).catch(() => {});
+      if (exclusiveLevels.includes(level)) {
+        let allLevelUpRoles = Object.values(levelUpRoleIDs).flatten().filter(role => !levelUpRoleIDs[level].includes(role));
+        await message.member.removeRoles(allLevelUpRoles, 'Level Up').catch(() => {});
+
+        /**
+         * HACK: When adding roles instantly after removing then just above this,
+         * a race condition occurs which adds the old roles back to the member as
+         * the cache hasn't been updated with the remove roles yet.
+         * Therefore, I'm using a timeout to wait for a while before adding new
+         * roles to prevent the race condition.
+         * This hack should be removed when it's fixed in a stable version of
+         * discord.js.
+         */
+        setTimeout(async () => {
+          let allLevelUpRoles = levelUpRoleIDs[level];
+          allLevelUpRoles = allLevelUpRoles.filter(role => !message.member.roles.has(role));
+
+          await message.member.addRoles(allLevelUpRoles, 'Level Up').catch(() => {});
+        }, 500);
+      }
+      else {
+        let allLevelUpRoles = Object.filter(levelUpRoleIDs, ([ level ]) => level <= currentLevel);
+        allLevelUpRoles = Object.values(allLevelUpRoles).flatten();
+        allLevelUpRoles = allLevelUpRoles.filter(role => !message.member.roles.has(role));
+
+        await message.member.addRoles(allLevelUpRoles, 'Level Up').catch(() => {});
+      }
     }
   }
   catch (e) {

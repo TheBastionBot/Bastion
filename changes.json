@@ -1,8 +1,9 @@
 {
-  "date": "December 25, 2018",
+  "date": "December 27, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
-    "Automatically remove accidental extra spaces around command arguments."
+    "Automatically remove accidental extra spaces around command arguments.",
+    "Users not getting all level up roles when they already had one of those roles."
   ],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
@@ -22,6 +23,8 @@
     "You can now enable disabled modules using the `--module` option in the `enableCommand` command.",
     "The `lyrics` command is much much better now. Just try it out.",
     "The `acrophobia` command now uses relative frequencies of letters as the first word of English words to generate acronyms for the game.",
+    "Level up roles are now synced.",
+    "Level up roles can now be exclusive.",
     "Tons of under-the-hood improvements & changes."
   ],
   "NEW FEATURES!": [

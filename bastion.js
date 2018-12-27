@@ -29,6 +29,7 @@ xrequire('./prototypes/Number');
 xrequire('./prototypes/String.prototype');
 xrequire('./prototypes/Array.prototype');
 xrequire('./prototypes/Array');
+xrequire('./prototypes/Object');
 
 const WebhookHandler = xrequire('./handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);

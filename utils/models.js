@@ -510,6 +510,11 @@ module.exports = (Sequelize, database) => {
     level: {
       type: Sequelize.STRING
     },
+    exclusive: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     price: {
       type: Sequelize.TEXT
     },
