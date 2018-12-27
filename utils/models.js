@@ -150,6 +150,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    filterEmojis: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     filterInvites: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -419,6 +424,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    ignoreEmojiFilter: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     ignoreInviteFilter: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -473,6 +483,11 @@ module.exports = (Sequelize, database) => {
     },
     description: {
       type: Sequelize.BLOB
+    },
+    ignoreEmojiFilter: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     },
     ignoreInviteFilter: {
       type: Sequelize.BOOLEAN,
