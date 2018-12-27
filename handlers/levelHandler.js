@@ -162,7 +162,10 @@ module.exports = async message => {
          * discord.js.
          */
         setTimeout(async () => {
-          await message.member.addRoles(levelUpRoleIDs[level], 'Level Up').catch(() => {});
+          let allLevelUpRoles = levelUpRoleIDs[level];
+          allLevelUpRoles = allLevelUpRoles.filter(role => !message.member.roles.has(role));
+
+          await message.member.addRoles(allLevelUpRoles, 'Level Up').catch(() => {});
         }, 500);
       }
       else {
