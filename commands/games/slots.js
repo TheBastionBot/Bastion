@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message) => {
 
   let reels = [];
   for (let i = 0; i < 3; i++) {
-    reels.push(reel[Math.floor(Math.random() * reel.length)]);
+    reels.push(reel.getRandom());
   }
 
   let result = 'Sorry, you lost.';
@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message) => {
       title: 'Slot Machine',
       description: reels.join(' \u05C0 '),
       footer: {
-        text: result
+        text: `🎰 ${result}`
       }
     }
   });

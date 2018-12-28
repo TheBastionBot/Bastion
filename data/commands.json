@@ -928,7 +928,7 @@
     "module": "Info"
   },
   "roll": {
-    "description": "Rolls the specified amount of dice and shows you the outcomes.",
+    "description": "Rolls the specified amount of dice, with specified modifiers, and shows you the outcomes.",
     "module": "Games"
   },
   "rot13": {

@@ -19,13 +19,13 @@ exports.exec = async (Bastion, message) => {
   const bastion = new ProgressBar(':bar', {
     incomplete: '-\u2003',
     complete: '-\u2003',
-    head: '\u2003>\u2003',
+    head: '🚘',
     total: 20
   });
   const racer = new ProgressBar(':bar', {
     incomplete: '-\u2003',
     complete: '-\u2003',
-    head: '\u2003>\u2003',
+    head: '🚖',
     total: 20
   });
 
@@ -47,10 +47,10 @@ exports.exec = async (Bastion, message) => {
   });
 
   let timer = setInterval(() => {
-    for (let i = 0; i < Math.floor(Math.random() * (5 - 1 + 1) + 1); i++) {
+    for (let i = 0; i < Number.random(1, 5); i++) {
       racer.tick();
     }
-    for (let i = 0; i < Math.floor(Math.random() * (5 - 1 + 1) + 1); i++) {
+    for (let i = 0; i < Number.random(1, 5); i++) {
       bastion.tick();
     }
 
@@ -58,6 +58,7 @@ exports.exec = async (Bastion, message) => {
       let result = 'Race ',
         progressBastion = `:vertical_traffic_light: ${bastion.lastDraw}:checkered_flag:`,
         progressRacer = `:vertical_traffic_light: ${racer.lastDraw}:checkered_flag:`;
+
       if (bastion.complete && !racer.complete) {
         result += 'Ended';
         progressBastion = `:vertical_traffic_light: ${bastion.lastDraw}:checkered_flag: :trophy:`;
@@ -69,6 +70,7 @@ exports.exec = async (Bastion, message) => {
       else if (bastion.complete && racer.complete) {
         result += 'Ended - Draw';
       }
+
       raceStatusMessage.edit({
         embed: {
           color: Bastion.colors.BLUE,
@@ -84,9 +86,7 @@ exports.exec = async (Bastion, message) => {
             }
           ]
         }
-      }).catch(e => {
-        Bastion.log.error(e);
-      });
+      }).catch(() => {});
     }
     if (bastion.complete || racer.complete) {
       clearInterval(timer);

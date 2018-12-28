@@ -696,7 +696,7 @@
     "description": "Lists all the roles (with their IDs) of your Discord server."
   },
   "roll": {
-    "description": "Rolls the specified amount of dice and shows you the outcomes."
+    "description": "Rolls the specified amount of dice, with specified modifiers, and shows you the outcomes."
   },
   "rot13": {
     "description": "Sends the message that you had sent, rot13 encoded."
