@@ -19,13 +19,13 @@ exports.exec = async (Bastion, message) => {
   const bastion = new ProgressBar(':bar', {
     incomplete: '-\u2003',
     complete: '-\u2003',
-    head: '\u2003>\u2003',
+    head: '🚘',
     total: 20
   });
   const racer = new ProgressBar(':bar', {
     incomplete: '-\u2003',
     complete: '-\u2003',
-    head: '\u2003>\u2003',
+    head: '🚖',
     total: 20
   });
 
