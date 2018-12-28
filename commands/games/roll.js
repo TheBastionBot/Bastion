@@ -36,7 +36,7 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'dice', type: Number, alias: 'c', defaultOption: true }
+    { name: 'dice', type: Number, alias: 'd', defaultOption: true }
   ]
 };
 
