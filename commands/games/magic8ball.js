@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.length < 2 || !args.join(' ').endsWith('?')) {
+  if (!args.length) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -35,10 +35,10 @@ exports.exec = async (Bastion, message, args) => {
   await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: args.join(' '),
-      description: outcomes[Math.floor(Math.random() * outcomes.length)],
+      title: 'Magic 8-ball says...',
+      description: `🎱 ${outcomes.getRandom()}`,
       footer: {
-        text: '🎱 Magic 8-ball'
+        text: `Asked by ${message.member.displayName}`
       }
     }
   });
@@ -55,6 +55,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'magic8ball <Question>?',
+  usage: 'magic8ball <QUESTION>',
   example: [ 'magic8ball Do I need a new lease on life?' ]
 };
