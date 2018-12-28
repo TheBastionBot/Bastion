@@ -13,9 +13,9 @@ exports.exec = async (Bastion, message) => {
 
   let quotes = xrequire('./assets/quotes.json');
 
-  let quote = quotes[Bastion.methods.getRandomInt(1, Object.keys(quotes).length)];
+  let quote = quotes[Number.random(1, Object.keys(quotes).length)];
 
-  let jumbledSentence = scramble(quote.quote);
+  let jumbledSentence = quote.quote.split(' ').shuffle().join(' ');
 
   let question = await message.channel.send({
     embed: {
@@ -79,24 +79,3 @@ exports.help = {
   usage: 'jumbledSentence',
   example: []
 };
-
-
-/**
- * Scrambles an sentence
- * @function scramble
- * @param {String} sentence The sentence to scramble
- * @returns {String} The scrambled sentence
- */
-function scramble(sentence) {
-  sentence = sentence.split(' ');
-
-  let i = sentence.length;
-  while (i) {
-    let j = Math.floor(Math.random() * i);
-    let t = sentence[--i];
-    sentence[i] = sentence[j];
-    sentence[j] = t;
-  }
-
-  return sentence.join(' ');
-}
