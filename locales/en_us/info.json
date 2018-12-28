@@ -26,6 +26,8 @@
   "enableModule": "%var% enabled all commands, in `%var%` module, in this server.",
   "disableFarewellMessages": "%var% disabled farewell messages.",
   "enableFarewellMessages": "%var% enabled farewell messages in this channel.",
+  "disableEmojiFilter": "%var% disabled automatic deletion of messages that are emoji spams.",
+  "enableEmojiFilter": "%var% enabled automatic deletion of messages that are emoji spams.",
   "disableInviteFilter": "%var% disabled automatic deletion of Discord server invites posted in this server.",
   "enableInviteFilter": "%var% enabled automatic deletion of Discord server invites posted in this server.",
   "disableLinkFilter": "%var% disabled automatic deletion of links posted in this server.",

@@ -1,5 +1,5 @@
 {
-  "date": "December 27, 2018",
+  "date": "December 28, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments.",
@@ -50,7 +50,8 @@
     "Bastion can now relay every direct messages, sent to it, to your inbox.",
     "Bastion can warn you about sneaky links in messages sent in the server.",
     "Bastion can now auto play songs of it's choice when there's no song in the queue. Here's your ticket to a 24x7 music channel!",
-    "You can now configure Bastion to prevent it from automatically disconnecting from voice channels when music is stopped or the queue is finished."
+    "You can now configure Bastion to prevent it from automatically disconnecting from voice channels when music is stopped or the queue is finished.",
+    "Emoji filter! Bastion can now filter messages that are emoji spams."
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",
@@ -82,7 +83,8 @@
     "`topGames` - Shows the top most played games in the server.",
     "`topSongs` - Shows the top most played songs, on Spotify, in the server.",
     "`autoPlay` - Toggles auto playing of music.",
-    "`autoDisconnect` - Toggles auto disconnect from voice channel."
+    "`autoDisconnect` - Toggles auto disconnect from voice channel.",
+    "`filterEmojis` - Toggles automatic deleting of messages that are emoji spams."
   ],
   "COMMANDS WITH NEW USAGE": [
     "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
