@@ -15,20 +15,18 @@ exports.exec = async (Bastion, message, args) => {
   ];
   let outcome = outcomes.getRandom();
 
-  if (args[0] && parseInt(args[0])) {
-    args[0] = parseInt(args[0]);
-    if (args[0] > 10) {
-      args[0] = 50;
-    }
-    for (let i = 1; i < args[0]; i++) {
-      outcome += outcomes.getRandom();
+  if (args.dice) {
+    if (args.dice > 50) args.dice = 50;
+
+    for (let i = 1; i < args.dice; i++) {
+      outcome += ` ${outcomes.getRandom()}`;
     }
   }
 
   await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      title: 'You rolled:',
+      title: 'Rolled',
       description: outcome
     }
   });
@@ -36,7 +34,10 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'dice', type: Number, alias: 'c', defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -45,6 +46,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'roll [no_of_dice]',
+  usage: 'roll [NO_OF_DICE]',
   example: [ 'roll', 'roll 5' ]
 };
