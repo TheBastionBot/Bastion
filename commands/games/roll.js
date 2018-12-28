@@ -13,13 +13,13 @@ exports.exec = async (Bastion, message, args) => {
     ':five:',
     ':six:'
   ];
-  let outcome = outcomes.getRandom();
+  let outcome = args.faces === 6 ? outcomes.getRandom() : Number.random(1, args.faces);
 
   if (args.dice) {
     if (args.dice > 50) args.dice = 50;
 
     for (let i = 1; i < args.dice; i++) {
-      outcome += ` ${outcomes.getRandom()}`;
+      outcome += `, ${args.faces === 6 ? outcomes.getRandom() : Number.random(1, args.faces)}`;
     }
   }
 
@@ -36,16 +36,17 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'dice', type: Number, alias: 'd', defaultOption: true }
+    { name: 'dice', type: Number, alias: 'd', defaultOption: true },
+    { name: 'faces', type: Number, alias: 'f', defaultValue: 6 }
   ]
 };
 
 exports.help = {
   name: 'roll',
-  description: 'Rolls the specified amount of dice and shows you the outcomes.',
+  description: 'Rolls the specified amount of dice, with specified number of faces, and shows you the outcomes.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'roll [NO_OF_DICE]',
-  example: [ 'roll', 'roll 5' ]
+  usage: 'roll [NO_OF_DICE] [-f FACES]',
+  example: [ 'roll', 'roll 5', 'roll 6 -f 8' ]
 };
