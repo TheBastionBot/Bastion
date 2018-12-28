@@ -10,7 +10,7 @@ exports.exec = async (Bastion, message) => {
   await message.channel.send({
     embed: {
       color: Bastion.colors.BLUE,
-      description: question[Math.floor(Math.random() * question.length)]
+      description: question.getRandom()
     }
   });
 };
