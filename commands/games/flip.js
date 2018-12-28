@@ -11,12 +11,10 @@ exports.exec = async (Bastion, message, args) => {
   ];
   let outcome = outcomes.getRandom();
 
-  if (args[0] && parseInt(args[0])) {
-    args[0] = parseInt(args[0]);
-    if (args[0] > 10) {
-      args[0] = 50;
-    }
-    for (let i = 1; i < args[0]; i++) {
+  if (args.coins) {
+    if (args.coins > 50) args.coins = 50;
+
+    for (let i = 1; i < args.coins; i++) {
       outcome += `, ${outcomes.getRandom()}`;
     }
   }
@@ -32,7 +30,10 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'coins', type: Number, alias: 'c', defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -41,6 +42,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'flip [no_of_coins]',
+  usage: 'flip [NO_OF_COINS]',
   example: [ 'flip', 'flip 5' ]
 };
