@@ -15,7 +15,7 @@ exports.exec = async (Bastion, message) => {
 
   let word = words.getRandom();
 
-  let jumbledWord = scramble(word);
+  let jumbledWord = word.split('').shuffle().join('');
 
   let question = await message.channel.send({
     embed: {
@@ -79,24 +79,3 @@ exports.help = {
   usage: 'jumbledWord',
   example: []
 };
-
-
-/**
- * Scrambles an word
- * @function shuffle
- * @param {String} word The word to scramble
- * @returns {String} The scrambled word
- */
-function scramble(word) {
-  word = word.split('');
-
-  let i = word.length;
-  while (i) {
-    let j = Math.floor(Math.random() * i);
-    let t = word[--i];
-    word[i] = word[j];
-    word[j] = t;
-  }
-
-  return word.join('');
-}
