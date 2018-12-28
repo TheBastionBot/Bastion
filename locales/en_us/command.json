@@ -272,6 +272,9 @@
   "fidgetSpinner": {
     "description": "Spins a fidget spinner for you and shows for how long it was spinning."
   },
+  "filterEmojis": {
+    "description": "Toggles automatic deleting of messages that are emoji spams. Messages with more than 50% of its content with emojis are considered as emoji spams."
+  },
   "filterInvite": {
     "description": "Toggles automatic deleting of Discord server invites posted in the server."
   },
