@@ -5,6 +5,7 @@
  */
 
 const credentialsFilter = xrequire('./filters/credentialsFilter');
+const emojiFilter = xrequire('./filters/emojiFilter');
 const wordFilter = xrequire('./filters/wordFilter');
 const linkFilter = xrequire('./filters/linkFilter');
 const inviteFilter = xrequire('./filters/inviteFilter');
@@ -50,6 +51,11 @@ module.exports = async message => {
        * Moderate mention spams in the message
        */
       if (await mentionSpamFilter(message)) return;
+
+      /**
+       * Filter emoji spams in the message
+       */
+      if (await emojiFilter(message)) return;
 
       /**
        * Check if the message contains a trigger and respond to it
