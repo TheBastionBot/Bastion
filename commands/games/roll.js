@@ -5,6 +5,9 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
+  if (args.additiveModifier === undefined) args.additiveModifier = 0;
+  if (args.multiplier === undefined) args.multiplier = 1;
+
   let outcomes = [
     ':one:',
     ':two:',
@@ -15,11 +18,31 @@ exports.exec = async (Bastion, message, args) => {
   ];
   let outcome = args.faces === 6 ? outcomes.getRandom() : Number.random(1, args.faces);
 
+  if (Object.keys(args).indexOf('additiveModifier') < Object.keys(args).indexOf('multiplier')) {
+    outcome += args.additiveModifier;
+    outcome *= args.multiplier;
+  }
+  else {
+    outcome *= args.multiplier;
+    outcome += args.additiveModifier;
+  }
+
   if (args.dice) {
     if (args.dice > 50) args.dice = 50;
 
     for (let i = 1; i < args.dice; i++) {
-      outcome += `, ${args.faces === 6 ? outcomes.getRandom() : Number.random(1, args.faces)}`;
+      let tempOutcome = args.faces === 6 ? outcomes.getRandom() : Number.random(1, args.faces);
+
+      if (Object.keys(args).indexOf('additiveModifier') < Object.keys(args).indexOf('multiplier')) {
+        tempOutcome += args.additiveModifier;
+        tempOutcome *= args.multiplier;
+      }
+      else {
+        tempOutcome *= args.multiplier;
+        tempOutcome += args.additiveModifier;
+      }
+
+      outcome += `, ${tempOutcome}`;
     }
   }
 
@@ -37,7 +60,9 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'dice', type: Number, alias: 'd', defaultOption: true },
-    { name: 'faces', type: Number, alias: 'f', defaultValue: 6 }
+    { name: 'faces', type: Number, alias: 'f', defaultValue: 6 },
+    { name: 'additiveModifier', type: Number, alias: 'a' },
+    { name: 'multiplier', type: Number, alias: 'm' }
   ]
 };
 
