@@ -68,10 +68,10 @@ exports.config = {
 
 exports.help = {
   name: 'roll',
-  description: 'Rolls the specified amount of dice, with specified number of faces, and shows you the outcomes.',
+  description: 'Rolls the specified amount of dice, with specified modifiers, and shows you the outcomes.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'roll [NO_OF_DICE] [-f FACES]',
-  example: [ 'roll', 'roll 5', 'roll 6 -f 8' ]
+  usage: 'roll [NO_OF_DICE] [-f FACES] [-a ADDITIVE_MODIFIER] [-m MULTIPLIER]',
+  example: [ 'roll', 'roll 5', 'roll 6 -f 8', 'roll 6 -f 8 -a 4 -m 3', 'roll 5 -m 3 -a 4' ]
 };
