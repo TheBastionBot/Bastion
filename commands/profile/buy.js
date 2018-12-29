@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
   args.index = Math.abs(args.index);
   args.index = args.index - 1;
 
-  if (args.index > itemsInShop.length) {
+  if (args.index >= itemsInShop.length) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
   }
 
