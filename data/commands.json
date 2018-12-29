@@ -112,7 +112,7 @@
     "module": "Searches"
   },
   "buy": {
-    "description": "Buy items from the server's shop.",
+    "description": "Buy items from the server's shop. You can also gift it to some other member while buying.",
     "module": "Profile"
   },
   "buyRole": {

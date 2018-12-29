@@ -9,6 +9,15 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  let user = message.author;
+  if (args.gift) {
+    user = await Bastion.utils.fetchMember(message.guild, args.gift);
+    if (!user) {
+      return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'notFound', 'player'), message.channel);
+    }
+    user = user.user;
+  }
+
   let shopModel = await Bastion.database.models.shop.findOne({
     attributes: [ 'custom' ],
     where: {
@@ -27,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
   args.index = Math.abs(args.index);
   args.index = args.index - 1;
 
-  if (args.index > itemsInShop.length) {
+  if (args.index >= itemsInShop.length) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'indexRange'), message.channel);
   }
 
@@ -49,7 +58,7 @@ exports.exec = async (Bastion, message, args) => {
   let itemsModel = await Bastion.database.models.items.findOne({
     attributes: [ 'custom' ],
     where: {
-      userID: message.author.id,
+      userID: user.id,
       guildID: message.guild.id
     }
   });
@@ -65,13 +74,13 @@ exports.exec = async (Bastion, message, args) => {
   userItems.push(itemsInShop[args.index].name);
 
   await Bastion.database.models.items.upsert({
-    userID: message.author.id,
+    userID: user.id,
     guildID: message.guild.id,
     custom: userItems
   },
   {
     where: {
-      userID: message.author.id,
+      userID: user.id,
       guildID: message.guild.id
     },
     fields: [ 'userID', 'guildID', 'custom' ]
@@ -84,10 +93,13 @@ exports.exec = async (Bastion, message, args) => {
     Bastion.emit('userDebit', message.guild.members.get(message.guild.owner.id), (0.9) * itemsInShop[args.index].value);
   }
 
+  let buyMessage = `${message.author.tag} bought **${itemsInShop[args.index].name}** for **${itemsInShop[args.index].value}** Bastion Currencies.`;
   await message.channel.send({
     embed: {
       color: Bastion.colors.GREEN,
-      description: `${message.author.tag} bought **${itemsInShop[args.index].name}** for **${itemsInShop[args.index].value}** Bastion Currencies.`
+      description: args.gift
+        ? `${buyMessage} And gifted it to **${user.tag}**.`
+        : buyMessage
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -98,16 +110,17 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'index', type: Number, defaultOption: true }
+    { name: 'index', type: Number, defaultOption: true },
+    { name: 'gift', type: String }
   ]
 };
 
 exports.help = {
   name: 'buy',
-  description: 'Buy items from the server\'s shop.',
+  description: 'Buy items from the server\'s shop. You can also gift it to some other member while buying.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'buy <ITEM_INDEX>',
-  example: [ 'buy 3' ]
+  usage: 'buy <ITEM_INDEX> [--gift USER_ID]',
+  example: [ 'buy 1', 'buy 3 --gift 266290969974931457' ]
 };
