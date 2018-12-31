@@ -7,7 +7,7 @@
 exports.exec = async (Bastion, message, args) => {
   if (!args.text && !args.embed) {
     let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'greetMessage' ],
+      attributes: [ 'greet', 'greetMessage' ],
       where: {
         guildID: message.guild.id
       }
@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
       let embed = Object.keys(guildModel.dataValues.greetMessage).length ? guildModel.dataValues.greetMessage : null;
       if (embed) {
         embed.footer = {};
-        embed.footer.text = 'Greeting Message Preview';
+        embed.footer.text = guildModel.dataValues.greet ? 'Greeting Message Preview' : 'Greetings are currently disabled. You can enable it using the `greet` command.';
       }
 
       if (text && embed) {
@@ -30,7 +30,10 @@ exports.exec = async (Bastion, message, args) => {
         await message.channel.send({
           embed: {
             color: Bastion.colors.BLUE,
-            description: text
+            description: text,
+            footer: {
+              text: guildModel.dataValues.greet ? 'Greeting Message Preview' : 'Greetings are currently disabled. You can enable it using the `greet` command.'
+            }
           }
         });
       }
