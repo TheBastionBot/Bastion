@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.length) {
+  if (!args.text && !args.embed) {
     let guildModel = await Bastion.database.models.guild.findOne({
       attributes: [ 'farewellMessage' ],
       where: {
@@ -13,27 +13,56 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
-    let farewellMessage = `Not set. Set farewell message using \`${this.help.name} <Message>\``;
-    if (guildModel.dataValues.farewellMessage) {
-      farewellMessage = await Bastion.utils.decompressString(guildModel.dataValues.farewellMessage);
-    }
+    if (guildModel.dataValues.farewellMessage && Object.keys(guildModel.dataValues.farewellMessage).length) {
+      let text = guildModel.dataValues.farewellMessage.text ? guildModel.dataValues.farewellMessage.text : null;
+      delete guildModel.dataValues.farewellMessage.text;
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Farewell Message',
-        description: farewellMessage
+      let embed = Object.keys(guildModel.dataValues.farewellMessage).length ? guildModel.dataValues.farewellMessage : null;
+      if (embed) {
+        embed.footer = {};
+        embed.footer.text = 'Farewell Message Preview';
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+
+      if (text && embed) {
+        await message.channel.send(text, { embed: embed });
+      }
+      else if (text) {
+        await message.channel.send({
+          embed: {
+            color: Bastion.colors.BLUE,
+            description: text
+          }
+        });
+      }
+      else if (embed) {
+        await message.channel.send({ embed: embed });
+      }
+    }
+    else {
+      await message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Farewell Message',
+          description: `Not set. See the help message for this command to see how to set a farewell message to farewell users leaving the server: \`help ${this.help.name}\``
+        }
+      });
+    }
   }
   else {
-    args = args.join(' ');
+    let responseObject = {};
 
-    let farewellMessage = await Bastion.utils.compressString(args);
+    if (args.text) {
+      responseObject.text = args.text.join(' ');
+    }
+    if (args.embed) {
+      args.embed = args.embed.join(' ');
+      Object.assign(responseObject, JSON.parse(args.embed));
+
+      delete responseObject.footer;
+    }
+
     await Bastion.database.models.guild.update({
-      farewellMessage: farewellMessage
+      farewellMessage: responseObject
     },
     {
       where: {
@@ -45,8 +74,8 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Farewell Message Set',
-        description: args
+        title: 'Farewell Message',
+        description: `Successfully set the farewell message. Use the \`${this.help.name}\` command without any arguments to see a preview of the farewell message.`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -56,7 +85,11 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'fmsg' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'text', type: String, alias: 't', multiple: true, defaultOption: true },
+    { name: 'embed', type: String, alias: 'e', multiple: true }
+  ]
 };
 
 exports.help = {
@@ -65,6 +98,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'farewellMessage [Message]',
-  example: [ 'farewellMessage Goodbye $username. Hope to see you soon!' ]
+  usage: 'farewellMessage [MESSAGE] [--embed EMBED_OBJECT]',
+  example: [ 'farewellMessage', 'farewellMessage Hello $user! Welcome to $server.', 'farewellMessage Hello $user! --embed { "title": "$user", "description": "Welcome to $server." }' ]
 };
