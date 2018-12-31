@@ -7,7 +7,7 @@
 exports.exec = async (Bastion, message, args) => {
   if (!args.text && !args.embed) {
     let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'farewellMessage' ],
+      attributes: [ 'farewell', 'farewellMessage' ],
       where: {
         guildID: message.guild.id
       }
@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
       let embed = Object.keys(guildModel.dataValues.farewellMessage).length ? guildModel.dataValues.farewellMessage : null;
       if (embed) {
         embed.footer = {};
-        embed.footer.text = 'Farewell Message Preview';
+        embed.footer.text = guildModel.dataValues.farewell ? 'Farewell Message Preview' : 'Farewells are currently disabled. You can enable it using the `farewell` command.';
       }
 
       if (text && embed) {
@@ -30,7 +30,10 @@ exports.exec = async (Bastion, message, args) => {
         await message.channel.send({
           embed: {
             color: Bastion.colors.BLUE,
-            description: text
+            description: text,
+            footer: {
+              text: guildModel.dataValues.farewell ? 'Farewell Message Preview' : 'Farewells are currently disabled. You can enable it using the `farewell` command.'
+            }
           }
         });
       }
