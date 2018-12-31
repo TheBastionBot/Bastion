@@ -52,6 +52,10 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'giveYourself'), message.channel);
     }
 
+    if (message.guild.transactions && message.guild.transactions[message.author.id] === 3) {
+      return Bastion.emit('error', '', `${message.author.displayName}, you've reached your transaction limit for today. You can only do 3 transactions in 24 hours.`, message.channel);
+    }
+
     let guildMemberModel = await Bastion.database.models.guildMember.findOne({
       attributes: [ 'bastionCurrencies' ],
       where: {
@@ -72,6 +76,17 @@ exports.exec = async (Bastion, message, args) => {
 
     Bastion.emit('userDebit', message.guild.members.get(user.id), args.amount);
     Bastion.emit('userCredit', message.member, args.amount);
+
+    // Transaction cooldown
+    if (!('transactions' in message.guild)) message.guild.transactions = {};
+    if (!(message.author.id in message.guild.transactions)) message.guild.transactions[message.author.id] = 0;
+    ++message.guild.transactions[message.author.id];
+
+    setTimeout(() => {
+      if (message.guild.transactions && message.author.id in message.guild.transactions) {
+        delete message.guild.transactions[message.author.id];
+      }
+    }, 24 * 60 * 60 * 1000);
 
     // Send a message in the channel to let the user know that the operation was successful.
     await message.channel.send({
