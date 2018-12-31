@@ -131,7 +131,7 @@ exports.config = {
 
 exports.help = {
   name: 'give',
-  description: 'Give the specified amount of %currency.name_plural% from your account to the specified user. If you are the bot owner, you can give any amount of %currency.name_plural%.',
+  description: 'Give the specified amount of %currency.name_plural% from your account to the specified user. If you are the server owner, you can give any amount of %currency.name_plural%.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
