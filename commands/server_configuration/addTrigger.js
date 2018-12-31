@@ -31,9 +31,7 @@ exports.exec = async (Bastion, message, args) => {
     args.embed = args.embed.join(' ');
     Object.assign(responseObject, JSON.parse(args.embed));
 
-    responseObject.footer = {
-      text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
-    };
+    delete responseObject.footer;
   }
   if (args.reaction) {
     args.reaction = encodeURIComponent(args.reaction);

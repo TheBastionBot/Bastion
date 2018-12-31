@@ -10,6 +10,7 @@
  * @returns {void}
  */
 module.exports = async message => {
+  if (!message.guild) return;
   if (!message.content.length) return;
 
   let guildModel = await message.client.database.models.guild.findOne({
