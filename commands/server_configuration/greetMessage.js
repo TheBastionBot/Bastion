@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.length) {
+  if (!args.text && !args.embed) {
     let guildModel = await Bastion.database.models.guild.findOne({
       attributes: [ 'greetMessage' ],
       where: {
@@ -13,27 +13,56 @@ exports.exec = async (Bastion, message, args) => {
       }
     });
 
-    let greetMessage = `Not set. Set greeting message using \`${this.help.name} <Message>\``;
-    if (guildModel.dataValues.greetMessage) {
-      greetMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetMessage);
-    }
+    if (guildModel.dataValues.greetMessage && Object.keys(guildModel.dataValues.greetMessage).length) {
+      let text = guildModel.dataValues.greetMessage.text ? guildModel.dataValues.greetMessage.text : null;
+      delete guildModel.dataValues.greetMessage.text;
 
-    message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Greeting Message',
-        description: greetMessage
+      let embed = Object.keys(guildModel.dataValues.greetMessage).length ? guildModel.dataValues.greetMessage : null;
+      if (embed) {
+        embed.footer = {};
+        embed.footer.text = 'Greeting Message Preview';
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+
+      if (text && embed) {
+        await message.channel.send(text, { embed: embed });
+      }
+      else if (text) {
+        await message.channel.send({
+          embed: {
+            color: Bastion.colors.BLUE,
+            description: text
+          }
+        });
+      }
+      else if (embed) {
+        await message.channel.send({ embed: embed });
+      }
+    }
+    else {
+      await message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Greeting Message',
+          description: `Not set. See the help message for this command to see how to set a greeting message to welcome new users: \`help ${this.help.name}\``
+        }
+      });
+    }
   }
   else {
-    args = args.join(' ');
+    let responseObject = {};
 
-    let greetMessage = await Bastion.utils.compressString(args);
+    if (args.text) {
+      responseObject.text = args.text.join(' ');
+    }
+    if (args.embed) {
+      args.embed = args.embed.join(' ');
+      Object.assign(responseObject, JSON.parse(args.embed));
+
+      delete responseObject.footer;
+    }
+
     await Bastion.database.models.guild.update({
-      greetMessage: greetMessage
+      greetMessage: responseObject
     },
     {
       where: {
@@ -45,8 +74,8 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Greeting Message Set',
-        description: args
+        title: 'Greeting Message',
+        description: `Successfully set the greeting message. Use the \`${this.help.name}\` command without any arguments to see a preview of the greeting message.`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -56,7 +85,11 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'gmsg' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'text', type: String, alias: 't', multiple: true, defaultOption: true },
+    { name: 'embed', type: String, alias: 'e', multiple: true }
+  ]
 };
 
 exports.help = {
@@ -65,6 +98,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'greetMessage [Message]',
-  example: [ 'greetMessage Hello $user! Welcome to $server.' ]
+  usage: 'greetMessage [MESSAGE] [--embed EMBED_OBJECT]',
+  example: [ 'greetMessage', 'greetMessage Hello $user! Welcome to $server.', 'greetMessage Hello $user! --embed { "title": "$user", "description": "Welcome to $server." }' ]
 };
