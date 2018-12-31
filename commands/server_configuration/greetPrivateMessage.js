@@ -7,7 +7,7 @@
 exports.exec = async (Bastion, message, args) => {
   if (!args.text && !args.embed) {
     let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'greetPrivateMessage' ],
+      attributes: [ 'greetPrivate', 'greetPrivateMessage' ],
       where: {
         guildID: message.guild.id
       }
@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
       let embed = Object.keys(guildModel.dataValues.greetPrivateMessage).length ? guildModel.dataValues.greetPrivateMessage : null;
       if (embed) {
         embed.footer = {};
-        embed.footer.text = 'Private Greeting Message Preview';
+        embed.footer.text = guildModel.dataValues.greetPrivate ? 'Private Greeting Message Preview' : 'Private greetings are currently disabled. You can enable it using the `greetPrivate` command.';
       }
 
       if (text && embed) {
@@ -30,7 +30,10 @@ exports.exec = async (Bastion, message, args) => {
         await message.channel.send({
           embed: {
             color: Bastion.colors.BLUE,
-            description: text
+            description: text,
+            footer: {
+              text: guildModel.dataValues.greetPrivate ? 'Private Greeting Message Preview' : 'Private greetings are currently disabled. You can enable it using the `greetPrivate` command.'
+            }
           }
         });
       }
