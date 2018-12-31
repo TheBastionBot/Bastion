@@ -5,35 +5,67 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.length) {
+  if (!args.text && !args.embed) {
     let guildModel = await Bastion.database.models.guild.findOne({
-      attributes: [ 'greetPrivateMessage' ],
+      attributes: [ 'greetPrivate', 'greetPrivateMessage' ],
       where: {
         guildID: message.guild.id
       }
     });
 
-    let greetPrivateMessage = `Not set. Set greeting private message using \`${this.help.name} <Message>\``;
-    if (guildModel.dataValues.greetPrivateMessage) {
-      greetPrivateMessage = await Bastion.utils.decompressString(guildModel.dataValues.greetPrivateMessage);
-    }
+    if (guildModel.dataValues.greetPrivateMessage && Object.keys(guildModel.dataValues.greetPrivateMessage).length) {
+      let text = guildModel.dataValues.greetPrivateMessage.text ? guildModel.dataValues.greetPrivateMessage.text : null;
+      delete guildModel.dataValues.greetPrivateMessage.text;
 
-    await message.channel.send({
-      embed: {
-        color: Bastion.colors.BLUE,
-        title: 'Greeting Private Message',
-        description: greetPrivateMessage
+      let embed = Object.keys(guildModel.dataValues.greetPrivateMessage).length ? guildModel.dataValues.greetPrivateMessage : null;
+      if (embed) {
+        embed.footer = {};
+        embed.footer.text = guildModel.dataValues.greetPrivate ? 'Private Greeting Message Preview' : 'Private greetings are currently disabled. You can enable it using the `greetPrivate` command.';
       }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+
+      if (text && embed) {
+        await message.channel.send(text, { embed: embed });
+      }
+      else if (text) {
+        await message.channel.send({
+          embed: {
+            color: Bastion.colors.BLUE,
+            description: text,
+            footer: {
+              text: guildModel.dataValues.greetPrivate ? 'Private Greeting Message Preview' : 'Private greetings are currently disabled. You can enable it using the `greetPrivate` command.'
+            }
+          }
+        });
+      }
+      else if (embed) {
+        await message.channel.send({ embed: embed });
+      }
+    }
+    else {
+      await message.channel.send({
+        embed: {
+          color: Bastion.colors.BLUE,
+          title: 'Private Greeting Message',
+          description: `Not set. See the help message for this command to see how to set a private greeting message to welcome new users: \`help ${this.help.name}\``
+        }
+      });
+    }
   }
   else {
-    args = args.join(' ');
+    let responseObject = {};
 
-    let greetPrivateMessage = await Bastion.utils.compressString(args);
+    if (args.text) {
+      responseObject.text = args.text.join(' ');
+    }
+    if (args.embed) {
+      args.embed = args.embed.join(' ');
+      Object.assign(responseObject, JSON.parse(args.embed));
+
+      delete responseObject.footer;
+    }
+
     await Bastion.database.models.guild.update({
-      greetPrivateMessage: greetPrivateMessage
+      greetPrivateMessage: responseObject
     },
     {
       where: {
@@ -45,8 +77,8 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        title: 'Greeting Private Message Set',
-        description: args
+        title: 'Private Greeting Message',
+        description: `Successfully set the private greeting message. Use the \`${this.help.name}\` command without any arguments to see a preview of the private greeting message.`
       }
     }).catch(e => {
       Bastion.log.error(e);
@@ -56,7 +88,11 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'greetprvmsg' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'text', type: String, alias: 't', multiple: true, defaultOption: true },
+    { name: 'embed', type: String, alias: 'e', multiple: true }
+  ]
 };
 
 exports.help = {
@@ -65,6 +101,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'greetPrivateMessage [Message]',
-  example: [ 'greetPrivateMessage Hello $user! Welcome to $server.' ]
+  usage: 'greetPrivateMessage [MESSAGE] [--embed EMBED_OBJECT]',
+  example: [ 'greetPrivateMessage', 'greetPrivateMessage Hello $user! Welcome to $server.', 'greetPrivateMessage Hello $user! --embed { "title": "$user", "description": "Welcome to $server." }' ]
 };

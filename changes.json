@@ -1,5 +1,5 @@
 {
-  "date": "December 29, 2018",
+  "date": "December 31, 2018",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments.",
@@ -52,7 +52,8 @@
     "Bastion can now auto play songs of it's choice when there's no song in the queue. Here's your ticket to a 24x7 music channel!",
     "You can now configure Bastion to prevent it from automatically disconnecting from voice channels when music is stopped or the queue is finished.",
     "Emoji filter! Bastion can now filter messages that are emoji spams.",
-    "You can now gift items that you buy from the server shop, directly when buying it."
+    "You can now gift items that you buy from the server shop, directly when buying it.",
+    "Greetings & farewells now support custom message embeds too!"
   ],
   "NEW COMMANDS!": [
     "`blacklist` - Blacklist users globally from using Bastion.",

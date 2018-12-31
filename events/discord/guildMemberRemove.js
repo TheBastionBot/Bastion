@@ -15,32 +15,65 @@ module.exports = async member => {
     if (!guildModel) return;
 
     if (guildModel.dataValues.farewell) {
-      let farewellMessage = 'May we meet again.';
-      if (guildModel.dataValues.farewellMessage) {
-        farewellMessage = await member.client.utils.decompressString(guildModel.dataValues.farewellMessage);
+      let isEmbed = guildModel.dataValues.farewellMessage && Object.keys(guildModel.dataValues.farewellMessage).length;
+
+      let farewellMessage = isEmbed ? guildModel.dataValues.farewellMessage : 'May we meet again.';
+
+      if (isEmbed) {
+        farewellMessage = JSON.stringify(farewellMessage);
       }
+
       farewellMessage = farewellMessage.replace(/\$user/ig, `<@${member.id}>`);
       farewellMessage = farewellMessage.replace(/\$server/ig, member.guild.name);
       farewellMessage = farewellMessage.replace(/\$username/ig, member.displayName);
       farewellMessage = farewellMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
 
+      let text, embed;
+      if (isEmbed) {
+        farewellMessage = JSON.parse(farewellMessage);
+
+        farewellMessage.footer = {};
+        farewellMessage.footer.text = 'Farewell!';
+
+        text = farewellMessage.text ? farewellMessage.text : null;
+        delete farewellMessage.text;
+        embed = Object.keys(farewellMessage).length ? farewellMessage : null;
+      }
+
       let farewellChannel = member.guild.channels.get(guildModel.dataValues.farewell);
+
       if (farewellChannel) {
-        farewellChannel.send({
-          embed: {
-            color: member.client.colors.BLUE,
-            title: `Goodbye ${member.displayName}!`,
-            description: farewellMessage
-          }
-        }).then(m => {
-          if (guildModel.dataValues.farewellTimeout > 0) {
-            m.delete(1000 * parseInt(guildModel.dataValues.farewellTimeout)).catch(e => {
-              member.client.log.error(e);
-            });
-          }
-        }).catch(e => {
-          member.client.log.error(e);
-        });
+        let farewell;
+
+        if (text && embed) {
+          farewell = await farewellChannel.send(text, { embed: embed }).catch(e => {
+            member.client.log.error(e);
+          });
+        }
+        else if (text) {
+          farewell = await farewellChannel.send({
+            embed: {
+              color: member.client.colors.RED,
+              description: text,
+              footer: {
+                text: 'Farewell!'
+              }
+            }
+          }).catch(e => {
+            member.client.log.error(e);
+          });
+        }
+        else if (embed) {
+          farewell = await farewellChannel.send({ embed: embed }).catch(e => {
+            member.client.log.error(e);
+          });
+        }
+
+        if (farewell && guildModel.dataValues.farewellTimeout > 0) {
+          await farewell.delete(1000 * parseInt(guildModel.dataValues.farewellTimeout)).catch(e => {
+            member.client.log.error(e);
+          });
+        }
       }
     }
 
