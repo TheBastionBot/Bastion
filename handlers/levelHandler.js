@@ -68,11 +68,11 @@ module.exports = async message => {
     guildMemberModel.dataValues.level = parseInt(guildMemberModel.dataValues.level);
     guildMemberModel.dataValues.bastionCurrencies = parseInt(guildMemberModel.dataValues.bastionCurrencies);
 
-    let currentLevel = Math.floor(0.15 * Math.sqrt(parseInt(guildMemberModel.dataValues.experiencePoints) + 1));
+    let currentLevel = Math.floor(0.15 * Math.sqrt(guildMemberModel.dataValues.experiencePoints + 1));
 
 
     // Level Up
-    if (guildModel.dataValues.levelUps) {
+    if (guildModel.dataValues.levelUps && guildMemberModel.dataValues.experiencePoints < 44444444444444) {
       if (currentLevel > guildMemberModel.dataValues.level) {
         await message.client.database.models.guildMember.update({
           bastionCurrencies: guildMemberModel.dataValues.bastionCurrencies + currentLevel * 5,

@@ -12,6 +12,16 @@
 module.exports = async message => {
   if (!message.content.length) return;
 
+  let guildModel = await message.client.database.models.guild.findOne({
+    attributes: [ 'guildID' ],
+    where: {
+      guildID: message.guild.id,
+      uncoverSneakyLinks: true
+    }
+  });
+
+  if (!guildModel) return;
+
   let sneakyLinks = await message.client.methods.makeBWAPIRequest('/text/redirects', {
     qs: {
       text: message.content
