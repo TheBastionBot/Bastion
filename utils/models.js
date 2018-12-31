@@ -65,7 +65,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING
     },
     greetMessage: {
-      type: Sequelize.BLOB
+      type: Sequelize.JSON
     },
     greetTimeout: {
       type: Sequelize.INTEGER,
@@ -78,13 +78,13 @@ module.exports = (Sequelize, database) => {
       defaultValue: false
     },
     greetPrivateMessage: {
-      type: Sequelize.BLOB
+      type: Sequelize.JSON
     },
     farewell: {
       type: Sequelize.STRING
     },
     farewellMessage: {
-      type: Sequelize.BLOB
+      type: Sequelize.JSON
     },
     farewellTimeout: {
       type: Sequelize.INTEGER,
