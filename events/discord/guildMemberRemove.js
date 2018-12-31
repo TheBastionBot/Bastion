@@ -53,7 +53,7 @@ module.exports = async member => {
         else if (text) {
           farewell = await farewellChannel.send({
             embed: {
-              color: member.client.colors.BLUE,
+              color: member.client.colors.RED,
               description: text,
               footer: {
                 text: 'Farewell!'
