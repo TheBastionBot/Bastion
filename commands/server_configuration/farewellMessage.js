@@ -99,5 +99,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'farewellMessage [MESSAGE] [--embed EMBED_OBJECT]',
-  example: [ 'farewellMessage', 'farewellMessage Hello $user! Welcome to $server.', 'farewellMessage Hello $user! --embed { "title": "$user", "description": "Welcome to $server." }' ]
+  example: [ 'farewellMessage', 'farewellMessage Bye $user! Hope to see you soon!', 'farewellMessage Bye $user! --embed { "title": "$user", "description": "Hope to see you soon." }' ]
 };
