@@ -109,7 +109,7 @@ exports.exec = async (Bastion, message, args) => {
         url: userModel && userModel.dataValues.avatar ? userModel.dataValues.avatar : user.displayAvatarURL
       },
       footer: {
-        text: `${guildMemberModel.dataValues.reputations} Reputation${parseInt(guildMemberModel.dataValues.reputations) === 1 ? '' : 's'}`
+        text: `${guildMemberModel.dataValues.karma} Karma`
       }
     }
   });
