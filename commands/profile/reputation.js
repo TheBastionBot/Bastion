@@ -17,7 +17,7 @@ exports.exec = async (Bastion, message, args) => {
     ];
     return message.channel.send({
       embed: {
-        description: reputationLyrics[Math.floor(Math.random() * reputationLyrics.length)]
+        description: reputationLyrics.getRandom()
       }
     }).catch(() => {});
   }
@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
     let user = message.mentions.users.first();
     if (!user) return;
     if (user.id === message.author.id) {
-      return Bastion.emit('error', '', 'You can\'t give reputation to yourself!', message.channel);
+      return Bastion.emit('error', '', 'You can\'t give karma to yourself!', message.channel);
     }
 
     let [ guildMemberModel, initialized ] = await message.client.database.models.guildMember.findOrBuild({
@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       defaults: {
         experiencePoints: 1,
-        reputations: 1
+        karma: 1
       }
     });
     if (initialized) {
@@ -44,14 +44,14 @@ exports.exec = async (Bastion, message, args) => {
     }
     else {
       await message.client.database.models.guildMember.update({
-        reputations: parseInt(guildMemberModel.dataValues.reputations) + 1
+        karma: parseInt(guildMemberModel.dataValues.karma) + 1
       },
       {
         where: {
           userID: message.author.id,
           guildID: message.guild.id
         },
-        fields: [ 'reputations' ]
+        fields: [ 'karma' ]
       });
     }
 
@@ -63,25 +63,25 @@ exports.exec = async (Bastion, message, args) => {
     await message.channel.send({
       embed: {
         color: Bastion.colors.GREEN,
-        description: `You have given one reputation to ${user.tag}`
+        description: `You have given one karma to ${user.tag}`
       }
     }).catch(e => {
       Bastion.log.error(e);
     });
   }
   else {
-    return Bastion.emit('error', '', `You have recently given reputation to someone, please wait at least ${COOLDOWN} hours before giving reputation again.`, message.channel);
+    return Bastion.emit('error', '', `You have recently given karma to someone, please wait at least ${COOLDOWN} hours before giving karma again.`, message.channel);
   }
 };
 
 exports.config = {
-  aliases: [ 'rep' ],
+  aliases: [ 'rep', 'karma' ],
   enabled: true
 };
 
 exports.help = {
   name: 'reputation',
-  description: 'Give reputations to other users. You can give reputation only once in 12 hours.',
+  description: 'Give karma to other users. You can give karma only once in 12 hours.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
