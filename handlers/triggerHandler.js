@@ -11,6 +11,9 @@
  */
 module.exports = async message => {
   try {
+    if (!message.guild) return;
+    if (!message.content) return;
+
     let triggerModels = await message.client.database.models.trigger.findAll({
       attributes: [ 'trigger', 'responseMessage', 'responseReactions' ],
       where: {
@@ -23,7 +26,7 @@ module.exports = async message => {
     let trigger = '';
     let response = [];
     for (let i = 0; i < triggerModels.length; i++) {
-      if (message.content.toLowerCase() === triggerModels[i].dataValues.trigger.toLowerCase()) {
+      if (message.content.toLowerCase().includes(triggerModels[i].dataValues.trigger.toLowerCase())) {
         trigger = triggerModels[i].dataValues.trigger;
         response.push({
           message: triggerModels[i].dataValues.responseMessage,
@@ -32,9 +35,9 @@ module.exports = async message => {
       }
     }
 
-    response = response[Math.floor(Math.random() * response.length)];
+    response = response.getRandom();
 
-    if (response && message.content.toLowerCase() === trigger.toLowerCase()) {
+    if (response && message.content.toLowerCase().includes(trigger.toLowerCase())) {
       response.message = JSON.stringify(response.message);
       response.message = message.client.methods.replaceVariables(response.message, message);
       response.message = JSON.parse(response.message);
@@ -50,9 +53,11 @@ module.exports = async message => {
 
         delete response.message.text;
         let embed = Object.keys(response.message).length ? response.message : null;
-        embed.footer = {
-          text: `${message.client.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
-        };
+        if (embed) {
+          embed.footer = {
+            text: `${message.client.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
+          };
+        }
 
         message.channel.send(text, { embed: embed }).catch(e => {
           message.client.log.error(e);
