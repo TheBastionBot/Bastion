@@ -656,6 +656,23 @@ module.exports = (Sequelize, database) => {
     }
   });
 
+  const Event = database.define('event', {
+    guildID: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      primaryKey: true
+    },
+    name: {
+      type: Sequelize.STRING
+    },
+    description: {
+      type: Sequelize.TEXT
+    },
+    time: {
+      type: Sequelize.DATE
+    }
+  });
+
   const Streamers = database.define('streamers', {
     guildID: {
       type: Sequelize.STRING,
@@ -761,6 +778,11 @@ module.exports = (Sequelize, database) => {
     onUpdate: 'CASCADE'
   });
   Guild.Shop = Guild.hasOne(Shop, {
+    foreignKey: 'guildID',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+  });
+  Guild.Events = Guild.hasMany(Event, {
     foreignKey: 'guildID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
