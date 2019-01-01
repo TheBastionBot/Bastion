@@ -11,6 +11,9 @@
  */
 module.exports = async message => {
   try {
+    if (!message.guild) return;
+    if (!message.content) return;
+
     let triggerModels = await message.client.database.models.trigger.findAll({
       attributes: [ 'trigger', 'responseMessage', 'responseReactions' ],
       where: {
