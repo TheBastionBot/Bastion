@@ -690,6 +690,9 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       unique: true
     },
+    message: {
+      type: Sequelize.BLOB
+    },
     mixer: {
       type: Sequelize.JSON
     },
