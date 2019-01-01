@@ -249,6 +249,11 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: false
     },
+    antiRaid: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
     autoDeleteCommandOutput: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
