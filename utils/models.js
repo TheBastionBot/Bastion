@@ -238,6 +238,12 @@ module.exports = (Sequelize, database) => {
     disabledCommands: {
       type: Sequelize.JSON
     },
+    allowedRoles: {
+      type: Sequelize.JSON
+    },
+    allowedChannels: {
+      type: Sequelize.JSON
+    },
     membersOnly: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
