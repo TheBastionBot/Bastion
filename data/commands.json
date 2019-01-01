@@ -1248,7 +1248,7 @@
     "module": "Info"
   },
   "volume": {
-    "description": "Changes/sets the volume of current playback in your Discord.",
+    "description": "Changes the volume of current playback in your server.",
     "module": "Music"
   },
   "votingChannels": {
