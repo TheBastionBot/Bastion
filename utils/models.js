@@ -52,6 +52,9 @@ module.exports = (Sequelize, database) => {
     description: {
       type: Sequelize.BLOB
     },
+    icon: {
+      type: Sequelize.STRING(2048)
+    },
     prefix: {
       type: Sequelize.JSON,
       allowNull: false,
@@ -488,6 +491,9 @@ module.exports = (Sequelize, database) => {
     },
     description: {
       type: Sequelize.BLOB
+    },
+    icon: {
+      type: Sequelize.STRING(2048)
     },
     ignoreEmojiFilter: {
       type: Sequelize.BOOLEAN,
