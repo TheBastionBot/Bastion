@@ -229,6 +229,9 @@ module.exports = (Sequelize, database) => {
     suggestionChannel: {
       type: Sequelize.STRING
     },
+    botRole: {
+      type: Sequelize.STRING
+    },
     disabledCommands: {
       type: Sequelize.JSON
     },
