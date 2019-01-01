@@ -23,7 +23,7 @@ module.exports = async message => {
     let trigger = '';
     let response = [];
     for (let i = 0; i < triggerModels.length; i++) {
-      if (message.content.toLowerCase() === triggerModels[i].dataValues.trigger.toLowerCase()) {
+      if (message.content.toLowerCase().includes(triggerModels[i].dataValues.trigger.toLowerCase())) {
         trigger = triggerModels[i].dataValues.trigger;
         response.push({
           message: triggerModels[i].dataValues.responseMessage,
@@ -32,9 +32,9 @@ module.exports = async message => {
       }
     }
 
-    response = response[Math.floor(Math.random() * response.length)];
+    response = response.getRandom();
 
-    if (response && message.content.toLowerCase() === trigger.toLowerCase()) {
+    if (response && message.content.toLowerCase().includes(trigger.toLowerCase())) {
       response.message = JSON.stringify(response.message);
       response.message = message.client.methods.replaceVariables(response.message, message);
       response.message = JSON.parse(response.message);
