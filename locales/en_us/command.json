@@ -936,7 +936,7 @@
     "description": "Shows the permissions you have in the server/channel."
   },
   "volume": {
-    "description": "Changes/sets the volume of current playback in your Discord."
+    "description": "Changes the volume of current playback in your server."
   },
   "votingChannels": {
     "description": "Adds/removes the channel as a voting channel. Any messages posted in this channel, by a user, will be available for voting."
