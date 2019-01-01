@@ -336,7 +336,7 @@ module.exports = (Sequelize, database) => {
       allowNull: false,
       defaultValue: '0'
     },
-    reputations: {
+    karma: {
       type: Sequelize.TEXT,
       allowNull: false,
       defaultValue: '0'
