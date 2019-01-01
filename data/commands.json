@@ -668,7 +668,7 @@
     "module": "Searches"
   },
   "music": {
-    "description": "Toggle music support for a specified server.",
+    "description": "Toggle music support for the specified server.",
     "module": "Music"
   },
   "musicChannel": {
@@ -864,7 +864,7 @@
     "module": "Server Configuration"
   },
   "reputation": {
-    "description": "Give reputations to other users. You can give reputation only once in 12 hours.",
+    "description": "Give karma to other users. You can give karma only once in 12 hours.",
     "module": "Profile"
   },
   "resetDatabase": {
@@ -1248,7 +1248,7 @@
     "module": "Info"
   },
   "volume": {
-    "description": "Changes/sets the volume of current playback in your Discord.",
+    "description": "Changes the volume of current playback in your server.",
     "module": "Music"
   },
   "votingChannels": {

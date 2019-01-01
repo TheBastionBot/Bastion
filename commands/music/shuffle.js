@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message) => {
   }
 
   let nowPlaying = message.guild.music.songs.shift();
-  message.guild.music.songs = shuffle(message.guild.music.songs);
+  message.guild.music.songs = message.guild.music.songs.shuffle();
   message.guild.music.songs.unshift(nowPlaying);
 
   await message.guild.music.textChannel.send({
@@ -49,20 +49,3 @@ exports.help = {
   usage: 'shuffle',
   example: []
 };
-
-/**
- * Shuffles an array.
- * @function shuffle
- * @param {array} array The array to shuffle.
- * @returns {array} The shuffled array.
- */
-function shuffle(array) {
-  let i = array.length;
-  while (i) {
-    let j = Math.floor(Math.random() * i);
-    let t = array[--i];
-    array[i] = array[j];
-    array[j] = t;
-  }
-  return array;
-}

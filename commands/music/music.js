@@ -5,36 +5,33 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.guildID) {
-    args.guildID = message.guild.id;
-  }
+  if (!args.id) args.id = message.guild.id;
 
-  let guildModels = await message.client.database.models.guild.findAll({
-    attributes: [ 'guildID', 'music' ]
+  let guildModel = await message.client.database.models.guild.findOne({
+    attributes: [ 'guildID', 'music' ],
+    where: {
+      guildID: args.id
+    }
   });
-  let guilds = guildModels.map(model => model.dataValues.guildID);
 
-  if (!guilds.includes(args.guildID)) {
+  if (!guildModel) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'server'), message.channel);
   }
 
-  let guild = guildModels.filter(model => model.dataValues.guildID === args.guildID);
-  guild = guild[0];
-
-  let musicStatus = !guild.dataValues.music;
+  let musicStatus = !guildModel.dataValues.music;
 
   await message.client.database.models.guild.update({
     music: musicStatus
   },
   {
     where: {
-      guildID: args.guildID
+      guildID: args.id
     },
     fields: [ 'music' ]
   });
 
-  guild = Bastion.resolver.resolveGuild(guild.guildID);
-  let guildDetails = guild ? `**${guild.name}** / ${args.guildID}` : `**${args.guildID}**`;
+  let guild = Bastion.resolver.resolveGuild(args.id);
+  let guildDetails = guild ? `**${guild.name}** / ${args.id}` : `**${args.id}**`;
 
   await message.channel.send({
     embed: {
@@ -50,14 +47,14 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: [
-    { name: 'guildID', type: String, defaultOption: true }
+    { name: 'id', type: String, defaultOption: true }
   ],
   ownerOnly: true
 };
 
 exports.help = {
   name: 'music',
-  description: 'Toggle music support for a specified server.',
+  description: 'Toggle music support for the specified server.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

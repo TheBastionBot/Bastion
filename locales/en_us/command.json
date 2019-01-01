@@ -501,7 +501,7 @@
     "description": "Searches for the details of a movie."
   },
   "music": {
-    "description": "Toggle music support for a specified server."
+    "description": "Toggle music support for the specified server."
   },
   "musicChannel": {
     "description": "Shows/Removes/Adds a voice channel specified by the ID and a text channel (the channel this command was used in) of you Discord server as default for the music module. Bastion will only accept music commands in that text channel and if anyone asks him to join a voice channel, it will automatically join the specified voice channel."
@@ -648,7 +648,7 @@
     "description": "Adds/removes the channel as the report channel. If it's enabled, when users report server members using the `report` command, the reports will be posted in this channel."
   },
   "reputation": {
-    "description": "Give reputations to other users. You can give reputation only once in 12 hours."
+    "description": "Give karma to other users. You can give karma only once in 12 hours."
   },
   "resetDatabase": {
     "description": "Resets all the data from a specified table of %bastion%'s database."
@@ -936,7 +936,7 @@
     "description": "Shows the permissions you have in the server/channel."
   },
   "volume": {
-    "description": "Changes/sets the volume of current playback in your Discord."
+    "description": "Changes the volume of current playback in your server."
   },
   "votingChannels": {
     "description": "Adds/removes the channel as a voting channel. Any messages posted in this channel, by a user, will be available for voting."

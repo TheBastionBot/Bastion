@@ -22,6 +22,8 @@ exports.exec = async (Bastion, message) => {
 
   if (!message.guild.voiceConnection.speaking) return;
 
+  await message.guild.music.dispatcher.pause();
+
   await message.guild.music.textChannel.send({
     embed: {
       color: Bastion.colors.ORANGE,
@@ -32,8 +34,6 @@ exports.exec = async (Bastion, message) => {
         text: `🔉 ${message.guild.music.dispatcher.volume * 50}% • ${Math.floor(message.guild.music.dispatcher.time / 60000)}:${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000) < 10 ? `0${Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)}` : Math.floor((message.guild.music.dispatcher.time % 60000) / 1000)} / ${message.guild.music.songs[0].duration}`
       }
     }
-  }).then(() => {
-    message.guild.music.dispatcher.pause();
   }).catch(e => {
     Bastion.log.error(e);
   });

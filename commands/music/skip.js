@@ -24,14 +24,15 @@ exports.exec = async (Bastion, message) => {
     if (!message.guild.music.skipVotes.includes(message.author.id)) {
       message.guild.music.skipVotes.push(message.author.id);
     }
+
     if (message.guild.music.skipVotes.length >= parseInt((message.guild.voiceConnection.channel.members.size - 1) / 2)) {
+      await message.guild.music.dispatcher.end();
+
       await message.guild.music.textChannel.send({
         embed: {
           color: Bastion.colors.GREEN,
           description: 'Skipping current song.'
         }
-      }).then(() => {
-        message.guild.music.dispatcher.end();
       }).catch(e => {
         Bastion.log.error(e);
       });
@@ -47,13 +48,13 @@ exports.exec = async (Bastion, message) => {
     }
   }
   else {
+    await message.guild.music.dispatcher.end();
+
     await message.guild.music.textChannel.send({
       embed: {
         color: Bastion.colors.GREEN,
         description: 'Skipping current song.'
       }
-    }).then(() => {
-      message.guild.music.dispatcher.end();
     }).catch(e => {
       Bastion.log.error(e);
     });
