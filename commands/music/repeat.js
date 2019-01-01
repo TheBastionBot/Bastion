@@ -44,7 +44,8 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [ 'loop' ],
-  enabled: true
+  enabled: true,
+  musicMasterOnly: true
 };
 
 exports.help = {
