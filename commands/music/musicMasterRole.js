@@ -12,34 +12,22 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
   }
 
-  if (!(parseInt(args[0]) < 9223372036854775807)) {
-    await message.client.database.models.guild.update({
-      musicMasterRole: null
-    },
-    {
-      where: {
-        guildID: message.guild.id
-      },
-      fields: [ 'musicMasterRole' ]
-    });
+  let role;
+  if (args.id || message.mentions.roles.size) {
+    args.id = args.id.join(' ');
 
-    return message.channel.send({
-      embed: {
-        color: Bastion.colors.RED,
-        description: Bastion.i18n.info(message.guild.language, 'removeMusicMasterRole', message.author.tag)
-      }
-    }).catch(e => {
-      Bastion.log.error(e);
-    });
+    role = message.mentions.roles.first() || await Bastion.utils.resolver.resolveRole(message.guild, args.id);
+
+    if (!role) {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+    }
   }
-
-  let role = message.guild.roles.get(args[0]);
-  if (!role) {
-    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
+  else {
+    role = null;
   }
 
   await message.client.database.models.guild.update({
-    musicMasterRole: role.id
+    musicMasterRole: role ? role.id : null
   },
   {
     where: {
@@ -48,10 +36,10 @@ exports.exec = async (Bastion, message, args) => {
     fields: [ 'musicMasterRole' ]
   });
 
-  await message.channel.send({
+  return message.channel.send({
     embed: {
-      color: Bastion.colors.GREEN,
-      description: Bastion.i18n.info(message.guild.language, 'addMusicMasterRole', message.author.tag, role.name)
+      color: role ? Bastion.colors.GREEN : Bastion.colors.RED,
+      description: role ? Bastion.i18n.info(message.guild.language, 'addMusicMasterRole', message.author.tag, role.name) : Bastion.i18n.info(message.guild.language, 'removeMusicMasterRole', message.author.tag)
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -60,7 +48,10 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'musicmaster' ],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'id', type: String, multiple: true, defaultOption: true }
+  ]
 };
 
 exports.help = {
