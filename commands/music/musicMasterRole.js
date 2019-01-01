@@ -60,15 +60,14 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [ 'musicmaster' ],
-  enabled: true,
-  ownerOnly: true
+  enabled: true
 };
 
 exports.help = {
   name: 'musicMasterRole',
   description: 'Adds a role specified by its ID as the Music Master role of %bastion%, in your Discord server. Users with this role get access to restricted music commands like `summon`, `play`, etc. and can summon and play music in any voice channel of your Discord server.',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'musicMasterRole [ROLE_ID]',
   example: [ 'musicMasterRole 319225727067095043', 'musicMasterRole' ]
