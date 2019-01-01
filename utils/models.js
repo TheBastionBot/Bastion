@@ -229,6 +229,9 @@ module.exports = (Sequelize, database) => {
     suggestionChannel: {
       type: Sequelize.STRING
     },
+    wordOfTheDayChannel: {
+      type: Sequelize.STRING
+    },
     botRole: {
       type: Sequelize.STRING
     },
