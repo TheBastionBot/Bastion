@@ -666,7 +666,7 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.STRING
     },
     description: {
-      type: Sequelize.TEXT
+      type: Sequelize.BLOB
     },
     time: {
       type: Sequelize.DATE
