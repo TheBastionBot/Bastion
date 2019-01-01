@@ -266,6 +266,11 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    carePackages: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   });
 
