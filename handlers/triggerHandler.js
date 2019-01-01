@@ -50,9 +50,11 @@ module.exports = async message => {
 
         delete response.message.text;
         let embed = Object.keys(response.message).length ? response.message : null;
-        embed.footer = {
-          text: `${message.client.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
-        };
+        if (embed) {
+          embed.footer = {
+            text: `${message.client.credentials.ownerId.includes(message.author.id) ? '' : 'This is not an official message from me or my owners.'}`
+          };
+        }
 
         message.channel.send(text, { embed: embed }).catch(e => {
           message.client.log.error(e);
