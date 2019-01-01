@@ -5,12 +5,17 @@
  */
 
 exports.exec = async (Bastion, message) => {
-  if (message.guild.music) {
-    message.guild.music.songs = [];
-
-    if (message.guild.music.dispatcher) {
-      message.guild.music.dispatcher.end();
+  if (!message.guild.music.enabled) {
+    if (Bastion.user.id === '267035345537728512') {
+      return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabledPublic'), message.channel);
     }
+    return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'musicDisabled'), message.channel);
+  }
+
+  message.guild.music.songs = [];
+
+  if (message.guild.music.dispatcher) {
+    message.guild.music.dispatcher.end();
   }
 
   if (message.guild.voiceConnection) {
