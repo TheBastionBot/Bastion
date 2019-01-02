@@ -1,116 +1,32 @@
 {
   "date": "January 2, 2019",
   "image": "https://i.imgur.com/zlOMqVD.gif",
-  "THESE BUGS ARE DEAD": [
-    "Automatically remove accidental extra spaces around command arguments.",
-    "Users not getting all level up roles when they already had one of those roles.",
-    "Schedule command now works with any type of arguments for the scheduled command."
+  "Bastion. Version. Seven.": [
+    "Oh my goodness!",
+    "It's finally here!",
+    "Bastion v7!",
+    "The biggest release of Bastion, ever!"
   ],
-  "THESE ABILITIES HAVE ENHANCED": [
-    "Logs are now much prettier, than it was already!",
-    "Commands that work in direct messages doesn't need any prefix",
-    "Multiple prefixes can be set from the config too!",
-    "`reason` command will now work with moderation case nos., instead of moderation log message IDs",
-    "daily claim reward cooldowns still be in effect even after Bastion restarts",
-    "Set any no. of channels as voting channels. No limitations!",
-    "Add any no. of level up roles. No limitations here, too!",
-    "`currencyGiveaway` command isn't bot owner only anymore! You can now use it in your own servers to do Bastion Currency giveaways",
-    "Trigger response supports a whole bunch of variables now",
-    "`roleInfo` & `serverInfo` commands will now show the role & server description, if you've set it.",
-    "Show if a server is a Bastion premium server in the `serverInfo` command.",
-    "Adding music from user playlist to the queue is now faster than ever.",
-    "Warnings are now permanently stored!",
-    "Server logging will now also log message update and message delete events.",
-    "You can now enable disabled modules using the `--module` option in the `enableCommand` command.",
-    "The `lyrics` command is much much better now. Just try it out.",
-    "The `acrophobia` command now uses relative frequencies of letters as the first word of English words to generate acronyms for the game.",
-    "Level up roles are now synced.",
-    "Level up roles can now be exclusive.",
-    "Tons of under-the-hood improvements & changes."
+  "OK. COOL. BUT WHERE IS THE FREAKING CHANGELOG?!": [
+    "I remember writing it... :thinking:",
+    "But...",
+    "forgot to post it here in the excitement of this release.",
+    "Sorry :sweat_smile:"
   ],
-  "NEW FEATURES!": [
-    "Set the amount of data shown in the terminal by modifying the value of `logLevel` key in config",
-    "Members have separate currency & level in every server",
-    "You can now `give` & `take` any amount of Bastion Currencies to/from any member of your server",
-    "Give as much XP as you want to your server members using the `giveXP` command",
-    "Tired of looking through the moderation logs to find a specific case? Use the `case` command to fetch any case from the moderation logs",
-    "Using the `claim` command daily will count towards your daily streak. If you get a streak of 7 days, you'll can get a bonus of upto 700 BC",
-    "Each servers can have their own triggers & responses",
-    "Trigger responses now support reactions & message embeds too!",
-    "Users can now have different music playlists in different servers",
-    "Members Only mode to allow only users with roles to use the commands.",
-    "You can now pin a message to the channel just by adding either 📌 or 📍 reaction to a message",
-    "Reaction Roles. Similar to self assignable roles, but instead of using commands, you just need to add/remove reactions to get roles",
-    "AFK Mode. Users can now set themselves as AFK and anyone mentioning them, in a server they manage, will be responded by Bastion that the user is AFK.",
-    "Level up messages will now show some inspirational texts.",
-    "You can now mass move members from one voice channel to another.",
-    "Bastion's boot logs will now show how long it took Bastion to boot up completely.",
-    "You can now send ROT13 encoded message using the `ROT13` command.",
-    "You can now send and view spoilers, without spoiling it for everyone, using the `sendSpoiler` and `showSpoiler` commands.",
-    "You can now relay a message to the announcement channel just by adding either 📢 or 📣 reaction to a message.",
-    "Bastion can now relay every direct messages, sent to it, to your inbox.",
-    "Bastion can warn you about sneaky links in messages sent in the server.",
-    "Bastion can now auto play songs of it's choice when there's no song in the queue. Here's your ticket to a 24x7 music channel!",
-    "You can now configure Bastion to prevent it from automatically disconnecting from voice channels when music is stopped or the queue is finished.",
-    "Emoji filter! Bastion can now filter messages that are emoji spams.",
-    "You can now gift items that you buy from the server shop, directly when buying it.",
-    "Greetings & farewells now support custom message embeds too!"
+  "Are you kidding me?": [
+    "Well, yeah.",
+    "Don't worry. I didn't forgot.",
+    "And neither is the changelog empty!",
+    "On the contrary, it is very huge!",
+    "So huge that it was impossible to fit within Discord's 2000 character message limit!",
+    "Now, you must be understanding how big this release is. Did I mention this earlier, though? :thinking:"
   ],
-  "NEW COMMANDS!": [
-    "`blacklist` - Blacklist users globally from using Bastion.",
-    "`ignoreInviteFilter`, `ignoreLinkFilter`, `ignoreWordFilter`, `ignoreMentionFilter`,  - Set channels and/or roles to be ignored by the invite, link, word & mention filters, respectively.",
-    "`ignoreStarboard` - Set channels and/or roles to be ignored by the starboard.",
-    "`sellRole` - Sell roles in your server's Role Store.",
-    "`serverDescription` & `roleDescription` - Set a description for the server & any role in the server.",
-    "`music` - Toggle music support for any specified server.",
-    "`toggleBastion` - Toggle Bastion in the server.",
-    "`setColor` - Set User Color to use the specified color for yourself in appropriate places like in your Bastion Profile.",
-    "`toggleLevelUps` - Toggle gaining XP and leveling up while chatting.",
-    "`reportChannel` - (Un)Set report channel of the server.",
-    "`membersOnly` - Toggle Members Only mode.",
-    "`reactionPinning` - Toggle Reaction Pinning.",
-    "`roleEmoji` - Assign an emoji to a role.",
-    "`reactionRolesGroup` - Creates a group of Reaction Roles and sends a message to which users can react to self assign roles to themselves and vice versa.",
-    "`afk` - Sets AFK mode for the user.",
-    "`moveMembers` - Moves all the members in a voice channel to another specified voice channel.",
-    "`listServers` - Lists all Discord servers that Bastion is connected to, in the current shard.",
-    "`mentionRole` - Mentions any unmentionable role.",
-    "`roblox` - Get info of any Roblox player.",
-    "`apod` - Get the Astronomy Picture of the Day from NASA.",
-    "`setProfilePicture` - Sets your profile picture that shows up in the Bastion user profile.",
-    "`book` - Shows details about the specified book.",
-    "`ignoreXP` - Set channels and/or roles to be ignored for experience.",
-    "`reactionAnnouncements` - Toggle Reaction Announcements.",
-    "`relayDirectMessages` - Toggles relaying of direct messages, sent to Bastion, to your inbox.",
-    "`uncoverSneakyLinks` - Toggle uncovering of sneaky links in the messages sent in the server.",
-    "`topGames` - Shows the top most played games in the server.",
-    "`topSongs` - Shows the top most played songs, on Spotify, in the server.",
-    "`autoPlay` - Toggles auto playing of music.",
-    "`autoDisconnect` - Toggles auto disconnect from voice channel.",
-    "`filterEmojis` - Toggles automatic deleting of messages that are emoji spams."
+  "So... Where is it then?": [
+    "I won't keep you waiting any longer.",
+    "It was so huge that I had to create [a blog for Bastion](https://medium.com/thebastionbot) and post it in a [blog post](https://medium.com/thebastionbot/bastion-v7-5cab8eb93680)!",
+    "[Here's a link to V7 release notes!](https://medium.com/thebastionbot/bastion-v7-5cab8eb93680)"
   ],
-  "COMMANDS WITH NEW USAGE": [
-    "`addTrigger` command's usage syntax has been changed. It won't work the way it used to before, please check the help message for it, using the `help addTrigger` command, to see the new usage details.",
-    "`roleStore` command will only show the roles being sold in the server's Role Store. Use the new `sellRole` command to sell roles instead.",
-    "`report` command will now send user reports in the Report Channel, which can be set using the `reportChannel` command. The usage syntax has also been changed, please check the help message using `help report` to see the new usage details.",
-    "Trigger commands can now be used by anyone with Manage Server permission.",
-    "`clear` command's usage syntax has been changed. See its help message, using the `help clear` command, for the new usage.",
-    "`clear` command can now clear messages sent in the last specified minutes.",
-    "`giveaway` command's usage syntax has been changed. See its help message, using the `help giveaway` command, for the new usage."
-  ],
-  "RENAMED COMMANDS": [
-    "Renamed `ignoreChannel` & `ignoreRole` commands to `ignoreChannels` & `ignoreRoles`, respectively.",
-    "Renamed `votingChannel` command to `votingChannels`.",
-    "Renamed `resetModLogs` command to `resetModerationLogs`.",
-    "Renamed `searchServer` command to `searchServers`. Also removed its `servers` alias and added `searchGuilds` alias.",
-    "Renamed `setBio` command to `setInfo`."
-  ],
-  "NOT AVAILABLE ANYMORE": [
-    "Removed `todo`, `listTodo` & `deleteTodo` commands.",
-    "Removed `userBlacklist` command, because same thing can be done with the new `blacklist` command.",
-    "Removed `buyGift`, `gift`, `giftShop` & `myGifts` commands. Why do you need a gift shop when you can have a custom shop!",
-    "Removed `whitelistChannel` & `whitelistRole` commands.",
-    "Removed `slowMode` command as slow mode is now an in-built feature in Discord."
-  ],
-  "BUGS HIDING IN THE CLOSET": []
+  "Enjoy Bastion V7": [
+    "And wish you all a new year full of crazy $#!T and sick A$$ adventures!"
+  ]
 }
