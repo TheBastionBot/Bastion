@@ -3,6 +3,10 @@
     es6: true,
     node: true
   },
+  globals: {
+    xrequire: false,
+    BASTION_CLIENT_ID: false
+  },
   extends: "eslint:recommended",
   parserOptions: {
     ecmaVersion: 8,

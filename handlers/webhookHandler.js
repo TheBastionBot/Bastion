@@ -1,16 +1,16 @@
 /**
  * @file webhookHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
+const Discord = xrequire('discord.js');
 
 module.exports = class WebhookHandler {
   /**
    * Handles the webhooks sent by Bastion.
    * @constructor
-   * @param {Object} webhooks The webhooks object in the `credentials.json` file.
+   * @param {Object} webhooks The webhooks object in the `credentials.yaml` file.
    */
   constructor(webhooks) {
     if (!webhooks) return null;

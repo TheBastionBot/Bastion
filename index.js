@@ -1,17 +1,25 @@
 /**
  * @file The starting point of Bastion
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
-const credentials = require('./settings/credentials.json');
-const config = require('./settings/config.json');
-const Manager = new Discord.ShardingManager('./bastion.js', {
-  totalShards: config.shardCount,
+const Tesseract = xrequire('tesseract');
+const fs = require('fs');
+const YAML = require('yaml');
+
+/* eslint-disable no-sync */
+const configurationsFile = fs.readFileSync('./settings/configurations.yaml', 'utf8');
+const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
+/* eslint-enable no-sync */
+const configurations = YAML.parse(configurationsFile);
+const credentials = YAML.parse(credentialsFile);
+
+const Manager = new Tesseract.ShardingManager('./bastion.js', {
+  totalShards: configurations.shardCount,
   token: credentials.token
 });
-const log = require('./handlers/logHandler');
+const log = xrequire('./handlers/logHandler');
 
 Manager.spawn();
 

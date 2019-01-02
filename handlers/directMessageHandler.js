@@ -1,7 +1,7 @@
 /**
  * @file directMessageHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 /**
@@ -9,14 +9,11 @@
  * @param {Message} message Discord.js message object
  * @returns {void}
  */
-module.exports = message => {
-  let prefix = message.client.config.prefix;
+module.exports = async message => {
+  try {
+    if (!message.content) return;
 
-  if (message.content.startsWith(prefix)) {
-    let args = message.content.split(' ');
-    let command = args.shift().slice(prefix.length).toLowerCase();
-
-    if (command === 'help' || command === 'h') {
+    if (message.content.toLowerCase().startsWith('help')) {
       return message.channel.send({
         embed: {
           color: message.client.colors.BLUE,
@@ -44,5 +41,31 @@ module.exports = message => {
         message.client.log.error(e);
       });
     }
+
+    let settingsModel = await message.client.database.models.settings.findOne({
+      attributes: [ 'relayDirectMessages' ],
+      where: {
+        botID: message.client.user.id
+      }
+    });
+
+    if (settingsModel && settingsModel.dataValues.relayDirectMessages) {
+      // Find the application owner
+      let app = await message.client.fetchApplication();
+      let owner = await message.client.fetchUser(app.owner.id);
+
+      // Relay the message
+      await owner.send({
+        embed: {
+          author: {
+            name: message.author.tag
+          },
+          description: message.content
+        }
+      });
+    }
+  }
+  catch (e) {
+    message.client.log.error(e);
   }
 };

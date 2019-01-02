@@ -1,7 +1,7 @@
 /**
  * @file conversationHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
 const request = require('request-promise-native');
@@ -17,8 +17,13 @@ module.exports = async message => {
 
     if (message.content.length < 2) return;
 
-    let guild = await message.client.db.get(`SELECT chat FROM guildSettings WHERE guildID=${message.guild.id}`);
-    if (!guild.chat) return;
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'chat' ],
+      where: {
+        guildID: message.guild.id
+      }
+    });
+    if (!guildModel.dataValues.chat) return;
 
     message.channel.startTyping();
 

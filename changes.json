@@ -1,11 +1,32 @@
 {
-  "date": "December 13, 2018",
-  "image": "https://i.imgur.com/Xytiuj8.gif",
-  "IMPROVEMENTS": [
-    "Some under-the-hood improvements & fixes that makes Bastion more efficient."
+  "date": "January 2, 2019",
+  "image": "https://i.imgur.com/zlOMqVD.gif",
+  "Bastion. Version. Seven.": [
+    "Oh my goodness!",
+    "It's finally here!",
+    "Bastion v7!",
+    "The biggest release of Bastion, ever!"
   ],
-  "HAPPY HOLIDAYS!": [
-    "Happy holidays to you and your family from The Bastion Bot Team.",
-    "Set your reminders for this new year. Bastion v7 is gonna be released!"
+  "OK. COOL. BUT WHERE IS THE FREAKING CHANGELOG?!": [
+    "I remember writing it... :thinking:",
+    "But...",
+    "forgot to post it here in the excitement of this release.",
+    "Sorry :sweat_smile:"
+  ],
+  "Are you kidding me?": [
+    "Well, yeah.",
+    "Don't worry. I didn't forgot.",
+    "And neither is the changelog empty!",
+    "On the contrary, it is very huge!",
+    "So huge that it was impossible to fit within Discord's 2000 character message limit!",
+    "Now, you must be understanding how big this release is. Did I mention this earlier, though? :thinking:"
+  ],
+  "So... Where is it then?": [
+    "I won't keep you waiting any longer.",
+    "It was so huge that I had to create [a blog for Bastion](https://medium.com/thebastionbot) and post it in a [blog post](https://medium.com/thebastionbot/bastion-v7-5cab8eb93680)!",
+    "[Here's a link to V7 release notes!](https://medium.com/thebastionbot/bastion-v7-5cab8eb93680)"
+  ],
+  "Enjoy Bastion V7": [
+    "And wish you all a new year full of crazy $#!T and sick A$$ adventures!"
   ]
 }

@@ -1,11 +1,13 @@
 /**
  * @file The starting point of Bastion
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const Discord = require('discord.js');
-const BASTION = new Discord.Client({
+const Tesseract = xrequire('tesseract');
+const BASTION = new Tesseract.Client({
+  settingsDirectory: './settings',
+  monitorsDirectory: './monitors',
   disabledEvents: [
     'USER_NOTE_UPDATE',
     'TYPING_START',
@@ -14,48 +16,78 @@ const BASTION = new Discord.Client({
   ]
 });
 
-if (BASTION.shard) {
-  process.title = `Bastion-Shard-${BASTION.shard.id}`;
-}
-else {
-  process.title = 'BastionBot';
-}
+if (BASTION.shard) process.title = `Bastion-Shard-${BASTION.shard.id}`;
+else process.title = 'BastionBot';
 
-BASTION.package = require('./package.json');
-BASTION.credentials = require('./settings/credentials.json');
-BASTION.config = require('./settings/config.json');
-BASTION.Constants = Discord.Constants;
-BASTION.colors = Discord.Constants.Colors;
-BASTION.permissions = Discord.Permissions.FLAGS;
+BASTION.package = xrequire('./package.json');
+BASTION.Constants = Tesseract.Constants;
+BASTION.colors = Tesseract.Constants.Colors;
+BASTION.permissions = Tesseract.Permissions.FLAGS;
 
-// require('./utils/Array.prototype');
-require('./utils/String.prototype');
-require('./utils/Number.prototype');
+xrequire('./prototypes/Number.prototype');
+xrequire('./prototypes/Number');
+xrequire('./prototypes/String.prototype');
+xrequire('./prototypes/Array.prototype');
+xrequire('./prototypes/Array');
+xrequire('./prototypes/Object');
 
-const WebhookHandler = require('./handlers/webhookHandler.js');
+const WebhookHandler = xrequire('./handlers/webhookHandler.js');
 BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
-BASTION.log = require('./handlers/logHandler');
-BASTION.functions = require('./handlers/functionHandler');
-const LanguageHandler = require('./handlers/languageHandler');
-BASTION.strings = new LanguageHandler();
-BASTION.db = require('sqlite');
-BASTION.db.open('./data/Bastion.sqlite').then(db => {
-  db.run('PRAGMA foreign_keys = ON');
-  require('./utils/populateDatabase')(BASTION.db);
+BASTION.log = xrequire('./handlers/logHandler');
+BASTION.methods = xrequire('./handlers/methodHandler');
+
+const StringHandler = xrequire('./handlers/stringHandler');
+BASTION.i18n = new StringHandler();
+
+const Sequelize = xrequire('sequelize');
+BASTION.database = new Sequelize(BASTION.credentials.database.URI, {
+  operatorsAliases: false,
+  logging: false
 });
+BASTION.database.authenticate().then(() => {
+  // Populate Database/Implement model definitions
+  xrequire('./utils/models')(Sequelize, BASTION.database);
 
-require('./handlers/eventHandler')(BASTION);
+  // Load Bastion Events
+  xrequire('./handlers/eventHandler')(BASTION);
 
-const Modules = require('./handlers/moduleHandler');
-BASTION.commands = Modules.commands;
-BASTION.aliases = Modules.aliases;
+  // Load Bastion Modules
+  const Modules = xrequire('./handlers/moduleHandler');
+  BASTION.commands = Modules.commands;
+  BASTION.aliases = Modules.aliases;
 
-BASTION.login(BASTION.credentials.token).catch(e => {
-  BASTION.log.error(e.toString());
-  process.exit(1);
+  // Start Bastion
+  BASTION.login(BASTION.credentials.token).then(() => {
+    /**
+     * Using <Model>.findOrCreate() won't require the use of
+     * <ModelInstance>.save() but <Model>.findOrBuild() is used instead because
+     * <Model>.findOrCreate() creates a race condition where a matching row is
+     * created by another connection after the `find` but before the `insert`
+     * call. However, it is not always possible to handle this case in SQLite,
+     * specifically if one transaction inserts and another tries to select
+     * before the first one has committed. TimeoutError is thrown instead.
+     */
+    BASTION.database.models.settings.findOrBuild({
+      where: {
+        botID: BASTION.user.id
+      }
+    }).spread((settingsModel, initialized) => {
+      if (initialized) {
+        return settingsModel.save();
+      }
+    }).catch(BASTION.log.error);
+  }).catch(e => {
+    BASTION.log.error(e.toString());
+    process.exit(1);
+  });
+}).catch(err => {
+  BASTION.log.error(err);
 });
 
 process.on('unhandledRejection', rejection => {
-  // eslint-disable-next-line no-console
-  console.warn(`\n[unhandledRejection]\n${rejection}\n[/unhandledRejection]\n`);
+  /* eslint-disable no-console */
+  console.warn('\n[unhandledRejection]');
+  console.warn(rejection);
+  console.warn('[/unhandledRejection]\n');
+  /* eslint-enable no-console */
 });

@@ -1,11 +1,12 @@
 /**
  * @file commandHandler
  * @author Sankarsan Kampa (a.k.a k3rn31p4nic)
- * @license MIT
+ * @license GPL-3.0
  */
 
-const parseArgs = require('command-line-args');
-const COLOR = require('chalk');
+const parseArgs = xrequire('command-line-args');
+const COLOR = xrequire('chalk');
+const _ = xrequire('lodash/core');
 const activeUsers = {};
 
 /**
@@ -15,54 +16,84 @@ const activeUsers = {};
  */
 module.exports = async message => {
   try {
-    let guild = await message.client.db.get(`SELECT prefix, language, musicTextChannel, musicVoiceChannel, musicMasterRole, ignoredChannels, ignoredRoles, disabledCommands FROM guildSettings WHERE guildID=${message.guild.id}`);
+    let guildModel = await message.client.database.models.guild.findOne({
+      attributes: [ 'enabled', 'prefix', 'language', 'membersOnly', 'music', 'musicAutoPlay', 'musicAutoDisconnect', 'musicTextChannel', 'musicVoiceChannel', 'musicMasterRole', 'disabledCommands' ],
+      where: {
+        guildID: message.guild.id
+      },
+      include: [
+        {
+          model: message.client.database.models.textChannel,
+          attributes: [ 'channelID', 'disabledCommands', 'blacklisted' ]
+        },
+        {
+          model: message.client.database.models.role,
+          attributes: [ 'roleID', 'disabledCommands', 'blacklisted' ]
+        }
+      ]
+    });
+
+    if (!guildModel.dataValues.enabled && !message.member.hasPermission('MANAGE_GUILD')) return;
+
+    // Members Only mode. It's < 2 because the everyone has the @everyone role
+    // by default which counts as 1.
+    if (guildModel.dataValues.membersOnly && !message.member.hasPermission('MANAGE_GUILD') && message.member.roles.size < 2) return;
 
     // Add guild's prefix to the discord.js guild object to minimize database reads.
-    if (!message.guild.prefix || message.guild.prefix.join(' ') !== `${guild.prefix} ${message.client.config.prefix}`) {
-      message.guild.prefix = guild.prefix.trim().split(' ');
-      message.guild.prefix.push(message.client.config.prefix);
+    guildModel.dataValues.prefix.concat(message.client.configurations.prefix);
+    if (!message.guild.prefix || !_.isEqual(message.guild.prefix, guildModel.dataValues.prefix)) {
+      message.guild.prefix = [ ...new Set(guildModel.dataValues.prefix) ];
     }
     // Add guild's language to the discord.js guild object to minimize database reads.
-    if (!message.guild.language || message.guild.language !== guild.language) {
-      message.guild.language = guild.language;
+    if (!message.guild.language || message.guild.language !== guildModel.dataValues.language) {
+      message.guild.language = guildModel.dataValues.language;
     }
     // Add a music object to the discord.js guild object, to hold music configs.
     if (!message.guild.music) {
       message.guild.music = {};
     }
+    // Set music support status of the guild.
+    message.guild.music.enabled = guildModel.dataValues.music;
+    // Set music auto play status
+    message.guild.music.autoPlay = guildModel.dataValues.musicAutoPlay;
+    // Set music auto disconnect status
+    message.guild.music.autoDisconnect = guildModel.dataValues.musicAutoDisconnect;
     // If any of the music channels have been removed, delete them from the database.
-    if (!message.guild.channels.has(guild.musicTextChannel) || !message.guild.channels.has(guild.musicVoiceChannel)) {
-      await message.client.db.run(`UPDATE guildSettings SET musicTextChannel=null, musicVoiceChannel=null WHERE guildID=${message.guild.id}`);
-      guild.musicTextChannel = null;
-      guild.musicVoiceChannel = null;
+    if (!message.guild.channels.has(guildModel.dataValues.musicTextChannel) || !message.guild.channels.has(guildModel.dataValues.musicVoiceChannel)) {
+      await message.client.database.models.guild.update({
+        musicTextChannel: null,
+        musicVoiceChannel: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'musicTextChannel', 'musicVoiceChannel' ]
+      });
+      guildModel.dataValues.musicTextChannel = null;
+      guildModel.dataValues.musicVoiceChannel = null;
     }
     // If any of the music channels have been removed, delete them from the database.
-    if (!message.guild.roles.has(guild.musicMasterRole)) {
-      await message.client.db.run(`UPDATE guildSettings SET musicMasterRole=null WHERE guildID=${message.guild.id}`);
-      guild.musicMasterRole = null;
+    if (!message.guild.roles.has(guildModel.dataValues.musicMasterRole)) {
+      await message.client.database.models.guild.update({
+        musicMasterRole: null
+      },
+      {
+        where: {
+          guildID: message.guild.id
+        },
+        fields: [ 'musicMasterRole' ]
+      });
+      guildModel.dataValues.musicMasterRole = null;
     }
     // Add music configs to the guild music object.
-    message.guild.music.textChannelID = guild.musicTextChannel;
-    message.guild.music.voiceChannelID = guild.musicVoiceChannel;
-    message.guild.music.masterRoleID = guild.musicMasterRole;
+    message.guild.music.textChannelID = guildModel.dataValues.musicTextChannel;
+    message.guild.music.voiceChannelID = guildModel.dataValues.musicVoiceChannel;
+    message.guild.music.masterRoleID = guildModel.dataValues.musicMasterRole;
 
     // The prefix used by the user to call the command.
     let usedPrefix;
     if (!message.guild.prefix.some(prefix => message.content.startsWith(usedPrefix = prefix))) return;
-
-    // Ignore commands from ignored roles & channels. Doesn't affect the guild administrator.
-    if (message.member && !message.member.hasPermission('ADMINISTRATOR')) {
-      if (guild.ignoredChannels) {
-        if (guild.ignoredChannels.split(' ').includes(message.channel.id)) return;
-      }
-
-      if (guild.ignoredRoles) {
-        let ignoredRoles = guild.ignoredRoles.split(' ');
-        for (let roleID of ignoredRoles) {
-          if (message.member.roles.has(roleID)) return;
-        }
-      }
-    }
 
     /**
      * @var {String} args The arguments used with the command.
@@ -90,23 +121,65 @@ module.exports = async message => {
     /**
      * Command log messages
      */
-    message.client.log.console(`\n[${new Date()}]`);
-    message.client.log.console(COLOR.green('[COMMAND]: ') + usedPrefix + command);
-    message.client.log.console(COLOR.green('[ARGUMENTs]: ') + (args.join(' ') || COLOR.yellow('No arguments to execute')));
-    message.client.log.console(COLOR.green('[MODULE]: ') + mdl);
-    if (message.client.shard) {
-      message.client.log.console(`${COLOR.green('[SHARD]:')} ${message.client.shard.id}`);
+    if (message.client.configurations.logLevel === 1) {
+      message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {cyan ${message.author.tag}} #${message.channel.name} {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
     }
-    message.client.log.console(`${COLOR.green('[SERVER]:')} ${message.guild} ${COLOR.cyan(message.guild.id)}`);
-    message.client.log.console(`${COLOR.green('[CHANNEL]:')} #${message.channel.name} ${COLOR.cyan(message.channel)}`);
-    message.client.log.console(`${COLOR.green('[USER]:')} ${message.author.tag} ${COLOR.cyan(`${message.author}`)}`);
+    else if (message.client.configurations.logLevel === 2) {
+      message.client.log.console(COLOR`\n${new Date().toLocaleTimeString()} {green ${message.guild.name}} > {yellow #${message.channel.name}}`);
+      message.client.log.console(COLOR`{cyan ${message.author.tag}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else if (message.client.configurations.logLevel === 3) {
+      message.client.log.console(`\n${new Date()}`);
+      message.client.log.console(COLOR`{green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
+      message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}} > {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else if (message.client.configurations.logLevel === 4) {
+      message.client.log.console(`\n${new Date()}`);
+      if (message.client.shard) {
+        message.client.log.console(COLOR`{green Shard ${message.client.shard.id}} > {green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
+      }
+      else {
+        message.client.log.console(COLOR`{green ${message.guild.name}} / {cyan ${message.guild.id}} > {yellow #${message.channel.name}}/{cyan ${message.channel.id}}`);
+      }
+      message.client.log.console(COLOR`${message.author.tag} / {cyan ${message.author.id}}`);
+      message.client.log.console(COLOR`{yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else if (message.client.configurations.logLevel === 5) {
+      message.client.log.console(`\n[${new Date()}]`);
+      if (message.client.shard) {
+        message.client.log.console(COLOR`{green [  SHARD]:} ${message.client.shard.id}`);
+      }
+      message.client.log.console(COLOR`{green [ SERVER]:} ${message.guild.name} / {cyan ${message.guild.id}}`);
+      message.client.log.console(COLOR`{green [CHANNEL]:} ${message.channel.name} / {cyan ${message.channel.id}}`);
+      message.client.log.console(COLOR`{green [   USER]:} ${message.author.tag} / {cyan ${message.author.id}}`);
+      message.client.log.console(COLOR`{green [COMMAND]:} {yellow ${usedPrefix}${command}} ${args.join(' ')}`);
+    }
+    else {
+      message.client.log.console(`\n[${new Date()}]`);
+      if (message.client.shard) {
+        message.client.log.console(COLOR`{green [    SHARD]:} ${message.client.shard.id}`);
+      }
+      message.client.log.console(COLOR`{green [   SERVER]:} ${message.guild.name} / {cyan ${message.guild.id}}`);
+      message.client.log.console(COLOR`{green [  CHANNEL]:} ${message.channel.name} / {cyan ${message.channel.id}}`);
+      message.client.log.console(COLOR`{green [     USER]:} ${message.author.tag} / {cyan ${message.author.id}}`);
+      message.client.log.console(COLOR`{green [  COMMAND]:} ${usedPrefix}${command} / {cyan ${mdl}}`);
+      message.client.log.console(COLOR`{green [ARGUMENTS]:} ${args.join(' ') || COLOR`{yellow No arguments to execute}`}`);
+    }
+
+    /**
+     * Check if a command is used in a blacklisted channel or by a blacklisted
+     * role.
+     */
+    let blacklistedChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.blacklisted).map(model => model.dataValues.channelID);
+    let blacklistedRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.blacklisted).map(model => model.dataValues.roleID);
+
+    if ((blacklistedChannels && blacklistedChannels.includes(message.channel.id)) || (blacklistedRoles && message.member.roles.some(role => blacklistedRoles.includes(role.id)))) return message.client.log.info('The command is either used in a blacklisted channel or the user is in a blacklisted role.');
 
     /**
      * Check if a command is disabled
      */
-    if (guild.disabledCommands) {
-      guild.disabledCommands = guild.disabledCommands.split(' ');
-      if (guild.disabledCommands.includes(cmd.help.name.toLowerCase())) {
+    if (guildModel.dataValues.disabledCommands) {
+      if (guildModel.dataValues.disabledCommands.includes(cmd.help.name.toLowerCase())) {
         return message.client.log.info('This command is disabled.');
       }
     }
@@ -133,6 +206,17 @@ module.exports = async message => {
         * @fires userMissingPermissions
         */
         return message.client.emit('userMissingPermissions', 'MUSIC_MASTER');
+      }
+    }
+
+    // Checks for guild owner permission
+    if (cmd.config.guildOwnerOnly) {
+      if (message.author.id !== message.guild.ownerID) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.emit('userMissingPermissions', 'GUILD_OWNER');
       }
     }
 
@@ -180,7 +264,7 @@ module.exports = async message => {
          * Error condition is encountered.
          * @fires error
          */
-        return message.client.emit('error', message.client.strings.error(message.guild.language, 'cooldown'), message.client.strings.error(message.guild.language, 'cooldown', true, `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
+        return message.client.emit('error', '', message.client.i18n.error(message.guild.language, 'cooldown', `<@${message.author.id}>`, cmd.help.name, cmd.config.userCooldown), message.channel);
       }
     }
 

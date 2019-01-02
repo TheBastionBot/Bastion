@@ -1,32 +1,41 @@
-os: linux
-dist: trusty
-sudo: required
 language: node_js
+cache: yarn
 node_js:
-  - "8"
+  - "lts/*"
+addons:
+  apt:
+    update: true
+    sources:
+    - sourceline: 'deb http://dl.yarnpkg.com/debian/ stable main'
+      key_url: 'http://dl.yarnpkg.com/debian/pubkey.gpg'
+    packages:
+    - yarn
+    - ffmpeg
+    - shellcheck
+  homebrew:
+    update: true
+    packages:
+    - yarn
+    - ffmpeg
+    - shellcheck
 matrix:
   include:
-    - os: linux
-      dist: trusty
+    - name: "Linux"
+      os: linux
+      dist: xenial
       sudo: required
-    - os: osx
-      osx_image: xcode9.3beta
-    - os: osx
-      osx_image: xcode9.2
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y build-essential; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g ffmpeg-binaries; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ffmpeg; fi
+    - name: "macOS"
+      os: osx
+      osx_image: xcode10.1
+before_install: true
 install:
-  - npm install
+  - yarn install
 before_script:
-  - cp settings/credentials_example.json settings/credentials.json
-  - cp settings/config_example.json settings/config.json
+  - cp settings/credentials.example.yaml settings/credentials.yaml
+  - cp settings/configurations.example.yaml settings/configurations.yaml
 script:
-  - npm test
+  - yarn test
+  - shellcheck -x *.sh
 after_success:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
