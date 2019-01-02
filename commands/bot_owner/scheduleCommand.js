@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   args.cronExp = args.cronExp.join(' ');
-  args.arguments = args.arguments.join(' ');
+  args.arguments = args.arguments.join(' ').replace(/\\/g, '');
 
   let scheduledStatus = await message.channel.send({
     embed: {
@@ -75,5 +75,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'scheduleCommand <CRON PATTERN> <-c COMMAND> [-a ARGUMENTS]',
-  example: [ 'scheduleCommand 0 0 0 1 1 * -c echo -a Happy New Year!' ]
+  example: [ 'scheduleCommand 0 0 * * * * -c clear -a \\--nonpinned', 'scheduleCommand 0 0 0 1 1 * -c echo -a Happy New Year!' ]
 };
