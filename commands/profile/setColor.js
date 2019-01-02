@@ -5,6 +5,10 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
+  if (Bastion.methods.isPublicBastion(Bastion)) {
+    return Bastion.emit('error', '', 'This command is temporarily disabled in the public Bastion. For details, please contact [Bastion Support](https://discord.gg/fzx8fkt).', message.channel);
+  }
+
   if (!args.color || !/^#?(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(args.color)) {
     return Bastion.emit('commandUsage', message, this.help);
   }

@@ -5,6 +5,10 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
+  if (Bastion.methods.isPublicBastion(Bastion)) {
+    return Bastion.emit('error', '', 'This command is temporarily disabled in the public Bastion. For details, please contact [Bastion Support](https://discord.gg/fzx8fkt).', message.channel);
+  }
+
   args = args.join(' ');
   if (!/^(https?:\/\/)((([-a-z0-9]{1,})?(-?)+[-a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9._\-~#%])+\/)+)?([a-z0-9._\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args)) {
     return Bastion.emit('commandUsage', message, this.help);
