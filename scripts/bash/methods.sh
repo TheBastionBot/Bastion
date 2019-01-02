@@ -12,7 +12,7 @@ function private::bastion_screen_name () {
 
 
 function method::debug () {
-  if ! [[ $(private::bastion_screen_name) ]]
+  if [[ $(private::bastion_screen_name) ]]
   then
     print::error "$NAME is already running!"
     print::info "Stop Bastion before you run it in dubug mode!"
