@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   args.cronExp = args.cronExp.join(' ');
-  args.arguments = args.arguments.join(' ');
+  args.arguments = args.arguments.join(' ').replace(/\\/g, '');
 
   let scheduledStatus = await message.channel.send({
     embed: {
