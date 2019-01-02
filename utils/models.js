@@ -288,6 +288,11 @@ module.exports = (Sequelize, database) => {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    commonMisspellingChecker: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   });
 
