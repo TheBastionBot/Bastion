@@ -1,9 +1,10 @@
 {
-  "date": "December 31, 2018",
+  "date": "January 2, 2019",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "THESE BUGS ARE DEAD": [
     "Automatically remove accidental extra spaces around command arguments.",
-    "Users not getting all level up roles when they already had one of those roles."
+    "Users not getting all level up roles when they already had one of those roles.",
+    "Schedule command now works with any type of arguments for the scheduled command."
   ],
   "THESE ABILITIES HAVE ENHANCED": [
     "Logs are now much prettier, than it was already!",
