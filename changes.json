@@ -1,6 +1,9 @@
 {
-  "date": "January 5, 2019",
+  "date": "January 8, 2019",
   "image": "https://i.imgur.com/zlOMqVD.gif",
+  "IMPROVEMENTS": [
+    "Bastion's autoplay will now play daily hits instead of weekly hits. Daily music listeners won't get bored of the same songs anymore."
+  ],
   "KILLED THOSE BUGS": [
     "Fixed `showSpoiler` command not decoding the spoilers for you!"
   ]
