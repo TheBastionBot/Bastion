@@ -99,7 +99,7 @@ module.exports = async member => {
         }
 
         if (greetings && guildModel.dataValues.greetTimeout > 0) {
-          await greetings.delete(1000 * parseInt(guildModel.dataValues.greetTimeout)).catch(e => {
+          greetings.delete(1000 * parseInt(guildModel.dataValues.greetTimeout)).catch(e => {
             member.client.log.error(e);
           });
         }
