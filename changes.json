@@ -8,6 +8,7 @@
   "KILLED THOSE BUGS": [
     "Fixed `showSpoiler` command not decoding the spoilers for you!",
     "Fixed an issue with auto-assignable roles being assigned at a delay if greet timeout was set.",
-    "Fixed an issue that prevented the default greet & farewell messages from being shown. Bastion wanted to have a custom message for those. But not anymore!"
+    "Fixed an issue that prevented the default greet & farewell messages from being shown. Bastion wanted to have a custom message for those. But not anymore!",
+    "Fixed an issue that prevented your profile from being shown if you had more XP than Bastion expected from you. Won't happen anymore."
   ]
 }
