@@ -46,7 +46,7 @@ module.exports = async member => {
     if (guildModel.dataValues.greet) {
       let isEmbed = guildModel.dataValues.greetMessage && Object.keys(guildModel.dataValues.greetMessage).length;
 
-      let greetMessage = isEmbed ? guildModel.dataValues.greetMessage : greetMessages.getRandom();
+      let greetMessage = isEmbed ? guildModel.dataValues.greetMessage : { text: greetMessages.getRandom() };
 
       if (isEmbed) {
         greetMessage = JSON.stringify(greetMessage);
@@ -109,7 +109,7 @@ module.exports = async member => {
     if (guildModel.dataValues.greetPrivate) {
       let isEmbed = guildModel.dataValues.greetPrivateMessage && Object.keys(guildModel.dataValues.greetPrivateMessage).length;
 
-      let greetPrivateMessage = isEmbed ? guildModel.dataValues.greetPrivateMessage : greetMessages.getRandom();
+      let greetPrivateMessage = isEmbed ? guildModel.dataValues.greetPrivateMessage : { text: greetMessages.getRandom() };
 
       if (isEmbed) {
         greetPrivateMessage = JSON.stringify(greetPrivateMessage);

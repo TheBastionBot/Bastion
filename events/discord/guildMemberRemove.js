@@ -17,7 +17,7 @@ module.exports = async member => {
     if (guildModel.dataValues.farewell) {
       let isEmbed = guildModel.dataValues.farewellMessage && Object.keys(guildModel.dataValues.farewellMessage).length;
 
-      let farewellMessage = isEmbed ? guildModel.dataValues.farewellMessage : 'May we meet again.';
+      let farewellMessage = isEmbed ? guildModel.dataValues.farewellMessage : { text: 'May we meet again.' };
 
       if (isEmbed) {
         farewellMessage = JSON.stringify(farewellMessage);
