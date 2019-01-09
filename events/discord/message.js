@@ -134,9 +134,7 @@ module.exports = async message => {
         let usersAFK = message.mentions.users.filter(user => message.guild.usersAFK.includes(user.id) && message.channel.permissionsFor(user).has('MANAGE_GUILD'));
         for (let user of usersAFK) {
           user = user[1];
-          if ([ 'idle', 'offline' ].includes(user.presence.status)) {
-            message.channel.send(`**${user.tag}** is currently away from keyboard. ${user.username} will get back to you later.`).catch(() => {});
-          }
+          message.channel.send(`**${user.tag}** is currently away from keyboard. ${user.username} will get back to you later.`).catch(() => {});
         }
       }
     }

@@ -2,7 +2,8 @@
   "date": "January 9, 2019",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "IMPROVEMENTS": [
-    "Bastion's autoplay will now play daily hits instead of weekly hits. Daily music listeners won't get bored of the same songs anymore."
+    "Bastion's autoplay will now play daily hits instead of weekly hits. Daily music listeners won't get bored of the same songs anymore.",
+    "AFK messages will be shown even if a user's status is set to *Online* or *DND*."
   ],
   "KILLED THOSE BUGS": [
     "Fixed `showSpoiler` command not decoding the spoilers for you!",
