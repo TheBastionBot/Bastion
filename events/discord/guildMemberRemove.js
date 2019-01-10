@@ -32,12 +32,14 @@ module.exports = async member => {
       if (isEmbed) {
         farewellMessage = JSON.parse(farewellMessage);
 
-        farewellMessage.footer = {};
-        farewellMessage.footer.text = 'Farewell!';
-
         text = farewellMessage.text ? farewellMessage.text : null;
         delete farewellMessage.text;
         embed = Object.keys(farewellMessage).length ? farewellMessage : null;
+
+        if (embed) {
+          embed.footer = {};
+          embed.footer.text = 'Farewell!';
+        }
       }
 
       let farewellChannel = member.guild.channels.get(guildModel.dataValues.farewell);
