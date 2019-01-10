@@ -15,13 +15,9 @@ module.exports = async member => {
     if (!guildModel) return;
 
     if (guildModel.dataValues.farewell) {
-      let isEmbed = guildModel.dataValues.farewellMessage && Object.keys(guildModel.dataValues.farewellMessage).length;
+      let farewellMessage = guildModel.dataValues.farewellMessage && Object.keys(guildModel.dataValues.farewellMessage).length ? guildModel.dataValues.farewellMessage : { text: 'May we meet again.' };
 
-      let farewellMessage = isEmbed ? guildModel.dataValues.farewellMessage : { text: 'May we meet again.' };
-
-      if (isEmbed) {
-        farewellMessage = JSON.stringify(farewellMessage);
-      }
+      farewellMessage = JSON.stringify(farewellMessage);
 
       farewellMessage = farewellMessage.replace(/\$user/ig, `<@${member.id}>`);
       farewellMessage = farewellMessage.replace(/\$server/ig, member.guild.name);
@@ -29,17 +25,15 @@ module.exports = async member => {
       farewellMessage = farewellMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
 
       let text, embed;
-      if (isEmbed) {
-        farewellMessage = JSON.parse(farewellMessage);
+      farewellMessage = JSON.parse(farewellMessage);
 
-        text = farewellMessage.text ? farewellMessage.text : null;
-        delete farewellMessage.text;
-        embed = Object.keys(farewellMessage).length ? farewellMessage : null;
+      text = farewellMessage.text ? farewellMessage.text : null;
+      delete farewellMessage.text;
+      embed = Object.keys(farewellMessage).length ? farewellMessage : null;
 
-        if (embed) {
-          embed.footer = {};
-          embed.footer.text = 'Farewell!';
-        }
+      if (embed) {
+        embed.footer = {};
+        embed.footer.text = 'Farewell!';
       }
 
       let farewellChannel = member.guild.channels.get(guildModel.dataValues.farewell);
