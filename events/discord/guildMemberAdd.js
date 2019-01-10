@@ -61,12 +61,14 @@ module.exports = async member => {
       if (isEmbed) {
         greetMessage = JSON.parse(greetMessage);
 
-        greetMessage.footer = {};
-        greetMessage.footer.text = 'Greetings!';
-
         text = greetMessage.text ? greetMessage.text : null;
         delete greetMessage.text;
         embed = Object.keys(greetMessage).length ? greetMessage : null;
+
+        if (embed) {
+          embed.footer = {};
+          embed.footer.text = 'Greetings!';
+        }
       }
 
       let greetChannel = member.guild.channels.get(guildModel.dataValues.greet);
@@ -124,12 +126,14 @@ module.exports = async member => {
       if (isEmbed) {
         greetPrivateMessage = JSON.parse(greetPrivateMessage);
 
-        greetPrivateMessage.footer = {};
-        greetPrivateMessage.footer.text = 'Greetings!';
-
         text = greetPrivateMessage.text ? greetPrivateMessage.text : null;
         delete greetPrivateMessage.text;
         embed = Object.keys(greetPrivateMessage).length ? greetPrivateMessage : null;
+
+        if (embed) {
+          embed.footer = {};
+          embed.footer.text = 'Greetings!';
+        }
       }
 
 
