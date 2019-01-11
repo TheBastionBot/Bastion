@@ -19,10 +19,7 @@ module.exports = async member => {
 
       farewellMessage = JSON.stringify(farewellMessage);
 
-      farewellMessage = farewellMessage.replace(/\$user/ig, `<@${member.id}>`);
-      farewellMessage = farewellMessage.replace(/\$server/ig, member.guild.name);
-      farewellMessage = farewellMessage.replace(/\$username/ig, member.displayName);
-      farewellMessage = farewellMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
+      farewellMessage = member.client.methods.replaceMemberVariables(farewellMessage, member);
 
       let text, embed;
       farewellMessage = JSON.parse(farewellMessage);
