@@ -12,7 +12,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.GOLD,
         title: 'List of Command Categories',
-        description: 'To get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands section: https://bastionbot.org/commands.',
+        description: `Use the \`${this.help.name} <category>\` command to list all the commands in the specified category.\nTo get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands section: https://bastionbot.org/commands.`,
         fields: [
           {
             name: 'Command Categories',
@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message, args) => {
     return await message.channel.send({
       embed: {
         color: Bastion.colors.RED,
-        title: 'Invalid Command Cateogry',
+        title: 'Command Cateogry Not Found',
         description: 'Use the `commands` command without any arguments to get a list of all the available command categories.'
       }
     });

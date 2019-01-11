@@ -44,13 +44,9 @@ module.exports = async member => {
     }
 
     if (guildModel.dataValues.greet) {
-      let isEmbed = guildModel.dataValues.greetMessage && Object.keys(guildModel.dataValues.greetMessage).length;
+      let greetMessage = guildModel.dataValues.greetMessage && Object.keys(guildModel.dataValues.greetMessage).length ? guildModel.dataValues.greetMessage : { text: greetMessages.getRandom() };
 
-      let greetMessage = isEmbed ? guildModel.dataValues.greetMessage : { text: greetMessages.getRandom() };
-
-      if (isEmbed) {
-        greetMessage = JSON.stringify(greetMessage);
-      }
+      greetMessage = JSON.stringify(greetMessage);
 
       greetMessage = greetMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetMessage = greetMessage.replace(/\$server/ig, member.guild.name);
@@ -58,15 +54,15 @@ module.exports = async member => {
       greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
 
       let text, embed;
-      if (isEmbed) {
-        greetMessage = JSON.parse(greetMessage);
+      greetMessage = JSON.parse(greetMessage);
 
-        greetMessage.footer = {};
-        greetMessage.footer.text = 'Greetings!';
+      text = greetMessage.text ? greetMessage.text : null;
+      delete greetMessage.text;
+      embed = Object.keys(greetMessage).length ? greetMessage : null;
 
-        text = greetMessage.text ? greetMessage.text : null;
-        delete greetMessage.text;
-        embed = Object.keys(greetMessage).length ? greetMessage : null;
+      if (embed) {
+        embed.footer = {};
+        embed.footer.text = 'Greetings!';
       }
 
       let greetChannel = member.guild.channels.get(guildModel.dataValues.greet);
@@ -107,13 +103,9 @@ module.exports = async member => {
     }
 
     if (guildModel.dataValues.greetPrivate) {
-      let isEmbed = guildModel.dataValues.greetPrivateMessage && Object.keys(guildModel.dataValues.greetPrivateMessage).length;
+      let greetPrivateMessage = guildModel.dataValues.greetPrivateMessage && Object.keys(guildModel.dataValues.greetPrivateMessage).length ? guildModel.dataValues.greetPrivateMessage : { text: greetMessages.getRandom() };
 
-      let greetPrivateMessage = isEmbed ? guildModel.dataValues.greetPrivateMessage : { text: greetMessages.getRandom() };
-
-      if (isEmbed) {
-        greetPrivateMessage = JSON.stringify(greetPrivateMessage);
-      }
+      greetPrivateMessage = JSON.stringify(greetPrivateMessage);
 
       greetPrivateMessage = greetPrivateMessage.replace(/\$user/ig, `<@${member.id}>`);
       greetPrivateMessage = greetPrivateMessage.replace(/\$server/ig, member.guild.name);
@@ -121,15 +113,15 @@ module.exports = async member => {
       greetPrivateMessage = greetPrivateMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
 
       let text, embed;
-      if (isEmbed) {
-        greetPrivateMessage = JSON.parse(greetPrivateMessage);
+      greetPrivateMessage = JSON.parse(greetPrivateMessage);
 
-        greetPrivateMessage.footer = {};
-        greetPrivateMessage.footer.text = 'Greetings!';
+      text = greetPrivateMessage.text ? greetPrivateMessage.text : null;
+      delete greetPrivateMessage.text;
+      embed = Object.keys(greetPrivateMessage).length ? greetPrivateMessage : null;
 
-        text = greetPrivateMessage.text ? greetPrivateMessage.text : null;
-        delete greetPrivateMessage.text;
-        embed = Object.keys(greetPrivateMessage).length ? greetPrivateMessage : null;
+      if (embed) {
+        embed.footer = {};
+        embed.footer.text = 'Greetings!';
       }
 
 

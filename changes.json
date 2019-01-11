@@ -1,13 +1,18 @@
 {
-  "date": "January 9, 2019",
+  "date": "January 11, 2019",
   "image": "https://i.imgur.com/zlOMqVD.gif",
   "IMPROVEMENTS": [
     "Bastion's autoplay will now play daily hits instead of weekly hits. Daily music listeners won't get bored of the same songs anymore.",
-    "AFK messages will be shown even if a user's status is set to *Online* or *DND*."
+    "AFK messages will be shown even if a user's status is set to *Online* or *DND*.",
+    "Some under-the-hood improvements to make Bastion even better!"
   ],
   "KILLED THOSE BUGS": [
     "Fixed `showSpoiler` command not decoding the spoilers for you!",
     "Fixed an issue with auto-assignable roles being assigned at a delay if greet timeout was set.",
-    "Fixed an issue that prevented the default greet & farewell messages from being shown. Bastion wanted to have a custom message for those. But not anymore!"
+    "Fixed an issue that prevented the default greet & farewell messages from being shown. Bastion wanted to have a custom message for those. But not anymore!",
+    "Fixed an issue that prevented your profile from being shown if you had more XP than Bastion expected from you. Won't happen anymore.",
+    "Fixed an issue that displayed the text only greet & farewell messages outside the embed.",
+    "Fixed an issue that caused the music queue to show wrong page count in some cases.",
+    "Some under-the-hood fixes to make Bastion even better!"
   ]
 }

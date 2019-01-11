@@ -5,6 +5,8 @@
  */
 
 module.exports = (percentage = 0, totalSteps = 10) => {
+  percentage = percentage > 100 ? 100 : percentage;
+
   let complete = '█';
   let empty = '▒';
 
