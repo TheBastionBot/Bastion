@@ -20,12 +20,14 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notPlaying'), message.channel);
   }
 
-  let songs = message.guild.music.songs.slice(1);
-  songs = songs.map((song, i) => `**${i + 1}.** ${song.title}`);
+  let songs = message.guild.music.songs;
 
   let noOfPages = songs.length / 10;
   let i = (args.page > 0 && args.page < noOfPages + 1) ? args.page : 1;
   i = i - 1;
+
+  songs = songs.slice(1);
+  songs = songs.map((song, i) => `**${i + 1}.** ${song.title}`);
 
   await message.guild.music.textChannel.send({
     embed: {
