@@ -102,5 +102,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'greetMessage [MESSAGE] [--embed EMBED_OBJECT]',
-  example: [ 'greetMessage', 'greetMessage Hello $user! Welcome to $server.', 'greetMessage Hello $user! --embed { "title": "$user", "description": "Welcome to $server." }' ]
+  example: [ 'greetMessage', 'greetMessage Hello {author}! Welcome to {server}.', 'greetMessage Hello {author}! --embed { "title": "{author}", "description": "Welcome to {server}." }' ]
 };
