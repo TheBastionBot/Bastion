@@ -1,32 +1,19 @@
 {
-  "date": "January 2, 2019",
-  "image": "https://i.imgur.com/zlOMqVD.gif",
-  "Bastion. Version. Seven.": [
-    "Oh my goodness!",
-    "It's finally here!",
-    "Bastion v7!",
-    "The biggest release of Bastion, ever!"
+  "date": "January 12, 2019",
+  "image": "https://i.imgur.com/kzb8x1e.gif",
+  "IMPROVEMENTS": [
+    "Bastion's autoplay will now play daily hits instead of weekly hits. Daily music listeners won't get bored of the same songs anymore.",
+    "AFK messages will be shown even if a user's status is set to *Online* or *DND*.",
+    "Added some new variable support for greet & farewell messages.",
+    "Some under-the-hood improvements to make Bastion even better!"
   ],
-  "OK. COOL. BUT WHERE IS THE FREAKING CHANGELOG?!": [
-    "I remember writing it... :thinking:",
-    "But...",
-    "forgot to post it here in the excitement of this release.",
-    "Sorry :sweat_smile:"
-  ],
-  "Are you kidding me?": [
-    "Well, yeah.",
-    "Don't worry. I didn't forgot.",
-    "And neither is the changelog empty!",
-    "On the contrary, it is very huge!",
-    "So huge that it was impossible to fit within Discord's 2000 character message limit!",
-    "Now, you must be understanding how big this release is. Did I mention this earlier, though? :thinking:"
-  ],
-  "So... Where is it then?": [
-    "I won't keep you waiting any longer.",
-    "It was so huge that I had to create [a blog for Bastion](https://medium.com/thebastionbot) and post it in a [blog post](https://medium.com/thebastionbot/bastion-v7-5cab8eb93680)!",
-    "[Here's a link to V7 release notes!](https://medium.com/thebastionbot/bastion-v7-5cab8eb93680)"
-  ],
-  "Enjoy Bastion V7": [
-    "And wish you all a new year full of crazy $#!T and sick A$$ adventures!"
+  "KILLED THOSE BUGS": [
+    "Fixed `showSpoiler` command not decoding the spoilers for you!",
+    "Fixed an issue with auto-assignable roles being assigned at a delay if greet timeout was set.",
+    "Fixed an issue that prevented the default greet & farewell messages from being shown. Bastion wanted to have a custom message for those. But not anymore!",
+    "Fixed an issue that prevented your profile from being shown if you had more XP than Bastion expected from you. Won't happen anymore.",
+    "Fixed an issue that displayed the text only greet & farewell messages outside the embed.",
+    "Fixed an issue that caused the music queue to show wrong page count in some cases.",
+    "Some under-the-hood fixes to make Bastion even better!"
   ]
 }

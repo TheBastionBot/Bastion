@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'selfDestructTimeout', minTimeout, maxTimeout), message.channel);
   }
 
-  if (message.deletable) {
+  if (message.content && message.deletable) {
     await message.delete().catch(() => {});
   }
 

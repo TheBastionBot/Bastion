@@ -6,6 +6,8 @@
 
 module.exports = async message => {
   try {
+    if (!message.guild) return;
+
     let guildModel = await message.client.database.models.guild.findOne({
       attributes: [ 'serverLog' ],
       where: {

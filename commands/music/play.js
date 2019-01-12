@@ -251,7 +251,7 @@ exports.help = {
  */
 async function startStreamDispatcher(guild, connection) {
   if (!guild.music.songs[0] && guild.music.autoPlay && connection.channel.members.size > 1) {
-    let songs = await guild.client.methods.makeBWAPIRequest('/google/youtube/topsongs');
+    let songs = await guild.client.methods.makeBWAPIRequest('/google/youtube/topsongs/today');
     let videoID = songs.getRandom();
 
     let youtubeDLOptions = [
