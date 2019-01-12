@@ -48,10 +48,7 @@ module.exports = async member => {
 
       greetMessage = JSON.stringify(greetMessage);
 
-      greetMessage = greetMessage.replace(/\$user/ig, `<@${member.id}>`);
-      greetMessage = greetMessage.replace(/\$server/ig, member.guild.name);
-      greetMessage = greetMessage.replace(/\$username/ig, member.displayName);
-      greetMessage = greetMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
+      greetMessage = member.client.methods.replaceMemberVariables(greetMessage, member);
 
       let text, embed;
       greetMessage = JSON.parse(greetMessage);
@@ -107,10 +104,7 @@ module.exports = async member => {
 
       greetPrivateMessage = JSON.stringify(greetPrivateMessage);
 
-      greetPrivateMessage = greetPrivateMessage.replace(/\$user/ig, `<@${member.id}>`);
-      greetPrivateMessage = greetPrivateMessage.replace(/\$server/ig, member.guild.name);
-      greetPrivateMessage = greetPrivateMessage.replace(/\$username/ig, member.displayName);
-      greetPrivateMessage = greetPrivateMessage.replace(/\$prefix/ig, member.guild.prefix ? member.guild.prefix[0] : member.client.configurations.prefix[0]);
+      greetPrivateMessage = member.client.methods.replaceMemberVariables(greetPrivateMessage, member);
 
       let text, embed;
       greetPrivateMessage = JSON.parse(greetPrivateMessage);

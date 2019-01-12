@@ -4,6 +4,7 @@
   "IMPROVEMENTS": [
     "Bastion's autoplay will now play daily hits instead of weekly hits. Daily music listeners won't get bored of the same songs anymore.",
     "AFK messages will be shown even if a user's status is set to *Online* or *DND*.",
+    "Added some new variable support for greet & farewell messages.",
     "Some under-the-hood improvements to make Bastion even better!"
   ],
   "KILLED THOSE BUGS": [
