@@ -34,7 +34,7 @@
     "command-line-args": "github:k3rn31p4nic/command-line-args",
     "cron": "~1.6.0",
     "discord.js": "~11.4.2",
-    "gamedig": "~1.0.47",
+    "gamedig": "~2.0.1",
     "hirez.js": "~2.0.0",
     "kitsu": "~6.5.1",
     "locke": "github:TheBastionBot/Locke#v0.9.0",
