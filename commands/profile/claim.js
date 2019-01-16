@@ -91,7 +91,7 @@ exports.exec = async (Bastion, message) => {
   await message.author.send({
     embed: {
       color: Bastion.colors.GREEN,
-      description: `Your account, in **${message.guild.name}** Server, has been debited with **${rewardAmount}** Bastion Currencies.`
+      description: `Your account, in **${message.guild.name}** Server, has been debited with **${rewardAmount}** STEM Bucks.`
     }
   }).catch(e => {
     if (e.code !== 50007) {
