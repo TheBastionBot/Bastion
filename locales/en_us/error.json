@@ -15,7 +15,7 @@
   "serverNotFound": "%bastion% cannot find the server at %var%.\n• Check the address for typing errors such as **ww**.example.com instead of **www**.example.com\n• Connection may have been timed out, try again later.",
   "eitherOneInVC": "Either one of us should be in a voice channel.",
   "favSongsNotFound": "There are no songs in your favorite songs list.",
-  "gamblingCooldown": "%var% you have recently gambled in this game, please wait at least %var% seconds before gambling again.",
+  "gamblingCooldown": "%var% you have recently gambled in this game, please wait at least %var% minutes before gambling again.",
   "giveLimit": "You cannot give more than %var%% of your %currency.name_plural%.",
   "giveNoUser": "You need to mention the user to whom you want to give %currency.name_plural%.",
   "giveYourself": "You cannot give yourself %currency.name_plural%.",
