@@ -19,7 +19,7 @@ exports.exec = async (Bastion, message, args) => {
     user = message.author;
   }
   if (!member) {
-    member = await Bastion.utils.fetchMember(message.guild, args.id);
+    member = await Bastion.utils.fetchMember(message.guild, user.id);
   }
   let nick = member.nickname;
   if (!nick) {
