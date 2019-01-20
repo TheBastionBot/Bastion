@@ -61,7 +61,7 @@ exports.exec = async (Bastion, message, args) => {
 
   setTimeout(() => {
     recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
-  }, cooldown * 1000);
+  }, cooldown * 60 * 1000);
 
   await message.channel.send({
     embed: {

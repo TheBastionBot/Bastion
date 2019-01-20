@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (args.id) {
+  if (!args.id) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
