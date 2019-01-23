@@ -97,5 +97,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addTrigger <trigger text> <-t text response | -e embed object | -r reaction emoji> ',
-  example: [ 'addTrigger Hi, there? -t Hello $user! :wave:', 'addTrigger Hi, there? -e { "description": "Hello $user! :wave:"}', 'addTrigger Hi, there? -r :wave:' ]
+  example: [ 'addTrigger Hi, there? -t Hello {author}! :wave:', 'addTrigger Hi, there? -e { "description": "Hello {author}! :wave:"}', 'addTrigger Hi, there? -r :wave:' ]
 };
