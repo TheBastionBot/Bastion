@@ -8,8 +8,8 @@ exports.exec = async (Bastion, message, args) => {
   args = message.mentions.users.first() || message.author;
   let guildMemberModel = await Bastion.database.models.guildMember.findOne({
     attributes: [
-      [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers)'), 'total' ],
-      [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers AS member WHERE member.experiencePoints * 1 > guildMember.experiencePoints * 1)'), 'rank' ]
+      [ Bastion.database.literal(`(SELECT COUNT(*) FROM guildMembers AS member WHERE member.guildID = ${message.guild.id})`), 'total' ],
+      [ Bastion.database.literal('(SELECT COUNT(*) FROM guildMembers AS member WHERE member.guildID = ${message.guild.id} AND member.experiencePoints * 1 > guildMember.experiencePoints * 1)'), 'rank' ]
     ],
     where: {
       userID: args.id,
