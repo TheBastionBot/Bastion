@@ -24,6 +24,7 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'profileNotCreated', `<@${args.id}>`), message.channel);
   }
 
+  let awardedXP = args.points;
   args.points = `${parseInt(guildMemberModel.dataValues.experiencePoints) + parseInt(args.points)}`;
   if (!Number.isSafeInteger(args.points)) args.points = '0';
 
@@ -41,7 +42,7 @@ exports.exec = async (Bastion, message, args) => {
   await message.channel.send({
     embed: {
       color: Bastion.colors.GREEN,
-      description: `<@${args.id}> has been awarded with **${args.points}** experience points.`
+      description: `<@${args.id}> has been awarded with **${awardedXP}** experience points.`
     }
   }).catch(e => {
     Bastion.log.error(e);
