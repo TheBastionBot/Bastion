@@ -25,6 +25,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   args.points = `${parseInt(guildMemberModel.dataValues.experiencePoints) + parseInt(args.points)}`;
+  if (!Number.isSafeInteger(args.points)) args.points = '0';
 
   await Bastion.database.models.guildMember.update({
     experiencePoints: args.points
