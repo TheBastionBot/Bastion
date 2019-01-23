@@ -16,7 +16,7 @@ module.exports = async Bastion => {
       if (!Bastion.channels.has(group.channelID)) return;
       let channel = Bastion.channels.get(group.channelID);
       if (!channel.messages.has(group.messageID)) {
-        await channel.fetchMessage(group.messageID);
+        await channel.fetchMessage(group.messageID).catch(() => {});
       }
     }
   }
