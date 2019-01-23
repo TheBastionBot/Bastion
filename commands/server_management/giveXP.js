@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (!args.id || !args.points) {
+  if (!args.id || !args.points || !Number.isSafeInteger(parseInt(args.points))) {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
 
   let awardedXP = args.points;
   args.points = `${parseInt(guildMemberModel.dataValues.experiencePoints) + parseInt(args.points)}`;
-  if (!Number.isSafeInteger(args.points)) args.points = '0';
+  if (!Number.isSafeInteger(parseInt(args.points))) args.points = '0';
 
   await Bastion.database.models.guildMember.update({
     experiencePoints: args.points
