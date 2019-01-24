@@ -1,11 +1,9 @@
 {
-  "date": "January 20, 2019",
-  "image": "https://i.imgur.com/hbMnuYj.gif",
-  "CHANGES": [
-    "Gambling cooldown has now been increased to 60 minutes."
-  ],
+  "date": "January 24, 2019",
+  "image": "https://i.imgur.com/T2klvh4.gif",
   "FIXES": [
-    "Fixed `userInfo` command not working with user mentions.",
-    "Fixed `removeAllRoles` command not working as it should be."
+    "Fixed `rank` command not showing the correct rank.",
+    "The `giveXP` command will now show the amount of XP awarded instead of the total XP with the user.",
+    "Fixed some under-the-hood issues too!"
   ]
 }

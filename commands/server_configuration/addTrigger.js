@@ -12,13 +12,13 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   let triggerModels = await message.client.database.models.trigger.findAll({
-    attributes: [ [ message.client.database.fn('COUNT', message.client.database.col('trigger')), 'noOfTriggers' ] ],
+    attributes: [ 'guildID' ],
     where: {
       guildID: message.guild.id
     }
   });
 
-  if (!Bastion.credentials.ownerId.includes(message.author.id) && triggerModels && triggerModels.dataValues.noOfTriggers >= 10) {
+  if (!Bastion.credentials.ownerId.includes(message.author.id) && triggerModels && triggerModels.length >= 10) {
     return Bastion.emit('error', 'forbidden', 'You can\'t set more than 10 triggers per server, for now. This limit will be increased in the future.', message.channel);
   }
 
@@ -97,5 +97,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addTrigger <trigger text> <-t text response | -e embed object | -r reaction emoji> ',
-  example: [ 'addTrigger Hi, there? -t Hello $user! :wave:', 'addTrigger Hi, there? -e { "description": "Hello $user! :wave:"}', 'addTrigger Hi, there? -r :wave:' ]
+  example: [ 'addTrigger Hi, there? -t Hello {author}! :wave:', 'addTrigger Hi, there? -e { "description": "Hello {author}! :wave:"}', 'addTrigger Hi, there? -r :wave:' ]
 };
