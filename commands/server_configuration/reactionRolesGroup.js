@@ -149,6 +149,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
-  usage: 'reactionRolesGroup [ ROLE_ID_1, ROLE_ID_2, ... ] [ -t Message Title ] [ -b Message Body ] [ --exclusive ] [ --remove MESSAGE_ID ]',
+  usage: 'reactionRolesGroup [ ROLE_ID_1 ROLE_ID_2 ... ] [ -t Message Title ] [ -b Message Body ] [ --exclusive ] [ --remove MESSAGE_ID ]',
   example: [ 'reactionRolesGroup', 'reactionRolesGroup 219101083619902983 2494130541574845651 -t Self Assign -b React to Get Role', 'reactionRolesGroup 219101083619902983 2494130541574845651 --exclusive' ]
 };
