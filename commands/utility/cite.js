@@ -36,7 +36,7 @@ exports.exec = async (Bastion, message, args) => {
           fields: [
             {
               name: 'Link to Message',
-              value: `https://discordapp.com/channels/${citedMessage.guild.id}/${citedMessage.channel.id}/${citedMessage.id}`
+              value: `[Click here to go to the original message.](${citedMessage.url})`
             }
           ],
           timestamp: citedMessage.createdAt
@@ -55,7 +55,7 @@ exports.exec = async (Bastion, message, args) => {
         fields: [
           {
             name: 'Link to Message',
-            value: `https://discordapp.com/channels/${citedMessage.guild.id}/${citedMessage.channel.id}/${citedMessage.id}`
+            value: `[Click here to go to the original message.](${citedMessage.url})`
           }
         ],
         image: {
