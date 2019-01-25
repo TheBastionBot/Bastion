@@ -1,9 +1,7 @@
 {
-  "date": "January 24, 2019",
+  "date": "January 25, 2019",
   "image": "https://i.imgur.com/T2klvh4.gif",
   "FIXES": [
-    "Fixed `rank` command not showing the correct rank.",
-    "The `giveXP` command will now show the amount of XP awarded instead of the total XP with the user.",
-    "Fixed some under-the-hood issues too!"
+    "Fixed an issue that prevented the `rank` command from working!"
   ]
 }
