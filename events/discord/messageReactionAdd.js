@@ -115,7 +115,7 @@ module.exports = async (reaction, user) => {
                         },
                         {
                           name: 'Link to Message',
-                          value: `https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`
+                          value: `[Click here to go to the original message.](${reaction.message.url})`
                         }
                       ],
                       image: {
