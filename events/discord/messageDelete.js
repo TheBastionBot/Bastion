@@ -52,7 +52,7 @@ module.exports = async message => {
           },
           {
             name: 'Message Content',
-            value: '~~Deleted~~',
+            value: '`[REDACTED]`',
             inline: true
           }
         ],
