@@ -26,7 +26,7 @@ for (let module of modules) {
 
     commands[file.help.name] = {
       description: file.help.description,
-      module: toTitleCase(module.replace('_', ' '))
+      module: toTitleCase(module.replace(/_/g, ' '))
     };
   }
 }
