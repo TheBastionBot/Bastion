@@ -27,7 +27,7 @@
   "homepage": "https://bastionbot.org",
   "dependencies": {
     "@k3rn31p4nic/google-translate-api": "~1.0.5",
-    "bwapi": "github:TheBastionBot/bwapi#3.0.1",
+    "bwapi": "github:TheBastionBot/bwapi#3.0.5",
     "chalk": "~2.4.1",
     "cheerio": "~1.0.0-rc.2",
     "color-convert": "~1.9.3",

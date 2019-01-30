@@ -13,17 +13,25 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   if (!args.song) {
-    return Bastion.emit('commandUsage', message, this.help);
+    if (message.guild.music.songs && message.guild.music.songs.length) {
+      args.song = message.guild.music.songs[0].title;
+    }
+    else {
+      return Bastion.emit('commandUsage', message, this.help);
+    }
+  }
+  else {
+    args.song = args.song.join(' ');
   }
 
-  let response = await Bastion.methods.makeBWAPIRequest(`/song/${args.song.join(' ')}`);
+  let response = await Bastion.methods.makeBWAPIRequest(`/song/${args.song}`);
 
   if (response.error) {
     return await message.channel.send({
       embed: {
         color: Bastion.colors.RED,
         title: 'Not Found',
-        description: `No lyrics was found for **${args.song.join(' ').toTitleCase()}**.\nIf you think you are searching for the right song, try adding the artist's name to the search term and try again.`
+        description: `No lyrics was found for **${args.song.toTitleCase()}**.\nIf you think you are searching for the right song, try adding the artist's name to the search term and try again.`
       }
     });
   }
@@ -59,10 +67,10 @@ exports.config = {
 
 exports.help = {
   name: 'lyrics',
-  description: 'Shows the lyrics of the specified song.',
+  description: 'Shows the lyrics of the current song being played in the server or any specified song.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'lyrics <SONG NAME> [ARTIST NAME]',
-  example: [ 'lyrics Something just like this', 'lyrics Shape of you - Ed Sheeran' ]
+  usage: 'lyrics [SONG NAME] [ARTIST NAME]',
+  example: [ 'lyrics', 'lyrics Something just like this', 'lyrics Shape of you - Ed Sheeran' ]
 };
