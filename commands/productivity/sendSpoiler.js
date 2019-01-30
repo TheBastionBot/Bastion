@@ -9,6 +9,10 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('commandUsage', message, this.help);
   }
 
+  if (message.deletable) {
+    await message.channel.delete().catch(() => {});
+  }
+
   await message.channel.send({
     embed: {
       color: message.client.colors.BLUE,
