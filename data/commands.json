@@ -616,7 +616,7 @@
     "module": "Server Configuration"
   },
   "lyrics": {
-    "description": "Shows the lyrics of the specified song.",
+    "description": "Shows the lyrics of the current song being played in the server or any specified song.",
     "module": "Music"
   },
   "magic8ball": {
@@ -640,12 +640,12 @@
     "module": "Server Management"
   },
   "messageChannel": {
-    "description": "Send a specified message to any specified text channel that Bastion has access to.",
-    "module": "Bot Owner"
+    "description": "Send a message to any specified text channel of your server through Bastion.",
+    "module": "Server Management"
   },
-  "messageUser": {
-    "description": "Send a specified message to any specified user that Bastion has access to.",
-    "module": "Bot Owner"
+  "messageMember": {
+    "description": "Send a message to any specified member of your server through Bastion.",
+    "module": "Server Management"
   },
   "minecraft": {
     "description": "Get stats of any Minecraft game server.",
