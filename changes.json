@@ -1,12 +1,19 @@
 {
-  "date": "January 30, 2019",
+  "date": "January 31, 2019",
   "image": "https://i.imgur.com/YPingwC.gif",
-  "FIXES": [
+  "NEW STUFF": [
+    "`messageChannel` can now be used by server managers to send any message to any channel in their server.",
+    "Added `messageMember` command, which can be used by server managers to send any message to any member in their server."
+  ],
+  "OLD STUFF, BUT BUFFED!": [
+    "The `lyrics` command will now automatically search the lyrics for the currently playing song if no song name is provided to it.",
+    "Made some under-the-hood improvements too!"
+  ],
+  "KILLED BUGS FROM OLD STUFF": [
     "Fixed an issue that prevented the `rank` command from working!",
     "`sendSpoiler` will now auto delete the invoking message containing the spoiler so the other users don't get spoiled!"
   ],
-  "IMPROVEMENTS": [
-    "The `lyrics` command will now automatically search the lyrics for the currently playing song if no song name is provided to it.",
-    "Made some under-the-hood improvements too!"
+  "THROWN OUT SOME ANCIENT STUFF": [
+    "Removed the `messageUser` command, because bot owners don't need to send message to random users!"
   ]
 }
