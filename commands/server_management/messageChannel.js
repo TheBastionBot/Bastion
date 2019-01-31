@@ -30,7 +30,7 @@ exports.config = {
 
 exports.help = {
   name: 'messageChannel',
-  description: 'Send a message to any specified text channel of your Discord server through Bastion.',
+  description: 'Send a message to any specified text channel of your server through Bastion.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
