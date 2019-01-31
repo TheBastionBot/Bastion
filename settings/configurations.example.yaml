@@ -2,7 +2,9 @@
 # This is probably best if you don't change the default value.
 shardCount: 1
 
-# Default prefixes of Bastion.
+# Default prefixes of Bastion. This is permanent, i.e., once set, it'll stay
+# the same until the database is deleted.
+# Although, you can use the `setPrefix` command to change server speific prefix.
 prefix:
   - "#!"
 
