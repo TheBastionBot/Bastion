@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
       level: guildMemberModel.level.defaultValue,
       karma: guildMemberModel.karma.defaultValue,
       lastClaimed: guildMemberModel.lastClaimed.defaultValue,
-      claimStreak: guildMemberModel.claimStreak.defaultValue,
+      claimStreak: guildMemberModel.claimStreak.defaultValue
     },
     {
       where: {
@@ -34,7 +34,7 @@ exports.exec = async (Bastion, message, args) => {
       level: guildMemberModel.level.defaultValue,
       karma: guildMemberModel.karma.defaultValue,
       lastClaimed: guildMemberModel.lastClaimed.defaultValue,
-      claimStreak: guildMemberModel.claimStreak.defaultValue,
+      claimStreak: guildMemberModel.claimStreak.defaultValue
     },
     {
       where: {
