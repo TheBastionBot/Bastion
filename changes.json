@@ -1,9 +1,10 @@
 {
-  "date": "January 31, 2019",
+  "date": "February 1, 2019",
   "image": "https://i.imgur.com/YPingwC.gif",
   "NEW STUFF": [
     "`messageChannel` can now be used by server managers to send any message to any channel in their server.",
-    "Added `messageMember` command, which can be used by server managers to send any message to any member in their server."
+    "Added `messageMember` command, which can be used by server managers to send any message to any member in their server.",
+    "Added `resetProfile` command, which can be used to delete your Bastion profile in case you want to start over. Server managers can use it to reset everyone's Bastion profiles."
   ],
   "OLD STUFF, BUT BUFFED!": [
     "The `lyrics` command will now automatically search the lyrics for the currently playing song if no song name is provided to it.",
@@ -14,6 +15,7 @@
     "`sendSpoiler` will now auto delete the invoking message containing the spoiler so the other users don't get spoiled!"
   ],
   "THROWN OUT SOME ANCIENT STUFF": [
-    "Removed the `messageUser` command, because bot owners don't need to send message to random users!"
+    "Removed the `messageUser` command, because bot owners don't need to send message to random users!",
+    "Removed the `resetDatabase` command, because `resetProfile` is a thing now."
   ]
 }
