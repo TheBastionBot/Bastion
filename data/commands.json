@@ -867,13 +867,13 @@
     "description": "Give karma to other users. You can give karma only once in 12 hours.",
     "module": "Profile"
   },
-  "resetDatabase": {
-    "description": "Resets all the data from a specified table of %bastion%'s database.",
-    "module": "Bot Owner"
-  },
   "resetModerationLogs": {
     "description": "Resets the moderation log cases back to 1.",
     "module": "Server Configuration"
+  },
+  "resetProfile": {
+    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can delete everyone's profiles.",
+    "module": "Profile"
   },
   "resume": {
     "description": "Resumes the previously paused playback.",
