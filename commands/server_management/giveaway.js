@@ -13,9 +13,9 @@ exports.exec = async (Bastion, message, args) => {
     // Giveaway item name
     args.item = args.item.join(' ');
 
-    // Verify whether timeout is within 12 hours
-    if (!args.timeout.inRange(1, 12)) {
-      return Bastion.emit('error', '', 'Giveaway can only run for at least an hour and at most 12 hours.', message.channel);
+    // Verify whether timeout is within 24 hours
+    if (!args.timeout.inRange(1, 24)) {
+      return Bastion.emit('error', '', 'Giveaway can only run for at least an hour and at most 24 hours.', message.channel);
     }
 
     // Generate a random reaction for the giveaway message
@@ -230,7 +230,7 @@ exports.config = {
 
 exports.help = {
   name: 'giveaway',
-  description: 'Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.',
+  description: 'Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 24 hours.',
   botPermission: '',
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
