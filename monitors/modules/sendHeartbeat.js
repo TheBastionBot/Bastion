@@ -12,7 +12,7 @@
 module.exports = async Bastion => {
   try {
     return await Bastion.methods.makeBWAPIRequest('/heartbeat', {
-      method: "POST",
+      method: 'POST',
       body: {
         bot: Bastion.user.id
       }
