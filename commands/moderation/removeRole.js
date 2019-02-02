@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
   else {
     role = args.slice(1).join(' ');
   }
-  role = message.guild.roles.find(role => role.name === role);
+  role = message.guild.roles.find(r => r.name === role);
   if (role && message.author.id !== message.guild.ownerID && message.member.highestRole.comparePositionTo(role) <= 0) return Bastion.log.info(Bastion.i18n.error(message.guild.language, 'lowerRole'));
   else if (!role) {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'roleNotFound'), message.channel);
