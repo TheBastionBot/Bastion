@@ -10,7 +10,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   if (message.deletable) {
-    await message.channel.delete().catch(() => {});
+    await message.delete().catch(() => {});
   }
 
   await message.channel.send({
