@@ -1,5 +1,5 @@
 {
-  "date": "February 1, 2019",
+  "date": "February 2, 2019",
   "image": "https://i.imgur.com/YPingwC.gif",
   "NEW STUFF": [
     "`messageChannel` can now be used by server managers to send any message to any channel in their server.",
@@ -8,6 +8,7 @@
   ],
   "OLD STUFF, BUT BUFFED!": [
     "The `lyrics` command will now automatically search the lyrics for the currently playing song if no song name is provided to it.",
+    "12 hours giveaways weren't enough for you? You can now run `giveaway` for a maximum of 24 hours!",
     "Made some under-the-hood improvements too!"
   ],
   "KILLED BUGS FROM OLD STUFF": [
