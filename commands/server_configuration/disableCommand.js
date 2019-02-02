@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'notFound', 'command'), message.channel);
     }
 
-    if ([ 'enablecommand', 'disablecommand' ].includes(command.help.name.toLowerCase()) || !command.config.ownerOnly) {
+    if ([ 'enablecommand', 'disablecommand' ].includes(command.help.name.toLowerCase()) || command.config.ownerOnly) {
       return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'commandNoDisable', command.help.name), message.channel);
     }
 
