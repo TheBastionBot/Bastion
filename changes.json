@@ -2,6 +2,7 @@
   "date": "February 2, 2019",
   "image": "https://i.imgur.com/YPingwC.gif",
   "KILLED THESE BUGS": [
-    "The `sendSpoiler` command had a major security issue, that came with the last release! Thanks to one of our mods who reported it as soon as the release went out and it was disabled to prevent any damage. That's been fixed now! Thank goodness!"
+    "The `sendSpoiler` command had a major security issue, that came with the last release! Thanks to one of our mods who reported it as soon as the release went out and it was disabled to prevent any damage. That's been fixed now! Thank goodness!",
+    "There was a bug that prevented you from disabling non bot owner commands. Killed that nasty bug!"
   ]
 }
