@@ -1,9 +1,22 @@
 {
-  "date": "January 24, 2019",
-  "image": "https://i.imgur.com/T2klvh4.gif",
-  "FIXES": [
-    "Fixed `rank` command not showing the correct rank.",
-    "The `giveXP` command will now show the amount of XP awarded instead of the total XP with the user.",
-    "Fixed some under-the-hood issues too!"
+  "date": "February 2, 2019",
+  "image": "https://i.imgur.com/YPingwC.gif",
+  "NEW STUFF": [
+    "`messageChannel` can now be used by server managers to send any message to any channel in their server.",
+    "Added `messageMember` command, which can be used by server managers to send any message to any member in their server.",
+    "Added `resetProfile` command, which can be used to delete your Bastion profile in case you want to start over. Server managers can use it to reset everyone's Bastion profiles."
+  ],
+  "OLD STUFF, BUT BUFFED!": [
+    "The `lyrics` command will now automatically search the lyrics for the currently playing song if no song name is provided to it.",
+    "12 hours giveaways weren't enough for you? You can now run `giveaway` for a maximum of 24 hours!",
+    "Made some under-the-hood improvements too!"
+  ],
+  "KILLED BUGS FROM OLD STUFF": [
+    "Fixed an issue that prevented the `rank` command from working!",
+    "`sendSpoiler` will now auto delete the invoking message containing the spoiler so the other users don't get spoiled!"
+  ],
+  "THROWN OUT SOME ANCIENT STUFF": [
+    "Removed the `messageUser` command, because bot owners don't need to send message to random users!",
+    "Removed the `resetDatabase` command, because `resetProfile` is a thing now."
   ]
 }

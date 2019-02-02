@@ -74,7 +74,7 @@ module.exports = async  (oldMessage, newMessage) => {
           },
           {
             name: 'Old Message Content',
-            value: '~~Deleted~~',
+            value: '`[REDACTED]`',
             inline: true
           }
         ],

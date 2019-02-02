@@ -57,7 +57,7 @@
   },
   "ark": {
     "description": "Get stats of any ARK: Survival Evolved game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "autoDisconnect": {
     "description": "Toggles auto disconnect from voice channel. If enabled, Bastion will automatically leave the voice channel to save bandwidth when no one else is connected to it.",
@@ -125,11 +125,11 @@
   },
   "callOfDuty4": {
     "description": "Get stats of any Call of Duty 4: Modern Warfare game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "callOfDutyModernWarfare3": {
     "description": "Get stats of any Call of Duty: Modern Warfare 3 game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "capture": {
     "description": "Captures a screenshot of the specified webpage.",
@@ -229,7 +229,7 @@
   },
   "counterStrikeGlobalOffensive": {
     "description": "Get stats of any Counter-Strike: Global Offensive game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "createCategory": {
     "description": "Creates a new channel category on your Discord server.",
@@ -432,7 +432,7 @@
     "module": "Server Management"
   },
   "giveaway": {
-    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours.",
+    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 24 hours.",
     "module": "Server Management"
   },
   "google": {
@@ -616,7 +616,7 @@
     "module": "Server Configuration"
   },
   "lyrics": {
-    "description": "Shows the lyrics of the specified song.",
+    "description": "Shows the lyrics of the current song being played in the server or any specified song.",
     "module": "Music"
   },
   "magic8ball": {
@@ -640,16 +640,16 @@
     "module": "Server Management"
   },
   "messageChannel": {
-    "description": "Send a specified message to any specified text channel that Bastion has access to.",
-    "module": "Bot Owner"
+    "description": "Send a message to any specified text channel of your server through Bastion.",
+    "module": "Server Management"
   },
-  "messageUser": {
-    "description": "Send a specified message to any specified user that Bastion has access to.",
-    "module": "Bot Owner"
+  "messageMember": {
+    "description": "Send a message to any specified member of your server through Bastion.",
+    "module": "Server Management"
   },
   "minecraft": {
     "description": "Get stats of any Minecraft game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "modLog": {
     "description": "Toggles logging of various moderation events in the server.",
@@ -867,13 +867,13 @@
     "description": "Give karma to other users. You can give karma only once in 12 hours.",
     "module": "Profile"
   },
-  "resetDatabase": {
-    "description": "Resets all the data from a specified table of %bastion%'s database.",
-    "module": "Bot Owner"
-  },
   "resetModerationLogs": {
     "description": "Resets the moderation log cases back to 1.",
     "module": "Server Configuration"
+  },
+  "resetProfile": {
+    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can delete everyone's profiles.",
+    "module": "Profile"
   },
   "resume": {
     "description": "Resumes the previously paused playback.",
@@ -945,7 +945,7 @@
   },
   "rust": {
     "description": "Get stats of any Rust game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "scheduleCommand": {
     "description": "Schedule a command as cron jobs to run at the specified schedule.\n`cron` expression format:```Second         0-59 or * or range\nMinute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```",
@@ -1149,7 +1149,7 @@
   },
   "teamFortress2": {
     "description": "Get stats of any Team Fortress 2 game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "terms": {
     "description": "Read %bastion%'s Terms of Service.",
@@ -1225,7 +1225,7 @@
   },
   "unturned": {
     "description": "Get stats of any Unturned game server.",
-    "module": "Game Server_stats"
+    "module": "Game Server Stats"
   },
   "urbanDictionary": {
     "description": "Searches the Urban Dictionary for an urban definition of the specified word.",

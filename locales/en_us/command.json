@@ -324,7 +324,7 @@
     "description": "Give the specified amount of experience points to the specified user and increase their level."
   },
   "giveaway": {
-    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours."
+    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 24 hours."
   },
   "google": {
     "description": "Searches Google, for the specified query, and shows the top results."
@@ -462,7 +462,7 @@
     "description": "Toggles logging of various events in the server."
   },
   "lyrics": {
-    "description": "Shows the lyrics of the specified song."
+    "description": "Shows the lyrics of the current song being played in the server or any specified song."
   },
   "magic8ball": {
     "description": "Get answers to your polar (yes/no) questions from the Magic 8-Ball."
@@ -480,10 +480,10 @@
     "description": "Mentions any unmentionable role."
   },
   "messageChannel": {
-    "description": "Send a specified message to any specified text channel that Bastion has access to."
+    "description": "Send a message to any specified text channel of your server through Bastion."
   },
-  "messageUser": {
-    "description": "Send a specified message to any specified user that Bastion has access to."
+  "messageMember": {
+    "description": "Send a message to any specified member of your server through Bastion."
   },
   "minecraft": {
     "description": "Get stats of any Minecraft game server."
@@ -650,11 +650,11 @@
   "reputation": {
     "description": "Give karma to other users. You can give karma only once in 12 hours."
   },
-  "resetDatabase": {
-    "description": "Resets all the data from a specified table of %bastion%'s database."
-  },
   "resetModerationLogs": {
     "description": "Resets the moderation log cases back to 1."
+  },
+  "resetProfile": {
+    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can delete everyone's profiles."
   },
   "resume": {
     "description": "Resumes the previously paused playback."
