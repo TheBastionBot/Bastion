@@ -324,7 +324,7 @@
     "description": "Give the specified amount of experience points to the specified user and increase their level."
   },
   "giveaway": {
-    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 12 hours."
+    "description": "Starts a giveaway event, with the item of your choice, for the given amount of time, a winner is chosen at random after the event is concluded. Event can run for at least 1 hour and at most 24 hours."
   },
   "google": {
     "description": "Searches Google, for the specified query, and shows the top results."
