@@ -42,18 +42,21 @@ module.exports = async (reaction, user) => {
       if (guildModel.dataValues.announcementChannel && guildModel.dataValues.reactionAnnouncements) {
         if ([ '📣', '📢' ].includes(reaction.emoji.name)) {
           if (reaction.message.channel.permissionsFor(user).has('MANAGE_GUILD')) {
-            await reaction.message.channel.send({
-              embed: {
-                color: user.client.colors.BLUE,
-                author: {
-                  name: reaction.message.author.tag
-                },
-                description: reaction.message.content,
-                footer: {
-                  text: `📣 Announcement made by ${user.tag}`
+            let announcementChannel = reaction.message.guild.channels.get(guildModel.dataValues.announcementChannel);
+            if (announcementChannel) {
+              await announcementChannel.send({
+                embed: {
+                  color: user.client.colors.BLUE,
+                  author: {
+                    name: reaction.message.author.tag
+                  },
+                  description: reaction.message.content,
+                  footer: {
+                    text: `📣 Announcement made by ${user.tag}`
+                  }
                 }
-              }
-            });
+              });
+            }
           }
         }
       }

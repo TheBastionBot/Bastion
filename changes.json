@@ -1,5 +1,7 @@
 {
   "date": "February 3, 2019",
   "image": "https://i.imgur.com/aDt4u3b.gif",
-  "KILLED THESE BUGS": []
+  "KILLED THESE BUGS": [
+    "Killed a bug that posted the announcement messages, announced through announcement reactions, in the current channel instead of the announcement channel."
+  ]
 }
