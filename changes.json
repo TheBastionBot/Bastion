@@ -1,7 +1,8 @@
 {
-  "date": "February 3, 2019",
+  "date": "February 4, 2019",
   "image": "https://i.imgur.com/aDt4u3b.gif",
   "KILLED THESE BUGS": [
-    "Killed a bug that posted the announcement messages, announced through announcement reactions, in the current channel instead of the announcement channel."
+    "Killed a bug that posted the announcement messages, announced through announcement reactions, in the current channel instead of the announcement channel.",
+    "Killed another bug that prevented the `addWhitelistDomains` from working."
   ]
 }
