@@ -8,7 +8,7 @@ exports.exec = async (Bastion, message) => {
   let owners = [];
   for (let userID of Bastion.credentials.ownerId) {
     let user = await Bastion.fetchUser(userID).catch(() => {});
-    owners.push(user.tag);
+    if (user) owners.push(user.tag);
   }
 
   let shardStats = Bastion.shard ? await Bastion.shard.broadcastEval('this.uptime') : 'None';
@@ -80,7 +80,7 @@ exports.exec = async (Bastion, message) => {
         },
         {
           name: `Owner${Bastion.credentials.ownerId.length > 1 ? 's' : ''}`,
-          value: owners.join('\n'),
+          value: owners.join('\n') || '-',
           inline: true
         },
         {
