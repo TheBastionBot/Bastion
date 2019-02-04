@@ -16,6 +16,8 @@ exports.exec = async (Bastion, message, args) => {
     }
   });
 
+  if (!guildModel.dataValues.whitelistedDomains) guildModel.dataValues.whitelistedDomains = [];
+
   let whitelistDomains = guildModel.dataValues.whitelistedDomains.concat(args.domains);
   whitelistDomains = [ ...new Set(whitelistDomains) ];
 
