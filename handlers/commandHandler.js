@@ -173,7 +173,11 @@ module.exports = async message => {
     let blacklistedChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.blacklisted).map(model => model.dataValues.channelID);
     let blacklistedRoles = guildModel.roles.length && guildModel.roles.filter(model => model.dataValues.blacklisted).map(model => model.dataValues.roleID);
 
-    if ((blacklistedChannels && blacklistedChannels.includes(message.channel.id)) || (blacklistedRoles && message.member.roles.some(role => blacklistedRoles.includes(role.id)))) return message.client.log.info('The command is either used in a blacklisted channel or the user is in a blacklisted role.');
+    if (!message.member.hasPermission('MANAGE_GUILD')) {
+      if ((blacklistedChannels && blacklistedChannels.includes(message.channel.id)) || (blacklistedRoles && message.member.roles.some(role => blacklistedRoles.includes(role.id)))) {
+        return message.client.log.info('The command is either used in a blacklisted channel or the user is in a blacklisted role.');
+      }
+    }
 
     /**
      * Check if a command is disabled
