@@ -2,7 +2,8 @@
   "date": "February 5, 2019",
   "image": "https://i.imgur.com/aDt4u3b.gif",
   "IMPROVEMENTS": [
-    "Users with *Manage Server* perms won't be ignored in ignored channels or even if they have roles that are being ignored by Bastion."
+    "Users with *Manage Server* perms won't be ignored in ignored channels or even if they have roles that are being ignored by Bastion.",
+    "Some under-the-hood improvements, as always!"
   ],
   "KILLED THESE BUGS": [
     "Killed a bug that posted the announcement messages, announced through announcement reactions, in the current channel instead of the announcement channel.",
