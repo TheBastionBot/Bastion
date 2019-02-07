@@ -144,7 +144,7 @@ module.exports = async Bastion => {
       Bastion.log.console(COLOR`{gray ${Bastion.package.url}}`);
 
       Bastion.log.console(COLOR`\n{gray </> with ❤ by The Bastion Bot Team & Contributors}`);
-      Bastion.log.console(COLOR`{gray Copyright (C) 2017-2018 The Bastion Bot Project}`);
+      Bastion.log.console(COLOR`{gray Copyright (C) 2017-2019 The Bastion Bot Project}`);
 
       Bastion.log.console(COLOR`\n{cyan [${Bastion.user.username}]:} I'm ready to roll! 🚀\n`);
 
