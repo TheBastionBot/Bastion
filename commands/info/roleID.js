@@ -49,6 +49,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'roleInfo <@role-mention|role_name>',
-  example: [ 'roleInfo @Dark Knigths', 'roleInfo The Legends' ]
+  usage: 'roleID <@role-mention|role_name>',
+  example: [ 'roleID @Dark Knigths', 'roleID The Legends' ]
 };
