@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
       color: Bastion.colors.BLUE,
       description: args.join(' '),
       footer: {
-        text: `${!Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
       }
     }
   });
