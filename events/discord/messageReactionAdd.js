@@ -75,11 +75,10 @@ module.exports = async (reaction, user) => {
 
       if (guildModel.dataValues.starboard) {
         let isSameUser = reaction.message.author.id === user.id;
-        let hasContent = reaction.message.content && reaction.message.content.length;
         let isStarred = [ '🌟', '⭐' ].includes(reaction.emoji.name);
         let alreadyInStarboard = starredMessages.includes(reaction.message.id);
 
-        if (!isSameUser && hasContent && isStarred && !alreadyInStarboard) {
+        if (!isSameUser && isStarred && !alreadyInStarboard) {
           let starboardIgnoredChannels = guildModel.textChannels.length && guildModel.textChannels.filter(model => model.dataValues.ignoreStarboard).map(model => model.dataValues.channelID);
           let isIgnoredChannel = starboardIgnoredChannels && starboardIgnoredChannels.includes(reaction.message.channel.id);
 
