@@ -4,8 +4,9 @@
   "NEW COMMANDS!": [
     "You can now set roles as exclusive roles using the `exclusiveRoles` command. If level-up-roles are set and at least one role is exclusive in a given level, when user level ups to that level, they will get all roles in that level and all roles that they got from previous levels will be removed from them."
   ],
-  "IMPROVEMENTS": [
+  "IMPROVEMENTS & CHANGES": [
     "Users with *Manage Server* perms won't be ignored in ignored channels or even if they have roles that are being ignored by Bastion.",
+    "Bastion will now consider image only starred messages for starboard.",
     "Some under-the-hood improvements, as always!"
   ],
   "KILLED THESE BUGS": [
