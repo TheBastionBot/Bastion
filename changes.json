@@ -1,8 +1,9 @@
 {
-  "date": "February 17, 2019",
+  "date": "February 18, 2019",
   "image": "https://i.imgur.com/PgTmB5V.gif",
-  "NEW COMMANDS!": [
-    "You can now set roles as exclusive roles using the `exclusiveRoles` command. If level-up-roles are set and at least one role is exclusive in a given level, when user level ups to that level, they will get all roles in that level and all roles that they got from previous levels will be removed from them."
+  "NEW STUFF!": [
+    "You can now set roles as exclusive roles using the `exclusiveRoles` command. If level-up-roles are set and at least one role is exclusive in a given level, when user level ups to that level, they will get all roles in that level and all roles that they got from previous levels will be removed from them.",
+    "Some new easter eggs have been added! Try and find it out if you can!"
   ],
   "IMPROVEMENTS & CHANGES": [
     "Users with *Manage Server* perms won't be ignored in ignored channels or even if they have roles that are being ignored by Bastion.",
