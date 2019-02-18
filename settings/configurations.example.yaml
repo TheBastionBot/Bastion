@@ -10,7 +10,7 @@ prefix:
 
 # Default status of Bastion.
 # Valid values are `online`, `idle`, `dnd` and `invisible`/
-status: online
+status: "online"
 
 # Default activity of Bastion.
 game:
@@ -18,7 +18,7 @@ game:
   # Valid values are `Playing`, `Listening`, `Watching` and `Streaming`.
   # Note that `Streaming` activity will only work in a valid Twitch channel URL
   # is added in the `url` field below.
-  type: Playing
+  type: "Playing"
   # Activity names.
   # Strings you add here will be randomly rotated in the interval specified
   # in the `interval` field below.
@@ -26,7 +26,7 @@ game:
     - "with Ganymede"
     - "with wrenches"
   # Twitch channel URL for Streaming activity.
-  url: https://twitch.tv/k3rn31p4nic
+  url: "https://twitch.tv/k3rn31p4nic"
   # Activity name rotation interval (in minutes).
   interval: 60
 

@@ -51,6 +51,10 @@
     "description": "Adds/removes an announcement channel. You will receive announcements made by the bot owner in this channel.",
     "module": "Server Configuration"
   },
+  "apexLegends": {
+    "description": "Get stats of any Apex Legends player.",
+    "module": "Player Stats"
+  },
   "apod": {
     "description": "Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.",
     "module": "Searches"
@@ -338,6 +342,10 @@
   "eval": {
     "description": "Evaluates JavaScript code.",
     "module": "Bot Owner"
+  },
+  "exclusiveRoles": {
+    "description": "Add/remove the specified roles as exclusive roles. If no argument is passed, it will show the current list of exclusive roles.",
+    "module": "Server Configuration"
   },
   "exec": {
     "description": "Executes a command in the Terminal (Linux/macOS) or Command Prompt (Windows) and shows the output. Note that it will terminate the command if it runs for more than 1 minute.",

@@ -11,10 +11,10 @@ exports.exec = async (Bastion, message, args) => {
 
   await message.channel.send({
     embed: {
-      color: Bastion.colors.DEFAULT,
+      color: Bastion.colors.BLUE,
       description: args.join(' '),
       footer: {
-        text: `${!Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
+        text: `${Bastion.credentials.ownerId.includes(message.author.id) ? '' : Bastion.i18n.info(message.guild.language, 'endorsementMessage')}`
       }
     }
   });
