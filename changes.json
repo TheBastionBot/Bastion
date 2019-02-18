@@ -3,6 +3,7 @@
   "image": "https://i.imgur.com/PgTmB5V.gif",
   "NEW STUFF!": [
     "You can now set roles as exclusive roles using the `exclusiveRoles` command. If level-up-roles are set and at least one role is exclusive in a given level, when user level ups to that level, they will get all roles in that level and all roles that they got from previous levels will be removed from them.",
+    "Apex Legends has been on the news for a few weeks now. So we decided to add stats for it too! You can now see your stats from Apex Legends using the `apexLegends` command.",
     "Some new easter eggs have been added! Try and find it out if you can!"
   ],
   "IMPROVEMENTS & CHANGES": [
