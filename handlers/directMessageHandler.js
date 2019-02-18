@@ -42,21 +42,23 @@ module.exports = async message => {
       });
     }
 
-    let instantResponses = await message.client.methods.makeBWAPIRequest('/chat/instant', {
-      qs: {
-        message: message.content
+    if (message.client.credentials.ownerId.includes(message.author.id)) {
+      let instantResponses = await message.client.methods.makeBWAPIRequest('/chat/instant', {
+        qs: {
+          message: message.content
+        }
+      });
+
+      if (instantResponses instanceof Array) {
+        message.channel.startTyping();
+
+        for (let response of instantResponses) {
+          let reply = await message.channel.send(response).catch(() => {});
+          if (!reply) break;
+        }
+
+        return message.channel.stopTyping(true);
       }
-    });
-
-    if (instantResponses instanceof Array) {
-      message.channel.startTyping();
-
-      for (let response of instantResponses) {
-        let reply = await message.channel.send(response).catch(() => {});
-        if (!reply) break;
-      }
-
-      return message.channel.stopTyping(true);
     }
 
     let settingsModel = await message.client.database.models.settings.findOne({
