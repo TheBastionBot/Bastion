@@ -1,20 +1,7 @@
 {
-  "date": "February 18, 2019",
+  "date": "February 20, 2019",
   "image": "https://i.imgur.com/PgTmB5V.gif",
-  "NEW STUFF!": [
-    "You can now set roles as exclusive roles using the `exclusiveRoles` command. If level-up-roles are set and at least one role is exclusive in a given level, when user level ups to that level, they will get all roles in that level and all roles that they got from previous levels will be removed from them.",
-    "Apex Legends has been on the news for a few weeks now. So we decided to add stats for it too! You can now see your stats from Apex Legends using the `apexLegends` command.",
-    "Some new easter eggs have been added! Try and find it out if you can!"
-  ],
-  "IMPROVEMENTS & CHANGES": [
-    "Users with *Manage Server* perms won't be ignored in ignored channels or even if they have roles that are being ignored by Bastion.",
-    "Bastion will now consider image only starred messages for starboard.",
-    "Some under-the-hood improvements, as always!"
-  ],
   "KILLED THESE BUGS": [
-    "Killed a bug that posted the announcement messages, announced through announcement reactions, in the current channel instead of the announcement channel.",
-    "Killed another bug that prevented the `addWhitelistDomains` from working.",
-    "There was another bug that prevented the `stats` command from working if an invalid owner ID was set in the credentials. Killed that too!",
-    "Some under-the-hood fixes too!"
+    "Fixed an issue with the `reputation` command that gave karma to yourself!"
   ]
 }
