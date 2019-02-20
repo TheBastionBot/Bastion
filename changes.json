@@ -1,6 +1,9 @@
 {
   "date": "February 20, 2019",
   "image": "https://i.imgur.com/PgTmB5V.gif",
+  "CHANGES": [
+    "Some under-the-hood, super-secret, changes!"
+  ],
   "KILLED THESE BUGS": [
     "Fixed an issue with the `reputation` command that gave karma to yourself!"
   ]
