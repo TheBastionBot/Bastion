@@ -1,7 +1,8 @@
 {
-  "date": "February 20, 2019",
+  "date": "February 26, 2019",
   "image": "https://i.imgur.com/PgTmB5V.gif",
   "CHANGES": [
+    "Sneaky links monitor won't run for bots anymore.",
     "Some under-the-hood, super-secret, changes!"
   ],
   "KILLED THESE BUGS": [
