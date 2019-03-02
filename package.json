@@ -39,7 +39,7 @@
     "kitsu": "~6.5.1",
     "locke": "github:TheBastionBot/Locke#v0.9.0",
     "lzutf8": "~0.5.5",
-    "mathjs": "~5.5.0",
+    "mathjs": "~5.6.0",
     "node-opus": "~0.3.1",
     "pokedex-api": "~1.1.2",
     "rainbowsix-api-node": "~0.0.1",
