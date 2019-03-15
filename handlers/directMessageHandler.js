@@ -42,24 +42,32 @@ module.exports = async message => {
       });
     }
 
-    if (message.client.credentials.ownerId.includes(message.author.id)) {
-      let instantResponses = await message.client.methods.makeBWAPIRequest('/chat/instant', {
-        qs: {
-          message: message.content
-        }
-      });
 
-      if (instantResponses instanceof Array) {
+    // Instant responses
+    let instantResponse = await message.client.methods.makeBWAPIRequest('/chat/instant', {
+      qs: {
+        message: message.content
+      }
+    });
+
+    if (instantResponse.status === 'success') {
+      if (instantResponse.message.permissions.everyone || message.client.credentials.ownerId.includes(message.author.id)) {
         message.channel.startTyping();
 
-        for (let response of instantResponses) {
-          let reply = await message.channel.send(response).catch(() => {});
-          if (!reply) break;
+        if (instantResponse.message.response instanceof Array) {
+          for (let response of instantResponse.message.response) {
+            let reply = await message.channel.send(response).catch(() => {});
+            if (!reply) break;
+          }
+        }
+        else {
+          await message.channel.send(instantResponse.message.response).catch(() => {});
         }
 
         return message.channel.stopTyping(true);
       }
     }
+
 
     let settingsModel = await message.client.database.models.settings.findOne({
       attributes: [ 'relayDirectMessages' ],
