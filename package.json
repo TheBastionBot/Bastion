@@ -36,7 +36,7 @@
     "discord.js": "~11.4.2",
     "gamedig": "~2.0.8",
     "hirez.js": "~2.0.0",
-    "kitsu": "~6.5.1",
+    "kitsu": "~7.0.0",
     "locke": "github:TheBastionBot/Locke#v0.9.0",
     "lzutf8": "~0.5.5",
     "mathjs": "~5.7.0",
