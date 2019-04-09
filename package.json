@@ -45,7 +45,7 @@
     "rainbowsix-api-node": "~0.0.1",
     "request": "~2.88.0",
     "request-promise-native": "~1.0.5",
-    "sequelize": "~4.43.0",
+    "sequelize": "~5.2.15",
     "snekfetch": "~4.0.4",
     "sqlite": "~3.0.0",
     "sqlite3": "~4.0.4",
