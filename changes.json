@@ -2,6 +2,7 @@
   "date": "April 10, 2019",
   "image": "https://i.imgur.com/PgTmB5V.gif",
   "KILLED THESE BUGS": [
-    "Fixed an issue with the `roll` command that prevented it from working without any arguments."
+    "Fixed an issue with the `roll` command that prevented it from working without any arguments.",
+    "Fixed an issue with the `nickname` command that prevented server owners from using it."
   ]
 }
