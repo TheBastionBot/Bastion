@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
 
   let color;
   let nickStat = '';
-  if (message.guild.ownerID === message.author.id) {
+  if (message.guild.ownerID === member.id) {
     color = Bastion.colors.RED;
     nickStat = 'Can\'t change server owner\'s nickname.';
   }
