@@ -9,12 +9,7 @@ exports.exec = async (Bastion, message, args) => {
   if (args.multiplier === undefined) args.multiplier = 1;
 
   let outcomes = [
-    ':one:',
-    ':two:',
-    ':three:',
-    ':four:',
-    ':five:',
-    ':six:'
+    1, 2, 3, 4, 5, 6
   ];
   let outcome = args.faces === 6 ? outcomes.getRandom() : Number.random(1, args.faces);
 

@@ -1,12 +1,12 @@
 {
-  "date": "March 15, 2019",
-  "image": "https://i.imgur.com/PgTmB5V.gif",
-  "CHANGES": [
-    "Sneaky links monitor won't run for bots anymore.",
-    "Some under-the-hood, super-secret, changes!"
+  "date": "April 27, 2019",
+  "image": "https://i.imgur.com/iB0dQTe.gif",
+  "NEW STUFF": [
+    "Some people weren't able to find the default prefix for Bastion. So we added a `prefix` command for DMs (that doesn't require any prefix) that can be used to get the default prefixes of Bastion. It'll also be useful in case you forgot your server prefix and don't know the default prefix.",
+    "Added the `karmaBoard` command to see a leaderboard of user karma in the server."
   ],
   "KILLED THESE BUGS": [
-    "The *Server Configuration* module grew so much that it crossed Discord's message limit and apparently broke the commands list. So, we broke the *Server Configuration* module and introduced the *Filters* module - a kick off of all filtering commands from *Server Configuration* module.",
-    "Fixed an issue with the `reputation` command that gave karma to yourself!"
+    "Fixed an issue with the `roll` command that prevented it from working without any arguments.",
+    "Fixed an issue with the `nickname` command that prevented server owners from using it."
   ]
 }

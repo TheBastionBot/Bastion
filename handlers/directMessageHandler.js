@@ -13,6 +13,18 @@ module.exports = async message => {
   try {
     if (!message.content) return;
 
+    if (message.content.toLowerCase().startsWith('prefix')) {
+      return message.channel.send({
+        embed: {
+          color: message.client.colors.BLUE,
+          title: 'Default Prefixes',
+          description: `\`${message.client.configurations.prefix.join("` `")}\``
+        }
+      }).catch(e => {
+        message.client.log.error(e);
+      });
+    }
+
     if (message.content.toLowerCase().startsWith('help')) {
       return message.channel.send({
         embed: {
