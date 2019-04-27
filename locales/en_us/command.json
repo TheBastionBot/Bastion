@@ -404,6 +404,9 @@
   "jumbledWord": {
     "description": "Unscramble the given jumbled word and increase your vocabulary skills while having fun with your friends."
   },
+  "karmaBoard": {
+    "description": "Shows the users with the highest karma in the server."
+  },
   "kick": {
     "description": "Kicks the specified user from your Discord server."
   },
