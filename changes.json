@@ -1,7 +1,12 @@
 {
   "date": "May 1, 2019",
   "image": "https://i.imgur.com/iB0dQTe.gif",
+  "IMPROVEMENTS": [
+    "Some under-the-hood improvements to make Bastion better, as always."
+  ],
   "KILLED THESE BUGS": [
-    "Fixed wording of `resetProfile` command description."
+    "Fixed issues some installations that prevented usage of some commands.",
+    "Fixed wording of `resetProfile` command description.",
+    "Some under-the-hood fixes as well!"
   ]
 }
