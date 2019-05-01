@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
     inline: true
   }));
 
-  let legends = stats.children.filter(child => child.id.startsWith("legend")).
+  let legends = stats.children.filter(child => child.id.startsWith('legend')).
     map(child => child.metadata.legend_name);
 
   await message.channel.send({

@@ -67,7 +67,7 @@ exports.config = {
 
 exports.help = {
   name: 'resetProfile',
-  description: 'Resets all your profile data, inluding all the XP, level, karma and currency that you\'ve earned. If you have Manage Server permission, you can delete everyone\'s profiles.',
+  description: 'Resets all your profile data, inluding all the XP, level, karma and currency that you\'ve earned. If you have Manage Server permission, you can reset all the profiles.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

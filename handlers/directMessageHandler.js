@@ -18,7 +18,7 @@ module.exports = async message => {
         embed: {
           color: message.client.colors.BLUE,
           title: 'Default Prefixes',
-          description: `\`${message.client.configurations.prefix.join("` `")}\``
+          description: `\`${message.client.configurations.prefix.join('` `')}\``
         }
       }).catch(e => {
         message.client.log.error(e);
