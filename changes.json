@@ -1,12 +1,7 @@
 {
-  "date": "April 27, 2019",
+  "date": "May 1, 2019",
   "image": "https://i.imgur.com/iB0dQTe.gif",
-  "NEW STUFF": [
-    "Some people weren't able to find the default prefix for Bastion. So we added a `prefix` command for DMs (that doesn't require any prefix) that can be used to get the default prefixes of Bastion. It'll also be useful in case you forgot your server prefix and don't know the default prefix.",
-    "Added the `karmaBoard` command to see a leaderboard of user karma in the server."
-  ],
   "KILLED THESE BUGS": [
-    "Fixed an issue with the `roll` command that prevented it from working without any arguments.",
-    "Fixed an issue with the `nickname` command that prevented server owners from using it."
+    "Fixed wording of `resetProfile` command description."
   ]
 }
