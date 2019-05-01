@@ -33,6 +33,18 @@ exports.error = (...message) => {
 };
 
 /**
+ * Used to display the fatal messages.
+ * @function Bastion.log.fatal
+ * @param {...string} message Message(s) to be shown in the error log.
+ * @returns {void}
+ */
+exports.fatal = (...message) => {
+  console.log(COLOR.red('[ERROR]'));
+  console.log(...message);
+  console.log(COLOR.red('[/ERROR]'));
+};
+
+/**
  * Used to display the information/notes in logs.
  * @function Bastion.log.info
  * @param {...string} message Message(s) to be shown in the log as information/notes.
