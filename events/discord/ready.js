@@ -13,7 +13,7 @@ module.exports = async Bastion => {
     if (!Bastion.methods.isPublicBastion(Bastion) && application.botPublic) {
       let errorCode = 0xBAADB002;
 
-      Bastion.log.fatal(Buffer.from("RkFUQUwgRVJST1I6IDB4QkFBREIwMDIKCkdvIHRvIHlvdXIgQm90J3MgYXBwbGljYXRpb24gcGFnZSBpbiBEaXNjb3JkIERldmVsb3BlcnMgc2l0ZSBhbmQgZGlzYWJsZSB0aGUgIlB1YmxpYyBCb3QiIG9wdGlvbi4KClBsZWFzZSBjb250YWN0IHRoZSBzdXBwb3J0IHRlYW0gYXQgQmFzdGlvbiBIUSAtIGh0dHBzOi8vZGlzY29yZC5nZy9meng4Zmt0IC0gZm9yIG1vcmUgaW5mb3JtYXRpb24u", "base64").toString("utf-8"));
+      Bastion.log.fatal(Buffer.from('RkFUQUwgRVJST1I6IDB4QkFBREIwMDIKCkdvIHRvIHlvdXIgQm90J3MgYXBwbGljYXRpb24gcGFnZSBpbiBEaXNjb3JkIERldmVsb3BlcnMgc2l0ZSBhbmQgZGlzYWJsZSB0aGUgIlB1YmxpYyBCb3QiIG9wdGlvbi4KClBsZWFzZSBjb250YWN0IHRoZSBzdXBwb3J0IHRlYW0gYXQgQmFzdGlvbiBIUSAtIGh0dHBzOi8vZGlzY29yZC5nZy9meng4Zmt0IC0gZm9yIG1vcmUgaW5mb3JtYXRpb24u', 'base64').toString('utf-8'));
 
       if (Bastion.shard) {
         await Bastion.shard.broadcastEval(`this.destroy().then(() => process.exitCode = ${errorCode})`);
