@@ -13,6 +13,8 @@ module.exports = async Bastion => {
     if (!Bastion.methods.isPublicBastion(Bastion) && application.botPublic) {
       let errorCode = 0xBAADB002;
 
+      Bastion.log.fatal(Buffer.from("RkFUQUwgRVJST1I6IDB4QkFBREIwMDIKCkdvIHRvIHlvdXIgQm90J3MgYXBwbGljYXRpb24gcGFnZSBpbiBEaXNjb3JkIERldmVsb3BlcnMgc2l0ZSBhbmQgZGlzYWJsZSB0aGUgIlB1YmxpYyBCb3QiIG9wdGlvbi4KClBsZWFzZSBjb250YWN0IHRoZSBzdXBwb3J0IHRlYW0gYXQgQmFzdGlvbiBIUSAtIGh0dHBzOi8vZGlzY29yZC5nZy9meng4Zmt0IC0gZm9yIG1vcmUgaW5mb3JtYXRpb24u", "base64").toString("utf-8"));
+
       if (Bastion.shard) {
         await Bastion.shard.broadcastEval(`this.destroy().then(() => process.exitCode = ${errorCode})`);
       }
@@ -22,7 +24,7 @@ module.exports = async Bastion => {
         process.exit(errorCode);
       }
 
-      return Bastion.log.error(`FATAL ERROR: 0x${errorCode.toString(16).toUpperCase()}\nPlease contact the support @ Bastion HQ: https://discord.gg/fzx8fkt`);
+      return null;
     }
 
     Bastion.monitors.exec(__filename.slice(__dirname.length + 1, -3), Bastion);
