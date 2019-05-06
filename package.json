@@ -12,7 +12,9 @@
     "test:boot": "node -r ./utils/globals.js tests/boot.js",
     "test": "yarn run test:lint && yarn run test:modules && yarn run test:boot",
     "start": "node -r ./utils/globals.js index.js",
-    "start:noshard": "node -r ./utils/globals.js bastion.js"
+    "start:noshard": "node -r ./utils/globals.js bastion.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -53,9 +55,11 @@
     "weather-js": "~2.0.0",
     "word-definition": "~2.1.6",
     "xkcd": "~1.1.3",
-    "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
+    "youtube-dl": "github:przemyslawpluta/node-youtube-dl",
+    "snyk": "^1.161.1"
   },
   "devDependencies": {
     "eslint": "^5.11.1"
-  }
+  },
+  "snyk": true
 }
