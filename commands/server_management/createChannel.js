@@ -16,21 +16,25 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
   }
 
-  let channelType;
-  if (!args.text && args.voice) {
-    channelType = 'voice';
+  args.type = args.type.toLowerCase();
+  if (![ 'text', 'voice', 'news', 'store' ].includes(args.type)) {
+    return Bastion.emit('error', 'Unsupported Channel Type', `The specified channel type is not supported.`, message.channel);
   }
-  else {
-    channelType = 'text';
+
+  if (args.voice) {
+    args.type = 'voice';
+  }
+
+  if (args.type == 'text') {
     args.name = args.name.replace(' ', '-');
   }
 
-  let channel = await message.guild.createChannel(args.name, { type: channelType });
+  let channel = await message.guild.createChannel(args.name, { type: args.type });
 
   await message.channel.send({
     embed: {
       color: Bastion.colors.GREEN,
-      description: Bastion.i18n.info(message.guild.language, 'createChannel', message.author.tag, channelType, channel.name),
+      description: Bastion.i18n.info(message.guild.language, 'createChannel', message.author.tag, args.type, channel.name),
       footer: {
         text: `ID: ${channel.id}`
       }
@@ -45,8 +49,9 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'name', type: String, alias: 'n', multiple: true, defaultOption: true },
-    { name: 'text', type: Boolean, alias: 't' },
-    { name: 'voice', type: Boolean, alias: 'v' }
+    { name: 'type', type: String, defaultValue: 'text' }, // TODO: add `t` alias after removing the depricated options.
+    { name: 'text', type: Boolean, alias: 't' }, // @depricated
+    { name: 'voice', type: Boolean, alias: 'v' } // @depricated
   ]
 };
 
@@ -56,6 +61,6 @@ exports.help = {
   botPermission: 'MANAGE_CHANNELS',
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',
-  usage: 'createChannel [-t | -v] <Channel Name>',
-  example: [ 'createChannel -t Text Channel Name', 'createChannel -v Voice Channel Name', 'createChannel Text Channel Name' ]
+  usage: 'createChannel [--type text|voice|news|store] <Channel Name>',
+  example: [ 'createChannel --type Text Channel-Name', 'createChannel --type Voice Channel Name', 'createChannel --type News Channel Name', 'createChannel --type Store Channel Name', 'createChannel Text-Channel-Name' ]
 };
