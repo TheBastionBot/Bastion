@@ -31,7 +31,8 @@ exports.exec = async (Bastion, message, args) => {
 
   let channel = await message.guild.createChannel(args.name, {
     type: args.type,
-    topic: args.topic
+    topic: args.topic,
+    nsfw: args.nsfw
   });
 
   await message.channel.send({
@@ -55,6 +56,7 @@ exports.config = {
     { name: 'type', type: String, defaultValue: 'text' }, // TODO: add `t` alias after removing the depricated options.
     { name: 'text', type: Boolean, alias: 't' }, // @depricated
     { name: 'voice', type: Boolean, alias: 'v' }, // @depricated
+    { name: 'nsfw', type: Boolean, defaultValue: false },
     { name: 'topic', type: String, multiple: true }
   ]
 };
@@ -66,5 +68,5 @@ exports.help = {
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',
   usage: 'createChannel [--type text|voice|news|store] <Channel Name>',
-  example: [ 'createChannel --type Text Channel-Name --topic Channel Topic', 'createChannel --type Voice Channel Name', 'createChannel --type News Channel Name', 'createChannel --type Store Channel Name', 'createChannel Text-Channel-Name' ]
+  example: [ 'createChannel --type Text Channel-Name --topic Channel Topic --nsfw', 'createChannel --type Voice Channel Name', 'createChannel --type News Channel Name', 'createChannel --type Store Channel Name', 'createChannel Text-Channel-Name' ]
 };
