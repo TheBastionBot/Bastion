@@ -29,7 +29,10 @@ exports.exec = async (Bastion, message, args) => {
     args.name = args.name.replace(' ', '-');
   }
 
-  let channel = await message.guild.createChannel(args.name, { type: args.type });
+  let channel = await message.guild.createChannel(args.name, {
+    type: args.type,
+    topic: args.topic
+  });
 
   await message.channel.send({
     embed: {
@@ -51,7 +54,8 @@ exports.config = {
     { name: 'name', type: String, alias: 'n', multiple: true, defaultOption: true },
     { name: 'type', type: String, defaultValue: 'text' }, // TODO: add `t` alias after removing the depricated options.
     { name: 'text', type: Boolean, alias: 't' }, // @depricated
-    { name: 'voice', type: Boolean, alias: 'v' } // @depricated
+    { name: 'voice', type: Boolean, alias: 'v' }, // @depricated
+    { name: 'topic', type: String, multiple: true }
   ]
 };
 
@@ -62,5 +66,5 @@ exports.help = {
   userTextPermission: 'MANAGE_CHANNELS',
   userVoicePermission: '',
   usage: 'createChannel [--type text|voice|news|store] <Channel Name>',
-  example: [ 'createChannel --type Text Channel-Name', 'createChannel --type Voice Channel Name', 'createChannel --type News Channel Name', 'createChannel --type Store Channel Name', 'createChannel Text-Channel-Name' ]
+  example: [ 'createChannel --type Text Channel-Name --topic Channel Topic', 'createChannel --type Voice Channel Name', 'createChannel --type News Channel Name', 'createChannel --type Store Channel Name', 'createChannel Text-Channel-Name' ]
 };
