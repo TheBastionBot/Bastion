@@ -55,11 +55,11 @@
     "weather-js": "~2.0.0",
     "word-definition": "~2.1.6",
     "xkcd": "~1.1.3",
-    "youtube-dl": "github:przemyslawpluta/node-youtube-dl",
-    "snyk": "^1.161.1"
+    "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^5.11.1"
+    "eslint": "^5.11.1",
+    "snyk": "^1.161.1"
   },
   "snyk": true
 }
