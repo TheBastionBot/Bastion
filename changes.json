@@ -1,12 +1,14 @@
 {
-  "date": "May 1, 2019",
+  "date": "May 13, 2019",
   "image": "https://i.imgur.com/iB0dQTe.gif",
+  "IMPROVEMENTS": [
+    "Verified server owners! You can now create news & store channels using the `createChannel` command.",
+    "The way you use `createChannel` has slightly been changed. See the help message, using `help createChannel` command for details."
+  ],
   "IMPROVEMENTS": [
     "Some under-the-hood improvements to make Bastion better, as always."
   ],
   "KILLED THESE BUGS": [
-    "Fixed issues some installations that prevented usage of some commands.",
-    "Fixed wording of `resetProfile` command description.",
     "Some under-the-hood fixes as well!"
   ]
 }
