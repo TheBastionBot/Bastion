@@ -49,6 +49,7 @@
     "request-promise-native": "~1.0.5",
     "sequelize": "~4.43.2",
     "snekfetch": "~4.0.4",
+    "snyk": "^1.161.1",
     "sqlite": "~3.0.0",
     "sqlite3": "~4.0.4",
     "tesseract": "github:TheBastionBot/Tesseract#v0.1.1",
@@ -58,8 +59,7 @@
     "youtube-dl": "github:przemyslawpluta/node-youtube-dl"
   },
   "devDependencies": {
-    "eslint": "^5.11.1",
-    "snyk": "^1.161.1"
+    "eslint": "^5.11.1"
   },
   "snyk": true
 }
