@@ -3,7 +3,7 @@
   "image": "https://i.imgur.com/iB0dQTe.gif",
   "IMPROVEMENTS": [
     "Verified server owners! You can now create news & store channels using the `createChannel` command.",
-    "You can now set channel topic while you're creating a channel using the `createChannel` command.",
+    "You can now set channel topic and whether the channel is NSFW or not, while you're creating a channel, using the `createChannel` command.",
     "The way you use `createChannel` has slightly been changed. See the help message, using `help createChannel` command for details."
   ],
   "IMPROVEMENTS": [
