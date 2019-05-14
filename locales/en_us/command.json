@@ -437,6 +437,9 @@
   "listAutoAssignableRoles": {
     "description": "Lists all auto-assignable roles."
   },
+  "listBans": {
+    "description": "Lists all the banned users of the Discord Server with the reason for the ban."
+  },
   "listFilteredWords": {
     "description": "Lists all filtered words."
   },
