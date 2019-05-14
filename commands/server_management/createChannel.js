@@ -18,14 +18,14 @@ exports.exec = async (Bastion, message, args) => {
 
   args.type = args.type.toLowerCase();
   if (![ 'text', 'voice', 'news', 'store' ].includes(args.type)) {
-    return Bastion.emit('error', 'Unsupported Channel Type', `The specified channel type is not supported.`, message.channel);
+    return Bastion.emit('error', 'Unsupported Channel Type', 'The specified channel type is not supported.', message.channel);
   }
 
   if (args.voice) {
     args.type = 'voice';
   }
 
-  if (args.type == 'text') {
+  if (args.type === 'text') {
     args.name = args.name.replace(' ', '-');
   }
 
