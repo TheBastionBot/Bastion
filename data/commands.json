@@ -583,6 +583,10 @@
     "description": "Lists all auto-assignable roles.",
     "module": "Server Configuration"
   },
+  "listBans": {
+    "description": "Lists all the banned users of the Discord Server with the reason for the ban.",
+    "module": "Moderation"
+  },
   "listFilteredWords": {
     "description": "Lists all filtered words.",
     "module": "Filters"
