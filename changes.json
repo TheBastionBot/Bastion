@@ -1,5 +1,5 @@
 {
-  "date": "May 13, 2019",
+  "date": "May 14, 2019",
   "image": "https://i.imgur.com/iB0dQTe.gif",
   "NEW STUFF!!": [
     "Verified server owners! You can now create news & store channels using the `createChannel` command.",
@@ -7,6 +7,7 @@
     "The way you use `createChannel` has slightly been changed. See the help message, using `help createChannel` command for details."
   ],
   "IMPROVEMENTS": [
+    "The `volume` command now has an alias! Use the shorter new `vol` command to change volume.",
     "Some under-the-hood improvements to make Bastion better, as always."
   ],
   "KILLED THESE BUGS": [
