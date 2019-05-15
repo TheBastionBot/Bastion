@@ -395,6 +395,9 @@
   "inRole": {
     "description": "Shows members that have a specified role in your Discord server."
   },
+  "invite": {
+    "description": "Shows you a invite links to the server and also shows how to invite Bastion."
+  },
   "isBreached": {
     "description": "Check if a site has been breached in the past."
   },
@@ -436,6 +439,9 @@
   },
   "listAutoAssignableRoles": {
     "description": "Lists all auto-assignable roles."
+  },
+  "listBans": {
+    "description": "Lists all the banned users of the Discord Server with the reason for the ban."
   },
   "listFilteredWords": {
     "description": "Lists all filtered words."
@@ -504,7 +510,7 @@
     "description": "Encodes a given text in Morse Code."
   },
   "moveMembers": {
-    "description": "Moves all the members in a voice channel to another specified voice channel."
+    "description": "Moves all the members in a voice channel to another specified voice channel. If the destination voice channel is not specified, Bastion will instead kick all the members from the source voice channel."
   },
   "movie": {
     "description": "Searches for the details of a movie."

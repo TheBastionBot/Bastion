@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
     return Bastion.emit('error', '', Bastion.i18n.error(message.guild.language, 'channelNameLength', minLength, maxLength), message.channel);
   }
 
-  let category = await message.guild.createChannel(args.name, 'category');
+  let category = await message.guild.createChannel(args.name, { type: 'category' });
 
   await message.channel.send({
     embed: {

@@ -527,6 +527,10 @@
     "description": "Shows members that have a specified role in your Discord server.",
     "module": "Info"
   },
+  "invite": {
+    "description": "Shows you a invite links to the server and also shows how to invite Bastion.",
+    "module": "Productivity"
+  },
   "isBreached": {
     "description": "Check if a site has been breached in the past.",
     "module": "Searches"
@@ -582,6 +586,10 @@
   "listAutoAssignableRoles": {
     "description": "Lists all auto-assignable roles.",
     "module": "Server Configuration"
+  },
+  "listBans": {
+    "description": "Lists all the banned users of the Discord Server with the reason for the ban.",
+    "module": "Moderation"
   },
   "listFilteredWords": {
     "description": "Lists all filtered words.",
@@ -672,7 +680,7 @@
     "module": "Utility"
   },
   "moveMembers": {
-    "description": "Moves all the members in a voice channel to another specified voice channel.",
+    "description": "Moves all the members in a voice channel to another specified voice channel. If the destination voice channel is not specified, Bastion will instead kick all the members from the source voice channel.",
     "module": "Server Management"
   },
   "movie": {

@@ -39,7 +39,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [],
+  aliases: [ 'vol' ],
   enabled: true,
   musicMasterOnly: true,
   argsDefinitions: [
