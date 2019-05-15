@@ -9,7 +9,8 @@
     "You can now set channel topic and whether the channel is NSFW or not, while you're creating a channel, using the `createChannel` command.",
     "The way you use `createChannel` has slightly been changed. See the help message, using `help createChannel` command for details."
   ],
-  "IMPROVEMENTS": [
+  "CHANGES & IMPROVEMENTS": [
+    "From now on, server managers - and not just the server owner, can give out experience points to the members of the server.",
     "The `volume` command now has an alias! Use the shorter new `vol` command to change volume.",
     "Some under-the-hood improvements to make Bastion better, as always."
   ],
