@@ -32,8 +32,8 @@ exports.exec = async (Bastion, message, args) => {
     embed: {
       color: Bastion.colors.GREEN,
       description: args.to
-      ? `${message.author.tag} moved all the members from **${sourceVoiceChannel.name}** Voice Channel to **${destinationVoiceChannel.name}** Voice Channel.`
-      : `${message.author.tag} kicked all the members from the **${sourceVoiceChannel.name}** Voice Channel.`
+        ? `${message.author.tag} moved all the members from **${sourceVoiceChannel.name}** Voice Channel to **${destinationVoiceChannel.name}** Voice Channel.`
+        : `${message.author.tag} kicked all the members from the **${sourceVoiceChannel.name}** Voice Channel.`
     }
   }).catch(e => {
     Bastion.log.error(e);
