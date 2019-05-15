@@ -1,7 +1,8 @@
 {
-  "date": "May 15, 2019",
+  "date": "May 16, 2019",
   "image": "https://i.imgur.com/iB0dQTe.gif",
   "NEW STUFF!!": [
+    "Added `invite` command. Guess what it must be doing!",
     "Added `listBans` command which can be used to list out all the banned users of the server with the reason for their ban.",
     "Added support for kicking all members from a voice channel using the same old `moveMembers` command. See the help message, using `help moveMembers` command, for details.",
     "Verified server owners! You can now create news & store channels using the `createChannel` command.",
