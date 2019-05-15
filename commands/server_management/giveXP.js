@@ -52,7 +52,6 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [],
   enabled: true,
-  guildOwnerOnly: true,
   argsDefinitions: [
     { name: 'id', type: String, defaultOption: true },
     { name: 'points', alias: 'n', type: String }
@@ -63,7 +62,7 @@ exports.help = {
   name: 'giveXP',
   description: 'Give the specified amount of experience points to the specified user and increase their level.',
   botPermission: '',
-  userTextPermission: '',
+  userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'giveXP <@USER_MENTION | USER_ID> <-n POINTS>',
   example: [ 'giveXP @user#0001 -n 100', 'giveXP 242621467230268813 -n 150' ]
