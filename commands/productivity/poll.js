@@ -16,7 +16,7 @@ exports.exec = async (Bastion, message, args) => {
     // let pollMessage = args.pollMessage.join(' ').split(';');
     message.channel.poll.message = args.pollMessage.join(' ').split(';');
     args.time = Math.abs(args.time);
-    args.time = args.time && args.time < 1440 ? args.time : 60;
+    args.time = args.time && args.time <= 1440 ? args.time : 60;
 
     let answers = [];
     for (let i = 1; i < message.channel.poll.message.length; i++) {

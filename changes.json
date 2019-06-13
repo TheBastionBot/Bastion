@@ -2,6 +2,7 @@
   "date": "June 13, 2019",
   "image": "https://i.redd.it/0kvo9axy8tz01.gif",
   "KILLED THESE BUGS": [
-    "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level."
+    "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level.",
+    "The `poll` command can now run for exactly 24 hours! For people who hadn't noticed, it only allowed you to run for 23 hours and 59 minutes."
   ]
 }
