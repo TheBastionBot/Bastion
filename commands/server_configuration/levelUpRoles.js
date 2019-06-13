@@ -66,7 +66,10 @@ exports.exec = async (Bastion, message, args) => {
     let roleModel = await Bastion.database.models.role.findAll({
       attributes: [ 'roleID', 'level' ],
       where: {
-        guildID: message.guild.id
+        guildID: message.guild.id,
+        level: {
+          [Bastion.database.Op.ne]: null
+        }
       }
     });
 
