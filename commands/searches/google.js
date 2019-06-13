@@ -18,7 +18,7 @@ exports.exec = async (Bastion, message, args) => {
     },
     url: 'http://google.com/search',
     qs: {
-      q: encodeURIComponent(args.query.join(' ')),
+      q: args.query.join(' '),
       safe: 'active'
     }
   };
