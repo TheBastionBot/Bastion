@@ -123,6 +123,10 @@
     "description": "Buy role from the server's Role Store.",
     "module": "Profile"
   },
+  "cacheMembers": {
+    "description": "Fetches all members of your server from Discord and stores them in Bastion's local cache.",
+    "module": "Server Management"
+  },
   "calculate": {
     "description": "Evaluates any mathematical expression.",
     "module": "Utility"
