@@ -61,6 +61,16 @@ module.exports = message => {
       for (let word of filteredWords) {
         if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
           if (message.deletable) message.delete().catch(() => {});
+
+          message.channel.send({
+            embed: {
+              color: message.client.colors.ORANGE,
+              description: `EXCUSE ME! ${message.author} you are not supposed to use that word in here!`
+            }
+          }).then(msg => {
+            msg.delete(10000).catch(() => {});
+          }).catch(() => {});
+
           return resolve(true);
         }
       }
