@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message) => {
   let guild = await message.guild.fetchMembers();
 
   await message.channel.send({
