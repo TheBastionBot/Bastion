@@ -1,6 +1,9 @@
 {
   "date": "June 20, 2019",
   "image": "https://i.redd.it/0kvo9axy8tz01.gif",
+  "NEW STUFF": [
+    "You can now use the `resetProfile` command to reset any user's profile, provided that you've Manage Server permissions."
+  ],
   "IMPROVEMENTS": [
     "The `google` command will now show more accurate search results.",
     "You will now be able to see the correct answer to the jumbed word, after the game is over. No more wondering what the correct answer was!"

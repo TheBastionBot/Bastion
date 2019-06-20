@@ -892,7 +892,7 @@
     "module": "Server Configuration"
   },
   "resetProfile": {
-    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can reset all the profiles.",
+    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can reset anyone and everyone's profiles.",
     "module": "Profile"
   },
   "resume": {
