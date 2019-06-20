@@ -100,8 +100,7 @@ exports.exec = async (Bastion, message, args) => {
       itemsInShop = itemsInShop.map((item, i) => {
         return {
           name: `${i + 1}. ${item.name}`,
-          value: `${item.value} Bastion Currencies`,
-          inline: true
+          value: `${item.value} Bastion Currencies`
         };
       });
 
