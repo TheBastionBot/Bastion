@@ -1,5 +1,5 @@
 {
-  "date": "June 13, 2019",
+  "date": "June 20, 2019",
   "image": "https://i.redd.it/0kvo9axy8tz01.gif",
   "IMPROVEMENTS": [
     "The `google` command will now show more accurate search results."
@@ -7,6 +7,7 @@
   "KILLED THESE BUGS": [
     "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level.",
     "The `poll` command can now run for exactly 24 hours! For people who hadn't noticed, it only allowed you to run for 23 hours and 59 minutes.",
-    "Fixed the `google` command not showing any search results."
+    "Fixed the `google` command not showing any search results.",
+    "Some under-the-hood fixes, as usual."
   ]
 }
