@@ -7,7 +7,8 @@
   ],
   "IMPROVEMENTS": [
     "The `google` command will now show more accurate search results.",
-    "You will now be able to see the correct answer to the jumbed word, after the game is over. No more wondering what the correct answer was!"
+    "You will now be able to see the correct answer to the jumbed word, after the game is over. No more wondering what the correct answer was!",
+    "The `profile` command has been tweaked a bit. Try it to find out."
   ],
   "KILLED THESE BUGS": [
     "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level.",
