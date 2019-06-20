@@ -669,7 +669,7 @@
     "description": "Resets the moderation log cases back to 1."
   },
   "resetProfile": {
-    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can reset all the profiles."
+    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can reset anyone and everyone's profiles."
   },
   "resume": {
     "description": "Resumes the previously paused playback."
