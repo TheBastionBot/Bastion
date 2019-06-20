@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
       fields: [ 'bastionCurrencies', 'experiencePoints', 'level', 'karma', 'lastClaimed', 'claimStreak' ]
     });
 
-    deletionMessage = `You\'ve successfully reset the Bastion profile of <@${args.user}>.`;
+    deletionMessage = `You've successfully reset the Bastion profile of <@${args.user}>.`;
   }
   else if (args.all && message.member.hasPermission('MANAGE_GUILD')) {
     await Bastion.database.models.guildMember.update({
