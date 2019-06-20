@@ -37,7 +37,7 @@ exports.exec = async (Bastion, message) => {
         embed: {
           color: Bastion.colors.RED,
           title: 'Jumbled Word',
-          description: 'The game was ended as no one was able to answer within the given 5 minutes.'
+          description: `The game was ended as no one was able to answer within the given 5 minutes.\nThe correct answer was ${word}.`
         }
       }).then(() => {
         question.delete().catch(() => {});
@@ -52,7 +52,7 @@ exports.exec = async (Bastion, message) => {
         embed: {
           color: Bastion.colors.BLUE,
           title: 'Jumbled Word',
-          description: `Congratulations ${answer.author}! You solved the jumbled word.`
+          description: `Congratulations ${answer.author}! You solved the jumbled word.\nThe correct answer was ${word}.`
         }
       }).then(() => {
         question.delete().catch(() => {});
