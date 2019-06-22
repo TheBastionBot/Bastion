@@ -3,7 +3,8 @@
   "image": "https://i.imgur.com/k6azzsE.gif",
   "NEW STUFF": [
     "You can now use the `resetProfile` command to reset any user's profile, provided that you've Manage Server permissions.",
-    "If your server has a huge amount of users, sometimes you might have noticed that a few features (like level up roles) doesn't seem to work for a few users. That's become some user's are not in Bastion's cache. So, to get around that, the `cacheMembers` command was added. It can be used by server managers for caching all the members of the server."
+    "If your server has a huge amount of users, sometimes you might have noticed that a few features (like level up roles) doesn't seem to work for a few users. That's become some user's are not in Bastion's cache. So, to get around that, the `cacheMembers` command was added. It can be used by server managers for caching all the members of the server.",
+    "You can now gamble on slots machine. Use the new `betSlots` command to satisfy your gambling needs!"
   ],
   "IMPROVEMENTS": [
     "The `google` command will now show more accurate search results.",
