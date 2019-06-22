@@ -1,5 +1,5 @@
 {
-  "date": "June 20, 2019",
+  "date": "June 22, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "NEW STUFF": [
     "You can now use the `resetProfile` command to reset any user's profile, provided that you've Manage Server permissions.",
@@ -9,7 +9,8 @@
     "The `google` command will now show more accurate search results.",
     "You will now be able to see the correct answer to the jumbed word, after the game is over. No more wondering what the correct answer was!",
     "The `profile` command has been tweaked a bit. Try it to find out.",
-    "Bastion will now show warning messages if a message is filtered because of forbidden words. No more silently deleting the messages."
+    "Bastion will now show warning messages if a message is filtered because of forbidden words. No more silently deleting the messages.",
+    "And if a message gets filtered because of a blocked word, it'll log the block word that triggered the filter."
   ],
   "KILLED THESE BUGS": [
     "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level.",
