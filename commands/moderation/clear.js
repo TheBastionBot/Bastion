@@ -22,6 +22,9 @@ exports.exec = async (Bastion, message, args) => {
   if (user) {
     messages = messages.filter(message => message.author.id === user.id);
   }
+  else if (args.user) {
+    messages = messages.filter(message => message.author.id === args.user);
+  }
   else if (args.bots) {
     messages = messages.filter(message => message.author.bot);
   }
@@ -63,6 +66,7 @@ exports.config = {
   enabled: true,
   argsDefinitions: [
     { name: 'amount', type: Number, alias: 'n', defaultValue: 100, defaultOption: true },
+    { name: 'user', type: String, alias: 'u' },
     { name: 'bots', type: Boolean },
     { name: 'nonpinned', type: Boolean },
     { name: 'time', type: Number, alias: 't' }
@@ -75,6 +79,6 @@ exports.help = {
   botPermission: 'MANAGE_MESSAGES',
   userTextPermission: 'MANAGE_MESSAGES',
   userVoicePermission: '',
-  usage: 'clear [NUMBER_OF_MESSAGES] [--nonpinned] [--bots] [@USER-MENTION] [--time TIMESPAN_IN_MINUTES]',
-  example: [ 'clear', 'clear 43', 'clear --time 3', 'clear 13 @Barry#0001', 'clear 37 --bots', 'clear --nonpinned' ]
+  usage: 'clear [NUMBER_OF_MESSAGES] [--nonpinned] [--bots] [@USER-MENTION | --user USER_ID] [--time TIMESPAN_IN_MINUTES]',
+  example: [ 'clear', 'clear 43', 'clear --time 3', 'clear 42 --user 188017158542327869', 'clear 13 @Barry#0001', 'clear 37 --bots', 'clear --nonpinned' ]
 };
