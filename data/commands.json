@@ -1055,6 +1055,10 @@
     "description": "Sets your profile picture that shows up in the Bastion user profile.",
     "module": "Profile"
   },
+  "setRateLimit": {
+    "description": "Sets the rate limit for users in the text/news channel of your Discord server. Members will be restricted to sending one message per this interval, unless they have Manage Channel or Manage Messages permissions.",
+    "module": "Server Management"
+  },
   "setStatus": {
     "description": "Sets the status of %bastion%.",
     "module": "Bot Owner"
