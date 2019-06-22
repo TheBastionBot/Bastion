@@ -54,7 +54,7 @@ exports.exec = async (Bastion, message, args) => {
 
   let requiredExp = {
     currentLevel: Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10)),
-    nextLevel: Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10) + 1),
+    nextLevel: Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10) + 1)
   };
 
   let totalRequiredExp = {
