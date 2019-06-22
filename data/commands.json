@@ -103,6 +103,10 @@
     "description": "Bet %currency.name_plural% on prediction of the outcome of rolling a dice. If you win, you get more of it. But if you lose, you lose the amount you have bet.",
     "module": "Gambling"
   },
+  "betSlots": {
+    "description": "Bet %currency.name_plural% on slot machine! You win if all 3 reels stop at the same emojis. There's also a grand prize if all 3 reels stop at :moneybag:!",
+    "module": "Gambling"
+  },
   "blacklist": {
     "description": "Adds/Removes a specified user to %bastion%'s blacklist. Blacklisted users cannot use any of %bastion%'s commands.",
     "module": "Bot Owner"
