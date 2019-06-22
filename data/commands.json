@@ -103,6 +103,10 @@
     "description": "Bet %currency.name_plural% on prediction of the outcome of rolling a dice. If you win, you get more of it. But if you lose, you lose the amount you have bet.",
     "module": "Gambling"
   },
+  "betSlots": {
+    "description": "Bet %currency.name_plural% on slot machine! You win if all 3 reels stop at the same emojis. There's also a grand prize if all 3 reels stop at :moneybag:!",
+    "module": "Gambling"
+  },
   "blacklist": {
     "description": "Adds/Removes a specified user to %bastion%'s blacklist. Blacklisted users cannot use any of %bastion%'s commands.",
     "module": "Bot Owner"
@@ -122,6 +126,10 @@
   "buyRole": {
     "description": "Buy role from the server's Role Store.",
     "module": "Profile"
+  },
+  "cacheMembers": {
+    "description": "Fetches all members of your server from Discord and stores them in Bastion's local cache.",
+    "module": "Server Management"
   },
   "calculate": {
     "description": "Evaluates any mathematical expression.",
@@ -892,7 +900,7 @@
     "module": "Server Configuration"
   },
   "resetProfile": {
-    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can reset all the profiles.",
+    "description": "Resets all your profile data, inluding all the XP, level, karma and currency that you've earned. If you have Manage Server permission, you can reset anyone and everyone's profiles.",
     "module": "Profile"
   },
   "resume": {
@@ -1046,6 +1054,10 @@
   "setProfilePicture": {
     "description": "Sets your profile picture that shows up in the Bastion user profile.",
     "module": "Profile"
+  },
+  "setRateLimit": {
+    "description": "Sets the rate limit for users in the text/news channel of your Discord server. Members will be restricted to sending one message per this interval, unless they have Manage Channel or Manage Messages permissions.",
+    "module": "Server Management"
   },
   "setStatus": {
     "description": "Sets the status of %bastion%.",

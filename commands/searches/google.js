@@ -14,11 +14,11 @@ exports.exec = async (Bastion, message, args) => {
 
   let options = {
     headers: {
-      'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0) Gecko/20100101 Firefox/68.0'
     },
     url: 'http://google.com/search',
     qs: {
-      q: encodeURIComponent(args.query.join(' ')),
+      q: args.query.join(' '),
       safe: 'active'
     }
   };
@@ -30,11 +30,11 @@ exports.exec = async (Bastion, message, args) => {
   $('.g').each((i) => {
     results[i] = {};
   });
-  $('.g>.r>a').each((i, e) => {
-    let raw = e.attribs['href'];
-    results[i]['name'] = `${getText(e)} - ${raw.substr(7, raw.indexOf('&sa=U') - 7)}`;
+  $('.g .r a h3').each((i, e) => {
+    let link = e.parent.attribs['href'];
+    results[i]['name'] = `${getText(e)} - ${link}`;
   });
-  $('.g>.s>.st').each((i, e) => {
+  $('.g .s .st').each((i, e) => {
     results[i]['value'] = getText(e);
   });
 

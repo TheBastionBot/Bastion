@@ -1,20 +1,24 @@
 {
-  "date": "May 16, 2019",
-  "image": "https://i.redd.it/0kvo9axy8tz01.gif",
-  "NEW STUFF!!": [
-    "Added `invite` command. Guess what it must be doing!",
-    "Added `listBans` command which can be used to list out all the banned users of the server with the reason for their ban.",
-    "Added support for kicking all members from a voice channel using the same old `moveMembers` command. See the help message, using `help moveMembers` command, for details.",
-    "Verified server owners! You can now create news & store channels using the `createChannel` command.",
-    "You can now set channel topic and whether the channel is NSFW or not, while you're creating a channel, using the `createChannel` command.",
-    "The way you use `createChannel` has slightly been changed. See the help message, using `help createChannel` command for details."
+  "date": "June 22, 2019",
+  "image": "https://i.imgur.com/k6azzsE.gif",
+  "NEW STUFF": [
+    "You can now use the `resetProfile` command to reset any user's profile, provided that you've Manage Server permissions.",
+    "If your server has a huge amount of users, sometimes you might have noticed that a few features (like level up roles) doesn't seem to work for a few users. That's become some user's are not in Bastion's cache. So, to get around that, the `cacheMembers` command was added. It can be used by server managers for caching all the members of the server.",
+    "You can now gamble on slots machine. Use the new `betSlots` command to satisfy your gambling needs!",
+    "Slow mode is back! You can now use the new `setRateLimit` command to set an interval for sending messages in a channel. Members in the channel can send only one message in this interval."
   ],
-  "CHANGES & IMPROVEMENTS": [
-    "From now on, server managers - and not just the server owner, can give out experience points to the members of the server.",
-    "The `volume` command now has an alias! Use the shorter new `vol` command to change volume.",
-    "Some under-the-hood improvements to make Bastion better, as always."
+  "IMPROVEMENTS": [
+    "The `google` command will now show more accurate search results.",
+    "You will now be able to see the correct answer to the jumbed word, after the game is over. No more wondering what the correct answer was!",
+    "The `profile` command has been tweaked a bit. Try it to find out.",
+    "Bastion will now show warning messages if a message is filtered because of forbidden words. No more silently deleting the messages.",
+    "And if a message gets filtered because of a blocked word, it'll log the block word that triggered the filter.",
+    "The `clear` command now accepts an `user` option which can be used to pass user IDs. It's useful when you want to clear messages from someone who has left the server, because you can't mention them anymore."
   ],
   "KILLED THESE BUGS": [
-    "Some under-the-hood fixes as well!"
+    "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level.",
+    "The `poll` command can now run for exactly 24 hours! For people who hadn't noticed, it only allowed you to run for 23 hours and 59 minutes.",
+    "Fixed the `google` command not showing any search results.",
+    "Some under-the-hood fixes, as usual."
   ]
 }

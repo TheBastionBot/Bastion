@@ -20,7 +20,7 @@ module.exports = message => {
 
       // Fetch filter data from database
       let guildModel = await message.client.database.models.guild.findOne({
-        attributes: [ 'guildID', 'filteredWords' ],
+        attributes: [ 'guildID', 'filteredWords', 'moderationLog' ],
         where: {
           guildID: message.guild.id,
           filterWords: true
@@ -60,7 +60,51 @@ module.exports = message => {
 
       for (let word of filteredWords) {
         if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
+          // If the code reaches here, the message contains words that needs to be filtered
+          resolve(true);
+
           if (message.deletable) message.delete().catch(() => {});
+
+          message.channel.send({
+            embed: {
+              color: message.client.colors.ORANGE,
+              description: `EXCUSE ME! ${message.author} you are not supposed to use that word in here!`
+            }
+          }).then(msg => {
+            msg.delete(10000).catch(() => {});
+          }).catch(() => {});
+
+
+          // Log the words that are filtered
+          if (!guildModel.dataValues.moderationLog) return;
+
+          let modLogChannel = message.guild.channels.get(guildModel.dataValues.moderationLog);
+          if (!modLogChannel) return;
+
+          await modLogChannel.send({
+            embed: {
+              color: message.client.colors.ORANGE,
+              title: 'Filtered Words',
+              fields: [
+                {
+                  name: 'User',
+                  value: message.author.tag,
+                  inline: true
+                },
+                {
+                  name: 'User ID',
+                  value: message.author.id,
+                  inline: true
+                },
+                {
+                  name: 'Blocked Word',
+                  value: word
+                }
+              ],
+              timestamp: new Date()
+            }
+          });
+
           return resolve(true);
         }
       }

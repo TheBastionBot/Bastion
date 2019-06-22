@@ -2,7 +2,7 @@
 name: Bug Report
 about: Create a bug report to help us improve Bastion
 title: "[BUG]: "
-labels: Bug
+labels: "\U0001F41E Bug"
 assignees: ''
 
 ---

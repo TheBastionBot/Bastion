@@ -51,8 +51,18 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   let rank = parseInt(guildMemberModel.dataValues.rank) + 1;
-  let totalExp = Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10) + 1);
-  let progress = guildMemberModel.dataValues.experiencePoints / totalExp * 100;
+
+  let requiredExp = {
+    currentLevel: Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10)),
+    nextLevel: Bastion.methods.getRequiredExpForLevel(parseInt(guildMemberModel.dataValues.level, 10) + 1)
+  };
+
+  let totalRequiredExp = {
+    currentLevel: guildMemberModel.dataValues.experiencePoints - requiredExp.currentLevel,
+    nextLevel: requiredExp.nextLevel - requiredExp.currentLevel
+  };
+
+  let progress = totalRequiredExp.currentLevel / totalRequiredExp.nextLevel * 100;
 
   let profileData = [
     {
@@ -67,7 +77,7 @@ exports.exec = async (Bastion, message, args) => {
     },
     {
       name: 'Experience Points',
-      value: `**${guildMemberModel.dataValues.experiencePoints}** / ${totalExp}`,
+      value: guildMemberModel.dataValues.experiencePoints,
       inline: true
     },
     {
@@ -76,7 +86,7 @@ exports.exec = async (Bastion, message, args) => {
       inline: true
     },
     {
-      name: `Progress - ${Math.round(progress)}%`,
+      name: `Progress - ${totalRequiredExp.currentLevel} / ${totalRequiredExp.nextLevel} - ${Math.round(progress)}%`,
       value: Bastion.methods.generateProgressBar(progress, 35)
     }
   ];
