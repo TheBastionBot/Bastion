@@ -11,7 +11,8 @@
     "You will now be able to see the correct answer to the jumbed word, after the game is over. No more wondering what the correct answer was!",
     "The `profile` command has been tweaked a bit. Try it to find out.",
     "Bastion will now show warning messages if a message is filtered because of forbidden words. No more silently deleting the messages.",
-    "And if a message gets filtered because of a blocked word, it'll log the block word that triggered the filter."
+    "And if a message gets filtered because of a blocked word, it'll log the block word that triggered the filter.",
+    "The `clear` command now accepts an `user` option which can be used to pass user IDs. It's useful when you want to clear messages from someone who has left the server, because you can't mention them anymore."
   ],
   "KILLED THESE BUGS": [
     "Fixed the `levelUpRoles` command showing the **Level null** for some roles that weren't assigned any level.",
