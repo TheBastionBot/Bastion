@@ -68,6 +68,13 @@ exports.exec = async (Bastion, message, args) => {
     if (reels[0] === ':moneybag:') prize *= 2;
 
     result = `Congratulations! You won the bet.\nYou won **${prize}** Bastion Currencies.`;
+
+    Bastion.emit('userDebit', message.member, prize);
+  }
+  else {
+    result = 'Sorry, you lost the bet. Better luck next time.';
+
+    Bastion.emit('userCredit', message.member, args.money);
   }
 
   setTimeout(() => {
