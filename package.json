@@ -48,7 +48,7 @@
     "request-promise-native": "~1.0.5",
     "sequelize": "~4.43.2",
     "snekfetch": "~4.0.4",
-    "snyk": "^1.161.1",
+    "snyk": "^1.189.0",
     "sqlite": "~3.0.0",
     "sqlite3": "~4.0.4",
     "tesseract": "github:TheBastionBot/Tesseract#v0.1.1",
