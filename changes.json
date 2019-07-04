@@ -1,6 +1,9 @@
 {
   "date": "July 4, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
+  "IMPROVEMENTS": [
+    "We know there were people who liked playing songs at high volume. We don't want you to harm your ears, so we limited the maximum volume at 200%."
+  ],
   "KILLED THESE BUGS": [
     "When you gambled in slots, it actually wasn't charging you or awarding you when you won! It has been fixed now."
   ]
