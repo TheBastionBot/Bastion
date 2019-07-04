@@ -21,7 +21,7 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   let color = Bastion.colors.GREEN;
-  if (args.value) {
+  if (args.value && args.value <= 200) {
     message.guild.voiceConnection.dispatcher.setVolume(args.value / 50);
   }
   else {
