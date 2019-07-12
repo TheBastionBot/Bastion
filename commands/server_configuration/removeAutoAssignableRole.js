@@ -32,7 +32,7 @@ exports.exec = async (Bastion, message, args) => {
   roles.splice(parseInt(args[0]) - 1, 1);
 
   await Bastion.database.models.guild.update({
-    autoAssignableRoles: roles
+    autoAssignableRoles: roles.length ? roles : null
   },
   {
     where: {
