@@ -1,6 +1,9 @@
 {
   "date": "July 12, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
+  "IMPROVEMENTS": [
+    "The `serverInfo` command will now also show the total number of members in the server."
+  ],
   "KILLED THESE BUGS": [
     "Fixed an issue that prevented auto assignable roles and self assignable roles from being deleted from some servers."
   ]
