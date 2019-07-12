@@ -22,7 +22,13 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   if (!suggestionChannel) {
-    suggestionChannel = message.channel;
+    return await message.channel.send({
+      embed: {
+        color: Bastion.colors.RED,
+        title: 'No Suggestion Channel',
+        description: "Suggestion channel has not been set in this server."
+      }
+    });
   }
 
   let suggestion = await suggestionChannel.send({
