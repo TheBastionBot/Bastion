@@ -120,6 +120,11 @@ exports.exec = async (Bastion, message) => {
           value: `${(rss / 1024 / 1024).toFixed(2)} MB RSS\n`
                  + `${(heapUsed / 1024 / 1024).toFixed(2)} MB Heap`,
           inline: true
+        },
+        {
+          name: 'Environment',
+          value: Bastion.methods.isPublicBastion(Bastion) ? 'A secret space station' : `Node ${process.version} on ${process.platform} ${process.arch}`,
+          inline: true
         }
       ],
       thumbnail: {

@@ -1,10 +1,12 @@
 {
-  "date": "July 4, 2019",
+  "date": "July 12, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
-    "We know there were people who liked playing songs at high volume. We don't want you to harm your ears, so we limited the maximum volume at 200%."
+    "The `serverInfo` command will now also show the total number of members in the server.",
+    "If a suggestion channel hasn't been set, don't send the suggestion in the current channel to avoid confusion.",
+    "The `stats` command will now show some environment details on private instances of Bastion."
   ],
   "KILLED THESE BUGS": [
-    "When you gambled in slots, it actually wasn't charging you or awarding you when you won! It has been fixed now."
+    "Fixed an issue that prevented auto assignable roles and self assignable roles from being deleted from some servers."
   ]
 }

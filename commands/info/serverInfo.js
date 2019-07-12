@@ -60,7 +60,7 @@ exports.exec = async (Bastion, message) => {
         },
         {
           name: 'Members',
-          value: `${message.guild.members.filter(m => !m.user.bot).size} Cached Users\n${message.guild.members.filter(m => m.user.bot).size} Cached BOTs`,
+          value: `${message.guild.memberCount} Total Members\n${message.guild.members.filter(m => !m.user.bot).size} Cached Users\n${message.guild.members.filter(m => m.user.bot).size} Cached Bots`,
           inline: true
         },
         {
