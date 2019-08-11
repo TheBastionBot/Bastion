@@ -7,6 +7,7 @@
     "Some under-the-hood improvements, as usual."
   ],
   "FIXES": [
+    "Fixed `translate` command not working sometimes.",
     "Some under-the-hood fixes to make Bastion even better."
   ]
 }
