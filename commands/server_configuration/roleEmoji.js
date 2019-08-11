@@ -77,5 +77,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'roleEmoji < ROLE_ID | @Role Mention | Role Name > < --emoji :emoji_name: | --remove >',
-  example: []
+  example: [ 'roleEmoji 218262649910853631 --emoji :smile:', 'roleEmoji @Clowns --emoji :joy:', 'roleEmoji Cool Kids --emoji :tada:', 'roleEmoji 218262649910853631 --remove' ]
 };
