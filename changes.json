@@ -1,12 +1,13 @@
 {
-  "date": "July 12, 2019",
+  "date": "August 11, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
-    "The `serverInfo` command will now also show the total number of members in the server.",
-    "If a suggestion channel hasn't been set, don't send the suggestion in the current channel to avoid confusion.",
-    "The `stats` command will now show some environment details on private instances of Bastion."
+    "If the `reminder` command is used without arguments, it'll now show the reminder message.",
+    "You won't be able to accidentally set scheduled commands for every second.",
+    "Some under-the-hood improvements, as usual."
   ],
-  "KILLED THESE BUGS": [
-    "Fixed an issue that prevented auto assignable roles and self assignable roles from being deleted from some servers."
+  "FIXES": [
+    "Fixed `translate` command not working sometimes.",
+    "Some under-the-hood fixes to make Bastion even better."
   ]
 }

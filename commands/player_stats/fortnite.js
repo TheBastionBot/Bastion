@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
   let options = {
     uri: `https://api.fortnitetracker.com/v1/profile/${args.platform}/${encodeURIComponent(args.player.join(' '))}`,
     headers: {
-      'TRN-Api-Key': Bastion.credentials.fortniteAPIKey,
+      'TRN-Api-Key': Bastion.credentials.trackerNetworkAPIKey,
       'User-Agent': `Bastion/${Bastion.package.version} (${Bastion.user.tag}; ${Bastion.user.id}) https://bastionbot.org`
     },
     json: true

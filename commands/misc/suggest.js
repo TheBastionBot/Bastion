@@ -26,7 +26,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.RED,
         title: 'No Suggestion Channel',
-        description: "Suggestion channel has not been set in this server."
+        description: 'Suggestion channel has not been set in this server.'
       }
     });
   }

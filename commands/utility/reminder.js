@@ -21,7 +21,19 @@ exports.exec = async (Bastion, message, args) => {
   }
 
   if (!args.duration || !args.message) {
-    return Bastion.emit('commandUsage', message, this.help);
+    if (!remindUsers.hasOwnProperty(message.author.id)) {
+      return Bastion.emit('error', '', 'You have not set reminders.', message.channel);
+    }
+
+    return await message.channel.send({
+      embed: {
+        color: Bastion.colors.BLUE,
+        title: 'Reminder Message',
+        description: remindUsers[message.author.id]
+      }
+    }).catch(e => {
+      Bastion.log.error(e);
+    });
   }
 
   let duration = moment.duration(`PT${args.duration.toUpperCase()}`).asMilliseconds(),
@@ -76,6 +88,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'reminder <-d Duration> <Message>',
-  example: [ 'reminder -d 10m30s Get back to work.' ]
+  usage: 'reminder [--cancel | -d DURATION MESSAGE] ',
+  example: [ 'reminder -d 10m30s Get back to work.', 'reminder --cancel' ]
 };

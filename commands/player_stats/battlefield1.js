@@ -24,7 +24,7 @@ exports.exec = async (Bastion, message, args) => {
 
   let options = {
     headers: {
-      'TRN-Api-Key': Bastion.credentials.battlefieldAPIKey
+      'TRN-Api-Key': Bastion.credentials.trackerNetworkAPIKey
     },
     url: `https://battlefieldtracker.com/bf1/api/Stats/BasicStats?platform=${args.platform}&displayName=${args.name}&game=tunguska`,
     json: true
