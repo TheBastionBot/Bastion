@@ -1,7 +1,10 @@
 {
-  "date": "August 10, 2019",
+  "date": "August 11, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
-    "Under-the-hood improvements"
+    "Some under-the-hood improvements, as usual."
+  ],
+  "FIXES": [
+    "Some under-the-hood fixes to make Bastion even better."
   ]
 }
