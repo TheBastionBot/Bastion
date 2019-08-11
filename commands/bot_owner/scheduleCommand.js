@@ -47,7 +47,7 @@ exports.exec = async (Bastion, message, args) => {
     guildID: message.guild.id,
     channelID: message.channel.id,
     messageID: scheduledStatus.id,
-    cronExp: '0 ' + args.cronExp,
+    cronExp: `0 ${args.cronExp}`,
     command: args.command,
     arguments: args.arguments
   },
