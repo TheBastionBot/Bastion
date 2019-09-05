@@ -1,6 +1,9 @@
 {
   "date": "September 5, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
+  "IMPROVEMENTS": [
+    "Some under-the-hood improvements, to make Bastion even better."
+  ],
   "CHANGES": [
     "`quake3` command has been rightly moved to the Game Server Stats category."
   ]
