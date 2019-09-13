@@ -59,7 +59,7 @@ module.exports = message => {
       let filteredWords = guildModel.dataValues.filteredWords ? guildModel.dataValues.filteredWords : [];
 
       for (let word of filteredWords) {
-        if (message.content.toLowerCase().split(' ').includes(word.toLowerCase())) {
+        if (message.content.toLowerCase().replace(/[^0-9a-z]/gi, '').includes(word.toLowerCase())) {
           // If the code reaches here, the message contains words that needs to be filtered
           resolve(true);
 
