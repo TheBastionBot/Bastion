@@ -59,7 +59,7 @@ module.exports = message => {
       let filteredWords = guildModel.dataValues.filteredWords ? guildModel.dataValues.filteredWords : [];
 
       for (let word of filteredWords) {
-        if (message.content.toLowerCase().replace(/[^0-9a-z]/gi, '').includes(word.toLowerCase())) {
+                if (message.content.toLowerCase().replace(/[^0-9a-z ]/gi, ' ').split(' ').includes(word.toLowerCase())) {
           // If the code reaches here, the message contains words that needs to be filtered
           resolve(true);
 
@@ -106,7 +106,55 @@ module.exports = message => {
           });
 
           return resolve(true);
-        }
+		}
+		else if (message.content.toLowerCase().replace(/[^0-9a-z ]/gi, '').split(' ').includes(word.toLowerCase())) {
+          // If the code reaches here, the message contains words that needs to be filtered
+          resolve(true);
+
+          if (message.deletable) message.delete().catch(() => {});
+
+          message.channel.send({
+            embed: {
+              color: message.client.colors.ORANGE,
+              description: `EXCUSE ME! ${message.author} you are not supposed to use that word in here!`
+            }
+          }).then(msg => {
+            msg.delete(10000).catch(() => {});
+          }).catch(() => {});
+
+
+          // Log the words that are filtered
+          if (!guildModel.dataValues.moderationLog) return;
+
+          let modLogChannel = message.guild.channels.get(guildModel.dataValues.moderationLog);
+          if (!modLogChannel) return;
+
+          await modLogChannel.send({
+            embed: {
+              color: message.client.colors.ORANGE,
+              title: 'Filtered Words',
+              fields: [
+                {
+                  name: 'User',
+                  value: message.author.tag,
+                  inline: true
+                },
+                {
+                  name: 'User ID',
+                  value: message.author.id,
+                  inline: true
+                },
+                {
+                  name: 'Blocked Word',
+                  value: word
+                }
+              ],
+              timestamp: new Date()
+            }
+          });
+
+          return resolve(true);
+      }
       }
     }
     catch (e) {
