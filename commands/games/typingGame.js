@@ -28,7 +28,7 @@ exports.exec = async (Bastion, message) => {
   let index = Number.random(1, Object.keys(typingArticles).length);
   let articleMessage = await message.channel.send({
     embed: {
-      description: typingArticles[index]
+      description: `${typingArticles[index]}⠀`
     }
   });
 
