@@ -1,10 +1,11 @@
 {
-  "date": "September 5, 2019",
+  "date": "October 3, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Some under-the-hood improvements, to make Bastion even better."
   ],
   "CHANGES": [
-    "`quake3` command has been rightly moved to the Game Server Stats category."
+    "`quake3` command has been rightly moved to the Game Server Stats category.",
+    "You can now instantly shutdown Bastion, without answering the confirmation prompt, using the `now` parameter with the `shutdown` command."
   ]
 }
