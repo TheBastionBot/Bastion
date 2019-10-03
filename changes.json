@@ -7,5 +7,8 @@
   "CHANGES": [
     "`quake3` command has been rightly moved to the Game Server Stats category.",
     "You can now instantly shutdown Bastion, without answering the confirmation prompt, using the `now` parameter with the `shutdown` command."
+  ],
+  "FIXES": [
+    "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
