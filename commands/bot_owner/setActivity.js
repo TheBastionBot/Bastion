@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message, args) => {
     });
   }
   else {
-    let game = typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name.length ? Bastion.configurations.game.name[0] : null;
+    let game = typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name instanceof Array ? Bastion.configurations.game.name[0] : null;
     await Bastion.user.setActivity(game, { type: Bastion.configurations.game.type });
 
     await message.channel.send({
