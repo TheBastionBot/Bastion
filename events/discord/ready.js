@@ -36,13 +36,13 @@ module.exports = async Bastion => {
     Bastion.user.setPresence({
       status: Bastion.configurations.status,
       game: {
-        name: typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name.length ? Bastion.configurations.game.name[0] : null,
+        name: typeof Bastion.configurations.game.name === 'string' ? Bastion.configurations.game.name : Bastion.configurations.game.name instanceof Array ? Bastion.configurations.game.name[0] : null,
         type: Bastion.configurations.game.type,
         url: Bastion.configurations.game.url && Bastion.configurations.game.url.trim().length ? Bastion.configurations.game.url : null
       }
     });
 
-    if (typeof Bastion.configurations.game.name !== 'string' && Bastion.configurations.game.name.length) {
+    if (Bastion.configurations.game.name instanceof Array && Bastion.configurations.game.length) {
       Bastion.setInterval(async () => {
         try {
           await Bastion.user.setActivity(Bastion.configurations.game.name[Math.floor(Math.random() * Bastion.configurations.game.name.length)],

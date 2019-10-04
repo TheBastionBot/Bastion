@@ -1,13 +1,14 @@
 {
-  "date": "August 11, 2019",
+  "date": "October 4, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
-    "If the `reminder` command is used without arguments, it'll now show the reminder message.",
-    "You won't be able to accidentally set scheduled commands for every second.",
-    "Some under-the-hood improvements, as usual."
+    "Some under-the-hood improvements, to make Bastion even better."
+  ],
+  "CHANGES": [
+    "`quake3` command has been rightly moved to the Game Server Stats category.",
+    "You can now instantly shutdown Bastion, without answering the confirmation prompt, using the `now` parameter with the `shutdown` command."
   ],
   "FIXES": [
-    "Fixed `translate` command not working sometimes.",
-    "Some under-the-hood fixes to make Bastion even better."
+    "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
