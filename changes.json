@@ -1,14 +1,12 @@
 {
-  "date": "October 4, 2019",
+  "date": "October 6, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Some under-the-hood improvements, to make Bastion even better."
   ],
-  "CHANGES": [
-    "`quake3` command has been rightly moved to the Game Server Stats category.",
-    "You can now instantly shutdown Bastion, without answering the confirmation prompt, using the `now` parameter with the `shutdown` command."
-  ],
   "FIXES": [
+    "Fixed the `twitch` command not showing the stream status.",
+    "Fixed live stream notifications. You can now go back to get notified about your fav streamers!",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
