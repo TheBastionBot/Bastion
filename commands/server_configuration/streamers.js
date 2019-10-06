@@ -4,7 +4,17 @@
  * @license GPL-3.0
  */
 
+const request = xrequire('request-promise-native');
+
 exports.exec = async (Bastion, message, args) => {
+  let options = {
+    headers: {
+      'Client-ID': Bastion.credentials.twitchClientID,
+      'Accept': 'Accept: application/vnd.twitchtv.v5+json'
+    },
+    json: true
+  };
+
   let streamersModel = await Bastion.database.models.streamers.findOne({
     attributes: [ 'channelID', 'twitch' ],
     where: {
@@ -22,7 +32,9 @@ exports.exec = async (Bastion, message, args) => {
     if (twitchStreamers.length) {
       color = Bastion.colors.BLUE;
       title = 'Followed streamers';
-      description = twitchStreamers.join(', ');
+
+      let response = await request(`https://api.twitch.tv/helix/users/?id=${twitchStreamers.join("&id=")}`, options);
+      description = response.data.map(user => user.display_name).join(', ');
     }
     else {
       color = Bastion.colors.RED;
@@ -30,17 +42,19 @@ exports.exec = async (Bastion, message, args) => {
     }
   }
   else {
+    let response = await request(`https://api.twitch.tv/helix/users/?login=${args.streamers.join("&login=")}`, options);
+
     if (args.remove) {
       color = Bastion.colors.RED;
       title = 'Removed from followed streamers';
-      twitchStreamers = twitchStreamers.filter(streamer => args.streamers.indexOf(streamer) < 0);
+      twitchStreamers = twitchStreamers.filter(streamer => response.data.map(user => user.id).indexOf(streamer) < 0);
     }
     else {
       color = Bastion.colors.GREEN;
       title = 'Added to followed streamers';
-      twitchStreamers = twitchStreamers.concat(args.streamers);
+      twitchStreamers = twitchStreamers.concat(response.data.map(user => user.id));
     }
-    description = args.streamers.join(' ');
+    description = response.data.map(user => user.display_name).join(' ');
     twitchStreamers = [ ...new Set(twitchStreamers) ];
 
     await Bastion.database.models.streamers.upsert({

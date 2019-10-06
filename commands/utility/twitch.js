@@ -14,12 +14,22 @@ exports.exec = async (Bastion, message, args) => {
   let options = {
     headers: {
       'Client-ID': Bastion.credentials.twitchClientID,
-      'Accept': 'Accept: application/vnd.twitchtv.v3+json'
+      'Accept': 'Accept: application/vnd.twitchtv.v5+json'
     },
-    url: `https://api.twitch.tv/kraken/streams/${args.live}`,
+    url: `https://api.twitch.tv/helix/users/?login=${args.live}`,
     json: true
   };
   let response = await request(options);
+
+  options = {
+    headers: {
+      'Client-ID': Bastion.credentials.twitchClientID,
+      'Accept': 'Accept: application/vnd.twitchtv.v5+json'
+    },
+    url: `https://api.twitch.tv/kraken/streams/${response.data[0].id}`,
+    json: true
+  };
+  response = await request(options);
 
   let author, fields, image, footer;
 
