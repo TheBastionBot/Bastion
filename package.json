@@ -45,7 +45,7 @@
     "pokedex-api": "~1.1.2",
     "request": "~2.88.0",
     "request-promise-native": "~1.0.5",
-    "sequelize": "~4.43.2",
+    "sequelize": "~5.21.0",
     "snekfetch": "~4.0.4",
     "snyk": "^1.231.0",
     "sqlite": "~3.0.0",
