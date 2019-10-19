@@ -4,13 +4,15 @@
  * @license GPL-3.0
  */
 
+const Sequelize = xrequire('sequelize');
+
 exports.exec = async (Bastion, message) => {
   let buyableRoleModels = await Bastion.database.models.role.findAll({
     attributes: [ 'roleID', 'price' ],
     where: {
       guildID: message.guild.id,
       price: {
-        [Bastion.database.Op.not]: null
+        [Sequelize.Op.not]: null
       }
     }
   });

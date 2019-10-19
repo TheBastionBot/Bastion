@@ -4,6 +4,8 @@
  * @license GPL-3.0
  */
 
+const Sequelize = xrequire('sequelize');
+
 exports.exec = async (Bastion, message, args) => {
   if (!args.role) {
     return Bastion.emit('commandUsage', message, this.help);
@@ -28,7 +30,7 @@ exports.exec = async (Bastion, message, args) => {
       roleID: role.id,
       guildID: message.guild.id,
       price: {
-        [Bastion.database.Op.not]: null
+        [Sequelize.Op.not]: null
       }
     }
   });

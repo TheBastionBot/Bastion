@@ -4,6 +4,8 @@
  * @license GPL-3.0
  */
 
+const Sequelize = xrequire('sequelize');
+
 exports.exec = async (Bastion, message, args) => {
   let reactionRolesGroupModels = await Bastion.database.models.reactionRolesGroup.findAll({
     fields: [ 'messageID' ],
@@ -65,7 +67,7 @@ exports.exec = async (Bastion, message, args) => {
     where: {
       guildID: message.guild.id,
       emoji: {
-        [Bastion.database.Op.not]: null
+        [Sequelize.Op.not]: null
       }
     }
   });
