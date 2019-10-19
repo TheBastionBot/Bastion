@@ -5,9 +5,6 @@
     "Some under-the-hood improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Fixed the `twitch` command not showing the stream status.",
-    "Fixed live stream notifications. You can now go back to get notified about your fav streamers!",
-    "Fixed the `rainbow6` command. Now you can go back to seeing your squad's stats!",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
