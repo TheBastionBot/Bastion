@@ -4,6 +4,8 @@
  * @license GPL-3.0
  */
 
+const Sequelize = xrequire('sequelize');
+
 exports.exec = async (Bastion, message, args) => {
   let user;
   if (message.mentions.users.size) {
@@ -62,7 +64,7 @@ exports.exec = async (Bastion, message, args) => {
       where: {
         guildID: message.guild.id,
         warnings: {
-          [Bastion.database.Op.not]: null
+          [Sequelize.Op.not]: null
         }
       }
     });

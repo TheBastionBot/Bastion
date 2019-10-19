@@ -4,6 +4,8 @@
  * @license GPL-3.0
  */
 
+const Sequelize = xrequire('sequelize');
+
 exports.exec = async (Bastion, message, args) => {
   if (args.level && args.add) {
     if (!message.member || !message.member.hasPermission('MANAGE_ROLES')) {
@@ -68,7 +70,7 @@ exports.exec = async (Bastion, message, args) => {
       where: {
         guildID: message.guild.id,
         level: {
-          [Bastion.database.Op.ne]: null
+          [Sequelize.Op.ne]: null
         }
       }
     });
