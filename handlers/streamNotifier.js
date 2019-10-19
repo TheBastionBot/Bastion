@@ -32,7 +32,7 @@ module.exports = Bastion => {
               let options = {
                 headers: {
                   'Client-ID': Bastion.credentials.twitchClientID,
-                  'Accept': 'Accept: application/vnd.twitchtv.v3+json'
+                  'Accept': 'Accept: application/vnd.twitchtv.v5+json'
                 },
                 url: `https://api.twitch.tv/kraken/streams/?channel=${twitchStreamers.join(',')}`,
                 json: true
