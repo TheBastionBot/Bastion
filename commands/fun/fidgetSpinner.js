@@ -20,7 +20,7 @@ exports.exec = async (Bastion, message) => {
     spinning.edit({
       embed: {
         color: Bastion.colors.BLUE,
-        description: `${message.author.tag}, you spinned the fidget spinner for ${timeout.toFixed(2)} seconds.`
+        description: `${message.author.tag}, you spun the fidget spinner for ${timeout.toFixed(2)} seconds.`
       }
     }).catch(e => {
       Bastion.log.error(e);

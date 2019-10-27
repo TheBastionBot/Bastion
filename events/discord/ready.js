@@ -42,7 +42,7 @@ module.exports = async Bastion => {
       }
     });
 
-    if (Bastion.configurations.game.name instanceof Array && Bastion.configurations.game.length) {
+    if (Bastion.configurations.game.name instanceof Array && Bastion.configurations.game.name.length) {
       Bastion.setInterval(async () => {
         try {
           await Bastion.user.setActivity(Bastion.configurations.game.name[Math.floor(Math.random() * Bastion.configurations.game.name.length)],

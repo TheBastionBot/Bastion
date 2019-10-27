@@ -1,13 +1,12 @@
 {
-  "date": "October 19, 2019",
+  "date": "October 27, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Some under-the-hood improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Fixed the `twitch` command not showing the stream status.",
-    "Fixed live stream notifications. You can now go back to get notified about your fav streamers!",
-    "Fixed the `rainbow6` command. Now you can go back to seeing your squad's stats!",
+    "Danny wanted to show his friends his Rainbow 6 stats. But Danny noticed that his death count and assists were always same and was confused. We don't want anyone to stay confused. So, we fixed the `rainbow6` command.",
+    "Cara tried to set multiple statuses, but Bastion was unable to cycle between them, so she got upset. We can't let anyone down, so we fixed that too!",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }

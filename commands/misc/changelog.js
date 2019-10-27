@@ -30,10 +30,6 @@ exports.exec = async (Bastion, message) => {
         + '\nJoin **Bastion HQ** and never miss an update: https://discord.gg/fzx8fkt'
     },
     {
-      name: 'Loving Bastion?',
-      value: 'Then why wait? Go ahead and express your feelings by tweeting him [@TheBastionBot](https://twitter.com/TheBastionBot) and your testimonial will be posted in [our testimonials page](https://bastionbot.org/testimonials).'
-    },
-    {
       name: 'Support Bastion\'s Development',
       value: '[Support the development of Bastion](https://bastionbot.org/donate) to keep it running forever and get cool rewards!'
     }
