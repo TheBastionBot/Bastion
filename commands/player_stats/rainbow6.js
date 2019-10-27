@@ -66,7 +66,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       {
         name: 'Assists',
-        value: `${data.pvp.deaths}`,
+        value: `${data.pvp.assists}`,
         inline: true
       },
       {
@@ -122,7 +122,7 @@ exports.exec = async (Bastion, message, args) => {
       },
       {
         name: 'Assists',
-        value: `${data.pve.deaths}`,
+        value: `${data.pve.assists}`,
         inline: true
       },
       {
