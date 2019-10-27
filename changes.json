@@ -5,7 +5,8 @@
     "Some under-the-hood improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Bastion was not able to cycle between multiple status, it's been fixed now.",
+    "Danny wanted to show his friends his Rainbow 6 stats. But Danny noticed that his death count and assists were always same and was confused. We don't want anyone to stay confused. So, we fixed the `rainbow6` command.",
+    "Cara tried to set multiple statuses, but Bastion was unable to cycle between them, so she got upset. We can't let anyone down, so we fixed that too!",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
