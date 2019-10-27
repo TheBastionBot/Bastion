@@ -1,10 +1,11 @@
 {
-  "date": "October 19, 2019",
+  "date": "October 27, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Some under-the-hood improvements, to make Bastion even better."
   ],
   "FIXES": [
+    "Bastion was not able to cycle between multiple status, it's been fixed now.",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
