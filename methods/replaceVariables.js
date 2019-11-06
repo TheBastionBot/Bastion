@@ -15,7 +15,7 @@ module.exports = (text, message) => {
     '{server.channels.text.size}': message.guild.channels.filter(channel => channel.type === 'text').size,
     '{server.channels.voice.size}': message.guild.channels.filter(channel => channel.type === 'voice').size,
     '{server.roles.size}': message.guild.roles.size,
-    '{server.members.size}': message.guild.members.size,
+    '{server.members.size}': message.guild.memberCount,
     '{server.users.size}': message.guild.members.filter(member => member.user.bot === false).size,
     '{server.bots.size}': message.guild.members.filter(member => member.user.bot === true).size,
     '{author}': message.author,
