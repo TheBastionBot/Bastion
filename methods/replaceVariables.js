@@ -31,7 +31,7 @@ module.exports = (text, message) => {
     '{bot.tag}': message.client.user.tag,
     '{bot.name}': message.client.user.username,
     '{bot.nick}': message.guild.me.displayName,
-    '{bot.avatar}': member.guild.me.user.displayAvatarURL,
+    '{bot.avatar}': message.guild.me.user.displayAvatarURL,
     '{bot.roles.size}': message.guild.me.roles.size
   };
 
