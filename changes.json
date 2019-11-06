@@ -5,5 +5,8 @@
     "Added more user variables. You now have access to server icon, user and bot avatars in greet messages, triggers, etc. To get a list of all the user variables that you can use, see our [FAQ](https://bastionbot.org/faq) page.",
     "You will now get the exact member count in server when you use the `memberCount` user variable.",
     "Some under-the-hood improvements, to make Bastion even better."
+  ],
+  "FIXES": [
+    "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
