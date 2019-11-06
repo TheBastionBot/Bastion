@@ -34,7 +34,6 @@ BASTION.i18n = new StringHandler();
 
 const Sequelize = xrequire('sequelize');
 BASTION.database = new Sequelize(BASTION.credentials.database.URI, {
-  operatorsAliases: false,
   logging: false
 });
 BASTION.database.authenticate().then(() => {
