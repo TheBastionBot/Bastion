@@ -24,6 +24,7 @@ module.exports = (text, message) => {
     '{author.tag}': message.author.tag,
     '{author.name}': message.author.username,
     '{author.nick}': message.member.displayName,
+    '{author.avatar}': message.author.displayAvatarURL,
     '{author.roles.size}': message.member.roles.size,
     '{bot}': message.client.user,
     '{bot.id}': message.client.user.id,

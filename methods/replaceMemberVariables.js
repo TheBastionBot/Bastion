@@ -24,6 +24,7 @@ module.exports = (text, member) => {
     '{author.tag}': member.user.tag,
     '{author.name}': member.user.username,
     '{author.nick}': member.displayName,
+    '{author.avatar}': member.user.displayAvatarURL,
     '{author.roles.size}': member.roles.size,
     '{bot}': member.client.user,
     '{bot.id}': member.client.user.id,
