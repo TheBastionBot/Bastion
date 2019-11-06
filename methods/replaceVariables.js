@@ -10,6 +10,7 @@ module.exports = (text, message) => {
     '{server}': message.guild.name,
     '{server.id}': message.guild.id,
     '{server.region}': message.guild.region,
+    '{server.icon}': message.guild.icon ? message.guild.iconURL : `https://dummyimage.com/128/7289DA/FFFFFF/&text=${encodeURIComponent(message.guild.nameAcronym)}`,
     '{server.prefix}': message.guild.prefix ? message.guild.prefix[0] : message.client.configurations.prefix[0],
     '{server.channels.size}': message.guild.channels.size,
     '{server.channels.text.size}': message.guild.channels.filter(channel => channel.type === 'text').size,
