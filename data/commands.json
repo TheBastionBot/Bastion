@@ -1187,6 +1187,10 @@
     "description": "Get stats of any Team Fortress 2 game server.",
     "module": "Game Server Stats"
   },
+  "teamtrees": {
+    "description": "Help #TeamTrees plant 20 million trees around the globe by January 1st, 2020!",
+    "module": "Misc"
+  },
   "terms": {
     "description": "Read %bastion%'s Terms of Service.",
     "module": "Misc"
