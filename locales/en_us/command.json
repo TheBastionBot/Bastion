@@ -89,6 +89,9 @@
   "book": {
     "description": "Searches for the details of a book"
   },
+  "botRole": {
+    "description": "Sets/unsets the Bot Role in the server. Any bot that joins the server is given this role."
+  },
   "buy": {
     "description": "Buy items from the server's shop. You can also gift it to some other member while buying."
   },
@@ -732,7 +735,7 @@
     "description": "Get stats of any Rust game server."
   },
   "scheduleCommand": {
-    "description": "Schedule a command as cron jobs to run at the specified schedule.\n`cron` expression format:```Second         0-59 or * or range\nMinute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```"
+    "description": "Schedule a command as cron jobs to run at the specified schedule.\n`cron` expression format:```Minute         0-59 or * or range\nHour           0-23 or * or range\nDay of month   1-31 or * or range\nMonth          1-12 or * or range\nDay of week    0-7 (0 or 7 is SUN) or * or range```"
   },
   "searchServers": {
     "description": "Searches for Discord servers, containing the specified text in their name, that Bastion is connected to."
