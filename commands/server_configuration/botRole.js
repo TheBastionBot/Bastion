@@ -4,16 +4,14 @@
  * @license GPL-3.0
  */
 
-exports.exec = async (Bastion, message) => {
-  let guildModel = await Bastion.database.models.guild.findOne({
-    attributes: [ 'botRole' ],
-    where: {
-      guildID: message.guild.id
-    }
-  });
+exports.exec = async (Bastion, message, args) => {
+  let role = args.role ? message.guild.roles.get(args.role.join('')) : message.mentions.roles.first();
+  if (!role && args.role) {
+    role = message.guild.roles.find(role => role.name === args.role.join(' '));
+  }
 
   await Bastion.database.models.guild.update({
-    botRole: guildModel.dataValues.botRole ? null : message.channel.id
+    botRole: role ? role.id : null
   },
   {
     where: {
@@ -24,8 +22,8 @@ exports.exec = async (Bastion, message) => {
 
   await message.channel.send({
     embed: {
-      color: guildModel.dataValues.botRole ? Bastion.colors.RED : Bastion.colors.GREEN,
-      description: Bastion.i18n.info(message.guild.language, guildModel.dataValues.botRole ? 'unsetBotRole' : 'setBotRole', message.author.tag)
+      color: role ? Bastion.colors.GREEN : Bastion.colors.RED,
+      description: Bastion.i18n.info(message.guild.language, role ? 'setBotRole' : 'unsetBotRole', message.author.tag, role)
     }
   }).catch(e => {
     Bastion.log.error(e);
@@ -34,7 +32,10 @@ exports.exec = async (Bastion, message) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  argsDefinitions: [
+    { name: 'role', type: String, multiple: true, alias: 'r', defaultOption: true }
+  ]
 };
 
 exports.help = {
@@ -44,5 +45,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'botRole',
-  example: []
+  example: [ 'botRole', 'botRole Bots', 'botRole 239314571642104659' ]
 };
