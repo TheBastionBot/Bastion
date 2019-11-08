@@ -7,7 +7,7 @@
 const request = xrequire('request-promise-native');
 const cheerio = xrequire('cheerio');
 
-exports.exec = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message) => {
   let options = {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0) Gecko/20100101 Firefox/68.0'
