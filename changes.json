@@ -1,7 +1,8 @@
 {
-  "date": "November 6, 2019",
+  "date": "November 8, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
+    "Channel rate limits for slowmode will cap at 6 hours; you can't try to set it more than that. Because that won't work anyway.",
     "Added more user variables. You now have access to server icon, user and bot avatars in greet messages, triggers, etc. To get a list of all the user variables that you can use, see our [FAQ](https://bastionbot.org/faq) page.",
     "You will now get the exact member count in server when you use the `memberCount` user variable.",
     "Some under-the-hood improvements, to make Bastion even better."
