@@ -33,7 +33,7 @@ exports.exec = async (Bastion, message, args) => {
       color = Bastion.colors.BLUE;
       title = 'Followed streamers';
 
-      let response = await request(`https://api.twitch.tv/helix/users/?id=${twitchStreamers.join("&id=")}`, options);
+      let response = await request(`https://api.twitch.tv/helix/users/?id=${twitchStreamers.join('&id=')}`, options);
       description = response.data.map(user => user.display_name).join(', ');
     }
     else {
@@ -42,7 +42,7 @@ exports.exec = async (Bastion, message, args) => {
     }
   }
   else {
-    let response = await request(`https://api.twitch.tv/helix/users/?login=${args.streamers.join("&login=")}`, options);
+    let response = await request(`https://api.twitch.tv/helix/users/?login=${args.streamers.join('&login=')}`, options);
 
     if (args.remove) {
       color = Bastion.colors.RED;

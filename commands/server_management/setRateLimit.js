@@ -7,6 +7,9 @@
 exports.exec = async (Bastion, message, args) => {
   let rateLimit = args.interval ? args.interval : 0;
 
+  // Discord supports a cooldown of at most 6h.
+  if (rateLimit > 21600) rateLimit = 21600;
+
   await message.channel.setRateLimitPerUser(rateLimit);
 
   await message.channel.send({

@@ -16,6 +16,8 @@
   "enableAnnouncementChannel": "%var% enabled this channel as the announcement channel for %bastion%.",
   "disableBastion": "%var% disabled my usage in this server.",
   "enableBastion": "%var% enabled my usage in this server.",
+  "setBotRole": "%var% set %var% as the Bot Role in this server.",
+  "unsetBotRole": "%var% has unset the Bot Role in this server.",
   "disableChat": "%var% disabled %bastion% chat in this server. I am going to miss talking with you all.",
   "enableChat": "%var% enabled %bastion% chat in this server. I will talk to you if you mention me! I am here anytime you need me.",
   "disableAllCommands": "%var% disabled all commands in this server. You can enable all commands again using the `enableCommand --all` command.",

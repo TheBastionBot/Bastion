@@ -9,7 +9,7 @@ module.exports = async member => {
     const greetMessages = xrequire('./assets/greetingMessages.json');
 
     let guildModel = await member.client.database.models.guild.findOne({
-      attributes: [ 'greet', 'greetMessage', 'greetTimeout', 'greetPrivate', 'greetPrivateMessage', 'autoAssignableRoles', 'serverLog' ],
+      attributes: [ 'greet', 'greetMessage', 'greetTimeout', 'greetPrivate', 'greetPrivateMessage', 'autoAssignableRoles', 'botRole', 'serverLog' ],
       where: {
         guildID: member.guild.id
       }
@@ -151,6 +151,11 @@ module.exports = async member => {
     autoAssignableRoles = autoAssignableRoles.filter(r => member.guild.roles.get(r));
     if (autoAssignableRoles.length) {
       member.addRoles(autoAssignableRoles).catch(() => {});
+    }
+
+    // Bot Role
+    if (guildModel.dataValues.botRole && member.user.bot) {
+      member.addRole(guildModel.dataValues.botRole).catch(() => {});
     }
   }
   catch (e) {

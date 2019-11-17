@@ -33,6 +33,26 @@ exports.exec = async (Bastion, message, args) => {
       inline: true
     }
   ];
+
+  if (data.rank && data.rank.seasons) {
+    let seasons = Object.keys(data.rank.seasons);
+    if (seasons.length) {
+      let rank = data.rank.seasons[seasons[0]];
+      rank.regions = Object.values(rank.regions);
+
+      stats.push({
+        name: rank.name,
+        value: `Season ${rank.id}`
+      });
+
+      rank.regions.forEach(r => stats.push({
+        name: getRegionName(r.region),
+        value: `**RANK** ${r.current.name}\n**SKILL** ${r.skillMean} ± ${r.skillStdev}\n**WINS** ${r.wins}\n**LOSSES** ${r.losses}`,
+        inline: true
+      }));
+    }
+  }
+
   if (data.pvp) {
     stats.push(
       {
@@ -176,4 +196,23 @@ exports.help = {
   userVoicePermission: '',
   usage: 'rainbow6 <uplay|ps4|xone> <username>',
   example: [ 'rainbow6 uplay SaffronPants' ]
+};
+
+/**
+ * Returns the region name of the specified region code.
+ * @param {string} region The region code of the ranked stats
+ * @returns {string} The region name
+ */
+const getRegionName = region => {
+  region = region.toLowerCase();
+  switch (region) {
+    case 'emea':
+      return 'Europe';
+    case 'ncsa':
+      return 'America';
+    case 'apac':
+      return 'Asia';
+    default:
+      return region;
+  }
 };

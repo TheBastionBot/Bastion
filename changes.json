@@ -1,12 +1,19 @@
 {
-  "date": "October 27, 2019",
+  "date": "November 17, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
+  "NEW FEATURES": [
+    "If you were looking to automatically assign a role to all the bots that join the server, we've got your back. With the new `botRole` command you can now set a role which will be auto assigned to any bots that join the server.",
+    "Added the `teamtrees`/`trees` command for the love of our planet! **[#TeamTrees](https://teamtrees.org)**",
+    "You can now drop some of your currencies in a channel, using the all new `drop` command. And anybody can pick all the dropped currencies by using the `pick` command."
+  ],
   "IMPROVEMENTS": [
+    "You can now see the ranked stats of Rainbow 6 players for their latest season in the `rainbow6` command.",
+    "Channel rate limits for slowmode will cap at 6 hours; you can't try to set it more than that. Because that won't work anyway.",
+    "Added more user variables. You now have access to server icon, user and bot avatars in greet messages, triggers, etc. To get a list of all the user variables that you can use, see our [FAQ](https://bastionbot.org/faq) page.",
+    "You will now get the exact member count in server when you use the `memberCount` user variable.",
     "Some under-the-hood improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Danny wanted to show his friends his Rainbow 6 stats. But Danny noticed that his death count and assists were always same and was confused. We don't want anyone to stay confused. So, we fixed the `rainbow6` command.",
-    "Cara tried to set multiple statuses, but Bastion was unable to cycle between them, so she got upset. We can't let anyone down, so we fixed that too!",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }

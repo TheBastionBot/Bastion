@@ -7,5 +7,5 @@ Array.union = function(arr1, arr2) {
 };
 
 Array.zip = function(...arr) {
-  return [...arr[0]].map((_, i) => arr.map(a => a[i]));
+  return [ ...arr[0] ].map((_, i) => arr.map(a => a[i]));
 };
