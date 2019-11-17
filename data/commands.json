@@ -327,6 +327,10 @@
     "description": "Instructions on how to financially support the development of the Bastion Bot project.",
     "module": "Misc"
   },
+  "drop": {
+    "description": "Drops some %currency.name_plural% in the current channel, so anybody can pick it up.",
+    "module": "Profile"
+  },
   "echo": {
     "description": "Sends the same message that you had sent. Just like an echo!",
     "module": "Utility"
@@ -750,6 +754,10 @@
   "pause": {
     "description": "Pauses the current playback in your Discord server.",
     "module": "Music"
+  },
+  "pick": {
+    "description": "Picks all the %currency.name_plural% dropped in the current channel and adds it to your account.",
+    "module": "Profile"
   },
   "ping": {
     "description": "Shows the response time and average WebSocket ping of %bastion%.",
