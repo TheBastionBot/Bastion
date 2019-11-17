@@ -1,9 +1,10 @@
 {
-  "date": "November 8, 2019",
+  "date": "November 17, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "NEW FEATURES": [
     "If you were looking to automatically assign a role to all the bots that join the server, we've got your back. With the new `botRole` command you can now set a role which will be auto assigned to any bots that join the server.",
-    "Added the `teamtrees`/`trees` command for the love of our planet! **[#TeamTrees](https://teamtrees.org)**"
+    "Added the `teamtrees`/`trees` command for the love of our planet! **[#TeamTrees](https://teamtrees.org)**",
+    "You can now drop some of your currencies in a channel, using the all new `drop` command. And anybody can pick all the dropped currencies by using the `pick` command."
   ],
   "IMPROVEMENTS": [
     "Channel rate limits for slowmode will cap at 6 hours; you can't try to set it more than that. Because that won't work anyway.",
