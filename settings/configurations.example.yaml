@@ -45,9 +45,5 @@ music:
 # Valid values ranges from 1 - 6
 logLevel: 6
 
-# Update settings
-autoUpdate:
-  # Automatically check if an update is available for Bastion, before startup.
-  check: true
-  # Automatically install any available updates before startup.
-  install: true
+# Automatically install any available updates before startup.
+autoUpdate: true
