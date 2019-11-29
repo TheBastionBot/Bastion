@@ -5,7 +5,6 @@
  */
 
 const moment = xrequire('moment');
-const specialIDs = xrequire('./assets/specialIDs.json');
 
 exports.exec = async (Bastion, message) => {
   let guildMemberModel = await Bastion.database.models.guildMember.findOne({
@@ -52,12 +51,12 @@ exports.exec = async (Bastion, message) => {
     description = `${description}\n\nCongratulations! You've completed your 7 day streak! Check for a DM from me for your bonus reward.`;
   }
 
-  if (Bastion.user.id === '267035345537728512') {
-    if (message.guild.id === specialIDs.bastionGuild) {
-      if (message.member && message.member.roles.has(specialIDs.patronsRole)) {
+  if (Bastion.user.id === '267035345537728512' && Bastion.hq) {
+    if (message.guild.id === Bastion.hq.id) {
+      if (message.member && message.member.roles.has(Bastion.hq.roles.patrons.id)) {
         rewardAmount += 500;
       }
-      else if (message.member && message.member.roles.has(specialIDs.donorsRole)) {
+      else if (message.member && message.member.roles.has(Bastion.hq.roles.donors.id)) {
         rewardAmount += 100;
       }
     }
