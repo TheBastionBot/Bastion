@@ -51,7 +51,14 @@ module.exports = () => {
 
       let latestPackage = await request(getPackageUrl('stable'), options);
 
-      resolve(compareVersion(latestPackage.version, package.version));
+      let result = compareVersion(latestPackage.version, package.version);
+
+      if (result === -1) {
+        latestPackage = await request(getPackageUrl('master'), options);
+        result = compareVersion(latestPackage.version, package.version);
+      }
+
+      resolve(result);
     }
     catch (e) {
       reject(e);
