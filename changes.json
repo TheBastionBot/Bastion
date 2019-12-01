@@ -3,7 +3,7 @@
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Bastion will now auto check for updates on start and install them if you'd like.",
-    "Some under-the-hood improvements, to make Bastion even better."
+    "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
     "Some under-the-hood fixes, as usual, to improve Bastion."
