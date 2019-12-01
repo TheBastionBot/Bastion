@@ -10,7 +10,7 @@ module.exports = (url) => {
   return new Promise(async (resolve, reject) => {
     try {
       let options = {
-        url: `https://api.bastionbot.org/url/follow?url=${url}`,
+        url: `https://thebastionbot.herokuapp.com/url/follow?url=${url}`,
         headers: {
           'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
         },
