@@ -19,8 +19,11 @@ const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
 const configurations = YAML.parse(configurationsFile);
 const credentials = YAML.parse(credentialsFile);
 
+
+log.info('Checking for updates...');
+
 compareVersion().then(async res => {
-  if (res !== 1) {
+  if (res === 1) {
     log.info('A new version of Bastion is avaiable.');
     if (configurations.autoUpdate) {
       const { stderr } = await exec('git pull', { timeout: 60000 });
@@ -28,7 +31,10 @@ compareVersion().then(async res => {
       if (stderr) log.info('Unable to update. Please try updating manually.');
       else log.info('Successfully installed all updates.');
     }
+  } else {
+    log.info('Bastion is up to date.');
   }
+
   log.info('Starting Bastion...');
 
 
