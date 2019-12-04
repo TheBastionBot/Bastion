@@ -1,8 +1,9 @@
 {
-  "date": "December 1, 2019",
+  "date": "December 4, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Bastion will now auto check for updates on start and install them if you'd like.",
+    "The `guide` command is now an alias for the all new `help` command",
     "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
