@@ -113,7 +113,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'h' ],
+  aliases: [ 'h', 'guide' ],
   enabled: true,
   argsDefinitions: [
     { name: 'command', type: String, alias: 'c', defaultOption: true },
@@ -123,7 +123,7 @@ exports.config = {
 
 exports.help = {
   name: 'help',
-  description: 'Shows help on the specified command.',
+  description: 'Shows help on the specified command. If a command isn\'t specified, it shows links to knowledge base resources.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
