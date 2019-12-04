@@ -31,7 +31,8 @@ compareVersion().then(async res => {
       if (stderr) log.info('Unable to update. Please try updating manually.');
       else log.info('Successfully installed all updates.');
     }
-  } else {
+  }
+  else {
     log.info('Bastion is up to date.');
   }
 
