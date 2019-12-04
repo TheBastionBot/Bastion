@@ -483,16 +483,12 @@
     "description": "Sets the time after which greeting message will be automatically deleted.",
     "module": "Server Configuration"
   },
-  "guide": {
-    "description": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the Bastion HQ.",
-    "module": "Help"
-  },
   "hello": {
     "description": "Get greetings from %bastion%.",
     "module": "Misc"
   },
   "help": {
-    "description": "Shows help on the specified command.",
+    "description": "Shows help on the specified command. If a command isn't specified, it shows links to knowledge base resources.",
     "module": "Help"
   },
   "hug": {
