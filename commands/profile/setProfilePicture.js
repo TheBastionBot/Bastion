@@ -8,8 +8,8 @@ exports.exec = async (Bastion, message, args) => {
   if (Bastion.methods.isPublicBastion(Bastion)) {
     let patrons = await Bastion.methods.getBastionPatrons();
 
-    if (!patrons.map(p => p.discord_id).includes(message.author.ID)) {
-      return Bastion.emit('error', '', 'Want to set a custom profile picture for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as a other cool perks.](https://patreon.com/bastionbot)', message.channel);
+    if (!patrons.map(p => p.discord_id).includes(message.author.id)) {
+      return Bastion.emit('error', '', 'Want to set a custom profile picture for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as other cool perks.](https://patreon.com/bastionbot)', message.channel);
     }
   }
 
