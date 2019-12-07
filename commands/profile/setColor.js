@@ -6,7 +6,11 @@
 
 exports.exec = async (Bastion, message, args) => {
   if (Bastion.methods.isPublicBastion(Bastion)) {
-    return Bastion.emit('error', '', 'This command is temporarily disabled in the public Bastion. For details, please contact [Bastion Support](https://discord.gg/fzx8fkt).', message.channel);
+    let patrons = await Bastion.methods.getBastionPatrons();
+
+    if (!patrons.map(p => p.discord_id).includes(message.author.ID)) {
+      return Bastion.emit('error', '', 'Want to set a custom accent color for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as a other cool perks.](https://patreon.com/bastionbot)', message.channel);
+    }
   }
 
   if (!args.color || !/^#?(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(args.color)) {
