@@ -2,7 +2,8 @@
   "date": "December 7, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "NEW FEATURES": [
-    "The `setColor` command is now available! You can now set a custom accent color for your profile."
+    "The `setColor` command is now available! You can now set a custom accent color for your profile.",
+    "The `setProfilePicture` command is now available too! You can now set a custom profile picture for your profile."
   ],
   "IMPROVEMENTS": [
     "Bastion will now auto check for updates on start and install them if you'd like.",
