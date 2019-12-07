@@ -9,7 +9,7 @@ exports.exec = async (Bastion, message, args) => {
     let patrons = await Bastion.methods.getBastionPatrons();
 
     if (!patrons.map(p => p.discord_id).includes(message.author.ID)) {
-      return Bastion.emit('error', '', 'Want to set a custom accent color for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as a other cool perks.](https://patreon.com/bastionbot)', message.channel);
+      return Bastion.emit('error', '', 'Want to set a custom profile picture for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as a other cool perks.](https://patreon.com/bastionbot)', message.channel);
     }
   }
 
