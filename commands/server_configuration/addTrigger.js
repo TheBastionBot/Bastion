@@ -23,11 +23,11 @@ exports.exec = async (Bastion, message, args) => {
 
     let patrons = await Bastion.methods.getBastionPatrons().catch(() => {});
     if (patrons && patrons.map(p => p.discord_id).includes(message.guild.ownerID)) {
-      let patron = patrons.find(p => p.discord_id === message.author.id);
+      let patron = patrons.find(p => p.discord_id === message.guild.ownerID);
       limit += parseInt(patron.amount_cents / 100) * 5;
     }
   
-    if (!Bastion.credentials.ownerId.includes(message.author.id) && triggerModels && triggerModels.length >= limit) {
+    if (!Bastion.credentials.ownerId.includes(message.guild.ownerID) && triggerModels && triggerModels.length >= limit) {
       return Bastion.emit('error', '', `You can't set more than ${limit} triggers. Want to set more triggers? [You can get 5 extra triggers for every dollar you donate towards supporting The Bastion Bot Project on Patreon, as well as other cool perks.](https://patreon.com/bastionbot)`, message.channel);
     }
   }
