@@ -36,6 +36,9 @@ BASTION.webhook = new WebhookHandler(BASTION.credentials.webhooks);
 BASTION.log = xrequire('./handlers/logHandler');
 BASTION.methods = xrequire('./handlers/methodHandler');
 
+BASTION.methods.makeExtractionRequest('/bastion/hq').
+  then(hq => (BASTION.hq = hq)).catch(BASTION.log.error);
+
 const StringHandler = xrequire('./handlers/stringHandler');
 BASTION.i18n = new StringHandler();
 

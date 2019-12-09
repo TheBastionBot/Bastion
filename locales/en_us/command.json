@@ -122,6 +122,9 @@
   "catFact": {
     "description": "Shows a random fact about cats."
   },
+  "catch": {
+    "description": "Catch any robbers, who are stealing %currency.name_plural%, in the channel."
+  },
   "catify": {
     "description": "Generates a random kitten image from the given string or your Discord tag if no string is specified."
   },
@@ -362,14 +365,11 @@
   "greetTimeout": {
     "description": "Sets the time after which greeting message will be automatically deleted."
   },
-  "guide": {
-    "description": "Shows you the guide on how to setup and install Private Bastion Bot. And links to the Bastion HQ."
-  },
   "hello": {
     "description": "Get greetings from %bastion%."
   },
   "help": {
-    "description": "Shows help on the specified command."
+    "description": "Shows help on the specified command. If a command isn't specified, it shows links to knowledge base resources."
   },
   "hug": {
     "description": "Give a hug to someone!"
@@ -859,6 +859,9 @@
   },
   "stats": {
     "description": "Shows detailed stats and info of %bastion%."
+  },
+  "steal": {
+    "description": "Steal some %currency.name_plural% from the specified member."
   },
   "steam": {
     "description": "Browse the games in different categories of the Steam Store."

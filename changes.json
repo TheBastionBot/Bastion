@@ -1,19 +1,21 @@
 {
-  "date": "November 17, 2019",
+  "date": "December 9, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "NEW FEATURES": [
-    "If you were looking to automatically assign a role to all the bots that join the server, we've got your back. With the new `botRole` command you can now set a role which will be auto assigned to any bots that join the server.",
-    "Added the `teamtrees`/`trees` command for the love of our planet! **[#TeamTrees](https://teamtrees.org)**",
-    "You can now drop some of your currencies in a channel, using the all new `drop` command. And anybody can pick all the dropped currencies by using the `pick` command."
+    "The `setColor` command is now available! You can now set a custom accent color for your profile.",
+    "The `setProfilePicture` command is now available too! You can now set a custom profile picture for your profile.",
+    "Patrons now get 5 extra triggers for every dollar they donate to The Bastion Bot Project.",
+    "There's no practical limit to how many Reaction Roles Group you can set in your server. Patrons now get 2 extra Reaction Roles Group for every dollar they donate to The Bastion Bot Project.",
+    "You can now steal Bastion Currencies from other server members by using the `steal` command. But be warned, don't get caught!",
+    "Yes, you can catch the thief using the `catch` command before he is done with the robbery."
   ],
   "IMPROVEMENTS": [
-    "You can now see the ranked stats of Rainbow 6 players for their latest season in the `rainbow6` command.",
-    "Channel rate limits for slowmode will cap at 6 hours; you can't try to set it more than that. Because that won't work anyway.",
-    "Added more user variables. You now have access to server icon, user and bot avatars in greet messages, triggers, etc. To get a list of all the user variables that you can use, see our [FAQ](https://bastionbot.org/faq) page.",
-    "You will now get the exact member count in server when you use the `memberCount` user variable.",
-    "Some under-the-hood improvements, to make Bastion even better."
+    "Bastion will now auto check for updates on start and install them if you'd like.",
+    "The `guide` command is now an alias for the all new `help` command",
+    "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
+    "Fixed the `game` command not working. You can now search for any games you want.",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }

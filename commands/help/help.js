@@ -87,6 +87,8 @@ exports.exec = async (Bastion, message, args) => {
     }
   }
   else {
+    let data = await Bastion.methods.makeExtractionRequest('/bastion/help');
+
     await message.channel.send({
       embed: {
         color: Bastion.colors.GOLD,
@@ -95,18 +97,10 @@ exports.exec = async (Bastion, message, args) => {
                      `\nTo get the list of commands in a specific command category, type \`${message.guild.prefix[0]}commands <category_name>\`.` +
                      `\nTo get help about a specific command, type \`${message.guild.prefix[0]}help <command_name>\`.` +
                      `\n\nNeed help or support with Bastion Bot?\n${message.guild.id === '267022940967665664' ? 'Ask for help in the <#267022940967665664> channel.' : 'Join [**Bastion HQ**](https://discord.gg/fzx8fkt) for testing the commands or any help you need with the bot or maybe just for fun.\nhttps://discord.gg/fzx8fkt'}`,
-        fields: [
-          {
-            name: 'Bastion HQ',
-            value: '[Join](https://discord.gg/fzx8fkt)',
-            inline: true
-          },
-          {
-            name: 'Bastion Bot',
-            value: `[Invite](https://discordapp.com/oauth2/authorize?client_id=${Bastion.user.id}&scope=bot&permissions=8)`,
-            inline: true
-          }
-        ],
+        fields: data.map(method => ({
+          name: method.name,
+          value: `${method.description}\n${method.link}`
+        })),
         thumbnail: {
           url: Bastion.user.displayAvatarURL
         },
@@ -119,7 +113,7 @@ exports.exec = async (Bastion, message, args) => {
 };
 
 exports.config = {
-  aliases: [ 'h' ],
+  aliases: [ 'h', 'guide' ],
   enabled: true,
   argsDefinitions: [
     { name: 'command', type: String, alias: 'c', defaultOption: true },
@@ -129,7 +123,7 @@ exports.config = {
 
 exports.help = {
   name: 'help',
-  description: 'Shows help on the specified command.',
+  description: 'Shows help on the specified command. If a command isn\'t specified, it shows links to knowledge base resources.',
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',

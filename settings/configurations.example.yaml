@@ -44,3 +44,6 @@ music:
 # console and a higher value means more details in the console.
 # Valid values ranges from 1 - 6
 logLevel: 6
+
+# Automatically install any available updates before startup.
+autoUpdate: true
