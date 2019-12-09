@@ -78,6 +78,6 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'steal',
-  example: []
+  usage: 'steal <USER_ID>',
+  example: [ 'steal 129660968579749313' ]
 };
