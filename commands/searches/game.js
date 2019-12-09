@@ -37,11 +37,11 @@ exports.exec = async (Bastion, message, args) => {
         },
         {
           name: 'Links',
-          value: game.websites ? game.websites.map(website => website.url).join('\n') : '-'
+          value: game.websites ? game.websites.join('\n') : '-'
         }
       ],
       image: {
-        url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.cloudinary_id}.jpg`
+        url: game.cover
       },
       footer: {
         text: 'Powered by IGDB'
