@@ -122,6 +122,9 @@
   "catFact": {
     "description": "Shows a random fact about cats."
   },
+  "catch": {
+    "description": "Catch any robbers, who are stealing %currency.name_plural%, in the channel."
+  },
   "catify": {
     "description": "Generates a random kitten image from the given string or your Discord tag if no string is specified."
   },
@@ -856,6 +859,9 @@
   },
   "stats": {
     "description": "Shows detailed stats and info of %bastion%."
+  },
+  "steal": {
+    "description": "Steal some %currency.name_plural% from the specified member."
   },
   "steam": {
     "description": "Browse the games in different categories of the Steam Store."
