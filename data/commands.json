@@ -163,6 +163,10 @@
     "description": "Shows a random fact about cats.",
     "module": "Fun"
   },
+  "catch": {
+    "description": "Catch any robbers, who are stealing %currency.name_plural%, in the channel.",
+    "module": "Profile"
+  },
   "catify": {
     "description": "Generates a random kitten image from the given string or your Discord tag if no string is specified.",
     "module": "Fun"
@@ -1142,6 +1146,10 @@
   "stats": {
     "description": "Shows detailed stats and info of %bastion%.",
     "module": "Misc"
+  },
+  "steal": {
+    "description": "Steal some %currency.name_plural% from the specified member.",
+    "module": "Profile"
   },
   "steam": {
     "description": "Browse the games in different categories of the Steam Store.",
