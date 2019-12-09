@@ -65,7 +65,7 @@ exports.exec = async (Bastion, message, args) => {
       let patron = patrons.find(p => p.discord_id === message.guild.ownerID);
       limit += parseInt(patron.amount_cents / 100) * 2;
     }
-  
+
     if (!Bastion.credentials.ownerId.includes(message.guild.ownerID) && reactionRolesGroupModels && reactionRolesGroupModels.length >= limit) {
       return Bastion.emit('error', '', `You can't set more than ${limit} Reaction Roles Group. Want to set more Reaction Roles Group? [You can get 2 extra Reaction Roles Group for every dollar you donate towards supporting The Bastion Bot Project on Patreon, as well as other cool perks.](https://patreon.com/bastionbot)`, message.channel);
     }

@@ -13,8 +13,8 @@ exports.exec = async (Bastion, message, args) => {
   i = i - 1;
 
   let description = Bastion.user.id !== '267035345537728512'
-  ? 'These are the awesome people who continuously support the development of the Bastion bot project, by being my patron, on [Patreon](https://patreon.com/bastionbot).\nIf you want to support the development of Bastion too, [be my Patron](https://patreon.com/bePatron?c=754397)'
-  : 'These are the awesome people who continuously support us, by being our patron, on Patreon.';
+    ? 'These are the awesome people who continuously support the development of the Bastion bot project, by being my patron, on [Patreon](https://patreon.com/bastionbot).\nIf you want to support the development of Bastion too, [be my Patron](https://patreon.com/bePatron?c=754397)'
+    : 'These are the awesome people who continuously support us, by being our patron, on Patreon.';
 
   await message.channel.send({
     embed: {

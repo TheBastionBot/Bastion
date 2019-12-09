@@ -4,7 +4,7 @@
  * @license GPL-3.0
  */
 
-exports.exec = async (Bastion, message, args) => {
+exports.exec = async (Bastion, message) => {
   if (message.channel.robbers && message.channel.robbers.length) {
     // Remove all the robbers.
     delete message.channel.robbers;
