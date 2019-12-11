@@ -225,7 +225,7 @@ module.exports = async message => {
     }
 
     // Checks if the user has the required Patreon tier
-    if (message.client.methods.isPublicBastion(message.client) && cmd.config.patronPledge) {
+    if (!message.client.credentials.ownerId.includes(message.author.id) && message.client.methods.isPublicBastion(message.client) && cmd.config.patronPledge) {
       let patron = await message.client.methods.getPatron(message.author.id).catch(() => {});
 
       if (!patron) {
