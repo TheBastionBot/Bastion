@@ -3,5 +3,8 @@
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Some under-the-hood changes & improvements, to make Bastion even better."
+  ],
+  "FIXES": [
+    "Fix the `game` command not showing the proper release date."
   ]
 }
