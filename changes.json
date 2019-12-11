@@ -1,7 +1,7 @@
 {
   "date": "December 11, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
-  "NEW FEATURES": [],
-  "IMPROVEMENTS": [],
-  "FIXES": []
+  "IMPROVEMENTS": [
+    "Some under-the-hood changes & improvements, to make Bastion even better."
+  ]
 }
