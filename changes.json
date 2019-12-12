@@ -1,10 +1,12 @@
 {
-  "date": "December 11, 2019",
+  "date": "December 12, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
+    "Thieves can't `catch` other thieves anymore. We won't allow that level of hipocricy.",
     "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Fix the `game` command not showing the proper release date."
+    "Fix the `game` command not showing the proper release date.",
+    "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
