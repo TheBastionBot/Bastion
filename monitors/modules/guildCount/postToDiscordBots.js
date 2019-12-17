@@ -30,7 +30,7 @@ module.exports = async Bastion => {
       body: requestBody,
       headers: {
         'Authorization': Bastion.credentials.discordBotsAPIToken,
-        'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+        'User-Agent': 'Bastion Discord Bot (https://bastion.traction.one)'
       },
       json: true
     };
