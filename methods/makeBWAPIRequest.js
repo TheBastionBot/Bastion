@@ -7,7 +7,7 @@
 const BastionWebAPI = xrequire('bwapi');
 const BWAPI = new BastionWebAPI({
   headers: {
-    'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+    'User-Agent': 'Bastion Discord Bot (https://bastion.traction.one)'
   }
 });
 
