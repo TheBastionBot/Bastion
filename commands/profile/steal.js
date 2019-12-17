@@ -5,6 +5,9 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
+  // One human can only rob one person at a time.
+  if (message.channel.robbers && message.channel.robbers.includes(message.author.id)) return;
+
   if (!args.id || !message.channel.members.has(args.id)) {
     return Bastion.emit('commandUsage', message, this.help);
   }
