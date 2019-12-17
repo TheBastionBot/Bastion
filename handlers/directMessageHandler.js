@@ -30,7 +30,7 @@ module.exports = async message => {
         embed: {
           color: message.client.colors.BLUE,
           title: 'The Bastion Bot',
-          url: 'https://bastionbot.org',
+          url: 'https://bastion.traction.one',
           description: 'Join [**Bastion HQ**](https://discord.gg/fzx8fkt) to test Bastion and it\'s commands, for giveaway events, for chatting and for a lot of fun!',
           fields: [
             {
