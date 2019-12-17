@@ -31,7 +31,7 @@ exports.exec = async (Bastion, message) => {
     },
     {
       name: 'Support Bastion\'s Development',
-      value: '[Support the development of Bastion](https://bastionbot.org/donate) to keep it running forever and get cool rewards!'
+      value: '[Support the development of Bastion](https://bastion.traction.one/donate) to keep it running forever and get cool rewards!'
     }
   );
 

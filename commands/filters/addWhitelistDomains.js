@@ -57,5 +57,5 @@ exports.help = {
   userTextPermission: 'MANAGE_GUILD',
   userVoicePermission: '',
   usage: 'addWhitelistDomains [Domain] [anotherDomain] [someOtherDomain]',
-  example: [ 'addWhitelistDomains https://bastionbot.org https://*.traction.one' ]
+  example: [ 'addWhitelistDomains https://duckduckgo.com https://*.traction.one' ]
 };

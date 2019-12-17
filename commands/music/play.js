@@ -144,8 +144,8 @@ exports.exec = async (Bastion, message, args) => {
         '--simulate',
         '--no-warnings',
         '--format=bestaudio[protocol^=http]',
-        `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastionbot.org)`,
-        '--referer=https://bastionbot.org',
+        `--user-agent=BastionDiscordBot/v${Bastion.package.version} (https://bastion.traction.one)`,
+        '--referer=https://bastion.traction.one',
         '--youtube-skip-dash-manifest'
       ];
 
@@ -260,8 +260,8 @@ async function startStreamDispatcher(guild, connection) {
       '--simulate',
       '--no-warnings',
       '--format=bestaudio[protocol^=http]',
-      '--user-agent=BastionDiscordBot (https://bastionbot.org)',
-      '--referer=https://bastionbot.org',
+      '--user-agent=BastionDiscordBot (https://bastion.traction.one)',
+      '--referer=https://bastion.traction.one',
       '--youtube-skip-dash-manifest'
     ];
 

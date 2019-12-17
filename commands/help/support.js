@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message) => {
       fields: [
         {
           name: 'Website',
-          value: 'https://bastionbot.org/'
+          value: 'https://bastion.traction.one/'
         }
       ]
     }

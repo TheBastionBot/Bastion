@@ -58,5 +58,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'setProfilePicture <IMAGE_URL>',
-  example: [ 'setProfilePicture https://bastionbot.org/avatar.gif' ]
+  example: [ 'setProfilePicture https://bastion.traction.one/avatar.gif' ]
 };
