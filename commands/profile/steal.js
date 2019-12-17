@@ -5,6 +5,9 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
+  // One human can only rob one person at a time.
+  if (message.channel.robbers && message.channel.robbers.includes(message.author.id)) return;
+
   if (!args.id || !message.channel.members.has(args.id)) {
     return Bastion.emit('commandUsage', message, this.help);
   }
@@ -50,8 +53,9 @@ exports.exec = async (Bastion, message, args) => {
   Bastion.setTimeout(() => {
     // If the robber hasn't been caught...
     if (message.channel.robbers && message.channel.robbers.includes(message.author.id)) {
-      // Delete the robbery notification.
+      // Delete the robbery notification and command.
       if (notification.deletable) notification.delete().catch(() => {});
+      if (message.deletable) message.delete().catch(() => {});
       // Remove the robber from the list.
       message.channel.robbers.splice(message.channel.robbers.indexOf(message.author.id), 1);
 

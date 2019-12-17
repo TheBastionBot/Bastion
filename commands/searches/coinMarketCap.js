@@ -13,7 +13,7 @@ exports.exec = async (Bastion, message, args) => {
 
   let options = {
     headers: {
-      'User-Agent': `Bastion: Discord Bot (https://bastionbot.org, ${Bastion.package.version})`
+      'User-Agent': `Bastion Discord Bot (https://bastion.traction.one, ${Bastion.package.version})`
     },
     url: `https://api.coinmarketcap.com/v1/ticker/${encodeURIComponent(args.name.join('-').toLowerCase())}`,
     json: true

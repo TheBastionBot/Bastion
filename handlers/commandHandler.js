@@ -224,6 +224,19 @@ module.exports = async message => {
       }
     }
 
+    // Checks if the user has the required Patreon tier
+    if (!message.client.credentials.ownerId.includes(message.author.id) && message.client.methods.isPublicBastion(message.client) && cmd.config.patronPledge) {
+      let patron = await message.client.methods.getPatron(message.author.id).catch(() => {});
+
+      if (!patron) {
+        return message.client.emit('error', 'Patrons Only!', `Want to get access to the \`${command}\` command and other Patreon only features? [Support The Bastion Bot Project on Patreon and get access to this as well as other cool perks.](https://patreon.com/bastionbot)`, message.channel);
+      }
+
+      if (cmd.config.patronPledge > (patron.amount_cents / 100)) {
+        return message.client.emit('error', 'Locked Tier', `Want to get access to the \`${command}\` command and other rewards in this tier? [Upgrade your tier to $${cmd.config.patronPledge}+ and get access to this as well as other cool perks in this tier.](https://patreon.com/bastionbot)`, message.channel);
+      }
+    }
+
     // Checks if the user has the required permission
     if (cmd.help.userTextPermission) {
       if (Object.keys(message.client.permissions).includes(cmd.help.userTextPermission)) {

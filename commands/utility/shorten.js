@@ -58,5 +58,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'shorten <URL>',
-  example: [ 'shorten https://bastionbot.org/SomeLongURL' ]
+  example: [ 'shorten https://bastion.traction.one/SomeLongURL' ]
 };

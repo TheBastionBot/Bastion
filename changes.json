@@ -1,21 +1,14 @@
 {
-  "date": "December 9, 2019",
+  "date": "December 17, 2019",
   "image": "https://i.imgur.com/k6azzsE.gif",
-  "NEW FEATURES": [
-    "The `setColor` command is now available! You can now set a custom accent color for your profile.",
-    "The `setProfilePicture` command is now available too! You can now set a custom profile picture for your profile.",
-    "Patrons now get 5 extra triggers for every dollar they donate to The Bastion Bot Project.",
-    "There's no practical limit to how many Reaction Roles Group you can set in your server. Patrons now get 2 extra Reaction Roles Group for every dollar they donate to The Bastion Bot Project.",
-    "You can now steal Bastion Currencies from other server members by using the `steal` command. But be warned, don't get caught!",
-    "Yes, you can catch the thief using the `catch` command before he is done with the robbery."
-  ],
   "IMPROVEMENTS": [
-    "Bastion will now auto check for updates on start and install them if you'd like.",
-    "The `guide` command is now an alias for the all new `help` command",
+    "Humans can't steal from multiple person simulataneously, so we fixed the issue where you were able to steal from multiple people in a channel.",
+    "Thieves can't `catch` other thieves anymore. We won't allow that level of hipocricy.",
+    "The use of `steal` command will be auto deleted when the robbery is a success, to remove all the traces of who stole it.",
     "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Fixed the `game` command not working. You can now search for any games you want.",
+    "Fix the `game` command not showing the proper release date.",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }

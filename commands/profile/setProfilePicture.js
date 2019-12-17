@@ -5,14 +5,6 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (Bastion.methods.isPublicBastion(Bastion)) {
-    let patrons = await Bastion.methods.getBastionPatrons();
-
-    if (!patrons.map(p => p.discord_id).includes(message.author.id)) {
-      return Bastion.emit('error', '', 'Want to set a custom profile picture for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as other cool perks.](https://patreon.com/bastionbot)', message.channel);
-    }
-  }
-
   args = args.join(' ');
   if (!/^(https?:\/\/)((([-a-z0-9]{1,})?(-?)+[-a-z0-9]{1,})(\.))+([a-z]{1,63})\/((([a-z0-9._\-~#%])+\/)+)?([a-z0-9._\-~#%]+)\.(jpg|jpeg|gif|png|bmp)$/i.test(args)) {
     return Bastion.emit('commandUsage', message, this.help);
@@ -55,7 +47,8 @@ exports.exec = async (Bastion, message, args) => {
 
 exports.config = {
   aliases: [],
-  enabled: true
+  enabled: true,
+  patronPledge: 1,
 };
 
 exports.help = {
@@ -65,5 +58,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'setProfilePicture <IMAGE_URL>',
-  example: [ 'setProfilePicture https://bastionbot.org/avatar.gif' ]
+  example: [ 'setProfilePicture https://bastion.traction.one/avatar.gif' ]
 };

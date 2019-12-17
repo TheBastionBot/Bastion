@@ -14,7 +14,7 @@ exports.exec = async (Bastion, message, args) => {
   let options = {
     uri: 'https://api.roblox.com/users/get-by-username',
     headers: {
-      'User-Agent': `Bastion/${Bastion.package.version} (${Bastion.user.tag}; ${Bastion.user.id}) https://bastionbot.org`
+      'User-Agent': `Bastion/${Bastion.package.version} (${Bastion.user.tag}; ${Bastion.user.id}) https://bastion.traction.one`
     },
     qs: {
       username: encodeURIComponent(args.player)

@@ -6,7 +6,7 @@
 
 const Pokedex = xrequire('pokedex-api');
 const pokedex = new Pokedex({
-  userAgent: 'Bastion: Discord Bot (https://bastionbot.org)',
+  userAgent: 'Bastion Discord Bot (https://bastion.traction.one)',
   version: 'v1'
 });
 

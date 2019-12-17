@@ -37,5 +37,5 @@ exports.help = {
   userTextPermission: 'MANAGE_EMOJIS',
   userVoicePermission: '',
   usage: 'createEmoji <EmojiURL> -n <EmojiName>',
-  example: [ 'createEmoji https://bastionbot.org/assets/images/bastion.png -n BastionBot' ]
+  example: [ 'createEmoji https://bastion.traction.one/assets/images/bastion.png -n BastionBot' ]
 };

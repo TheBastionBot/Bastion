@@ -35,7 +35,7 @@ exports.exec = async (Bastion, message) => {
         },
         {
           name: 'Premium',
-          value: `[${guildModel && guildModel.dataValues.premium}](https://bastionbot.org 'Premium servers & perks are coming soon™')`.toUpperCase(),
+          value: `[${guildModel && guildModel.dataValues.premium}](https://bastion.traction.one 'Premium servers & perks are coming soon™')`.toUpperCase(),
           inline: true
         },
         {

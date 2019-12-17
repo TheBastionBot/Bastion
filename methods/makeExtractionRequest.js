@@ -7,7 +7,7 @@
 const ExtractionAPI = require('ex.traction');
 const extraction = new ExtractionAPI({
   headers: {
-    'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+    'User-Agent': 'Bastion Discord Bot (https://bastion.traction.one)'
   }
 });
 

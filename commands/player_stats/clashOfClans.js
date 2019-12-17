@@ -121,7 +121,7 @@ exports.exec = async (Bastion, message, args) => {
         Authorization: `Bearer ${Bastion.credentials.clashOfClansAPIKey}`,
         'User-Agent': `Bastion/${Bastion.package.version} (${
           Bastion.user.tag
-        }; ${Bastion.user.id}) https://bastionbot.org`
+        }; ${Bastion.user.id}) https://bastion.traction.one`
       },
       json: true
     };

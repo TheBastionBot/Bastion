@@ -12,7 +12,7 @@ exports.exec = async (Bastion, message, args) => {
       embed: {
         color: Bastion.colors.GOLD,
         title: 'List of Command Categories',
-        description: `Use the \`${this.help.name} <category>\` command to list all the commands in the specified category.\nTo get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands section: https://bastionbot.org/commands.`,
+        description: `Use the \`${this.help.name} <category>\` command to list all the commands in the specified category.\nTo get a complete list of all the commands with details, visit [my website](https://bastion.traction.one/) and check out the commands section: https://bastion.traction.one/commands.`,
         fields: [
           {
             name: 'Command Categories',
@@ -56,7 +56,7 @@ exports.exec = async (Bastion, message, args) => {
         },
         {
           name: 'Want the complete list?',
-          value: 'To get a complete list of all the commands with details, visit [my website](https://bastionbot.org/) and check out the commands page: https://bastionbot.org/commands.'
+          value: 'To get a complete list of all the commands with details, visit [my website](https://bastion.traction.one/) and check out the commands page: https://bastion.traction.one/commands.'
         }
       ],
       footer: {

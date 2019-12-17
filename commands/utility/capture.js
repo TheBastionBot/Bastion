@@ -42,5 +42,5 @@ exports.help = {
   userTextPermission: '',
   userVoicePermission: '',
   usage: 'capture <url>',
-  example: [ 'capture https://bastionbot.org' ]
+  example: [ 'capture https://bastion.traction.one' ]
 };

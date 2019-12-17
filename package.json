@@ -1,8 +1,8 @@
 {
   "name": "bastion",
-  "version": "7.8.0",
+  "version": "7.8.1",
   "description": "Give awesome perks to your Discord server!",
-  "url": "https://bastionbot.org/",
+  "url": "https://bastion.traction.one/",
   "main": "index.js",
   "scripts": {
     "build:commandStrings": "node -r ./utils/globals.js utils/generateCommandStrings.js",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/TheBastionBot/Bastion/issues"
   },
-  "homepage": "https://bastionbot.org",
+  "homepage": "https://bastion.traction.one",
   "dependencies": {
     "@k3rn31p4nic/google-translate-api": "~1.1.0",
     "bwapi": "github:TheBastionBot/bwapi#3.0.6",

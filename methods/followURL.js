@@ -12,7 +12,7 @@ module.exports = (url) => {
       let options = {
         url: `https://thebastionbot.herokuapp.com/url/follow?url=${url}`,
         headers: {
-          'User-Agent': 'Bastion Discord Bot (https://bastionbot.org)'
+          'User-Agent': 'Bastion Discord Bot (https://bastion.traction.one)'
         },
         json: true
       };

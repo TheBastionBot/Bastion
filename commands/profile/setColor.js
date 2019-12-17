@@ -5,14 +5,6 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  if (Bastion.methods.isPublicBastion(Bastion)) {
-    let patrons = await Bastion.methods.getBastionPatrons();
-
-    if (!patrons.map(p => p.discord_id).includes(message.author.id)) {
-      return Bastion.emit('error', '', 'Want to set a custom accent color for your profile? [Support The Bastion Bot Project on Patreon and get access to this as well as other cool perks.](https://patreon.com/bastionbot)', message.channel);
-    }
-  }
-
   if (!args.color || !/^#?(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(args.color)) {
     return Bastion.emit('commandUsage', message, this.help);
   }
@@ -46,6 +38,7 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [],
   enabled: true,
+  patronPledge: 1,
   argsDefinitions: [
     { name: 'color', type: String, defaultOption: true }
   ]
