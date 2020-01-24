@@ -1,10 +1,11 @@
 {
-  "date": "December 20, 2019",
+  "date": "January 24, 2020",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
     "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
+    "Fix `patrons` command working oppositely for public & private Bastion.",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
