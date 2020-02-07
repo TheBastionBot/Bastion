@@ -5,7 +5,7 @@
  */
 
 exports.exec = async (Bastion, message, args) => {
-  let patrons = Bastion.user.id !== '267035345537728512' ? await Bastion.methods.getBastionPatrons() : await Bastion.methods.getPatrons();
+  let patrons = Bastion.user.id === '267035345537728512' ? await Bastion.methods.getBastionPatrons() : await Bastion.methods.getPatrons();
   patrons = patrons.filter(patron => !patron.declined_since).map(patron => patron.full_name);
 
   let noOfPages = patrons.length / 50;

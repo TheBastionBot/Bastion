@@ -1,14 +1,11 @@
 {
-  "date": "December 17, 2019",
+  "date": "February 7, 2020",
   "image": "https://i.imgur.com/k6azzsE.gif",
   "IMPROVEMENTS": [
-    "Humans can't steal from multiple person simulataneously, so we fixed the issue where you were able to steal from multiple people in a channel.",
-    "Thieves can't `catch` other thieves anymore. We won't allow that level of hipocricy.",
-    "The use of `steal` command will be auto deleted when the robbery is a success, to remove all the traces of who stole it.",
     "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
-    "Fix the `game` command not showing the proper release date.",
+    "Fix `patrons` command working oppositely for public & private Bastion.",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }

@@ -48,7 +48,7 @@ exports.exec = async (Bastion, message, args) => {
 exports.config = {
   aliases: [],
   enabled: true,
-  patronPledge: 1,
+  patronPledge: 1
 };
 
 exports.help = {

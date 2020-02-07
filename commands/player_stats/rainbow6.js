@@ -194,8 +194,8 @@ exports.help = {
   botPermission: '',
   userTextPermission: '',
   userVoicePermission: '',
-  usage: 'rainbow6 <uplay|ps4|xone> <username>',
-  example: [ 'rainbow6 uplay SaffronPants' ]
+  usage: 'rainbow6 <username> [--platform uplay|ps4|xone]',
+  example: [ 'rainbow6 SaffronPants --platform xone', 'rainbow6 k3rn31p4nic' ]
 };
 
 /**
