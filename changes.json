@@ -5,6 +5,7 @@
     "Some under-the-hood changes & improvements, to make Bastion even better."
   ],
   "FIXES": [
+    "Fixed an issue when Bastion displayed 'null' when you had no plain text response to trigger.",
     "Some under-the-hood fixes, as usual, to improve Bastion."
   ]
 }
