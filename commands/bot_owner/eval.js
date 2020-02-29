@@ -73,7 +73,8 @@ exports.config = {
     { name: 'broadcast', type: Boolean },
     { name: 'delete', type: Boolean }
   ],
-  ownerOnly: true
+  ownerOnly: true,
+  unsafe: true
 };
 
 exports.help = {

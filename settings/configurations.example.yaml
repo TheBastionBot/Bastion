@@ -47,3 +47,7 @@ logLevel: 6
 
 # Automatically install any available updates before startup.
 autoUpdate: true
+
+# Toggles unsafe commands. Only enable this if this instance of Bastion is
+# owned by you. This enables commands like `eval` & `exec` for all bot owners.
+allowUnsafeCommands: false

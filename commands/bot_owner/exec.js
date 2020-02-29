@@ -106,7 +106,8 @@ exports.config = {
   aliases: [],
   enabled: true,
   argsDefinitions: null,
-  ownerOnly: true
+  ownerOnly: true,
+  unsafe: true
 };
 
 exports.help = {

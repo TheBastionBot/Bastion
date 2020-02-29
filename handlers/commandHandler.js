@@ -191,6 +191,17 @@ module.exports = async message => {
     /**
      * Command permissions handler
      */
+    // Checks for runnability of unsafe commands
+    if (cmd.config.unsafe) {
+      if (!message.client.configurations.allowUnsafeCommands) {
+        /**
+        * User has missing permissions.
+        * @fires userMissingPermissions
+        */
+        return message.client.log.info('Unsafe commands are disabled.');
+      }
+    }
+
     // Checks for bot owner permission
     if (cmd.config.ownerOnly) {
       if (!message.client.credentials.ownerId.includes(message.author.id)) {
