@@ -49,7 +49,7 @@ module.exports = async message => {
       }
 
       if (response.message && Object.keys(response.message).length) {
-        let text = response.message.text ? response.message.text : "";
+        let text = response.message.text ? response.message.text : '';
 
         delete response.message.text;
         let embed = Object.keys(response.message).length ? response.message : null;
