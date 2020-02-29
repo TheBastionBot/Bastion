@@ -47,3 +47,7 @@ logLevel: 6
 
 # Automatically install any available updates before startup.
 autoUpdate: true
+
+# Toggles unsafe commands. Only enable this if Bastion is hosted on your
+# own server. This enables commands like `eval` & `exec`.
+allowUnsafeCommands: false
