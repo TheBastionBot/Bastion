@@ -12,13 +12,7 @@ const exec = util.promisify(xrequire('child_process').exec);
 const log = xrequire('./handlers/logHandler');
 const compareVersion = xrequire('./utils/compareVersion');
 
-/* eslint-disable no-sync */
-const configurationsFile = fs.readFileSync('./settings/configurations.yaml', 'utf8');
-const credentialsFile = fs.readFileSync('./settings/credentials.yaml', 'utf8');
-/* eslint-enable no-sync */
-const configurations = YAML.parse(configurationsFile);
-const credentials = YAML.parse(credentialsFile);
-
+const { configurations, credentials } = xrequire('./handlers/settingsHandler');
 
 log.info('Checking for updates...');
 

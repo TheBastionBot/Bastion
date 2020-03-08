@@ -8,9 +8,7 @@ const logger = xrequire('./handlers/logHandler');
 const fs = require('fs');
 const YAML = require('yaml');
 
-// eslint-disable-next-line no-sync
-const configurationsFile = fs.readFileSync('./settings/configurations.yaml', 'utf8');
-const { prefix } = YAML.parse(configurationsFile);
+const { configurations: { prefix } } = xrequire('./handlers/settingsHandler');
 
 module.exports = (Sequelize, database) => {
   // Models
