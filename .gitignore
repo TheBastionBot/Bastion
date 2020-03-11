@@ -1,8 +1,6 @@
 ### Bastion settings ###
-settings/credentials.yaml
-settings/configurations.yaml
-data/bastion.db
-data/backup*
+settings/*.yaml
+!settings/*.example.yaml
 
 # Lock file
 package-lock.json
