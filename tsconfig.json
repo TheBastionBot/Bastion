@@ -1,0 +1,32 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "declaration": false,
+        "diagnostics": true,
+        "emitBOM": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "newLine": "lf",
+        "noErrorTruncation": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outDir": ".",
+        "preserveWatchOutput": true,
+        "removeComments": true,
+        "resolveJsonModule": true,
+        "rootDir": ".",
+        "sourceMap": true,
+        "target": "esnext"
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "**/*",
+    ],
+    "typeRoots" : [
+        "./typings"
+    ]
+}
