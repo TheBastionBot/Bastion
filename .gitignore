@@ -1,3 +1,9 @@
+# Transpiled files
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
+
 ### Bastion settings ###
 settings/*.yaml
 !settings/*.example.yaml
