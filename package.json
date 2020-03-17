@@ -1,0 +1,28 @@
+{
+  "name": "bastion",
+  "version": "8.0.0-alpha",
+  "description": "Give awesome perks to your Discord server!",
+  "homepage": "https://bastion.traction.one",
+  "main": "./index.js",
+  "repository": "https://github.com/TheBastionBot/Bastion.git",
+  "author": "Sankarsan Kampa",
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "transpile": "./node_modules/.bin/tsc",
+    "start": "node .",
+    "lint": "./node_modules/.bin/eslint . --ext .ts",
+    "test": "yarn transpile"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.7.6",
+    "@types/node": "^13.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "^6.8.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "tesseract": "https://github.com/TheBastionBot/Tesseract"
+  }
+}
