@@ -12,6 +12,7 @@ export = class ShardResumeListener extends Listener {
         });
     }
 
-    exec = async (shardId: number, replayedEvents: number): Promise<void> => {
+    exec = async (shardId: number): Promise<void> => {
+        console.log("Shard " + shardId + " - Resumed");
     }
 }
