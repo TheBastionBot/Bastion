@@ -13,5 +13,7 @@ export = class ShardErrorListener extends Listener {
     }
 
     exec = async (error: Error, shardId: number): Promise<void> => {
+        this.client.log.info("Shard " + shardId + " - Errored");
+        this.client.log.error(error);
     }
 }
