@@ -13,5 +13,7 @@ export = class ShardDisconnectListener extends Listener {
     }
 
     exec = async (event: CloseEvent, shardId: number): Promise<void> => {
+        this.client.log.info("Shard " + shardId + " - Disconnected");
+        this.client.log.error(event);
     }
 }
