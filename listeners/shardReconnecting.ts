@@ -13,5 +13,6 @@ export = class ShardReconnectingListener extends Listener {
     }
 
     exec = async (shardId: number): Promise<void> => {
+        this.client.log.info("Shard " + shardId + " - Reconnecting");
     }
 }
