@@ -30,7 +30,7 @@ export = class ReadyListener extends Listener {
         const knownGuilds = guilds.map(g => g._id);
         const newGuilds = this.client.guilds.cache
             .map(g => ({ _id: g.id}))
-            .filter(g => !knownGuilds.includes(g));
+            .filter(g => !knownGuilds.includes(g._id));
 
         if (newGuilds.length) {
             await GuildModel.insertMany(newGuilds);
