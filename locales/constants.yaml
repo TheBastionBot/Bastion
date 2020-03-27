@@ -1,0 +1,17 @@
+author.name: Sankarsan Kampa
+author.alias: Traction
+author.username: k3rn31p4nic
+author.url: https://traction.one
+author.discord.id: '266290969974931457'
+
+bastion.bot.id: '267035345537728512'
+bastion.bot.invite: https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=8
+bastion.id: '267022940967665664'
+bastion.name: Bastion
+bastion.project: The Bastion Bot Project
+bastion.server.name: Bastion HQ
+bastion.server.invite: https://discord.gg/fzx8fkt
+
+currency.symbol: ₿
+currency.abbreviation: BC
+currency.name: Bastion Coin
