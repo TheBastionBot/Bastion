@@ -1,3 +1,8 @@
+/*!
+ * @author Sankarsan Kampa (k3rn31p4nic)
+ * @copyright 2020 - The Bastion Bot Project
+ */
+
 import { Guild, TextChannel } from "discord.js";
 
 import TextChannelModel from "../models/TextChannel";
