@@ -4,7 +4,9 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { Guild, User } from "discord.js";
+import { User } from "discord.js";
+
+import Guild = require("../structures/Guild");
 
 export = class GuildBanAddListener extends Listener {
     constructor() {
@@ -14,5 +16,26 @@ export = class GuildBanAddListener extends Listener {
     }
 
     exec = async (guild: Guild, user: User): Promise<void> => {
+        const banInfo = await guild.fetchBan(user.id);
+
+        guild.createLog({
+            event: "guildBanAdd",
+            fields: [
+                {
+                    name: "User",
+                    value: user.tag,
+                    inline: true,
+                },
+                {
+                    name: "User ID",
+                    value: user.id,
+                    inline: true,
+                },
+                {
+                    name: "Reason",
+                    value: banInfo.reason,
+                },
+            ],
+        });
     }
 }
