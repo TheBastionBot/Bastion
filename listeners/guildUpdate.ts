@@ -4,7 +4,8 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { Guild } from "discord.js";
+
+import Guild = require("../structures/Guild");
 
 export = class GuildUpdateListener extends Listener {
     constructor() {
@@ -14,5 +15,27 @@ export = class GuildUpdateListener extends Listener {
     }
 
     exec = async (oldGuild: Guild, newGuild: Guild): Promise<void> => {
+        if (oldGuild.name === newGuild.name) return;
+
+        newGuild.createLog({
+            event: "guildUpdate",
+            fields: [
+                {
+                    name: "Old Server Name",
+                    value: oldGuild.name,
+                    inline: true,
+                },
+                {
+                    name: "New Server Name",
+                    value: newGuild.name,
+                    inline: true,
+                },
+                {
+                    name: "Server ID",
+                    value: oldGuild.id,
+                    inline: true,
+                },
+            ],
+        });
     }
 }
