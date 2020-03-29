@@ -37,11 +37,6 @@ export = class ChannelCreateListener extends Listener {
                         value: channel.parent ? channel.parent.name : "-",
                         inline: true,
                     },
-                    {
-                        name: "Channel Category ID",
-                        value: channel.parent ? channel.parent.id : "-",
-                        inline: true,
-                    },
                 ],
                 timestamp: channel.createdTimestamp,
             });
