@@ -4,7 +4,9 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { Collection, Message, Snowflake } from "discord.js";
+import { Collection, DMChannel, Message, Snowflake } from "discord.js";
+
+import Guild = require("../structures/Guild");
 
 export = class MessageDeleteBulkListener extends Listener {
     constructor() {
@@ -14,5 +16,32 @@ export = class MessageDeleteBulkListener extends Listener {
     }
 
     exec = async (messages: Collection<Snowflake, Message>): Promise<void> => {
+        if (messages.size === 0) return;
+
+        const message = messages.first();
+        if (message.channel instanceof DMChannel) return;
+
+        const guild = message.guild as Guild;
+
+        guild.createLog({
+            event: "messageClear",
+            fields: [
+                {
+                    name: "Channel",
+                    value: message.channel.name,
+                    inline: true,
+                },
+                {
+                    name: "Channel ID",
+                    value: message.channel.id,
+                    inline: true,
+                },
+                {
+                    name: "Delete Count",
+                    value: messages.size + " messages",
+                    inline: true,
+                },
+            ],
+        });
     }
 }
