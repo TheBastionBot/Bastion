@@ -7,7 +7,7 @@ import { Listener, Constants } from "tesseract";
 import { Invite } from "discord.js";
 
 import Guild = require("../structures/Guild");
-import * as duration from "../utils/duration";
+import * as durations from "../utils/durations";
 
 export = class InviteCreateListener extends Listener {
     constructor() {
@@ -51,7 +51,7 @@ export = class InviteCreateListener extends Listener {
         if (invite.maxAge) {
             fields.push({
                 name: "Expires",
-                value: duration.humanize(duration.between(invite.maxAge)),
+                value: durations.humanize(durations.between(invite.maxAge)),
                 inline: true,
             });
         }
