@@ -48,30 +48,22 @@ export = class ChannelUpdateListener extends Listener {
                 );
             }
 
-            if (oldChannel.parent) {
-                fields.push({
-                    name: "Channel Category ID",
-                    value: oldChannel.parent.id,
-                    inline: true,
-                });
-            }
-
             if (oldChannel.parentID === newChannel.parentID) {
                 fields.push({
                     name: "Channel Category",
-                    value: oldChannel.parent.name,
+                    value: oldChannel.parent ? oldChannel.parent.name : "-",
                     inline: true,
                 });
             } else {
                 fields.push(
                     {
                         name: "Old Channel Category",
-                        value: oldChannel.parent.name,
+                        value: oldChannel.parent ? oldChannel.parent.name : "-",
                         inline: true,
                     },
                     {
                         name: "New Channel Category",
-                        value: newChannel.parent.name,
+                        value: newChannel.parent ? newChannel.parent.name : "-",
                         inline: true,
                     },
                 );
