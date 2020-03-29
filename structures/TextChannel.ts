@@ -4,15 +4,16 @@
  */
 
 import { Guild, TextChannel } from "discord.js";
+import * as mongoose from "mongoose";
 
-import TextChannelModel from "../models/TextChannel";
+import TextChannelModel, { TextChannel as ITextChannel } from "../models/TextChannel";
 
 export = class BastionTextChannel extends TextChannel {
     constructor(guild: Guild, data: object) {
         super(guild, data);
     }
 
-    public async getDocument() {
+    public async getDocument(): Promise<ITextChannel & mongoose.Document> {
         return await TextChannelModel.findById(this.id);
     }
 }

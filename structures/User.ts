@@ -5,15 +5,16 @@
 
 import { Client } from "tesseract";
 import { User } from "discord.js";
+import * as mongoose from "mongoose";
 
-import UserModel from "../models/User";
+import UserModel, { User as IUser } from "../models/User";
 
 export = class BastionUser extends User {
     constructor(client: Client, data: object) {
         super(client, data);
     }
 
-    public async getDocument() {
+    public async getDocument(): Promise<IUser & mongoose.Document> {
         return await UserModel.findById(this.id);
     }
 }

@@ -5,15 +5,16 @@
 
 import { Client } from "tesseract";
 import { Guild, GuildMember } from "discord.js";
+import * as mongoose from "mongoose";
 
-import MemberModel from "../models/Member";
+import MemberModel, { Member as IGuildMember } from "../models/Member";
 
 export = class BastionGuildMember extends GuildMember {
     constructor(client: Client, data: object, guild: Guild) {
         super(client, data, guild);
     }
 
-    public async getDocument() {
+    public async getDocument(): Promise<IGuildMember & mongoose.Document> {
         return await MemberModel.findOne({
             user: this.id,
             guild: this.guild.id,
