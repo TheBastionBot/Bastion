@@ -18,6 +18,8 @@ export = class MessageUpdateListener extends Listener {
     exec = async (oldMessage: Message, newMessage: Message): Promise<void> => {
         if (oldMessage.channel instanceof DMChannel || newMessage.channel instanceof DMChannel) return;
 
+        if (oldMessage.content === newMessage.content) return;
+
         const guild = oldMessage.guild as Guild;
 
         if (oldMessage.type !== "DEFAULT") return;
