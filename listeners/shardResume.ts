@@ -13,6 +13,6 @@ export = class ShardResumeListener extends Listener {
     }
 
     exec = async (shardId: number): Promise<void> => {
-        console.log("Shard " + shardId + " - Resumed");
+        this.client.log.info("Shard " + shardId + " - Resumed");
     }
 }
