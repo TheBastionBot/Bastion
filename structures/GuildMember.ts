@@ -14,6 +14,13 @@ export = class BastionGuildMember extends GuildMember {
         super(client, data, guild);
     }
 
+    public canManage(member: GuildMember) {
+        if (this.id === this.guild.ownerID) return true;
+        if (member.id === this.guild.ownerID) return false;
+        if (this.id === member.id) return false;
+        return this.roles.highest.comparePositionTo(member.roles.highest) > 0;
+    }
+
     public async getDocument(): Promise<IGuildMember & mongoose.Document> {
         return await MemberModel.findOne({
             user: this.id,
