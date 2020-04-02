@@ -1,0 +1,5 @@
+notFound: "Not Found"
+unauthorized: "Unauthorized"
+
+noDeletableMessages: "No messages were found, for the specified filter, that could be deleted."
+rolePosition: "%var%, your role doesn't give you the authorization to take actions on %var%."
