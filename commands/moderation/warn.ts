@@ -63,23 +63,30 @@ export = class Warn extends Command {
             });
         }
 
-        // Resolve user
-        const user = this.client.resolver.resolveUser(argv.user);
+        // Resolve member
+        const member = this.client.resolver.resolveGuildMember(message.guild, argv.user) as BastionGuildMember;
 
         // Reason
         const reason = argv._.join(" ");
 
         // Command Syntax Validation
-        if (!user || !reason) throw new errors.CommandSyntaxError(this.name);
+        if (!member || !reason) throw new errors.CommandSyntaxError(this.name);
 
-        // Add member to the cache if they don't already exist
-        if (message.guild.members.cache.has(user.id)) {
-            await message.guild.members.fetch({ user });
+        // Check command user's permission over target member
+        if (message.author.id !== message.guild.ownerID && !(message.member as BastionGuildMember).canManage(member)) {
+            return await message.channel.send({
+                embed: {
+                    color: Constants.Colors.RED,
+                    title: this.client.locale.getString("en_us", "errors", "unauthorized"),
+                    description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, member.user.tag),
+                },
+            }).catch(() => {
+                // This error can be ignored.
+            });
         }
 
         // Add the warning to the Guild Member
-        const member = message.guild.members.cache.get(user.id) as BastionGuildMember;
-        const guildMemberDocument = await (member).getDocument();
+        const guildMemberDocument = await member.getDocument();
 
         if (!guildMemberDocument.warnings || !guildMemberDocument.warnings.length) {
             guildMemberDocument.warnings = [];
@@ -103,7 +110,7 @@ export = class Warn extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.Colors.DARK_BUT_NOT_BLACK,
-                description: this.client.locale.getString("en_us", "info", "memberWarn", message.author.tag, user.tag, reason),
+                description: this.client.locale.getString("en_us", "info", "memberWarn", message.author.tag, member.user.tag, reason),
             },
         }).catch(() => {
             // This error can be ignored.
