@@ -6,7 +6,10 @@
 import { Command, CommandArguments } from "tesseract";
 import { Constants, Message } from "discord.js";
 
+import MemberModel from "../../models/Member";
+import * as arrays from "../../utils/arrays";
 import * as errors from "../../utils/errors";
+import * as pagination from "../../utils/pagination";
 
 import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
@@ -18,8 +21,10 @@ export = class Warn extends Command {
             triggers: [],
             arguments: {
                 alias: {
+                    list: "l",
                     user: "u",
                 },
+                boolean: [ "list" ],
                 string: [ "user" ],
             },
             scope: "guild",
@@ -32,7 +37,32 @@ export = class Warn extends Command {
         });
     }
 
-    exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
+        // List Bans
+        if (argv.list) {
+            const warnedMemberDocuments = await MemberModel.find({
+                guild: message.guild.id,
+                warnings: { $exists: true, $ne: [] },
+            });
+
+            const warnedMembers = pagination.paginate(warnedMemberDocuments, argv.page);
+
+            return await message.channel.send({
+                embed: {
+                    color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                    title: "Warned Users",
+                    description: warnedMembers.items.length ? "Users warned in the server." : "No one has been warned in the server.",
+                    fields: warnedMembers.items.map((member: { _id: string; warnings: string[] }) => ({
+                        name: message.guild.members.cache.has(member._id) ? message.guild.members.cache.get(member._id).user.tag : member._id,
+                        value: arrays.toBulletList(member.warnings),
+                    })),
+                    footer: {
+                        text: warnedMembers.items.length ? `Page ${warnedMembers.page} of ${warnedMembers.pages}` : "",
+                    },
+                },
+            });
+        }
+
         // Resolve user
         const user = this.client.resolver.resolveUser(argv.user);
 
