@@ -97,7 +97,7 @@ export = class Warn extends Command {
         guildMemberDocument.save();
 
         // DM the User about their Warning
-        await message.channel.send({
+        await message.member.send({
             embed: {
                 color: Constants.Colors.ORANGE,
                 description: this.client.locale.getString("en_us", "info", "memberWarnDM", message.author.tag, message.guild.name, reason),
@@ -142,7 +142,7 @@ export = class Warn extends Command {
             }
 
             // DM the User about their Warn Action
-            await message.channel.send({
+            await message.member.send({
                 embed: {
                     color: Constants.Colors.ORANGE,
                     description: this.client.locale.getString("en_us", "info", "memberWarnActionDM", message.guild.name),
