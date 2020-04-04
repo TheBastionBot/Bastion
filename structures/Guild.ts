@@ -19,6 +19,7 @@ interface GuildCreateLogOptions {
 
 export = class BastionGuild extends Guild {
     client: Client;
+    document: Guild & mongoose.Document;
 
     constructor(client: Client, data: object) {
         super(client, data);
