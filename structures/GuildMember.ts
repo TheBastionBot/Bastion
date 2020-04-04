@@ -10,6 +10,8 @@ import * as mongoose from "mongoose";
 import MemberModel, { Member as IGuildMember } from "../models/Member";
 
 export = class BastionGuildMember extends GuildMember {
+    document: GuildMember & mongoose.Document;
+
     constructor(client: Client, data: object, guild: Guild) {
         super(client, data, guild);
     }
