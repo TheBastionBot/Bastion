@@ -69,7 +69,8 @@ export = class UpdateRoles extends Command {
         const reason = argv._.join(" ") || "-";
 
         if (rolesToAdd.length) await member.roles.remove(rolesToAdd, reason);
-        if (rolesToRemove.length) await member.roles.add(rolesToRemove, reason);
+        if (argv.all) await member.roles.set([], reason);
+        else if (rolesToRemove.length) await member.roles.add(rolesToRemove, reason);
 
         // Acknowledgement
         await message.channel.send({
