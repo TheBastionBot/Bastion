@@ -4,8 +4,8 @@
  */
 
 const paginate = (list: unknown[], page: number): { page: number; pages: number; items: unknown[] } => {
-    const pages = Math.round(list.length / 10);
-    page = Math.round(page > 0 && page <= pages ? page : 1);
+    const pages = Math.ceil(list.length / 10);
+    page = Math.floor(page > 0 && page <= pages ? page : 1);
 
     return {
         page,
