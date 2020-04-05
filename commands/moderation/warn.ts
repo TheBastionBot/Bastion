@@ -21,10 +21,11 @@ export = class Warn extends Command {
             triggers: [],
             arguments: {
                 alias: {
+                    clear: "c",
                     list: "l",
                     user: "u",
                 },
-                boolean: [ "list" ],
+                boolean: [ "clear", "list" ],
                 string: [ "user" ],
             },
             scope: "guild",
@@ -66,11 +67,11 @@ export = class Warn extends Command {
         // Resolve member
         const member = this.client.resolver.resolveGuildMember(message.guild, argv.user) as BastionGuildMember;
 
-        // Reason
-        const reason = argv._.join(" ");
-
         // Command Syntax Validation
-        if (!member || !reason) throw new errors.CommandSyntaxError(this.name);
+        if (!member) throw new errors.CommandSyntaxError(this.name);
+
+        // Reason
+        const reason = argv._.join(" ") || "-";
 
         // Check command user's permission over target member
         if (message.author.id !== message.guild.ownerID && !(message.member as BastionGuildMember).canManage(member)) {
@@ -90,6 +91,23 @@ export = class Warn extends Command {
 
         if (!guildMemberDocument.warnings || !guildMemberDocument.warnings.length) {
             guildMemberDocument.warnings = [];
+        }
+
+        // Clear Warning
+        if (argv.clear) {
+            guildMemberDocument.warnings = [];
+
+            guildMemberDocument.save();
+
+            // Acknowledgement
+            return await message.channel.send({
+                embed: {
+                    color: Constants.Colors.ORANGE,
+                    description: this.client.locale.getString("en_us", "info", "memberWarnClear", message.author.tag, member.user.tag, reason),
+                },
+            }).catch(() => {
+                // This error can be ignored.
+            });
         }
 
         guildMemberDocument.warnings.push(reason);
