@@ -42,11 +42,9 @@ export = class Report extends Command {
         if (!user || !reason) throw new errors.CommandSyntaxError(this.name);
 
 
-        const guildDocument = await (message.guild as BastionGuild).getDocument();
-
-        if (guildDocument.reportsChannelId) {
+        if ((message.guild as BastionGuild).document.reportsChannelId) {
             // Report User
-            await (message.guild.channels.cache.get(guildDocument.reportsChannelId) as TextChannel).send({
+            await (message.guild.channels.cache.get((message.guild as BastionGuild).document.reportsChannelId) as TextChannel).send({
                 embed: {
                     color: Constants.Colors.ORANGE,
                     title: "User Report",

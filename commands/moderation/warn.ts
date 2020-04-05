@@ -135,12 +135,10 @@ export = class Warn extends Command {
         });
 
         // Take Warn Action
-        const guildDocument = await (message.guild as BastionGuild).getDocument();
-
-        if (guildDocument.warnings && guildDocument.warnings.action && guildDocument.warnings.threshold && guildMemberDocument.warnings.length >= guildDocument.warnings.threshold) {
+        if ((message.guild as BastionGuild).document.warnings && (message.guild as BastionGuild).document.warnings.action && (message.guild as BastionGuild).document.warnings.threshold && guildMemberDocument.warnings.length >= (message.guild as BastionGuild).document.warnings.threshold) {
             const reason = `Warn Threshold Exceeded - ${guildMemberDocument.warnings.length} Warnings`;
 
-            switch (guildDocument.warnings.action.toLowerCase()) {
+            switch ((message.guild as BastionGuild).document.warnings.action.toLowerCase()) {
             case "kick":
                 if (member.kickable) {
                     await member.kick(reason);
