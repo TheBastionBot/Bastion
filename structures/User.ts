@@ -10,6 +10,7 @@ import * as mongoose from "mongoose";
 import UserModel, { User as IUser } from "../models/User";
 
 export = class BastionUser extends User {
+    client: Client;
     document: IUser & mongoose.Document;
 
     constructor(client: Client, data: object) {
@@ -18,5 +19,9 @@ export = class BastionUser extends User {
 
     public async getDocument(): Promise<IUser & mongoose.Document> {
         return await UserModel.findById(this.id);
+    }
+
+    public isOwner(): boolean {
+        return this.client.credentials.owners.includes(this.id);
     }
 }
