@@ -4,7 +4,7 @@
  */
 
 import { Client } from "tesseract";
-import { Constants, EmbedFieldData, Guild, Message, NewsChannel, TextChannel } from "discord.js";
+import { Constants, EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel } from "discord.js";
 import * as mongoose from "mongoose";
 
 import GuildModel, { Guild as IGuild } from "../models/Guild";
@@ -35,6 +35,8 @@ export = class BastionGuild extends Guild {
         playing: boolean;
         repeat: boolean;
         skipVotes: string[];
+        textChannel?: NewsChannel | TextChannel;
+        voiceChannel?: VoiceChannel;
     };
 
     constructor(client: Client, data: object) {
