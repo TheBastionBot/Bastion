@@ -34,7 +34,7 @@ export = class Warn extends Command {
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],
-            userPermissions: [],
+            userPermissions: [ "KICK_MEMBERS" ],
         });
     }
 
