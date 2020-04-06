@@ -10,6 +10,15 @@ import * as mongoose from "mongoose";
 import GuildModel, { Guild as IGuild } from "../models/Guild";
 
 
+interface GuildMusic {
+    id: string;
+    track: string;
+    album: string;
+    artist: string;
+    duration: string;
+    thumbnail: string;
+}
+
 interface GuildCreateLogOptions {
     event: string;
     fields: EmbedFieldData[];
@@ -20,9 +29,24 @@ interface GuildCreateLogOptions {
 export = class BastionGuild extends Guild {
     client: Client;
     document: IGuild & mongoose.Document;
+    music: {
+        queue: GuildMusic[];
+        history: GuildMusic[];
+        playing: boolean;
+        repeat: boolean;
+        skipVotes: string[];
+    };
 
     constructor(client: Client, data: object) {
         super(client, data);
+
+        this.music = {
+            queue: [],
+            history: [],
+            playing: false,
+            repeat: false,
+            skipVotes: [],
+        };
     }
 
     public async getDocument(): Promise<IGuild & mongoose.Document> {
