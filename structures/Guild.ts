@@ -4,7 +4,7 @@
  */
 
 import { Client } from "tesseract";
-import { Constants, EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel } from "discord.js";
+import { Constants, EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
 import * as mongoose from "mongoose";
 
 import GuildModel, { Guild as IGuild } from "../models/Guild";
@@ -17,6 +17,7 @@ interface GuildMusic {
     artist: string;
     duration: string;
     thumbnail: string;
+    requester: Snowflake;
 }
 
 interface GuildCreateLogOptions {
