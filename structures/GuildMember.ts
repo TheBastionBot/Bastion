@@ -19,7 +19,7 @@ export = class BastionGuildMember extends GuildMember {
         super(client, data, guild);
     }
 
-    public canManage(member: GuildMember) {
+    public canManage(member: GuildMember): boolean {
         if (this.id === this.guild.ownerID) return true;
         if (member.id === this.guild.ownerID) return false;
         if (this.id === member.id) return false;
