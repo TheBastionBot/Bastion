@@ -1,5 +1,11 @@
 notFound: "Not Found"
 unauthorized: "Unauthorized"
 
+musicDisabled: "Music is not enabled in this server. Ask the bot owner to enable it before you can use music commands."
+musicDisabledPublic: "Music is disabled in the Public Bastion due to the maintenance cost of supporting music in soooo many Discord servers that Bastion is in.\n\nBut don't worry, you can host Bastion yourself if you want music.\nOtherwise our team can host a private Bastion for you, if you [become a Patron](%bastion.website%/donate) for the respective tier.\n\nFor more information, concat us in [%bastion.server.name%](%bastion.server.invite%)"
 noDeletableMessages: "No messages were found, for the specified filter, that could be deleted."
+noMusicChannels: "No default music channels have been set. So, only the bot owner or users in the Music Master role can use this command when I'm not already in a voice channel."
+noMusicChannelsAsOwner: "No default music channels have been set. So, you need to be in a voice channel to be able to use the command."
 rolePosition: "%var%, your role doesn't give you the authorization to take actions on %var%."
+unspeakable: "I don't have permission to speak in the **%var%** voice channel."
+unjoinable: "I don't have permission to join the **%var%** voice channel."
