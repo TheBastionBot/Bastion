@@ -11,6 +11,7 @@ bastion.name: Bastion
 bastion.project: The Bastion Bot Project
 bastion.server.name: Bastion HQ
 bastion.server.invite: https://discord.gg/fzx8fkt
+bastion.website: https://bastion.traction.one
 
 currency.symbol: ₿
 currency.abbreviation: BC
