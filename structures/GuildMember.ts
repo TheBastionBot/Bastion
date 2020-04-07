@@ -9,6 +9,9 @@ import * as mongoose from "mongoose";
 
 import MemberModel, { Member as IGuildMember } from "../models/Member";
 
+import BastionGuild = require("./Guild");
+import BastionUser = require("./User");
+
 export = class BastionGuildMember extends GuildMember {
     document: IGuildMember & mongoose.Document;
 
@@ -28,5 +31,10 @@ export = class BastionGuildMember extends GuildMember {
             user: this.id,
             guild: this.guild.id,
         });
+    }
+
+    public isMusicMaster(): boolean {
+        if ((this.user as BastionUser).isOwner()) return true;
+        return (this.guild as BastionGuild).document.music && (this.guild as BastionGuild).document.music.roleId && this.roles.cache.has((this.guild as BastionGuild).document.music.roleId);
     }
 }
