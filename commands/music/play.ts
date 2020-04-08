@@ -190,7 +190,7 @@ export = class Play extends Command {
             guild.music.playing = true;
 
             // Start the dispatcher
-            const dispatcher = guild.voice.connection.play(this.musicDirectory + song.id + ".mp3");
+            const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + song.id + ".mp3");
 
             // Set playing activity
             this.client.user.setActivity({
@@ -222,7 +222,7 @@ export = class Play extends Command {
             });
 
             // Leave the voice channel
-            guild.voice.channel.leave();
+            guild.voice && guild.voice.channel.leave();
 
             // Acknowledge
             guild.music.textChannel.send({
