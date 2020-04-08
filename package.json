@@ -6,6 +6,7 @@
   "main": "./index.js",
   "repository": "https://github.com/TheBastionBot/Bastion.git",
   "author": "Sankarsan Kampa",
+  "authorURL": "https://traction.one",
   "license": "GPL-3.0",
   "private": true,
   "scripts": {
