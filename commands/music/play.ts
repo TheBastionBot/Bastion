@@ -243,7 +243,9 @@ export = class Play extends Command {
         guild.music.skipVotes = [];
 
         // Add the completed song to history
-        guild.music.history.push(guild.music.queue.shift());
+        if (guild.music.queue.length) {
+            guild.music.history.push(guild.music.queue.shift());
+        }
 
         this.startStreamDispatcher(guild);
     }
