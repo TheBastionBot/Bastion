@@ -17,12 +17,14 @@
   "devDependencies": {
     "@types/mongoose": "^5.7.6",
     "@types/node": "^13.9.0",
+    "@types/yargs-parser": "^15.0.0",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
     "eslint": "^6.8.0",
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "chalk": "^4.0.0",
     "tesseract": "https://github.com/TheBastionBot/Tesseract"
   }
 }
