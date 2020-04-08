@@ -57,9 +57,9 @@ export = class Pause extends Command {
                 embed: {
                     color: Constants.COLORS.PINK,
                     title: "Paused Playback",
-                    description: song.track,
+                    description: this.client.locale.getString("en_us", "info", "playbackPause", message.author.tag, song.track),
                     footer: {
-                        text: `${Math.floor(guild.voice.connection.dispatcher.streamTime / 6e4)}:${Math.floor((guild.voice.connection.dispatcher.streamTime % 6e4) / 1e3)} / ${song.duration} • ${message.author.tag}`
+                        text: `${Math.floor(guild.voice.connection.dispatcher.streamTime / 6e4)}:${Math.floor((guild.voice.connection.dispatcher.streamTime % 6e4) / 1e3)} / ${song.duration} • ${guild.voice.connection.channel.name}`
                     },
                 },
             }).catch(() => {
