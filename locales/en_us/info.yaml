@@ -20,3 +20,4 @@ noReportChannel: "A Report Channel hasn't been set in this server. Ask the serve
 reportConfirmation: "%var%, your report was successfully submitted to the moderators."
 musicEnable: "%var% enabled music in this server."
 musicDisable: "%var% disabled music in this server."
+setVolume: "%var% set the volume to %var%%."
