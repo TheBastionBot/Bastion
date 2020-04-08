@@ -4,9 +4,10 @@
 *.d.ts
 *.d.ts.map
 
-### Bastion settings ###
-settings/*.yaml
-!settings/*.example.yaml
+### Bastion ###
+/music
+/settings/*.yaml
+!/settings/*.example.yaml
 
 # Lock file
 package-lock.json
