@@ -27,8 +27,13 @@ const toBulletList = (array: unknown[], bullet = "•"): string => {
     return string.join("\n") + "\n";
 };
 
+const wrap = (array: unknown[], separator: string): unknown[] => {
+    return array.map(e => separator + e + separator);
+};
+
 
 export {
     shuffle,
     toBulletList,
+    wrap,
 };
