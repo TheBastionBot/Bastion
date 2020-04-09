@@ -43,10 +43,33 @@ export = class Skip extends Command {
             });
         }
 
-        // Check whether the command user is a Music Master
-        if (!(message.member as BastionGuildMember).isMusicMaster()) return;
+        if (guild.music.queue.length && guild.music.voiceChannel.members.has(message.author.id)) {
+            // Check whether the command user is a Music Master
+            if (!(message.member as BastionGuildMember).isMusicMaster()) {
+                // Vote to skip
+                if (!guild.music.skipVotes.includes(message.author.id)) {
+                    guild.music.skipVotes.push(message.author.id);
+                }
 
-        if (guild.music.queue.length || guild.music.history.length) {
+                const nowPlaying = guild.music.queue[0];
+
+                // Check vote count
+                const requiredVotes = Math.ceil((guild.voice.channel.members.size - 1) / 2);
+
+                if (guild.music.skipVotes.length < requiredVotes) {
+                    // Acknowledge
+                    return await guild.music.textChannel.send({
+                        embed: {
+                            color: Constants.COLORS.PINK,
+                            description: this.client.locale.getString("en_us", "info", "musicSkipCount", (requiredVotes - guild.music.skipVotes.length).toString()),
+                            footer: {
+                                text: `${nowPlaying.track} • ${guild.music.voiceChannel.name}`
+                            },
+                        },
+                    });
+                }
+            }
+
             // Stop the dispatcher
             guild.voice && guild.voice.connection && guild.voice.connection.dispatcher.end();
         }
