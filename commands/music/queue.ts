@@ -136,7 +136,7 @@ export = class Queue extends Command {
                         description: this.client.locale.getString("en_us", "info", "musicQueueCount", (guild.music.queue.length - 1).toString()),
                         fields: queue.items.map((song: { track: string; artist: string; album: string }, i) => ({
                             name: `#${i + 1} - ${song.track}`,
-                            value: `${song.artist || "Unknown Artist"}${song.track !== song.album ? " - " + song.album : ""}`,
+                            value: `${song.artist || "Unknown Artist"}${song.album && song.track !== song.album ? " - " + song.album : ""}`,
                         })),
                         footer: {
                             text: `${nowPlaying.track} • ${Math.floor(streamTime / 6e4)}:${Math.floor((streamTime % 6e4) / 1e3)} / ${nowPlaying.duration} • ${guild.voice.connection.channel.name} • Page ${queue.page} of ${queue.pages}`
