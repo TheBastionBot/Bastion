@@ -18,6 +18,17 @@ const abbreviate = (number: number): string => {
     return scaled.toFixed(3).replace(/(?:\.0+|0+)$/, "") + SI_PREFIX_SYMBOL[symbolIndex];
 };
 
+type ClampFunction = {
+    (number: number, upper: number): number;
+    (number: number, lower: number, upper: number): number;
+}
+const clamp: ClampFunction = (number: number, lower: number, upper?: number): number => {
+    if (typeof upper !== "number") {
+        [ lower, upper ] = [ -Infinity, lower ];
+    }
+    return Math.max(lower, Math.min(number, upper));
+};
+
 const getRandomInt = (min: number, max: number): number => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -27,5 +38,6 @@ const getRandomInt = (min: number, max: number): number => {
 
 export {
     abbreviate,
+    clamp,
     getRandomInt,
 };
