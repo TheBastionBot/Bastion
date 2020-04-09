@@ -52,6 +52,8 @@ export = class Pause extends Command {
 
             const song = guild.music.queue[0];
 
+            const streamTime = guild.voice.connection.dispatcher.streamTime - guild.voice.connection.dispatcher.pausedTime;
+
             // Acknowledge
             guild.music.textChannel.send({
                 embed: {
@@ -59,7 +61,7 @@ export = class Pause extends Command {
                     title: "Paused Playback",
                     description: this.client.locale.getString("en_us", "info", "playbackPause", message.author.tag, song.track),
                     footer: {
-                        text: `${Math.floor(guild.voice.connection.dispatcher.streamTime / 6e4)}:${Math.floor((guild.voice.connection.dispatcher.streamTime % 6e4) / 1e3)} / ${song.duration} • ${guild.voice.connection.channel.name}`
+                        text: `${Math.floor(streamTime / 6e4)}:${Math.floor((streamTime % 6e4) / 1e3)} / ${song.duration} • ${guild.voice.connection.channel.name}`
                     },
                 },
             }).catch(() => {
