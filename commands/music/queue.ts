@@ -75,7 +75,7 @@ export = class Queue extends Command {
                 }).catch(() => {
                     // This error can be ignored.
                 });
-            } else if (argv.remove && numbers.inRange(argv.remove, 1, guild.music.queue.length - 1)) {
+            } else if (argv.remove && guild.music.queue.length > 1 && numbers.inRange(argv.remove, 1, guild.music.queue.length - 1)) {
                 // Check whether the command user is a Music Master,
                 // if they're removing a song requested by someone else
                 if (!(message.member as BastionGuildMember).isMusicMaster() && guild.music.queue[argv.remove].requester !== message.author.id) return;
