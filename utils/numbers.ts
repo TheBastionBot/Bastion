@@ -18,7 +18,14 @@ const abbreviate = (number: number): string => {
     return scaled.toFixed(3).replace(/(?:\.0+|0+)$/, "") + SI_PREFIX_SYMBOL[symbolIndex];
 };
 
+const getRandomInt = (min: number, max: number): number => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 
 export {
     abbreviate,
+    getRandomInt,
 };
