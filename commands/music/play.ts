@@ -247,6 +247,13 @@ export = class Play extends Command {
             guild.music.history.push(guild.music.queue.shift());
         }
 
+        // Repeat the history queue
+        if (!guild.music.queue.length && guild.music.repeat) {
+            guild.music.queue = guild.music.history;
+            // Reset the history queue
+            guild.music.history = [];
+        }
+
         this.startStreamDispatcher(guild);
     }
 
