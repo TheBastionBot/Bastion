@@ -23,10 +23,11 @@ export = class Queue extends Command {
             arguments: {
                 alias: {
                     clear: [ "c" ],
-                    shuffle: [ "s" ],
+                    loop: [ "l" ],
                     remove: [ "r" ],
+                    shuffle: [ "s" ],
                 },
-                boolean: [ "clear", "shuffle" ],
+                boolean: [ "clear", "loop", "shuffle" ],
                 number: [ "remove" ],
             },
             scope: "guild",
@@ -71,6 +72,18 @@ export = class Queue extends Command {
                     embed: {
                         color: Constants.COLORS.PINK,
                         description: this.client.locale.getString("en_us", "info", "musicQueueClean", message.author.tag),
+                    },
+                }).catch(() => {
+                    // This error can be ignored.
+                });
+            } else if (argv.loop) {
+                guild.music.repeat = !guild.music.repeat;
+
+                // Acknowledge
+                guild.music.textChannel.send({
+                    embed: {
+                        color: Constants.COLORS.PINK,
+                        description: this.client.locale.getString("en_us", "info", guild.music.repeat ? "musicQueueRepeatEnabled" : "musicQueueRepeatDisable", message.author.tag),
                     },
                 }).catch(() => {
                     // This error can be ignored.
