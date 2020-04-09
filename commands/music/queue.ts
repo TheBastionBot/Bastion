@@ -54,8 +54,6 @@ export = class Queue extends Command {
         if (guild.music.playing && guild.voice && guild.voice.connection.dispatcher) {
             const nowPlaying = guild.music.queue[0];
 
-            const streamTime = guild.voice.connection.dispatcher.streamTime - guild.voice.connection.dispatcher.pausedTime;
-
             if (argv.clear) {
                 // Check whether the command user is a Music Master
                 if (!(message.member as BastionGuildMember).isMusicMaster()) return;
@@ -69,11 +67,7 @@ export = class Queue extends Command {
                 guild.music.textChannel.send({
                     embed: {
                         color: Constants.COLORS.PINK,
-                        title: "Music Queue Cleared",
                         description: this.client.locale.getString("en_us", "info", "musicQueueClean", message.author.tag),
-                        footer: {
-                            text: `${nowPlaying.track} • ${Math.floor(streamTime / 6e4)}:${Math.floor((streamTime % 6e4) / 1e3)} / ${nowPlaying.duration} • ${guild.voice.connection.channel.name}`
-                        },
                     },
                 }).catch(() => {
                     // This error can be ignored.
@@ -97,6 +91,8 @@ export = class Queue extends Command {
                     // This error can be ignored.
                 });
             } else {
+                const streamTime = guild.voice.connection.dispatcher.streamTime - guild.voice.connection.dispatcher.pausedTime;
+
                 const queue = pagination.paginate(guild.music.queue.slice(1), argv.page);
 
                 // Acknowledge
@@ -104,7 +100,7 @@ export = class Queue extends Command {
                     embed: {
                         color: Constants.COLORS.PINK,
                         title: "Music Queue",
-                        description: this.client.locale.getString("en_us", "info", "queueCount", (guild.music.queue.length - 1).toString()),
+                        description: this.client.locale.getString("en_us", "info", "musicQueueCount", (guild.music.queue.length - 1).toString()),
                         fields: queue.items.map((song: { track: string; artist: string; album: string }, i) => ({
                             name: `#${i + 1} - ${song.track}`,
                             value: `${song.artist || "Unknown Artist"}${song.track !== song.album ? " - " + song.album : ""}`,
