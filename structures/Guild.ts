@@ -3,8 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Client } from "tesseract";
-import { Constants, EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
+import { Client, Constants } from "tesseract";
+import { EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
 import * as mongoose from "mongoose";
 
 import GuildModel, { Guild as IGuild } from "../models/Guild";
@@ -67,7 +67,7 @@ export = class BastionGuild extends Guild {
             if (serverLogChannel instanceof NewsChannel || serverLogChannel instanceof TextChannel) {
                 return serverLogChannel.send({
                     embed: {
-                        color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                        color: Constants.COLORS.SOMEWHAT_DARK,
                         title: this.client.locale.getString(document.language, "events", options.event),
                         fields: options.fields,
                         footer: {
