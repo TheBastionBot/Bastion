@@ -7,10 +7,10 @@ import * as numbers from "./numbers";
 
 
 const shuffle = (array: unknown[]): unknown[] => {
-    let shuffledArray: unknown[] = [];
+    const shuffledArray: unknown[] = [];
 
     for (let i = 0; i < array.length; i++) {
-        let j = numbers.getRandomInt(0, i);
+        const j = numbers.getRandomInt(0, i);
         if (i !== j) shuffledArray[i] = shuffledArray[j];
         shuffledArray[j] = array[i];
     }
