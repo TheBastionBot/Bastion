@@ -25,6 +25,8 @@ type ClampFunction = {
 const clamp: ClampFunction = (number: number, lower: number, upper?: number): number => {
     if (typeof upper !== "number") {
         [ lower, upper ] = [ -Infinity, lower ];
+    } else {
+        [ lower, upper ] = [ Math.min(lower, upper), Math.max(lower, upper) ];
     }
     return Math.max(lower, Math.min(number, upper));
 };
