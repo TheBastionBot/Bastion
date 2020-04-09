@@ -8,6 +8,7 @@ import { Message } from "discord.js";
 
 import * as arrays from "../../utils/arrays";
 import * as constants from "../../utils/constants";
+import * as numbers from "../../utils/numbers";
 import * as pagination from "../../utils/pagination";
 
 import BastionGuild = require("../../structures/Guild");
@@ -23,8 +24,10 @@ export = class Queue extends Command {
                 alias: {
                     clear: [ "c" ],
                     shuffle: [ "s" ],
+                    remove: [ "r" ],
                 },
                 boolean: [ "clear", "shuffle" ],
+                number: [ "remove" ],
             },
             scope: "guild",
             owner: false,
@@ -68,6 +71,23 @@ export = class Queue extends Command {
                     embed: {
                         color: Constants.COLORS.PINK,
                         description: this.client.locale.getString("en_us", "info", "musicQueueClean", message.author.tag),
+                    },
+                }).catch(() => {
+                    // This error can be ignored.
+                });
+            } else if (argv.remove && numbers.inRange(argv.remove, 1, guild.music.queue.length - 1)) {
+                // Check whether the command user is a Music Master,
+                // if they're removing a song requested by someone else
+                if (!(message.member as BastionGuildMember).isMusicMaster() && guild.music.queue[argv.remove].requester !== message.author.id) return;
+
+                // Remove the song from the queue
+                const removedSong = guild.music.queue.splice(argv.remove, 1)[0];
+
+                // Acknowledge
+                guild.music.textChannel.send({
+                    embed: {
+                        color: Constants.COLORS.PINK,
+                        description: this.client.locale.getString("en_us", "info", "musicQueueRemove", message.author.tag, removedSong.track, this.client.users.cache.has(removedSong.requester) ? this.client.users.cache.get(removedSong.requester).tag : removedSong.requester),
                     },
                 }).catch(() => {
                     // This error can be ignored.
