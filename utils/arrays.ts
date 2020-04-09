@@ -3,6 +3,20 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
+import * as numbers from "./numbers";
+
+
+const shuffle = (array: unknown[]): unknown[] => {
+    let shuffledArray: unknown[] = [];
+
+    for (let i = 0; i < array.length; i++) {
+        let j = numbers.getRandomInt(0, i);
+        if (i !== j) shuffledArray[i] = shuffledArray[j];
+        shuffledArray[j] = array[i];
+    }
+    return shuffledArray;
+};
+
 const toBulletList = (array: unknown[], bullet = "•"): string => {
     const string: string[] = [];
 
@@ -15,5 +29,6 @@ const toBulletList = (array: unknown[], bullet = "•"): string => {
 
 
 export {
+    shuffle,
     toBulletList,
 };
