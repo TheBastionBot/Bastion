@@ -3,8 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "tesseract";
-import { Constants, Message } from "discord.js";
+import { Command, CommandArguments, Constants } from "tesseract";
+import { Message } from "discord.js";
 
 export = class Clear extends Command {
     constructor() {
@@ -68,7 +68,7 @@ export = class Clear extends Command {
         if (!clearedMessages.size) {
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.RED,
+                    color: Constants.COLORS.RED,
                     title: this.client.locale.getString("en_us", "errors", "notFound"),
                     description: this.client.locale.getString("en_us", "errors", "noDeletableMessages"),
                 },
@@ -80,7 +80,7 @@ export = class Clear extends Command {
         // Acknowledgement
         await message.channel.send({
             embed: {
-                color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                color: Constants.COLORS.ORANGE,
                 description: this.client.locale.getString("en_us", "info", "messageClear", message.author.tag, clearedMessages.size),
                 fields: [
                     {

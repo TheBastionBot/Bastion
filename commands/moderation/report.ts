@@ -3,8 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "tesseract";
-import { Constants, Message, TextChannel } from "discord.js";
+import { Command, CommandArguments, Constants } from "tesseract";
+import { Message, TextChannel } from "discord.js";
 
 import * as errors from "../../utils/errors";
 
@@ -46,7 +46,7 @@ export = class Report extends Command {
             // Report User
             await (message.guild.channels.cache.get((message.guild as BastionGuild).document.reportsChannelId) as TextChannel).send({
                 embed: {
-                    color: Constants.Colors.ORANGE,
+                    color: Constants.COLORS.ORANGE,
                     title: "User Report",
                     fields: [
                         {
@@ -67,7 +67,7 @@ export = class Report extends Command {
             // Acknowledgement
             await message.channel.send({
                 embed: {
-                    color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                    color: Constants.COLORS.ORANGE,
                     description: this.client.locale.getString("en_us", "info", "reportConfirmation", message.author.tag),
                 },
             }).catch(() => {
@@ -81,7 +81,7 @@ export = class Report extends Command {
         } else {
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.RED,
+                    color: Constants.COLORS.RED,
                     description: this.client.locale.getString("en_us", "errors", "noReportChannel"),
                 },
             }).catch(() => {

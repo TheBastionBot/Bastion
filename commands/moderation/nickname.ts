@@ -3,8 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "tesseract";
-import { Constants, Message } from "discord.js";
+import { Command, CommandArguments, Constants } from "tesseract";
+import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
 
@@ -43,7 +43,7 @@ export = class Nickname extends Command {
         if (message.author.id !== message.guild.ownerID && !(message.member as BastionGuildMember).canManage(member)) {
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.RED,
+                    color: Constants.COLORS.RED,
                     title: this.client.locale.getString("en_us", "errors", "unauthorized"),
                     description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, member.user.tag),
                 },
@@ -60,7 +60,7 @@ export = class Nickname extends Command {
         // Acknowledgement
         await message.channel.send({
             embed: {
-                color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                color: Constants.COLORS.ORANGE,
                 description: argv.nick
                     ? this.client.locale.getString("en_us", "info", "nickUpdate", message.author.tag, member.user.tag, argv.nick)
                     : this.client.locale.getString("en_us", "info", "nickRemove", message.author.tag, member.user.tag),

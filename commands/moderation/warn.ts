@@ -3,8 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "tesseract";
-import { Constants, Message } from "discord.js";
+import { Command, CommandArguments, Constants } from "tesseract";
+import { Message } from "discord.js";
 
 import MemberModel from "../../models/Member";
 import * as arrays from "../../utils/arrays";
@@ -50,7 +50,7 @@ export = class Warn extends Command {
 
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                    color: Constants.COLORS.ORANGE,
                     title: "Warned Users",
                     description: warnedMembers.items.length ? "Users warned in the server." : "No one has been warned in the server.",
                     fields: warnedMembers.items.map((member: { _id: string; warnings: string[] }) => ({
@@ -77,7 +77,7 @@ export = class Warn extends Command {
         if (message.author.id !== message.guild.ownerID && !(message.member as BastionGuildMember).canManage(member)) {
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.RED,
+                    color: Constants.COLORS.RED,
                     title: this.client.locale.getString("en_us", "errors", "unauthorized"),
                     description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, member.user.tag),
                 },
@@ -102,7 +102,7 @@ export = class Warn extends Command {
             // Acknowledgement
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.ORANGE,
+                    color: Constants.COLORS.ORANGE,
                     description: this.client.locale.getString("en_us", "info", "memberWarnClear", message.author.tag, member.user.tag, reason),
                 },
             }).catch(() => {
@@ -117,7 +117,7 @@ export = class Warn extends Command {
         // DM the User about their Warning
         await message.member.send({
             embed: {
-                color: Constants.Colors.ORANGE,
+                color: Constants.COLORS.ORANGE,
                 description: this.client.locale.getString("en_us", "info", "memberWarnDM", message.author.tag, message.guild.name, reason),
             },
         }).catch(() => {
@@ -127,7 +127,7 @@ export = class Warn extends Command {
         // Acknowledgement
         await message.channel.send({
             embed: {
-                color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                color: Constants.COLORS.ORANGE,
                 description: this.client.locale.getString("en_us", "info", "memberWarn", message.author.tag, member.user.tag, reason),
             },
         }).catch(() => {
@@ -160,7 +160,7 @@ export = class Warn extends Command {
             // DM the User about their Warn Action
             await message.member.send({
                 embed: {
-                    color: Constants.Colors.ORANGE,
+                    color: Constants.COLORS.ORANGE,
                     description: this.client.locale.getString("en_us", "info", "memberWarnActionDM", message.guild.name),
                 },
             }).catch(() => {

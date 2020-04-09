@@ -3,8 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "tesseract";
-import { Constants, Message, User } from "discord.js";
+import { Command, CommandArguments, Constants } from "tesseract";
+import { Message, User } from "discord.js";
 
 import * as pagination from "../../utils/pagination";
 import * as errors from "../../utils/errors";
@@ -51,7 +51,7 @@ export = class Ban extends Command {
 
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                    color: Constants.COLORS.ORANGE,
                     title: "Banned Users",
                     description: "Users banned in " + message.guild.name,
                     fields: banInfo.items.map((ban: { user: User; reason: string }) => ({
@@ -75,7 +75,7 @@ export = class Ban extends Command {
         if (message.author.id !== message.guild.ownerID && message.guild.members.cache.has(user.id) && !(message.member as BastionGuildMember).canManage(message.guild.members.cache.get(user.id))) {
             return await message.channel.send({
                 embed: {
-                    color: Constants.Colors.RED,
+                    color: Constants.COLORS.RED,
                     title: this.client.locale.getString("en_us", "errors", "unauthorized"),
                     description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, user.tag),
                 },
@@ -100,7 +100,7 @@ export = class Ban extends Command {
         // Acknowledgement
         await message.channel.send({
             embed: {
-                color: Constants.Colors.DARK_BUT_NOT_BLACK,
+                color: Constants.COLORS.DARK_BUT_NOT_BLACK,
                 description: argv.soft
                     ? this.client.locale.getString("en_us", "info", "memberSoftBan", message.author.tag, user.tag)
                     : this.client.locale.getString("en_us", "info", "guildBanAdd", message.author.tag, user.tag),
