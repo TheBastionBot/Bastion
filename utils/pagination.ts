@@ -8,7 +8,7 @@ const paginate = (list: unknown[], page: number): { page: number; pages: number;
     page = Math.floor(page > 0 && page <= pages ? page : 1);
 
     return {
-        page,
+        page: pages ? page : 0,
         pages,
         items: list.slice((page - 1) * 10, ((page - 1) * 10) + 10),
     };
