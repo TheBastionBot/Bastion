@@ -6,6 +6,7 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import * as arrays from "../../utils/arrays";
 import * as constants from "../../utils/constants";
 import * as pagination from "../../utils/pagination";
 
@@ -21,8 +22,9 @@ export = class Queue extends Command {
             arguments: {
                 alias: {
                     clear: [ "c" ],
+                    shuffle: [ "s" ],
                 },
-                boolean: [ "clear" ],
+                boolean: [ "clear", "shuffle" ],
             },
             scope: "guild",
             owner: false,
@@ -72,6 +74,24 @@ export = class Queue extends Command {
                         footer: {
                             text: `${nowPlaying.track} • ${Math.floor(streamTime / 6e4)}:${Math.floor((streamTime % 6e4) / 1e3)} / ${nowPlaying.duration} • ${guild.voice.connection.channel.name}`
                         },
+                    },
+                }).catch(() => {
+                    // This error can be ignored.
+                });
+            } else if (argv.shuffle) {
+                // Check whether the command user is a Music Master
+                if (!(message.member as BastionGuildMember).isMusicMaster()) return;
+
+                // Shuffle queue
+                const shuffledQueue = arrays.shuffle(guild.music.queue.slice(1)) as typeof guild.music.queue;
+
+                guild.music.queue = [ nowPlaying, ...shuffledQueue ];
+
+                // Acknowledge
+                guild.music.textChannel.send({
+                    embed: {
+                        color: Constants.COLORS.PINK,
+                        description: this.client.locale.getString("en_us", "info", "musicQueueShuffle", message.author.tag),
                     },
                 }).catch(() => {
                     // This error can be ignored.
