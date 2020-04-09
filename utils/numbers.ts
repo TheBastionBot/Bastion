@@ -35,9 +35,21 @@ const getRandomInt = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+type InRangeFunction = {
+    (number: number, upper: number): boolean;
+    (number: number, lower: number, upper: number): boolean;
+}
+const inRange: InRangeFunction = (number: number, lower: number, upper?: number): boolean => {
+    if (typeof upper !== "number") {
+        [ lower, upper ] = [ -Infinity, lower ];
+    }
+    return number >= Math.min(lower, upper) && number <= Math.max(lower, upper);
+};
+
 
 export {
     abbreviate,
     clamp,
     getRandomInt,
+    inRange,
 };
