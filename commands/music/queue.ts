@@ -18,7 +18,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Queue extends Command {
     constructor() {
         super("queue", {
-            description: "",
+            description: "It allows you to see the current music queue of the server. It also allows you to clear, or shuffle the music queue as well as remove a song from the queue, or set (and unset) the queue in loop.",
             triggers: [],
             arguments: {
                 alias: {
@@ -37,6 +37,13 @@ export = class Queue extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "queue",
+                "queue --loop",
+                "queue --shuffle",
+                "queue --clear",
+                "queue --remove 13",
+            ],
         });
     }
 

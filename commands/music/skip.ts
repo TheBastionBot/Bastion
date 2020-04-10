@@ -15,7 +15,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Skip extends Command {
     constructor() {
         super("skip", {
-            description: "",
+            description: "It allows you to skip the music track that is currently being played in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",

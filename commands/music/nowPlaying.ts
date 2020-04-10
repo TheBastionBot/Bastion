@@ -14,7 +14,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class NowPlaying extends Command {
     constructor() {
         super("nowPlaying", {
-            description: "",
+            description: "It shows you the music track that is currently being played in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",

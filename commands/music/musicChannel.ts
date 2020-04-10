@@ -14,10 +14,10 @@ import BastionGuild = require("../../structures/Guild");
 export = class MusicChannel extends Command {
     constructor() {
         super("musicChannel", {
-            description: "",
+            description: "It allows you to set (and unset) Bastion's Music Channels.",
             triggers: [],
             arguments: {
-                string: [ "vc" ],
+                string: [ "voiceChannel" ],
             },
             scope: "guild",
             owner: false,
@@ -26,6 +26,10 @@ export = class MusicChannel extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "musicChannel --voice-channel VOICE_CHANNEL_ID",
+                "musicChannel",
+            ],
         });
     }
 
@@ -44,7 +48,7 @@ export = class MusicChannel extends Command {
             });
         }
 
-        const voiceChannel = this.client.resolver.resolveGuildChannel(guild, argv.vc, [ "voice" ]) as VoiceChannel;
+        const voiceChannel = this.client.resolver.resolveGuildChannel(guild, argv.voiceChannel, [ "voice" ]) as VoiceChannel;
 
         // Set the Music Channels
         guild.document.music = {

@@ -15,7 +15,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Pause extends Command {
     constructor() {
         super("pause", {
-            description: "",
+            description: "It allows you to pause the music track that is currently being played in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",

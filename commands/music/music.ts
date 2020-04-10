@@ -12,7 +12,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class Music extends Command {
     constructor() {
         super("music", {
-            description: "",
+            description: "It toggles Bastion's music support in the server. Once enabled, you can use all music commands in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",

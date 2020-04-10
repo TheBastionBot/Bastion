@@ -39,7 +39,7 @@ export = class Play extends Command {
 
     constructor() {
         super("play", {
-            description: "",
+            description: "It allows you to play a music in the server, from the given queury or from any supported source.",
             triggers: [],
             arguments: {
                 alias: {
@@ -56,6 +56,10 @@ export = class Play extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "play Remember The Name by Ed Sheeran",
+                "play --link https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            ],
         });
 
         this.musicDirectory = "./music/";

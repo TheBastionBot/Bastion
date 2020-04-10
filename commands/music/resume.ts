@@ -15,7 +15,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Resume extends Command {
     constructor() {
         super("resume", {
-            description: "",
+            description: "It allows you to resume the music track that was paused in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",

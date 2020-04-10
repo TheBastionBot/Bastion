@@ -14,7 +14,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class MusicMaster extends Command {
     constructor() {
         super("musicMaster", {
-            description: "",
+            description: "It allows you to set (and unset) Bastion's Music Master role.",
             triggers: [],
             arguments: {
                 alias: {
@@ -29,6 +29,10 @@ export = class MusicMaster extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "musicMaster --role ROLE_ID",
+                "musicMaster",
+            ],
         });
     }
 

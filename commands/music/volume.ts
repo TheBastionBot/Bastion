@@ -16,7 +16,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Volume extends Command {
     constructor() {
         super("volume", {
-            description: "",
+            description: "It allows you to set the volume of the music track that is currently being played in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",
@@ -26,6 +26,9 @@ export = class Volume extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "volume 42",
+            ],
         });
     }
 

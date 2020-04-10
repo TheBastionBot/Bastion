@@ -15,7 +15,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Stop extends Command {
     constructor() {
         super("stop", {
-            description: "",
+            description: "It allows you to stop the current music playback in the server.",
             triggers: [],
             arguments: {},
             scope: "guild",
