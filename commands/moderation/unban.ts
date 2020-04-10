@@ -11,7 +11,7 @@ import * as errors from "../../utils/errors";
 export = class Unban extends Command {
     constructor() {
         super("unban", {
-            description: "",
+            description: "It allows you to unban the users who're banned in the server.",
             triggers: [],
             arguments: {
                 alias: {
@@ -26,6 +26,9 @@ export = class Unban extends Command {
             ratelimit: 1,
             clientPermissions: [ "BAN_MEMBERS" ],
             userPermissions: [ "BAN_MEMBERS" ],
+            syntax: [
+                "unban --user USER_ID -- REASON",
+            ],
         });
     }
 

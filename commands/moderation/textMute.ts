@@ -13,7 +13,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class TextMute extends Command {
     constructor() {
         super("textMute", {
-            description: "",
+            description: "It allows you to text mute (and unmute) users in a channel (or category). Text muted users can't send messages in the channels they are muted.",
             triggers: [],
             arguments: {
                 configuration: {
@@ -22,6 +22,9 @@ export = class TextMute extends Command {
                 alias: {
                     channel: "c",
                     user: "u",
+                },
+                default: {
+                    set: true,
                 },
                 boolean: [ "set", "channel" ],
                 string: [ "user" ],
@@ -33,6 +36,12 @@ export = class TextMute extends Command {
             ratelimit: 1,
             clientPermissions: [ "MUTE_MEMBERS" ],
             userPermissions: [ "MUTE_MEMBERS" ],
+            syntax: [
+                "textMute --user USER_ID -- REASON",
+                "textMute --user USER_ID --channel -- REASON",
+                "textMute --unset --user USER_ID -- REASON",
+                "textMute --unset --user USER_ID --channel -- REASON",
+            ],
         });
     }
 

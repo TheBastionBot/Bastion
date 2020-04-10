@@ -13,13 +13,14 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Nickname extends Command {
     constructor() {
         super("nickname", {
-            description: "",
+            description: "It allows you to set (and unset) nicknames of the server members.",
             triggers: [],
             arguments: {
                 alias: {
                     nick: "n",
                     user: "u",
                 },
+                array: [ "nick" ],
                 string: [ "nick", "user" ],
             },
             scope: "guild",
@@ -29,6 +30,10 @@ export = class Nickname extends Command {
             ratelimit: 1,
             clientPermissions: [ "KICK_MEMBERS" ],
             userPermissions: [ "KICK_MEMBERS" ],
+            syntax: [
+                "nickname --user USER_ID --nick NICKNAME -- REASON",
+                "nickname --user USER_ID -- REASON",
+            ],
         });
     }
 
@@ -55,7 +60,7 @@ export = class Nickname extends Command {
         // Nickname user
         const reason = argv._.join(" ") || "-";
 
-        await member.setNickname(argv.nick || "", reason);
+        await member.setNickname(argv.nick.join(" ") || "", reason);
 
         // Acknowledgement
         await message.channel.send({

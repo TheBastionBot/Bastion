@@ -13,7 +13,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class Report extends Command {
     constructor() {
         super("report", {
-            description: "",
+            description: "It allows you to report a server member to the moderators of the server, provided a Report Channel is set.",
             triggers: [],
             arguments: {
                 alias: {
@@ -28,6 +28,9 @@ export = class Report extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "report --user USER_ID -- REASON",
+            ],
         });
     }
 

@@ -13,7 +13,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class VoiceMute extends Command {
     constructor() {
         super("voiceMute", {
-            description: "",
+            description: "It allows you to voice mute (and unmute) users in a channel. Voice muted users can't speak in the voice channels they are muted.",
             triggers: [],
             arguments: {
                 configuration: {
@@ -21,6 +21,9 @@ export = class VoiceMute extends Command {
                 },
                 alias: {
                     user: "u",
+                },
+                default: {
+                    set: true,
                 },
                 boolean: [ "set" ],
                 string: [ "user" ],
@@ -32,6 +35,10 @@ export = class VoiceMute extends Command {
             ratelimit: 1,
             clientPermissions: [ "MUTE_MEMBERS" ],
             userPermissions: [ "MUTE_MEMBERS" ],
+            syntax: [
+                "voiceMute --user USER_ID -- REASON",
+                "voiceMute --unset --user USER_ID -- REASON",
+            ],
         });
     }
 

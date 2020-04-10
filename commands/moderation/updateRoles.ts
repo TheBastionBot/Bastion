@@ -14,7 +14,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class UpdateRoles extends Command {
     constructor() {
         super("updateRoles", {
-            description: "",
+            description: "It allows you to update roles of server members.",
             triggers: [],
             arguments: {
                 alias: {
@@ -23,7 +23,7 @@ export = class UpdateRoles extends Command {
                     user: "u",
                 },
                 array: [ "add", "remove" ],
-                boolean: [ "all" ],
+                boolean: [ "removeAll" ],
                 string: [ "add", "remove", "user" ],
             },
             scope: "guild",
@@ -33,6 +33,11 @@ export = class UpdateRoles extends Command {
             ratelimit: 1,
             clientPermissions: [ "MANAGE_ROLES" ],
             userPermissions: [ "MANAGE_ROLES" ],
+            syntax: [
+                "updateRoles --user USER_ID --add ROLE_ID",
+                "updateRoles --user USER_ID --remove ROLE_ID",
+                "updateRoles --user USER_ID --remove-all",
+            ],
         });
     }
 
@@ -68,9 +73,9 @@ export = class UpdateRoles extends Command {
         // Update member roles
         const reason = argv._.join(" ") || "-";
 
-        if (rolesToAdd.length) await member.roles.remove(rolesToAdd, reason);
-        if (argv.all) await member.roles.set([], reason);
-        else if (rolesToRemove.length) await member.roles.add(rolesToRemove, reason);
+        if (rolesToAdd.length) await member.roles.add(rolesToAdd, reason);
+        if (argv.removeAll) await member.roles.set([], reason);
+        else if (rolesToRemove.length) await member.roles.remove(rolesToRemove, reason);
 
         // Acknowledgement
         await message.channel.send({

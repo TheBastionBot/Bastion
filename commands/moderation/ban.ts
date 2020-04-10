@@ -14,7 +14,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Ban extends Command {
     constructor() {
         super("ban", {
-            description: "",
+            description: "It allows you to ban (or soft ban) users from the server, and optionally clear their messages from the specified number of days. It also allows you to list all the users banned in the server.",
             triggers: [],
             arguments: {
                 alias: {
@@ -39,6 +39,13 @@ export = class Ban extends Command {
             ratelimit: 1,
             clientPermissions: [ "BAN_MEMBERS" ],
             userPermissions: [ "BAN_MEMBERS" ],
+            syntax: [
+                "ban --list",
+                "ban --list --page 3",
+                "ban --user USER_ID -- REASON",
+                "ban --user USER_ID --soft -- REASON",
+                "ban --user USER_ID --days NUMBER -- REASON",
+            ],
         });
     }
 

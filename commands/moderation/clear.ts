@@ -9,7 +9,7 @@ import { Message } from "discord.js";
 export = class Clear extends Command {
     constructor() {
         super("clear", {
-            description: "",
+            description: "It allows you to clear a specified number of messages in a channel. You can optionally filter the messages that should be cleard based on the message author, or since when it was sent, or whether it is pinned or system message or a bot sent it.",
             triggers: [ "clean", "purge" ],
             arguments: {
                 alias: {
@@ -28,6 +28,15 @@ export = class Clear extends Command {
             ratelimit: 1,
             clientPermissions: [ "MANAGE_MESSAGES" ],
             userPermissions: [ "MANAGE_MESSAGES" ],
+            syntax: [
+                "clear -- REASON",
+                "clear --limit 42 -- REASON",
+                "clear --user USER_ID -- REASON",
+                "clear --bots -- REASON",
+                "clear --pinned -- REASON",
+                "clear --system -- REASON",
+                "clear --time 1586478504946 -- REASON",
+            ],
         });
     }
 

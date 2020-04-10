@@ -13,7 +13,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Kick extends Command {
     constructor() {
         super("kick", {
-            description: "",
+            description: "It allows you to kick users from the server.",
             triggers: [],
             arguments: {
                 alias: {
@@ -28,6 +28,9 @@ export = class Kick extends Command {
             ratelimit: 1,
             clientPermissions: [ "KICK_MEMBERS" ],
             userPermissions: [ "KICK_MEMBERS" ],
+            syntax: [
+                "kick --user USER_ID -- REASON",
+            ],
         });
     }
 

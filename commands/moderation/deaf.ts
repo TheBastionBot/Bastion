@@ -13,7 +13,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Deaf extends Command {
     constructor() {
         super("deaf", {
-            description: "",
+            description: "It allows you to deafen (and undeafen) users in the server. Deafened users can't listen anything in the server's voice channels.",
             triggers: [],
             arguments: {
                 configuration: {
@@ -21,6 +21,9 @@ export = class Deaf extends Command {
                 },
                 alias: {
                     user: "u",
+                },
+                default: {
+                    set: true,
                 },
                 boolean: [ "set" ],
                 string: [ "user" ],
@@ -32,6 +35,10 @@ export = class Deaf extends Command {
             ratelimit: 1,
             clientPermissions: [ "DEAFEN_MEMBERS" ],
             userPermissions: [ "DEAFEN_MEMBERS" ],
+            syntax: [
+                "deaf --user USER_ID -- REASON",
+                "deaf --unset --user USER_ID -- REASON",
+            ],
         });
     }
 

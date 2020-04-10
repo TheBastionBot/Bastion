@@ -17,7 +17,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class Warn extends Command {
     constructor() {
         super("warn", {
-            description: "",
+            description: "It allows you to warn server members, as well as clear their warnings. It also allows you to list all the warnings.",
             triggers: [],
             arguments: {
                 alias: {
@@ -35,11 +35,16 @@ export = class Warn extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [ "KICK_MEMBERS" ],
+            syntax: [
+                "warn --list",
+                "warn --user USER_ID -- REASON",
+                "warn --user USER_ID --clear -- REASON",
+            ],
         });
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
-        // List Bans
+        // List Warns
         if (argv.list) {
             const warnedMemberDocuments = await MemberModel.find({
                 guild: message.guild.id,
