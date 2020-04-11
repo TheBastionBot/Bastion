@@ -6,6 +6,8 @@
 import * as tesseract from "tesseract";
 
 
+tesseract.StructureManager.initialize();
+
 const Bastion = new tesseract.Client();
 
 
