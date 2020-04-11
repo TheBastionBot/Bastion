@@ -66,7 +66,7 @@ export = class Clear extends Command {
 
         // Filter messages sent after the specified time
         if (argv.time) {
-            messages = messages.filter(m => m.createdTimestamp >= message.createdTimestamp - (argv.time * 60 * 1000));
+            messages = messages.filter(m => m.createdTimestamp >= message.createdTimestamp - (argv.time * 6e4));
         }
 
         // Delete filtered messages
@@ -106,7 +106,7 @@ export = class Clear extends Command {
                 // This error can be ignored.
             });
             m.delete({
-                timeout: 10000,
+                timeout: 6e4,
                 reason: `Cleared ${clearedMessages.size} messages`,
             }).catch(() => {
                 // This error can be ignored.
