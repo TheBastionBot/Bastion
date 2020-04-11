@@ -77,7 +77,7 @@ export = class UpdateRoles extends Command {
         if (argv.removeAll) await member.roles.set([], reason);
         else if (rolesToRemove.length) await member.roles.remove(rolesToRemove, reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

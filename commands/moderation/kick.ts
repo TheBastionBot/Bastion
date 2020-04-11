@@ -54,12 +54,12 @@ export = class Kick extends Command {
             });
         }
 
-        // Kick user
+        // Kick member
         const reason = argv._.join(" ") || "-";
 
         await member.kick(reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

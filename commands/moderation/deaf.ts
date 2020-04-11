@@ -67,7 +67,7 @@ export = class Deaf extends Command {
         // Set deaf
         await member.voice.setDeaf(!!argv.set, reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

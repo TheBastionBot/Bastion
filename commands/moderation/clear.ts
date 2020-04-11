@@ -86,7 +86,7 @@ export = class Clear extends Command {
             });
         }
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

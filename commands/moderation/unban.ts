@@ -44,7 +44,7 @@ export = class Unban extends Command {
 
         await message.guild.members.unban(user, reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

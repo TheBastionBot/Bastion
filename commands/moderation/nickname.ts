@@ -57,12 +57,12 @@ export = class Nickname extends Command {
             });
         }
 
-        // Nickname user
+        // Set member nickname
         const reason = argv._.join(" ") || "-";
 
         await member.setNickname(argv.nick.join(" ") || "", reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

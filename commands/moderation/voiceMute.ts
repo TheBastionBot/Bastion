@@ -67,7 +67,7 @@ export = class VoiceMute extends Command {
         // Set Voice Mute
         await member.voice.setMute(!!argv.set, reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

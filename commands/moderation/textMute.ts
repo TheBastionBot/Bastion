@@ -76,7 +76,7 @@ export = class TextMute extends Command {
             SEND_MESSAGES: argv.set ? false : null,
         }, reason);
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,

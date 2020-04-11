@@ -104,7 +104,7 @@ export = class Warn extends Command {
 
             guildMemberDocument.save();
 
-            // Acknowledgement
+            // Acknowledge
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.ORANGE,
@@ -129,7 +129,7 @@ export = class Warn extends Command {
             // This error can be ignored.
         });
 
-        // Acknowledgement
+        // Acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
