@@ -51,7 +51,7 @@ export = class InviteCreateListener extends Listener {
         if (invite.maxAge) {
             fields.push({
                 name: "Expires",
-                value: durations.humanize(durations.between(invite.maxAge * 1000)),
+                value: durations.humanize(durations.between(invite.maxAge * 1e3)),
                 inline: true,
             });
         }
