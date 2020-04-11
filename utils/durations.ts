@@ -16,12 +16,12 @@ interface Duration {
 
 const between = (end: number, start?: number): Duration => {
     let time = start ? Math.abs(start - end) : end;
-    time /= 1000;
+    time /= 1e3;
 
     // return milliseconds only if duration is less than a second
     if (time < 1) {
         return {
-            ms: time * 1000,
+            ms: time * 1e3,
         };
     }
 
