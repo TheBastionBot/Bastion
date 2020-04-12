@@ -14,7 +14,7 @@ export interface Member {
     karma?: number;
     lastClaimed?: Date;
     claimStreak?: number;
-    warnings?: string[];
+    infractions?: string[];
 }
 
 const memberSchema = new mongoose.Schema<Member>({
@@ -56,7 +56,7 @@ const memberSchema = new mongoose.Schema<Member>({
         required: true,
         default: 0,
     },
-    warnings: {
+    infractions: {
         type: [ String ],
     },
 });
