@@ -27,8 +27,10 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
+    "@types/node-fetch": "^2.5.5",
     "@types/uuid": "^7.0.2",
     "chalk": "^4.0.0",
+    "node-fetch": "^2.6.0",
     "tesseract": "https://github.com/TheBastionBot/Tesseract",
     "uuid": "^7.0.3",
     "youtube-dl": "^3.0.2"
