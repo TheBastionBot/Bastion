@@ -49,24 +49,24 @@ export interface Guild {
         inviteFilter?: {
             enabled: boolean;
             whitelist?: string[];
-            action?: string;
+            infraction?: boolean;
         };
         linkFilter?: {
             enabled: boolean;
             whitelist?: string[];
-            action?: string;
+            infraction?: boolean;
         };
         mentionFilter?: {
             enabled: boolean;
             roles?: boolean;
             users?: boolean;
             threshold?: number;
-            action?: string;
+            infraction?: boolean;
         };
         messageFilter?: {
             enabled: boolean;
             patterns: string[];
-            action?: string;
+            infraction?: boolean;
         };
     };
     warnings?: {
@@ -231,8 +231,8 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                     whitelist: {
                         type: [ String ],
                     },
-                    action: {
-                        type: String,
+                    infraction: {
+                        type: Boolean,
                     },
                 },
             },
@@ -244,8 +244,8 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                     whitelist: {
                         type: [ String ],
                     },
-                    action: {
-                        type: String,
+                    infraction: {
+                        type: Boolean,
                     },
                 },
             },
@@ -263,8 +263,8 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                     threshold: {
                         type: Number,
                     },
-                    action: {
-                        type: String,
+                    infraction: {
+                        type: Boolean,
                     },
                 },
             },
@@ -276,8 +276,8 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                     patterns: {
                         type: [ String ],
                     },
-                    action: {
-                        type: String,
+                    infraction: {
+                        type: Boolean,
                     },
                 },
             },
