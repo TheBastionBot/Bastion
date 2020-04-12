@@ -69,9 +69,9 @@ export interface Guild {
             infraction?: boolean;
         };
     };
-    warnings?: {
-        threshold: number;
-        action: string;
+    infractions?: {
+        kickThreshold: number;
+        banThreshold: number;
     };
     gambling?: {
         enabled: boolean;
@@ -283,13 +283,13 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
             },
         }
     },
-    warnings: {
+    infractions: {
         type: {
-            threshold: {
+            kickThreshold: {
                 type: Number,
             },
-            action: {
-                type: String,
+            banThreshold: {
+                type: Number,
             },
         },
     },
