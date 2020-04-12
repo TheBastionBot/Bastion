@@ -15,7 +15,7 @@ export = class InviteFilter extends Interrupt {
         super("inviteFilter");
     }
 
-    deleteInvite = (message: Message): void => {
+    private deleteInvite = (message: Message): void => {
         // delete the message
         if (message.deletable) message.delete().catch(() => {
             // this error can be ignored
@@ -48,5 +48,7 @@ export = class InviteFilter extends Interrupt {
             this.deleteInvite(message);
             return true;
         }
+
+        return false;
     }
 }

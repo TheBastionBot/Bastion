@@ -15,7 +15,7 @@ export = class LinkFilter extends Interrupt {
         super("linkFilter");
     }
 
-    deleteLink = (message: Message): void => {
+    private deleteLink = (message: Message): void => {
         // delete the message
         if (message.deletable) message.delete().catch(() => {
             // this error can be ignored
@@ -47,5 +47,7 @@ export = class LinkFilter extends Interrupt {
             this.deleteLink(message);
             return true;
         }
+
+        return false;
     }
 }

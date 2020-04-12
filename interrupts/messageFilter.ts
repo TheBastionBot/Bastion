@@ -13,7 +13,7 @@ export = class MessageFilter extends Interrupt {
         super("messageFilter");
     }
 
-    testPatterns = (message: string, patterns: string[]): boolean => {
+    private testPatterns = (message: string, patterns: string[]): boolean => {
         for (const pattern of patterns) {
             const patternRegExp = new RegExp(pattern.replace(/\?/g, ".").replace(/\*+/g, ".*"), "ig");
 
@@ -42,5 +42,7 @@ export = class MessageFilter extends Interrupt {
 
             return true;
         }
+
+        return false;
     }
 }
