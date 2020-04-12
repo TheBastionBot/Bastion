@@ -3,6 +3,7 @@
 *.js.map
 *.d.ts
 *.d.ts.map
+!/typings/*.d.ts
 
 ### Bastion ###
 /music
