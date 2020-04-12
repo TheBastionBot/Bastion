@@ -37,4 +37,13 @@ export = class BastionGuildMember extends GuildMember {
         if ((this.user as BastionUser).isOwner()) return true;
         return (this.guild as BastionGuild).document.music && (this.guild as BastionGuild).document.music.roleId && this.roles.cache.has((this.guild as BastionGuild).document.music.roleId);
     }
+
+    public async clearInfractions(): Promise<IGuildMember & mongoose.Document> {
+        const member = this.document ? this.document : await this.getDocument();
+
+        member.infractions = undefined;
+        delete member.infractions;
+
+        return member.save();
+    }
 }
