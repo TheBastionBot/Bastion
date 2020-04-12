@@ -11,13 +11,12 @@ import * as arrays from "../../utils/arrays";
 import * as errors from "../../utils/errors";
 import * as pagination from "../../utils/pagination";
 
-import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
 export = class Warn extends Command {
     constructor() {
         super("warn", {
-            description: "It allows you to warn server members, as well as clear their warnings. It also allows you to list all the warnings.",
+            description: "It allows you to warn server members, as well as clear their infractions. It also allows you to list all the infractions.",
             triggers: [],
             arguments: {
                 alias: {
@@ -44,11 +43,11 @@ export = class Warn extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
-        // List Warns
+        // list infractions
         if (argv.list) {
             const warnedMemberDocuments = await MemberModel.find({
                 guild: message.guild.id,
-                warnings: { $exists: true, $ne: [] },
+                infractions: { $exists: true, $ne: [] },
             });
 
             const warnedMembers = pagination.paginate(warnedMemberDocuments, argv.page);
@@ -58,9 +57,9 @@ export = class Warn extends Command {
                     color: Constants.COLORS.ORANGE,
                     title: "Warned Users",
                     description: warnedMembers.items.length ? "Users warned in the server." : "No one has been warned in the server.",
-                    fields: warnedMembers.items.map((member: { _id: string; warnings: string[] }) => ({
+                    fields: warnedMembers.items.map((member: { _id: string; infractions: string[] }) => ({
                         name: message.guild.members.cache.has(member._id) ? message.guild.members.cache.get(member._id).user.tag : member._id,
-                        value: arrays.toBulletList(member.warnings),
+                        value: arrays.toBulletList(member.infractions),
                     })),
                     footer: {
                         text: warnedMembers.items.length ? `Page ${warnedMembers.page} of ${warnedMembers.pages}` : "",
@@ -68,6 +67,7 @@ export = class Warn extends Command {
                 },
             });
         }
+
 
         // Resolve member
         const member = this.client.resolver.resolveGuildMember(message.guild, argv.user) as BastionGuildMember;
@@ -91,86 +91,44 @@ export = class Warn extends Command {
             });
         }
 
-        // Add the warning to the Guild Member
-        const guildMemberDocument = await member.getDocument();
 
-        if (!guildMemberDocument.warnings || !guildMemberDocument.warnings.length) {
-            guildMemberDocument.warnings = [];
-        }
-
-        // Clear Warning
+        // clear infractions
         if (argv.clear) {
-            guildMemberDocument.warnings = [];
+            await member.clearInfractions();
 
-            guildMemberDocument.save();
-
-            // Acknowledge
+            // acknowledge
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.ORANGE,
-                    description: this.client.locale.getString("en_us", "info", "memberWarnClear", message.author.tag, member.user.tag, reason),
+                    description: this.client.locale.getString("en_us", "info", "memberInfractionsClear", message.author.tag, member.user.tag, reason),
                 },
             }).catch(() => {
-                // This error can be ignored.
+                // this error can be ignored
             });
         }
 
-        guildMemberDocument.warnings.push(reason);
 
-        guildMemberDocument.save();
+        // add infraction to the member
+        await member.addInfraction(reason);
 
-        // DM the User about their Warning
+        // message the member about their warning
         await message.member.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
                 description: this.client.locale.getString("en_us", "info", "memberWarnDM", message.author.tag, message.guild.name, reason),
             },
         }).catch(() => {
-            // This error can be ignored.
+            // this error can be ignored
         });
 
-        // Acknowledge
+        // acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
                 description: this.client.locale.getString("en_us", "info", "memberWarn", message.author.tag, member.user.tag, reason),
             },
         }).catch(() => {
-            // This error can be ignored.
+            // this error can be ignored
         });
-
-        // Take Warn Action
-        if ((message.guild as BastionGuild).document.warnings && (message.guild as BastionGuild).document.warnings.action && (message.guild as BastionGuild).document.warnings.threshold && guildMemberDocument.warnings.length >= (message.guild as BastionGuild).document.warnings.threshold) {
-            const reason = `Warn Threshold Exceeded - ${guildMemberDocument.warnings.length} Warnings`;
-
-            switch ((message.guild as BastionGuild).document.warnings.action.toLowerCase()) {
-            case "kick":
-                if (member.kickable) {
-                    await member.kick(reason);
-                }
-                break;
-            case "softban":
-                if (member.bannable) {
-                    await member.ban({ days: 0, reason });
-                    await message.guild.members.unban(member, reason);
-                }
-                break;
-            case "ban":
-                if (member.kickable) {
-                    await member.ban({ days: 0, reason });
-                }
-                break;
-            }
-
-            // DM the User about their Warn Action
-            await message.member.send({
-                embed: {
-                    color: Constants.COLORS.ORANGE,
-                    description: this.client.locale.getString("en_us", "info", "memberWarnActionDM", message.guild.name),
-                },
-            }).catch(() => {
-                // This error can be ignored.
-            });
-        }
     }
 }
