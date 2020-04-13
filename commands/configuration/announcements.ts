@@ -21,7 +21,7 @@ export = class Announcements extends Command {
                 boolean: [ "disable" ],
             },
             scope: "guild",
-            owner: true,
+            owner: false,
             typing: true,
             cooldown: 0,
             ratelimit: 1,
