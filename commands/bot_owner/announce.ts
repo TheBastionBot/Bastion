@@ -39,7 +39,7 @@ export = class Announce extends Command {
         // command syntax validation
         if (!announcementMessage) throw new errors.CommandSyntaxError(this.name);
 
-        const guilds = await GuildModel.find({ announcementsChannelId: { $ne: null } });
+        const guilds = await GuildModel.find({ announcementsChannelId: { $exists: true } });
 
         for (const guild of guilds) {
             if (this.client.channels.cache.has(guild.announcementsChannelId)) {
