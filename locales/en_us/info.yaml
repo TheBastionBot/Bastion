@@ -61,3 +61,5 @@ announcementsEnable: "%var% enabled Bastion Announcements in the server, and set
 announcementsDisable: "%var% disabled Bastion Announcements in the server."
 reportsEnable: "%var% enabled Reports in the server, and set this channel as the Report Channel."
 reportsDisable: "%var% disabled Reports in the server."
+gamificationEnable: "%var% enabled gamification in the server. Members can now gain experience and level up by participating in the server."
+gamificationDisable: "%var% disabled gamification in the server. Members can no longer gain experience and level up in the server."
