@@ -200,7 +200,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         unique: true,
         sparse: true,
     },
-    announcementChannelId: {
+    announcementsChannelId: {
         type: String,
         unique: true,
         sparse: true,
