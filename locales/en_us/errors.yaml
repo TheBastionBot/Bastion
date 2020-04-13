@@ -10,5 +10,8 @@ noMusicChannelsAsOwner: "No default music channels have been set. So, you need t
 rolePosition: "%var%, your role doesn't give you the authorization to take actions on %var%."
 roleNotFound: "I looked into the deep dark corners of the server, but I didn't find that role."
 noAutoRoles: "You don't seem to have any Auto Roles configured for the server."
+autoRolesLimit: "Unfortunately, you can't have more than %var% Auto Roles in the server."
+noSelfRoles: "You don't seem to have any Self Roles configured for the server."
+selfRolesLimit: "Unfortunately, you can't have more than %var% Self Roles in the server."
 unspeakable: "I don't have permission to speak in the **%var%** voice channel."
 unjoinable: "I don't have permission to join the **%var%** voice channel."
