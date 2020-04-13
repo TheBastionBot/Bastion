@@ -52,3 +52,6 @@ didYouKnowCommandsCount: "Did you know? There are %var% commands in this version
 commandCategoriesCommand: "You can use the `commands` command to get the list of all the %var% Command Categories."
 categoryCommandsCommand: "You can use the `commands CATEGORY` command to get the list of all the commands in that category."
 commandDetailsOption: "To get detailed information on a command, use the `--help` option with that command."
+autoRolesAdd: "%var% added the %var% role as an Auto Role."
+autoRolesRemove: "%var% removed the %var% role from Auto Roles."
+autoRolesList: "These roles will automatically be assigned to the users when they join the server."
