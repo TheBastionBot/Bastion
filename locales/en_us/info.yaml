@@ -55,3 +55,6 @@ commandDetailsOption: "To get detailed information on a command, use the `--help
 autoRolesAdd: "%var% added the %var% role as an Auto Role."
 autoRolesRemove: "%var% removed the %var% role from Auto Roles."
 autoRolesList: "These roles will automatically be assigned to the users when they join the server."
+selfRolesAdd: "%var% added the %var% role as a Self Role."
+selfRolesRemove: "%var% removed the %var% role from Self Roles."
+selfRolesList: "These roles can be assigned, and unassigned, to themselves by the server members.."
