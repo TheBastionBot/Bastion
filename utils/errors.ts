@@ -4,7 +4,8 @@
  */
 
 enum BASTION_ERRORS {
-    COMMAND_SYNTAX_ERROR = "CommandSyntaxError",
+    COMMAND_SYNTAX_ERROR = "Command Syntax Error",
+    ROLE_NOT_FOUND = "Role Not Found",
 }
 
 class CommandSyntaxError extends Error {
@@ -14,7 +15,15 @@ class CommandSyntaxError extends Error {
     }
 }
 
+class RoleNotFound extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = BASTION_ERRORS.ROLE_NOT_FOUND;
+    }
+}
+
 
 export {
     CommandSyntaxError,
+    RoleNotFound,
 };
