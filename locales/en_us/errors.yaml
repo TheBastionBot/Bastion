@@ -7,6 +7,7 @@ musicDownloadError: "I was unable to get the requested music. Either this is not
 noDeletableMessages: "No messages were found, for the specified filter, that could be deleted."
 noMusicChannels: "No default music channels have been set. So, only the bot owner or users in the Music Master role can use this command when I'm not already in a voice channel."
 noMusicChannelsAsOwner: "No default music channels have been set. So, you need to be in a voice channel to be able to use the command."
+noReportChannel: "Report Channel hasn't been set in this server. Ask the server managers to set a Report Channel in the server."
 rolePosition: "%var%, your role doesn't give you the authorization to take actions on %var%."
 roleNotFound: "I looked into the deep dark corners of the server, but I didn't find that role."
 noAutoRoles: "You don't seem to have any Auto Roles configured for the server."
