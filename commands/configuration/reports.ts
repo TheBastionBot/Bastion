@@ -27,6 +27,10 @@ export = class Reports extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [ "MANAGE_GUILD" ],
+            syntax: [
+                "reports",
+                "reports --disable",
+            ],
         });
     }
 

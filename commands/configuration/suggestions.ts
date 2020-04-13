@@ -27,6 +27,10 @@ export = class Suggestions extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [ "MANAGE_GUILD" ],
+            syntax: [
+                "suggestions",
+                "suggestions --disable",
+            ],
         });
     }
 

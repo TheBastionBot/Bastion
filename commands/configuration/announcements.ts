@@ -27,6 +27,10 @@ export = class Announcements extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [ "MANAGE_GUILD" ],
+            syntax: [
+                "announcements",
+                "announcements --disable",
+            ],
         });
     }
 
