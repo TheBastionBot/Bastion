@@ -14,12 +14,12 @@ export interface Guild {
     language?: string;
     greeting?: {
         channelId: string;
-        message?: string;
+        message?: object;
         timeout?: number;
     };
     farewell?: {
         channelId: string;
-        message?: string;
+        message?: object;
         timeout?: number;
     };
     music?: {
@@ -112,7 +112,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                 sparse: true,
             },
             message: {
-                type: String,
+                type: Object,
                 trim: true,
             },
             timeout: {
@@ -128,7 +128,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                 sparse: true,
             },
             message: {
-                type: String,
+                type: Object,
                 trim: true,
             },
             timeout: {
