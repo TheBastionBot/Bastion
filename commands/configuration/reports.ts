@@ -12,7 +12,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class Reports extends Command {
     constructor() {
         super("reports", {
-            description: "It allows you to enable (and disable) user reports in the server. It sets the channel as a Report Channel that will receive the user reports, reported by the server members using the `report` command.",
+            description: "It allows you to enable (and disable) user reports in the server. It sets the channel as the Report Channel that will receive the user reports, reported by the server members using the `report` command.",
             triggers: [],
             arguments: {
                 alias: {
@@ -38,7 +38,7 @@ export = class Reports extends Command {
         const guild = (message.guild as BastionGuild);
 
         // update the report channel
-        if (argv.disable && guild.document.reportsChannelId) {
+        if (argv.disable) {
             guild.document.reportsChannelId = undefined;
             delete guild.document.reportsChannelId;
         } else {

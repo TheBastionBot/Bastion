@@ -12,7 +12,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class Suggestions extends Command {
     constructor() {
         super("suggestions", {
-            description: "It allows you to enable (and disable) suggestions in the server. It sets the channel as a Suggestion Channel that will receive the suggestions, suggested by the server members using the `suggest` command.",
+            description: "It allows you to enable (and disable) suggestions in the server. It sets the channel as the Suggestion Channel that will receive the suggestions, suggested by the server members using the `suggest` command.",
             triggers: [],
             arguments: {
                 alias: {
@@ -38,7 +38,7 @@ export = class Suggestions extends Command {
         const guild = (message.guild as BastionGuild);
 
         // update the suggestion channel
-        if (argv.disable && guild.document.suggestionsChannelId) {
+        if (argv.disable) {
             guild.document.suggestionsChannelId = undefined;
             delete guild.document.suggestionsChannelId;
         } else {

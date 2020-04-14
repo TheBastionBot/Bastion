@@ -12,7 +12,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class Announcements extends Command {
     constructor() {
         super("announcements", {
-            description: "It allows you to enable (and disable) Bastion's Announcements in the server. It sets the channel as an Announcement Channel that will receive the announcement broadcasts sent by the bot owners using the `announce` command.",
+            description: "It allows you to enable (and disable) Bastion's Announcements in the server. It sets the channel as the Announcement Channel that will receive the announcement broadcasts sent by the bot owners using the `announce` command.",
             triggers: [],
             arguments: {
                 alias: {
@@ -38,7 +38,7 @@ export = class Announcements extends Command {
         const guild = (message.guild as BastionGuild);
 
         // update the announcement channel
-        if (argv.disable && guild.document.announcementsChannelId) {
+        if (argv.disable) {
             guild.document.announcementsChannelId = undefined;
             delete guild.document.announcementsChannelId;
         } else {
