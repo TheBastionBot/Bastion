@@ -10,6 +10,8 @@ noMusicChannelsAsOwner: "No default music channels have been set. So, you need t
 noReportChannel: "Report Channel hasn't been set in this server. Ask the server managers to set a Report Channel in the server."
 rolePosition: "%var%, your role doesn't give you the authorization to take actions on %var%."
 roleNotFound: "I looked into the deep dark corners of the server, but I didn't find that role."
+channelNotFound: "I looked into the deep dark corners of the server, but I didn't find that channel."
+emojiNotFound: "I looked into the deep dark corners of the server, but I didn't find that emoji."
 noAutoRoles: "You don't seem to have any Auto Roles configured for the server."
 autoRolesLimit: "Unfortunately, you can't have more than %var% Auto Roles in the server."
 noSelfRoles: "You don't seem to have any Self Roles configured for the server."
