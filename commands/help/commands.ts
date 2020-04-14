@@ -49,7 +49,7 @@ export = class Commands extends Command {
                     fields: [
                         {
                             name: "Commands",
-                            value: "```" + filteredCommands.slice(0, 10).join("\n") + "```",
+                            value: "```\n" + filteredCommands.slice(0, 10).join("\n") + "```",
                         },
                         {
                             name: "Want the complete list?",
