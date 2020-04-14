@@ -69,3 +69,5 @@ serverLogsEnable: "%var% enabled logging of the server events, and set this chan
 serverLogsDisable: "%var% disabled logging of the server events."
 moderationLogsEnable: "%var% enabled logging of the moderation events in the server, and set this channel as the Moderation Log Channel."
 moderationLogsDisable: "%var% disabled logging of the moderation events in the server."
+availableLocales: "I can speak in any of the following languages. *You know, I'm something of a language expert myself.*"
+guildLanguageUpdate: "%var% set this server's language to %var%. Don't judge my grammar!"
