@@ -12,7 +12,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class Suggestions extends Command {
     constructor() {
         super("suggestions", {
-            description: "It allows you to enable (and disable) suggestions in the server. It sets the channel as a Report Channel that will receive the user reports, reported by the server members using the `report` command.",
+            description: "It allows you to enable (and disable) suggestions in the server. It sets the channel as a Suggestion Channel that will receive the suggestions, suggested by the server members using the `suggest` command.",
             triggers: [],
             arguments: {
                 alias: {
@@ -37,12 +37,12 @@ export = class Suggestions extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         const guild = (message.guild as BastionGuild);
 
-        // update the report channel
-        if (argv.disable && guild.document.reportsChannelId) {
-            guild.document.reportsChannelId = undefined;
-            delete guild.document.reportsChannelId;
+        // update the suggestion channel
+        if (argv.disable && guild.document.suggestionsChannelId) {
+            guild.document.suggestionsChannelId = undefined;
+            delete guild.document.suggestionsChannelId;
         } else {
-            guild.document.reportsChannelId = message.channel.id;
+            guild.document.suggestionsChannelId = message.channel.id;
         }
 
         // save document
@@ -51,8 +51,8 @@ export = class Suggestions extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                color: guild.document.reportsChannelId ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.reportsChannelId ? "reportsEnable" : "reportsDisable", message.author.tag),
+                color: guild.document.suggestionsChannelId ? Constants.COLORS.GREEN : Constants.COLORS.RED,
+                description: this.client.locale.getString("en_us", "info", guild.document.suggestionsChannelId ? "suggestionsEnable" : "suggestionsDisable", message.author.tag),
             },
         }).catch(() => {
             // This error can be ignored.
