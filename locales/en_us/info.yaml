@@ -73,3 +73,5 @@ availableLocales: "I can speak in any of the following languages. *You know, I'm
 guildLanguageUpdate: "%var% set this server's language to %var%. Don't judge my grammar!"
 guildPrefixes: "These are the prefixes I listen to in this server. You can invoke me using any of these prefixes."
 guildPrefixUpdate: "%var% set my prefixes in the server to: %var%"
+starboardEnable: "%var% enabled Starboard in the server, and set this channel as the Starboard Channel."
+starboardDisable: "%var% disabled Starboard in the server."
