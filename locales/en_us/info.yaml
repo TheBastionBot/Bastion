@@ -67,3 +67,5 @@ gamificationEnable: "%var% enabled gamification in the server. Members can now g
 gamificationDisable: "%var% disabled gamification in the server. Members can no longer gain experience and level up in the server."
 serverLogsEnable: "%var% enabled logging of the server events, and set this channel as the Server Log Channel."
 serverLogsDisable: "%var% disabled logging of the server events."
+moderationLogsEnable: "%var% enabled logging of the moderation events in the server, and set this channel as the Moderation Log Channel."
+moderationLogsDisable: "%var% disabled logging of the moderation events in the server."
