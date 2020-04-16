@@ -9,6 +9,8 @@ noMusicChannels: "No default music channels have been set. So, only the bot owne
 noMusicChannelsAsOwner: "No default music channels have been set. So, you need to be in a voice channel to be able to use the command."
 noReportChannel: "Report Channel hasn't been set in this server. Ask the server managers to set a Report Channel in the server."
 rolePosition: "%var%, your role doesn't give you the authorization to take actions on %var%."
+profileNotFound: "Looks like %var% hasn't been active. Therefore, their profile hasn't been created yet. Once I see them, they'll have their cool profile to show too!"
+memberNotFound: "I looked into the deep dark corners of the server, but I didn't find that member."
 roleNotFound: "I looked into the deep dark corners of the server, but I didn't find that role."
 channelNotFound: "I looked into the deep dark corners of the server, but I didn't find that channel."
 emojiNotFound: "I looked into the deep dark corners of the server, but I didn't find that emoji."
