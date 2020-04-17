@@ -75,7 +75,7 @@ export interface Guild {
     };
     gambling?: {
         enabled: boolean;
-        reward?: number;
+        multiplier?: number;
     };
     streamers?: {
         twitch?: {
@@ -298,7 +298,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
             enabled: {
                 type: Boolean,
             },
-            reward: {
+            multiplier: {
                 type: Number,
             },
         },
