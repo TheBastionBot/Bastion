@@ -48,7 +48,7 @@ export = class MentionSpamCommand extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                color: argv.enable ? Constants.COLORS.GREEN : argv.disable ? Constants.COLORS.RED : Constants.COLORS.IRIS,
+                color: guild.document.mentionSpam.threshold ? Constants.COLORS.GREEN : Constants.COLORS.RED,
                 description: this.client.locale.getString("en_us", "info", guild.document.mentionSpam.threshold ? "mentionSpamInfractionsEnable" : "mentionSpamInfractionsDisable", message.author.tag, guild.document.mentionSpam.threshold),
             },
         }).catch(() => {
