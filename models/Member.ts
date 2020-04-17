@@ -12,7 +12,7 @@ export interface Member {
     experience?: number;
     level?: number;
     karma?: number;
-    lastClaimed?: Date;
+    lastClaimed?: number;
     claimStreak?: number;
     infractions?: string[];
 }
@@ -49,7 +49,7 @@ const memberSchema = new mongoose.Schema<Member>({
         default: 0,
     },
     lastClaimed: {
-        type: Date,
+        type: Number,
     },
     claimStreak: {
         type: Number,
