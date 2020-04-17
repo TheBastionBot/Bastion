@@ -21,3 +21,4 @@ selfRolesLimit: "Unfortunately, you can't have more than %var% Self Roles in the
 unspeakable: "I don't have permission to speak in the **%var%** voice channel."
 unjoinable: "I don't have permission to join the **%var%** voice channel."
 languageUnavailable: "I'm sorry, I can't speak in %var% yet."
+alreadyClaimed: "%var% you've already claimed your daily reward for today. Check back tomorrow!"
