@@ -56,18 +56,16 @@ export interface Guild {
             whitelist?: string[];
             infraction?: boolean;
         };
-        mentionFilter?: {
-            enabled: boolean;
-            roles?: boolean;
-            users?: boolean;
-            threshold?: number;
-            infraction?: boolean;
-        };
         messageFilter?: {
             enabled: boolean;
             patterns: string[];
             infraction?: boolean;
         };
+    };
+    mentionSpam?: {
+        roles?: boolean;
+        users?: boolean;
+        threshold?: number;
     };
     infractions?: {
         kickThreshold: number;
@@ -249,25 +247,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                     },
                 },
             },
-            mentionFilter: {
-                type: {
-                    enabled: {
-                        type: Boolean,
-                    },
-                    roles: {
-                        type: Boolean,
-                    },
-                    users: {
-                        type: Boolean,
-                    },
-                    threshold: {
-                        type: Number,
-                    },
-                    infraction: {
-                        type: Boolean,
-                    },
-                },
-            },
             messageFilter: {
                 type: {
                     enabled: {
@@ -282,6 +261,19 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                 },
             },
         }
+    },
+    mentionSpam: {
+        type: {
+            roles: {
+                type: Boolean,
+            },
+            users: {
+                type: Boolean,
+            },
+            threshold: {
+                type: Number,
+            },
+        },
     },
     infractions: {
         type: {
