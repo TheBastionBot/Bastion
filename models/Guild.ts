@@ -33,7 +33,7 @@ export interface Guild {
     gamification?: {
         enabled: boolean;
         messages?: boolean;
-        modifier?: number;
+        multiplier?: number;
     };
     chat?: boolean;
     streamerRoleId?: string;
@@ -172,7 +172,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
             messages: {
                 type: Boolean,
             },
-            modifier: {
+            multiplier: {
                 type: Number,
             },
         },

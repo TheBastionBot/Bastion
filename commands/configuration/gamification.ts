@@ -13,11 +13,11 @@ import BastionGuild = require("../../structures/Guild");
 export = class Gamification extends Command {
     constructor() {
         super("gamification", {
-            description: "It allows you to enable (or disable) gamification in the server. When enabled, users gain experience and level up in the server by participating in the server, competing against each other to climb the leaderboard. It also allows you to toggle level up messages and set the level up modifier.",
+            description: "It allows you to enable (or disable) gamification in the server. When enabled, users gain experience and level up in the server by participating in the server, competing against each other to climb the leaderboard. It also allows you to toggle level up messages and set the level up multiplier.",
             triggers: [],
             arguments: {
                 boolean: [ "messages" ],
-                number: [ "modifier" ],
+                number: [ "multiplier" ],
             },
             scope: "guild",
             owner: false,
@@ -29,7 +29,7 @@ export = class Gamification extends Command {
             syntax: [
                 "gamification",
                 "gamification --messages",
-                "gamification --modifier NUMBER",
+                "gamification --multiplier NUMBER",
             ],
         });
     }
@@ -37,15 +37,15 @@ export = class Gamification extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         const guild = (message.guild as BastionGuild);
 
-        const status = (argv.messages || argv.modifier) ? true : !(guild.document.gamification && guild.document.gamification.enabled);
+        const status = (argv.messages || argv.multiplier) ? true : !(guild.document.gamification && guild.document.gamification.enabled);
 
         guild.document.gamification = {
-            // enable gamification if either messages or modifier is specified, otherwise toggle it
+            // enable gamification if either messages or multiplier is specified, otherwise toggle it
             enabled: status,
             // enable level up messages if specified, otherwise keep the old value based on whether gamification is enabled
             messages: argv.messages ? true : status ? guild.document.gamification && guild.document.gamification.messages : undefined,
-            // set the level up modifier if specified, otherwise keep the old value based on whether gamification is enabled
-            modifier: typeof argv.modifier === "number" ? argv.modifier : status ? guild.document.gamification && guild.document.gamification.modifier : undefined,
+            // set the level up multiplier if specified, otherwise keep the old value based on whether gamification is enabled
+            multiplier: typeof argv.multiplier === "number" ? argv.multiplier : status ? guild.document.gamification && guild.document.gamification.multiplier : undefined,
         };
 
         // save document
@@ -64,8 +64,8 @@ export = class Gamification extends Command {
                             inline: true,
                         },
                         {
-                            name: "Level-Up Modifier",
-                            value: guild.document.gamification.modifier ? guild.document.gamification.modifier.toString() : gamification.DEFAUL_LEVELUP_MODIFIER.toString(),
+                            name: "Level-Up Multiplier",
+                            value: guild.document.gamification.multiplier ? guild.document.gamification.multiplier.toString() : gamification.DEFAUL_LEVELUP_MULTIPLIER.toString(),
                             inline: true,
                         },
                     ]

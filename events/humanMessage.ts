@@ -26,18 +26,18 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         if (!guild.document.gamification || !guild.document.gamification.enabled) return;
 
         // check whether member has exceeded max level or experience
-        if (member.document.level >= gamification.MAX_LEVEL || member.document.experience >= gamification.MAX_EXPERIENCE(guild.document.gamification.modifier)) return;
+        if (member.document.level >= gamification.MAX_LEVEL || member.document.experience >= gamification.MAX_EXPERIENCE(guild.document.gamification.multiplier)) return;
 
         // increment experience
         member.document.experience += 1;
 
         // compute current level from new experience
-        const computedLevel: number = gamification.computeLevel(member.document.experience, guild.document.gamification.modifier);
+        const computedLevel: number = gamification.computeLevel(member.document.experience, guild.document.gamification.multiplier);
 
         // level up
         if (computedLevel > member.document.level) {
             member.document.level = computedLevel;
-            member.document.balance = numbers.clamp(member.document.balance + computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MODIFIER, Number.MAX_SAFE_INTEGER);
+            member.document.balance = numbers.clamp(member.document.balance + computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER, Number.MAX_SAFE_INTEGER);
 
             // achievement message
             if (guild.document.gamification.messages) {
