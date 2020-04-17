@@ -34,7 +34,7 @@
     "color-convert": "~2.0.0",
     "command-line-args": "github:k3rn31p4nic/command-line-args",
     "cron": "~1.8.2",
-    "discord.js": "~11.6.1",
+    "discord.js": "~12.2.0",
     "ex.traction": "github:k3rn31p4nic/node-extraction#v1.0.0",
     "gamedig": "~2.0.8",
     "hirez.js": "~2.0.0",
