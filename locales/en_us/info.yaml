@@ -65,6 +65,8 @@ suggestionsEnable: "%var% enabled Suggestions in the server, and set this channe
 suggestionsDisable: "%var% disabled Suggestions in the server."
 gamificationEnable: "%var% enabled gamification in the server. Members can now gain experience and level up by participating in the server."
 gamificationDisable: "%var% disabled gamification in the server. Members can no longer gain experience and level up in the server."
+gamblingEnable: "%var% enabled gambling in the server. Members can now use their Bastion Coins to gamble in games."
+gamblingDisable: "%var% disabled gambling in the server. Members can't gamble in games anymore."
 serverLogsEnable: "%var% enabled logging of the server events, and set this channel as the Server Log Channel."
 serverLogsDisable: "%var% disabled logging of the server events."
 moderationLogsEnable: "%var% enabled logging of the moderation events in the server, and set this channel as the Moderation Log Channel."
