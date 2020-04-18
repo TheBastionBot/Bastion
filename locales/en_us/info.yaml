@@ -109,3 +109,6 @@ claimStreakLast: "You've come this far, only one day left for your 7 days streak
 claimStreakClaimed: "Congratulations on completing your 7 days streak! Check your balance to see your bonus reward."
 claimStreak: "%var% more days to complete your 7 days streak. Keep going, I believe in you!"
 claimRewardBooster: "Thank you for Boosting the server, I've doubled your reward!"
+triggersAdd: "%var% added a new trigger in the server."
+triggersClear: "%var% cleared all the triggers available in the server."
+triggersList: "These are the available triggers in the server."
