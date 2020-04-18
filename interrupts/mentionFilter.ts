@@ -14,6 +14,8 @@ export = class MessageMention extends Interrupt {
     }
 
     exec = async (message: Message): Promise<boolean> => {
+        if (!message.guild) return;
+
         if (!message.content || !message.content.length) return false;
 
         const guild = message.guild as BastionGuild;
