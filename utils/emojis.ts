@@ -18,7 +18,13 @@ const getEmojis = (): string[] => {
     return emojis;
 };
 
+const isUnicodeEmoji = (emoji: string): boolean => {
+    return emojis.includes(Buffer.from(emoji).toString("base64"));
+};
+
 const parseEmoji = (emoji: string): Emoji => {
+    if (!emoji) return;
+
     let emojiObject: Emoji;
 
     if (emojis.includes(emoji)) {
@@ -52,5 +58,6 @@ const parseEmoji = (emoji: string): Emoji => {
 
 export {
     getEmojis,
+    isUnicodeEmoji,
     parseEmoji,
 };
