@@ -8,9 +8,9 @@ import { Message } from "discord.js";
 
 import BastionGuild = require("../structures/Guild");
 
-export = class MessageMention extends Interrupt {
+export = class MentionSpamInterrupt extends Interrupt {
     constructor() {
-        super("messageMention");
+        super("mentionSpam");
     }
 
     exec = async (message: Message): Promise<boolean> => {
@@ -23,12 +23,12 @@ export = class MessageMention extends Interrupt {
         // check whether the member has permission to manage messages
         if (message.member.hasPermission("MANAGE_MESSAGES")) return false;
 
-        // check whether mention filter is enabled
-        if (!guild.document.filters || !guild.document.filters.mentionFilter || !guild.document.filters.mentionFilter.enabled || !guild.document.filters.mentionFilter.threshold) return false;
+        // check whether mention spam infractions are enabled
+        if (!guild.document.mentionSpam || !guild.document.mentionSpam.threshold) return false;
 
         // check whether the number of mentions in the messages are above the allowed threshold
-        if (message.mentions.users.size > guild.document.filters.mentionFilter.threshold) return true;
-        if (message.mentions.roles.size > guild.document.filters.mentionFilter.threshold) return true;
+        if (message.mentions.users.size > guild.document.mentionSpam.threshold) return true;
+        if (message.mentions.roles.size > guild.document.mentionSpam.threshold) return true;
 
         return false;
     }
