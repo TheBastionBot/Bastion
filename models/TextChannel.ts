@@ -14,7 +14,6 @@ export interface TextChannel {
     ignoredFilters?: {
         inviteFilter?: boolean;
         linkFilter?: boolean;
-        mentionFilter?: boolean;
         messageFilter?: boolean;
     };
     disabledCommands?: string[];
@@ -42,9 +41,6 @@ export default mongoose.model<TextChannel & mongoose.Document>("TextChannel", ne
                 type: Boolean,
             },
             linkFilter: {
-                type: Boolean,
-            },
-            mentionFilter: {
                 type: Boolean,
             },
             messageFilter: {
