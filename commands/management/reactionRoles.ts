@@ -43,7 +43,7 @@ export = class ReactionRolesCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         if (argv.message && argv.delete) {
             // remove reaction roles group
-            await ReactionRoleGroupModel.remove({
+            await ReactionRoleGroupModel.deleteMany({
                 _id: argv.message,
             });
 
