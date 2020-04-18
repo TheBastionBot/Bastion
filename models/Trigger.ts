@@ -23,12 +23,10 @@ const triggerSchema = new mongoose.Schema<Trigger>({
         required: true,
     },
     responseMessage: {
-        type: mongoose.SchemaTypes.Mixed,
-        required: true,
+        type: String,
     },
     responseReaction: {
         type: String,
-        required: true,
     },
 });
 
