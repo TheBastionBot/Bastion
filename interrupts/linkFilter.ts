@@ -32,7 +32,7 @@ export = class LinkFilter extends Interrupt {
         const guild = message.guild as BastionGuild;
 
         // check whether the member has permission to manage channel or manage messages
-        if (message.channel.permissionsFor(message.member).has([ "MANAGE_CHANNELS", "MANAGE_MESSAGES" ])) return false;
+        if (message.channel.permissionsFor(message.member) && message.channel.permissionsFor(message.member).has([ "MANAGE_CHANNELS", "MANAGE_MESSAGES" ])) return false;
 
         // check whether link filter is enabled
         if (!guild.document.filters || !guild.document.filters.linkFilter || !guild.document.filters.linkFilter.enabled) return false;
