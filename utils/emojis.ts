@@ -57,6 +57,7 @@ const parseEmoji = (emoji: string): Emoji => {
 
 
 export {
+    Emoji,
     getEmojis,
     isUnicodeEmoji,
     parseEmoji,
