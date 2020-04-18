@@ -6,8 +6,11 @@
 import { Constants, ModuleManagerEvent, Client } from "tesseract";
 import { Message } from "discord.js";
 
+import * as emojis from "../utils/emojis";
 import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
+
+import TriggerModel from "../models/Trigger";
 
 import BastionGuild = require("../structures/Guild");
 import BastionGuildMember = require("../structures/GuildMember");
@@ -61,10 +64,42 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         await member.document.save();
     }
 
+    handleTriggers = async (message: Message): Promise<void> => {
+        if (!message.content) return;
+
+        const triggers = await TriggerModel.find({ guild: message.guild.id });
+
+        // TODO: if multiple responses are there for a single trigger, randomize it
+        for (const trigger of triggers) {
+            const patternRegExp = new RegExp(trigger.trigger.replace(/\?/g, ".").replace(/\*+/g, ".*"), "ig");
+
+            if (!patternRegExp.test(message.content)) continue;
+
+            if (trigger.responseMessage) {
+                message.channel.send(trigger.responseMessage);
+            }
+
+            if (trigger.responseReaction) {
+                const emoji = emojis.parseEmoji(trigger.responseReaction);
+
+                if (emoji) {
+                    message.react(emoji.reaction);
+                }
+            }
+        }
+    }
+
     exec = async (message: Message): Promise<void> => {
         if (!message.guild) return;
 
         // handle member gamification
-        await this.handleGamification(message);
+        this.handleGamification(message).catch(() => {
+            // this error can be ignored
+        });
+
+        // handle triggers
+        this.handleTriggers(message).catch(() => {
+            // this error can be ignored
+        });
     }
 }
