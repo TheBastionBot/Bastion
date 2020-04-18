@@ -62,6 +62,8 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
     }
 
     exec = async (message: Message): Promise<void> => {
+        if (!message.guild) return;
+
         // handle member gamification
         await this.handleGamification(message);
     }
