@@ -4,7 +4,7 @@
  */
 
 import { Interrupt } from "tesseract";
-import { Message } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 
 import BastionGuild = require("../structures/Guild");
 
@@ -25,12 +25,14 @@ export = class MessageFilter extends Interrupt {
     exec = async (message: Message): Promise<boolean> => {
         if (!message.guild) return;
 
+        if (!(message.channel instanceof TextChannel)) return;
+
         if (!message.content || !message.content.length) return false;
 
         const guild = message.guild as BastionGuild;
 
-        // check whether the member has permission to manage messages
-        if (message.member.hasPermission("MANAGE_MESSAGES")) return false;
+        // check whether the member has permission to manage channel or manage messages
+        if (message.channel.permissionsFor(message.member).has([ "MANAGE_CHANNELS", "MANAGE_MESSAGES" ])) return false;
 
         // check whether message filter is enabled
         if (!guild.document.filters || !guild.document.filters.messageFilter || !guild.document.filters.messageFilter.enabled || !guild.document.filters.messageFilter.patterns) return false;
