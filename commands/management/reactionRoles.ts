@@ -73,6 +73,7 @@ export = class ReactionRolesCommand extends Command {
 
             // add reaction roles group
             await ReactionRoleGroupModel.findByIdAndUpdate(reactionMessage.id, {
+                _id: reactionMessage.id,
                 roles: roles.map(r => r.id),
                 exclusive: argv.exclusive ? argv.exclusive : undefined,
             }, {
@@ -100,7 +101,7 @@ export = class ReactionRolesCommand extends Command {
             if (rolesWithEmojis && rolesWithEmojis.length) {
                 for (const role of rolesWithEmojis) {
                     const emoji = emojis.parseEmoji(role.emoji);
-                    await message.react(emoji.reaction);
+                    await reactionMessage.react(emoji.reaction);
                 }
             }
 

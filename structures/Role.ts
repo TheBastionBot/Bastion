@@ -23,6 +23,7 @@ export = class BastionRole extends Role {
 
     public async createDocument(role?: IRole): Promise<IRole & mongoose.Document> {
         return await RoleModel.findByIdAndUpdate(this.id, {
+            id: this.id,
             guild: this.guild.id,
             ...role,
         }, {

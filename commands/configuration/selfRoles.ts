@@ -61,6 +61,7 @@ export = class SelfRoles extends Command {
 
             // set role as self assignable
             await RoleModel.findByIdAndUpdate(role.id, {
+                _id: role.id,
                 guild: message.guild.id,
                 selfAssignable: true,
             }, {
