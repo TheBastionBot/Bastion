@@ -58,7 +58,7 @@ export = class MessageFilterCommand extends Command {
 
         if (argv.pattern && argv.pattern.length && (argv._.length || argv.reaction)) {
             // trigger pattern
-            const pattern = argv.pattern.join(" ")
+            const pattern = argv.pattern.join(" ");
 
             const fields: EmbedFieldData[] = [
                 {
@@ -127,8 +127,8 @@ export = class MessageFilterCommand extends Command {
                     value: (t.responseMessage ? "Message Response" : "") + "\n" + (t.responseReaction ? "Reaction Response" : ""),
                 })),
             },
-        }).catch((e) => {
-            console.error(e)
+        }).catch(() => {
+            // this error can be ignored
         });
     }
 }
