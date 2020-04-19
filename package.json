@@ -26,6 +26,13 @@
     "eslint": "^6.8.0",
     "typescript": "^3.8.3"
   },
+  "peerDependencies": {
+    "bufferutil": "^4.0.1",
+    "erlpack": "discordapp/erlpack",
+    "sodium": "^3.0.2",
+    "utf-8-validate": "^5.0.2",
+    "zlib-sync": "^0.1.6"
+  },
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
     "@types/node-fetch": "^2.5.5",
