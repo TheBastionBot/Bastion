@@ -10,14 +10,31 @@ import * as emojis from "../utils/emojis";
 import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
 
+import RoleModel from "../models/Role";
 import TriggerModel from "../models/Trigger";
 
 import BastionGuild = require("../structures/Guild");
 import BastionGuildMember = require("../structures/GuildMember");
+import TesseractClient from "tesseract/typings/client/TesseractClient";
 
 export = class HumanMessageEvent extends ModuleManagerEvent {
     constructor() {
         super("humanMessage");
+    }
+
+    handleLevelRoles = async (message: Message, level: number): Promise<void> => {
+        const roles = await RoleModel.find({
+            guild: message.guild.id,
+            level: level,
+        });
+
+        // identify valid roles
+        const levelRoles = roles.filter(r => message.guild.roles.cache.has(r._id));
+
+        // add member to the roles
+        if (levelRoles.length) {
+            await message.member.roles.add(levelRoles.map(r => r._id));
+        }
     }
 
     handleGamification = async (message: Message): Promise<void> => {
@@ -58,6 +75,10 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
                     // this error can be ignored
                 });
             }
+
+            // reward level roles, if available
+            this.handleLevelRoles(message, member.document.level)
+                .catch((message.client as TesseractClient).log.error);
         }
 
         // save document
