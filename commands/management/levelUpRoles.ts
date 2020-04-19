@@ -16,7 +16,7 @@ import BastionRole = require("../../structures/Role");
 export = class LevelUpRolesCommand extends Command {
     constructor() {
         super("levelUpRoles", {
-            description: "It allows you to add roles to a level so that when members reach.",
+            description: "It allows you to add roles to a level. When members reach that level, they'll be awarded those roles.",
             triggers: [],
             arguments: {
                 array: [ "role" ],
