@@ -97,9 +97,6 @@ export = class Clear extends Command {
                         value: reason,
                     },
                 ],
-                footer: {
-                    text: user.id,
-                },
             },
         }).then(m => {
             if (message.deletable) message.delete({ reason: argv._raw }).catch(() => {
