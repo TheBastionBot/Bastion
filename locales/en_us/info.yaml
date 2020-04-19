@@ -112,3 +112,5 @@ claimRewardBooster: "Thank you for Boosting the server, I've doubled your reward
 triggersAdd: "%var% added a new trigger in the server."
 triggersClear: "%var% cleared all the triggers available in the server."
 triggersList: "These are the available triggers in the server."
+selfAddRole: "%var%, I've added you to the %var% role."
+selfRemoveRole: "%var%, I've removed you from the %var% role."
