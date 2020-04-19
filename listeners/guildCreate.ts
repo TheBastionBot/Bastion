@@ -18,7 +18,7 @@ export = class GuildCreateListener extends Listener {
 
     exec = async (guild: Guild): Promise<void> => {
         // create the guild instance in datastore
-        await GuildModel.findByIdAndUpdate(guild.id, { _id: guild.id }, { upsert: true });
+        GuildModel.findByIdAndUpdate(guild.id, { _id: guild.id }, { upsert: true }).catch(this.client.log.error);
 
 
         const credentials = (this.client.credentials as BastionCredentials);
