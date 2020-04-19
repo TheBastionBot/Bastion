@@ -13,5 +13,6 @@ export = class InvalidatedListener extends Listener {
     }
 
     exec = async (): Promise<void> => {
+        this.client.log.error("INVALIDATED");
     }
 }

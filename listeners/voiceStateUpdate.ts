@@ -14,5 +14,6 @@ export = class VoiceStateUpdateListener extends Listener {
     }
 
     exec = async (oldVoiceState: VoiceState, newVoiceState: VoiceState): Promise<void> => {
+        // TODO: Auto Pause music if all the members in the music channel leave, and vice versa
     }
 }

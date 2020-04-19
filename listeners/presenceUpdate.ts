@@ -14,5 +14,7 @@ export = class PresenceListener extends Listener {
     }
 
     exec = async (oldPresence: Presence, newPresence: Presence): Promise<void> => {
+        // TODO: streamer role implementation
+        // TODO: top games/music in the server
     }
 }
