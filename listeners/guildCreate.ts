@@ -6,6 +6,7 @@
 import { Listener, Constants } from "tesseract";
 import { Guild } from "discord.js";
 
+import GuildModel from "../models/Guild";
 import { BastionCredentials } from "../typings/settings";
 
 export = class GuildCreateListener extends Listener {
@@ -16,6 +17,10 @@ export = class GuildCreateListener extends Listener {
     }
 
     exec = async (guild: Guild): Promise<void> => {
+        // create the guild instance in datastore
+        await GuildModel.findByIdAndUpdate(guild.id, { _id: guild.id }, { upsert: true });
+
+
         const credentials = (this.client.credentials as BastionCredentials);
 
         // log guild info when joining a new guild
