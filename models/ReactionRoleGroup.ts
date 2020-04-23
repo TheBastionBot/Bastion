@@ -8,14 +8,26 @@ import * as mongoose from "mongoose";
 export interface ReactionRoleGroup {
     _id: string;
     id?: string;
+    channel: string;
+    guild: string;
     roles: string[];
     exclusive?: boolean;
 }
 
-const playlistSchema = new mongoose.Schema<ReactionRoleGroup>({
+const reactionRoleGroupSchema = new mongoose.Schema<ReactionRoleGroup>({
     _id: {
         type: String,
         required: true,
+    },
+    channel: {
+        type: String,
+        required: true,
+        ref: "TextChannel",
+    },
+    guild: {
+        type: String,
+        required: true,
+        ref: "Guild",
     },
     roles: {
         type: [ String ],
@@ -25,4 +37,4 @@ const playlistSchema = new mongoose.Schema<ReactionRoleGroup>({
     },
 });
 
-export default mongoose.model<ReactionRoleGroup & mongoose.Document>("ReactionRoleGroup", playlistSchema);
+export default mongoose.model<ReactionRoleGroup & mongoose.Document>("ReactionRoleGroup", reactionRoleGroupSchema);
