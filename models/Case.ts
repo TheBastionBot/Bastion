@@ -35,4 +35,4 @@ caseSchema.index({
     unique: true,
 });
 
-export = mongoose.model<Case & mongoose.Document>("Case", caseSchema);
+export default mongoose.model<Case & mongoose.Document>("Case", caseSchema);
