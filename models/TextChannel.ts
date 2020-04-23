@@ -16,6 +16,7 @@ export interface TextChannel {
         linkFilter?: boolean;
         messageFilter?: boolean;
     };
+    voting?: boolean;
     disabledCommands?: string[];
 }
 
@@ -47,6 +48,9 @@ export default mongoose.model<TextChannel & mongoose.Document>("TextChannel", ne
                 type: Boolean,
             },
         },
+    },
+    voting: {
+        type: Boolean,
     },
     disabledCommands: {
         type: [ String ],
