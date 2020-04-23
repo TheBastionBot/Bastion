@@ -7,6 +7,7 @@ import { Listener, Constants } from "tesseract";
 import { GuildMember, TextChannel } from "discord.js";
 
 import { Guild as IGuild } from "../models/Guild";
+import RoleModel from "../models/Role";
 import Guild = require("../structures/Guild");
 import * as embeds from "../utils/embeds";
 import * as greetings from "../assets/greetings.json";
@@ -16,6 +17,19 @@ export = class GuildMemberAddListener extends Listener {
         super("guildMemberAdd", {
             mode: Constants.LISTENER_MODE.ON,
         });
+    }
+
+    handleAutoRoles = async (member: GuildMember, guild: Guild): Promise<void> => {
+        const autoRoles = await RoleModel.find({
+            guild: guild.id,
+            autoAssignable: { $exists: true },
+        });
+
+        const botRoles: string[] = autoRoles.filter(role => role.autoAssignable && role.autoAssignable.forBots).map(r => r._id);
+        const userRoles: string[] = autoRoles.filter(role => role.autoAssignable && role.autoAssignable.forUsers).map(r => r._id);
+        const otherRoles: string[] = autoRoles.filter(role => role.autoAssignable && ((Number(role.autoAssignable.forBots) ^ Number(role.autoAssignable.forUsers)) === 0)).map(r => r._id);
+
+        member.roles.add(otherRoles.concat(member.user.bot ? botRoles : userRoles), "Auto added via Auto Roles");
     }
 
     handleGreetings = (guild: Guild, document: IGuild): void => {
@@ -51,6 +65,9 @@ export = class GuildMemberAddListener extends Listener {
 
         // greet new members
         this.handleGreetings(guild, guildDocument);
+
+        // assign auto roles to new members
+        this.handleAutoRoles(member, guild);
 
         // guild logs
         guild.createLog({
