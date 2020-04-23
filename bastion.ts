@@ -8,7 +8,12 @@ import * as tesseract from "tesseract";
 
 tesseract.StructureManager.initialize();
 
-const Bastion = new tesseract.Client();
+const Bastion = new tesseract.Client({
+    partials: [
+        "MESSAGE",
+        "REACTION",
+    ],
+});
 
 
 Bastion.login().then(() => {
