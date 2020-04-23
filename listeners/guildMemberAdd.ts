@@ -4,9 +4,12 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { GuildMember } from "discord.js";
+import { GuildMember, TextChannel } from "discord.js";
 
+import { Guild as IGuild } from "../models/Guild";
 import Guild = require("../structures/Guild");
+import * as embeds from "../utils/embeds";
+import * as greetings from "../assets/greetings.json";
 
 export = class GuildMemberAddListener extends Listener {
     constructor() {
@@ -15,9 +18,41 @@ export = class GuildMemberAddListener extends Listener {
         });
     }
 
+    handleGreetings = (guild: Guild, document: IGuild): void => {
+        // check whether greetings are enabled
+        if (!document.greeting || !document.greeting.channelId) return;
+        // check whether the greeting channel is valid
+        if (!guild.channels.cache.has(document.greeting.channelId)) return;
+
+        // identify greetings channel
+        const greetingsChannel = (guild.channels.cache.get(document.greeting.channelId) as TextChannel);
+        // generate greetings message
+        const greetingsMessage = embeds.generateEmbed(
+            document.greeting.message ? document.greeting.message : greetings[Math.floor(Math.random() * greetings.length)]
+        );
+
+        // greet
+        greetingsChannel.send({
+            embed: {
+                ...greetingsMessage,
+                footer: {
+                    text: "Greetings!",
+                },
+            },
+        }).catch(() => {
+            // this error can be ignored
+        });
+    }
+
     exec = async (member: GuildMember): Promise<void> => {
         const guild = member.guild as Guild;
 
+        const guildDocument = await guild.getDocument();
+
+        // greet new members
+        this.handleGreetings(guild, guildDocument);
+
+        // guild logs
         guild.createLog({
             event: "guildMemberAdd",
             fields: [
