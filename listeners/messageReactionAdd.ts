@@ -18,6 +18,15 @@ export = class MessageReactionAddListener extends Listener {
     }
 
     exec = async (messageReaction: MessageReaction, user: User): Promise<void> => {
+        // if the reaction has partial data, fetch it
+        if (messageReaction.partial) {
+            messageReaction = await messageReaction.fetch();
+        }
+        // if the reaction's message has partial data, fetch it too
+        if (messageReaction.message.partial) {
+            messageReaction.message = await messageReaction.message.fetch();
+        }
+
         if (!messageReaction.message.guild) return;
 
         // identify the member
