@@ -16,6 +16,11 @@ export = class MessageListener extends Listener {
     }
 
     exec = async (message: Message): Promise<void> => {
+        // if the message has partial data, fetch it
+        if (message.partial) {
+            message = await message.fetch();
+        }
+
         if (message.channel instanceof DMChannel) {
             const config = await ConfigModel.findById(this.client.user.id);
 

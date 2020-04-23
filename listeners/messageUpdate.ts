@@ -16,6 +16,15 @@ export = class MessageUpdateListener extends Listener {
     }
 
     exec = async (oldMessage: Message, newMessage: Message): Promise<void> => {
+        // if the old message has partial data, fetch it
+        if (oldMessage.partial) {
+            oldMessage = await oldMessage.fetch();
+        }
+        // if the new message has partial data, fetch it
+        if (newMessage.partial) {
+            newMessage = await newMessage.fetch();
+        }
+
         if (oldMessage.channel instanceof DMChannel || newMessage.channel instanceof DMChannel) return;
 
         if (oldMessage.content === newMessage.content) return;

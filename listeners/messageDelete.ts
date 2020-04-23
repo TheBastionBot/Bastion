@@ -16,6 +16,11 @@ export = class MessageDeleteListener extends Listener {
     }
 
     exec = async (message: Message): Promise<void> => {
+        // if the message has partial data, fetch it
+        if (message.partial) {
+            message = await message.fetch();
+        }
+
         if (message.channel instanceof DMChannel) return;
 
         const guild = message.guild as Guild;
