@@ -4,6 +4,7 @@
  */
 
 import * as tesseract from "tesseract";
+import { Intents } from "discord.js";
 
 
 tesseract.StructureManager.initialize();
@@ -13,6 +14,15 @@ const Bastion = new tesseract.Client({
         "MESSAGE",
         "REACTION",
     ],
+    ws: {
+        intents: new Intents(Intents.ALL).remove(
+            "DIRECT_MESSAGE_REACTIONS",
+            "DIRECT_MESSAGE_TYPING",
+            "GUILD_INTEGRATIONS",
+            "GUILD_MESSAGE_TYPING",
+            "GUILD_WEBHOOKS",
+        ),
+    },
 });
 
 
