@@ -47,11 +47,11 @@ export = class MessageReactionAddListener extends Listener {
 
             // remove all other roles in this reaction roles group, if the roles are mutually exclusive
             if (reactionRolesGroup.exclusive) {
-                await member.roles.remove(reactionRolesGroup.roles, "Auto Removed with Reaction Roles");
+                await member.roles.remove(reactionRolesGroup.roles, "Auto Removed via Reaction Roles");
             }
 
             // add the reaction role
-            await member.roles.add(reactionRole._id, "Added with Reaction Roles");
+            await member.roles.add(reactionRole._id, "Added via Reaction Roles");
         }
     }
 }

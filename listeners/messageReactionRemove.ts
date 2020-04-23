@@ -46,7 +46,7 @@ export = class MessageReactionRemoveListener extends Listener {
             if (!reactionRole) return;
 
             // remove the reaction role
-            await member.roles.remove(reactionRole._id, "Removed with Reaction Roles");
+            await member.roles.remove(reactionRole._id, "Removed via Reaction Roles");
         }
     }
 }
