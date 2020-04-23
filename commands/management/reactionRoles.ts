@@ -31,6 +31,7 @@ export = class ReactionRolesCommand extends Command {
             clientPermissions: [ "MANAGE_ROLES" ],
             userPermissions: [ "MANAGE_ROLES" ],
             syntax: [
+                "reactionRoles",
                 "reactionRoles --role ROLE --emoji EMOJI",
                 "reactionRoles --role ROLE --no-emoji",
                 "reactionRoles --message ID --role ROLE...",
@@ -43,7 +44,7 @@ export = class ReactionRolesCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         if (argv.message && argv.delete) {
             // remove reaction roles group
-            await ReactionRoleGroupModel.deleteMany({
+            await ReactionRoleGroupModel.deleteOne({
                 _id: argv.message,
             });
 
@@ -74,6 +75,8 @@ export = class ReactionRolesCommand extends Command {
             // add reaction roles group
             await ReactionRoleGroupModel.findByIdAndUpdate(reactionMessage.id, {
                 _id: reactionMessage.id,
+                channel: message.channel.id,
+                guild: message.guild.id,
                 roles: roles.map(r => r.id),
                 exclusive: argv.exclusive ? argv.exclusive : undefined,
             }, {
@@ -166,6 +169,25 @@ export = class ReactionRolesCommand extends Command {
             });
         }
 
-        throw new errors.CommandSyntaxError(this.name);
+        // list all reaction role groups
+        const reactionRoleGroups = await ReactionRoleGroupModel.find({
+            // guild: message.guild.id,
+        });
+
+        if (!reactionRoleGroups) throw new Error("NO_REACTION_ROLES");
+
+
+        // acknowledge
+        await message.channel.send({
+            embed: {
+                title: "Reaction Role Groups",
+                fields: reactionRoleGroups.map(group => ({
+                    name: group._id,
+                    value:  group.roles.length + " Roles" + (group.exclusive ? " / Exclusive" : "") + " / [Jump to Reaction Message](https://discordapp.com/channels/" + group.guild + "/" + group.channel + "/" + group._id  + ")",
+                })),
+            },
+        }).catch(() => {
+            // this error can be ignored
+        })
     }
 }
