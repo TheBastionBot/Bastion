@@ -55,9 +55,11 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(member.document.experience, guild.document.gamification.multiplier);
 
+        // update level
+        member.document.level = computedLevel;
+
         // level up
         if (computedLevel > member.document.level) {
-            member.document.level = computedLevel;
             member.document.balance = numbers.clamp(member.document.balance + computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER, Number.MAX_SAFE_INTEGER);
 
             // achievement message
