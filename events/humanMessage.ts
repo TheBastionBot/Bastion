@@ -4,7 +4,7 @@
  */
 
 import { Constants, ModuleManagerEvent, Client } from "tesseract";
-import { Message } from "discord.js";
+import { Message, Snowflake } from "discord.js";
 
 import * as emojis from "../utils/emojis";
 import * as numbers from "../utils/numbers";
@@ -19,8 +19,12 @@ import BastionGuildMember = require("../structures/GuildMember");
 import TesseractClient from "tesseract/typings/client/TesseractClient";
 
 export = class HumanMessageEvent extends ModuleManagerEvent {
+    private recentUsers: Map<Snowflake, string[]>;
+
     constructor() {
         super("humanMessage");
+
+        this.recentUsers = new Map<Snowflake, string[]>();
     }
 
     handleLevelRoles = async (message: Message, level: number): Promise<void> => {
@@ -39,6 +43,12 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
     }
 
     handleGamification = async (message: Message): Promise<void> => {
+        // get recent users
+        const recentUsers = this.recentUsers.get(message.guild.id) || [];
+
+        // check whether the member had recently gained XP
+        if (recentUsers.includes(message.author.id)) return;
+
         const bastion = message.client as Client;
         const guild = message.guild as BastionGuild;
         const member = message.member as BastionGuildMember;
@@ -86,6 +96,17 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
 
         // save document
         await member.document.save();
+
+        // add to recent users
+        recentUsers.push(message.author.id);
+        this.recentUsers.set(message.guild.id, recentUsers);
+
+        // remove the user after cooldown period
+        (message.client as TesseractClient).setTimeout(() => {
+            const recentUsers = this.recentUsers.get(message.guild.id);
+            recentUsers.splice(recentUsers.indexOf(message.author.id), 1)
+            this.recentUsers.set(message.guild.id, recentUsers);
+        }, 13e3);
     }
 
     handleTriggers = async (message: Message): Promise<void> => {
