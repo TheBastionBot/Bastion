@@ -11,6 +11,7 @@ import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
 
 import RoleModel from "../models/Role";
+import TextChannelModel from "../models/TextChannel";
 import TriggerModel from "../models/Trigger";
 
 import BastionGuild = require("../structures/Guild");
@@ -110,6 +111,24 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         }
     }
 
+    handleVotingChannels = async (message: Message): Promise<void> => {
+        const votingChannel = await TextChannelModel.findOne({
+            _id: message.channel.id,
+            voting: true,
+        });
+
+        // check whether it's a voting channel
+        if (!votingChannel) return;
+
+        // set the message up for voting
+        message.react("👍").catch(() => {
+            // this error can be ignored
+        });
+        message.react("👎").catch(() => {
+            // this error can be ignored
+        });
+    }
+
     exec = async (message: Message): Promise<void> => {
         if (!message.guild) return;
 
@@ -120,6 +139,11 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
 
         // handle triggers
         this.handleTriggers(message).catch(() => {
+            // this error can be ignored
+        });
+
+        // handle voting channels
+        this.handleVotingChannels(message).catch(() => {
             // this error can be ignored
         });
     }
