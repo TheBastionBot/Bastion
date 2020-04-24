@@ -8,7 +8,7 @@ import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
 
-export = class ChannelsCommand extends Command {
+export = class IAmCommand extends Command {
     constructor() {
         super("iam", {
             description: "It allows you add (and remove) yourself to (and from) the Self Roles set in the server.",
