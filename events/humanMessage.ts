@@ -104,7 +104,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         // remove the user after cooldown period
         (message.client as TesseractClient).setTimeout(() => {
             const recentUsers = this.recentUsers.get(message.guild.id);
-            recentUsers.splice(recentUsers.indexOf(message.author.id), 1)
+            recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
             this.recentUsers.set(message.guild.id, recentUsers);
         }, 13e3);
     }
