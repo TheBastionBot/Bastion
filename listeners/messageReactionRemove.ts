@@ -4,7 +4,7 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { MessageReaction, User } from "discord.js";
+import { GuildMember, MessageReaction, User } from "discord.js";
 
 import ReactionRoleGroup from "../models/ReactionRoleGroup";
 import RoleModel from "../models/Role";
@@ -17,21 +17,7 @@ export = class MessageReactionRemoveListener extends Listener {
         });
     }
 
-    exec = async (messageReaction: MessageReaction, user: User): Promise<void> => {
-        // if the reaction has partial data, fetch it
-        if (messageReaction.partial) {
-            messageReaction = await messageReaction.fetch();
-        }
-        // if the reaction's message has partial data, fetch it too
-        if (messageReaction.message.partial) {
-            messageReaction.message = await messageReaction.message.fetch();
-        }
-
-        if (!messageReaction.message.guild) return;
-
-        // identify the member
-        const member = messageReaction.message.guild.member(user);
-
+    handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
         // identify the reaction roles group for the reaction
         const reactionRolesGroup = await ReactionRoleGroup.findById(messageReaction.message.id);
 
@@ -57,5 +43,26 @@ export = class MessageReactionRemoveListener extends Listener {
             // remove the reaction role
             await member.roles.remove(reactionRole._id, "Removed via Reaction Roles");
         }
+    }
+
+    exec = async (messageReaction: MessageReaction, user: User): Promise<void> => {
+        // if the reaction has partial data, fetch it
+        if (messageReaction.partial) {
+            messageReaction = await messageReaction.fetch();
+        }
+        // if the reaction's message has partial data, fetch it too
+        if (messageReaction.message.partial) {
+            messageReaction.message = await messageReaction.message.fetch();
+        }
+
+        if (!messageReaction.message.guild) return;
+
+        // identify the member
+        const member = messageReaction.message.guild.member(user);
+
+        // handle reaction roles
+        this.handleReactionRoles(messageReaction, member).catch(() => {
+            // this error can be ignored
+        });
     }
 }
