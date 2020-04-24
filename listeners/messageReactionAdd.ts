@@ -18,6 +18,30 @@ export = class MessageReactionAddListener extends Listener {
         });
     }
 
+    handleSuggestions = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
+        // check whether the reaction was of a suggestion
+        if (![ "✅", "❎" ].includes(messageReaction.emoji.name)) return;
+        // check whether the member has permission to accept/reject suggestion
+        if (!(messageReaction.message.channel as TextChannel).permissionsFor(member).has("MANAGE_CHANNELS")) return;
+
+        // get the suggestion message & embed
+        const suggestionMessage = messageReaction.message;
+        const suggestionEmbed = suggestionMessage.embeds[0];
+
+        // check whether it's a valid suggestion message
+        if (!suggestionEmbed) return;
+        if (!suggestionEmbed.title.startsWith("Suggestion")) return;
+
+        // update the suggestion status
+        suggestionEmbed.color = messageReaction.emoji.name === "✅" ? Constants.COLORS.GREEN : messageReaction.emoji.name === "❎" ? Constants.COLORS.RED : Constants.COLORS.INDIGO;
+        suggestionEmbed.title = "Suggestion " + (messageReaction.emoji.name === "✅" ? "Accepted" : messageReaction.emoji.name === "❎" ? "Rejected" : "");
+
+        // update suggestion message
+        await suggestionMessage.edit({
+            embed: suggestionEmbed,
+        });
+    }
+
     handleStarboard = async (messageReaction: MessageReaction, member: GuildMember, starboardChannel: TextChannel): Promise<void> => {
         // check whether the reaction was of a star
         if (![ "🌠", "🌟", "⭐" ].includes(messageReaction.emoji.name)) return;
@@ -151,6 +175,13 @@ export = class MessageReactionAddListener extends Listener {
 
 
         const guildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
+
+        // handle suggestions, if enabled and the suggestions channel exists
+        if (guildDocument.suggestionsChannelId && messageReaction.message.channel.id === guildDocument.suggestionsChannelId) {
+            this.handleSuggestions(messageReaction, member).catch(() => {
+                // this error can be ignored
+            });
+        }
 
         // handle starboard, if enabled and the starboard channel exists
         if (guildDocument.starboardChannelId && messageReaction.message.guild.channels.cache.has(guildDocument.starboardChannelId)) {
