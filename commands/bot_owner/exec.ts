@@ -43,6 +43,10 @@ export = class Exec extends Command {
         });
     }
 
+    sanitize = (string: string): string => {
+        return string.slice(0, 1000) + "\n...";
+    }
+
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
         if (!argv.command || !argv.command.length) throw new errors.CommandSyntaxError(this.name);
@@ -73,13 +77,13 @@ export = class Exec extends Command {
         if (stdout) {
             fields.push({
                 name: "OUTPUT",
-                value: "```bash\n" + stdout + "```",
+                value: "```bash\n" + this.sanitize(stdout) + "```",
             });
         }
         if (stderr) {
             fields.push({
                 name: "ERROR",
-                value: "```bash\n" + stderr + "```",
+                value: "```bash\n" + this.sanitize(stderr) + "```",
             });
         }
 
@@ -96,8 +100,6 @@ export = class Exec extends Command {
                     if (message.deletable) message.delete({ timeout: 1e4 });
                     output.delete({ timeout: 1e4 });
                 }
-            }).catch(() => {
-                // this error can be ignored.
             });
         }
     }
