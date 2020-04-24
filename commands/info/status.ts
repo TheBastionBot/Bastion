@@ -33,14 +33,14 @@ export = class StatusCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // calculate Bastion's presence
-        const guildCounts = await this.client.shard.broadcastEval(bastion => bastion.guilds.cache.size);
+        const guildCounts = await this.client.shard.broadcastEval("this.guilds.cache.size");
         const guildCount = argv.shard ? this.client.guilds.cache.size : guildCounts.reduce((acc, val) => acc + val, 0);
 
-        const userCounts = argv.shard ? this.client.guilds.cache.map(g => g.memberCount) : await this.client.shard.broadcastEval(bastion => bastion.guilds.cache.map(g => g.memberCount).reduce((acc, val) => acc + val, 0));
+        const userCounts = argv.shard ? this.client.guilds.cache.map(g => g.memberCount) : await this.client.shard.broadcastEval("this.guilds.cache.map(g => g.memberCount).reduce((acc, val) => acc + val, 0)");
         const userCount = userCounts.reduce((acc, val) => acc + val, 0);
 
         // calculate memory usage
-        const rss = await this.client.shard.broadcastEval(() => process.memoryUsage().rss);
+        const rss = await this.client.shard.broadcastEval("process.memoryUsage().rss");
         const memoryUsage = argv.shard ? process.memoryUsage().rss : rss.reduce((acc, val) => acc + val, 0);
 
 
