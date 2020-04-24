@@ -4,10 +4,11 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { GuildMember, MessageReaction, User } from "discord.js";
+import { GuildMember, MessageReaction, TextChannel, User } from "discord.js";
 
 import ReactionRoleGroup from "../models/ReactionRoleGroup";
 import RoleModel from "../models/Role";
+import BastionGuild = require("../structures/Guild");
 import * as emojis from "../utils/emojis";
 
 export = class MessageReactionAddListener extends Listener {
@@ -15,6 +16,16 @@ export = class MessageReactionAddListener extends Listener {
         super("messageReactionAdd", {
             mode: Constants.LISTENER_MODE.ON,
         });
+    }
+
+    handleReactionPinning = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
+        // check whether the reaction was of a pin
+        if (![ "📌", "📍" ].includes(messageReaction.emoji.name)) return;
+        // check whether the member has permission to pin messages
+        if (!(messageReaction.message.channel as TextChannel).permissionsFor(member).has("MANAGE_MESSAGES")) return;
+
+        // pin the message
+        await messageReaction.message.pin();
     }
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
@@ -70,5 +81,15 @@ export = class MessageReactionAddListener extends Listener {
         this.handleReactionRoles(messageReaction, member).catch(() => {
             // this error can be ignored
         });
+
+
+        const guildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
+
+        // handle reaction pinning, if enabled
+        if (guildDocument.reactionPinning) {
+            this.handleReactionPinning(messageReaction, member).catch(() => {
+                // this error can be ignored
+            });
+        }
     }
 }
