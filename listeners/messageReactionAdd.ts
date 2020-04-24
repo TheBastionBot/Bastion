@@ -4,7 +4,7 @@
  */
 
 import { Listener, Constants } from "tesseract";
-import { GuildMember, MessageReaction, TextChannel, User } from "discord.js";
+import { GuildMember, MessageEmbedOptions, MessageReaction, TextChannel, User } from "discord.js";
 
 import ReactionRoleGroup from "../models/ReactionRoleGroup";
 import RoleModel from "../models/Role";
@@ -15,6 +15,27 @@ export = class MessageReactionAddListener extends Listener {
     constructor() {
         super("messageReactionAdd", {
             mode: Constants.LISTENER_MODE.ON,
+        });
+    }
+
+    handleReactionAnnouncement = async (messageReaction: MessageReaction, member: GuildMember, announcementChannel: TextChannel): Promise<void> => {
+        // check whether the reaction was of an announcement
+        if (![ "📣", "📢" ].includes(messageReaction.emoji.name)) return;
+        // check whether the member has permission to announce
+        if (!member.permissions.has("MANAGE_GUILD")) return;
+
+        // override message embed footer
+        const footerMessage = member.user.tag + " announced via Announcement Pinnning.";
+        const embed: MessageEmbedOptions = messageReaction.message.embeds && messageReaction.message.embeds.length ? messageReaction.message.embeds[0] : {};
+        embed.footer = {
+            ...embed.footer,
+            text: embed.footer && embed.footer.text ? footerMessage + " • " + embed.footer.text : footerMessage,
+        };
+
+        // announce the message
+        await announcementChannel.send(messageReaction.message.content, {
+            embed,
+            files: [ ...messageReaction.message.attachments.values() ],
         });
     }
 
@@ -84,6 +105,13 @@ export = class MessageReactionAddListener extends Listener {
 
 
         const guildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
+
+        // handle reaction announcement, if enabled and the announcement channel exists
+        if (guildDocument.reactionAnnouncements && messageReaction.message.guild.channels.cache.has(guildDocument.announcementsChannelId)) {
+            this.handleReactionAnnouncement(messageReaction, member, messageReaction.message.guild.channels.cache.get(guildDocument.announcementsChannelId) as TextChannel).catch(() => {
+                // this error can be ignored
+            });
+        }
 
         // handle reaction pinning, if enabled
         if (guildDocument.reactionPinning) {
