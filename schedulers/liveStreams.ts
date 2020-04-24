@@ -8,6 +8,7 @@ import { TextChannel } from "discord.js";
 import fetch from "node-fetch";
 
 import GuildModel, { Guild } from "../models/Guild";
+import * as constants from "../utils/constants";
 import { BastionCredentials } from "../typings/settings";
 
 export = class LiveStreams extends Scheduler {
@@ -50,7 +51,7 @@ export = class LiveStreams extends Scheduler {
             if (this.client.channels.cache.has(info.channelId)) {
                 await (this.client.channels.cache.get(info.channelId) as TextChannel).send({
                     embed: {
-                        color: 0x9146ff,
+                        color: constants.COLORS.TWITCH,
                         author: {
                             name: stream.user_name,
                             url: "https://twitch.tv/" + stream.user_name,
