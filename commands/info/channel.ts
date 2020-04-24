@@ -4,7 +4,7 @@
  */
 
 import { Command, CommandArguments, Constants } from "tesseract";
-import { GuildChannel, Message } from "discord.js";
+import { GuildChannel, Message, TextChannel } from "discord.js";
 
 import * as strings from "../../utils/strings";
 
@@ -51,6 +51,7 @@ export = class ChannelCommand extends Command {
                     name: channel.name,
                 },
                 title: strings.toTitleCase(channel.type) + " Channel",
+                description: "topic" in channel ? (channel as TextChannel).topic : null,
                 fields: [
                     {
                         name: "Position",
