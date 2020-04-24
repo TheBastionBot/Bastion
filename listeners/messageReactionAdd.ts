@@ -18,6 +18,52 @@ export = class MessageReactionAddListener extends Listener {
         });
     }
 
+    handleStarboard = async (messageReaction: MessageReaction, member: GuildMember, starboardChannel: TextChannel): Promise<void> => {
+        // check whether the reaction was of a star
+        if (![ "🌠", "🌟", "⭐" ].includes(messageReaction.emoji.name)) return;
+        // check whether the member has at least one role
+        if (member.roles.cache.size <= 1) return;
+        // check whether the message author is starring their own message
+        if (messageReaction.message.author.id === member.user.id) return;
+
+        // extract image attachment from the message
+        // although, it can be a video.
+        // TODO: find a way to filter out videos.
+        const imageAttachments = messageReaction.message.attachments.filter(a => Boolean(a.height && a.width));
+        const imageAttachment = imageAttachments.first();
+
+        // check whether the message has any content
+        if (!messageReaction.message.content && !imageAttachment) return;
+
+        // post it in the starboard
+        await starboardChannel.send({
+            embed: {
+                color: Constants.COLORS.YELLOW,
+                author: {
+                    name: messageReaction.message.author.tag,
+                    iconURL: messageReaction.message.author.displayAvatarURL({
+                        dynamic: true,
+                        size: 64,
+                    }),
+                },
+                description: messageReaction.message.content,
+                fields: [
+                    {
+                        name: "Source",
+                        value: "[Click here to Jump to the Message.](" + messageReaction.message.url  + ")",
+                        inline: true,
+                    },
+                ],
+                image: {
+                    url: imageAttachment ? imageAttachment.url : null,
+                },
+                footer: {
+                    text: "Starboard",
+                },
+            },
+        });
+    }
+
     handleReactionAnnouncement = async (messageReaction: MessageReaction, member: GuildMember, announcementChannel: TextChannel): Promise<void> => {
         // check whether the reaction was of an announcement
         if (![ "📣", "📢" ].includes(messageReaction.emoji.name)) return;
@@ -105,6 +151,13 @@ export = class MessageReactionAddListener extends Listener {
 
 
         const guildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
+
+        // handle starboard, if enabled and the starboard channel exists
+        if (guildDocument.starboardChannelId && messageReaction.message.guild.channels.cache.has(guildDocument.starboardChannelId)) {
+            this.handleStarboard(messageReaction, member, messageReaction.message.guild.channels.cache.get(guildDocument.starboardChannelId) as TextChannel).catch(() => {
+                // this error can be ignored
+            });
+        }
 
         // handle reaction announcement, if enabled and the announcement channel exists
         if (guildDocument.reactionAnnouncements && messageReaction.message.guild.channels.cache.has(guildDocument.announcementsChannelId)) {
