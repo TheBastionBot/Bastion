@@ -41,6 +41,10 @@ export = class Eval extends Command {
         });
     }
 
+    sanitize = (string: string): string => {
+        return string.slice(0, 1000) + "\n...";
+    }
+
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
         if (!argv.code || !argv.code.length) throw new errors.CommandSyntaxError(this.name);
@@ -66,11 +70,11 @@ export = class Eval extends Command {
                     fields: [
                         {
                             name: "INPUT",
-                            value: "```js\n" + code + "```",
+                            value: "```js\n" + this.sanitize(code) + "```",
                         },
                         {
                             name: stderr ? "ERROR" : "OUTPUT",
-                            value: "```js\n" + (stderr ? stderr : stdout) + "```",
+                            value: "```js\n" + this.sanitize(stderr ? stderr : stdout) + "```",
                         },
                     ],
                 },
@@ -79,8 +83,6 @@ export = class Eval extends Command {
                     if (message.deletable) message.delete({ timeout: 1e4 });
                     output.delete({ timeout: 1e4 });
                 }
-            }).catch(() => {
-                // this error can be ignored.
             });
         }
     }
