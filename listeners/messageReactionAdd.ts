@@ -144,6 +144,11 @@ export = class MessageReactionAddListener extends Listener {
 
             // remove all other roles in this reaction roles group, if the roles are mutually exclusive
             if (reactionRolesGroup.exclusive) {
+                for (const reaction of messageReaction.message.reactions.cache.filter(r => r.users.cache.has(member.user.id) && r.emoji.name !== messageReaction.emoji.name).values()) {
+                    await reaction.users.remove(member).catch(() => {
+                        // this error can be ignored
+                    });
+                }
                 await member.roles.remove(reactionRolesGroup.roles, "Auto Removed via Reaction Roles");
             }
 
