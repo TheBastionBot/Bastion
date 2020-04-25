@@ -55,7 +55,7 @@ export = class FlipCommand extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 title: "Rock Paper Scrissor",
-                description: "I choose " + bastionChoice.toLowerCase() + ". " + result,
+                description: "I chose **" + bastionChoice + "**, You chose **" + userChoice + "**. " + result,
             },
         });
     }
