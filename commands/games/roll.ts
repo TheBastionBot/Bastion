@@ -26,7 +26,7 @@ export = class RollCommand extends Command {
             userPermissions: [],
             syntax: [
                 "roll",
-                "roll 13d42x3+1337",
+                "roll NOTATION",
             ],
         });
 

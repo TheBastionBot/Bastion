@@ -36,7 +36,7 @@ export = class FlipCommand extends Command {
             userPermissions: [],
             syntax: [
                 "flip",
-                "flip --coins 3",
+                "flip --coins NUMBER",
             ],
         });
 
