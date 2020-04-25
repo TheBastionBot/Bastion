@@ -8,7 +8,7 @@ import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
 
-export = class FlipCommand extends Command {
+export = class RockPaperScissorCommand extends Command {
     private choices: string[];
 
     constructor() {
