@@ -81,7 +81,7 @@ export = class AcrophobiaCommand extends Command {
         // find the winner
         const winnerIndex = +Object.keys(votes).reduce((acc, curr) => {
             return votes[acc] > votes[curr] ? acc : curr;
-        });
+        }) - 1;
 
         const winner: string = this.client.users.cache.has(submissions[winnerIndex].user) ? this.client.users.cache.get(submissions[winnerIndex].user).tag : submissions[winnerIndex].user;
 
