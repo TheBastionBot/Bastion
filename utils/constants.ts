@@ -12,6 +12,7 @@ const COLORS = {
     MIXER: 0x1fbaed,
 
     APEX_LEGENDS: 0xda292a,
+    DESTINY_2: 0x9d9a93,
 };
 
 const isPublicBastion = (user: User): boolean => {
