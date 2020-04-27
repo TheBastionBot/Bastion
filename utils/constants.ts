@@ -13,6 +13,7 @@ const COLORS = {
 
     APEX_LEGENDS: 0xda292a,
     DESTINY_2: 0x9d9a93,
+    FORTNITE: 0x149af9,
 };
 
 const isPublicBastion = (user: User): boolean => {
