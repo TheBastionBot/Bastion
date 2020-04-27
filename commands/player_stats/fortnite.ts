@@ -62,7 +62,7 @@ export = class FortniteCommand extends Command {
                     name: response.epicUserHandle,
                 },
                 title: "Fortnite - Player Stats",
-                fields: response.lifeTimeStats.map((stat: any) => ({
+                fields: response.lifeTimeStats.map((stat: { key: string; value: string }) => ({
                     name: stat.key,
                     value: stat.value,
                     inline: true,
