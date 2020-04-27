@@ -12,6 +12,7 @@ const COLORS = {
     MIXER: 0x1fbaed,
 
     APEX_LEGENDS: 0xda292a,
+    CSGO: 0xf3a11d,
     DESTINY_2: 0x9d9a93,
     FORTNITE: 0x149af9,
 };
