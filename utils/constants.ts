@@ -15,6 +15,7 @@ const COLORS = {
     CSGO: 0xf3a11d,
     DESTINY_2: 0x9d9a93,
     FORTNITE: 0x149af9,
+    PUBG: 0xf2a900,
 };
 
 const isPublicBastion = (user: User): boolean => {
