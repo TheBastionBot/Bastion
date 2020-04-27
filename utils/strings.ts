@@ -12,6 +12,11 @@ const toSnakeCase = (string: string, upperCase?: boolean): string => {
     return upperCase ? snakeString.toUpperCase() : snakeString.toLowerCase();
 };
 
+const camelToTitleCase = (string: string, separator = " "): string => {
+    return toTitleCase(string.replace(/([A-Z])/g, " $1"), " ", separator);
+};
+
+
 const snakeToTitleCase = (string: string, separator = " "): string => {
     return toTitleCase(string, "_", separator);
 };
@@ -20,5 +25,6 @@ const snakeToTitleCase = (string: string, separator = " "): string => {
 export {
     toTitleCase,
     toSnakeCase,
+    camelToTitleCase,
     snakeToTitleCase,
 };
