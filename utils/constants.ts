@@ -10,6 +10,8 @@ const COLORS = {
     TWITCH: 0x9146ff,
     YOUTUBE: 0xff0000,
     MIXER: 0x1fbaed,
+
+    APEX_LEGENDS: 0xda292a,
 };
 
 const isPublicBastion = (user: User): boolean => {
