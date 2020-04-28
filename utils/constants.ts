@@ -16,6 +16,7 @@ const COLORS = {
     DESTINY_2: 0x9d9a93,
     FORTNITE: 0x149af9,
     PUBG: 0xf2a900,
+    RAINBOW6: 0x36a9e0,
 };
 
 const isPublicBastion = (user: User): boolean => {
