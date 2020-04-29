@@ -3,6 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
+import { Constants } from "tesseract";
 import { ColorResolvable, EmbedFieldData, MessageEmbedAuthor, MessageEmbedFooter, MessageEmbedOptions } from "discord.js";
 
 export interface MessageEmbedData {
@@ -21,13 +22,14 @@ export interface MessageEmbedData {
 export const generateEmbed = (embed: string | MessageEmbedData): MessageEmbedOptions => {
     if (typeof embed === "string") {
         return {
+            color: Constants.COLORS.IRIS,
             description: embed,
         };
     }
 
     return {
         author: embed.author,
-        color: embed.color,
+        color: embed.color || Constants.COLORS.IRIS,
         description: embed.description,
         fields: embed.fields,
         footer: embed.footer,
