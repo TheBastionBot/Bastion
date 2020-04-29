@@ -34,8 +34,8 @@ export = class ReactionRolesCommand extends Command {
                 "reactionRoles",
                 "reactionRoles --role ROLE --emoji EMOJI",
                 "reactionRoles --role ROLE --no-emoji",
-                "reactionRoles --message ID --role ROLE...",
-                "reactionRoles --message ID --role ROLE... --exclusive",
+                "reactionRoles --message ID --role ROLES...",
+                "reactionRoles --message ID --role ROLES... --exclusive",
                 "reactionRoles --message ID --delete",
             ],
         });
