@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@types/discord-rpc": "^3.0.2",
+    "@types/mathjs": "^6.0.5",
     "@types/mongoose": "^5.7.6",
     "@types/node": "^13.9.0",
     "@types/yargs-parser": "^15.0.0",
@@ -39,6 +40,7 @@
     "@types/uuid": "^7.0.2",
     "chalk": "^4.0.0",
     "discord-rpc": "^3.1.0",
+    "mathjs": "^6.6.4",
     "node-fetch": "^2.6.0",
     "tesseract": "https://github.com/TheBastionBot/Tesseract",
     "uuid": "^7.0.3",
