@@ -10,11 +10,11 @@ import BastionGuildMember = require("../../structures/GuildMember");
 
 import * as numbers from "../../utils/numbers";
 
-export = class ClaimCommand extends Command {
+export = class DailyCommand extends Command {
     constructor() {
-        super("claim", {
+        super("daily", {
             description: "It allows you to claim Bastion Coins, that every member receives as a reward for being in the server. You can claim your rewards once every 24 hours.",
-            triggers: [ "daily" ],
+            triggers: [ "claim" ],
             arguments: {},
             scope: "guild",
             owner: false,
