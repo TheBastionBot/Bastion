@@ -39,7 +39,7 @@ export = class PUBGCommand extends Command {
             ],
         });
 
-        this.platforms = [ "steam", "psn", "xbox" ];
+        this.platforms = [ "steam", "psn", "xbox", "stadia" ];
         this.modes = [ "solo", "solo-fpp", "duo", "duo-fpp", "squad", "squad-fpp" ];
     }
 
