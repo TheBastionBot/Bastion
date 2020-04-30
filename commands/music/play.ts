@@ -137,7 +137,7 @@ export = class Play extends Command {
                     url: thumbnail,
                 },
                 footer: {
-                    text: `#${guild.music.queue.length - 1} • ${duration} • ${guild.members.cache.get(requester).user.tag || requester}`
+                    text: (guild.music.queue.length ? "#" + (guild.music.queue.length - 1) : "Up Next") + ` • ${duration} • ${guild.members.cache.get(requester).user.tag || requester}`,
                 },
             },
         }).catch(() => {
