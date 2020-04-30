@@ -93,7 +93,7 @@ export = class LiveStreams extends Scheduler {
         if (!this.client.guilds.cache.size) return;
 
         const guildDocuments = await GuildModel.find({
-            $or: this.client.guilds.cache.map(g => ({ _id: g.id})),
+            $or: this.client.guilds.cache.map(g => ({ _id: g.id })),
             streamers: {
                 $exists: true,
             },
