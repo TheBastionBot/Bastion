@@ -39,21 +39,25 @@ export = class ClaimCommand extends Command {
     exec = async (message: Message): Promise<void> => {
         const member = message.member as BastionGuildMember;
 
+        const today = new Date();
+        const yesterday = ((d): Date => new Date(d.setDate(d.getDate() - 1)))(new Date());
+        const lastClaimed = new Date(member.document.lastClaimed);
+
         // check whether already claimed today
-        if (new Date().toDateString() === new Date(member.document.lastClaimed).toDateString()) throw new Error(this.client.locale.getString("en_us", "errors", "alreadyClaimed", message.author.tag));
+        if (today.toDateString() === lastClaimed.toDateString()) throw new Error(this.client.locale.getString("en_us", "errors", "alreadyClaimed", message.author.tag));
         // otherwise, update last claim date to today
-        member.document.lastClaimed = Date.now();
+        member.document.lastClaimed = today.getTime();
 
         // generate the base reward
         let rewardAmount = numbers.getRandomInt(42, 128);
 
         // reduce the reward into half if the user has been a member for less than 3 days
-        if (Date.now() - message.member.joinedTimestamp < 2592e5) {
+        if (today.getTime() - message.member.joinedTimestamp < 2592e5) {
             rewardAmount /= 2;
         }
 
-        // increment claim streak
-        member.document.claimStreak += 1;
+        // increment claim streak, if they didn't miss their timeframe
+        member.document.claimStreak = yesterday.toDateString() === lastClaimed.toDateString() ? member.document.claimStreak + 1 : 1;
 
         // get claim message for the current streak
         const claimStreakMessage = this.client.locale.getString("en_us", "info", this.getClaimMessageKey(member.document.claimStreak), 7 - member.document.claimStreak);
