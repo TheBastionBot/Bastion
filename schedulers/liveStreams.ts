@@ -28,6 +28,9 @@ export = class LiveStreams extends Scheduler {
     }
 
     handleTwitchStreamers = async (guildId: string, info: Guild["streamers"]["twitch"]): Promise<void> => {
+        // check whether the client is ready
+        if (!this.client.readyTimestamp) return;
+
         if (!this.twitchSubscriptions.has(guildId)) this.twitchSubscriptions.set(guildId, []);
 
         // streams that were already notified

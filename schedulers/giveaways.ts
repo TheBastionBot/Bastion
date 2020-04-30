@@ -17,6 +17,9 @@ export = class GiveawayScheduler extends Scheduler {
     }
 
     exec = async (): Promise<void> => {
+        // check whether the client is ready
+        if (!this.client.readyTimestamp) return;
+
         // check whether the guild cache is empty
         if (!this.client.guilds.cache.size) return;
 
