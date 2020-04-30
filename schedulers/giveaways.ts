@@ -30,7 +30,6 @@ export = class GiveawayScheduler extends Scheduler {
 
         const completed: Snowflake[] = [];
 
-        // end the giveaway
         for (const giveawayDocument of giveawayDocuments) {
             // identify the guild for the giveaway
             const guild = this.client.guilds.cache.get(giveawayDocument.guild);
