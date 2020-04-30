@@ -20,7 +20,7 @@ export = class GiveawayCommand extends Command {
 
     constructor() {
         super("giveaway", {
-            description: "It allows you to run giveaway events in the server for at least an hour and at most a week. You can set any number of winners for the event. And it also allows you to reroll the winners, if need be, after the end of the event.",
+            description: "It allows you to run giveaway events in the server for at least an hour and at most a month. You can set any number of winners for the event. And it also allows you to reroll the winners, if need be, after the end of the event.",
             triggers: [],
             arguments: {
                 alias: {
