@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Constants, Listener, Interrupt } from "tesseract";
 import { DMChannel, Message } from "discord.js";
 
 import Guild = require("../structures/Guild");
@@ -28,6 +28,13 @@ export = class MessageUpdateListener extends Listener {
         if (oldMessage.channel instanceof DMChannel || newMessage.channel instanceof DMChannel) return;
 
         if (oldMessage.content === newMessage.content) return;
+
+
+        // interrupts
+        for (const interrupt of this.client.interrupter.modules.array() as Interrupt[]) {
+            await interrupt.exec(newMessage);
+        }
+
 
         const guild = oldMessage.guild as Guild;
 
