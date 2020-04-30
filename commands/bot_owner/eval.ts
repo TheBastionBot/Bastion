@@ -42,7 +42,7 @@ export = class Eval extends Command {
     }
 
     sanitize = (string: string): string => {
-        return string.slice(0, 1000) + "\n...";
+        return string.length > 1000 ? string.slice(0, 1000) + "\n..." : string;
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
