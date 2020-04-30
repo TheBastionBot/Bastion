@@ -16,43 +16,38 @@ export = class MessageDeleteListener extends Listener {
     }
 
     exec = async (message: Message): Promise<void> => {
-        // if the message has partial data, fetch it
-        if (message.partial) {
-            message = await message.fetch();
-        }
-
         if (message.channel instanceof DMChannel) return;
 
-        const guild = message.guild as Guild;
+        const guild = (message.guild || message.channel.guild) as Guild;
 
         if (message.type !== "DEFAULT") return;
 
-        guild.createLog({
+        guild && guild.createLog({
             event: "messageDelete",
             fields: [
                 {
                     name: "Channel",
-                    value: message.channel.name,
+                    value: message.channel ? message.channel.name : "-",
                     inline: true,
                 },
                 {
                     name: "Channel ID",
-                    value: message.channel.id,
+                    value: message.channel ? message.channel.id : "-",
                     inline: true,
                 },
                 {
                     name: "Author",
-                    value: message.author.tag,
+                    value: message.author ? message.author.tag : "-",
                     inline: true,
                 },
                 {
                     name: "Author ID",
-                    value: message.author.id,
+                    value: message.author ? message.author.id : "-",
                     inline: true,
                 },
                 {
                     name: "Sent",
-                    value: message.createdAt.toUTCString(),
+                    value: message.createdAt ? message.createdAt.toUTCString() : "-",
                     inline: true,
                 },
             ],
