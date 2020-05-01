@@ -6,6 +6,7 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import * as constants from "../../utils/constants";
 import * as duration from "../../utils/durations";
 import { version as bastionVersion } from "../../package.json";
 
@@ -90,7 +91,7 @@ export = class StatusCommand extends Command {
             },
             {
                 name: "Environment",
-                value: "Node " + process.version + " on " + process.platform + process.arch,
+                value: "Node " + process.version + " on " + process.platform + " " + process.arch + ". " + (constants.isPublicBastion(this.client.user) ? "Connected via Starlink." : ""),
                 inline: true
             },
         ];
