@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Constants, ModuleManagerEvent, Client } from "tesseract";
+import { Constants, ModuleManagerEvent, Client, Logger } from "tesseract";
 import { Message, Snowflake } from "discord.js";
 
 import * as emojis from "../utils/emojis";
@@ -91,7 +91,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
 
             // reward level roles, if available
             this.handleLevelRoles(message, member.document.level)
-                .catch((message.client as TesseractClient).log.error);
+                .catch(Logger.error);
         }
 
         // save document

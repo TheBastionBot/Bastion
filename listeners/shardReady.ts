@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants, Logger } from "tesseract";
 
 export = class ShardReadyListener extends Listener {
     constructor() {
@@ -13,10 +13,10 @@ export = class ShardReadyListener extends Listener {
     }
 
     exec = async (shardId: number): Promise<void> => {
-        this.client.log.info("Shard " + shardId + " - Ready");
+        Logger.info("Shard " + shardId + " - Ready");
 
         if (!process.env.BASTION_SHARDS_READY && this.client.shard.count === shardId + 1) {
-            this.client.log.info("Systems Ready!");
+            Logger.info("Systems Ready!");
             await this.client.shard.broadcastEval("process.env.BASTION_SHARDS_READY = true");
         }
     }

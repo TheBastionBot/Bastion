@@ -4,7 +4,7 @@
  */
 
 import * as fs from "fs";
-import { Command, CommandArguments, Constants } from "tesseract";
+import { Command, CommandArguments, Constants, Logger } from "tesseract";
 import { Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
 import * as youtube from "youtube-dl";
 import { v4 as uuid } from "uuid";
@@ -206,7 +206,7 @@ export = class Play extends Command {
 
             dispatcher.on("finish", () => this.dispatcherFinishHandler(guild));
             dispatcher.on("error", (error: Error) => {
-                this.client.log.error(error);
+                Logger.error(error);
                 this.dispatcherFinishHandler(guild);
             });
         } else {
@@ -335,8 +335,8 @@ export = class Play extends Command {
         // Connect to the music channel
         const voiceConnection = await guild.music.voiceChannel.join();
 
-        voiceConnection.on("error", this.client.log.error);
-        voiceConnection.on("failed", this.client.log.error);
+        voiceConnection.on("error", Logger.error);
+        voiceConnection.on("failed", Logger.error);
 
         // Set voice state
         message.guild.me.voice.setMute(false).catch(() => {
@@ -380,7 +380,7 @@ export = class Play extends Command {
         });
 
         // Create the music directory
-        await fs.promises.mkdir(this.musicDirectory, { recursive: true }).catch(this.client.log.error);
+        await fs.promises.mkdir(this.musicDirectory, { recursive: true }).catch(Logger.error);
 
         stream.pipe(fs.createWriteStream(this.musicDirectory + songId + ".mp3"));
     }

@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants, Logger } from "tesseract";
 
 export = class ShardReconnectingListener extends Listener {
     constructor() {
@@ -13,6 +13,6 @@ export = class ShardReconnectingListener extends Listener {
     }
 
     exec = async (shardId: number): Promise<void> => {
-        this.client.log.info("Shard " + shardId + " - Reconnecting");
+        Logger.info("Shard " + shardId + " - Reconnecting");
     }
 }

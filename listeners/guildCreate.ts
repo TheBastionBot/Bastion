@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants, Logger } from "tesseract";
 import { Guild } from "discord.js";
 
 import GuildModel from "../models/Guild";
@@ -18,7 +18,7 @@ export = class GuildCreateListener extends Listener {
 
     exec = async (guild: Guild): Promise<void> => {
         // create the guild instance in datastore
-        GuildModel.findByIdAndUpdate(guild.id, { _id: guild.id }, { upsert: true }).catch(this.client.log.error);
+        GuildModel.findByIdAndUpdate(guild.id, { _id: guild.id }, { upsert: true }).catch(Logger.error);
 
 
         const credentials = (this.client.credentials as BastionCredentials);

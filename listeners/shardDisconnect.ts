@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants, Logger } from "tesseract";
 
 export = class ShardDisconnectListener extends Listener {
     constructor() {
@@ -13,9 +13,9 @@ export = class ShardDisconnectListener extends Listener {
     }
 
     exec = async (event: CloseEvent, shardId: number): Promise<void> => {
-        this.client.log.info("Shard " + shardId + " - Disconnected");
+        Logger.info("Shard " + shardId + " - Disconnected");
         if (!event.wasClean) {
-            this.client.log.error(event);
+            Logger.error(event);
         }
     }
 }

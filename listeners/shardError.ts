@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants, Logger } from "tesseract";
 
 export = class ShardErrorListener extends Listener {
     constructor() {
@@ -13,7 +13,7 @@ export = class ShardErrorListener extends Listener {
     }
 
     exec = async (error: Error, shardId: number): Promise<void> => {
-        this.client.log.info("Shard " + shardId + " - Errored");
-        this.client.log.error(error);
+        Logger.info("Shard " + shardId + " - Errored");
+        Logger.error(error);
     }
 }

@@ -30,5 +30,5 @@ const Bastion = new tesseract.Client({
 
 
 Bastion.login().then(() => {
-    Bastion.log.info("Shard " + Bastion.shard.ids.join(", ") + " - Launched");
+    tesseract.Logger.info("Shard " + Bastion.shard.ids.join(", ") + " - Launched");
 }).catch(console.error);

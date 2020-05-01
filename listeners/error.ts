@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants, Logger } from "tesseract";
 
 export = class ErrorListener extends Listener {
     constructor() {
@@ -13,6 +13,6 @@ export = class ErrorListener extends Listener {
     }
 
     exec = async (error: Error): Promise<void> => {
-        this.client.log.error(error);
+        Logger.error(error);
     }
 }
