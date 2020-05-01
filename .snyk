@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -44,3 +44,14 @@ patch:
         patched: '2019-10-05T04:47:16.172Z'
     - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
         patched: '2019-10-05T04:47:16.172Z'
+  SNYK-JS-LODASH-567746:
+    - cheerio > lodash:
+        patched: '2020-05-01T04:47:28.685Z'
+    - sequelize > lodash:
+        patched: '2020-05-01T04:47:28.685Z'
+    - gamedig > cheerio > lodash:
+        patched: '2020-05-01T04:47:28.685Z'
+    - request-promise-native > request-promise-core > lodash:
+        patched: '2020-05-01T04:47:28.685Z'
+    - gamedig > request-promise > request-promise-core > lodash:
+        patched: '2020-05-01T04:47:28.685Z'
