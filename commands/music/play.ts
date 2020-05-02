@@ -227,8 +227,10 @@ export = class Play extends Command {
                 // This error can be ignored.
             });
 
-            // Leave the voice channel
-            guild.voice && guild.voice.channel.leave();
+            // Leave the voice channel, if `autoDisconnect` is enabled
+            if (guild.document.music.autoDisconnect) {
+                guild.voice && guild.voice.channel.leave();
+            }
 
             // Acknowledge
             guild.music.textChannel.send({
