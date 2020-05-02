@@ -80,8 +80,8 @@ export = class ProfileCommand extends Command {
 
         // calculate level progress
         const requiredXP = {
-            currentLevel: gamification.computeExperience(memberProfile.level, (message.guild as BastionGuild).document.gamification.multiplier),
-            nextLevel: gamification.computeExperience(memberProfile.level + 1, (message.guild as BastionGuild).document.gamification.multiplier),
+            currentLevel: gamification.computeExperience(memberProfile.level, (message.guild as BastionGuild).document.gamification ? (message.guild as BastionGuild).document.gamification.multiplier : gamification.DEFAUL_LEVELUP_MULTIPLIER),
+            nextLevel: gamification.computeExperience(memberProfile.level + 1, (message.guild as BastionGuild).document.gamification ? (message.guild as BastionGuild).document.gamification.multiplier : gamification.DEFAUL_LEVELUP_MULTIPLIER),
         };
 
         const totalRequiredXP = {
