@@ -73,6 +73,8 @@ export = class Play extends Command {
                 "--geo-bypass-country=US",
                 // video selection
                 "--no-playlist",
+                // filesystem options
+                "--no-cache-dir",
                 // verbosity / simulation
                 "--quiet",
                 "--no-warnings",
@@ -355,6 +357,8 @@ export = class Play extends Command {
             "--geo-bypass-country=US",
             // video selection
             "--no-playlist",
+            // filesystem options
+            "--no-cache-dir",
             // verbosity / simulation
             "--quiet",
             "--no-warnings",
