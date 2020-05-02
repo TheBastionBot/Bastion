@@ -15,6 +15,7 @@ const COLORS = {
     CSGO: 0xf3a11d,
     DESTINY_2: 0x9d9a93,
     FORTNITE: 0x149af9,
+    OVERWATCH: 0xf99e1a,
     PUBG: 0xf2a900,
     RAINBOW6: 0x36a9e0,
     ROCKET_LEAGUE: 0x0475d0,
