@@ -35,7 +35,7 @@
     "zlib-sync": "^0.1.6"
   },
   "dependencies": {
-    "@discordjs/opus": "^0.2.1",
+    "@discordjs/opus": "^0.3.2",
     "@types/node-fetch": "^2.5.5",
     "@types/uuid": "^7.0.2",
     "chalk": "^4.0.0",
