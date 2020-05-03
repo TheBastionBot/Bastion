@@ -46,10 +46,29 @@ export = class InviteFilter extends Interrupt {
             if (guild.document.filters.inviteFilter.whitelist.some(id => message.member.roles.cache.has(id))) return false;
         }
 
-        // TODO: follow redirects if it's there's an URL
         // check whether the message has invite
         if (regex.SERVER_INVITE.test(message.content)) {
+            // allowed invite codes
+            const allowed: string[] = [];
+
+            // fetch guild invite codes
+            const guildInvites = await message.guild.fetchInvites().catch(() => {
+                // this error can be ignored
+            });
+            if (guildInvites) allowed.push( ...guildInvites.keys());
+
+            // fetch guild vanity code
+            const vanityCode = await message.guild.fetchVanityCode();
+            if (vanityCode) allowed.push(vanityCode);
+
+            // extract invite codes in messages
+            const invites = message.content.match(new RegExp(regex.SERVER_INVITE, "g"));
+
+            if (allowed.length && invites.every(code => allowed.includes(code))) return false;
+
+            // delete invite code
             this.deleteInvite(message);
+
             return true;
         }
 
