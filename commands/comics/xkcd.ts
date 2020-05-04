@@ -1,0 +1,69 @@
+/*!
+ * @author Sankarsan Kampa (k3rn31p4nic)
+ * @copyright 2020 - The Bastion Bot Project
+ */
+
+import { Command, Constants } from "tesseract";
+import { Message } from "discord.js";
+
+import * as omnic from "../../utils/omnic";
+
+export = class XKCDCommand extends Command {
+    constructor() {
+        super("xkcd", {
+            description: "It allows you to see the latest xkcd comic strip.",
+            triggers: [],
+            arguments: {},
+            scope: "guild",
+            owner: false,
+            typing: true,
+            cooldown: 0,
+            ratelimit: 1,
+            clientPermissions: [],
+            userPermissions: [],
+            syntax: [],
+        });
+    }
+
+    exec = async (message: Message): Promise<void> => {
+        // fetch the comic strip
+        const response = await omnic.makeRequest("/comics/xkcd");
+        const xkcd = await response.json();
+
+        // acknowledge
+        await message.channel.send({
+            embed: {
+                color: Constants.COLORS.IRIS,
+                author: {
+                    name: "xkcd",
+                    url: "https://xkcd.com",
+                },
+                title: xkcd.safe_title || xkcd.title,
+                description: xkcd.alt,
+                fields: [
+                    {
+                        name: "Comic Number",
+                        value: xkcd.num,
+                        inline: true,
+                    },
+                    {
+                        name: "Publication Date",
+                        value: xkcd.day + "-" + xkcd.month + "-" + xkcd.year,
+                        inline: true,
+                    },
+                    {
+                        name: "Explain It!",
+                        value: "[Open Link](https://www.explainxkcd.com/wiki/index.php/" + xkcd.num + ")",
+                        inline: true,
+                    },
+                ],
+                image: {
+                    url: xkcd.img,
+                },
+                footer: {
+                    text: "Powered by xkcd",
+                },
+            },
+        });
+    }
+}
