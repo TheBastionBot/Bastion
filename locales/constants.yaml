@@ -17,3 +17,4 @@ bastion.website: https://bastion.traction.one
 currency.symbol: ₿
 currency.abbreviation: BC
 currency.name: Bastion Coin
+currency.name.plural: Bastion Coins
