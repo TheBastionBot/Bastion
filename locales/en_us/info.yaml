@@ -127,3 +127,4 @@ votingChannels: "These are the channels in the server that has been set as the V
 roleStoreAdd: "%var% added the %var% role to the Role Store. You can now buy this role for %var% %currency.name.plural%."
 roleStoreRemove: "%var% removed the %var% role from the Role Store."
 roleBought: "%var% you've successfully bought the %var% role for %var% %currency.name.plural%."
+karma: "%var% has given one karma to %var%."
