@@ -43,6 +43,7 @@ export interface Guild {
     announcementsChannelId?: string;
     reportsChannelId?: string;
     suggestionsChannelId?: string;
+    moderationCaseCount?: number;
     reactionAnnouncements?: boolean;
     reactionPinning?: boolean;
     filters?: {
@@ -212,6 +213,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         type: String,
         unique: true,
         sparse: true,
+    },
+    moderationCaseCount: {
+        type: Number,
     },
     reactionAnnouncements: {
         type: Boolean,
