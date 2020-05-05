@@ -128,3 +128,5 @@ roleStoreAdd: "%var% added the %var% role to the Role Store. You can now buy thi
 roleStoreRemove: "%var% removed the %var% role from the Role Store."
 roleBought: "%var% you've successfully bought the %var% role for %var% %currency.name.plural%."
 karma: "%var% has given one karma to %var%."
+lockdownChannel: "%var% has locked down this channel until further notice. You can't send messages in this channel until the lockdown has been lifted.1"
+lockdownChannelRemove: "%var% has lifted the locked down of this channel. You can now send messages in this channel."
