@@ -99,7 +99,7 @@ export = class Clear extends Command {
                 ],
             },
         }).then(m => {
-            if (message.deletable) message.delete({ reason: argv._raw }).catch(() => {
+            if (message.deletable) message.delete({ reason: "Bulk Delete by " + message.author.tag }).catch(() => {
                 // This error can be ignored.
             });
             m.delete({
