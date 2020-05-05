@@ -48,7 +48,7 @@ export = class LevelUpRolesCommand extends Command {
             if (argv.role) {
                 const role = this.client.resolver.resolveRole(message.guild, argv.role.join(" ")) as BastionRole;
 
-                if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "info", "roleNotFound"));
+                if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "error", "roleNotFound"));
 
                 // get the role document if it exists
                 let roleDocument = await role.fetchDocument();
