@@ -8,6 +8,7 @@ import { EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel,
 import * as mongoose from "mongoose";
 
 import GuildModel, { Guild as IGuild } from "../models/Guild";
+import CaseModel from "../models/Case";
 
 
 interface GuildMusic {
@@ -25,6 +26,11 @@ interface GuildCreateLogOptions {
     fields: EmbedFieldData[];
     footer?: string;
     timestamp?: number | Date;
+}
+
+interface GuildCreateModerationLogOptions {
+    event: string;
+    fields: EmbedFieldData[];
 }
 
 export = class BastionGuild extends Guild {
@@ -76,6 +82,44 @@ export = class BastionGuild extends Guild {
                         timestamp: options.timestamp || new Date(),
                     },
                 });
+            }
+        }
+    }
+
+    public async createModerationLog(options: GuildCreateModerationLogOptions): Promise<void> {
+        const document = await this.getDocument();
+
+        const channelsPool = this.client.channels.cache.filter(c => c.type === "text" || c.type === "news");
+
+        if (document.moderationLogChannelId && channelsPool.has(document.moderationLogChannelId)) {
+            const moderationLogChannel = channelsPool.get(document.moderationLogChannelId);
+
+            if (moderationLogChannel instanceof NewsChannel || moderationLogChannel instanceof TextChannel) {
+                // increment moderation case count
+                document.moderationCaseCount = document.moderationCaseCount ? document.moderationCaseCount + 1 : 1;
+
+                // create moderation log message
+                const moderationLogMessage = await moderationLogChannel.send({
+                    embed: {
+                        color: Constants.COLORS.ORANGE,
+                        title: this.client.locale.getString(document.language, "events", options.event),
+                        fields: options.fields,
+                        footer: {
+                            text: "Case #" + document.moderationCaseCount,
+                        },
+                        timestamp: new Date(),
+                    },
+                });
+
+                // create moderation case log
+                await CaseModel.create({
+                    guild: this.id,
+                    number: document.moderationCaseCount,
+                    messageId: moderationLogMessage.id,
+                });
+
+                // save guild document
+                await document.save();
             }
         }
     }
