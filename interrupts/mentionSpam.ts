@@ -10,7 +10,9 @@ import BastionGuild = require("../structures/Guild");
 
 export = class MentionSpamInterrupt extends Interrupt {
     constructor() {
-        super("mentionSpam");
+        super("mentionSpam", {
+            type: 2,
+        });
     }
 
     exec = async (message: Message): Promise<boolean> => {

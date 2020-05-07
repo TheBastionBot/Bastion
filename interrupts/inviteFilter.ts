@@ -12,7 +12,9 @@ import * as regex from "../utils/regex";
 
 export = class InviteFilter extends Interrupt {
     constructor() {
-        super("inviteFilter");
+        super("inviteFilter", {
+            type: 0,
+        });
     }
 
     private deleteInvite = (message: Message): void => {

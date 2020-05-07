@@ -12,7 +12,9 @@ import * as regex from "../utils/regex";
 
 export = class LinkFilter extends Interrupt {
     constructor() {
-        super("linkFilter");
+        super("linkFilter", {
+            type: 0,
+        });
     }
 
     private deleteLink = (message: Message): void => {

@@ -10,7 +10,9 @@ import BastionGuild = require("../structures/Guild");
 
 export = class MessageFilter extends Interrupt {
     constructor() {
-        super("messageFilter");
+        super("messageFilter", {
+            type: 0,
+        });
     }
 
     private testPatterns = (message: string, patterns: string[]): boolean => {
