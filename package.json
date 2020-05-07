@@ -44,7 +44,7 @@
     "mathjs": "^7.0.0",
     "node-fetch": "^2.6.0",
     "tesseract": "https://github.com/TheBastionBot/Tesseract",
-    "uuid": "^7.0.3",
+    "uuid": "^8.0.0",
     "youtube-dl": "^3.0.2"
   }
 }
