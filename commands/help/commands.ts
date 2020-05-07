@@ -44,7 +44,12 @@ export = class Commands extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.YELLOW,
+                    author: {
+                        name: this.client.locale.getConstant("bastion.name"),
+                        url: this.client.locale.getConstant("bastion.website"),
+                    },
                     title: "Command Search",
+                    url: this.client.locale.getConstant("bastion.website") + "/commands",
                     description: this.client.locale.getString("en_us", "info", "commandSearchFound", filteredCommands.length.toString(), argv.search),
                     fields: [
                         {
@@ -88,9 +93,11 @@ export = class Commands extends Command {
                     embed: {
                         color: Constants.COLORS.YELLOW,
                         author: {
-                            name: "Commands in " + strings.snakeToTitleCase(category) + " Category",
-                            url: "https://bastion.traction.one/commands",
+                            name: this.client.locale.getConstant("bastion.name"),
+                            url: this.client.locale.getConstant("bastion.website"),
                         },
+                        title: "Commands in " + strings.snakeToTitleCase(category) + " Category",
+                        url: this.client.locale.getConstant("bastion.website") + "/commands",
                         description: this.client.locale.getString("en_us", "info", "commandCategoriesCommand", Object.keys(commands).length),
                         fields: [
                             {
@@ -127,7 +134,12 @@ export = class Commands extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.YELLOW,
+                author: {
+                    name: this.client.locale.getConstant("bastion.name"),
+                    url: this.client.locale.getConstant("bastion.website"),
+                },
                 title: "Command Categories",
+                url: this.client.locale.getConstant("bastion.website") + "/commands",
                 description: this.client.locale.getString("en_us", "info", "categoryCommandsCommand"),
                 fields: [
                     {
