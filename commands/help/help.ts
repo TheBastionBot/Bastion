@@ -24,7 +24,6 @@ export = class HelpCommand extends Command {
     }
 
     exec = async (message: Message): Promise<void> => {
-        // list all the command categories
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.YELLOW,
@@ -53,7 +52,7 @@ export = class HelpCommand extends Command {
                 },
             },
         }).catch(() => {
-            // This error can be ignored.
+            // this error can be ignored
         });
     }
 }
