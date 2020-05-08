@@ -30,15 +30,19 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
     handleLevelRoles = async (message: Message, level: number): Promise<void> => {
         const roles = await RoleModel.find({
             guild: message.guild.id,
-            level: level,
+            level: { $exists: true },
         });
 
         // identify valid roles
-        const levelRoles = roles.filter(r => message.guild.roles.cache.has(r._id));
+        const extraRoles = roles.filter(r => r.level !== level && message.guild.roles.cache.has(r._id))
+        const levelRoles = roles.filter(r => r.level === level && message.guild.roles.cache.has(r._id));
 
-        // add member to the roles
+        // update member roles
         if (levelRoles.length) {
+            // add roles in the current level
             await message.member.roles.add(levelRoles.map(r => r._id));
+            // remove roles from any other level
+            await message.member.roles.remove(extraRoles.map(r => r._id));
         }
     }
 
