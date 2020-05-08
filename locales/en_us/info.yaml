@@ -133,3 +133,5 @@ lockdownChannelRemove: "%var% has lifted the locked down of this channel. You ca
 membersOnlyEnable: "%var% enabled Members Only mode in the server. Only the members who have at least one role in the server can use Bastion."
 membersOnlyDisable: "%var% disabled Members Only mode in the server. Anybody can use Bastion now."
 didYouKnowDeveloper: "Did you know? %var% is the one who created me."
+streamerRoleSet: "%var% set the %var% role as the Streamer Role of the server. When a member goes live in the server, they're assigned to this role, provided they have at least one role."
+streamerRoleUnset: "%var% removed the Streamer Role of the server."
