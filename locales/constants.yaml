@@ -7,7 +7,7 @@ author.url: https://traction.one
 author.discord.id: '266290969974931457'
 
 bastion.bot.id: '267035345537728512'
-bastion.bot.invite: https://discordapp.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=8
+bastion.bot.invite: https://discord.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=8
 bastion.name: Bastion
 bastion.project: The Bastion Bot Project
 bastion.project.url: https://github.com/TheBastionBot

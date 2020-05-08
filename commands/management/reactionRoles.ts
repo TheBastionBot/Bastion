@@ -183,7 +183,7 @@ export = class ReactionRolesCommand extends Command {
                 title: "Reaction Role Groups",
                 fields: reactionRoleGroups.map(group => ({
                     name: group._id,
-                    value:  group.roles.length + " Roles" + (group.exclusive ? " / Exclusive" : "") + " / [Jump to Reaction Message](https://discordapp.com/channels/" + group.guild + "/" + group.channel + "/" + group._id  + ")",
+                    value:  group.roles.length + " Roles" + (group.exclusive ? " / Exclusive" : "") + " / [Jump to Reaction Message](https://discord.com/channels/" + group.guild + "/" + group.channel + "/" + group._id  + ")",
                 })),
             },
         }).catch(() => {
