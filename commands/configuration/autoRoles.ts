@@ -106,7 +106,7 @@ export = class AutoRoles extends Command {
                 // this error can be ignored
             });
         } else if (argv.remove) {
-            const role =this.client.resolver.resolveRole(message.guild, argv.remove.join(" "));
+            const role = this.client.resolver.resolveRole(message.guild, argv.remove.join(" "));
 
             if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
 

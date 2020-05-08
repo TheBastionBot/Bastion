@@ -34,7 +34,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         });
 
         // identify valid roles
-        const extraRoles = roles.filter(r => r.level !== level && message.guild.roles.cache.has(r._id))
+        const extraRoles = roles.filter(r => r.level !== level && message.guild.roles.cache.has(r._id));
         const levelRoles = roles.filter(r => r.level === level && message.guild.roles.cache.has(r._id));
 
         // update member roles
