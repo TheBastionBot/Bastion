@@ -127,7 +127,14 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             if (!patternRegExp.test(message.content)) continue;
 
             if (trigger.responseMessage) {
-                message.channel.send(trigger.responseMessage);
+                message.channel.send({
+                    embed: {
+                        ...trigger.responseMessage,
+                        footer: {
+                            text: (message.client as Client).locale.getConstant("bastion.name") + " Trigger",
+                        },
+                    },
+                });
             }
 
             if (trigger.responseReaction) {
