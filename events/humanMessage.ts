@@ -9,6 +9,7 @@ import { Message, Snowflake } from "discord.js";
 import * as emojis from "../utils/emojis";
 import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
+import * as omnic from "../utils/omnic";
 
 import RoleModel from "../models/Role";
 import TextChannelModel from "../models/TextChannel";
@@ -156,22 +157,46 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         });
     }
 
+    handleInstantResponses = async (message: Message): Promise<void> => {
+        if (!message.content) return;
+
+        // fetch an instant response
+        const response = await omnic.makeRequest("/chat/instant?message=" + encodeURIComponent(message.content)).then(res => res.json());
+
+        // check whether there's an instant response
+        if (response.status !== "success") return;
+
+        const replies = response.response.reply instanceof Array ? response.response.reply : [ response.response.reply ];
+
+        // respond with the instant replies
+        for (const reply of replies) {
+            await message.channel.send(reply).catch(() => {
+                // this error can be ignored
+            });
+        }
+    };
+
     exec = async (message: Message): Promise<void> => {
-        if (!message.guild) return;
+        if (message.guild) {
+            // handle member gamification
+            this.handleGamification(message).catch(() => {
+                // this error can be ignored
+            });
 
-        // handle member gamification
-        this.handleGamification(message).catch(() => {
-            // this error can be ignored
-        });
+            // handle triggers
+            this.handleTriggers(message).catch(() => {
+                // this error can be ignored
+            });
 
-        // handle triggers
-        this.handleTriggers(message).catch(() => {
-            // this error can be ignored
-        });
-
-        // handle voting channels
-        this.handleVotingChannels(message).catch(() => {
-            // this error can be ignored
-        });
+            // handle voting channels
+            this.handleVotingChannels(message).catch(() => {
+                // this error can be ignored
+            });
+        } else {
+            // handle instant responses
+            this.handleInstantResponses(message).catch(() => {
+                // this error can be ignored
+            });
+        }
     }
 }
