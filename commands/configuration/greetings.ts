@@ -7,8 +7,7 @@ import { Command, CommandArguments } from "tesseract";
 import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
-
-import { MessageEmbedData } from "../../typings/discord";
+import * as embeds from "../../utils/embeds";
 
 export = class Greetings extends Command {
     constructor() {
@@ -45,25 +44,22 @@ export = class Greetings extends Command {
         // update guild greeting settings
         guild.document.greeting = {
             channelId: argv.enable ? message.channel.id : argv.disable ? undefined : guild.document.greeting ? guild.document.greeting.channelId : undefined,
-            message: argv._.length ? JSON.parse(argv._.join(" ")) : guild.document.greeting ? guild.document.greeting.message : undefined,
+            message: argv._.length ? embeds.generateBastionEmbed(JSON.parse(argv._.join(" "))) : guild.document.greeting ? guild.document.greeting.message : undefined,
             timeout: typeof argv.timeout === "number" ? argv.timeout : guild.document.greeting ? guild.document.greeting.timeout : undefined,
         };
-
-        // overwrite footer
-        const embed: MessageEmbedData = guild.document.greeting.message || {};
-        if (embed) {
-            embed.footer = {};
-            embed.footer.text = "Greeting Preview • "
-                + (message.guild.channels.cache.has(guild.document.greeting.channelId) ? message.guild.channels.cache.get(guild.document.greeting.channelId).name : "Disabled")
-                + (typeof guild.document.greeting.timeout === "number" ? " • " + guild.document.greeting.timeout : "");
-        }
 
         // save document
         await guild.document.save();
 
         // acknowledge
-        await message.channel.send(embed.content, {
-            embed,
+        await message.channel.send({
+            embed: {
+                ...guild.document.greeting.message,
+                footer: {
+                    text: "Greeting Preview • " + (message.guild.channels.cache.has(guild.document.greeting.channelId) ? message.guild.channels.cache.get(guild.document.greeting.channelId).name : "Disabled")
+                        + (typeof guild.document.greeting.timeout === "number" ? " • " + (guild.document.greeting.timeout + " minutes") : ""),
+                },
+            },
         }).catch(() => {
             // this error can be ignored
         });
