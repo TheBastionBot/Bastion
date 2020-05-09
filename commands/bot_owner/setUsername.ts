@@ -16,7 +16,6 @@ export = class SetUsername extends Command {
             arguments: {},
             scope: "guild",
             owner: true,
-            typing: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],

@@ -20,7 +20,6 @@ export = class Announce extends Command {
             },
             scope: "guild",
             owner: true,
-            typing: false,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],

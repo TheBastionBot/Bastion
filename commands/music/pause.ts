@@ -20,7 +20,6 @@ export = class Pause extends Command {
             arguments: {},
             scope: "guild",
             owner: false,
-            typing: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],

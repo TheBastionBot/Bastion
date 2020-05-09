@@ -23,7 +23,6 @@ export = class Blacklist extends Command {
             },
             scope: "guild",
             owner: true,
-            typing: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],

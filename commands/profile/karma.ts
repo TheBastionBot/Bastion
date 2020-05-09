@@ -17,7 +17,6 @@ export = class KarmaCommand extends Command {
             arguments: {},
             scope: "guild",
             owner: false,
-            typing: true,
             cooldown: 216e2,
             ratelimit: 3,
             clientPermissions: [],

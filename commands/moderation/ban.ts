@@ -34,7 +34,6 @@ export = class Ban extends Command {
             },
             scope: "guild",
             owner: false,
-            typing: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [ "BAN_MEMBERS" ],

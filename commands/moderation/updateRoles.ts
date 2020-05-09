@@ -28,7 +28,6 @@ export = class UpdateRoles extends Command {
             },
             scope: "guild",
             owner: false,
-            typing: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [ "MANAGE_ROLES" ],
