@@ -8,7 +8,7 @@ import * as mongoose from "mongoose";
 export interface Trigger {
     guild: string;
     trigger: string;
-    responseMessage?: unknown;
+    responseMessage?: object;
     responseReaction?: string;
 }
 
@@ -23,7 +23,7 @@ const triggerSchema = new mongoose.Schema<Trigger>({
         required: true,
     },
     responseMessage: {
-        type: String,
+        type: Object,
     },
     responseReaction: {
         type: String,
