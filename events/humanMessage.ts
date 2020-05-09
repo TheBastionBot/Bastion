@@ -4,13 +4,14 @@
  */
 
 import { Constants, ModuleManagerEvent, Client, Logger } from "tesseract";
-import { Message, Snowflake } from "discord.js";
+import { ClientApplication, DMChannel, Message, Snowflake, Team, User } from "discord.js";
 
 import * as emojis from "../utils/emojis";
 import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
 import * as omnic from "../utils/omnic";
 
+import ConfigModel from "../models/Config";
 import RoleModel from "../models/Role";
 import TextChannelModel from "../models/TextChannel";
 import TriggerModel from "../models/Trigger";
@@ -176,6 +177,39 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         }
     };
 
+    handleDirectMessageRelay = async (message: Message): Promise<void> => {
+        const config = await ConfigModel.findById(message.client.user.id);
+
+        if (config.relayDirectMessages && message.content) {
+            // get the application owner
+            const app: ClientApplication = await message.client.fetchApplication();
+            const owner: User = app.owner instanceof Team ? app.owner.owner.user : app.owner;
+
+            // check if the message author is same as the owner
+            if (message.author.id === owner.id) return;
+
+            const channel: DMChannel = await owner.createDM();
+
+            // relay the message to the application owner
+            await channel.send({
+                embed: {
+                    color: Constants.COLORS.IRIS,
+                    author: {
+                        name: message.author.tag,
+                        iconURL: message.author.displayAvatarURL({
+                            dynamic: true,
+                            size: 64,
+                        }),
+                    },
+                    description: message.content,
+                    footer: {
+                        text: message.author.id,
+                    },
+                },
+            });
+        }
+    }
+
     exec = async (message: Message): Promise<void> => {
         if (message.guild) {
             // handle member gamification
@@ -195,6 +229,11 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         } else {
             // handle instant responses
             this.handleInstantResponses(message).catch(() => {
+                // this error can be ignored
+            });
+
+            // handle direct message relays
+            this.handleDirectMessageRelay(message).catch(() => {
                 // this error can be ignored
             });
         }
