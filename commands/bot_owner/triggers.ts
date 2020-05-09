@@ -6,6 +6,7 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, EmbedFieldData } from "discord.js";
 
+import * as embeds from "../../utils/embeds";
 import * as emojis from "../../utils/emojis";
 import TriggerModel from "../../models/Trigger";
 
@@ -68,13 +69,13 @@ export = class MessageFilterCommand extends Command {
             ];
 
             // trigger response message
-            let response: string;
+            let response: embeds.MessageEmbedData;
             if (argv._.length) {
-                response = argv._.join(" ");
+                response = embeds.generateBastionEmbed(JSON.parse(argv._.join(" ")));
 
                 fields.push({
                     name: "Response Message",
-                    value: response,
+                    value: "```json\n" + JSON.stringify(response) + "```",
                 });
             }
 
