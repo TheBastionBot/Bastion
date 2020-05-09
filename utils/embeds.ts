@@ -45,6 +45,28 @@ export const generateEmbed = (embed: string | MessageEmbedData): MessageEmbedOpt
     };
 };
 
+export const generateBastionEmbed = (embed: string | MessageEmbedOptions): MessageEmbedData => {
+    if (typeof embed === "string") {
+        return {
+            color: Constants.COLORS.IRIS,
+            description: embed,
+        };
+    }
+
+    return {
+        author: embed.author,
+        color: embed.color || Constants.COLORS.IRIS,
+        description: embed.description,
+        fields: embed.fields,
+        footer: embed.footer,
+        image: embed.image && embed.image.url,
+        thumbnail: embed.thumbnail && embed.thumbnail.url,
+        timestamp: embed.timestamp,
+        title: embed.title,
+        url: embed.url,
+    };
+};
+
 export const isValidBastionEmbed = (embed: MessageEmbedData): boolean => {
     // check whether it's an embed
     if (embed.constructor !== ({}).constructor) return false;
