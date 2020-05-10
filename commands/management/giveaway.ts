@@ -58,7 +58,7 @@ export = class GiveawayCommand extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
-        if (!argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const item = argv._.join(" ");
         const timeout = argv.timeout ? argv.timeout : this.defaultTimeout;
@@ -67,7 +67,7 @@ export = class GiveawayCommand extends Command {
 
         // check for premium membership
         if (constants.isPublicBastion(this.client.user)) {
-            if (timeout > 168 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumGiveawayTimeout", 1));
+            if (timeout > 168 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveawayTimeout", 1));
 
             // find active giveaways in the server
             const activeGiveawaysCount = await GiveawayModel.countDocuments({
@@ -77,7 +77,7 @@ export = class GiveawayCommand extends Command {
                 },
             });
 
-            if (activeGiveawaysCount > 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumGiveaways", 5));
+            if (activeGiveawaysCount > 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveaways", 5));
         }
 
 

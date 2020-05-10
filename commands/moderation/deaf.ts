@@ -46,7 +46,7 @@ export = class Deaf extends Command {
         const member = this.client.resolver.resolveGuildMember(message.guild, argv.user);
 
         // Command Syntax Validation
-        if (!member) throw new errors.CommandSyntaxError(this.name);
+        if (!member) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Check command user's permission over target member
         if (message.author.id !== message.guild.ownerID && !(message.member as BastionGuildMember).canManage(member)) {

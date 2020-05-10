@@ -284,7 +284,7 @@ export = class Play extends Command {
         const songLink: string = argv.link ? argv.link.href : info ? info.webpage_url || info.url : null;
 
         // Command Syntax Validation
-        if (!songLink) throw new errors.CommandSyntaxError(this.name);
+        if (!songLink) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Set the Music Text & Voice Channels
         guild.music.textChannel = message.guild.channels.cache.has(guild.document.music.textChannelId)

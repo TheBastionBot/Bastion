@@ -37,7 +37,7 @@ export = class CryptocurrencyCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // Command Syntax Validation
-        if (!argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // identify the cryptocurrency symbol
         const symbol = argv._.join(" ");

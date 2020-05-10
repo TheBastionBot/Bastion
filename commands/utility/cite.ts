@@ -29,7 +29,7 @@ export = class CiteCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
-        if (!argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // identify channel
         const channel = (argv.channel ? message.guild.channels.cache.get(argv.channel) : message.channel) as TextChannel;

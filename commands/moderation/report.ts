@@ -41,7 +41,7 @@ export = class Report extends Command {
         const reason = argv._.join(" ");
 
         // Command Syntax Validation
-        if (!user || !reason) throw new errors.CommandSyntaxError(this.name);
+        if (!user || !reason) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
 
         if ((message.guild as BastionGuild).document.reportsChannelId) {

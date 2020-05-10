@@ -49,14 +49,14 @@ export = class SelfRoles extends Command {
                     selfAssignable: true,
                 });
 
-                if (selfRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumSelfRoles", 5));
+                if (selfRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumSelfRoles", 5));
             }
 
 
             // check whether the specified role exists
             const role = this.client.resolver.resolveRole(message.guild, argv.add.join(" "));
 
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             // set role as self assignable
             await RoleModel.findByIdAndUpdate(role.id, {
@@ -82,7 +82,7 @@ export = class SelfRoles extends Command {
         } else if (argv.remove) {
             const role = this.client.resolver.resolveRole(message.guild, argv.remove.join(" "));
 
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             // unset role as self assignable
             await RoleModel.findByIdAndUpdate(role.id, {

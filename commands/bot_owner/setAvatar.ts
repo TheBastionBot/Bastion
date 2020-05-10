@@ -34,7 +34,7 @@ export = class SetAvatar extends Command {
         const image = message.attachments.first();
 
         // command syntax validation
-        if (!argv.image || !(image.height && image.width)) throw new errors.CommandSyntaxError(this.name);
+        if (!argv.image || !(image.height && image.width)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // update avatar
         await this.client.user.setAvatar(argv.image);

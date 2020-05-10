@@ -43,7 +43,7 @@ export = class Blacklist extends Command {
         const users: Snowflake[] = argv.users ? argv.users.filter((id: string) => snowflake.isValid(id)) : [];
 
         // command syntax validation
-        if (!servers.length && !users.length) throw new errors.CommandSyntaxError(this.name);
+        if (!servers.length && !users.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const fields: EmbedField[] = [];
 

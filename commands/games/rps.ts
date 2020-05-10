@@ -33,7 +33,7 @@ export = class RockPaperScissorCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         const userChoice = argv._.join("").toUpperCase();
 
-        if (!this.choices.includes(userChoice)) throw new errors.CommandSyntaxError(this.name);
+        if (!this.choices.includes(userChoice)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // find bastion's choice
         const bastionChoice: string = this.choices[Math.floor(Math.random() * this.choices.length)];

@@ -42,7 +42,7 @@ export = class ReasonCommand extends Command {
         if (message.author.id !== message.guild.ownerID || message.member.roles.cache.size < 2) return;
 
         // Command Syntax Validation
-        if (!argv.number || !argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv.number || !argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // find the moderation case
         const moderationCase = await CaseModel.findOne({

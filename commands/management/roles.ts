@@ -110,6 +110,6 @@ export = class RolesCommand extends Command {
             });
         }
 
-        throw new errors.CommandSyntaxError(this.name);
+        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
     }
 }

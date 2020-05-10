@@ -33,7 +33,7 @@ export = class RoleCommand extends Command {
         // identify the role
         const role = this.client.resolver.resolveRole(message.guild, identifier);
 
-        if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+        if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
         // acknowledge
         message.channel.send({

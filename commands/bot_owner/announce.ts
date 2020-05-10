@@ -36,7 +36,7 @@ export = class Announce extends Command {
         const announcementMessage = argv.message && argv.message.join(" ");
 
         // command syntax validation
-        if (!announcementMessage) throw new errors.CommandSyntaxError(this.name);
+        if (!announcementMessage) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const guilds = await GuildModel.find({ announcementsChannelId: { $exists: true } });
 

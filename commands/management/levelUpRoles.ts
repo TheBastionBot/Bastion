@@ -55,7 +55,7 @@ export = class LevelUpRolesCommand extends Command {
                         level: { $exists: true, $ne: null },
                     });
 
-                    if (roleLevels.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumRoleLeves", 5));
+                    if (roleLevels.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumRoleLeves", 5));
 
                     // find roles in the level
                     const levelRolesCount = await RoleModel.countDocuments({
@@ -63,13 +63,13 @@ export = class LevelUpRolesCommand extends Command {
                         level: argv.level,
                     });
 
-                    if (levelRolesCount >= 1 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumLevelRoles", 1));
+                    if (levelRolesCount >= 1 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumLevelRoles", 1));
                 }
 
 
                 const role = this.client.resolver.resolveRole(message.guild, argv.role.join(" ")) as BastionRole;
 
-                if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "error", "roleNotFound"));
+                if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "error", "roleNotFound"));
 
                 // get the role document if it exists
                 let roleDocument = await role.fetchDocument();

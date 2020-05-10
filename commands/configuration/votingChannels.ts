@@ -48,7 +48,7 @@ export = class Announcements extends Command {
                     voting: true,
                 });
 
-                if (votingChannelsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumVotingChannels", 3));
+                if (votingChannelsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumVotingChannels", 3));
             }
 
 

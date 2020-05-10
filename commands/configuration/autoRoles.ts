@@ -54,14 +54,14 @@ export = class AutoRoles extends Command {
                     autoAssignable: { $exists: true, $ne: null },
                 });
 
-                if (autoRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumAutoRoles", 5));
+                if (autoRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumAutoRoles", 5));
             }
 
 
             // check whether the specified role exists
             const role = this.client.resolver.resolveRole(message.guild, argv.add.join(" "));
 
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             const forBots: boolean = !(Number(argv.bot) ^ Number(argv.user)) || argv.bot || false;
             const forUsers: boolean = !(Number(argv.bot) ^ Number(argv.user)) || argv.user || false;
@@ -105,7 +105,7 @@ export = class AutoRoles extends Command {
         } else if (argv.remove) {
             const role = this.client.resolver.resolveRole(message.guild, argv.remove.join(" "));
 
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             // unset role as auto assignable
             await RoleModel.findByIdAndUpdate(role.id, {

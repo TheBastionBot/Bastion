@@ -29,7 +29,7 @@ export = class FollowRedirectsCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
-        if (!argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const url: string = argv._.join(" ");
 

@@ -63,14 +63,14 @@ export = class ReactionRolesCommand extends Command {
         if (argv.message && argv.role && argv.role.length) {
             // check for premium membership
             if (constants.isPublicBastion(this.client.user)) {
-                if (argv.role.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroupRoles", 5));
+                if (argv.role.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroupRoles", 5));
 
                 // find reaction role groups in the server
                 const reactionRoleGroupsCount = await ReactionRoleGroupModel.countDocuments({
                     guild: message.guild.id,
                 });
 
-                if (reactionRoleGroupsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroups", 3));
+                if (reactionRoleGroupsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroups", 3));
             }
 
 
@@ -84,7 +84,7 @@ export = class ReactionRolesCommand extends Command {
             // identify the roles
             const roles = this.client.resolver.resolveRoles(message.guild, argv.role);
 
-            if (!roles.length) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!roles.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             // add reaction roles group
             await ReactionRoleGroupModel.findByIdAndUpdate(reactionMessage.id, {
@@ -131,7 +131,7 @@ export = class ReactionRolesCommand extends Command {
             // identify the role
             const role = this.client.resolver.resolveRole(message.guild, identifier) as BastionRole;
 
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             // get the role document if it exists
             let roleDocument = await role.fetchDocument();

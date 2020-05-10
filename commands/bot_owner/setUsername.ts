@@ -30,7 +30,7 @@ export = class SetUsername extends Command {
         const username = argv._.join(" ");
 
         // command syntax validation
-        if (!argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // update username
         await this.client.user.setUsername(username);

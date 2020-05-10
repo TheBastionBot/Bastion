@@ -47,7 +47,7 @@ export = class RoleStoreCommand extends Command {
             // identify role
             const role = this.client.resolver.resolveRole(message.guild, argv._.join(" ")) as BastionRole;
 
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "error", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "error", "roleNotFound"));
 
 
             if (argv.sell > 0) {
@@ -59,7 +59,7 @@ export = class RoleStoreCommand extends Command {
                         price: { $exists: true, $ne: null },
                     });
 
-                    if (paidRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumPaidRoles", 5));
+                    if (paidRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPaidRoles", 5));
                 }
 
 

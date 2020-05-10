@@ -67,7 +67,7 @@ export = class MessageFilterCommand extends Command {
                     guild: message.guild.id,
                 });
 
-                if (triggersCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumTriggers", 5));
+                if (triggersCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumTriggers", 5));
             }
 
 

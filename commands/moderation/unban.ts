@@ -36,7 +36,7 @@ export = class Unban extends Command {
         const user = this.client.resolver.resolveUser(argv.user);
 
         // Command Syntax Validation
-        if (!user) throw new errors.CommandSyntaxError(this.name);
+        if (!user) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Unban user
         const reason = argv._.join(" ") || "-";

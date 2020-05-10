@@ -37,7 +37,7 @@ export = class StreamerRoleCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
-        if (!argv._.length && !argv.remove) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length && !argv.remove) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const guild = (message.guild as BastionGuild);
 
@@ -49,7 +49,7 @@ export = class StreamerRoleCommand extends Command {
         } else {
             // identify the role
             role = this.client.resolver.resolveRole(message.guild, argv._.join(" "));
-            if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
             // set the streamer role
             guild.document.streamerRoleId = role.id;

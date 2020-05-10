@@ -33,7 +33,7 @@ export = class ColorCommand extends Command {
         const color = colors.parse(argv._.join(" "));
 
         // command syntax validation
-        if (!color) throw new errors.CommandSyntaxError(this.name);
+        if (!color) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // acknowledge
         await message.channel.send({

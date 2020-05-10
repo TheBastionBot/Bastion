@@ -36,7 +36,7 @@ export = class Prefix extends Command {
         if (argv._.length) {
             // check for premium membership
             if (argv._.length > 3 && constants.isPublicBastion(this.client.user)) {
-                if (!await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumPrefix", 3));
+                if (!await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPrefix", 3));
             }
 
 

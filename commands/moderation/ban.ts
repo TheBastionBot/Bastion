@@ -75,7 +75,7 @@ export = class Ban extends Command {
         const user = this.client.resolver.resolveUser(argv.user);
 
         // Command Syntax Validation
-        if (!user) throw new errors.CommandSyntaxError(this.name);
+        if (!user) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Check command user's permission over target member
         if (message.author.id !== message.guild.ownerID && message.guild.members.cache.has(user.id) && !(message.member as BastionGuildMember).canManage(message.guild.members.cache.get(user.id))) {

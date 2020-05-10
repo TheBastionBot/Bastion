@@ -49,7 +49,7 @@ export = class UpdateRoles extends Command {
         let rolesToRemove = this.client.resolver.resolveRoles(message.guild, argv.remove);
 
         // Command Syntax Validation
-        if (!member || (!rolesToAdd.length && !rolesToRemove.length)) throw new errors.CommandSyntaxError(this.name);
+        if (!member || (!rolesToAdd.length && !rolesToRemove.length)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Check command user's permission over target member
         if (message.author.id !== message.guild.ownerID && (message.member as BastionGuildMember).canManage(member)) {

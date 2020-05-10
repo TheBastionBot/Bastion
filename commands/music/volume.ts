@@ -35,7 +35,7 @@ export = class Volume extends Command {
         let volume = Number.parseInt(argv._[0]);
 
         // Command Syntax Validation
-        if (!argv._.length || !Number.isInteger(volume)) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length || !Number.isInteger(volume)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const guild = (message.guild as BastionGuild);
 

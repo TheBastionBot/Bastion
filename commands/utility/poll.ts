@@ -117,7 +117,7 @@ export = class PollCommand extends Command {
         }
 
 
-        if (!argv._.length || !argv.option || !argv.option.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length || !argv.option || !argv.option.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const item = argv._.join(" ");
         const timeout = argv.timeout ? argv.timeout : this.defaultTimeout;

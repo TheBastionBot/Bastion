@@ -40,7 +40,7 @@ export = class CaseCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // Command Syntax Validation
-        if (!argv.number) throw new errors.CommandSyntaxError(this.name);
+        if (!argv.number) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const moderationCase = await CaseModel.findOne({
             guild: message.guild.id,

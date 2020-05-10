@@ -72,7 +72,7 @@ export = class Warn extends Command {
         const member = this.client.resolver.resolveGuildMember(message.guild, argv.user) as BastionGuildMember;
 
         // Command Syntax Validation
-        if (!member) throw new errors.CommandSyntaxError(this.name);
+        if (!member) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Reason
         const reason = argv._.join(" ") || "-";

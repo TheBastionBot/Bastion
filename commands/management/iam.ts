@@ -33,11 +33,11 @@ export = class IAmCommand extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
-        if (!argv._.length) throw new errors.CommandSyntaxError(this.name);
+        if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const role = this.client.resolver.resolveRole(message.guild, argv._.join(" "));
 
-        if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "errors", "roleNotFound"));
+        if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
 
         if (argv.not) {
             // remove the role
