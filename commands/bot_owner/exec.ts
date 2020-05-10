@@ -30,6 +30,7 @@ export = class Exec extends Command {
             },
             scope: "guild",
             owner: true,
+            unsafe: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],
