@@ -7,9 +7,11 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import RoleModel from "../../models/Role";
+import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as gamification from "../../utils/gamification";
 import * as numbers from "../../utils/numbers";
+import * as omnic from "../../utils/omnic";
 
 import BastionRole = require("../../structures/Role");
 
@@ -45,6 +47,26 @@ export = class LevelUpRolesCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         if (argv.level) {
             if (argv.role) {
+                // check for premium membership
+                if (constants.isPublicBastion(this.client.user)) {
+                    // find role levels
+                    const roleLevels = await RoleModel.distinct("level", {
+                        guild: message.guild.id,
+                        level: { $exists: true, $ne: null },
+                    });
+
+                    if (roleLevels.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumRoleLeves", 5));
+
+                    // find roles in the level
+                    const levelRolesCount = await RoleModel.countDocuments({
+                        guild: message.guild.id,
+                        level: argv.level,
+                    });
+
+                    if (levelRolesCount >= 1 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumLevelRoles", 1));
+                }
+
+
                 const role = this.client.resolver.resolveRole(message.guild, argv.role.join(" ")) as BastionRole;
 
                 if (!role) throw new errors.RoleNotFound(this.client.locale.getString("en_us", "error", "roleNotFound"));
@@ -80,7 +102,9 @@ export = class LevelUpRolesCommand extends Command {
                     guild: message.guild.id,
                     level: argv.level,
                 }, {
-                    level: undefined,
+                    $unset: {
+                        level: 1,
+                    },
                 });
 
                 // acknowledge
