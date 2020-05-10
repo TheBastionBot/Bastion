@@ -6,13 +6,13 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, EmbedFieldData } from "discord.js";
 
-import * as errors from "../../utils/errors";
-
 import RoleModel from "../../models/Role";
+import * as constants from "../../utils/constants";
+import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
+
 
 export = class SelfRoles extends Command {
-    private MAX_SELF_ROLES: number;
-
     constructor() {
         super("selfRoles", {
             description: "It allows you to set up Self Roles in the server. Self Roles are the roles which server members can assign (and unassign) to themselves.",
@@ -37,21 +37,21 @@ export = class SelfRoles extends Command {
                 "selfRoles --remove ROLE",
             ],
         });
-
-        this.MAX_SELF_ROLES = 10;
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         if (argv.add) {
-            // check whether the self roles limit has been reached
-            const count = await RoleModel.countDocuments({
-                guild: message.guild.id,
-                selfAssignable: true,
-            });
+            // check for premium membership
+            if (constants.isPublicBastion(this.client.user)) {
+                // find self roles in the server
+                const selfRolesCount = await RoleModel.countDocuments({
+                    guild: message.guild.id,
+                    selfAssignable: true,
+                });
 
-            if (count >= this.MAX_SELF_ROLES) {
-                throw new Error(this.client.locale.getString("en_us", "errors", "selfRolesLimit", this.MAX_SELF_ROLES));
+                if (selfRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumSelfRoles", 5));
             }
+
 
             // check whether the specified role exists
             const role = this.client.resolver.resolveRole(message.guild, argv.add.join(" "));
