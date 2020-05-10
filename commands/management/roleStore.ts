@@ -7,8 +7,10 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import RoleModel from "../../models/Role";
+import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as numbers from "../../utils/numbers";
+import * as omnic from "../../utils/omnic";
 
 import BastionRole = require("../../structures/Role");
 import BastionGuildMember = require("../../structures/GuildMember");
@@ -49,6 +51,18 @@ export = class RoleStoreCommand extends Command {
 
 
             if (argv.sell > 0) {
+                // check for premium membership
+                if (constants.isPublicBastion(this.client.user)) {
+                    // find paid roles in the server
+                    const paidRolesCount = await RoleModel.countDocuments({
+                        guild: message.guild.id,
+                        price: { $exists: true, $ne: null },
+                    });
+
+                    if (paidRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumPaidRoles", 5));
+                }
+
+
                 // check whether the member has permission to manage roles
                 if (!message.member.permissions.has("MANAGE_ROLES")) throw new Error("NO_PERMISSION");
 
@@ -83,7 +97,7 @@ export = class RoleStoreCommand extends Command {
                 const roleDocument = await RoleModel.findOne({
                     _id: role.id,
                     guild: message.guild.id,
-                    price: { $exists: true, $ne: null, },
+                    price: { $exists: true, $ne: null },
                 });
 
                 if (!roleDocument) throw new Error("ROLE_NOT_FOR_SALE");
@@ -121,7 +135,9 @@ export = class RoleStoreCommand extends Command {
                 }, {
                     _id: role.id,
                     guild: message.guild.id,
-                    price: undefined,
+                    $unset: {
+                        price: 1,
+                    },
                 });
 
                 // acknowledge
