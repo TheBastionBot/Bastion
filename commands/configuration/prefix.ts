@@ -7,6 +7,9 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
+import * as constants from "../../utils/constants";
+import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 export = class Prefix extends Command {
     constructor() {
@@ -30,7 +33,13 @@ export = class Prefix extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         const guild = (message.guild as BastionGuild);
 
-        if (argv._.length && argv._.length <= 10) {
+        if (argv._.length) {
+            // check for premium membership
+            if (argv._.length > 3 && constants.isPublicBastion(this.client.user)) {
+                if (!await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumPrefix", 3));
+            }
+
+
             // set guild prefixes
             guild.document.prefixes = argv._;
 
