@@ -4,6 +4,7 @@
  */
 
 import fetch, { RequestInit as RequestOptions, Response } from "node-fetch";
+import { Guild, Snowflake } from "discord.js";
 
 export const BASE_PATH = "https://omnic.traction.one/";
 
@@ -21,4 +22,19 @@ export const makeRequest = (path: string, options?: RequestOptions): Promise<Res
     };
 
     return fetch(resolvePath(path), requestOptions);
+};
+
+export const isPremiumUser = async (userId: Snowflake): Promise<boolean> => {
+    // check whether it's one of my guild
+    if (userId === "266290969974931457") return true;
+    // check whether it's a premium user
+    const owner: Patron = await makeRequest("/patreon/patrons/" + userId).then(res => res.json());
+    if (owner.patron_status === "active_patron" && owner.currently_entitled_amount_cents >= 300) return true;
+    // otherwise, this ain't a premium user
+    return false;
+};
+
+export const isPremiumGuild = async (guild: Guild): Promise<boolean> => {
+    // check whether the guild owner is a premium user
+    return isPremiumUser(guild.ownerID);
 };
