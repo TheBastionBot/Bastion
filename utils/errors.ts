@@ -3,36 +3,27 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-enum BASTION_ERRORS {
-    COMMAND_SYNTAX_ERROR = "Command Syntax Error",
-    PREMIUM_MEMBERSHIP_ERROR = "Premium Membership Error",
+export enum BASTION_ERROR_TYPE {
+    INVALID_COMMAND_SYNTAX = "Invalid Command Syntax",
+    PREMIUM_MEMBERSHIP_REQUIRED = "Premium Membership Required",
     ROLE_NOT_FOUND = "Role Not Found",
 }
 
-class CommandSyntaxError extends Error {
-    constructor(message: string) {
+export class BastionError extends Error {
+    constructor(title: string, message: string) {
         super(message);
-        this.name = BASTION_ERRORS.COMMAND_SYNTAX_ERROR;
+        this.name = title;
     }
 }
 
-class PremiumMembershipError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = BASTION_ERRORS.PREMIUM_MEMBERSHIP_ERROR;
+export class ConsoleError extends BastionError {
+    constructor(title: string, message: string) {
+        super(title, message);
     }
 }
 
-class RoleNotFound extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = BASTION_ERRORS.ROLE_NOT_FOUND;
+export class DiscordError extends BastionError {
+    constructor(title: string, message: string) {
+        super(title, message);
     }
 }
-
-
-export {
-    CommandSyntaxError,
-    PremiumMembershipError,
-    RoleNotFound,
-};
