@@ -1,3 +1,8 @@
+/*!
+ * @author Sankarsan Kampa (k3rn31p4nic)
+ * @copyright 2020 - The Bastion Bot Project
+ */
+
 import { Command, Constants, ModuleManagerEvent } from "tesseract";
 import { Message } from "discord.js";
 
