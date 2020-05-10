@@ -27,6 +27,7 @@ export = class UrbanDictionaryCommand extends Command {
             arguments: {},
             scope: "guild",
             owner: false,
+            nsfw: true,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],
