@@ -39,6 +39,14 @@ export = class GuildMemberRemoveListener extends Listener {
                     text: "farewells!",
                 },
             },
+        }).then(farewell => {
+            if (document.farewell.timeout && farewell.deletable) {
+                farewell.delete({
+                    timeout: document.farewell.timeout * 6e4,
+                }).catch(() => {
+                    // this error can be ignored
+                });
+            }
         }).catch(() => {
             // this error can be ignored
         });
