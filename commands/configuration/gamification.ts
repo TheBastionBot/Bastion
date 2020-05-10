@@ -6,7 +6,10 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import * as constants from "../../utils/constants";
+import * as errors from "../../utils/errors";
 import * as gamification from "../../utils/gamification";
+import * as omnic from "../../utils/omnic";
 
 import BastionGuild = require("../../structures/Guild");
 
@@ -34,6 +37,12 @@ export = class Gamification extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+        // check for premium membership
+        if (argv.multiplier && constants.isPublicBastion(this.client.user)) {
+            if (!await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumGamificationMultiplier"));
+        }
+
+
         const guild = (message.guild as BastionGuild);
 
         const status = (argv.messages || argv.multiplier) ? true : !(guild.document.gamification && guild.document.gamification.enabled);
