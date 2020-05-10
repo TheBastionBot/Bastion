@@ -7,8 +7,10 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import GiveawayModel from "../../models/Giveaway";
+import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as numbers from "../../utils/numbers";
+import * as omnic from "../../utils/omnic";
 
 export = class GiveawayCommand extends Command {
     /** The default reactions for participating. */
@@ -61,6 +63,23 @@ export = class GiveawayCommand extends Command {
         const item = argv._.join(" ");
         const timeout = argv.timeout ? argv.timeout : this.defaultTimeout;
         const winners = argv.winners ? argv.winners : this.defaultWinners;
+
+
+        // check for premium membership
+        if (constants.isPublicBastion(this.client.user)) {
+            if (timeout > 168 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumGiveawayTimeout", 1));
+
+            // find active giveaways in the server
+            const activeGiveawaysCount = await GiveawayModel.countDocuments({
+                guild: message.guild.id,
+                ends: {
+                    $gte: new Date(),
+                },
+            });
+
+            if (activeGiveawaysCount > 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumGiveaways", 5));
+        }
+
 
         // calculate end date
         const expectedEndDate = new Date(Date.now() + timeout * 36e5);
