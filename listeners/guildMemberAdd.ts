@@ -53,6 +53,14 @@ export = class GuildMemberAddListener extends Listener {
                     text: "Greetings!",
                 },
             },
+        }).then(greeting => {
+            if (document.greeting.timeout && greeting.deletable) {
+                greeting.delete({
+                    timeout: document.greeting.timeout * 6e4,
+                }).catch(() => {
+                    // this error can be ignored
+                });
+            }
         }).catch(() => {
             // this error can be ignored
         });
