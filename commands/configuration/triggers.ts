@@ -26,7 +26,7 @@ export = class MessageFilterCommand extends Command {
                 string: [ "pattern", "reaction" ],
             },
             scope: "guild",
-            owner: true,
+            owner: false,
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],
