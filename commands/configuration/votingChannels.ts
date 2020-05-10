@@ -7,6 +7,9 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, TextChannel } from "discord.js";
 
 import TextChannelModel from "../../models/TextChannel";
+import * as constants from "../../utils/constants";
+import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 
 export = class Announcements extends Command {
@@ -37,6 +40,18 @@ export = class Announcements extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         if (argv.add) {
+            // check for premium membership
+            if (constants.isPublicBastion(this.client.user)) {
+                // find voting channels in the server
+                const votingChannelsCount = await TextChannelModel.countDocuments({
+                    guild: message.guild.id,
+                    voting: true,
+                });
+
+                if (votingChannelsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumVotingChannels", 3));
+            }
+
+
             // set the channel as a voting channel
             await TextChannelModel.findByIdAndUpdate(message.channel.id, {
                 _id: message.channel.id,
