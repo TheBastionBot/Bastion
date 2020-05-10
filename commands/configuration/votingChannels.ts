@@ -77,7 +77,9 @@ export = class Announcements extends Command {
             await TextChannelModel.findByIdAndUpdate(message.channel.id, {
                 _id: message.channel.id,
                 guild: message.guild.id,
-                voting: undefined,
+                $unset: {
+                    voting: 1,
+                },
             });
 
             // acknowledge
