@@ -7,6 +7,9 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
+import * as constants from "../../utils/constants";
+import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 export = class GamblingCommand extends Command {
     constructor() {
@@ -30,6 +33,12 @@ export = class GamblingCommand extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+        // check for premium membership
+        if (argv.multiplier && constants.isPublicBastion(this.client.user)) {
+            if (!await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumGamblingMultiplier"));
+        }
+
+
         const guild = (message.guild as BastionGuild);
 
         const status = (argv.multiplier) ? true : !(guild.document.gambling && guild.document.gambling.enabled);
