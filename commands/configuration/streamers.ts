@@ -8,6 +8,8 @@ import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
 import * as constants from "../../utils/constants";
+import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 export = class InviteFilterCommand extends Command {
     constructor() {
@@ -61,6 +63,13 @@ export = class InviteFilterCommand extends Command {
                     delete guild.document.streamers.twitch;
                 }
             }
+
+
+            // check for premium membership
+            if (guild.document.streamers.twitch.users.length > 3 && constants.isPublicBastion(this.client.user)) {
+                if (!await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumStreamers", 3));
+            }
+
 
             // save document
             await guild.document.save();
