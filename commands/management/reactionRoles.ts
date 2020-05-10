@@ -8,8 +8,10 @@ import { Message } from "discord.js";
 
 import RoleModel from "../../models/Role";
 import ReactionRoleGroupModel from "../../models/ReactionRoleGroup";
+import * as constants from "../../utils/constants";
 import * as emojis from "../../utils/emojis";
 import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 import BastionRole = require("../../structures/Role");
 
@@ -59,6 +61,19 @@ export = class ReactionRolesCommand extends Command {
         }
 
         if (argv.message && argv.role && argv.role.length) {
+            // check for premium membership
+            if (constants.isPublicBastion(this.client.user)) {
+                if (argv.role.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroupRoles", 5));
+
+                // find reaction role groups in the server
+                const reactionRoleGroupsCount = await ReactionRoleGroupModel.countDocuments({
+                    guild: message.guild.id,
+                });
+
+                if (reactionRoleGroupsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroups", 3));
+            }
+
+
             // identify the reaction roles message
             const reactionMessage = await message.channel.messages.fetch(argv.message, false).catch(() => {
                 // this error can be ignored
