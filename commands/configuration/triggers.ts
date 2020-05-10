@@ -6,9 +6,12 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, EmbedFieldData } from "discord.js";
 
+import TriggerModel from "../../models/Trigger";
+import * as constants from "../../utils/constants";
 import * as embeds from "../../utils/embeds";
 import * as emojis from "../../utils/emojis";
-import TriggerModel from "../../models/Trigger";
+import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 export = class MessageFilterCommand extends Command {
     constructor() {
@@ -57,6 +60,17 @@ export = class MessageFilterCommand extends Command {
         }
 
         if (argv.pattern && argv.pattern.length && (argv._.length || argv.reaction)) {
+            // check for premium membership
+            if (constants.isPublicBastion(this.client.user)) {
+                // find triggers in the server
+                const triggersCount = await TriggerModel.countDocuments({
+                    guild: message.guild.id,
+                });
+
+                if (triggersCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.PremiumMembershipError(this.client.locale.getString("en_us", "errors", "premiumTriggers", 5));
+            }
+
+
             // trigger pattern
             const pattern = argv.pattern.join(" ");
 
