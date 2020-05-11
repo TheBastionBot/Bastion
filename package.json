@@ -27,7 +27,7 @@
     "eslint": "^6.8.0",
     "typescript": "^3.8.3"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "bufferutil": "^4.0.1",
     "erlpack": "discordapp/erlpack",
     "sodium": "^3.0.2",
