@@ -6,6 +6,9 @@
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import * as constants from "../../utils/constants";
+import * as omnic from "../../utils/omnic";
+
 export = class ServerCommand extends Command {
     constructor() {
         super("server", {
@@ -23,6 +26,12 @@ export = class ServerCommand extends Command {
     }
 
     exec = async (message: Message): Promise<void> => {
+        // check for premium membership
+        const isPremiumGuild = await omnic.isPremiumGuild(message.guild).catch(() => {
+            // this error can be ignored
+        });
+
+
         await message.guild.fetch().catch(() => {
             // this error can be ignored
         });
@@ -30,7 +39,7 @@ export = class ServerCommand extends Command {
         // acknowledge
         message.channel.send({
             embed: {
-                color: Constants.COLORS.IRIS,
+                color: isPremiumGuild ? constants.COLORS.GOLD : Constants.COLORS.IRIS,
                 author: {
                     name: message.guild.name,
                 },
@@ -87,7 +96,7 @@ export = class ServerCommand extends Command {
                     url: message.guild.banner ? message.guild.bannerURL({ size: 2048 }) : message.guild.splash ? message.guild.splashURL({ size: 2048 }) : null,
                 },
                 footer: {
-                    text: message.guild.id,
+                    text: "Powered by Bastion"  + (isPremiumGuild ? " Gold" : "") + " • " + message.guild.id,
                 },
             },
         }).catch(() => {
