@@ -24,3 +24,27 @@ presence:
     # Acitvity URL
     # Twitch channel URL for `STREAMING` activity.
     url: "https://twitch.tv/k3rn31p4nic"
+
+# Scheduled Commands
+scheduledCommands:
+  # Command name
+- command: command
+  # Arguments for the command
+  arguments: "command arguments"
+  # Cron expression for the scheduler
+  # Format:
+  #   Second         0-59 or * or range
+  #   Minute         0-59 or * or range
+  #   Hour           0-23 or * or range
+  #   Day of month   1-31 or * or range
+  #   Month          1-12 or * or range
+  #   Day of week    0-7 (0 or 7 is SUN) or * or range
+  cronTime: "* * * * * *"
+  # ID of the Discord Server where this command will be scheduled
+  server: "134054417466911337"
+  # ID of the Discord Channel where this command will be scheduled
+  channel: "422946211761681337"
+
+# Port used for the Status API.
+# `PORT` environment variable overwrites this value.
+port: 8377
