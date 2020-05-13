@@ -21,6 +21,8 @@ const COLORS = {
     ROCKET_LEAGUE: 0x0475d0,
 
     PATREON: 0xff514d,
+
+    GOLD: 0xffd700,
 };
 
 const isPublicBastion = (user: User): boolean => {
