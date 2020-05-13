@@ -8,6 +8,7 @@ import { Message } from "discord.js";
 
 import * as constants from "../../utils/constants";
 import * as duration from "../../utils/durations";
+import * as omnic from "../../utils/omnic";
 import { version as bastionVersion } from "../../package.json";
 
 export = class StatusCommand extends Command {
@@ -32,6 +33,11 @@ export = class StatusCommand extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+        // check for premium membership
+        const isPremiumGuild = await omnic.isPremiumGuild(message.guild).catch(() => {
+            // this error can be ignored
+        });
+
         // calculate Bastion's presence
         const guildCounts = await this.client.shard.broadcastEval("this.guilds.cache.size");
         const guildCount = argv.shard ? this.client.guilds.cache.size : guildCounts.reduce((acc, val) => acc + val, 0);
@@ -99,9 +105,9 @@ export = class StatusCommand extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                color: Constants.COLORS.IRIS,
+                color: isPremiumGuild ? constants.COLORS.GOLD : Constants.COLORS.IRIS,
                 author: {
-                    name: "Bastion v" + bastionVersion,
+                    name: "Bastion" + (isPremiumGuild ? " Gold" : "") + " v" + bastionVersion,
                     url: this.client.locale.getConstant("bastion.website"),
                 },
                 title: (argv.shard ? "Shard " + this.client.shard.ids.join(" / ") : "") + " Status",
