@@ -46,7 +46,7 @@ Manager.spawn();
 
 // Sharding Manager Events
 Manager.on("shardCreate", shard => {
-    console.info(chalk`{gray ${new Date()}} Shard ${shard.id} - Launching {grey [ ${shard.id + 1} of ${Manager.totalShards} ]}`);
+    tesseract.Logger.info(chalk`Shard ${shard.id} - Launching {grey [ ${shard.id + 1} of ${Manager.totalShards} ]}`);
 });
 
 // RPC Events
