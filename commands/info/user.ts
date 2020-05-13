@@ -6,6 +6,9 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { GuildMember, Message, User } from "discord.js";
 
+import * as constants from "../../utils/constants";
+import * as omnic from "../../utils/omnic";
+
 export = class UserCommand extends Command {
     constructor() {
         super("user", {
@@ -42,10 +45,16 @@ export = class UserCommand extends Command {
         }
 
 
+        // check for premium membership
+        const isPremiumUser = await omnic.isPremiumUser(user.id).catch(() => {
+            // this error can be ignored
+        });
+
+
         // acknowledge
         message.channel.send({
             embed: {
-                color: member && member.displayColor ? member.displayColor : Constants.COLORS.IRIS,
+                color: isPremiumUser ? constants.COLORS.GOLD : member && member.displayColor ? member.displayColor : Constants.COLORS.IRIS,
                 author: {
                     name: user.tag + (member && member.nickname ? " • " + member.nickname : ""),
                 },
@@ -78,7 +87,7 @@ export = class UserCommand extends Command {
                     }),
                 },
                 footer: {
-                    text: (member && member.guild.ownerID === user.id ? "Server Owner • " : "") + user.id,
+                    text: (isPremiumUser ? "Bastion Gold Member • " : "") + (member && member.guild.ownerID === user.id ? "Server Owner • " : "") + user.id,
                 },
             },
         }).catch(() => {
