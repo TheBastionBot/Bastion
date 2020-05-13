@@ -7,7 +7,11 @@ import * as tesseract from "tesseract";
 import * as chalk from "chalk";
 import * as DiscordRPC from "discord-rpc";
 
+import { BastionConfigurations } from "./typings/settings";
 import * as manifest from "./package.json";
+
+
+const configurations = tesseract.settings.getConfigurations() as BastionConfigurations;
 
 
 process.env.BASTION_BOOT_TIME = Date.now().toString();
@@ -37,7 +41,7 @@ const Manager = new tesseract.ShardingManager(
 
 // Tesseract Web Server
 const server = new tesseract.WebServer(Manager);
-server.start();
+server.start(process.env.PORT || configurations.port);
 
 
 // Spawn shards
