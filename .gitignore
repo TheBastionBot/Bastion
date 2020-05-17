@@ -10,6 +10,9 @@
 /settings/*.yaml
 !/settings/*.example.yaml
 
+# Auto generated files
+/assets/badges.json
+
 # Lock file
 package-lock.json
 yarn.lock
