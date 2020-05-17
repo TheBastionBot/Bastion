@@ -9,7 +9,6 @@ export interface Guild {
     _id: string;
     id?: string;
     disabled?: boolean;
-    premium?: boolean;
     prefixes?: string[];
     language?: string;
     greeting?: {
@@ -92,9 +91,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         required: true,
     },
     disabled: {
-        type: Boolean,
-    },
-    premium: {
         type: Boolean,
     },
     prefixes: {
