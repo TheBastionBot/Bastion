@@ -10,6 +10,7 @@ import * as emojis from "../utils/emojis";
 import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
 import * as omnic from "../utils/omnic";
+import * as variables from "../utils/variables";
 
 import ConfigModel from "../models/Config";
 import RoleModel from "../models/Role";
@@ -129,7 +130,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             if (trigger.responseMessage) {
                 message.channel.send({
                     embed: {
-                        ...trigger.responseMessage,
+                        ...JSON.parse(variables.replaceMessageVariables(JSON.stringify(trigger.responseMessage), message)),
                         footer: {
                             text: (message.client as Client).locale.getConstant("bastion.name") + " Trigger",
                         },
