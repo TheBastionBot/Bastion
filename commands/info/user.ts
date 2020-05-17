@@ -6,6 +6,7 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { GuildMember, Message, User } from "discord.js";
 
+import * as badges from "../../utils/badges";
 import * as constants from "../../utils/constants";
 import * as omnic from "../../utils/omnic";
 
@@ -51,6 +52,10 @@ export = class UserCommand extends Command {
         });
 
 
+        // get member badges
+        const memberBadges = member ? badges.resolveBadges(badges.getMemberBadgeValue(member)) : [];
+
+
         // acknowledge
         message.channel.send({
             embed: {
@@ -59,6 +64,7 @@ export = class UserCommand extends Command {
                     name: user.tag + (member && member.nickname ? " • " + member.nickname : ""),
                 },
                 title: user.bot ? "Bot" : "Human",
+                description: memberBadges.map(badge => badge.emoji).join(" "),
                 fields: [
                     {
                         name: "Joined Discord",
