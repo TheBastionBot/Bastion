@@ -13,6 +13,7 @@ import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 import BastionUser = require("../../structures/User");
 
+import * as badges from "../../utils/badges";
 import * as gamification from "../../utils/gamification";
 import progress from "../../utils/progress";
 
@@ -90,6 +91,13 @@ export = class ProfileCommand extends Command {
 
         const currentProgress = totalRequiredXP.currentLevel / totalRequiredXP.nextLevel * 100;
 
+
+        const userBadgeValue = await badges.fetchBadgeValue(member.id).then(res => res.json()).catch(() => {
+            // this error can be ignored
+        });
+        const userBadges = userBadgeValue && "badgeValue" in userBadgeValue ? badges.resolveBadges(userBadgeValue.badgeValue) : [];
+
+
         // acknowledge
         message.channel.send({
             embed: {
@@ -98,8 +106,12 @@ export = class ProfileCommand extends Command {
                     name: member.user.tag,
                 },
                 title: "Bastion Profile",
-                description: userProfile.info,
+                description: userBadges.map(badge => badge.emoji).join(" "),
                 fields: [
+                    {
+                        name: "About",
+                        description: userProfile.info && typeof userProfile.info === "string" ? userProfile.info : "-",
+                    },
                     {
                         name: "Rank",
                         value: (rank + 1).toString(),
