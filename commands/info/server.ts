@@ -8,7 +8,6 @@ import { Message } from "discord.js";
 
 import * as badges from "../../utils/badges";
 import * as constants from "../../utils/constants";
-import * as omnic from "../../utils/omnic";
 
 export = class ServerCommand extends Command {
     constructor() {
@@ -26,12 +25,9 @@ export = class ServerCommand extends Command {
         });
     }
 
-    exec = async (message: Message): Promise<void> => {
-        // check for premium membership
-        const isPremiumGuild = await omnic.isPremiumGuild(message.guild).catch(() => {
-            // this error can be ignored
-        });
+    isPremiumGuild = (badges: number): boolean => (badges & constants.BADGES.BASTION_GOLD_GUILD) === constants.BADGES.BASTION_GOLD_GUILD;
 
+    exec = async (message: Message): Promise<void> => {
         const guildBadgeValue = await badges.fetchBadgeValue(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
@@ -44,7 +40,7 @@ export = class ServerCommand extends Command {
         // acknowledge
         message.channel.send({
             embed: {
-                color: isPremiumGuild ? constants.COLORS.GOLD : Constants.COLORS.IRIS,
+                color: this.isPremiumGuild(guildBadgeValue.badgeValue) ? constants.COLORS.GOLD : Constants.COLORS.IRIS,
                 author: {
                     name: message.guild.name,
                 },
@@ -105,7 +101,7 @@ export = class ServerCommand extends Command {
                     url: message.guild.banner ? message.guild.bannerURL({ size: 2048 }) : message.guild.splash ? message.guild.splashURL({ size: 2048 }) : null,
                 },
                 footer: {
-                    text: "Powered by Bastion"  + (isPremiumGuild ? " Gold" : "") + " • " + message.guild.id,
+                    text: "Powered by Bastion"  + (this.isPremiumGuild(guildBadgeValue.badgeValue) ? " Gold" : "") + " • " + message.guild.id,
                 },
             },
         }).catch(() => {
