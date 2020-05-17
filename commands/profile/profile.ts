@@ -110,7 +110,7 @@ export = class ProfileCommand extends Command {
                 fields: [
                     {
                         name: "About",
-                        description: userProfile.info && typeof userProfile.info === "string" ? userProfile.info : "-",
+                        value: userProfile.info || "-",
                     },
                     {
                         name: "Rank",
