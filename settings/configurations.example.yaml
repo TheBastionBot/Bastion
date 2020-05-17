@@ -45,6 +45,11 @@ scheduledCommands:
   # ID of the Discord Channel where this command will be scheduled
   channel: "422946211761681337"
 
+# Enable Unsafe Mode
+# When enabled, this allows usage of unsafe commands like `exec` and `eval`.
+# Keep this disabled if the bot owner isn't you.
+unsafeMode: false
+
 # Port used for the Status API.
 # `PORT` environment variable overwrites this value.
 port: 8377
