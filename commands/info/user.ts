@@ -83,7 +83,7 @@ export = class UserCommand extends Command {
                     },
                     {
                         name: "Roles",
-                        value: member && member.roles.cache.size ? [ ...member.roles.cache.values() ].slice(0, member.roles.cache.size - 1).map(r => r.name).join(", ") : "-",
+                        value: member && member.roles.cache.size > 1 ? [ ...member.roles.cache.values() ].slice(0, member.roles.cache.size - 1).map(r => r.name).join(", ") : "-",
                     },
                 ],
                 thumbnail: {
