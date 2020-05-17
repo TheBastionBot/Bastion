@@ -143,7 +143,7 @@ export = class ProfileCommand extends Command {
                     },
                     {
                         name: "Cake Day",
-                        value: userProfile.cakeDay ? userProfile.cakeDay.toUTCString() : "-",
+                        value: userProfile.cakeDay ? userProfile.cakeDay.toDateString() : "-",
                         inline: true,
                     },
                     {
