@@ -6,6 +6,7 @@
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import * as badges from "../../utils/badges";
 import * as constants from "../../utils/constants";
 import * as omnic from "../../utils/omnic";
 
@@ -31,6 +32,10 @@ export = class ServerCommand extends Command {
             // this error can be ignored
         });
 
+        const guildBadgeValue = await badges.fetchBadgeValue(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
+            // this error can be ignored
+        });
+        const guildBadges = guildBadgeValue && "badgeValue" in guildBadgeValue ? badges.resolveBadges(guildBadgeValue.badgeValue) : [];
 
         await message.guild.fetch().catch(() => {
             // this error can be ignored
@@ -44,8 +49,12 @@ export = class ServerCommand extends Command {
                     name: message.guild.name,
                 },
                 title: (message.guild.partnered ? "Partnered" : message.guild.verified ? "Verified" : "") + " Server",
-                description: message.guild.description,
+                description: guildBadges.map(badge => badge.emoji).join(" "),
                 fields: [
+                    {
+                        name: "About",
+                        value: message.guild.description || "-",
+                    },
                     {
                         name: "Owner",
                         value: message.guild.owner.user.tag + " • " + message.guild.owner.id,
