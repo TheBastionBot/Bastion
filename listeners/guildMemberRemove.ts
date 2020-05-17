@@ -9,6 +9,7 @@ import { GuildMember, TextChannel } from "discord.js";
 import { Guild as IGuild } from "../models/Guild";
 import Guild = require("../structures/Guild");
 import * as embeds from "../utils/embeds";
+import * as variables from "../utils/variables";
 import * as farewells from "../assets/farewells.json";
 
 export = class GuildMemberRemoveListener extends Listener {
@@ -18,14 +19,14 @@ export = class GuildMemberRemoveListener extends Listener {
         });
     }
 
-    handleFarewells = (guild: Guild, document: IGuild): void => {
+    handleFarewells = (member: GuildMember, document: IGuild): void => {
         // check whether farewells are enabled
         if (!document.farewell || !document.farewell.channelId) return;
         // check whether the farewell channel is valid
-        if (!guild.channels.cache.has(document.farewell.channelId)) return;
+        if (!member.guild.channels.cache.has(document.farewell.channelId)) return;
 
         // identify farewells channel
-        const farewellsChannel = (guild.channels.cache.get(document.farewell.channelId) as TextChannel);
+        const farewellsChannel = (member.guild.channels.cache.get(document.farewell.channelId) as TextChannel);
         // generate farewells message
         const farewellsMessage = embeds.generateEmbed(
             document.farewell.message ? document.farewell.message : farewells[Math.floor(Math.random() * farewells.length)]
@@ -34,7 +35,7 @@ export = class GuildMemberRemoveListener extends Listener {
         // farewell
         farewellsChannel.send({
             embed: {
-                ...farewellsMessage,
+                ...(JSON.parse(variables.replaceMemberVariables(JSON.stringify(farewellsMessage), member))),
                 footer: {
                     text: "farewells!",
                 },
@@ -58,7 +59,7 @@ export = class GuildMemberRemoveListener extends Listener {
         const guildDocument = await guild.getDocument();
 
         // bid farewell to members leaving the server
-        this.handleFarewells(guild, guildDocument);
+        this.handleFarewells(member, guildDocument);
 
         // guild logs
         guild.createLog({
