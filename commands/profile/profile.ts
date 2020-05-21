@@ -153,10 +153,13 @@ export = class ProfileCommand extends Command {
                     },
                 ],
                 thumbnail: {
-                    url: userProfile.avatar || member.user.displayAvatarURL({
+                    url: member.user.displayAvatarURL({
                         dynamic: true,
                         size: 512,
                     }),
+                },
+                image: {
+                    url: userProfile.backdrop,
                 },
                 footer: {
                     text: member.id === this.client.locale.getConstant("author.discord.id") ? "Oh, hey! Here's my developer!" : "",
