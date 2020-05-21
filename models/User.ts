@@ -8,7 +8,7 @@ import * as mongoose from "mongoose";
 export interface User {
     _id: string;
     id?: string;
-    avatar?: string;
+    backdrop?: string;
     info?: string;
     cakeDay?: Date;
     location?: string;
@@ -21,7 +21,7 @@ export default mongoose.model<User & mongoose.Document>("User", new mongoose.Sch
         type: String,
         required: true,
     },
-    avatar: {
+    backdrop: {
         type: String,
         trim: true,
     },
