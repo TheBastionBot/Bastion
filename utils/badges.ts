@@ -27,7 +27,11 @@ export const resolveBadges = (value: number): Badge[] => {
     return badges;
 };
 
-export const fetchBadgeValue = (userId: Snowflake, guildId?: Snowflake): Promise<Response> => {
+type FetchBadgesFunction = {
+    (userId: Snowflake): Promise<Response>;
+    (ownerId: Snowflake, guildId: Snowflake): Promise<Response>;
+}
+export const fetchBadges: FetchBadgesFunction = (userId: Snowflake, guildId?: Snowflake): Promise<Response> => {
     return omnic.makeRequest("/badges/user/" + userId + (guildId ? "/" + guildId : ""));
 };
 
