@@ -28,10 +28,13 @@ export = class ServerCommand extends Command {
     isPremiumGuild = (badges: number): boolean => (badges & constants.BADGES.BASTION_GOLD_GUILD) === constants.BADGES.BASTION_GOLD_GUILD;
 
     exec = async (message: Message): Promise<void> => {
-        const guildBadgeValue = await badges.fetchBadgeValue(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
+        // get guild badges
+        const guildBadges = await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
-        const guildBadges = guildBadgeValue && "badgeValue" in guildBadgeValue ? badges.resolveBadges(guildBadgeValue.badgeValue) : [];
+        // check for premium membership
+        const guildMembership = badges.getMembership(guildBadges ? guildBadges.badgeValue : 0);
+
 
         await message.guild.fetch().catch(() => {
             // this error can be ignored
@@ -40,12 +43,12 @@ export = class ServerCommand extends Command {
         // acknowledge
         message.channel.send({
             embed: {
-                color: this.isPremiumGuild(guildBadgeValue.badgeValue) ? constants.COLORS.GOLD : Constants.COLORS.IRIS,
+                color: guildMembership ? guildMembership.color : Constants.COLORS.IRIS,
                 author: {
                     name: message.guild.name,
                 },
                 title: (message.guild.partnered ? "Partnered" : message.guild.verified ? "Verified" : "") + " Server",
-                description: guildBadges.map(badge => badge.emoji).join(" "),
+                description: (guildBadges && "badgeValue" in guildBadges ? badges.resolveBadges(guildBadges.badgeValue) : []).map(badge => badge.emoji).join(" "),
                 fields: [
                     {
                         name: "About",
@@ -101,7 +104,7 @@ export = class ServerCommand extends Command {
                     url: message.guild.banner ? message.guild.bannerURL({ size: 2048 }) : message.guild.splash ? message.guild.splashURL({ size: 2048 }) : null,
                 },
                 footer: {
-                    text: "Powered by Bastion"  + (this.isPremiumGuild(guildBadgeValue.badgeValue) ? " Gold" : "") + " • " + message.guild.id,
+                    text: (guildMembership ? guildMembership.name : "Powered by Bastion") + " • " + message.guild.id,
                 },
             },
         }).catch(() => {

@@ -92,10 +92,10 @@ export = class ProfileCommand extends Command {
         const currentProgress = totalRequiredXP.currentLevel / totalRequiredXP.nextLevel * 100;
 
 
-        const userBadgeValue = await badges.fetchBadgeValue(member.id).then(res => res.json()).catch(() => {
+        // get user badges
+        const userBadges = await badges.fetchBadges(member.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
-        const userBadges = userBadgeValue && "badgeValue" in userBadgeValue ? badges.resolveBadges(userBadgeValue.badgeValue) : [];
 
 
         // acknowledge
@@ -106,7 +106,7 @@ export = class ProfileCommand extends Command {
                     name: member.user.tag,
                 },
                 title: "Bastion Profile",
-                description: userBadges.map(badge => badge.emoji).join(" "),
+                description: (userBadges && "badgeValue" in userBadges ? badges.resolveBadges(userBadges.badgeValue) : []).map(badge => badge.emoji).join(" "),
                 fields: [
                     {
                         name: "About",

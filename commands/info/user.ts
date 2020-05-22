@@ -7,8 +7,6 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { GuildMember, Message, User } from "discord.js";
 
 import * as badges from "../../utils/badges";
-import * as constants from "../../utils/constants";
-import * as omnic from "../../utils/omnic";
 
 export = class UserCommand extends Command {
     constructor() {
@@ -46,20 +44,22 @@ export = class UserCommand extends Command {
         }
 
 
-        // check for premium membership
-        const isPremiumUser = await omnic.isPremiumUser(user.id).catch(() => {
+        // get user badges
+        const userBadges = await badges.fetchBadges(user.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
+        // check for premium membership
+        const userMembership = badges.getMembership(userBadges ? userBadges.badgeValue : 0);
 
 
         // get member badges
-        const memberBadges = member ? badges.resolveBadges(badges.getMemberBadgeValue(member)) : [];
+        const memberBadges = member ? badges.resolveBadges((userBadges ? userBadges.badgeValue : 0) | badges.getMemberBadgeValue(member)) : [];
 
 
         // acknowledge
         message.channel.send({
             embed: {
-                color: isPremiumUser ? constants.COLORS.GOLD : member && member.displayColor ? member.displayColor : Constants.COLORS.IRIS,
+                color: userMembership ? userMembership.color : member && member.displayColor ? member.displayColor : Constants.COLORS.IRIS,
                 author: {
                     name: user.tag + (member && member.nickname ? " • " + member.nickname : ""),
                 },
@@ -93,7 +93,7 @@ export = class UserCommand extends Command {
                     }),
                 },
                 footer: {
-                    text: (isPremiumUser ? "Bastion Gold Member • " : "") + (member && member.guild.ownerID === user.id ? "Server Owner • " : "") + user.id,
+                    text: (userMembership ? userMembership.name + " • " : "") + (member && member.guild.ownerID === user.id ? "Server Owner • " : "") + user.id,
                 },
             },
         }).catch(() => {
