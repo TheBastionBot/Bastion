@@ -65,3 +65,49 @@ export const getMemberBadgeValue = (member: GuildMember): number => {
 
     return badgeValue;
 };
+
+export const has = (badges: number, badge: string | number): boolean => {
+    if (typeof badge === "string") {
+        return (badges & constants.BADGES[badge as keyof typeof constants.BADGES]) === constants.BADGES[badge as keyof typeof constants.BADGES];
+    }
+    return (badges & badge) === badge;
+};
+
+export const getMembership = (badges: number): Badge & { color: number } => {
+    if (has(badges, "BASTION_DIAMOND_USER")) {
+        return {
+            ...BADGES["BASTION_DIAMOND_USER"],
+            color: constants.COLORS.DIAMOND,
+        };
+    }
+    if (has(badges, "BASTION_DIAMOND_GUILD")) {
+        return {
+            ...BADGES["BASTION_DIAMOND_GUILD"],
+            color: constants.COLORS.DIAMOND,
+        };
+    }
+    if (has(badges, "BASTION_PLATINUM_USER")) {
+        return {
+            ...BADGES["BASTION_PLATINUM_USER"],
+            color: constants.COLORS.PLATINUM,
+        };
+    }
+    if (has(badges, "BASTION_PLATINUM_USER")) {
+        return {
+            ...BADGES["BASTION_PLATINUM_USER"],
+            color: constants.COLORS.PLATINUM,
+        };
+    }
+    if (has(badges, "BASTION_GOLD_USER")) {
+        return {
+            ...BADGES["BASTION_GOLD_USER"],
+            color: constants.COLORS.GOLD,
+        };
+    }
+    if (has(badges, "BASTION_GOLD_USER")) {
+        return {
+            ...BADGES["BASTION_GOLD_USER"],
+            color: constants.COLORS.GOLD,
+        };
+    }
+};
