@@ -6,6 +6,7 @@
 export enum BASTION_ERROR_TYPE {
     INVALID_COMMAND_SYNTAX = "Invalid Command Syntax",
     PREMIUM_MEMBERSHIP_REQUIRED = "Premium Membership Required",
+    LIMITED_PREMIUM_MEMBERSHIP = "Limited Premium Membership",
     ROLE_NOT_FOUND = "Role Not Found",
 }
 
