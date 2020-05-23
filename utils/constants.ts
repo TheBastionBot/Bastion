@@ -63,6 +63,72 @@ const COLORS = {
     GOLD: 0xffd700,
 };
 
+const LIMITS = {
+    SESSIONAL_VOICE_CHANNELS: false,
+    GAMIFICATION_MULTIPLIER: false,
+    GAMBLING_REWARD_MULTIPLIER: false,
+    CHANNEL_LEVEL_LANGUAGES: false,
+    PREFIXES: 3,
+    VOTING_CHANNELS: 1,
+    STREAMERS_PER_SERVICE: 3,
+    REACTION_ROLE_GROUPS: 2,
+    REACTION_ROLES_PER_GROUP: 5,
+    GIVEAWAYS: 5,
+    GIVEAWAY_TIMEOUT: 128,
+    POLLS: 5,
+    POLL_TIMEOUT: 128,
+    LEVEL_ROLES: 5,
+    ROLES_PER_LEVEL: 1,
+    ROLES_STORE: 5,
+    AUTO_ROLES: 5,
+    SELF_ROLES: 5,
+    TRIGGERS: 5,
+
+    GOLD: {
+        SESSIONAL_VOICE_CHANNELS: true,
+        GAMIFICATION_MULTIPLIER: true,
+        GAMBLING_REWARD_MULTIPLIER: true,
+        CHANNEL_LEVEL_LANGUAGES: true,
+        PREFIXES: 5,
+        VOTING_CHANNELS: 5,
+        STREAMERS_PER_SERVICE: 5,
+        REACTION_ROLE_GROUPS: 5,
+        REACTION_ROLES_PER_GROUP: 10,
+        GIVEAWAYS: 10,
+        GIVEAWAY_TIMEOUT: 720,
+        POLLS: 10,
+        POLL_TIMEOUT: 720,
+        LEVEL_ROLES: 10,
+        ROLES_PER_LEVEL: 3,
+        ROLES_STORE: 10,
+        AUTO_ROLES: 10,
+        SELF_ROLES: 10,
+        TRIGGERS: 10,
+    },
+
+    PLATINUM: {
+        SESSIONAL_VOICE_CHANNELS: true,
+        GAMIFICATION_MULTIPLIER: true,
+        GAMBLING_REWARD_MULTIPLIER: true,
+        CHANNEL_LEVEL_LANGUAGES: true,
+        PREFIXES: 10,
+        VOTING_CHANNELS: 10,
+        STREAMERS_PER_SERVICE: 10,
+        REACTION_ROLE_GROUPS: 10,
+        REACTION_ROLES_PER_GROUP: 15,
+        GIVEAWAYS: 20,
+        GIVEAWAY_TIMEOUT: 2160,
+        POLLS: 20,
+        POLL_TIMEOUT: 2160,
+        LEVEL_ROLES: 20,
+        ROLES_PER_LEVEL: 5,
+        ROLES_STORE: 20,
+        AUTO_ROLES: 20,
+        SELF_ROLES: 20,
+        TRIGGERS: 20,
+    },
+};
+
 const isPublicBastion = (user: User): boolean => {
     return user.id === "267035345537728512";
 };
@@ -71,5 +137,6 @@ const isPublicBastion = (user: User): boolean => {
 export {
     BADGES,
     COLORS,
+    LIMITS,
     isPublicBastion,
 };
