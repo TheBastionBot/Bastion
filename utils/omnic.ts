@@ -4,7 +4,7 @@
  */
 
 import fetch, { RequestInit as RequestOptions, Response } from "node-fetch";
-import { Guild, Snowflake } from "discord.js";
+import { Guild, GuildMember, Snowflake, User } from "discord.js";
 
 export const BASE_PATH = "https://omnic.traction.one/";
 
@@ -24,17 +24,31 @@ export const makeRequest = (path: string, options?: RequestOptions): Promise<Res
     return fetch(resolvePath(path), requestOptions);
 };
 
-export const isPremiumUser = async (userId: Snowflake): Promise<boolean> => {
-    // check whether it's one of my guild
-    if (userId === "266290969974931457") return true;
+export enum PremiumTier {
+    DIAMOND = 1,
+    PLATINUM,
+    GOLD,
+}
+
+type FetchPremiumTierFunction = {
+    (userId: Snowflake): Promise<PremiumTier>;
+    (user: User): Promise<PremiumTier>;
+    (ownerId: Snowflake): Promise<PremiumTier>;
+    (owner: GuildMember): Promise<PremiumTier>;
+    (guildId: Snowflake): Promise<PremiumTier>;
+    (guild: Guild): Promise<PremiumTier>;
+}
+export const fetchPremiumTier: FetchPremiumTierFunction = async (identifier: Snowflake | User | GuildMember | Guild): Promise<PremiumTier> => {
+    const userId = (identifier instanceof User || identifier instanceof GuildMember) ? identifier.id : identifier instanceof Guild ? identifier.ownerID : identifier;
+
+    // check if it's me
+    if (userId === "266290969974931457") return PremiumTier.DIAMOND;
+
     // check whether it's a premium user
     const owner: Patron = await makeRequest("/patreon/patrons/" + userId).then(res => res.json());
-    if (owner.patron_status === "active_patron" && owner.currently_entitled_amount_cents >= 300) return true;
-    // otherwise, this ain't a premium user
-    return false;
-};
 
-export const isPremiumGuild = async (guild: Guild): Promise<boolean> => {
-    // check whether the guild owner is a premium user
-    return isPremiumUser(guild.ownerID);
+    // return premium membership tier
+    if (owner.patron_status === "active_patron" && owner.currently_entitled_amount_cents >= 1000) return PremiumTier.DIAMOND;
+    if (owner.patron_status === "active_patron" && owner.currently_entitled_amount_cents >= 500) return PremiumTier.PLATINUM;
+    if (owner.patron_status === "active_patron" && owner.currently_entitled_amount_cents >= 300) return PremiumTier.GOLD;
 };
