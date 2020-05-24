@@ -6,10 +6,10 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
-import BastionGuild = require("../../structures/Guild");
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
+import BastionGuild = require("../../structures/Guild");
 
 export = class Prefix extends Command {
     constructor() {
@@ -43,12 +43,12 @@ export = class Prefix extends Command {
 
                 if (tier) { // check for premium membership limits
                     if (tier === omnic.PremiumTier.GOLD && argv._.length > constants.LIMITS.GOLD.PREFIXES) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPrefix", constants.LIMITS.GOLD.PREFIXES));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPrefix", constants.LIMITS.GOLD.PREFIXES));
                     } else if (tier === omnic.PremiumTier.PLATINUM && argv._.length > constants.LIMITS.PLATINUM.PREFIXES) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPrefix", constants.LIMITS.PLATINUM.PREFIXES));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPrefix", constants.LIMITS.PLATINUM.PREFIXES));
                     }
                 } else {    // no premium membership
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPrefix", constants.LIMITS.PREFIXES));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumPrefix", constants.LIMITS.PREFIXES));
                 }
             }
 
@@ -63,7 +63,7 @@ export = class Prefix extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "guildPrefixUpdate", message.author.tag, guild.document.prefixes.join("  ")),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "guildPrefixUpdate", message.author.tag, guild.document.prefixes.join("  ")),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -77,7 +77,7 @@ export = class Prefix extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", "guildPrefixes"),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "guildPrefixes"),
                 fields: [
                     {
                         name: "Prefixes",

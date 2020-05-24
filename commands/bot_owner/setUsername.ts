@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class SetUsername extends Command {
     constructor() {
@@ -39,7 +40,7 @@ export = class SetUsername extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.PUPIL,
-                description: this.client.locale.getString("en_us", "info", "updateUsername", message.author.tag, username),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "updateUsername", message.author.tag, username),
             },
         }).catch(() => {
             // this error can be ignored.

@@ -272,7 +272,7 @@ export = class Play extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -304,7 +304,7 @@ export = class Play extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", (message.member as BastionGuildMember).isMusicMaster() ? "noMusicChannelsAsOwner" : "noMusicChannels"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", (message.member as BastionGuildMember).isMusicMaster() ? "noMusicChannelsAsOwner" : "noMusicChannels"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -316,7 +316,7 @@ export = class Play extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", "unjoinable", guild.music.voiceChannel.name),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "unjoinable", guild.music.voiceChannel.name),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -328,7 +328,7 @@ export = class Play extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", "unspeakable", guild.music.voiceChannel.name),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "unspeakable", guild.music.voiceChannel.name),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -377,7 +377,7 @@ export = class Play extends Command {
             message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", "musicDownloadError"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"),
                 },
             }).catch(() => {
                 // This error can be ignored.

@@ -56,9 +56,9 @@ export = class InviteFilterCommand extends Command {
         await message.channel.send({
             embed: {
                 color: argv.enable ? Constants.COLORS.GREEN : argv.disable ? Constants.COLORS.RED : Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", argv.enable ? "inviteFilterEnable" : argv.disable ? "inviteFilterDisable" : guild.document.filters.inviteFilter.enabled ? "inviteFilterEnabled" : "inviteFilterDisabled", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.enable ? "inviteFilterEnable" : argv.disable ? "inviteFilterDisable" : guild.document.filters.inviteFilter.enabled ? "inviteFilterEnabled" : "inviteFilterDisabled", message.author.tag),
                 footer: {
-                    text: guild.document.filters.inviteFilter.enabled ? this.client.locale.getString("en_us", "info", guild.document.filters.inviteFilter.infraction ? "filterInfractionEnabled" : "filterInfractionDisabled") : "",
+                    text: guild.document.filters.inviteFilter.enabled ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.filters.inviteFilter.infraction ? "filterInfractionEnabled" : "filterInfractionDisabled") : "",
                 },
             },
         }).catch(() => {

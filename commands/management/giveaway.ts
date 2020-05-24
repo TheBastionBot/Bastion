@@ -11,6 +11,7 @@ import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as numbers from "../../utils/numbers";
 import * as omnic from "../../utils/omnic";
+import BastionGuild = require("../../structures/Guild");
 
 export = class GiveawayCommand extends Command {
     /** The default reactions for participating. */
@@ -75,12 +76,12 @@ export = class GiveawayCommand extends Command {
 
             if (tier) { // check for premium membership limits
                 if (tier === omnic.PremiumTier.GOLD && timeout > constants.LIMITS.GOLD.GIVEAWAY_TIMEOUT) {
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveawayTimeout", constants.LIMITS.GOLD.GIVEAWAY_TIMEOUT));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitGiveawayTimeout", constants.LIMITS.GOLD.GIVEAWAY_TIMEOUT));
                 } else if (tier === omnic.PremiumTier.PLATINUM && timeout > constants.LIMITS.PLATINUM.GIVEAWAY_TIMEOUT) {
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveawayTimeout", constants.LIMITS.PLATINUM.GIVEAWAY_TIMEOUT));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitGiveawayTimeout", constants.LIMITS.PLATINUM.GIVEAWAY_TIMEOUT));
                 }
             } else if (timeout > constants.LIMITS.GIVEAWAY_TIMEOUT) {
-                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveawayTimeout", constants.LIMITS.GIVEAWAY_TIMEOUT));
+                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumGiveawayTimeout", constants.LIMITS.GIVEAWAY_TIMEOUT));
             }
 
 
@@ -95,12 +96,12 @@ export = class GiveawayCommand extends Command {
 
             if (tier) { // check for premium membership limits
                 if (tier === omnic.PremiumTier.GOLD && activeGiveawaysCount >= constants.LIMITS.GOLD.GIVEAWAYS) {
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveaways", constants.LIMITS.GOLD.GIVEAWAYS));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitGiveaways", constants.LIMITS.GOLD.GIVEAWAYS));
                 } else if (tier === omnic.PremiumTier.PLATINUM && activeGiveawaysCount >= constants.LIMITS.PLATINUM.GIVEAWAYS) {
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveaways", constants.LIMITS.PLATINUM.GIVEAWAYS));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitGiveaways", constants.LIMITS.PLATINUM.GIVEAWAYS));
                 }
             } else {    // no premium membership
-                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveaways", constants.LIMITS.GIVEAWAYS));
+                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumGiveaways", constants.LIMITS.GIVEAWAYS));
             }
         }
 

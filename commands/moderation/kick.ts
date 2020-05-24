@@ -7,7 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-
+import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
 export = class Kick extends Command {
@@ -45,8 +45,8 @@ export = class Kick extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    title: this.client.locale.getString("en_us", "errors", "unauthorized"),
-                    description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, member.user.tag),
+                    title: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "unauthorized"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "rolePosition", message.author.tag, member.user.tag),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -62,7 +62,7 @@ export = class Kick extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
-                description: this.client.locale.getString("en_us", "info", "memberKick", message.author.tag, member.user.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberKick", message.author.tag, member.user.tag),
                 fields: [
                     {
                         name: "Reason",

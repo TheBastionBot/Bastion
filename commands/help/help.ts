@@ -6,6 +6,8 @@
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class HelpCommand extends Command {
     constructor() {
         super("help", {
@@ -31,9 +33,9 @@ export = class HelpCommand extends Command {
                     url: this.client.locale.getConstant("bastion.website"),
                 },
                 title: "Help",
-                description: this.client.locale.getString("en_us", "info", "commandCategoriesCommand") + "\n"
-                    + this.client.locale.getString("en_us", "info", "categoryCommandsCommand") + "\n"
-                    + this.client.locale.getString("en_us", "info", "commandDetailsOption"),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandCategoriesCommand") + "\n"
+                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "categoryCommandsCommand") + "\n"
+                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandDetailsOption"),
                 fields: [
                     {
                         name: "Need help with " + this.client.locale.getConstant("bastion.name") + "?",
@@ -47,7 +49,7 @@ export = class HelpCommand extends Command {
                     },
                 ],
                 footer: {
-                    text: this.client.locale.getString("en_us", "info", "didYouKnowDeveloper", this.client.locale.getConstant("author.username")),
+                    text: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowDeveloper", this.client.locale.getConstant("author.username")),
                 },
             },
         }).catch(() => {

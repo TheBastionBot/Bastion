@@ -8,6 +8,7 @@ import { Message } from "discord.js";
 
 import * as strings from "../../utils/strings";
 import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class RoleCommand extends Command {
     constructor() {
@@ -33,7 +34,7 @@ export = class RoleCommand extends Command {
         // identify the role
         const role = this.client.resolver.resolveRole(message.guild, identifier);
 
-        if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
+        if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
         // acknowledge
         message.channel.send({

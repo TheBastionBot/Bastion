@@ -8,7 +8,6 @@ import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
 
-
 export = class ServerLogs extends Command {
     constructor() {
         super("serverLogs", {
@@ -51,7 +50,7 @@ export = class ServerLogs extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.serverLogChannelId ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.serverLogChannelId ? "serverLogsEnable" : "serverLogsDisable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.serverLogChannelId ? "serverLogsEnable" : "serverLogsDisable", message.author.tag),
             },
         }).catch(() => {
             // this error can be ignored

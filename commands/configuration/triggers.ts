@@ -12,6 +12,7 @@ import * as embeds from "../../utils/embeds";
 import * as emojis from "../../utils/emojis";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
+import BastionGuild = require("../../structures/Guild");
 
 export = class MessageFilterCommand extends Command {
     constructor() {
@@ -52,7 +53,7 @@ export = class MessageFilterCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "info", "triggersClear", message.author.tag),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "triggersClear", message.author.tag),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -76,12 +77,12 @@ export = class MessageFilterCommand extends Command {
 
                     if (tier) { // check for premium membership limits
                         if (tier === omnic.PremiumTier.GOLD && triggersCount >= constants.LIMITS.GOLD.TRIGGERS) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitTriggers", constants.LIMITS.GOLD.TRIGGERS));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitTriggers", constants.LIMITS.GOLD.TRIGGERS));
                         } else if (tier === omnic.PremiumTier.PLATINUM && triggersCount >= constants.LIMITS.PLATINUM.TRIGGERS) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitTriggers", constants.LIMITS.PLATINUM.TRIGGERS));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitTriggers", constants.LIMITS.PLATINUM.TRIGGERS));
                         }
                     } else {    // no premium membership
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumTriggers", constants.LIMITS.TRIGGERS));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumTriggers", constants.LIMITS.TRIGGERS));
                     }
                 }
             }
@@ -136,7 +137,7 @@ export = class MessageFilterCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "triggersAdd", message.author.tag),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "triggersAdd", message.author.tag),
                     fields,
                 },
             }).catch(() => {
@@ -151,7 +152,7 @@ export = class MessageFilterCommand extends Command {
         return await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", "triggersList"),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "triggersList"),
                 fields: triggers.map(t => ({
                     name: t.trigger,
                     value: (t.responseMessage ? "Message Response" : "") + "\n" + (t.responseReaction ? "Reaction Response" : ""),

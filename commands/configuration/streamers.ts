@@ -6,10 +6,10 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
-import BastionGuild = require("../../structures/Guild");
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
+import BastionGuild = require("../../structures/Guild");
 
 export = class InviteFilterCommand extends Command {
     constructor() {
@@ -74,12 +74,12 @@ export = class InviteFilterCommand extends Command {
 
                 if (tier) { // check for premium membership limits
                     if (tier === omnic.PremiumTier.GOLD && guild.document.streamers.twitch.users.length > constants.LIMITS.GOLD.STREAMERS_PER_SERVICE) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitStreamers", constants.LIMITS.GOLD.STREAMERS_PER_SERVICE));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitStreamers", constants.LIMITS.GOLD.STREAMERS_PER_SERVICE));
                     } else if (tier === omnic.PremiumTier.PLATINUM && guild.document.streamers.twitch.users.length > constants.LIMITS.PLATINUM.STREAMERS_PER_SERVICE) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitStreamers", constants.LIMITS.PLATINUM.STREAMERS_PER_SERVICE));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitStreamers", constants.LIMITS.PLATINUM.STREAMERS_PER_SERVICE));
                     }
                 } else {    // no premium membership
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumStreamers", constants.LIMITS.STREAMERS_PER_SERVICE));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumStreamers", constants.LIMITS.STREAMERS_PER_SERVICE));
                 }
             }
 

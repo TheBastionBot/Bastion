@@ -10,7 +10,7 @@ import TextChannelModel from "../../models/TextChannel";
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
-
+import BastionGuild = require("../../structures/Guild");
 
 export = class Announcements extends Command {
     constructor() {
@@ -57,12 +57,12 @@ export = class Announcements extends Command {
 
                     if (tier) { // check for premium membership limits
                         if (tier === omnic.PremiumTier.GOLD && votingChannelsCount >= constants.LIMITS.GOLD.VOTING_CHANNELS) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitVotingChannels", constants.LIMITS.GOLD.VOTING_CHANNELS));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitVotingChannels", constants.LIMITS.GOLD.VOTING_CHANNELS));
                         } else if (tier === omnic.PremiumTier.PLATINUM && votingChannelsCount >= constants.LIMITS.PLATINUM.VOTING_CHANNELS) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitVotingChannels", constants.LIMITS.PLATINUM.VOTING_CHANNELS));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitVotingChannels", constants.LIMITS.PLATINUM.VOTING_CHANNELS));
                         }
                     } else {    // no premium membership
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumVotingChannels", constants.LIMITS.VOTING_CHANNELS));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumVotingChannels", constants.LIMITS.VOTING_CHANNELS));
                     }
                 }
             }
@@ -81,7 +81,7 @@ export = class Announcements extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "votingChannelsAdd", message.author.tag),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "votingChannelsAdd", message.author.tag),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -102,7 +102,7 @@ export = class Announcements extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "info", "votingChannelsRemove", message.author.tag),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "votingChannelsRemove", message.author.tag),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -133,7 +133,7 @@ export = class Announcements extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 title: "Voting Channels",
-                description: this.client.locale.getString("en_us", "info", "votingChannels"),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "votingChannels"),
                 fields: [
                     {
                         name: (channels.length ? channels.length : "No") + " Voting Channels",

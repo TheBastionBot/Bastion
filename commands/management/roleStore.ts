@@ -11,9 +11,9 @@ import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as numbers from "../../utils/numbers";
 import * as omnic from "../../utils/omnic";
-
-import BastionRole = require("../../structures/Role");
+import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
+import BastionRole = require("../../structures/Role");
 
 export = class RoleStoreCommand extends Command {
     constructor() {
@@ -47,7 +47,7 @@ export = class RoleStoreCommand extends Command {
             // identify role
             const role = this.client.resolver.resolveRole(message.guild, argv._.join(" ")) as BastionRole;
 
-            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "error", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "error", "roleNotFound"));
 
 
             if (argv.sell > 0) {
@@ -68,12 +68,12 @@ export = class RoleStoreCommand extends Command {
 
                         if (tier) { // check for premium membership limits
                             if (tier === omnic.PremiumTier.GOLD && paidRolesCount >= constants.LIMITS.GOLD.PAID_ROLES) {
-                                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPaidRoles", constants.LIMITS.GOLD.PAID_ROLES));
+                                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPaidRoles", constants.LIMITS.GOLD.PAID_ROLES));
                             } else if (tier === omnic.PremiumTier.PLATINUM && paidRolesCount >= constants.LIMITS.PLATINUM.PAID_ROLES) {
-                                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPaidRoles", constants.LIMITS.PLATINUM.PAID_ROLES));
+                                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPaidRoles", constants.LIMITS.PLATINUM.PAID_ROLES));
                             }
                         } else {    // no premium membership
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPaidRoles", constants.LIMITS.PAID_ROLES));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumPaidRoles", constants.LIMITS.PAID_ROLES));
                         }
                     }
                 }
@@ -98,7 +98,7 @@ export = class RoleStoreCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.GREEN,
-                        description: this.client.locale.getString("en_us", "info", "roleStoreAdd", message.author.tag, role.name, argv.sell),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleStoreAdd", message.author.tag, role.name, argv.sell),
                     },
                 }).catch(() => {
                     // this error can be ignored
@@ -132,7 +132,7 @@ export = class RoleStoreCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.GREEN,
-                        description: this.client.locale.getString("en_us", "info", "roleBought", message.author.tag, role.name, argv.sell),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleBought", message.author.tag, role.name, argv.sell),
                     },
                 }).catch(() => {
                     // this error can be ignored
@@ -160,7 +160,7 @@ export = class RoleStoreCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.RED,
-                        description: this.client.locale.getString("en_us", "info", "roleStoreRemove", message.author.tag, role.name),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleStoreRemove", message.author.tag, role.name),
                     },
                 }).catch(() => {
                     // this error can be ignored

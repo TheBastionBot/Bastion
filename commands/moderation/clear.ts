@@ -6,6 +6,8 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class Clear extends Command {
     constructor() {
         super("clear", {
@@ -77,8 +79,8 @@ export = class Clear extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    title: this.client.locale.getString("en_us", "errors", "notFound"),
-                    description: this.client.locale.getString("en_us", "errors", "noDeletableMessages"),
+                    title: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "notFound"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "noDeletableMessages"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -89,7 +91,7 @@ export = class Clear extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
-                description: this.client.locale.getString("en_us", "info", "messageClear", message.author.tag, clearedMessages.size),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "messageClear", message.author.tag, clearedMessages.size),
                 fields: [
                     {
                         name: "Reason",

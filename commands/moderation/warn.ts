@@ -10,7 +10,7 @@ import MemberModel from "../../models/Member";
 import * as arrays from "../../utils/arrays";
 import * as errors from "../../utils/errors";
 import * as pagination from "../../utils/pagination";
-
+import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
 export = class Warn extends Command {
@@ -82,8 +82,8 @@ export = class Warn extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    title: this.client.locale.getString("en_us", "errors", "unauthorized"),
-                    description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, member.user.tag),
+                    title: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "unauthorized"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "rolePosition", message.author.tag, member.user.tag),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -99,7 +99,7 @@ export = class Warn extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.ORANGE,
-                    description: this.client.locale.getString("en_us", "info", "memberInfractionsClear", message.author.tag, member.user.tag, reason),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberInfractionsClear", message.author.tag, member.user.tag, reason),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -114,7 +114,7 @@ export = class Warn extends Command {
         await message.member.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
-                description: this.client.locale.getString("en_us", "info", "memberWarnDM", message.author.tag, message.guild.name, reason),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberWarnDM", message.author.tag, message.guild.name, reason),
             },
         }).catch(() => {
             // this error can be ignored
@@ -124,7 +124,7 @@ export = class Warn extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
-                description: this.client.locale.getString("en_us", "info", "memberWarn", message.author.tag, member.user.tag, reason),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberWarn", message.author.tag, member.user.tag, reason),
             },
         }).catch(() => {
             // this error can be ignored

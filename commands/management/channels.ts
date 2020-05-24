@@ -6,9 +6,10 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { GuildChannel, Message, TextChannel } from "discord.js";
 
+import confirmation from "../../utils/confirmation";
 import * as errors from "../../utils/errors";
 import * as numbers from "../../utils/numbers";
-import confirmation from "../../utils/confirmation";
+import BastionGuild = require("../../structures/Guild");
 
 export = class ChannelsCommand extends Command {
     constructor() {
@@ -67,7 +68,7 @@ export = class ChannelsCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", channel.type + "ChannelCreate", message.author.tag, channel.name, reason),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", channel.type + "ChannelCreate", message.author.tag, channel.name, reason),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -76,7 +77,7 @@ export = class ChannelsCommand extends Command {
 
         if (argv.delete) {
             // get confirmation
-            const answer = await confirmation(message, this.client.locale.getString("en_us", "info", "channelDeleteQuestion", message.author.tag, (message.channel as GuildChannel).name));
+            const answer = await confirmation(message, this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "channelDeleteQuestion", message.author.tag, (message.channel as GuildChannel).name));
 
             if (answer) {
                 // delete channel
@@ -96,7 +97,7 @@ export = class ChannelsCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "textChannelRename", message.author.tag, channel.name, reason),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "textChannelRename", message.author.tag, channel.name, reason),
                 },
             }).catch(() => {
                 // this error can be ignored

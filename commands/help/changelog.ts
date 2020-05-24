@@ -8,6 +8,7 @@ import { promises as fs } from "fs";
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
 import { version } from "../../package.json";
 
 interface ChangeLog {
@@ -72,7 +73,7 @@ export = class ChangeLogCommand extends Command {
                     url: changelog.image,
                 },
                 footer: {
-                    text: changelog.date + " • " + this.client.locale.getString("en_us", "info", "didYouKnowEarlyReleases"),
+                    text: changelog.date + " • " + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowEarlyReleases"),
                 },
             },
         });

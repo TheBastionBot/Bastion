@@ -12,7 +12,7 @@ import * as constants from "../../utils/constants";
 import * as emojis from "../../utils/emojis";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
-
+import BastionGuild = require("../../structures/Guild");
 import BastionRole = require("../../structures/Role");
 
 export = class ReactionRolesCommand extends Command {
@@ -53,7 +53,7 @@ export = class ReactionRolesCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "info", "reactionRolesGroupRemove"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionRolesGroupRemove"),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -71,12 +71,12 @@ export = class ReactionRolesCommand extends Command {
 
                 if (tier) { // check for premium membership limits
                     if (tier === omnic.PremiumTier.GOLD && argv.role.length > constants.LIMITS.GOLD.REACTION_ROLES_PER_GROUP) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroupRoles", constants.LIMITS.GOLD.REACTION_ROLES_PER_GROUP));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitReactionRoleGroupRoles", constants.LIMITS.GOLD.REACTION_ROLES_PER_GROUP));
                     } else if (tier === omnic.PremiumTier.PLATINUM && argv.role.length > constants.LIMITS.PLATINUM.REACTION_ROLES_PER_GROUP) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroupRoles", constants.LIMITS.PLATINUM.REACTION_ROLES_PER_GROUP));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitReactionRoleGroupRoles", constants.LIMITS.PLATINUM.REACTION_ROLES_PER_GROUP));
                     }
                 } else if (argv.role.length > constants.LIMITS.REACTION_ROLES_PER_GROUP) {
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroupRoles", constants.LIMITS.REACTION_ROLES_PER_GROUP));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumReactionRoleGroupRoles", constants.LIMITS.REACTION_ROLES_PER_GROUP));
                 }
 
 
@@ -88,12 +88,12 @@ export = class ReactionRolesCommand extends Command {
 
                 if (tier) { // check for premium membership limits
                     if (tier === omnic.PremiumTier.GOLD && reactionRoleGroupsCount >= constants.LIMITS.GOLD.REACTION_ROLE_GROUPS) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroups", constants.LIMITS.GOLD.REACTION_ROLE_GROUPS));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitReactionRoleGroups", constants.LIMITS.GOLD.REACTION_ROLE_GROUPS));
                     } else if (tier === omnic.PremiumTier.PLATINUM && reactionRoleGroupsCount >= constants.LIMITS.PLATINUM.REACTION_ROLE_GROUPS) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroups", constants.LIMITS.PLATINUM.REACTION_ROLE_GROUPS));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitReactionRoleGroups", constants.LIMITS.PLATINUM.REACTION_ROLE_GROUPS));
                     }
                 } else if (reactionRoleGroupsCount >= constants.LIMITS.REACTION_ROLE_GROUPS) {
-                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroups", constants.LIMITS.REACTION_ROLE_GROUPS));
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumReactionRoleGroups", constants.LIMITS.REACTION_ROLE_GROUPS));
                 }
             }
 
@@ -108,7 +108,7 @@ export = class ReactionRolesCommand extends Command {
             // identify the roles
             const roles = this.client.resolver.resolveRoles(message.guild, argv.role);
 
-            if (!roles.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!roles.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
             // add reaction roles group
             await ReactionRoleGroupModel.findByIdAndUpdate(reactionMessage.id, {
@@ -125,7 +125,7 @@ export = class ReactionRolesCommand extends Command {
             await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "reactionRolesGroupAdd"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionRolesGroupAdd"),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -155,7 +155,7 @@ export = class ReactionRolesCommand extends Command {
             // identify the role
             const role = this.client.resolver.resolveRole(message.guild, identifier) as BastionRole;
 
-            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
             // get the role document if it exists
             let roleDocument = await role.fetchDocument();

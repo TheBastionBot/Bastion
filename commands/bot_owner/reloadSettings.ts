@@ -6,6 +6,8 @@
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class ReloadSettings extends Command {
     constructor() {
         super("reloadSettings", {
@@ -30,7 +32,7 @@ export = class ReloadSettings extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.PUPIL,
-                description: this.client.locale.getString("en_us", "info", "settingsReload", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "settingsReload", message.author.tag),
             },
         }).catch(() => {
             // this error can be ignored.

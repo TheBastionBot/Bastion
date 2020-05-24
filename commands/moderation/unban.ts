@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class Unban extends Command {
     constructor() {
@@ -47,7 +48,7 @@ export = class Unban extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
-                description: this.client.locale.getString("en_us", "info", "guildBanRemove", message.author.tag, user.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "guildBanRemove", message.author.tag, user.tag),
                 fields: [
                     {
                         name: "Reason",

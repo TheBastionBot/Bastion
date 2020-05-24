@@ -35,7 +35,7 @@ export = class Skip extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -60,7 +60,7 @@ export = class Skip extends Command {
                     return await guild.music.textChannel.send({
                         embed: {
                             color: Constants.COLORS.PINK,
-                            description: this.client.locale.getString("en_us", "info", "musicSkipCount", (requiredVotes - guild.music.skipVotes.length).toString()),
+                            description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "musicSkipCount", (requiredVotes - guild.music.skipVotes.length).toString()),
                             footer: {
                                 text: `${nowPlaying.track} • ${guild.music.voiceChannel.name}`
                             },

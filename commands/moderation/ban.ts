@@ -6,9 +6,9 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, User } from "discord.js";
 
-import * as pagination from "../../utils/pagination";
 import * as errors from "../../utils/errors";
-
+import * as pagination from "../../utils/pagination";
+import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
 export = class Ban extends Command {
@@ -82,8 +82,8 @@ export = class Ban extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    title: this.client.locale.getString("en_us", "errors", "unauthorized"),
-                    description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, user.tag),
+                    title: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "unauthorized"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "rolePosition", message.author.tag, user.tag),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -108,8 +108,8 @@ export = class Ban extends Command {
             embed: {
                 color: Constants.COLORS.DARK_BUT_NOT_BLACK,
                 description: argv.soft
-                    ? this.client.locale.getString("en_us", "info", "memberSoftBan", message.author.tag, user.tag)
-                    : this.client.locale.getString("en_us", "info", "guildBanAdd", message.author.tag, user.tag),
+                    ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberSoftBan", message.author.tag, user.tag)
+                    : this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "guildBanAdd", message.author.tag, user.tag),
                 fields: [
                     {
                         name: "Reason",

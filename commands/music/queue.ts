@@ -54,7 +54,7 @@ export = class Queue extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -77,7 +77,7 @@ export = class Queue extends Command {
                 guild.music.textChannel.send({
                     embed: {
                         color: Constants.COLORS.PINK,
-                        description: this.client.locale.getString("en_us", "info", "musicQueueClean", message.author.tag),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "musicQueueClean", message.author.tag),
                     },
                 }).catch(() => {
                     // This error can be ignored.
@@ -89,7 +89,7 @@ export = class Queue extends Command {
                 guild.music.textChannel.send({
                     embed: {
                         color: Constants.COLORS.PINK,
-                        description: this.client.locale.getString("en_us", "info", guild.music.repeat ? "musicQueueRepeatEnabled" : "musicQueueRepeatDisable", message.author.tag),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.music.repeat ? "musicQueueRepeatEnabled" : "musicQueueRepeatDisable", message.author.tag),
                     },
                 }).catch(() => {
                     // This error can be ignored.
@@ -106,7 +106,7 @@ export = class Queue extends Command {
                 guild.music.textChannel.send({
                     embed: {
                         color: Constants.COLORS.PINK,
-                        description: this.client.locale.getString("en_us", "info", "musicQueueRemove", message.author.tag, removedSong.track, this.client.users.cache.has(removedSong.requester) ? this.client.users.cache.get(removedSong.requester).tag : removedSong.requester),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "musicQueueRemove", message.author.tag, removedSong.track, this.client.users.cache.has(removedSong.requester) ? this.client.users.cache.get(removedSong.requester).tag : removedSong.requester),
                     },
                 }).catch(() => {
                     // This error can be ignored.
@@ -124,7 +124,7 @@ export = class Queue extends Command {
                 guild.music.textChannel.send({
                     embed: {
                         color: Constants.COLORS.PINK,
-                        description: this.client.locale.getString("en_us", "info", "musicQueueShuffle", message.author.tag),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "musicQueueShuffle", message.author.tag),
                     },
                 }).catch(() => {
                     // This error can be ignored.
@@ -139,7 +139,7 @@ export = class Queue extends Command {
                     embed: {
                         color: Constants.COLORS.PINK,
                         title: "Music Queue",
-                        description: this.client.locale.getString("en_us", "info", "musicQueueCount", (guild.music.queue.length - 1).toString()),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "musicQueueCount", (guild.music.queue.length - 1).toString()),
                         fields: queue.items.map((song: { track: string; artist: string; album: string }, i) => ({
                             name: `#${i + 1} - ${song.track}`,
                             value: `${song.artist || "Unknown Artist"}${song.album && song.track !== song.album ? " - " + song.album : ""}`,

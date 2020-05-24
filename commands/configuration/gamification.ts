@@ -10,7 +10,6 @@ import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as gamification from "../../utils/gamification";
 import * as omnic from "../../utils/omnic";
-
 import BastionGuild = require("../../structures/Guild");
 
 export = class Gamification extends Command {
@@ -43,7 +42,7 @@ export = class Gamification extends Command {
             const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
                 // this error can be ignored
             });
-            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGamificationMultiplier"));
+            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumGamificationMultiplier"));
         }
 
 
@@ -67,7 +66,7 @@ export = class Gamification extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.gamification.enabled ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.gamification.enabled ? "gamificationEnable" : "gamificationDisable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.gamification.enabled ? "gamificationEnable" : "gamificationDisable", message.author.tag),
                 fields: guild.document.gamification.enabled
                     ? [
                         {

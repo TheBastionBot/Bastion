@@ -35,7 +35,7 @@ export = class Pause extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -58,7 +58,7 @@ export = class Pause extends Command {
                 embed: {
                     color: Constants.COLORS.PINK,
                     title: "Paused Playback",
-                    description: this.client.locale.getString("en_us", "info", "playbackPause", message.author.tag, song.track),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "playbackPause", message.author.tag, song.track),
                     footer: {
                         text: `${Math.floor(streamTime / 6e4)}:${Math.floor((streamTime % 6e4) / 1e3)} / ${song.duration} • ${guild.voice.connection.channel.name}`
                     },

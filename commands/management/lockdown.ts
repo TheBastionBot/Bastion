@@ -6,6 +6,8 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { GuildChannel, Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class LockdownCommand extends Command {
     constructor() {
         super("lockdown", {
@@ -46,7 +48,7 @@ export = class LockdownCommand extends Command {
         await message.channel.send({
             embed: {
                 color: argv.remove ? Constants.COLORS.GREEN : Constants.COLORS.ORANGE,
-                description: this.client.locale.getString("en_us", "info", argv.remove ? "lockdownChannel" : "lockdownChannelRemove", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.remove ? "lockdownChannel" : "lockdownChannelRemove", message.author.tag),
             },
         }).catch(() => {
             // this error can be ignored

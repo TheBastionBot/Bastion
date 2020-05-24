@@ -6,9 +6,8 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
-import BastionGuild = require("../../structures/Guild");
-
 import * as arrays from "../../utils/arrays";
+import BastionGuild = require("../../structures/Guild");
 
 export = class MessageFilterCommand extends Command {
     constructor() {
@@ -70,7 +69,7 @@ export = class MessageFilterCommand extends Command {
         await message.channel.send({
             embed: {
                 color: argv.enable ? Constants.COLORS.GREEN : argv.disable ? Constants.COLORS.RED : Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", argv.enable ? "messageFilterEnable" : argv.disable ? "messageFilterDisable" : guild.document.filters.messageFilter.enabled ? "messageFilterEnabled" : "messageFilterDisabled", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.enable ? "messageFilterEnable" : argv.disable ? "messageFilterDisable" : guild.document.filters.messageFilter.enabled ? "messageFilterEnabled" : "messageFilterDisabled", message.author.tag),
                 fields: guild.document.filters.messageFilter.enabled || pattern.length ? [
                     {
                         name: pattern.length ? "Filter Pattern Added" : "Filter Patterns",
@@ -78,7 +77,7 @@ export = class MessageFilterCommand extends Command {
                     },
                 ] : [],
                 footer: {
-                    text: guild.document.filters.messageFilter.enabled ? this.client.locale.getString("en_us", "info", guild.document.filters.messageFilter.infraction ? "filterInfractionEnabled" : "filterInfractionDisabled") : "",
+                    text: guild.document.filters.messageFilter.enabled ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.filters.messageFilter.infraction ? "filterInfractionEnabled" : "filterInfractionDisabled") : "",
                 },
             },
         }).catch(() => {

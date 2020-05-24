@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class IAmCommand extends Command {
     constructor() {
@@ -37,7 +38,7 @@ export = class IAmCommand extends Command {
 
         const role = this.client.resolver.resolveRole(message.guild, argv._.join(" "));
 
-        if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
+        if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
         if (argv.not) {
             // remove the role
@@ -51,7 +52,7 @@ export = class IAmCommand extends Command {
         await message.channel.send({
             embed: {
                 color: argv.not ? Constants.COLORS.RED : Constants.COLORS.GREEN,
-                description: this.client.locale.getString("en_us", "info", argv.not ? "selfRemoveRole" : "selfAddRole", message.author.tag, role.name),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.not ? "selfRemoveRole" : "selfAddRole", message.author.tag, role.name),
             },
         }).catch(() => {
             // this error can be ignored

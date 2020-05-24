@@ -10,7 +10,7 @@ import RoleModel from "../../models/Role";
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
-
+import BastionGuild = require("../../structures/Guild");
 
 export = class SelfRoles extends Command {
     constructor() {
@@ -58,12 +58,12 @@ export = class SelfRoles extends Command {
 
                     if (tier) { // check for premium membership limits
                         if (tier === omnic.PremiumTier.GOLD && selfRolesCount >= constants.LIMITS.GOLD.SELF_ROLES) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitSelfRoles", constants.LIMITS.GOLD.SELF_ROLES));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitSelfRoles", constants.LIMITS.GOLD.SELF_ROLES));
                         } else if (tier === omnic.PremiumTier.PLATINUM && selfRolesCount >= constants.LIMITS.PLATINUM.SELF_ROLES) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitSelfRoles", constants.LIMITS.PLATINUM.SELF_ROLES));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitSelfRoles", constants.LIMITS.PLATINUM.SELF_ROLES));
                         }
                     } else {    // no premium membership
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumSelfRoles", constants.LIMITS.SELF_ROLES));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumSelfRoles", constants.LIMITS.SELF_ROLES));
                     }
                 }
             }
@@ -72,7 +72,7 @@ export = class SelfRoles extends Command {
             // check whether the specified role exists
             const role = this.client.resolver.resolveRole(message.guild, argv.add.join(" "));
 
-            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
             // set role as self assignable
             await RoleModel.findByIdAndUpdate(role.id, {
@@ -87,7 +87,7 @@ export = class SelfRoles extends Command {
             await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "selfRolesAdd", message.author.tag, role.name),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "selfRolesAdd", message.author.tag, role.name),
                     footer: {
                         text: role.id,
                     },
@@ -98,7 +98,7 @@ export = class SelfRoles extends Command {
         } else if (argv.remove) {
             const role = this.client.resolver.resolveRole(message.guild, argv.remove.join(" "));
 
-            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "errors", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
             // unset role as self assignable
             await RoleModel.findByIdAndUpdate(role.id, {
@@ -111,7 +111,7 @@ export = class SelfRoles extends Command {
             await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "info", "selfRolesRemove", message.author.tag, role.name),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "selfRolesRemove", message.author.tag, role.name),
                     footer: {
                         text: role.id,
                     },
@@ -126,7 +126,7 @@ export = class SelfRoles extends Command {
             });
 
             if (!selfRoles.length) {
-                throw new Error(this.client.locale.getString("en_us", "errors", "noSelfRoles"));
+                throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "noSelfRoles"));
             }
 
             // construct list of self roles
@@ -151,7 +151,7 @@ export = class SelfRoles extends Command {
                 embed: {
                     color: Constants.COLORS.IRIS,
                     title: "Self Roles",
-                    description: this.client.locale.getString("en_us", "info", "selfRolesList"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "selfRolesList"),
                     fields,
                 },
             }).catch(() => {

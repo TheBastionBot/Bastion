@@ -6,9 +6,9 @@
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
-import BastionGuildMember = require("../../structures/GuildMember");
-
 import * as numbers from "../../utils/numbers";
+import BastionGuild = require("../../structures/Guild");
+import BastionGuildMember = require("../../structures/GuildMember");
 
 export = class DailyCommand extends Command {
     constructor() {
@@ -43,7 +43,7 @@ export = class DailyCommand extends Command {
         const lastClaimed = new Date(member.document.lastClaimed);
 
         // check whether already claimed today
-        if (today.toDateString() === lastClaimed.toDateString()) throw new Error(this.client.locale.getString("en_us", "errors", "alreadyClaimed", message.author.tag));
+        if (today.toDateString() === lastClaimed.toDateString()) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "alreadyClaimed", message.author.tag));
         // otherwise, update last claim date to today
         member.document.lastClaimed = today.getTime();
 
@@ -59,7 +59,7 @@ export = class DailyCommand extends Command {
         member.document.claimStreak = yesterday.toDateString() === lastClaimed.toDateString() ? member.document.claimStreak + 1 : 1;
 
         // get claim message for the current streak
-        const claimStreakMessage = this.client.locale.getString("en_us", "info", this.getClaimMessageKey(member.document.claimStreak), 7 - member.document.claimStreak);
+        const claimStreakMessage = this.client.locale.getString((message.guild as BastionGuild).document.language, "info", this.getClaimMessageKey(member.document.claimStreak), 7 - member.document.claimStreak);
 
         // check whether member has completed the streak
         if (member.document.claimStreak === 7) {
@@ -84,9 +84,9 @@ export = class DailyCommand extends Command {
         message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", "claim", message.author.tag) + "\n\n" + claimStreakMessage,
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "claim", message.author.tag) + "\n\n" + claimStreakMessage,
                 footer: {
-                    text: message.member.premiumSinceTimestamp ? this.client.locale.getString("en_us", "info", "claimRewardBooster") : "",
+                    text: message.member.premiumSinceTimestamp ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "claimRewardBooster") : "",
                 },
             },
         }).catch(() => {

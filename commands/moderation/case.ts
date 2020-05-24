@@ -47,7 +47,7 @@ export = class CaseCommand extends Command {
             number: argv.number,
         });
 
-        if (!moderationCase) throw new Error(this.client.locale.getString("en_us", "errors", "caseNotFound"));
+        if (!moderationCase) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "caseNotFound"));
 
         const channelsPool = message.guild.channels.cache.filter(c => c.type === "text" || c.type === "news");
 

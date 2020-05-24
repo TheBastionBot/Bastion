@@ -40,7 +40,7 @@ export = class Music extends Command {
         await message.channel.send({
             embed: {
                 color: status ? Constants.COLORS.RED : Constants.COLORS.GREEN,
-                description: this.client.locale.getString("en_us", "info", status ? "musicDisable" : "musicEnable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", status ? "musicDisable" : "musicEnable", message.author.tag),
             },
         }).catch(() => {
             // This error can be ignored.

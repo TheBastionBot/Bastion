@@ -6,6 +6,8 @@
 import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class DonateCommand extends Command {
     constructor() {
         super("donate", {
@@ -41,7 +43,7 @@ export = class DonateCommand extends Command {
                     },
                 ],
                 footer: {
-                    text: this.client.locale.getString("en_us", "info", "didYouKnowDonation"),
+                    text: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowDonation"),
                 },
             },
         }).catch(() => {

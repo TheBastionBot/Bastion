@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { GuildChannel, Message, TextChannel } from "discord.js";
 
 import * as strings from "../../utils/strings";
+import BastionGuild = require("../../structures/Guild");
 
 export = class ChannelCommand extends Command {
     constructor() {
@@ -39,7 +40,7 @@ export = class ChannelCommand extends Command {
             channel = message.channel as GuildChannel;
         }
 
-        if (!channel) throw new Error(this.client.locale.getString("en_us", "errors", "channelNotFound"));
+        if (!channel) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "channelNotFound"));
 
 
         // acknowledge

@@ -8,7 +8,6 @@ import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
 
-
 export = class Suggestions extends Command {
     constructor() {
         super("suggestions", {
@@ -51,7 +50,7 @@ export = class Suggestions extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.suggestionsChannelId ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.suggestionsChannelId ? "suggestionsEnable" : "suggestionsDisable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.suggestionsChannelId ? "suggestionsEnable" : "suggestionsDisable", message.author.tag),
             },
         }).catch(() => {
             // This error can be ignored.

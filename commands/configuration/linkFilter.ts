@@ -56,9 +56,9 @@ export = class LinkFilterCommand extends Command {
         await message.channel.send({
             embed: {
                 color: argv.enable ? Constants.COLORS.GREEN : argv.disable ? Constants.COLORS.RED : Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", argv.enable ? "linkFilterEnable" : argv.disable ? "linkFilterDisable" : guild.document.filters.linkFilter.enabled ? "linkFilterEnabled" : "linkFilterDisabled", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.enable ? "linkFilterEnable" : argv.disable ? "linkFilterDisable" : guild.document.filters.linkFilter.enabled ? "linkFilterEnabled" : "linkFilterDisabled", message.author.tag),
                 footer: {
-                    text: guild.document.filters.linkFilter.enabled ? this.client.locale.getString("en_us", "info", guild.document.filters.linkFilter.infraction ? "filterInfractionEnabled" : "filterInfractionDisabled") : "",
+                    text: guild.document.filters.linkFilter.enabled ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.filters.linkFilter.infraction ? "filterInfractionEnabled" : "filterInfractionDisabled") : "",
                 },
             },
         }).catch(() => {

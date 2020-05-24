@@ -8,6 +8,7 @@ import { Message } from "discord.js";
 
 import MemberModel from "../../models/Member";
 import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class KarmaCommand extends Command {
     constructor() {
@@ -32,7 +33,7 @@ export = class KarmaCommand extends Command {
 
         // check whether the specified user is a server member
         const member = this.client.resolver.resolveGuildMember(message.guild, argv._.join(" "));
-        if (!member) throw new Error(this.client.locale.getString("en_us", "errors", "memberNotFound"));
+        if (!member) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "memberNotFound"));
 
         // check whether author is giving karma to themselves
         if (message.author.id === member.id) throw new Error("NO_SELF_KARMA");
@@ -41,7 +42,7 @@ export = class KarmaCommand extends Command {
         const memberProfile = await MemberModel.findOne({ user: member.id, guild: message.guild.id });
 
         // check whether member profile exists
-        if (!memberProfile) throw new Error(this.client.locale.getString("en_us", "errors", "profileNotFound"));
+        if (!memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound"));
 
         // give karma to the member
         memberProfile.karma += 1;
@@ -53,7 +54,7 @@ export = class KarmaCommand extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
-                description: this.client.locale.getString("en_us", "info", "karma", message.author.tag, member.user.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "karma", message.author.tag, member.user.tag),
             },
         }).catch(() => {
             // this error can be ignored

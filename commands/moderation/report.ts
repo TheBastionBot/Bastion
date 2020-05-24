@@ -70,7 +70,7 @@ export = class Report extends Command {
             await message.channel.send({
                 embed: {
                     color: Constants.COLORS.ORANGE,
-                    description: this.client.locale.getString("en_us", "info", "reportConfirmation", message.author.tag),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reportConfirmation", message.author.tag),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -84,7 +84,7 @@ export = class Report extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", "noReportChannel"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "noReportChannel"),
                 },
             }).catch(() => {
                 // This error can be ignored.

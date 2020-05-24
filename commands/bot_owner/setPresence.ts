@@ -6,6 +6,8 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, Presence } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class SetPresence extends Command {
     constructor() {
         super("setPresence", {
@@ -66,7 +68,7 @@ export = class SetPresence extends Command {
             embed: {
                 color: Constants.COLORS.PUPIL,
                 title: "Presence Updated",
-                description: this.client.locale.getString("en_us", "info", "setPresence", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "setPresence", message.author.tag),
                 fields: [
                     {
                         name: "Status",

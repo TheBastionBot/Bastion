@@ -39,7 +39,7 @@ export = class VoiceSessionsCommand extends Command {
             const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
                 // this error can be ignored
             });
-            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumVoiceSessions"));
+            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumVoiceSessions"));
         }
 
         if (argv.create) {
@@ -70,7 +70,7 @@ export = class VoiceSessionsCommand extends Command {
             return message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "voiceSessionCreate", message.author.tag),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "voiceSessionCreate", message.author.tag),
                 },
             }).catch(() => {
                 // this error can be ignored

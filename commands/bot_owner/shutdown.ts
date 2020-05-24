@@ -5,7 +5,9 @@
 
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
+
 import BastionUser = require("../../structures/User");
+import BastionGuild = require("../../structures/Guild");
 
 export = class Shutdown extends Command {
     constructor() {
@@ -42,7 +44,7 @@ export = class Shutdown extends Command {
         const question = await message.channel.send({
             embed: {
                 color: Constants.COLORS.PUPIL,
-                description: this.client.locale.getString("en_us", "info", "shutdownQuestion", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "shutdownQuestion", message.author.tag),
             },
         });
 

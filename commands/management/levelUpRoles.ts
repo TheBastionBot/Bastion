@@ -12,7 +12,7 @@ import * as errors from "../../utils/errors";
 import * as gamification from "../../utils/gamification";
 import * as numbers from "../../utils/numbers";
 import * as omnic from "../../utils/omnic";
-
+import BastionGuild = require("../../structures/Guild");
 import BastionRole = require("../../structures/Role");
 
 export = class LevelUpRolesCommand extends Command {
@@ -64,12 +64,12 @@ export = class LevelUpRolesCommand extends Command {
 
                     if (tier) { // check for premium membership limits
                         if (tier === omnic.PremiumTier.GOLD && roleLevels.length >= constants.LIMITS.GOLD.ROLE_LEVELS) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitRoleLevels", constants.LIMITS.GOLD.ROLE_LEVELS));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitRoleLevels", constants.LIMITS.GOLD.ROLE_LEVELS));
                         } else if (tier === omnic.PremiumTier.PLATINUM && roleLevels.length >= constants.LIMITS.PLATINUM.ROLE_LEVELS) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitRoleLevels", constants.LIMITS.PLATINUM.ROLE_LEVELS));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitRoleLevels", constants.LIMITS.PLATINUM.ROLE_LEVELS));
                         }
                     } else if (roleLevels.length >= constants.LIMITS.ROLE_LEVELS) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumRoleLevels", constants.LIMITS.ROLE_LEVELS));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumRoleLevels", constants.LIMITS.ROLE_LEVELS));
                     }
 
 
@@ -82,19 +82,19 @@ export = class LevelUpRolesCommand extends Command {
 
                     if (tier) { // check for premium membership limits
                         if (tier === omnic.PremiumTier.GOLD && levelRolesCount >= constants.LIMITS.GOLD.ROLES_PER_LEVEL) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitLevelRoles", constants.LIMITS.GOLD.ROLES_PER_LEVEL));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitLevelRoles", constants.LIMITS.GOLD.ROLES_PER_LEVEL));
                         } else if (tier === omnic.PremiumTier.PLATINUM && levelRolesCount >= constants.LIMITS.PLATINUM.ROLES_PER_LEVEL) {
-                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitLevelRoles", constants.LIMITS.PLATINUM.ROLES_PER_LEVEL));
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitLevelRoles", constants.LIMITS.PLATINUM.ROLES_PER_LEVEL));
                         }
                     } else if (levelRolesCount >= constants.LIMITS.ROLES_PER_LEVEL) {
-                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumLevelRoles", constants.LIMITS.ROLES_PER_LEVEL));
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumLevelRoles", constants.LIMITS.ROLES_PER_LEVEL));
                     }
                 }
 
 
                 const role = this.client.resolver.resolveRole(message.guild, argv.role.join(" ")) as BastionRole;
 
-                if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString("en_us", "error", "roleNotFound"));
+                if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "error", "roleNotFound"));
 
                 // get the role document if it exists
                 let roleDocument = await role.fetchDocument();
@@ -114,7 +114,7 @@ export = class LevelUpRolesCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.GREEN,
-                        description: this.client.locale.getString("en_us", "info", "roleLevelAdd", message.author.tag, role.name, argv.level),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleLevelAdd", message.author.tag, role.name, argv.level),
                     },
                 }).catch(() => {
                     // this error can be ignored
@@ -136,7 +136,7 @@ export = class LevelUpRolesCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.RED,
-                        description: this.client.locale.getString("en_us", "info", "roleLevelClear", message.author.tag, argv.level),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleLevelClear", message.author.tag, argv.level),
                     },
                 }).catch(() => {
                     // this error can be ignored

@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class SetAvatar extends Command {
     constructor() {
@@ -43,7 +44,7 @@ export = class SetAvatar extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.PUPIL,
-                description: this.client.locale.getString("en_us", "info", "updateAvatar", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "updateAvatar", message.author.tag),
                 image: {
                     url: this.client.user.displayAvatarURL({
                         dynamic: true,

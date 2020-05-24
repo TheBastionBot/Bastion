@@ -48,7 +48,7 @@ export = class MentionSpamCommand extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.mentionSpam.threshold ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.mentionSpam.threshold ? "mentionSpamInfractionsEnable" : "mentionSpamInfractionsDisable", message.author.tag, guild.document.mentionSpam.threshold),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.mentionSpam.threshold ? "mentionSpamInfractionsEnable" : "mentionSpamInfractionsDisable", message.author.tag, guild.document.mentionSpam.threshold),
             },
         }).catch(() => {
             // this error can be ignored

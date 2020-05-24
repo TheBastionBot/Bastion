@@ -8,7 +8,6 @@ import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
 
-
 export = class ReactionAnnouncementsCommand extends Command {
     constructor() {
         super("reactionAnnouncements", {
@@ -43,8 +42,8 @@ export = class ReactionAnnouncementsCommand extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.reactionAnnouncements ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.reactionAnnouncements ? "reactionAnnouncementsEnable" : "reactionAnnouncementsDisable", message.author.tag)
-                    + (guild.document.announcementsChannelId ? "" : this.client.locale.getString("en_us", "info", "reactionAnnouncementsEnableWithoutAnnouncementChannel", message.author.tag)),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.reactionAnnouncements ? "reactionAnnouncementsEnable" : "reactionAnnouncementsDisable", message.author.tag)
+                    + (guild.document.announcementsChannelId ? "" : this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionAnnouncementsEnableWithoutAnnouncementChannel", message.author.tag)),
             },
         }).catch(() => {
             // This error can be ignored.

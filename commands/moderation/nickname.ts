@@ -7,7 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-
+import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
 export = class Nickname extends Command {
@@ -48,8 +48,8 @@ export = class Nickname extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    title: this.client.locale.getString("en_us", "errors", "unauthorized"),
-                    description: this.client.locale.getString("en_us", "errors", "rolePosition", message.author.tag, member.user.tag),
+                    title: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "unauthorized"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "rolePosition", message.author.tag, member.user.tag),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -66,8 +66,8 @@ export = class Nickname extends Command {
             embed: {
                 color: Constants.COLORS.ORANGE,
                 description: argv.nick
-                    ? this.client.locale.getString("en_us", "info", "nickUpdate", message.author.tag, member.user.tag, argv.nick)
-                    : this.client.locale.getString("en_us", "info", "nickRemove", message.author.tag, member.user.tag),
+                    ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "nickUpdate", message.author.tag, member.user.tag, argv.nick)
+                    : this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "nickRemove", message.author.tag, member.user.tag),
                 fields: [
                     {
                         name: "Reason",

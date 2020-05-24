@@ -6,10 +6,10 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
-import BastionGuild = require("../../structures/Guild");
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
+import BastionGuild = require("../../structures/Guild");
 
 export = class GamblingCommand extends Command {
     constructor() {
@@ -39,7 +39,7 @@ export = class GamblingCommand extends Command {
             const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
                 // this error can be ignored
             });
-            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGamblingMultiplier"));
+            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumGamblingMultiplier"));
         }
 
 
@@ -61,7 +61,7 @@ export = class GamblingCommand extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.gambling.enabled ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.gambling.enabled ? "gamblingEnable" : "gamblingDisable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.gambling.enabled ? "gamblingEnable" : "gamblingDisable", message.author.tag),
                 fields: guild.document.gambling.enabled
                     ? [
                         {

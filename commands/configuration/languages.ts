@@ -7,7 +7,6 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as arrays from "../../utils/arrays";
-
 import BastionGuild = require("../../structures/Guild");
 
 export = class Languages extends Command {
@@ -45,7 +44,7 @@ export = class Languages extends Command {
 
             // check whether the language is available
             if (!locales.includes(language)) {
-                throw new Error(this.client.locale.getString("en_us", "errors", "languageUnavailable"));
+                throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "languageUnavailable"));
             }
 
             // set guild language
@@ -58,7 +57,7 @@ export = class Languages extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "guildLanguageUpdate", message.author.tag, language.toUpperCase()),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "guildLanguageUpdate", message.author.tag, language.toUpperCase()),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -70,7 +69,7 @@ export = class Languages extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 title: "Available Languages",
-                description: this.client.locale.getString("en_us", "info", "availableLocales"),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "availableLocales"),
                 fields: [
                     {
                         name: "Languages",

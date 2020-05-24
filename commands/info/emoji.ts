@@ -6,6 +6,8 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
+import BastionGuild = require("../../structures/Guild");
+
 export = class EmojiCommand extends Command {
     constructor() {
         super("emoji", {
@@ -33,7 +35,7 @@ export = class EmojiCommand extends Command {
         // identify the emoji
         const emoji = message.guild.emojis.cache.has(identifier) ? message.guild.emojis.cache.get(identifier) : message.guild.emojis.cache.find(e => e.name === identifier);
 
-        if (!emoji) throw new Error(this.client.locale.getString("en_us", "errors", "emojiNotFound"));
+        if (!emoji) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "emojiNotFound"));
 
         const author = await emoji.fetchAuthor().catch(() => {
             // this error can be ignored

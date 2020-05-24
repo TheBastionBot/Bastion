@@ -6,8 +6,9 @@
 import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
-import * as errors from "../../utils/errors";
 import confirmation from "../../utils/confirmation";
+import * as errors from "../../utils/errors";
+import BastionGuild = require("../../structures/Guild");
 
 export = class RolesCommand extends Command {
     constructor() {
@@ -58,7 +59,7 @@ export = class RolesCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "roleCreate", message.author.tag, role.name, reason),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleCreate", message.author.tag, role.name, reason),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -70,7 +71,7 @@ export = class RolesCommand extends Command {
             const role = this.client.resolver.resolveRole(message.guild, argv.delete.join(" "));
 
             // get confirmation
-            const answer = await confirmation(message, this.client.locale.getString("en_us", "info", "roleDeleteQuestion", message.author.tag, role.name));
+            const answer = await confirmation(message, this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleDeleteQuestion", message.author.tag, role.name));
 
             if (answer) {
                 // delete role
@@ -80,7 +81,7 @@ export = class RolesCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.GREEN,
-                        description: this.client.locale.getString("en_us", "info", "roleDelete", message.author.tag, role.name, reason),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleDelete", message.author.tag, role.name, reason),
                     },
                 }).catch(() => {
                     // this error can be ignored
@@ -103,7 +104,7 @@ export = class RolesCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString("en_us", "info", "roleRename", message.author.tag, role.name, reason),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleRename", message.author.tag, role.name, reason),
                 },
             }).catch(() => {
                 // this error can be ignored

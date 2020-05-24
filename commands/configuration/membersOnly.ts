@@ -8,7 +8,6 @@ import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
 
-
 export = class MembersOnlyCommand extends Command {
     constructor() {
         super("membersOnly", {
@@ -43,7 +42,7 @@ export = class MembersOnlyCommand extends Command {
         await message.channel.send({
             embed: {
                 color: guild.document.membersOnly ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", guild.document.membersOnly ? "membersOnlyEnable" : "membersOnlyDisable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.membersOnly ? "membersOnlyEnable" : "membersOnlyDisable", message.author.tag),
             },
         }).catch(() => {
             // This error can be ignored.

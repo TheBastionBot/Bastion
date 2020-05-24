@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import * as strings from "../../utils/strings";
+import BastionGuild = require("../../structures/Guild");
 
 export = class Commands extends Command {
     constructor() {
@@ -49,7 +50,7 @@ export = class Commands extends Command {
                     },
                     title: "Command Search",
                     url: this.client.locale.getConstant("bastion.website") + "/commands",
-                    description: this.client.locale.getString("en_us", "info", "commandSearchFound", filteredCommands.length.toString(), argv.search),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandSearchFound", filteredCommands.length.toString(), argv.search),
                     fields: [
                         {
                             name: "Commands",
@@ -57,11 +58,11 @@ export = class Commands extends Command {
                         },
                         {
                             name: "Want the complete list?",
-                            value: this.client.locale.getString("en_us", "info", "commandsWebsite"),
+                            value: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandsWebsite"),
                         },
                     ],
                     footer: {
-                        text: this.client.locale.getString("en_us", "info", "didYouKnowCommandsCount", this.manager.modules.size),
+                        text: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowCommandsCount", this.manager.modules.size),
                     },
                 },
             }).catch(() => {
@@ -97,7 +98,7 @@ export = class Commands extends Command {
                         },
                         title: "Commands in " + strings.snakeToTitleCase(category) + " Category",
                         url: this.client.locale.getConstant("bastion.website") + "/commands",
-                        description: this.client.locale.getString("en_us", "info", "commandCategoriesCommand", Object.keys(commands).length),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandCategoriesCommand", Object.keys(commands).length),
                         fields: [
                             {
                                 name: "Commands",
@@ -105,12 +106,12 @@ export = class Commands extends Command {
                             },
                             {
                                 name: "Need more details?",
-                                value: this.client.locale.getString("en_us", "info", "commandDetailsOption")
+                                value: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandDetailsOption")
                                     + "```bash\ncommands --help```",
                             },
                         ],
                         footer: {
-                            text: this.client.locale.getString("en_us", "info", "didYouKnowCommandsCount", this.manager.modules.size),
+                            text: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowCommandsCount", this.manager.modules.size),
                         },
                     },
                 }).catch(() => {
@@ -139,7 +140,7 @@ export = class Commands extends Command {
                 },
                 title: "Command Categories",
                 url: this.client.locale.getConstant("bastion.website") + "/commands",
-                description: this.client.locale.getString("en_us", "info", "categoryCommandsCommand"),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "categoryCommandsCommand"),
                 fields: [
                     {
                         name: "Command Categories",
@@ -147,11 +148,11 @@ export = class Commands extends Command {
                     },
                     {
                         name: "Want the complete list?",
-                        value: this.client.locale.getString("en_us", "info", "commandsWebsite"),
+                        value: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandsWebsite"),
                     },
                 ],
                 footer: {
-                    text: this.client.locale.getString("en_us", "info", "didYouKnowCommandsCount", this.manager.modules.size),
+                    text: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowCommandsCount", this.manager.modules.size),
                 },
             },
         }).catch(() => {

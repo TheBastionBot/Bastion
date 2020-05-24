@@ -7,6 +7,7 @@ import { Command, Constants } from "tesseract";
 import { Message } from "discord.js";
 
 import ConfigModel from "../../models/Config";
+import BastionGuild = require("../../structures/Guild");
 
 export = class RelayDirectMessages extends Command {
     constructor() {
@@ -37,7 +38,7 @@ export = class RelayDirectMessages extends Command {
             embed: {
                 color: config.relayDirectMessages ? Constants.COLORS.GREEN : Constants.COLORS.RED,
                 title: "Direct Messages Relay",
-                description: this.client.locale.getString("en_us", "info", config.relayDirectMessages ? "directMessagesRelayEnable" : "directMessagesRelayDisable", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", config.relayDirectMessages ? "directMessagesRelayEnable" : "directMessagesRelayDisable", message.author.tag),
             },
         }).catch(() => {
             // this error can be ignored.

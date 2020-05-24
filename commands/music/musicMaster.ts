@@ -43,7 +43,7 @@ export = class MusicMaster extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString("en_us", "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", constants.isPublicBastion(message.author) ? "musicDisabledPublic" : "musicDisabled"),
                 },
             }).catch(() => {
                 // This error can be ignored.
@@ -63,7 +63,7 @@ export = class MusicMaster extends Command {
         await message.channel.send({
             embed: {
                 color: role ? Constants.COLORS.GREEN : Constants.COLORS.RED,
-                description: this.client.locale.getString("en_us", "info", role ? "musicMasterRoleAdd" : "musicMasterRoleRemove", message.author.tag, role ? role.name : null),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", role ? "musicMasterRoleAdd" : "musicMasterRoleRemove", message.author.tag, role ? role.name : null),
             },
         }).catch(() => {
             // This error can be ignored.
