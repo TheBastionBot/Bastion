@@ -15,7 +15,7 @@ export = class StatusCommand extends Command {
     constructor() {
         super("status", {
             description: "It allows you to see Bastion's status, at a glance. It also allows you to see status of the current shard.",
-            triggers: [ "stats" ],
+            triggers: [ "stats", "info" ],
             arguments: {
                 boolean: [ "shard" ],
             },
