@@ -81,6 +81,10 @@ export interface Guild {
             users: string[];
         };
     };
+    voiceSessions: {
+        categories?: string[];
+        userLimit?: number;
+    };
     disabledCommands?: string[];
     membersOnly?: boolean;
 }
@@ -306,6 +310,16 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                         type: [ String ],
                     },
                 },
+            },
+        },
+    },
+    voiceSessions: {
+        type: {
+            categories: {
+                type: [ String ],
+            },
+            userLimit: {
+                type: Number,
             },
         },
     },
