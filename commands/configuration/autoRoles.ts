@@ -46,7 +46,7 @@ export = class AutoRoles extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         if (argv.add) {
-            // check for premium membership
+            // check for premium membership limits
             if (constants.isPublicBastion(this.client.user)) {
                 // find auto roles in the server
                 const autoRolesCount = await RoleModel.countDocuments({
@@ -54,7 +54,23 @@ export = class AutoRoles extends Command {
                     autoAssignable: { $exists: true, $ne: null },
                 });
 
-                if (autoRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumAutoRoles", 5));
+                // check whether limits have exceeded
+                if (autoRolesCount >= constants.LIMITS.AUTO_ROLES) {
+                    // fetch the premium tier
+                    const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                        // this error can be ignored
+                    });
+
+                    if (tier) { // check for premium membership limits
+                        if (tier === omnic.PremiumTier.GOLD && autoRolesCount >= constants.LIMITS.GOLD.AUTO_ROLES) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitAutoRoles", constants.LIMITS.GOLD.AUTO_ROLES));
+                        } else if (tier === omnic.PremiumTier.PLATINUM && autoRolesCount >= constants.LIMITS.PLATINUM.AUTO_ROLES) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitAutoRoles", constants.LIMITS.PLATINUM.AUTO_ROLES));
+                        }
+                    } else {    // no premium membership
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumAutoRoles", constants.LIMITS.AUTO_ROLES));
+                    }
+                }
             }
 
 

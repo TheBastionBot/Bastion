@@ -60,14 +60,30 @@ export = class MessageFilterCommand extends Command {
         }
 
         if (argv.pattern && argv.pattern.length && (argv._.length || argv.reaction)) {
-            // check for premium membership
+            // check for premium membership limits
             if (constants.isPublicBastion(this.client.user)) {
                 // find triggers in the server
                 const triggersCount = await TriggerModel.countDocuments({
                     guild: message.guild.id,
                 });
 
-                if (triggersCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumTriggers", 5));
+                // check whether limits have exceeded
+                if (triggersCount >= constants.LIMITS.TRIGGERS) {
+                    // fetch the premium tier
+                    const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                        // this error can be ignored
+                    });
+
+                    if (tier) { // check for premium membership limits
+                        if (tier === omnic.PremiumTier.GOLD && triggersCount >= constants.LIMITS.GOLD.TRIGGERS) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitTriggers", constants.LIMITS.GOLD.TRIGGERS));
+                        } else if (tier === omnic.PremiumTier.PLATINUM && triggersCount >= constants.LIMITS.PLATINUM.TRIGGERS) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitTriggers", constants.LIMITS.PLATINUM.TRIGGERS));
+                        }
+                    } else {    // no premium membership
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumTriggers", constants.LIMITS.TRIGGERS));
+                    }
+                }
             }
 
 

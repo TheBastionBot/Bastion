@@ -67,7 +67,22 @@ export = class GiveawayCommand extends Command {
 
         // check for premium membership
         if (constants.isPublicBastion(this.client.user)) {
-            if (timeout > 168 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveawayTimeout", 1));
+            // fetch the premium tier
+            const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                // this error can be ignored
+            });
+
+
+            if (tier) { // check for premium membership limits
+                if (tier === omnic.PremiumTier.GOLD && timeout > constants.LIMITS.GOLD.GIVEAWAY_TIMEOUT) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveawayTimeout", constants.LIMITS.GOLD.GIVEAWAY_TIMEOUT));
+                } else if (tier === omnic.PremiumTier.PLATINUM && timeout > constants.LIMITS.PLATINUM.GIVEAWAY_TIMEOUT) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveawayTimeout", constants.LIMITS.PLATINUM.GIVEAWAY_TIMEOUT));
+                }
+            } else if (timeout > constants.LIMITS.GIVEAWAY_TIMEOUT) {
+                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveawayTimeout", constants.LIMITS.GIVEAWAY_TIMEOUT));
+            }
+
 
             // find active giveaways in the server
             const activeGiveawaysCount = await GiveawayModel.countDocuments({
@@ -77,7 +92,16 @@ export = class GiveawayCommand extends Command {
                 },
             });
 
-            if (activeGiveawaysCount > 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveaways", 5));
+
+            if (tier) { // check for premium membership limits
+                if (tier === omnic.PremiumTier.GOLD && activeGiveawaysCount >= constants.LIMITS.GOLD.GIVEAWAYS) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveaways", constants.LIMITS.GOLD.GIVEAWAYS));
+                } else if (tier === omnic.PremiumTier.PLATINUM && activeGiveawaysCount >= constants.LIMITS.PLATINUM.GIVEAWAYS) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitGiveaways", constants.LIMITS.PLATINUM.GIVEAWAYS));
+                }
+            } else {    // no premium membership
+                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGiveaways", constants.LIMITS.GIVEAWAYS));
+            }
         }
 
 

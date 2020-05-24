@@ -63,14 +63,38 @@ export = class ReactionRolesCommand extends Command {
         if (argv.message && argv.role && argv.role.length) {
             // check for premium membership
             if (constants.isPublicBastion(this.client.user)) {
-                if (argv.role.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroupRoles", 5));
+                // fetch the premium tier
+                const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                    // this error can be ignored
+                });
+
+
+                if (tier) { // check for premium membership limits
+                    if (tier === omnic.PremiumTier.GOLD && argv.role.length > constants.LIMITS.GOLD.REACTION_ROLES_PER_GROUP) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroupRoles", constants.LIMITS.GOLD.REACTION_ROLES_PER_GROUP));
+                    } else if (tier === omnic.PremiumTier.PLATINUM && argv.role.length > constants.LIMITS.PLATINUM.REACTION_ROLES_PER_GROUP) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroupRoles", constants.LIMITS.PLATINUM.REACTION_ROLES_PER_GROUP));
+                    }
+                } else if (argv.role.length > constants.LIMITS.REACTION_ROLES_PER_GROUP) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroupRoles", constants.LIMITS.REACTION_ROLES_PER_GROUP));
+                }
+
 
                 // find reaction role groups in the server
                 const reactionRoleGroupsCount = await ReactionRoleGroupModel.countDocuments({
                     guild: message.guild.id,
                 });
 
-                if (reactionRoleGroupsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroups", 3));
+
+                if (tier) { // check for premium membership limits
+                    if (tier === omnic.PremiumTier.GOLD && reactionRoleGroupsCount >= constants.LIMITS.GOLD.REACTION_ROLE_GROUPS) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroups", constants.LIMITS.GOLD.REACTION_ROLE_GROUPS));
+                    } else if (tier === omnic.PremiumTier.PLATINUM && reactionRoleGroupsCount >= constants.LIMITS.PLATINUM.REACTION_ROLE_GROUPS) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitReactionRoleGroups", constants.LIMITS.PLATINUM.REACTION_ROLE_GROUPS));
+                    }
+                } else if (reactionRoleGroupsCount >= constants.LIMITS.REACTION_ROLE_GROUPS) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumReactionRoleGroups", constants.LIMITS.REACTION_ROLE_GROUPS));
+                }
             }
 
 

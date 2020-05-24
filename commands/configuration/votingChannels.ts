@@ -48,7 +48,23 @@ export = class Announcements extends Command {
                     voting: true,
                 });
 
-                if (votingChannelsCount >= 3 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumVotingChannels", 3));
+                // check whether limits have exceeded
+                if (votingChannelsCount >= constants.LIMITS.VOTING_CHANNELS) {
+                    // fetch the premium tier
+                    const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                        // this error can be ignored
+                    });
+
+                    if (tier) { // check for premium membership limits
+                        if (tier === omnic.PremiumTier.GOLD && votingChannelsCount >= constants.LIMITS.GOLD.VOTING_CHANNELS) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitVotingChannels", constants.LIMITS.GOLD.VOTING_CHANNELS));
+                        } else if (tier === omnic.PremiumTier.PLATINUM && votingChannelsCount >= constants.LIMITS.PLATINUM.VOTING_CHANNELS) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitVotingChannels", constants.LIMITS.PLATINUM.VOTING_CHANNELS));
+                        }
+                    } else {    // no premium membership
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumVotingChannels", constants.LIMITS.VOTING_CHANNELS));
+                    }
+                }
             }
 
 

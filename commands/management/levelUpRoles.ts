@@ -49,13 +49,29 @@ export = class LevelUpRolesCommand extends Command {
             if (argv.role) {
                 // check for premium membership
                 if (constants.isPublicBastion(this.client.user)) {
+                    // fetch the premium tier
+                    const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                        // this error can be ignored
+                    });
+
+
                     // find role levels
                     const roleLevels = await RoleModel.distinct("level", {
                         guild: message.guild.id,
                         level: { $exists: true, $ne: null },
                     });
 
-                    if (roleLevels.length >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumRoleLeves", 5));
+
+                    if (tier) { // check for premium membership limits
+                        if (tier === omnic.PremiumTier.GOLD && roleLevels.length >= constants.LIMITS.GOLD.ROLE_LEVELS) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitRoleLevels", constants.LIMITS.GOLD.ROLE_LEVELS));
+                        } else if (tier === omnic.PremiumTier.PLATINUM && roleLevels.length >= constants.LIMITS.PLATINUM.ROLE_LEVELS) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitRoleLevels", constants.LIMITS.PLATINUM.ROLE_LEVELS));
+                        }
+                    } else if (roleLevels.length >= constants.LIMITS.ROLE_LEVELS) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumRoleLevels", constants.LIMITS.ROLE_LEVELS));
+                    }
+
 
                     // find roles in the level
                     const levelRolesCount = await RoleModel.countDocuments({
@@ -63,7 +79,16 @@ export = class LevelUpRolesCommand extends Command {
                         level: argv.level,
                     });
 
-                    if (levelRolesCount >= 1 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumLevelRoles", 1));
+
+                    if (tier) { // check for premium membership limits
+                        if (tier === omnic.PremiumTier.GOLD && levelRolesCount >= constants.LIMITS.GOLD.ROLES_PER_LEVEL) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitLevelRoles", constants.LIMITS.GOLD.ROLES_PER_LEVEL));
+                        } else if (tier === omnic.PremiumTier.PLATINUM && levelRolesCount >= constants.LIMITS.PLATINUM.ROLES_PER_LEVEL) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitLevelRoles", constants.LIMITS.PLATINUM.ROLES_PER_LEVEL));
+                        }
+                    } else if (levelRolesCount >= constants.LIMITS.ROLES_PER_LEVEL) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumLevelRoles", constants.LIMITS.ROLES_PER_LEVEL));
+                    }
                 }
 
 

@@ -65,9 +65,22 @@ export = class InviteFilterCommand extends Command {
             }
 
 
-            // check for premium membership
-            if (guild.document.streamers.twitch.users.length > 3 && constants.isPublicBastion(this.client.user)) {
-                if (!await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumStreamers", 3));
+            // check for premium membership limits
+            if (guild.document.streamers.twitch.users.length > constants.LIMITS.STREAMERS_PER_SERVICE && constants.isPublicBastion(this.client.user)) {
+                // fetch the premium tier
+                const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                    // this error can be ignored
+                });
+
+                if (tier) { // check for premium membership limits
+                    if (tier === omnic.PremiumTier.GOLD && guild.document.streamers.twitch.users.length > constants.LIMITS.GOLD.STREAMERS_PER_SERVICE) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitStreamers", constants.LIMITS.GOLD.STREAMERS_PER_SERVICE));
+                    } else if (tier === omnic.PremiumTier.PLATINUM && guild.document.streamers.twitch.users.length > constants.LIMITS.PLATINUM.STREAMERS_PER_SERVICE) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitStreamers", constants.LIMITS.PLATINUM.STREAMERS_PER_SERVICE));
+                    }
+                } else {    // no premium membership
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumStreamers", constants.LIMITS.STREAMERS_PER_SERVICE));
+                }
             }
 
 

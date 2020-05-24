@@ -41,7 +41,7 @@ export = class SelfRoles extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         if (argv.add) {
-            // check for premium membership
+            // check for premium membership limits
             if (constants.isPublicBastion(this.client.user)) {
                 // find self roles in the server
                 const selfRolesCount = await RoleModel.countDocuments({
@@ -49,7 +49,23 @@ export = class SelfRoles extends Command {
                     selfAssignable: true,
                 });
 
-                if (selfRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumSelfRoles", 5));
+                // check whether limits have exceeded
+                if (selfRolesCount >= constants.LIMITS.SELF_ROLES) {
+                    // fetch the premium tier
+                    const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                        // this error can be ignored
+                    });
+
+                    if (tier) { // check for premium membership limits
+                        if (tier === omnic.PremiumTier.GOLD && selfRolesCount >= constants.LIMITS.GOLD.SELF_ROLES) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitSelfRoles", constants.LIMITS.GOLD.SELF_ROLES));
+                        } else if (tier === omnic.PremiumTier.PLATINUM && selfRolesCount >= constants.LIMITS.PLATINUM.SELF_ROLES) {
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitSelfRoles", constants.LIMITS.PLATINUM.SELF_ROLES));
+                        }
+                    } else {    // no premium membership
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumSelfRoles", constants.LIMITS.SELF_ROLES));
+                    }
+                }
             }
 
 

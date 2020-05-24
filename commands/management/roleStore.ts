@@ -59,7 +59,23 @@ export = class RoleStoreCommand extends Command {
                         price: { $exists: true, $ne: null },
                     });
 
-                    if (paidRolesCount >= 5 && !await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPaidRoles", 5));
+                    // check whether limits have exceeded
+                    if (paidRolesCount >= constants.LIMITS.PAID_ROLES) {
+                        // fetch the premium tier
+                        const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                            // this error can be ignored
+                        });
+
+                        if (tier) { // check for premium membership limits
+                            if (tier === omnic.PremiumTier.GOLD && paidRolesCount >= constants.LIMITS.GOLD.PAID_ROLES) {
+                                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPaidRoles", constants.LIMITS.GOLD.PAID_ROLES));
+                            } else if (tier === omnic.PremiumTier.PLATINUM && paidRolesCount >= constants.LIMITS.PLATINUM.PAID_ROLES) {
+                                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPaidRoles", constants.LIMITS.PLATINUM.PAID_ROLES));
+                            }
+                        } else {    // no premium membership
+                            throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPaidRoles", constants.LIMITS.PAID_ROLES));
+                        }
+                    }
                 }
 
 

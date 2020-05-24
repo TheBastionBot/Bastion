@@ -8,7 +8,7 @@ import { Message } from "discord.js";
 
 import * as constants from "../../utils/constants";
 import * as duration from "../../utils/durations";
-import * as omnic from "../../utils/omnic";
+import * as badges from "../../utils/badges";
 import { version as bastionVersion } from "../../package.json";
 
 export = class StatusCommand extends Command {
@@ -33,10 +33,13 @@ export = class StatusCommand extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
-        // check for premium membership
-        const isPremiumGuild = await omnic.isPremiumGuild(message.guild).catch(() => {
+        // get guild badges
+        const guildBadges = await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
+        // check for premium membership
+        const guildMembership = badges.getMembership(guildBadges ? guildBadges.badgeValue : 0);
+
 
         // calculate Bastion's presence
         const guildCounts = await this.client.shard.broadcastEval("this.guilds.cache.size");
@@ -105,12 +108,13 @@ export = class StatusCommand extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                color: isPremiumGuild ? constants.COLORS.GOLD : Constants.COLORS.IRIS,
+                color: guildMembership ? guildMembership.color : Constants.COLORS.IRIS,
                 author: {
-                    name: "Bastion" + (isPremiumGuild ? " Gold" : "") + " v" + bastionVersion,
+                    name: "Bastion v" + bastionVersion,
                     url: this.client.locale.getConstant("bastion.website"),
                 },
                 title: (argv.shard ? "Shard " + this.client.shard.ids.join(" / ") : "") + " Status",
+                description: guildMembership.emoji + " " + guildMembership.name,
                 url: this.client.locale.getConstant("bastion.website") + "/status",
                 thumbnail: {
                     url: this.client.user.displayAvatarURL({

@@ -35,7 +35,11 @@ export = class GamblingCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // check for premium membership
         if (argv.multiplier && constants.isPublicBastion(this.client.user)) {
-            if (!await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGamblingMultiplier"));
+            // fetch the premium tier
+            const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                // this error can be ignored
+            });
+            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumGamblingMultiplier"));
         }
 
 

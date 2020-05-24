@@ -34,9 +34,22 @@ export = class Prefix extends Command {
         const guild = (message.guild as BastionGuild);
 
         if (argv._.length) {
-            // check for premium membership
-            if (argv._.length > 3 && constants.isPublicBastion(this.client.user)) {
-                if (!await omnic.isPremiumGuild(message.guild)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPrefix", 3));
+            // check for premium membership limits
+            if (argv._.length > constants.LIMITS.PREFIXES && constants.isPublicBastion(this.client.user)) {
+                // fetch the premium tier
+                const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                    // this error can be ignored
+                });
+
+                if (tier) { // check for premium membership limits
+                    if (tier === omnic.PremiumTier.GOLD && argv._.length > constants.LIMITS.GOLD.PREFIXES) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPrefix", constants.LIMITS.GOLD.PREFIXES));
+                    } else if (tier === omnic.PremiumTier.PLATINUM && argv._.length > constants.LIMITS.PLATINUM.PREFIXES) {
+                        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString("en_us", "errors", "membershipLimitPrefix", constants.LIMITS.PLATINUM.PREFIXES));
+                    }
+                } else {    // no premium membership
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString("en_us", "errors", "premiumPrefix", constants.LIMITS.PREFIXES));
+                }
             }
 
 
