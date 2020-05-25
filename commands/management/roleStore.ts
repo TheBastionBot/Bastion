@@ -124,8 +124,9 @@ export = class RoleStoreCommand extends Command {
                 // add the role to the member
                 await message.member.roles.add(role);
 
-                // deduct the balance from the member
-                (message.member as BastionGuildMember).document.balance -= roleDocument.price;
+                // debit the price from the member's account
+                (message.member as BastionGuildMember).debit(roleDocument.price, "Paid Role", (message.member as BastionGuildMember).document);
+
                 await (message.member as BastionGuildMember).document.save();
 
                 // acknowledge
