@@ -7,7 +7,6 @@ import { Constants, ModuleManagerEvent, Client, Logger } from "tesseract";
 import { ClientApplication, DMChannel, Message, Snowflake, Team, User } from "discord.js";
 
 import * as emojis from "../utils/emojis";
-import * as numbers from "../utils/numbers";
 import * as gamification from "../utils/gamification";
 import * as omnic from "../utils/omnic";
 import * as variables from "../utils/variables";
@@ -77,7 +76,8 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
 
         // level up
         if (computedLevel > member.document.level) {
-            member.document.balance = numbers.clamp(member.document.balance + computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER, Number.MAX_SAFE_INTEGER);
+            // credit reward amount into member's account
+            await member.credit(computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER, "Level-up Reward", member.document);
 
             // achievement message
             if (guild.document.gamification.messages) {
