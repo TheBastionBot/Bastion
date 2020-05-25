@@ -14,7 +14,7 @@ export = class RoleCommand extends Command {
     constructor() {
         super("role", {
             description: "It allows you see the information of a role.",
-            triggers: [],
+            triggers: [ "roleInfo" ],
             arguments: {},
             scope: "guild",
             owner: false,
@@ -23,7 +23,7 @@ export = class RoleCommand extends Command {
             clientPermissions: [],
             userPermissions: [],
             syntax: [
-                "role -- ROLE",
+                "role ROLE",
             ],
         });
     }

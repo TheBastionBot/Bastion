@@ -13,7 +13,7 @@ export = class ServerCommand extends Command {
     constructor() {
         super("server", {
             description: "It allows you see the information of the server.",
-            triggers: [],
+            triggers: [ "serverInfo" ],
             arguments: {},
             scope: "guild",
             owner: false,

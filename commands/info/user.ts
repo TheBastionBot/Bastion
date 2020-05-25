@@ -12,7 +12,7 @@ export = class UserCommand extends Command {
     constructor() {
         super("user", {
             description: "It allows you see the information of a user.",
-            triggers: [ "member" ],
+            triggers: [ "member", "userInfo", "memberInfo" ],
             arguments: {},
             scope: "guild",
             owner: false,
@@ -22,7 +22,7 @@ export = class UserCommand extends Command {
             userPermissions: [],
             syntax: [
                 "user",
-                "user -- USER_ID",
+                "user USER",
             ],
         });
     }

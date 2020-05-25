@@ -13,7 +13,7 @@ export = class ChannelCommand extends Command {
     constructor() {
         super("channel", {
             description: "It allows you see the information of a channel.",
-            triggers: [],
+            triggers: [ "channelInfo" ],
             arguments: {},
             scope: "guild",
             owner: false,
@@ -23,7 +23,7 @@ export = class ChannelCommand extends Command {
             userPermissions: [],
             syntax: [
                 "channel",
-                "channel -- CHANNEL",
+                "channel CHANNEL",
             ],
         });
     }

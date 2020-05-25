@@ -12,7 +12,7 @@ export = class EmojiCommand extends Command {
     constructor() {
         super("emoji", {
             description: "It allows you see the information of an emoji.",
-            triggers: [],
+            triggers: [ "emojiInfo" ],
             arguments: {},
             scope: "guild",
             owner: false,
@@ -21,7 +21,7 @@ export = class EmojiCommand extends Command {
             clientPermissions: [],
             userPermissions: [],
             syntax: [
-                "emoji -- EMOJI",
+                "emoji EMOJI",
             ],
         });
     }
