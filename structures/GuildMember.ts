@@ -3,11 +3,14 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Client, Constants } from "tesseract";
+import { Client, Constants, Logger } from "tesseract";
 import { Guild, GuildMember } from "discord.js";
 import * as mongoose from "mongoose";
 
 import MemberModel, { Member as IGuildMember } from "../models/Member";
+import TransactionModel from "../models/Transaction";
+
+import * as numbers from "../utils/numbers";
 
 import BastionGuild = require("./Guild");
 import BastionUser = require("./User");
@@ -104,5 +107,59 @@ export = class BastionGuildMember extends GuildMember {
         delete member.infractions;
 
         return member.save();
+    }
+
+    /** Add balance to a member's account. */
+    public async credit(amount: number, reason: string, document?: IGuildMember & mongoose.Document): Promise<IGuildMember & mongoose.Document> {
+        amount = Math.abs(amount);
+
+        // get member document
+        const member = document || await this.getDocument();
+
+        if (amount) {
+            // update member's balance
+            member.balance = numbers.clamp(member.balance + amount, Number.MAX_SAFE_INTEGER);
+
+            // create transaction log
+            if (!document) {
+                await TransactionModel.create({
+                    guild: this.guild.id,
+                    sender: this.client.user.id,
+                    receiver: document.user,
+                    amount,
+                    time: new Date(),
+                    note: reason,
+                }).catch(Logger.error);
+            }
+        }
+
+        return document ? member : member.save();
+    }
+
+    /** Remove balance from a member's account. */
+    public async debit(amount: number, reason: string, document?: IGuildMember & mongoose.Document): Promise<IGuildMember & mongoose.Document> {
+        amount = Math.abs(amount);
+
+        // get member document
+        const member = document || await this.getDocument();
+
+        if (amount) {
+            // update member's balance
+            member.balance = numbers.clamp(member.balance - amount, Number.MIN_SAFE_INTEGER);
+
+            // create transaction log
+            if (!document) {
+                await TransactionModel.create({
+                    guild: this.guild.id,
+                    sender: document.user,
+                    receiver: this.client.user.id,
+                    amount,
+                    time: new Date(),
+                    note: reason,
+                }).catch(Logger.error);
+            }
+        }
+
+        return document ? member : member.save();
     }
 }
