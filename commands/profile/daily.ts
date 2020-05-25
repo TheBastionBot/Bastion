@@ -74,8 +74,8 @@ export = class DailyCommand extends Command {
             rewardAmount *= 2;
         }
 
-        // update member's balance
-        member.document.balance += rewardAmount;
+        // credit reward amount into member's account
+        await member.credit(rewardAmount, "Daily Reward", member.document);
 
         // save document
         await member.document.save();
