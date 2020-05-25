@@ -114,27 +114,27 @@ export = class ProfileCommand extends Command {
                     },
                     {
                         name: "Rank",
-                        value: (rank + 1).toString(),
+                        value: rank + 1,
                         inline: true,
                     },
                     {
                         name: "Level",
-                        value: memberProfile.level.toString(),
+                        value: memberProfile.level,
                         inline: true,
                     },
                     {
                         name: "Experience",
-                        value: memberProfile.experience.toString(),
+                        value: memberProfile.experience,
                         inline: true,
                     },
                     {
                         name: "Karma",
-                        value: memberProfile.karma.toString(),
+                        value: memberProfile.karma,
                         inline: true,
                     },
                     {
                         name: "Bastion Coins",
-                        value: memberProfile.balance.toString(),
+                        value: memberProfile.balance,
                         inline: true,
                     },
                     {
