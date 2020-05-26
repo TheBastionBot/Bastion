@@ -121,30 +121,43 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
 
         const triggers = await TriggerModel.find({ guild: message.guild.id });
 
-        // TODO: if multiple responses are there for a single trigger, randomize it
+        // responses
+        const responseMessages: object[] = [];
+        const responseReactions: string[] = [];
+
         for (const trigger of triggers) {
             const patternRegExp = new RegExp(trigger.trigger.replace(/\?/g, ".").replace(/\*+/g, ".*"), "ig");
 
             if (!patternRegExp.test(message.content)) continue;
 
             if (trigger.responseMessage) {
-                message.channel.send({
-                    embed: {
-                        ...JSON.parse(variables.replaceMessageVariables(JSON.stringify(trigger.responseMessage), message)),
-                        footer: {
-                            text: (message.client as Client).locale.getConstant("bastion.name") + " Trigger",
-                        },
-                    },
-                });
+                responseMessages.push(trigger.responseMessage);
             }
 
             if (trigger.responseReaction) {
                 const emoji = emojis.parseEmoji(trigger.responseReaction);
 
                 if (emoji) {
-                    message.react(emoji.reaction);
+                    responseReactions.push(emoji.reaction);
                 }
             }
+        }
+
+        // response message
+        if (responseMessages.length) {
+            message.channel.send({
+                embed: {
+                    ...JSON.parse(variables.replaceMessageVariables(JSON.stringify(responseMessages[Math.floor(Math.random() * responseMessages.length)]), message)),
+                    footer: {
+                        text: (message.client as Client).locale.getConstant("bastion.name") + " Trigger",
+                    },
+                },
+            });
+        }
+
+        // response reaction
+        if (responseReactions.length) {
+            message.react(responseReactions[Math.floor(Math.random() * responseReactions.length)]);
         }
     }
 
