@@ -110,6 +110,7 @@ claimStreakClaimed: "Congratulations on completing your 7 days streak! Check you
 claimStreak: "%var% more days to complete your 7 days streak. Keep going, I believe in you!"
 claimRewardBooster: "Thank you for Boosting the server, I've doubled your reward!"
 triggersAdd: "%var% added a new trigger in the server."
+triggersRemove: "%var% removed the trigger with the pattern `%var%`."
 triggersClear: "%var% cleared all the triggers available in the server."
 triggersList: "These are the available triggers in the server."
 selfAddRole: "%var%, I've added you to the %var% role."
