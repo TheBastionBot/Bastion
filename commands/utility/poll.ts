@@ -7,8 +7,11 @@ import { Command, CommandArguments, Constants } from "tesseract";
 import { Message, TextChannel } from "discord.js";
 
 import PollModel from "../../models/Poll";
+import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as numbers from "../../utils/numbers";
+import * as omnic from "../../utils/omnic";
+import BastionGuild = require("../../structures/Guild");
 
 export = class PollCommand extends Command {
     /** The default poll vote reactions */
@@ -121,6 +124,47 @@ export = class PollCommand extends Command {
 
         const item = argv._.join(" ");
         const timeout = argv.timeout ? argv.timeout : this.defaultTimeout;
+
+
+        // check for premium membership
+        if (constants.isPublicBastion(this.client.user)) {
+            // fetch the premium tier
+            const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                // this error can be ignored
+            });
+
+
+            if (tier) { // check for premium membership limits
+                if (tier === omnic.PremiumTier.GOLD && timeout > constants.LIMITS.GOLD.POLL_TIMEOUT) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPollTimeout", constants.LIMITS.GOLD.POLL_TIMEOUT));
+                } else if (tier === omnic.PremiumTier.PLATINUM && timeout > constants.LIMITS.PLATINUM.POLL_TIMEOUT) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPollTimeout", constants.LIMITS.PLATINUM.POLL_TIMEOUT));
+                }
+            } else if (timeout > constants.LIMITS.POLL_TIMEOUT) {
+                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumPollTimeout", constants.LIMITS.POLL_TIMEOUT));
+            }
+
+
+            // find active polls in the server
+            const activePollsCount = await PollModel.countDocuments({
+                guild: message.guild.id,
+                ends: {
+                    $gte: new Date(),
+                },
+            });
+
+
+            if (tier) { // check for premium membership limits
+                if (tier === omnic.PremiumTier.GOLD && activePollsCount >= constants.LIMITS.GOLD.POLLS) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPolls", constants.LIMITS.GOLD.POLLS));
+                } else if (tier === omnic.PremiumTier.PLATINUM && activePollsCount >= constants.LIMITS.PLATINUM.POLLS) {
+                    throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPolls", constants.LIMITS.PLATINUM.POLLS));
+                }
+            } else {    // no premium membership
+                throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumPolls", constants.LIMITS.POLLS));
+            }
+        }
+
 
         // calculate end date
         const expectedEndDate = new Date(Date.now() + timeout * 36e5);
