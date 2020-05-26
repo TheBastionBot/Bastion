@@ -22,12 +22,13 @@ export = class MessageFilterCommand extends Command {
             arguments: {
                 alias: {
                     clear: [ "c" ],
+                    delete: [ "d" ],
                     pattern: [ "p" ],
                     reaction: [ "e" ],
                 },
                 boolean: [ "clear" ],
-                array: [ "pattern" ],
-                string: [ "pattern", "reaction" ],
+                array: [ "delete", "pattern" ],
+                string: [ "delete", "pattern", "reaction" ],
             },
             scope: "guild",
             owner: false,
@@ -54,6 +55,27 @@ export = class MessageFilterCommand extends Command {
                 embed: {
                     color: Constants.COLORS.RED,
                     description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "triggersClear", message.author.tag),
+                },
+            }).catch(() => {
+                // this error can be ignored
+            });
+        }
+
+        if (argv.delete && argv.delete.length) {
+            // trigger pattern
+            const pattern = argv.delete.join(" ");
+
+            // delete all the trigger matching the specified pattern
+            await TriggerModel.deleteMany({
+                guild: message.guild.id,
+                trigger: pattern,
+            });
+
+            // acknowledge
+            return await message.channel.send({
+                embed: {
+                    color: Constants.COLORS.RED,
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "triggersRemove", message.author.tag, pattern),
                 },
             }).catch(() => {
                 // this error can be ignored
