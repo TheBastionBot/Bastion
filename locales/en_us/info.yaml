@@ -140,3 +140,7 @@ didYouKnowDonation: "Did you know? If everyone using Bastion donate at least $1,
 didYouKnowEarlyReleases: "Did you know? Patrons of %bastion.project% get early access to new releases of %bastion.name%."
 voiceSessionCreate: "%var% created a new category for Voice Sessions. Members can now create new temporary voice channels whenever they need it."
 checkProfile: "You can use the `profile` command to see your complete Bastion Profile."
+commandEnabled: "The command is currently enabled."
+commandDisable: "The command is currently disabled."
+volatileCommandEnable: "%var% has enabled the `%var%` command."
+volatileCommandDisable: "%var% has disabled the `%var%` command, temporarily, until the next restart."
