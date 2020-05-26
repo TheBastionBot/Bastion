@@ -19,7 +19,7 @@ export interface Badge {
 }
 
 export const resolveBadges = (value: number): Badge[] => {
-    const badges = [];
+    const badges: Badge[] = [];
     for (let index = 0; index < Object.keys(BADGES).length; index++) {
         const badgeValue = 1 << index;
         if ((value & badgeValue) === badgeValue) badges.push(BADGES[Object.keys(BADGES)[index] as keyof typeof BADGES]);
