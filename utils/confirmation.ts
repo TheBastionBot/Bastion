@@ -25,7 +25,23 @@ export default async (message: Message, text?: string): Promise<boolean> => {
         }
     );
 
-    if (reactions.size && reactions.first().emoji.name === "☑️") return true;
-    if (reactions.size && reactions.first().emoji.name === "🚫") return false;
-    return null;
+    let confirmation: boolean;
+
+    // got the confirmations
+    if (reactions.size && reactions.first().emoji.name === "☑️") confirmation = true;
+
+    // didn't get the confirmation
+    if (reactions.size && reactions.first().emoji.name === "🚫") confirmation = false;
+
+    // grey out the question
+    await question.edit({
+        embed: {
+            color: Constants.COLORS.SOMEWHAT_DARK,
+            description: text,
+        },
+    }).catch(() => {
+        // this error can be ignored
+    });
+
+    return confirmation;
 };
