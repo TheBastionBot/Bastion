@@ -61,7 +61,7 @@ export = class UserCommand extends Command {
             embed: {
                 color: userMembership ? userMembership.color : member && member.displayColor ? member.displayColor : Constants.COLORS.IRIS,
                 author: {
-                    name: user.tag + (member && member.nickname ? " • " + member.nickname : ""),
+                    name: user.tag + (member && member.nickname ? " / " + member.nickname : ""),
                 },
                 title: user.bot ? "Bot" : "Human",
                 description: memberBadges.map(badge => badge.emoji).join(" "),
