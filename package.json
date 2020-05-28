@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "7.8.3",
+  "version": "7.8.4",
   "description": "Give awesome perks to your Discord server!",
   "url": "https://bastion.traction.one/",
   "main": "index.js",
