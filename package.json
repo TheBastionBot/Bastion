@@ -50,7 +50,7 @@
     "snyk": "^1.316.1",
     "sqlite": "~3.0.0",
     "sqlite3": "~4.2.0",
-    "tesseract": "github:TheBastionBot/Tesseract#v0.1.1",
+    "tesseract": "github:TheBastionBot/Tesseract#v2.0.0",
     "weather-js": "~2.0.0",
     "word-definition": "~2.1.6",
     "xkcd": "~1.1.3",
