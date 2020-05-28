@@ -38,7 +38,7 @@
     "ex.traction": "github:k3rn31p4nic/node-extraction#v1.0.0",
     "gamedig": "~2.0.8",
     "hirez.js": "~2.0.0",
-    "locke": "github:TheBastionBot/Locke#v0.9.0",
+    "locke": "github:TheBastionBot/Locke#v1.2.0",
     "lzutf8": "~0.5.5",
     "mathjs": "~7.0.0",
     "opusscript": "^0.0.7",
