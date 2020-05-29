@@ -1,0 +1,33 @@
+{
+    "name": "bastion",
+    "version": "8.0.0",
+    "description": "Get an enhanced Discord experience!",
+    "homepage": "https://bastion.traction.one",
+    "main": "./index.js",
+    "repository": "https://github.com/TheBastionBot/Bastion.git",
+    "author": "Sankarsan Kampa",
+    "authorURL": "https://traction.one",
+    "private": true,
+    "scripts": {
+        "start": "node ."
+    },
+    "optionalDependencies": {
+        "@discordjs/opus": "^0.3.2",
+        "bufferutil": "^4.0.1",
+        "erlpack": "discordapp/erlpack",
+        "sodium": "^3.0.2",
+        "utf-8-validate": "^5.0.2",
+        "zlib-sync": "^0.1.6"
+    },
+    "dependencies": {
+        "@k3rn31p4nic/google-translate-api": "^1.1.1",
+        "chalk": "^4.0.0",
+        "discord-rpc": "^3.1.0",
+        "mathjs": "^7.0.0",
+        "node-fetch": "^2.6.0",
+        "opusscript": "^0.0.7",
+        "tesseract": "https://github.com/TheBastionBot/Tesseract#v2.0.0",
+        "uuid": "^8.0.0",
+        "youtube-dl": "^3.0.2"
+    }
+}
