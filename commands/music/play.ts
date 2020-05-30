@@ -195,7 +195,7 @@ export = class Play extends Command {
             guild.music.playing = true;
 
             // Start the dispatcher
-            const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + song.id + ".mp3");
+            const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + guild.id + "/" + song.id + ".mp3");
 
             // Set playing activity
             this.client.user.setActivity({
@@ -217,7 +217,7 @@ export = class Play extends Command {
             guild.music.history = [];
 
             // Clear the music directory
-            fs.promises.rmdir(this.musicDirectory, { recursive: true }).catch(() => {
+            fs.promises.rmdir(this.musicDirectory + guild.id, { recursive: true }).catch(() => {
                 // This error can be ignored.
             });
 
@@ -385,8 +385,8 @@ export = class Play extends Command {
         });
 
         // Create the music directory
-        await fs.promises.mkdir(this.musicDirectory, { recursive: true }).catch(Logger.error);
+        await fs.promises.mkdir(this.musicDirectory + message.guild.id + "/", { recursive: true }).catch(Logger.error);
 
-        stream.pipe(fs.createWriteStream(this.musicDirectory + songId + ".mp3"));
+        stream.pipe(fs.createWriteStream(this.musicDirectory + message.guild.id + "/" + songId + ".mp3"));
     }
 }
