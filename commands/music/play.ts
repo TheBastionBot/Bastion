@@ -226,8 +226,8 @@ export = class Play extends Command {
                 // This error can be ignored.
             });
 
-            // Leave the voice channel, if `autoDisconnect` is enabled
-            if (guild.document.music.autoDisconnect) {
+            // Leave the voice channel, if `keepAlive` is disabled
+            if (!guild.document.music.keepAlive) {
                 guild.voice && guild.voice.channel.leave();
             }
 
