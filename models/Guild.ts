@@ -27,7 +27,7 @@ export interface Guild {
         voiceChannelId?: string;
         roleId?: string;
         autoPlay?: boolean;
-        autoDisconnect?: boolean;
+        keepAlive?: boolean;
     };
     gamification?: {
         enabled: boolean;
@@ -158,7 +158,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
             autoPlay: {
                 type: Boolean,
             },
-            autoDisconnect: {
+            keepAlive: {
                 type: Boolean,
             },
         },
