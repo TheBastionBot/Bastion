@@ -15,7 +15,7 @@ export = class NowPlaying extends Command {
     constructor() {
         super("nowPlaying", {
             description: "It shows you the music track that is currently being played in the server.",
-            triggers: [],
+            triggers: [ "np" ],
             arguments: {},
             scope: "guild",
             owner: false,
