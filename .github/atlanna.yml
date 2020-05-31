@@ -1,0 +1,54 @@
+# Auto Responses
+
+# Auto response when a new issue is opened.
+issueOpenedResponse: |
+  Thank you for opening this issue.
+  A maintainer will get by as soon as practical to address this issue.
+
+  If this is a support question and not really an issue or suggestion, then please ask it in our [Discord Server](https://discord.gg/fzx8fkt 'Bastion HQ') instead.
+
+# Auto response when an issue is closed.
+issueClosedResponse: |
+  If you think this was a mistake, feel free to reopen this isssue.
+
+# Auto response when someone opens an issue for the first time.
+firstIssueOpenedResponse: |
+  Thank you for opening this issue.
+  A maintainer will get by as soon as practical to address this issue.
+
+  Since this is your first time here, please check the contributing guidelines to see other ways you can get involved.
+
+  If this is a support question and not really an issue or suggestion, then please ask it in our [Discord Server](https://discord.gg/fzx8fkt 'Bastion HQ') instead.
+
+# Auto response when a new pull request is opened.
+pullRequestOpenedResponse: |
+  Thank you for opening this pull request.
+  A maintainer will get by as soon as practical to review the changes.
+
+# Auto response when a pull request is merged.
+pullRequestMergedResponse: |
+  Thank you for your contribution.
+
+# Auto response when a pull request is closed.
+pullRequestClosedResponse: |
+  If you think this was a mistake, feel free to reopen this pull request.
+
+# Auto response when someone opens a pull request for the first time.
+firstPullRequestOpenedResponse: |
+  Thank you for opening this issue.
+  A maintainer will get by as soon as practical to review the changes.
+
+  Since this is your first time here, please check the contributing guidelines to make sure you're doing it right.
+
+# Auto response when someone's pull request is merged for the first time.
+firstPullRequestMergedResponse: |
+  Thank you for your contribution.
+  We hope to see more contributions from you.
+
+
+# Invite contributors to the organization after their pull requeust is merged.
+inviteContributors: false
+
+
+# Create a status check to show pull requests as "Pending" if it's a work-in-progress.
+workInProgressCheck: true
