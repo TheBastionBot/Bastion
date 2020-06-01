@@ -46,6 +46,23 @@ export = class MessageFilter extends Interrupt {
                 // this error can be ignored
             });
 
+            // create moderation log
+            guild.createModerationLog({
+                event: "messageFilter",
+                fields: [
+                    {
+                        name: "User",
+                        value: message.author.tag + "/" + message.author.id,
+                    },
+                    {
+                        name: "Channel",
+                        value: message.channel.name + "/" + message.channel.id,
+                    },
+                ],
+            }).catch(() => {
+                // this error can be ignored
+            });
+
             return true;
         }
 
