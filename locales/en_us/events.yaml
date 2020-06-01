@@ -28,6 +28,12 @@ emojiUpdate: Emoji Updated
 guildMemberAdd: Member Joined
 guildMemberRemove: Member Left
 
+# Interrupt Events
+inviteFilter: Invite Filtered
+linkFilter: Link Filtered
+mentionSpam: Mention Spam
+messageFilter: Message Filtered
+
 # Invite Events
 inviteCreate: Invite Created
 inviteDelete: Invite Deleted
