@@ -30,10 +30,31 @@ export = class MentionSpamInterrupt extends Interrupt {
         // check whether mention spam infractions are enabled
         if (!guild.document.mentionSpam || !guild.document.mentionSpam.threshold) return false;
 
-        // check whether the number of mentions in the messages are above the allowed threshold
-        if (message.mentions.users.size > guild.document.mentionSpam.threshold) return true;
-        if (message.mentions.roles.size > guild.document.mentionSpam.threshold) return true;
+        let filtered = false;
 
-        return false;
+        // check whether the number of mentions in the messages are above the allowed threshold
+        if (message.mentions.users.size > guild.document.mentionSpam.threshold) filtered = true;
+        if (message.mentions.roles.size > guild.document.mentionSpam.threshold) filtered = true;
+
+        if (filtered) {
+            // create moderation log
+            guild.createModerationLog({
+                event: "mentionSpam",
+                fields: [
+                    {
+                        name: "User",
+                        value: message.author.tag + "/" + message.author.id,
+                    },
+                    {
+                        name: "Channel",
+                        value: message.channel.name + "/" + message.channel.id,
+                    },
+                ],
+            }).catch(() => {
+                // this error can be ignored
+            });
+        }
+
+        return filtered;
     }
 }
