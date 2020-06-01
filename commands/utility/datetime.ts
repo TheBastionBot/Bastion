@@ -20,31 +20,34 @@ export = class DateTimeCommand extends Command {
             userPermissions: [],
             syntax: [
                 "datetime",
-                "datetime TIMEZOME",
+                "datetime TIMEZONE...",
             ],
         });
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
-        const timezone: string = argv._.join(" ");
+        const timezones: string[] = argv._;
 
-        let date: string;
+        const dates: string[] = [];
 
-        // validate timezone
-        try {
-            date = new Date().toLocaleString("en-US", { timeZone: timezone ? timezone : "UTC", timeZoneName: "long" });
-        } catch {
-            throw new Error("INVALID_TIMEZONE");
+        if (timezones.length) {
+            for (const timezone of timezones) {
+                try {
+                    dates.push(new Date().toLocaleString("en-US", { timeZone: timezone, timeZoneName: "long" }));
+                } catch {
+                    // this error can be ignored
+                }
+            }
+        } else {
+            dates.push(new Date().toLocaleString("en-US", { timeZone: "UTC", timeZoneName: "long" }));
         }
 
         // acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
-                description: date,
-            },
-            footer: {
-                text: "Date and Time",
+                title: "Date and Time",
+                description: dates.join("\n"),
             },
         });
     }
