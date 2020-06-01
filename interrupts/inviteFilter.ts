@@ -57,7 +57,7 @@ export = class InviteFilter extends Interrupt {
             const guildInvites = await message.guild.fetchInvites().catch(() => {
                 // this error can be ignored
             });
-            if (guildInvites) allowed.push( ...guildInvites.keys());
+            if (guildInvites) allowed.push(...guildInvites.keys());
 
             // fetch guild vanity code
             const vanityCode = await message.guild.fetchVanityCode();
@@ -70,6 +70,23 @@ export = class InviteFilter extends Interrupt {
 
             // delete invite code
             this.deleteInvite(message);
+
+            // create moderation log
+            guild.createModerationLog({
+                event: "inviteFilter",
+                fields: [
+                    {
+                        name: "User",
+                        value: message.author.tag + "/" + message.author.id,
+                    },
+                    {
+                        name: "Channel",
+                        value: message.channel.name + "/" + message.channel.id,
+                    },
+                ],
+            }).catch(() => {
+                // this error can be ignored
+            });
 
             return true;
         }
