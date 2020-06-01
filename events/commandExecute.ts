@@ -39,7 +39,12 @@ export = class CommandExecuteEvent extends ModuleManagerEvent {
                 }).catch(Logger.error);
             }
 
-            return Logger.error(error);
+            return message.channel.send({
+                embed: {
+                    color: Constants.COLORS.RED,
+                    description: error.message,
+                },
+            }).catch(Logger.error);
         }
     }
 }
