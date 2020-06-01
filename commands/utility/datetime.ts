@@ -9,9 +9,15 @@ import { Message } from "discord.js";
 export = class DateTimeCommand extends Command {
     constructor() {
         super("datetime", {
-            description: "It allows you to see the current time, optionally in the specified time zone.",
+            description: "It allows you to see the current time in multiple different time zones. It also allows you to convert the specified time into multiple different time zones.",
             triggers: [ "date", "time", "now" ],
-            arguments: {},
+            arguments: {
+                alias: {
+                    convert: [ "c" ],
+                },
+                array: [ "convert" ],
+                string: [ "convert" ],
+            },
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -21,6 +27,8 @@ export = class DateTimeCommand extends Command {
             syntax: [
                 "datetime",
                 "datetime TIMEZONE...",
+                "datetime --convert DATE",
+                "datetime --convert DATE -- TIMEZONE...",
             ],
         });
     }
@@ -33,13 +41,13 @@ export = class DateTimeCommand extends Command {
         if (timezones.length) {
             for (const timezone of timezones) {
                 try {
-                    dates.push(new Date().toLocaleString("en-US", { timeZone: timezone, timeZoneName: "long" }));
+                    dates.push(new Date(argv.convert ? argv.convert.join(" ") : Date.now()).toLocaleString("en-US", { timeZone: timezone, timeZoneName: "long" }));
                 } catch {
                     // this error can be ignored
                 }
             }
         } else {
-            dates.push(new Date().toLocaleString("en-US", { timeZone: "UTC", timeZoneName: "long" }));
+            dates.push(new Date(argv.convert ? argv.convert.join(" ") : Date.now()).toLocaleString("en-US", { timeZone: "UTC", timeZoneName: "long" }));
         }
 
         // acknowledge
