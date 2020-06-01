@@ -50,7 +50,26 @@ export = class LinkFilter extends Interrupt {
 
         // check whether the message has an uri
         if (regex.URI.test(message.content)) {
+            // delete link
             this.deleteLink(message);
+
+            // create moderation log
+            guild.createModerationLog({
+                event: "linkFilter",
+                fields: [
+                    {
+                        name: "User",
+                        value: message.author.tag + "/" + message.author.id,
+                    },
+                    {
+                        name: "Channel",
+                        value: message.channel.name + "/" + message.channel.id,
+                    },
+                ],
+            }).catch(() => {
+                // this error can be ignored
+            });
+
             return true;
         }
 
