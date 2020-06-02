@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, Constants, ModuleManagerEvent } from "tesseract";
+import { Command, Constants, Logger, ModuleManagerEvent } from "tesseract";
 import { Message } from "discord.js";
 
 import * as arrays from "../utils/arrays";
@@ -54,6 +54,6 @@ export = class CommandHelpEvent extends ModuleManagerEvent {
                     },
                 ],
             },
-        });
+        }).catch(Logger.error);
     }
 }
