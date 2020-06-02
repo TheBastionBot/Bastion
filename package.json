@@ -1,7 +1,7 @@
 {
   "name": "bastion",
-  "version": "8.0.0-beta",
-  "description": "Give awesome perks to your Discord server!",
+  "version": "8.0.0",
+  "description": "Get an enhanced Discord experience!",
   "homepage": "https://bastion.traction.one",
   "main": "./index.js",
   "repository": "https://github.com/TheBastionBot/Bastion.git",
