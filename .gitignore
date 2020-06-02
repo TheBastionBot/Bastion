@@ -11,7 +11,9 @@
 !/settings/*.example.yaml
 
 # Auto generated files
+/build
 /assets/badges.json
+/assets/commands.json
 
 # Lock file
 package-lock.json
