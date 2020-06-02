@@ -7,7 +7,7 @@
   "repository": "https://github.com/TheBastionBot/Bastion.git",
   "author": "Sankarsan Kampa",
   "authorURL": "https://traction.one",
-  "license": "GPL-3.0",
+  "license": "",
   "private": true,
   "scripts": {
     "transpile": "./node_modules/.bin/tsc",
