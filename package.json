@@ -39,13 +39,13 @@
     "zlib-sync": "^0.1.6"
   },
   "dependencies": {
+    "@bastion/tesseract": "^2.0.0",
     "@k3rn31p4nic/google-translate-api": "^1.1.1",
     "chalk": "^4.0.0",
     "discord-rpc": "^3.1.0",
     "mathjs": "^7.0.0",
     "node-fetch": "^2.6.0",
     "opusscript": "^0.0.7",
-    "tesseract": "https://github.com/TheBastionBot/Tesseract",
     "uuid": "^8.0.0",
     "youtube-dl": "^3.0.2"
   }
