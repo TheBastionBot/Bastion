@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, Constants, ModuleManagerEvent } from "tesseract";
+import { Command, Constants, ModuleManagerEvent } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 export = class InsufficientClientPermissionsEvent extends ModuleManagerEvent {

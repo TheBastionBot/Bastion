@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants, Logger } from "tesseract";
+import { Listener, Constants, Logger } from "@bastion/tesseract";
 
 export = class ShardReadyListener extends Listener {
     constructor() {

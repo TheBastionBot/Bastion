@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "tesseract";
+import { Command, CommandArguments } from "@bastion/tesseract";
 import { Message, NewsChannel, TextChannel } from "discord.js";
 
 import * as errors from "../../utils/errors";

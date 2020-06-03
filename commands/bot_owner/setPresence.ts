@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments, Constants } from "tesseract";
+import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message, Presence } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");

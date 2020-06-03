@@ -4,7 +4,7 @@
  */
 
 import * as fs from "fs";
-import { Command, CommandArguments, Constants, Logger } from "tesseract";
+import { Command, CommandArguments, Constants, Logger } from "@bastion/tesseract";
 import { Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
 import * as youtube from "youtube-dl";
 import { v4 as uuid } from "uuid";

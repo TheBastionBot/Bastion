@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants } from "@bastion/tesseract";
 import { Guild } from "discord.js";
 
 import { BastionCredentials } from "../typings/settings";

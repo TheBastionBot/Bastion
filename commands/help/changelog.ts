@@ -5,7 +5,7 @@
 
 import * as yaml from "yaml";
 import { promises as fs } from "fs";
-import { Command, Constants } from "tesseract";
+import { Command, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");

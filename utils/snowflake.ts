@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Snowflake, SnowflakeUtil } from "tesseract";
+import { Snowflake, SnowflakeUtil } from "@bastion/tesseract";
 
 import * as numbers from "./numbers";
 

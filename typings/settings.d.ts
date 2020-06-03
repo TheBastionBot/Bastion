@@ -1,4 +1,4 @@
-import { TesseractConfigurations, TesseractCredentials } from "tesseract/typings/utils/settings";
+import { TesseractConfigurations, TesseractCredentials } from "@bastion/tesseract/typings/utils/settings";
 
 interface BastionConfigurations extends TesseractConfigurations {
     port?: number;

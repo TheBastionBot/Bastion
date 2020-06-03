@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Constants, Listener } from "tesseract";
+import { Constants, Listener } from "@bastion/tesseract";
 import { VoiceState } from "discord.js";
 
 import GuildModel from "../models/Guild";

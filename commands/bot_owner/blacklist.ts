@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments, Constants, Snowflake } from "tesseract";
+import { Command, CommandArguments, Constants, Snowflake } from "@bastion/tesseract";
 import { Message, EmbedField } from "discord.js";
 
 import ConfigModel from "../../models/Config";

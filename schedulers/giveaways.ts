@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Constants, Scheduler } from "tesseract";
+import { Constants, Scheduler } from "@bastion/tesseract";
 import { Snowflake, TextChannel, User } from "discord.js";
 
 import GiveawayModel from "../models/Giveaway";

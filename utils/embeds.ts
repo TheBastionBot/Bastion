@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Constants } from "tesseract";
+import { Constants } from "@bastion/tesseract";
 import { ColorResolvable, EmbedFieldData, MessageEmbedAuthor, MessageEmbedFooter, MessageEmbedOptions } from "discord.js";
 
 export interface MessageEmbedData {

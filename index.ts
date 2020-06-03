@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import * as tesseract from "tesseract";
+import * as tesseract from "@bastion/tesseract";
 import * as chalk from "chalk";
 import * as DiscordRPC from "discord-rpc";
 

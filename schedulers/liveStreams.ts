@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Scheduler } from "tesseract";
+import { Scheduler } from "@bastion/tesseract";
 import { TextChannel } from "discord.js";
 import fetch from "node-fetch";
 

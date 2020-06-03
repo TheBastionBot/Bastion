@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Constants, Listener } from "tesseract";
+import { Constants, Listener } from "@bastion/tesseract";
 import { DMChannel, Message } from "discord.js";
 
 import Guild = require("../structures/Guild");

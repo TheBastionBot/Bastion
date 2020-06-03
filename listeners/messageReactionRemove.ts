@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "tesseract";
+import { Listener, Constants } from "@bastion/tesseract";
 import { GuildMember, MessageReaction, TextChannel, User } from "discord.js";
 
 import ReactionRoleGroup from "../models/ReactionRoleGroup";

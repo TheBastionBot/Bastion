@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Interrupt } from "tesseract";
+import { Interrupt } from "@bastion/tesseract";
 import { Message, TextChannel } from "discord.js";
 
 import BastionGuild = require("../structures/Guild");

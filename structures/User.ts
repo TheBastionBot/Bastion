@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Client } from "tesseract";
+import { Client } from "@bastion/tesseract";
 import { User } from "discord.js";
 import * as mongoose from "mongoose";
 

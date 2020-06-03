@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Snowflake } from "tesseract";
+import { Snowflake } from "@bastion/tesseract";
 import { GuildMember } from "discord.js";
 import { Response } from "node-fetch";
 

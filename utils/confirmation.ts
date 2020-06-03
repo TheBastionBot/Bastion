@@ -4,7 +4,7 @@
  */
 
 import { Message, User } from "discord.js";
-import { Constants } from "tesseract";
+import { Constants } from "@bastion/tesseract";
 
 export default async (message: Message, text?: string): Promise<boolean> => {
     const question = await message.channel.send({

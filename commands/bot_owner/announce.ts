@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments, Constants } from "tesseract";
+import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message, NewsChannel, TextChannel } from "discord.js";
 
 import GuildModel from "../../models/Guild";

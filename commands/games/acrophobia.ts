@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, Constants } from "tesseract";
+import { Command, Constants } from "@bastion/tesseract";
 import { Collection, Message, Snowflake } from "discord.js";
 
 import * as numbers from "../../utils/numbers";

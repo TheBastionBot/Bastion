@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments, Constants } from "tesseract";
+import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { GuildChannel, Message, TextChannel } from "discord.js";
 
 import confirmation from "../../utils/confirmation";

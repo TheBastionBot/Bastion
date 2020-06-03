@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Constants, ModuleManagerEvent, Client, Logger } from "tesseract";
+import { Constants, ModuleManagerEvent, Client, Logger } from "@bastion/tesseract";
 import { ClientApplication, DMChannel, Message, Snowflake, Team, User } from "discord.js";
 
 import * as emojis from "../utils/emojis";
@@ -18,7 +18,6 @@ import TriggerModel from "../models/Trigger";
 
 import BastionGuild = require("../structures/Guild");
 import BastionGuildMember = require("../structures/GuildMember");
-import TesseractClient from "tesseract/typings/client/TesseractClient";
 
 export = class HumanMessageEvent extends ModuleManagerEvent {
     private recentUsers: Map<Snowflake, string[]>;
@@ -109,7 +108,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         this.recentUsers.set(message.guild.id, recentUsers);
 
         // remove the user after cooldown period
-        (message.client as TesseractClient).setTimeout(() => {
+        (message.client as Client).setTimeout(() => {
             const recentUsers = this.recentUsers.get(message.guild.id);
             recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
             this.recentUsers.set(message.guild.id, recentUsers);

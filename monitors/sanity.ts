@@ -5,7 +5,7 @@
 
 import * as crypto from "crypto";
 import { promises as fs } from "fs";
-import { Monitor } from "tesseract";
+import { Monitor } from "@bastion/tesseract";
 import { Team, User } from "discord.js";
 
 export = class SanityMonitor extends Monitor {

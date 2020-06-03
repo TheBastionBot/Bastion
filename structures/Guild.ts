@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Client, Constants } from "tesseract";
+import { Client, Constants } from "@bastion/tesseract";
 import { EmbedFieldData, Guild, Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
 import * as mongoose from "mongoose";
 
