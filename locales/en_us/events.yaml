@@ -1,0 +1,83 @@
+# Channel Events
+categoryChannelCreate: Category Channel Created
+categoryChannelDelete: Category Channel Deleted
+categoryChannelUpdate: Category Channel Updated
+
+newsChannelCreate: News Channel Created
+newsChannelDelete: News Channel Deleted
+newsChannelUpdate: News Channel Updated
+
+storeChannelCreate: Store Channel Created
+storeChannelDelete: Store Channel Deleted
+storeChannelUpdate: Store Channel Updated
+
+textChannelCreate: Text Channel Created
+textChannelDelete: Text Channel Deleted
+textChannelUpdate: Text Channel Updated
+
+voiceChannelCreate: Voice Channel Created
+voiceChannelDelete: Voice Channel Deleted
+voiceChannelUpdate: Voice Channel Updated
+
+# Emoji Events
+emojiCreate: Emoji Created
+emojiDelete: Emoji Deleted
+emojiUpdate: Emoji Updated
+
+# Guild Member Events
+guildMemberAdd: Member Joined
+guildMemberRemove: Member Left
+
+# Interrupt Events
+inviteFilter: Invite Filtered
+linkFilter: Link Filtered
+mentionSpam: Mention Spam
+messageFilter: Message Filtered
+
+# Invite Events
+inviteCreate: Invite Created
+inviteDelete: Invite Deleted
+
+# Member Nickname Events
+nickUpdate: Nickname Updated
+
+# Message Events
+messageClear: Messages Cleared
+messageDelete: Message Deleted
+messageUpdate: Message Updated
+
+# Moderation Events
+memberKick: Member Kicked
+memberSoftBan: Member Soft-Banned
+guildBanAdd: Member Banned
+guildBanRemove: Member Unbanned
+guildReportAdd: Reported Member
+
+# Mute Events
+voiceMuteAdd: Member Voice Muted
+voiceMuteRemove: Member Voice Unmuted
+
+memberVoiceDeafen: Member Deafened
+memberVoiceUndeafen: Member Undeafened
+
+textMuteAdd: Member Text Muted
+textMuteRemove: Member Text Unmuted
+
+# Role Assignment Events
+memberRoleClear: Member Roles Cleared
+memberRoleUpdate: Member Roles Updated
+
+# Role Events
+roleCreate: Role Created
+roleDelete: Role Deleted
+roleUpdate: Role Updated
+
+# Server Events
+guildCreate: Server Joined
+guildDelete: Server Left
+guildUpdate: Server Updated
+
+# Warning Events
+guildWarnAdd: Member Warned
+guildWarnClear: Guild Warnings Cleared
+guildWarnRemove: Member Warnings Removed
