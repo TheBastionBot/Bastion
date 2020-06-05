@@ -39,6 +39,8 @@ export = class CommandExecuteEvent extends ModuleManagerEvent {
                 }).catch(Logger.error);
             }
 
+            Logger.error(error);
+
             return message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
