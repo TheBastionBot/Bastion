@@ -27,7 +27,7 @@ export = class StreamerRoleCommand extends Command {
             clientPermissions: [],
             userPermissions: [ "MANAGE_GUILD" ],
             syntax: [
-                "streamerRole",
+                "streamerRole ROLE",
                 "streamerRole --remove",
             ],
         });
