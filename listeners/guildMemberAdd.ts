@@ -68,6 +68,11 @@ export = class GuildMemberAddListener extends Listener {
     }
 
     exec = async (member: GuildMember): Promise<void> => {
+        // if it's a partial member, fetch it
+        if (member.partial) {
+            await member.fetch();
+        }
+
         const guild = member.guild as Guild;
 
         const guildDocument = await guild.getDocument();

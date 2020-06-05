@@ -16,6 +16,11 @@ export = class GuildMemberUpdateListener extends Listener {
     }
 
     exec = async (oldMember: GuildMember, newMember: GuildMember): Promise<void> => {
+        // if it's a partial member, fetch it
+        if (oldMember.partial) {
+            await oldMember.fetch();
+        }
+
         if (oldMember.nickname === newMember.nickname) return;
 
         const guild = oldMember.guild as Guild;
