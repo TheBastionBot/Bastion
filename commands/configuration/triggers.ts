@@ -40,6 +40,7 @@ export = class MessageFilterCommand extends Command {
                 "triggers",
                 "triggers --pattern PATTERN -- RESPONSE",
                 "triggers --pattern PATTERN --reaction EMOJI",
+                "triggers --delete PATTERN",
                 "triggers --clear",
             ],
         });
