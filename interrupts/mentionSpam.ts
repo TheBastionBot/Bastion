@@ -28,7 +28,7 @@ export = class MentionSpamInterrupt extends Interrupt {
         if (message.channel.permissionsFor(message.member) && message.channel.permissionsFor(message.member).has([ "MANAGE_CHANNELS", "MANAGE_MESSAGES" ])) return false;
 
         // check whether mention spam infractions are enabled
-        if (!guild.document.mentionSpam || !guild.document.mentionSpam.threshold) return false;
+        if (!guild.document || !guild.document.mentionSpam || !guild.document.mentionSpam.threshold) return false;
 
         let filtered = false;
 

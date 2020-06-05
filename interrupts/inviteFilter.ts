@@ -37,7 +37,7 @@ export = class InviteFilter extends Interrupt {
         if (message.channel.permissionsFor(message.member) && message.channel.permissionsFor(message.member).has([ "MANAGE_CHANNELS", "MANAGE_MESSAGES" ])) return false;
 
         // check whether invite filter is enabled
-        if (!guild.document.filters || !guild.document.filters.inviteFilter || !guild.document.filters.inviteFilter.enabled) return false;
+        if (!guild.document || !guild.document.filters || !guild.document.filters.inviteFilter || !guild.document.filters.inviteFilter.enabled) return false;
 
         // check whether any whitelist exists
         if (guild.document.filters.inviteFilter.whitelist) {

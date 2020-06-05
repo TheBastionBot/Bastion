@@ -25,7 +25,7 @@ export = class MembersOnlyInterrupt extends Interrupt {
         const guild = message.guild as BastionGuild;
 
         // check whether members only mode is enabled
-        if (!guild.document.membersOnly) return false;
+        if (!guild.document || !guild.document.membersOnly) return false;
 
         // check whether the member has at least one role
         if (message.member && message.guild.ownerID !== message.member.id && message.member.roles.cache.size < 2) return true;
