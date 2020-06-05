@@ -22,6 +22,7 @@ languageUnavailable: "I'm sorry, I can't speak in %var% yet."
 alreadyClaimed: "%var% you've already claimed your daily reward for today. Check back tomorrow!"
 caseNotFound: "I looked into the deep dark corners of the server, but I didn't find the moderation log with that case number."
 commandNotFound: "I looked into the deep dark corners of my circuitry, but I didn't find any command with that name."
+guildNotFound: "I looked into the deep dark corners of my data store, but I didn't find any server with that ID."
 
 premiumVoiceSessions: "Only Premium Servers can have Voice Sessions to automatically create Temporary Voice Channels."
 premiumGamificationMultiplier: "Only Premium Servers can have a custom Gamification Multiplier."
