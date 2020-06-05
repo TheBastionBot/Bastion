@@ -47,6 +47,14 @@ export const generateEmbed = (embed: string | MessageEmbedData): MessageEmbedOpt
 
 export const generateBastionEmbed = (embed: string | MessageEmbedOptions): MessageEmbedData => {
     if (typeof embed === "string") {
+        try {
+            embed = JSON.parse(embed);
+        } catch {
+            // this error can be ignored
+        }
+    }
+
+    if (typeof embed === "string") {
         return {
             color: Constants.COLORS.IRIS,
             description: embed,
