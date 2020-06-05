@@ -44,7 +44,7 @@ export = class Farewells extends Command {
         // update guild farewell settings
         guild.document.farewell = {
             channelId: argv.enable ? message.channel.id : argv.disable ? undefined : guild.document.farewell ? guild.document.farewell.channelId : undefined,
-            message: argv._.length ? embeds.generateBastionEmbed(JSON.parse(argv._.join(" "))) : guild.document.farewell ? guild.document.farewell.message : undefined,
+            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : guild.document.farewell ? guild.document.farewell.message : undefined,
             timeout: typeof argv.timeout === "number" ? argv.timeout : guild.document.farewell ? guild.document.farewell.timeout : undefined,
         };
 

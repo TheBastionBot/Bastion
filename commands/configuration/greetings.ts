@@ -44,7 +44,7 @@ export = class Greetings extends Command {
         // update guild greeting settings
         guild.document.greeting = {
             channelId: argv.enable ? message.channel.id : argv.disable ? undefined : guild.document.greeting ? guild.document.greeting.channelId : undefined,
-            message: argv._.length ? embeds.generateBastionEmbed(JSON.parse(argv._.join(" "))) : guild.document.greeting ? guild.document.greeting.message : undefined,
+            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : guild.document.greeting ? guild.document.greeting.message : undefined,
             timeout: typeof argv.timeout === "number" ? argv.timeout : guild.document.greeting ? guild.document.greeting.timeout : undefined,
         };
 

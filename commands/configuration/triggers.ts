@@ -125,7 +125,7 @@ export = class MessageFilterCommand extends Command {
             // trigger response message
             let response: embeds.MessageEmbedData;
             if (argv._.length) {
-                response = embeds.generateBastionEmbed(JSON.parse(argv._.join(" ")));
+                response = embeds.generateBastionEmbed(argv._.join(" "));
 
                 fields.push({
                     name: "Response Message",
