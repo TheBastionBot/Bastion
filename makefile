@@ -22,7 +22,7 @@ start:
 	@node .
 
 obfuscate:
-	@npx javascript-obfuscator . --output ./build --target node --self-defending true --source-map false --source-map-mode inline --exclude './node_modules'
+	@npx javascript-obfuscator . --output ./build --target node --self-defending true --source-map false --source-map-mode inline --exclude './node_modules,./build'
 
 generate:
 # Generate obfuscated code
@@ -32,13 +32,9 @@ generate:
 # Copy locales
 	@cp -r ./locales ./build/locales
 # Copy example settings
-	@rm -r ./build/settings &>/dev/null
-	@mkdir ./build/settings
 	@cp ./settings/configurations.example.yaml ./build/settings/configurations.example.yaml
 	@cp ./settings/credentials.example.yaml ./build/settings/credentials.example.yaml
 # Copy scripts
-	@rm -r ./build/scripts &>/dev/null
-	@mkdir ./build/scripts
 	@cp -r ./scripts/bash ./build/scripts/bash
 	@cp -r ./scripts/powershell ./build/scripts/powershell
 	@cp ./bastion.sh ./build/bastion.sh
