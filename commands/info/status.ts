@@ -34,7 +34,7 @@ export = class StatusCommand extends Command {
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // get guild badges
-        const guildBadges = await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
+        const guildBadges = constants.isPublicBastion(this.client.user) && await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
         // check for premium membership

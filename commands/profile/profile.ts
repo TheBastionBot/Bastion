@@ -14,6 +14,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 import BastionUser = require("../../structures/User");
 
 import * as badges from "../../utils/badges";
+import * as constants from "../../utils/constants";
 import * as gamification from "../../utils/gamification";
 import progress from "../../utils/progress";
 
@@ -93,7 +94,7 @@ export = class ProfileCommand extends Command {
 
 
         // get user badges
-        const userBadges = await badges.fetchBadges(member.id).then(res => res.json()).catch(() => {
+        const userBadges = constants.isPublicBastion(this.client.user) && await badges.fetchBadges(member.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
 

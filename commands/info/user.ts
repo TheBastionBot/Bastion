@@ -7,6 +7,7 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { GuildMember, Message, User } from "discord.js";
 
 import * as badges from "../../utils/badges";
+import * as constants from "../../utils/constants";
 
 export = class UserCommand extends Command {
     constructor() {
@@ -45,7 +46,7 @@ export = class UserCommand extends Command {
 
 
         // get user badges
-        const userBadges = await badges.fetchBadges(user.id).then(res => res.json()).catch(() => {
+        const userBadges = constants.isPublicBastion(this.client.user) && await badges.fetchBadges(user.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
         // check for premium membership
@@ -53,7 +54,7 @@ export = class UserCommand extends Command {
 
 
         // get member badges
-        const memberBadges = member ? badges.resolveBadges((userBadges ? userBadges.badgeValue : 0) | badges.getMemberBadgeValue(member)) : [];
+        const memberBadges = constants.isPublicBastion(this.client.user) && member ? badges.resolveBadges((userBadges ? userBadges.badgeValue : 0) | badges.getMemberBadgeValue(member)) : [];
 
 
         // acknowledge

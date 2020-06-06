@@ -25,11 +25,9 @@ export = class ServerCommand extends Command {
         });
     }
 
-    isPremiumGuild = (badges: number): boolean => (badges & constants.BADGES.BASTION_GOLD_GUILD) === constants.BADGES.BASTION_GOLD_GUILD;
-
     exec = async (message: Message): Promise<void> => {
         // get guild badges
-        const guildBadges = await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
+        const guildBadges = constants.isPublicBastion(this.client.user) && await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
             // this error can be ignored
         });
         // check for premium membership
