@@ -59,11 +59,11 @@ export = class LinkFilter extends Interrupt {
                 fields: [
                     {
                         name: "User",
-                        value: message.author.tag + "/" + message.author.id,
+                        value: message.author.tag + " / " + message.author.id,
                     },
                     {
                         name: "Channel",
-                        value: message.channel.name + "/" + message.channel.id,
+                        value: message.channel.name + " / " + message.channel.id,
                     },
                 ],
             }).catch(() => {
