@@ -6,6 +6,7 @@
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
+import RoleModel from "../../models/Role";
 import * as errors from "../../utils/errors";
 import BastionGuild = require("../../structures/Guild");
 
@@ -39,6 +40,10 @@ export = class IAmCommand extends Command {
         const role = this.client.resolver.resolveRole(message.guild, argv._.join(" "));
 
         if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
+
+        const roleDocument = await RoleModel.findById(role.id);
+
+        if (!roleDocument || !roleDocument.selfAssignable) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotSelfAssignable", role.name));
 
         if (argv.not) {
             // remove the role
