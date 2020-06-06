@@ -111,7 +111,7 @@ export = class Warn extends Command {
         await member.addInfraction(reason);
 
         // message the member about their warning
-        await message.member.send({
+        await member.send({
             embed: {
                 color: Constants.COLORS.ORANGE,
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberWarnDM", message.author.tag, message.guild.name, reason),
