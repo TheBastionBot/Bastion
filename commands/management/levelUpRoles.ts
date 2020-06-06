@@ -100,7 +100,7 @@ export = class LevelUpRolesCommand extends Command {
                 let roleDocument = await role.fetchDocument();
 
                 // otherwise, create the document if required
-                if (!roleDocument && argv.emoji) {
+                if (!roleDocument) {
                     roleDocument = await role.createDocument();
                 }
 
