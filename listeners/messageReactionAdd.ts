@@ -19,6 +19,9 @@ export = class MessageReactionAddListener extends Listener {
     }
 
     handleSuggestions = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
+        // don't allow bots to handle suggestions
+        if (member.user.bot) return;
+
         // check whether the reaction was of a suggestion
         if (![ "✅", "❎" ].includes(messageReaction.emoji.name)) return;
         // check whether the member has permission to accept/reject suggestion
@@ -120,7 +123,7 @@ export = class MessageReactionAddListener extends Listener {
     }
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
-        // don't give bot reaction roles
+        // don't give reaction roles to bots
         if (member.user.bot) return;
 
         // identify the reaction roles group for the reaction
