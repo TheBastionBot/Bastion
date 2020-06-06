@@ -6,6 +6,7 @@
 import { Command, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
+import MemberModel from "../../models/Member";
 import * as numbers from "../../utils/numbers";
 import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
@@ -36,16 +37,20 @@ export = class DailyCommand extends Command {
     }
 
     exec = async (message: Message): Promise<void> => {
-        const member = message.member as BastionGuildMember;
+        // get the member document
+        const memberDocument = await MemberModel.findOne({
+            user: message.author.id,
+            guild: message.guild.id,
+        });
 
         const today = new Date();
         const yesterday = ((d): Date => new Date(d.setDate(d.getDate() - 1)))(new Date());
-        const lastClaimed = new Date(member.document.lastClaimed);
+        const lastClaimed = new Date(memberDocument.lastClaimed);
 
         // check whether already claimed today
         if (today.toDateString() === lastClaimed.toDateString()) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "alreadyClaimed", message.author.tag));
         // otherwise, update last claim date to today
-        member.document.lastClaimed = today.getTime();
+        memberDocument.lastClaimed = today.getTime();
 
         // generate the base reward
         let rewardAmount = numbers.getRandomInt(42, 128);
@@ -56,15 +61,15 @@ export = class DailyCommand extends Command {
         }
 
         // increment claim streak, if they didn't miss their timeframe
-        member.document.claimStreak = yesterday.toDateString() === lastClaimed.toDateString() ? member.document.claimStreak + 1 : 1;
+        memberDocument.claimStreak = yesterday.toDateString() === lastClaimed.toDateString() ? memberDocument.claimStreak + 1 : 1;
 
         // get claim message for the current streak
-        const claimStreakMessage = this.client.locale.getString((message.guild as BastionGuild).document.language, "info", this.getClaimMessageKey(member.document.claimStreak), 7 - member.document.claimStreak);
+        const claimStreakMessage = this.client.locale.getString((message.guild as BastionGuild).document.language, "info", this.getClaimMessageKey(memberDocument.claimStreak), 7 - memberDocument.claimStreak);
 
         // check whether member has completed the streak
-        if (member.document.claimStreak === 7) {
+        if (memberDocument.claimStreak === 7) {
             // reset claim streak
-            member.document.claimStreak = 0;
+            memberDocument.claimStreak = 0;
             // bonus reward
             rewardAmount += numbers.getRandomInt(512, 1024);
         }
@@ -75,10 +80,10 @@ export = class DailyCommand extends Command {
         }
 
         // credit reward amount into member's account
-        await member.credit(rewardAmount, "Daily Reward", member.document);
+        await (message.member as BastionGuildMember).credit(rewardAmount, "Daily Reward", memberDocument);
 
         // save document
-        await member.document.save();
+        await memberDocument.save();
 
         // acknowledge
         message.channel.send({
