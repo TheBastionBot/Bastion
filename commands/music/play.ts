@@ -68,6 +68,8 @@ export = class Play extends Command {
         return new Promise((resolve, reject) =>
             youtube.getInfo("ytsearch:" + query, [
                 "--ignore-errors",
+                // network options
+                "--force-ipv4",
                 // geo restriction
                 "--geo-bypass-country=US",
                 // video selection
@@ -354,6 +356,8 @@ export = class Play extends Command {
         // Create the music stream
         const stream = youtube(songLink, [
             "--ignore-errors",
+            // network options
+            "--force-ipv4",
             // geo restriction
             "--geo-bypass-country=US",
             // video selection
