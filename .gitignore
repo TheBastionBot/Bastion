@@ -1,6 +1,4 @@
 # Transpiled files
-*.js
-*.js.map
 *.d.ts
 *.d.ts.map
 !/typings/*.d.ts
@@ -12,8 +10,6 @@
 
 # Auto generated files
 /build
-/assets/badges.json
-/assets/commands.json
 
 # Lock file
 package-lock.json
