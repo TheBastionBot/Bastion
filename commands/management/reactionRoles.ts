@@ -53,7 +53,7 @@ export = class ReactionRolesCommand extends Command {
             return await message.channel.send({
                 embed: {
                     color: Constants.COLORS.RED,
-                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionRolesGroupRemove"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionRolesGroupRemove", message.author.tag, argv.message),
                 },
             }).catch(() => {
                 // this error can be ignored
@@ -125,7 +125,7 @@ export = class ReactionRolesCommand extends Command {
             await message.channel.send({
                 embed: {
                     color: Constants.COLORS.GREEN,
-                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionRolesGroupAdd"),
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "reactionRolesGroupAdd", message.author.tag, reactionMessage.url),
                 },
             }).catch(() => {
                 // this error can be ignored
