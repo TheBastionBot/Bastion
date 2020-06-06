@@ -147,3 +147,6 @@ volatileCommandDisable: "%var% has disabled the `%var%` command, temporarily, un
 didYouKnowDailyCoins: "Did you know? You can get free coins on a daily basis by using the `daily` command every day."
 membersPruneQuestion: "%var% are you sure you want to prune the members without any roles who haven't been active in the past %var% days? This can't be undone."
 membersPrune: "%var% pruned all the members, from the server, without any roles who haven't been active in the past %var% days with the reason %var%."
+shutdownQuestion: "%var% are you sure you want to shut me down now?"
+reactionRolesGroupAdd: "%var% created a Reaction Role Group associated with [this message](%var%)."
+reactionRolesGroupRemove: "%var% removed the Reaction Role Group associated with the message %var%."
