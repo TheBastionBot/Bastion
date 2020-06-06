@@ -120,6 +120,9 @@ export = class MessageReactionAddListener extends Listener {
     }
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
+        // don't give bot reaction roles
+        if (member.user.bot) return;
+
         // identify the reaction roles group for the reaction
         const reactionRolesGroup = await ReactionRoleGroup.findById(messageReaction.message.id);
 
