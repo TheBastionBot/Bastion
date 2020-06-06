@@ -56,8 +56,8 @@ export = class Warn extends Command {
                     color: Constants.COLORS.ORANGE,
                     title: "Warned Users",
                     description: warnedMembers.items.length ? "Users warned in the server." : "No one has been warned in the server.",
-                    fields: warnedMembers.items.map((member: { _id: string; infractions: string[] }) => ({
-                        name: message.guild.members.cache.has(member._id) ? message.guild.members.cache.get(member._id).user.tag : member._id,
+                    fields: warnedMembers.items.map((member: { user: string; infractions: string[] }) => ({
+                        name: message.guild.members.cache.has(member.user) ? message.guild.members.cache.get(member.user).user.tag : member.user,
                         value: arrays.toBulletList(member.infractions),
                     })),
                     footer: {
