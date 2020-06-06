@@ -28,15 +28,15 @@ generate:
 # Generate obfuscated code
 	@make obfuscate
 # Copy assets
-	@cp -r ./assets ./build/assets
+	@cp -r ./assets ./build/
 # Copy locales
-	@cp -r ./locales ./build/locales
+	@cp -r ./locales ./build/
 # Copy example settings
 	@cp ./settings/configurations.example.yaml ./build/settings/configurations.example.yaml
 	@cp ./settings/credentials.example.yaml ./build/settings/credentials.example.yaml
 # Copy scripts
-	@cp -r ./scripts/bash ./build/scripts/bash
-	@cp -r ./scripts/powershell ./build/scripts/powershell
+	@cp -r ./scripts/bash ./build/scripts
+	@cp -r ./scripts/powershell ./build/scripts
 	@cp ./bastion.sh ./build/bastion.sh
 	@cp ./bastion.cmd ./build/bastion.cmd
 # Copy changelog
