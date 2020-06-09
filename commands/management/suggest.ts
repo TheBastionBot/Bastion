@@ -54,6 +54,13 @@ export = class SuggestCommand extends Command {
             },
         });
 
+        // delete the command invocation
+        if (message.deletable) {
+            message.delete({ reason: "Suggestion Command" }).catch(() => {
+                // this error can be ignored
+            });
+        }
+
         // add reaction to accept/reject the suggestion
         suggestion.react("✅").catch(() => {
             // this error can be ignored
