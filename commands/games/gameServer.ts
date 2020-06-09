@@ -68,7 +68,7 @@ export = class GameServerCommand extends Command {
                     },
                     {
                         name: "Players",
-                        value: (server.players.length + server.bots.length) + " / " + server.maxplayers,
+                        value: ((server.players ? server.players.length : 0) + (server.bots ? server.bots.length : 0)) + " / " + server.maxplayers,
                         inline: true,
                     },
                     {
@@ -76,10 +76,10 @@ export = class GameServerCommand extends Command {
                         value: "`" + server.connect + "`",
                         inline: true,
                     },
-                ].concat(server.players.filter((player: Player) => player.name).sort((a: Player, b: Player) => b.time - a.time).sort((a: Player, b: Player) => b.score - a.score).map((player: Player) => ({
+                ].concat(server.players ? server.players.filter((player: Player) => player.name).sort((a: Player, b: Player) => b.time - a.time).sort((a: Player, b: Player) => b.score - a.score).map((player: Player) => ({
                     name: (player.team ? "[" + player.team + "]" : "") + player.name,
                     value: "```\nSCORE " + (player.score || 0) + (player.ping ? "\tPING " + player.ping + "ms" : "") + (player.time ? "\t" + (player.time / 60).toFixed(2) + " minutes" : "") + "```",
-                })).slice(0, 10)),
+                })).slice(0, 10) : []),
                 footer: {
                     text: server.ping + "ms" + (server.password ? " • Password Protected" : "") + " • Powered by Omnic",
                 },
