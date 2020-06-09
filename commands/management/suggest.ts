@@ -33,7 +33,7 @@ export = class SuggestCommand extends Command {
         const guild = message.guild as BastionGuild;
 
         // check whether suggestions channel is set and is available
-        if (!guild.document.suggestionsChannelId || !message.guild.channels.cache.has(guild.document.suggestionsChannelId)) throw new Error("NO_SUGGESTIONS_CHANNEL");
+        if (!guild.document.suggestionsChannelId || !message.guild.channels.cache.has(guild.document.suggestionsChannelId)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "noSuggestionChannel", message.author.tag));
 
         // identify the suggestion channel
         const suggestionChannel = message.guild.channels.cache.get(guild.document.suggestionsChannelId) as TextChannel;
