@@ -10,6 +10,7 @@ import ReactionRoleGroup from "../models/ReactionRoleGroup";
 import RoleModel from "../models/Role";
 import BastionGuild = require("../structures/Guild");
 import * as emojis from "../utils/emojis";
+import memcache from "../utils/memcache";
 
 export = class MessageReactionAddListener extends Listener {
     constructor() {
@@ -62,6 +63,10 @@ export = class MessageReactionAddListener extends Listener {
         // check whether the message has any content
         if (!messageReaction.message.content && !imageAttachment) return;
 
+        // check whether the message is in starboard cache
+        const starboardCache = memcache.get("starboard") as string[];
+        if (starboardCache && starboardCache instanceof Array && starboardCache.includes(messageReaction.message.id)) return;
+
         // post it in the starboard
         await starboardChannel.send({
             embed: {
@@ -89,6 +94,11 @@ export = class MessageReactionAddListener extends Listener {
                 },
             },
         });
+
+        if (starboardCache && starboardCache instanceof Array) {
+            starboardCache.push(messageReaction.message.id);
+        }
+        memcache.set("starboard", starboardCache ? starboardCache : [ messageReaction.message.id ]);
     }
 
     handleReactionAnnouncement = async (messageReaction: MessageReaction, member: GuildMember, announcementChannel: TextChannel): Promise<void> => {
