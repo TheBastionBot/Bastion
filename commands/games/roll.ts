@@ -8,15 +8,20 @@ import { Message } from "discord.js";
 
 import * as numbers from "../../utils/numbers";
 
+import BastionGuild = require("../../structures/Guild");
+import BastionGuildMember = require("../../structures/GuildMember");
+
 export = class RollCommand extends Command {
     private pattern: RegExp;
     private modifierPattern: RegExp;
 
     constructor() {
         super("roll", {
-            description: "It allows you to roll dice and see the result. It supports dice notation.",
+            description: "It allows you to roll dice and see the result. It supports dice notation. It also supports gambling.",
             triggers: [],
-            arguments: {},
+            arguments: {
+                number: [ "bet" ],
+            },
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -26,6 +31,7 @@ export = class RollCommand extends Command {
             syntax: [
                 "roll",
                 "roll NOTATION",
+                "roll --bet RESULT",
             ],
         });
 
@@ -84,6 +90,19 @@ export = class RollCommand extends Command {
             });
 
             result = this.applyModifiers(result, modifiers.filter(m => m));
+        }
+
+        // gambling
+        if (argv.bet) {
+            if ((message.guild as BastionGuild).document.gambling && (message.guild as BastionGuild).document.gambling.enabled) {
+                if (result === argv.bet) {
+                    (message.member as BastionGuildMember).credit(100 * ((message.guild as BastionGuild).document.gambling.multiplier || 1), "Won the bet in Roll.");
+                } else {
+                    (message.member as BastionGuildMember).debit(100 * ((message.guild as BastionGuild).document.gambling.multiplier || 1), "Lost the bet in Roll.");
+                }
+            } else {
+                throw new Error("GAMBLING_DISABLED");
+            }
         }
 
         fields.push({
