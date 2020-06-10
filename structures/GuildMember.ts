@@ -125,7 +125,7 @@ export = class BastionGuildMember extends GuildMember {
                 await TransactionModel.create({
                     guild: this.guild.id,
                     sender: this.client.user.id,
-                    receiver: document.user,
+                    receiver: member.user,
                     amount,
                     time: new Date(),
                     note: reason,
@@ -145,13 +145,13 @@ export = class BastionGuildMember extends GuildMember {
 
         if (amount) {
             // update member's balance
-            member.balance = numbers.clamp(member.balance - amount, Number.MIN_SAFE_INTEGER);
+            member.balance = numbers.clamp(member.balance - amount, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 
             // create transaction log
             if (!document) {
                 await TransactionModel.create({
                     guild: this.guild.id,
-                    sender: document.user,
+                    sender: member.user,
                     receiver: this.client.user.id,
                     amount,
                     time: new Date(),
