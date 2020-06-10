@@ -13,7 +13,7 @@ export = class RockPaperScissorCommand extends Command {
 
     constructor() {
         super("magic8ball", {
-            description: "",
+            description: "It allows you to get answers to your polar questions from the Magic 8 Ball.",
             triggers: [ "8ball" ],
             arguments: {},
             scope: "guild",

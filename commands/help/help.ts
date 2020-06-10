@@ -11,7 +11,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class HelpCommand extends Command {
     constructor() {
         super("help", {
-            description: "",
+            description: "It allows you to see the help message of Bastion that shows you basic information you need to start using Bastion.",
             triggers: [],
             arguments: {},
             scope: "guild",

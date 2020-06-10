@@ -11,7 +11,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class DonateCommand extends Command {
     constructor() {
         super("donate", {
-            description: "",
+            description: "It allows you to see the ways you can contribute to Bastion and it's development.",
             triggers: [],
             arguments: {},
             scope: "guild",
