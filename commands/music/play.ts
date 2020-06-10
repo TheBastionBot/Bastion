@@ -15,6 +15,8 @@ import * as errors from "../../utils/errors";
 import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
+import { BastionConfigurations } from "../../typings/settings";
+
 
 interface YoutubeInfo extends youtube.Info {
     id: string;
@@ -200,12 +202,14 @@ export = class Play extends Command {
             const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + guild.id + "/" + song.id + ".mp3");
 
             // Set playing activity
-            this.client.user.setActivity({
-                name: song.track,
-                type: "LISTENING",
-            }).catch(() => {
-                // This error can be ignored.
-            });
+            if ((this.client.configurations as BastionConfigurations).music && (this.client.configurations as BastionConfigurations).music.activity) {
+                this.client.user.setActivity({
+                    name: song.track,
+                    type: "LISTENING",
+                }).catch(() => {
+                    // This error can be ignored.
+                });
+            }
 
             dispatcher.on("finish", () => this.dispatcherFinishHandler(guild));
             dispatcher.on("error", (error: Error) => {
@@ -224,9 +228,11 @@ export = class Play extends Command {
             });
 
             // Reset playing activity
-            this.client.user.setActivity(this.client.configurations.presence.activity).catch(() => {
-                // This error can be ignored.
-            });
+            if ((this.client.configurations as BastionConfigurations).music && (this.client.configurations as BastionConfigurations).music.activity) {
+                this.client.user.setActivity(this.client.configurations.presence.activity).catch(() => {
+                    // This error can be ignored.
+                });
+            }
 
             // Leave the voice channel, if `keepAlive` is disabled
             if (!guild.document.music.keepAlive) {
