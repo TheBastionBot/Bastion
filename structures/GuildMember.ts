@@ -18,7 +18,7 @@ import BastionUser = require("./User");
 export = class BastionGuildMember extends GuildMember {
     document: IGuildMember & mongoose.Document;
 
-    constructor(client: Client, data: object, guild: Guild) {
+    constructor(client: Client, data: Record<string, unknown>, guild: Guild) {
         super(client, data, guild);
     }
 

@@ -46,7 +46,7 @@ export = class BastionGuild extends Guild {
         voiceChannel?: VoiceChannel;
     };
 
-    constructor(client: Client, data: object) {
+    constructor(client: Client, data: Record<string, unknown>) {
         super(client, data);
 
         this.music = {

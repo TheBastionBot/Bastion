@@ -9,7 +9,7 @@ import * as mongoose from "mongoose";
 import TextChannelModel, { TextChannel as ITextChannel } from "../models/TextChannel";
 
 export = class BastionNewsChannel extends NewsChannel {
-    constructor(guild: Guild, data: object) {
+    constructor(guild: Guild, data: Record<string, unknown>) {
         super(guild, data);
     }
 

@@ -12,7 +12,7 @@ import RoleModel, { Role as IRole } from "../models/Role";
 export = class BastionRole extends Role {
     public document: IRole & mongoose.Document;
 
-    constructor(client: Client, data: object, guild: Guild) {
+    constructor(client: Client, data: Record<string, unknown>, guild: Guild) {
         super(client, data, guild);
     }
 

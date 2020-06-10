@@ -121,7 +121,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         const triggers = await TriggerModel.find({ guild: message.guild.id });
 
         // responses
-        const responseMessages: object[] = [];
+        const responseMessages: Record<string, unknown>[] = [];
         const responseReactions: string[] = [];
 
         for (const trigger of triggers) {

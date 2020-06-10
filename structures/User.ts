@@ -13,7 +13,7 @@ export = class BastionUser extends User {
     client: Client;
     document: IUser & mongoose.Document;
 
-    constructor(client: Client, data: object) {
+    constructor(client: Client, data: Record<string, unknown>) {
         super(client, data);
     }
 

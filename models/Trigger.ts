@@ -8,7 +8,7 @@ import * as mongoose from "mongoose";
 export interface Trigger {
     guild: string;
     trigger: string;
-    responseMessage?: object;
+    responseMessage?: Record<string, unknown>;
     responseReaction?: string;
 }
 

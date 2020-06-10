@@ -13,12 +13,12 @@ export interface Guild {
     language?: string;
     greeting?: {
         channelId: string;
-        message?: object;
+        message?: Record<string, unknown>;
         timeout?: number;
     };
     farewell?: {
         channelId: string;
-        message?: object;
+        message?: Record<string, unknown>;
         timeout?: number;
     };
     music?: {

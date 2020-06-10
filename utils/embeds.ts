@@ -6,7 +6,7 @@
 import { Constants } from "@bastion/tesseract";
 import { ColorResolvable, EmbedFieldData, MessageEmbedAuthor, MessageEmbedFooter, MessageEmbedOptions } from "discord.js";
 
-export interface MessageEmbedData {
+export interface MessageEmbedData extends Record<string, unknown> {
     author?: MessageEmbedAuthor;
     color?: ColorResolvable;
     description?: string;
