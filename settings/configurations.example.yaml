@@ -50,6 +50,13 @@ scheduledCommands:
 # Keep this disabled if the bot owner isn't you.
 unsafeMode: false
 
+# Music Settings
+music:
+  # Enable Music Activity
+  # When enabled, Bastion will update it's activity to the currently playing
+  # track.
+  activity: true
+
 # Port used for the Status API.
 # `PORT` environment variable overwrites this value.
 port: 8377
