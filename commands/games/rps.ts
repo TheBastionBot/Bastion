@@ -8,14 +8,19 @@ import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
 
+import BastionGuild = require("../../structures/Guild");
+import BastionGuildMember = require("../../structures/GuildMember");
+
 export = class RockPaperScissorCommand extends Command {
     private choices: string[];
 
     constructor() {
         super("rps", {
-            description: "It allows you to play Rock Paper Scissor with Bastion.",
+            description: "It allows you to play Rock Paper Scissor with Bastion. It also supports gambling.",
             triggers: [ "rockPaperScissor" ],
-            arguments: {},
+            arguments: {
+                boolean: [ "bet" ],
+            },
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -24,6 +29,7 @@ export = class RockPaperScissorCommand extends Command {
             userPermissions: [],
             syntax: [
                 "rps CHOICE",
+                "rps CHOICE --bet",
             ],
         });
 
@@ -48,6 +54,19 @@ export = class RockPaperScissorCommand extends Command {
                     : userChoice === "SCISSOR" && bastionChoice === "PAPER"
                         ? "You win, human."
                         : "I win! Sorry, human. :yum:";
+
+        // gambling
+        if (argv.bet) {
+            if ((message.guild as BastionGuild).document.gambling && (message.guild as BastionGuild).document.gambling.enabled) {
+                if (result === "You win, human.") {
+                    (message.member as BastionGuildMember).credit(42 * ((message.guild as BastionGuild).document.gambling.multiplier || 1), "Won the bet in RPS.");
+                } else {
+                    (message.member as BastionGuildMember).debit(42 * ((message.guild as BastionGuild).document.gambling.multiplier || 1), "Lost the bet in RPS.");
+                }
+            } else {
+                throw new Error("GAMBLING_DISABLED");
+            }
+        }
 
         // acknowledge
         await message.channel.send({
