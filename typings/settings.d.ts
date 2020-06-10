@@ -2,6 +2,9 @@ import { TesseractConfigurations, TesseractCredentials } from "@bastion/tesserac
 
 interface BastionConfigurations extends TesseractConfigurations {
     port?: number;
+    music?: {
+        activity?: boolean;
+    };
 }
 
 interface BastionCredentials extends TesseractCredentials {
