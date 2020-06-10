@@ -133,6 +133,7 @@ giveaway: It allows you to run giveaway events in the server for at least an
   hour and at most a month. You can set any number of winners for the event. And
   it also allows you to reroll the winners, if need be, after the end of the
   event.
+grant: It allows you to grant experience or coins to the members of the server.
 iam: It allows you add (and remove) yourself to (and from) the Self Roles set in
   the server.
 leave: It allows you to ask Bastion to leave the server and clear all data it
