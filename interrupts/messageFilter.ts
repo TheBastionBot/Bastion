@@ -7,6 +7,7 @@ import { Interrupt } from "@bastion/tesseract";
 import { Message, TextChannel } from "discord.js";
 
 import BastionGuild = require("../structures/Guild");
+import BastionGuildMember = require("../structures/GuildMember");
 
 export = class MessageFilter extends Interrupt {
     constructor() {
@@ -41,6 +42,9 @@ export = class MessageFilter extends Interrupt {
 
         // check whether the message matches restricted patterns
         if (this.testPatterns(message.content, guild.document.filters.messageFilter.patterns)) {
+            // add infraction
+            (message.member as BastionGuildMember).addInfraction("Violated message filter.");
+
             // delete the message
             if (message.deletable) message.delete().catch(() => {
                 // this error can be ignored

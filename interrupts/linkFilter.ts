@@ -6,9 +6,10 @@
 import { Interrupt } from "@bastion/tesseract";
 import { Message, TextChannel } from "discord.js";
 
-import BastionGuild = require("../structures/Guild");
-
 import * as regex from "../utils/regex";
+
+import BastionGuild = require("../structures/Guild");
+import BastionGuildMember = require("../structures/GuildMember");
 
 export = class LinkFilter extends Interrupt {
     constructor() {
@@ -50,6 +51,9 @@ export = class LinkFilter extends Interrupt {
 
         // check whether the message has an uri
         if (regex.URI.test(message.content)) {
+            // add infraction
+            (message.member as BastionGuildMember).addInfraction("Unauthorized to send links.");
+
             // delete link
             this.deleteLink(message);
 

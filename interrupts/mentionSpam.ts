@@ -7,6 +7,7 @@ import { Interrupt } from "@bastion/tesseract";
 import { Message, TextChannel } from "discord.js";
 
 import BastionGuild = require("../structures/Guild");
+import BastionGuildMember = require("../structures/GuildMember");
 
 export = class MentionSpamInterrupt extends Interrupt {
     constructor() {
@@ -37,6 +38,9 @@ export = class MentionSpamInterrupt extends Interrupt {
         if (message.mentions.roles.size > guild.document.mentionSpam.threshold) filtered = true;
 
         if (filtered) {
+            // add infraction
+            (message.member as BastionGuildMember).addInfraction("Mention spam.");
+
             // create moderation log
             guild.createModerationLog({
                 event: "mentionSpam",
