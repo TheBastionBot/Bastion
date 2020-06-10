@@ -98,20 +98,25 @@ acrophobia: It allows you to play the Acrophobia game with your fellow server
   backronym. After the submissions are over, in the specified amount of time,
   everyone then votes anonymously for their favorite answer. The most popular
   backronym wins.
-flip: It allows you to flip any number of coins and see the result.
+flip: It allows you to flip any number of coins and see the result. It also
+  supports gambling.
 gameServer: It allows you to fetch information from nearly any game server that
   makes its status publicly available.
-magic8ball: ""
+magic8ball: It allows you to get answers to your polar questions from the Magic 8 Ball.
 roll: It allows you to roll dice and see the result. It supports dice notation.
-rps: It allows you to play Rock Paper Scissor with Bastion.
+  It also supports gambling.
+rps: It allows you to play Rock Paper Scissor with Bastion. It also supports
+  gambling.
 russianRoulette: It allows you to play Russian Roulette. Let's see if you can
   last all the 7 rounds.
 changelog: It allows you to see the changes that have been introduced in the
   current version of Bastion.
 commands: It allows you the see the list of commands available in Bastion. You
   can also use it to search for commands matching a given query.
-donate: ""
-help: ""
+donate: It allows you to see the ways you can contribute to Bastion and it's
+  development.
+help: It allows you to see the help message of Bastion that shows you basic
+  information you need to start using Bastion.
 avatar: It allows you see the avatar of a user.
 channel: It allows you see the information of a channel.
 emoji: It allows you see the information of an emoji.
@@ -159,7 +164,9 @@ clear: It allows you to clear a specified number of messages in a channel. You
   or a bot sent it.
 deaf: It allows you to deafen (and undeafen) users in the server. Deafened users
   can't listen anything in the server's voice channels.
-infractions: It allows you to list all your infractions.
+infractions: It allows you to list all your infractions. If you're a server
+  manager, it also allows you to set the thresholds for the actions that should
+  be taken for violating infractions.
 kick: It allows you to kick users from the server.
 nickname: It allows you to set (and unset) nicknames of the server members.
 reason: It allows you to update the reason of a moderation case. Forgot to set a
