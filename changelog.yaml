@@ -1,6 +1,8 @@
 date: June 14, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
+  Killed these bugs:
+    - description: Fixed an issue with the `role` command that displayed the list of members even when it wasn't asked.
   Bastion V8:
     - title: Dashboard
       description: Portal, or [Bastion's Dashboard](https://portal.traction.one) is now live! [Become a supporter](https://patreon.com/bastionbot) today to get early access to the dashboard beta!
