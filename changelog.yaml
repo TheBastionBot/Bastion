@@ -1,7 +1,9 @@
 date: June 14, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
-  Killed these bugs:
+  Some Improvements:
+    - description: Auto Roles won't try to add empty list of roles when there are no Auto Roles set.
+  Killed these Bugs:
     - description: Fixed an issue with the `role` command that displayed the list of members even when it wasn't asked.
   Bastion V8:
     - title: Dashboard
