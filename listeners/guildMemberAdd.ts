@@ -30,7 +30,9 @@ export = class GuildMemberAddListener extends Listener {
         const userRoles: string[] = autoRoles.filter(role => role.autoAssignable && role.autoAssignable.forUsers).map(r => r._id);
         const otherRoles: string[] = autoRoles.filter(role => role.autoAssignable && ((Number(role.autoAssignable.forBots) ^ Number(role.autoAssignable.forUsers)) === 0)).map(r => r._id);
 
-        member.roles.add(otherRoles.concat(member.user.bot ? botRoles : userRoles), "Auto added via Auto Roles");
+        if (botRoles.length || userRoles.length || otherRoles.length) {
+            member.roles.add(otherRoles.concat(member.user.bot ? botRoles : userRoles), "Auto added via Auto Roles");
+        }
     }
 
     handleGreetings = (member: GuildMember, document: IGuild): void => {
