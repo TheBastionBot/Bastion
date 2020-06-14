@@ -1,25 +1,10 @@
-date: June 10, 2020
+date: June 14, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
-  New Features:
-    - title: Gambling Commands
-      description: Gambling commands are now back! `flip`, `roll` and `rps` will allow server members to bet on the outcome, provided gambling is enabled in the server.
-    - title: Infractions
-      description: If a member violates any filters, it'll be automatically added to their list of infractions.
-    - title: Music Activity
-      description: You can now configure whether the music activity should be displayed while playing music.
-    - title: Role Members
-      description: You can now see the members in a role by using the `--members` option with the `role` command.
-    - title: "`infractions` command"
-      description: The command isn't new, but it has new options that'll allow you to set the thresholds for the infraction actions.
-    - title: "`grant` command"
-      description: You can now use this new command to grant XP and Coins to all members of your server at once, provided gamification is enabled in the server and profiles for the members have been created.
-  Made some improvements:
-    - description: The `invite` command can now be used even without the Create Invites permission. Well, it can be used, but it won't create an instant invite for you; it'll only show the invite link to invite Bastion to your server.
-  Killed these bugs:
-    - description: Some commands' description were missing, found them! They are back at their place now.
-    - description: Fixed a rare case when a member's balance had the chance to become the lowest possible negative value when they went into debt. Thank goodness it's fixed, before it affected anyone!
-    - description: Fixed some cases where coins transaction logs won't get created.
+  Some Improvements:
+    - description: Auto Roles won't try to add empty list of roles when there are no Auto Roles set.
+  Killed these Bugs:
+    - description: Fixed an issue with the `role` command that displayed the list of members even when it wasn't asked.
   Bastion V8:
     - title: Dashboard
       description: Portal, or [Bastion's Dashboard](https://portal.traction.one) is now live! [Become a supporter](https://patreon.com/bastionbot) today to get early access to the dashboard beta!
