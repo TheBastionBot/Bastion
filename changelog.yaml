@@ -7,6 +7,7 @@ changes:
     - description: Fixed an issue with the `role` command that displayed the list of members even when it wasn't asked.
     - description: Fixed an issue with the `giveaway` command that displayed that you needed premium membership even when you didn't need it.
     - description: Fixed an issue with the `poll` command that displayed that you needed premium membership even when you didn't need it.
+    - description: Some under-the-hood fixes, as always, to make Bastion even better!
   Bastion V8:
     - title: Dashboard
       description: Portal, or [Bastion's Dashboard](https://portal.traction.one) is now live! [Become a supporter](https://patreon.com/bastionbot) today to get early access to the dashboard beta!
