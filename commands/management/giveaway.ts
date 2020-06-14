@@ -100,7 +100,7 @@ export = class GiveawayCommand extends Command {
                 } else if (tier === omnic.PremiumTier.PLATINUM && activeGiveawaysCount >= constants.LIMITS.PLATINUM.GIVEAWAYS) {
                     throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitGiveaways", constants.LIMITS.PLATINUM.GIVEAWAYS));
                 }
-            } else {    // no premium membership
+            } else if (activeGiveawaysCount >= constants.LIMITS.GIVEAWAYS) {    // no premium membership
                 throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumGiveaways", constants.LIMITS.GIVEAWAYS));
             }
         }
