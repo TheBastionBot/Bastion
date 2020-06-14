@@ -21,9 +21,6 @@ export = class RoleCommand extends Command {
                 alias: {
                     members: [ "m" ],
                 },
-                default: {
-                    members: 1,
-                },
                 number: [ "members" ],
             },
             scope: "guild",
