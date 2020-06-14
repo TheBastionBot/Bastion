@@ -160,7 +160,7 @@ export = class PollCommand extends Command {
                 } else if (tier === omnic.PremiumTier.PLATINUM && activePollsCount >= constants.LIMITS.PLATINUM.POLLS) {
                     throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.LIMITED_PREMIUM_MEMBERSHIP, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "membershipLimitPolls", constants.LIMITS.PLATINUM.POLLS));
                 }
-            } else {    // no premium membership
+            } else if (activePollsCount >= constants.LIMITS.POLLS) {    // no premium membership
                 throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumPolls", constants.LIMITS.POLLS));
             }
         }
