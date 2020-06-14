@@ -55,7 +55,7 @@ export = class GrantCommand extends Command {
         return await message.channel.send({
             embed: {
                 color: Constants.COLORS.GREEN,
-                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "grantMembers", message.author.tag, argv.xp, argv.coins),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "grantMembers", message.author.tag, argv.xp ? argv.xp : 0, argv.coins ? argv.coins : 0),
             },
         });
     }
