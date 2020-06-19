@@ -133,7 +133,7 @@ export = class RoleStoreCommand extends Command {
                 return await message.channel.send({
                     embed: {
                         color: Constants.COLORS.GREEN,
-                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleBought", message.author.tag, role.name, argv.sell),
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "roleBought", message.author.tag, role.name, roleDocument.price),
                     },
                 }).catch(() => {
                     // this error can be ignored
