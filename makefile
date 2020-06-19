@@ -3,18 +3,35 @@
 all: clean test build
 
 clean:
+ifeq ($(OS), Windows_NT)
+	@debian run "find . -type f \( -name '*.js' -o -name '*.js.map' \) -not -path './node_modules/*' -delete"
+else
 	@find . -type f \( -name '*.js' -o -name '*.js.map' \) -not -path './node_modules/*' -delete
+endif
 
 test:
+ifeq ($(OS), Windows_NT)
+	@.\node_modules\.bin\eslint . --ext .ts
+else
 	@./node_modules/.bin/eslint . --ext .ts
+endif
 
 build:
+ifeq ($(OS), Windows_NT)
+# Fetch badges
+	@debian run ./scripts/fetchBadges.sh
+# Transpile TypeScript
+	@.\node_modules\.bin\tsc
+# Verify Constants Sanity
+	@debian run ./scripts/constantSanityCheck.sh
+else
 # Fetch badges
 	@./scripts/fetchBadges.sh
 # Transpile TypeScript
 	@./node_modules/.bin/tsc
 # Verify Constants Sanity
 	@./scripts/constantSanityCheck.sh
+endif
 # Generate Commands Data
 	@node ./scripts/generateCommandsData.js
 
