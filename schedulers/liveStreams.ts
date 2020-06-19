@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Scheduler } from "@bastion/tesseract";
+import { Logger, Scheduler } from "@bastion/tesseract";
 import { TextChannel } from "discord.js";
 import fetch from "node-fetch";
 
@@ -92,21 +92,25 @@ export = class LiveStreams extends Scheduler {
     };
 
     exec = async (): Promise<void> => {
-        // check whether the guild cache is empty
-        if (!this.client.guilds.cache.size) return;
+        try {
+            // check whether the guild cache is empty
+            if (!this.client.guilds.cache.size) return;
 
-        const guildDocuments = await GuildModel.find({
-            $or: this.client.guilds.cache.map(g => ({ _id: g.id })),
-            streamers: {
-                $exists: true,
-            },
-        });
+            const guildDocuments = await GuildModel.find({
+                $or: this.client.guilds.cache.map(g => ({ _id: g.id })),
+                streamers: {
+                    $exists: true,
+                },
+            });
 
-        for (const guild of guildDocuments) {
-            // twitch streams
-            if (guild.streamers.twitch && guild.streamers.twitch.channelId && guild.streamers.twitch.users.length) {
-                this.handleTwitchStreamers(guild._id, guild.streamers.twitch);
+            for (const guild of guildDocuments) {
+                // twitch streams
+                if (guild.streamers.twitch && guild.streamers.twitch.channelId && guild.streamers.twitch.users.length) {
+                    this.handleTwitchStreamers(guild._id, guild.streamers.twitch).catch(e => Logger.error(e));
+                }
             }
+        } catch (e) {
+            Logger.error(e);
         }
     }
 }
