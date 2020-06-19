@@ -21,7 +21,7 @@ presence:
     # Activity name.
     # The name of the activity.
     name: "with Ganymede"
-    # Acitvity URL
+    # Activity URL
     # Twitch channel URL for `STREAMING` activity.
     url: "https://twitch.tv/k3rn31p4nic"
 
