@@ -151,12 +151,12 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
                         text: (message.client as Client).locale.getConstant("bastion.name") + " Trigger",
                     },
                 },
-            });
+            }).catch(Logger.error);
         }
 
         // response reaction
         if (responseReactions.length) {
-            message.react(responseReactions[Math.floor(Math.random() * responseReactions.length)]);
+            message.react(responseReactions[Math.floor(Math.random() * responseReactions.length)]).catch(Logger.error);
         }
     }
 
