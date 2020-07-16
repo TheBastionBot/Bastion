@@ -28,6 +28,10 @@ export = class MusicCommand extends Command {
             ratelimit: 1,
             clientPermissions: [],
             userPermissions: [],
+            syntax: [
+                "music",
+                "music --server SERVER_ID",
+            ],
         });
     }
 
