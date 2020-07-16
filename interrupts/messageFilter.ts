@@ -34,6 +34,9 @@ export = class MessageFilter extends Interrupt {
 
         const guild = message.guild as BastionGuild;
 
+        // check whether the member is in the safe list
+        if (message.member.roles.cache.some(role => role.name.toLowerCase() === "safelist")) return false;
+
         // check whether the member has permission to manage channel or manage messages
         if (message.channel.permissionsFor(message.member) && message.channel.permissionsFor(message.member).has([ "MANAGE_CHANNELS", "MANAGE_MESSAGES" ])) return false;
 
