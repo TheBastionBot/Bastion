@@ -33,6 +33,8 @@ export = class GrantCommand extends Command {
             syntax: [
                 "grant --xp NUMBER",
                 "grant --coins NUMBER",
+                "grant --user USER --xp NUMBER",
+                "grant --user USER --coins NUMBER",
             ],
         });
     }
@@ -40,6 +42,36 @@ export = class GrantCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         // command syntax validation
         if (!argv.xp && !argv.coins) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
+
+        if (argv.user) {
+            // check whether the specified user is a server member
+            const member = this.client.resolver.resolveGuildMember(message.guild, argv.user);
+            if (!member) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "memberNotFound"));
+
+            // get user's profile data
+            const memberProfile = await MemberModel.findOne({ user: member.id, guild: message.guild.id });
+            // check whether user profile exists
+            if (!memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound"));
+
+            // update XP & coins
+            await MemberModel.updateOne({
+                user: member.id,
+                guild: message.guild.id,
+            }, {
+                $inc: {
+                    experience: argv.xp ? argv.xp : 0,
+                    balance: argv.coins ? argv.coins : 0,
+                },
+            });
+
+            // acknowledge
+            return await message.channel.send({
+                embed: {
+                    color: Constants.COLORS.GREEN,
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "grantMember", message.author.tag, argv.xp ? argv.xp : 0, argv.coins ? argv.coins : 0, member.displayName),
+                },
+            });
+        }
 
         // update XP & coins
         await MemberModel.updateMany({
