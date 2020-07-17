@@ -129,6 +129,7 @@ status: It allows you to see Bastion's status, at a glance. It also allows you
   to see status of the current shard.
 user: It allows you see the information of a user.
 channels: It allows you create, delete and update channels in the server.
+edit: It allows you to edit any message sent by Bastion.
 giveaway: It allows you to run giveaway events in the server for at least an
   hour and at most a month. You can set any number of winners for the event. And
   it also allows you to reroll the winners, if need be, after the end of the
