@@ -14,6 +14,7 @@ memberNotFound: "I looked into the deep dark corners of the server, but I didn't
 roleNotFound: "I looked into the deep dark corners of the server, but I didn't find that role."
 channelNotFound: "I looked into the deep dark corners of the server, but I didn't find that channel."
 emojiNotFound: "I looked into the deep dark corners of the server, but I didn't find that emoji."
+messageNotFound: "I looked into the deep dark corners of the channel, but I didn't find that message."
 noAutoRoles: "You don't seem to have any Auto Roles configured for the server."
 noSelfRoles: "You don't seem to have any Self Roles configured for the server."
 unspeakable: "I don't have permission to speak in the **%var%** voice channel."

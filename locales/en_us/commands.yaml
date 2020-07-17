@@ -129,6 +129,7 @@ status: It allows you to see Bastion's status, at a glance. It also allows you
   to see status of the current shard.
 user: It allows you see the information of a user.
 channels: It allows you create, delete and update channels in the server.
+edit: It allows you to edit any message sent by Bastion in the current channel.
 giveaway: It allows you to run giveaway events in the server for at least an
   hour and at most a month. You can set any number of winners for the event. And
   it also allows you to reroll the winners, if need be, after the end of the
@@ -140,6 +141,8 @@ leave: It allows you to ask Bastion to leave the server and clear all data it
   has on server and its members.
 levelUpRoles: It allows you to add roles to a level. When members reach that
   level, they'll be awarded those roles.
+lockSession: It allows you lock the Voice Session channel that you're currently
+  in so that anyone else can't join unless they're invited.
 lockdown: It allows you lockdown a channel in the server from users who don't
   have permission to manage messages or the channel.
 prune: It allows you to prune members without any roles, from the server, based

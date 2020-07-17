@@ -1,13 +1,21 @@
-date: June 15, 2020
+date: July 18, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
+  New features:
+    - title: Lock Voice Sessions
+      description: You can now lock a Voice Session channel once all the members are in the channel so no one else could join the channel without permission.
+    - title: Safelist
+      description: You can now create a Safelist role and messages anyone in with that role, regardless of their permissions, won't get filtered by Bastion's filters.
+    - title: Edit Messages
+      description: Ever felt the need to edit a message sent by Bastion? Well, now you can use the new `edit` command to do exactly that.
+    - title: Individual Grants
+    - description: You can now choose to `grant` XP & Coins to individual members instead of granting it to all the active members.
   Some Improvements:
-    - description: Auto Roles won't try to add empty list of roles when there are no Auto Roles set.
+    - description: Some under-the-hood improvements, to make Bastion better than ever.
   Killed these Bugs:
-    - description: Fixed an issue with the `role` command that displayed the list of members even when it wasn't asked.
-    - description: Fixed an issue with the `giveaway` command that displayed that you needed premium membership even when you didn't need it.
-    - description: Fixed an issue with the `poll` command that displayed that you needed premium membership even when you didn't need it.
-    - description: Fixed an issue with the `grant` command that prevented it from mentioning how much XP and Coins was granted to the members, in some cases.
+    - description: Fixed a minor issue with the Role Store where the buy option didn't display how much you spent on a Role.
+    - description: Fixed a minor issue with `lockdown` enabled/disabled acknowledgement messages being swapped.
+    - description: Some under-the-hood fixes.
   Bastion V8:
     - title: Dashboard
       description: Portal, or [Bastion's Dashboard](https://portal.traction.one) is now live! [Become a supporter](https://patreon.com/bastionbot) today to get early access to the dashboard beta!
