@@ -18,17 +18,17 @@
   "devDependencies": {
     "@types/discord-rpc": "^3.0.2",
     "@types/mathjs": "^6.0.5",
-    "@types/mongoose": "^5.7.6",
-    "@types/node": "^14.0.13",
+    "@types/mongoose": "^5.7.32",
+    "@types/node": "^14.0.23",
     "@types/node-fetch": "^2.5.5",
     "@types/uuid": "^8.0.0",
-    "@types/ws": "^7.2.4",
+    "@types/ws": "^7.2.6",
     "@types/yargs-parser": "^15.0.0",
     "@types/youtube-dl": "^1.12.2",
-    "@typescript-eslint/eslint-plugin": "^3.2.0",
-    "@typescript-eslint/parser": "^3.2.0",
-    "eslint": "^7.2.0",
-    "typescript": "^3.8.3"
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
+    "eslint": "^7.4.0",
+    "typescript": "^3.9.7"
   },
   "optionalDependencies": {
     "@discordjs/opus": "^0.3.2",
@@ -42,11 +42,11 @@
     "@bastion/tesseract": "^2.0.0",
     "@k3rn31p4nic/google-translate-api": "^1.1.1",
     "chalk": "^4.1.0",
-    "discord-rpc": "^3.1.0",
-    "mathjs": "^7.0.0",
+    "discord-rpc": "^3.1.2",
+    "mathjs": "^7.1.0",
     "node-fetch": "^2.6.0",
     "opusscript": "^0.0.7",
-    "uuid": "^8.0.0",
+    "uuid": "^8.2.0",
     "youtube-dl": "^3.0.2"
   }
 }
