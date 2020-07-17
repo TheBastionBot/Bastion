@@ -13,7 +13,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class EditCommand extends Command {
     constructor() {
         super("edit", {
-            description: "It allows you to edit any message sent by Bastion.",
+            description: "It allows you to edit any message sent by Bastion in the current channel.",
             triggers: [],
             arguments: {
                 alias: {
