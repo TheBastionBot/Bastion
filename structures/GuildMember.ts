@@ -42,13 +42,23 @@ export = class BastionGuildMember extends GuildMember {
     }
 
     public async addInfraction(message: string): Promise<IGuildMember & mongoose.Document> {
-        const member = await this.getDocument();
+        let member = await this.getDocument();
 
-        // add infraction to member
-        if (member.infractions) {
-            member.infractions.push(message);
+        // check whether member document exists
+        if (member) {
+            // add infraction to member
+            if (member.infractions) {
+                member.infractions.push(message);
+            } else {
+                member.infractions = [ message ];
+            }
         } else {
-            member.infractions = [ message ];
+            // create the member model if it doesn't exist
+            member = await MemberModel.create({
+                user: this.id,
+                guild: this.guild.id,
+                infractions: [ message ],
+            });
         }
 
 
