@@ -62,7 +62,7 @@ export = class Blacklist extends Command {
             });
         }
         // update blacklisted users
-        if (servers.length) {
+        if (users.length) {
             if (argv.remove) config.blacklistedUserIds = config.blacklistedUserIds.filter(id => !users.includes(id));
             else config.blacklistedUserIds = [ ...users, ...config.blacklistedUserIds ];
 
@@ -75,7 +75,8 @@ export = class Blacklist extends Command {
             });
         }
 
-        config.save();
+        // save config document
+        await config.save();
 
 
         // acknowledge
