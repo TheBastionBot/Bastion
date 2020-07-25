@@ -46,6 +46,12 @@ export = class VoiceSessionsCommand extends Command {
             // create sessional category
             const sessionalCategory = await message.guild.channels.create("Sessional Channels", {
                 type: "category",
+                permissionOverwrites: [
+                    {
+                        id: message.guild.id,
+                        allow: [ "CREATE_INSTANT_INVITE" ],
+                    },
+                ],
             });
 
             // create new channel actuator voice channel
