@@ -84,7 +84,7 @@ export = class Blacklist extends Command {
             embed: {
                 color: Constants.COLORS.PUPIL,
                 title: "Bastion's Blacklist",
-                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", servers.length || users.length ? "bastionBlacklistUpdate" : "bastionBlacklistUnchanged", message.author.tag),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", servers.length || users.length ? "bastionBlacklistUpdate" : "bastionBlacklistUnchanged", message.author.tag),
                 fields,
                 footer: {
                     text: `${config.blacklistedGuildIds.length} Blacklisted Servers / ${config.blacklistedUserIds.length} Blacklisted Users`,
