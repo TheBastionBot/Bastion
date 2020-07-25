@@ -5,6 +5,7 @@ changes:
     - description: Voice Sessions categories will now have Create Invite permission, by default, so that even when the session is locked, members can still invite others to join the sessions.
     - description: Some under-the-hood improvements, to make Bastion better than ever.
   Killed these Bugs:
+    - description: Fixed an issue where you weren't able to `blacklist` a user in some cases.
     - description: Fixed an issue that some servers were facing with Level up Messages and Level up Roles.
     - description: Some under-the-hood fixes.
   Bastion V8:
