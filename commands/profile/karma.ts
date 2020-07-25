@@ -42,7 +42,7 @@ export = class KarmaCommand extends Command {
         const memberProfile = await MemberModel.findOne({ user: member.id, guild: message.guild.id });
 
         // check whether member profile exists
-        if (!memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound"));
+        if (!memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound", member.user.tag));
 
         // give karma to the member
         memberProfile.karma += 1;
