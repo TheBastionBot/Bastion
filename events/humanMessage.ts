@@ -70,9 +70,6 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(member.document.experience, guild.document.gamification.multiplier);
 
-        // update level
-        member.document.level = computedLevel;
-
         // level up
         if (computedLevel > member.document.level) {
             // credit reward amount into member's account
@@ -99,6 +96,9 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             this.handleLevelRoles(message, member.document.level)
                 .catch(Logger.error);
         }
+
+        // update level
+        member.document.level = computedLevel;
 
         // save document
         await member.document.save();
