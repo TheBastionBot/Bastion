@@ -1,13 +1,10 @@
-date: July 26, 2020
+date: August 1, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
   Some Improvements:
-    - description: Voice Sessions categories will now have Create Invite permission, by default, so that even when the session is locked, members can still invite others to join the sessions.
     - description: Some under-the-hood improvements, to make Bastion better than ever.
-  Killed these Bugs:
-    - description: Fixed an issue where you weren't able to add infractions to members if their profile wasn't already created.
-    - description: Fixed an issue where you weren't able to `blacklist` a user in some cases.
-    - description: Fixed an issue that some servers were facing with Level up Messages and Level up Roles.
+  Squashed these Bugs:
+    - description: Fixed an issue where you weren't able to `blacklist` a server in some cases.
     - description: Some under-the-hood fixes.
   Bastion V8:
     - title: Dashboard
