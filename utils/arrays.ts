@@ -24,7 +24,7 @@ const toBulletList = (array: unknown[], bullet = "•"): string => {
         string.push(bullet + " " + element.toString());
     }
 
-    return string.join("\n") + "\n";
+    return (string.join("\n") + "\n").trim();
 };
 
 const wrap = (array: unknown[], separator: string): unknown[] => {
