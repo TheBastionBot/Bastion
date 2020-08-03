@@ -5,6 +5,7 @@
 
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
+import fetch from "node-fetch";
 
 import * as constants from "../../utils/constants";
 import * as duration from "../../utils/durations";
@@ -14,10 +15,10 @@ import { version as bastionVersion } from "../../package.json";
 export = class StatusCommand extends Command {
     constructor() {
         super("status", {
-            description: "It allows you to see Bastion's status, at a glance. It also allows you to see status of the current shard.",
+            description: "It allows you to see Bastion's status, at a glance. It also allows you to see status of the current shard. You can also see a summary of Discord's status.",
             triggers: [ "stats", "info" ],
             arguments: {
-                boolean: [ "shard" ],
+                boolean: [ "discord", "shard" ],
             },
             scope: "guild",
             owner: false,
@@ -28,11 +29,45 @@ export = class StatusCommand extends Command {
             syntax: [
                 "status",
                 "status --shard",
+                "status --discord",
             ],
         });
     }
 
-    exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
+        if (argv.discord) {
+            const response = await fetch("https://srhpyqt94yxb.statuspage.io/api/v2/summary.json", {
+                method: "GET",
+                headers: {
+                    "Accepts": "application/json",
+                    "Content-Type": "application/json",
+                    "User-Agent": "Bastion (Discord Bot; https://bastion.traction.one)",
+                },
+            });
+            const data = await response.json();
+
+            // acknowledge
+            return await message.channel.send({
+                embed: {
+                    color: data.status.indicator === "none" ? Constants.COLORS.GREEN : data.status.indicator === "minor" ? Constants.COLORS.ORANGE : Constants.COLORS.RED,
+                    author: {
+                        name: "Discord Status",
+                        url: "https://status.discord.com",
+                    },
+                    title: data.status.description,
+                    description: data.status.indicator.toUpperCase(),
+                    url: "https://status.discord.com",
+                    fields: data.incidents.map((incident: any) => ({
+                        name: incident.name,
+                        value: incident.status + " / " + incident.impact + " / " + (incident.resolved_at ? "Resolved" : "Unresolved") + "\n" + new Date(incident.created_at).toLocaleString(),
+                    })),
+                    timestamp: new Date(),
+                },
+            }).catch(() => {
+                // this error can be ignored
+            });
+        }
+
         // get guild badges
         const guildBadges = constants.isPublicBastion(this.client.user) && await badges.fetchBadges(message.guild.ownerID, message.guild.id).then(res => res.json()).catch(() => {
             // this error can be ignored
@@ -106,7 +141,7 @@ export = class StatusCommand extends Command {
 
 
         // acknowledge
-        await message.channel.send({
+        return await message.channel.send({
             embed: {
                 color: guildMembership ? guildMembership.color : Constants.COLORS.IRIS,
                 author: {
@@ -128,8 +163,6 @@ export = class StatusCommand extends Command {
                 },
                 timestamp: new Date(),
             },
-        }).catch(() => {
-            // this error can be ignored
         });
     }
 }
