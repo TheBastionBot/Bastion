@@ -126,7 +126,8 @@ role: It allows you see the information of a role. It also allows you to see the
   members in a role.
 server: It allows you see the information of the server.
 status: It allows you to see Bastion's status, at a glance. It also allows you
-  to see status of the current shard.
+  to see status of the current shard. You can also see a summary of Discord's
+  status.
 user: It allows you see the information of a user.
 channels: It allows you create, delete and update channels in the server.
 edit: It allows you to edit any message sent by Bastion in the current channel.
