@@ -4,6 +4,8 @@ changes:
   New Stuff:
     - title: Discord Status
       description: You can now see Discord's status without visiting Discord's status page. Use the `--discord` option with the `status` command.
+    - title: New Trigger Variables
+      description: You can now use `{id}`, `{content}`, and `{content.clean}` variables in trigger responses to resolve the message ID, content, and cleaned content (with all mentions replaced by the equivalent text), respectively.
   Some Improvements:
     - description: Some under-the-hood improvements, to make Bastion better than ever.
   Squashed these Bugs:
