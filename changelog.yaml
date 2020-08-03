@@ -1,6 +1,9 @@
-date: August 1, 2020
+date: August 3, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
+  New Stuff:
+    - title: Discord Status
+      description: You can now see Discord's status without visiting Discord's status page. Use the `--discord` option with the `status` command.
   Some Improvements:
     - description: Some under-the-hood improvements, to make Bastion better than ever.
   Squashed these Bugs:
