@@ -43,6 +43,9 @@ export const replaceMemberVariables = (string: string, member: GuildMember): str
 
 export const replaceMessageVariables = (string: string, message: Message): string => {
     const vars: { [key: string]: string | number } = {
+        "{id}": message.id,
+        "{content}": message.content,
+        "{content.clean}": message.cleanContent,
         "{server}": message.guild.name,
         "{server.id}": message.guild.id,
         "{server.region}": message.guild.region,
