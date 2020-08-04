@@ -13,6 +13,7 @@ changes:
     - description: Some under-the-hood improvements, to make Bastion better than ever.
   Squashed these Bugs:
     - description: Fixed an issue where you weren't able to `blacklist` a server in some cases.
+    - description: Fixed an issue where Level-up Messages would show your previous level.
     - description: Some under-the-hood fixes.
   Bastion V8:
     - title: Dashboard
