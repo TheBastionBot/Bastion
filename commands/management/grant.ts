@@ -51,7 +51,7 @@ export = class GrantCommand extends Command {
             // get user's profile data
             const memberProfile = await MemberModel.findOne({ user: member.id, guild: message.guild.id });
             // check whether user profile exists
-            if (!memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound"));
+            if (!memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound", member.user.tag));
 
             // update XP & coins
             await MemberModel.updateOne({

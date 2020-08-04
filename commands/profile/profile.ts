@@ -48,7 +48,7 @@ export = class ProfileCommand extends Command {
         const userProfile = identifier === message.author.id ? (message.author as BastionUser).document : await UserModel.findById(identifier);
         const memberProfile = identifier === message.author.id ? (member as BastionGuildMember).document : await MemberModel.findOne({ user: identifier, guild: message.guild.id });
         // check whether user profile exists
-        if (!userProfile || !memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound"));
+        if (!userProfile || !memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound", member.user.tag));
 
         // calculate the rank of the member
         const rank = await MemberModel.find({ guild: message.guild.id }, null, { sort: {

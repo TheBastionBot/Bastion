@@ -32,7 +32,7 @@ export = class CoinsCommand extends Command {
         const memberProfile = (message.member as BastionGuildMember).document;
 
         // check whether user profile exists
-        if (!userProfile || !memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound"));
+        if (!userProfile || !memberProfile) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "profileNotFound", message.author.tag));
 
 
         // acknowledge
