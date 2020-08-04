@@ -10,7 +10,7 @@ prefixes:
 presence:
   # Default status of Bastion.
   # Valid values are `online`, `idle`, `dnd` and `invisible`
-  status: "dnd"
+- status: "dnd"
   # Default activity of Bastion
   activity:
     # Activity type.

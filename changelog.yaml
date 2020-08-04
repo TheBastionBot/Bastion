@@ -1,13 +1,19 @@
-date: July 26, 2020
+date: August 4, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
+  New Stuff:
+    - title: Discord Status
+      description: You can now see Discord's status without visiting Discord's status page. Use the `--discord` option with the `status` command.
+    - title: New Trigger Variables
+      description: You can now use `{id}`, `{content}`, and `{content.clean}` variables in trigger responses to resolve the message ID, content, and cleaned content (with all mentions replaced by the equivalent text), respectively.
+    - title: Multiple Unique Presence
+      description: You were previously able to set Bastion's activity to automatically cycle through multiple games. But that wasn't enough. So, now you can cycle through multiple presence. That means, not only multiple games, but multiple activities, status, and streaming URL!
   Some Improvements:
-    - description: Voice Sessions categories will now have Create Invite permission, by default, so that even when the session is locked, members can still invite others to join the sessions.
+    - description: Bot owners can now bypass command cooldowns.
     - description: Some under-the-hood improvements, to make Bastion better than ever.
-  Killed these Bugs:
-    - description: Fixed an issue where you weren't able to add infractions to members if their profile wasn't already created.
-    - description: Fixed an issue where you weren't able to `blacklist` a user in some cases.
-    - description: Fixed an issue that some servers were facing with Level up Messages and Level up Roles.
+  Squashed these Bugs:
+    - description: Fixed an issue where you weren't able to `blacklist` a server in some cases.
+    - description: Fixed an issue where Level-up Messages would show your previous level.
     - description: Some under-the-hood fixes.
   Bastion V8:
     - title: Dashboard
