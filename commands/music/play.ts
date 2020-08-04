@@ -229,7 +229,7 @@ export = class Play extends Command {
 
             // Reset playing activity
             if ((this.client.configurations as BastionConfigurations).music && (this.client.configurations as BastionConfigurations).music.activity) {
-                this.client.user.setActivity(this.client.configurations.presence.activity).catch(() => {
+                this.client.user.setActivity(this.client.configurations.presence instanceof Array ? this.client.configurations.presence[0].activity : this.client.configurations.presence.activity).catch(() => {
                     // This error can be ignored.
                 });
             }
