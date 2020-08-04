@@ -48,13 +48,13 @@ export = class Gamification extends Command {
 
         const guild = (message.guild as BastionGuild);
 
-        const status = (argv.messages || argv.multiplier) ? true : !(guild.document.gamification && guild.document.gamification.enabled);
+        const status = (typeof argv.messages === "boolean" || argv.multiplier) ? true : !(guild.document.gamification && guild.document.gamification.enabled);
 
         guild.document.gamification = {
             // enable gamification if either messages or multiplier is specified, otherwise toggle it
             enabled: status,
             // enable level up messages if specified, otherwise keep the old value based on whether gamification is enabled
-            messages: argv.messages ? true : status ? guild.document.gamification && guild.document.gamification.messages : undefined,
+            messages: typeof argv.messages === "boolean" ? argv.messages : status ? guild.document.gamification && guild.document.gamification.messages : undefined,
             // set the level up multiplier if specified, otherwise keep the old value based on whether gamification is enabled
             multiplier: typeof argv.multiplier === "number" ? argv.multiplier : status ? guild.document.gamification && guild.document.gamification.multiplier : undefined,
         };
