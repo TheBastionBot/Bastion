@@ -83,7 +83,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
                         fields: [
                             {
                                 name: "LEVELED UP!",
-                                value: bastion.locale.getString(guild.document.language, "info", "levelUp", message.author.tag, member.document.level),
+                                value: bastion.locale.getString(guild.document.language, "info", "levelUp", message.author.tag, computedLevel),
                             },
                         ],
                     },
