@@ -57,7 +57,7 @@ export = class StatusCommand extends Command {
                     title: data.status.description,
                     description: data.status.indicator.toUpperCase(),
                     url: "https://status.discord.com",
-                    fields: data.incidents.map((incident: any) => ({
+                    fields: data.incidents.map((incident: { name: string, status: string, impact: string, resolved_at: string, created_at: string }) => ({
                         name: incident.name,
                         value: incident.status + " / " + incident.impact + " / " + (incident.resolved_at ? "Resolved" : "Unresolved") + "\n" + new Date(incident.created_at).toLocaleString(),
                     })),
