@@ -51,9 +51,13 @@ export = class Suggestions extends Command {
             embed: {
                 color: guild.document.suggestionsChannelId ? Constants.COLORS.GREEN : Constants.COLORS.RED,
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.suggestionsChannelId ? "suggestionsEnable" : "suggestionsDisable", message.author.tag),
+                fields: [
+                    {
+                        name: "Collect and track suggestions more effectively.",
+                        value: "Checkout [**Glee**](https://glee.traction.one). The best way to collect user feedback.",
+                    },
+                ],
             },
-        }).catch(() => {
-            // This error can be ignored.
         });
     }
 }
