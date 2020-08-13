@@ -24,7 +24,7 @@ export = class LevelUpRolesCommand extends Command {
                 array: [ "role" ],
                 boolean: [ "remove" ],
                 string: [ "role" ],
-                number: [ "level"],
+                number: [ "level" ],
                 coerce: {
                     level: (arg: number): number => numbers.clamp(arg, 1, gamification.MAX_LEVEL),
                 },
