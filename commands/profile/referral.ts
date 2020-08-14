@@ -10,7 +10,6 @@ import MemberModel from "../../models/Member";
 import RoleModel from "../../models/Role";
 import * as errors from "../../utils/errors";
 import BastionGuild = require("../../structures/Guild");
-import TextChannel = require("../../structures/TextChannel");
 
 export = class ReferralCommand extends Command {
     constructor() {
@@ -50,8 +49,12 @@ export = class ReferralCommand extends Command {
 
         // check whether the member's referral invite exists
         if (!invite) {
+            const channel = message.guild.channels.cache.get((message.guild as BastionGuild).document.referralsChannel);
+
+            if (!channel) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "noReferralsChannel"));
+
             // create new referral invite
-            invite = await (message.channel as TextChannel).createInvite({
+            invite = await channel.createInvite({
                 reason: "Referral invite generated for " + message.author.tag,
                 temporary: false,
                 maxAge: 0,
