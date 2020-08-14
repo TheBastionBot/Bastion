@@ -6,18 +6,21 @@
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
+import GuildModel from "../../models/Guild";
 import MemberModel from "../../models/Member";
 import * as pagination from "../../utils/pagination";
+import BastionGuild = require("../../structures/Guild");
 
 export = class ReferralsCommand extends Command {
     constructor() {
         super("referrals", {
-            description: "It allows you track the server members' invites.",
+            description: "It allows you set the Referrals Channel so that members can invite others to the server and gain referral rewards. And it also allows you to track the members' invites.",
             triggers: [],
             arguments: {
                 alias: {
                     page: [ "p" ],
                 },
+                boolean: [ "enable", "disable" ],
                 number: [ "page" ],
             },
             scope: "guild",
@@ -29,11 +32,38 @@ export = class ReferralsCommand extends Command {
             syntax: [
                 "referrals",
                 "referrals --page NUMBER",
+                "referrals --enable",
+                "referrals --disable",
             ],
         });
     }
 
-    exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
+        if (argv.enable || argv.disable) {
+            if (argv.enable) {
+                // set the referrals channel, enabling referrals in the server
+                await GuildModel.findByIdAndUpdate(message.guild.id, {
+                    referralsChannel: message.channel.id,
+                });
+            } else {
+                // remove referrals channel, disabling referrals altogether
+                await GuildModel.findByIdAndUpdate(message.guild.id, {
+                    $unset: {
+                        referralsChannel: 1,
+                    },
+                });
+            }
+
+            // acknowledge
+            return await message.channel.send({
+                embed: {
+                    color: argv.enable ? Constants.COLORS.GREEN : Constants.COLORS.RED,
+                    title: "Referrals Channel",
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.enable ? "referralsEnable" : "referralsDisable", message.author.tag),
+                },
+            });
+        }
+
         const members = await MemberModel.find({
             guild: message.guild.id,
             referral: {
