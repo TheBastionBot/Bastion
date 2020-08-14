@@ -15,6 +15,7 @@ export interface Role {
         forBots: boolean;
         forUsers: boolean;
     };
+    referrals?: number;
     level?: number;
     price?: number;
     blacklisted?: boolean;
@@ -46,6 +47,9 @@ export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Sch
                 type: Boolean,
             },
         },
+    },
+    referrals: {
+        type: Number,
     },
     level: {
         type: Number,
