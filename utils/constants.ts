@@ -83,6 +83,7 @@ const LIMITS = {
     AUTO_ROLES: 5,
     SELF_ROLES: 5,
     TRIGGERS: 5,
+    INVITE_REWARDS: 1,
 
     GOLD: {
         SESSIONAL_VOICE_CHANNELS: true,
@@ -104,6 +105,7 @@ const LIMITS = {
         AUTO_ROLES: 10,
         SELF_ROLES: 10,
         TRIGGERS: 10,
+        INVITE_REWARDS: 10,
     },
 
     PLATINUM: {
@@ -126,6 +128,7 @@ const LIMITS = {
         AUTO_ROLES: 20,
         SELF_ROLES: 20,
         TRIGGERS: 20,
+        INVITE_REWARDS: 20,
     },
 };
 
