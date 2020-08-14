@@ -153,3 +153,5 @@ reactionRolesGroupRemove: "%var% removed the Reaction Role Group associated with
 infractionThreshold: "%var% updated the infraction thresholds in the server."
 grantMember: "%var% has granted %var% XP and %var% Coins to %var%."
 grantMembers: "%var% has granted %var% XP and %var% Coins to all the active members of the server."
+roleReferralsSet: "%var% added the %var% role as a reward for inviting at least %var% users to the server."
+roleReferralsClear: "%var% removed all the role rewards for inviting %var% users to the server."
