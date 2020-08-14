@@ -45,6 +45,7 @@ premiumPaidRoles: "Only Premium Servers can sell more than %var% Roles."
 premiumAutoRoles: "Only Premium Servers can have more than %var% Auto Roles."
 premiumSelfRoles: "Only Premium Servers can have more than %var% Self Roles."
 premiumTriggers: "Only Premium Servers can have more than %var% Triggers."
+premiumInviteRoles: "Only Premium Servers can have more than %var% Invite Referral Rewards."
 
 membershipLimitPrefix: "The Premium Membership Tier of the server only allows to have %var% Server Prefixes."
 membershipLimitVotingChannels: "The Premium Membership Tier of the server only allows to have %var% Voting Channels."
@@ -61,3 +62,4 @@ membershipLimitPaidRoles: "The Premium Membership Tier of the server only allows
 membershipLimitAutoRoles: "The Premium Membership Tier of the server only allows to have %var% Auto Roles."
 membershipLimitSelfRoles: "The Premium Membership Tier of the server only allows to have %var% Self Roles."
 membershipLimitTriggers: "The Premium Membership Tier of the server only allows to have %var% Triggers."
+membershipLimitInviteRoles: "The Premium Membership Tier of the server only allows to have %var% Invite Referral Rewards."
