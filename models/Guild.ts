@@ -45,6 +45,7 @@ export interface Guild {
     moderationCaseCount?: number;
     reactionAnnouncements?: boolean;
     reactionPinning?: boolean;
+    referralsChannel?: string;
     filters?: {
         inviteFilter?: {
             enabled: boolean;
@@ -222,6 +223,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     reactionPinning: {
         type: Boolean,
+    },
+    referralsChannel: {
+        type: String,
     },
     filters: {
         type: {
