@@ -1,20 +1,15 @@
-date: August 4, 2020
+date: August 14, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
   New Stuff:
-    - title: Discord Status
-      description: You can now see Discord's status without visiting Discord's status page. Use the `--discord` option with the `status` command.
-    - title: New Trigger Variables
-      description: You can now use `{id}`, `{content}`, and `{content.clean}` variables in trigger responses to resolve the message ID, content, and cleaned content (with all mentions replaced by the equivalent text), respectively.
-    - title: Multiple Unique Presence
-      description: You were previously able to set Bastion's activity to automatically cycle through multiple games. But that wasn't enough. So, now you can cycle through multiple presence. That means, not only multiple games, but multiple activities, status, and streaming URL!
+    - title: Invite Tracking
+      description: You can enable referrals in the server and allow users to invite others to the server and track the invites to see who have invited how many users.
+    - title: Invite Rewards
+      description: You can also set multiple role rewards for inviting any specified amount of new users that users can claim when they've referred that many users.
+    - title: COVID-19 Tracker
+      description: You can track global, as well as regional, COVID-19 stats using the `covid19` command.
   Some Improvements:
-    - description: Bot owners can now bypass command cooldowns.
     - description: Some under-the-hood improvements, to make Bastion better than ever.
-  Squashed these Bugs:
-    - description: Fixed an issue where you weren't able to `blacklist` a server in some cases.
-    - description: Fixed an issue where Level-up Messages would show your previous level.
-    - description: Some under-the-hood fixes.
   Bastion V8:
     - title: Dashboard
       description: Portal, or [Bastion's Dashboard](https://portal.traction.one) is now live! [Become a supporter](https://patreon.com/bastionbot) today to get early access to the dashboard beta!

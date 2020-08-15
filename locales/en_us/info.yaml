@@ -153,3 +153,7 @@ reactionRolesGroupRemove: "%var% removed the Reaction Role Group associated with
 infractionThreshold: "%var% updated the infraction thresholds in the server."
 grantMember: "%var% has granted %var% XP and %var% Coins to %var%."
 grantMembers: "%var% has granted %var% XP and %var% Coins to all the active members of the server."
+roleReferralsSet: "%var% added the %var% role as a reward for inviting at least %var% users to the server."
+roleReferralsClear: "%var% removed all the role rewards for inviting %var% users to the server."
+referralsEnable: "%var% enabled Referrals in the server and set this channel as the Referrals Channel. Members can now generate their referral codes using the `referral` command get rewarded, when they invite new members to the server, based on the Referral Rewards set by the server managers."
+referralsDisable: "%var% disabled Referrals in the server and cleared the channel set as the Referrals Channel. Members can't generate new referral codes anymore, although the old codes will still remain valid and you can still claim rewards as long as Rewards are not removed by the server managers."

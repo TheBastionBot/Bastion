@@ -154,6 +154,11 @@ reactionRoles: It allows you to create (and delete) Reaction Role Groups. A
   Reaction Roles in a single group can also be set as mutually exclusive. It
   also allows you to assign emojis to roles, that can be used in reacting to the
   Reaction Role Message.
+referralRewards: It allows you set roles as rewards for referrals (inviting
+  other users to the server).
+referrals: It allows you set the Referrals Channel so that members can invite
+  others to the server and gain referral rewards. And it also allows you to
+  track the members' invites.
 roleStore: It allows you to set up a Role Store in the server. Server managers
   can sell roles in the server and members can buy them with Bastion Coins.
 roles: It allows you create, delete and update roles in the server.
@@ -235,10 +240,14 @@ leaderboard: It allows you to see the leaderboard of your server. You're ranked
 profile: It allows you to see your (or any of the server member's) Bastion Profile.
 rank: It allows you to see your (or any of the server member's) rank, level,
   experience, and karma.
+referral: It allows you to see your referral invite that you can use to invite
+  people to the server and increase your referral points. It can also be used to
+  claim your referral rewards set by the server managers.
 anime: It allows you to search for information on the specified anime.
 apod: It allows you to discover the cosmos! Each day a different image or
   photograph of our fascinating universe is featured, along with a brief
   explanation written by a professional astronomer.
+covid19: It allows you to see the latest global and regional stats on COVID-19.
 cryptocurrency: It allows you to see some information on the specified cryptocurrency.
 game: It allows you to search for information on the specified game.
 manga: It allows you to search for information on the specified manga.
