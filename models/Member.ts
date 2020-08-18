@@ -16,6 +16,7 @@ export interface Member {
     claimStreak?: number;
     infractions?: string[];
     referral?: string;
+    boost?: number;
 }
 
 const memberSchema = new mongoose.Schema<Member>({
@@ -62,6 +63,9 @@ const memberSchema = new mongoose.Schema<Member>({
     },
     referral: {
         type: String,
+    },
+    boost: {
+        type: Number,
     },
 });
 
