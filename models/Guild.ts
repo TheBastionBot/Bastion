@@ -88,6 +88,7 @@ export interface Guild {
     };
     disabledCommands?: string[];
     membersOnly?: boolean;
+    boosts?: number;
 }
 
 export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.Schema<Guild>({
@@ -332,5 +333,8 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     membersOnly: {
         type: Boolean,
+    },
+    boosts: {
+        type: Number,
     },
 }));
