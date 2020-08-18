@@ -1,19 +1,10 @@
-date: August 14, 2020
+date: August 18, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
   New Stuff:
-    - title: Invite Tracking
-      description: You can enable referrals in the server and allow users to invite others to the server and track the invites to see who have invited how many users.
-    - title: Invite Rewards
-      description: You can also set multiple role rewards for inviting any specified amount of new users that users can claim when they've referred that many users.
-    - title: COVID-19 Tracker
-      description: You can track global, as well as regional, COVID-19 stats using the `covid19` command.
+    - title: Community Servers
+      description: Your server is now listed in [Bastion's Community Servers](https://bastion.traction.one/servers). Wanna boost your rankingg there? Read below.
+    - title: Server Boosting
+      description: You can now boost the ranking of your favorite servers everyday, using the `boost` command, in community [server listing](https://bastion.traction.one/servers).
   Some Improvements:
     - description: Some under-the-hood improvements, to make Bastion better than ever.
-  Bastion V8:
-    - title: Dashboard
-      description: Portal, or [Bastion's Dashboard](https://portal.traction.one) is now live! [Become a supporter](https://patreon.com/bastionbot) today to get early access to the dashboard beta!
-    - title: Music Support
-      description: Music has now been enabled in the Public Bastion. Become a [Premium Member](https://bastion.traction.one/premium) today and claim it!
-    - title: And a boat load of other new features!
-      description: Missed the v8 release notes? You can [read our blog post](https://notes.traction.one/posts/6674640902554005511/) that highlights most of the important things that are new.
