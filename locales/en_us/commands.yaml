@@ -129,6 +129,9 @@ status: It allows you to see Bastion's status, at a glance. It also allows you
   to see status of the current shard. You can also see a summary of Discord's
   status.
 user: It allows you see the information of a user.
+boost: It allows you to boost the server in Bastion's server listings. You can
+  boost the server once every 24 hours. Server's boost score gets reset every
+  month.
 channels: It allows you create, delete and update channels in the server.
 edit: It allows you to edit any message sent by Bastion in the current channel.
 giveaway: It allows you to run giveaway events in the server for at least an
