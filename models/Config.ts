@@ -11,6 +11,7 @@ export interface Config {
     relayDirectMessages?: boolean;
     blacklistedGuildIds?: string[];
     blacklistedUserIds?: string[];
+    boostResetMonth?: number;
 }
 
 export default mongoose.model<Config & mongoose.Document>("Config", new mongoose.Schema<Config>({
@@ -26,5 +27,8 @@ export default mongoose.model<Config & mongoose.Document>("Config", new mongoose
     },
     blacklistedUserIds: {
         type: [ String ],
+    },
+    boostResetMonth: {
+        type: Number,
     },
 }));
