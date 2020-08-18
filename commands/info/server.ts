@@ -44,6 +44,7 @@ export = class ServerCommand extends Command {
                 color: guildMembership ? guildMembership.color : Constants.COLORS.IRIS,
                 author: {
                     name: message.guild.name,
+                    url: this.client.locale.getConstant("bastion.website") + "/servers/" + message.guild.id,
                 },
                 title: (message.guild.partnered ? "Partnered" : message.guild.verified ? "Verified" : "") + " Server",
                 description: (guildBadges && "badgeValue" in guildBadges ? badges.resolveBadges(guildBadges.badgeValue) : []).map(badge => badge.emoji).join(" "),
