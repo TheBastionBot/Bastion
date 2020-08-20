@@ -271,8 +271,8 @@ datetime: It allows you to see the current time in multiple different time
   zones. It also allows you to convert the specified time into multiple
   different time zones.
 definitions: It allows you to look up definitions for the specified word.
-echo: It allows you to echo a message through Bastion. It also supports Bastion
-  embed objects.
+echo: It allows you to send a message through Bastion to any channel in the
+  server. It also supports Bastion embed objects.
 followRedirects: It follows all the redirects in the specified URL and allows
   you to see the final URL.
 invite: It allows you to generate an instant invite for the server. Optionally,
