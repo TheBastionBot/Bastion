@@ -93,6 +93,25 @@ export = class BastionGuildMember extends GuildMember {
 
 
             if (action) {
+                // create moderation log
+                (this.guild as BastionGuild).createModerationLog({
+                    event: "infractionAdd",
+                    fields: [
+                        {
+                            name: "User",
+                            value: this.user.tag + " / " + this.id,
+                        },
+                        {
+                            name: "Action",
+                            value: action,
+                        },
+                        {
+                            name: "Reason",
+                            value: message,
+                        },
+                    ],
+                }).catch(Logger.error);
+
                 // message the user regarding the infraction action
                 await this.send({
                     embed: {
@@ -110,11 +129,26 @@ export = class BastionGuildMember extends GuildMember {
         return member.save();
     }
 
-    public async clearInfractions(): Promise<IGuildMember & mongoose.Document> {
+    public async clearInfractions(reason: string): Promise<IGuildMember & mongoose.Document> {
         const member = this.document ? this.document : await this.getDocument();
 
         member.infractions = undefined;
         delete member.infractions;
+
+        // create moderation log
+        (this.guild as BastionGuild).createModerationLog({
+            event: "infractionClear",
+            fields: [
+                {
+                    name: "User",
+                    value: this.user.tag + " / " + this.id,
+                },
+                {
+                    name: "Reason",
+                    value: reason,
+                },
+            ],
+        }).catch(Logger.error);
 
         return member.save();
     }
