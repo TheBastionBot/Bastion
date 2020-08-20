@@ -6,6 +6,7 @@
 import { Constants, ModuleManagerEvent, Client, Logger } from "@bastion/tesseract";
 import { ClientApplication, DMChannel, Message, Snowflake, Team, User } from "discord.js";
 
+import * as embeds from "../utils/embeds";
 import * as emojis from "../utils/emojis";
 import * as gamification from "../utils/gamification";
 import * as omnic from "../utils/omnic";
@@ -146,7 +147,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         if (responseMessages.length) {
             message.channel.send({
                 embed: {
-                    ...JSON.parse(variables.replaceMessageVariables(JSON.stringify(responseMessages[Math.floor(Math.random() * responseMessages.length)]), message)),
+                    ...embeds.generateEmbed(JSON.parse(variables.replaceMessageVariables(JSON.stringify(responseMessages[Math.floor(Math.random() * responseMessages.length)]), message))),
                     footer: {
                         text: (message.client as Client).locale.getConstant("bastion.name") + " Trigger",
                     },

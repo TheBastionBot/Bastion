@@ -54,7 +54,7 @@ export = class Greetings extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                ...guild.document.greeting.message,
+                ...embeds.generateEmbed(guild.document.greeting.message),
                 footer: {
                     text: "Greeting Preview • " + (message.guild.channels.cache.has(guild.document.greeting.channelId) ? message.guild.channels.cache.get(guild.document.greeting.channelId).name : "Disabled")
                         + (typeof guild.document.greeting.timeout === "number" ? " • " + (guild.document.greeting.timeout + " minutes") : ""),
