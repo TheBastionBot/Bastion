@@ -93,7 +93,7 @@ export = class Warn extends Command {
 
         // clear infractions
         if (argv.clear) {
-            await member.clearInfractions();
+            await member.clearInfractions(reason);
 
             // acknowledge
             return await message.channel.send({
