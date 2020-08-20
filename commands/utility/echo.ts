@@ -4,17 +4,23 @@
  */
 
 import { Command, CommandArguments } from "@bastion/tesseract";
-import { Message } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 
 import * as errors from "../../utils/errors";
 import * as embeds from "../../utils/embeds";
+import BastionGuild = require("../../structures/Guild");
 
 export = class EchoCommand extends Command {
     constructor() {
         super("echo", {
-            description: "It allows you to echo a message through Bastion. It also supports Bastion embed objects.",
+            description: "It allows you to send a message through Bastion to any channel in the server. It also supports Bastion embed objects.",
             triggers: [],
-            arguments: {},
+            arguments: {
+                alias: {
+                    channel: [ "c" ],
+                },
+                string: [ "channel" ],
+            },
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -23,6 +29,7 @@ export = class EchoCommand extends Command {
             userPermissions: [ "MANAGE_MESSAGES" ],
             syntax: [
                 "echo -- MESSAGE",
+                "echo --channel ID -- MESSAGE",
             ],
         });
     }
@@ -30,6 +37,10 @@ export = class EchoCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
         if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
+
+        const channel: TextChannel = this.client.resolver.resolveGuildChannel(message.guild, argv.channel ? argv.channel : message.channel.id, [ "text", "news" ]) as TextChannel;
+
+        if (!channel) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "channelNotFound"));
 
         // validate input
         const rawData = argv._.join(" ");
@@ -43,7 +54,7 @@ export = class EchoCommand extends Command {
         }
 
         // acknowledge
-        await message.channel.send({
+        await channel.send({
             embed: embeds.generateEmbed(embed),
         });
     }
