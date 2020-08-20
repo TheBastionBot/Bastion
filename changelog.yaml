@@ -7,4 +7,5 @@ changes:
     - title: Server Boosting
       description: You can now boost the ranking of your favorite servers everyday, using the `boost` command, in community [server listing](https://bastion.traction.one/servers).
   Some Improvements:
+    - description: Infraction events will now be logged in the moderation logs too.
     - description: Some under-the-hood improvements, to make Bastion better than ever.
