@@ -129,6 +129,9 @@ status: It allows you to see Bastion's status, at a glance. It also allows you
   to see status of the current shard. You can also see a summary of Discord's
   status.
 user: It allows you see the information of a user.
+boost: It allows you to boost the server in Bastion's server listings. You can
+  boost the server once every 24 hours. Server's boost score gets reset every
+  month.
 channels: It allows you create, delete and update channels in the server.
 edit: It allows you to edit any message sent by Bastion in the current channel.
 giveaway: It allows you to run giveaway events in the server for at least an
@@ -193,7 +196,8 @@ voiceMute: It allows you to voice mute (and unmute) users in a channel. Voice
 warn: It allows you to warn server members, as well as clear their infractions.
   It also allows you to list all the infractions.
 music: It toggles Bastion's music support in the specified server. Once enabled,
-  you can use all music commands in the server.
+  you can use all music commands in the server. It also allows you to see the
+  list of servers where music is enabled.
 musicChannel: It allows you to set (and unset) Bastion's Music Channels.
 musicMaster: It allows you to set (and unset) Bastion's Music Master role.
 nowPlaying: It shows you the music track that is currently being played in the server.
@@ -268,8 +272,8 @@ datetime: It allows you to see the current time in multiple different time
   zones. It also allows you to convert the specified time into multiple
   different time zones.
 definitions: It allows you to look up definitions for the specified word.
-echo: It allows you to echo a message through Bastion. It also supports Bastion
-  embed objects.
+echo: It allows you to send a message through Bastion to any channel in the
+  server. It also supports Bastion embed objects.
 followRedirects: It follows all the redirects in the specified URL and allows
   you to see the final URL.
 invite: It allows you to generate an instant invite for the server. Optionally,
