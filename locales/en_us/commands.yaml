@@ -196,7 +196,8 @@ voiceMute: It allows you to voice mute (and unmute) users in a channel. Voice
 warn: It allows you to warn server members, as well as clear their infractions.
   It also allows you to list all the infractions.
 music: It toggles Bastion's music support in the specified server. Once enabled,
-  you can use all music commands in the server.
+  you can use all music commands in the server. It also allows you to see the
+  list of servers where music is enabled.
 musicChannel: It allows you to set (and unset) Bastion's Music Channels.
 musicMaster: It allows you to set (and unset) Bastion's Music Master role.
 nowPlaying: It shows you the music track that is currently being played in the server.
