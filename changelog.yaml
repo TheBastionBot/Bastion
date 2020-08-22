@@ -1,4 +1,4 @@
-date: August 20, 2020
+date: August 22, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
   New Stuff:
@@ -7,6 +7,7 @@ changes:
     - title: Server Boosting
       description: You can now boost the ranking of your favorite servers everyday, using the `boost` command, in community [server listing](https://bastion.traction.one/servers).
   Some Improvements:
+    - description: You can now see the list of servers where music is enabled using the `--servers` or `-l` option of the `music` command.
     - description: Infraction events will now be logged in the moderation logs too.
     - description: You can now use `echo` to send messages to any channel in the server.
     - description: Greetings, farewell, and trigger responses will now directly support bastion embed objects rather than discord embed objects. [Build your own Bastion Embed Object](https://bastion.traction.one/tools/embedbuilder)!
