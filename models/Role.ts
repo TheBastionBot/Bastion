@@ -18,6 +18,7 @@ export interface Role {
     referrals?: number;
     level?: number;
     price?: number;
+    invite?: string;
     blacklisted?: boolean;
     disabledCommands?: string[];
 }
@@ -56,6 +57,9 @@ export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Sch
     },
     price: {
         type: Number,
+    },
+    invite: {
+        type: String,
     },
     blacklisted: {
         type: Boolean,
