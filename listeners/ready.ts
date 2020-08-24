@@ -7,6 +7,8 @@ import { Listener, Constants } from "@bastion/tesseract";
 
 import ConfigModel from "../models/Config";
 import GuildModel from "../models/Guild";
+import * as constants from "../utils/constants";
+import BastionGuild = require("../structures/Guild");
 
 export = class ReadyListener extends Listener {
     constructor() {
@@ -34,6 +36,19 @@ export = class ReadyListener extends Listener {
 
         if (newGuilds.length) {
             await GuildModel.insertMany(newGuilds);
+        }
+
+        // Cache invite data
+        // TODO: add public bot support (with premium membership)
+        if (!constants.isPublicBastion(this.client.user)) {
+            for (const guild of this.client.guilds.cache.values()) {
+                // fetch guild invites
+                const invites = await guild.fetchInvites();
+                // store invite uses in cache
+                for (const invite of invites.values()) {
+                    (guild as BastionGuild).invites[invite.code] = invite.uses || 0;
+                }
+            }
         }
     }
 }
