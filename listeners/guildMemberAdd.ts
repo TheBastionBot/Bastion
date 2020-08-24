@@ -3,12 +3,13 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Listener, Constants } from "@bastion/tesseract";
+import { Listener, Constants, Logger } from "@bastion/tesseract";
 import { GuildMember, TextChannel } from "discord.js";
 
 import { Guild as IGuild } from "../models/Guild";
 import RoleModel from "../models/Role";
 import Guild = require("../structures/Guild");
+import * as constants from "../utils/constants";
 import * as embeds from "../utils/embeds";
 import * as variables from "../utils/variables";
 import * as greetings from "../assets/greetings.json";
@@ -69,6 +70,31 @@ export = class GuildMemberAddListener extends Listener {
         });
     }
 
+    handleInviteRoles = async (member: GuildMember): Promise<void> => {
+        // TODO: add public bot support (with premium membership)
+        if (constants.isPublicBastion(member.client.user)) return;
+
+        // fetch guild invites
+        const invites = await member.guild.fetchInvites();
+        // HACK: find the match for the invite that could've been used
+        const invite = invites.find(i => i.uses > (member.guild as Guild).invites[i.code]);
+
+        // update invite cache
+        for (const invite of invites.values()) {
+            (member.guild as Guild).invites[invite.code] = invite.uses || 0;
+        }
+
+        // find the roles for this invite
+        const inviteRoles = await RoleModel.find({
+            guild: member.guild.id,
+            invite: invite.code,
+        });
+
+        if (inviteRoles) {
+            await member.roles.add(inviteRoles.map(r => r._id), "Joined using the invite " + invite.code);
+        }
+    }
+
     exec = async (member: GuildMember): Promise<void> => {
         // if it's a partial member, fetch it
         if (member.partial) {
@@ -84,6 +110,9 @@ export = class GuildMemberAddListener extends Listener {
 
         // assign auto roles to new members
         this.handleAutoRoles(member, guild);
+
+        // assign invite roles to new members
+        this.handleInviteRoles(member).catch(Logger.error);
 
         // guild logs
         guild.createLog({
