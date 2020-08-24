@@ -45,6 +45,9 @@ export = class BastionGuild extends Guild {
         textChannel?: NewsChannel | TextChannel;
         voiceChannel?: VoiceChannel;
     };
+    invites: {
+        [code: string]: number;
+    };
 
     constructor(client: Client, data: Record<string, unknown>) {
         super(client, data);
@@ -56,6 +59,8 @@ export = class BastionGuild extends Guild {
             repeat: false,
             skipVotes: [],
         };
+
+        this.invites = {};
     }
 
     public async getDocument(): Promise<IGuild & mongoose.Document> {
