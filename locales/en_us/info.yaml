@@ -158,3 +158,5 @@ roleReferralsClear: "%var% removed all the role rewards for inviting %var% users
 referralsEnable: "%var% enabled Referrals in the server and set this channel as the Referrals Channel. Members can now generate their referral codes using the `referral` command get rewarded, when they invite new members to the server, based on the Referral Rewards set by the server managers."
 referralsDisable: "%var% disabled Referrals in the server and cleared the channel set as the Referrals Channel. Members can't generate new referral codes anymore, although the old codes will still remain valid and you can still claim rewards as long as Rewards are not removed by the server managers."
 boost: "%var%, you've successfully boosted the server. You can boost it again tomorrow!"
+roleInviteSet: "%var% has set the %var% role as an Invite Role. I'll assign the role to users joining the server using the invite code %var%."
+roleInviteRemove: "%var% has removed the %var% role as an Invite Role."
