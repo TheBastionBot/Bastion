@@ -1,4 +1,4 @@
-date: August 24, 2020
+date: August 30, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
   NEW:
@@ -6,3 +6,5 @@ changes:
       description: You can now associate roles with an invite and anyone who joins the server will be assigned the respective roles associted with the invite used.
   CHANGES:
     - description: Some under-the-hood improvements, to make Bastion better than ever.
+  SQUASHED THESE BUGS:
+    - description: Killed some bugs in the `greetings` and `farewells` commands where Bastion was expecting for embed objects unnecessarily.
