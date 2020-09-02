@@ -169,6 +169,9 @@ referrals: It allows you set the Referrals Channel so that members can invite
 roleStore: It allows you to set up a Role Store in the server. Server managers
   can sell roles in the server and members can buy them with Bastion Coins.
 roles: It allows you create, delete and update roles in the server.
+safeList: It allows you to add members or roles to a safe list that prevents
+  their messages from being filtered by invite filter or link filter in the
+  server.
 suggest: It allows you send a suggestion to the suggestion staff, provided a
   Suggestion Channel has been set in the server.
 ban: It allows you to ban (or soft ban) users from the server, and optionally
