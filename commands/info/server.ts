@@ -100,7 +100,7 @@ export = class ServerCommand extends Command {
                     }),
                 },
                 image: {
-                    url: message.guild.banner ? message.guild.bannerURL({ size: 2048 }) : message.guild.splash ? message.guild.splashURL({ size: 2048 }) : null,
+                    url: message.guild.banner ? message.guild.bannerURL({ size: 2048 }) : message.guild.splash ? message.guild.splashURL({ size: 2048 }) : message.guild.discoverySplash ? message.guild.discoverySplashURL({ size: 2048 }) : null,
                 },
                 footer: {
                     text: (guildMembership ? guildMembership.name : "Powered by Bastion") + " • " + message.guild.id,
