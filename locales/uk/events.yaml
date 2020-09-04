@@ -1,0 +1,69 @@
+---
+#Channel Events
+categoryChannelCreate: Канал категорії створено
+categoryChannelDelete: Канал категорії успішно видалено
+categoryChannelUpdate: Канал категорії оновлено
+newsChannelCreate: Канал новин створено
+newsChannelDelete: Канал новин успішно видалено
+newsChannelUpdate: Канал новин оновлено
+storeChannelCreate: Канал магазину створено
+storeChannelDelete: Канал магазину видалено
+storeChannelUpdate: Канал магазину оновлено
+textChannelCreate: Текстовий канал створено
+textChannelDelete: Текстовий канал видалено
+textChannelUpdate: Текстовий канал оновлено
+voiceChannelCreate: Голосовий канал створено
+voiceChannelDelete: Голосовий канал видалено
+voiceChannelUpdate: Голосовий канал оновлено
+#Emoji Events
+emojiCreate: Emoji створено
+emojiDelete: Емодзі видалено
+emojiUpdate: Emoji оновлено
+#Guild Member Events
+guildMemberAdd: Учасник приєднався
+guildMemberRemove: Залишився користувач
+#Infraction Events
+infractionAdd: Новий дріб
+infractionClear: Інфракцію очищено
+#Interrupt Events
+inviteFilter: Запросити відфільтрованого
+linkFilter: Фільтроване посилання
+mentionSpam: Згадування спаму
+messageFilter: Відфільтроване повідомлення
+#Invite Events
+inviteCreate: Запросити створено
+inviteDelete: Запросити видалено
+#Member Nickname Events
+nickUpdate: Nickname Updated
+#Message Events
+messageClear: Повідомлення очищено
+messageDelete: Повідомлення успішно видалено
+messageUpdate: Повідомлення оновлено
+#Moderation Events
+memberKick: Учасника вигнано
+memberSoftBan: Користувача від оператора заблоковано
+guildBanAdd: Забанено користувача
+guildBanRemove: Учасник розбанив
+guildReportAdd: Повідомлення про учасника
+#Mute Events
+voiceMuteAdd: Голос учасника приглушено
+voiceMuteRemove: Голос учасника увімкнено
+memberVoiceDeafen: Вимкнено звук учасника
+memberVoiceUndeafen: Учасник відключив звук
+textMuteAdd: Текст учасника приглушено
+textMuteRemove: Текст учасника розблокований
+#Role Assignment Events
+memberRoleClear: Ролі учасників очищено
+memberRoleUpdate: Ролі учасника оновлено
+#Role Events
+roleCreate: Роль створено
+roleDelete: Роль видалено
+roleUpdate: Роль оновлено
+#Server Events
+guildCreate: Сервер приєднався
+guildDelete: Сервер вийшов
+guildUpdate: Сервер оновлено
+#Warning Events
+guildWarnAdd: Попередження учасника
+guildWarnClear: Помилки гільдії очищено
+guildWarnRemove: Попередження користувача видалено
