@@ -1,4 +1,4 @@
-date: September 2, 2020
+date: September 4, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
   NEW:
@@ -8,7 +8,10 @@ changes:
       description: You can now add roles & channels to a safe list for link filter & invite filter to ignore messages sent by members in those roles or in those channels from the specified filters.
     - title: Invite Roles
       description: You can now associate roles with an invite and anyone who joins the server will be assigned the respective roles associted with the invite used. Currently only available for self hosted instances of Bastion.
+    - title: More Languages
+      description: You can now set the language in your server to Arabic, Chinese Simplified, Czech, Danish, Dutch, Finnish, French, German, Italian, Japanese, Norwegian, Polish, Portuguese, Portuguese (Brazilian), Romanian, Russian, Spanish, Swedish, Turkish, and Ukrainian. Join us if you want to bring Bastion to your language!
   CHANGES:
-    - description: Some under-the-hood improvements, to make Bastion better than ever.
+    - description: Some under-the-hood improvements to make Bastion even better.
   SQUASHED THESE BUGS:
     - description: Killed some bugs in the `greetings` and `farewells` commands where Bastion was expecting for embed objects unnecessarily.
+    - description: Some under-the-hood fixes to make Bastion better than ever.
