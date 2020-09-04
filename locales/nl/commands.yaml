@@ -1,0 +1,143 @@
+---
+announce: Het stelt je in staat mededelingen te sturen naar de aankondigingskanalen in de servers waar deze is ingesteld.
+blacklist: Het stelt je in staat om gebruikers en servers dat te blokkeren. Blacklisted servers en gebruikers hebben geen toegang tot Bastion's commando's.
+commandModule: Het stelt u in staat om tijdelijk een opdrachtmodule in of uit te schakelen tot de volgende restart. Het stelt je ook in staat om te controleren of de opdracht momenteel is ingeschakeld.
+eval: Het laat je toe om JavaScript-code uit te voeren binnen de context van Bastion.
+exec: Hiermee kun je opdrachten uitvoeren op de terminal waar Bastion draait.
+relayDirectMessages: Het stelt je in staat om Bastion's Direct Message Relais in te schakelen. Indien ingeschakeld, zal Bastion alle directe berichten verzenden naar de bot eigenaren.
+reloadSettings: Het laat je toe om Bastion's instellingen te herladen zonder Bastion opnieuw te starten.
+setAvatar: Het stelt je in staat Bastion's avatar rechtstreeks van Discord te updaten.
+setNick: Het maakt het mogelijk om Bastion's bijnaam te updaten in de server.
+setPresence: Het stelt je in staat om Bastion's aanwezigheid in het scherf bij te werken.
+setUsername: Het stelt je in staat om Bastion's gebruikersnaam rechtstreeks van Discord te updaten.
+shutdown: Het staat je toe om Bastion direct van Discord af te sluiten.
+garfield: Het laat je de nieuwste Garfield comic strip zien.
+xkcd: Het laat je de nieuwste strip van xkcd zien.
+announcements: Hiermee kunt u Bastion's mededelingen inschakelen (en uitschakelen) in de server. Het stelt het kanaal in als het Announcement Channel dat de aankondigingsuitzendingen zal ontvangen verzonden door de eigenaren van de bot met behulp van het `aankondiging` commando.
+autoRoles: Het laat u toe Auto Roles in te stellen op de server. Automatische rollen zijn de rollen die automatisch aan gebruikers worden toegewezen wanneer ze op de server komen. U kunt optioneel Auto Rollen instellen voor zowel bots als mensen.
+farewells: Hiermee kun je afscheidsberichten inschakelen (en uitschakelen) in de server. Het maakt het ook mogelijk om afscheidsberichten en time-out in te stellen.
+gambling: Hiermee kun je gokken inschakelen (of uitschakelen) in de server. Wanneer ingeschakeld, kunnen leden hun Bastion Coins gebruiken om te spelen in spellen.
+gamification: Hiermee kun je gamification inschakelen (of uitschakelen) in de server. Wanneer ingeschakeld, krijgen gebruikers ervaring en een level omhoog in de server door deel te nemen aan de server, met elkaar te concurreren om de leaderboard te beklimmen. Het stelt je ook in staat om level up berichten in te schakelen en de level up multiplier in te stellen.
+greetings: Hiermee kunt u groeten inschakelen (en uitschakelen) in de server. Het maakt het ook mogelijk om groetberichten en time-out in te stellen.
+inviteFilter: Het stelt je in staat een uitnodigingsfilter in de server in te schakelen (en uit te schakelen). En het stelt u ook in staat om de schending van dit filter te beschouwen als een overtreding.
+languages: Het stelt je in staat om de beschikbare talen in Bastion te bekijken en een van hen in te stellen als de standaardtaal voor jouw server.
+linkFilter: Hiermee kunt u link-filter inschakelen (en uitschakelen) in de server. En het stelt u ook in staat om de schending van dit filter te beschouwen als een overtreding.
+membersOnly: Het staat je toe om alleen de Leden modus in de server in te schakelen (en uit te schakelen). Indien ingeschakeld, kunnen alleen de leden die minstens één rol in de server hebben Bastion gebruiken.
+mentionSpam: Hiermee kunt u de drempel voor vermelding van spam in de server instellen (en deactiveren). Indien ingesteld, zal Bastion de gebruikers waarschuwen die dit schenden en het toevoegen aan hun overtredingen.
+messageFilter: Hiermee kunt u het berichtenfilter inschakelen (en uitschakelen) in de server. Indien ingeschakeld, filtert het de berichten die overeenkomen met de door u opgegeven patronen. En het stelt u ook in staat om de schending van dit filter te beschouwen als een overtreding.
+moderationLogs: Het stelt je in staat om het loggen van moderatie events in de server in te schakelen (en uit te schakelen). Het kanaal wordt ingesteld als moderatie log kanaal dat de moderatie gebeurtenissen zal loggen in de server.
+prefix: Hiermee kun je eigen voorvoegsels instellen voor Bastion in jouw server.
+reactionAnnouncements: Het stelt je in staat om Reactie Mededelingen in de server in te schakelen (en uit te schakelen). Indien ingeschakeld en een Mededeling Kanaal is ingesteld, wanneer iemand met de juiste machtiging een Megaphoon of Luidspreker reactie toevoegt aan een bericht. de boodschap wordt aangekondigd in het Mededeling Kanaal.
+reactionPinning: Hiermee kunt u Reactie Pinnen inschakelen (en uitschakelen) in de server. Indien ingeschakeld, wanneer iemand met de juiste permissie een pincode toevoegt aan een bericht, wordt het bericht in het kanaal vastgezet.
+reports: Hiermee kunt u gebruikersrapporten inschakelen (en uitschakelen) in de server. Het zet het kanaal als het Rapport Kanaal dat de gebruikersrapporten ontvangt, gerapporteerd door de server leden met behulp van het `report` commando.
+selfRoles: Hiermee kun je zelf-rollen instellen op de server. Zelfrollen zijn de rollen die server leden zichzelf kunnen toewijzen (en niet toegewezen).
+serverLogs: Het stelt je in staat om het loggen van servergebeurtenissen in te schakelen (en uit te schakelen). Het stelt het kanaal in als het Server Logkanaal dat de server-gebeurtenissen zal loggen.
+starboard: Hiermee kunt u het SB inschakelen (en uitschakelen) in de server. Het kanaal wordt ingesteld als het Starboard Channel dat de ster-berichten van de server zal loggen.
+streamerRole: Het staat toe om de Streamer Rol voor de server in te stellen. Wanneer een lid live gaat in de server, zijn ze toegewezen aan deze rol, mits ze ten minste één rol in de server hebben.
+streamers: Het stelt je in staat om streamers te volgen vanaf verschillende platforms, in de server. Wanneer de streamers live gaan, of een video plaatsen, zal Bastion hiervan op de server op de hoogte zijn.
+suggestions: Het stelt je in staat om suggesties in de server in te schakelen (en uitschakelen) Het stelt het kanaal in als het Suggestie Kanaal dat de suggesties zal ontvangen, voorgesteld door de server leden met behulp van het 'suggestie' commando.
+triggers: Het stelt je in staat triggers toe te voegen (en verwijderen) in de server. Wanneer een trigger is ingesteld, en Bastion ziet een bericht van een mens die het patroon bevat dat gespecificeerd is in de trigger, zal reageren met de opgegeven reactie of reactie, of beide.
+voiceSessions: Het laat je toe om spraaksessies (of tijdelijke spraakkanalen, als je wilt), te beheren in de server.
+votingChannels: Het stelt je in staat om kanalen in te stellen (en ongezeten) als Stemkanalen. Als een kanaal wordt ingesteld als een Stemkanaal, zal alles wat verstuurd wordt in het kanaal ingesteld worden zodat iedereen kan stemmen.
+acrophobia: Het stelt je in staat om het Acrophobia spel te spelen met je mede-serverleden. Bastion genereert een willekeurige acronim en spelers concurreren door racen om de meest coherente of humoristische zin te maken die bij de afkorting past - een backronym. Nadat de inzendingen voorbij zijn, stemt iedereen binnen de aangegeven tijd anoniem voor zijn favoriete antwoord. De meest populaire backronym wint.
+flip: Het stelt je in staat om een willekeurig aantal munten om te draaien en het resultaat te zien. Het ondersteunt ook gokken.
+gameServer: Het stelt je in staat om informatie op te halen van bijna elke spelserver die de status openbaar beschikbaar maakt.
+magic8ball: Het stelt je in staat antwoord te krijgen op vragen van je polair van de Magische 8 Ball.
+roll: Het stelt je in staat dobbelstenen te draaien en het resultaat te zien. Het ondersteunt dice notation. Het ondersteunt ook gokken.
+rps: Het laat je toe Steen Papier Schaar te spelen met Bastion. Het ondersteunt ook gokken.
+russianRoulette: Het stelt je in staat om Russische Roulette te spelen. Laten we kijken of je alle 7 rondes kunt volhouden.
+changelog: Het stelt je in staat om de wijzigingen te zien die zijn aangebracht in de huidige versie van Bastion.
+commands: Het laat je de lijst zien van commando's die beschikbaar zijn in Bastion. Je kunt het ook gebruiken om te zoeken naar commando's die overeenkomen met een bepaalde query.
+donate: Het stelt je in staat om te zien hoe je kan bijdragen aan Bastion en zijn ontwikkeling.
+help: Het laat je toe om het hulpbericht van Bastion te zien dat je basisinformatie laat zien die je nodig hebt om Bastion te gaan gebruiken.
+avatar: Het laat je de avatar van een gebruiker zien.
+channel: Het laat je de informatie van een kanaal zien.
+emoji: Het laat je de informatie van een emoji zien.
+patrons: Het laat je onze Patrons zien, de geweldige mensen die de ontwikkeling van The Bastion Bot Project steunen.
+role: Het geeft je de informatie over een rol en geeft je ook de mogelijkheid om de leden in een rol te zien.
+server: Het laat je de informatie van de server zien.
+status: Hiermee kun je de status van Bastion's bekijken, in een oogopslag. Het laat je ook de huidige scherpe status zien. Je kunt ook een samenvatting zien van de status van Discord.
+user: Het laat je de informatie van een gebruiker zien.
+boost: Het stelt je in staat om een boost te geven aan de server in Bastion's server lijst. Je kunt de server elke 24 uur een boost geven. Server's boost score wordt elke maand gereset.
+channels: Hiermee kun je kanalen in de server aanmaken, verwijderen en bijwerken.
+edit: Het stelt je in staat om elk bericht verzonden door Bastion in het huidige kanaal te bewerken.
+giveaway: Het stelt je in staat om minstens een uur en maximaal een maand weg te geven in de server. U kunt een willekeurig aantal winnaars instellen voor het evenement. En het stelt u ook in staat om de winnaars eventueel na het einde van het evenement te herleiden.
+grant: Het stelt je in staat om ervaring of munten toe te kennen aan de leden van de server.
+iam: Hiermee kun je jezelf toevoegen (en verwijderen) aan (en van) de zelfrollen die zijn ingesteld op de server.
+inviteRoles: Het stelt je in staat om serveruitnodigingen te koppelen aan rollen. Iedereen die de server betreedt met een uitnodiging die is gekoppeld aan een rol krijgt de opgegeven rol automatisch toegewezen. Het stelt je ook in staat om de lijst met rollen gekoppeld aan een uitnodiging te zien.
+leave: Het stelt je in staat om Bastion te vragen om de server te verlaten en alle gegevens die het heeft op de server en zijn leden te wissen.
+levelUpRoles: Het stelt je in staat om rollen toe te voegen aan een level. Wanneer leden dat level bereiken, krijgen ze die rollen.
+lockSession: Het stelt je in staat om het Spraaksessiekanaal te vergrendelen waar je op dit moment in bent, zodat iedereen anders niet meer mee kan doen tenzij ze zijn uitgenodigd.
+lockdown: Het laat je toe een kanaal in de server te sluiten van gebruikers die geen rechten hebben om berichten of het kanaal te beheren.
+prune: Het stelt je in staat om leden zonder rollen van de server te snoeien op basis van hoe lang ze inactief zijn geweest.
+reactionRoles: Het stelt je in staat om reactie Rol groepen te maken (en te verwijderen). Een Reactie Rol Groep is een groep reacties emojis die kan worden gebruikt door een lid op het Reactie Role Bericht om zichzelf rollen toe te voegen (of te verwijderen). Reactie van rollen in één groep kan ook worden ingesteld als elkaars tegenstanders. Het stelt je ook in staat emojis toe te wijzen aan rollen, die kunnen worden gebruikt in reactie op het Reactie Role Message.
+referralRewards: Je kunt rollen instellen als beloning voor verwijzingen (nodigt andere gebruikers uit voor de server).
+referrals: Het stelt je in staat het Verwijzingskanaal in te stellen zodat leden anderen kunnen uitnodigen tot de server en beloningen voor aanbevelingen kunnen krijgen. En je kunt ook de uitnodigingen van de leden volgen.
+roleStore: Het stelt je in staat een Rol Store op te zetten in de server. Serverbeheerders kunnen rollen in de server verkopen en leden kunnen deze kopen met Bastion Coins.
+roles: Hiermee kun je rollen in de server maken, verwijderen en bijwerken.
+safeList: Het stelt je in staat om leden of rollen toe te voegen aan een veilige lijst die voorkomt dat hun berichten worden gefilterd door een uitnodigingsfilter of link filter in de server.
+suggest: U kunt een suggestie naar het adviserende personeel sturen, mits er een suggestiekanaal op de server is gezet.
+ban: Hiermee kun je gebruikers van de server verbannen (of zachte ban) en hun berichten optioneel wissen van het opgegeven aantal dagen. Het stelt je ook in staat om alle verbannen gebruikers op de server weer te geven.
+case: Het geeft je de mogelijkheid om de moderatie case log te zien voor het opgegeven case nummer.
+clear: Het stelt je in staat een bepaald aantal berichten in een kanaal te wissen. U kunt optioneel de berichten filteren die gewist moeten zijn op basis van de auteur van het bericht, of sinds wanneer het is verzonden, of dat het is vastgezet of een systeembericht of een bot het heeft verzonden.
+deaf: Het stelt je in staat om doof- (en ondoofte) gebruikers in de server te vinden. Veroordeelde gebruikers kunnen niets beluisteren in de spraakkanalen van de server.
+infractions: Het stelt je in staat al je overtredingen te vermelden. Als je een serverbeheerder bent, kun je ook de drempels instellen voor de acties die moeten worden ondernomen voor overtredingen van overtredingen.
+kick: Hiermee kun je gebruikers verwijderen van de server.
+nickname: Het stelt je in staat bijnaam van de serverleden in te stellen (en ongezet).
+reason: Het stelt je in staat om de reden van een moderatie-zaak bij te werken. Ben je een reden vergeten? Heb je een typo? Hier is je tweede kans.
+report: Het stelt je in staat om een serverlid te rapporteren aan de moderators van de server, mits er een Rapportkanaal is ingesteld.
+textMute: Hiermee kun je gebruikers dempen (en dempen) in een kanaal (of categorie). Tekstgedempte gebruikers kunnen geen berichten versturen in de kanalen die ze gedempt zijn.
+unban: Je kunt de verbannen gebruikers die verbannen zijn op de server weer ongedaan maken.
+updateRoles: Hiermee kun je de rollen van de serverleden bijwerken.
+voiceMute: Het stelt je in staat om gebruikers te dempen (en dempen) in een kanaal. Stem gedempte gebruikers kunnen niet spreken in de spraakkanalen die ze zijn gedempt.
+warn: Het stelt je in staat om je serverleden te waarschuwen en hun overtredingen op te helderen. Het stelt je ook in staat om alle overtredingen te vermelden.
+music: Het schakelt Bastion's muziekondersteuning in de opgegeven server in. Eenmaal ingeschakeld, kunt u alle muziekcommando's gebruiken in de server. Het laat je ook de lijst zien van servers waar muziek is ingeschakeld.
+musicChannel: Het stelt je in staat Bastion's Muziek Kanalen in te stellen (en uit te halen).
+musicMaster: Het stelt je in staat om Bastion's Muziek Meester rol in te stellen (en ongezet).
+nowPlaying: Het toont je het muziekspoor dat momenteel in de server wordt gespeeld.
+pause: Het stelt je in staat om het muzieknummer dat momenteel in de server wordt gespeeld te pauzeren.
+play: Het stelt je in staat om muziek te spelen op de server, van de opgegeven query of van elke ondersteunde bron.
+queue: Het laat je toe om de wachtrij van de server te zien. Het stelt je ook in staat om de muziekwachtrij te wissen of te schudden en een nummer te verwijderen uit de wachtrij, of zet (en deactiveren) de wachtrij in de lus.
+resume: Hiermee kunt u het muzieknummer hervatten dat in de server is gepauzeerd.
+skip: Hiermee kun je het muzieknummer overslaan dat momenteel wordt gespeeld in de server.
+stop: Het laat je toe om het afspelen van huidige muziek in de server te stoppen.
+volume: Hiermee kun je het volume van het muzieknummer dat momenteel wordt afgespeeld in de server instellen.
+apexLegends: Het stelt je in staat om de statistieken van elke Apex Legends speler in elk ondersteund platform te zien.
+counterStrikeGlobalOffensive: "Het stelt je in staat om de statistieken van een Counter-Strike te zien: Global Offensive speler in elk ondersteund platform."
+destiny2: Het stelt je in staat om de statistieken van elke Destiny 2-speler in een ondersteund platform te zien.
+fortnite: Het stelt je in staat om de statistieken van een Fortnite speler te zien in elk ondersteund platform.
+overwatch: Het stelt je in staat om de statistieken van elke Overwatch speler op elk ondersteund platform te zien.
+pubg: Het stelt u in staat om de statistieken van elke bekende spelers in Slaggronden op elk ondersteund platform te zien. Het laat je ook de statistieken zien in aparte gamemodus.
+rainbow6: Het stelt je in staat om de statistieken van elke Rainbow 6-speler in elk ondersteund platform te zien.
+rocketLeague: Het stelt je in staat om de statistieken van elke Rocket League speler te zien in elk ondersteund platform.
+coins: Het laat je toe om je Bastion Account te bekijken.
+daily: Het laat je toe om Bastion Coins te claimen dat elk lid als beloning ontvangt voor zijn of haar aanwezigheid in de server. U kunt uw beloningen eenmaal elke 24 uur opeisen.
+karma: Het laat je toe om iemand de zoete kleine internetpunten te geven, we noemen karma, als je denkt dat het de moeite waard is. Je kunt maximaal 3 karmas per 6 uur opgeven, dus besteed het verstandig.
+leaderboard: Het stelt je in staat om de ranglijst van je server te zien. Je bent gerangschikt op basis van jouw level, ervaring, karma en Bastion Coins; in precies die volgorde.
+profile: Het laat je toe je Bastion profiel te zien (of een van de server leden).
+rank: Het stelt je in staat om je (of een van de serverleden) rank, niveau, ervaring en karma te zien.
+referral: Het stelt je in staat je aanbeveling uitnodiging te zien die je kunt gebruiken om mensen uit te nodigen voor de server en je referral points te verhogen. Het kan ook gebruikt worden om je referral beloningen op te eisen die zijn ingesteld door de server managers.
+anime: Het stelt je in staat om informatie over het opgegeven anime te zoeken.
+apod: Het geeft je de mogelijkheid om het rookje te ontdekken! Elke dag wordt een andere afbeelding of foto van ons fascinerende universum uitgegeven, samen met een korte uitleg geschreven door een professionele astronomer.
+covid19: Het stelt u in staat om de laatste globale en regionale statistieken op COVID-19 te zien.
+cryptocurrency: Het stelt u in staat om informatie te zien op de opgegeven cryptovaluta.
+game: Het laat je toe om te zoeken naar informatie over het opgegeven spel.
+manga: Het staat je toe om informatie te zoeken over de opgegeven manga.
+movie: Het stelt je in staat om te zoeken naar informatie over de opgegeven film.
+pokemon: Het stelt u in staat om informatie te zoeken over de gespecificeerde Poke}}mon.
+tvShow: Het stelt u in staat om informatie te zoeken op de opgegeven TV Show.
+urbanDictionary: Het laat je toe om het Urban Dictionary naar definities van het opgegeven woord te zoeken.
+weather: Het laat u de huidige weerkracht van de opgegeven locatie zien.
+wikipedia: Je kunt de Wikipedia zoeken naar de opgegeven titel.
+calculate: Het stelt je in staat om wiskundige uitdrukkingen te beoordelen en hun resultaat te zien.
+choose: Hiermee kun je Bastion vragen om een optie te kiezen uit een set van opties. Laat Bastion een beslissing nemen voor jou.
+cite: Het stelt je in staat om een bericht van een kanaal in de server te citeren.
+color: Hiermee kunt u de opgegeven kleur in één formaat in vele verschillende formaten converteren.
+datetime: Het laat je de huidige tijd zien in meerdere tijdzones. Het stelt je ook in staat de opgegeven tijd om te zetten in meerdere verschillende tijdzones.
+definitions: Het stelt je in staat definities te zoeken voor het opgegeven woord.
+echo: Het stelt je in staat om een bericht te sturen via Bastion naar een willekeurig kanaal op de server. Het ondersteunt ook Bastion embed objecten.
+followRedirects: Het volgt alle doorverwijzingen van de opgegeven URL en laat je de uiteindelijke URL zien.
+invite: Het stelt je in staat om een directe uitnodiging voor de server te genereren. Optioneel kan de uitnodiging een tijdelijk karakter hebben dat de leden uit de server verwijdert als ze geen rol binnen 24 uur toegewezen krijgen. Het laat je ook de uitnodigingslink zien om Bastion uit te nodigen voor jouw server.
+lmstfy: Het maakt het mogelijk om een LMGTFY link te sturen voor de opgegeven zoekopdracht. Gebruik het om mensen te leren zoeken op internet en antwoorden op hun vragen te krijgen.
+poll: Het stelt je in staat om gedurende minstens een uur en hooguit een maand opiniepeilingen uit te voeren in de server. Je kunt maximaal 13 opties instellen voor de poll. Het laat je ook de status zien van een lopende poll.
+translate: Het stelt u in staat de opgegeven tekst van de ene naar de andere taal te vertalen.
