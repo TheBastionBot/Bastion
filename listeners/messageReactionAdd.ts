@@ -129,7 +129,7 @@ export = class MessageReactionAddListener extends Listener {
         if (!(messageReaction.message.channel as TextChannel).permissionsFor(member).has("MANAGE_MESSAGES")) return;
 
         // pin the message
-        await messageReaction.message.pin();
+        await messageReaction.message.pin({ reason: "Pin reaction added by " + member.user ? member.user.tag : member.id });
     }
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {

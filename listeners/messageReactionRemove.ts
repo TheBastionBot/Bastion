@@ -25,7 +25,7 @@ export = class MessageReactionRemoveListener extends Listener {
         if (!(messageReaction.message.channel as TextChannel).permissionsFor(member).has("MANAGE_MESSAGES")) return;
 
         // unpin the message
-        await messageReaction.message.unpin();
+        await messageReaction.message.unpin({ reason: "Pin reaction removed by " + member.user ? member.user.tag : member.id });
     }
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
