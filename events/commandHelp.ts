@@ -3,11 +3,12 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, Constants, Logger, ModuleManagerEvent } from "@bastion/tesseract";
+import { Client, Command, Constants, Logger, ModuleManagerEvent } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as arrays from "../utils/arrays";
 import * as strings from "../utils/strings";
+import BastionGuild = require("../structures/Guild");
 
 export = class CommandHelpEvent extends ModuleManagerEvent {
     constructor() {
@@ -36,7 +37,7 @@ export = class CommandHelpEvent extends ModuleManagerEvent {
                     },
                     {
                         name: "Description",
-                        value: command.description || "-",
+                        value: (message.client as Client).locale.getString((message.guild as BastionGuild).document.language, "commands", command.name) || "-",
                     },
                     {
                         name: "Bastion Permissions",
