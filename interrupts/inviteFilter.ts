@@ -65,8 +65,8 @@ export = class InviteFilter extends Interrupt {
             if (guildInvites) allowed.push(...guildInvites.keys());
 
             // fetch guild vanity code
-            const vanityCode = await message.guild.fetchVanityCode();
-            if (vanityCode) allowed.push(vanityCode);
+            const vanityData = await message.guild.fetchVanityData();
+            if (vanityData && vanityData.code) allowed.push(vanityData.code);
 
             // extract invite codes in messages
             const invites = message.content.match(new RegExp(regex.SERVER_INVITE, "g"));
