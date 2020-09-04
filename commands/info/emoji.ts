@@ -37,7 +37,7 @@ export = class EmojiCommand extends Command {
 
         if (!emoji) throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "emojiNotFound"));
 
-        const author = await emoji.fetchAuthor().catch(() => {
+        const author = emoji.author && emoji.author.id ? emoji.author :  await emoji.fetchAuthor().catch(() => {
             // this error can be ignored
         });
 
