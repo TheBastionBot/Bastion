@@ -1,0 +1,143 @@
+---
+announce: Det giver dig mulighed for at sende meddelelser til annonceringen kanaler i servere, hvor det er blevet indstillet.
+blacklist: Det giver dig mulighed for at sortliste brugere og servere, at. Blacklistede servere og brugere ikke har adgang til Bastion kommandoer.
+commandModule: Det giver dig mulighed for midlertidigt at aktivere eller deaktivere et kommandomodul indtil næste genstart. Det giver dig også mulighed for at kontrollere, om kommandoen i øjeblikket er aktiveret.
+eval: Det giver dig mulighed for at udføre JavaScript kode inde i Bastion kontekst.
+exec: Det giver dig mulighed for at udføre kommandoer i terminalen hvor Bastion kører.
+relayDirectMessages: Det giver dig mulighed for at skifte Bastion's Direct Message Relay. Hvis aktiveret, vil Bastion videregive alle direkte beskeder til botejerne.
+reloadSettings: Det giver dig mulighed for at genindlæse Bastion indstillinger uden at behøve at genstarte Bastion.
+setAvatar: Det giver dig mulighed for at opdatere Bastion avatar direkte fra Discord.
+setNick: Det giver dig mulighed for at opdatere Bastion's kaldenavn i serveren.
+setPresence: Det giver dig mulighed for at opdatere Bastion tilstedeværelse i skagen.
+setUsername: Det giver dig mulighed for at opdatere Bastion brugernavn direkte fra Discord.
+shutdown: Det giver dig mulighed for at lukke Bastion direkte fra Discord.
+garfield: Det giver dig mulighed for at se den nyeste Garfield tegneserie.
+xkcd: Det giver dig mulighed for at se den nyeste xkcd tegneserie.
+announcements: Det giver dig mulighed for at aktivere (og deaktivere) Bastions annonceringer i serveren. Det sætter kanalen som annoncering Kanalen, der vil modtage annoncering udsendelser sendt af bot ejere ved hjælp af `announce` kommando.
+autoRoles: Det giver dig mulighed for at oprette Auto Roller i serveren. Auto Roller er de roller, som er tildelt brugere automatisk, når de tilslutter sig serveren. Du kan eventuelt oprette Auto Roller for enten bots eller mennesker.
+farewells: Det giver dig mulighed for at aktivere (og deaktivere) farvel i serveren. Det giver dig også mulighed for at indstille farvel besked og timeout.
+gambling: Det giver dig mulighed for at aktivere (eller deaktivere) gambling i serveren. Når aktiveret, kan medlemmer bruge deres Bastion Mønter til at spille i spil.
+gamification: Det giver dig mulighed for at aktivere (eller deaktivere) gamification i serveren. Når aktiveret, får brugerne erfaring og niveau op på serveren ved at deltage i serveren, konkurrerer mod hinanden for at klatre leaderboardet. Det giver dig også mulighed for at skifte niveau op beskeder og indstille niveau op multiplikator.
+greetings: Det giver dig mulighed for at aktivere (og deaktivere) hilsner på serveren. Det giver dig også mulighed for at indstille hilsen og timeout.
+inviteFilter: Det giver dig mulighed for at aktivere (og deaktivere) Invitationsfilter på serveren. Og det giver dig også mulighed for at konfigurere, hvis overtrædelse af dette filter skal betragtes som en ufraktion.
+languages: Det giver dig mulighed for at se de sprog, der er tilgængelige i Bastion og indstille en af dem som standard sprog for din server.
+linkFilter: Det giver dig mulighed for at aktivere (og deaktivere) Link Filter på serveren. Og det giver dig også mulighed for at konfigurere, hvis overtrædelse af dette filter skal betragtes som en ufraktion.
+membersOnly: Det giver dig mulighed for at aktivere (og deaktivere) Medlemmer Kun tilstand i serveren. Hvis aktiveret, kan kun de medlemmer der har mindst en rolle på serveren bruge Bastion.
+mentionSpam: Det giver dig mulighed for at indstille (og frakoste) tærsklen for omtale spam i serveren. Hvis angivet, vil Bastion advare de brugere, der overtræder dette og tilføje det til deres brøk.
+messageFilter: Det giver dig mulighed for at aktivere (og deaktivere) Brevfilter på serveren. Når det er aktiveret, filtrerer det brevene der matcher mønstrene angivet af dig. Og det giver dig også mulighed for at konfigurere, hvis overtrædelse af dette filter skal betragtes som en ufraktion.
+moderationLogs: Det giver dig mulighed for at aktivere (og deaktivere) logning af mådehold begivenheder på serveren. Det sætter kanalen som Moderation Log Channel der vil logge mådehold begivenheder på serveren.
+prefix: Det giver dig mulighed for at indstille brugerdefinerede præfikser til Bastion i din server.
+reactionAnnouncements: Det giver dig mulighed for at aktivere (og deaktivere) Reaktionsmeddelelser på serveren. Hvis aktiveret, og en annonceringskanal er indstillet, når nogen med ordentlig tilladelse tilføjer en Megaphone eller højttaler reaktion på en besked, meddelelsen bliver annonceret i meddelelseskanalen.
+reactionPinning: Det giver dig mulighed for at aktivere (og deaktivere) Reaktion Pinning i serveren. Hvis aktiveret, når nogen med ordentlig tilladelse tilføjer en Pin reaktion til en besked, beskeden bliver fastgjort i kanalen.
+reports: Det giver dig mulighed for at aktivere (og deaktivere) brugerrapporter i serveren. Den sætter den kanal nemlig den Rapport Kanal at vil modtage den bruger rapporter, rapporteret af den styreenhed medlemmer benytter den `report` befale.
+selfRoles: Det giver dig mulighed for at oprette Selvroller i serveren. Selvroller er de roller, som servermedlemmer kan tildele (og unassign) til sig selv.
+serverLogs: Det giver dig mulighed for at aktivere (og deaktivere) logning af serverbegivenheder. Det sætter kanalen som Server Log Channel der vil logge serverens begivenheder.
+starboard: Det giver dig mulighed for at aktivere (og deaktivere) Starboard i serveren. Det sætter kanalen som Starboard Channel der vil logge den stjernemarkerede beskeder fra serveren.
+streamerRole: Det gør det muligt at indstille Streamer Rolle for serveren. Når et medlem bor i serveren, er de tilknyttet denne rolle, forudsat at de har mindst én rolle på serveren.
+streamers: Det giver dig mulighed for at følge streamers, fra forskellige platforme, i serveren. Når streamerne bliver levende, eller når de sender en video, vil Bastion give besked om det i serveren.
+suggestions: Det giver dig mulighed for at aktivere (og deaktivere) forslag på serveren. Den sætter den kanal nemlig den Suggestion Kanal at vil modtage den forslag, foreslået af den styreenhed medlemmer benytter den `suggest` befale.
+triggers: Det giver dig mulighed for at tilføje (og fjerne) udløser i serveren. Når en udløser er indstillet, og Bastion ser en besked fra et menneske, der indeholder det mønster, der er angivet i udløseren, det vil reagere med enten den angivne svarmeddelelse eller reaktion, eller begge dele.
+voiceSessions: Det giver dig mulighed for at administrere stemmesessioner (eller midlertidige stemmekanaler, hvis du foretrækker), i serveren.
+votingChannels: Det giver dig mulighed for at indstille (og frakoble) kanaler som stemmekanaler. Hvis en kanal er sat som en stemmekanal, vil noget sendt i kanalen blive sat op for alle til at stemme.
+acrophobia: Det giver dig mulighed for at spille Acrophobia spil med dine kolleger server medlemmer. Bastion genererer en tilfældig forkortelse, og spillerne konkurrerer ved racing for at skabe den mest sammenhængende eller humoristiske sætning, der passer til forkortelsen - en backronym. Efter indsendelserne er overstået, i det angivne tidsrum, alle derefter stemmer anonymt for deres foretrukne svar. De mest populære backronym vinder.
+flip: Det giver dig mulighed for at vende et vilkårligt antal mønter og se resultatet. Det understøtter også gambling.
+gameServer: Det giver dig mulighed for at hente oplysninger fra næsten enhver spilserver, der gør sin status offentligt tilgængelig.
+magic8ball: Det giver dig mulighed for at få svar på dine polære spørgsmål fra Magic 8 Ball.
+roll: Det giver dig mulighed for at rulle terninger og se resultatet. Det understøtter terninger notation. Det understøtter også gambling.
+rps: Det giver dig mulighed for at spille Rock Paper Scissor med Bastion. Det understøtter også gambling.
+russianRoulette: Det giver dig mulighed for at spille russisk Roulette. Lad os se, om du kan vare alle de 7 runder.
+changelog: Det giver dig mulighed for at se de ændringer, der er blevet indført i den nuværende version af Bastion.
+commands: Det giver dig mulighed for at se listen over kommandoer tilgængelige i Bastion. Du kan også bruge den til at søge efter kommandoer, der matcher en given forespørgsel.
+donate: Det giver dig mulighed for at se de måder, du kan bidrage til Bastion, og det er udvikling.
+help: Det giver dig mulighed for at se hjælp budskab fra Bastion, der viser dig grundlæggende oplysninger, du har brug for at begynde at bruge Bastion.
+avatar: Det giver dig mulighed for at se en brugers avatar.
+channel: Det tillader jer se den information i en kanal.
+emoji: Det giver dig mulighed for at se oplysninger om en emoji.
+patrons: Det giver dig mulighed for at se vores protektorer, de fantastiske mennesker, der støtter udviklingen af The Bastion Bot Project.
+role: Det giver dig mulighed for at se oplysninger om en rolle. Det giver dig også mulighed for at se medlemmerne i en rolle.
+server: Det giver dig mulighed for at se oplysninger om serveren.
+status: Det giver dig mulighed for at se Bastion's status, på et øjeblik. Det giver dig også mulighed for at se status for den nuværende shard. Du kan også se en oversigt over Discord's status.
+user: Det giver dig mulighed for at se oplysninger om en bruger.
+boost: Det giver dig mulighed for at øge serveren i Bastion serverlister. Du kan øge serveren en gang hver 24 timer. Serverens boost score bliver nulstillet hver måned.
+channels: Det giver dig mulighed for at oprette, slette og opdatere kanaler i serveren.
+edit: Det giver dig mulighed for at redigere en besked sendt af Bastion i den aktuelle kanal.
+giveaway: Det giver dig mulighed for at køre giveaway begivenheder på serveren i mindst en time og højst en måned. Du kan indstille et vilkårligt antal vindere til begivenheden. Og det giver dig også mulighed for at omdirigere vinderne, hvis det er nødvendigt, efter afslutningen af begivenheden.
+grant: Det giver dig mulighed for at give erfaring eller mønter til medlemmerne af serveren.
+iam: Det giver dig mulighed for at tilføje (og fjerne) dig selv til (og fra) selvroller sat i serveren.
+inviteRoles: Det giver dig mulighed for at knytte server invitationer til roller. Enhver, der slutter sig til serveren med en invitation tilknyttet en rolle, vil blive tildelt den angivne rolle automatisk. Det giver dig også mulighed for at se listen over roller forbundet med en invitation.
+leave: Det giver dig mulighed for at spørge Bastion til at forlade serveren og rydde alle data, den har på serveren og dens medlemmer.
+levelUpRoles: Det giver dig mulighed for at tilføje roller til et niveau. Når medlemmer når dette niveau, vil de blive tildelt disse roller.
+lockSession: Det giver dig mulighed for at låse stemmesessionskanalen, som du er i øjeblikket i, så alle andre ikke kan deltage, medmindre de er inviteret.
+lockdown: Det giver jer låse en kanal i den styreenhed fra brugernes hvem ikke nyde tilladelse hen til styre beskeder eller den kanal.
+prune: Det giver dig mulighed for at beskære medlemmer uden nogen roller, fra serveren, baseret på, hvor længe de har været inaktive.
+reactionRoles: Det giver dig mulighed for at oprette (og slette) Reaction Rolle grupper. En Reaktion Rolle Group er en gruppe af reaktioner emojis, der kan bruges af et medlem i Reaction Rolle Besked til at tilføje (eller fjerne) roller til sig selv. Reaktionsroller i en enkelt gruppe kan også indstilles som gensidigt udelukkende. Det giver dig også mulighed for at tildele emojis til roller, der kan bruges til at reagere på Reaction Rolle Besked.
+referralRewards: Det giver dig mulighed for at indstille roller som belønninger for henvisninger (invitere andre brugere til serveren).
+referrals: Det giver dig mulighed for at indstille henvisningskanalen, så medlemmer kan invitere andre til serveren og få henvisning belønninger. Og det giver dig også mulighed for at spore medlemmernes invitationer.
+roleStore: Det giver dig mulighed for at oprette en Rolle Store i serveren. Server ledere kan sælge roller i serveren og medlemmer kan købe dem med Bastion mønter.
+roles: Det giver dig mulighed for at oprette, slette og opdatere roller i serveren.
+safeList: Det giver dig mulighed for at tilføje medlemmer eller roller til en sikker liste, der forhindrer deres breve i at blive filtreret ved invitere filter eller link filter på serveren.
+suggest: Det giver dig mulighed for at sende et forslag til forslaget personale, forudsat at en Suggestion Kanal er blevet sat i serveren.
+ban: Det giver dig mulighed for at forbyde (eller bløde forbud) brugere fra serveren, og eventuelt rydde deres beskeder fra det angivne antal dage. Det giver dig også mulighed for at liste alle brugere forbudt i serveren.
+case: Det giver dig mulighed for at se mådehold case log for det angivne case nummer.
+clear: Det giver dig mulighed for at rydde et bestemt antal beskeder i en kanal. Du kan eventuelt filtrere brevene som skal være cleard baseret på brevforfatteren, eller siden da det blev sendt, eller om det er fastgjort eller systembesked eller en bot sendt det.
+deaf: Det giver dig mulighed for at døvne (og undeafen) brugere på serveren. Døde brugere kan ikke lytte noget i serverens stemmekanaler.
+infractions: Det giver dig mulighed for at liste alle dine brøker. Hvis du er en server manager, det giver dig også mulighed for at indstille tærsklerne for de handlinger, der skal træffes for at overtræde overtrædelser.
+kick: Det giver dig mulighed for at sparke brugere fra serveren.
+nickname: Den tillader jer hen til placere (og unset) øgenavne i den styreenhed medlemmer.
+reason: Det giver dig mulighed for at opdatere årsagen til en mådehold sag. Glemt for at angive en årsag? Har du en typo? Her er din anden chance.
+report: Det giver dig mulighed for at rapportere en server medlem til moderatorer af serveren, forudsat at en rapport kanal er indstillet.
+textMute: Det giver dig mulighed for at tekst mute (og unmute) brugere i en kanal (eller kategori). Tekst muted brugere kan ikke sende beskeder i de kanaler, de er muted.
+unban: Det giver dig mulighed for at fjerne udelukkelse af brugere, der er udelukket i serveren.
+updateRoles: Det giver dig mulighed for at opdatere roller servermedlemmer.
+voiceMute: Det giver dig mulighed for at stemme mute (og unmute) brugere i en kanal. Stemme muted brugere kan ikke tale i de stemmekanaler de er muted.
+warn: Det giver dig mulighed for at advare servermedlemmer, samt rydde deres brøker. Det giver dig også mulighed for at liste alle de brøker.
+music: Det skifter Bastions musikunderstøttelse på den angivne server. Når den er aktiveret, kan du bruge alle musikkommandoer på serveren. Det giver dig også mulighed for at se listen over servere, hvor musik er aktiveret.
+musicChannel: Det giver dig mulighed for at indstille (og frakoble) Bastions musikkanaler.
+musicMaster: Det giver dig mulighed for at indstille (og frakoble) Bastion musik Master rolle.
+nowPlaying: Det viser dig det musikspor, der i øjeblikket afspilles i serveren.
+pause: Det giver dig mulighed for at holde pause på det musikspor, der i øjeblikket afspilles i serveren.
+play: Det giver dig mulighed for at afspille en musik i serveren, fra den givne forespørgsel eller fra enhver understøttet kilde.
+queue: Det giver dig mulighed for at se serverens aktuelle musikkø Det giver dig også mulighed for at klar, eller shuffle musik kø samt fjerne en sang fra køen, eller sæt (og fravalgt) køen i løkken.
+resume: Det giver dig mulighed for at genoptage musiksporet, der blev sat på pause i serveren.
+skip: Det giver dig mulighed for at springe over det musikspor, der i øjeblikket afspilles i serveren.
+stop: Det giver dig mulighed for at stoppe den aktuelle musikafspilning på serveren.
+volume: Det giver dig mulighed for at indstille lydstyrken for det musikspor, der i øjeblikket afspilles i serveren.
+apexLegends: Det giver dig mulighed for at se statistikkerne for enhver Apex Legends spiller i enhver understøttet platform.
+counterStrikeGlobalOffensive: "Det giver dig mulighed for at se statistikkerne for enhver Counter-Strike: Global Offensive spiller i enhver understøttet platform."
+destiny2: Det giver dig mulighed for at se statistikkerne for enhver Destiny 2 afspiller i enhver understøttet platform.
+fortnite: Det giver dig mulighed for at se statistikkerne for enhver Fortnite spiller i enhver understøttet platform.
+overwatch: Det giver dig mulighed for at se statistikkerne for enhver Overwatch afspiller i enhver understøttet platform.
+pubg: Det giver dig mulighed for at se statistikkerne af enhver Playerunknown's Battlegrounds spiller i enhver understøttet platform. Det giver dig også mulighed for at se statistikkerne i separate spiltilstande.
+rainbow6: Det giver dig mulighed for at se statistikkerne for enhver regnbue 6 spiller i enhver understøttet platform.
+rocketLeague: Det giver dig mulighed for at se statistikkerne af enhver Rocket League afspiller i enhver understøttet platform.
+coins: Det giver dig mulighed for at se din Bastion konto.
+daily: Det giver dig mulighed for at kræve Bastion mønter, at hvert medlem modtager som en belønning for at være i serveren. Du kan kræve din belønning én gang hver 24 timer.
+karma: Det giver dig mulighed for at give nogen de søde små internetpoint, vi kalder karma, hvis du tror, de er det værd. Du kan give op til 3 karmas hver 6. time, så tilsæt den klogt.
+leaderboard: Det giver dig mulighed for at se leaderboard af din server. Du er rangeret baseret på dit niveau, erfaring, karma og Bastion mønter; i den nøjagtige rækkefølge.
+profile: Det giver dig mulighed for at se din (eller nogen af serveren medlemmers) Bastion Profil.
+rank: Det giver dig mulighed for at se din (eller nogen af servermedlemmets) rang, niveau, oplevelse og karma.
+referral: Det giver dig mulighed for at se din henvisning invitation, som du kan bruge til at invitere folk til serveren og øge din henvisning point. Det kan også bruges til at hævde din henvisning belønninger sat af server managers.
+anime: Det giver dig mulighed for at søge efter oplysninger om den angivne anime.
+apod: Det giver dig mulighed for at opdage kosmos! Hver dag vises et andet billede eller fotografi af vores fascinerende univers, sammen med en kort forklaring skrevet af en professionel astronom.
+covid19: Det giver dig mulighed for at se de nyeste globale og regionale statistikker på COVID-19.
+cryptocurrency: Det giver dig mulighed for at se nogle oplysninger om den angivne kryptovaluta.
+game: Det giver dig mulighed for at søge efter oplysninger om det angivne spil.
+manga: Det giver dig mulighed for at søge efter oplysninger om den angivne manga.
+movie: Det giver dig mulighed for at søge efter oplysninger om den angivne film.
+pokemon: Det giver dig mulighed for at søge efter oplysninger om den specificerede Pokeţmon.
+tvShow: Det giver dig mulighed for at søge efter oplysninger om den angivne tv-serie.
+urbanDictionary: Det giver dig mulighed for at søge i Urban Dictionary for definitioner af det angivne ord.
+weather: Det giver dig mulighed for at se den aktuelle vejrkraft af den angivne placering.
+wikipedia: Det giver dig mulighed for at søge i Wikipedia efter den angivne titel.
+calculate: Det giver dig mulighed for at evaluere matematiske udtryk og se deres resultat.
+choose: Det giver dig mulighed for at spørge Bastion at vælge en mulighed fra det givne sæt af muligheder. Lad Bastion træffe en beslutning for dig.
+cite: Det giver dig mulighed for at citere en besked fra enhver kanal i serveren.
+color: Det giver dig mulighed for at konvertere den angivne farve i ét format i mange forskellige formater.
+datetime: Det giver dig mulighed for at se den aktuelle tid i flere forskellige tidszoner. Det giver dig også mulighed for at konvertere den angivne tid til flere forskellige tidszoner.
+definitions: Det giver dig mulighed for at slå op definitioner for det angivne ord.
+echo: Det giver dig mulighed for at sende en besked gennem Bastion til enhver kanal i serveren. Det understøtter også Bastion indlejrede objekter.
+followRedirects: Det følger alle omdirigeringer i den angivne URL og giver dig mulighed for at se den endelige URL.
+invite: Det giver dig mulighed for at generere en øjeblikkelig invitation til serveren. Alternativt kan invitationen være en midlertidig som vil sparke medlemmerne fra serveren, hvis de ikke er tildelt en rolle inden for 24 timer. Det viser dig også invitationslinket til at invitere Bastion til din server.
+lmstfy: Det giver dig mulighed for at sende et LMGTFY link til den angivne søgeforespørgsel. Brug den til at lære folk, hvordan man laver en internetsøgning og få svar på deres spørgsmål.
+poll: Det giver dig mulighed for at køre meningsmålinger på serveren i mindst en time og højst en måned. Du kan indstille højst 13 muligheder for afstemningen. Det giver dig også mulighed for at se status for en løbende afstemning.
+translate: Det giver dig mulighed for at oversætte den angivne tekst fra et sprog til et andet.
