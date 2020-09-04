@@ -1,0 +1,143 @@
+---
+announce: Ermöglicht dir Ankündigungen an die Ankündigungskanäle in Servern zu schicken, bei denen dies eingestellt ist.
+blacklist: Erlaubt dir, Benutzer und Server davon zu sperren. Server und Benutzern auf der Blacklist haben keinen Zugriff auf Bastion's Befehle.
+commandModule: Erlaubt dir bis zum nächsten Neustart ein Befehlmodul zu aktivieren oder zu deaktivieren. Erlaubt dir auch zu überprüfen, ob der Befehl derzeit aktiviert ist.
+eval: Erlaubt dir, JavaScript-Code in Bastion auszuführen.
+exec: Sie können Befehle in dem Terminal ausführen, an dem Bastion läuft.
+relayDirectMessages: Erlaubt dir, die Weiterleitung von Bastion’s Direktnachrichten umzustellen. Wenn aktiviert, leitet Bastion alle Direktnachrichten an die Bot-Besitzer weiterleiten.
+reloadSettings: Erlaubt es dir, alle Einstellungen von Bastion neu zu laden, ohne Bastion neu starten zu müssen.
+setAvatar: Erlaubt dir, den Avatar von Bastion direkt von Discord zu aktualisieren.
+setNick: Es erlaubt dir, den Namen von Bastion auf dem Server zu ändern.
+setPresence: Es erlaubt dir, die Präsenz von Bastion in der Scherbe zu aktualisieren.
+setUsername: Erlaubt dir, den Benutzernamen von Bastion direkt in Discord zu ändern.
+shutdown: Erlaubt es dir, Bastion in Discord auszuschalten.
+garfield: Zeigt dir den neuesten Garfield Comic Streifen.
+xkcd: Zeigt dir den neuesten xkcd Comic.
+announcements: Es erlaubt dir, die Ankündigungen von Bastion in diesem Server zu aktivieren (und zu deaktivieren). Es setzt den Kanal als den Ankündigungskanal, der die von den Bot-Besitzern mit dem 'announce'-Befehl gesendeten Ankündigung Nachrichten erhält.
+autoRoles: Erlaubt es dir automatische Rollen auf dem Server einzurichten. Automatische Rollen sind die Rollen, die Benutzern zugeteilt werden, wenn sie dem Server beitreten. Du kannst automatische Rollen wahlweise für Bots oder Nutzer einrichten.
+farewells: Erlaubt es dir Abschiedsnachrichten auf dem Server zu aktivieren (und zu deaktivieren) und erlaubt dir auch, diese Nachrichten und timeouts festzulegen.
+gambling: Erlaubt dir, Glücksspiel auf dem Server zu aktivieren (oder zu deaktivieren). Wenn aktiviert, können Mitglieder ihre Bastion Coins verwenden, um an Spielen teilzunehmen.
+gamification: Es erlaubt Ihnen, Gamifizierung auf dem Server zu aktivieren (oder zu deaktivieren). Wenn diese Option aktiviert ist, gewinnen Benutzer Erfahrung und Level auf dem Server, indem sie am Server teilnehmen, und konkurrieren gegeneinander, um die Rangliste zu steigern. Außerdem können Sie die Level-Up-Nachrichten umschalten und den Level-Up-Multiplikator einstellen.
+greetings: Erlaubt dir Willkommensnachrichten auf dem Server zu aktivieren (und deaktivieren) und erlaubt dir auch, diese Nachrichten festzulegen und Timeouts zu setzen.
+inviteFilter: Sie können den Einladungsfilter auf dem Server aktivieren (und deaktivieren). Und es erlaubt Ihnen auch zu konfigurieren, wenn die Verletzung dieses Filters als eine Verletzung angesehen werden sollte.
+languages: Zeigt dir alle für Bastion verfügbaren Sprachen und erlaubt es dir eine Standarte Sprache für deinen Server zu setzen.
+linkFilter: Erlaubt es dir den Link-Filter auf dem Server aktivieren (und deaktivieren). Und ermöglicht dir auch einzustellen, ob der Verstoß gegen diesen Filter als Regelverstoß angesehen werden soll.
+membersOnly: Erlaubt dir, im Server zu aktivieren (und zu deaktivieren), dass nur Mitglieder, die mindestens eine Rolle im Server haben, Bastion benutzen können.
+mentionSpam: Erlaubt dir, den Schwellenwert für Erwähnungs-Spam auf dem Server zu setzen (und zu entfernen). Wenn aktiviert, warnt Bastion die Benutzer, die dagegen verstoßen, und fügt dies zu ihren Verstößen hinzu.
+messageFilter: Es erlaubt Ihnen den Nachrichtenfilter auf dem Server zu aktivieren (und deaktivieren). Wenn aktiviert, filtert es die Nachrichten, die den von Ihnen angegebenen Mustern entsprechen. Und es erlaubt Ihnen auch zu konfigurieren, wenn die Verletzung dieses Filters als eine Verletzung angesehen werden sollte.
+moderationLogs: Erlaubt dir, die Speicherung aller Moderations-Ereignisse auf dem Server zu aktivieren (und deaktivieren). Setzt diesen Kanal als den Speicherort, der alle Moderations-Ereignisse zeigt.
+prefix: Es erlaubt dir, eigene Präfixe für Bastion auf deinem Server festzulegen.
+reactionAnnouncements: Sie können Reaktionsmitteilungen auf dem Server aktivieren (und deaktivieren). Wenn aktiviert, und ein Ankündigungs-Kanal gesetzt ist, wenn jemand mit angemessener Berechtigung eine Megaphone oder Lautsprecher-Reaktion zu einer Nachricht hinzufügt, die Nachricht wird im Ankündigungskanal angekündigt.
+reactionPinning: Es ermöglicht das Pinning von Reaktionen auf dem Server zu aktivieren (und deaktivieren). Wenn aktiviert, wenn jemand mit angemessener Berechtigung eine Pin-Reaktion zu einer Nachricht hinzufügt, wird die Nachricht im Kanal angepinnt.
+reports: Es erlaubt Ihnen, Benutzerberichte auf dem Server zu aktivieren (und zu deaktivieren). Es legt den Kanal als den Report Channel fest, der die Benutzerberichte erhält, die von den Servermitgliedern mit dem `report`-Befehl gemeldet werden.
+selfRoles: Erlaubt dir selbst zuweisbare Rollen auf dem Server einrichten. Hierbei kannst du entscheiden, welche Rollen sich die Mitglieder zuweisen (und nicht zuweisen) können.
+serverLogs: Es erlaubt Ihnen, die Protokollierung von Serverereignissen zu aktivieren (und zu deaktivieren). Setzt den Kanal als Server Log Kanal, der die Serverereignisse protokolliert.
+starboard: Es erlaubt Ihnen, das Starboard auf dem Server zu aktivieren (und deaktivieren). Setzt den Kanal als den Starboard-Kanal, der die markierten Nachrichten des Servers protokolliert.
+streamerRole: Es erlaubt die Streamer Rolle für den Server zu setzen. Wenn ein Mitglied live auf dem Server geht, ist es dieser Rolle zugeordnet, vorausgesetzt es hat mindestens eine Rolle im Server.
+streamers: Es erlaubt Ihnen, Streamers von verschiedenen Plattformen auf dem Server zu folgen. Wenn die Streamer live gehen oder ein Video veröffentlichen, wird Bastion dies auf dem Server melden.
+suggestions: Es erlaubt Ihnen, Vorschläge auf dem Server zu aktivieren (und deaktivieren). Setzt den Kanal als den Vorschlagskanal, der die Vorschläge erhält, die von den Servermitgliedern mit dem Befehl `suggest` vorgeschlagen werden.
+triggers: Es ermöglicht das Hinzufügen und Entfernen von Triggern auf dem Server. Wenn ein Trigger gesetzt ist und Bastion eine Nachricht von einem Menschen sieht, die das im Trigger angegebene Muster enthält, Es wird entweder mit der angegebenen Antwort oder Reaktion antworten, oder beides.
+voiceSessions: Es ermöglicht Ihnen die Verwaltung von Sprachsitzungen (oder temporäre Sprachkanäle, wenn Sie bevorzugen), auf dem Server.
+votingChannels: Sie können Kanäle als Voting Kanäle einstellen (und entfernen). Wenn ein Kanal als Abstimmungskanal eingestellt wird, wird alles im Kanal für alle zur Abstimmung geschickte eingerichtet.
+acrophobia: Es ermöglicht Ihnen, das Acrophobia-Spiel mit Ihren anderen Servermitgliedern zu spielen. Bastion erzeugt ein zufälliges Akronym und Spieler konkurrieren beim Rennen, um den kohärentesten oder humorvollsten Satz zu schaffen, der zum Akronym passt - ein Backronym. Nachdem die Beiträge vorbei sind, stimmen alle anonym für ihre bevorzugte Antwort ab.
+flip: Es erlaubt Ihnen, beliebig viele Münzen zu drehen und das Ergebnis zu sehen. Es unterstützt auch das Spielen.
+gameServer: Es erlaubt Ihnen, Informationen von fast jedem Spielserver abzurufen, der seinen Status öffentlich zugänglich macht.
+magic8ball: Es ermöglicht Ihnen, Antworten auf Ihre polaren Fragen von der Magic 8 Ball zu erhalten.
+roll: Es erlaubt dir, Würfel zu würfeln und das Ergebnis zu sehen. Es unterstützt Würfel Notation. Es unterstützt auch Spielen.
+rps: Es ermöglicht dir Rock Paper Schere mit Bastion zu spielen und unterstützt auch das Spielen.
+russianRoulette: Es erlaubt dir, russisches Roulette zu spielen. Lass uns sehen, ob du alle 7 Runden halten kannst.
+changelog: Es ermöglicht Ihnen, die Änderungen zu sehen, die in der aktuellen Version von Bastion eingeführt wurden.
+commands: Es erlaubt Ihnen die Liste der Befehle, die in Bastion verfügbar sind, zu sehen und Sie können auch verwenden, um nach Befehlen zu suchen, die einer bestimmten Anfrage entsprechen.
+donate: Sie können sehen, wie Sie Bastion und ihre Entwicklung unterstützen können.
+help: Es erlaubt dir, die Hilfe-Nachricht von Bastion zu sehen, die dir grundlegende Informationen zeigt, die du brauchst, um Bastion zu benutzen.
+avatar: Es erlaubt Ihnen, den Avatar eines Benutzers zu sehen.
+channel: Es ermöglicht die Information eines Kanals zu sehen.
+emoji: Es erlaubt Ihnen, die Informationen eines Emoji zu sehen.
+patrons: Es erlaubt Ihnen, unsere Patronen zu sehen, die erstaunlichen Leute, die die Entwicklung von The Bastion Bot Projekt unterstützen.
+role: Es ermöglicht Ihnen, die Informationen einer Rolle zu sehen und die Mitglieder in einer Rolle zu sehen.
+server: Es erlaubt Ihnen, die Informationen des Servers zu sehen.
+status: Es erlaubt Ihnen, den Status von Bastion auf einen Blick zu sehen. Du kannst auch den Status des aktuellen Scherbens sehen. Du kannst auch eine Zusammenfassung des Discords Status sehen.
+user: Es erlaubt Ihnen, die Informationen eines Benutzers zu sehen.
+boost: Es erlaubt dir, den Server in Bastions Serverlisten zu steigern. Du kannst den Server einmal alle 24 Stunden steigern. Der Boost Wert des Servers wird jeden Monat zurückgesetzt.
+channels: Es erlaubt das Erstellen, Löschen und Aktualisieren von Kanälen auf dem Server.
+edit: Es erlaubt dir, jede von Bastion gesendete Nachricht im aktuellen Kanal zu bearbeiten.
+giveaway: Es erlaubt Ihnen, verschenkte Ereignisse für mindestens eine Stunde und höchstens einen Monat auf dem Server auszuführen. Sie können eine beliebige Anzahl von Gewinnern für das Event festlegen. Und es erlaubt Ihnen auch, die Gewinner bei Bedarf nach dem Ende der Veranstaltung zu reollen.
+grant: Es erlaubt dir, den Mitgliedern des Servers Erfahrungen oder Münzen zu gewähren.
+iam: Es erlaubt Ihnen, sich selbst zu (und von ihnen) Self-Rollen hinzuzufügen (und zu entfernen), die auf dem Server gesetzt sind.
+inviteRoles: Es erlaubt Ihnen, Server-Einladungen mit Rollen zu verknüpfen. Jeder, der dem Server mit einer Einladung in Verbindung mit einer Rolle beitritt, wird die angegebene Rolle automatisch zugewiesen. Außerdem können Sie die Liste der Rollen sehen, die mit einer Einladung verbunden sind.
+leave: Es erlaubt Ihnen, Bastion zu bitten, den Server zu verlassen und alle Daten zu löschen, die er auf dem Server und seinen Mitgliedern hat.
+levelUpRoles: Es erlaubt dir, Rollen zu einem Level hinzuzufügen. Wenn Mitglieder dieses Level erreichen, werden sie diese Rollen erhalten.
+lockSession: Es erlaubt Ihnen, den Sprach-Session-Kanal zu sperren, in dem Sie gerade eingeloggt sind, so dass niemand anderen beitreten kann, es sei denn, sie sind eingeladen.
+lockdown: Es erlaubt dir, einen Channel auf dem Server von Benutzern zu sperren, die keine Berechtigung haben, Nachrichten oder den Channel zu verwalten.
+prune: Es erlaubt Ihnen, Mitglieder ohne Rollen vom Server zu beschneiden, abhängig davon, wie lange sie inaktiv waren.
+reactionRoles: Es erlaubt Ihnen Reaktionsrollengruppen zu erstellen (und zu löschen). Eine Reaktionsrolle Gruppe ist eine Gruppe von Reaktionsreaktions-Emojis, die von einem Mitglied in der Reaktionsrolle Nachricht benutzt werden kann, um Rollen zu sich selbst hinzuzufügen (oder zu entfernen). Reaktionsrollen in einer einzigen Gruppe können auch als einander ausschließen. Außerdem können Sie Emojis Rollen zuweisen, die zur Reaktion auf die Reaktionsrolle verwendet werden können.
+referralRewards: Es erlaubt Ihnen, Rollen als Belohnung für Empfehlungen zu setzen (andere Benutzer zum Server einladen).
+referrals: Es erlaubt dir, den Empfehlungskanal so zu setzen, dass Mitglieder andere auf den Server einladen und Belohnungen für Empfehlungen erhalten können. Und es erlaubt Ihnen auch, die Einladungen der Mitglieder zu verfolgen.
+roleStore: Sie können einen RollenStore auf dem Server einrichten. Server Manager können Rollen auf dem Server verkaufen und Mitglieder können sie mit Bastion Coins kaufen.
+roles: Es ermöglicht das Erstellen, Löschen und Aktualisieren von Rollen im Server.
+safeList: Sie können Mitglieder oder Rollen zu einer sicheren Liste hinzufügen, die verhindert, dass ihre Nachrichten durch Einladungsfilter oder Link-Filter auf dem Server gefiltert werden.
+suggest: Es erlaubt Ihnen, dem Vorschlagsteam einen Vorschlag zu senden, vorausgesetzt es wurde ein Vorschlagskanal im Server gesetzt.
+ban: Es erlaubt Ihnen, Benutzer vom Server zu sperren (oder weiche Sperre) und ihre Nachrichten optional von der angegebenen Anzahl von Tagen zu löschen. Außerdem können Sie alle auf dem Server gesperrten Benutzer auflisten.
+case: Hier können Sie die Groß-/Kleinschreibung für die angegebene Fallnummer einsehen.
+clear: Es erlaubt Ihnen, eine bestimmte Anzahl von Nachrichten in einem Kanal zu löschen. Sie können optional die Nachrichten filtern, die nach dem Nachrichtenautor gelöscht werden sollen, oder seit wann es gesendet wurde, oder ob es angeheftet oder System-Nachricht oder ein Bot gesendet wurde.
+deaf: Es erlaubt dir, taube (und unsichtbare) Benutzer auf dem Server zu finden. Taubte Benutzer können nichts in den Sprachkanälen des Servers hören.
+infractions: Sie können alle Ihre Verstöße auflisten. Wenn Sie ein Server-Manager sind, können Sie auch die Schwellenwerte für die Aktionen festlegen, die bei Verstößen ergriffen werden sollen.
+kick: Es erlaubt Ihnen, Benutzer vom Server zu kicken.
+nickname: Es erlaubt Ihnen, Spitznamen der Servermitglieder zu setzen (und zu entfernen).
+reason: Es erlaubt dir, den Grund einer Moderation zu aktualisieren. Vergiss einen Grund zu setzen? Hast du einen Tipp? Hier ist deine zweite Chance.
+report: Es erlaubt Ihnen, einen Server den Moderatoren des Servers zu melden, sofern ein Report Channel festgelegt ist.
+textMute: Es erlaubt es Benutzern in einem Kanal (oder in einer Kategorie) zu Text stummschalten (und nicht stummschalten). Text-stummgeschaltete Benutzer können keine Nachrichten in den Sendern, die sie stumm sind, senden.
+unban: Es erlaubt dir, Benutzer zu entbannen, die auf dem Server gebannt sind.
+updateRoles: Es erlaubt Ihnen, die Rollen von Servermitgliedern zu aktualisieren.
+voiceMute: Sie können stumm (und unstumm) Benutzer in einem Kanal ansprechen. Stummgeschaltete Benutzer können nicht in den Sprachkanälen sprechen, die sie stumm gehalten haben.
+warn: Es erlaubt Ihnen, die Mitglieder des Servers zu warnen, sowie ihre Verstöße zu beseitigen.
+music: Es schaltet die Musikunterstützung von Bastion auf dem angegebenen Server ein. Einmal aktiviert, kannst du alle Musikbefehle auf dem Server verwenden. Sie können auch die Liste der Server sehen, auf denen Musik aktiviert ist.
+musicChannel: Es erlaubt dir, die Musikkanäle von Bastion zu setzen (und zu entfernen).
+musicMaster: Es erlaubt dir, die Musik Master-Rolle von Bastion zu setzen (und zu entfernen).
+nowPlaying: Es zeigt Ihnen den Musiktitel, der gerade auf dem Server abgespielt wird.
+pause: Damit können Sie den Musiktitel, der gerade auf dem Server abgespielt wird, pausieren.
+play: Es erlaubt Ihnen, eine Musik auf dem Server abzuspielen, von der gegebenen Abfrage oder von einer beliebigen unterstützten Quelle.
+queue: Es erlaubt Ihnen, die aktuelle Musik-Warteschlange des Servers zu sehen. Es erlaubt dir auch, die Musik-Warteschlange zu löschen oder zu mischen sowie einen Song aus der Warteschlange zu entfernen, oder setzen (und entfernen) Sie die Queue in Schleife.
+resume: Es erlaubt Ihnen, den Musiktitel, der auf dem Server pausiert wurde, wieder aufzunehmen.
+skip: Es erlaubt dir, den Musiktitel, der gerade auf dem Server abgespielt wird, zu überspringen.
+stop: Es erlaubt Ihnen, die aktuelle Wiedergabe auf dem Server zu stoppen.
+volume: Sie können die Lautstärke des Musikstücks einstellen, der derzeit auf dem Server abgespielt wird.
+apexLegends: Es erlaubt dir, die Statistiken eines jeden Apex Legends Spielers auf jeder unterstützten Plattform zu sehen.
+counterStrikeGlobalOffensive: "Es erlaubt dir, die Statistiken von jedem Counter-Strike: Global Offensive Spieler auf jeder unterstützten Plattform zu sehen."
+destiny2: Es erlaubt dir, die Statistiken eines jeden Destiny 2 Spielers auf jeder unterstützten Plattform zu sehen.
+fortnite: Es erlaubt dir, die Statistiken eines jeden Fortnite-Spielers auf jeder unterstützten Plattform zu sehen.
+overwatch: Es erlaubt dir, die Statistiken eines jeden Overwatch Players auf jeder unterstützten Plattform zu sehen.
+pubg: Es erlaubt dir, die Statistiken eines Spielers auf jeder unterstützten Plattform zu sehen. Außerdem können Sie die Statistiken in separaten Spielmodi sehen.
+rainbow6: Es erlaubt dir, die Statistiken eines jeden Rainbow 6 Spielers auf jeder unterstützten Plattform zu sehen.
+rocketLeague: Es erlaubt dir, die Statistiken eines jeden Raketenliga-Spielers auf jeder unterstützten Plattform zu sehen.
+coins: Es erlaubt Ihnen, Ihr Bastion Konto zu sehen.
+daily: Es erlaubt Ihnen, Bastion Coins zu beanspruchen, die jedes Mitglied als Belohnung für seine Mitgliedschaft auf dem Server erhält. Du kannst deine Belohnungen einmal alle 24 Stunden beanspruchen.
+karma: Es erlaubt Ihnen, jemandem die süßen kleinen Internet-Points, nennen wir Karma, wenn Sie denken, dass sie es wert sind. Sie können bis zu 3 Karmas alle 6 Stunden aufgeben, so verbringen Sie es klug.
+leaderboard: Es erlaubt dir, die Rangliste deines Servers zu sehen. Du bist basierend auf deinem Level, deiner Erfahrung, deinem Karma und deiner Bastion Coins; in dieser exakten Reihenfolge.
+profile: Es erlaubt Ihnen, Ihr (oder eines der Server-Mitglieder) Bastion Profil zu sehen.
+rank: Es erlaubt Ihnen, Ihren (oder eines der Servermitglieder) Rang, Level, Erfahrung und Karma zu sehen.
+referral: Es erlaubt Ihnen, Ihre Empfehlungseinladung zu sehen, mit der Sie Leute auf den Server einladen und Ihre Empfehlungspunkte erhöhen können. Es kann auch verwendet werden, um die von den Servermanagern eingestellten Empfehlungsbelohnungen zu beanspruchen.
+anime: Es erlaubt Ihnen, nach Informationen über die angegebene Anime zu suchen.
+apod: Sie können den Kosmos entdecken! Jeden Tag wird ein anderes Bild oder Foto unseres faszinierenden Universums vorgestellt, zusammen mit einer kurzen Erklärung, die von einem professionellen Astronomen geschrieben wurde.
+covid19: Es erlaubt Ihnen, die neuesten globalen und regionalen Statistiken auf COVID-19 zu sehen.
+cryptocurrency: Es erlaubt Ihnen, einige Informationen über die angegebene Kryptowährung zu sehen.
+game: Es erlaubt dir, nach Informationen über das angegebene Spiel zu suchen.
+manga: Es erlaubt Ihnen, nach Informationen über die angegebene Mango zu suchen.
+movie: Sie können nach Informationen über den angegebenen Film suchen.
+pokemon: Es erlaubt Ihnen, nach Informationen auf dem angegebenen Poke<unk> mon zu suchen.
+tvShow: Es erlaubt Ihnen, nach Informationen auf der angegebenen TV Show zu suchen.
+urbanDictionary: Es erlaubt Ihnen, im Urban Wörterbuch nach Definitionen des angegebenen Wortes zu suchen.
+weather: Hier können Sie die aktuelle Wetterstärke des angegebenen Standortes sehen.
+wikipedia: Sie können die Wikipedia nach dem angegebenen Titel durchsuchen.
+calculate: Es erlaubt Ihnen, mathematische Ausdrücke zu bewerten und deren Ergebnis zu sehen.
+choose: Es erlaubt es dir, Bastion zu bitten, eine Option aus der angegebenen Reihe von Optionen auszuwählen. Lassen Sie Bastion eine Entscheidung für dich treffen.
+cite: Es erlaubt Ihnen, eine Nachricht von jedem Kanal auf dem Server zu zitieren.
+color: Es erlaubt Ihnen, die angegebene Farbe in einem Format in viele Differformate zu konvertieren.
+datetime: Sie können die aktuelle Zeit in verschiedenen Zeitzonen sehen. Es erlaubt Ihnen auch, die angegebene Zeit in mehrere verschiedene Zeitzonen umzuwandeln.
+definitions: Es erlaubt Ihnen, Definitionen nach dem angegebenen Wort zu suchen.
+echo: Es erlaubt dir, eine Nachricht über Bastion an jeden Kanal des Servers zu senden und unterstützt auch einbettete Objekte.
+followRedirects: Es folgt allen Umleitungen in der angegebenen URL und erlaubt Ihnen, die endgültige URL zu sehen.
+invite: Es ermöglicht Ihnen, eine Soforteinladung für den Server zu generieren. Optional kann die Einladung eine temporäre Einladung sein, die die Mitglieder vom Server kickt, wenn sie innerhalb von 24 Stunden keine Rolle zugewiesen haben. Es zeigt Ihnen auch den Einladungslink an, um Bastion zu Ihrem Server einzuladen.
+lmstfy: Es erlaubt Ihnen einen LMGTFY-Link für die angegebene Suchanfrage zu senden. Benutze es um Menschen zu lehren, wie man eine Internet-Suche durchführt und Antworten auf ihre Fragen erhält.
+poll: Es erlaubt Ihnen, Umfragen für mindestens eine Stunde und höchstens einen Monat im Server auszuführen. Sie können maximal 13 Wahloptionen für die Umfrage festlegen. Sie können auch den Status einer laufenden Umfrage sehen.
+translate: Es erlaubt Ihnen, den angegebenen Text von einer Sprache in eine andere zu übersetzen.
