@@ -6,7 +6,7 @@ commandModule: It allows you to temporarily enable or disable a command module
   until the next restart. It also allows you to check whether the command is
   currently enabled.
 eval: It allows you to execute JavaScript code inside Bastion's context.
-exec: It allows you to execute commands in the termial where Bastion is running.
+exec: It allows you to execute commands in the terminal where Bastion is running.
 relayDirectMessages: It allows you to toggle Bastion's Direct Message Relay. If
   enabled, Bastion will relay all direct messages to the bot owners.
 reloadSettings: It allows you to reload Bastion's settings without needing to restart Bastion.
@@ -141,6 +141,10 @@ giveaway: It allows you to run giveaway events in the server for at least an
 grant: It allows you to grant experience or coins to the members of the server.
 iam: It allows you add (and remove) yourself to (and from) the Self Roles set in
   the server.
+inviteRoles: It allows you to associate server invites with roles. Anyone who
+  joins the server with an invite associated with a role will be assigned the
+  specified role automatically. It also allows you to see the list of roles
+  associated with an invite.
 leave: It allows you to ask Bastion to leave the server and clear all data it
   has on server and its members.
 levelUpRoles: It allows you to add roles to a level. When members reach that
@@ -165,6 +169,9 @@ referrals: It allows you set the Referrals Channel so that members can invite
 roleStore: It allows you to set up a Role Store in the server. Server managers
   can sell roles in the server and members can buy them with Bastion Coins.
 roles: It allows you create, delete and update roles in the server.
+safeList: It allows you to add members or roles to a safe list that prevents
+  their messages from being filtered by invite filter or link filter in the
+  server.
 suggest: It allows you send a suggestion to the suggestion staff, provided a
   Suggestion Channel has been set in the server.
 ban: It allows you to ban (or soft ban) users from the server, and optionally
@@ -203,7 +210,7 @@ musicMaster: It allows you to set (and unset) Bastion's Music Master role.
 nowPlaying: It shows you the music track that is currently being played in the server.
 pause: It allows you to pause the music track that is currently being played in
   the server.
-play: It allows you to play a music in the server, from the given queury or from
+play: It allows you to play a music in the server, from the given query or from
   any supported source.
 queue: It allows you to see the current music queue of the server. It also
   allows you to clear, or shuffle the music queue as well as remove a song from

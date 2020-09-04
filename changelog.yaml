@@ -1,14 +1,17 @@
-date: August 22, 2020
+date: September 5, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
-  New Stuff:
-    - title: Community Servers
-      description: Your server is now listed in [Bastion's Community Servers](https://bastion.traction.one/servers). Wanna boost your rankingg there? Read below.
-    - title: Server Boosting
-      description: You can now boost the ranking of your favorite servers everyday, using the `boost` command, in community [server listing](https://bastion.traction.one/servers).
-  Some Improvements:
-    - description: You can now see the list of servers where music is enabled using the `--servers` or `-l` option of the `music` command.
-    - description: Infraction events will now be logged in the moderation logs too.
-    - description: You can now use `echo` to send messages to any channel in the server.
-    - description: Greetings, farewell, and trigger responses will now directly support bastion embed objects rather than discord embed objects. [Build your own Bastion Embed Object](https://bastion.traction.one/tools/embedbuilder)!
-    - description: Some under-the-hood improvements, to make Bastion better than ever.
+  NEW:
+    - title: Dashboard
+      description: An all new Dashboard is now live for all the users of Bastion. You can check it out [here](https://bastion.traction.one/dashboard).
+    - title: Safe List
+      description: You can now add roles & channels to a safe list for link filter & invite filter to ignore messages sent by members in those roles or in those channels from the specified filters.
+    - title: Invite Roles
+      description: You can now associate roles with an invite and anyone who joins the server will be assigned the respective roles associted with the invite used. Currently only available for self hosted instances of Bastion.
+    - title: More Languages
+      description: You can now set the language in your server to Arabic, Chinese Simplified, Czech, Danish, Dutch, Finnish, French, German, Italian, Japanese, Norwegian, Polish, Portuguese, Portuguese (Brazilian), Romanian, Russian, Spanish, Swedish, Turkish, and Ukrainian. Join us if you want to bring Bastion to your language!
+  CHANGES:
+    - description: Some under-the-hood improvements to make Bastion even better.
+  SQUASHED THESE BUGS:
+    - description: Killed some bugs in the `greetings` and `farewells` commands where Bastion was expecting for embed objects unnecessarily.
+    - description: Some under-the-hood fixes to make Bastion better than ever.

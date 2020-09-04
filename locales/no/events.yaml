@@ -1,0 +1,69 @@
+---
+#Channel Events
+categoryChannelCreate: Kategori Kanal opprettet
+categoryChannelDelete: Kategori kanal slettet
+categoryChannelUpdate: Kategorinanalen er oppdatert
+newsChannelCreate: Nyhetskanalen opprettet
+newsChannelDelete: Nyhetskanalen slettet
+newsChannelUpdate: Nyhetskanalen er oppdatert
+storeChannelCreate: Butikk-kanal opprettet
+storeChannelDelete: Butikkkanal slettet
+storeChannelUpdate: Butikkkanal oppdatert
+textChannelCreate: Tekst kanal opprettet
+textChannelDelete: Tekst kanal slettet
+textChannelUpdate: Tekst kanal oppdatert
+voiceChannelCreate: Talekanal opprettet
+voiceChannelDelete: Talekanal slettet
+voiceChannelUpdate: Talekanal oppdatert
+#Emoji Events
+emojiCreate: Emoji opprettet
+emojiDelete: Emoji slettet
+emojiUpdate: Emoji oppdatert
+#Guild Member Events
+guildMemberAdd: Medlem registrert
+guildMemberRemove: Medlem venstre
+#Infraction Events
+infractionAdd: Ny brøkdel
+infractionClear: Infraksjon fjernet
+#Interrupt Events
+inviteFilter: Invitasjon filtrert
+linkFilter: Lenke filtrert
+mentionSpam: Nevn søppelpost
+messageFilter: Melding filtrert
+#Invite Events
+inviteCreate: Invitasjon opprettet
+inviteDelete: Invitasjon slettet
+#Member Nickname Events
+nickUpdate: Nickname Updated
+#Message Events
+messageClear: Meldinger tømt
+messageDelete: Melding slettet
+messageUpdate: Melding oppdatert
+#Moderation Events
+memberKick: Medlem kastet ut
+memberSoftBan: Medlem det blir brukt
+guildBanAdd: Medlem Utestengt
+guildBanRemove: Medlem Unbanned
+guildReportAdd: Rapportert medlem
+#Mute Events
+voiceMuteAdd: Medlem Stemme dempede
+voiceMuteRemove: Medlemmet stemme ikke dempet
+memberVoiceDeafen: Medlem døde
+memberVoiceUndeafen: Medlem ududekket
+textMuteAdd: Medlem dempet
+textMuteRemove: Medlem tekst ikke dempet
+#Role Assignment Events
+memberRoleClear: Medlem Roller Renset
+memberRoleUpdate: Medlemsroller oppdatert
+#Role Events
+roleCreate: Rolle opprettet
+roleDelete: Rollen slettet
+roleUpdate: Rolle oppdatert
+#Server Events
+guildCreate: Serveren er blitt med
+guildDelete: Server venstre
+guildUpdate: Serveren er oppdatert
+#Warning Events
+guildWarnAdd: Medlem Advart
+guildWarnClear: Guild Advarsler Tømt
+guildWarnRemove: Medlem Advarsler Fjernet

@@ -1,0 +1,69 @@
+---
+#Channel Events
+categoryChannelCreate: Canal de categoría creado
+categoryChannelDelete: Canal de texto eliminado
+categoryChannelUpdate: La categoría ha actualizado
+newsChannelCreate: Canal de noticias creado
+newsChannelDelete: Canal de noticias eliminado
+newsChannelUpdate: Canal de noticias actualizado
+storeChannelCreate: Canal de la tienda creado
+storeChannelDelete: Canal de tienda eliminado
+storeChannelUpdate: Canal de tienda actualizado
+textChannelCreate: Canal de texto creado
+textChannelDelete: Canal de texto borrado
+textChannelUpdate: Canal de texto actualizado
+voiceChannelCreate: Canal de voz creado
+voiceChannelDelete: Eliminado el canal de voz
+voiceChannelUpdate: Actualizado el canal de voz
+#Emoji Events
+emojiCreate: Emoji creado
+emojiDelete: Emoji eliminado
+emojiUpdate: Emoji actualizado
+#Guild Member Events
+guildMemberAdd: Miembro unido
+guildMemberRemove: Miembro restante
+#Infraction Events
+infractionAdd: Nueva Infracción
+infractionClear: Infracción Limpiada
+#Interrupt Events
+inviteFilter: Invitación Filtrada
+linkFilter: Enlace filtrado
+mentionSpam: Mencionar Spam
+messageFilter: Mensaje filtrado
+#Invite Events
+inviteCreate: Invitación creada
+inviteDelete: Invitación eliminada
+#Member Nickname Events
+nickUpdate: Nickname Updated
+#Message Events
+messageClear: Mensajes Limpiados
+messageDelete: Mensaje eliminado
+messageUpdate: Mensaje actualizado
+#Moderation Events
+memberKick: Miembro expulsado
+memberSoftBan: Miembro Soft baneado
+guildBanAdd: Miembro prohibido
+guildBanRemove: Miembro desbaneado
+guildReportAdd: Miembro reportado
+#Mute Events
+voiceMuteAdd: Voz de miembro silenciada
+voiceMuteRemove: Voz de miembro dessilenciada
+memberVoiceDeafen: Miembro ensordecido
+memberVoiceUndeafen: Miembro sin ensordecer
+textMuteAdd: Texto de miembro silenciado
+textMuteRemove: Texto de miembro dessilenciado
+#Role Assignment Events
+memberRoleClear: Rol de miembros limpiado
+memberRoleUpdate: Rol de miembros actualizado
+#Role Events
+roleCreate: Rol creado
+roleDelete: Rol borrado
+roleUpdate: Rol actualizado
+#Server Events
+guildCreate: Servidor unido
+guildDelete: Servidor izquierdo
+guildUpdate: Servidor actualizado
+#Warning Events
+guildWarnAdd: Miembro avisado
+guildWarnClear: Advertencias de gremio limpiadas
+guildWarnRemove: Advertencias de miembro eliminadas

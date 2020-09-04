@@ -1,0 +1,69 @@
+---
+#Channel Events
+categoryChannelCreate: Kategori Kanalı Oluşturuldu
+categoryChannelDelete: Kategori Kanalı Kaldırıldı
+categoryChannelUpdate: Kategori Kanalı Güncellendi
+newsChannelCreate: Haber Kanalı Oluşturuldu
+newsChannelDelete: Haber Kanalı Silindi
+newsChannelUpdate: Haber Kanalı Güncellendi
+storeChannelCreate: Mağaza Kanalı Oluşturuldu
+storeChannelDelete: Mağaza Kanalı Silindi
+storeChannelUpdate: Mağaza Kanalı Güncellendi
+textChannelCreate: Metin Kanalı Oluşturuldu
+textChannelDelete: Metin Kanalı Silindi
+textChannelUpdate: Metin Kanalı Güncellendi
+voiceChannelCreate: Ses Kanalı Oluşturuldu
+voiceChannelDelete: Ses Kanalı Silindi
+voiceChannelUpdate: Ses Kanalı Oluşturuldu
+#Emoji Events
+emojiCreate: Emoji Oluşturuldu
+emojiDelete: Emoji Silindi
+emojiUpdate: Emoji Güncellendi
+#Guild Member Events
+guildMemberAdd: Üye Katıldı
+guildMemberRemove: Üye Ayrıldı
+#Infraction Events
+infractionAdd: Yeni İhlal
+infractionClear: İhlal Temizlendi
+#Interrupt Events
+inviteFilter: Davet Filtrelendi
+linkFilter: Link Filtrelendi
+mentionSpam: Bahset Spam
+messageFilter: Mesaj Filtrelendi
+#Invite Events
+inviteCreate: Davet Oluşturuldu
+inviteDelete: Davet Silindi
+#Member Nickname Events
+nickUpdate: Kullanıcı Adı Güncellendi
+#Message Events
+messageClear: Mesaj Silindi
+messageDelete: Mesaj Silindi
+messageUpdate: Mesaj Güncellendi
+#Moderation Events
+memberKick: Üye Atıldı
+memberSoftBan: Üye Geçici Yasaklandı
+guildBanAdd: Üye Yasaklandı
+guildBanRemove: Üyenin yasağı kaldırıldı
+guildReportAdd: Üye Rapor Edildi
+#Mute Events
+voiceMuteAdd: Üye Susturuldu
+voiceMuteRemove: Üye Susturması Kaldırıldı
+memberVoiceDeafen: Üye Sağırlaştırıldı
+memberVoiceUndeafen: Üye Sağırlaştırılması Kaldırıldı
+textMuteAdd: Üye Yazı Engeli
+textMuteRemove: Üye Yazı Engeli Kaldırıldı
+#Role Assignment Events
+memberRoleClear: Üye Rolleri Temizlendi
+memberRoleUpdate: Üye Rolleri Güncellendi
+#Role Events
+roleCreate: Rol oluşturuldu
+roleDelete: Rol Silindi
+roleUpdate: Rol güncellendi
+#Server Events
+guildCreate: Sunucuya Katıldı
+guildDelete: Sunucudan Ayrıldı
+guildUpdate: Server Güncellendi
+#Warning Events
+guildWarnAdd: Üye Uyarıldı
+guildWarnClear: Sunucu Uyarıları Temizlendi
+guildWarnRemove: Üye Uyarıları Kaldırıldı
