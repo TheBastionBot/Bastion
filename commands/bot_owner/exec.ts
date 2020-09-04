@@ -16,7 +16,7 @@ const exec = promisify(exe);
 export = class Exec extends Command {
     constructor() {
         super("exec", {
-            description: "It allows you to execute commands in the termial where Bastion is running.",
+            description: "It allows you to execute commands in the terminal where Bastion is running.",
             triggers: [],
             arguments: {
                 alias: {

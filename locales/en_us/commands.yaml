@@ -6,7 +6,7 @@ commandModule: It allows you to temporarily enable or disable a command module
   until the next restart. It also allows you to check whether the command is
   currently enabled.
 eval: It allows you to execute JavaScript code inside Bastion's context.
-exec: It allows you to execute commands in the termial where Bastion is running.
+exec: It allows you to execute commands in the terminal where Bastion is running.
 relayDirectMessages: It allows you to toggle Bastion's Direct Message Relay. If
   enabled, Bastion will relay all direct messages to the bot owners.
 reloadSettings: It allows you to reload Bastion's settings without needing to restart Bastion.
@@ -210,7 +210,7 @@ musicMaster: It allows you to set (and unset) Bastion's Music Master role.
 nowPlaying: It shows you the music track that is currently being played in the server.
 pause: It allows you to pause the music track that is currently being played in
   the server.
-play: It allows you to play a music in the server, from the given queury or from
+play: It allows you to play a music in the server, from the given query or from
   any supported source.
 queue: It allows you to see the current music queue of the server. It also
   allows you to clear, or shuffle the music queue as well as remove a song from
