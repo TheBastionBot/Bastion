@@ -10,7 +10,7 @@ export interface MessageEmbedData extends Record<string, unknown> {
     author?: MessageEmbedAuthor;
     color?: ColorResolvable;
     description?: string;
-    fields?: EmbedFieldData[];
+    fields?: readonly EmbedFieldData[];
     footer?: MessageEmbedFooter;
     image?: string;
     thumbnail?: string;

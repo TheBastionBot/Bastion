@@ -4,7 +4,7 @@
  */
 
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
-import { Message } from "discord.js";
+import { Message, NewsChannel, TextChannel } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
 
@@ -73,7 +73,7 @@ export = class Clear extends Command {
         // Delete filtered messages
         const reason = argv._.join(" ") || "-";
 
-        const clearedMessages = await message.channel.bulkDelete(messages, true);
+        const clearedMessages = await (message.channel as TextChannel | NewsChannel).bulkDelete(messages, true);
 
         if (!clearedMessages.size) {
             return await message.channel.send({
