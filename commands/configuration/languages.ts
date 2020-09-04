@@ -40,15 +40,15 @@ export = class Languages extends Command {
         const locales = this.client.locale.getLocales().map(l => l.toUpperCase());
 
         if (argv.set) {
-            const language: string = argv.set.toLowerCase();
+            const language: string = argv.set.toUpperCase();
 
             // check whether the language is available
             if (!locales.includes(language)) {
-                throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "languageUnavailable"));
+                throw new Error(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "languageUnavailable", language));
             }
 
             // set guild language
-            guild.document.language = language;
+            guild.document.language = language.toLocaleLowerCase();
 
             // save document
             await guild.document.save();
