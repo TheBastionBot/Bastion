@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "@bastion/tesseract";
+import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
@@ -54,14 +54,13 @@ export = class Greetings extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                ...(guild.document.greeting.message ? embeds.generateEmbed(guild.document.greeting.message) : {}),
+                color: Constants.COLORS.IRIS,
+                description: "```json\n" + JSON.stringify(guild.document.greeting.message ? embeds.generateEmbed(guild.document.greeting.message) : {}) + "```",
                 footer: {
                     text: "Greeting Preview • " + (message.guild.channels.cache.has(guild.document.greeting.channelId) ? message.guild.channels.cache.get(guild.document.greeting.channelId).name : "Disabled")
                         + (typeof guild.document.greeting.timeout === "number" ? " • " + (guild.document.greeting.timeout + " minutes") : ""),
                 },
             },
-        }).catch(() => {
-            // this error can be ignored
         });
     }
 }

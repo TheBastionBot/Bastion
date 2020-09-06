@@ -3,7 +3,7 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
-import { Command, CommandArguments } from "@bastion/tesseract";
+import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import BastionGuild = require("../../structures/Guild");
@@ -54,14 +54,13 @@ export = class Farewells extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                ...(guild.document.farewell.message ? embeds.generateEmbed(guild.document.farewell.message) : {}),
+                color: Constants.COLORS.IRIS,
+                description: "```json\n" + JSON.stringify(guild.document.farewell.message ? embeds.generateEmbed(guild.document.farewell.message) : {}) + "```",
                 footer: {
                     text: "Farewell Preview • " + (message.guild.channels.cache.has(guild.document.farewell.channelId) ? message.guild.channels.cache.get(guild.document.farewell.channelId).name : "Disabled")
                         + (typeof guild.document.farewell.timeout === "number" ? " • " + (guild.document.farewell.timeout + " minutes") : ""),
                 },
             },
-        }).catch(() => {
-            // this error can be ignored
         });
     }
 }
