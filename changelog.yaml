@@ -1,17 +1,8 @@
-date: September 5, 2020
+date: September 6, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
-  NEW:
-    - title: Dashboard
-      description: An all new Dashboard is now live for all the users of Bastion. You can check it out [here](https://bastion.traction.one/dashboard).
-    - title: Safe List
-      description: You can now add roles & channels to a safe list for link filter & invite filter to ignore messages sent by members in those roles or in those channels from the specified filters.
-    - title: Invite Roles
-      description: You can now associate roles with an invite and anyone who joins the server will be assigned the respective roles associted with the invite used. Currently only available for self hosted instances of Bastion.
-    - title: More Languages
-      description: You can now set the language in your server to Arabic, Chinese Simplified, Czech, Danish, Dutch, Finnish, French, German, Italian, Japanese, Norwegian, Polish, Portuguese, Portuguese (Brazilian), Romanian, Russian, Spanish, Swedish, Turkish, and Ukrainian. Join us if you want to bring Bastion to your language!
   CHANGES:
-    - description: Some under-the-hood improvements to make Bastion even better.
+    - description: `greetings` & `farewells` previews would now show up as embed objects instead of it being rendered.
   SQUASHED THESE BUGS:
-    - description: Killed some bugs in the `greetings` and `farewells` commands where Bastion was expecting for embed objects unnecessarily.
+    - description: Fixed an issue where the last streamer was not being removed.
     - description: Some under-the-hood fixes to make Bastion better than ever.
