@@ -66,7 +66,7 @@ export = class InviteFilterCommand extends Command {
 
 
             // check for premium membership limits
-            if (guild.document.streamers.twitch.users.length > constants.LIMITS.STREAMERS_PER_SERVICE && constants.isPublicBastion(this.client.user)) {
+            if (guild.document.streamers.twitch && guild.document.streamers.twitch.users && guild.document.streamers.twitch.users.length > constants.LIMITS.STREAMERS_PER_SERVICE && constants.isPublicBastion(this.client.user)) {
                 // fetch the premium tier
                 const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
                     // this error can be ignored
