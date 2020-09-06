@@ -162,5 +162,5 @@ roleInviteSet: "%var% has set the %var% role as an Invite Role. I'll assign the 
 roleInviteRemove: "%var% has removed the %var% role as an Invite Role."
 inviteFilterSafeListAdd: "%var% has added %var% to the server's Invite Filter Safe List."
 inviteFilterSafeListRemove: "%var% has removed %var% from the server's Invite Filter Safe List."
-linkFilterSafeListAdd: "%var% has added %var% from the server's Link Filter Safe List."
+linkFilterSafeListAdd: "%var% has added %var% to the server's Link Filter Safe List."
 linkFilterSafeListRemove: "%var% has removed %var% from the server's Link Filter Safe List."
