@@ -3,6 +3,7 @@ image: https://i.imgur.com/L8CJkNz.gif
 changes:
   CHANGES:
     - description: `greetings` & `farewells` previews would now show up as embed objects instead of it being rendered.
+    - description: Changed an implementation where using `linkFilter` or `inviteFilter` would reset their respective Safe List that was set using the `safeList` command.
   SQUASHED THESE BUGS:
     - description: Fixed an issue where the last streamer was not being removed.
     - description: Some under-the-hood fixes to make Bastion better than ever.
