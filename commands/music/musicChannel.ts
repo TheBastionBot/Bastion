@@ -24,7 +24,7 @@ export = class MusicChannel extends Command {
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],
-            userPermissions: [],
+            userPermissions: [ "MANAGE_GUILD" ],
             syntax: [
                 "musicChannel --voice-channel VOICE_CHANNEL_ID",
                 "musicChannel",

@@ -27,7 +27,7 @@ export = class MusicMaster extends Command {
             cooldown: 0,
             ratelimit: 1,
             clientPermissions: [],
-            userPermissions: [],
+            userPermissions: [ "MANAGE_GUILD" ],
             syntax: [
                 "musicMaster --role ROLE_ID",
                 "musicMaster",
