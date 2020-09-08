@@ -46,7 +46,7 @@ export = class LinkFilterCommand extends Command {
             linkFilter: {
                 enabled: argv.disable ? undefined : argv.enable || guild.document.filters && guild.document.filters.linkFilter && guild.document.filters.linkFilter.enabled ? true : undefined,
                 infraction: argv.infraction === false ? undefined : argv.infraction || guild.document.filters && guild.document.filters.linkFilter && guild.document.filters.linkFilter.infraction ? true : undefined,
-                whitelist: (guild.document.filters && guild.document.filters.linkFilter && guild.document.filters.linkFilter.whitelist) ?? undefined,
+                whitelist: guild.document.filters && guild.document.filters.linkFilter && guild.document.filters.linkFilter.whitelist ? guild.document.filters.linkFilter.whitelist : undefined,
             },
         };
 

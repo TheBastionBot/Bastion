@@ -46,7 +46,7 @@ export = class InviteFilterCommand extends Command {
             inviteFilter: {
                 enabled: argv.disable ? undefined : argv.enable || guild.document.filters && guild.document.filters.inviteFilter && guild.document.filters.inviteFilter.enabled ? true : undefined,
                 infraction: argv.infraction === false ? undefined : argv.infraction || guild.document.filters && guild.document.filters.inviteFilter && guild.document.filters.inviteFilter.infraction ? true : undefined,
-                whitelist: (guild.document.filters && guild.document.filters.inviteFilter && guild.document.filters.inviteFilter.whitelist) ?? undefined,
+                whitelist: guild.document.filters && guild.document.filters.inviteFilter && guild.document.filters.inviteFilter.whitelist ? guild.document.filters.inviteFilter.whitelist : undefined,
             },
         };
 
