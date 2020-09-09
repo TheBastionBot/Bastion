@@ -12,7 +12,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class VerificationCommand extends Command {
     constructor() {
         super("verification", {
-            description: "It allows you to enable Captcha Verification in the server. When enabled, users joining the server need to solve a captcha to prove that they are human. When they successfully solve the captcha, Bastion will give them the specified Verified Role.",
+            description: "It allows you to enable Captcha Verification in the server. When enabled, users joining the server need to solve a captcha, in your server's [dashboard](%bastion.dashboard%), to prove that they are human. When they successfully solve the captcha, Bastion will give them the specified Verified Role.",
             triggers: [],
             arguments: {
                 alias: {
