@@ -1,6 +1,9 @@
-date: September 6, 2020
+date: September 9, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
+  NEW:
+    - title: Captcha Verification
+      description: You can now opt to enable Captcha Verification in your server. When enabled, users joining the server would need to solve a captcha in the server's [dashboard](https://bastion.traction.one/dashboard) to verify themselves, and then they'll be assigned the role that was set using the new `verification` command.
   CHANGES:
     - description: `greetings` & `farewells` previews would now show up as embed objects instead of it being rendered.
     - description: Changed an implementation where using `linkFilter` or `inviteFilter` would reset their respective Safe List that was set using the `safeList` command.
