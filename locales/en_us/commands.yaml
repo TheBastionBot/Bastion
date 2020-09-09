@@ -87,6 +87,11 @@ triggers: It allows you to add (and remove) Triggers in the server. When a
   trigger is set, and Bastion sees a message from a human containing the pattern
   specified in the trigger, it'll respond with either the specified response
   message or reaction, or both.
+verification: It allows you to enable Captcha Verification in the server. When
+  enabled, users joining the server need to solve a captcha, in your server's
+  [dashboard](%bastion.dashboard%), to prove that they are human. When they
+  successfully solve the captcha, Bastion will give them the specified Verified
+  Role.
 voiceSessions: It allows you manage Voice Sessions (or Temporary Voice Channels,
   if you prefer), in the server.
 votingChannels: It allows you to set (and unset) channels as Voting Channels. If
