@@ -15,6 +15,7 @@ bastion.server.id: '267022940967665664'
 bastion.server.name: Bastion HQ
 bastion.server.invite: https://discord.gg/fzx8fkt
 bastion.website: https://bastion.traction.one
+bastion.dashboard: https://bastion.traction.one/dashboard
 
 currency.symbol: ₿
 currency.abbreviation: BC
