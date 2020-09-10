@@ -1,7 +1,6 @@
 ---
 notFound: "Nie znaleziono"
 unauthorized: "Nieautoryzowany"
-musicDisabled: "Muzyka nie jest włączona na tym serwerze. Zapytać właściciela bota, aby go włączył/a przed użyciem muzycznych komend."
 musicDownloadError: "Nie mogłem uzyskać żądanej muzyki. Albo nie jest to prawidłowe zapytanie muzyki, albo żądany zasób jest dla mnie niedostępny."
 noDeletableMessages: "Nie znaleziono wiadomości, dla określonego filtra, które mogły zostać usunięte."
 noMusicChannels: "Nie ustawiono domyślnych kanałów muzycznych. Zatem tylko właściciel bota lub użytkownicy w roli Music Master mogą używać tej komendy gdy nie jestem jeszcze na kanale głosowym."

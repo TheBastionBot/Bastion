@@ -1,7 +1,6 @@
 ---
 notFound: "No Encontrado"
 unauthorized: "No autorizado"
-musicDisabled: "La música no está habilitada en este servidor. Pide al propietario del bot que la habilite antes de utilizar comandos de música."
 musicDownloadError: "No pude obtener la música solicitada. O esta no es una consulta válida para la música, o el recurso solicitado no está disponible para mí."
 noDeletableMessages: "No se han encontrado mensajes, para el filtro especificado, que se ha podido eliminar."
 noMusicChannels: "No se han establecido canales de música por defecto. Por lo tanto, sólo el propietario del bot o los usuarios del rol de Music Master pueden usar este comando cuando no estoy ya en un canal de voz."

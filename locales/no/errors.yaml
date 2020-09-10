@@ -1,7 +1,6 @@
 ---
 notFound: "Ikke funnet"
 unauthorized: "Uautorisert"
-musicDisabled: "Musikk er ikke aktivert i denne serveren. Be bot eieren om å aktivere den før du kan bruke musikkkommandoer."
 musicDownloadError: "Jeg kunne ikke motta den forespurte musikken. Enten er dette ikke et gyldig søk etter musikk, eller så er ikke den ressursen jeg ønsker utilgjengelig."
 noDeletableMessages: "Ingen meldinger ble funnet, for det angitte filteret, som kunne slettes."
 noMusicChannels: "Ingen standard musikkkanaler har blitt satt. Så er det bare bot eieren eller brukere i Musikkmasterrollen som kan bruke denne kommandoen når jeg ikke allerede er i en talekanal."

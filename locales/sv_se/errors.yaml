@@ -1,7 +1,6 @@
 ---
 notFound: "Hittades inte"
 unauthorized: "Obehörig"
-musicDisabled: "Musik är inte aktiverat på denna server. Be bottägaren att aktivera den innan du kan använda musikkommandon."
 musicDownloadError: "Jag kunde inte få den begärda musiken. Antingen är detta inte en giltig fråga för musik, eller så är den begärda resursen inte tillgänglig för mig."
 noDeletableMessages: "Inga meddelanden hittades, för det angivna filtret, som kunde tas bort."
 noMusicChannels: "Inga standardkanaler för musik har angetts. Så, bara bot ägare eller användare i Music Master roll kan använda detta kommando när jag inte redan i en röstkanal."
