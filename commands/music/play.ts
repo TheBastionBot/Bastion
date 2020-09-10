@@ -11,6 +11,7 @@ import { v4 as uuid } from "uuid";
 
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
+import * as omnic from "../../utils/omnic";
 
 import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
@@ -285,6 +286,16 @@ export = class Play extends Command {
             }).catch(() => {
                 // This error can be ignored.
             });
+        }
+
+        // check for premium membership
+        if (constants.isPublicBastion(this.client.user)) {
+            // fetch the premium tier
+            const tier = await omnic.fetchPremiumTier(message.guild).catch(() => {
+                // this error can be ignored
+            });
+
+            if (!tier) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.PREMIUM_MEMBERSHIP_REQUIRED, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "premiumMusic"));
         }
 
         const query = argv._.join(" ");
