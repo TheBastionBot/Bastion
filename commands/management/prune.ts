@@ -12,13 +12,14 @@ import BastionGuild = require("../../structures/Guild");
 export = class PruneCommand extends Command {
     constructor() {
         super("prune", {
-            description: "It allows you to prune members without any roles, from the server, based on how long they have been inactive.",
+            description: "It allows you to prune members without any roles, from the server, based on how long they have been inactive. It also allows you to include the members from the specified roles.",
             triggers: [],
             arguments: {
                 alias: {
                     days: "d",
                 },
-                string: [ "days" ],
+                array: [ "roles" ],
+                string: [ "days", "roles" ],
             },
             scope: "guild",
             owner: false,
@@ -29,6 +30,7 @@ export = class PruneCommand extends Command {
             syntax: [
                 "prune -- REASON",
                 "prune --days NUMBER -- REASON",
+                "prune --roles ROLE... -- REASON",
             ],
         });
     }
@@ -46,6 +48,7 @@ export = class PruneCommand extends Command {
         await message.guild.members.prune({
             days: days,
             reason: reason,
+            roles: argv.roles,
         });
 
         // acknowledge
