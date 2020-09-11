@@ -69,7 +69,6 @@ leave: Sen avulla voit pyytää Bastion jättää palvelimen ja poistaa kaikki t
 levelUpRoles: Sen avulla voit lisätä rooleja tasolle. Kun jäsenet saavuttavat tuon tason, heille myönnetään nämä roolit.
 lockSession: Sen avulla voit lukita Voice Session -kanavan, johon olet tällä hetkellä, jotta kukaan muu ei voi liittyä ennen kutsumista.
 lockdown: Sen avulla voit lukita kanavan palvelimella käyttäjiltä, joilla ei ole oikeutta hallita viestejä tai kanavaa.
-prune: Sen avulla voit karsia jäseniä ilman rooleja palvelimelta, sen mukaan, kuinka kauan he ovat olleet toimettomia.
 reactionRoles: Sen avulla voit luoda (ja poistaa) Reaction Role Groups. Reaction Role Group on ryhmä reaktioita emojit, joita jäsen voi käyttää Reaction Role Message -viestissä lisätä (tai poistaa) rooleja itselleen. Myös yhden ryhmän reaktioroolit voidaan asettaa toisensa poissulkeviksi. Sen avulla voit myös määrittää emojis rooleja, joita voidaan käyttää reagoimaan Reaction Role Message.
 referralRewards: Sen avulla voit asettaa roolit palkinnot lähetteitä (kutsumalla muita käyttäjiä palvelimelle).
 referrals: Sen avulla voit asettaa Referrals Channel jotta jäsenet voivat kutsua muita palvelimelle ja saada referral palkintoja. Sen avulla voit myös seurata jäsenten kutsuja.

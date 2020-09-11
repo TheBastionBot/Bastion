@@ -69,7 +69,6 @@ leave: Pozwala poprosić Bastion o opuszczenie serwera i wyczyszczenie wszystkic
 levelUpRoles: Pozwala na dodawanie ról do poziomu. Gdy członkowie osiągną ten poziom, otrzymają te role.
 lockSession: Pozwala to na zablokowanie kanału sesji głosowej, w którym jesteś obecnie, aby nikt inny nie mógł dołączyć do kanału dopóki nie zostanie zaproszony.
 lockdown: Pozwala zablokować na serwerze kanał od użytkowników, którzy nie mają uprawnień do zarządzania wiadomościami lub kanałem.
-prune: Pozwala na upuszczanie członków bez żadnych ról, z serwera, w oparciu o czas ich nieaktywności.
 reactionRoles: Pozwala na tworzenie (i usuwanie) Grup Roli Reakcji. Grupa Roli Reakcji jest grupą emocji reakcji, które mogą być użyte przez członka w wiadomości roli Reakcji do dodania (lub usunięcia) ról do siebie. Role reakcji w jednej grupie można również ustawić jako wzajemnie wykluczające. Pozwala również przypisać emotikony do roli, które mogą być używane w reakcji na Wiadomość Roli Reakcji.
 referralRewards: Pozwala ustawić role jako nagrody dla rekomendacji (zapraszanie innych użytkowników na serwer).
 referrals: Pozwala ustawić Kanał Referencji, aby członkowie mogli zaprosić innych na serwer i otrzymać nagrody polecające. Pozwala również śledzić zaproszenia członków.

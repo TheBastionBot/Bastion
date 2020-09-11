@@ -69,7 +69,6 @@ leave: Ele permite que você peça ao Bastion para deixar o servidor e limpar to
 levelUpRoles: Isso permite que você adicione cargos a um nível. Quando membros alcançarem esse nível, eles serão atribuídos a essas funções.
 lockSession: Permite que você bloqueie o canal da Sessão de Voz em que você está atualmente para que ninguém possa entrar, a menos que seja convidado.
 lockdown: Isto permite bloquear um canal no servidor de usuários que não têm permissão para gerenciar mensagens ou canais.
-prune: Ele permite que você limpe membros sem quaisquer papéis, do servidor, com base no tempo em que eles estão inativos.
 reactionRoles: Ele permite que você crie (e exclua grupos) grupos de função de reação. Um Grupo de Função Reação é um grupo de reações emojis que podem ser usados por um membro na Mensagem de Função de Reação para adicionar (ou remover) papéis a si mesmo. Cargos por reação num único grupo também podem ser definidos como mutuamente exclusivos. Ele também permite que você atribua emojis a papéis, que podem ser usados em resposta à Mensagem de Função de Reação.
 referralRewards: Isso permite que você defina papéis como recompensas para indicações (convidando outros usuários para o servidor).
 referrals: Ele permite que você configure o Canal de Indicações para que os membros possam convidar outros usuários para o servidor e ganhar recompensas de indicação. E também permite que você acompanhe os convites dos membros.

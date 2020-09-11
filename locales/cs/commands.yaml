@@ -69,7 +69,6 @@ leave: Umožňuje vás požádat Bastiona, aby opustil server a vymazal všechna
 levelUpRoles: Umožňuje přidat role na úroveň. Když členové dosáhnou této úrovně, budou jim tyto role uděleny.
 lockSession: Umožňuje uzamknout kanál hlasové relace, ve kterém se momentálně nacházíte, aby se kdokoliv jiný nemohl připojit, pokud nebude pozván.
 lockdown: Umožňuje uzamknout kanál na serveru od uživatelů, kteří nemají oprávnění ke správě zpráv nebo kanálu.
-prune: Umožňuje vám prořezávat členy bez rolí ze serveru na základě toho, jak dlouho byli neaktivní.
 reactionRoles: Umožňuje vytvořit (a odstranit) skupiny reakčních skupin. Skupina reakčních rolí je skupina emojů, kterou může použít člen ve zprávě Role Reaction pro přidání (nebo odstranění) rolí sami. Role reakce v jedné skupině mohou být rovněž stanoveny jako vzájemně se vylučující. Umožňuje také přiřadit emoji k rolím, které mohou být použity při reakci na zprávu Role v reakci.
 referralRewards: Umožňuje nastavit role jako odměny pro doporučení (pozváním ostatních uživatelů na server).
 referrals: Umožňuje nastavit referenční kanál tak, aby členové mohli pozvat ostatní na server a získat odměnu za doporučení. A také vám umožňuje sledovat pozvánky členů.
