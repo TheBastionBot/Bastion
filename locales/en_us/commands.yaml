@@ -159,7 +159,8 @@ lockSession: It allows you lock the Voice Session channel that you're currently
 lockdown: It allows you lockdown a channel in the server from users who don't
   have permission to manage messages or the channel.
 prune: It allows you to prune members without any roles, from the server, based
-  on how long they have been inactive.
+  on how long they have been inactive. It also allows you to include the members
+  from the specified roles.
 reactionRoles: It allows you to create (and delete) Reaction Role Groups. A
   Reaction Role Group is a group of reactions emojis that can be used by a
   member on the Reaction Role Message to add (or remove) roles to themselves.
