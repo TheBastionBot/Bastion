@@ -1,7 +1,6 @@
 ---
 notFound: "Nenalezeno"
 unauthorized: "Neautorizovaný"
-musicDisabled: "V tomto serveru není povolena hudba. Požádejte vlastníka bota, aby umožnil používat hudební příkazy."
 musicDownloadError: "Nepodařilo se mi získat požadovanou hudbu. Buď to není platný dotaz pro hudbu, nebo je mi požadovaný zdroj nedostupný."
 noDeletableMessages: "Pro zadaný filtr nebyly nalezeny žádné zprávy, které by mohly být odstraněny."
 noMusicChannels: "Nebyly nastaveny žádné výchozí hudební kanály. Takže pouze majitel bota nebo uživatelé v roli Mistr hudby mohou použít tento příkaz, když už nejsem v hlasovém kanálu."

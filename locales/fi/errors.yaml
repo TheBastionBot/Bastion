@@ -1,7 +1,6 @@
 ---
 notFound: "Ei Löytynyt"
 unauthorized: "Luvaton"
-musicDisabled: "Musiikki ei ole käytössä tällä palvelimella. Pyydä botin omistajaa ottamaan se käyttöön ennen kuin voit käyttää musiikkikomentoja."
 musicDownloadError: "En voinut saada pyydettyä musiikkia. Joko tämä ei ole kelvollinen kysely musiikille, tai pyydetty resurssi ei ole käytettävissäni."
 noDeletableMessages: "Määritetylle suodattimelle ei löytynyt viestejä, jotka olisi voinut poistaa."
 noMusicChannels: "Oletusmusiikkikanavia ei ole asetettu. Joten, vain botin omistaja tai käyttäjät Music Master roolissa voi käyttää tätä komentoa, kun en ole jo äänikanavalla."

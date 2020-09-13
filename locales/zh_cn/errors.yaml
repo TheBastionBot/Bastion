@@ -1,7 +1,6 @@
 ---
 notFound: "找不到"
 unauthorized: "未授权"
-musicDisabled: "音樂不開放在這裡，請問負責人開前你可以用。"
 musicDownloadError: "我无法获得请求的音乐。这不是一个有效的音乐查询，或者请求的资源对我不可用。"
 noDeletableMessages: "没有找到可以删除的指定过滤器。"
 noMusicChannels: "没有设置默认音乐频道。 因此，当我还没有进入语音频道时，只有机器人所有者或音乐主角色的用户可以使用此命令。"

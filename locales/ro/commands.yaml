@@ -69,7 +69,6 @@ leave: Vă permite să solicitați Bastionului să părăsească serverul și s�
 levelUpRoles: Îți permite să adaugi roluri la un nivel. Când membrii ating acel nivel, li se vor acorda aceste roluri.
 lockSession: Vă permite să blocați canalul de Sesiune Voce în care vă aflați în prezent, astfel încât oricine altcineva să nu se poată alătura decât dacă este invitat.
 lockdown: Permite blocarea unui canal în server de la utilizatorii care nu au permisiunea de a gestiona mesajele sau canalul.
-prune: Îți permite să execuți membrii fără niciun rol, de pe server, în funcție de cât timp au fost inactive.
 reactionRoles: Vă permite să creați (și ștergeți) Grupuri de rol reacționare. Un Grup de Reacții Role este un grup de reacții emojis care poate fi folosit de un membru pe Mesajul Rolul de Reacție pentru a adăuga (sau elimina) roluri la ele însele. Rolurile de reacție într-un singur grup pot fi, de asemenea, stabilite ca excluderi reciproce. De asemenea, vă permite să atribuiți emojis rolurilor, care pot fi utilizate pentru a reacționa la Mesajul Reaction Rrol.
 referralRewards: Vă permite să setați roluri ca recompense pentru recomandări (invitând alți utilizatori la server).
 referrals: Îți permite să setezi Canalul de Recomandări astfel încât membrii să îi poată invita pe ceilalți pe server și să obțină recompense de recomandare. Și, de asemenea, vă permite să urmăriți invitațiile membrilor.

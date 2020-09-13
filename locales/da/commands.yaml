@@ -69,7 +69,6 @@ leave: Det giver dig mulighed for at spørge Bastion til at forlade serveren og 
 levelUpRoles: Det giver dig mulighed for at tilføje roller til et niveau. Når medlemmer når dette niveau, vil de blive tildelt disse roller.
 lockSession: Det giver dig mulighed for at låse stemmesessionskanalen, som du er i øjeblikket i, så alle andre ikke kan deltage, medmindre de er inviteret.
 lockdown: Det giver jer låse en kanal i den styreenhed fra brugernes hvem ikke nyde tilladelse hen til styre beskeder eller den kanal.
-prune: Det giver dig mulighed for at beskære medlemmer uden nogen roller, fra serveren, baseret på, hvor længe de har været inaktive.
 reactionRoles: Det giver dig mulighed for at oprette (og slette) Reaction Rolle grupper. En Reaktion Rolle Group er en gruppe af reaktioner emojis, der kan bruges af et medlem i Reaction Rolle Besked til at tilføje (eller fjerne) roller til sig selv. Reaktionsroller i en enkelt gruppe kan også indstilles som gensidigt udelukkende. Det giver dig også mulighed for at tildele emojis til roller, der kan bruges til at reagere på Reaction Rolle Besked.
 referralRewards: Det giver dig mulighed for at indstille roller som belønninger for henvisninger (invitere andre brugere til serveren).
 referrals: Det giver dig mulighed for at indstille henvisningskanalen, så medlemmer kan invitere andre til serveren og få henvisning belønninger. Og det giver dig også mulighed for at spore medlemmernes invitationer.

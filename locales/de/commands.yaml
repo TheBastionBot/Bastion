@@ -69,7 +69,6 @@ leave: Es erlaubt Ihnen, Bastion zu bitten, den Server zu verlassen und alle Dat
 levelUpRoles: Es erlaubt dir, Rollen zu einem Level hinzuzufügen. Wenn Mitglieder dieses Level erreichen, werden sie diese Rollen erhalten.
 lockSession: Es erlaubt Ihnen, den Sprach-Session-Kanal zu sperren, in dem Sie gerade eingeloggt sind, so dass niemand anderen beitreten kann, es sei denn, sie sind eingeladen.
 lockdown: Es erlaubt dir, einen Channel auf dem Server von Benutzern zu sperren, die keine Berechtigung haben, Nachrichten oder den Channel zu verwalten.
-prune: Es erlaubt Ihnen, Mitglieder ohne Rollen vom Server zu beschneiden, abhängig davon, wie lange sie inaktiv waren.
 reactionRoles: Es erlaubt Ihnen Reaktionsrollengruppen zu erstellen (und zu löschen). Eine Reaktionsrolle Gruppe ist eine Gruppe von Reaktionsreaktions-Emojis, die von einem Mitglied in der Reaktionsrolle Nachricht benutzt werden kann, um Rollen zu sich selbst hinzuzufügen (oder zu entfernen). Reaktionsrollen in einer einzigen Gruppe können auch als einander ausschließen. Außerdem können Sie Emojis Rollen zuweisen, die zur Reaktion auf die Reaktionsrolle verwendet werden können.
 referralRewards: Es erlaubt Ihnen, Rollen als Belohnung für Empfehlungen zu setzen (andere Benutzer zum Server einladen).
 referrals: Es erlaubt dir, den Empfehlungskanal so zu setzen, dass Mitglieder andere auf den Server einladen und Belohnungen für Empfehlungen erhalten können. Und es erlaubt Ihnen auch, die Einladungen der Mitglieder zu verfolgen.

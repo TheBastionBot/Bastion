@@ -1,7 +1,6 @@
 ---
 notFound: "Niet gevonden"
 unauthorized: "Ongeautoriseerd"
-musicDisabled: "Muziek is niet ingeschakeld in deze server. Vraag de bot eigenaar om het aan te zetten voordat je muziek commandos kan gebruiken."
 musicDownloadError: "Ik kon de gevraagde muziek niet ophalen. Dit is geen geldige query voor muziek, of de gevraagde resource is niet beschikbaar voor mij."
 noDeletableMessages: "Er zijn geen berichten gevonden, voor het opgegeven filter, die konden worden verwijderd."
 noMusicChannels: "Er zijn geen standaard muziek kanalen ingesteld. Dus alleen de bot eigenaar of gebruikers in de Muziek Master rol kunnen dit commando gebruiken wanneer ik nog niet in een spraakkanaal ben."

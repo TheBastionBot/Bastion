@@ -1,7 +1,6 @@
 ---
 notFound: "Nu s-a găsit"
 unauthorized: "Neautorizat"
-musicDisabled: "Muzica nu este activată pe acest server. Cereți proprietarului botului să îl activeze înainte de a putea folosi comenzile muzicale."
 musicDownloadError: "Nu am putut obține muzica solicitată. Fie aceasta nu este o interogare valabilă pentru muzică, fie resursa solicitată nu îmi este disponibilă."
 noDeletableMessages: "Nu au fost găsite mesaje, pentru filtrul specificat, care au putut fi șterse."
 noMusicChannels: "Nu a fost setat niciun canal de muzică implicit. Deci, doar proprietarul botului sau utilizatorii din rolul de maestru de muzică pot folosi această comandă când nu sunt deja într-un canal de voce."
