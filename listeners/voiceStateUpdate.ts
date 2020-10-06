@@ -50,9 +50,9 @@ export = class VoiceStateUpdateListener extends Listener {
         if (newState.channel && newState.channel.parent && guild.voiceSessions.categories.includes(newState.channel.parentID)) {
             // check whether member is requesting a new session channel to be created
             if (newState.channel.name.startsWith(this.newSessionChannelPrefix)) {
-                // HACK: channel number might have concurrency problem
-                const sessionChannelName = newState.channel.name.replace(this.newSessionChannelPrefix, "").trim();
+                const sessionChannelName = newState.member.displayName + (newState.member.displayName.toLowerCase().endsWith("s") ? "'" : "'s") + " Channel";
 
+                // HACK: channel number might have concurrency problem
                 const newSessionChannel = await newState.channel.guild.channels.create(sessionChannelName + " #" + (newState.channel.parent.children.filter(c => c.type === "voice" && c.name.startsWith(sessionChannelName + " #")).size + 1), {
                     type: "voice",
                     bitrate: newState.channel.guild.premiumTier ? newState.channel.guild.premiumTier * 128e3 : 96e3,
