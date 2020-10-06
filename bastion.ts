@@ -10,8 +10,8 @@ import { Intents } from "discord.js";
 tesseract.StructureManager.initialize();
 
 const Bastion = new tesseract.Client({
-    messageCacheMaxSize: 13,
-    messageCacheLifetime: 36e2,
+    messageCacheMaxSize: 5,
+    messageCacheLifetime: 9e2,
     messageSweepInterval: 36e2,
     partials: [
         "MESSAGE",
