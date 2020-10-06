@@ -1,13 +1,6 @@
-date: September 13, 2020
+date: October 6, 2020
 image: https://i.imgur.com/L8CJkNz.gif
 changes:
-  NEW:
-    - title: Captcha Verification
-      description: You can now opt to enable Captcha Verification in your server. When enabled, users joining the server would need to solve a captcha in the server's [dashboard](https://bastion.traction.one/dashboard) to verify themselves, and then they'll be assigned the role that was set using the new `verification` command.
-    - description: You can now choose to include roles which should be included when pruning members from the server.
   CHANGES:
-    - description: Previews from the `greetings` & `farewells` commands would now show up as embed objects instead of it being rendered.
-    - description: Changed an implementation where using `linkFilter` or `inviteFilter` would reset their respective Safe List that was set using the `safeList` command.
-  SQUASHED THESE BUGS:
-    - description: Fixed an issue where the last streamer was not being removed.
-    - description: Some under-the-hood fixes to make Bastion better than ever.
+    - description: Temporary voice channels' names will now be based on the name of the user who created it.
+    - description: Some optimizations to cache to reduce Bastion's memory usage.
