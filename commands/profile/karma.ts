@@ -13,7 +13,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class KarmaCommand extends Command {
     constructor() {
         super("karma", {
-            description: "It allows you to give someone the sweet little internet points, we call karma, if you think they're worth it. You can give up to 3 karmas every 6 hours, so spend it wisely.",
+            description: "It allows you to give someone the sweet little internet points, we call karma, if you think they're worth it. You can also add a personalized message along with it. You can give up to 3 karmas every 6 hours, so spend it wisely.",
             triggers: [ "rep" ],
             arguments: {},
             scope: "guild",
@@ -24,6 +24,7 @@ export = class KarmaCommand extends Command {
             userPermissions: [],
             syntax: [
                 "karma USER",
+                "karma USER -- MESSAGE",
             ],
         });
     }
@@ -55,6 +56,14 @@ export = class KarmaCommand extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "karma", message.author.tag, member.user.tag),
+                fields: argv._.length
+                ?   [
+                        {
+                            name: "Message",
+                            value: argv._.join(" "),
+                        },
+                    ]
+                :   [],
             },
         }).catch(() => {
             // this error can be ignored
