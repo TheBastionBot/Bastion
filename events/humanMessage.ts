@@ -66,7 +66,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         if (member.document.level >= gamification.MAX_LEVEL || member.document.experience >= gamification.MAX_EXPERIENCE(guild.document.gamification.multiplier)) return;
 
         // increment experience
-        member.document.experience += 1;
+        member.document.experience = member.premiumSinceTimestamp ? member.document.experience + 2 : member.document.experience + 1;
 
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(member.document.experience, guild.document.gamification.multiplier);
