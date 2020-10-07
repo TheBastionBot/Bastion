@@ -20,7 +20,7 @@ export = class Farewells extends Command {
                     enable: [ "e" ],
                     timeout: [ "t" ],
                 },
-                boolean: [ "disable", "enable" ],
+                boolean: [ "disable", "enable", "random" ],
                 number: [ "timeout" ],
             },
             scope: "guild",
@@ -34,6 +34,7 @@ export = class Farewells extends Command {
                 "farewells --disable",
                 "farewells --timeout TIMEOUT_IN_MINUTES",
                 "farewells -- MESSAGE",
+                "farewells --random",
             ],
         });
     }
@@ -44,7 +45,7 @@ export = class Farewells extends Command {
         // update guild farewell settings
         guild.document.farewell = {
             channelId: argv.enable ? message.channel.id : argv.disable ? undefined : guild.document.farewell ? guild.document.farewell.channelId : undefined,
-            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : guild.document.farewell ? guild.document.farewell.message : undefined,
+            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : argv.random ? undefined : guild.document.farewell ? guild.document.farewell.message : undefined,
             timeout: typeof argv.timeout === "number" ? argv.timeout : guild.document.farewell ? guild.document.farewell.timeout : undefined,
         };
 
