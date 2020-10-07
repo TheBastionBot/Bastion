@@ -6,6 +6,7 @@ changes:
     - description: Added support back for server wide text muting members in the server with the `--server` flag in the `textMute` command.
   CHANGES:
     - description: Temporary voice channels' names will now be based on the name of the user who created it.
+    - description: Did you want to go back to Bastion's random greetings and farewells after setting a custom message? Now you can do that by using the `--random` flag with the `greetings` and `farewells` commands respectively.
     - description: Some optimizations to cache to reduce Bastion's memory usage.
   FIXES:
     - description: Fixed an issue with the `music` command that prevented some servers from show up in the list of all servers where music is enabled.
