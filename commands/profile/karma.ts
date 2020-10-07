@@ -56,14 +56,13 @@ export = class KarmaCommand extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "karma", message.author.tag, member.user.tag),
-                fields: argv._.length
-                ?   [
+                fields: argv._.length ?
+                    [
                         {
                             name: "Message",
                             value: argv._.join(" "),
                         },
-                    ]
-                :   [],
+                    ] : [],
             },
         }).catch(() => {
             // this error can be ignored
