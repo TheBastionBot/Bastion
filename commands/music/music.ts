@@ -56,8 +56,9 @@ export = class MusicCommand extends Command {
             if (argv.servers) {
                 // find the guilds
                 const guildDocuments = await GuildModel.find({
-                    music: {
-                        enabled: true,
+                    "music.enabled": {
+                        $exists: true,
+                        $eq: true,
                     },
                 });
 
