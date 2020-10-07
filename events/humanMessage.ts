@@ -13,6 +13,7 @@ import * as omnic from "../utils/omnic";
 import * as variables from "../utils/variables";
 
 import ConfigModel from "../models/Config";
+import MemberModel from "../models/Member";
 import RoleModel from "../models/Role";
 import TextChannelModel from "../models/TextChannel";
 import TriggerModel from "../models/Trigger";
@@ -179,6 +180,30 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         });
     }
 
+    handleKarma = async (message: Message): Promise<void> => {
+        if (!message.content) return;
+
+        if ((message.content.toLowerCase().includes("thanks") || message.content.toLowerCase().includes("thank you")) && message.mentions.users && message.mentions.users.size) {
+            const users = Array.from(message.mentions.users.keys()).filter(id => id !== message.member.id);
+
+            await MemberModel.updateMany({
+                user: {
+                    $in: users,
+                },
+                guild: message.guild.id,
+            }, {
+                $inc: {
+                    karma: 1,
+                },
+            });
+
+            // react to the message for confirmation
+            message.react("🆙").catch(() => {
+                // this error can be ignored
+            });
+        }
+    }
+
     handleInstantResponses = async (message: Message): Promise<void> => {
         if (!message.content) return;
 
@@ -242,6 +267,9 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             this.handleTriggers(message).catch(() => {
                 // this error can be ignored
             });
+
+            // handle karma
+            this.handleKarma(message).catch(Logger.error);
 
             // handle voting channels
             this.handleVotingChannels(message).catch(() => {
