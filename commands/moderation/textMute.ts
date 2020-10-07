@@ -13,7 +13,7 @@ import BastionGuildMember = require("../../structures/GuildMember");
 export = class TextMute extends Command {
     constructor() {
         super("textMute", {
-            description: "It allows you to text mute (and unmute) users in a channel (or category). Text muted users can't send messages in the channels they are muted.",
+            description: "It allows you to text mute (and unmute) users in a channel, category, or the server. Text muted users can't send messages in the channels they are muted.",
             triggers: [],
             arguments: {
                 configuration: {
@@ -38,8 +38,10 @@ export = class TextMute extends Command {
             syntax: [
                 "textMute --user USER_ID -- REASON",
                 "textMute --user USER_ID --channel -- REASON",
+                "textMute --user USER_ID --server -- REASON",
                 "textMute --unset --user USER_ID -- REASON",
                 "textMute --unset --user USER_ID --channel -- REASON",
+                "textMute --unset --user USER_ID --server -- REASON",
             ],
         });
     }
@@ -66,14 +68,40 @@ export = class TextMute extends Command {
 
         const reason = argv._.join(" ") || "-";
 
-        // Set Text Mute
-        const channel = !argv.channel && (message.channel as GuildChannel).parent
-            ? (message.channel as GuildChannel).parent
-            : (message.channel as GuildChannel);
 
-        await channel.updateOverwrite(member.id, {
-            SEND_MESSAGES: argv.set ? false : null,
-        }, reason);
+        let channel: GuildChannel;
+
+        if (argv.server) {
+            // Check if the `Muted` role exist
+            let mutedRole = message.guild.roles.cache.find(r => r.name.toLowerCase() === "muted");
+
+            // Otherwise, create it
+            if (!mutedRole) {
+                mutedRole = await message.guild.roles.create({
+                    data: {
+                        name: "Muted",
+                    },
+                    reason: "It will be used to server mute"
+                });
+            }
+
+            if (argv.set) {
+                // add the role to the member
+                await member.roles.add(mutedRole);
+            } else {
+                // remove the role from the member
+                await member.roles.remove(mutedRole);
+            }
+        } else {
+            channel = !argv.channel && (message.channel as GuildChannel).parent
+                ?   (message.channel as GuildChannel).parent
+                :   (message.channel as GuildChannel);
+
+            await channel.updateOverwrite(member.id, {
+                SEND_MESSAGES: argv.set ? false : null,
+            }, reason);
+        }
+
 
         // Acknowledge
         await message.channel.send({
@@ -92,8 +120,6 @@ export = class TextMute extends Command {
                     text: member.id,
                 },
             },
-        }).catch(() => {
-            // This error can be ignored.
         });
     }
 }
