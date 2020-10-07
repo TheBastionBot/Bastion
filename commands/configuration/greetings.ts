@@ -20,7 +20,7 @@ export = class Greetings extends Command {
                     enable: [ "e" ],
                     timeout: [ "t" ],
                 },
-                boolean: [ "disable", "enable" ],
+                boolean: [ "disable", "enable", "random" ],
                 number: [ "timeout" ],
             },
             scope: "guild",
@@ -34,6 +34,7 @@ export = class Greetings extends Command {
                 "greetings --disable",
                 "greetings --timeout TIMEOUT_IN_MINUTES",
                 "greetings -- MESSAGE",
+                "greetings --random",
             ],
         });
     }
@@ -44,7 +45,7 @@ export = class Greetings extends Command {
         // update guild greeting settings
         guild.document.greeting = {
             channelId: argv.enable ? message.channel.id : argv.disable ? undefined : guild.document.greeting ? guild.document.greeting.channelId : undefined,
-            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : guild.document.greeting ? guild.document.greeting.message : undefined,
+            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : argv.random ? undefined : guild.document.greeting ? guild.document.greeting.message : undefined,
             timeout: typeof argv.timeout === "number" ? argv.timeout : guild.document.greeting ? guild.document.greeting.timeout : undefined,
         };
 
