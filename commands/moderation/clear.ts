@@ -6,6 +6,7 @@
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message, NewsChannel, TextChannel } from "discord.js";
 
+import confirmation from "../../utils/confirmation";
 import BastionGuild = require("../../structures/Guild");
 
 export = class Clear extends Command {
@@ -15,7 +16,7 @@ export = class Clear extends Command {
             triggers: [ "clean", "purge" ],
             arguments: {
                 alias: {
-                    limit: "l",
+                    limit: "n",
                     time: "t",
                     user: "u",
                 },
@@ -70,9 +71,16 @@ export = class Clear extends Command {
             messages = messages.filter(m => m.createdTimestamp >= message.createdTimestamp - (argv.time * 6e4));
         }
 
-        // Delete filtered messages
         const reason = argv._.join(" ") || "-";
 
+        // get confirmation, if no limit is specified
+        if (!argv.limit) {
+            const answer = await confirmation(message, "I will try to delete " + messages.size.toLocaleString() + " messages from this channel. Are you sure you want to do this?");
+
+            if (!answer) return;
+        }
+
+        // Delete filtered messages
         const clearedMessages = await (message.channel as TextChannel | NewsChannel).bulkDelete(messages, true);
 
         if (!clearedMessages.size) {
