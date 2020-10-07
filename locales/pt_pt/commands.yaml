@@ -85,7 +85,6 @@ kick: Ele permite expulsar usuários do servidor.
 nickname: Ele permite que você defina (e não definir) apelidos dos membros do servidor.
 reason: Ele permite que você atualize o motivo de uma instância de moderação. Esqueceu de definir um motivo? Um erro de digitação? Aqui está sua segunda chance.
 report: Ele permite que você reporte um membro do servidor aos moderadores do servidor, contanto que um canal de relatório esteja definido.
-textMute: Ele permite que você emita texto para usuários em um canal (ou categoria). Usuários com mensagens silenciadas em texto não podem enviar mensagens nos canais que estão silenciados.
 unban: Isso permite desbanir os usuários que estão banidos no servidor.
 updateRoles: Ele permite que você atualize as funções dos membros do servidor.
 voiceMute: Isso permite que você silencie e ative o áudio de usuários em um canal. Usuários com o áudio de voz não podem falar nos canais de voz que estão silenciados.

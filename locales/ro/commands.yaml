@@ -85,7 +85,6 @@ kick: Vă permite să dați afară utilizatori de pe server.
 nickname: Îți permite să setezi (și să anulezi) poreclele membrilor serverului.
 reason: Îți permite să actualizezi motivul unui caz de moderare. Ai uitat să setezi un motiv? A fost o tipografie? Iată a doua șansă a ta.
 report: Vă permite să raportați un membru al serverului către moderatorii serverului, cu condiția să fie setat un canal de raportare.
-textMute: Vă permite să introduceţi sunetul (şi deblocaţi) utilizatori într-un canal (sau categorie). Utilizatorii care dezactivează textul nu pot trimite mesaje în canalele pe care sunt dezactivate.
 unban: Vă permite să deblocați utilizatorii care sunt interziși pe server.
 updateRoles: Vă permite să actualizaţi rolurile membrilor serverului.
 voiceMute: Îți permite să muți utilizatorii de voce (și să dezactiveze) într-un canal. Utilizatorii cu sunet de voce nu pot vorbi pe canalele de voce pe care sunt blocați.

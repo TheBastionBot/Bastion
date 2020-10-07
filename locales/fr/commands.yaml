@@ -85,7 +85,6 @@ kick: Il vous permet d'expulser des utilisateurs du serveur.
 nickname: Il vous permet de définir (et de désactiver) les surnoms des membres du serveur.
 reason: Il vous permet de mettre à jour la raison d'une affaire de modération. Vous avez oublié de définir une raison ? Vous avez une faute de frappe ? Voici votre seconde chance.
 report: Il vous permet de signaler un membre du serveur aux modérateurs du serveur, à condition qu'un canal de signalements soit défini.
-textMute: Il vous permet de bâillonner textuellement (et de débâillonner) des utilisateurs dans un canal (ou une catégorie). Les utilisateurs bâillonnés textuellement ne peuvent pas envoyer de messages dans les canaux où ils sont bâillonnés.
 unban: Il vous permet de gracier les utilisateurs qui sont bannis sur le serveur.
 updateRoles: Il vous permet de mettre à jour les rôles des membres du serveur.
 voiceMute: Il vous permet de bâillonner vocalement (et de débâillonner) les utilisateurs d'un canal. Les utilisateurs qui sont bâillonnés vocalement ne peuvent pas parler dans les canaux vocaux où ils sont bâillonnés.

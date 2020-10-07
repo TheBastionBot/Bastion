@@ -85,7 +85,6 @@ kick: Pozwala na wyrzucenie użytkowników z serwera.
 nickname: Pozwala na ustawianie (i wyłączanie) pseudonimów członków serwera.
 reason: Pozwala zaktualizować powód sprawy moderacyjnej. Zapomniałeś podać powód? Czy typo? Oto twoja druga szansa.
 report: Pozwala na zgłaszanie członka serwera moderatorom serwera, pod warunkiem że zostanie ustawiony kanał raportu.
-textMute: Pozwala to na wyciszenie tekstu (i wyciszanie) użytkowników na kanale (lub kategorii). Wyciszeni tekst użytkownicy nie mogą wysyłać wiadomości w kanałach, które są wyciszone.
 unban: Pozwala odbanować użytkowników, którzy są zbanowani na serwerze.
 updateRoles: Pozwala na aktualizację ról członków serwera.
 voiceMute: Pozwala to na wyciszenie (i wyłączanie wyciszenia) użytkowników na kanale. Wyciszeni głos użytkownicy nie mogą mówić w kanałach głosowych, które są wyciszone.

@@ -85,7 +85,6 @@ kick: Sen avulla voit potkia käyttäjiä palvelimelta.
 nickname: Sen avulla voit asettaa (ja poistaa) nimimerkkejä palvelimen jäseniä.
 reason: Sen avulla voit päivittää maltillisen tapauksen syytä. Unohditko asettaa syyn? Oliko typo? Tässä on toinen mahdollisuutesi.
 report: Sen avulla voit ilmoittaa palvelimen jäsenen palvelimen valvojille edellyttäen, että raportti kanava on asetettu.
-textMute: Sen avulla voit tekstillä mykistää (ja mykistää) käyttäjiä kanavassa (tai kategoriassa). Tekstin käyttäjät eivät voi lähettää viestejä mykistetyistä kanavista.
 unban: Sen avulla voit poistaa porttikiellon käyttäjille, joille on annettu porttikielto palvelimella.
 updateRoles: Sen avulla voit päivittää rooleja palvelimen jäseniä.
 voiceMute: Sen avulla voit ääni mykistää (ja mykistää) käyttäjiä kanavalla. Ääni mykistetyt käyttäjät eivät voi puhua äänikanavilla, jotka ovat mykistettyjä.

@@ -180,6 +180,7 @@ safeList: It allows you to add members or roles to a safe list that prevents
   server.
 suggest: It allows you send a suggestion to the suggestion staff, provided a
   Suggestion Channel has been set in the server.
+voiceSession: ""
 ban: It allows you to ban (or soft ban) users from the server, and optionally
   clear their messages from the specified number of days. It also allows you to
   list all the users banned in the server.
@@ -199,8 +200,8 @@ reason: It allows you to update the reason of a moderation case. Forgot to set a
   reason? Did a typo? Here's your second chance.
 report: It allows you to report a server member to the moderators of the server,
   provided a Report Channel is set.
-textMute: It allows you to text mute (and unmute) users in a channel (or
-  category). Text muted users can't send messages in the channels they are
+textMute: It allows you to text mute (and unmute) users in a channel, category,
+  or the server. Text muted users can't send messages in the channels they are
   muted.
 unban: It allows you to unban the users who're banned in the server.
 updateRoles: It allows you to update roles of server members.

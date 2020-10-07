@@ -85,7 +85,6 @@ kick: Es erlaubt Ihnen, Benutzer vom Server zu kicken.
 nickname: Es erlaubt Ihnen, Spitznamen der Servermitglieder zu setzen (und zu entfernen).
 reason: Es erlaubt dir, den Grund einer Moderation zu aktualisieren. Vergiss einen Grund zu setzen? Hast du einen Tipp? Hier ist deine zweite Chance.
 report: Es erlaubt Ihnen, einen Server den Moderatoren des Servers zu melden, sofern ein Report Channel festgelegt ist.
-textMute: Es erlaubt es Benutzern in einem Kanal (oder in einer Kategorie) zu Text stummschalten (und nicht stummschalten). Text-stummgeschaltete Benutzer können keine Nachrichten in den Sendern, die sie stumm sind, senden.
 unban: Es erlaubt dir, Benutzer zu entbannen, die auf dem Server gebannt sind.
 updateRoles: Es erlaubt Ihnen, die Rollen von Servermitgliedern zu aktualisieren.
 voiceMute: Sie können stumm (und unstumm) Benutzer in einem Kanal ansprechen. Stummgeschaltete Benutzer können nicht in den Sprachkanälen sprechen, die sie stumm gehalten haben.

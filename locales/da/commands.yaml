@@ -85,7 +85,6 @@ kick: Det giver dig mulighed for at sparke brugere fra serveren.
 nickname: Den tillader jer hen til placere (og unset) øgenavne i den styreenhed medlemmer.
 reason: Det giver dig mulighed for at opdatere årsagen til en mådehold sag. Glemt for at angive en årsag? Har du en typo? Her er din anden chance.
 report: Det giver dig mulighed for at rapportere en server medlem til moderatorer af serveren, forudsat at en rapport kanal er indstillet.
-textMute: Det giver dig mulighed for at tekst mute (og unmute) brugere i en kanal (eller kategori). Tekst muted brugere kan ikke sende beskeder i de kanaler, de er muted.
 unban: Det giver dig mulighed for at fjerne udelukkelse af brugere, der er udelukket i serveren.
 updateRoles: Det giver dig mulighed for at opdatere roller servermedlemmer.
 voiceMute: Det giver dig mulighed for at stemme mute (og unmute) brugere i en kanal. Stemme muted brugere kan ikke tale i de stemmekanaler de er muted.

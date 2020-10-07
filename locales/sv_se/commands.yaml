@@ -85,7 +85,6 @@ kick: Det låter dig sparka användare från servern.
 nickname: Det gör att du kan ställa in (och unset) smeknamn på servermedlemmar.
 reason: Det gör att du kan uppdatera orsaken till ett översiktsfall. Glömt att ange en anledning? Har du skrivit fel? Här är din andra chans.
 report: Det låter dig rapportera en servermedlem till moderatorerna för servern, förutsatt att en Report Channel är inställd.
-textMute: Det gör att du kan text tysta (och avtysta) användare i en kanal (eller kategori). Textdämpade användare kan inte skicka meddelanden i kanalerna de är tysta.
 unban: Det gör att du kan unban användare som är bannlysta på servern.
 updateRoles: Det låter dig uppdatera roller för servermedlemmar.
 voiceMute: Det gör att du kan röst tysta (och avtysta) användare i en kanal. Röstdämpade användare kan inte tala i röstkanalerna de är tysta.
