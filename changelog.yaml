@@ -1,6 +1,13 @@
-date: October 7, 2020
-image: https://i.imgur.com/L8CJkNz.gif
+date: October 8, 2020
+image: https://i.imgur.com/y6w9t0o.png
 changes:
+  AMONG US ✕ Bastion:
+    - title: Among Us Lobbies
+      description: Server members can now create Discord Lobbies for their Among Us party and manage it automatically, using the new `amongUs` command.
+    - title: Lobby Channel
+      description: Server Managers, don't fret, you can restrict the usage of `amongUs` command to a specific channel using the new `amongUsChannel` command.
+    - title: Lobby Restrictions
+      description: And lobby hosts, your lobbies are private by default. And you have complete control over whether to allow everyone or only your friends.
   NEW:
     - description: Did you ever want to add a personalized message when giving rep/karma to someone? You can do it now! See `karma --help` for more details.
     - description: You can now give karma/rep anyone simply by thanking them in a message reply. Thank you @Alice for suggesting this! Works even when you mention multiple users.
