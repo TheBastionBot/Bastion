@@ -186,7 +186,6 @@ safeList: It allows you to add members or roles to a safe list that prevents
   server.
 suggest: It allows you send a suggestion to the suggestion staff, provided a
   Suggestion Channel has been set in the server.
-voiceSession: ""
 ban: It allows you to ban (or soft ban) users from the server, and optionally
   clear their messages from the specified number of days. It also allows you to
   list all the users banned in the server.
