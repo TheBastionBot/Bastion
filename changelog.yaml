@@ -1,7 +1,7 @@
 date: October 8, 2020
 image: https://i.imgur.com/y6w9t0o.png
 changes:
-  AMONG US ✕ Bastion:
+  Among Us ✕ Bastion:
     - title: Among Us Lobbies
       description: Server members can now create Discord Lobbies for their Among Us party and manage it automatically, using the new `amongUs` command.
     - title: Lobby Channel
