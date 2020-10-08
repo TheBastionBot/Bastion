@@ -85,7 +85,6 @@ kick: Pozwala na wyrzucenie użytkowników z serwera.
 nickname: Pozwala na ustawianie (i wyłączanie) pseudonimów członków serwera.
 reason: Pozwala zaktualizować powód sprawy moderacyjnej. Zapomniałeś podać powód? Czy typo? Oto twoja druga szansa.
 report: Pozwala na zgłaszanie członka serwera moderatorom serwera, pod warunkiem że zostanie ustawiony kanał raportu.
-textMute: Pozwala to na wyciszenie tekstu (i wyciszanie) użytkowników na kanale (lub kategorii). Wyciszeni tekst użytkownicy nie mogą wysyłać wiadomości w kanałach, które są wyciszone.
 unban: Pozwala odbanować użytkowników, którzy są zbanowani na serwerze.
 updateRoles: Pozwala na aktualizację ról członków serwera.
 voiceMute: Pozwala to na wyciszenie (i wyłączanie wyciszenia) użytkowników na kanale. Wyciszeni głos użytkownicy nie mogą mówić w kanałach głosowych, które są wyciszone.
@@ -111,7 +110,6 @@ rainbow6: Pozwala to zobaczyć statystyki gracza Rainbow 6 na dowolnej obsługiw
 rocketLeague: Pozwala to zobaczyć statystyki gracza Rocket League na każdej obsługiwanej platformie.
 coins: Pozwala zobaczyć konto Bastion.
 daily: Pozwala Ci na odebranie monet Bastiona, które każdy użytkownik otrzymuje jako nagrodę za bycie na serwerze. Możesz odebrać nagrody raz na 24 godziny.
-karma: Pozwala Ci to dać komuś słodkie, małe punkty internetowe, nazywamy karmą, jeśli uważasz, że są warte jej. Możesz porzucić do 3 karmas co 6 godzin, więc wydawać je mądrze.
 leaderboard: Pozwala Ci zobaczyć tablicę wyników Twojego serwera. Jesteś uszeregowany na podstawie swojego poziomu, doświadczenia, karmy i monet Bastiona; w tej dokładnej kolejności.
 profile: Pozwala zobaczyć profil Bastiona (lub dowolnego członka serwera).
 rank: Pozwala zobaczyć swoją (lub dowolny z członków serwera) rangę, poziom, doświadczenie i karmę.

@@ -85,7 +85,6 @@ kick: Umožňuje ti vykopnout uživatele ze serveru.
 nickname: Umožňuje nastavit (a odstavit) přezdívky členů serveru.
 reason: Umožňuje vám aktualizovat důvod umírněnosti. Zapomněli jste nastavit důvod? Napadli jste typo? Zde je vaše druhá šance.
 report: Umožňuje vám nahlásit člena serveru moderátorům serveru za předpokladu, že je nastaven reportní kanál.
-textMute: Umožňuje vám ztlumit (a vymlčet) uživatele v kanálu (nebo kategorii). Text ztlumený uživateli nemůže odesílat zprávy v kanálech, které jsou ztlumeny.
 unban: Umožňuje vám odbanovat uživatele, kteří jsou na serveru zakázáni.
 updateRoles: Umožňuje aktualizovat role členů serveru.
 voiceMute: Umožňuje vám ztlumit (a vymlčet) uživatele v kanálu. Hlas ztlumený nemůže mluvit v hlasových kanálech, které jsou ztlumeny.
@@ -111,7 +110,6 @@ rainbow6: Umožňuje vám vidět statistiky jakéhokoliv hráče Rainbow 6 na li
 rocketLeague: Umožňuje vám vidět statistiky jakéhokoliv hráče Rocket League v jakékoli podporované platformě.
 coins: Umožňuje vám vidět váš Bastion účet.
 daily: Umožňuje ti nárokovat Bastion mince, že každý člen obdrží odměnu za to, že je na serveru. Své odměny si můžeš nárokovat jednou za 24 hodin.
-karma: Umožňuje vám dát někomu sladké malé internetové body, nazýváme karma, pokud si myslíte, že za to stojí. Můžete dát až 3 karmas každých 6 hodin, takže to strávíte moudře.
 leaderboard: Umožňuje ti vidět žebříček tvého serveru. Jsi hodnocený na základě své úrovně, zkušenosti, karmy a Bastion Coins; v tomto přesném pořadí.
 profile: Umožňuje vám vidět váš (nebo kterýkoli z členů serveru) Bastion profil.
 rank: Umožňuje vám vidět vaše (nebo kterýkoli z členů serveru), úroveň, zkušenosti a karma.

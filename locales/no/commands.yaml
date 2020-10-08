@@ -85,7 +85,6 @@ kick: Det gir deg mulighet til å sparke brukere fra serveren.
 nickname: Det lar deg sette (og angre) kallenavn på servermedlemmer.
 reason: Det lar deg oppdatere grunnen til en moderasjonssak. Glemt å angi en grunn? Visste en skrivefeil? Her er din andre sjanse.
 report: Det gjør at du kan rapportere en servermedlem til serverens moderatorer, forutsatt at en rapportkanal er satt.
-textMute: Det lar deg se tekst demping (og av-dempe) brukere i en kanal (eller kategori). Tekst dempede brukere kan ikke sende meldinger i kanalene de er dempet.
 unban: Det lar deg oppheve bannlysningen av brukerne som er forbudt på serveren.
 updateRoles: Det lar deg oppdatere roller for servermedlemmer.
 voiceMute: Det lar deg stemme demp (og dempe) brukere i en kanal. Stemme dempede brukere kan ikke snakke i stemmekanalene de er dempet.
@@ -111,7 +110,6 @@ rainbow6: Det gjør at du kan se statistikken for alle Rainbow 6-spillere i alle
 rocketLeague: Det gjør at du kan se statistikken for hvilken som helst Rocket League spiller i alle støttede plattformer.
 coins: Det gjør at du kan se din Basel-konto.
 daily: Det lar deg kreve Bastion Coins, at hvert medlem mottar som en belønning for å være på serveren. Du kan ta imot belÃ¸nningen en gang hver 24. time.
-karma: Det lar deg gi noen de lille internett poengene, vi kaller karma, hvis du tror de er verdt det. Du kan gi opptil 3 karmas hver 6. time, så bruk den til klok.
 leaderboard: Det lar deg se oversikt over din server. Du rangert basert på ditt nivå, erfaring, karma og Basismynter, i den eksakte rekkefølgen.
 profile: Det lar deg se din (eller noen av servermedlemmene's) Profil.
 rank: Det lar deg se din (eller noen av servermedlemmene's) rangering, erfaring, og karma.

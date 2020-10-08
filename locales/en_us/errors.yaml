@@ -28,6 +28,8 @@ guildNotFound: "I looked into the deep dark corners of my data store, but I didn
 roleNotSelfAssignable: "The %var% role is not a Self Role. Only roles set as Self Roles can be self assigned."
 noSuggestionChannel: "No suggestion channel has been set in the server where suggestions can be sent. Ask server managers to set a suggestion channel so that you can send suggestions."
 noReferralsChannel: "No Referrals Channel is set in the server. I can't generate a referral invite code until it's set."
+noAmongUsChannel: "Among Us Lobbies are not enabled in this server. Ask server managers to enable it using the `amongUsChannel` command."
+notAmongUsChannel: "The `amongUs` command only works in the Among Us Channel. Go to the <#%var%> channel to use the command. If you don't have access to the channel, ask the server staff to see if you can get access."
 
 premiumMusic: "Music is enabled only in Premium servers, in the Public Bastion.\n\nFor more information, contact us in [%bastion.server.name%](%bastion.server.invite%)."
 premiumVoiceSessions: "Only Premium Servers can have Voice Sessions to automatically create Temporary Voice Channels."

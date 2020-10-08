@@ -85,7 +85,6 @@ kick: Il vous permet d'expulser des utilisateurs du serveur.
 nickname: Il vous permet de définir (et de désactiver) les surnoms des membres du serveur.
 reason: Il vous permet de mettre à jour la raison d'une affaire de modération. Vous avez oublié de définir une raison ? Vous avez une faute de frappe ? Voici votre seconde chance.
 report: Il vous permet de signaler un membre du serveur aux modérateurs du serveur, à condition qu'un canal de signalements soit défini.
-textMute: Il vous permet de bâillonner textuellement (et de débâillonner) des utilisateurs dans un canal (ou une catégorie). Les utilisateurs bâillonnés textuellement ne peuvent pas envoyer de messages dans les canaux où ils sont bâillonnés.
 unban: Il vous permet de gracier les utilisateurs qui sont bannis sur le serveur.
 updateRoles: Il vous permet de mettre à jour les rôles des membres du serveur.
 voiceMute: Il vous permet de bâillonner vocalement (et de débâillonner) les utilisateurs d'un canal. Les utilisateurs qui sont bâillonnés vocalement ne peuvent pas parler dans les canaux vocaux où ils sont bâillonnés.
@@ -111,7 +110,6 @@ rainbow6: Il vous permet de voir les statistiques de n'importe quel joueur Rainb
 rocketLeague: Il vous permet de voir les statistiques de n'importe quel joueur de Rocket League sur n'importe quelle plateforme prise en charge.
 coins: Il vous permet de voir votre compte Bastion.
 daily: Il vous permet de réclamer des piècesBastion, que chaque membre reçoit en récompense pour être sur le serveur. Vous pouvez collecter vos récompenses toutes les 24 heures.
-karma: Il vous permet de donner à quelqu'un des doux petit points Internet, que nous appelons karma, si vous pensez qu'ils en valent la peine. Vous pouvez abandonner jusqu'à 3 karmas toutes les 6 heures, donc dépensez-les avec sagesse.
 leaderboard: Il vous permet de voir le classement de votre serveur. Vous êtes classé en fonction de votre niveau, de votre expérience, de votre karma et de vos pièces Bastion ; dans cet ordre exact.
 profile: Il vous permet de voir votre (ou l'un des membres du serveur) profil Bastion.
 rank: Il vous permet de voir votre (ou l'un des membres du serveur) rang, niveau, expérience et karma.

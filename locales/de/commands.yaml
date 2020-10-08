@@ -85,7 +85,6 @@ kick: Es erlaubt Ihnen, Benutzer vom Server zu kicken.
 nickname: Es erlaubt Ihnen, Spitznamen der Servermitglieder zu setzen (und zu entfernen).
 reason: Es erlaubt dir, den Grund einer Moderation zu aktualisieren. Vergiss einen Grund zu setzen? Hast du einen Tipp? Hier ist deine zweite Chance.
 report: Es erlaubt Ihnen, einen Server den Moderatoren des Servers zu melden, sofern ein Report Channel festgelegt ist.
-textMute: Es erlaubt es Benutzern in einem Kanal (oder in einer Kategorie) zu Text stummschalten (und nicht stummschalten). Text-stummgeschaltete Benutzer können keine Nachrichten in den Sendern, die sie stumm sind, senden.
 unban: Es erlaubt dir, Benutzer zu entbannen, die auf dem Server gebannt sind.
 updateRoles: Es erlaubt Ihnen, die Rollen von Servermitgliedern zu aktualisieren.
 voiceMute: Sie können stumm (und unstumm) Benutzer in einem Kanal ansprechen. Stummgeschaltete Benutzer können nicht in den Sprachkanälen sprechen, die sie stumm gehalten haben.
@@ -111,7 +110,6 @@ rainbow6: Es erlaubt dir, die Statistiken eines jeden Rainbow 6 Spielers auf jed
 rocketLeague: Es erlaubt dir, die Statistiken eines jeden Raketenliga-Spielers auf jeder unterstützten Plattform zu sehen.
 coins: Es erlaubt Ihnen, Ihr Bastion Konto zu sehen.
 daily: Es erlaubt Ihnen, Bastion Coins zu beanspruchen, die jedes Mitglied als Belohnung für seine Mitgliedschaft auf dem Server erhält. Du kannst deine Belohnungen einmal alle 24 Stunden beanspruchen.
-karma: Es erlaubt Ihnen, jemandem die süßen kleinen Internet-Points, nennen wir Karma, wenn Sie denken, dass sie es wert sind. Sie können bis zu 3 Karmas alle 6 Stunden aufgeben, so verbringen Sie es klug.
 leaderboard: Es erlaubt dir, die Rangliste deines Servers zu sehen. Du bist basierend auf deinem Level, deiner Erfahrung, deinem Karma und deiner Bastion Coins; in dieser exakten Reihenfolge.
 profile: Es erlaubt Ihnen, Ihr (oder eines der Server-Mitglieder) Bastion Profil zu sehen.
 rank: Es erlaubt Ihnen, Ihren (oder eines der Servermitglieder) Rang, Level, Erfahrung und Karma zu sehen.

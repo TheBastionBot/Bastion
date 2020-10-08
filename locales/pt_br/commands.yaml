@@ -85,7 +85,6 @@ kick: Ele permite expulsar usuários do servidor.
 nickname: Ele permite que você defina (e não definir) apelidos dos membros do servidor.
 reason: Ele permite que você atualize o motivo de uma instância de moderação. Esqueceu de definir um motivo? Um erro de digitação? Aqui está sua segunda chance.
 report: Ele permite que você reporte um membro do servidor aos moderadores do servidor, contanto que um canal de relatório esteja definido.
-textMute: Ele permite que você emita texto para usuários em um canal (ou categoria). Usuários com mensagens silenciadas em texto não podem enviar mensagens nos canais que estão silenciados.
 unban: Isso permite desbanir os usuários que estão banidos no servidor.
 updateRoles: Ele permite que você atualize as funções dos membros do servidor.
 voiceMute: Isso permite que você silencie e ative o áudio de usuários em um canal. Usuários com o áudio de voz não podem falar nos canais de voz que estão silenciados.
@@ -111,7 +110,6 @@ rainbow6: Ele permite que você veja as estatísticas de qualquer jogador do Arc
 rocketLeague: Ele permite que você veja as estatísticas de qualquer jogador da Liga de Foguetes em qualquer plataforma suportada.
 coins: Ele permite que você veja sua Conta Bastion.
 daily: Isso permite que você reivindique Moedas de Bastion, que todo membro recebe como recompensa por estar no servidor. Você pode reivindicar suas recompensas uma vez a cada 24 horas.
-karma: Isso permite que você dê a alguém os doces pequenos pontos de internet, nós chamamos karma, se você acha que eles valem a pena. Você pode desistir de até 3 karmas a cada 6 horas, então gaste sabiamente.
 leaderboard: Isso permite que você veja a classificação dos líderes do seu servidor. Você é classificado com base em seu nível, experiência, karma e Coins de Basção; naquela ordem exata.
 profile: Ele permite que você veja seu (ou qualquer um dos perfis de Bastion do membro).
 rank: Ele permite que você veja sua (ou qualquer um dos membros do servidor), nível, experiência e karma.

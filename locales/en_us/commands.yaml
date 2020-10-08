@@ -17,6 +17,9 @@ setUsername: It allows you to update Bastion's username directly from Discord.
 shutdown: It allows you to shutdown Bastion directly from Discord.
 garfield: It allows you to see the latest Garfield comic strip.
 xkcd: It allows you to see the latest xkcd comic strip.
+amongUsChannel: It allows to set the channel for creating Among Us lobbies.
+  Anybody who has access to this channel would be able to auto create Among Us
+  lobbies using the `amongus` command.
 announcements: It allows you to enable (and disable) Bastion's Announcements in
   the server. It sets the channel as the Announcement Channel that will receive
   the announcement broadcasts sent by the bot owners using the `announce`
@@ -103,6 +106,9 @@ acrophobia: It allows you to play the Acrophobia game with your fellow server
   backronym. After the submissions are over, in the specified amount of time,
   everyone then votes anonymously for their favorite answer. The most popular
   backronym wins.
+amongus: It allows you create Among Us lobbies with necessary channels for
+  Discussion and Muted users, and gives the lobby host easy ways to manage them
+  automatically.
 flip: It allows you to flip any number of coins and see the result. It also
   supports gambling.
 gameServer: It allows you to fetch information from nearly any game server that
@@ -199,8 +205,8 @@ reason: It allows you to update the reason of a moderation case. Forgot to set a
   reason? Did a typo? Here's your second chance.
 report: It allows you to report a server member to the moderators of the server,
   provided a Report Channel is set.
-textMute: It allows you to text mute (and unmute) users in a channel (or
-  category). Text muted users can't send messages in the channels they are
+textMute: It allows you to text mute (and unmute) users in a channel, category,
+  or the server. Text muted users can't send messages in the channels they are
   muted.
 unban: It allows you to unban the users who're banned in the server.
 updateRoles: It allows you to update roles of server members.
@@ -249,8 +255,8 @@ daily: It allows you to claim Bastion Coins, that every member receives as a
   reward for being in the server. You can claim your rewards once every 24
   hours.
 karma: It allows you to give someone the sweet little internet points, we call
-  karma, if you think they're worth it. You can give up to 3 karmas every 6
-  hours, so spend it wisely.
+  karma, if you think they're worth it. You can also add a personalized message
+  along with it. You can give up to 3 karmas every 6 hours, so spend it wisely.
 leaderboard: It allows you to see the leaderboard of your server. You're ranked
   based on your level, experience, karma, and Bastion Coins; in that exact
   order.

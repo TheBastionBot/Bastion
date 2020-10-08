@@ -85,7 +85,6 @@ kick: Hiermee kun je gebruikers verwijderen van de server.
 nickname: Het stelt je in staat bijnaam van de serverleden in te stellen (en ongezet).
 reason: Het stelt je in staat om de reden van een moderatie-zaak bij te werken. Ben je een reden vergeten? Heb je een typo? Hier is je tweede kans.
 report: Het stelt je in staat om een serverlid te rapporteren aan de moderators van de server, mits er een Rapportkanaal is ingesteld.
-textMute: Hiermee kun je gebruikers dempen (en dempen) in een kanaal (of categorie). Tekstgedempte gebruikers kunnen geen berichten versturen in de kanalen die ze gedempt zijn.
 unban: Je kunt de verbannen gebruikers die verbannen zijn op de server weer ongedaan maken.
 updateRoles: Hiermee kun je de rollen van de serverleden bijwerken.
 voiceMute: Het stelt je in staat om gebruikers te dempen (en dempen) in een kanaal. Stem gedempte gebruikers kunnen niet spreken in de spraakkanalen die ze zijn gedempt.
@@ -111,7 +110,6 @@ rainbow6: Het stelt je in staat om de statistieken van elke Rainbow 6-speler in 
 rocketLeague: Het stelt je in staat om de statistieken van elke Rocket League speler te zien in elk ondersteund platform.
 coins: Het laat je toe om je Bastion Account te bekijken.
 daily: Het laat je toe om Bastion Coins te claimen dat elk lid als beloning ontvangt voor zijn of haar aanwezigheid in de server. U kunt uw beloningen eenmaal elke 24 uur opeisen.
-karma: Het laat je toe om iemand de zoete kleine internetpunten te geven, we noemen karma, als je denkt dat het de moeite waard is. Je kunt maximaal 3 karmas per 6 uur opgeven, dus besteed het verstandig.
 leaderboard: Het stelt je in staat om de ranglijst van je server te zien. Je bent gerangschikt op basis van jouw level, ervaring, karma en Bastion Coins; in precies die volgorde.
 profile: Het laat je toe je Bastion profiel te zien (of een van de server leden).
 rank: Het stelt je in staat om je (of een van de serverleden) rank, niveau, ervaring en karma te zien.

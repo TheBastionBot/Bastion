@@ -1,13 +1,22 @@
-date: September 13, 2020
-image: https://i.imgur.com/L8CJkNz.gif
+date: October 8, 2020
+image: https://i.imgur.com/y6w9t0o.png
 changes:
+  Among Us ✕ Bastion:
+    - title: Among Us Lobbies
+      description: Server members can now create Discord Lobbies for their Among Us party and manage it automatically, using the new `amongUs` command.
+    - title: Lobby Channel
+      description: Server Managers, don't fret, you can restrict the usage of `amongUs` command to a specific channel using the new `amongUsChannel` command.
+    - title: Lobby Restrictions
+      description: And lobby hosts, your lobbies are private by default. And you have complete control over whether to allow everyone or only your friends.
   NEW:
-    - title: Captcha Verification
-      description: You can now opt to enable Captcha Verification in your server. When enabled, users joining the server would need to solve a captcha in the server's [dashboard](https://bastion.traction.one/dashboard) to verify themselves, and then they'll be assigned the role that was set using the new `verification` command.
-    - description: You can now choose to include roles which should be included when pruning members from the server.
+    - description: Did you ever want to add a personalized message when giving rep/karma to someone? You can do it now! See `karma --help` for more details.
+    - description: You can now give karma/rep anyone simply by thanking them in a message reply. Thank you @Alice for suggesting this! Works even when you mention multiple users.
+    - description: Have you ever deleted all the messages from a channel by mistake? I have. So, from now on, `clear` will always ask for confirmation if no `--limit` is explicitly specified.
+    - description: Added support back for server wide text muting members in the server with the `--server` flag in the `textMute` command.
+    - description: Did you want to go back to Bastion's random greetings and farewells after setting a custom message? Now you can do that by using the `--random` flag with the `greetings` and `farewells` commands respectively.
+    - description: Bastion will now give double Experience Points to server members if they are boosting your server.
   CHANGES:
-    - description: Previews from the `greetings` & `farewells` commands would now show up as embed objects instead of it being rendered.
-    - description: Changed an implementation where using `linkFilter` or `inviteFilter` would reset their respective Safe List that was set using the `safeList` command.
-  SQUASHED THESE BUGS:
-    - description: Fixed an issue where the last streamer was not being removed.
-    - description: Some under-the-hood fixes to make Bastion better than ever.
+    - description: Temporary voice channels' names will now be based on the name of the user who created it.
+    - description: Some optimizations to cache to reduce Bastion's memory usage.
+  FIXES:
+    - description: Fixed an issue with the `music` command that prevented some servers from show up in the list of all servers where music is enabled.

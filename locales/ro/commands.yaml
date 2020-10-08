@@ -85,7 +85,6 @@ kick: Vă permite să dați afară utilizatori de pe server.
 nickname: Îți permite să setezi (și să anulezi) poreclele membrilor serverului.
 reason: Îți permite să actualizezi motivul unui caz de moderare. Ai uitat să setezi un motiv? A fost o tipografie? Iată a doua șansă a ta.
 report: Vă permite să raportați un membru al serverului către moderatorii serverului, cu condiția să fie setat un canal de raportare.
-textMute: Vă permite să introduceţi sunetul (şi deblocaţi) utilizatori într-un canal (sau categorie). Utilizatorii care dezactivează textul nu pot trimite mesaje în canalele pe care sunt dezactivate.
 unban: Vă permite să deblocați utilizatorii care sunt interziși pe server.
 updateRoles: Vă permite să actualizaţi rolurile membrilor serverului.
 voiceMute: Îți permite să muți utilizatorii de voce (și să dezactiveze) într-un canal. Utilizatorii cu sunet de voce nu pot vorbi pe canalele de voce pe care sunt blocați.
@@ -111,7 +110,6 @@ rainbow6: Vă permite să vedeţi statisticile oricărui jucător Rainbow 6 pe o
 rocketLeague: Îți permite să vezi statisticile oricărui jucător de la Rocket League în orice platformă suportată.
 coins: Vă permite să vedeţi contul dvs. Bastion.
 daily: Vă permite să pretindeți Bastion Coins, că fiecare membru primește ca recompensă pentru că se află pe server. Poți să-ți revendici recompensele o dată la 24 de ore.
-karma: Îți permite să oferi cuiva punctele mici de internet, pe care le numim karma, dacă crezi că merită. Poţi renunţa la 3 karme la fiecare 6 ore, aşa că o petreci cu înţelepciune.
 leaderboard: Îți permite să vezi clasamentul serverului tău. Ești clasat în funcție de nivelul, experiența, karma și Bastion Coins; în acea ordine exactă.
 profile: Îți permite să vezi profilul tău de Bastion (sau oricare dintre membrii serverului).
 rank: Îți permite să vezi rangul tău (sau al oricăruia dintre membrii serverului) și nivelul, experiența și karma.

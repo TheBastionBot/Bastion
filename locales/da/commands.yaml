@@ -85,7 +85,6 @@ kick: Det giver dig mulighed for at sparke brugere fra serveren.
 nickname: Den tillader jer hen til placere (og unset) øgenavne i den styreenhed medlemmer.
 reason: Det giver dig mulighed for at opdatere årsagen til en mådehold sag. Glemt for at angive en årsag? Har du en typo? Her er din anden chance.
 report: Det giver dig mulighed for at rapportere en server medlem til moderatorer af serveren, forudsat at en rapport kanal er indstillet.
-textMute: Det giver dig mulighed for at tekst mute (og unmute) brugere i en kanal (eller kategori). Tekst muted brugere kan ikke sende beskeder i de kanaler, de er muted.
 unban: Det giver dig mulighed for at fjerne udelukkelse af brugere, der er udelukket i serveren.
 updateRoles: Det giver dig mulighed for at opdatere roller servermedlemmer.
 voiceMute: Det giver dig mulighed for at stemme mute (og unmute) brugere i en kanal. Stemme muted brugere kan ikke tale i de stemmekanaler de er muted.
@@ -111,7 +110,6 @@ rainbow6: Det giver dig mulighed for at se statistikkerne for enhver regnbue 6 s
 rocketLeague: Det giver dig mulighed for at se statistikkerne af enhver Rocket League afspiller i enhver understøttet platform.
 coins: Det giver dig mulighed for at se din Bastion konto.
 daily: Det giver dig mulighed for at kræve Bastion mønter, at hvert medlem modtager som en belønning for at være i serveren. Du kan kræve din belønning én gang hver 24 timer.
-karma: Det giver dig mulighed for at give nogen de søde små internetpoint, vi kalder karma, hvis du tror, de er det værd. Du kan give op til 3 karmas hver 6. time, så tilsæt den klogt.
 leaderboard: Det giver dig mulighed for at se leaderboard af din server. Du er rangeret baseret på dit niveau, erfaring, karma og Bastion mønter; i den nøjagtige rækkefølge.
 profile: Det giver dig mulighed for at se din (eller nogen af serveren medlemmers) Bastion Profil.
 rank: Det giver dig mulighed for at se din (eller nogen af servermedlemmets) rang, niveau, oplevelse og karma.

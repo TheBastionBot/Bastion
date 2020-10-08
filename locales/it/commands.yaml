@@ -85,7 +85,6 @@ kick: Consente di espellere gli utenti dal server.
 nickname: Consente di impostare (e disattivare) i soprannomi dei membri del server.
 reason: Ti permette di aggiornare il motivo di un caso di moderazione. Hai dimenticato di impostare un motivo? Hai fatto un errore? Ecco la tua seconda occasione.
 report: Consente di segnalare un membro del server ai moderatori del server, a condizione che sia impostato un Canale del report.
-textMute: Ti permette di testare gli utenti silenziati (e disattivare) in un canale (o categoria). Gli utenti silenziati di testo non possono inviare messaggi nei canali che sono disattivati.
 unban: Ti permette di sbloccare gli utenti che sono bannati nel server.
 updateRoles: Consente di aggiornare i ruoli dei membri del server.
 voiceMute: Ti permette di vocare gli utenti muti (e disattivare) in un canale. Gli utenti silenziati di voce non possono parlare nei canali vocali che sono disattivati.
@@ -111,7 +110,6 @@ rainbow6: Ti permette di vedere le statistiche di qualsiasi giocatore Rainbow 6 
 rocketLeague: Ti permette di vedere le statistiche di qualsiasi giocatore Rocket League in qualsiasi piattaforma supportata.
 coins: Ti permette di vedere il tuo account Bastion.
 daily: Ti permette di rivendicare Bastion Coins, che ogni membro riceve come ricompensa per essere nel server. Puoi richiedere i tuoi premi una volta ogni 24 ore.
-karma: Ti permette di dare a qualcuno i dolci piccoli punti internet, chiamiamo karma, se pensi che ne valgano la pena. Puoi rinunciare fino a 3 karma ogni 6 ore, quindi spenderlo con saggezza.
 leaderboard: Ti permette di vedere la classifica del tuo server. Sei classificato in base al tuo livello, esperienza, karma e Bastion Coins; in quell'ordine esatto.
 profile: Ti permette di vedere il tuo (o uno qualsiasi dei membri del server) Profilo Bastion.
 rank: Ti permette di vedere il tuo (o uno qualsiasi dei membri del server) rango, livello, esperienza e karma.
