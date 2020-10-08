@@ -168,3 +168,5 @@ verificationEnabled: "Captcha Verification is enabled in this server, and the ve
 verificationDisabled: "Captcha Verification is disabled in this server. Enable it to make users verify whether they are human after they join the server."
 verificationRoleSet: "%var% set the %var% role as the Verified Role of the server. When a member solves the captcha in the server's dashboard to prove that they are human, they're assigned to this role."
 verificationRoleUnset: "%var% removed the Verified Role of the server, which disables the server's Captcha Verification."
+amongUsChannelSet: "%var% set this channel as the Among Us Channel. Anybody who has access to this channel would be able to auto create Among Us lobbies using the `amongus` command."
+amongUsChannelUnset: "%var% removed the Among Us Channel of the server. Members won't be able to create Among Us lobbies anymore."
