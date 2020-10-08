@@ -90,6 +90,7 @@ export interface Guild {
     membersOnly?: boolean;
     boosts?: number;
     verifiedRoleId?: string;
+    amongUsChannel?: string;
 }
 
 export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.Schema<Guild>({
@@ -339,6 +340,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         type: Number,
     },
     verifiedRoleId: {
+        type: String,
+    },
+    amongUsChannel: {
         type: String,
     },
 }));
