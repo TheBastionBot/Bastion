@@ -17,6 +17,9 @@ setUsername: It allows you to update Bastion's username directly from Discord.
 shutdown: It allows you to shutdown Bastion directly from Discord.
 garfield: It allows you to see the latest Garfield comic strip.
 xkcd: It allows you to see the latest xkcd comic strip.
+amongUsChannel: It allows to set the channel for creating Among Us lobbies.
+  Anybody who has access to this channel would be able to auto create Among Us
+  lobbies using the `amongus` command.
 announcements: It allows you to enable (and disable) Bastion's Announcements in
   the server. It sets the channel as the Announcement Channel that will receive
   the announcement broadcasts sent by the bot owners using the `announce`
@@ -103,6 +106,9 @@ acrophobia: It allows you to play the Acrophobia game with your fellow server
   backronym. After the submissions are over, in the specified amount of time,
   everyone then votes anonymously for their favorite answer. The most popular
   backronym wins.
+amongus: It allows you create Among Us lobbies with necessary channels for
+  Discussion and Muted users, and gives the lobby host easy ways to manage them
+  automatically.
 flip: It allows you to flip any number of coins and see the result. It also
   supports gambling.
 gameServer: It allows you to fetch information from nearly any game server that
