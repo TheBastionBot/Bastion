@@ -1,8 +1,9 @@
-date: October 19, 2020
+date: October 20, 2020
 image:
 changes:
   CHANGES:
     - description: You can now use the `voiceSessions` command without any arguments to list all the Voice Session categories in the server.
     - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
+    - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
   FIXES:
     - description: Fixed some error messages that were not using the proper locale.
