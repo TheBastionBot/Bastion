@@ -48,10 +48,28 @@ const inRange: InRangeFunction = (number: number, lower: number, upper?: number)
     return number >= Math.min(lower, upper) && number <= Math.max(lower, upper);
 };
 
+const largestNeighbor = (number: number, list: number[]): number => {
+    let nearest = Number.MAX_SAFE_INTEGER;
+    for (const item of list) {
+        if (item < nearest && item >= number) nearest = item;
+    }
+    return nearest;
+};
+
+const smallestNeighbor = (number: number, list: number[]): number => {
+    let nearest = Number.MIN_SAFE_INTEGER;
+    for (const item of list) {
+        if (item > nearest && item <= number) nearest = item;
+    }
+    return nearest;
+};
+
 
 export {
     abbreviate,
     clamp,
     getRandomInt,
     inRange,
+    largestNeighbor,
+    smallestNeighbor,
 };
