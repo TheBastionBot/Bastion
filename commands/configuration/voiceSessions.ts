@@ -69,7 +69,7 @@ export = class VoiceSessionsCommand extends Command {
             // update guild document
             await GuildModel.findByIdAndUpdate(message.guild.id, {
                 voiceSessions: {
-                    categories: sessionalCategories,
+                    categories: sessionalCategories.filter(id => message.guild.channels.cache.has(id)),
                 },
             });
 
