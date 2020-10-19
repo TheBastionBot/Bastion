@@ -137,7 +137,6 @@ didYouKnowDeveloper: "Wussten Sie schon? %var% ist derjenige, der mich erstellt 
 streamerRoleSet: "%var% hat die Rolle %var% als Streamer des Servers festgelegt. Wenn ein Mitglied live auf dem Server geht, sind sie dieser Rolle zugeordnet, vorausgesetzt sie haben mindestens eine Rolle."
 streamerRoleUnset: "%var% hat die Streamer-Rolle des Servers entfernt."
 didYouKnowDonation: "Wusstest du? Wenn jeder Bastion mindestens $1 spenden würde, könnten wir Bastion jahrelang blühen lassen!"
-didYouKnowEarlyReleases: "Wussten Sie schon? Schirmherren von %bastion.project% erhalten frühzeitigen Zugriff auf neue Versionen von %bastion.name%."
 voiceSessionCreate: "%var% hat eine neue Kategorie für Sprachsitzungen erstellt. Mitglieder können jetzt neue temporäre Sprachkanäle erstellen, wann immer sie dies benötigen."
 checkProfile: "Du kannst den `profile` Befehl verwenden, um dein komplettes Bastion Profil zu sehen."
 commandEnabled: "Der Befehl ist derzeit aktiviert."
