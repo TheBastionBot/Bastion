@@ -41,7 +41,7 @@ export = class EditCommand extends Command {
         const messageObject = await message.channel.messages.fetch(argv.message, false);
 
         // check whether the message exists.
-        if (!messageObject) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "error", "roleNotFound"));
+        if (!messageObject) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
         // check whether the message is editable
         if (!messageObject.editable) return;

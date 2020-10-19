@@ -47,7 +47,7 @@ export = class RoleStoreCommand extends Command {
             // identify role
             const role = this.client.resolver.resolveRole(message.guild, argv._.join(" ")) as BastionRole;
 
-            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "error", "roleNotFound"));
+            if (!role) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ROLE_NOT_FOUND, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "roleNotFound"));
 
 
             if (argv.sell > 0) {
