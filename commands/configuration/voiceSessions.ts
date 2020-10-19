@@ -27,6 +27,7 @@ export = class VoiceSessionsCommand extends Command {
             clientPermissions: [ "MANAGE_CHANNELS" ],
             userPermissions: [ "MANAGE_GUILD" ],
             syntax: [
+                "voiceSessions",
                 "voiceSessions --create",
             ],
         });
@@ -83,7 +84,20 @@ export = class VoiceSessionsCommand extends Command {
             });
         }
 
-        // command syntax validation
-        throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
+        // find all sessional categories
+        const sessionalCategories: string[] = (message.guild as BastionGuild).document.voiceSessions ? (message.guild as BastionGuild).document.voiceSessions.categories : [];
+
+        // acknowledge
+        return await message.channel.send({
+            embed: {
+                color: Constants.COLORS.IRIS,
+                title: (sessionalCategories.length ? "" : "No ") + "Voice Sessions",
+                description: "Use `voiceSessions --create` to create a new category for Voice Sessions.",
+                fields: sessionalCategories.map(id => ({
+                    name: message.guild.channels.cache.has(id) ? message.guild.channels.cache.get(id).name : "[DELETED CHANNEL]",
+                    value: id,
+                })),
+            },
+        });
     }
 }
