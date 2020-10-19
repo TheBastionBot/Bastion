@@ -4,3 +4,5 @@ changes:
   CHANGES:
     - description: You can now use the `voiceSessions` command without any arguments to list all the Voice Session categories in the server.
     - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
+  FIXES:
+    - description: Fixed some error messages that were not using the proper locale.
