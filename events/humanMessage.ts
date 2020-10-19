@@ -9,6 +9,7 @@ import { ClientApplication, DMChannel, Message, Snowflake, Team, User } from "di
 import * as embeds from "../utils/embeds";
 import * as emojis from "../utils/emojis";
 import * as gamification from "../utils/gamification";
+import * as numbers from "../utils/numbers";
 import * as omnic from "../utils/omnic";
 import * as variables from "../utils/variables";
 
@@ -33,12 +34,18 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
     handleLevelRoles = async (message: Message, level: number): Promise<void> => {
         const roles = await RoleModel.find({
             guild: message.guild.id,
-            level: { $exists: true },
+            level: { $exists: true, $ne: null },
         });
 
+        // check whether there are any level up roles
+        if (!roles || !roles.length) return;
+
+        // get the nearest level for which roles are available
+        const nearestLevel = numbers.smallestNeighbor(level, roles.map(r => r.level));
+
         // identify valid roles
-        const extraRoles = roles.filter(r => r.level !== level && message.guild.roles.cache.has(r._id));
-        const levelRoles = roles.filter(r => r.level === level && message.guild.roles.cache.has(r._id));
+        const extraRoles = roles.filter(r => r.level !== nearestLevel && message.guild.roles.cache.has(r._id));
+        const levelRoles = roles.filter(r => r.level === nearestLevel && message.guild.roles.cache.has(r._id));
 
         // update member roles
         if (levelRoles.length) {
