@@ -7,5 +7,7 @@ changes:
   CHANGES:
     - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
     - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
+    - description: Some under-the-hood improvements to make Bastion better than ever!
   FIXES:
+    - description: Fixed an issue in the invite filter that caused it to ignore invites in some guilds.
     - description: Fixed some error messages that were not using the proper locale.
