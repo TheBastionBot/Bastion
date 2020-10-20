@@ -14,6 +14,7 @@ export interface Guild {
     greeting?: {
         channelId: string;
         message?: Record<string, unknown>;
+        privateMessage?: Record<string, unknown>;
         timeout?: number;
     };
     farewell?: {
@@ -115,6 +116,10 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
                 sparse: true,
             },
             message: {
+                type: Object,
+                trim: true,
+            },
+            privateMessage: {
                 type: Object,
                 trim: true,
             },
