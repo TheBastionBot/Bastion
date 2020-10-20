@@ -37,6 +37,24 @@ export = class GuildMemberAddListener extends Listener {
     }
 
     handleGreetings = (member: GuildMember, document: IGuild): void => {
+        if (document.greeting.privateMessage) {
+            // greet DM
+            member.createDM().then(privateChannel => {
+                privateChannel.send({
+                    embed: {
+                        ...JSON.parse(variables.replaceMemberVariables(JSON.stringify(greetingsMessage), member)),
+                        footer: {
+                            text: "Greetings from " + member.guild.name + ". Welcome to our server!",
+                        },
+                    },
+                }).catch(() => {
+                    // this error can be ignored
+                });
+            }).catch(() => {
+                // this error can be ignored
+            });
+        }
+
         // check whether greetings are enabled
         if (!document.greeting || !document.greeting.channelId) return;
         // check whether the greeting channel is valid
