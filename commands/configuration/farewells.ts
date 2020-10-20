@@ -55,11 +55,19 @@ export = class Farewells extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                color: Constants.COLORS.IRIS,
-                description: "```json\n" + JSON.stringify(guild.document.farewell.message ? embeds.generateEmbed(guild.document.farewell.message) : {}) + "```",
+                color: message.guild.channels.cache.has(guild.document.farewell.channelId) ? Constants.COLORS.IRIS : Constants.COLORS.RED,
+                title: "Farewells " + (message.guild.channels.cache.has(guild.document.farewell.channelId) ? "Enabled" : "Disabled"),
+                fields: [
+                    {
+                        name: "Message",
+                        value: guild.document.farewell.message
+                            ?   "```json\n" + JSON.stringify(guild.document.farewell.message ? embeds.generateEmbed(guild.document.farewell.message) : {}) + "```"
+                            :   "[Default Messages]",
+                    },
+                ],
                 footer: {
-                    text: "Farewell Preview • " + (message.guild.channels.cache.has(guild.document.farewell.channelId) ? message.guild.channels.cache.get(guild.document.farewell.channelId).name : "Disabled")
-                        + (typeof guild.document.farewell.timeout === "number" ? " • " + (guild.document.farewell.timeout + " minutes") : ""),
+                    text: (message.guild.channels.cache.has(guild.document.farewell.channelId) ? "Channel #" + message.guild.channels.cache.get(guild.document.farewell.channelId).name + " • " : "")
+                    + (typeof guild.document.farewell.timeout === "number" && guild.document.farewell.timeout ? "Timeout - " + (guild.document.farewell.timeout + " minutes") : "No Timeout"),
                 },
             },
         });
