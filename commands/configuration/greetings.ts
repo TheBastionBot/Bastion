@@ -20,7 +20,7 @@ export = class Greetings extends Command {
                     enable: [ "e" ],
                     timeout: [ "t" ],
                 },
-                boolean: [ "disable", "enable", "random" ],
+                boolean: [ "disable", "enable", "private", "random" ],
                 number: [ "timeout" ],
             },
             scope: "guild",
@@ -32,9 +32,10 @@ export = class Greetings extends Command {
             syntax: [
                 "greetings --enable",
                 "greetings --disable",
+                "greetings --random",
                 "greetings --timeout TIMEOUT_IN_MINUTES",
                 "greetings -- MESSAGE",
-                "greetings --random",
+                "greetings --private -- MESSAGE",
             ],
         });
     }
@@ -45,7 +46,8 @@ export = class Greetings extends Command {
         // update guild greeting settings
         guild.document.greeting = {
             channelId: argv.enable ? message.channel.id : argv.disable ? undefined : guild.document.greeting ? guild.document.greeting.channelId : undefined,
-            message: argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : argv.random ? undefined : guild.document.greeting ? guild.document.greeting.message : undefined,
+            message: argv._.length && !argv.private ? embeds.generateBastionEmbed(argv._.join(" ")) : argv.random ? undefined : guild.document.greeting ? guild.document.greeting.message : undefined,
+            privateMessage: argv.private ? argv._.length ? embeds.generateBastionEmbed(argv._.join(" ")) : undefined : guild.document.greeting ? guild.document.greeting.privateMessage : undefined,
             timeout: typeof argv.timeout === "number" ? argv.timeout : guild.document.greeting ? guild.document.greeting.timeout : undefined,
         };
 
@@ -55,11 +57,25 @@ export = class Greetings extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
-                color: Constants.COLORS.IRIS,
-                description: "```json\n" + JSON.stringify(guild.document.greeting.message ? embeds.generateEmbed(guild.document.greeting.message) : {}) + "```",
+                color: message.guild.channels.cache.has(guild.document.greeting.channelId) ? Constants.COLORS.IRIS : Constants.COLORS.RED,
+                title: "Greetings " + (message.guild.channels.cache.has(guild.document.greeting.channelId) ? "Enabled" : "Disabled"),
+                fields: [
+                    {
+                        name: "Message",
+                        value: guild.document.greeting.message
+                            ?   "```json\n" + JSON.stringify(guild.document.greeting.message ? embeds.generateEmbed(guild.document.greeting.message) : {}) + "```"
+                            :   "[Default Messages]",
+                    },
+                    {
+                        name: "Private Message",
+                        value: guild.document.greeting.privateMessage
+                            ?   "```json\n" + JSON.stringify(guild.document.greeting.privateMessage ? embeds.generateEmbed(guild.document.greeting.privateMessage) : {}) + "```"
+                            :   "[Not Set]",
+                    },
+                ],
                 footer: {
-                    text: "Greeting Preview • " + (message.guild.channels.cache.has(guild.document.greeting.channelId) ? message.guild.channels.cache.get(guild.document.greeting.channelId).name : "Disabled")
-                        + (typeof guild.document.greeting.timeout === "number" ? " • " + (guild.document.greeting.timeout + " minutes") : ""),
+                    text: (message.guild.channels.cache.has(guild.document.greeting.channelId) ? "Channel #" + message.guild.channels.cache.get(guild.document.greeting.channelId).name + " • " : "")
+                        + (typeof guild.document.greeting.timeout === "number" && guild.document.greeting.timeout ? "Timeout - " + (guild.document.greeting.timeout + " minutes") : "No Timeout"),
                 },
             },
         });
