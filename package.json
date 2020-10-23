@@ -47,6 +47,6 @@
     "node-fetch": "^2.6.0",
     "opusscript": "^0.0.7",
     "uuid": "^8.3.0",
-    "youtube-dl": "^3.0.2"
+    "youtube-dl": "k3rn31p4nic/node-youtube-dl"
   }
 }
