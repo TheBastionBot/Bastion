@@ -50,14 +50,7 @@ export = class Play extends Command {
         super("play", {
             description: "It allows you to play a music in the server, from the given query or from any supported source.",
             triggers: [],
-            arguments: {
-                alias: {
-                    link: "l",
-                },
-                coerce: {
-                    link: Constants.ArgumentTypes.URL,
-                },
-            },
+            arguments: {},
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -66,7 +59,7 @@ export = class Play extends Command {
             userPermissions: [],
             syntax: [
                 "play Remember The Name by Ed Sheeran",
-                "play --link https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                "play https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             ],
         });
 
@@ -306,8 +299,9 @@ export = class Play extends Command {
         }
 
         const query = argv._.join(" ");
-        const info = argv.link ? argv.link.href.startsWith("http") && argv.link.href.includes("youtube.com") && argv.link.href.includes("playlist") ? await this.getSongInfo(argv.link.href, true) : null : await this.getSongInfo(query);
-        const songLinks: string[] = info ? argv.link.href.startsWith("http") && argv.link.href.includes("youtube.com") && argv.link.href.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.webpage_url || info.url ] : argv.link ? [ argv.link.href ] : null;
+        const isQueryURL = regex.URI.test(query);
+        const info = isQueryURL ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? await this.getSongInfo(query, true) : null : await this.getSongInfo(query);
+        const songLinks: string[] = info ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.webpage_url || info.url ] : isQueryURL ? [ query ] : null;
 
         // Command Syntax Validation
         if (!songLinks || !songLinks.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
