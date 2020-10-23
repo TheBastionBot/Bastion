@@ -35,6 +35,11 @@ interface YoutubeInfo extends youtube.Info {
     alt_title: string;
     creator: string;
     uploader: string;
+    entries: {
+        id: string;
+        url: string;
+        title: string;
+    }[];
 }
 
 
@@ -68,7 +73,7 @@ export = class Play extends Command {
         this.musicDirectory = "./music/";
     }
 
-    private getSongInfo(query: string): Promise<YoutubeInfo> {
+    private getSongInfo(query: string, playlist?: boolean): Promise<YoutubeInfo> {
         return new Promise((resolve, reject) =>
             youtube.getInfo(regex.URI.test(query) ? query : "ytsearch:" + query, [
                 "--ignore-errors",
@@ -77,10 +82,11 @@ export = class Play extends Command {
                 // geo restriction
                 "--geo-bypass-country=US",
                 // video selection
-                "--no-playlist",
+                ...(playlist ? [ "--flat-playlist", "--yes-playlist" ] : [ "--no-playlist" ]),
                 // filesystem options
                 "--no-cache-dir",
                 // verbosity / simulation
+                (playlist ? "--dump-single-json" : "--dump-json"),
                 "--quiet",
                 "--no-warnings",
                 // workarounds
@@ -300,11 +306,11 @@ export = class Play extends Command {
         }
 
         const query = argv._.join(" ");
-        const info = query.length ? await this.getSongInfo(query) : null;
-        const songLink: string = argv.link ? argv.link.href : info ? info.webpage_url || info.url : null;
+        const info = argv.link ? argv.link.href.startsWith("http") && argv.link.href.includes("youtube.com") && argv.link.href.includes("playlist") ? await this.getSongInfo(argv.link.href, true) : null : await this.getSongInfo(query);
+        const songLinks: string[] = info ? argv.link.href.startsWith("http") && argv.link.href.includes("youtube.com") && argv.link.href.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.webpage_url || info.url ] : argv.link ? [ argv.link.href ] : null;
 
         // Command Syntax Validation
-        if (!songLink) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
+        if (!songLinks || !songLinks.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // Set the Music Text & Voice Channels
         guild.music.textChannel = message.guild.channels.cache.has(guild.document.music.textChannelId)
@@ -372,7 +378,7 @@ export = class Play extends Command {
         const songId = uuid();
 
         // Create the music stream
-        const stream = youtube(songLink, [
+        const stream = youtube(songLinks[0], [
             "--ignore-errors",
             // network options
             "--force-ipv4",
@@ -383,6 +389,7 @@ export = class Play extends Command {
             // filesystem options
             "--no-cache-dir",
             // verbosity / simulation
+            "--dump-json",
             "--quiet",
             "--no-warnings",
             // workarounds
