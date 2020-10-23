@@ -12,6 +12,7 @@ import { v4 as uuid } from "uuid";
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
 import * as omnic from "../../utils/omnic";
+import * as regex from "../../utils/regex";
 
 import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
@@ -69,7 +70,7 @@ export = class Play extends Command {
 
     private getSongInfo(query: string): Promise<YoutubeInfo> {
         return new Promise((resolve, reject) =>
-            youtube.getInfo("ytsearch:" + query, [
+            youtube.getInfo(regex.URI.test(query) ? query : "ytsearch:" + query, [
                 "--ignore-errors",
                 // network options
                 "--force-ipv4",
