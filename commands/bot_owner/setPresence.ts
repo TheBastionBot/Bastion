@@ -48,7 +48,7 @@ export = class SetPresence extends Command {
 
     isValidTwitchURL = (url: string): boolean => url && url.startsWith("https://twitch.tv/");
 
-    isValidType = (type: string): boolean => type && [ "PLAYING", "WATCHING", "LISTENING", "STREAMING" ].includes(type.toUpperCase());
+    isValidType = (type: string): boolean => type && [ "PLAYING", "WATCHING", "LISTENING", "STREAMING", "COMPETING" ].includes(type.toUpperCase());
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // set presence

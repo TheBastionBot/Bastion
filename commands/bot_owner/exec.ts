@@ -97,8 +97,12 @@ export = class Exec extends Command {
                 },
             }).then(output => {
                 if (argv.delete) {
-                    if (message.deletable) message.delete({ timeout: 1e4 });
-                    output.delete({ timeout: 1e4 });
+                    if (message.deletable) message.delete({ timeout: 1e4 }).catch(() => {
+                        // this error can be ignored
+                    });
+                    output.delete({ timeout: 1e4 }).catch(() => {
+                        // this error can be ignored
+                    });
                 }
             });
         }

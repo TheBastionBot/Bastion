@@ -13,6 +13,7 @@ const Bastion = new tesseract.Client({
     messageCacheMaxSize: 5,
     messageCacheLifetime: 9e2,
     messageSweepInterval: 36e2,
+    messageEditHistoryMaxSize: 0,
     partials: [
         "MESSAGE",
         "REACTION",
