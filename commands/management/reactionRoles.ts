@@ -47,6 +47,7 @@ export = class ReactionRolesCommand extends Command {
             // remove reaction roles group
             await ReactionRoleGroupModel.deleteOne({
                 _id: argv.message,
+                guild: message.guild.id,
             });
 
             // acknowledge
@@ -209,7 +210,7 @@ export = class ReactionRolesCommand extends Command {
 
         // list all reaction role groups
         const reactionRoleGroups = await ReactionRoleGroupModel.find({
-            // guild: message.guild.id,
+            guild: message.guild.id,
         });
 
         if (!reactionRoleGroups) throw new Error("NO_REACTION_ROLES");
@@ -218,6 +219,7 @@ export = class ReactionRolesCommand extends Command {
         // acknowledge
         await message.channel.send({
             embed: {
+                color: Constants.COLORS.IRIS,
                 title: "Reaction Role Groups",
                 fields: reactionRoleGroups.map(group => ({
                     name: group._id,
