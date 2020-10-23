@@ -5,6 +5,7 @@ changes:
     - description: Private Greeting Messages are back! You can now set the `--private` flag when setting greeting messages to set it as a Private Greeting Message. See `greetings --help` for more details.
     - description: You can now use the `voiceSessions` command without any arguments to list all the Voice Session categories in the server.
   CHANGES:
+    - description: The `play` command will now automatically recognize URLs; no need to use the `--link` or `-l` option anymore.
     - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
     - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
     - description: Some under-the-hood improvements to make Bastion better than ever!
