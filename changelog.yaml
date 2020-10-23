@@ -1,4 +1,4 @@
-date: October 20, 2020
+date: October 23, 2020
 image:
 changes:
   NEW:
@@ -10,4 +10,6 @@ changes:
     - description: Some under-the-hood improvements to make Bastion better than ever!
   FIXES:
     - description: Fixed an issue in the invite filter that caused it to ignore invites in some guilds.
+    - description: Added a workaround to make `play` work with only links until `youtube-dl` fixes the issue with song search.
     - description: Fixed some error messages that were not using the proper locale.
+    - description: Some under-the-hood fixes to make Bastion more stable than ever.
