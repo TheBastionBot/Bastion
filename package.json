@@ -39,7 +39,7 @@
     "zlib-sync": "^0.1.7"
   },
   "dependencies": {
-    "@bastion/tesseract": "^2.1.1",
+    "@bastion/tesseract": "^2.1.2",
     "@k3rn31p4nic/google-translate-api": "^1.1.1",
     "chalk": "^4.1.0",
     "discord-rpc": "^3.1.3",
