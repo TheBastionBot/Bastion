@@ -6,6 +6,7 @@
 import { Listener, Constants, Logger } from "@bastion/tesseract";
 import { GuildMember, MessageEmbedOptions, MessageReaction, TextChannel, User, VoiceChannel } from "discord.js";
 
+import { Guild as GuildDocument } from "../models/Guild";
 import ReactionRoleGroup from "../models/ReactionRoleGroup";
 import RoleModel from "../models/Role";
 import BastionGuild = require("../structures/Guild");
@@ -173,6 +174,40 @@ export = class MessageReactionAddListener extends Listener {
         }
     }
 
+    handleVoiceSessions = async (messageReaction: MessageReaction, member: GuildMember, guildDocument: GuildDocument): Promise<void> => {
+        // don't allow bots to handle voice sessions
+        if (member.user.bot) return;
+
+        // check whether voice sessions are available
+        if (!guildDocument.voiceSessions || !guildDocument.voiceSessions.categories) return;
+
+        // check whether the reaction was valid
+        if (![ "🔒", "🔓" ].includes(messageReaction.emoji.name)) return;
+
+        // check whether the reaction was made in a valid message
+        if (messageReaction.message.author.id !== member.client.user.id) return;
+        if (!messageReaction.message.embeds.length || !messageReaction.message.embeds[0].title || !messageReaction.message.embeds[0].title.startsWith("Voice Session Control") || !(messageReaction.message.channel as TextChannel).parentID) return;
+        if (!guildDocument.voiceSessions.categories.includes((messageReaction.message.channel as TextChannel).parentID)) return;
+
+        if (member.voice && member.voice.channel && member.voice.channel.parentID && guildDocument.voiceSessions.categories.includes((messageReaction.message.channel as TextChannel).parentID) && member.voice.channel.name.startsWith(member.displayName + "'")) {
+            if (messageReaction.emoji.name === "🔒") {
+                await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
+                    CONNECT: false,
+                });
+                await messageReaction.users.remove(member).catch(() => {
+                    // this error can be ignored
+                });
+            } else if (messageReaction.emoji.name === "🔓") {
+                await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
+                    CONNECT: true,
+                });
+                await messageReaction.users.remove(member).catch(() => {
+                    // this error can be ignored
+                });
+            }
+        }
+    }
+
     handleGameLobby = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
         // don't allow bots to handle game lobbies
         if (member.user.bot) return;
@@ -247,7 +282,10 @@ export = class MessageReactionAddListener extends Listener {
         this.handleGameLobby(messageReaction, member).catch(Logger.error);
 
 
-        const guildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
+        const guildDocument: GuildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
+
+        // handle Voice Sessions
+        this.handleVoiceSessions(messageReaction, member, guildDocument).catch(Logger.error);
 
         // handle suggestions, if enabled and the suggestions channel exists
         if (guildDocument.suggestionsChannelId && messageReaction.message.channel.id === guildDocument.suggestionsChannelId) {
