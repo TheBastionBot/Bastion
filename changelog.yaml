@@ -7,6 +7,7 @@ changes:
     - description: When you create a Voice Session a **session-control** text channel will be created where you can use reactions to control your voice session.
   CHANGES:
     - description: Voice Sessions will be locked by default now. You can invite others to your voice channel by sending an invite or unlocking your voice session in **session-control**.
+    - description: Voice Sessions' names will now be based on the name of the **+ New [NAME]** channel that's used to create a new session.
     - description: The `play` command will now automatically recognize URLs; no need to use the `--link` or `-l` option anymore.
     - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
     - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
