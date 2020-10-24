@@ -193,14 +193,14 @@ export = class MessageReactionAddListener extends Listener {
             if (messageReaction.emoji.name === "🔒") {
                 await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
                     CONNECT: false,
-                });
+                },  "Locking Voice Session");
                 await messageReaction.users.remove(member).catch(() => {
                     // this error can be ignored
                 });
             } else if (messageReaction.emoji.name === "🔓") {
                 await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
                     CONNECT: true,
-                });
+                }, "Unlocking Voice Session");
                 await messageReaction.users.remove(member).catch(() => {
                     // this error can be ignored
                 });
