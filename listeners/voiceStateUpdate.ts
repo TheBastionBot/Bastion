@@ -59,6 +59,12 @@ export = class VoiceStateUpdateListener extends Listener {
                     parent: newState.channel.parent,
                     // TODO: Add member limit
                     // userLimit: ,
+                    permissionOverwrites: [
+                        {
+                            id: newState.member.id,
+                            allow: [ "CONNECT", "CREATE_INSTANT_INVITE", "MOVE_MEMBERS", "MUTE_MEMBERS" ],
+                        },
+                    ],
                     reason: "Requested by " + (newState.member.user ? newState.member.user.tag : newState.member.id),
                 });
 
