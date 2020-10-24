@@ -64,6 +64,11 @@ export = class VoiceStateUpdateListener extends Listener {
                             id: newState.member.id,
                             allow: [ "CONNECT", "CREATE_INSTANT_INVITE", "MOVE_MEMBERS", "MUTE_MEMBERS" ],
                         },
+                        {
+                            id: newState.member.guild.id,
+                            allow: [ "SPEAK", "VIEW_CHANNEL" ],
+                            deny: [ "CONNECT", "CREATE_INSTANT_INVITE" ],
+                        },
                     ],
                     reason: "Requested by " + (newState.member.user ? newState.member.user.tag : newState.member.id),
                 });
