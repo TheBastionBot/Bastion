@@ -4,7 +4,7 @@
  */
 
 import { Command, Constants } from "@bastion/tesseract";
-import { Message } from "discord.js";
+import { EmbedFieldData, Message } from "discord.js";
 
 import MemberModel from "../../models/Member";
 
@@ -66,7 +66,7 @@ export = class LeaderboardCommand extends Command {
                         value: member.karma,
                         inline: true,
                     },
-                ]),
+                ]) as unknown as EmbedFieldData[],
                 thumbnail: {
                     url: "https://i.imgur.com/Kzt8Ldk.png",
                 },

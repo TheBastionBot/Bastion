@@ -4,7 +4,7 @@
  */
 
 import { Logger, Scheduler } from "@bastion/tesseract";
-import { TextChannel } from "discord.js";
+import { MessageEmbedOptions, TextChannel } from "discord.js";
 import fetch from "node-fetch";
 
 import GuildModel, { Guild } from "../models/Guild";
@@ -79,7 +79,7 @@ export = class LiveStreams extends Scheduler {
                             text: "🔴 LIVE",
                         },
                         timestamp: stream.started_at,
-                    },
+                    } as unknown as MessageEmbedOptions,
                 }).then(() => {
                     notifiedStreams.push(stream.id);
                 }).catch(() => {

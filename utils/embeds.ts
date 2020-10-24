@@ -31,7 +31,7 @@ export const generateEmbed = (embed: string | MessageEmbedData): MessageEmbedOpt
         author: embed.author,
         color: embed.color || Constants.COLORS.IRIS,
         description: embed.description,
-        fields: embed.fields,
+        fields: embed.fields as EmbedFieldData[],
         footer: embed.footer,
         image: {
             url: embed.image,

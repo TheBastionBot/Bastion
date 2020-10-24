@@ -4,7 +4,7 @@
  */
 
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
-import { Message } from "discord.js";
+import { EmbedFieldData, Message } from "discord.js";
 
 import RoleModel from "../../models/Role";
 import * as constants from "../../utils/constants";
@@ -155,7 +155,7 @@ export = class ReferralRewardsCommand extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 title: "Referral Rewards",
-                fields: rewards.items,
+                fields: rewards.items as EmbedFieldData[],
                 footer: {
                     text: `Page ${rewards.page} of ${rewards.pages}`
                 },

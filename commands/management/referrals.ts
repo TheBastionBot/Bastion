@@ -4,7 +4,7 @@
  */
 
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
-import { Message } from "discord.js";
+import { EmbedFieldData, Message } from "discord.js";
 
 import GuildModel from "../../models/Guild";
 import MemberModel from "../../models/Member";
@@ -84,7 +84,7 @@ export = class ReferralsCommand extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 title: "Referrals",
-                fields: paginatedMembers.items,
+                fields: paginatedMembers.items as EmbedFieldData[],
                 footer: {
                     text: `Page ${paginatedMembers.page} of ${paginatedMembers.pages}`
                 },
