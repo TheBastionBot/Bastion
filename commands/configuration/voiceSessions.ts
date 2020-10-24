@@ -50,7 +50,8 @@ export = class VoiceSessionsCommand extends Command {
                 permissionOverwrites: [
                     {
                         id: message.guild.id,
-                        allow: [ "CREATE_INSTANT_INVITE" ],
+                        allow: [ "SPEAK" ],
+                        deny: [ "CONNECT", "CREATE_INSTANT_INVITE" ],
                     },
                 ],
             });
@@ -59,6 +60,13 @@ export = class VoiceSessionsCommand extends Command {
             await message.guild.channels.create("➕ New Voice Channel", {
                 type: "voice",
                 parent: sessionalCategory,
+                permissionOverwrites: [
+                    {
+                        id: message.guild.id,
+                        allow: [ "CONNECT" ],
+                        deny: [ "SPEAK" ],
+                    },
+                ],
             });
 
             // consolidate all sessional categories
