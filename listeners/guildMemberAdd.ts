@@ -37,6 +37,9 @@ export = class GuildMemberAddListener extends Listener {
     }
 
     handleGreetings = (member: GuildMember, document: IGuild): void => {
+        // check whether greetings are enabled
+        if (!document.greeting) return;
+
         if (document.greeting.privateMessage) {
             // greet DM
             member.createDM().then(privateChannel => {
@@ -55,8 +58,8 @@ export = class GuildMemberAddListener extends Listener {
             });
         }
 
-        // check whether greetings are enabled
-        if (!document.greeting || !document.greeting.channelId) return;
+        // check whether server greetings are enabled
+        if (!document.greeting.channelId) return;
         // check whether the greeting channel is valid
         if (!member.guild.channels.cache.has(document.greeting.channelId)) return;
 
