@@ -50,8 +50,21 @@ export = class VoiceSessionsCommand extends Command {
                 permissionOverwrites: [
                     {
                         id: message.guild.id,
-                        allow: [ "SPEAK" ],
+                        allow: [ "SPEAK", "VIEW_CHANNEL" ],
                         deny: [ "CONNECT", "CREATE_INSTANT_INVITE" ],
+                    },
+                ],
+            });
+
+            // create new channel actuator text channel
+            const controlChannel = await message.guild.channels.create("session-control", {
+                type: "text",
+                parent: sessionalCategory,
+                permissionOverwrites: [
+                    {
+                        id: message.guild.id,
+                        allow: [ "ADD_REACTIONS" ],
+                        deny: [ "SEND_MESSAGES" ],
                     },
                 ],
             });
@@ -79,6 +92,23 @@ export = class VoiceSessionsCommand extends Command {
                 voiceSessions: {
                     categories: sessionalCategories.filter(id => message.guild.channels.cache.has(id)),
                 },
+            });
+
+            // send control message
+            const controlMessage = await controlChannel.send({
+                embed: {
+                    color: Constants.COLORS.IRIS,
+                    title: "Voice Session Control",
+                    description: "You can lock or unlock your voice session by reacting to the this message.",
+                },
+            });
+
+            // add control reactions
+            await controlMessage.react("🔒").catch(() => {
+                // this error can be ignored
+            });
+            await controlMessage.react("🔓").catch(() => {
+                // this error can be ignored
             });
 
             // acknowledge
