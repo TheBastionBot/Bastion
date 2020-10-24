@@ -28,7 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
     "eslint": "^7.6.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.3"
   },
   "optionalDependencies": {
     "@discordjs/opus": "^0.3.2",
