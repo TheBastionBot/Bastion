@@ -5,6 +5,7 @@ changes:
     - description: Private Greeting Messages are back! You can now set the `--private` flag when setting greeting messages to set it as a Private Greeting Message. See `greetings --help` for more details.
     - description: You can now use the `voiceSessions` command without any arguments to list all the Voice Session categories in the server.
     - description: When you create a Voice Session a **session-control** text channel will be created where you can use reactions to control your voice session.
+    - description: You can now use the new "COMPETING" activity type for Bastion's activities.
   CHANGES:
     - description: Voice Sessions will be locked by default now. You can invite others to your voice channel by sending an invite or unlocking your voice session in **session-control**.
     - description: Voice Sessions' names will now be based on the name of the **+ New [NAME]** channel that's used to create a new session.
