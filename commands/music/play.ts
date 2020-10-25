@@ -423,6 +423,6 @@ export = class Play extends Command {
 
         for (const songLink of songLinks) {
             await this.prepareStream(songLink, message).catch(Logger.error);
-        };
+        }
     }
 }
