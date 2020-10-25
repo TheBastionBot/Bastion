@@ -95,6 +95,55 @@ export = class Play extends Command {
         );
     }
 
+    private prepareStream = (songLink: string, message: Message): Promise<boolean> => {
+        return new Promise((resolve, reject) => {
+            const songId = uuid();
+
+            // Create the music stream
+            const stream = youtube(songLink, [
+                "--ignore-errors",
+                // network options
+                "--force-ipv4",
+                // geo restriction
+                "--geo-bypass-country=US",
+                // video selection
+                "--no-playlist",
+                // filesystem options
+                "--no-cache-dir",
+                // verbosity / simulation
+                "--dump-json",
+                "--quiet",
+                "--no-warnings",
+                // workarounds
+                "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/604.1 (KHTML, like Gecko) Version/13.0.4 Safari/604.1",
+                "--referer=https://bastion.traction.one",
+                // video format
+                "--format=bestaudio[protocol^=http]",
+                "--youtube-skip-dash-manifest",
+            ], {});
+
+            stream.on("info", (info: YoutubeInfo) => this.streamInfoHandler(message.guild as BastionGuild, { ...info, id: songId, requester: message.author.id }));
+            stream.on("end", () => {
+                this.streamEndHandler(message.guild as BastionGuild);
+                resolve(true);
+            });
+            stream.on("error", () => {
+                message.channel.send({
+                    embed: {
+                        color: Constants.COLORS.RED,
+                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"),
+                    },
+                }).catch(() => {
+                    // This error can be ignored.
+                });
+
+                reject(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"));
+            });
+
+            stream.pipe(fs.createWriteStream(this.musicDirectory + message.guild.id + "/" + songId + ".mp3"));
+        });
+    };
+
     private streamInfoHandler = (guild: BastionGuild, info: YoutubeInfo): void => {
         const id = info.id;
         const track = info.track || info.title || info.fulltitle || info.alt_title;
@@ -369,47 +418,11 @@ export = class Play extends Command {
             // This error can be ignored.
         });
 
-        const songId = uuid();
-
-        // Create the music stream
-        const stream = youtube(songLinks[0], [
-            "--ignore-errors",
-            // network options
-            "--force-ipv4",
-            // geo restriction
-            "--geo-bypass-country=US",
-            // video selection
-            "--no-playlist",
-            // filesystem options
-            "--no-cache-dir",
-            // verbosity / simulation
-            "--dump-json",
-            "--quiet",
-            "--no-warnings",
-            // workarounds
-            "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/604.1 (KHTML, like Gecko) Version/13.0.4 Safari/604.1",
-            "--referer=https://bastion.traction.one",
-            // video format
-            "--format=bestaudio[protocol^=http]",
-            "--youtube-skip-dash-manifest",
-        ], {});
-
-        stream.on("info", (info: YoutubeInfo) => this.streamInfoHandler(guild, { ...info, id: songId, requester: message.author.id }));
-        stream.on("end", () => this.streamEndHandler(guild));
-        stream.on("error", () => {
-            message.channel.send({
-                embed: {
-                    color: Constants.COLORS.RED,
-                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"),
-                },
-            }).catch(() => {
-                // This error can be ignored.
-            });
-        });
-
         // Create the music directory
         await fs.promises.mkdir(this.musicDirectory + message.guild.id + "/", { recursive: true }).catch(Logger.error);
 
-        stream.pipe(fs.createWriteStream(this.musicDirectory + message.guild.id + "/" + songId + ".mp3"));
+        for (const songLink of songLinks) {
+            await this.prepareStream(songLink, message).catch(Logger.error);
+        };
     }
 }
