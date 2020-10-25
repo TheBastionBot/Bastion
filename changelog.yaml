@@ -1,22 +1,24 @@
-date: October 8, 2020
-image: https://i.imgur.com/y6w9t0o.png
+date: October 25, 2020
+image:
 changes:
-  Among Us ✕ Bastion:
-    - title: Among Us Lobbies
-      description: Server members can now create Discord Lobbies for their Among Us party and manage it automatically, using the new `amongUs` command.
-    - title: Lobby Channel
-      description: Server Managers, don't fret, you can restrict the usage of `amongUs` command to a specific channel using the new `amongUsChannel` command.
-    - title: Lobby Restrictions
-      description: And lobby hosts, your lobbies are private by default. And you have complete control over whether to allow everyone or only your friends.
   NEW:
-    - description: Did you ever want to add a personalized message when giving rep/karma to someone? You can do it now! See `karma --help` for more details.
-    - description: You can now give karma/rep anyone simply by thanking them in a message reply. Thank you @Alice for suggesting this! Works even when you mention multiple users.
-    - description: Have you ever deleted all the messages from a channel by mistake? I have. So, from now on, `clear` will always ask for confirmation if no `--limit` is explicitly specified.
-    - description: Added support back for server wide text muting members in the server with the `--server` flag in the `textMute` command.
-    - description: Did you want to go back to Bastion's random greetings and farewells after setting a custom message? Now you can do that by using the `--random` flag with the `greetings` and `farewells` commands respectively.
-    - description: Bastion will now give double Experience Points to server members if they are boosting your server.
+    - description: Private Greeting Messages are back! You can now set the `--private` flag when setting greeting messages to set it as a Private Greeting Message. See `greetings --help` for more details.
+    - description: You can now use the `voiceSessions` command without any arguments to list all the Voice Session categories in the server.
+    - description: When you create a Voice Session a **session-control** text channel will be created where you can use reactions to control your voice session.
+    - description: You can now use the new "COMPETING" activity type for Bastion's activities.
   CHANGES:
-    - description: Temporary voice channels' names will now be based on the name of the user who created it.
-    - description: Some optimizations to cache to reduce Bastion's memory usage.
+    - description: Voice Sessions will be locked by default now. You can invite others to your voice channel by sending an invite or unlocking your voice session in **session-control**.
+    - description: Voice Sessions' names will now be based on the name of the **+ New [NAME]** channel that's used to create a new session.
+    - description: The `play` command will now automatically recognize URLs; no need to use the `--link` or `-l` option anymore.
+    - description: Some major improvements in YouTube playlist support.
+    - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
+    - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
+    - description: Some under-the-hood improvements to make Bastion better than ever!
   FIXES:
-    - description: Fixed an issue with the `music` command that prevented some servers from show up in the list of all servers where music is enabled.
+    - description: Fixed an issue with the link filter that treated some custom emojis as links.
+    - description: Fixed an issue in the invite filter that caused it to ignore invites in some guilds.
+    - description: Added a workaround to make `play` work with only links until `youtube-dl` fixes the issue with song search.
+    - description: Fixed some error messages that were not using the proper locale.
+    - description: Some under-the-hood fixes to make Bastion more stable than ever.
+  REMOVALS:
+    - description: The `lockSession` command has been deleted as you can now do that using reactions as mentioned above.

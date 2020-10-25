@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "8.8.0",
+  "version": "8.9.0",
   "description": "Get an enhanced Discord experience!",
   "homepage": "https://bastion.traction.one",
   "main": "./index.js",
@@ -25,10 +25,10 @@
     "@types/ws": "^7.2.6",
     "@types/yargs-parser": "^15.0.0",
     "@types/youtube-dl": "^1.12.2",
-    "@typescript-eslint/eslint-plugin": "^3.8.0",
-    "@typescript-eslint/parser": "^3.8.0",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^7.6.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.3"
   },
   "optionalDependencies": {
     "@discordjs/opus": "^0.3.2",
@@ -39,7 +39,7 @@
     "zlib-sync": "^0.1.7"
   },
   "dependencies": {
-    "@bastion/tesseract": "^2.1.1",
+    "@bastion/tesseract": "^2.1.3",
     "@k3rn31p4nic/google-translate-api": "^1.1.1",
     "chalk": "^4.1.0",
     "discord-rpc": "^3.1.3",
@@ -47,6 +47,6 @@
     "node-fetch": "^2.6.0",
     "opusscript": "^0.0.7",
     "uuid": "^8.3.0",
-    "youtube-dl": "^3.0.2"
+    "youtube-dl": "k3rn31p4nic/node-youtube-dl"
   }
 }
