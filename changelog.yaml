@@ -1,4 +1,4 @@
-date: October 24, 2020
+date: October 25, 2020
 image:
 changes:
   NEW:
@@ -10,6 +10,7 @@ changes:
     - description: Voice Sessions will be locked by default now. You can invite others to your voice channel by sending an invite or unlocking your voice session in **session-control**.
     - description: Voice Sessions' names will now be based on the name of the **+ New [NAME]** channel that's used to create a new session.
     - description: The `play` command will now automatically recognize URLs; no need to use the `--link` or `-l` option anymore.
+    - description: Some major improvements in YouTube playlist support.
     - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
     - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
     - description: Some under-the-hood improvements to make Bastion better than ever!
