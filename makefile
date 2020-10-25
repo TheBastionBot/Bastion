@@ -39,7 +39,7 @@ start:
 	@node .
 
 obfuscate:
-	@npx javascript-obfuscator . --output ./build --target node --self-defending true --source-map false --source-map-mode inline --exclude './node_modules,./build'
+	@npx javascript-obfuscator ./ --output ./build --target node --self-defending true --source-map false --source-map-mode inline --exclude '**/node_modules,**/build'
 
 generate:
 # Generate obfuscated code
