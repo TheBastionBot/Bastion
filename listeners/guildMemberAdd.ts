@@ -111,7 +111,7 @@ export = class GuildMemberAddListener extends Listener {
             invite: invite.code,
         });
 
-        if (inviteRoles) {
+        if (inviteRoles && inviteRoles.length) {
             await member.roles.add(inviteRoles.map(r => r._id), "Joined using the invite " + invite.code);
         }
     }
