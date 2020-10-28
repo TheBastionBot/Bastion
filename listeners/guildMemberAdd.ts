@@ -24,7 +24,7 @@ export = class GuildMemberAddListener extends Listener {
     handleAutoRoles = async (member: GuildMember, guild: Guild): Promise<void> => {
         const autoRoles = await RoleModel.find({
             guild: guild.id,
-            autoAssignable: { $exists: true },
+            autoAssignable: { $exists: true, $ne: null },
         });
 
         const botRoles: string[] = autoRoles.filter(role => role.autoAssignable && role.autoAssignable.forBots).map(r => r._id);
