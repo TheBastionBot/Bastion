@@ -1,24 +1,7 @@
-date: October 25, 2020
+date: October 30, 2020
 image:
 changes:
   NEW:
-    - description: Private Greeting Messages are back! You can now set the `--private` flag when setting greeting messages to set it as a Private Greeting Message. See `greetings --help` for more details.
-    - description: You can now use the `voiceSessions` command without any arguments to list all the Voice Session categories in the server.
-    - description: When you create a Voice Session a **session-control** text channel will be created where you can use reactions to control your voice session.
-    - description: You can now use the new "COMPETING" activity type for Bastion's activities.
-  CHANGES:
-    - description: Voice Sessions will be locked by default now. You can invite others to your voice channel by sending an invite or unlocking your voice session in **session-control**.
-    - description: Voice Sessions' names will now be based on the name of the **+ New [NAME]** channel that's used to create a new session.
-    - description: The `play` command will now automatically recognize URLs; no need to use the `--link` or `-l` option anymore.
-    - description: Some major improvements in YouTube playlist support.
-    - description: Automatically delete Voice Session categories if the categories have been deleted by the user.
-    - description: Some improvements to Level-up Roles so that users can keep their roles until they can get new ones.
-    - description: Some under-the-hood improvements to make Bastion better than ever!
-  FIXES:
-    - description: Fixed an issue with the link filter that treated some custom emojis as links.
-    - description: Fixed an issue in the invite filter that caused it to ignore invites in some guilds.
-    - description: Added a workaround to make `play` work with only links until `youtube-dl` fixes the issue with song search.
-    - description: Fixed some error messages that were not using the proper locale.
-    - description: Some under-the-hood fixes to make Bastion more stable than ever.
-  REMOVALS:
-    - description: The `lockSession` command has been deleted as you can now do that using reactions as mentioned above.
+    - description: Trivia game is back again with the `trivia` command.
+    - description: Added new `meme`, `joke`, `showerThought`, `lifeProTips`, and `todayILearned` commands to get a random post from respective subreddits.
+    - description: Brought back the old `catify` and `robotify` commands to allow you to generate your unique cat and robot avatars, respectivey.
