@@ -100,6 +100,12 @@ voiceSessions: It allows you manage Voice Sessions (or Temporary Voice Channels,
 votingChannels: It allows you to set (and unset) channels as Voting Channels. If
   a channel is set as a Voting Channel, anything sent in the channel will be set
   up for everyone to vote.
+catify: It allows you to generate a cat that's unique to you.
+joke: Posts a random joke collected from the r/jokes subreddit.
+lifeProTip: Posts a random life pro tip collected from the r/TodayILearned subreddit.
+meme: Posts a random meme collected from the r/memes subreddit.
+robotify: It allows you to generate a robot avatar that's unique to you.
+showerThought: Posts a random shower thought collected from the r/ShowerThoughts subreddit.
 acrophobia: It allows you to play the Acrophobia game with your fellow server
   members. Bastion generates a random acronym and players compete by racing to
   create the most coherent or humorous sentence that fits the acronym - a
@@ -120,6 +126,8 @@ rps: It allows you to play Rock Paper Scissor with Bastion. It also supports
   gambling.
 russianRoulette: It allows you to play Russian Roulette. Let's see if you can
   last all the 7 rounds.
+trivia: Play a game of trivia and see if you can answer the questions of various
+  difficulty across multiple categories.
 changelog: It allows you to see the changes that have been introduced in the
   current version of Bastion.
 commands: It allows you the see the list of commands available in Bastion. You
@@ -160,8 +168,6 @@ leave: It allows you to ask Bastion to leave the server and clear all data it
   has on server and its members.
 levelUpRoles: It allows you to add roles to a level. When members reach that
   level, they'll be awarded those roles.
-lockSession: It allows you lock the Voice Session channel that you're currently
-  in so that anyone else can't join unless they're invited.
 lockdown: It allows you lockdown a channel in the server from users who don't
   have permission to manage messages or the channel.
 prune: It allows you to prune members without any roles, from the server, based
@@ -178,9 +184,9 @@ referralRewards: It allows you set roles as rewards for referrals (inviting
 referrals: It allows you set the Referrals Channel so that members can invite
   others to the server and gain referral rewards. And it also allows you to
   track the members' invites.
+roles: It allows you create, delete and update roles in the server.
 roleStore: It allows you to set up a Role Store in the server. Server managers
   can sell roles in the server and members can buy them with Bastion Coins.
-roles: It allows you create, delete and update roles in the server.
 safeList: It allows you to add members or roles to a safe list that prevents
   their messages from being filtered by invite filter or link filter in the
   server.
