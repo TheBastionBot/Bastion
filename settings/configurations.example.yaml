@@ -14,7 +14,7 @@ presence:
   # Default activity of Bastion
   activity:
     # Activity type.
-    # Valid values are `PLAYING`, `LISTENING`, `WATCHING` and `STREAMING`.
+    # Valid values are `PLAYING`, `LISTENING`, `WATCHING`, `STREAMING` and `COMPETING`.
     # Note that `STREAMING` activity will only work if a valid Twitch channel URL
     # is added in the `url` field below.
     type: "PLAYING"
