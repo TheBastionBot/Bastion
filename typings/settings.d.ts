@@ -12,6 +12,9 @@ interface BastionCredentials extends TesseractCredentials {
         webhookID: string;
         webhookToken: string;
     };
+    google: {
+        apiKey: string;
+    };
     twitch: {
         clientId: string;
         clientSecret: string;
