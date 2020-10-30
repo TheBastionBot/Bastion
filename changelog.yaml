@@ -5,3 +5,4 @@ changes:
     - description: Trivia game is back again with the `trivia` command.
     - description: Added new `meme`, `joke`, `pun`, `showerThought`, `lifeProTips`, and `todayILearned` commands to get a random post from respective subreddits.
     - description: Brought back the old `catify` and `robotify` commands to allow you to generate your unique cat and robot avatars, respectivey.
+    - description: Bastion now uses YouTube API to search for the music queries as `youtube-dl` doesn't support it anymore.
