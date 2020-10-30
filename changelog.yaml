@@ -3,5 +3,5 @@ image:
 changes:
   NEW:
     - description: Trivia game is back again with the `trivia` command.
-    - description: Added new `meme`, `joke`, `showerThought`, `lifeProTips`, and `todayILearned` commands to get a random post from respective subreddits.
+    - description: Added new `meme`, `joke`, `pun`, `showerThought`, `lifeProTips`, and `todayILearned` commands to get a random post from respective subreddits.
     - description: Brought back the old `catify` and `robotify` commands to allow you to generate your unique cat and robot avatars, respectivey.
