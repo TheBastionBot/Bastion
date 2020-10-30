@@ -6,6 +6,7 @@
 import * as fs from "fs";
 import { Command, CommandArguments, Constants, Logger } from "@bastion/tesseract";
 import { Message, NewsChannel, TextChannel, VoiceChannel, Snowflake } from "discord.js";
+import fetch from "node-fetch";
 import * as youtube from "youtube-dl";
 import { v4 as uuid } from "uuid";
 
@@ -17,7 +18,7 @@ import * as regex from "../../utils/regex";
 import BastionGuild = require("../../structures/Guild");
 import BastionGuildMember = require("../../structures/GuildMember");
 
-import { BastionConfigurations } from "../../typings/settings";
+import { BastionConfigurations, BastionCredentials } from "../../typings/settings";
 
 
 interface YoutubeInfo extends youtube.Info {
@@ -66,8 +67,30 @@ export = class Play extends Command {
         this.musicDirectory = "./music/";
     }
 
+    private searchYouTube = async (query: string): Promise<string> => {
+        const response = await fetch("https://youtube.googleapis.com/youtube/v3/search?part=id&regionCode=US&type=video&maxResults=5&q=" + encodeURIComponent(query) + "&key=" + (this.client.credentials as BastionCredentials).google.apiKey);
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.items.length) return data.items[0].id.videoId;
+            throw "No results found for the specified query.";
+        } else {
+            throw response.statusText;
+        }
+    }
+
     private getSongInfo(query: string, playlist?: boolean): Promise<YoutubeInfo> {
-        return new Promise((resolve, reject) =>
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            // try using the official YouTube API
+            if ((this.client.credentials as BastionCredentials).google && (this.client.credentials as BastionCredentials).google.apiKey && !regex.URI.test(query)) {
+                const videoId = await this.searchYouTube(query).catch(() => {
+                    // this error can be ignored
+                });
+                if (videoId) return resolve({ url: "https://youtu.be/" + videoId, webpage_url: "https://youtube.com/watch?v=" + videoId } as YoutubeInfo);
+            }
+
+            // otherwise, fallback to `youtube-dl`
             youtube.getInfo(regex.URI.test(query) ? query : "ytsearch:" + query, [
                 "--ignore-errors",
                 // network options
@@ -91,8 +114,8 @@ export = class Play extends Command {
             ], (error: Error, info: YoutubeInfo) => {
                 if (error) return reject(error);
                 return resolve(info);
-            })
-        );
+            });
+        });
     }
 
     private prepareStream = (songLink: string, message: Message): Promise<boolean> => {
@@ -350,7 +373,7 @@ export = class Play extends Command {
         const query = argv._.join(" ");
         const isQueryURL = regex.URI.test(query);
         const info = isQueryURL ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? await this.getSongInfo(query, true) : null : await this.getSongInfo(query);
-        const songLinks: string[] = info ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.webpage_url || info.url ] : isQueryURL ? [ query ] : null;
+        const songLinks: string[] = info ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.url || info.webpage_url  ] : isQueryURL ? [ query ] : null;
 
         // Command Syntax Validation
         if (!songLinks || !songLinks.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
