@@ -10,8 +10,8 @@ import * as omnic from "../../utils/omnic";
 
 export = class TodayILearnedCommand extends Command {
     constructor() {
-        super("lifeProTip", {
-            description: "Posts a random life pro tip collected from the r/TodayILearned subreddit.",
+        super("todayILearned", {
+            description: "Posts a random fact collected from the r/TodayILearned subreddit.",
             triggers: [ "TIL" ],
             arguments: {},
             scope: "guild",
