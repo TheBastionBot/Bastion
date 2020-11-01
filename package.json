@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "8.10.0",
+  "version": "8.10.1",
   "description": "Get an enhanced Discord experience!",
   "homepage": "https://bastion.traction.one",
   "main": "./index.js",
