@@ -41,16 +41,20 @@ export = class RockPaperScissorCommand extends Command {
 
         if (!this.choices.includes(userChoice)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
+        const isAprilFoolsDay = new Date().getMonth() === 3 && new Date().getDate() === 1;
+
         // find bastion's choice
-        const bastionChoice: string = this.choices[Math.floor(Math.random() * this.choices.length)];
+        const bastionChoice: string = isAprilFoolsDay ? "ROCK" : this.choices[Math.floor(Math.random() * this.choices.length)];
 
         // find the result
         const result = userChoice === bastionChoice
             ? "Damn! It's a draw, mate."
             : userChoice === "ROCK" && bastionChoice === "SCISSOR"
-                ?  "You win, human."
+                ? "You win, human."
                 : userChoice === "PAPER" && bastionChoice === "ROCK"
-                    ? "You win, human."
+                    ? isAprilFoolsDay
+                        ? "I understand that scissors can beat paper. And I get how rock can beat scissors. But there's no way paper can beat rock. Paper is supposed to magically wrap around rock leaving it immobile? Why can't paper do this to scissors? Forget scissors, why can't paper do this to people? Why aren't sheets of notebook constantly suffocating students as they attempt to take notes in class? I'll tell you why. Because paper can't beat anybody. A rock would tear it up in seconds. When I play rock paper scissor, I always choose rock. And if you claim to have beaten me with your paper I will punch you in the face with my already chenched fist and say, \"oh sorry, i thought paper would protect you.\""
+                        : "You win, human."
                     : userChoice === "SCISSOR" && bastionChoice === "PAPER"
                         ? "You win, human."
                         : "I win! Sorry, human. :yum:";
