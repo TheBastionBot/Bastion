@@ -1,5 +1,7 @@
-date: October 31, 2020
+date: November 1, 2020
 image:
 changes:
+  CHANGES:
+  - description: Added some more easter eggs.
   FIXES:
   - description: Some under-the-hood fixes to make Bastion better than ever.
