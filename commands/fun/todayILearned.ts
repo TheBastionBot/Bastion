@@ -38,9 +38,7 @@ export = class TodayILearnedCommand extends Command {
                 title: post.data.children[0].data.title.slice(0, 256),
                 url: post.data.children[0].data.url,
                 ...(post.data.children[0].data.selftext ? { description: post.data.children[0].data.selftext.slice(0, 1024) } : {}),
-                thumbnail: {
-                    url: post.data.children[0].data.thumbnail,
-                },
+                ...(post.data.children[0].data.thumbnail ? { thumbnail: { url: post.data.children[0].data.thumbnail } } : {}),
                 footer: {
                     text: "Powered by r/TodayILearned",
                 },
