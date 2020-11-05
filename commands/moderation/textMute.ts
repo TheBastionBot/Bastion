@@ -73,7 +73,7 @@ export = class TextMute extends Command {
 
         if (argv.server) {
             // Check if the `Muted` role exist
-            let mutedRole = message.guild.roles.cache.find(r => r.name.toLowerCase() === "muted");
+            let mutedRole = message.guild.roles.cache.find(r => r.name && r.name.toLowerCase() === "muted");
 
             // Otherwise, create it
             if (!mutedRole) {
@@ -81,7 +81,7 @@ export = class TextMute extends Command {
                     data: {
                         name: "Muted",
                     },
-                    reason: "It will be used to server mute"
+                    reason: "It will be used for server-wide mute"
                 });
             }
 
