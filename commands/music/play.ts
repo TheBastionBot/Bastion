@@ -118,7 +118,7 @@ export = class Play extends Command {
         });
     }
 
-    private prepareStream = (songLink: string, message: Message): Promise<boolean> => {
+    private prepareStream = (songLink: string, message: Message, ignoreError: boolean): Promise<boolean> => {
         return new Promise((resolve, reject) => {
             const songId = uuid();
 
@@ -151,14 +151,16 @@ export = class Play extends Command {
                 resolve(true);
             });
             stream.on("error", () => {
-                message.channel.send({
-                    embed: {
-                        color: Constants.COLORS.RED,
-                        description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"),
-                    },
-                }).catch(() => {
-                    // This error can be ignored.
-                });
+                if (ignoreError) {
+                    message.channel.send({
+                        embed: {
+                            color: Constants.COLORS.RED,
+                            description: this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"),
+                        },
+                    }).catch(() => {
+                        // This error can be ignored.
+                    });
+                }
 
                 reject(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"));
             });
@@ -445,7 +447,7 @@ export = class Play extends Command {
         await fs.promises.mkdir(this.musicDirectory + message.guild.id + "/", { recursive: true }).catch(Logger.error);
 
         for (const songLink of songLinks) {
-            await this.prepareStream(songLink, message).catch(Logger.error);
+            await this.prepareStream(songLink, message, songLinks.length > 1).catch(Logger.error);
         }
     }
 }
