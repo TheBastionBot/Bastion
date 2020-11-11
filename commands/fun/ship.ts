@@ -29,7 +29,7 @@ export = class ShipCommand extends Command {
     }
 
     private shortString = (data: string): string => {
-        let result: string = "";
+        let result = "";
 
         if (data.length >= 2) {
             result = (Number.parseInt(data[0]) + Number.parseInt(data[data.length - 1])).toString() + this.shortString(data.substring(1, data.length - 1));
