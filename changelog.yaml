@@ -1,6 +1,8 @@
-date: November 5, 2020
+date: November 11, 2020
 image:
 changes:
+  NEW:
+  - description: Added some more commands to the Fun module, like `pickupLine`, `roast`, `ship`, and `simpness`, so you can have some more fun in your server.
   CHANGES:
   - description: Added some more easter eggs.
   FIXES:
