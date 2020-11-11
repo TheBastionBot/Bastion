@@ -3,6 +3,8 @@
  * @copyright 2020 - The Bastion Bot Project
  */
 
+const frequency = (string: string) => [ ...string ].reduce((a: { [key: string]: number }, c) => (a[c] = a[c] + 1 || 1) && a, {});
+
 const toTitleCase = (string: string, splitSeparator = " ", joinSeprator = " "): string => {
     return string.split(splitSeparator).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(joinSeprator);
 };
@@ -23,6 +25,7 @@ const snakeToTitleCase = (string: string, separator = " "): string => {
 
 
 export {
+    frequency,
     toTitleCase,
     toSnakeCase,
     camelToTitleCase,
