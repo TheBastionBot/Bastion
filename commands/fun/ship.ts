@@ -32,9 +32,7 @@ export = class ShipCommand extends Command {
         let result: string = "";
 
         if (data.length >= 2) {
-            const int1 = Number.parseInt(data[0]);
-            const int2 = Number.parseInt(data[data.length - 1]);
-            result = (int1 + int2).toString() + this.shortString(data.substring(1, data.length - 1));
+            result = (Number.parseInt(data[0]) + Number.parseInt(data[data.length - 1])).toString() + this.shortString(data.substring(1, data.length - 1));
         } else {
             return data;
         }
@@ -66,7 +64,7 @@ export = class ShipCommand extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
-                title: firstName + " + " + secondName,
+                title: firstName + " ❤️ " + secondName,
                 description: "**" + firstName + "** and **" + secondName + "** are **" + this.calculate(Object.values(strings.frequency(firstName.toLowerCase() + " loves " + secondName.toLowerCase())).join("")) + "** compatible with each other.",
             },
         });
