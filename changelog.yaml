@@ -1,8 +1,10 @@
-date: October 30, 2020
+date: November 11, 2020
 image:
 changes:
   NEW:
-    - description: Trivia game is back again with the `trivia` command.
-    - description: Added new `meme`, `joke`, `pun`, `showerThought`, `lifeProTips`, and `todayILearned` commands to get a random post from respective subreddits.
-    - description: Brought back the old `catify` and `robotify` commands to allow you to generate your unique cat and robot avatars, respectivey.
-    - description: Bastion now uses YouTube API to search for the music queries as `youtube-dl` doesn't support it anymore.
+  - description: Added some more commands to the Fun module, like `pickupLine`, `roast`, `ship`, and `simpness`, so you can have some more fun in your server.
+  CHANGES:
+  - description: Added some more easter eggs.
+  FIXES:
+  - description: Fixed an issue when finding the Muted role in servers which have roles with blank names (good old times).
+  - description: Some under-the-hood fixes to make Bastion better than ever.
