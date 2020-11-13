@@ -65,7 +65,7 @@ export = class ShipCommand extends Command {
             embed: {
                 color: Constants.COLORS.IRIS,
                 title: firstName + " ❤️ " + secondName,
-                description: "**" + firstName + "** and **" + secondName + "** are **" + this.calculate(Object.values(strings.frequency(firstName.toLowerCase() + " loves " + secondName.toLowerCase())).join("")) + "** compatible with each other.",
+                description: "**" + firstName + "** and **" + secondName + "** are **" + this.calculate(Object.values(strings.frequency(firstName.toString().toLowerCase() + " loves " + secondName.toString().toLowerCase())).join("")) + "** compatible with each other.",
             },
         });
     }
