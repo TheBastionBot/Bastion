@@ -1,10 +1,9 @@
-date: November 11, 2020
+date: November 13, 2020
 image:
 changes:
   NEW:
-  - description: Added some more commands to the Fun module, like `pickupLine`, `roast`, `ship`, and `simpness`, so you can have some more fun in your server.
+  - description: Added the `phdComics` command to get comic strips from PHD Comics.
   CHANGES:
-  - description: Added some more easter eggs.
+  - description: Some under-the-hood improvements to make Bastion even better.
   FIXES:
-  - description: Fixed an issue when finding the Muted role in servers which have roles with blank names (good old times).
   - description: Some under-the-hood fixes to make Bastion better than ever.
