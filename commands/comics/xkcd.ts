@@ -51,8 +51,8 @@ export = class XKCDCommand extends Command {
                         inline: true,
                     },
                     {
-                        name: "Explain It!",
-                        value: "[Open Link](https://www.explainxkcd.com/wiki/index.php/" + xkcd.num + ")",
+                        name: "Don't get it?",
+                        value: "[Read the explanation.](https://www.explainxkcd.com/wiki/index.php/" + xkcd.num + ")",
                         inline: true,
                     },
                 ],
