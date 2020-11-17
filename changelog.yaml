@@ -1,7 +1,8 @@
-date: November 13, 2020
+date: November 17, 2020
 image:
 changes:
   NEW:
+  - description: Added the `ticTacToe` command to allow users to play a game of Tic Tac Toe with their friends.
   - description: Added the `phdComics` command to get comic strips from PHD Comics.
   CHANGES:
   - description: Some under-the-hood improvements to make Bastion even better.
