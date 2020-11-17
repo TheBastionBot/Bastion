@@ -375,7 +375,7 @@ export = class Play extends Command {
         const query = argv._.join(" ");
         const isQueryURL = regex.URI.test(query);
         const info = isQueryURL ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? await this.getSongInfo(query, true) : null : await this.getSongInfo(query);
-        const songLinks: string[] = info ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.url || info.webpage_url  ] : isQueryURL ? [ query ] : null;
+        const songLinks: string[] = info ? query.startsWith("http") && query.includes("youtube.com") && query.includes("playlist") ? info.entries.map(i => "https://youtu.be/" + i.id) : [ info.webpage_url || info.url ] : isQueryURL ? [ query ] : null;
 
         // Command Syntax Validation
         if (!songLinks || !songLinks.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
