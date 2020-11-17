@@ -4,6 +4,7 @@ changes:
   NEW:
   - description: Added the `ticTacToe` command to allow users to play a game of Tic Tac Toe with their friends.
   - description: Added the `phdComics` command to get comic strips from PHD Comics.
+  - description: Added support for re-rolling giveaways. You can now reroll a giveaway after it has ended with the `--reroll` flag and specify how many winners you wanna reroll with the `--winner` flag.
   CHANGES:
   - description: Some under-the-hood improvements to make Bastion even better.
   FIXES:
