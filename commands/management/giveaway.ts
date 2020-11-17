@@ -4,7 +4,7 @@
  */
 
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
-import { Message } from "discord.js";
+import { Message, User } from "discord.js";
 
 import GiveawayModel from "../../models/Giveaway";
 import * as constants from "../../utils/constants";
@@ -27,6 +27,7 @@ export = class GiveawayCommand extends Command {
             triggers: [],
             arguments: {
                 alias: {
+                    reroll: [ "r" ],
                     timeout: [ "t" ],
                     winners: [ "w" ],
                 },
@@ -50,6 +51,7 @@ export = class GiveawayCommand extends Command {
                 "giveaway -- ITEM",
                 "giveaway --winners NUMBER -- ITEM",
                 "giveaway --timeout HOURS -- ITEM",
+                "giveaway --reroll ID --winners NUMBER",
             ],
         });
 
@@ -59,6 +61,82 @@ export = class GiveawayCommand extends Command {
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+        if (argv.reroll) {
+            // identify the giveaway message
+            const giveawayMessage = await message.channel.messages.fetch(argv.reroll);
+
+            // identify giveaway participants
+            let participants: User[] = [];
+            for (const reaction of [ "🎊", "🎉" ]) {
+                if (giveawayMessage.reactions.cache.has(reaction)) {
+                    // fetch participants
+                    await giveawayMessage.reactions.cache.get(reaction).users.fetch().catch(() => {
+                        // this error can be ignored
+                    });
+
+                    // store participants
+                    participants.push(...giveawayMessage.reactions.cache.get(reaction).users.cache.filter(u => !u.bot).values());
+                }
+            }
+
+            // find giveaway winners
+            const winners: User[] = [];
+
+            for (let i = 0; i < (argv.winners || 1); i++) {
+                if (!participants.length) break;
+
+                // get a random participant as the winner
+                const winner = participants[Math.floor(Math.random() * participants.length)];
+
+                // add them to the winners list
+                winners.push(winner);
+
+                // and remove them from the participants list,
+                // so that the next winners pool won't have them again
+                participants = participants.filter(p => p.id !== winner.id);
+            }
+
+            // announce the result
+            if (winners.length) {
+                await giveawayMessage.edit({
+                    embed: {
+                        color: Constants.COLORS.SOMEWHAT_DARK,
+                        author: {
+                            name: "GIVEAWAY WINNERS REROLLED",
+                        },
+                        title: giveawayMessage.embeds[0].title,
+                        description: "The giveaway winners were rerolled and the following users have won the giveaway and will be contacted soon for their rewards.\nThank you everyone for participating. Better luck next time.",
+                        fields: [
+                            {
+                                name: "Congratulations",
+                                value: winners.join(", "),
+                            },
+                        ],
+                        footer: {
+                            text: giveawayMessage.id,
+                        },
+                        timestamp: new Date(),
+                    },
+                });
+            } else {
+                await giveawayMessage.edit({
+                    embed: {
+                        color: Constants.COLORS.RED,
+                        author: {
+                            name: "GIVEAWAY ENDED",
+                        },
+                        title: giveawayMessage.embeds[0].title,
+                        description: "Unfortunately, no one participated in this giveaway and therfore there aren't any winners this time.",
+                        footer: {
+                            text: giveawayMessage.id,
+                        },
+                        timestamp: new Date(),
+                    },
+                });
+            }
+        }
+
+
         if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const item = argv._.join(" ");
