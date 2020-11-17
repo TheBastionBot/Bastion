@@ -133,6 +133,7 @@ rps: It allows you to play Rock Paper Scissor with Bastion. It also supports
   gambling.
 russianRoulette: It allows you to play Russian Roulette. Let's see if you can
   last all the 7 rounds.
+ticTacToe: It allows you to play a game of Tic Tac Toe with another member of the server.
 trivia: Play a game of trivia and see if you can answer the questions of various
   difficulty across multiple categories.
 changelog: It allows you to see the changes that have been introduced in the
