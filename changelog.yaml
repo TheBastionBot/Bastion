@@ -1,4 +1,4 @@
-date: November 17, 2020
+date: November 18, 2020
 image:
 changes:
   NEW:
@@ -6,6 +6,7 @@ changes:
   - description: Added the `phdComics` command to get comic strips from PHD Comics.
   - description: Added support for re-rolling giveaways. You can now reroll a giveaway after it has ended with the `--reroll` flag and specify how many winners you wanna reroll with the `--winner` flag.
   CHANGES:
+  - description: You can now use the `--user` flag with the `echo` command to Direct Message a member through Bastion instead. But this would require the user to have at least the Manage Server permission in the server.
   - description: Some under-the-hood improvements to make Bastion even better.
   FIXES:
   - description: Some under-the-hood fixes to make Bastion better than ever.
