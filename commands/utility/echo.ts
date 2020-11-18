@@ -4,7 +4,7 @@
  */
 
 import { Command, CommandArguments } from "@bastion/tesseract";
-import { Message, TextChannel } from "discord.js";
+import { GuildMember, Message, TextChannel } from "discord.js";
 
 import * as errors from "../../utils/errors";
 import * as embeds from "../../utils/embeds";
@@ -13,13 +13,14 @@ import BastionGuild = require("../../structures/Guild");
 export = class EchoCommand extends Command {
     constructor() {
         super("echo", {
-            description: "It allows you to send a message through Bastion to any channel in the server. It also supports Bastion embed objects.",
+            description: "It allows you to send a message through Bastion to any channel or member in the server. It also supports Bastion embed objects.",
             triggers: [],
             arguments: {
                 alias: {
                     channel: [ "c" ],
+                    user: [ "u" ],
                 },
-                string: [ "channel" ],
+                string: [ "channel", "user" ],
             },
             scope: "guild",
             owner: false,
@@ -30,6 +31,7 @@ export = class EchoCommand extends Command {
             syntax: [
                 "echo -- MESSAGE",
                 "echo --channel ID -- MESSAGE",
+                "echo --user ID -- MESSAGE",
             ],
         });
     }
@@ -38,7 +40,8 @@ export = class EchoCommand extends Command {
         // command syntax validation
         if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
-        const channel: TextChannel = this.client.resolver.resolveGuildChannel(message.guild, argv.channel ? argv.channel : message.channel.id, [ "text", "news" ]) as TextChannel;
+        const user: GuildMember = this.client.resolver.resolveGuildMember(message.guild, argv.user);
+        const channel = user ? await user.createDM() : this.client.resolver.resolveGuildChannel(message.guild, argv.channel ? argv.channel : message.channel.id, [ "text", "news" ]) as TextChannel;
 
         if (!channel) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "channelNotFound"));
 
@@ -55,7 +58,12 @@ export = class EchoCommand extends Command {
 
         // acknowledge
         await channel.send({
-            embed: embeds.generateEmbed(embed),
+            embed: {
+                ...embeds.generateEmbed(embed),
+                footer: {
+                    text: "Sent by " + message.author.tag + (user ? " from " + message.guild.name : ""),
+                },
+            },
         });
     }
 }
