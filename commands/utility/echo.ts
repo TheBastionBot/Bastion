@@ -31,7 +31,7 @@ export = class EchoCommand extends Command {
             syntax: [
                 "echo -- MESSAGE",
                 "echo --channel ID -- MESSAGE",
-                "echo --user ID -- MESSAGE",
+                "echo --user USER -- MESSAGE",
             ],
         });
     }
@@ -41,7 +41,7 @@ export = class EchoCommand extends Command {
         if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         const user: GuildMember = this.client.resolver.resolveGuildMember(message.guild, argv.user);
-        const channel = user ? await user.createDM() : this.client.resolver.resolveGuildChannel(message.guild, argv.channel ? argv.channel : message.channel.id, [ "text", "news" ]) as TextChannel;
+        const channel = user && message.member.permissions.has("MANAGE_GUILD") ? await user.createDM() : this.client.resolver.resolveGuildChannel(message.guild, argv.channel ? argv.channel : message.channel.id, [ "text", "news" ]) as TextChannel;
 
         if (!channel) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "channelNotFound"));
 
