@@ -1,10 +1,14 @@
-date: November 11, 2020
+date: November 21, 2020
 image:
 changes:
   NEW:
-  - description: Added some more commands to the Fun module, like `pickupLine`, `roast`, `ship`, and `simpness`, so you can have some more fun in your server.
+  - title: New Game!
+    description: Added a new multiplayer game called Number Nash. Checkout `#!numberNash --help` for more info.
+  - description: Added the `ticTacToe` command to allow users to play a game of Tic Tac Toe with their friends.
+  - description: Added the `phdComics` command to get comic strips from PHD Comics.
+  - description: Added support for re-rolling giveaways. You can now reroll a giveaway after it has ended with the `--reroll` flag and specify how many winners you wanna reroll with the `--winner` flag.
   CHANGES:
-  - description: Added some more easter eggs.
+  - description: You can now use the `--user` flag with the `echo` command to Direct Message a member through Bastion instead. But this would require the user to have at least the Manage Server permission in the server.
+  - description: Some under-the-hood improvements to make Bastion even better.
   FIXES:
-  - description: Fixed an issue when finding the Muted role in servers which have roles with blank names (good old times).
   - description: Some under-the-hood fixes to make Bastion better than ever.

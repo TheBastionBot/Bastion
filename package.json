@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "8.11.0",
+  "version": "8.12.0",
   "description": "Get an enhanced Discord experience!",
   "homepage": "https://bastion.traction.one",
   "main": "./index.js",
@@ -17,18 +17,19 @@
   },
   "devDependencies": {
     "@types/discord-rpc": "^3.0.2",
+    "@types/jsdom": "^16.2.5",
     "@types/mathjs": "^6.0.5",
-    "@types/mongoose": "^5.7.36",
-    "@types/node": "^14.6.4",
+    "@types/mongoose": "^5.10.1",
+    "@types/node": "^14.14.9",
     "@types/node-fetch": "^2.5.5",
     "@types/uuid": "^8.3.0",
     "@types/ws": "^7.2.6",
     "@types/yargs-parser": "^15.0.0",
-    "@types/youtube-dl": "^1.12.2",
-    "@typescript-eslint/eslint-plugin": "^4.5.0",
-    "@typescript-eslint/parser": "^4.5.0",
+    "@types/youtube-dl": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
     "eslint": "^7.6.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.1.2"
   },
   "optionalDependencies": {
     "@discordjs/opus": "^0.3.2",
@@ -45,7 +46,8 @@
     "chalk": "^4.1.0",
     "discord-rpc": "^3.1.3",
     "he": "^1.2.0",
-    "mathjs": "^7.2.0",
+    "jsdom": "^16.4.0",
+    "mathjs": "^8.0.1",
     "node-fetch": "^2.6.0",
     "opusscript": "^0.0.7",
     "trivia-api": "^1.0.1",

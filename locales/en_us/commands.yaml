@@ -16,6 +16,7 @@ setPresence: It allows you to update Bastion's presence in the shard.
 setUsername: It allows you to update Bastion's username directly from Discord.
 shutdown: It allows you to shutdown Bastion directly from Discord.
 garfield: It allows you to see the latest Garfield comic strip.
+phdComics: It allows you to see the latest PHD comic strip, or the specified one.
 xkcd: It allows you to see the latest xkcd comic strip.
 amongUsChannel: It allows to set the channel for creating Among Us lobbies.
   Anybody who has access to this channel would be able to auto create Among Us
@@ -126,12 +127,17 @@ flip: It allows you to flip any number of coins and see the result. It also
 gameServer: It allows you to fetch information from nearly any game server that
   makes its status publicly available.
 magic8ball: It allows you to get answers to your polar questions from the Magic 8 Ball.
+numberNash: Number Nash is a multiplayer game of numbers played with multiple
+  members of the server. When started, everyone can post a natural number
+  between 1 and 100 in the channel. The game ends in a minute and the member who
+  posted the smallest number that wasn't also posted by anyone else wins.
 roll: It allows you to roll dice and see the result. It supports dice notation.
   It also supports gambling.
 rps: It allows you to play Rock Paper Scissor with Bastion. It also supports
   gambling.
 russianRoulette: It allows you to play Russian Roulette. Let's see if you can
   last all the 7 rounds.
+ticTacToe: It allows you to play a game of Tic Tac Toe with another member of the server.
 trivia: Play a game of trivia and see if you can answer the questions of various
   difficulty across multiple categories.
 changelog: It allows you to see the changes that have been introduced in the
@@ -303,8 +309,8 @@ datetime: It allows you to see the current time in multiple different time
   zones. It also allows you to convert the specified time into multiple
   different time zones.
 definitions: It allows you to look up definitions for the specified word.
-echo: It allows you to send a message through Bastion to any channel in the
-  server. It also supports Bastion embed objects.
+echo: It allows you to send a message through Bastion to any channel or member
+  in the server. It also supports Bastion embed objects.
 followRedirects: It follows all the redirects in the specified URL and allows
   you to see the final URL.
 invite: It allows you to generate an instant invite for the server. Optionally,
