@@ -127,6 +127,10 @@ flip: It allows you to flip any number of coins and see the result. It also
 gameServer: It allows you to fetch information from nearly any game server that
   makes its status publicly available.
 magic8ball: It allows you to get answers to your polar questions from the Magic 8 Ball.
+numberNash: Number Nash is a multiplayer game of numbers played with multiple
+  members of the server. When started, everyone can post a natural number
+  between 1 and 100 in the channel. The game ends in a minute and the member who
+  posted the smallest number that wasn't also posted by anyone else wins.
 roll: It allows you to roll dice and see the result. It supports dice notation.
   It also supports gambling.
 rps: It allows you to play Rock Paper Scissor with Bastion. It also supports
