@@ -110,6 +110,12 @@ export = class VoiceSessionsCommand extends Command {
             await controlMessage.react("🔓").catch(() => {
                 // this error can be ignored
             });
+            await controlMessage.react("🔐").catch(() => {
+                // this error can be ignored
+            });
+            await controlMessage.react("👁️").catch(() => {
+                // this error can be ignored
+            });
 
             // acknowledge
             return message.channel.send({
