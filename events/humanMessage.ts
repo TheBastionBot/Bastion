@@ -205,7 +205,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             });
 
             // react to the message for confirmation
-            message.react("🆙").catch(() => {
+            message.react("👍🏻").catch(() => {
                 // this error can be ignored
             });
         }
