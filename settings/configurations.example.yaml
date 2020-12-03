@@ -23,7 +23,7 @@ presence:
     name: "with Ganymede"
     # Activity URL
     # Twitch channel URL for `STREAMING` activity.
-    url: "https://twitch.tv/k3rn31p4nic"
+    url: "https://twitch.tv/iamtraction"
 
 # Scheduled Commands
 scheduledCommands:

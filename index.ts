@@ -62,7 +62,7 @@ rpc.on("ready", () => {
         largeImageKey: "f2be54a6b3bc34a5b849fdeb2e550d68",
         largeImageText: "Bastion",
         smallImageKey: "b7b407c827109b547ce91a08e7f9168b",
-        smallImageText: "k3rn31p4nic#8383",
+        smallImageText: "iamtraction#8383",
         instance: false,
     });
 });
