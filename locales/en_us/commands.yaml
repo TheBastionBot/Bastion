@@ -102,6 +102,7 @@ votingChannels: It allows you to set (and unset) channels as Voting Channels. If
   a channel is set as a Voting Channel, anything sent in the channel will be set
   up for everyone to vote.
 catify: It allows you to generate a cat that's unique to you.
+dankmeme: Posts a random dank meme collected from the r/dankmemes subreddit.
 joke: Posts a random joke collected from the r/jokes subreddit.
 lifeProTip: Posts a random life pro tip collected from the r/LifeProTips subreddit.
 meme: Posts a random meme collected from the r/memes subreddit.
