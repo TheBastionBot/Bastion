@@ -182,7 +182,7 @@ export = class MessageReactionAddListener extends Listener {
         if (!guildDocument.voiceSessions || !guildDocument.voiceSessions.categories) return;
 
         // check whether the reaction was valid
-        if (![ "🔒", "🔓", "🔐", "👁️"].includes(messageReaction.emoji.name)) return;
+        if (![ "🔒", "🔓", "🔐", "👁️" ].includes(messageReaction.emoji.name)) return;
 
         // check whether the reaction was made in a valid message
         if (messageReaction.message.author.id !== member.client.user.id) return;
