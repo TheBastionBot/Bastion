@@ -99,7 +99,7 @@ export = class VoiceSessionsCommand extends Command {
                 embed: {
                     color: Constants.COLORS.IRIS,
                     title: "Voice Session Control",
-                    description: "You can lock or unlock your voice session by reacting to the this message.",
+                    description: "You can lock, unlock, hide, and unhide your voice session by reacting to the this message.",
                 },
             });
 
