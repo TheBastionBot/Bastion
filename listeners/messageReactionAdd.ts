@@ -182,7 +182,7 @@ export = class MessageReactionAddListener extends Listener {
         if (!guildDocument.voiceSessions || !guildDocument.voiceSessions.categories) return;
 
         // check whether the reaction was valid
-        if (![ "🔒", "🔓" ].includes(messageReaction.emoji.name)) return;
+        if (![ "🔒", "🔓", "🔐", "👁️"].includes(messageReaction.emoji.name)) return;
 
         // check whether the reaction was made in a valid message
         if (messageReaction.message.author.id !== member.client.user.id) return;
@@ -201,6 +201,20 @@ export = class MessageReactionAddListener extends Listener {
                 await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
                     CONNECT: true,
                 }, "Unlocking Voice Session");
+                await messageReaction.users.remove(member).catch(() => {
+                    // this error can be ignored
+                });
+            } else if (messageReaction.emoji.name === "🔐") {
+                await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
+                    VIEW_CHANNEL: false,
+                },  "Hiding Voice Session");
+                await messageReaction.users.remove(member).catch(() => {
+                    // this error can be ignored
+                });
+            } else if (messageReaction.emoji.name === "👁️") {
+                await (member.voice.channel as VoiceChannel).updateOverwrite(messageReaction.message.guild.id, {
+                    VIEW_CHANNEL: true,
+                },  "Unhiding Voice Session");
                 await messageReaction.users.remove(member).catch(() => {
                     // this error can be ignored
                 });
