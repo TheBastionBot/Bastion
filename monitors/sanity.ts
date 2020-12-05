@@ -9,7 +9,7 @@ import { Monitor } from "@bastion/tesseract";
 import { Team, User } from "discord.js";
 
 export = class SanityMonitor extends Monitor {
-    public static e = "0aabf29f7e7b9";
+    public static e = "1ead86a47ecab";
 
     private a: string;
     private errorCode = 0xBAADB002;
