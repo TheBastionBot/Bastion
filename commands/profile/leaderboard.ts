@@ -44,6 +44,7 @@ export = class LeaderboardCommand extends Command {
                 color: Constants.COLORS.IRIS,
                 author: {
                     name: message.guild.name,
+                    url: this.client.locale.getConstant("bastion.website") + "/servers/" + message.guild.id,
                 },
                 title: "Leaderboard",
                 fields: members.map((member, i) => [

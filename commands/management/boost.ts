@@ -57,6 +57,10 @@ export = class BoostCommand extends Command {
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
+                author: {
+                    name: message.guild.name,
+                    url: this.client.locale.getConstant("bastion.website") + "/servers/" + message.guild.id,
+                },
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "boost", message.author.tag),
             },
         });
