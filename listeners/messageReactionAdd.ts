@@ -166,7 +166,9 @@ export = class MessageReactionAddListener extends Listener {
                         // this error can be ignored
                     });
                 }
-                await member.roles.remove(reactionRolesGroup.roles, "Auto Removed via Reaction Roles");
+                await member.roles.remove(reactionRolesGroup.roles, "Auto Removed via Reaction Roles").catch(() => {
+                    // this error can be ignored
+                });
             }
 
             // add the reaction role
