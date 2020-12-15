@@ -288,9 +288,7 @@ export = class MessageReactionAddListener extends Listener {
         const member = messageReaction.message.guild.member(user);
 
         // handle reaction roles
-        this.handleReactionRoles(messageReaction, member).catch(() => {
-            // this error can be ignored
-        });
+        this.handleReactionRoles(messageReaction, member).catch(Logger.error);
 
         // handle Among Us game lobby
         this.handleGameLobby(messageReaction, member).catch(Logger.error);
@@ -303,30 +301,22 @@ export = class MessageReactionAddListener extends Listener {
 
         // handle suggestions, if enabled and the suggestions channel exists
         if (guildDocument.suggestionsChannelId && messageReaction.message.channel.id === guildDocument.suggestionsChannelId) {
-            this.handleSuggestions(messageReaction, member).catch(() => {
-                // this error can be ignored
-            });
+            this.handleSuggestions(messageReaction, member).catch(Logger.error);
         }
 
         // handle starboard, if enabled and the starboard channel exists
         if (guildDocument.starboardChannelId && messageReaction.message.guild.channels.cache.has(guildDocument.starboardChannelId)) {
-            this.handleStarboard(messageReaction, member, messageReaction.message.guild.channels.cache.get(guildDocument.starboardChannelId) as TextChannel).catch(() => {
-                // this error can be ignored
-            });
+            this.handleStarboard(messageReaction, member, messageReaction.message.guild.channels.cache.get(guildDocument.starboardChannelId) as TextChannel).catch(Logger.error);
         }
 
         // handle reaction announcement, if enabled and the announcement channel exists
         if (guildDocument.reactionAnnouncements && messageReaction.message.guild.channels.cache.has(guildDocument.announcementsChannelId)) {
-            this.handleReactionAnnouncement(messageReaction, member, messageReaction.message.guild.channels.cache.get(guildDocument.announcementsChannelId) as TextChannel).catch(() => {
-                // this error can be ignored
-            });
+            this.handleReactionAnnouncement(messageReaction, member, messageReaction.message.guild.channels.cache.get(guildDocument.announcementsChannelId) as TextChannel).catch(Logger.error);
         }
 
         // handle reaction pinning, if enabled
         if (guildDocument.reactionPinning) {
-            this.handleReactionPinning(messageReaction, member).catch(() => {
-                // this error can be ignored
-            });
+            this.handleReactionPinning(messageReaction, member).catch(Logger.error);
         }
     }
 }
