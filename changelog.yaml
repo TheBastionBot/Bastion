@@ -1,10 +1,5 @@
-date: December 5, 2020
+date: December 15, 2020
 image:
 changes:
-  NEW:
-  - title: Dank Memes!
-    description: Added the `dankmeme` command for people who who didn't think `meme` wasn't nasty enough!
-  CHANGES:
-  - description: Members can now completely hide and unhide their temporary voice channels from other members using the new 🔐 and 👁️ reactions, respectively.
-  - description: A few of you complained about the 🆙 reaction for auto-karmas given by Bastion when someone thanked someone. So, we've now updated it to 👍🏻.
-  - description: Some under-the-hood changes as usual to make Bastion even better!
+  FIXES:
+  - description: Some under-the-hood fixes to make Bastion even better!
