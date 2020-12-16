@@ -149,7 +149,7 @@ export = class StatusCommand extends Command {
                     url: this.client.locale.getConstant("bastion.website"),
                 },
                 title: (argv.shard ? "Shard " + this.client.shard.ids.join(" / ") : "") + " Status",
-                description: guildMembership ? guildMembership.emoji + " " + guildMembership.name : ("[Get **Bastion Premium Membership** for an enhanced Bastion experience.](" + this.client.locale.getConstant("bastion.website") + "/premium)"),
+                description: constants.isPublicBastion(message.client.user) ? guildMembership ? guildMembership.emoji + " " + guildMembership.name : ("[Get **Bastion Premium Membership** for an enhanced Bastion experience.](" + this.client.locale.getConstant("bastion.website") + "/premium)") : ("[**Support the development of Bastion** and get awesome perks to enhance your Bastion experience.](" + this.client.locale.getConstant("bastion.website") + "/premium)"),
                 url: this.client.locale.getConstant("bastion.website") + "/status",
                 thumbnail: {
                     url: this.client.user.displayAvatarURL({
