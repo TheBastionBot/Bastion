@@ -102,7 +102,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             }
 
             // reward level roles, if available
-            this.handleLevelRoles(message, member.document.level)
+            this.handleLevelRoles(message, computedLevel)
                 .catch(Logger.error);
         }
 
