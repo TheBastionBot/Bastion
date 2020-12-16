@@ -7,6 +7,7 @@ import { Listener, Constants } from "@bastion/tesseract";
 import { Invite } from "discord.js";
 
 import Guild = require("../structures/Guild");
+import * as constants from "../utils/constants";
 import * as durations from "../utils/durations";
 
 export = class InviteCreateListener extends Listener {
@@ -19,6 +20,13 @@ export = class InviteCreateListener extends Listener {
     exec = async (invite: Invite): Promise<void> => {
         const guild = invite.guild as Guild;
 
+        // add new invite data to invite cache
+        // TODO: add public bot support (with premium membership)
+        if (!constants.isPublicBastion(this.client.user)) {
+            (guild as Guild).invites[invite.code] = invite.uses || 0;
+        }
+
+        // server log
         const fields = [
             {
                 name: "Invite Code",
