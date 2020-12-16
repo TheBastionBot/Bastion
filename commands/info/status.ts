@@ -119,7 +119,7 @@ export = class StatusCommand extends Command {
         const stats = [
             {
                 name: "Presence",
-                value: guildCount + " Servers\n" + userCount + " Users",
+                value: guildCount.toLocaleString() + " Servers\n" + userCount.toLocaleString() + " Users",
                 inline: true
             },
             {
