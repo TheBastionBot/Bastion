@@ -1,6 +1,8 @@
 date: December 16, 2020
 image:
 changes:
+  CHANGES:
+  - description: Some under-the-hood improvements as always to make Bastion even better!
   FIXES:
   - description: Fixed an issue where level up roles gave rewards for the previous level instead of the current level.
   - description: Some under-the-hood fixes to make Bastion even better!
