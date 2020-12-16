@@ -140,11 +140,7 @@ export = class MessageReactionAddListener extends Listener {
         // identify the reaction roles group for the reaction
         const reactionRolesGroup = await ReactionRoleGroup.findById(messageReaction.message.id);
 
-        if (!reactionRolesGroup) {
-            // TODO: Remove this after testing in production
-            if (messageReaction.message.guild.id === "767330367090196501") return console.log("eRRor__group_not_found", messageReaction.message.id);
-            return;
-        }
+        if (!reactionRolesGroup) return;
 
         // build the reaction emoji
         const emoji = messageReaction.emoji.id
@@ -161,11 +157,7 @@ export = class MessageReactionAddListener extends Listener {
                 emoji: emojiObject.value,
             });
 
-            if (!reactionRole) {
-                // TODO: Remove this after testing in production
-                if (messageReaction.message.guild.id === "767330367090196501") return console.log("eRRor__role_not_found", reactionRolesGroup.roles, messageReaction.message.guild.id, emojiObject);
-                return;
-            }
+            if (!reactionRole) return;
 
             // remove all other roles in this reaction roles group, if the roles are mutually exclusive
             if (reactionRolesGroup.exclusive) {
@@ -181,10 +173,6 @@ export = class MessageReactionAddListener extends Listener {
 
             // add the reaction role
             await member.roles.add(reactionRole._id, "Added via Reaction Roles");
-        } else {
-            // TODO: Remove this after testing in production
-            if (messageReaction.message.guild.id === "767330367090196501") return console.log("eRRor__emoji_object_not_found", emoji);
-            return;
         }
     }
 
