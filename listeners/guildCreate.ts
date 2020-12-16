@@ -7,7 +7,9 @@ import { Listener, Constants, Logger } from "@bastion/tesseract";
 import { Guild } from "discord.js";
 
 import GuildModel from "../models/Guild";
+import * as constants from "../utils/constants";
 import { BastionCredentials } from "../typings/settings";
+import BastionGuild = require("../structures/Guild");
 
 export = class GuildCreateListener extends Listener {
     constructor() {
@@ -19,6 +21,21 @@ export = class GuildCreateListener extends Listener {
     exec = async (guild: Guild): Promise<void> => {
         // create the guild instance in datastore
         GuildModel.findByIdAndUpdate(guild.id, { _id: guild.id }, { upsert: true }).catch(Logger.error);
+
+        // cache invite data
+        // TODO: add public bot support (with premium membership)
+        if (!constants.isPublicBastion(this.client.user)) {
+            // fetch guild invites
+            const invites = await guild.fetchInvites().catch(() => {
+                // this error can be ignored
+            });
+            if (invites) {
+                // store invite uses in cache
+                for (const invite of invites.values()) {
+                    (guild as BastionGuild).invites[invite.code] = invite.uses || 0;
+                }
+            }
+        }
 
 
         const credentials = (this.client.credentials as BastionCredentials);
