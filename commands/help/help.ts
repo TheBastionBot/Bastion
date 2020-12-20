@@ -34,8 +34,10 @@ export = class HelpCommand extends Command {
                 },
                 title: "Help",
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandCategoriesCommand") + "\n"
-                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "categoryCommandsCommand") + "\n"
-                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandDetailsOption"),
+                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "categoryCommandsCommand")
+                    + " For example:```bash\n" + this.client.configurations.prefixes[0] + "commands " + this.manager.modules.random().category + "```\n"
+                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandDetailsOption")
+                    + " For example:```bash\n" + this.client.configurations.prefixes[0] + this.manager.modules.randomKey() + " --help```",
                 fields: [
                     {
                         name: "Need help with " + this.client.locale.getConstant("bastion.name") + "?",
