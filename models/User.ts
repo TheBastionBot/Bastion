@@ -28,6 +28,7 @@ export default mongoose.model<User & mongoose.Document>("User", new mongoose.Sch
     info: {
         type: String,
         trim: true,
+        maxlength: 256,
     },
     cakeDay: {
         type: Date,
@@ -35,6 +36,7 @@ export default mongoose.model<User & mongoose.Document>("User", new mongoose.Sch
     location: {
         type: String,
         trim: true,
+        maxlength: 16,
     },
     color: {
         type: Number,
