@@ -49,6 +49,10 @@ export = class HelpCommand extends Command {
                         value: "[Invite " + this.client.locale.getConstant("bastion.name") + " to your server](" + this.client.locale.getConstant("bastion.bot.invite") + ")",
                         inline: true,
                     },
+                    {
+                        name: "Do you like using Bastion?",
+                        value: "[**Support the development of Bastion** and get awesome perks to enhance your Bastion experience.](" + this.client.locale.getConstant("bastion.website") + "/premium)",
+                    },
                 ],
                 footer: {
                     text: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "didYouKnowDeveloper", this.client.locale.getConstant("author.username")),
