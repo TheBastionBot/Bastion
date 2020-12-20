@@ -146,12 +146,8 @@ export = class ProfileCommand extends Command {
                     name: member.user.tag,
                 },
                 title: "Bastion Profile",
-                description: (userBadges && "badgeValue" in userBadges ? badges.resolveBadges(userBadges.badgeValue) : []).map(badge => badge.emoji).join(" "),
+                description: (userBadges && "badgeValue" in userBadges ? badges.resolveBadges(userBadges.badgeValue) : []).map(badge => badge.emoji).join(" ") + "\n\n" + (userProfile.info ? userProfile.info : ""),
                 fields: [
-                    {
-                        name: "About",
-                        value: userProfile.info || "-",
-                    },
                     {
                         name: "Rank",
                         value: rank + 1,
@@ -178,18 +174,13 @@ export = class ProfileCommand extends Command {
                         inline: true,
                     },
                     {
-                        name: "Progress - " + totalRequiredXP.currentLevel + " / " + totalRequiredXP.nextLevel + " - " + Math.round(currentProgress) + "%",
-                        value: "`" + progress(currentProgress, 35) + "`",
-                    },
-                    {
-                        name: "Cake Day",
-                        value: userProfile.cakeDay ? userProfile.cakeDay.toDateString() : "-",
-                        inline: true,
-                    },
-                    {
                         name: "Location",
                         value: userProfile.location || "-",
                         inline: true,
+                    },
+                    {
+                        name: "Progress - " + totalRequiredXP.currentLevel + " / " + totalRequiredXP.nextLevel + " - " + Math.round(currentProgress) + "%",
+                        value: "`" + progress(currentProgress, 35) + "`",
                     },
                 ],
                 thumbnail: {
@@ -202,7 +193,7 @@ export = class ProfileCommand extends Command {
                     url: userProfile.backdrop,
                 },
                 footer: {
-                    text: member.id === this.client.locale.getConstant("author.discord.id") ? "Oh, hey! Here's my developer!" : "",
+                    text: member.id === this.client.locale.getConstant("author.discord.id") ? "" : ("If you know " + member.displayName + ", send them a message."),
                 },
             },
         }).catch(() => {
