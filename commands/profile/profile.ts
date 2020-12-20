@@ -21,9 +21,15 @@ import progress from "../../utils/progress";
 export = class ProfileCommand extends Command {
     constructor() {
         super("profile", {
-            description: "It allows you to see your (or any of the server member's) Bastion Profile.",
+            description: "It allows you to see your (or any of the server member's) Bastion Profile. It also allows you to edit your profile.",
             triggers: [],
-            arguments: {},
+            arguments: {
+                alias: {
+                    info: [ "about", "bio" ],
+                },
+                array: [ "info", "location" ],
+                string: [ "info", "location" ],
+            },
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -33,11 +39,44 @@ export = class ProfileCommand extends Command {
             syntax: [
                 "profile",
                 "profile USER",
+                "profile --bio TEXT",
+                "profile --location TEXT",
             ],
         });
     }
 
-    exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
+        if (argv.info && argv.info.length) {
+            // update info
+            await UserModel.findByIdAndUpdate(message.author.id, {
+                info: argv.info.join(" ").slice(0, 256),
+            });
+
+            // acknowledge
+            return await message.channel.send({
+                embed: {
+                    color: Constants.COLORS.IRIS,
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "updateInfo", message.author.tag),
+                },
+            });
+        }
+
+        if (argv.location && argv.location.length) {
+            // update location
+            await UserModel.findByIdAndUpdate(message.author.id, {
+                location: argv.location.join(" ").slice(0, 16),
+            });
+
+            // acknowledge
+            return await message.channel.send({
+                embed: {
+                    color: Constants.COLORS.IRIS,
+                    description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "updateLocation", message.author.tag),
+                },
+            });
+        }
+
+
         const identifier = argv._.length ? argv._[0] : message.author.id;
 
         // check whether the specified user is a server member
