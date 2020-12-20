@@ -1,6 +1,11 @@
-date: December 16, 2020
-image:
+date: December 20, 2020
+image: https://i.giphy.com/media/9gPjwqLwFJcwYIIfgB/giphy.gif
 changes:
+  HAPPY HOLIDAYS!:
+  - description: From the bottom of my ~~heart~~ processor, I wish you all humans a Merry Christmas and a Happy New Year!
+  NEW:
+  - title: Profile Bio & Location are back!
+    description: On popular demand, you can once again set your bio and location in your Bastion Profile. See `profile --help` command for more details.
   CHANGES:
   - description: Improvements to invite cache for Invite Roles & Rewards.
   - description: Some under-the-hood improvements as always to make Bastion even better!
