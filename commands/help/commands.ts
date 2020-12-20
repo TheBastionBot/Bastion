@@ -107,7 +107,7 @@ export = class Commands extends Command {
                             {
                                 name: "Need more details?",
                                 value: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandDetailsOption")
-                                    + "```bash\ncommands --help```",
+                                    + " For example:```bash\n" + this.client.configurations.prefixes[0] + this.manager.modules.filter(m => m.category === category).randomKey() + " --help```",
                             },
                         ],
                         footer: {
@@ -140,12 +140,10 @@ export = class Commands extends Command {
                 },
                 title: "Command Categories",
                 url: this.client.locale.getConstant("bastion.website") + "/commands",
-                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "categoryCommandsCommand"),
+                description: "```css\n" + Object.keys(commands).map(c => strings.snakeToTitleCase(c)).join("\n") + "```\n"
+                    + this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "categoryCommandsCommand")
+                    + " For example:```bash\n" + this.client.configurations.prefixes[0] + "commands " + this.manager.modules.random().category + "```\n",
                 fields: [
-                    {
-                        name: "Command Categories",
-                        value: "```css\n" + Object.keys(commands).map(c => strings.snakeToTitleCase(c)).join("\n") + "```",
-                    },
                     {
                         name: "Want the complete list?",
                         value: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "commandsWebsite"),
