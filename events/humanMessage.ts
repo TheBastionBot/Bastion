@@ -190,6 +190,9 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
     handleKarma = async (message: Message): Promise<void> => {
         if (!message.content) return;
 
+        // check whether gamification is enabled
+        if (!(message.guild as BastionGuild).document.gamification || !(message.guild as BastionGuild).document.gamification.enabled) return;
+
         if ((message.content.toLowerCase().includes("thanks") || message.content.toLowerCase().includes("thank you")) && message.mentions.users && message.mentions.users.size) {
             const users = Array.from(message.mentions.users.keys()).filter(id => id !== message.member.id);
 
