@@ -3,4 +3,5 @@ image:
 changes:
   CHANGES:
   - description: We won't give karma to users being thanked if gamification is not enabled.
+  - description: The `apod` command will now link to the permanent archive page of the APOD so you can visit them whenever you want.
   - description: Some under-the-hood improvements as always to make Bastion even better!
