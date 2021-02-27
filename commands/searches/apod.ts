@@ -37,13 +37,17 @@ export = class APODCommand extends Command {
             url: string;
         } = await response.json();
 
+        const today = new Date();
+
         // acknowledge
         await message.channel.send({
             embed: {
                 color: Constants.COLORS.IRIS,
                 author: {
                     name: "Astronomy Picture of the Day",
-                    url: "https://apod.nasa.gov/",
+                    url: "https://apod.nasa.gov/apod/ap" + (
+                        (today.getUTCFullYear() - 2000).toString() + (today.getUTCMonth() > 9 ? (today.getUTCMonth() + 1).toString() : ("0" + (today.getUTCMonth() + 1).toString())) + today.getUTCDate().toString()
+                    ) + ".html",
                 },
                 title: apod.title,
                 description: apod.explanation,
