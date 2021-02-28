@@ -1,6 +1,6 @@
 /*!
- * @author Sankarsan Kampa (iamtraction)
- * @copyright 2020 - The Bastion Bot Project
+ * @author TRACTION (iamtraction)
+ * @copyright 2020 - Sankarsan Kampa
  */
 
 const paginate = (list: unknown[], page: number): { page: number; pages: number; items: unknown[] } => {

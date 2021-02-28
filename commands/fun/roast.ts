@@ -1,6 +1,6 @@
 /*!
- * @author Sankarsan Kampa (iamtraction)
- * @copyright 2020 - The Bastion Bot Project
+ * @author TRACTION (iamtraction)
+ * @copyright 2020 - Sankarsan Kampa
  */
 
 import { Command } from "@bastion/tesseract";

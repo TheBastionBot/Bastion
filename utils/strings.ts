@@ -1,6 +1,6 @@
 /*!
- * @author Sankarsan Kampa (iamtraction)
- * @copyright 2020 - The Bastion Bot Project
+ * @author TRACTION (iamtraction)
+ * @copyright 2020 - Sankarsan Kampa
  */
 
 const frequency = (string: string): { [key: string]: number } => [ ...string ].reduce((a: { [key: string]: number }, c) => (a[c] = a[c] + 1 || 1) && a, {});

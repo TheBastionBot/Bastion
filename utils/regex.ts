@@ -1,6 +1,6 @@
 /*!
- * @author Sankarsan Kampa (iamtraction)
- * @copyright 2020 - The Bastion Bot Project
+ * @author TRACTION (iamtraction)
+ * @copyright 2020 - Sankarsan Kampa
  */
 
 export const SERVER_INVITE = /(https:\/\/)?(www\.)?(discord\.gg|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i;
