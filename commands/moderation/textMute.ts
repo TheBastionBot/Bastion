@@ -108,7 +108,7 @@ export = class TextMute extends Command {
             embed: {
                 color: Constants.COLORS.ORANGE,
                 description: argv.set
-                    ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberSetTextMute", message.author.tag, member.user.tag, channel.name)
+                    ? this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberSetTextMute", message.author.tag, member.user.tag, channel?.name)
                     : this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "memberUnsetTextMute", message.author.tag, member.user.tag),
                 fields: [
                     {
