@@ -19,7 +19,7 @@ export = class Queue extends Command {
     constructor() {
         super("queue", {
             description: "It allows you to see the current music queue of the server. It also allows you to clear, or shuffle the music queue as well as remove a song from the queue, or set (and unset) the queue in loop.",
-            triggers: [],
+            triggers: [ "q" ],
             arguments: {
                 alias: {
                     clear: [ "c" ],
