@@ -14,7 +14,7 @@ export = class Kick extends Command {
     constructor() {
         super("kick", {
             description: "It allows you to kick users from the server.",
-            triggers: [],
+            triggers: [ "k" ],
             arguments: {
                 alias: {
                     user: "u",
