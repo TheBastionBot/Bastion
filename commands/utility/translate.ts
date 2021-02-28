@@ -6,7 +6,7 @@
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
-import translate = require("@k3rn31p4nic/google-translate-api");
+import translate = require("@iamtraction/google-translate");
 
 import * as errors from "../../utils/errors";
 

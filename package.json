@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@bastion/tesseract": "^2.1.4",
-    "@k3rn31p4nic/google-translate-api": "^1.1.1",
+    "@iamtraction/google-translate": "^1.1.2",
     "@types/he": "^1.1.1",
     "chalk": "^4.1.0",
     "discord-rpc": "^3.1.3",
