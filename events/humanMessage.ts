@@ -1,5 +1,5 @@
 /*!
- * @author Sankarsan Kampa (k3rn31p4nic)
+ * @author Sankarsan Kampa (iamtraction)
  * @copyright 2020 - The Bastion Bot Project
  */
 
