@@ -4,6 +4,7 @@ changes:
   CHANGES:
   - description: We won't give karma to users being thanked if gamification is not enabled.
   - description: The `apod` command will now link to the permanent archive page of the APOD so you can visit them whenever you want.
+  - description: Added some more aliases for commands.
   - description: Some under-the-hood improvements as always to make Bastion even better!
   FIXES:
   - description: Fixed an issue with `textMute` that didn't show the success message after successfully muting someone server wide.
