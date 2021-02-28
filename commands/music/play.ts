@@ -50,7 +50,7 @@ export = class Play extends Command {
     constructor() {
         super("play", {
             description: "It allows you to play a music in the server, from the given query or from any supported source.",
-            triggers: [],
+            triggers: [ "p" ],
             arguments: {},
             scope: "guild",
             owner: false,
