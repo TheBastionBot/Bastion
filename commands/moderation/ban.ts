@@ -15,7 +15,7 @@ export = class Ban extends Command {
     constructor() {
         super("ban", {
             description: "It allows you to ban (or soft ban) users from the server, and optionally clear their messages from the specified number of days. It also allows you to list all the users banned in the server.",
-            triggers: [],
+            triggers: [ "b" ],
             arguments: {
                 alias: {
                     days: "d",
