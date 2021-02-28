@@ -17,7 +17,7 @@ export = class Warn extends Command {
     constructor() {
         super("warn", {
             description: "It allows you to warn server members, as well as clear their infractions. It also allows you to list all the infractions.",
-            triggers: [],
+            triggers: [ "w" ],
             arguments: {
                 alias: {
                     clear: "c",
