@@ -1,69 +1,55 @@
 ---
-#Channel Events
-categoryChannelCreate: Kategorie kanálu vytvořena
-categoryChannelDelete: Kategorie kanálu smazaná
-categoryChannelUpdate: Kategorie kanálů byla aktualizována
-newsChannelCreate: Kanál byl vytvořen
-newsChannelDelete: Kanál byl smazán
-newsChannelUpdate: Kanál novinek aktualizován
-storeChannelCreate: Úložný kanál vytvořen
-storeChannelDelete: Úložiště kanálu smazáno
-storeChannelUpdate: Obchod kanál aktualizován
-textChannelCreate: Textový kanál vytvořen
-textChannelDelete: Textový kanál odstraněn
-textChannelUpdate: Textový kanál aktualizován
-voiceChannelCreate: Hlasový kanál vytvořen
-voiceChannelDelete: Hlasový kanál smazán
-voiceChannelUpdate: Hlasový kanál aktualizován
-#Emoji Events
-emojiCreate: Emoji vytvořeno
-emojiDelete: Emoji smazána
-emojiUpdate: Emoji aktualizováno
-#Guild Member Events
-guildMemberAdd: Člen se připojil
-guildMemberRemove: Člen odešel
-#Infraction Events
-infractionAdd: Nová Infrakce
-infractionClear: Infrakce vymazána
-#Interrupt Events
-inviteFilter: Pozvání filtrováno
-linkFilter: Odkaz filtrován
-mentionSpam: Zmínit nevyžádanou poštu
-messageFilter: Zpráva filtrována
-#Invite Events
-inviteCreate: Pozvánka vytvořena
-inviteDelete: Pozvánka odstraněna
-#Member Nickname Events
-nickUpdate: Nickname Updated
-#Message Events
-messageClear: Zprávy vymazány
-messageDelete: Zprávy smazány
-messageUpdate: Zprávy aktualizovány
-#Moderation Events
-memberKick: Člen vyhozen
-memberSoftBan: Člen Soft-Zabanován
-guildBanAdd: Člen zabanován
-guildBanRemove: Člen odblokován
-guildReportAdd: Nahlášený člen
-#Mute Events
-voiceMuteAdd: Člen hlasu ztlumeno
-voiceMuteRemove: Hlasové odmlčení člena
-memberVoiceDeafen: Člen ztišen
-memberVoiceUndeafen: Člen nezhlušený
-textMuteAdd: Text člena ztlumen
-textMuteRemove: Text člena je odtlumený
-#Role Assignment Events
-memberRoleClear: Členské role vymazány
-memberRoleUpdate: Členské role aktualizovány
-#Role Events
-roleCreate: Role vytvořena
-roleDelete: Role smazána
-roleUpdate: Role aktualizována
-#Server Events
-guildCreate: Server se připojil
-guildDelete: Server odešel
-guildUpdate: Server aktualizován
-#Warning Events
-guildWarnAdd: Člen upozorněn
-guildWarnClear: Výstrahy klanu vymazány
-guildWarnRemove: Upozornění člena byla odstraněna
+categoryChannelDelete: "Kanál kategorie odstraněn"
+categoryChannelCreate: "Kanál kategorie vytvořen"
+categoryChannelUpdate: "Kanál kategorie upraven"
+newsChannelCreate: "Novinkový kanál vytvořen"
+newsChannelDelete: "Novinkový kanál odstraněn"
+newsChannelUpdate: "Novinkový kanál upraven"
+storeChannelCreate: "Obchodní kanál vytvořen"
+storeChannelDelete: "Obchodní kanál odstraněn"
+storeChannelUpdate: "Obchodní kanál upraven"
+textChannelDelete: "Textový kanál odstraněn"
+textChannelCreate: "Textový kanál vytvořen"
+textChannelUpdate: "Textový kanál upraven"
+voiceChannelCreate: "Hlasový kanál vytvořen"
+voiceChannelDelete: "Hlasový kanál odstraněn"
+voiceChannelUpdate: "Hlasový kanál upraven"
+emojiCreate: "Smajlík vytvořen"
+emojiDelete: "Smajlík odstraněn"
+emojiUpdate: "Smajlík upraven"
+guildMemberAdd: "Člen se připojil"
+guildMemberRemove: "Člen se odpojil"
+infractionAdd: "Nový trest"
+infractionClear: "Trest odebrán"
+inviteFilter: "Pozvánka odfiltrována"
+linkFilter: "Odkaz odfiltrován"
+mentionSpam: "Spam zmínek"
+messageFilter: "Zpráva odfiltrována"
+inviteCreate: "Pozvánka vytvořena"
+inviteDelete: "Pozvánka odstraněna"
+nickUpdate: "Přezdívka změněna"
+messageClear: "Zprávy vyčištěny"
+messageDelete: "Zpráva odstraněna"
+messageUpdate: "Zpráva upravena"
+memberKick: "Člen vyhozen"
+memberSoftBan: "Člen soft-zabanován"
+guildBanAdd: "Člen zabanován"
+guildBanRemove: "Člen odbanován"
+guildReportAdd: "Nahlášen člen"
+voiceMuteAdd: "Hlas člena ztlumen"
+voiceMuteRemove: "Hlas člena odtlumen"
+memberVoiceDeafen: "Člen umlčen"
+memberVoiceUndeafen: "Člen odmlčen"
+textMuteAdd: "Člen textově umlčen"
+textMuteRemove: "Člen textově odmlčen"
+memberRoleClear: "Role člena vymazány"
+memberRoleUpdate: "Role člena aktualizovány"
+roleCreate: "Role vytvořena"
+roleDelete: "Role odstraněna"
+roleUpdate: "Role upravena"
+guildCreate: "Server se připojil"
+guildDelete: "Server se odpojil"
+guildUpdate: "Server aktualizován"
+guildWarnAdd: "Člen varován"
+guildWarnClear: "Varování serveru vyčištěna"
+guildWarnRemove: "Varování serveru odstraněna"

@@ -1,140 +1,162 @@
 ---
-announce: Umožňuje vám posílat oznámení do oznamovacích kanálů na serverech, kde byla nastavena.
-blacklist: Umožňuje to uživatelům a serverům černé listiny. Blacklistované servery a uživatelé nemají přístup k Bastionovým příkazům.
-commandModule: Umožňuje vám dočasně povolit nebo zakázat příkazový modul do dalšího restartu. Umožňuje také zkontrolovat, zda je tento příkaz aktuálně povolen.
-eval: Umožňuje spustit JavaScript kód uvnitř Bastionova kontextu.
-exec: Umožňuje provádět příkazy v terminálu, kde Bastion běží.
-relayDirectMessages: Umožňuje přepnout relé přímých zpráv v Bastionu. Pokud je povoleno, Bastion přenese všechny přímé zprávy majitelům bota.
-reloadSettings: Umožňuje vám znovu načíst Bastionova nastavení, aniž byste potřebovali restartovat Bastion.
-setAvatar: Umožňuje aktualizovat Bastionův avatar přímo z Discordu.
-setNick: Umožňuje aktualizovat Bastion přezdívku na serveru.
-setPresence: Umožňuje vám aktualizovat přítomnost Bastionu v úlomku.
-setUsername: Umožňuje aktualizovat Bastionovo uživatelské jméno přímo z Discordu.
-shutdown: Umožňuje ti vypnout Bastion přímo z Discordu.
-garfield: To vám umožní vidět nejnovější Garfield komiks.
-xkcd: Umožňuje vám vidět nejnovější xkcd komiksový pruh.
-announcements: Umožňuje vám povolit (a zakázat) oznámení Bastiona na serveru. Nastavuje kanál jako oznamovací kanál, který obdrží oznámení odeslané majiteli bota pomocí příkazu `announce`.
-autoRoles: Umožňuje nastavit automatické role na serveru. Automatické role jsou role, které jsou přiřazeny uživatelům automaticky při připojení k serveru. Můžete volitelně nastavit automatické role pro boty nebo člověka.
-farewells: Umožňuje vám povolit (a zakázat) skoro na serveru. Také vám umožňuje nastavit rozloučené zprávy a časový limit.
-gambling: Umožňuje povolit (nebo zakázat) hazardní hry na serveru. Pokud je povoleno, mohou členové používat své Bastion Coins k hraní ve hrách.
-gamification: Umožňuje vám povolit (nebo zakázat) gamování na serveru. Pokud je povoleno, uživatelé získávají zkušenosti a zvyšují úroveň na serveru tím, že se účastní serveru, navzájem si konkurují, aby šplhali do žebříčku. Umožňuje také přepínat zprávy úrovně nahoru a nastavit multiplikátor úrovně.
-greetings: Umožňuje ti povolit (a zakázat) pozdravy na serveru. Také ti umožňuje nastavit uvítací zprávu a časový limit.
-inviteFilter: Umožňuje zapnout (a vypnout) filtr pozvánky na serveru. A také vám umožňuje nastavit, zda by porušení tohoto filtru mělo být považováno za infrakci.
-languages: Umožňuje zobrazit jazyky dostupné v Bastionu a nastavit jeden z nich jako výchozí jazyk pro váš server.
-linkFilter: Umožňuje zapnout (a vypnout) filtr odkazů na serveru. A také vám umožňuje nastavit, zda by porušení tohoto filtru mělo být považováno za infrakci.
-membersOnly: Umožňuje vám povolit (a zakázat) členy pouze na serveru. Pokud je povoleno, Bastion mohou použít pouze uživatelé, kteří mají alespoň jednu roli na serveru.
-mentionSpam: Umožňuje nastavit (a zrušit) práh pro zmínění spamu na serveru. Je-li nastaveno, Bastion upozorní uživatele, kteří to porušují a přidá ho do svých infrakcí.
-messageFilter: Umožňuje povolit (a zakázat) filtr zpráv na serveru. Pokud je povoleno, filtruje zprávy, které odpovídají vzorům, které jste uvedli. A také vám umožňuje nastavit, zda by porušení tohoto filtru mělo být považováno za infrakci.
-moderationLogs: Umožňuje zapnout (a vypnout) protokolování moderačních událostí na serveru. Nastavuje kanál jako logový kanál, který bude zaznamenávat moderační události na serveru.
-prefix: Umožňuje nastavit vlastní prefixy pro Bastion na vašem serveru.
-reactionAnnouncements: Umožňuje povolit (a zakázat) Reakční oznámení na serveru. Pokud je povoleno, a je nastaven oznamovací kanál, když někdo s řádným oprávněním přidá Megaphone nebo Loudspeaker reakci na zprávu, zpráva je oznámena v kanálu oznámení.
-reactionPinning: Umožňuje zapnout (a vypnout) Pinning reakce na serveru. Je-li povoleno, když někdo se správným oprávněním přidá PIN reakci na zprávu, zpráva se připne do kanálu.
-reports: Umožňuje vám povolit (a zakázat) uživatelská hlášení na serveru. Nastavuje kanál jako Report kanál, který bude dostávat uživatelské reporty, nahlášený členy serveru pomocí příkazu `report`.
-selfRoles: Umožňuje nastavit vlastní role na serveru. Vlastní role jsou role, které mohou členové serveru přiřadit (a odřadit) sobě.
-serverLogs: Umožňuje zapnout (a vypnout) protokolování událostí serveru. Nastavuje kanál jako logový kanál serveru, který bude zaznamenávat události serveru.
-starboard: Umožňuje vám povolit (a zakázat) Starboard na serveru. Nastavuje kanál jako kanál, který bude zaznamenávat zprávy s hvězdičkou serveru.
-streamerRole: Umožňuje nastavit Streamer Role serveru. Když člen žije na serveru, jsou přiřazeni k této roli, pokud mají alespoň jednu roli na serveru.
-streamers: Umožňuje sledovat streamery z různých platforem, na serveru. Když streamery chodí živě nebo pošlete video, Bastion o tom bude informovat na serveru.
-suggestions: Umožňuje povolit (a zakázat) návrhy na serveru. Nastavuje kanál jako Suggestion Channel který bude dostávat návrhy, které navrhují členové serveru pomocí příkazu `suggest`.
-triggers: Umožňuje přidat (a odstranit) spouště na serveru. Když je nastaven spouštěč a Bastion vidí zprávu od člověka obsahující vzorec uvedený v spouštěči, odpoví buď zadanou odpovědí, nebo reakcí, nebo obojím.
-voiceSessions: Umožňuje spravovat hlasové relace (nebo dočasné hlasové kanály, pokud chcete) na serveru.
-votingChannels: Umožňuje nastavit (a odstavit) kanály jako hlasovací kanály. Pokud je kanál nastaven jako hlasovací kanál, bude cokoli odesláno v kanálu nastaveno pro každého.
-acrophobia: Umožňuje vám hrát hru Acrophobia s vašimi kolegy členy serveru. Bastion generuje náhodné zkratky a hráči soutěží závody, aby vytvořili nejsoudržnější nebo nejhumornější větu, která se hodí do zkratky - backronym. Po vypršení příspěvků v určeném čase všichni hlasují anonymně pro svou oblíbenou odpověď. Nejpopulárnější backronym zvítězí.
-flip: Umožňuje ti překlopit libovolný počet mincí a vidět výsledek. Také to podporuje hazardní hry.
-gameServer: Umožňuje vám načíst informace z téměř jakéhokoliv herního serveru, který jeho status zveřejní.
-magic8ball: Umožňuje vám získat odpovědi na vaše polární otázky z koule Magic 8.
-roll: Umožňuje vám rolovat kostky a vidět výsledek. Podporuje notaci kostek. Také podporuje hazardní hry.
-rps: Umožňuje vám hrát s Bastionem Rock Paper Scissor.
-russianRoulette: Umožňuje ti hrát ruskou ruletu. Podívejme se, zda můžeš trvat všech 7 kol.
-changelog: Umožňuje vám vidět změny, které byly zavedeny v aktuální verzi Bastionu.
-commands: Umožňuje vám zobrazit seznam příkazů, které jsou k dispozici v Bastionu. Můžete jej také použít k hledání příkazů odpovídajících danému dotazu.
-donate: Umožňuje vám vidět způsoby, jak můžete přispět k Bastionovi a jeho vývoji.
-help: Umožňuje vám zobrazit nápovědu Bastionu, která vám ukáže základní informace, které potřebujete začít používat Bastion.
-avatar: Umožňuje vám vidět avatar uživatele.
-channel: Umožňuje vám vidět informace o kanálu.
-emoji: Umožňuje vám vidět informace o emoji.
-patrons: Umožňuje vám vidět naše Patrony, úžasné lidi, kteří podporují rozvoj projektu Bastion Bot.
-role: Umožňuje vám vidět informace o roli. Také vám umožňuje vidět členy v určité roli.
-server: Umožňuje vám vidět informace o serveru.
-status: Umožňuje vám vidět stav Bastiony na pohled. Umožňuje vám také vidět stav aktuálního úlomku. Můžete také vidět souhrn stavu Discordu.
-user: Umožňuje vám vidět informace o uživateli.
-boost: Umožňuje zvýšit obsah serveru v Bastionových seznamech serverů. Server můžete zvýšit jednou za 24 hodin. Skóre zrychlení serveru se obnoví každý měsíc.
-channels: Umožňuje vytváření, mazání a aktualizaci kanálů na serveru.
-edit: Umožňuje vám upravovat všechny zprávy odeslané Bastionem v aktuálním kanálu.
-giveaway: Umožňuje běh událostí na serveru po dobu nejméně jedné hodiny a nejvíce měsíce. Můžete nastavit libovolný počet vítězů pro událost. A také vám umožňuje rerolovat vítěze po skončení akce.
-grant: Umožňuje ti dát zkušenosti nebo mince členům serveru.
-iam: Umožňuje přidat (a odstranit) sami sebe do serveru (a od) nastavených Self rolí.
-inviteRoles: Umožňuje vám přiřadit pozvání na server k roli. Každému, kdo se připojí na server s pozvánkou přidruženou k roli bude přiřazena zadaná role automaticky. Umožňuje vám také zobrazit seznam rolí spojených s pozvánkou.
-leave: Umožňuje vás požádat Bastiona, aby opustil server a vymazal všechna data, která má na serveru a jeho členech.
-levelUpRoles: Umožňuje přidat role na úroveň. Když členové dosáhnou této úrovně, budou jim tyto role uděleny.
-lockSession: Umožňuje uzamknout kanál hlasové relace, ve kterém se momentálně nacházíte, aby se kdokoliv jiný nemohl připojit, pokud nebude pozván.
-lockdown: Umožňuje uzamknout kanál na serveru od uživatelů, kteří nemají oprávnění ke správě zpráv nebo kanálu.
-reactionRoles: Umožňuje vytvořit (a odstranit) skupiny reakčních skupin. Skupina reakčních rolí je skupina emojů, kterou může použít člen ve zprávě Role Reaction pro přidání (nebo odstranění) rolí sami. Role reakce v jedné skupině mohou být rovněž stanoveny jako vzájemně se vylučující. Umožňuje také přiřadit emoji k rolím, které mohou být použity při reakci na zprávu Role v reakci.
-referralRewards: Umožňuje nastavit role jako odměny pro doporučení (pozváním ostatních uživatelů na server).
-referrals: Umožňuje nastavit referenční kanál tak, aby členové mohli pozvat ostatní na server a získat odměnu za doporučení. A také vám umožňuje sledovat pozvánky členů.
-roleStore: Umožňuje nastavit obchod Role na serveru. Manažeři serverů mohou prodávat role na serveru a členové je mohou koupit pomocí Bastion Coins.
-roles: Umožňuje vytvářet, mazat a aktualizovat role na serveru.
-safeList: Umožňuje přidat členy nebo role do bezpečného seznamu, který zabrání filtrování jejich zpráv pomocí filtru pozvánky nebo filtru odkazů na serveru.
-suggest: Umožňuje ti poslat návrh týmu za předpokladu, že na serveru byl nastaven Suggestion Channel .
-ban: Umožňuje vám zakázat (nebo zakázat) uživatele ze serveru a volitelně vymazat jejich zprávy ze zadaného počtu dní. Umožňuje také zobrazit seznam všech uživatelů, kteří jsou na serveru zakázáni.
-case: Umožňuje zobrazit umírněný případ pro zadané číslo.
-clear: Umožňuje vymazat zadaný počet zpráv v kanálu. Můžete volitelně filtrovat zprávy, které by měly být vymazány na základě autora zprávy, nebo od okamžiku, kdy byl odeslán, nebo zda je připnuta nebo systémová zpráva nebo bot.
-deaf: Umožňuje ti hlušit (a nezakládat) uživatele na serveru. Ztišení uživatelé nemohou poslouchat nic v hlasových kanálech serveru.
-infractions: Umožňuje vám zobrazit všechny vaše informace. Pokud jste serverový manažer, můžete také nastavit limity pro akce, které by měly být podniknuty pro porušení infrakcí.
-kick: Umožňuje ti vykopnout uživatele ze serveru.
-nickname: Umožňuje nastavit (a odstavit) přezdívky členů serveru.
-reason: Umožňuje vám aktualizovat důvod umírněnosti. Zapomněli jste nastavit důvod? Napadli jste typo? Zde je vaše druhá šance.
-report: Umožňuje vám nahlásit člena serveru moderátorům serveru za předpokladu, že je nastaven reportní kanál.
-unban: Umožňuje vám odbanovat uživatele, kteří jsou na serveru zakázáni.
-updateRoles: Umožňuje aktualizovat role členů serveru.
-voiceMute: Umožňuje vám ztlumit (a vymlčet) uživatele v kanálu. Hlas ztlumený nemůže mluvit v hlasových kanálech, které jsou ztlumeny.
-warn: Umožňuje varovat členy serveru a vyčistit jejich infrakce. Také vám umožňuje zobrazit všechny infrakce.
-music: Přepíná hudební podporu Bastiona na zadaném serveru. Jakmile je povoleno, můžete použít všechny hudební příkazy na serveru. Umožňuje vám také zobrazit seznam serverů, kde je povolena hudba.
-musicChannel: Umožňuje nastavit (a odstavit) Bastionovy hudební kanály.
-musicMaster: Umožňuje vám nastavit (a zrušit) Hlavní roli Bastiona.
-nowPlaying: Ukazuje ti hudební skladbu, která se právě hraje na serveru.
-pause: Umožňuje pozastavit hudební skladbu, která se právě hraje na serveru.
-play: Umožňuje přehrávat hudbu na serveru, z daného dotazu nebo z jakéhokoli podporovaného zdroje.
-queue: Umožňuje vám vidět aktuální frontu hudby serveru. Umožňuje také vyčistit nebo zamíchat frontu hudby a také odstranit skladbu z fronty, nebo nastavit (a zrušit) frontu ve smyčce.
-resume: Umožňuje pokračovat v hudební skladbě, která byla pozastavena na serveru.
-skip: Umožňuje přeskočit hudební skladbu, která se právě hraje na serveru.
-stop: Umožňuje zastavit aktuální přehrávání hudby na serveru.
-volume: Umožňuje nastavit hlasitost hudební skladby, která se právě hraje na serveru.
-apexLegends: Umožňuje zobrazit statistiky jakéhokoliv hráče Apex Legends na libovolné podporované platformě.
-counterStrikeGlobalOffensive: "Umožňuje vám vidět statistiky jakéhokoliv hráče Counter-Strike: Globální útočný hráč na libovolné podporované platformě."
-destiny2: Umožňuje zobrazit statistiky jakéhokoliv hráče Destiny 2 na libovolné podporované platformě.
-fortnite: Umožňuje vám vidět statistiky jakéhokoliv hráče Fortnite na libovolné podporované platformě.
-overwatch: Umožňuje zobrazit statistiky jakéhokoliv přehrávače Overwatch v jakékoli podporované platformě.
-pubg: Umožňuje vám vidět statistiky jakéhokoliv hráče Hráček Battlegrounds v jakékoliv podporované platformě. Umožňuje také vidět statistiky v oddělených herních módech.
-rainbow6: Umožňuje vám vidět statistiky jakéhokoliv hráče Rainbow 6 na libovolné podporované platformě.
-rocketLeague: Umožňuje vám vidět statistiky jakéhokoliv hráče Rocket League v jakékoli podporované platformě.
-coins: Umožňuje vám vidět váš Bastion účet.
-daily: Umožňuje ti nárokovat Bastion mince, že každý člen obdrží odměnu za to, že je na serveru. Své odměny si můžeš nárokovat jednou za 24 hodin.
-leaderboard: Umožňuje ti vidět žebříček tvého serveru. Jsi hodnocený na základě své úrovně, zkušenosti, karmy a Bastion Coins; v tomto přesném pořadí.
-profile: Umožňuje vám vidět váš (nebo kterýkoli z členů serveru) Bastion profil.
-rank: Umožňuje vám vidět vaše (nebo kterýkoli z členů serveru), úroveň, zkušenosti a karma.
-referral: Umožňuje ti vidět pozvánku k doporučení, kterou můžeš použít k pozvání lidí na server a ke zvýšení počtu doporučených bodů. Může být také použit k získání doporučených odměn nastavených správci serverů.
-anime: Umožňuje vám vyhledat informace o zadaném animu.
-apod: Umožňuje ti objevit kosmo! Každý den se objevuje jiný obraz nebo fotografie našeho fascinujícího vesmíru spolu se stručným vysvětlením napsaným profesionálním astronomem.
-covid19: Umožňuje vám vidět nejnovější globální a regionální statistiky na COVID-19.
-cryptocurrency: Umožňuje vám vidět nějaké informace o zadané kryptoměně.
-game: Umožňuje vám vyhledávat informace o dané hře.
-manga: Umožňuje vám vyhledat informace o zadaném mangu.
-movie: Umožňuje vám vyhledávat informace o zadaném filmu.
-pokemon: Umožňuje vám vyhledat informace o zadaném Pokeju .
-tvShow: Umožňuje vám vyhledat informace na zadaném seriálu.
-urbanDictionary: It provides nearly 14,000 travel-oriented phrases and instantly translates in either direction between English and Czech.
-weather: Umožňuje ti vidět aktuální počasí na určeném místě.
-wikipedia: Umožňuje vám vyhledat Wikipedii pro zadaný název.
-calculate: Umožňuje vyhodnotit matematické výrazy a vidět jejich výsledek.
-choose: Umožňuje vás požádat Bastiona, aby si vybral možnost z dané sady možností. Nechte Bastion rozhodnout pro vás.
-cite: Umožňuje citovat zprávu z libovolného kanálu na serveru.
-color: Umožňuje převést zadanou barvu v jednom formátu do mnoha rozdílných formátů.
-datetime: Umožňuje vám vidět aktuální čas ve více různých časových pásmech. Umožňuje také převést zadaný čas na více různých časových pásmech.
-definitions: Umožňuje vám vyhledat definice zadaného slova.
-echo: Umožňuje ti posílat zprávu přes Bastion do libovolného kanálu na serveru. Také podporuje objekty s Bastionem.
-followRedirects: Sleduje všechny přesměrování v zadané URL adrese a umožňuje zobrazení konečné adresy URL.
-invite: Umožňuje ti vygenerovat okamžitou pozvánku pro server. Volitelně může být pozvánka dočasná, která vykopne členy ze serveru, pokud jim není přiřazena role do 24 hodin. Ukazuje vám také odkaz na pozvání k pozvání Bastiona na tvůj server.
-lmstfy: Umožňuje vám odeslat LMGTFY odkaz pro zadaný vyhledávací dotaz. Používejte ji k výuce lidí, jak provádět internetové vyhledávání a dostávat odpovědi na jejich otázky.
-poll: Umožňuje vám spustit ankety na serveru alespoň hodinu a nejvíce měsíčně. Můžete nastavit maximálně 13 možností pro anketu. Také vám umožní vidět stav spuštěného průzkumu.
-translate: Umožňuje vám přeložit zadaný text z jednoho jazyka do druhého.
+announce: "Umožňuje posílání oznámení do oznamovacích kanálů v serverech, kde je to nastavené."
+blacklist: "Umožňuje dávat uživatele a servery na černou listinu. Servery a uživatelé na černé listině nemají přístup k příkazům bota."
+commandModule: "Umožňuje dočasně povolit nebo zakázat příkazový modul do dalšího restartu. Lze pomocí toho také zjistit, zda je příkaz momentálně povolen."
+eval: "Umožňuje spustit kód JavaScript uvnitř kontextu bota."
+exec: "Umožňuje vykonávat příkazy v terminálu, kde bot zrovna běží."
+relayDirectMessages: "Umožňuje přepnout předávání soukromých zpráv bota. Pokud je povoleno, bude bot předávat všechny soukromé zprávy majitelům bota."
+reloadSettings: "Umožňuje znovu načíst nastavení bota bez nutnosti restartu."
+setAvatar: "Umožňuje upravit avatar bota přímo z Discordu."
+setNick: "Umožňuje upravit přezdívku bota na serveru."
+setPresence: "Umožňuje upravit status bota."
+setUsername: "Umožňuje upravit jméno bota přímo z Discordu."
+shutdown: "Umožňuje vypnout bota přímo z Discordu."
+garfield: "Umožňuje zobrazení nejnovějšího komiksu o Garfieldovi."
+phdComics: "Umožňuje zobrazit nejnovější PHD komiks, nebo nějaký specifický."
+xkcd: "Umožňuje zobrazit nejnovější xkcd komiks."
+amongUsChannel: "Umožňuje nastavit kanál k vytváření Among Us lobbíček. Kdokoli s přístupem k tomuto kanálu může automaticky vytvářet Among Us lobbíčka pomocí příkazu `amongus`."
+announcements: "Umožňuje povolit (a zakázat) oznámení bota v serveru. Nastaví tento kanál jako oznamovací kanál, do kterého budou posílána všechna oznámení vytvořená příkazem `announce`."
+autoRoles: "Umožňuje nastavit automatické role v serveru. Automatické role jsou automaticky přiřazeny uživatelům, když se připojí k serveru. Můžete dokonce nastavit role zvlášť pro boty a lidi."
+farewells: "Umožňuje povolit (a zakázat) rozloučení na serveru. Také umožňuje nastavit zprávu a časový limit."
+gambling: "Umožňuje povolit (nebo zakázat) gamblení na serveru. Pokud je povoleno, mohou členové používat své virtuální peníze ke gamblení ve hrách."
+gamification: "Umožňuje povolit (nebo zakázat) herní systém na serveru. Pokud je povoleno, mohou uživatelé chatováním sbírat zkušenosti a získávat tím vyšší úrovně na serveru a soupeřit mezi sebou, kdo bude první v žebříčku. Také to umožňuje povolit level up zprávy a nastavit násobitel."
+greetings: "Umožňuje povolit (a zakázat) uvítání na serveru. Také to umožňuje nastavit zprávu a čas vypršení."
+inviteFilter: "Umožňuje povolit (a zakázat) filtr pozvánek na serveru. Také to umožňuje nastavit, zda má být porušení tohoto filtru považováno za přestupek."
+languages: "Umožňuje zobrazit dostupné jazyky bota a nastavit jeden z nich jako výchozí pro tento server."
+linkFilter: "Umožňuje povolit (a zakázat) filtr odkazů na serveru. Také umožňuje nastavit, zda by mělo být porušení tohoto filtru považováno za přestupek."
+membersOnly: "Umožňuje povolit (a zakázat) režim pouze členů na serveru. Pokud je povoleno, mohou bota používat pouze členové s minimálně jednou rolí."
+mentionSpam: "Umožňuje nastavit (a odnastavit) hranici spamu zmínek na serveru. Pokud je nastaveno, bude bot varovat uživatele, kteří toto poruší, a přidá to do jejich přestupků."
+messageFilter: "Umožňuje povolit (a zakázat) filtr zpráv na serveru. Pokud je povoleno, bude bot filtrovat zprávy, které se shodují s nastavenými vzory. Také umožňuje nastavit, zda se má porušení tohoto filtru počítat jako přestupek."
+moderationLogs: "Umožňuje povolit (a zakázat) protokolování moderačních událostí. Nastaví kanál jako kanál pro protokol moderací, který bude zaznamenávat moderační události na serveru."
+prefix: "Umožňuje nastavit vlastní prefix bota na tomto serveru."
+reactionAnnouncements: "Umožňuje povolit (a zakázat) reakční oznámení na serveru. Pokud je povoleno a je nastaven oznamovací kanál, kdokoli kdo se správným oprávněním zareaguje s :mega: nebo :loudspeaker:, tím odešle zprávu do oznamovacího kanálu."
+reactionPinning: "Umožňuje povolit (a zakázat) reakční připínání na serveru. Pokud je povoleno, kdokoli kdo se správným oprávněním přidá reakci :pushpin: ke zprávě tím danou zprávu připne."
+reports: "Umožňuje povolit (a zakázat) uživatelská nahlášení na serveru. Nastaví kanál jako kanál nahlášení, takže bude obdržovat všechna nahlášení vytvořená členy serveru pomocí příkazu `report`."
+selfRoles: "Umožňuje povolit (a zakázat) self-role na serveru. Self-role jsou role, které si mohou členové přiřadit k sobě."
+serverLogs: "Umožňuje povolit (a zakázat) protokolování serverových událostí. Nastaví kanál jako kanál protokolu, který bude zaznamenávat všechny serverové události."
+starboard: "Umožňuje povolit (a zakázat) Starboard na serveru. Nastaví kanál jako kanál Starboardu, který bude zaznamenávat všechny zprávy s hvězdičkami."
+streamerRole: "Umožňuje nastavit roli streamera na serveru. Jakmile bude člen streamovat na serveru, obdrží tuto roli, pokud má alespoň jednu jinou."
+streamers: "Umožňuje sledovat streamery napříč různými platformami na serveru. Jakmile začne streamer streamovat nebo zveřejní video, oznámí to bot v serveru."
+suggestions: "Umožňuje povolit (a zakázat) návrhy v serveru. Nastaví kanál jako kanál návrhů, který bude dostávat návrhy vytvořené členy serveru pomocí příkazu `suggest`."
+triggers: "Umožňuje přidat (a odebrat) automatické odpovědi. Jakmile je odpověď nastavena a bot uvidí zprávu od člověka obsahující zadaný vzor, odpoví buď zprávou, reakcí, nebo obojím."
+verification: "Umožňuje povolit ověřování pomocí Captcha na serveru. Pokud je povoleno, budou muset členové serveru vyřešit Captchu v [panelu](%bastion.dashboard%) vašeho serveru (nefunguje ve vlastních instancích bota), aby ověřili, že jsou člověk. Jakmile úspěšně vyřeší Captchu, dá jim bot nastavenou ověřenou roli."
+voiceSessions: "Umožňuje spravovat dočasné hlasové kanály v serveru."
+votingChannels: "Umožňuje nastavit kanály jako hlasovací kanály. Pokud je kanál nastaven jako hlasovací kanál, bude cokoli odeslané v kanálu nastavené k hlasování pro všechny."
+catify: "Umožňuje vygenerovat unikátní kočku."
+dankmeme: "Pošle náhodný dank meme ze subredditu r/dankmemes."
+joke: "Pošle náhodný vtip ze subredditu r/jokes."
+lifeProTip: "Pošle náhodný životní pro tip ze subredditu r/LifeProTips."
+meme: "Pošle náhodný meme ze subredditu r/memes."
+pickupLine: "Pošle náhodný příspěvek ze subredditu r/pickuplines."
+pun: "Pošle náhodnou slovní hříčku ze subredditu r/puns."
+roast: "Umožňuje někoho roastnout."
+robotify: "Umožňuje vygenerovat unikátní robotí avatar."
+ship: "Umožňuje porovnat dva lidi."
+showerThought: "Pošle náhodnou myšlenku ze sprchy ze subredditu r/ShowerThoughts."
+simpness: "Umožňuje zobrazit, jak moc je někdo velký simp."
+todayILearned: "Pošle náhodný fakt ze subredditu r/TodayILearned."
+acrophobia: "Umožňuje zahrát si hru Akrofobie s jiným členem ze serveru. Bot vygeneruje náhodný akronym a hráči soutěží, kdo vymyslí logičtější nebo vtipnější větu, která se shoduje s akronymem - backronym. Jakmile vyprší čas, všichni anonymně hlasují pro jejich nejoblíbenější odpověď. Nejoblíbenější backronym vyhrává."
+amongus: "Umožňuje vytvářet Among Us lobbíčka s potřebnými kanály pro diskuzi a umlčené uživatele, a dá hostitely lobby jednoduché možnosti jejich automatické správy."
+flip: "Umožňuje hodit jakýmkoli počtem peněz a zobrazit výsledek. Také to podporuje gamblení."
+gameServer: "Umožňuje zjistit informace o téměř jakémkoli herním serveru, který má veřejně dostupný svůj stav."
+magic8ball: "Umožňuje zjistit odpovědi na otázky z magické 8 koule."
+numberNash: "Number Nash je hra pro více hráčů s několika členy serveru. Jakmile začne, kdokoli může posílat přirozená čísla mezi 1 a 100 do kanálu. Hra skončí za minutu a člen, který poslal nejmenší číslo, které ještě neposlal nikdo jiný, vyhraje."
+roll: "Umožňuje hodit kostkou. Podporuje notaci kostek. Také to podporuje gambling."
+rps: "Umožňuje hrát kámen, nůžky, papír s botem. Také to podporuje gambling."
+russianRoulette: "Umožňuje hrát Ruskou ruletu."
+ticTacToe: "Umožňuje hrát piškvorky s jiným členem serveru."
+trivia: "Zahrajte si vědomostní hru a zjistěte, zda zvládnete odpovědět na všechny otázky v různých kategoriích."
+changelog: "Umožňuje zobrazit změny v nejnovější verzi bota."
+commands: "Umožňuje zobrazit seznam příkazů dostupných v botovi. Příkaz lze také použít k vyhledávání jiných příkazů."
+donate: "Umožňuje zobrazit způsob, jak přispět k vývoji bota."
+help: "Umožňuje zobrazit pomocnou zprávu, která zobrazí základní informace o botovi."
+avatar: "Umožňuje zobrazit avatara uživatele."
+channel: "Umožňuje zobrazit informace o kanálu."
+emoji: "Umožňuje zobrazit informace o emoji."
+patrons: "Umožňuje zobrazit naše patrony, úžasné lidi, kteří podporují vývoj projektu Bastion Bot."
+role: "Umožňuje zobrazit informace o roli. Také to zobrazí členy s rolí."
+server: "Umožňuje zobrazit informace o serveru."
+status: "Umožňuje zobrazit stav bota. Také zobrazí stav současného shardu. Také můžete vidět souhrn stavu Discordu."
+user: "Umožňuje zobrazit informace o uživateli."
+boost: "Umožňuje boostnout server v Bastionově seznamu serverů. Server můžete boostnout každých 24 hodin. Boost skóre serveru se obnoví každý měsíc."
+channels: "Umožňuje vytvořit, odstranit a upravit kanály v serveru."
+edit: "Umožňuje upravit jakoukoli zprávu, kterou bot odeslal v daném kanále."
+giveaway: "Umožňuje spouštět soutěže v serveru na minimálně hodinu a maximálně měsíc. Můžete nastavit jakýkoli počet výherců události. Také můžete rerollnout výherce, pokud to bude potřeba, na konci události."
+grant: "Umožňuje sbírat zkušenosti nebo peníze pro členy serveru."
+iam: "Umožňuje si přidat či odebrat self-role na serveru."
+inviteRoles: "Umožňuje přiřadit serverové pozvánky a role. Kdokoli se připojí pomocí přiřazené pozvánky automaticky obdrží nastavené role. Také si díky tomu lze zobrazit seznam rolí přiřazených k pozvánce."
+leave: "Umožňuje odebrat bota ze serveru a vyčistit všechna jeho data na serveru."
+levelUpRoles: "Umožňuje vám přidat role k úrovni. Jakmile člen dosáhne dané úrovně, dostane tyto role."
+lockdown: "Umožňuje uzamknout kanál před všemi, kdo nemají oprávnění spravovat zprávy nebo kanály."
+prune: "Umožňuje vyhodit členy bez rolí ze serveru, podle toho, jak dlouho jsou neaktivní. Také lze zahrnout členy se specifikovanými rolemi."
+reactionRoles: "Umožňuje vytvořit (a odstranit) skupiny reakčních rolí. Skupina reakčních rolí je skupina reakčních emoji, které mohou být použity členem na zprávě reakčních rolí k přidání (nebo odebrání) rolí. Reakční role v samostatné skupině mohou být také společně exkluzivní. Také to umožňuje přiřazovat emoji k rolím, které mohou být použity k reakci na zprávu reakčních rolí."
+referralRewards: "Umožňuje vám nastavit role jako odměny za pozvání dalších uživatelů na server."
+referrals: "Umožňuje nastavit kanál doporučení, takže mohou uživatelé zvát ostatní uživatele na server a dostávat odměny. Také díky tomu můžete sledovat, kolik kdo pozval uživatelů."
+roles: "Umožňuje vám vytvořit, odstranit a změnit role na serveru."
+roleStore: "Umožňuje vám nastavit obchod s rolemi na serveru. Správci serveru mohou prodávat role a členové si je mohou kupovat pomocí virtuálních peněz."
+safeList: "Umožňuje přidat členy nebo role na bezpečný seznam, díky čemuž nebudou jejich zprávy odfiltrovány filtrem pozvánek nebo odkazů."
+suggest: "Umožňuje poslat návrh členům návrhového týmu, pokud byl nastaven kanál návrhů na serveru."
+ban: "Umožňuje zabanovat (nebo soft-zabanovat) uživatele ze serveru, a případně vyčistit jejich zprávy ze specifického počtu dnů. Také vám to umožňuje zobrazit všechny zabanované uživatele na serveru."
+case: "Umožňuje vám zobrazit moderační protokol pro zadané číslo případu."
+clear: "Umožňuje vám vyčistit specifický počet zpráv v kanále. Případně můžete vyfiltrovat zprávy, které by měly být smazány, v závislosti na autorovi zprávy, nebo na datu jejího odeslání, nebo když ji poslal bot."
+deaf: "Umožňuje vám umlčet (a odmlčet) členy v serveru. Umlčení členové nemohou poslouchat nic v hlasových kanálech serveru."
+infractions: "Umožňuje vám zobrazit si všechny své přestupky. Pokud jste správce serveru, můžete si také zobrazit hranici, po které má být vykonána akce."
+kick: "Umožňuje vám vyhodit uživatele ze serveru."
+nickname: "Umožňuje vám nastavit (a odnastavit) přezdívky členů serveru."
+reason: "Umožňuje vám upravit důvod banu/vyhození. Zapomněli jste nastavit důvod? Udělali jste překlep? Tady máte druhou šanci."
+report: "Umožňuje vám nahlásit člena serveru moderátorům, pokud je nastaven kanál nahlášení."
+textMute: "Umožňuje vám textově umlčet (a odmlčet) uživatele z kanálu, kategorie nebo celého serveru. Textově umlčení uživatelé nemohou posílat zprávy do kanálů, kde jsou umlčeni."
+unban: "Umožňuje vám odbanovat uživatele, kteří jsou zabanováni na serveru."
+updateRoles: "Umožňuje vám upravit role členů serveru."
+voiceMute: "Umožňuje vám hlasově umlčet (a odmlčet) uživatele v kanálu. Hlasově umlčení uživatelé nemohou mluvit v kanálech, kde jsou umlčeni."
+warn: "Umožňuje vám varovat členy serveru a vyčistit jejich přestupky. Také vám to umožňuje zobrazit všechny přestupky."
+music: "Přepne podporu hudby v daném serveru. Jakmile je aktivováno, může kdokoli používat všechny hudební příkazy na serveru. Také vám to umožňuje zobrazit seznam serverů, kde je hudba povolena."
+musicChannel: "Umožňuje nastavit (a odnastavit) hudební kanály bota."
+musicMaster: "Umožňuje nastavit (a odnastavit) roli DJe serveru."
+nowPlaying: "Zobrazí momentálně přehrávanou skladbu."
+pause: "Umožňuje pozastavit skladbu, která právě hraje na serveru."
+play: "Umožňuje přehrávat hudbu v serveru, od zadaného dotazu po jakýkoli podporovaný zdroj."
+queue: "Umožňuje zobrazit momentální hudební frontu serveru. Také to umožňuje vyčistit nebo promíchat frontu, či odebrat skladbu z ní, nebo nastavit (a odnastavit) frontu do smyčky."
+resume: "Umožňuje zrušit pozastavení skladby, která byla na serveru pozastavena."
+skip: "Umožňuje přeskočit skladbu, která se momentálně přehrává na serveru."
+stop: "Umožňuje zastavit momentálně přehrávanou skladbu na serveru."
+volume: "Umožňuje změnit hlasitost skladby, která se momentálně přehrává na serveru."
+apexLegends: "Umožňuje zobrazit statistiky jakéhokoli Apex Legends hráče na jakékoli podporované platformě."
+counterStrikeGlobalOffensive: "Umožňuje zobrazit statistiky jakéhokoli Counter-Strike: Global Offensive hráče na jakékoli podporované platformě."
+destiny2: "Umožňuje zobrazit statistiky jakéhokoli Destiny 2 hráče na jakékoli podporované platformě."
+fortnite: "Umožňuje zobrazit statistiky jakéhokoli Fortnite hráče na jakékoli podporované platformě."
+overwatch: "Umožňuje zobrazit statistiky jakéhokoli Overwatch hráče na jakékoli podporované platformě."
+pubg: "Umožňuje zobrazit statistiky jakéhokoli Playerunknown's Battlegrounds hráče na jakékoli podporované platformě. Také umožňuje zobrazit statistiky různých herních režimů."
+rainbow6: "Umožňuje zobrazit statistiky jakéhokoli Rainbow 6 hráče na jakékoli podporované platformě."
+rocketLeague: "Umožňuje zobrazit statistiky jakéhokoli Rocket League hráče na jakékoli podporované platformě."
+coins: "Umožňuje zobrazit si vlastní účet."
+daily: "Umožňuje vybrat peníze, které každý člen obdrží jako odměnu za to, že je v serveru. Svou odměnu si můžete vybrat každých 24 hodin."
+karma: "Umožňuje dát někomu malinké internetové bodíky, kterým říkáme karma, pokud si myslíte, že to za to stojí. Také k tomu můžete přidat personalizovanou zprávu. Můžete rozdat pouze 3 karmy každých 6 hodin, takže je rozdejte moudře."
+leaderboard: "Umožňuje vám zobrazit si žebříček vašeho serveru. Vaše umístění se odvíjí od vaší úrovně, zkušeností, karmy a peněz; přesně v daném pořadí."
+profile: "Umožňuje zobrazit si váš (nebo číkoli jiný) profil. Také vám to umožňuje upravit si profil."
+rank: "Umožňuje zobrazit vaši (nebo číkoli jinou) hodnost, úroveň, zkušenosti a karma."
+referral: "Umožňuje zobrazit si svou pozvánku s doporučením, kterou můžete použít k pozvání lidí na server a zvýšení svých bodů doporučení. Příkaz lze také použít k vyzvednutí odměny nastavené správci serveru."
+anime: "Umožňuje hledat informace o specifickém anime."
+apod: "Umožňuje prozkoumávat vesmír! Každý den je doporučený nový obrázek nebo fotka našeho fascinujícího vesmíru, společně se stručným popisem od profesionálního astronoma."
+covid19: "Umožňuje vám zobrazit si poslední globální a regionální statistiky o pandemii COVID-19."
+cryptocurrency: "Umožňuje zobrazit si informace o zadané kryptoměně."
+game: "Umožňuje hledat informace o zadané hře."
+manga: "Umožňuje hledat informace o zadaném manga."
+movie: "Umožňuje hledat informace o zadaném filmu."
+pokemon: "Umožňuje hledat informace o zadaném Pokémonovi."
+tvShow: "Umožňuje hledat informace o zadaném pořadu."
+urbanDictionary: "Umožňuje prohledat Urban Dictionary pro definice nebo zadané slovo."
+weather: "Umožňuje zobrazit si momentální předpověď počasí pro zadanou lokaci."
+wikipedia: "Umožňuje prohledat Wikipedii se zadaným výrazem."
+calculate: "Umožňuje vám zadat matematické rovnice a zjistit jejich řešení."
+choose: "Umožňuje požádat bota o vybrání možnosti ze zadaných. Nechte bota udělat práci za vás."
+cite: "Umožňuje vám citovat zprávu z jakéhokoli kanálu na serveru."
+color: "Umožňuje vám konvertovat zadanou barvu v jednom formátu do spousty jiných formátů."
+datetime: "Umožňuje zobrazit aktuální čas v několika různých časových pásmech. Také umožňuje konvertovat zadaný čas do několika různých časových pásem."
+definitions: "Umožňuje hledat význam zadaného slova."
+echo: "Umožňuje poslat zprávu pomocí bota do jakéhokoli kanálu nebo jakémukoli členovi na serveru. Také podporuje embed objekty Bastiona."
+followRedirects: "Následuje všechna přesměrování na zadané URL a zobrazí konečnou URL."
+invite: "Umožňuje generovat instantní pozvánky na server. Volitelně může být pozvánka dočasná, což vyhodí hráče ze serveru, pokud jim nebude do 24 hodin přiřazena role. Také zobrazuje odkaz na pozvání Bastiona na váš server."
+lmstfy: "Umožňuje poslat LMGTFY odkaz na zadaný dotaz. Použijte k naučení lidí hledat si věci a odpovědi na své otázky na internetu."
+poll: "Umožňuje vytvářet hlasování na minimálně hodinu a maximálně měsíc. Můžete nastavit maximálně 13 možností pro hlasování. Příkazem si také můžete zobrazit stav běžícího hlasování."
+translate: "Umožňuje přeložit zadaný text do jiného jazyka."
