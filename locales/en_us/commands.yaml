@@ -301,6 +301,7 @@ urbanDictionary: It allows you to search the Urban Dictionary for definitions of
   the specified word.
 weather: It allows you to see the current weather forcast of the specified location.
 wikipedia: It allows you to search the Wikipedia for the specified title.
+wotd: It shows you the word of the day.
 calculate: It allows you to evaluate mathematical expressions and see their result.
 choose: It allows you to ask Bastion to choose an option from the given set of
   options. Let Bastion make a decision for you.
