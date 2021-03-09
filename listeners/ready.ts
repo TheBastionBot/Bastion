@@ -6,7 +6,7 @@
 import { Listener, Constants } from "@bastion/tesseract";
 
 import ConfigModel from "../models/Config";
-import GuildModel from "../models/Guild";
+import GuildModel, { Guild } from "../models/Guild";
 import * as constants from "../utils/constants";
 import BastionGuild = require("../structures/Guild");
 
@@ -35,7 +35,7 @@ export = class ReadyListener extends Listener {
             .filter(g => !knownGuilds.includes(g._id));
 
         if (newGuilds.length) {
-            await GuildModel.insertMany(newGuilds);
+            await GuildModel.insertMany(newGuilds as Guild[]);
         }
 
         // Cache invite data
