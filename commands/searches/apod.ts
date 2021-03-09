@@ -12,7 +12,7 @@ export = class APODCommand extends Command {
     constructor() {
         super("apod", {
             description: "It allows you to discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.",
-            triggers: [],
+            triggers: [ "astronomyPictureOfTheDay" ],
             arguments: {},
             scope: "guild",
             owner: false,
