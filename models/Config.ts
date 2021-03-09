@@ -14,7 +14,7 @@ export interface Config {
     boostResetMonth?: number;
 }
 
-export default mongoose.model<Config & mongoose.Document>("Config", new mongoose.Schema<Config>({
+export default mongoose.model<Config & mongoose.Document>("Config", new mongoose.Schema<Config & mongoose.Document>({
     _id: {
         type: String,
         required: true,

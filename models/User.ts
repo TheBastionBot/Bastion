@@ -16,7 +16,7 @@ export interface User {
     afk?: string;
 }
 
-export default mongoose.model<User & mongoose.Document>("User", new mongoose.Schema<User>({
+export default mongoose.model<User & mongoose.Document>("User", new mongoose.Schema<User & mongoose.Document>({
     _id: {
         type: String,
         required: true,

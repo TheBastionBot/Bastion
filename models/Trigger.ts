@@ -12,7 +12,7 @@ export interface Trigger {
     responseReaction?: string;
 }
 
-const triggerSchema = new mongoose.Schema<Trigger>({
+const triggerSchema = new mongoose.Schema<Trigger & mongoose.Document>({
     guild: {
         type: String,
         required: true,

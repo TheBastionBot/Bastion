@@ -94,7 +94,7 @@ export interface Guild {
     amongUsChannel?: string;
 }
 
-export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.Schema<Guild>({
+export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.Schema<Guild & mongoose.Document>({
     _id: {
         type: String,
         required: true,

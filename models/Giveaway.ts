@@ -14,7 +14,7 @@ export interface Giveaway {
     ends: Date;
 }
 
-const giveawaySchema = new mongoose.Schema<Giveaway>({
+const giveawaySchema = new mongoose.Schema<Giveaway & mongoose.Document>({
     _id: {
         type: String,
         required: true,

@@ -19,7 +19,7 @@ export interface Member {
     boost?: number;
 }
 
-const memberSchema = new mongoose.Schema<Member>({
+const memberSchema = new mongoose.Schema<Member & mongoose.Document>({
     user: {
         type: String,
         required: true,

@@ -11,7 +11,7 @@ export interface Case {
     messageId: string;
 }
 
-const caseSchema = new mongoose.Schema<Case>({
+const caseSchema = new mongoose.Schema<Case & mongoose.Document>({
     guild: {
         type: String,
         required: true,

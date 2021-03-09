@@ -20,7 +20,7 @@ export interface TextChannel {
     disabledCommands?: string[];
 }
 
-export default mongoose.model<TextChannel & mongoose.Document>("TextChannel", new mongoose.Schema<TextChannel>({
+export default mongoose.model<TextChannel & mongoose.Document>("TextChannel", new mongoose.Schema<TextChannel & mongoose.Document>({
     _id: {
         type: String,
         required: true,

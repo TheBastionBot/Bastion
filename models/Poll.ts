@@ -13,7 +13,7 @@ export interface Poll {
     ends: Date;
 }
 
-const pollSchema = new mongoose.Schema<Poll>({
+const pollSchema = new mongoose.Schema<Poll & mongoose.Document>({
     _id: {
         type: String,
         required: true,

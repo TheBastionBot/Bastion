@@ -11,7 +11,7 @@ export interface Playlist {
     songs: string[];
 }
 
-const playlistSchema = new mongoose.Schema<Playlist>({
+const playlistSchema = new mongoose.Schema<Playlist & mongoose.Document>({
     guild: {
         type: String,
         required: true,

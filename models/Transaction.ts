@@ -14,7 +14,7 @@ export interface Transaction {
     note?: string;
 }
 
-const transactionSchema = new mongoose.Schema<Transaction>({
+const transactionSchema = new mongoose.Schema<Transaction & mongoose.Document>({
     guild: {
         type: String,
         required: true,

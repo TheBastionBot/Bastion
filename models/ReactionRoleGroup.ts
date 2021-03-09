@@ -14,7 +14,7 @@ export interface ReactionRoleGroup {
     exclusive?: boolean;
 }
 
-const reactionRoleGroupSchema = new mongoose.Schema<ReactionRoleGroup>({
+const reactionRoleGroupSchema = new mongoose.Schema<ReactionRoleGroup & mongoose.Document>({
     _id: {
         type: String,
         required: true,

@@ -23,7 +23,7 @@ export interface Role {
     disabledCommands?: string[];
 }
 
-export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Schema<Role>({
+export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Schema<Role & mongoose.Document>({
     _id: {
         type: String,
         required: true,
