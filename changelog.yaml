@@ -1,6 +1,8 @@
-date: February 28, 2021
+date: March 9, 2021
 image:
 changes:
+  NEW:
+  - description: Added `wotd` command so you can use it to get the word of the day and improve your vocabulary.
   CHANGES:
   - description: We won't give karma to users being thanked if gamification is not enabled.
   - description: The `apod` command will now link to the permanent archive page of the APOD so you can visit them whenever you want.
