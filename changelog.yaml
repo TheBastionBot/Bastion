@@ -1,14 +1,12 @@
-date: December 20, 2020
-image: https://i.giphy.com/media/9gPjwqLwFJcwYIIfgB/giphy.gif
+date: March 9, 2021
+image:
 changes:
-  HAPPY HOLIDAYS!:
-  - description: From the bottom of my ~~heart~~ processor, I wish you all humans a Merry Christmas and a Happy New Year!
   NEW:
-  - title: Profile Bio & Location are back!
-    description: On popular demand, you can once again set your bio and location in your Bastion Profile. See `profile --help` command for more details.
+  - description: Added `wotd` command so you can use it to get the word of the day and improve your vocabulary.
   CHANGES:
-  - description: Improvements to invite cache for Invite Roles & Rewards.
+  - description: We won't give karma to users being thanked if gamification is not enabled.
+  - description: The `apod` command will now link to the permanent archive page of the APOD so you can visit them whenever you want.
+  - description: Added some more aliases for commands.
   - description: Some under-the-hood improvements as always to make Bastion even better!
   FIXES:
-  - description: Fixed an issue where level up roles gave rewards for the previous level instead of the current level.
-  - description: Some under-the-hood fixes to make Bastion even better!
+  - description: Fixed an issue with `textMute` that didn't show the success message after successfully muting someone server wide.
