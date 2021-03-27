@@ -19,6 +19,7 @@ export = class EchoCommand extends Command {
                 alias: {
                     channel: [ "c" ],
                     user: [ "u" ],
+                    plain: [ "p" ],
                 },
                 boolean: [ "plain" ],
                 string: [ "channel", "user" ],
@@ -31,6 +32,7 @@ export = class EchoCommand extends Command {
             userPermissions: [ "MANAGE_MESSAGES" ],
             syntax: [
                 "echo -- MESSAGE",
+                "echo --plain -- MESSAGE",
                 "echo --channel ID -- MESSAGE",
                 "echo --user USER -- MESSAGE",
             ],
