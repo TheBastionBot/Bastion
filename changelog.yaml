@@ -3,5 +3,8 @@ image:
 changes:
   NEW:
   - description: You can now send plain text (non-embedded) message with the `echo` command on your instance of Bastion if you use the `--plain` option.
+  - description: You can now disable entire command categories with the `commandModule` command using the `--category` option.
   CHANGES:
   - description: The `echo` command won't show the sender of message if it's your own instance of Bastion.
+  FIXES:
+  - description: Some under-the-hood fixes as always to make Bastion even better!
