@@ -78,6 +78,7 @@ export interface Guild {
         multiplier?: number;
     };
     streamers?: {
+        message?: string;
         twitch?: {
             channelId?: string;
             users: string[];
@@ -312,6 +313,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         },
     },
     streamers: {
+        message: {
+            type: String,
+        },
         type: {
             twitch: {
                 type: {
