@@ -3,7 +3,7 @@
  * @copyright 2020 - Sankarsan Kampa
  */
 
-import { Command, CommandArguments } from "@bastion/tesseract";
+import { Command, CommandArguments, Client } from "@bastion/tesseract";
 import { GuildMember, Message, TextChannel } from "discord.js";
 
 import * as errors from "../../utils/errors";
@@ -61,7 +61,7 @@ export = class EchoCommand extends Command {
             embed: {
                 ...embeds.generateEmbed(embed),
                 footer: {
-                    text: "Sent by " + message.author.tag + (user ? " from " + message.guild.name : ""),
+                    text: (message.client as Client).credentials.owners?.includes(message.author.id) ? "" : "Sent by " + message.author.tag + (user ? " from " + message.guild.name : ""),
                 },
             },
         });
