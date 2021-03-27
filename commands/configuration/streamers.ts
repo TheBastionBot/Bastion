@@ -15,7 +15,7 @@ import BastionGuild = require("../../structures/Guild");
 export = class InviteFilterCommand extends Command {
     constructor() {
         super("streamers", {
-            description: "It allows you to follow streamers, from various platforms, in the server. When the streamers go live, or post a video, Bastion will notify about it in the server.",
+            description: "It allows you to follow streamers, from various platforms, in the server. When the streamers go live, or post a video, Bastion will notify about it in the server. It also lets to set a custom message for the notifications.",
             triggers: [],
             arguments: {
                 alias: {
@@ -35,6 +35,7 @@ export = class InviteFilterCommand extends Command {
                 "streamers",
                 "streamers --twitch USERNAME",
                 "streamers --twitch USERNAME --remove",
+                "streamers -- MESSAGE",
             ],
         });
     }
@@ -42,9 +43,25 @@ export = class InviteFilterCommand extends Command {
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         const guild = (message.guild as BastionGuild);
 
-        if (argv.twitch) {
-            const guildObject: Guild = guild.document.toObject();
+        const guildObject: Guild = guild.document.toObject();
 
+        // notification message for twitch streams
+        if (argv._.length && !argv.twitch) {
+            // update twitch streams notification message
+            guildObject.streamers = {
+                ...guildObject.streamers,
+                message: argv._.join(" "),
+            };
+
+
+            // update document
+            guild.document.overwrite(guildObject);
+
+            // save document
+            await guild.document.save();
+        }
+
+        if (argv.twitch) {
             // update twitch streamers
             guildObject.streamers = {
                 ...guildObject.streamers,
@@ -109,6 +126,7 @@ export = class InviteFilterCommand extends Command {
             embed: {
                 color: argv.twitch && argv.twitch.length ? constants.COLORS.TWITCH : Constants.COLORS.IRIS,
                 title: "Followed Streamers",
+                description: guildObject.streamers.message,
                 fields: fields.length ? fields : [
                     {
                         name: "You aren't following any streamers.",
