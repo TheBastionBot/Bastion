@@ -140,7 +140,7 @@ didYouKnowDonation: "Le saviez-vous ? Si tout le monde utilisant Bastion faisait
 voiceSessionCreate: "%var% a créé une nouvelle catégorie pour les sessions vocales. Les membres peuvent maintenant créer de nouveaux canaux vocaux temporaires quand ils en ont besoin."
 checkProfile: "Vous pouvez utiliser la commande `profile` pour voir votre profil Bastion complet."
 commandEnabled: "La commande est actuellement activée."
-commandDisable: "La commande est actuellement désactivée."
+commandDisabled: "La commande est actuellement désactivée."
 volatileCommandEnable: "%var% a activé la commande `%var%`."
 volatileCommandDisable: "%var% a désactivé temporairement la commande `%var%` jusqu'au prochain redémarrage."
 didYouKnowDailyCoins: "Le saviez-vous ? Vous pouvez obtenir des pièces gratuites quotidiennement en utilisant la commande `daily` tous les jours."

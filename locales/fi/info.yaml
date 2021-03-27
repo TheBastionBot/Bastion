@@ -140,7 +140,7 @@ didYouKnowDonation: "Tiesitkö? Jos kaikki Bastionia käyttävät lahjoittavat v
 voiceSessionCreate: "%var% loi uuden kategorian puheistunnoille. Jäsenet voivat nyt luoda uusia väliaikaisia puhekanavia aina kun he sitä tarvitsevat."
 checkProfile: "Voit käyttää `profile`-komentoa nähdäksesi koko Bastion profiilisi."
 commandEnabled: "Komento on tällä hetkellä käytössä."
-commandDisable: "Komento on tällä hetkellä poistettu käytöstä."
+commandDisabled: "Komento on tällä hetkellä poistettu käytöstä."
 volatileCommandEnable: "%var% on ottanut käyttöön `%var%` komennon."
 volatileCommandDisable: "%var% on poistanut `%var%` -komennon tilapäisesti seuraavaan uudelleenkäynnistykseen asti."
 didYouKnowDailyCoins: "Tiesitkö? Voit saada ilmaisia kolikoita päivittäin käyttämällä `daily`-komentoa joka päivä."
