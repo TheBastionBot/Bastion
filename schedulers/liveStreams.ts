@@ -27,7 +27,7 @@ export = class LiveStreams extends Scheduler {
         this.twitchSubscriptions = new Map<string, string[]>();
     }
 
-    handleTwitchStreamers = async (guildId: string, info: Guild["streamers"]["twitch"]): Promise<void> => {
+    handleTwitchStreamers = async (guildId: string, info: Guild["streamers"]["twitch"], message: string): Promise<void> => {
         // check whether the client is ready
         if (!this.client.readyTimestamp) return;
 
@@ -52,7 +52,7 @@ export = class LiveStreams extends Scheduler {
 
             // notify
             if (this.client.channels.cache.has(info.channelId)) {
-                await (this.client.channels.cache.get(info.channelId) as TextChannel).send({
+                await (this.client.channels.cache.get(info.channelId) as TextChannel).send(message, {
                     embed: {
                         color: constants.COLORS.TWITCH,
                         author: {
@@ -106,7 +106,7 @@ export = class LiveStreams extends Scheduler {
             for (const guild of guildDocuments) {
                 // twitch streams
                 if (guild.streamers.twitch && guild.streamers.twitch.channelId && guild.streamers.twitch.users.length) {
-                    this.handleTwitchStreamers(guild._id, guild.streamers.twitch).catch(e => Logger.error(e));
+                    this.handleTwitchStreamers(guild._id, guild.streamers.twitch, guild.streamers.message).catch(e => Logger.error(e));
                 }
             }
         } catch (e) {
