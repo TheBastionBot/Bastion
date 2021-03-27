@@ -24,6 +24,7 @@ alreadyClaimed: "%var% you've already claimed your daily reward for today. Check
 alreadyBoosted: "%var% you've already boosted the server today. Try again tomorrow!"
 caseNotFound: "I looked into the deep dark corners of the server, but I didn't find the moderation log with that case number."
 commandNotFound: "I looked into the deep dark corners of my circuitry, but I didn't find any command with that name."
+commandCategoryNotFound: "I looked into the deep dark corners of my circuitry, but I didn't find any command category with that name."
 guildNotFound: "I looked into the deep dark corners of my data store, but I didn't find any server with that ID."
 roleNotSelfAssignable: "The %var% role is not a Self Role. Only roles set as Self Roles can be self assigned."
 noSuggestionChannel: "No suggestion channel has been set in the server where suggestions can be sent. Ask server managers to set a suggestion channel so that you can send suggestions."
