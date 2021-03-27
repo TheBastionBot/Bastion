@@ -85,7 +85,7 @@ export = class CommandModuleCommand extends Command {
                     name: command.name,
                 },
                 title: "Command Module",
-                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.enable ? "volatileCommandEnable" : argv.disable ? "volatileCommandDisable" : command.enabled ? "commandEnabled" : "commandDisable", message.author.tag, command.name),
+                description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", argv.enable ? "volatileCommandEnable" : argv.disable ? "volatileCommandDisable" : command.enabled ? "commandEnabled" : "commandDisabled", message.author.tag, command.name),
             },
         }).catch(() => {
             // this error can be ignored.
