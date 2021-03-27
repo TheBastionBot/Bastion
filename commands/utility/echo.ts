@@ -20,6 +20,7 @@ export = class EchoCommand extends Command {
                     channel: [ "c" ],
                     user: [ "u" ],
                 },
+                boolean: [ "plain" ],
                 string: [ "channel", "user" ],
             },
             scope: "guild",
@@ -36,7 +37,7 @@ export = class EchoCommand extends Command {
         });
     }
 
-    exec = async (message: Message, argv: CommandArguments): Promise<void> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<any> => {
         // command syntax validation
         if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
@@ -45,8 +46,17 @@ export = class EchoCommand extends Command {
 
         if (!channel) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.ERROR, this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "channelNotFound"));
 
+        const isOwner = (message.client as Client).credentials.owners?.includes(message.author.id);
+
         // validate input
         const rawData = argv._.join(" ");
+
+        // check whether plain text output is requested
+        if (isOwner && argv.plain) {
+            return await channel.send(rawData);
+        }
+
+
         let embed: string | embeds.MessageEmbedData;
         try {
             embed = JSON.parse(rawData);
@@ -61,7 +71,7 @@ export = class EchoCommand extends Command {
             embed: {
                 ...embeds.generateEmbed(embed),
                 footer: {
-                    text: (message.client as Client).credentials.owners?.includes(message.author.id) ? "" : "Sent by " + message.author.tag + (user ? " from " + message.guild.name : ""),
+                    text: isOwner ? "" : "Sent by " + message.author.tag + (user ? " from " + message.guild.name : ""),
                 },
             },
         });
