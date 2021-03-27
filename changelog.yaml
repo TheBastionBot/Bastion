@@ -2,6 +2,7 @@ date: March 27, 2021
 image:
 changes:
   NEW:
+  - description: You can now set a custom message for live stream notifications that supports mentions. See `streamers --help` for an example.
   - description: You can now send plain text (non-embedded) message with the `echo` command on your instance of Bastion if you use the `--plain` option.
   - description: You can now disable entire command categories with the `commandModule` command using the `--category` option.
   CHANGES:
