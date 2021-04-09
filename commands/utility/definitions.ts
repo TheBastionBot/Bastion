@@ -35,7 +35,7 @@ export = class DefinitionsCommand extends Command {
         const word: string = argv._.join(" ");
 
         // fetch definitions
-        const response = await omnic.makeRequest("/words/definitions/" + word);
+        const response = await omnic.makeRequest("/words/definitions/" + word.toLowerCase());
         const definitions = await response.json();
 
         // acknowledge
