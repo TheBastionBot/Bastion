@@ -9,4 +9,5 @@ changes:
   - description: The `echo` command won't show the sender of message if it's your own instance of Bastion.
   FIXES:
   - description: Fixed `definitions` not working if the word is not in lowercase.
+  - description: Fixed the permalink format in the `apod` command.
   - description: Some under-the-hood fixes as always to make Bastion even better!
