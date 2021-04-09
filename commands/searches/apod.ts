@@ -46,7 +46,9 @@ export = class APODCommand extends Command {
                 author: {
                     name: "Astronomy Picture of the Day",
                     url: "https://apod.nasa.gov/apod/ap" + (
-                        (today.getUTCFullYear() - 2000).toString() + (today.getUTCMonth() > 9 ? (today.getUTCMonth() + 1).toString() : ("0" + (today.getUTCMonth() + 1).toString())) + today.getUTCDate().toString()
+                        (today.getUTCFullYear() - 2000).toString()
+                        + (today.getUTCMonth() > 8 ? (today.getUTCMonth() + 1).toString() : ("0" + (today.getUTCMonth() + 1).toString()))
+                        + (today.getUTCDate() > 9 ? today.getUTCDate().toString() : ("0" + today.getUTCDate().toString()))
                     ) + ".html",
                 },
                 title: apod.title,
