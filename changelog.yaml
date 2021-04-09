@@ -1,4 +1,4 @@
-date: March 27, 2021
+date: April 10, 2021
 image:
 changes:
   NEW:
@@ -8,4 +8,5 @@ changes:
   CHANGES:
   - description: The `echo` command won't show the sender of message if it's your own instance of Bastion.
   FIXES:
+  - description: Fixed `definitions` not working if the word is not in lowercase.
   - description: Some under-the-hood fixes as always to make Bastion even better!
