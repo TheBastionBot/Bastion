@@ -39,7 +39,7 @@ export = class EchoCommand extends Command {
         });
     }
 
-    exec = async (message: Message, argv: CommandArguments): Promise<any> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         // command syntax validation
         if (!argv._.length) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
