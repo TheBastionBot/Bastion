@@ -100,6 +100,9 @@ export = class GuildMemberAddListener extends Listener {
         // HACK: find the match for the invite that could've been used
         const invite = invites.find(i => i.uses > (member.guild as Guild).invites[i.code]);
 
+        // return, if the invite doesn't exist
+        if (!invite) return;
+
         // update invite cache
         for (const invite of invites.values()) {
             (member.guild as Guild).invites[invite.code] = invite.uses || 0;
