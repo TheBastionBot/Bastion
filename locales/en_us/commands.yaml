@@ -3,8 +3,8 @@ announce: It allows you to send announcements to the announcement channels in
 blacklist: It allows you to blacklist users and servers that. Blacklisted
   servers and users don't have access to Bastion's commands.
 commandModule: It allows you to temporarily enable or disable a command module
-  until the next restart. It also allows you to check whether the command is
-  currently enabled.
+  or cateogry until the next restart. It also allows you to check whether the
+  command is currently enabled.
 eval: It allows you to execute JavaScript code inside Bastion's context.
 exec: It allows you to execute commands in the terminal where Bastion is running.
 relayDirectMessages: It allows you to toggle Bastion's Direct Message Relay. If
@@ -83,7 +83,7 @@ streamerRole: It allows to set the Streamer Role for the server. When a member
   least one role in the server.
 streamers: It allows you to follow streamers, from various platforms, in the
   server. When the streamers go live, or post a video, Bastion will notify about
-  it in the server.
+  it in the server. It also lets to set a custom message for the notifications.
 suggestions: It allows you to enable (and disable) suggestions in the server. It
   sets the channel as the Suggestion Channel that will receive the suggestions,
   suggested by the server members using the `suggest` command.

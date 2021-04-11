@@ -1,12 +1,13 @@
-date: March 9, 2021
+date: April 10, 2021
 image:
 changes:
   NEW:
-  - description: Added `wotd` command so you can use it to get the word of the day and improve your vocabulary.
+  - description: You can now set a custom message for live stream notifications that supports mentions. See `streamers --help` for an example.
+  - description: You can now send plain text (non-embedded) message with the `echo` command on your instance of Bastion if you use the `--plain` option.
+  - description: You can now disable entire command categories with the `commandModule` command using the `--category` option.
   CHANGES:
-  - description: We won't give karma to users being thanked if gamification is not enabled.
-  - description: The `apod` command will now link to the permanent archive page of the APOD so you can visit them whenever you want.
-  - description: Added some more aliases for commands.
-  - description: Some under-the-hood improvements as always to make Bastion even better!
+  - description: The `echo` command won't show the sender of message if it's your own instance of Bastion.
   FIXES:
-  - description: Fixed an issue with `textMute` that didn't show the success message after successfully muting someone server wide.
+  - description: Fixed `definitions` not working if the word is not in lowercase.
+  - description: Fixed the permalink format in the `apod` command.
+  - description: Some under-the-hood fixes as always to make Bastion even better!

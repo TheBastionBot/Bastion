@@ -140,7 +140,7 @@ didYouKnowDonation: "Știați că? Dacă toată lumea care utilizează Bastion d
 voiceSessionCreate: "%var% a creat o nouă categorie pentru Sesiunile de Voce. Membrii pot crea acum canale vocale temporare noi ori de câte ori au nevoie."
 checkProfile: "Poți folosi comanda `profile` pentru a vedea profilul tău complet Bastion."
 commandEnabled: "Comanda este în prezent activată."
-commandDisable: "Comanda este momentan dezactivată."
+commandDisabled: "Comanda este momentan dezactivată."
 volatileCommandEnable: "%var% a activat comanda `%var%."
 volatileCommandDisable: "%var% a dezactivat comanda `%var%, temporar, până la următoarea repornire."
 didYouKnowDailyCoins: "Știați că? Puteți obține monede gratuite zilnic folosind comanda \"zilnic\" în fiecare zi."

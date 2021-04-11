@@ -140,7 +140,7 @@ didYouKnowDonation: "Visste du att? Om alla som använder Bastion donerar minst 
 voiceSessionCreate: "%var% skapade en ny kategori för röstsessioner. Medlemmar kan nu skapa nya tillfälliga röstkanaler när de behöver det."
 checkProfile: "Du kan använda `profile`-kommandot för att se din kompletta Bastion Profile."
 commandEnabled: "Kommandot är för närvarande aktiverat."
-commandDisable: "Kommandot är för närvarande inaktiverat."
+commandDisabled: "Kommandot är för närvarande inaktiverat."
 volatileCommandEnable: "%var% har aktiverat kommandot `%var%`."
 volatileCommandDisable: "%var% har tillfälligt inaktiverat kommandot `%var%` tills nästa omstart börjar."
 didYouKnowDailyCoins: "Visste du? Du kan få gratis mynt dagligen genom att använda kommandot `dagligen` varje dag."

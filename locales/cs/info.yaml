@@ -140,7 +140,7 @@ didYouKnowDonation: "Věděli jste, že? Pokud každý, kdo používá Bastion, 
 voiceSessionCreate: "%var% vytvořil novou kategorii pro hlasové relace. Členové mohou nyní vytvořit nové dočasné hlasové kanály, kdykoliv je potřebují."
 checkProfile: "Můžete použít příkaz `profile` k zobrazení vašeho úplného Bastion profilu."
 commandEnabled: "Příkaz je aktuálně povolen."
-commandDisable: "Příkaz je momentálně zakázán."
+commandDisabled: "Příkaz je momentálně zakázán."
 volatileCommandEnable: "%var% povolil příkaz `%var%`."
 volatileCommandDisable: "%var% zakázal příkaz `%var%` dočasně až do dalšího restartu."
 didYouKnowDailyCoins: "Věděli jste, že? Mince můžete denně získat zdarma pomocí příkazu `daily`."
