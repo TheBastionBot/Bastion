@@ -6,7 +6,7 @@
 import { Command, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
-import * as omnic from "../../utils/omnic";
+import { getRandomPost } from "../../utils/reddit";
 
 export = class JokeCommand extends Command {
     constructor() {
@@ -26,8 +26,7 @@ export = class JokeCommand extends Command {
 
     exec = async (message: Message): Promise<void> => {
         // fetch a random joke
-        const response = await omnic.makeRequest("/reddit/jokes/random");
-        const [ post ] = await response.json();
+        const [ post ] = await getRandomPost("jokes");
 
         if (!post || !post.data || !post.data.children || !post.data.children.length || !post.data.children[0].data) return;
 
