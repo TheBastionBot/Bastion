@@ -7,7 +7,7 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
 
 interface UrbanDictionaryDefinition {
     definition: string;
@@ -45,7 +45,7 @@ export = class UrbanDictionaryCommand extends Command {
         // identify the word
         const word = argv._.join(" ");
 
-        const response = await omnic.makeRequest("/urbandictionary/definitions/" + encodeURIComponent(word));
+        const response = await requests.get("https://api.urbandictionary.com/v0/define?term=" + encodeURIComponent(word));
 
         const definitions: { list: UrbanDictionaryDefinition[] } = await response.json();
 
