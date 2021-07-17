@@ -3,17 +3,22 @@
  * @copyright 2020 - Sankarsan Kampa
  */
 
-import { Command, Constants } from "@bastion/tesseract";
+import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
 
 export = class XKCDCommand extends Command {
     constructor() {
         super("xkcd", {
-            description: "It allows you to see the latest xkcd comic strip.",
+            description: "It allows you to see the latest xkcd comic strip, or the specified edition.",
             triggers: [],
-            arguments: {},
+            arguments: {
+                alias: {
+                    number: [ "n" ],
+                },
+                string: [ "number" ],
+            },
             scope: "guild",
             owner: false,
             cooldown: 0,
@@ -24,9 +29,9 @@ export = class XKCDCommand extends Command {
         });
     }
 
-    exec = async (message: Message): Promise<void> => {
+    exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // fetch the comic strip
-        const response = await omnic.makeRequest("/comics/xkcd");
+        const response = await requests.get("https://xkcd.com" + (argv._?.length ? "/" + argv._.join("") : "") + "/info.0.json");
         const xkcd = await response.json();
 
         // acknowledge
