@@ -6,8 +6,6 @@
 import { Command, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
-import * as omnic from "../../utils/omnic";
-
 export = class GarfieldCommand extends Command {
     constructor() {
         super("garfield", {
@@ -25,9 +23,11 @@ export = class GarfieldCommand extends Command {
     }
 
     exec = async (message: Message): Promise<void> => {
-        // fetch the comic strip
-        const response = await omnic.makeRequest("/comics/garfield/latest");
-        const garfield = await response.json();
+        // get today's date
+        const date = new Date();
+        const year = date.getUTCFullYear();
+        const month = date.getUTCMonth() + 1;
+        const day = date.getUTCDate();
 
         // acknowledge
         await message.channel.send({
@@ -35,7 +35,7 @@ export = class GarfieldCommand extends Command {
                 color: Constants.COLORS.IRIS,
                 author: {
                     name: "Garfield",
-                    url: garfield.url,
+                    url: "https://garfield.com/comic",
                 },
                 fields: [
                     {
@@ -45,7 +45,7 @@ export = class GarfieldCommand extends Command {
                     },
                 ],
                 image: {
-                    url: garfield.img,
+                    url: "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/" + year + "/" + year +  "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day) + ".gif",
                 },
                 footer: {
                     text: "Powered by Garfield",
