@@ -7,7 +7,7 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
 
 export = class WikipediaCommand extends Command {
     constructor() {
@@ -39,7 +39,7 @@ export = class WikipediaCommand extends Command {
         const title = argv._.join(" ");
 
         // fetch wiki
-        const response = await omnic.makeRequest("/wikimedia/wikipedia/" + title);
+        const response = await requests.get("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts|info|pageimages&exsentences=10&exintro=true&explaintext=true&inprop=url&pithumbsize=512&redirects=1&formatversion=2&titles=" + title);
         const wiki: {
             query: {
                 pages: {
