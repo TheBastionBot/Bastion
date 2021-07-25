@@ -5,9 +5,9 @@
 
 import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
+import * as gamedig from "gamedig";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
 
 interface Player {
     name?: string;
@@ -15,6 +15,10 @@ interface Player {
     score?: number;
     time?: number;
     ping?: number;
+    raw?: {
+        frags?: number;
+        ping?: number;
+    };
 }
 
 export = class GameServerCommand extends Command {
@@ -48,8 +52,12 @@ export = class GameServerCommand extends Command {
         // identify game slug
         const game: string = argv._.join("");
 
-        const response = await omnic.makeRequest("/games/" + game + "/server/" + argv.host + "/" + argv.port);
-        const server = await response.json();
+        // fetch data from the game server
+        const server = await gamedig.query({
+            type: game as gamedig.Type,
+            host: argv.host,
+            port: Number.parseInt(argv.port),
+        });
 
         // acknowledge
         await message.channel.send({
@@ -76,12 +84,23 @@ export = class GameServerCommand extends Command {
                         value: "`" + server.connect + "`",
                         inline: true,
                     },
-                ].concat(server.players ? server.players.filter((player: Player) => player.name).sort((a: Player, b: Player) => b.time - a.time).sort((a: Player, b: Player) => b.score - a.score).map((player: Player) => ({
-                    name: (player.team ? "[" + player.team + "]" : "") + player.name,
-                    value: "```\nSCORE " + (player.score || 0) + (player.ping ? "\tPING " + player.ping + "ms" : "") + (player.time ? "\t" + (player.time / 60).toFixed(2) + " minutes" : "") + "```",
-                })).slice(0, 10) : []),
+                ].concat(
+                    server.players
+                        ?   server.players
+                            .filter(player => player.name)
+                            .sort((a: Player, b: Player) => b.time - a.time)
+                            .sort((a, b) => b.score - a.score)
+                            .sort((a: Player, b: Player) => b.raw?.frags - a.raw?.frags)
+                            .map((player: Player) => ({
+                                name: (player.team ? "[" + player.team + "]" : "") + player.name,
+                                value: "```\nSCORE " + (player.score || player.raw?.frags || 0) + ((player.ping || player.raw?.ping) ? "\tPING " + (player.ping || player.raw?.ping) + "ms" : "") + (player.time ? "\t" + (player.time / 60).toFixed(2) + " minutes" : "") + "```",
+                                inline: false,
+                            }))
+                            .slice(0, 5)
+                        :   []
+                ),
                 footer: {
-                    text: server.ping + "ms" + (server.password ? " • Password Protected" : "") + " • Powered by Omnic",
+                    text: server.ping + "ms" + (server.password ? " • Password Protected" : ""),
                 },
             },
         });
