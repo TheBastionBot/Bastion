@@ -8,7 +8,8 @@ import { Message } from "discord.js";
 
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class ApexLegendsCommand extends Command {
     private platforms: string[];
@@ -47,7 +48,9 @@ export = class ApexLegendsCommand extends Command {
         const platform = argv.platform && this.platforms.includes(argv.platform.toLowerCase()) ? argv.platform.toLowerCase() : this.platforms[0];
 
         // get stats
-        const rawResponse = await omnic.makeRequest("/playerstats/apexlegends/" + platform + "/" + encodeURIComponent(player));
+        const rawResponse = await requests.get("https://public-api.tracker.gg/v2/apex/standard/profile/" + platform + "/" + encodeURIComponent(player), {
+            "TRN-Api-Key": (this.client.credentials as BastionCredentials).trackerNetworkApiKey,
+        });
         const response = await rawResponse.json();
 
         // check for errors
