@@ -5,10 +5,11 @@
 
 import { Command, CommandArguments } from "@bastion/tesseract";
 import { Message } from "discord.js";
+import { BastionCredentials } from "../../typings/settings";
 
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
 
 export = class FortniteCommand extends Command {
     private platforms: string[];
@@ -47,7 +48,9 @@ export = class FortniteCommand extends Command {
         const platform = argv.platform && this.platforms.includes(argv.platform.toLowerCase()) ? argv.platform.toLowerCase() : this.platforms[0];
 
         // get stats
-        const rawResponse = await omnic.makeRequest("/playerstats/fortnite/" + platform + "/" + encodeURIComponent(player));
+        const rawResponse = await requests.get("https://api.fortnitetracker.com/v1/profile/" + platform + "/" + encodeURIComponent(player), {
+            "TRN-Api-Key": (this.client.credentials as BastionCredentials).trackerNetworkApiKey,
+        });
         const response = await rawResponse.json();
 
         // check for errors
