@@ -147,7 +147,7 @@ export = class PUBGCommand extends Command {
                     },
                 ],
                 footer: {
-                    text: mode.toUpperCase() + " • " + platform.toUpperCase() + " • Powered by Tracker Network",
+                    text: mode.toUpperCase() + " • " + platform.toUpperCase(),
                 },
             },
         });
