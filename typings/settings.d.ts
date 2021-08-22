@@ -20,4 +20,5 @@ interface BastionCredentials extends TesseractCredentials {
         clientSecret: string;
         accessToken: string;
     };
+    trackerNetworkApiKey: string;
 }
