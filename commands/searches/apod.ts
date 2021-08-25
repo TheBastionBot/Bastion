@@ -6,7 +6,8 @@
 import { Command, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class APODCommand extends Command {
     constructor() {
@@ -25,7 +26,8 @@ export = class APODCommand extends Command {
     }
 
     exec = async (message: Message): Promise<void> => {
-        const response = await omnic.makeRequest("/nasa/apod");
+        const response = await requests.get("https://api.nasa.gov/planetary/apod?api_key=" + (this.client.credentials as BastionCredentials).nasaApiKey);
+
         const apod: {
             copyright: string;
             date: string;
