@@ -47,6 +47,7 @@ const COLORS = {
     YOUTUBE: 0xff0000,
     MIXER: 0x1fbaed,
 
+    AIM_LAB: 0x68c7c3,
     APEX_LEGENDS: 0xda292a,
     CSGO: 0xf3a11d,
     DESTINY_2: 0x9d9a93,
