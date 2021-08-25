@@ -7,7 +7,8 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class DefinitionsCommand extends Command {
     constructor() {
@@ -35,7 +36,7 @@ export = class DefinitionsCommand extends Command {
         const word: string = argv._.join(" ");
 
         // fetch definitions
-        const response = await omnic.makeRequest("/words/definitions/" + word.toLowerCase());
+        const response = await requests.get("https://api.wordnik.com/v4/word.json/" + encodeURIComponent(word.toLowerCase()) + "/definitions?limit=10&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=" + (this.client.credentials as BastionCredentials).wordnikApiKey);
         const definitions = await response.json();
 
         // acknowledge
