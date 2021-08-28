@@ -6,7 +6,8 @@
 import { Command, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class WordOfTheDayCommand extends Command {
     constructor() {
@@ -26,7 +27,7 @@ export = class WordOfTheDayCommand extends Command {
 
     exec = async (message: Message): Promise<void> => {
         // fetch word of the day
-        const response = await omnic.makeRequest("/words/word-of-the-day/");
+        const response = await requests.get("https://api.wordnik.com/v4/word.json/wordOfTheDay?api_key=" + (this.client.credentials as BastionCredentials).wordnikApiKey);
         const wotd = await response.json();
 
         // acknowledge
