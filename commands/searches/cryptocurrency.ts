@@ -7,7 +7,8 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 interface Currency {
     name: string;
@@ -43,7 +44,9 @@ export = class CryptocurrencyCommand extends Command {
         const symbol = argv._.join(" ");
 
         // fetch data on the cryptocurrency
-        const response = await omnic.makeRequest("/currencies/crypto/" + encodeURIComponent(symbol));
+        const response = await requests.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?symbol=" + encodeURIComponent(symbol), {
+            "X-CMC_PRO_API_KEY": (this.client.credentials as BastionCredentials).coinMarketCapApiKey,
+        });
         const { status, data }: {
             status: { error_code: number; error_message: string };
             data: { [key: string]: Currency };
