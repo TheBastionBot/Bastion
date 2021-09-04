@@ -7,7 +7,7 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
 
 export = class AnimeCommand extends Command {
     constructor() {
@@ -39,7 +39,12 @@ export = class AnimeCommand extends Command {
         const title = argv._.join(" ");
 
         // fetch anime data
-        const response = await omnic.makeRequest("/kitsu/anime/" + encodeURIComponent(title));
+        const response = await requests.get("https://kitsu.io/api/edge/manga?" + new URLSearchParams({
+            "fields[anime]": "titles,slug,synopsis,startDate,endDate,ageRating,ageRatingGuide,nsfw,posterImage",
+            "filter[text]": title,
+        }), {
+            Accept: "application/vnd.api+json",
+        });
         const results: {
             data: {
                 attributes: {
