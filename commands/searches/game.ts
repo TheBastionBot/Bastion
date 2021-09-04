@@ -7,7 +7,8 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class GameCommand extends Command {
     constructor() {
@@ -39,11 +40,20 @@ export = class GameCommand extends Command {
         const title = argv._.join(" ");
 
         // fetch game data
-        const response = await omnic.makeRequest("/games/search/" + title);
+        const response = await requests.post("https://api.igdb.com/v4/games?" + new URLSearchParams({
+            fields: "*, alternative_names.*, artworks.*, cover.*, genres.*, platforms.*, screenshots.*, videos.*, websites.*",
+            limit: "10",
+            search: title,
+        }), {
+            "Authorization": "Bearer " + (this.client.credentials as BastionCredentials).twitch.accessToken,
+            "Client-ID": (this.client.credentials as BastionCredentials).twitch.clientId,
+        });
         const game: {
             alternative_names: string[];
             artworks: string[];
-            cover: string;
+            cover: {
+                url: string;
+            };
             first_release_date: number;
             game_modes: number[];
             genres: string[];
@@ -54,7 +64,9 @@ export = class GameCommand extends Command {
             total_rating: number;
             url: string;
             version_title: string;
-            websites: string[];
+            websites: {
+                url: string;
+            }[];
         }[] = await response.json();
 
         if (!game.length) throw new Error("NOT_FOUND");
@@ -82,14 +94,14 @@ export = class GameCommand extends Command {
                     },
                     {
                         name: "Links",
-                        value: game[0].websites ? game[0].websites.join("\n") : "-",
+                        value: game[0].websites?.map(site => site?.url)?.join("\n") || "-",
                     },
                 ],
                 image: {
-                    url: game[0].cover,
+                    url: game[0].cover?.url?.startsWith("//") ? "https:" + game[0].cover.url.replace("t_thumb", "t_cover_big") : "",
                 },
                 footer: {
-                    text: "Powered by IGDB",
+                    text: "Powered by Twitch",
                 },
             },
         });
