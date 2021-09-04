@@ -7,7 +7,8 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message, TextChannel } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class MovieCommand extends Command {
     private genres: { [key: string]: string };
@@ -46,7 +47,10 @@ export = class MovieCommand extends Command {
         const title = argv._.join(" ");
 
         // fetch movie data
-        const response = await omnic.makeRequest("/tmdb/movies/" + title);
+        const response = await requests.get("https://api.themoviedb.org/3/search/movie?" + new URLSearchParams({
+            api_key: (this.client.credentials as BastionCredentials).tmdbApiKey,
+            query: title,
+        }));
         const movies: {
             page: number;
             total_results: number;
