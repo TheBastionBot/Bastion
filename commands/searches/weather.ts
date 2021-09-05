@@ -7,7 +7,8 @@ import { Command, CommandArguments, Constants } from "@bastion/tesseract";
 import { Message } from "discord.js";
 
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class WeatherCommand extends Command {
     constructor() {
@@ -50,7 +51,7 @@ export = class WeatherCommand extends Command {
         // identify the city
         const city = argv._.join(" ");
 
-        const response = await omnic.makeRequest("/weather/" + city);
+        const response = await requests.get(" https://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(city) + "&APPID=" + (this.client.credentials as BastionCredentials).openWeatherMapApiKey);
         const weather: {
             coord: {
                 lat: number;
