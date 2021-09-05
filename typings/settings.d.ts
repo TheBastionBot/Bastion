@@ -23,6 +23,7 @@ interface BastionCredentials extends TesseractCredentials {
     nasaApiKey: string;
     wordnikApiKey: string;
     tmdbApiKey: string;
+    openWeatherMapApiKey: string;
     coinMarketCapApiKey: string;
     rocketLeagueApiKey: string;
     trackerNetworkApiKey: string;
