@@ -8,7 +8,8 @@ import { Message } from "discord.js";
 
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class PUBGCommand extends Command {
     private platforms: string[];
@@ -51,9 +52,26 @@ export = class PUBGCommand extends Command {
         const platform = argv.platform && this.platforms.includes(argv.platform.toLowerCase()) ? argv.platform.toLowerCase() : this.platforms[0];
         const mode = argv.mode && this.modes.includes(argv.mode.toLowerCase()) ? argv.mode.toLowerCase() : this.modes[0];
 
-        // get stats
-        const rawResponse = await omnic.makeRequest("/playerstats/pubg/" + platform + "/" + encodeURIComponent(player));
-        const response = await rawResponse.json();
+        // get profile
+        const rawProfileResponse = await requests.get("https://api.pubg.com/shards/" + platform + "/players/?filter[playerNames]=" + player, {
+            Authorization: "Bearer " + (this.client.credentials as BastionCredentials).pubgApiKey,
+        });
+        const profileResponse = await rawProfileResponse.json();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let response: Record<string, any> = {};
+        if (profileResponse?.data?.length) {
+            // get stats
+            const rawStatsResponse = await requests.get("https://api.pubg.com/shards/" + platform + "/players/" + profileResponse.data[0].id + "/seasons/lifetime", {
+                Authorization: "Bearer " + (this.client.credentials as BastionCredentials).pubgApiKey,
+            });
+            const statsResponse = await rawStatsResponse.json();
+
+            response = {
+                profile: profileResponse.data[0],
+                stats: statsResponse.data,
+            };
+        }
 
         // check for errors
         if (!Object.keys(response).length) throw new Error("PLAYER_NOT_FOUND");
