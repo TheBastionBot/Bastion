@@ -8,12 +8,10 @@ import { Message } from "discord.js";
 
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import * as requests from "../../utils/requests";
 import * as strings from "../../utils/strings";
 
 export = class OverwatchCommand extends Command {
-    private platforms: string[];
-
     constructor() {
         super("overwatch", {
             description: "It allows you to see the stats of any Overwatch player in any supported platform.",
@@ -35,8 +33,26 @@ export = class OverwatchCommand extends Command {
                 "overwatch USERNAME --platform PLATFORM",
             ],
         });
+    }
 
-        this.platforms = [ "pc", "psn", "xbl", "nintendo-switch" ];
+    resolvePlatform(platform: string): string {
+        switch (platform) {
+        case "ps":
+        case "playstation":
+        case "psn":
+            return "psn";
+        case "xb":
+        case "xbox":
+        case "xbl":
+        case "xbox-live":
+            return "psn";
+        case "nintendo":
+        case "switch":
+        case "nintendo-switch":
+            return "psn";
+        default:
+            return "pc";
+        }
     }
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
@@ -45,10 +61,10 @@ export = class OverwatchCommand extends Command {
 
         // identify player & platform
         const player = argv._.join(" ");
-        const platform = argv.platform && this.platforms.includes(argv.platform.toLowerCase()) ? argv.platform.toLowerCase() : this.platforms[0];
+        const platform = this.resolvePlatform(argv.platform?.toLowerCase());
 
         // get stats
-        const rawResponse = await omnic.makeRequest("/playerstats/overwatch/" + platform + "/" + encodeURIComponent(player));
+        const rawResponse = await requests.get("https://ovrstat.com/stats/" + platform + "/" + (player.replace("#", "-")));
         const response = await rawResponse.json();
 
         // check for errors
