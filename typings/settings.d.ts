@@ -25,6 +25,10 @@ interface BastionCredentials extends TesseractCredentials {
     tmdbApiKey: string;
     openWeatherMapApiKey: string;
     coinMarketCapApiKey: string;
+    ubisoft: {
+        email: string;
+        password: string;
+    };
     pubgApiKey: string;
     rocketLeagueApiKey: string;
     trackerNetworkApiKey: string;
