@@ -52,6 +52,7 @@
     "mathjs": "^9.2.0",
     "node-fetch": "^2.6.0",
     "opusscript": "^0.0.8",
+    "r6api.js": "^2.1.0",
     "trivia-api": "^1.0.1",
     "uuid": "^8.3.0",
     "youtube-dl": "iamtraction/node-youtube-dl"
