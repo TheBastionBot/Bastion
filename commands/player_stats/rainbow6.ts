@@ -5,13 +5,15 @@
 
 import { Command, CommandArguments } from "@bastion/tesseract";
 import { Message, EmbedFieldData } from "discord.js";
+import R6API from "r6api.js";
 
 import * as constants from "../../utils/constants";
 import * as errors from "../../utils/errors";
-import * as omnic from "../../utils/omnic";
+import { BastionCredentials } from "../../typings/settings";
 
 export = class Rainbow6Command extends Command {
     private platforms: string[];
+    private ranks: string[];
 
     constructor() {
         super("rainbow6", {
@@ -35,19 +37,36 @@ export = class Rainbow6Command extends Command {
             ],
         });
 
-        this.platforms = [ "uplay", "steam", "psn", "xbl" ];
+        this.platforms = [ "uplay", "steam", "psn", "xbl", "epic", "amazon" ];
+        this.ranks = [
+            "Unranked",
+            "Copper 5",
+            "Copper 4",
+            "Copper 3",
+            "Copper 2",
+            "Copper 1",
+            "Bronze 5",
+            "Bronze 4",
+            "Bronze 3",
+            "Bronze 2",
+            "Bronze 1",
+            "Silver 5",
+            "Silver 4",
+            "Silver 3",
+            "Silver 2",
+            "Silver 1",
+            "Gold 3",
+            "Gold 2",
+            "Gold 1",
+            "Platinum 3",
+            "Platinum 2",
+            "Platinum 1",
+            "Diamond 3",
+            "Diamond 2",
+            "Diamond 1",
+            "Champions",
+        ];
     }
-
-    private resolveRegion = (region: string): string => {
-        region = region.toLowerCase();
-
-        switch (region) {
-        case "emea": return "Europe";
-        case "ncsa": return "America";
-        case "apac": return "Asia";
-        default: return region;
-        }
-    };
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // Command Syntax Validation
@@ -57,22 +76,29 @@ export = class Rainbow6Command extends Command {
         const player = argv._.join(" ");
         const platform = argv.platform && this.platforms.includes(argv.platform.toLowerCase()) ? argv.platform.toLowerCase() : this.platforms[0];
 
-        // get stats
-        const rawResponse = await omnic.makeRequest("/playerstats/rainbow6/" + platform + "/" + encodeURIComponent(player));
-        const response = await rawResponse.json();
+        // initialize
+        const r6 = new R6API((this.client.credentials as BastionCredentials).ubisoft);
+
+        // find user
+        const users = await r6.findByUsername(platform, player);
 
         // check whether player exists
-        if (!Object.keys(response).length) throw new Error("PLAYER_DOESNT_EXIST");
+        if (!users?.length) throw new Error("PLAYER_NOT_FOUND");
+
+        // const playtime = await r6.getPlaytime(platform, users[0].id);
+        const progression = await r6.getProgression(platform, users[0].id);
+        const ranks = await r6.getRanks(platform, users[0].id);
+        const stats = await r6.getStats(platform, users[0].id);
 
         const fields: EmbedFieldData[] = [
             {
                 name: "Level",
-                value: response.level.level,
+                value: progression?.[0]?.level?.toString() || "-",
                 inline: true,
             },
             {
                 name: "XP",
-                value: response.level.xp,
+                value: progression?.[0]?.xp?.toString() || "-",
                 inline: true,
             },
         ];
@@ -80,33 +106,33 @@ export = class Rainbow6Command extends Command {
         // Rank stats
         let emblem: string;
 
-        if (response.rank) {
-            const seasons = Object.keys(response.rank.seasons);
+        if (ranks.length) {
+            const seasons = Object.keys(ranks?.[0]?.seasons || {});
 
             if (seasons.length) {
-                const season = response.rank.seasons[seasons.pop()];
+                const season = ranks?.[0]?.seasons[seasons.pop()];
                 // flag to check for the highest rank across regions
                 let highestRank = -1;
 
                 fields.push(
                     {
-                        name: "Season - " + season.id,
-                        value: season.name,
+                        name: "Season - " + season.seasonId,
+                        value: season.seasonName,
                     },
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    ...Object.values(season.regions).map((r: any) => {
+                    ...Object.values(season.regions).map(r => {
                         // rank emblem
-                        if (r.current.id > highestRank) {
-                            highestRank = r.current.id;
-                            emblem = r.current.image;
+                        if (r.boards.pvp_ranked.current.id > highestRank) {
+                            highestRank = r.boards.pvp_ranked.current.id;
+                            emblem = r.boards.pvp_ranked.current.icon.replace("undefined", this.ranks[r.boards.pvp_ranked.current.id]).replace(/ /g, "%20");
                         }
 
                         return {
-                            name: this.resolveRegion(r.region),
-                            value: r.current.name + " - Rank " + r.current.id
-                                + "\n**SKILL** " + r.skillMean.toFixed(2) + " ± " + r.skillStdev.toFixed(2)
-                                + "\n" + r.kills + " kills / " + r.deaths + " deaths\n"
-                                + r.wins + " wins / " + r.losses + " losses",
+                            name: r.regionId?.toUpperCase(),
+                            value: (r.boards.pvp_ranked.current.name || this.ranks[r.boards.pvp_ranked.current.id]) + " - Rank " + r.boards.pvp_ranked.current.id
+                                + "\n**SKILL** " + r.boards.pvp_ranked.skillMean.toFixed(2) + " ± " + r.boards.pvp_ranked.skillStdev.toFixed(2)
+                                + "\n" + r.boards.pvp_ranked.kills + " kills / " + r.boards.pvp_ranked.deaths + " deaths\n"
+                                + r.boards.pvp_ranked.wins + " wins / " + r.boards.pvp_ranked.losses + " losses",
                             inline: true,
                         };
                     }),
@@ -116,100 +142,100 @@ export = class Rainbow6Command extends Command {
         }
 
         // PvP stats
-        if (response.stats.pvp && response.stats.pvp.general) {
+        if (stats?.[0]?.pvp?.general) {
             fields.push(
                 {
                     name: "PvP",
-                    value: response.user.username + " has played PvP matches for " + (response.stats.pvp.general.playtime / 60 / 60).toFixed(2) + " hours.",
+                    value: player + " has played PvP matches for " + (stats?.[0]?.pvp.general.playtime / 60 / 60).toFixed(2) + " hours.",
                 },
                 {
                     name: "Matches",
-                    value: response.stats.pvp.general.matches,
+                    value: stats?.[0]?.pvp.general.matches,
                     inline: true,
                 },
                 {
                     name: "Wins",
-                    value: response.stats.pvp.general.wins,
+                    value: stats?.[0]?.pvp.general.wins,
                     inline: true,
                 },
                 {
                     name: "Losses",
-                    value: response.stats.pvp.general.losses,
+                    value: stats?.[0]?.pvp.general.losses,
                     inline: true,
                 },
                 {
                     name: "Kills",
-                    value: response.stats.pvp.general.kills,
+                    value: stats?.[0]?.pvp.general.kills,
                     inline: true,
                 },
                 {
                     name: "Assists",
-                    value: response.stats.pvp.general.assists,
+                    value: stats?.[0]?.pvp.general.assists,
                     inline: true,
                 },
                 {
                     name: "Deaths",
-                    value: response.stats.pvp.general.deaths,
+                    value: stats?.[0]?.pvp.general.deaths,
                     inline: true,
                 },
                 {
                     name: "WLR",
-                    value: response.stats.pvp.general.losses ? (response.stats.pvp.general.wins / response.stats.pvp.general.losses).toFixed(2) : response.stats.pvp.general.wins,
+                    value: stats?.[0]?.pvp.general.losses ? (stats?.[0]?.pvp.general.wins / stats?.[0]?.pvp.general.losses).toFixed(2) : stats?.[0]?.pvp.general.wins,
                     inline: true,
                 },
                 {
                     name: "LDR",
-                    value: response.stats.pvp.general.deaths ? (response.stats.pvp.general.kills / response.stats.pvp.general.deaths).toFixed(2) : response.stats.pvp.general.kills,
+                    value: stats?.[0]?.pvp.general.deaths ? (stats?.[0]?.pvp.general.kills / stats?.[0]?.pvp.general.deaths).toFixed(2) : stats?.[0]?.pvp.general.kills,
                     inline: true,
                 },
             );
         }
 
         // PvE stats
-        if (response.stats.pve && response.stats.pve.general) {
+        if (stats?.[0]?.pve?.general) {
             fields.push(
                 {
                     name: "PvE",
-                    value: response.user.username + " has played PvE matches for " + (response.stats.pve.general.playtime / 60 / 60).toFixed(2) + " hours.",
+                    value: player + " has played PvE matches for " + (stats?.[0]?.pve.general.playtime / 60 / 60).toFixed(2) + " hours.",
                 },
                 {
                     name: "Matches",
-                    value: response.stats.pve.general.matches,
+                    value: stats?.[0]?.pve.general.matches,
                     inline: true,
                 },
                 {
                     name: "Wins",
-                    value: response.stats.pve.general.wins,
+                    value: stats?.[0]?.pve.general.wins,
                     inline: true,
                 },
                 {
                     name: "Losses",
-                    value: response.stats.pve.general.losses,
+                    value: stats?.[0]?.pve.general.losses,
                     inline: true,
                 },
                 {
                     name: "Kills",
-                    value: response.stats.pve.general.kills,
+                    value: stats?.[0]?.pve.general.kills,
                     inline: true,
                 },
                 {
                     name: "Assists",
-                    value: response.stats.pve.general.assists,
+                    value: stats?.[0]?.pve.general.assists,
                     inline: true,
                 },
                 {
                     name: "Deaths",
-                    value: response.stats.pve.general.deaths,
+                    value: stats?.[0]?.pve.general.deaths,
                     inline: true,
                 },
                 {
                     name: "WLR",
-                    value: response.stats.pve.general.losses ? (response.stats.pve.general.wins / response.stats.pve.general.losses).toFixed(2) : response.stats.pve.general.wins,
+                    value: stats?.[0]?.pve.general.losses ? (stats?.[0]?.pve.general.wins / stats?.[0]?.pve.general.losses).toFixed(2) : stats?.[0]?.pve.general.wins,
                     inline: true,
                 },
                 {
                     name: "KDR",
-                    value: response.stats.pve.general.deaths ? (response.stats.pve.general.kills / response.stats.pve.general.deaths).toFixed(2) : response.stats.pve.general.kills,
+                    value: stats?.[0]?.pve.general.deaths ? (stats?.[0]?.pve.general.kills / stats?.[0]?.pve.general.deaths).toFixed(2) : stats?.[0]?.pve.general.kills,
                     inline: true,
                 },
             );
@@ -220,7 +246,7 @@ export = class Rainbow6Command extends Command {
             embed: {
                 color: constants.COLORS.RAINBOW6,
                 author: {
-                    name: response.user.username,
+                    name: users?.[0]?.username,
                 },
                 title: "Rainbow 6 - Player Stats",
                 fields: fields,
@@ -228,7 +254,7 @@ export = class Rainbow6Command extends Command {
                     url: emblem,
                 },
                 footer: {
-                    text: response.user.platform.toUpperCase() + " • Powered by Ubisoft",
+                    text: users?.[0]?.platform.toUpperCase() + " • Powered by Ubisoft",
                 },
             },
         });
