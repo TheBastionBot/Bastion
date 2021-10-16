@@ -6,7 +6,7 @@ If (Test-Path ".\index.js") {
   Write-Host "[Bastion]: Booting up..."
   Write-Host
 
-  yarn start
+  npm start
 }
 Else {
   Write-Host "[Bastion]: System check failed."
