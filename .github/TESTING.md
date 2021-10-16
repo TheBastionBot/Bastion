@@ -7,7 +7,7 @@ your code is consistent with Bastion's [style guide] and doesn't break anything.
 After you've coded your heart out, run all the specified test scripts, by
 running this in your terminal:
 ```bash
-yarn test
+npm test
 ```
 This will verify the consistency of the coding style and if Bastion boots
 successfully.

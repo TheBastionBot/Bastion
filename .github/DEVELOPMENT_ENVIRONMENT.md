@@ -23,6 +23,5 @@ The next step is to install the dev dependencies of Bastion so that you get all
 the things needed to properly develop Bastion.
 
 ```bash
-npm install --global yarn
-yarn install
+npm install
 ```
