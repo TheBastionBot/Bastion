@@ -13,7 +13,7 @@
     "transpile": "./node_modules/.bin/tsc",
     "start": "node .",
     "lint": "./node_modules/.bin/eslint . --ext .ts",
-    "test": "yarn transpile"
+    "test": "npm run transpile"
   },
   "devDependencies": {
     "@types/discord-rpc": "^3.0.2",
