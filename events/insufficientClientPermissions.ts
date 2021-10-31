@@ -24,5 +24,5 @@ export = class InsufficientClientPermissionsEvent extends ModuleManagerEvent {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

@@ -17,5 +17,5 @@ export = class ShardDisconnectListener extends Listener {
         if (!event.wasClean) {
             Logger.error(event);
         }
-    }
+    };
 }

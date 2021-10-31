@@ -43,5 +43,5 @@ export = class MessageDeleteBulkListener extends Listener {
                 },
             ],
         });
-    }
+    };
 }

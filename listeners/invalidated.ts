@@ -14,5 +14,5 @@ export = class InvalidatedListener extends Listener {
 
     exec = async (): Promise<void> => {
         Logger.error("INVALIDATED");
-    }
+    };
 }

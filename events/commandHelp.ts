@@ -56,5 +56,5 @@ export = class CommandHelpEvent extends ModuleManagerEvent {
                 ],
             },
         }).catch(Logger.error);
-    }
+    };
 }

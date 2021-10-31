@@ -49,5 +49,5 @@ export = class InviteCommand extends Command {
             (invite ? "Hello. Beep. Boop.\nIf you wanna invite friends to this server, share the following invite link with your friends.\nBeep!\n" + invite.url : "You don't have perms to create an instant invite for the channel.")
             + ((constants.isPublicBastion(this.client.user) || this.client.credentials.owners.includes(message.author.id)) ? "\n\nAnd if you wanna invite me to your server, use the following link.\nBeep.\n" + this.client.locale.getConstant("bastion.bot.invite").replace(this.client.locale.getConstant("bastion.bot.id"), this.client.user.id) : "")
         );
-    }
+    };
 }

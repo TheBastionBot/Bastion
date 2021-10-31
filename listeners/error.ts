@@ -14,5 +14,5 @@ export = class ErrorListener extends Listener {
 
     exec = async (error: Error): Promise<void> => {
         Logger.error(error);
-    }
+    };
 }

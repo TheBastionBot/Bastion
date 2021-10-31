@@ -52,5 +52,5 @@ export = class GarfieldCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

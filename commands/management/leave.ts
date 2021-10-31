@@ -48,5 +48,5 @@ export = class LeaveCommand extends Command {
             // leave the guild
             await message.guild.leave();
         }
-    }
+    };
 }

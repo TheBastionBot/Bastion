@@ -42,5 +42,5 @@ export = class SetNick extends Command {
         }).catch(() => {
             // this error can be ignored.
         });
-    }
+    };
 }

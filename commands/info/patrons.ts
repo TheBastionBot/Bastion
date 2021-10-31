@@ -61,5 +61,5 @@ export = class PatronsCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

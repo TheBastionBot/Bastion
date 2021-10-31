@@ -27,5 +27,5 @@ export = class RoastCommand extends Command {
     exec = async (message: Message): Promise<void> => {
         // acknowledge
         await message.channel.send(roasts[Math.floor(Math.random() * roasts.length)]);
-    }
+    };
 }

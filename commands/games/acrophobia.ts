@@ -48,7 +48,7 @@ export = class AcrophobiaCommand extends Command {
                 // this error can be ignored
             });
         }
-    }
+    };
 
     handleVotingEnd = (message: Message, submissions: Submission[], collected: Collection<Snowflake, Message>): Promise<unknown> => {
         // remove the game as active game
@@ -97,7 +97,7 @@ export = class AcrophobiaCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 
     handleSubmission = (message: Message): void => {
         // delete the submission message
@@ -106,7 +106,7 @@ export = class AcrophobiaCommand extends Command {
                 // this error can be ignored
             });
         }
-    }
+    };
 
     handleSubmissionEnd = async (message: Message, collected: Collection<Snowflake, Message>): Promise<unknown> => {
         try {
@@ -164,7 +164,7 @@ export = class AcrophobiaCommand extends Command {
             // remove the game as active game
             this.games.delete(message.channel.id);
         }
-    }
+    };
 
     exec = async (message: Message): Promise<void> => {
         const time = 2;
@@ -210,5 +210,5 @@ export = class AcrophobiaCommand extends Command {
         // handle submissions
         submission.on("collect", this.handleSubmission);
         submission.on("end", collected => this.handleSubmissionEnd(startMessage, collected));
-    }
+    };
 }

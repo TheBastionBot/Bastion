@@ -44,7 +44,7 @@ export = class SetPresence extends Command {
         case "offline":
             return ":black_circle:";
         }
-    }
+    };
 
     isValidTwitchURL = (url: string): boolean => url && url.startsWith("https://twitch.tv/");
 
@@ -87,5 +87,5 @@ export = class SetPresence extends Command {
         }).catch(() => {
             // this error can be ignored.
         });
-    }
+    };
 }

@@ -93,5 +93,5 @@ export = class NowPlaying extends Command {
                 // This error can be ignored.
             });
         }
-    }
+    };
 }

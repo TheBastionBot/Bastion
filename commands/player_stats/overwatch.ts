@@ -190,5 +190,5 @@ export = class OverwatchCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

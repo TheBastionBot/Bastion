@@ -64,5 +64,5 @@ export = class APODCommand extends Command {
                 timestamp: new Date(apod.date),
             },
         });
-    }
+    };
 }

@@ -104,5 +104,5 @@ export = class GameServerCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

@@ -218,5 +218,5 @@ export = class GiveawayCommand extends Command {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

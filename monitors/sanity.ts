@@ -65,5 +65,5 @@ export = class SanityMonitor extends Monitor {
                 process.exit(this.errorCode);
             }
         }
-    }
+    };
 }

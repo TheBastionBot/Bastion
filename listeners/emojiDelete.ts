@@ -35,5 +35,5 @@ export = class EmojiDeleteListener extends Listener {
             footer: emoji.managed ? "Managed" : undefined,
             timestamp: emoji.createdTimestamp,
         });
-    }
+    };
 }

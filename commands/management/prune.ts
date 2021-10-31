@@ -60,5 +60,5 @@ export = class PruneCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

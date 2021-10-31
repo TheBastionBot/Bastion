@@ -79,5 +79,5 @@ export = class Greetings extends Command {
                 },
             },
         });
-    }
+    };
 }

@@ -45,7 +45,7 @@ export = class MessageReactionAddListener extends Listener {
         await suggestionMessage.edit({
             embed: suggestionEmbed,
         });
-    }
+    };
 
     handleStarboard = async (messageReaction: MessageReaction, member: GuildMember, starboardChannel: TextChannel): Promise<void> => {
         // check whether the reaction was of a star
@@ -100,7 +100,7 @@ export = class MessageReactionAddListener extends Listener {
             starboardCache.push(messageReaction.message.id);
         }
         memcache.set("starboard", starboardCache ? starboardCache : [ messageReaction.message.id ]);
-    }
+    };
 
     handleReactionAnnouncement = async (messageReaction: MessageReaction, member: GuildMember, announcementChannel: TextChannel): Promise<void> => {
         // check whether the reaction was of an announcement
@@ -121,7 +121,7 @@ export = class MessageReactionAddListener extends Listener {
             embed,
             files: [ ...messageReaction.message.attachments.values() ],
         });
-    }
+    };
 
     handleReactionPinning = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
         // check whether the reaction was of a pin
@@ -131,7 +131,7 @@ export = class MessageReactionAddListener extends Listener {
 
         // pin the message
         await messageReaction.message.pin({ reason: "Pin reaction added by " + member.user ? member.user.tag : member.id });
-    }
+    };
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
         // don't give reaction roles to bots
@@ -174,7 +174,7 @@ export = class MessageReactionAddListener extends Listener {
             // add the reaction role
             await member.roles.add(reactionRole._id, "Added via Reaction Roles");
         }
-    }
+    };
 
     handleVoiceSessions = async (messageReaction: MessageReaction, member: GuildMember, guildDocument: GuildDocument): Promise<void> => {
         // don't allow bots to handle voice sessions
@@ -222,7 +222,7 @@ export = class MessageReactionAddListener extends Listener {
                 });
             }
         }
-    }
+    };
 
     handleGameLobby = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
         // don't allow bots to handle game lobbies
@@ -271,7 +271,7 @@ export = class MessageReactionAddListener extends Listener {
                 SPEAK: false,
             });
         }
-    }
+    };
 
     exec = async (messageReaction: MessageReaction, user: User): Promise<void> => {
         // if the reaction has partial data, fetch it
@@ -320,5 +320,5 @@ export = class MessageReactionAddListener extends Listener {
         if (guildDocument.reactionPinning) {
             this.handleReactionPinning(messageReaction, member).catch(Logger.error);
         }
-    }
+    };
 }

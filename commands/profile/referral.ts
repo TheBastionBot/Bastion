@@ -112,5 +112,5 @@ export = class ReferralCommand extends Command {
                 },
             });
         }
-    }
+    };
 }

@@ -100,5 +100,5 @@ export = class UserCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

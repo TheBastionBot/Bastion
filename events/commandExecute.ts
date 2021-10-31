@@ -48,5 +48,5 @@ export = class CommandExecuteEvent extends ModuleManagerEvent {
                 },
             }).catch(Logger.error);
         }
-    }
+    };
 }

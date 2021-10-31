@@ -77,5 +77,5 @@ export = class ChangeLogCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

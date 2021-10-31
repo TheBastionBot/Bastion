@@ -125,5 +125,5 @@ export = class RocketLeagueCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

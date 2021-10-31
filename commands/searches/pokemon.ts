@@ -109,5 +109,5 @@ export = class PokemonCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

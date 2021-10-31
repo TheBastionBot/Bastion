@@ -24,7 +24,7 @@ export = class InviteFilter extends Interrupt {
         if (message.deletable) message.delete().catch(() => {
             // this error can be ignored
         });
-    }
+    };
 
     exec = async (message: Message): Promise<boolean> => {
         if (!message.guild) return;
@@ -102,5 +102,5 @@ export = class InviteFilter extends Interrupt {
         }
 
         return false;
-    }
+    };
 }

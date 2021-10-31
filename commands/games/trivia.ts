@@ -90,5 +90,5 @@ export = class TriviaCommand extends Command {
                 },
             });
         }
-    }
+    };
 }

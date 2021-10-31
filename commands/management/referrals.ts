@@ -90,5 +90,5 @@ export = class ReferralsCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

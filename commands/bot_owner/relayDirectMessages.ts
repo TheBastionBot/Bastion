@@ -43,5 +43,5 @@ export = class RelayDirectMessages extends Command {
         }).catch(() => {
             // this error can be ignored.
         });
-    }
+    };
 }

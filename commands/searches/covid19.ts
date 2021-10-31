@@ -159,5 +159,5 @@ export = class COVID19Command extends Command {
                 timestamp: new Date(stats.ts),
             },
         });
-    }
+    };
 }

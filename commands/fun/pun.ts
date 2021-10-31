@@ -45,5 +45,5 @@ export = class PunCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

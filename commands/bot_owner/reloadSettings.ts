@@ -37,5 +37,5 @@ export = class ReloadSettings extends Command {
         }).catch(() => {
             // this error can be ignored.
         });
-    }
+    };
 }

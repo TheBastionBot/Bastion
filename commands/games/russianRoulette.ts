@@ -64,5 +64,5 @@ export = class RussianRouletteCommand extends Command {
             // if game is over, terminate it
             if (isGameOver) break;
         }
-    }
+    };
 }

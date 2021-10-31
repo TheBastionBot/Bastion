@@ -105,5 +105,5 @@ export = class ChannelsCommand extends Command {
         }
 
         throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
-    }
+    };
 }

@@ -72,5 +72,5 @@ export = class GuildCreateListener extends Listener {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

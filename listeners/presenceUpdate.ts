@@ -53,5 +53,5 @@ export = class PresenceListener extends Listener {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

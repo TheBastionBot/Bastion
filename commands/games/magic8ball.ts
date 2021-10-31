@@ -65,5 +65,5 @@ export = class RockPaperScissorCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

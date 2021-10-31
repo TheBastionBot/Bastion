@@ -27,5 +27,5 @@ export = class RobotifyCommand extends Command {
         await message.channel.send({
             files: [ { name: "avatar.png", attachment: "https://robohash.org/" + encodeURIComponent(message.author.tag) + "?set=set0" } ]
         });
-    }
+    };
 }

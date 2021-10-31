@@ -156,5 +156,5 @@ export = class Commands extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

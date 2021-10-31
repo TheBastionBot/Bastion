@@ -109,5 +109,5 @@ export = class AimLabCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

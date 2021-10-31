@@ -120,5 +120,5 @@ export = class Clear extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

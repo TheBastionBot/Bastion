@@ -164,5 +164,5 @@ export = class StatusCommand extends Command {
                 timestamp: new Date(),
             },
         });
-    }
+    };
 }

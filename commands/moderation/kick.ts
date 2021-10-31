@@ -76,5 +76,5 @@ export = class Kick extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

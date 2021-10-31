@@ -144,5 +144,5 @@ export = class Announcements extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

@@ -81,5 +81,5 @@ export = class ChannelCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

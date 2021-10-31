@@ -178,5 +178,5 @@ export = class SafeListCommand extends Command {
 
         // Command Syntax Validation
         throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
-    }
+    };
 }

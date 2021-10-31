@@ -203,5 +203,5 @@ export = class PollCommand extends Command {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

@@ -88,5 +88,5 @@ export = class ApexLegendsCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

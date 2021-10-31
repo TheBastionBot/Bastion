@@ -62,5 +62,5 @@ export = class Unban extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

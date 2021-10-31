@@ -24,5 +24,5 @@ export = class InsufficientUserPermissionsEvent extends ModuleManagerEvent {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

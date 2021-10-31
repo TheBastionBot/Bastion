@@ -72,5 +72,5 @@ export = class Skip extends Command {
             // Stop the dispatcher
             guild.voice && guild.voice.connection && guild.voice.connection.dispatcher.end();
         }
-    }
+    };
 }

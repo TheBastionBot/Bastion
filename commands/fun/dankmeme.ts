@@ -44,5 +44,5 @@ export = class DankMemeCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

@@ -90,5 +90,5 @@ export = class Report extends Command {
                 // This error can be ignored.
             });
         }
-    }
+    };
 }

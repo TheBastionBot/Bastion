@@ -69,5 +69,5 @@ export = class XKCDCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

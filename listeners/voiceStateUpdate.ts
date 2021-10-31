@@ -77,5 +77,5 @@ export = class VoiceStateUpdateListener extends Listener {
                 await newState.member.voice.setChannel(newSessionChannel).catch(console.error);
             }
         }
-    }
+    };
 }

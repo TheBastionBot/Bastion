@@ -76,5 +76,5 @@ export = class ChannelUpdateListener extends Listener {
                 fields: fields,
             });
         }
-    }
+    };
 }

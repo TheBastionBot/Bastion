@@ -64,5 +64,5 @@ export = class BoostCommand extends Command {
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "boost", message.author.tag),
             },
         });
-    }
+    };
 }

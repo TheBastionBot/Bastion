@@ -43,5 +43,5 @@ export = class TodayILearnedCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

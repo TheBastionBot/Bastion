@@ -63,5 +63,5 @@ export = class CaseCommand extends Command {
                 });
             }
         }
-    }
+    };
 }

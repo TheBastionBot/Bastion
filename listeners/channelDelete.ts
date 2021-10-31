@@ -35,5 +35,5 @@ export = class ChannelDeleteListener extends Listener {
                 ],
             });
         }
-    }
+    };
 }

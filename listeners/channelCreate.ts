@@ -41,5 +41,5 @@ export = class ChannelCreateListener extends Listener {
                 timestamp: channel.createdTimestamp,
             });
         }
-    }
+    };
 }

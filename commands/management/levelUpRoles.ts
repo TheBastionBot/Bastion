@@ -202,5 +202,5 @@ export = class LevelUpRolesCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

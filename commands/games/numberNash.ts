@@ -104,5 +104,5 @@ export = class NumberNashCommand extends Command {
             // delete the game
             this.games.delete(message.channel.id);
         });
-    }
+    };
 }

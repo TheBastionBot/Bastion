@@ -169,5 +169,5 @@ export = class PUBGCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

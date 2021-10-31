@@ -56,5 +56,5 @@ export = class DefinitionsCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

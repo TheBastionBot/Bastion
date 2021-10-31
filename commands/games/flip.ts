@@ -78,5 +78,5 @@ export = class FlipCommand extends Command {
                 description: outcomes.join(" / "),
             },
         });
-    }
+    };
 }

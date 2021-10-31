@@ -63,5 +63,5 @@ export = class RoleUpdateListener extends Listener {
             footer: oldRole.managed ? "Managed" : undefined,
             timestamp: oldRole.createdTimestamp,
         });
-    }
+    };
 }

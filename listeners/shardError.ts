@@ -15,5 +15,5 @@ export = class ShardErrorListener extends Listener {
     exec = async (error: Error, shardId: number): Promise<void> => {
         Logger.info("Shard " + shardId + " - Errored");
         Logger.error(error);
-    }
+    };
 }

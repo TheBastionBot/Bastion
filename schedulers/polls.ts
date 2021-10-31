@@ -108,5 +108,5 @@ export = class PollScheduler extends Scheduler {
         } catch (e) {
             Logger.error(e);
         }
-    }
+    };
 }

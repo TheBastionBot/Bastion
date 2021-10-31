@@ -52,5 +52,5 @@ export = class MessageDeleteListener extends Listener {
                 },
             ],
         });
-    }
+    };
 }

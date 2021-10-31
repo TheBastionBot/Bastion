@@ -19,5 +19,5 @@ export = class ShardReadyListener extends Listener {
             Logger.info("Systems Ready!");
             await this.client.shard.broadcastEval("process.env.BASTION_SHARDS_READY = true");
         }
-    }
+    };
 }

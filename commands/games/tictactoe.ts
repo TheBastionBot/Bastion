@@ -48,7 +48,7 @@ export = class TicTacToeCommand extends Command {
         if (number === 6) return "seven";
         if (number === 7) return "eight";
         if (number === 8) return "nine";
-    }
+    };
 
     private getState = (board: number[], position: number): string => {
         if (board[position] === -1) return ":" + this.getPositionString(position) + ":";
@@ -69,7 +69,7 @@ export = class TicTacToeCommand extends Command {
         if (board[0] !== -1 && board[4] === board[0] && board[8] === board[0]) return board[0];
         if (board[2] !== -1 && board[4] === board[2] && board[6] === board[2]) return board[2];
         return null;
-    }
+    };
 
     private collectMove = async (gameId: Snowflake) => {
         const game = this.games.get(gameId);
@@ -106,7 +106,7 @@ export = class TicTacToeCommand extends Command {
                 ],
             },
         });
-    }
+    };
 
     exec = async (message: Message): Promise<void> => {
         if (!message.mentions.members.size) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
@@ -204,5 +204,5 @@ export = class TicTacToeCommand extends Command {
                 break;
             }
         }
-    }
+    };
 }

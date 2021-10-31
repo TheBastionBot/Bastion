@@ -81,5 +81,5 @@ export = class CounterStrikeGlobalOffensiveCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

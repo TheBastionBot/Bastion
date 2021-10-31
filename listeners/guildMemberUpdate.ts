@@ -45,5 +45,5 @@ export = class GuildMemberUpdateListener extends Listener {
                 },
             ],
         });
-    }
+    };
 }

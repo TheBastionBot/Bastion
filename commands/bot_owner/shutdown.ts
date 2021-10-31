@@ -69,5 +69,5 @@ export = class Shutdown extends Command {
 
             await this.shutdown();
         }
-    }
+    };
 }

@@ -38,7 +38,7 @@ export = class SimpnessCommand extends Command {
         }
 
         return result;
-    }
+    };
 
     private calculate = (data: string): string => {
         let output = data;
@@ -48,7 +48,7 @@ export = class SimpnessCommand extends Command {
         }
 
         return output + "%";
-    }
+    };
 
     exec = async (message: Message, args: CommandArguments): Promise<void> => {
         const user = message.mentions.members.size ? message.mentions.members.first() : ((message.client as TesseractClient).resolver.resolveGuildMember(message.guild, args._.join(" ")) || message.member);
@@ -60,5 +60,5 @@ export = class SimpnessCommand extends Command {
                 description: "According to my calculations, **" + user.displayName + "**, you are **" + (user.id === "266290969974931457" ? "0%" : this.calculate(Object.values(strings.frequency(user.displayName.toLowerCase() + " " + new Date().toDateString())).join(""))) + "** simp today.",
             },
         });
-    }
+    };
 }

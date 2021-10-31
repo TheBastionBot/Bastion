@@ -85,5 +85,5 @@ export = class UrbanDictionaryCommand extends Command {
                 timestamp: new Date(definitions.list[0].written_on),
             },
         });
-    }
+    };
 }

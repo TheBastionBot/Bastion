@@ -33,5 +33,5 @@ export = class Blacklist extends Interrupt {
         if (config.blacklistedUserIds && config.blacklistedUserIds.includes(message.author.id)) return true;
 
         return false;
-    }
+    };
 }

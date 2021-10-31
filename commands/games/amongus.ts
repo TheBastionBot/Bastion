@@ -166,5 +166,5 @@ export = class AmongUsCommand extends Command {
         for (const emoji of emojis) {
             await introMessage.react(emoji);
         }
-    }
+    };
 }

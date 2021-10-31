@@ -80,5 +80,5 @@ export = class RockPaperScissorCommand extends Command {
                 description: "I chose **" + bastionChoice + "**, You chose **" + userChoice + "**. " + result,
             },
         });
-    }
+    };
 }

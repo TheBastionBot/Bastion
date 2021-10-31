@@ -86,5 +86,5 @@ export = class Deaf extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

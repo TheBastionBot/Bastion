@@ -90,5 +90,5 @@ export = class GrantCommand extends Command {
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", "grantMembers", message.author.tag, argv.xp ? argv.xp : 0, argv.coins ? argv.coins : 0),
             },
         });
-    }
+    };
 }

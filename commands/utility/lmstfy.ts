@@ -49,5 +49,5 @@ export = class LMSTFYCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

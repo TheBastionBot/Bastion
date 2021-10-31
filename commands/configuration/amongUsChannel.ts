@@ -54,5 +54,5 @@ export = class AmongUsChannelCommand extends Command {
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.amongUsChannel ? "amongUsChannelSet" : "amongUsChannelUnset", message.author.tag, (message.channel as TextChannel).name),
             },
         });
-    }
+    };
 }

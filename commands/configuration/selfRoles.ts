@@ -158,5 +158,5 @@ export = class SelfRoles extends Command {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

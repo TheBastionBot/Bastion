@@ -112,5 +112,5 @@ export = class LiveStreams extends Scheduler {
         } catch (e) {
             Logger.error(e);
         }
-    }
+    };
 }

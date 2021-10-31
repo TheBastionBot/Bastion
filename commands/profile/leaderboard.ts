@@ -76,5 +76,5 @@ export = class LeaderboardCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

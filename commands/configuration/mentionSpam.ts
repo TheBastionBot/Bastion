@@ -53,5 +53,5 @@ export = class MentionSpamCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

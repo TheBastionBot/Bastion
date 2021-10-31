@@ -31,5 +31,5 @@ export = class MembersOnlyInterrupt extends Interrupt {
         if (message.member && message.guild.ownerID !== message.member.id && message.member.roles.cache.size < 2) return true;
 
         return false;
-    }
+    };
 }

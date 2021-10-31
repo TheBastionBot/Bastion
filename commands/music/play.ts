@@ -77,7 +77,7 @@ export = class Play extends Command {
         } else {
             throw response.statusText;
         }
-    }
+    };
 
     private getSongInfo(query: string, playlist?: boolean): Promise<YoutubeInfo> {
         // eslint-disable-next-line no-async-promise-executor
@@ -229,7 +229,7 @@ export = class Play extends Command {
         if (!guild.music.playing) {
             this.startStreamDispatcher(guild);
         }
-    }
+    };
 
     private startStreamDispatcher = (guild: BastionGuild): void => {
         if (guild.music.queue.length) {
@@ -324,7 +324,7 @@ export = class Play extends Command {
                 // This error can be ignored.
             });
         }
-    }
+    };
 
     private dispatcherFinishHandler = (guild: BastionGuild): void => {
         // Reset playing status
@@ -345,7 +345,7 @@ export = class Play extends Command {
         }
 
         this.startStreamDispatcher(guild);
-    }
+    };
 
     exec = async (message: Message, argv: CommandArguments): Promise<unknown> => {
         const guild = (message.guild as BastionGuild);
@@ -449,5 +449,5 @@ export = class Play extends Command {
         for (const songLink of songLinks) {
             await this.prepareStream(songLink, message, songLinks.length > 1).catch(Logger.error);
         }
-    }
+    };
 }

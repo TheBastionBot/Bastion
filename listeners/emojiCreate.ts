@@ -40,5 +40,5 @@ export = class EmojiCreateListener extends Listener {
             footer: emoji.managed ? "Managed" : undefined,
             timestamp: emoji.createdTimestamp,
         });
-    }
+    };
 }

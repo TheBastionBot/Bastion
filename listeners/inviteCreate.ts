@@ -70,5 +70,5 @@ export = class InviteCreateListener extends Listener {
             footer: invite.temporary ? "Temporary Membership" : undefined,
             timestamp: invite.createdTimestamp,
         });
-    }
+    };
 }

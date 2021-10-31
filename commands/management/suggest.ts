@@ -79,5 +79,5 @@ export = class SuggestCommand extends Command {
             // this error can be ignored
         });
 
-    }
+    };
 }

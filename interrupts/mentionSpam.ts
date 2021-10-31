@@ -63,5 +63,5 @@ export = class MentionSpamInterrupt extends Interrupt {
         }
 
         return filtered;
-    }
+    };
 }

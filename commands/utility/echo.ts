@@ -77,5 +77,5 @@ export = class EchoCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

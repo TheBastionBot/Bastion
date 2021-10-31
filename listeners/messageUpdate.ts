@@ -68,5 +68,5 @@ export = class MessageUpdateListener extends Listener {
                 },
             ],
         });
-    }
+    };
 }

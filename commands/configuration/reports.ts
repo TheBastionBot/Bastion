@@ -55,5 +55,5 @@ export = class Reports extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

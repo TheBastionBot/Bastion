@@ -121,5 +121,5 @@ export = class TextMute extends Command {
                 },
             },
         });
-    }
+    };
 }

@@ -60,5 +60,5 @@ export = class InviteDeleteListener extends Listener {
             fields,
             footer: invite.temporary ? "Temporary Membership" : undefined,
         });
-    }
+    };
 }

@@ -75,5 +75,5 @@ export = class CryptocurrencyCommand extends Command {
                 timestamp: new Date(currency.date_added),
             },
         });
-    }
+    };
 }

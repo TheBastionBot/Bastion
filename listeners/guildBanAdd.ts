@@ -37,5 +37,5 @@ export = class GuildBanAddListener extends Listener {
                 },
             ],
         });
-    }
+    };
 }

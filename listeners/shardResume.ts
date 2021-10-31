@@ -14,5 +14,5 @@ export = class ShardResumeListener extends Listener {
 
     exec = async (shardId: number): Promise<void> => {
         Logger.info("Shard " + shardId + " - Resumed");
-    }
+    };
 }

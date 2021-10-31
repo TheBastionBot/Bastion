@@ -47,5 +47,5 @@ export = class ReactionPinningCommand extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

@@ -44,5 +44,5 @@ export = class MemeCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

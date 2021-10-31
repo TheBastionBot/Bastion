@@ -34,7 +34,7 @@ export = class GuildMemberAddListener extends Listener {
         if (botRoles.length || userRoles.length || otherRoles.length) {
             member.roles.add(otherRoles.concat(member.user.bot ? botRoles : userRoles), "Auto added via Auto Roles");
         }
-    }
+    };
 
     handleGreetings = (member: GuildMember, document: IGuild): void => {
         // check whether greetings are enabled
@@ -89,7 +89,7 @@ export = class GuildMemberAddListener extends Listener {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 
     handleInviteRoles = async (member: GuildMember): Promise<void> => {
         // TODO: add public bot support (with premium membership)
@@ -117,7 +117,7 @@ export = class GuildMemberAddListener extends Listener {
         if (inviteRoles && inviteRoles.length) {
             await member.roles.add(inviteRoles.map(r => r._id), "Joined using the invite " + invite.code);
         }
-    }
+    };
 
     exec = async (member: GuildMember): Promise<void> => {
         // if it's a partial member, fetch it
@@ -165,5 +165,5 @@ export = class GuildMemberAddListener extends Listener {
             ],
             timestamp: member.joinedTimestamp,
         });
-    }
+    };
 }

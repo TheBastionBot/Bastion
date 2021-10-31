@@ -90,5 +90,5 @@ export = class InfractionsCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

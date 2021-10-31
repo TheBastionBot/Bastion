@@ -40,5 +40,5 @@ export = class PickupLineCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

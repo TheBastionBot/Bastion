@@ -161,5 +161,5 @@ export = class ReferralRewardsCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

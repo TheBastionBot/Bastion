@@ -54,7 +54,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             // remove roles from any other level
             await message.member.roles.remove(extraRoles.map(r => r._id));
         }
-    }
+    };
 
     handleGamification = async (message: Message): Promise<void> => {
         // get recent users
@@ -122,7 +122,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
             recentUsers.splice(recentUsers.indexOf(message.author.id), 1);
             this.recentUsers.set(message.guild.id, recentUsers);
         }, 13e3);
-    }
+    };
 
     handleTriggers = async (message: Message): Promise<void> => {
         if (!message.content) return;
@@ -167,7 +167,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         if (responseReactions.length) {
             message.react(responseReactions[Math.floor(Math.random() * responseReactions.length)]).catch(Logger.error);
         }
-    }
+    };
 
     handleVotingChannels = async (message: Message): Promise<void> => {
         const votingChannel = await TextChannelModel.findOne({
@@ -185,7 +185,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
         message.react("👎").catch(() => {
             // this error can be ignored
         });
-    }
+    };
 
     handleKarma = async (message: Message): Promise<void> => {
         if (!message.content) return;
@@ -212,7 +212,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
                 // this error can be ignored
             });
         }
-    }
+    };
 
     handleInstantResponses = async (message: Message): Promise<void> => {
         if (!message.content) return;
@@ -264,7 +264,7 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
                 },
             });
         }
-    }
+    };
 
     exec = async (message: Message): Promise<void> => {
         if (message.guild) {
@@ -296,5 +296,5 @@ export = class HumanMessageEvent extends ModuleManagerEvent {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

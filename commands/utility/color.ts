@@ -64,5 +64,5 @@ export = class ColorCommand extends Command {
                 ],
             },
         });
-    }
+    };
 }

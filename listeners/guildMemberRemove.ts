@@ -51,7 +51,7 @@ export = class GuildMemberRemoveListener extends Listener {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 
     exec = async (member: GuildMember): Promise<void> => {
         // if it's a partial member, fetch it
@@ -92,5 +92,5 @@ export = class GuildMemberRemoveListener extends Listener {
                 },
             ],
         });
-    }
+    };
 }

@@ -153,5 +153,5 @@ export = class Queue extends Command {
                 });
             }
         }
-    }
+    };
 }

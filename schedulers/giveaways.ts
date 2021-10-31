@@ -142,5 +142,5 @@ export = class GiveawayScheduler extends Scheduler {
         } catch (e) {
             Logger.error(e);
         }
-    }
+    };
 }

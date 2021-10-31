@@ -137,5 +137,5 @@ export = class InviteFilterCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

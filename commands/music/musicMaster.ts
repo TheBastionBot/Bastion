@@ -68,5 +68,5 @@ export = class MusicMaster extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

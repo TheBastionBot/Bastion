@@ -12,7 +12,7 @@ class Memcache {
 
     public get = (key: string): unknown => {
         return this.cacheStore.get(key);
-    }
+    };
 
     public set = (key: string, value: unknown, timeout?: number): boolean => {
         this.cacheStore.set(key, value);
@@ -22,7 +22,7 @@ class Memcache {
         }
 
         return true;
-    }
+    };
 
     public delete = (key: string): unknown => {
         const item = this.cacheStore.get(key);
@@ -33,12 +33,12 @@ class Memcache {
         }
 
         return null;
-    }
+    };
 
     public clear = (): boolean => {
         this.cacheStore.clear();
         return true;
-    }
+    };
 }
 
 export default new Memcache();

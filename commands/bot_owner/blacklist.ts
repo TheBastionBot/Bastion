@@ -93,5 +93,5 @@ export = class Blacklist extends Command {
                 },
             },
         });
-    }
+    };
 }

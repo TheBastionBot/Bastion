@@ -71,5 +71,5 @@ export = class Farewells extends Command {
                 },
             },
         });
-    }
+    };
 }

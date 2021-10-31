@@ -90,5 +90,5 @@ export = class CommandModuleCommand extends Command {
         }).catch(() => {
             // this error can be ignored.
         });
-    }
+    };
 }

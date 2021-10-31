@@ -73,5 +73,5 @@ export = class ReasonCommand extends Command {
                 });
             }
         }
-    }
+    };
 }

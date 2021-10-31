@@ -34,7 +34,7 @@ export = class DailyCommand extends Command {
         case 7: return "claimStreakClaimed";
         default: return "claimStreak";
         }
-    }
+    };
 
     exec = async (message: Message): Promise<void> => {
         // get the member document
@@ -97,5 +97,5 @@ export = class DailyCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

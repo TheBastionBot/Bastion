@@ -199,5 +199,5 @@ export = class ProfileCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

@@ -55,5 +55,5 @@ export = class SetAvatar extends Command {
         }).catch(() => {
             // this error can be ignored.
         });
-    }
+    };
 }

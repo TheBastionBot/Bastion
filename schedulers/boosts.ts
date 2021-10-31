@@ -40,5 +40,5 @@ export = class Boosts extends Scheduler {
         } catch (e) {
             Logger.error(e);
         }
-    }
+    };
 }

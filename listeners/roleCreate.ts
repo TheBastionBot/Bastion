@@ -39,5 +39,5 @@ export = class RoleCreateListener extends Listener {
             footer: role.managed ? "Managed" : undefined,
             timestamp: role.createdTimestamp,
         });
-    }
+    };
 }

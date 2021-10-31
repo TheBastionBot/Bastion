@@ -55,14 +55,14 @@ export = class RollCommand extends Command {
         default:
             return result;
         }
-    }
+    };
 
     private applyModifiers = (result: number, modifiers: string[]): number => {
         for (const modifier of modifiers) {
             result = this.applyModifier(result, modifier);
         }
         return result;
-    }
+    };
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         const [ , d, f, ...modifiers ] = argv._.join("").match(this.pattern);
@@ -120,5 +120,5 @@ export = class RollCommand extends Command {
                 fields,
             },
         });
-    }
+    };
 }

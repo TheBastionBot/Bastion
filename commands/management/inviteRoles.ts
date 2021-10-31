@@ -96,5 +96,5 @@ export = class InviteRolesCommand extends Command {
                 })),
             },
         });
-    }
+    };
 }

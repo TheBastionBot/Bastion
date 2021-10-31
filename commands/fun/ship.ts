@@ -38,7 +38,7 @@ export = class ShipCommand extends Command {
         }
 
         return result;
-    }
+    };
 
     private calculate = (data: string): string => {
         let output = data;
@@ -48,7 +48,7 @@ export = class ShipCommand extends Command {
         }
 
         return output + "%";
-    }
+    };
 
     exec = async (message: Message, args: CommandArguments): Promise<void> => {
         // command syntax validation
@@ -68,5 +68,5 @@ export = class ShipCommand extends Command {
                 description: "**" + firstName + "** and **" + secondName + "** are **" + this.calculate(Object.values(strings.frequency(firstName.toString().toLowerCase() + " loves " + secondName.toString().toLowerCase())).join("")) + "** compatible with each other.",
             },
         });
-    }
+    };
 }

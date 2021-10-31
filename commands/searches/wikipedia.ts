@@ -29,7 +29,7 @@ export = class WikipediaCommand extends Command {
 
     sanitize = (string: string): string => {
         return string.length > 2000 ? string.slice(0, 2000) + "\n..." : string;
-    }
+    };
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // command syntax validation
@@ -74,5 +74,5 @@ export = class WikipediaCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

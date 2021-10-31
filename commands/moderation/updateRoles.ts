@@ -101,5 +101,5 @@ export = class UpdateRoles extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

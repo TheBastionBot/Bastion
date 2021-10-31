@@ -50,5 +50,5 @@ export = class GuildDeleteListener extends Listener {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

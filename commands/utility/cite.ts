@@ -67,5 +67,5 @@ export = class CiteCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

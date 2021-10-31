@@ -33,7 +33,7 @@ export = class WeatherCommand extends Command {
         const minutes = date.getMinutes();
 
         return (hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + minutes;
-    }
+    };
 
     private kelvinToCelcius = (kelvin: number): number => Math.round(kelvin - 273.15);
 
@@ -42,7 +42,7 @@ export = class WeatherCommand extends Command {
     private degreesToDirection = (degrees: number): string => {
         const directions = [ "North", "North - North East", "North East", "East - North East", "East", "East - South East", "South East", "South -South East", "South", "South - South West", "South West", "West - South West", "West", "West - North West", "North West", "North - North West" ];
         return directions[Math.round((degrees / 22.5 ) + .5) % 8];
-    }
+    };
 
     exec = async (message: Message, argv: CommandArguments): Promise<void> => {
         // Command Syntax Validation
@@ -203,5 +203,5 @@ export = class WeatherCommand extends Command {
                 timestamp: new Date(weather.dt * 1000),
             },
         });
-    }
+    };
 }

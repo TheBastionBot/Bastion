@@ -26,7 +26,7 @@ export = class MessageReactionRemoveListener extends Listener {
 
         // unpin the message
         await messageReaction.message.unpin({ reason: "Pin reaction removed by " + member.user ? member.user.tag : member.id });
-    }
+    };
 
     handleReactionRoles = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
         // identify the reaction roles group for the reaction
@@ -54,7 +54,7 @@ export = class MessageReactionRemoveListener extends Listener {
             // remove the reaction role
             await member.roles.remove(reactionRole._id, "Removed via Reaction Roles");
         }
-    }
+    };
 
     exec = async (messageReaction: MessageReaction, user: User): Promise<void> => {
         // if the reaction has partial data, fetch it
@@ -85,5 +85,5 @@ export = class MessageReactionRemoveListener extends Listener {
                 // this error can be ignored
             });
         }
-    }
+    };
 }

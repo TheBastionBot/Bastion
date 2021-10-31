@@ -258,5 +258,5 @@ export = class Rainbow6Command extends Command {
                 },
             },
         });
-    }
+    };
 }

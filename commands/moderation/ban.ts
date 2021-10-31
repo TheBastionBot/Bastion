@@ -123,5 +123,5 @@ export = class Ban extends Command {
         }).catch(() => {
             // This error can be ignored.
         });
-    }
+    };
 }

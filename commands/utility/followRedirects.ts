@@ -55,5 +55,5 @@ export = class FollowRedirectsCommand extends Command {
                 ],
             },
         });
-    }
+    };
 }

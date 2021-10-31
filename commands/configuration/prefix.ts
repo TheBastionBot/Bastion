@@ -88,5 +88,5 @@ export = class Prefix extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

@@ -67,5 +67,5 @@ export = class TranslateCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

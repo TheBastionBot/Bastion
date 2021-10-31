@@ -71,5 +71,5 @@ export = class VerificationCommand extends Command {
                 description: this.client.locale.getString((message.guild as BastionGuild).document.language, "info", guild.document.verifiedRoleId ? "verificationRoleSet" : "verificationRoleUnset", message.author.tag, guild.document.verifiedRoleId ? message.guild.roles.cache.get(guild.document.verifiedRoleId).name : undefined),
             },
         });
-    }
+    };
 }

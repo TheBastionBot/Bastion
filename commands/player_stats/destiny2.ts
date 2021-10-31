@@ -153,5 +153,5 @@ export = class Destiny2Command extends Command {
                 },
             },
         });
-    }
+    };
 }

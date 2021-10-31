@@ -65,5 +65,5 @@ export = class LinkFilterCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

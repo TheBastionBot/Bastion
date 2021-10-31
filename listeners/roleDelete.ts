@@ -34,5 +34,5 @@ export = class RoleDeleteListener extends Listener {
             ],
             footer: role.managed ? "Managed" : undefined,
         });
-    }
+    };
 }

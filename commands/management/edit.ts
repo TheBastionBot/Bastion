@@ -69,5 +69,5 @@ export = class EditCommand extends Command {
 
         // acknowledge
         await message.react("✅");
-    }
+    };
 }

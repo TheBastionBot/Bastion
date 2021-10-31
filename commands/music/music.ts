@@ -110,5 +110,5 @@ export = class MusicCommand extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

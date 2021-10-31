@@ -40,5 +40,5 @@ export = class ChooseCommand extends Command {
                 description: choice,
             },
         });
-    }
+    };
 }

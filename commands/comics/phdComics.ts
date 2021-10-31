@@ -54,5 +54,5 @@ export = class PHDComicsCommand extends Command {
                 },
             },
         });
-    }
+    };
 }

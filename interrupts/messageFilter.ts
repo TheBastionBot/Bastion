@@ -23,7 +23,7 @@ export = class MessageFilter extends Interrupt {
             if (patternRegExp.test(message)) return true;
         }
         return false;
-    }
+    };
 
     exec = async (message: Message): Promise<boolean> => {
         if (!message.guild) return;
@@ -74,5 +74,5 @@ export = class MessageFilter extends Interrupt {
         }
 
         return false;
-    }
+    };
 }

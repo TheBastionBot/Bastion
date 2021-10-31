@@ -58,5 +58,5 @@ export = class DateTimeCommand extends Command {
                 description: dates.join("\n"),
             },
         });
-    }
+    };
 }

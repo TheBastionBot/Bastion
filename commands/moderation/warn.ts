@@ -129,5 +129,5 @@ export = class Warn extends Command {
         }).catch(() => {
             // this error can be ignored
         });
-    }
+    };
 }

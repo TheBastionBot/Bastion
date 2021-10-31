@@ -74,5 +74,5 @@ export = class FortniteCommand extends Command {
                 },
             },
         });
-    }
+    };
 }
