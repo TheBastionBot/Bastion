@@ -252,6 +252,7 @@ skip: It allows you to skip the music track that is currently being played in
 stop: It allows you to stop the current music playback in the server.
 volume: It allows you to set the volume of the music track that is currently
   being played in the server.
+aimlab: It allows you to see the stats of any Aim Lab player.
 apexLegends: It allows you to see the stats of any Apex Legends player in any
   supported platform.
 counterStrikeGlobalOffensive: "It allows you to see the stats of any
