@@ -1,4 +1,4 @@
-date: August 25, 2021
+date: November 7, 2021
 image:
 changes:
   NEW:
@@ -6,4 +6,5 @@ changes:
   CHANGES:
   - description: Some under-the-hood changes to make Bastion less reliable on the API server.
   FIXES:
+  - description: Fixed some dependencies not getting installed in M1 Macs.
   - description: Some under-the-hood fixes as always to make Bastion even better!
