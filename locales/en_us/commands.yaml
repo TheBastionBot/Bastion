@@ -17,7 +17,7 @@ setUsername: It allows you to update Bastion's username directly from Discord.
 shutdown: It allows you to shutdown Bastion directly from Discord.
 garfield: It allows you to see the latest Garfield comic strip.
 phdComics: It allows you to see the latest PHD comic strip, or the specified one.
-xkcd: It allows you to see the latest xkcd comic strip.
+xkcd: It allows you to see the latest xkcd comic strip, or the specified edition.
 amongUsChannel: It allows to set the channel for creating Among Us lobbies.
   Anybody who has access to this channel would be able to auto create Among Us
   lobbies using the `amongus` command.
@@ -252,6 +252,7 @@ skip: It allows you to skip the music track that is currently being played in
 stop: It allows you to stop the current music playback in the server.
 volume: It allows you to set the volume of the music track that is currently
   being played in the server.
+aimlab: It allows you to see the stats of any Aim Lab player.
 apexLegends: It allows you to see the stats of any Apex Legends player in any
   supported platform.
 counterStrikeGlobalOffensive: "It allows you to see the stats of any
@@ -269,6 +270,7 @@ rainbow6: It allows you to see the stats of any Rainbow 6 player in any
   supported platform.
 rocketLeague: It allows you to see the stats of any Rocket League player in any
   supported platform.
+valorant: It allows you to see the stats of any VALORANT player.
 coins: It allows you to see your Bastion Account.
 daily: It allows you to claim Bastion Coins, that every member receives as a
   reward for being in the server. You can claim your rewards once every 24

@@ -17,14 +17,14 @@ function method::debug () {
     print::error "$NAME is already running!"
     print::info "Stop Bastion before you run it in dubug mode!"
   else
-    yarn start
+    npm start
   fi
 }
 
 function method::fix-dependencies () {
   print::message "Fixing dependencies..."
   rm -rf node_modules package-lock.json
-  yarn install --production --no-lockfile
+  npm install --production --no-package-lock
 }
 
 function method::fix-locales () {
@@ -84,7 +84,7 @@ function method::start () {
 
       print::message "Booting up..."
 
-      screen -L -dmS "$NAME" /bin/bash -c "until yarn start .; do sleep 1; done"
+      screen -L -dmS "$NAME" /bin/bash -c "until npm start .; do sleep 1; done"
 
       print::info "$NAME was successfully started!"
     else
@@ -136,7 +136,7 @@ function method::update () {
     echo "Updating dependencies..."
 
     rm -fr node_modules package-lock.json screenlog.0
-    yarn install --production --no-lockfile
+    npm install --production --no-package-lock
     if ! [[ "$?" -eq 0 ]]
     then
       print::error "Failed to install dependencies."

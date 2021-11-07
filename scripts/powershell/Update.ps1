@@ -65,10 +65,10 @@ Write-Host "[Bastion]: Updating dependencies..."
 Write-Host
 
 Remove-Item -Path ".\node_modules", ".\package-lock.json" -Force -Recurse -ErrorAction SilentlyContinue
-yarn install --production --no-lockfile
+npm install --production --no-package-lock
 If (-Not ($?)) {
   Write-Host "[Bastion]: Unable to update Bastion, error while updating dependencies."
-  Write-Host "[Bastion]: Try updating it manually: yarn install --production --no-lockfile"
+  Write-Host "[Bastion]: Try updating it manually: npm install --production --no-package-lock"
   Write-Host "[Bastion]: Contact Bastion Support for further help."
 
   Exit-Bastion-Updater

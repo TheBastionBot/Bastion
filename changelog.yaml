@@ -1,13 +1,11 @@
-date: April 10, 2021
+date: November 7, 2021
 image:
 changes:
   NEW:
-  - description: You can now set a custom message for live stream notifications that supports mentions. See `streamers --help` for an example.
-  - description: You can now send plain text (non-embedded) message with the `echo` command on your instance of Bastion if you use the `--plain` option.
-  - description: You can now disable entire command categories with the `commandModule` command using the `--category` option.
+  - description: You can now see the stats of any VALORANT player by using the `valorant` command. For example, `valorant FNATIC Boaster#1010 -r EU`.
+  - description: You can now see the stats of any Aim Lab player by using the `aimlab` command. For example, `aimlab iamtraction`.
   CHANGES:
-  - description: The `echo` command won't show the sender of message if it's your own instance of Bastion.
+  - description: Some under-the-hood changes to make Bastion less reliable on the API server.
   FIXES:
-  - description: Fixed `definitions` not working if the word is not in lowercase.
-  - description: Fixed the permalink format in the `apod` command.
+  - description: Fixed some dependencies not getting installed in M1 Macs.
   - description: Some under-the-hood fixes as always to make Bastion even better!
