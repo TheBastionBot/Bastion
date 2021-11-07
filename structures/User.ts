@@ -10,7 +10,7 @@ import * as mongoose from "mongoose";
 import UserModel, { User as IUser } from "../models/User";
 
 export = class BastionUser extends User {
-    client: Client;
+    declare client: Client;
     document: IUser & mongoose.Document;
 
     constructor(client: Client, data: Record<string, unknown>) {

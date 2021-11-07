@@ -34,7 +34,7 @@ interface GuildCreateModerationLogOptions {
 }
 
 export = class BastionGuild extends Guild {
-    client: Client;
+    declare client: Client;
     document: IGuild & mongoose.Document;
     music: {
         queue: GuildMusic[];
