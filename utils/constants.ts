@@ -56,6 +56,7 @@ const COLORS = {
     PUBG: 0xf2a900,
     RAINBOW6: 0x36a9e0,
     ROCKET_LEAGUE: 0x0475d0,
+    VALORANT: 0xff4655,
 
     PATREON: 0xff514d,
 
