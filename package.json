@@ -45,7 +45,7 @@
     "@types/he": "^1.1.1",
     "chalk": "^4.1.0",
     "discord-rpc": "^4.0.1",
-    "fast-xml-parser": "^3.21.1",
+    "fast-xml-parser": "^4.0.1",
     "gamedig": "^3.0.7",
     "he": "^1.2.0",
     "jsdom": "^19.0.0",
