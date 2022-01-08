@@ -20,7 +20,7 @@
     "@types/gamedig": "^3.0.1",
     "@types/jsdom": "^16.2.5",
     "@types/mathjs": "^9.3.0",
-    "@types/node": "^16.11.6",
+    "@types/node": "^17.0.8",
     "@types/node-fetch": "^2.5.12",
     "@types/uuid": "^8.3.0",
     "@types/ws": "^8.2.0",
