@@ -37,7 +37,7 @@ export = class MentionSpamCommand extends Command {
 
         // update mention spam settings
         guild.document.mentionSpam = {
-            ...guild.document.mentionSpam,
+            ...guild.document.mentionSpam?.toJSON(),
             threshold: typeof argv.threshold === "number" && argv.threshold > 1 ? argv.threshold : undefined,
         };
 

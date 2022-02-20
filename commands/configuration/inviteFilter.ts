@@ -42,7 +42,7 @@ export = class InviteFilterCommand extends Command {
 
         // update invite filter settings
         guild.document.filters = {
-            ...guild.document.filters,
+            ...guild.document.filters?.toJSON(),
             inviteFilter: {
                 enabled: argv.disable ? undefined : argv.enable || guild.document.filters && guild.document.filters.inviteFilter && guild.document.filters.inviteFilter.enabled ? true : undefined,
                 infraction: argv.infraction === false ? undefined : argv.infraction || guild.document.filters && guild.document.filters.inviteFilter && guild.document.filters.inviteFilter.infraction ? true : undefined,

@@ -54,7 +54,7 @@ export = class MusicMaster extends Command {
 
         // Set the Music Master role
         guild.document.music = {
-            ...guild.document.music,
+            ...guild.document.music?.toJSON(),
             roleId: role ? role.id : undefined,
         };
 

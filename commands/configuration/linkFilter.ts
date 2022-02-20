@@ -42,7 +42,7 @@ export = class LinkFilterCommand extends Command {
 
         // update link filter settings
         guild.document.filters = {
-            ...guild.document.filters,
+            ...guild.document.filters?.toJSON(),
             linkFilter: {
                 enabled: argv.disable ? undefined : argv.enable || guild.document.filters && guild.document.filters.linkFilter && guild.document.filters.linkFilter.enabled ? true : undefined,
                 infraction: argv.infraction === false ? undefined : argv.infraction || guild.document.filters && guild.document.filters.linkFilter && guild.document.filters.linkFilter.infraction ? true : undefined,

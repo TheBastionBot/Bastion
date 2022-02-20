@@ -51,7 +51,7 @@ export = class MusicChannel extends Command {
 
         // Set the Music Channels
         guild.document.music = {
-            ...guild.document.music,
+            ...guild.document.music?.toJSON(),
             textChannelId: voiceChannel ? message.channel.id : undefined,
             voiceChannelId: voiceChannel ? voiceChannel.id : undefined,
         };

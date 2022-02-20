@@ -50,7 +50,7 @@ export = class MessageFilterCommand extends Command {
 
         // update message filter settings
         guild.document.filters = {
-            ...guild.document.filters,
+            ...guild.document.filters?.toJSON(),
             messageFilter: {
                 enabled: argv.disable ? undefined : argv.enable || guild.document.filters && guild.document.filters.messageFilter && guild.document.filters.messageFilter.enabled ? true : undefined,
                 patterns: argv.clear

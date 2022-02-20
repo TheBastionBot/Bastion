@@ -94,7 +94,7 @@ export = class MusicCommand extends Command {
 
         // toggle music in the server
         guildDocument.music = {
-            ...guildDocument.music,
+            ...guildDocument.music?.toJSON(),
             enabled: !status,
         };
 

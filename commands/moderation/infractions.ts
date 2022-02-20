@@ -48,7 +48,7 @@ export = class InfractionsCommand extends Command {
 
             // update infractions
             guildDocument.infractions = {
-                ...guildDocument.infractions,
+                ...guildDocument.infractions?.toJSON(),
                 kickThreshold: argv.kick ? argv.kick : guildDocument.infractions && guildDocument.infractions.kickThreshold ? guildDocument.infractions.kickThreshold : undefined,
                 banThreshold: argv.ban ? argv.ban : guildDocument.infractions && guildDocument.infractions.banThreshold ? guildDocument.infractions.banThreshold : undefined,
             };
