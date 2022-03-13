@@ -10,10 +10,10 @@
   "license": "",
   "private": true,
   "scripts": {
-    "transpile": "./node_modules/.bin/tsc",
+    "transpile": "tsc",
     "start": "node .",
-    "lint": "./node_modules/.bin/eslint . --ext .ts",
-    "test": "npm run transpile"
+    "lint": "eslint . --ext .ts",
+    "test": "npm run lint && npm run transpile"
   },
   "devDependencies": {
     "@types/discord-rpc": "^4.0.0",
