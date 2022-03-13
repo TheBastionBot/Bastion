@@ -78,41 +78,39 @@ export = class ValorantCommand extends Command {
                         value: response?.data?.account_level,
                         inline: true,
                     },
-                    ...(mmrResponse?.data?.current_data?.elo
-                        ?   [
-                                {
-                                    name: "Rank",
-                                    value: mmrResponse?.data?.current_data?.currenttierpatched,
-                                    inline: true,
-                                },
-                                {
-                                    name: "ELO",
-                                    value: mmrResponse?.data?.current_data?.elo,
-                                    inline: true,
-                                },
-                                ...(actStats?.error
-                                    ?   [
-                                            {
-                                                name: "Placement",
-                                                value: mmrResponse?.data?.current_data?.games_needed_for_rating + " Matches",
-                                                inline: true,
-                                            },
-                                        ]
-                                    :   [
-                                            {
-                                                name: "Wins",
-                                                value: actStats?.wins + " Matches",
-                                                inline: true,
-                                            },
-                                            {
-                                                name: "Played",
-                                                value: actStats?.number_of_games + " Matches",
-                                                inline: true,
-                                            },
-                                        ]
-                                ),
-                            ]
-                        :   []
+                    ...(mmrResponse?.data?.current_data?.elo ?
+                        [
+                            {
+                                name: "Rank",
+                                value: mmrResponse?.data?.current_data?.currenttierpatched,
+                                inline: true,
+                            },
+                            {
+                                name: "ELO",
+                                value: mmrResponse?.data?.current_data?.elo,
+                                inline: true,
+                            },
+                            ...(actStats?.error ?
+                                [
+                                    {
+                                        name: "Placement",
+                                        value: mmrResponse?.data?.current_data?.games_needed_for_rating + " Matches",
+                                        inline: true,
+                                    },
+                                ] : [
+                                    {
+                                        name: "Wins",
+                                        value: actStats?.wins + " Matches",
+                                        inline: true,
+                                    },
+                                    {
+                                        name: "Played",
+                                        value: actStats?.number_of_games + " Matches",
+                                        inline: true,
+                                    },
+                                ]
+                            ),
+                        ] : []
                     ),
                 ],
                 thumbnail: {
