@@ -92,7 +92,7 @@ function method::start () {
       echo
 
       print::message "Check if you have installed Bastion correctly."
-      print::message "Follow the installation guide: https://docs.bastionbot.org"
+      print::message "Follow the installation guide: https://bastion.gitbook.io"
     fi
   fi
 }
