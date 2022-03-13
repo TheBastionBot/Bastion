@@ -1,6 +1,7 @@
-date: February 20, 2022
+date: March 13, 2022
 image:
 changes:
   FIXES:
   - description: Fixed an issue that prevented changes in some servers not being saved.
+  - description: Fixed an issue where discord invites were not being filtered in some cases.
   - description: Some under-the-hood fixes as always to make Bastion even better!
