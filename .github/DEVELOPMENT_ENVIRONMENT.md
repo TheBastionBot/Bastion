@@ -13,10 +13,10 @@ local computer.
  -  [Install Bastion on Windows Subsystem for Linux]
 
 <!-- Links -->
-[Install Bastion on GNU/Linux]: https://docs.bastionbot.org/install-linux
-[Install Bastion on macOS]: https://docs.bastionbot.org/install-macos
-[Install Bastion on Windows]: https://docs.bastionbot.org/install-win
-[Install Bastion on Windows Subsystem for Linux]: https://docs.bastionbot.org/install-win-wsl
+[Install Bastion on GNU/Linux]: https://bastion.gitbook.io/docs/install/install-on-linux
+[Install Bastion on macOS]: https://bastion.gitbook.io/docs/install/install-on-macos
+[Install Bastion on Windows]: https://bastion.gitbook.io/docs/install/install-on-windows
+[Install Bastion on Windows Subsystem for Linux]: https://bastion.gitbook.io/docs/install/install-on-linux
 
 ## Step 2: Install Dev Dependencies
 The next step is to install the dev dependencies of Bastion so that you get all

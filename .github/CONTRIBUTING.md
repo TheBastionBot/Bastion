@@ -34,7 +34,7 @@ this repository, you can start here: https://github.com/TheBastionBot/Bastion/pu
 
 We want to deliver the Bastion Discord Bot in many different languages from many
 different countries. If you want to contribute on translations and bring it to the
-world, you can start doing that by going here: https://i18n.bastionbot.org
+world, you can start doing that by going here: https://crowdin.com/project/bastion
 
 ## Additional Notes
 
@@ -48,7 +48,7 @@ these before you open a Pull Request.
 
 <!-- Links -->
 [The Bastion Bot Project]: https://github.com/TheBastionBot 'The Bastion Bot GitHub Organization'
-[Contributing Guidelines]: https://dev.bastionbot.org/contributing/guidelines 'The Bastion Bot - Contributing Guidelines'
-[Contributing Guidelines for Issues]: https://dev.bastionbot.org/contributing/issues 'The Bastion Bot - Contributing on Issues'
-[Contributing Guidelines for Pull Requests]: https://dev.bastionbot.org/contributing/pulls 'The Bastion Bot - Contributing on Pull Requests'
+[Contributing Guidelines]: https://bastion.gitbook.io/docs/contributing/guidelines 'The Bastion Bot - Contributing Guidelines'
+[Contributing Guidelines for Issues]: https://bastion.gitbook.io/docs/contributing/issues 'The Bastion Bot - Contributing on Issues'
+[Contributing Guidelines for Pull Requests]: https://bastion.gitbook.io/docs/contributing/pulls 'The Bastion Bot - Contributing on Pull Requests'
 [Bastion HQ]: https://discord.gg/fzx8fkt
