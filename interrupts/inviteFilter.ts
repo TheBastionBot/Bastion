@@ -71,9 +71,9 @@ export = class InviteFilter extends Interrupt {
             if (vanityData && vanityData.code) allowed.push(vanityData.code);
 
             // extract invite codes in messages
-            const invites = message.content.match(new RegExp(regex.SERVER_INVITE, "g"));
+            const invites = message.content.match(new RegExp(regex.SERVER_INVITE, "ig"));
 
-            if (allowed.length && invites.every(code => allowed.includes(code))) return false;
+            if (allowed.length && invites?.every(code => allowed.includes(code))) return false;
 
             // add infraction
             (message.member as BastionGuildMember).addInfraction("Unauthorized to send Server Invites.");
