@@ -67,9 +67,11 @@ export = class InviteFilterCommand extends Command {
                 ...guildObject.streamers,
                 twitch: {
                     channelId: message.channel.id,
-                    users: guildObject.streamers && guildObject.streamers.twitch && guildObject.streamers.twitch.users && guildObject.streamers.twitch.users.length && !guildObject.streamers.twitch.users.includes(argv.twitch)
-                        ? guildObject.streamers.twitch.users.concat(argv.twitch)
-                        : [ argv.twitch as string ],
+                    users: guildObject.streamers?.twitch?.users?.length
+                        ?   !guildObject.streamers.twitch.users.includes(argv.twitch)
+                            ?   guildObject.streamers.twitch.users.concat(argv.twitch)
+                            :   guildObject.streamers.twitch.users
+                        :   [ argv.twitch as string ],
                 },
             };
 
