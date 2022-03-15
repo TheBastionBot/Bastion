@@ -77,6 +77,21 @@ If (-Not ($?)) {
 Pass-Step
 
 
+# Update Bastion dependencies
+Write-Host "[Bastion]: Preparing Bastion..."
+Write-Host
+
+npm run transpile
+If (-Not ($?)) {
+  Write-Host "[Bastion]: Found some errors while building Bastion."
+  Write-Host "[Bastion]: Contact Bastion Support for further help."
+
+  Exit-Bastion-Updater
+}
+
+Pass-Step
+
+
 # Update was successful
 Write-Host "[Bastion]: Bastion was successfully updated."
 Write-Host
