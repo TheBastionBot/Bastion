@@ -3,3 +3,4 @@ image:
 changes:
   FIXES:
   - description: Fixed an issue where removing a streamer would remove all the streamers when using the `streamers` commands.
+  - description: Some under-the-hood fixes as always to make Bastion even better!
