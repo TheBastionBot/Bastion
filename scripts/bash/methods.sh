@@ -144,6 +144,16 @@ function method::update () {
       exit 1
     fi
 
+    echo "Preparing..."
+
+    npm run transpile
+    if ! [[ "$?" -eq 0 ]]
+    then
+      print::error "Found some errors while building Bastion."
+      print::message "Contact Bastion Support for help."
+      exit 1
+    fi
+
     print::message "Ready to boot up and start running."
   fi
 }
