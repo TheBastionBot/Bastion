@@ -109,7 +109,7 @@ export = class Play extends Command {
                 "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/604.1 (KHTML, like Gecko) Version/13.0.4 Safari/604.1",
                 "--referer=https://bastion.traction.one",
                 // video format
-                "--format=bestaudio[protocol^=http]",
+                `--format=bestaudio[ext=m4a]${constants.isPublicBastion(this.client.user) ? "[filesize<10M]" : ""}`,
                 "--youtube-skip-dash-manifest",
             ], (error: Error, info: YoutubeInfo) => {
                 if (error) return reject(error);
@@ -141,7 +141,7 @@ export = class Play extends Command {
                 "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/604.1 (KHTML, like Gecko) Version/13.0.4 Safari/604.1",
                 "--referer=https://bastion.traction.one",
                 // video format
-                "--format=bestaudio[protocol^=http]",
+                `--format=bestaudio[ext=m4a]${constants.isPublicBastion(this.client.user) ? "[filesize<10M]" : ""}`,
                 "--youtube-skip-dash-manifest",
             ], {});
 
@@ -150,8 +150,8 @@ export = class Play extends Command {
                 this.streamEndHandler(message.guild as BastionGuild);
                 resolve(true);
             });
-            stream.on("error", () => {
-                if (ignoreError) {
+            stream.on("error", error => {
+                if (!ignoreError) {
                     message.channel.send({
                         embed: {
                             color: Constants.COLORS.RED,
@@ -162,10 +162,10 @@ export = class Play extends Command {
                     });
                 }
 
-                reject(this.client.locale.getString((message.guild as BastionGuild).document.language, "errors", "musicDownloadError"));
+                reject(error);
             });
 
-            stream.pipe(fs.createWriteStream(this.musicDirectory + message.guild.id + "/" + songId + ".mp3"));
+            stream.pipe(fs.createWriteStream(this.musicDirectory + message.guild.id + "/" + songId + ".m4a"));
         });
     };
 
@@ -274,7 +274,7 @@ export = class Play extends Command {
             guild.music.playing = true;
 
             // Start the dispatcher
-            const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + guild.id + "/" + song.id + ".mp3");
+            const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + guild.id + "/" + song.id + ".m4a");
 
             // Set playing activity
             if ((this.client.configurations as BastionConfigurations).music && (this.client.configurations as BastionConfigurations).music.activity) {
@@ -298,7 +298,7 @@ export = class Play extends Command {
             guild.music.history = [];
 
             // Clear the music directory
-            fs.promises.rmdir(this.musicDirectory + guild.id, { recursive: true }).catch(() => {
+            fs.promises.rm(this.musicDirectory + guild.id, { recursive: true }).catch(() => {
                 // This error can be ignored.
             });
 
