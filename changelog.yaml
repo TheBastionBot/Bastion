@@ -5,4 +5,5 @@ changes:
   - description: Epic Games usernames are now supported by the `rocketLeague` command and it's also the default platform.
   FIXES:
   - description: Fixed an issue where removing a streamer would remove all the streamers when using the `streamers` commands.
+  - description: Some improvements and fixed to music commands.
   - description: Some under-the-hood improvements & fixes as always to make Bastion even better!
