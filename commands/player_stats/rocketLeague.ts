@@ -52,7 +52,7 @@ export = class RocketLeagueCommand extends Command {
             ],
         });
 
-        this.platforms = [ "steam", "ps4", "xboxone" ];
+        this.platforms = [ "epic", "steam", "ps4", "xboxone" ];
         this.skillTypes = [ "assists", "goals", "mvps", "saves", "shots", "wins" ];
     }
 
@@ -96,20 +96,20 @@ export = class RocketLeagueCommand extends Command {
         // check for errors
         if (!data.user_name) throw new Error("PLAYER_NOT_FOUND");
 
+        console.log(data);
+
         // acknowledge
         await message.channel.send({
             embed: {
                 color: constants.COLORS.ROCKET_LEAGUE,
                 author: {
-                    name: data.user_name + " / " + player,
+                    name: data.user_name + " / " + argv._.join(" "),
                 },
                 title: "Rocket League - Player Stats",
                 fields: [
                     {
                         name: "Season Reward",
-                        value: "Level " + data.season_rewards
-                            ? data.season_rewards?.level + (data.season_rewards?.wins ? data.season_rewards?.wins + " Wins" : "")
-                            : "-",
+                        value: `Level ${data.season_rewards?.level || 0} (${data.season_rewards?.wins || 0} Wins)`,
                     },
                     ...Object.keys(data.stats).map((key: string) => ({
                         name: strings.toTitleCase(key),
