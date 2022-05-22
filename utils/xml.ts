@@ -3,13 +3,16 @@
  * @copyright 2020 - Sankarsan Kampa
  */
 
-import * as parser from "fast-xml-parser";
+import { XMLParser, XMLValidator } from "fast-xml-parser";
+
+const parser = new XMLParser({
+    numberParseOptions: {
+        hex: true,
+        leadingZeros: false,
+    },
+});
 
 export const parse = (xml: string): unknown => {
-    if (parser.validate(xml) === true) {
-        return parser.parse(xml, {
-            parseTrueNumberOnly: true,
-        });
-    }
+    if (XMLValidator.validate(xml) === true) return parser.parse(xml);
     return {};
 };
