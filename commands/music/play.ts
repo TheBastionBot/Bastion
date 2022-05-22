@@ -274,7 +274,7 @@ export = class Play extends Command {
             guild.music.playing = true;
 
             // Start the dispatcher
-            const dispatcher = guild.voice && guild.voice.connection.play(this.musicDirectory + guild.id + "/" + song.id + ".m4a");
+            const dispatcher = guild.voice?.connection?.play(this.musicDirectory + guild.id + "/" + song.id + ".m4a");
 
             // Set playing activity
             if ((this.client.configurations as BastionConfigurations).music && (this.client.configurations as BastionConfigurations).music.activity) {
@@ -311,7 +311,7 @@ export = class Play extends Command {
 
             // Leave the voice channel, if `keepAlive` is disabled
             if (!guild.document.music.keepAlive) {
-                guild.voice && guild.voice.channel.leave();
+                guild.voice?.channel?.leave();
             }
 
             // Acknowledge
@@ -385,7 +385,7 @@ export = class Play extends Command {
             ? message.guild.channels.cache.get(guild.document.music.textChannelId) as NewsChannel | TextChannel
             : message.channel as NewsChannel | TextChannel;
 
-        guild.music.voiceChannel = message.guild.voice && message.guild.voice.connection
+        guild.music.voiceChannel = message.guild.voice?.connection
             ? message.guild.voice.channel
             : message.guild.channels.cache.filter(c => c.type === "voice").has(guild.document.music.voiceChannelId)
                 ? message.guild.channels.cache.filter(c => c.type === "voice").get(guild.document.music.voiceChannelId) as VoiceChannel

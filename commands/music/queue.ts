@@ -61,7 +61,7 @@ export = class Queue extends Command {
             });
         }
 
-        if (guild.music.playing && guild.voice && guild.voice.connection.dispatcher) {
+        if (guild.music.playing && guild.voice?.connection?.dispatcher) {
             const nowPlaying = guild.music.queue[0];
 
             if (argv.clear) {

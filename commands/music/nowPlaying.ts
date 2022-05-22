@@ -41,7 +41,7 @@ export = class NowPlaying extends Command {
             });
         }
 
-        if (guild.music.playing && guild.voice && guild.voice.connection.dispatcher) {
+        if (guild.music.playing && guild.voice?.connection?.dispatcher) {
             const song = guild.music.queue[0];
 
             const streamTime = guild.voice.connection.dispatcher.streamTime - guild.voice.connection.dispatcher.pausedTime;

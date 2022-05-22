@@ -52,7 +52,7 @@ export = class Stop extends Command {
             guild.music.history = [];
 
             // Stop the dispatcher
-            guild.voice && guild.voice.connection && guild.voice.connection.dispatcher.end();
+            guild.voice?.connection?.dispatcher?.end();
         }
     };
 }

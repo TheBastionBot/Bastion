@@ -55,7 +55,7 @@ export = class Volume extends Command {
         if (!(message.member as BastionGuildMember).isMusicMaster()) return;
 
 
-        if (guild.music.playing && guild.voice && guild.voice.connection.dispatcher && !guild.voice.connection.dispatcher.paused) {
+        if (guild.music.playing && guild.voice?.connection?.dispatcher && !guild.voice.connection.dispatcher.paused) {
             // Cap the volume between 0.01 and 2
             volume = volume < 1 ? 1 : volume > 200 ? 200 : volume;
 

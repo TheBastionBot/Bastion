@@ -45,7 +45,7 @@ export = class Pause extends Command {
         // Check whether the command user is a Music Master
         if (!(message.member as BastionGuildMember).isMusicMaster()) return;
 
-        if (guild.music.playing && guild.voice && guild.voice.connection.dispatcher && !guild.voice.connection.dispatcher.paused) {
+        if (guild.music.playing && guild.voice?.connection?.dispatcher && !guild.voice.connection.dispatcher.paused) {
             // Pause the dispatcher
             guild.voice.connection.dispatcher.pause(true);
 
