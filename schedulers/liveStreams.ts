@@ -46,6 +46,9 @@ export = class LiveStreams extends Scheduler {
         });
 
         const streams: TwitchStream[] = (await response.json()).data;
+
+        if (!streams) return Logger.error("Make sure your Twitch credentials are valid.");
+
         for (const stream of streams) {
             // check whether this stream has already been notified
             if (notifiedStreams.includes(stream.id)) continue;
@@ -105,7 +108,7 @@ export = class LiveStreams extends Scheduler {
 
             for (const guild of guildDocuments) {
                 // twitch streams
-                if (guild.streamers.twitch && guild.streamers.twitch.channelId && guild.streamers.twitch.users.length) {
+                if (guild.streamers?.twitch?.channelId && guild.streamers?.twitch?.users?.length) {
                     this.handleTwitchStreamers(guild._id, guild.streamers.twitch, guild.streamers.message).catch(e => Logger.error(e));
                 }
             }
