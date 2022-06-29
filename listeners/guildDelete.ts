@@ -31,7 +31,7 @@ export = class GuildDeleteListener extends Listener {
                         fields: [
                             {
                                 name: "Server Owner",
-                                value: guild.owner.user.tag + " / " + guild.owner.user.id,
+                                value: guild.owner?.user ? guild.owner.user.id + " / " + guild.owner.user.id : "-",
                             },
                         ],
                         footer: {
