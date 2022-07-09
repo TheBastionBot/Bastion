@@ -42,7 +42,7 @@ export = class VoiceStateUpdateListener extends Listener {
 
         // check whether all members left the old channel
         if (oldState.channel && oldState.channel.parent && guild.voiceSessions.categories.includes(oldState.channel.parentID) && !oldState.channel.name.startsWith(this.newSessionChannelPrefix) && oldState.channel.members.size === 0 && oldState.channel.deletable) {
-            oldState.channel.delete("Members Left");
+            await oldState.channel.delete("Members Left");
         }
 
 
