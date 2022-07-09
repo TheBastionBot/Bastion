@@ -45,7 +45,7 @@ server.start(process.env.PORT || configurations.port);
 
 
 // Spawn shards
-Manager.spawn().catch(tesseract.Logger.error);
+Manager.spawn("auto", 5500, 6e4).catch(tesseract.Logger.error);
 
 
 // Sharding Manager Events
