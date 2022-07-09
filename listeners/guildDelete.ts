@@ -16,7 +16,7 @@ export = class GuildDeleteListener extends Listener {
     }
 
     exec = async (guild: Guild): Promise<void> => {
-        if (!guild?.id) return;
+        if (!guild?.available) return;
 
         const credentials = (this.client.credentials as BastionCredentials);
 
