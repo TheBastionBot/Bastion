@@ -68,6 +68,8 @@ export = class BastionGuild extends Guild {
     }
 
     public async createLog(options: GuildCreateLogOptions): Promise<Message> {
+        if (!this?.available) return;
+
         const document = await this.getDocument();
 
         const channelsPool = this.client.channels.cache.filter(c => c.type === "text" || c.type === "news");
