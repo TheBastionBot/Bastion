@@ -40,7 +40,7 @@
     "zlib-sync": "^0.1.7"
   },
   "dependencies": {
-    "@bastion/tesseract": "^2.1.6",
+    "@bastion/tesseract": "^2.1.7",
     "@iamtraction/google-translate": "^1.1.2",
     "@types/he": "^1.1.1",
     "chalk": "^4.1.2",
