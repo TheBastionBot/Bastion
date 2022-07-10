@@ -224,55 +224,6 @@ export = class MessageReactionAddListener extends Listener {
         }
     };
 
-    handleGameLobby = async (messageReaction: MessageReaction, member: GuildMember): Promise<void> => {
-        // don't allow bots to handle game lobbies
-        if (member.user.bot) return;
-
-        // check whether the reaction was valid
-        if (![ "🔈", "👻", "🖐🏻", "🔇", "🔓", "❌" ].includes(messageReaction.emoji.name)) return;
-
-        // check whether the reaction was made in a valid message
-        if (!messageReaction.message.embeds.length || !messageReaction.message.embeds[0].title || !messageReaction.message.embeds[0].title.startsWith("Among Us Lobby ") || !(messageReaction.message.channel as TextChannel).parentID) return;
-
-        // find the appropriate channels
-        const discussionChannel = (messageReaction.message.channel as TextChannel).parent.children.find(c => c.name === "Discussion") as VoiceChannel;
-        const mutedChannel = (messageReaction.message.channel as TextChannel).parent.children.find(c => c.name === "Muted") as VoiceChannel;
-
-        if (messageReaction.emoji.name === "🖐🏻" && (messageReaction.message.channel as TextChannel).topic.trim() === member.id) {
-            for (const member of mutedChannel.members.values()) {
-                await member.voice.setChannel(discussionChannel);
-            }
-            await messageReaction.users.remove(member).catch(() => {
-                // this error can be ignored
-            });
-        } else if (messageReaction.emoji.name === "🔇" && (messageReaction.message.channel as TextChannel).topic.trim() === member.id) {
-            for (const member of discussionChannel.members.values()) {
-                await member.voice.setChannel(mutedChannel);
-            }
-            await messageReaction.users.remove(member).catch(() => {
-                // this error can be ignored
-            });
-        } else if (messageReaction.emoji.name === "🔓" && (messageReaction.message.channel as TextChannel).topic.trim() === member.id) {
-            await (messageReaction.message.channel as TextChannel).updateOverwrite(messageReaction.message.guild.id, {
-                ADD_REACTIONS: true,
-            });
-        } else if (messageReaction.emoji.name === "❌" && (messageReaction.message.channel as TextChannel).topic.trim() === member.id) {
-            await mutedChannel.delete();
-            await discussionChannel.delete();
-            const lobby = (messageReaction.message.channel as TextChannel).parent;
-            await messageReaction.message.channel.delete();
-            await lobby.delete();
-        } else if (messageReaction.emoji.name === "🔈") {
-            await discussionChannel.updateOverwrite(member, {
-                CONNECT: true,
-            });
-        } else if (messageReaction.emoji.name === "👻") {
-            await discussionChannel.updateOverwrite(member, {
-                SPEAK: false,
-            });
-        }
-    };
-
     exec = async (messageReaction: MessageReaction, user: User): Promise<void> => {
         // if the reaction has partial data, fetch it
         if (messageReaction.partial) {
@@ -291,9 +242,6 @@ export = class MessageReactionAddListener extends Listener {
 
         // handle reaction roles
         this.handleReactionRoles(messageReaction, member).catch(Logger.error);
-
-        // handle Among Us game lobby
-        this.handleGameLobby(messageReaction, member).catch(Logger.error);
 
 
         const guildDocument: GuildDocument = await (messageReaction.message.guild as BastionGuild).getDocument();
