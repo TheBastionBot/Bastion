@@ -1,6 +1,8 @@
-date: June 7, 2022
+date: July 10, 2022
 image:
 changes:
+  REMOVED:
+  - description: Removed `amongus` and `amongusChannel` commands.
   CHANGES:
   - description: Some under-the-hood changes to make optimize & improve Bastion's performance!
   FIXES:
