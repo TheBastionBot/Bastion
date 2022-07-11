@@ -94,6 +94,8 @@ export = class BastionGuild extends Guild {
     }
 
     public async createModerationLog(options: GuildCreateModerationLogOptions): Promise<void> {
+        if (!this?.available) return;
+
         const document = await this.getDocument();
 
         const channelsPool = this.client.channels.cache.filter(c => c.type === "text" || c.type === "news");
