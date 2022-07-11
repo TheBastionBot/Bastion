@@ -55,7 +55,7 @@ export = class LinkFilter extends Interrupt {
         // check whether the message has an uri
         if (regex.URI.test(message.content)) {
             // add infraction
-            (message.member as BastionGuildMember).addInfraction("Unauthorized to send links.");
+            (message.member as BastionGuildMember)?.addInfraction("Unauthorized to send links.");
 
             // delete link
             this.deleteLink(message);

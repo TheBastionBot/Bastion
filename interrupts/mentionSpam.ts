@@ -42,7 +42,7 @@ export = class MentionSpamInterrupt extends Interrupt {
 
         if (filtered) {
             // add infraction
-            (message.member as BastionGuildMember).addInfraction("Mention spam.");
+            (message.member as BastionGuildMember)?.addInfraction("Mention spam.");
 
             // create moderation log
             guild.createModerationLog({

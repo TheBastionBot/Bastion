@@ -46,7 +46,7 @@ export = class MessageFilter extends Interrupt {
         // check whether the message matches restricted patterns
         if (this.testPatterns(message.content, guild.document.filters.messageFilter.patterns)) {
             // add infraction
-            (message.member as BastionGuildMember).addInfraction("Violated message filter.");
+            (message.member as BastionGuildMember)?.addInfraction("Violated message filter.");
 
             // delete the message
             if (message.deletable) message.delete().catch(() => {

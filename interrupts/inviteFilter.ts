@@ -76,7 +76,7 @@ export = class InviteFilter extends Interrupt {
             if (allowed.length && invites?.every(code => allowed.includes(code))) return false;
 
             // add infraction
-            (message.member as BastionGuildMember).addInfraction("Unauthorized to send Server Invites.");
+            (message.member as BastionGuildMember)?.addInfraction("Unauthorized to send Server Invites.");
 
             // delete invite code
             this.deleteInvite(message);
