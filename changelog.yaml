@@ -1,4 +1,4 @@
-date: July 10, 2022
+date: July 15, 2022
 image:
 changes:
   REMOVED:
@@ -6,4 +6,5 @@ changes:
   CHANGES:
   - description: Some under-the-hood changes to make optimize & improve Bastion's performance!
   FIXES:
+  - description: Fixed some issues with sharding that prevented respawing of disconnected shards in some cases.
   - description: Some under-the-hood improvements & fixes as always to make Bastion even better!
