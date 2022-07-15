@@ -48,7 +48,7 @@
     "fast-xml-parser": "^4.0.7",
     "gamedig": "^4.0.4",
     "he": "^1.2.0",
-    "jsdom": "^19.0.0",
+    "jsdom": "^20.0.0",
     "mathjs": "^10.5.3",
     "node-fetch": "^2.6.7",
     "opusscript": "^0.0.8",
