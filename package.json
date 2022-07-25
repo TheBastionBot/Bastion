@@ -18,7 +18,7 @@
   "devDependencies": {
     "@types/discord-rpc": "^4.0.3",
     "@types/gamedig": "^3.0.1",
-    "@types/jsdom": "^16.2.14",
+    "@types/jsdom": "^20.0.0",
     "@types/mathjs": "^9.3.0",
     "@types/node": "^18.0.4",
     "@types/node-fetch": "^2.5.12",
