@@ -50,7 +50,7 @@
     "he": "^1.2.0",
     "jsdom": "^18.0.1",
     "mathjs": "^10.0.0",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^3.2.10",
     "opusscript": "^0.0.8",
     "r6api.js": "^3.1.0",
     "trivia-api": "^1.0.1",
