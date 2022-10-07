@@ -43,7 +43,7 @@
     "@bastion/tesseract": "^2.1.7",
     "@iamtraction/google-translate": "^1.1.2",
     "@types/he": "^1.1.1",
-    "chalk": "^4.1.2",
+    "chalk": "^5.1.0",
     "discord-rpc": "^4.0.1",
     "fast-xml-parser": "^4.0.7",
     "gamedig": "^4.0.4",
