@@ -2,5 +2,6 @@ date: November 11, 2022
 image:
 changes:
   FIXES:
-  - description: the `setAvatar` command now properly supports both image attachments & image links for changing avatars.
-  - description: fix Xbox & Switch platforms not working for `overwatch` command.
+  - description: The `setAvatar` command now properly supports both image attachments & image links for changing avatars.
+  - description: Fix `anime` command querying mangas.
+  - description: Fix Xbox & Switch platforms not working for `overwatch` command.
