@@ -4,4 +4,5 @@ changes:
   FIXES:
   - description: The `setAvatar` command now properly supports both image attachments & image links for changing avatars.
   - description: Fix `anime` command querying mangas.
+  - description: Fix live notification messages not getting saved in the `streamers` command.
   - description: Fix Xbox & Switch platforms not working for `overwatch` command.
