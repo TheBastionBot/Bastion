@@ -49,7 +49,7 @@ export = class InviteFilterCommand extends Command {
         if (argv._.length && !argv.twitch) {
             // update twitch streams notification message
             guildObject.streamers = {
-                ...guildObject.streamers,
+                ...guildObject.streamers?.toJSON(),
                 message: argv._.join(" "),
             };
 
