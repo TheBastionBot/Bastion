@@ -45,11 +45,11 @@ export = class OverwatchCommand extends Command {
         case "xbox":
         case "xbl":
         case "xbox-live":
-            return "psn";
+            return "xbl";
         case "nintendo":
         case "switch":
         case "nintendo-switch":
-            return "psn";
+            return "switch";
         default:
             return "pc";
         }
