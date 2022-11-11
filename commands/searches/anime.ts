@@ -39,7 +39,7 @@ export = class AnimeCommand extends Command {
         const title = argv._.join(" ");
 
         // fetch anime data
-        const response = await requests.get("https://kitsu.io/api/edge/manga?" + new URLSearchParams({
+        const response = await requests.get("https://kitsu.io/api/edge/anime?" + new URLSearchParams({
             "fields[anime]": "titles,slug,synopsis,startDate,endDate,ageRating,ageRatingGuide,nsfw,posterImage",
             "filter[text]": title,
         }), {
