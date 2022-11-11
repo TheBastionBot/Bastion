@@ -26,6 +26,7 @@ export = class SetAvatar extends Command {
             clientPermissions: [],
             userPermissions: [],
             syntax: [
+                "setAvatar (IMAGE ATTACHMENT)",
                 "setAvatar --image LINK",
             ],
         });
@@ -35,10 +36,10 @@ export = class SetAvatar extends Command {
         const image = message.attachments.first();
 
         // command syntax validation
-        if (!argv.image || !(image.height && image.width)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
+        if (!argv.image && !(image.height && image.width)) throw new errors.DiscordError(errors.BASTION_ERROR_TYPE.INVALID_COMMAND_SYNTAX, this.name);
 
         // update avatar
-        await this.client.user.setAvatar(argv.image);
+        await this.client.user.setAvatar(image?.attachment || argv.image);
 
         // acknowledge
         await message.channel.send({
