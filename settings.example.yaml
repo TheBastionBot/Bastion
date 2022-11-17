@@ -1,0 +1,70 @@
+# Bot Owners
+# User IDs of users who should be considered as the bot owners.
+# `TESSERACT_OWNER_ID` environment variable adds an additional owner to the list.
+owners:
+  - "YOUR_USER_ID"
+  - "ANOTHER_USER_ID"
+
+# Add the token of the bot which should be running Bastion.
+# https://discord.com/developers/applications
+# `TESSERACT_BOT_TOKEN` environment variable overwrites this value.
+token: ""
+
+# MongoDB connection URI
+# `TESSERACT_MONGO_URI` environment variable overwrites this value.
+mongoURI: "mongodb://localhost:27017/bastion"
+
+# Enable Music Activity
+# When enabled, Bastion updates the activity to the currently playing track.
+# It should ideally be disabled if music is played on multiple servers.
+# `BASTION_MUSIC_ACTIVITY` environment variable overwrites this value.
+musicActivity: true
+
+# Relay Direct Messages
+# When enabled, Bastion will relay any direct messages it receives to the
+# owner of the bot application / team.
+# `BASTION_RELAY_DMS` environment variable overwrites this value.
+relayDirectMessages: false
+
+# Safe Mode
+# When enabled, this disables usage of unsafe commands like `exec` and `eval`.
+# Keep this enabled if the bot owner isn't exclusively you.
+# `TESSERACT_UNSAFE_MODE` environment variable overwrites this value.
+unsafeMode: false
+
+# Port used for the Status API.
+# `BASTION_API_PORT` and `PORT` environment variables overwrites this value.
+port: 8377
+
+# API Keys
+# These are optional and only required for specific features and/or commands.
+
+# Required for `cryptocurrency` command.
+coinMarketCapApiKey: ""
+# Required for `apod` command.
+nasaApiKey: "DEMO_KEY"
+# Required for `weather` command.
+openWeatherMapApiKey: ""
+# Required for `movie` and `tv` commands.
+tmdbApiKey: ""
+# Required for `apex`, `csgo`, and `fortnite` commands.
+trackerNetworkApiKey: ""
+# Required for `game` command.
+twitch:
+  clientId: ""
+  clientSecret: ""
+  accessToken: ""
+# Required for `rainbow6` command.
+ubisoft:
+  email: ""
+  password: ""
+# Required for `definitions` command.
+wordnikApiKey: ""
+
+# Additional Settings
+# These settings are for internal use only. You don't need to configure this.
+bastion:
+  webhookId: ""
+  webhookToken: ""
+patreon:
+  accessToken: ""
