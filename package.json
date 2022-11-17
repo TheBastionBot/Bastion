@@ -54,7 +54,7 @@
     "opusscript": "^0.0.8",
     "r6api.js": "^4.1.0",
     "trivia-api": "^1.0.1",
-    "uuid": "^8.3.0",
+    "uuid": "^9.0.0",
     "youtube-dl": "iamtraction/node-youtube-dl"
   }
 }
