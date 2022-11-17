@@ -32,7 +32,7 @@
     "typescript": "^4.6.4"
   },
   "optionalDependencies": {
-    "@discordjs/opus": "^0.8.0",
+    "@discordjs/opus": "^0.9.0",
     "bufferutil": "^4.0.6",
     "erlpack": "discord/erlpack",
     "libsodium-wrappers": "^0.7.10",
