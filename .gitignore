@@ -1,19 +1,14 @@
-# Transpiled files
-*.js
-*.js.map
-*.d.ts
-*.d.ts.map
-!/typings/*.d.ts
+# dotenv
+.env
 
 ### Bastion ###
 /music
-/settings/*.yaml
-!/settings/*.example.yaml
+/settings.yaml
+!/settings.example.yaml
 
 # Auto generated files
-# /build
-# /assets/badges.json
-# /assets/commands.json
+/dist
+/typings
 
 # Lock file
 package-lock.json
