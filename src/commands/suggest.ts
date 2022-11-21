@@ -1,0 +1,75 @@
+/*!
+ * @author TRACTION (iamtraction)
+ * @copyright 2022
+ */
+import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, GuildTextBasedChannel } from "discord.js";
+import { Command } from "@bastion/tesseract";
+
+import GuildModel from "../models/Guild";
+import MessageComponents from "../utils/components";
+import { COLORS } from "../utils/constants";
+
+class SuggestCommand extends Command {
+    constructor() {
+        super({
+            name: "suggest",
+            description: "Send a suggestion to the server staff.",
+            options: [
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "suggestion",
+                    description: "What do you want to suggest?",
+                    required: true,
+                },
+            ],
+        });
+    }
+
+    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
+        await interaction.deferReply({ ephemeral: true });
+        const suggestion = interaction.options.getString("suggestion");
+
+        const guildDocument = await GuildModel.findById(interaction.guildId);
+
+        // send the suggestion
+        if (guildDocument?.suggestionsChannel && interaction.guild.channels.cache.has(guildDocument.suggestionsChannel)) {
+            await (interaction.guild.channels.cache.get(guildDocument.suggestionsChannel) as GuildTextBasedChannel).send({
+                embeds: [
+                    {
+                        color: COLORS.INDIGO,
+                        author: {
+                            name: interaction.user.tag + " / " + interaction.user.id,
+                        },
+                        title: "Suggestion",
+                        description: suggestion,
+                    },
+                ],
+                components: [
+                    {
+                        type: ComponentType.ActionRow,
+                        components: [
+                            {
+                                type: ComponentType.Button,
+                                label: "Accept",
+                                style: ButtonStyle.Success,
+                                customId: MessageComponents.SuggestionAcceptButton,
+                            },
+                            {
+                                type: ComponentType.Button,
+                                label: "Reject",
+                                style: ButtonStyle.Danger,
+                                customId: MessageComponents.SuggestionRejectButton,
+                            },
+                        ],
+                    },
+                ],
+            });
+
+            return await interaction.editReply("We've received your suggestion. We'll get back to you with updates.");
+        }
+
+        return await interaction.editReply("Bastion is not configured to receive suggestions in the server.");
+    }
+}
+
+export = SuggestCommand;
