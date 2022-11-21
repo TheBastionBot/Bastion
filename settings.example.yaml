@@ -14,6 +14,22 @@ token: ""
 # `TESSERACT_MONGO_URI` environment variable overwrites this value.
 mongoURI: "mongodb://localhost:27017/bastion"
 
+# Presences
+# Bastion will cycle through these activities randomly.
+# status — online / idle / dnd / invisible
+# activity — 0 (Playing) / 1 (Streaming) / 2 (Listening) / 3 (Watching) / 5 (Competing)
+# name — string
+# url — Twitch URL when `activity` is set to
+presences:
+- status: "online"
+  activity: 3
+  name: "the server"
+  url:
+- status: "dnd"
+  activity: 1
+  name: "some games"
+  url: https://twitch.tv/iamtraction
+
 # Enable Music Activity
 # When enabled, Bastion updates the activity to the currently playing track.
 # It should ideally be disabled if music is played on multiple servers.
