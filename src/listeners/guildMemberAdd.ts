@@ -8,6 +8,7 @@ import { Listener, Logger } from "@bastion/tesseract";
 import GuildModel from "../models/Guild";
 import RoleModel from "../models/Role";
 import { logGuildEvent } from "../utils/guilds";
+import * as variables from "../utils/variables";
 
 class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
     constructor() {
@@ -39,7 +40,7 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
             embeds: [
                 {
                     title: "Welcome!",
-                    description: guildDocument.greetingMessage,
+                    description: variables.replace(guildDocument.greetingMessage, member),
                 },
             ],
         }).then(m => {
