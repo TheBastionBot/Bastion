@@ -17,7 +17,7 @@ class LeaderboardCommand extends Command {
         });
     }
 
-    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
+    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
 
         // fetch top 5 members
@@ -32,6 +32,9 @@ class LeaderboardCommand extends Command {
             },
             limit: 5,
         });
+
+        // check whether member documents have been created
+        if (!members.length) return interaction.editReply("User profiles haven't been created in the server yet. Make sure gamification is enabled and members are active in the server.");
 
         // acknowledge
         await interaction.editReply({
