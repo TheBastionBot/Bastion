@@ -17,6 +17,7 @@ import * as members from "../utils/members";
 import * as numbers from "../utils/numbers";
 import { bastion } from "../types";
 import { COLORS } from "../utils/constants";
+import * as variables from "../utils/variables";
 
 class MessageCreateListener extends Listener<"messageCreate"> {
     public activeUsers: Map<Snowflake, Snowflake[]>;
@@ -132,7 +133,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
         // response message
         if (responseMessages.length) {
-            message.reply(responseMessages[Math.floor(Math.random() * responseMessages.length)])
+            message.reply(variables.replace(responseMessages[Math.floor(Math.random() * responseMessages.length)], message))
             .catch(Logger.error);
         }
 
