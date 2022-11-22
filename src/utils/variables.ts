@@ -4,6 +4,11 @@
  */
 import { GuildMember, Message, PartialGuildMember } from "discord.js";
 
+/**
+ * Replace variables in the specified string with their values.
+ * @param string The string containing the variables.
+ * @param context The context in which these variables are to be replaced.
+ */
 export const replace = (string: string, context: PartialGuildMember | GuildMember | Message): string => {
     const vars: { [key: string]: string | number } = {
         "{id}": context?.id,
