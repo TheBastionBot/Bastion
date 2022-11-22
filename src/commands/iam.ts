@@ -65,7 +65,7 @@ class IamCommand extends Command {
                     type: ComponentType.ActionRow,
                     components: [
                         {
-                            type: ComponentType.SelectMenu,
+                            type: ComponentType.StringSelect,
                             customId: MessageComponents.SelfRolesSelect,
                             placeholder: "Select Roles",
                             minValues: 0,
