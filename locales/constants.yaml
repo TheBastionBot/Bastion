@@ -1,17 +1,14 @@
-# DO NOT MODIFY. This file is auto-generated.
-
-author.name: Sankarsan Kampa
-author.alias: Traction
+author.name: TRACTION
 author.username: iamtraction
 author.url: https://traction.one
-author.discord.id: '266290969974931457'
+author.discord.id: "266290969974931457"
 
-bastion.bot.id: '267035345537728512'
+bastion.bot.id: "267035345537728512"
 bastion.bot.invite: https://discord.com/oauth2/authorize?client_id=267035345537728512&scope=bot&permissions=8
 bastion.name: Bastion
 bastion.project: The Bastion Bot Project
 bastion.project.url: https://github.com/TheBastionBot
-bastion.server.id: '267022940967665664'
+bastion.server.id: "267022940967665664"
 bastion.server.name: Bastion HQ
 bastion.server.invite: https://discord.gg/fzx8fkt
 bastion.website: https://bastion.traction.one

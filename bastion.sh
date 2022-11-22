@@ -53,14 +53,6 @@ case $1 in
   method::update
 ;;
 
---fix-d)
-  method::fix-dependencies
-;;
-
---fix-l)
-  method::fix-locales
-;;
-
 *)
   method::help
 ;;

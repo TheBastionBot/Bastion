@@ -44,22 +44,6 @@ If (-Not ($?)) {
 Pass-Step
 
 
-# Update global FFmpeg binaries
-Write-Host "[Bastion]: Updating FFmpeg..."
-Write-Host
-
-choco upgrade ffmpeg -y
-If (-Not ($?)) {
-  Write-Host "[Bastion]: Unable to update Bastion, error while updating FFmpeg."
-  Write-Host "[Bastion]: Try updating it manually: choco upgrade ffmpeg -y"
-  Write-Host "[Bastion]: Contact Bastion Support for further help."
-
-  Exit-Bastion-Updater
-}
-
-Pass-Step
-
-
 # Update Bastion dependencies
 Write-Host "[Bastion]: Updating dependencies..."
 Write-Host
@@ -81,7 +65,7 @@ Pass-Step
 Write-Host "[Bastion]: Preparing Bastion..."
 Write-Host
 
-npm run transpile
+npm run build
 If (-Not ($?)) {
   Write-Host "[Bastion]: Found some errors while building Bastion."
   Write-Host "[Bastion]: Contact Bastion Support for further help."

@@ -2,18 +2,18 @@ env:
   es6: true
   node: true
 extends:
-  - 'eslint:recommended'
-  - 'plugin:@typescript-eslint/eslint-recommended'
-  - 'plugin:@typescript-eslint/recommended'
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:@typescript-eslint/recommended"
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
-parser: '@typescript-eslint/parser'
+parser: "@typescript-eslint/parser"
 parserOptions:
-  ecmaVersion: 2020
+  ecmaVersion: 2022
   sourceType: module
 plugins:
-  - '@typescript-eslint'
+  - "@typescript-eslint"
 rules:
   indent:
     - error
@@ -27,3 +27,4 @@ rules:
   semi:
     - error
     - always
+  "@typescript-eslint/no-namespace": off

@@ -22,8 +22,8 @@ then
   echo
 
   exit 1
-elif ! [ "$(node --version | cut -d'v' -f 2 | cut -d'.' -f 1)" -ge 12 ]
+elif ! [ "$(node --version | cut -d'v' -f 2 | cut -d'.' -f 1)" -ge 18 ]
 then
   print::error "Found an outdated version of Node.js"
-  print::message "Node.js version 12.x or higher is required to run Bastion."
+  print::message "Node.js version 18.x or higher is required to run Bastion."
 fi

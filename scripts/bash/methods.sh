@@ -21,22 +21,10 @@ function method::debug () {
   fi
 }
 
-function method::fix-dependencies () {
-  print::message "Fixing dependencies..."
-  rm -rf node_modules package-lock.json
-  npm install --no-package-lock
-}
-
-function method::fix-locales () {
-  print::message "Fixing locales..."
-  export LC_ALL="$LANG"
-  grep -qF "LC_ALL=\"$LANG\"" /etc/environment || echo "LC_ALL=\"$LANG\"" | sudo tee -a /etc/environment 1>/dev/null
-}
-
 function method::help () {
   echo
-  echo -e "${CYAN}Bastion${NC} - One of the best Discord Bot!"
-  echo -e "Give awesome perks to your Discord Server!"
+  echo -e "${CYAN}Bastion${NC}"
+  echo -e "Get an enhanced Discord experience!"
   echo
   echo -e "${GREEN}Usage:${NC}"
   echo " $0 --[OPTION]"
@@ -45,8 +33,6 @@ function method::help () {
   echo " --debug      Start Bastion in debug mode to see the issue that is"
   echo "              preventing Bastion from booting. Does not start Bastion in"
   echo "              background, so if you close the debug mode, Bastion stops."
-  echo " --fix-d      Fixes dependencies issues by reinstalling dependencies."
-  echo " --fix-l      Fixes locales issue that causes errors with youtube-dl."
   echo " --restart    Restarts Bastion."
   echo " --show       Shows you real-time log of Bastion running in background."
   echo " --start      Starts Bastion in background - in a screen session -"
@@ -77,7 +63,7 @@ function method::start () {
     print::info "$NAME is already started."
   else
     print::message "Checking Bastion System..."
-    if [ -r index.js ]
+    if [ -r ./dist/index.js ]
     then
       print::message "System check successful."
       echo
@@ -146,7 +132,7 @@ function method::update () {
 
     echo "Preparing..."
 
-    npm run transpile
+    npm run build
     if ! [[ "$?" -eq 0 ]]
     then
       print::error "Found some errors while building Bastion."

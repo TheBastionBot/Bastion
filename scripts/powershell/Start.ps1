@@ -1,5 +1,5 @@
 Write-Host "[Bastion]: Checking Bastion system..."
-If (Test-Path ".\index.js") {
+If (Test-Path ".\dist\index.js") {
   Write-Host "[Bastion]: System check successful."
   Write-Host
 
