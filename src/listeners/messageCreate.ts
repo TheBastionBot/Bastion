@@ -63,7 +63,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether the member had recently gained XP
         if (activeUsers.includes(message.author.id)) return;
 
-        const memberDocument = await MemberModel.findOne({ user: message.author.id, guild: message.guildId });
+        // find member document or create a new one
+        const memberDocument = await MemberModel.findOneAndUpdate({ user: message.author.id, guild: message.guildId }, {}, { new: true, upsert: true });
 
         // check whether gamification is enabled
         if (!guildDocument.gamification) return;
