@@ -36,15 +36,16 @@ class PHDCommand extends Command {
 
         const { document } = new JSDOM(html).window;
 
-        const image = document?.getElementById("comic2")?.getAttribute("src");
+        const images = [];
+        for (const element of document?.getElementsByName("comic2")?.values()) {
+            const imageUrl = element?.getAttribute("src");
+            if (imageUrl) images.push(imageUrl);
+        }
 
-        if (image) {
+        if (images.length) {
             return await interaction.editReply({
                 content: `[PHD Comics${ issue ? `#${ issue }` : "" }](<${ comicURL }>)`,
-                files: [{
-                    name: "phdcomics.png",
-                    attachment: image,
-                }],
+                files: images.slice(0, 10).map(i => ({ name: i?.split("/").pop(), attachment: i })),
             });
         }
 
