@@ -6,12 +6,18 @@ import { GuildMember, PartialGuildMember, time } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
+import { COLORS } from "../utils/constants";
 import { logGuildEvent } from "../utils/guilds";
 import * as variables from "../utils/variables";
+import * as yaml from "../utils/yaml";
 
 class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
+    private farewells: string[];
+
     constructor() {
         super("guildMemberRemove");
+
+        this.farewells = yaml.parse("data", "farewells.yaml") as unknown as string[];
     }
 
     handleFarewells = async (member: GuildMember | PartialGuildMember): Promise<void> => {
@@ -26,8 +32,9 @@ class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
         farewellChannel.send({
             embeds: [
                 {
+                    color: COLORS.SECONDARY,
                     title: "Farewell!",
-                    description: variables.replace(guildDocument.farewellMessage, member),
+                    description: variables.replace(guildDocument.farewellMessage || this.farewells[Math.floor(Math.random() * this.farewells.length)], member),
                 },
             ],
         }).then(m => {
