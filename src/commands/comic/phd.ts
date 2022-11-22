@@ -37,7 +37,7 @@ class PHDCommand extends Command {
         const { document } = new JSDOM(html).window;
 
         const images = [];
-        for (const element of document?.getElementsByName("comic2")?.values()) {
+        for (const element of document?.getElementsByName("comic2")?.values() || []) {
             const imageUrl = element?.getAttribute("src");
             if (imageUrl) images.push(imageUrl);
         }
