@@ -18,7 +18,7 @@ class SuggestionRejectButton extends MessageComponent {
 
     public async exec(interaction: ButtonInteraction<"cached">): Promise<unknown> {
         // check whether the user has permission to reject suggestions
-        if (!interaction.channel.permissionsFor(interaction.member).has(PermissionFlagsBits.ManageMessages)) return interaction.deferUpdate();
+        if (!interaction.channel.permissionsFor(interaction.member)?.has(PermissionFlagsBits.ManageMessages)) return interaction.deferUpdate();
 
         await interaction.update({
             embeds: [

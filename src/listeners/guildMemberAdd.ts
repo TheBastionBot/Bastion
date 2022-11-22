@@ -7,11 +7,18 @@ import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import RoleModel from "../models/Role";
+import { COLORS } from "../utils/constants";
 import { logGuildEvent } from "../utils/guilds";
+import * as variables from "../utils/variables";
+import * as yaml from "../utils/yaml";
 
 class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
+    private greetings: string[];
+
     constructor() {
         super("guildMemberAdd");
+
+        this.greetings = yaml.parse("data", "greetings.yaml") as unknown as string[];
     }
 
     handleAutoRoles = async (member: GuildMember): Promise<void> => {
@@ -38,8 +45,9 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
         greetingChannel.send({
             embeds: [
                 {
+                    color: COLORS.SECONDARY,
                     title: "Welcome!",
-                    description: guildDocument.greetingMessage,
+                    description: variables.replace(guildDocument.greetingMessage || this.greetings[Math.floor(Math.random() * this.greetings.length)], member),
                 },
             ],
         }).then(m => {

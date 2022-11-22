@@ -27,6 +27,9 @@ class ClaimCommand extends Command {
             guild: interaction.guild.id,
         });
 
+        // check whether user profile exists
+        if (!memberDocument) return interaction.editReply("Your user profile hasn't been created in the server yet.");
+
         const today = new Date();
         const yesterday = ((d): Date => new Date(d.setDate(d.getDate() - 1)))(new Date());
         const lastClaimed = new Date(memberDocument.lastClaimed);
