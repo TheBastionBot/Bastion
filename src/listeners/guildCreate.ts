@@ -26,12 +26,12 @@ class GuildCreateListener extends Listener<"guildCreate"> {
             fields: [
                 {
                     name: "ID",
-                    value: guild.id,
+                    value: guild.id || "-",
                     inline: true,
                 },
                 {
                     name: "Owner",
-                    value: guild.ownerId,
+                    value: guild.ownerId || "-",
                     inline: true,
                 },
             ],
