@@ -7,6 +7,7 @@ import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import { logGuildEvent } from "../utils/guilds";
+import * as variables from "../utils/variables";
 
 class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
     constructor() {
@@ -26,7 +27,7 @@ class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
             embeds: [
                 {
                     title: "Farewell!",
-                    description: guildDocument.farewellMessage,
+                    description: variables.replace(guildDocument.farewellMessage, member),
                 },
             ],
         }).then(m => {
