@@ -20,7 +20,7 @@ class InviteFilter extends Filter {
         if (!message.content?.length) return;
 
         // check whether the member has permission to manage channel or manage messages
-        if (message.channel.permissionsFor(message.member).has(PermissionFlagsBits.ManageMessages)) return false;
+        if (message.channel.permissionsFor(message.member)?.has(PermissionFlagsBits.ManageMessages)) return false;
 
         const guildDocument = await GuildModel.findById(message.guildId);
 

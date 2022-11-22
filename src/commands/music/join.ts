@@ -34,12 +34,12 @@ class JoinCommand extends Command {
 
         // check whether member has permission to join the voice channel
         const voiceChannel = interaction.guild.channels.cache.get(connection.joinConfig.channelId);
-        if (voiceChannel?.permissionsFor(interaction.member).has(PermissionFlagsBits.Connect)) {
+        if (voiceChannel?.permissionsFor(interaction.member)?.has(PermissionFlagsBits.Connect)) {
             await interaction.member.voice.setChannel(connection.joinConfig.channelId);
             return await interaction.reply(`I've moved you to the **${ voiceChannel.name }** voice channel.`);
         }
 
-        return await interaction.reply(`You don't have the permission to join the ${ voiceChannel?.permissionsFor(interaction.member).has(PermissionFlagsBits.ViewChannel) ? `**${ voiceChannel.name }**` : "" } voice channel.`);
+        return await interaction.reply(`You don't have the permission to join the ${ voiceChannel?.permissionsFor(interaction.member)?.has(PermissionFlagsBits.ViewChannel) ? `**${ voiceChannel.name }**` : "" } voice channel.`);
     }
 }
 
