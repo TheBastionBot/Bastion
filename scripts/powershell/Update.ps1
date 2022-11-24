@@ -73,6 +73,14 @@ If (-Not ($?)) {
   Exit-Bastion-Updater
 }
 
+npm run commands
+If (-Not ($?)) {
+  Write-Host "[Bastion]: Found some errors while publishing Bastion commands."
+  Write-Host "[Bastion]: Contact Bastion Support for further help."
+
+  Exit-Bastion-Updater
+}
+
 Pass-Step
 
 
