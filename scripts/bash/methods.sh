@@ -140,6 +140,14 @@ function method::update () {
       exit 1
     fi
 
+    npm run commands
+    if ! [[ "$?" -eq 0 ]]
+    then
+      print::error "Found some errors while publishing Bastion commands."
+      print::message "Contact Bastion Support for help."
+      exit 1
+    fi
+
     print::message "Ready to boot up and start running."
   fi
 }
