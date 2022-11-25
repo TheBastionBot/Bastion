@@ -121,7 +121,7 @@ function method::update () {
 
     echo "Updating dependencies..."
 
-    rm -fr node_modules package-lock.json screenlog.0
+    rm -fr dist node_modules package-lock.json screenlog.0
     npm install --no-package-lock
     if ! [[ "$?" -eq 0 ]]
     then
