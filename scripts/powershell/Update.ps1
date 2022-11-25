@@ -48,7 +48,7 @@ Pass-Step
 Write-Host "[Bastion]: Updating dependencies..."
 Write-Host
 
-Remove-Item -Path ".\node_modules", ".\package-lock.json" -Force -Recurse -ErrorAction SilentlyContinue
+Remove-Item -Path ".\dist", ".\node_modules", ".\package-lock.json" -Force -Recurse -ErrorAction SilentlyContinue
 npm install --no-package-lock
 If (-Not ($?)) {
   Write-Host "[Bastion]: Unable to update Bastion, error while updating dependencies."
@@ -68,6 +68,14 @@ Write-Host
 npm run build
 If (-Not ($?)) {
   Write-Host "[Bastion]: Found some errors while building Bastion."
+  Write-Host "[Bastion]: Contact Bastion Support for further help."
+
+  Exit-Bastion-Updater
+}
+
+npm run commands
+If (-Not ($?)) {
+  Write-Host "[Bastion]: Found some errors while publishing Bastion commands."
   Write-Host "[Bastion]: Contact Bastion Support for further help."
 
   Exit-Bastion-Updater

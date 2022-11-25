@@ -1,14 +1,21 @@
+# Bot ID
+# Add the Client ID of bot which should be running Bastion.
+# https://discord.com/developers/applications
+# `TESSERACT_BOT_ID` environment variable overwrites this value.
+id: ""
+
+# Bot Token
+# Add the token of the bot which should be running Bastion.
+# https://discord.com/developers/applications
+# `TESSERACT_BOT_TOKEN` environment variable overwrites this value.
+token: ""
+
 # Bot Owners
 # User IDs of users who should be considered as the bot owners.
 # `TESSERACT_OWNER_ID` environment variable adds an additional owner to the list.
 owners:
   - "YOUR_USER_ID"
   - "ANOTHER_USER_ID"
-
-# Add the token of the bot which should be running Bastion.
-# https://discord.com/developers/applications
-# `TESSERACT_BOT_TOKEN` environment variable overwrites this value.
-token: ""
 
 # MongoDB connection URI
 # `TESSERACT_MONGO_URI` environment variable overwrites this value.

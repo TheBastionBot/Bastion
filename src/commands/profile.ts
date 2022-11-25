@@ -38,7 +38,7 @@ class ProfileCommand extends Command {
         if (!member) return interaction.editReply(`${ user } is not a member of the server anymore.`);
 
         // get user's profile data
-        const memberProfile = await MemberModel.findOne({ user: member.id, guild: interaction.guild.id });
+        const memberProfile = await MemberModel.findOne({ user: member.id, guild: interaction.guildId });
 
         // check whether user profile exists
         if (!memberProfile) return interaction.editReply({
@@ -123,6 +123,11 @@ class ProfileCommand extends Command {
                         {
                             name: "Bastion Coins",
                             value: (memberProfile.balance || 0).toLocaleString(),
+                            inline: true,
+                        },
+                        {
+                            name: "Infractions",
+                            value: `${ (memberProfile.infractions?.length || 0).toLocaleString() } warnings`,
                             inline: true,
                         },
                         {

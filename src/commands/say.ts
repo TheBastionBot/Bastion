@@ -5,6 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
+import { generate as generateEmbed } from "../utils/embeds";
+
 class SayCommand extends Command {
     constructor() {
         super({
@@ -21,8 +23,15 @@ class SayCommand extends Command {
         });
     }
 
-    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
-        await interaction.reply(interaction.options.getString("message"));
+    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
+        const message = generateEmbed(interaction.options.getString("message"));
+
+        if (typeof message === "string") {
+            return await interaction.reply(message);
+        }
+        return await interaction.reply({
+            embeds: [ message ],
+        });
     }
 }
 

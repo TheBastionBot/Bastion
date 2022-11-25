@@ -20,6 +20,10 @@ enum MessageComponents {
     VoiceSessionLockButton = "VoiceSessionLockButton",
     VoiceSessionUnlockButton = "VoiceSessionUnlockButton",
     VoiceSessionEndButton = "VoiceSessionEndButton",
+
+    VerificationButton = "VerificationButton",
+    VerificationModal = "VerificationModal",
+    VerificationTextInput = "VerificationTextInput",
 }
 
 export default MessageComponents;

@@ -2,11 +2,12 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildMember, PartialGuildMember, time } from "discord.js";
+import { APIEmbed, GuildMember, PartialGuildMember, time } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import { COLORS } from "../utils/constants";
+import { generate as generateEmbed } from "../utils/embeds";
 import { logGuildEvent } from "../utils/guilds";
 import * as variables from "../utils/variables";
 import * as yaml from "../utils/yaml";
@@ -29,12 +30,16 @@ class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
         // check whether the channel is valid
         if (!farewellChannel?.isTextBased()) return;
 
+        const farewellMessage = generateEmbed(variables.replace(guildDocument.farewellMessage || this.farewells[Math.floor(Math.random() * this.farewells.length)], member), true) as APIEmbed;
+
         farewellChannel.send({
             embeds: [
                 {
+                    ...farewellMessage,
                     color: COLORS.SECONDARY,
-                    title: "Farewell!",
-                    description: variables.replace(guildDocument.farewellMessage || this.farewells[Math.floor(Math.random() * this.farewells.length)], member),
+                    footer: {
+                        text: "Farewell!"
+                    },
                 },
             ],
         }).then(m => {

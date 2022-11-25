@@ -2,12 +2,13 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildMember, time } from "discord.js";
+import { APIEmbed, GuildMember, time } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import RoleModel from "../models/Role";
 import { COLORS } from "../utils/constants";
+import { generate as generateEmbed } from "../utils/embeds";
 import { logGuildEvent } from "../utils/guilds";
 import * as variables from "../utils/variables";
 import * as yaml from "../utils/yaml";
@@ -42,12 +43,16 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
         // check whether the channel is valid
         if (!greetingChannel?.isTextBased()) return;
 
+        const greetingMessage = generateEmbed(variables.replace(guildDocument.greetingMessage || this.greetings[Math.floor(Math.random() * this.greetings.length)], member), true) as APIEmbed;
+
         greetingChannel.send({
             embeds: [
                 {
+                    ...greetingMessage,
                     color: COLORS.SECONDARY,
-                    title: "Welcome!",
-                    description: variables.replace(guildDocument.greetingMessage || this.greetings[Math.floor(Math.random() * this.greetings.length)], member),
+                    footer: {
+                        text: "Greetings!"
+                    },
                 },
             ],
         }).then(m => {

@@ -12,12 +12,13 @@ import GuildModel, { Guild as GuildDocument } from "../models/Guild";
 import MemberModel from "../models/Member";
 import RoleModel from "../models/Role";
 import TriggerModel from "../models/Trigger";
+import { COLORS } from "../utils/constants";
+import { generate as generateEmbed } from "../utils/embeds";
 import * as gamification from "../utils/gamification";
 import * as members from "../utils/members";
 import * as numbers from "../utils/numbers";
-import { bastion } from "../types";
-import { COLORS } from "../utils/constants";
 import * as variables from "../utils/variables";
+import { bastion } from "../types";
 
 class MessageCreateListener extends Listener<"messageCreate"> {
     public activeUsers: Map<Snowflake, Snowflake[]>;
@@ -112,7 +113,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         }, 13e3).unref();
     };
 
-    handleTriggers = async (message: Message<true>): Promise<void> => {
+    handleTriggers = async (message: Message<true>): Promise<unknown> => {
         const triggers = await TriggerModel.find({ guild: message.guild.id });
 
         // responses
@@ -134,7 +135,14 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
         // response message
         if (responseMessages.length) {
-            message.reply(variables.replace(responseMessages[Math.floor(Math.random() * responseMessages.length)], message))
+            const responseMessage = generateEmbed(variables.replace(responseMessages[Math.floor(Math.random() * responseMessages.length)], message));
+            if (typeof responseMessage === "string") {
+                return message.reply(responseMessage)
+                .catch(Logger.error);
+            }
+            return message.reply({
+                embeds: [ responseMessage ],
+            })
             .catch(Logger.error);
         }
 
