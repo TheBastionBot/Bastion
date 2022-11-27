@@ -3,14 +3,15 @@
  * @copyright 2022
  */
 import * as path from "path";
-import { Logger, ShardingManager } from "@bastion/tesseract";
+import { Logger, ShardingManager, WebServer } from "@bastion/tesseract";
 import * as DiscordRPC from "discord-rpc";
 import * as dotenv from "dotenv";
 import { gray } from "picocolors";
 
+import * as settings from "./utils/settings";
+
 // configure dotenv
 dotenv.config();
-
 
 // connect to Discord via IPC
 const rpc = new DiscordRPC.Client({ transport: "ipc" });
@@ -30,6 +31,12 @@ Manager.on("shardCreate", shard => {
     Logger.info(`Shard ${shard.id} — Launching ${ gray(`[ ${shard.id + 1} of ${ Manager.totalShards } ]`) }`);
 });
 
+// Tesseract Web Server
+const port = process.env.PORT || process.env.TESSERACT_PORT || settings.get()?.port;
+if (port) {
+    const server = new WebServer(Manager);
+    server.start();
+}
 
 // RPC Events
 rpc.on("ready", () => {
