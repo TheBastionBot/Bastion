@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ButtonInteraction, ButtonStyle, ComponentType, PermissionFlagsBits, User } from "discord.js";
-import { Logger, MessageComponent } from "@bastion/tesseract";
+import { Client, Logger, MessageComponent } from "@bastion/tesseract";
 
 import GiveawayModel from "../models/Giveaway";
 import MessageComponents from "../utils/components";
@@ -43,7 +43,7 @@ class GiveawayEndButton extends MessageComponent {
                         name: "GIVEAWAY ENDED",
                     },
                     title: interaction.message.embeds[0].title,
-                    description: winners.length ? "The following users have won the giveaway and will be contacted soon for their rewards.\nThank you everyone for participating." : "Unfortunately, no one participated in this giveaway and therfore there aren't any winners this time.",
+                    description: (interaction.client as Client).locales.getText(interaction.guildLocale, winners.length ? "giveawayWinners" : "giveawayNoWinners"),
                     fields: winners.length ? [
                         {
                             name: "Congratulations",
