@@ -22,7 +22,7 @@ class VoiceSessionLockButton extends MessageComponent {
             (interaction.channel as VoiceChannel).permissionOverwrites.edit(interaction.guildId, {
                 Connect: false,
                 ViewChannel: false,
-            }, { reason: "Unlock Voice Session" }).catch(Logger.ignore);
+            }, { reason: "Lock Voice Session" }).catch(Logger.ignore);
         }
 
         await interaction.deferUpdate();
