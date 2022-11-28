@@ -19,10 +19,10 @@ class ResumeCommand extends Command {
         const studio = (interaction.client as Client).studio.get(interaction.guild);
 
         if (studio?.player?.state?.status === AudioPlayerStatus.Paused || studio?.player?.state?.status === AudioPlayerStatus.AutoPaused) {
-            const paused = studio.player.unpause();
-            return await interaction.reply(`${ paused ? "I've resumed" : "I was unable to resume" } the playback of **${ (studio.player.state.resource?.metadata as music.Song)?.name }**.`);
+            const resumed = studio.player.unpause();
+            return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, resumed ? "musicResume" : "musicResumeError", { song: (studio.player.state.resource?.metadata as music.Song)?.name }));
         }
-        await interaction.reply({ content: "Nothing is being played at the moment.", ephemeral: true });
+        await interaction.reply({ content: (interaction.client as Client).locales.getText(interaction.guildLocale, "musicPlayingNothing"), ephemeral: true });
     }
 }
 

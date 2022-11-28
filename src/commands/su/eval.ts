@@ -4,7 +4,7 @@
  */
 import { inspect } from "util";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class EvalCommand extends Command {
     constructor() {
@@ -43,7 +43,7 @@ class EvalCommand extends Command {
         }
 
         await interaction.reply({
-            content: `\`\`\`js\n${ stderr || stdout || "Successfully evaluated the code." }\`\`\``,
+            content: `\`\`\`js\n${ stderr || stdout || (interaction.client as Client).locales.getText(interaction.guildLocale, "evalSuccess") }\`\`\``,
             ephemeral: !isPublic,
         });
     }

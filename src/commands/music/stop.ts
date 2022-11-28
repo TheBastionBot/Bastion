@@ -26,7 +26,7 @@ class StopCommand extends Command {
             getVoiceConnection(interaction.guildId)?.destroy();
         }
 
-        await interaction.reply("I've stopped the music playback and disconnected from the voice channels.");
+        await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "musicStop"));
     }
 }
 

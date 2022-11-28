@@ -38,7 +38,7 @@ class SkipCommand extends Command {
                 ],
             });
         }
-        await interaction.reply({ content: "Nothing is in the queue at the moment.", ephemeral: true });
+        await interaction.reply({ content: (interaction.client as Client).locales.getText(interaction.guildLocale, "musicQueueEmpty"), ephemeral: true });
     }
 }
 

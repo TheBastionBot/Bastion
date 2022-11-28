@@ -5,7 +5,7 @@
 import { promisify } from "util";
 import { exec as exe } from "child_process";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 const exec = promisify(exe);
 
@@ -52,7 +52,7 @@ class ExecCommand extends Command {
             });
 
         await interaction.reply({
-            content: `\`\`\`bash\n${ stderr || stdout || "Successfully evaluated the command." }\`\`\``,
+            content: `\`\`\`bash\n${ stderr || stdout || (interaction.client as Client).locales.getText(interaction.guildLocale, "execSuccess") }\`\`\``,
             ephemeral: !isPublic,
         });
     }
