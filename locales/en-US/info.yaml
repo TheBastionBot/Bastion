@@ -3,6 +3,8 @@ donate: "Donate to support the development of Bastion to help keep it running, a
 evalSuccess: "Successfully evaluated the code."
 everyoneRoleDeleteError: "You can't delete the **%everyone%** role."
 execSuccess: "Successfully executed the command."
+giveawayNoWinners: "Unfortunately, no one participated in this giveaway and therfore there aren't any winners this time."
+giveawayWinners: "The following users have won the giveaway and will be contacted soon for their rewards.\nThank you everyone for participating."
 guildJoined: "I have joined the server **%guild%**."
 guildLeft: "I have left the server **%guild%**."
 leveledUp: "You've leveled up to **%level%**!"
