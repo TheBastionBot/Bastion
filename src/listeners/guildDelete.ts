@@ -21,7 +21,7 @@ class GuildDeleteListener extends Listener<"guildDelete"> {
         // bastion log
         bastionLog(guild.client as Client, {
             color: COLORS.RED,
-            description: `I have left the server **${ guild.name }**.`,
+            description: (guild.client as Client).locales.getText(guild.preferredLocale, "guildLeft", { guild: guild.name }),
             fields: [
                 {
                     name: "ID",

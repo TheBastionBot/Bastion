@@ -84,7 +84,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                message.reply(`You've leveled up to **Level ${ computedLevel }**!`)
+                message.reply((message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` }))
                 .catch(Logger.ignore);
             }
 

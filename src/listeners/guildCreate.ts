@@ -22,7 +22,7 @@ class GuildCreateListener extends Listener<"guildCreate"> {
         // bastion log
         bastionLog(guild.client as Client, {
             color: COLORS.GREEN,
-            description: `I have joined the server **${ guild.name }**.`,
+            description: (guild.client as Client).locales.getText(guild.preferredLocale, "guildJoined", { guild: guild.name }),
             fields: [
                 {
                     name: "ID",

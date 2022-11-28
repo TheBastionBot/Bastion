@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { Listener, Logger } from "@bastion/tesseract";
+import { Client, Listener, Logger } from "@bastion/tesseract";
 import { ButtonStyle, ChannelType, ComponentType, PermissionFlagsBits, VoiceState } from "discord.js";
 
 import GuildModel from "../models/Guild";
@@ -75,7 +75,7 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
 
                 // send voice session control message
                 await newSessionChannel.send({
-                    content: "You can control your voice session using these actions.",
+                    content: (newState.client as Client).locales.getText(newState.guild.preferredLocale, "voiceSessionControl"),
                     components: [
                         {
                             type: ComponentType.ActionRow,
