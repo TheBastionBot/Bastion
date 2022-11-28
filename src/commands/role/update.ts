@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class RoleUpdateCommand extends Command {
     constructor() {
@@ -64,7 +64,7 @@ class RoleUpdateCommand extends Command {
         const reason = interaction.options.getString("reason");
 
         if (role.id === interaction.guildId) {
-            return await interaction.editReply("You can't edit the **@everyone** role.");
+            return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "everyoneRoleEditError"));
         }
 
         await interaction.guild.roles.edit(role, {
@@ -76,7 +76,12 @@ class RoleUpdateCommand extends Command {
             reason,
         });
 
-        await interaction.editReply(`I've updated the **${ role.name }** role.`);
+        await interaction.editReply({
+            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "roleUpdateSuccess", { role }),
+            allowedMentions: {
+                roles: [],
+            },
+        });
     }
 }
 

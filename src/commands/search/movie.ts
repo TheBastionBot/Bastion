@@ -112,7 +112,10 @@ class MovieCommand extends Command {
             });
         }
 
-        await interaction.editReply(`I didn't find any movie for **${ name }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "movie",
+            query: name,
+        }));
     }
 }
 

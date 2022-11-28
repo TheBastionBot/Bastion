@@ -73,7 +73,10 @@ class CryptoCurrencyCommand extends Command {
             });
         }
 
-        await interaction.editReply(`I didn't find any crypo currency for **${ symbol }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "cryptocurrency",
+            query: symbol,
+        }));
     }
 }
 

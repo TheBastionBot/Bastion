@@ -33,7 +33,7 @@ class RoleDeleteCommand extends Command {
         const reason = interaction.options.getString("reason");
 
         if (role.id === interaction.guildId) {
-            return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "everyoneRoleDeleteError", { everyone: "@everyone" }));
+            return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "everyoneRoleDeleteError"));
         }
 
         await role.delete(reason);

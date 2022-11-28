@@ -61,7 +61,10 @@ class DefinitionsCommand extends Command {
             );
         }
 
-        await interaction.editReply(`I didn't find any definition for **${ word }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "definition",
+            query: word,
+        }));
     }
 }
 

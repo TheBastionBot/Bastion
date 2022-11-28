@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class PruneCommand extends Command {
     constructor() {
@@ -46,7 +46,7 @@ class PruneCommand extends Command {
             reason,
         });
 
-        await interaction.editReply(`I've pruned ${ pruned || "the" } inactive members from the server.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "pruneSuccess", { count: pruned || "the" }));
     }
 }
 
