@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import RoleModel from "../models/Role";
 import MessageComponents from "../utils/components";
@@ -29,7 +29,12 @@ class IamCommand extends Command {
 
         if (role) {
             if (role.id === interaction.guildId) {
-                return await interaction.editReply("**@everyone** isn't a valid role for this.");
+                return await interaction.editReply({
+                    content: (interaction.client as Client).locales.getText(interaction.guildLocale, "selfRoleInvalid", { role: "@everyone" }),
+                    allowedMentions: {
+                        roles: [],
+                    },
+                });
             }
 
             // check if role is self assignable
@@ -43,10 +48,15 @@ class IamCommand extends Command {
                     await interaction.member.roles.add(role);
                 }
 
-                return await interaction.editReply(`I've ${ interaction.member.roles.cache.has(role.id) ? "removed you from" : "added you to" } the **${ role.name }** role.`);
+                return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, interaction.member.roles.cache.has(role.id) ? "selfRoleUnassign" : "selfRoleAssign", { role: role }));
             }
 
-            return await interaction.editReply(`**${ role.name }** is not a self assignable role.`);
+            return await interaction.editReply({
+                content: (interaction.client as Client).locales.getText(interaction.guildLocale, "selfRoleInvalid", { role: role }),
+                allowedMentions: {
+                    roles: [],
+                },
+            });
         }
 
         const selfRoleDocuments = await RoleModel.find({
@@ -56,10 +66,10 @@ class IamCommand extends Command {
 
         const selfRoles = interaction.guild.roles.cache.filter(r => selfRoleDocuments.some(doc => doc.id === r.id));
 
-        if (!selfRoles?.size) return interaction.editReply("There are no self assignable roles in the server.");
+        if (!selfRoles?.size) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "selfRolesEmpty"));
 
         await interaction.editReply({
-            content: "Select the roles that you want to assign yourself. Deselect the roles to remove them.",
+            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "selfRolesSelect"),
             components: [
                 {
                     type: ComponentType.ActionRow,

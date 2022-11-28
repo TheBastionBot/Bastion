@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class InviteCommand extends Command {
     constructor() {
@@ -25,7 +25,7 @@ class InviteCommand extends Command {
 
         if (interaction.channel.isThread()) {
             return await interaction.reply({
-                content: "You can't invite people to Threads. Use this command in a non-Thread channel.",
+                content: (interaction.client as Client).locales.getText(interaction.guildLocale, "inviteThreadChannel"),
                 components: [
                     {
                         type: ComponentType.ActionRow,
@@ -69,7 +69,7 @@ class InviteCommand extends Command {
         });
 
         await interaction.reply({
-            content: `Share this invite with your friends to invite them to this channel — ${ invite.url }`,
+            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "invite", { invite: invite.url }),
             components: [
                 {
                     type: ComponentType.ActionRow,

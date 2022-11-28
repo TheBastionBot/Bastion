@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, GuildTextBasedChannel } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import MessageComponents from "../utils/components";
@@ -65,10 +65,10 @@ class SuggestCommand extends Command {
                 ],
             });
 
-            return await interaction.editReply("We've received your suggestion. We'll get back to you with updates.");
+            return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "suggestionReceived"));
         }
 
-        return await interaction.editReply("Bastion is not configured to receive suggestions in the server.");
+        return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "suggestionNotConfigured"));
     }
 }
 

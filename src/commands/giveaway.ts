@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 
 import GiveawayModel from "../models/Giveaway";
 import MessageComponents from "../utils/components";
@@ -90,7 +90,7 @@ class GiveawayCommand extends Command {
                         name: "GIVEAWAY!",
                     },
                     title: title,
-                    description: description || `React to this message with ${ this.reaction } to participate in the giveaway for a chance to win.`,
+                    description: description || (interaction.client as Client).locales.getText(interaction.guildLocale, "giveawayParticipate", { reaction: this.reaction }),
                     footer: {
                         text: `${ winners } Winners`,
                     },
