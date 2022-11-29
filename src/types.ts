@@ -9,6 +9,7 @@ export namespace bastion {
         musicActivity?: boolean;
         relayDirectMessages?: boolean;
         port?: number;
+        auth?: string;
         coinMarketCapApiKey?: string;
         nasaApiKey?: string;
         openWeatherMapApiKey?: string;
