@@ -32,7 +32,7 @@ Manager.on("shardCreate", shard => {
 });
 
 // Tesseract Web Server
-const port = process.env.PORT || process.env.TESSERACT_PORT || settings.get()?.port;
+const port = process.env.PORT || process.env.BASTION_API_PORT || settings.get()?.port;
 const auth = process.env.BASTION_API_AUTH || settings.get()?.auth;
 if (port && auth) {
     const server = new WebServer(Manager);
