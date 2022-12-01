@@ -2,11 +2,8 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import * as fs from "fs";
-import * as path from "path";
 import { Message, Snowflake, Team } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
-import * as YAML from "yaml";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild";
 import MemberModel from "../models/Member";
@@ -18,6 +15,7 @@ import * as gamification from "../utils/gamification";
 import * as members from "../utils/members";
 import * as numbers from "../utils/numbers";
 import * as variables from "../utils/variables";
+import * as yaml from "../utils/yaml";
 import { bastion } from "../types";
 
 class MessageCreateListener extends Listener<"messageCreate"> {
@@ -86,7 +84,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                message.reply(`You've leveled up to **Level ${ computedLevel }**!`)
+                message.reply((message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` }))
                 .catch(Logger.ignore);
             }
 
@@ -191,7 +189,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     handleInstantResponses = async (message: Message): Promise<void> => {
         if (!message.content) return;
 
-        const responses = YAML.parse(fs.readFileSync(path.resolve("data", "responses.yaml"), "utf8"));
+        const responses = yaml.parse("data", "responses.yaml");
 
         for (const response of responses) {
             if (response.messages.includes(message.content.toLowerCase())) {

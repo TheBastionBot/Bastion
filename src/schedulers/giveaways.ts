@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ButtonStyle, ComponentType, GuildTextBasedChannel, Snowflake, User } from "discord.js";
-import { Logger, Scheduler } from "@bastion/tesseract";
+import { Client, Logger, Scheduler } from "@bastion/tesseract";
 
 import GiveawayModel from "../models/Giveaway";
 import MessageComponents from "../utils/components";
@@ -66,7 +66,7 @@ class GiveawayScheduler extends Scheduler {
                                         name: "GIVEAWAY ENDED",
                                     },
                                     title: giveawayMessage.embeds[0].title,
-                                    description: winners.length ? "The following users have won the giveaway and will be contacted soon for their rewards.\nThank you everyone for participating." : "Unfortunately, no one participated in this giveaway and therfore there aren't any winners this time.",
+                                    description: (this.client as Client).locales.getText(guild.preferredLocale, winners.length ? "giveawayWinners" : "giveawayNoWinners"),
                                     fields: winners.length ? [
                                         {
                                             name: "Congratulations",

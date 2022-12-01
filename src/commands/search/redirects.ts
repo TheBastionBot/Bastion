@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 import { fetch } from "undici";
 
 class RedirectsCommand extends Command {
@@ -31,7 +31,8 @@ class RedirectsCommand extends Command {
         }
 
         const res = await fetch(url, { redirect: "follow" }).catch(Logger.ignore);
-        return interaction.editReply(res ? res.url : "I was unable to follow the specified URL.");
+
+        return interaction.editReply(res ? res.url : (interaction.client as Client).locales.getText(interaction.guildLocale, "redirectsError"));
     }
 }
 

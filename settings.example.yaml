@@ -55,9 +55,17 @@ relayDirectMessages: false
 # `TESSERACT_UNSAFE_MODE` environment variable overwrites this value.
 unsafeMode: false
 
-# Port used for the Status API.
+# Bastion API Port
+# Port used for Bastion API Server.
+# If port isn't set the API server won't start.
 # `BASTION_API_PORT` and `PORT` environment variables overwrites this value.
 port: 8377
+
+# Bastion API Auth
+# Auth for accessing the Bastion API Server.
+# If auth isn't set the API server won't start.
+# `BASTION_API_AUTH` environment variable overwrites this value.
+auth: ""
 
 # API Keys
 # These are optional and only required for specific features and/or commands.

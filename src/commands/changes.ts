@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class ChangesCommand extends Command {
     constructor() {
@@ -14,7 +14,7 @@ class ChangesCommand extends Command {
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
-        await interaction.reply(`See what's new in **Bastion v${ process.env.npm_package_version }** — https://github.com/TheBastionBot/Bastion/releases/tag/v${ process.env.npm_package_version }`);
+        await interaction.reply(`${ (interaction.client as Client).locales.getText(interaction.guildLocale, "changes", { version: `Bastion v${ process.env.npm_package_version }` }) } — https://github.com/TheBastionBot/Bastion/releases/tag/v${ process.env.npm_package_version }`);
     }
 }
 

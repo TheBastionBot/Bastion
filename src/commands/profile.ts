@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import MemberModel from "../models/Member";
@@ -35,18 +35,20 @@ class ProfileCommand extends Command {
 
         // check whether the specified user is a server member
         const member = interaction.guild.members.cache.get(user?.id) || await interaction.guild.members.fetch(user);
-        if (!member) return interaction.editReply(`${ user } is not a member of the server anymore.`);
+        if (!member) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "memberNotFound", { user: user }));
 
         // get user's profile data
         const memberProfile = await MemberModel.findOne({ user: member.id, guild: interaction.guildId });
 
         // check whether user profile exists
-        if (!memberProfile) return interaction.editReply({
-            content: `A profile for ${ user } hasn't been created in the server yet.`,
-            allowedMentions: {
-                users: [],
-            },
-        });
+        if (!memberProfile) {
+            return interaction.editReply({
+                content: (interaction.client as Client).locales.getText(interaction.guildLocale, "profileNotCreated", { user }),
+                allowedMentions: {
+                    users: [],
+                },
+            });
+        }
 
         // calculate the rank of the member
         const rank = await MemberModel.find({ guild: interaction.guildId }, null, { sort: {

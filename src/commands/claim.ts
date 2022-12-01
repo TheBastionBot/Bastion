@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import MemberModel from "../models/Member";
 import * as numbers from "../utils/numbers";
@@ -28,14 +28,21 @@ class ClaimCommand extends Command {
         });
 
         // check whether user profile exists
-        if (!memberDocument) return interaction.editReply("Your user profile hasn't been created in the server yet.");
+        if (!memberDocument) {
+            return interaction.editReply({
+                content: (interaction.client as Client).locales.getText(interaction.guildLocale, "profileNotCreated", { user: interaction.user }),
+                allowedMentions: {
+                    users: [],
+                },
+            });
+        }
 
         const today = new Date();
         const yesterday = ((d): Date => new Date(d.setDate(d.getDate() - 1)))(new Date());
         const lastClaimed = new Date(memberDocument.lastClaimed);
 
         // check whether already claimed today
-        if (today.toDateString() === lastClaimed.toDateString()) return interaction.editReply("You've already claimed your daily reward. Check back tomorrow.");
+        if (today.toDateString() === lastClaimed.toDateString()) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "rewardsAlreadyClaimed"));
         // otherwise, update last claim date to today
         memberDocument.lastClaimed = today.getTime();
 
@@ -70,7 +77,7 @@ class ClaimCommand extends Command {
         await memberDocument.save();
 
         // acknowledge
-        await interaction.editReply(`You've claimed your daily reward of **${ rewardAmount } Bastion Coins**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "rewardsClaimed", { amount: rewardAmount }));
     }
 }
 

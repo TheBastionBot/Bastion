@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class AboutCommand extends Command {
     constructor() {
@@ -15,7 +15,7 @@ class AboutCommand extends Command {
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
         await interaction.reply({
-            content: "Bastion — Bastion is a multi purpose bot that can help your community get an enhanced Discord experience! Let us know if you want it to have any features that can help your community.",
+            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "about"),
             components: [
                 {
                     type: ComponentType.ActionRow,

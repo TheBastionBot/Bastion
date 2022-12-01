@@ -2,17 +2,16 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import * as fs from "fs";
-import * as path from "path";
 import { Logger } from "@bastion/tesseract";
 import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
-import * as yaml from "yaml";
+
+import * as yaml from "./utils/yaml";
 
 // configure dotenv
 dotenv.config();
 
-const settings = yaml.parse(fs.readFileSync(path.resolve("./settings.yaml"), "utf8"));
+const settings = yaml.parse("settings.yaml");
 
 const client = new MongoClient(settings?.mongoURI || process.env.TESSERACT_MONGO_URI);
 

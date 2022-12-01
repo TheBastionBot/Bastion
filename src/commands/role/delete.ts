@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class RoleDeleteCommand extends Command {
     constructor() {
@@ -33,12 +33,12 @@ class RoleDeleteCommand extends Command {
         const reason = interaction.options.getString("reason");
 
         if (role.id === interaction.guildId) {
-            return await interaction.reply("You can't delete the **@everyone** role.");
+            return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "everyoneRoleDeleteError"));
         }
 
         await role.delete(reason);
 
-        await interaction.reply(`I've deleted the **${ role.name }** role.`);
+        await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "roleDeleteSuccess", { role: role.name }));
     }
 }
 

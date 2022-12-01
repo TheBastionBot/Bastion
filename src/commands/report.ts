@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, GuildTextBasedChannel } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import MessageComponents from "../utils/components";
@@ -93,10 +93,10 @@ class ReportCommand extends Command {
                 ],
             });
 
-            return await interaction.editReply("We've received your report. We'll investigate the situation and take the necessary action.");
+            return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "reportReceived"));
         }
 
-        return await interaction.editReply("Bastion is not configured to receive reports in the server.");
+        return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "reportNotConfigured"));
     }
 }
 

@@ -99,7 +99,10 @@ class GameCommand extends Command {
             });
         }
 
-        await interaction.editReply(`I didn't find any game for **${ name }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "game",
+            query: name,
+        }));
     }
 }
 

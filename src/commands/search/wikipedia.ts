@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests";
 
@@ -50,7 +50,10 @@ class WikipediaCommand extends Command {
             return await interaction.editReply(`[${ wiki.query.pages[0].title }](<${ wiki.query.pages[0].fullurl }>) — ${ wiki.query.pages[0].extract }`);
         }
 
-        await interaction.editReply(`I didn't find any Wikipedia article for **${ query }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "Wikipedia article",
+            query,
+        }));
     }
 }
 

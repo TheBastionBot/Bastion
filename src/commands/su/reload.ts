@@ -18,7 +18,7 @@ class ReloadCommand extends Command {
         await interaction.deferReply({ ephemeral: true });
         await interaction.client.shard.broadcastEval(bastion => (bastion as Client).initSettings());
 
-        await interaction.editReply("I've reloaded the settings.");
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "reloadSuccess"));
     }
 }
 

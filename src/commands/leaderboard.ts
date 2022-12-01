@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import MemberModel from "../models/Member";
 import { COLORS } from "../utils/constants";
@@ -34,7 +34,7 @@ class LeaderboardCommand extends Command {
         });
 
         // check whether member documents have been created
-        if (!members.length) return interaction.editReply("User profiles haven't been created in the server yet. Make sure gamification is enabled and members are active in the server.");
+        if (!members.length) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "profilesNotCreated"));
 
         // acknowledge
         await interaction.editReply({

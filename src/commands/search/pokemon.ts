@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests";
 import { COLORS } from "../../utils/constants";
@@ -129,7 +129,10 @@ class PokemonCommand extends Command {
             });
         }
 
-        await interaction.editReply(`I didn't find any pokémon for **${ name }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "pokémon",
+            query: name,
+        }));
     }
 }
 

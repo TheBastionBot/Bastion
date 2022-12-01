@@ -111,7 +111,10 @@ class TVCommand extends Command {
             });
         }
 
-        await interaction.editReply(`I didn't find any TV show for **${ name }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "TV show",
+            query: name,
+        }));
     }
 }
 

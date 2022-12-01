@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class DonateCommand extends Command {
     constructor() {
@@ -15,7 +15,7 @@ class DonateCommand extends Command {
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
         await interaction.reply({
-            content: "Donate to support the development of Bastion to help keep it running, and enjoy an enhanced Bastion exprience.",
+            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "donate"),
             components: [
                 {
                     type: ComponentType.ActionRow,

@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class LMGTFYCommand extends Command {
     constructor() {
@@ -35,7 +35,7 @@ class LMGTFYCommand extends Command {
         const query = interaction.options.getString("query");
         const site = interaction.options.getString("site");
 
-        await interaction.reply("Let me search that for you... https://lmgtfy.com/?s=" + (site || "g") + "&q=" + encodeURIComponent(query));
+        await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "lmgtfy") + " https://lmgtfy.com/?s=" + (site || "g") + "&q=" + encodeURIComponent(query));
     }
 }
 

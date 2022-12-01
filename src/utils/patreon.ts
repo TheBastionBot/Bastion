@@ -11,12 +11,6 @@ import { patreon } from "../types";
 
 export const CACHE_NAMESPACE = "patreon";
 
-export enum PremiumTier {
-    DIAMOND = 1,
-    PLATINUM,
-    GOLD,
-}
-
 /**
  * Returns the list of all currently active patrons.
  * @returns {Patron[]} List of all active patrons.

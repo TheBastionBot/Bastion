@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests";
 
@@ -49,7 +49,10 @@ class UrbanDictionaryCommand extends Command {
             return await interaction.editReply(`[${ definitions?.list[0].word }](<${ definitions.list[0].permalink }>) — ${ definitions.list[0].definition } **(${ (definitions.list[0].thumbs_up ?? 0) - (definitions.list[0].thumbs_down ?? 0) } votes)**`);
         }
 
-        await interaction.editReply(`I didn't find any definition for **${ word }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+            item: "definition",
+            query: word,
+        }));
     }
 }
 
