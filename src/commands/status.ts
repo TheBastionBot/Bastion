@@ -87,7 +87,7 @@ class StatusCommand extends Command {
                         },
                         {
                             name: "Uptime",
-                            value: `${ (uptime / 1000).toFixed() }s`,
+                            value: `<t:${ ((Date.now() - uptime) / 1000).toFixed() }:R>`,
                             inline: true,
                         },
                         {
