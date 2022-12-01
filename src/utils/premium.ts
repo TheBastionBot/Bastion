@@ -7,7 +7,7 @@ import { Guild, GuildMember, Snowflake, User } from "discord.js";
 import { fetchPatronByDiscordId } from "./patreon";
 import { patreon } from "../types";
 
-enum Tier {
+export enum Tier {
     Free = "Free",
     Gold = "Gold",
     Platinum = "Platinum",
