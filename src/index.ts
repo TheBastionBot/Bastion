@@ -56,5 +56,5 @@ rpc.on("ready", () => {
 process.on("SIGINT", () => {
     rpc.destroy()
     .then(() => process.exit())
-    .catch(Logger.error);
+    .catch(Logger.ignore);
 });
