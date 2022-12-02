@@ -83,7 +83,7 @@ class ChannelCreateCommand extends Command {
             bitrate: interaction.guild.premiumTier ? interaction.guild.premiumTier * 128e3 : 96e3,
             userLimit: limit,
             rateLimitPerUser: slowmode,
-            parent: interaction.channel.parentId,
+            parent: type === ChannelType.GuildCategory ? undefined :interaction.channel.parentId,
             reason,
         });
 
