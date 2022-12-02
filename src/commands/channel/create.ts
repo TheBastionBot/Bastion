@@ -24,7 +24,7 @@ class ChannelCreateCommand extends Command {
                     choices: [
                         { name: "Text", value: ChannelType.GuildText },
                         { name: "Voice", value: ChannelType.GuildVoice },
-                        { name: "Announcement", value: ChannelType.GuildNews },
+                        { name: "Announcement", value: ChannelType.GuildAnnouncement },
                         { name: "Stage", value: ChannelType.GuildStageVoice },
                         { name: "Category", value: ChannelType.GuildCategory },
                     ],
