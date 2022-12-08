@@ -21,7 +21,7 @@ const bastion = new Client({
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildPresences,
         GatewayIntentBits.GuildMessages,
-        // GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildMessageReactions,
         // GatewayIntentBits.GuildMessageTyping,
         GatewayIntentBits.DirectMessages,
         // GatewayIntentBits.DirectMessageReactions,
