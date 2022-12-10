@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { Message, Snowflake, Team } from "discord.js";
+import { ChannelType, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild";
@@ -186,6 +186,38 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         }
     };
 
+    handleAutoThreads = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
+        if (!message.content) return;
+
+        // check whether the channel is valid
+        if (message.channel.type !== ChannelType.GuildText) return;
+
+        // check whether channel has slow mode
+        if (!message.channel.rateLimitPerUser) return;
+
+        // check whether auto threads is enabled in the channel
+        if (!guildDocument.autoThreadChannels?.includes(message.channelId)) return;
+
+        // create a new thread
+        const thread = await message.channel.threads.create({
+            type: ChannelType.PrivateThread,
+            name: message.member.displayName + " — " + new Date().toDateString(),
+            autoArchiveDuration: ThreadAutoArchiveDuration.OneDay,
+            reason: `Auto Thread for ${ message.author.tag }`,
+            invitable: true,
+            startMessage: message,
+        });
+
+        thread.send({
+            content: `Hello ${ message.author }!
+\nThis thread has been automatically created from your message in the ${ message.channel } channel.
+\n**Useful Commands**
+• \`/thread name\` — Change the name of the thread.
+• \`/thread close\` — Close and lock the thread once you're done.
+\n*This thread will be automatically archived after 24 hours of inactivity.*`,
+        }).catch(Logger.ignore);
+    };
+
     handleInstantResponses = async (message: Message): Promise<void> => {
         if (!message.content) return;
 
@@ -243,6 +275,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             this.handleVotingChannel(message, guildDocument).catch(Logger.error);
             // karma
             this.handleKarma(message, guildDocument).catch(Logger.error);
+            // auto threads
+            this.handleAutoThreads(message, guildDocument).catch(Logger.error);
         } else {
             if (process.env.BASTION_RELAY_DMS || ((message.client as Client).settings as bastion.Settings)?.relayDirectMessages) {
                 // relay direct messages
