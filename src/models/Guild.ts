@@ -55,6 +55,7 @@ export interface Guild {
     suggestionsChannel?: string;
     reportsChannel?: string;
     streamerRole?: string;
+    autoThreadChannels?: string[];
     votingChannels?: string[];
     // twitch notifications
     twitchNotificationChannel?: string;
@@ -200,6 +201,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         type: String,
         unique: true,
         sparse: true,
+    },
+    autoThreadChannels: {
+        type: [ String ],
     },
     votingChannels: {
         type: [ String ],
