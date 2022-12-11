@@ -24,7 +24,7 @@ class ChannelCreateCommand extends Command {
                     choices: [
                         { name: "Text", value: ChannelType.GuildText },
                         { name: "Voice", value: ChannelType.GuildVoice },
-                        { name: "Announcement", value: ChannelType.GuildNews },
+                        { name: "Announcement", value: ChannelType.GuildAnnouncement },
                         { name: "Stage", value: ChannelType.GuildStageVoice },
                         { name: "Category", value: ChannelType.GuildCategory },
                     ],
@@ -83,7 +83,7 @@ class ChannelCreateCommand extends Command {
             bitrate: interaction.guild.premiumTier ? interaction.guild.premiumTier * 128e3 : 96e3,
             userLimit: limit,
             rateLimitPerUser: slowmode,
-            parent: interaction.channel.parentId,
+            parent: type === ChannelType.GuildCategory ? undefined :interaction.channel.parentId,
             reason,
         });
 

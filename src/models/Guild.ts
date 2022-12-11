@@ -45,14 +45,17 @@ export interface Guild {
     messageFilterPatterns?: string[];
     // spam filters
     mentionSpamThreshold?: number;
+    // starboard
+    starboardChannel?: string;
+    starboardThreshold?: number;
     // logs
     moderationLogChannel?: string;
     serverLogChannel?: string;
     // special channels and roles
     suggestionsChannel?: string;
-    starboardChannel?: string;
     reportsChannel?: string;
     streamerRole?: string;
+    autoThreadChannels?: string[];
     votingChannels?: string[];
     // twitch notifications
     twitchNotificationChannel?: string;
@@ -166,6 +169,14 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     mentionSpamThreshold: {
         type: Number,
     },
+    starboardChannel: {
+        type: String,
+        unique: true,
+        sparse: true,
+    },
+    starboardThreshold: {
+        type: Number,
+    },
     moderationLogChannel: {
         type: String,
         unique: true,
@@ -181,11 +192,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         unique: true,
         sparse: true,
     },
-    starboardChannel: {
-        type: String,
-        unique: true,
-        sparse: true,
-    },
     reportsChannel: {
         type: String,
         unique: true,
@@ -195,6 +201,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         type: String,
         unique: true,
         sparse: true,
+    },
+    autoThreadChannels: {
+        type: [ String ],
     },
     votingChannels: {
         type: [ String ],

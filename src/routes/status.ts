@@ -15,7 +15,7 @@ router.get("/", auth, async (req: Request, res: Response, next: NextFunction): P
         const shardingManger: ShardingManager = req.app.get("shard-manager");
 
         const shards = await shardingManger.broadcastEval(client => ({
-            shard: client.shard.ids.join(" / "),
+            id: client.shard.ids.join(" / "),
             uptime: client.uptime,
             wsStatus: client.ws.status,
             wsPing: client.ws.ping,
