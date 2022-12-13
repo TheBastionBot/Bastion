@@ -7,6 +7,7 @@ import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResourc
 import { Client, Command, Logger } from "@bastion/tesseract";
 import { music } from "@bastion/tesseract/typings/types";
 import * as playDL from "play-dl";
+import ytpl from "ytpl";
 
 import GuildModel from "../../models/Guild";
 import { isPublicBastion } from "../../utils/constants";
@@ -159,6 +160,40 @@ class PlayCommand extends Command {
         const subscription = connection.subscribe(studio.player);
 
         if (!subscription) return await interaction.editReply("I couldn't connect to the voice channel.");
+
+        // check whether a YouTube plalist link is provided
+        if (ytpl.validateID(song)) {
+            // fetch the playlist data from YouTube
+            const playlist = await ytpl(song);
+
+            // cgeck whether the playlist has any items
+            if (!playlist.items.length) return await interaction.editReply("This playlist doesn't have any playable items.");
+
+            // songs in the playlist
+            const queueItems = playlist.items.map(i => ({
+                name: i.title,
+                url: i.shortUrl,
+                duration: i.durationSec,
+                user: interaction.user.username,
+            }));
+
+            // if queue is full or already playing, add all songs to queue.
+            if (studio.player.state.status === AudioPlayerStatus.Playing || studio.queue?.length) {
+                studio.queue = studio.queue.concat(queueItems);
+                return await interaction.editReply(`I've added **${ queueItems.length }** items to the queue from the **[${ playlist.title }](${ playlist.url })** playlist.`);
+            }
+
+            // remove the first song to play and add rest of the songs to queue.
+            const queueItem: music.Song = queueItems.shift();
+            studio.queue = studio.queue.concat(queueItems);
+
+            // create the audio resource
+            const resource = await this.createAudioResource(queueItem);
+
+            // play the resource
+            studio.player.play(resource);
+            return await interaction.editReply(`Now playing **${ queueItem.name }** from the **[${ playlist.title }](${ playlist.url })** playlist.`);
+        }
 
         // search for the song info
         const [ video ] = await playDL.search(song, {
