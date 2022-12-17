@@ -16,6 +16,8 @@ class ChannelUpdateListener extends Listener<"channelUpdate"> {
     public async exec(oldChannel: DMChannel | NonThreadGuildBasedChannel, newChannel: DMChannel | NonThreadGuildBasedChannel): Promise<void> {
         if (oldChannel.isDMBased() || newChannel.isDMBased()) return;
 
+        if (oldChannel.name === newChannel.name && oldChannel.parentId === newChannel.parentId) return;
+
         await logGuildEvent(newChannel.guild, {
             title: `${ resolveType(newChannel.type) } Channel Updated`,
             url: newChannel.url,

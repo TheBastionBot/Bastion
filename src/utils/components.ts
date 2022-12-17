@@ -5,6 +5,9 @@
 enum MessageComponents {
     GiveawayEndButton = "GiveawayEndButton",
 
+    MusicPausePlayButton = "MusicPausePlayButton",
+    MusicSkipButton = "MusicSkipButton",
+
     PollEndButton = "PollEndButton",
 
     SelfRolesSelect = "SelfRolesSelect",

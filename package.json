@@ -1,6 +1,6 @@
 {
     "name": "bastion",
-    "version": "10.4.0",
+    "version": "10.5.0",
     "description": "Get an enhanced Discord experience!",
     "homepage": "https://bastion.traction.one",
     "main": "./dist/index.js",
@@ -40,6 +40,7 @@
         "play-dl": "^1.9.6",
         "r6api.js": "^4.4.1",
         "undici": "^5.12.0",
-        "ytdl-core": "^4.11.2"
+        "ytdl-core": "^4.11.2",
+        "ytpl": "^2.3.0"
     }
 }

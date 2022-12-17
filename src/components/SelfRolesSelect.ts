@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { SelectMenuInteraction } from "discord.js";
+import { StringSelectMenuInteraction } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
 import RoleModel from "../models/Role";
@@ -16,7 +16,7 @@ class SelfRolesSelectMenu extends MessageComponent {
         });
     }
 
-    public async exec(interaction: SelectMenuInteraction<"cached">): Promise<void> {
+    public async exec(interaction: StringSelectMenuInteraction<"cached">): Promise<void> {
         // get all self roles
         const selfRoleDocuments = await RoleModel.find({
             guild: interaction.guildId,
