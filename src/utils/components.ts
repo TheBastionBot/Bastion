@@ -5,7 +5,7 @@
 enum MessageComponents {
     GiveawayEndButton = "GiveawayEndButton",
 
-    MusicPausePlayButton = "MusicPauseButton",
+    MusicPausePlayButton = "MusicPausePlayButton",
     MusicSkipButton = "MusicSkipButton",
 
     PollEndButton = "PollEndButton",
