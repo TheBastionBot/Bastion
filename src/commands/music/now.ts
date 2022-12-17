@@ -29,7 +29,7 @@ class NowCommand extends Command {
                             {
                                 custom_id: MessageComponents.MusicPausePlayButton,
                                 type: ComponentType.Button,
-                                label: studio?.player?.state?.status === AudioPlayerStatus.Playing ? "Pause" : "Resume",
+                                label: "Pause / Resume",
                                 style: ButtonStyle.Primary,
                             },
                             {
