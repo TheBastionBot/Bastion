@@ -41,7 +41,6 @@ class NowCommand extends Command {
                         ],
                     },
                 ],
-                ephemeral: true,
             });
         }
         await interaction.reply({ content: (interaction.client as Client).locales.getText(interaction.guildLocale, "musicPlayingNothing"), ephemeral: true });
