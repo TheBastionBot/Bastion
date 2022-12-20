@@ -83,6 +83,7 @@ class IamCommand extends Command {
                             options: selfRoles.map(r => ({
                                 value: r.id,
                                 label: r.name,
+                                emoji: r.unicodeEmoji,
                             })),
                         },
                     ],
