@@ -19,7 +19,7 @@ owners:
 
 # MongoDB connection URI
 # `TESSERACT_MONGO_URI` environment variable overwrites this value.
-mongoURI: "mongodb://localhost:27017/bastion"
+mongoURI: "mongodb://127.0.0.1:27017/bastion"
 
 # Presences
 # Bastion will cycle through these activities randomly.
