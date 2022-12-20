@@ -89,7 +89,6 @@ class RoleLevelsCommand extends Command {
             }
 
             await RoleModel.findByIdAndUpdate(role.id, {
-                _id: role.id,
                 guild: interaction.guildId,
                 level: level,
             }, {
