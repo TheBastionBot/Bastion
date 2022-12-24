@@ -8,6 +8,7 @@ export interface Role {
     _id: string;
     id?: string;
     guild: string;
+    description?: string;
     emoji?: string;
     level?: number;
     price?: number;
@@ -26,6 +27,10 @@ export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Sch
         type: String,
         required: true,
         ref: "Guild",
+    },
+    description: {
+        type: String,
+        maxlength: 100,
     },
     emoji: {
         type: String,
