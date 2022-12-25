@@ -46,15 +46,16 @@ class RoleLevelsCommand extends Command {
 
         // remove level
         if (typeof remove === "number") {
-            const deletedDocuments = await RoleModel.deleteMany({
+            await RoleModel.updateMany({
                 guild: interaction.guildId,
-                level: level,
+                level: remove,
+            }, {
+                $unset: {
+                    level: 1,
+                },
             });
 
-            if (deletedDocuments?.deletedCount) {
-                return await interaction.editReply(`The roles assigned to **level ${ remove }** have been unassigned.`);
-            }
-            return await interaction.editReply(`No roles are assigned to **level ${ remove }**.`);
+            return await interaction.editReply(`The roles assigned to **level ${ remove }** have been unassigned.`);
         }
 
         // set role's level
