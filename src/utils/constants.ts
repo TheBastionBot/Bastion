@@ -38,6 +38,16 @@ export enum COLORS {
     VALORANT = 0xff4655,
 }
 
+export enum SelectRolesType {
+    AddOnly = 1,
+    RemoveOnly = 2,
+}
+
+export enum SelectRolesUI {
+    Buttons = 0,
+    SelectMenu = 1,
+}
+
 export const isPublicBastion = (user: ClientUser | Snowflake): boolean => {
     return typeof user === "string" ? user === BASTION_USER_ID : user.id === BASTION_USER_ID;
 };

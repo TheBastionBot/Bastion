@@ -61,7 +61,6 @@ class SelfRolesCommand extends Command {
 
             // set role as self assignable
             await RoleModel.findByIdAndUpdate(role.id, {
-                _id: role.id,
                 guild: interaction.guildId,
                 selfAssignable: true,
             }, {

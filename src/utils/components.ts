@@ -10,6 +10,11 @@ enum MessageComponents {
 
     PollEndButton = "PollEndButton",
 
+    SelectRolesButton = "SelectRolesButton",
+    SelectRolesNoRolesButton = "SelectRolesNoRolesButton",
+    SelectRolesSelect = "SelectRolesSelect",
+    SelectRolesUpdateSelect = "SelectRolesUpdateSelect",
+
     SelfRolesSelect = "SelfRolesSelect",
     SelfRolesClearButton = "SelfRolesClearButton",
 

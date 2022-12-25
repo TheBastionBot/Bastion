@@ -9,7 +9,7 @@ import { music } from "@bastion/tesseract/typings/types";
 
 import { COLORS } from "../../utils/constants";
 
-class SkipCommand extends Command {
+class QueueCommand extends Command {
     constructor() {
         super({
             name: "queue",
@@ -71,4 +71,4 @@ class SkipCommand extends Command {
     }
 }
 
-export = SkipCommand;
+export = QueueCommand;

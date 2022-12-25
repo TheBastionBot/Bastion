@@ -10,7 +10,7 @@ class ShardResumeListener extends Listener<"shardResume"> {
     }
 
     public exec(shardId: number): void {
-        Logger.info(`Shard ${ shardId } - Resumed`);
+        Logger.info(`Shard ${ shardId } — Resumed`);
     }
 }
 

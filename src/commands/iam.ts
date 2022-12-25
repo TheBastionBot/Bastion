@@ -80,10 +80,16 @@ class IamCommand extends Command {
                             placeholder: "Select Roles",
                             minValues: 0,
                             maxValues: selfRoles.size,
-                            options: selfRoles.map(r => ({
-                                value: r.id,
-                                label: r.name,
-                            })),
+                            options: selfRoles.map(r => {
+                                const roleDocument = selfRoleDocuments.find(doc => doc.id === r.id);
+
+                                return {
+                                    value: r.id,
+                                    label: r.name,
+                                    emoji: roleDocument.emoji || r.unicodeEmoji,
+                                    description: roleDocument.description,
+                                };
+                            }),
                         },
                     ],
                 },

@@ -62,7 +62,6 @@ class AutoRolesCommand extends Command {
 
             // set role as auto assignable
             await RoleModel.findByIdAndUpdate(role.id, {
-                _id: role.id,
                 guild: interaction.guildId,
                 autoAssignable: true,
             }, {

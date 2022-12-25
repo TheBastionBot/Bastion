@@ -5,8 +5,10 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
+import RoleModel from "../../models/Role";
 import * as strings from "../../utils/strings";
 import { COLORS } from "../../utils/constants";
+import * as snowflake from "../../utils/snowflake";
 
 class RoleInfoCommand extends Command {
     constructor() {
@@ -25,16 +27,21 @@ class RoleInfoCommand extends Command {
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
+        await interaction.deferReply();
         const role = interaction.options.getRole("role");
 
-        await interaction.reply({
+        // get the role document
+        const roleDocument = await RoleModel.findById(role.id);
+
+        await interaction.editReply({
             embeds: [
                 {
-                    color: COLORS.PRIMARY,
+                    color: role.color || COLORS.PRIMARY,
                     author: {
                         name: role.name,
                     },
                     title: `${ role.managed ? "Managed" : "" } Role`,
+                    description: roleDocument?.description,
                     fields: [
                         {
                             name: "Position",
@@ -52,12 +59,30 @@ class RoleInfoCommand extends Command {
                             inline: true,
                         },
                         {
+                            name: "Mentionable",
+                            value: role.mentionable ? "Yes" : "No",
+                            inline: true,
+                        },
+                        {
+                            name: "Hoisted",
+                            value: role.hoist ? "Yes" : "No",
+                            inline: true,
+                        },
+                        {
+                            name: "Emoji",
+                            value: roleDocument?.emoji ? snowflake.isValid(roleDocument.emoji) ? `<:e:${ roleDocument.emoji }>` : roleDocument.emoji : role.unicodeEmoji || "-",
+                            inline: true,
+                        },
+                        {
                             name: "Permissions",
                             value: role.permissions.bitfield ? role.permissions.toArray().map(p => strings.camelToTitleCase(p)).join(", ") : "-",
                         },
                     ],
+                    thumbnail: {
+                        url: role.iconURL(),
+                    },
                     footer: {
-                        text: `${ role.hoist ? "Hoisted •" : "" } ${ role.id }`,
+                        text: role.id,
                     },
                 },
             ],
