@@ -11,9 +11,9 @@ export interface SelectRoleGroup {
     guild: string;
     roles?: string[];
     type?: number;
+    ui?: number;
     min?: number;
     max?: number;
-    ui?: number;
 }
 
 export default mongoose.model<SelectRoleGroup & mongoose.Document>("SelectRoleGroup", new mongoose.Schema<SelectRoleGroup & mongoose.Document>({
@@ -38,13 +38,13 @@ export default mongoose.model<SelectRoleGroup & mongoose.Document>("SelectRoleGr
     type: {
         type: Number,
     },
+    ui: {
+        type: Number,
+    },
     min: {
         type: Number,
     },
     max: {
-        type: Number,
-    },
-    ui: {
         type: Number,
     },
 }));
