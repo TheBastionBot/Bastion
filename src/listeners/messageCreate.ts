@@ -14,6 +14,7 @@ import { generate as generateEmbed } from "../utils/embeds";
 import * as gamification from "../utils/gamification";
 import * as members from "../utils/members";
 import * as numbers from "../utils/numbers";
+import * as regex from "../utils/regex";
 import * as variables from "../utils/variables";
 import * as yaml from "../utils/yaml";
 import { bastion } from "../types";
@@ -233,8 +234,43 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         }
     };
 
-    handleDirectMessageRelay = async (message: Message): Promise<void> => {
+    handleDirectMessageRelay = async (message: Message, relayDirectMessages: boolean | string): Promise<unknown> => {
         if (!message.content) return;
+
+        // generate the message payload
+        const payload = {
+            embeds: [
+                {
+                    color: COLORS.SECONDARY,
+                    author: {
+                        name: message.author.tag,
+                        icon_url: message.author.displayAvatarURL(),
+                    },
+                    description: message.content,
+                    footer: {
+                        text: message.author.id,
+                    },
+                },
+            ],
+        };
+
+        // check whether the message should be relayed via webhook
+        if (typeof relayDirectMessages === "string") {
+            // match the string for a valid webhook url
+            const match = relayDirectMessages.match(regex.WEBHOOK_URL);
+
+            // check whether the match was a success
+            if (!(match instanceof Array)) return;
+
+            // get the webhook id & token from the matched array
+            const [ , webhookId, webhookToken ] = match;
+
+            // fetch the webhook
+            const webhook = await message.client.fetchWebhook(webhookId, webhookToken);
+
+            // relay the message via the webhook
+            return await webhook?.send(payload);
+        }
 
         // get the application owner
         const app = await message.client.application.fetch();
@@ -246,18 +282,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         const channel = await owner.createDM();
 
         // relay the message to the application owner
-        await channel.send({
-            embeds: [
-                {
-                    color: COLORS.SECONDARY,
-                    author: {
-                        name: `${ message.author.tag } / ${ message.author.id }`,
-                        icon_url: message.author.displayAvatarURL(),
-                    },
-                    description: message.content,
-                },
-            ],
-        });
+        await channel.send(payload);
     };
 
     public async exec(message: Message<boolean>): Promise<void> {
@@ -278,9 +303,10 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             // auto threads
             this.handleAutoThreads(message, guildDocument).catch(Logger.error);
         } else {
-            if (process.env.BASTION_RELAY_DMS || ((message.client as Client).settings as bastion.Settings)?.relayDirectMessages) {
+            const relayDirectMessages = process.env.BASTION_RELAY_DMS || ((message.client as Client).settings as bastion.Settings)?.relayDirectMessages;
+            if (relayDirectMessages) {
                 // relay direct messages
-                this.handleDirectMessageRelay(message).catch(Logger.error);
+                this.handleDirectMessageRelay(message, relayDirectMessages).catch(Logger.error);
             } else {
                 // instant responses
                 this.handleInstantResponses(message).catch(Logger.error);

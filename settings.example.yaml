@@ -46,6 +46,8 @@ musicActivity: true
 # Relay Direct Messages
 # When enabled, Bastion will relay any direct messages it receives to the
 # owner of the bot application / team.
+# If a Discord webhook URL is specified, it'll relay the direct messages
+# via the webhook.
 # `BASTION_RELAY_DMS` environment variable overwrites this value.
 relayDirectMessages: false
 
