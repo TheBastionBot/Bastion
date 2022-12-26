@@ -5,7 +5,6 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChannelType, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../../models/Guild";
 import SelectRoleGroupModel from "../../../models/SelectRoleGroup";
 import MessageComponents from "../../../utils/components";
 import { isPublicBastion, SelectRolesType, SelectRolesUI } from "../../../utils/constants";
@@ -80,12 +79,13 @@ class SelectRolesAddCommand extends Command {
 
         // check for limits
         if (isPublicBastion(interaction.client.user.id)) {
-            // get the guild document
-            const guildDocument = await GuildModel.findById(interaction.guildId);
-
             const tier = await getPremiumTier(interaction.guild.ownerId);
             const limit = checkFeature(tier, Feature.SelectRoles) as number;
-            if (guildDocument.votingChannels?.length >= limit) {
+
+            // get all select role group documents
+            const selectRoleGroupDocuments = await SelectRoleGroupModel.find({ guild: interaction.guildId });
+
+            if (selectRoleGroupDocuments?.length >= limit) {
                 return interaction.editReply(`You need to upgrade from Bastion ${ tier } to add more than ${ limit } select role groups.`);
             }
         }
