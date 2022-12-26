@@ -7,7 +7,7 @@ import { tesseract } from "@bastion/tesseract/typings/types";
 export namespace bastion {
     export interface Settings extends tesseract.Settings {
         musicActivity?: boolean;
-        relayDirectMessages?: boolean;
+        relayDirectMessages?: boolean | string;
         port?: number;
         auth?: string;
         coinMarketCapApiKey?: string;
