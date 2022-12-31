@@ -13,12 +13,17 @@ class AutoRolesCommand extends Command {
     constructor() {
         super({
             name: "auto-roles",
-            description: "Configure roles that will be auto assigned to users when they join the server.",
+            description: "Configure roles that will be auto assigned to members when they join the server.",
             options: [
                 {
                     type: ApplicationCommandOptionType.Role,
                     name: "role",
                     description: "The role you want to add or remove as an auto role.",
+                },
+                {
+                    type: ApplicationCommandOptionType.Boolean,
+                    name: "bots",
+                    description: "Whether this role should be auto assigned to bots.",
                 },
             ],
             userPermissions: [ PermissionFlagsBits.ManageGuild ],
@@ -28,6 +33,7 @@ class AutoRolesCommand extends Command {
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
         const role = interaction.options.getRole("role");
+        const bots = interaction.options.getBoolean("bots");
 
         if (role?.id === interaction.guildId) {
             return await interaction.editReply("**@everyone** isn't a valid role for this.");
@@ -40,6 +46,7 @@ class AutoRolesCommand extends Command {
             // remove role as auto assignable
             if (roleDocument?.autoAssignable) {
                 roleDocument.autoAssignable = undefined;
+                roleDocument.bots = undefined;
 
                 await roleDocument.save();
                 return await interaction.editReply(`I won't auto assign the **${ role.name }** role anymore.`);
@@ -64,11 +71,12 @@ class AutoRolesCommand extends Command {
             await RoleModel.findByIdAndUpdate(role.id, {
                 guild: interaction.guildId,
                 autoAssignable: true,
+                bots: typeof bots === "boolean" ? bots : undefined,
             }, {
                 upsert: true,
             });
 
-            return await interaction.editReply(`I'll auto assign the **${ role.name }** role to users when they join the server.`);
+            return await interaction.editReply(`I'll auto assign the **${ role.name }** role to ${ bots ? "bots" : bots === false ? "users" : "members" } when they join the server.`);
         }
 
         const autoRoles = await RoleModel.find({
