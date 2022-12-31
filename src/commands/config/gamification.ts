@@ -46,7 +46,7 @@ class GamificationCommand extends Command {
 
         // update gamification settings
         guildDocument.gamification = messages || multiplier ? true : guildDocument.gamification ? undefined : true;
-        guildDocument.gamificationMessages = messages || guildDocument.gamificationMessages || undefined;
+        guildDocument.gamificationMessages = typeof messages === "boolean" ? messages : guildDocument.gamificationMessages || undefined;
         guildDocument.gamificationMultiplier = multiplier || guildDocument.gamificationMultiplier || undefined;
 
         await guildDocument.save();
