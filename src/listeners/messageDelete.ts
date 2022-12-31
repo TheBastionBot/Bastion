@@ -44,7 +44,12 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
                     value: time(message.createdAt),
                     inline: true,
                 },
-            ],
+                message.content && {
+                    name: "Content",
+                    value: message.content,
+                    inline: false,
+                }
+            ].filter(x => x),
             timestamp: new Date().toISOString(),
         });
     }
