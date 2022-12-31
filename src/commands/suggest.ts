@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, GuildTextBasedChannel } from "discord.js";
-import { Client, Command } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import MessageComponents from "../utils/components";
@@ -33,7 +33,7 @@ class SuggestCommand extends Command {
 
         // send the suggestion
         if (guildDocument?.suggestionsChannel && interaction.guild.channels.cache.has(guildDocument.suggestionsChannel)) {
-            await (interaction.guild.channels.cache.get(guildDocument.suggestionsChannel) as GuildTextBasedChannel).send({
+            const message = await (interaction.guild.channels.cache.get(guildDocument.suggestionsChannel) as GuildTextBasedChannel).send({
                 embeds: [
                     {
                         color: COLORS.INDIGO,
@@ -64,6 +64,10 @@ class SuggestCommand extends Command {
                     },
                 ],
             });
+
+            // set the message up for voting
+            message.react("👍").catch(Logger.ignore);
+            message.react("👎").catch(Logger.ignore);
 
             return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "suggestionReceived"));
         }
