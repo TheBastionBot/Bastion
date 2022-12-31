@@ -13,7 +13,9 @@
         "commands": "tesseract publish",
         "migrate": "node ./dist/migrate.js",
         "start": "node .",
-        "test": "eslint . --ext .ts"
+        "test": "eslint . --ext .ts",
+        "docker": "cd docker && docker-compose up -d --build",
+        "docker:down": "cd docker && docker-compose down"
     },
     "devDependencies": {
         "@types/discord-rpc": "^4.0.3",

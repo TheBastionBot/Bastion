@@ -1,0 +1,44 @@
+services:
+  bastion:
+    image: ${DOCKER_IMAGE:-bastion}
+    container_name: bastion
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+    environment:
+      TESSERACT_MONGO_URI: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@bastion-mongo:${MONGO_PORT:-27017}
+      PORT: ${PORT:-8377}
+      BASTION_API_AUTH: ${BASTION_API_AUTH}
+      TESSERACT_BOT_ID: ${TESSERACT_BOT_ID}
+      TESSERACT_BOT_TOKEN: ${TESSERACT_BOT_TOKEN}
+      TESSERACT_OWNER_ID: ${TESSERACT_OWNER_ID}
+    ports:
+      - ${PORT}:${PORT}
+    tty: true
+    restart: always
+    volumes:
+      - ./settings.yaml:/app/settings.yaml
+    depends_on:
+      - bastion-mongo
+    networks:
+      - bastion
+  bastion-mongo:
+    container_name: bastion-mongo
+    image: mongo:latest
+    tty: true
+    command: mongod --auth --port=${MONGO_PORT:-27017} --bind_ip_all
+    restart: always
+    ports:
+      - ${MONGO_PORT:-27017}:${MONGO_PORT:-27017}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-bastion}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: bastion
+    networks:
+      - bastion
+    volumes:
+      - ./data:/data/db
+networks:
+  bastion:
+    driver: bridge
+
