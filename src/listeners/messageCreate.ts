@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ChannelType, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
+import { ChannelType, GuildTextBasedChannel, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild";
@@ -85,8 +85,14 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                message.reply((message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` }))
-                .catch(Logger.ignore);
+                if (guildDocument?.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
+                    (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
+                        .send(`${message.author} ${(message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` })}`)
+                        .catch(Logger.ignore);
+                } else {
+                    message.reply((message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` }))
+                        .catch(Logger.ignore); 
+                }
             }
 
             // reward level roles, if available
