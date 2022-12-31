@@ -73,27 +73,31 @@ class PlayCommand extends Command {
      * or stops the player.
      */
     private IdleStateHandler = async (interaction: ChatInputCommandInteraction<"cached">) => {
-        const studio = (interaction.client as Client).studio.get(interaction.guild);
+        try {
+            const studio = (interaction.client as Client).studio.get(interaction.guild);
 
-        // get next song in queue
-        const song = studio.queue.shift();
-        if (song) {
-            // create the audio resource
-            const resource = await this.createAudioResource(song).catch(Logger.error);
-            if (resource) {
-                // play the resource
-                studio.player.play(resource);
-                await interaction.channel.send(`Now playing **${ song.name }**.`);
+            // get next song in queue
+            const song = studio.queue.shift();
+            if (song) {
+                // create the audio resource
+                const resource = await this.createAudioResource(song).catch(Logger.error);
+                if (resource) {
+                    // play the resource
+                    studio.player.play(resource);
+                    await interaction.channel.send(`Now playing **${ song.name }**.`);
+                } else {
+                    await interaction.channel.send(`I couldn't play **${ song.name }**.`);
+                }
             } else {
-                await interaction.channel.send(`I couldn't play **${ song.name }**.`);
+                // stop audio player
+                studio.player.stop();
+                // delete studio from studio manager
+                (interaction.client as Client).studio.delete(interaction.guild);
+                // destroy voice connection
+                getVoiceConnection(interaction.guildId).destroy();
             }
-        } else {
-            // stop audio player
-            studio.player.stop();
-            // delete studio from studio manager
-            (interaction.client as Client).studio.delete(interaction.guild);
-            // destroy voice connection
-            getVoiceConnection(interaction.guildId).destroy();
+        } catch (error) {
+            Logger.error(error);
         }
     };
 
