@@ -23,8 +23,6 @@ COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY ./package.json ./yarn.lock* ./tsconfig.json ./bastion.sh ./settings.example.yaml ./
 
-RUN cp settings.example.yaml settings.yaml
-
 COPY ./data ./data
 COPY ./locales ./locales
 COPY ./scripts ./scripts
