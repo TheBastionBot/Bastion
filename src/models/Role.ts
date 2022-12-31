@@ -16,6 +16,7 @@ export interface Role {
     referrals?: number;
     autoAssignable?: boolean;
     selfAssignable?: boolean;
+    bots?: boolean;
 }
 
 export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Schema<Role & mongoose.Document>({
@@ -51,6 +52,9 @@ export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Sch
         type: Boolean,
     },
     selfAssignable: {
+        type: Boolean,
+    },
+    bots: {
         type: Boolean,
     },
 }));
