@@ -6,6 +6,7 @@ import { Message, MessageType, PartialMessage, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
 import { logGuildEvent } from "../utils/guilds";
+import gitDiff from "git-diff";
 
 class MessageUpdateListener extends Listener<"messageUpdate"> {
     constructor() {
@@ -51,7 +52,17 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     value: time(newMessage.createdAt),
                     inline: true,
                 },
-            ],
+                oldMessage.content && newMessage.content && {
+                    name: "Diff",
+                    value: gitDiff(oldMessage.content, newMessage.content, {
+                        noHeaders: true,
+                        wordDiff: true
+                    })
+                        .split("\n")
+                        .join("\n"),
+                    inline: false,
+                },
+            ].filter(x => x),
             timestamp: new Date().toISOString(),
         });
     }
