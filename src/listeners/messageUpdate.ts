@@ -5,6 +5,7 @@
 import { Message, MessageType, PartialMessage, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
+import GuildModel from "../models/Guild";
 import { logGuildEvent } from "../utils/guilds";
 import gitDiff from "git-diff";
 
@@ -17,6 +18,8 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
         if (!newMessage.inGuild()) return;
         if (![ MessageType.Default, MessageType.Reply ].includes(newMessage.type)) return;
         if (oldMessage.content === newMessage.content) return;
+
+        const guildDocument = await GuildModel.findById(newMessage.guild.id);
 
         await logGuildEvent(newMessage.guild, {
             title: "Message Updated",
@@ -52,7 +55,7 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     value: time(newMessage.createdAt),
                     inline: true,
                 },
-                oldMessage.content && newMessage.content && {
+                guildDocument.logContent && oldMessage.content && newMessage.content && {
                     name: "Diff",
                     value: gitDiff(oldMessage.content, newMessage.content, {
                         noHeaders: true,
