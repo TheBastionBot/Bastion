@@ -45,6 +45,12 @@ class SuggestionAcceptButton extends MessageComponent {
                     components: [
                         {
                             type: ComponentType.Button,
+                            label: "Change Status",
+                            style: ButtonStyle.Secondary,
+                            customId: MessageComponents.SuggestionRejectButton
+                        },
+                        {
+                            type: ComponentType.Button,
                             label: "Reset Status",
                             style: ButtonStyle.Secondary,
                             customId: MessageComponents.SuggestionResetButton,
