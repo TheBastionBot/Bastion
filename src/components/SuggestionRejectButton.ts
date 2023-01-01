@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ButtonInteraction, PermissionFlagsBits } from "discord.js";
+import { ButtonInteraction, ButtonStyle, ComponentType, PermissionFlagsBits } from "discord.js";
 import { MessageComponent } from "@bastion/tesseract";
 
 import MessageComponents from "../utils/components";
@@ -26,7 +26,6 @@ class SuggestionRejectButton extends MessageComponent {
                     ...interaction.message.embeds[0].toJSON(),
                     color: COLORS.RED,
                     fields: [
-                        ...interaction.message.embeds[0].fields,
                         {
                             name: "Status",
                             value: "Rejected",
@@ -40,7 +39,19 @@ class SuggestionRejectButton extends MessageComponent {
                     ],
                 },
             ],
-            components: [],
+            components: [
+                {
+                    type: ComponentType.ActionRow,
+                    components: [
+                        {
+                            type: ComponentType.Button,
+                            label: "Change Status",
+                            style: ButtonStyle.Secondary,
+                            customId: MessageComponents.SuggestionAcceptButton,
+                        },
+                    ],
+                },
+            ],
         });
     }
 }
