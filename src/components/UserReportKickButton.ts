@@ -3,9 +3,10 @@
  * @copyright 2022
  */
 import { ButtonInteraction, PermissionFlagsBits, Snowflake } from "discord.js";
-import { MessageComponent } from "@bastion/tesseract";
+import { Logger, MessageComponent } from "@bastion/tesseract";
 
 import MessageComponents from "../utils/components";
+import { logModerationEvent } from "../utils/guilds";
 
 class UserReportKickButton extends MessageComponent {
     constructor() {
@@ -23,12 +24,13 @@ class UserReportKickButton extends MessageComponent {
 
         await interaction.guild.members.kick(reportedUserId, reportedReason);
 
+        const fieldData = [ ...interaction.message.embeds[0].fields ];
+
         await interaction.update({
             embeds: [
                 {
                     ...interaction.message.embeds[0].toJSON(),
-                    fields: [
-                        ...interaction.message.embeds[0].fields,
+                    fields: fieldData.concat([
                         {
                             name: "Action",
                             value: "Kicked",
@@ -39,11 +41,24 @@ class UserReportKickButton extends MessageComponent {
                             value: interaction.user.tag,
                             inline: true,
                         },
-                    ],
+                    ]),
                 },
             ],
             components: [],
         });
+
+        // create moderation log
+        logModerationEvent(interaction.guild, {
+            title: "User Kicked",
+            url: interaction.message.url,
+            fields: fieldData.concat([
+                {
+                    name: "Moderator",
+                    value: interaction.user.tag,
+                    inline: true,
+                },
+            ]),
+        }).catch(Logger.ignore);
     }
 }
 

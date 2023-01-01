@@ -3,9 +3,10 @@
  * @copyright 2022
  */
 import { ButtonInteraction, PermissionFlagsBits, Snowflake } from "discord.js";
-import { MessageComponent } from "@bastion/tesseract";
+import { Logger, MessageComponent } from "@bastion/tesseract";
 
 import MessageComponents from "../utils/components";
+import { logModerationEvent } from "../utils/guilds";
 
 class UserReportBanButton extends MessageComponent {
     constructor() {
@@ -26,12 +27,13 @@ class UserReportBanButton extends MessageComponent {
             reason: reportedReason,
         });
 
+        const fieldData = [ ...interaction.message.embeds[0].fields ];
+
         await interaction.update({
             embeds: [
                 {
                     ...interaction.message.embeds[0].toJSON(),
-                    fields: [
-                        ...interaction.message.embeds[0].fields,
+                    fields: fieldData.concat([
                         {
                             name: "Action",
                             value: "Banned",
@@ -42,11 +44,24 @@ class UserReportBanButton extends MessageComponent {
                             value: interaction.user.tag,
                             inline: true,
                         },
-                    ],
+                    ]),
                 },
             ],
             components: [],
         });
+
+        // create moderation log
+        logModerationEvent(interaction.guild, {
+            title: "User Banned",
+            url: interaction.message.url,
+            fields: fieldData.concat([
+                {
+                    name: "Moderator",
+                    value: interaction.user.tag,
+                    inline: true,
+                },
+            ]),
+        }).catch(Logger.ignore);
     }
 }
 
