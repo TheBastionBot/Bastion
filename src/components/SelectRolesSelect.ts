@@ -41,13 +41,13 @@ class SelectRolesSelectMenu extends MessageComponent {
             }
 
             const memberRoles = interaction.member.roles.cache
-            .filter(r => !selectRoleGroup.roles.some(id => id === r.id))   // remove all the roles in the select role group
-            .map(r => r.id)
-            .concat(roles); // add the selected roles
+                .filter(r => !selectRoleGroup.roles.some(id => id === r.id))   // remove all the roles in the select role group
+                .map(r => r.id)
+                .concat(roles); // add the selected roles
 
             // update member roles
             await interaction.member.roles.set(memberRoles)
-            .catch(Logger.ignore);
+                .catch(Logger.ignore);
         }
     }
 }

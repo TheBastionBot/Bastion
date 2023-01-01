@@ -32,7 +32,7 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
 
         if (autoRoles.length) {
             member.roles.add(autoRoles, "Auto Assigned")
-            .catch(Logger.ignore);
+                .catch(Logger.ignore);
         }
     };
 

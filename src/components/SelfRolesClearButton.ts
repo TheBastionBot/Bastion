@@ -24,11 +24,11 @@ class SelfRolesClearButton extends MessageComponent {
         });
 
         const memberRoles = interaction.member.roles.cache
-        .filter(r => !selfRoleDocuments.some(doc => doc.id === r.id));  // remove all the self roles
+            .filter(r => !selfRoleDocuments.some(doc => doc.id === r.id));  // remove all the self roles
 
         // update member roles
         await interaction.member.roles.set(memberRoles)
-        .catch(Logger.error);
+            .catch(Logger.error);
 
         await interaction.deferUpdate();
     }
