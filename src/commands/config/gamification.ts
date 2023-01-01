@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild";
@@ -21,6 +21,12 @@ class GamificationCommand extends Command {
                     description: "Should it show the level up messages.",
                 },
                 {
+                    type: ApplicationCommandOptionType.Channel,
+                    name: "channel",
+                    description: "The channel where the level up messages should be sent.",
+                    channel_types: [ ChannelType.GuildText ],
+                },
+                {
                     type: ApplicationCommandOptionType.Number,
                     name: "multiplier",
                     description: "The reward multiplier.",
@@ -33,6 +39,7 @@ class GamificationCommand extends Command {
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
         const messages = interaction.options.getBoolean("messages");
+        const channel = interaction.options.getChannel("channel");
         const multiplier = interaction.options.getNumber("multiplier");
 
         // check for premium membership
@@ -47,6 +54,7 @@ class GamificationCommand extends Command {
         // update gamification settings
         guildDocument.gamification = messages || multiplier ? true : guildDocument.gamification ? undefined : true;
         guildDocument.gamificationMessages = typeof messages === "boolean" ? messages : guildDocument.gamificationMessages || undefined;
+        guildDocument.gamificationChannel = channel?.id || undefined;
         guildDocument.gamificationMultiplier = multiplier || guildDocument.gamificationMultiplier || undefined;
 
         await guildDocument.save();
