@@ -20,6 +20,7 @@ enum MessageComponents {
 
     SuggestionAcceptButton = "SuggestionAcceptButton",
     SuggestionRejectButton = "SuggestionRejectButton",
+    SuggestionResetButton = "SuggestionResetButton",
 
     UserReportBanButton = "UserReportBanButton",
     UserReportKickButton = "UserReportKickButton",

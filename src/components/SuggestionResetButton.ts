@@ -8,10 +8,10 @@ import { MessageComponent } from "@bastion/tesseract";
 import MessageComponents from "../utils/components";
 import { COLORS } from "../utils/constants";
 
-class SuggestionAcceptButton extends MessageComponent {
+class SuggestionResetButton extends MessageComponent {
     constructor() {
         super({
-            id: MessageComponents.SuggestionAcceptButton,
+            id: MessageComponents.SuggestionResetButton,
             scope: "guild",
         });
     }
@@ -24,19 +24,8 @@ class SuggestionAcceptButton extends MessageComponent {
             embeds: [
                 {
                     ...interaction.message.embeds[0].toJSON(),
-                    color: COLORS.GREEN,
-                    fields: [
-                        {
-                            name: "Status",
-                            value: "Accepted",
-                            inline: true,
-                        },
-                        {
-                            name: "Accepted By",
-                            value: interaction.user.tag,
-                            inline: true,
-                        },
-                    ],
+                    color: COLORS.INDIGO,
+                    fields: [],
                 },
             ],
             components: [
@@ -45,9 +34,15 @@ class SuggestionAcceptButton extends MessageComponent {
                     components: [
                         {
                             type: ComponentType.Button,
-                            label: "Reset Status",
-                            style: ButtonStyle.Secondary,
-                            customId: MessageComponents.SuggestionResetButton,
+                            label: "Accept",
+                            style: ButtonStyle.Success,
+                            customId: MessageComponents.SuggestionAcceptButton,
+                        },
+                        {
+                            type: ComponentType.Button,
+                            label: "Reject",
+                            style: ButtonStyle.Danger,
+                            customId: MessageComponents.SuggestionRejectButton,
                         },
                     ],
                 },
@@ -56,4 +51,4 @@ class SuggestionAcceptButton extends MessageComponent {
     }
 }
 
-export = SuggestionAcceptButton;
+export = SuggestionResetButton;
