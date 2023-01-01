@@ -3,8 +3,9 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Command, Logger } from "@bastion/tesseract";
 
+import { logModerationEvent } from "../utils/guilds";
 import { addInfraction, manageable } from "../utils/members";
 
 class WarnCommand extends Command {
@@ -41,7 +42,34 @@ class WarnCommand extends Command {
             // add infraction to the member
             await addInfraction(member, reason);
 
-            return await interaction.editReply(`${ user } received a warning for **${ reason }**.`);
+            const warnMessage = await interaction.editReply(`${ user } received a warning for **${ reason }**.`);
+
+            // create moderation log
+            return logModerationEvent(interaction.guild, {
+                title: "User Warned",
+                url: warnMessage.url,
+                fields: [
+                    {
+                        name: "User",
+                        value: user.tag,
+                        inline: true,
+                    },
+                    {
+                        name: "User ID",
+                        value: user.id,
+                        inline: true,
+                    },
+                    {
+                        name: "Reason",
+                        value: reason,
+                    },
+                    {
+                        name: "Moderator",
+                        value: interaction.user.tag,
+                        inline: true,
+                    },
+                ],
+            }).catch(Logger.ignore);
         }
 
         return await interaction.editReply({
