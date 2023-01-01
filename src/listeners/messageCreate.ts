@@ -47,7 +47,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // update member roles
         if (levelRoles.length) {
             const memberRoles = message.member.roles.cache
-            .filter(r => extraRoles.some(doc => doc.id === r.id))   // remove roles from any other level
+            .filter(r => !extraRoles.some(doc => doc.id === r.id))   // remove roles from any other level
             .map(r => r.id)
             .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
 
