@@ -70,7 +70,7 @@ export const addInfraction = async (member: PartialGuildMember | GuildMember, re
  * @param member The member.
  */
 export const clearInfraction = async (member: PartialGuildMember | GuildMember) => {
-    let memberDocument = await MemberModel.findOne({ user: member.id, guild: member.guild.id });
+    const memberDocument = await MemberModel.findOne({ user: member.id, guild: member.guild.id });
 
     // check whether infractions exist
     if (memberDocument?.infractions?.length) {

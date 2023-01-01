@@ -142,9 +142,9 @@ const main = async () => {
 };
 
 main()
-.then(() => Logger.info("Migration completed successfully."))
-.catch(e => {
-    Logger.info("Error when migrating. Join Bastion HQ for support: https://discord.gg/fzx8fkt");
-    Logger.error(e);
-})
-.finally(() => client.close());
+    .then(() => Logger.info("Migration completed successfully."))
+    .catch(e => {
+        Logger.info("Error when migrating. Join Bastion HQ for support: https://discord.gg/fzx8fkt");
+        Logger.error(e);
+    })
+    .finally(() => client.close());

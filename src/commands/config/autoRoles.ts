@@ -86,8 +86,8 @@ class AutoRolesCommand extends Command {
 
         await interaction.editReply(
             autoRoles?.length
-            ?   autoRoles.map(r => interaction.guild.roles.cache.has(r.id) ? interaction.guild.roles.cache.get(r.id).name: r.id).join(", ")
-            :   "There are no auto assignable roles in the server."
+                ?   autoRoles.map(r => interaction.guild.roles.cache.has(r.id) ? interaction.guild.roles.cache.get(r.id).name: r.id).join(", ")
+                :   "There are no auto assignable roles in the server."
         );
     }
 }

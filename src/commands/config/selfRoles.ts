@@ -47,7 +47,7 @@ class SelfRolesCommand extends Command {
 
             // check for limits
             if (isPublicBastion(interaction.client.user.id)) {
-                const tier = await getPremiumTier(interaction.guild.ownerId)
+                const tier = await getPremiumTier(interaction.guild.ownerId);
                 const selfRoleCount = await RoleModel.countDocuments({
                     guild: interaction.guildId,
                     selfAssignable: true,
@@ -77,8 +77,8 @@ class SelfRolesCommand extends Command {
 
         await interaction.editReply(
             selfRoles?.length
-            ?   selfRoles.map(r => interaction.guild.roles.cache.has(r.id) ? interaction.guild.roles.cache.get(r.id).name: r.id).join(", ")
-            :   "There are no self assignable roles in the server."
+                ?   selfRoles.map(r => interaction.guild.roles.cache.has(r.id) ? interaction.guild.roles.cache.get(r.id).name: r.id).join(", ")
+                :   "There are no self assignable roles in the server."
         );
     }
 }

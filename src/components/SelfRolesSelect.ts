@@ -24,13 +24,13 @@ class SelfRolesSelectMenu extends MessageComponent {
         });
 
         const memberRoles = interaction.member.roles.cache
-        .filter(r => !selfRoleDocuments.some(doc => doc.id === r.id))   // remove all the self roles
-        .map(r => r.id)
-        .concat(interaction.values.filter(id => selfRoleDocuments.some(doc => doc.id === id))); // add the selected self roles
+            .filter(r => !selfRoleDocuments.some(doc => doc.id === r.id))   // remove all the self roles
+            .map(r => r.id)
+            .concat(interaction.values.filter(id => selfRoleDocuments.some(doc => doc.id === id))); // add the selected self roles
 
         // update member roles
         await interaction.member.roles.set(memberRoles)
-        .catch(Logger.error);
+            .catch(Logger.error);
 
         await interaction.deferUpdate();
     }

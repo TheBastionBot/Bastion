@@ -60,6 +60,12 @@ class AimLabCommand extends Command {
             return await interaction.editReply(`The profile for **${ username }** was not found.`);
         }
 
+        const skillScores = body.data.aimlabProfile?.skillScores?.length ? body.data.aimlabProfile.skillScores.map((skill: { name: string; score: string }) => ({
+            name: skill.name[0].toUpperCase() + skill.name.slice(1),
+            value: (skill.score as unknown as number).toFixed(),
+            inline: true,
+        })) : [];
+
         await interaction.editReply({
             embeds: [
                 {
@@ -85,12 +91,7 @@ class AimLabCommand extends Command {
                             value: ((body.data.aimlabProfile?.ranking?.skill - body.data.aimlabProfile?.ranking?.rank?.minSkill) / (body.data.aimlabProfile?.ranking?.rank?.maxSkill - body.data.aimlabProfile?.ranking?.rank?.minSkill) * 100).toFixed() + "%",
                             inline: true,
                         },
-                        ...body.data.aimlabProfile?.skillScores?.map((skill: { name: string; score: string }) => ({
-                            name: skill.name[0].toUpperCase() + skill.name.slice(1),
-                            value: (skill.score as unknown as number).toFixed(),
-                            inline: true,
-                        })),
-                    ],
+                    ].concat(skillScores),
                     thumbnail: {
                         url: "https://aimlab.gg/static/aimlab/ranks/" + body.data.aimlabProfile?.ranking?.rank?.displayName?.toLowerCase()?.replace(" ", "_") + ".png",
                     },
