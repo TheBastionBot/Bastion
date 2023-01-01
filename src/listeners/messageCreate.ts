@@ -85,12 +85,13 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                if (guildDocument?.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
+                const gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
+                if (guildDocument.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
                     (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
-                        .send(`${message.author} ${(message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` })}`)
+                        .send(`${ message.author }, ${ gamificationMessage }`)
                         .catch(Logger.ignore);
                 } else {
-                    message.reply((message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` }))
+                    message.reply(gamificationMessage)
                         .catch(Logger.ignore); 
                 }
             }
