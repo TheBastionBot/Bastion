@@ -47,9 +47,9 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // update member roles
         if (levelRoles.length) {
             const memberRoles = message.member.roles.cache
-            .filter(r => !extraRoles.some(doc => doc.id === r.id))   // remove roles from any other level
-            .map(r => r.id)
-            .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
+                .filter(r => !extraRoles.some(doc => doc.id === r.id))   // remove roles from any other level
+                .map(r => r.id)
+                .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
 
             // update member roles
             message.member.roles.set(memberRoles).catch(Logger.error);
@@ -92,7 +92,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                         .catch(Logger.ignore);
                 } else {
                     message.reply(gamificationMessage)
-                        .catch(Logger.ignore); 
+                        .catch(Logger.ignore);
                 }
             }
 
@@ -144,18 +144,17 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             const responseMessage = generateEmbed(variables.replace(responseMessages[Math.floor(Math.random() * responseMessages.length)], message));
             if (typeof responseMessage === "string") {
                 return message.reply(responseMessage)
-                .catch(Logger.error);
+                    .catch(Logger.error);
             }
             return message.reply({
                 embeds: [ responseMessage ],
-            })
-            .catch(Logger.error);
+            }).catch(Logger.error);
         }
 
         // response reaction
         if (responseReactions.length) {
             message.react(responseReactions[Math.floor(Math.random() * responseReactions.length)])
-            .catch(Logger.error);
+                .catch(Logger.error);
         }
     };
 
@@ -236,7 +235,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                 const replies: string | string[] = response.responses[Math.floor(Math.random() * response.responses.length)];
 
                 message.reply(replies instanceof Array ? replies.join("\n") : replies)
-                .catch(Logger.ignore);
+                    .catch(Logger.ignore);
             }
         }
     };

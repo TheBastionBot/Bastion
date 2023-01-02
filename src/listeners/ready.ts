@@ -19,13 +19,13 @@ class ReadyListener extends Listener<"ready"> {
         if (guildDocuments) {
             // get all the guilds that don't have a document
             const newGuilds = client.guilds.cache
-            .map(g => ({ _id: g.id }))
-            .filter(g => !guildDocuments.some(doc => doc._id === g._id));
+                .map(g => ({ _id: g.id }))
+                .filter(g => !guildDocuments.some(doc => doc._id === g._id));
 
             // create the documents for the new guilds
             if (newGuilds.length) {
                 await GuildModel.insertMany(newGuilds as GuildDocument[], { ordered: false })
-                .catch(Logger.error);
+                    .catch(Logger.error);
             }
         }
     }

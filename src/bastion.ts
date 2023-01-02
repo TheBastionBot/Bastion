@@ -56,6 +56,6 @@ bastion.init();
 process.on("SIGINT", () => {
     bastion.destroy();
     bastion.disconnectMongo()
-    .then(() => process.exit())
-    .catch(Logger.error);
+        .then(() => process.exit())
+        .catch(Logger.error);
 });
