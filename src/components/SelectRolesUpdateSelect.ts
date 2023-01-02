@@ -27,10 +27,10 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
         if (!interaction.message?.reference?.messageId) return;
 
         // get the select role group document
-        const selectRolesGroup = await SelectRoleGroupModel.findById(interaction.message.reference.messageId);
+        const selectRoleGroup = await SelectRoleGroupModel.findById(interaction.message.reference.messageId);
 
         // check whether the select role group exists
-        if (!selectRolesGroup?.id) {
+        if (!selectRoleGroup?.id) {
             return interaction.message.edit({
                 content: "The Select Roles group doesn't exist anymore.",
                 components: [],
@@ -38,19 +38,19 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
         }
 
         // fetch the select role group message
-        const selectRolesMessage = await (interaction.guild.channels.cache.get(selectRolesGroup.channel) as GuildTextBasedChannel)?.messages.fetch(selectRolesGroup.id).catch(Logger.ignore);
+        const selectRolesMessage = await (interaction.guild.channels.cache.get(selectRoleGroup.channel) as GuildTextBasedChannel)?.messages.fetch(selectRoleGroup.id).catch(Logger.ignore);
 
         // check whether the select role group message exists
         if (selectRolesMessage) {
             // update roles in select role group
-            selectRolesGroup.roles = interaction.values;
-            await selectRolesGroup.save();
+            selectRoleGroup.roles = interaction.values;
+            await selectRoleGroup.save();
 
             const roleDocuments = await RoleModel.find({
-                $or: selectRolesGroup.roles.map(id => ({ id })),
+                $or: selectRoleGroup.roles.map(id => ({ id })),
             });
 
-            const selectRoles = selectRolesGroup.roles.map(id => {
+            const selectRoles = selectRoleGroup.roles.map(id => {
                 const role = interaction.guild.roles.cache.get(id);
                 const roleDocument = roleDocuments.find(r => r.id === id);
 
@@ -63,7 +63,7 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
             });
 
             // update select role group components with select menu
-            if (selectRolesGroup.ui === SelectRolesUI.SelectMenu) {
+            if (selectRoleGroup.ui === SelectRolesUI.SelectMenu) {
                 return await selectRolesMessage.edit({
                     components: [
                         {
@@ -73,8 +73,8 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
                                     type: ComponentType.StringSelect,
                                     customId: MessageComponents.SelectRolesSelect,
                                     placeholder: "Select Roles",
-                                    minValues: selectRolesGroup.min || 1,
-                                    maxValues: selectRolesGroup.max || selectRoles.length,
+                                    minValues: selectRoleGroup.min || 1,
+                                    maxValues: selectRoleGroup.max || selectRoles.length,
                                     options: selectRoles,
                                 },
                             ],
@@ -98,7 +98,7 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
             });
         }
 
-        await selectRolesGroup.delete();
+        await selectRoleGroup.delete();
     }
 }
 

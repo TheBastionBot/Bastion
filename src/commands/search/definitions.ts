@@ -54,10 +54,10 @@ class DefinitionsCommand extends Command {
         if (definitions?.length) {
             return await interaction.editReply(
                 definitions
-                .filter(definition => definition.partOfSpeech && definition.text)
-                .slice(0, 3)
-                .map(definition => (`***${ definition.partOfSpeech }*** ${ definition.text }`))
-                .join("\n")
+                    .filter(definition => definition.partOfSpeech && definition.text)
+                    .slice(0, 3)
+                    .map(definition => (`***${ definition.partOfSpeech }*** ${ definition.text }`))
+                    .join("\n")
             );
         }
 
