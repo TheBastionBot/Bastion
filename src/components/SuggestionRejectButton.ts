@@ -49,6 +49,12 @@ class SuggestionRejectButton extends MessageComponent {
                             style: ButtonStyle.Secondary,
                             customId: MessageComponents.SuggestionAcceptButton,
                         },
+                        {
+                            type: ComponentType.Button,
+                            label: "Reset Status",
+                            style: ButtonStyle.Secondary,
+                            customId: MessageComponents.SuggestionResetButton,
+                        },
                     ],
                 },
             ],
