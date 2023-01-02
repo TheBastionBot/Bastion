@@ -17,7 +17,7 @@ class SuggestionResetButton extends MessageComponent {
     }
 
     public async exec(interaction: ButtonInteraction<"cached">): Promise<unknown> {
-        // check whether the user has permission to accept suggestions
+        // check whether the user has permission to reset suggestion status
         if (!interaction.channel.permissionsFor(interaction.member)?.has(PermissionFlagsBits.ManageMessages)) return interaction.deferUpdate();
 
         await interaction.update({
