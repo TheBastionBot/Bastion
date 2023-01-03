@@ -2,52 +2,51 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ChatInputCommandInteraction, ComponentType } from "discord.js";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
-import MessageComponents from "../utils/components";
+import GuildModel from "../models/Guild";
 
 class PrivacyCommand extends Command {
     constructor() {
         super({
             name: "privacy",
             description: "Get privacy settings in a server.",
+            options: [
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "server",
+                    description: "Server id. Get it by using /server info in the server.",
+                    required: true
+                }
+            ]
         });
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply({ ephemeral: true });
 
-        const servers = interaction.client.guilds.cache
-            .filter((guild) => guild.members.cache.find((u) => u.id === interaction.user.id))
-            .map((guild) => ({
-                value: guild.id,
-                label: guild.name,
-                description: `id: ${guild.id}, members: ${guild.memberCount}`
-            }));
-        
-        if (!servers.length) {
-            return await interaction.editReply({
-                content: "I am not in any of the servers you are in.",
-            });
+        const guildId = interaction.options.getString("server");
+
+        if (!/^\d{18}$/.test(guildId)) {
+            await interaction.editReply("Invalid server id.");
         }
 
-        return await interaction.editReply({
-            content: "Please select a server.",
-            components: [
-                {
-                    type: ComponentType.ActionRow,
-                    components: [
-                        {
-                            type: ComponentType.StringSelect,
-                            customId: MessageComponents.PrivacyServerSelect,
-                            minValues: 1,
-                            maxValues: 1,
-                            options: servers
-                        }
-                    ]
-                }
-            ]
-        });
+        const guild = interaction.client.guilds.cache.find((guild) => guild.id === guildId);
+        
+        if (!guild) {
+            return await interaction.editReply("I am not in this server.");
+        }
+        
+        if (!guild.members.cache.find((m) => m.id === interaction.user.id)) {
+            return await interaction.editReply("You are not in this server.");
+        }
+
+        const guildDocument = await GuildModel.findById(guildId);
+
+        return await interaction.editReply(`${guildDocument.serverLogChannel ? "Content logs" : "Server logs"} are ${guildDocument.serverLogChannel && guildDocument.logContent ? "enabled" : "disabled"} in **${guild.name}**.
+Your deleted or edited messages will ${guildDocument.serverLogChannel && guildDocument.logContent ? "be" : "not be"} logged.
+
+*Please note that this may change.*`);
     }
 }
 
