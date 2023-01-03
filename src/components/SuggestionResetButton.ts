@@ -8,35 +8,24 @@ import { MessageComponent } from "@bastion/tesseract";
 import MessageComponents from "../utils/components";
 import { COLORS } from "../utils/constants";
 
-class SuggestionAcceptButton extends MessageComponent {
+class SuggestionResetButton extends MessageComponent {
     constructor() {
         super({
-            id: MessageComponents.SuggestionAcceptButton,
+            id: MessageComponents.SuggestionResetButton,
             scope: "guild",
         });
     }
 
     public async exec(interaction: ButtonInteraction<"cached">): Promise<unknown> {
-        // check whether the user has permission to accept suggestions
+        // check whether the user has permission to reset suggestion status
         if (!interaction.channel.permissionsFor(interaction.member)?.has(PermissionFlagsBits.ManageMessages)) return interaction.deferUpdate();
 
         await interaction.update({
             embeds: [
                 {
                     ...interaction.message.embeds[0].toJSON(),
-                    color: COLORS.GREEN,
-                    fields: [
-                        {
-                            name: "Status",
-                            value: "Accepted",
-                            inline: true,
-                        },
-                        {
-                            name: "Accepted By",
-                            value: interaction.user.tag,
-                            inline: true,
-                        },
-                    ],
+                    color: COLORS.INDIGO,
+                    fields: [],
                 },
             ],
             components: [
@@ -45,15 +34,15 @@ class SuggestionAcceptButton extends MessageComponent {
                     components: [
                         {
                             type: ComponentType.Button,
-                            label: "Change Status",
-                            style: ButtonStyle.Secondary,
-                            customId: MessageComponents.SuggestionRejectButton,
+                            label: "Accept",
+                            style: ButtonStyle.Success,
+                            customId: MessageComponents.SuggestionAcceptButton,
                         },
                         {
                             type: ComponentType.Button,
-                            label: "Reset Status",
-                            style: ButtonStyle.Secondary,
-                            customId: MessageComponents.SuggestionResetButton,
+                            label: "Reject",
+                            style: ButtonStyle.Danger,
+                            customId: MessageComponents.SuggestionRejectButton,
                         },
                     ],
                 },
@@ -62,4 +51,4 @@ class SuggestionAcceptButton extends MessageComponent {
     }
 }
 
-export = SuggestionAcceptButton;
+export = SuggestionResetButton;

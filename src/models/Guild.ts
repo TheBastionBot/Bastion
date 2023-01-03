@@ -23,6 +23,7 @@ export interface Guild {
     // gamification
     gamification?: boolean;
     gamificationMessages?: boolean;
+    gamificationChannel?: string;
     gamificationMultiplier?: number;
     // gambling
     gambling?: boolean;
@@ -121,6 +122,11 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     gamificationMessages: {
         type: Boolean,
+    },
+    gamificationChannel: {
+        type: String,
+        unique: true,
+        sparse: true,
     },
     gamificationMultiplier: {
         type: Number,

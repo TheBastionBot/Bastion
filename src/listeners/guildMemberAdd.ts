@@ -23,14 +23,16 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
     }
 
     handleAutoRoles = async (member: GuildMember): Promise<void> => {
-        const autoRoles = await RoleModel.find({
+        const autoRoleDocuments = await RoleModel.find({
             guild: member.guild.id,
             autoAssignable: true,
         });
 
+        const autoRoles = autoRoleDocuments.filter(r => r.bots !== (member.user.bot ? false : true)).map(r => r._id);
+
         if (autoRoles.length) {
-            member.roles.add(autoRoles.map(r => r._id), "Auto Assigned")
-            .catch(Logger.ignore);
+            member.roles.add(autoRoles, "Auto Assigned")
+                .catch(Logger.ignore);
         }
     };
 

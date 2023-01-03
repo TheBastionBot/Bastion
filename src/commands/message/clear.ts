@@ -74,8 +74,8 @@ class ClearCommand extends Command {
 
         await interaction.editReply(
             deletedMessages?.size
-            ?   `I've deleted **${ deletedMessages.size }** messages from the channel.`
-            :   "I didn't find any deletable messages from the last two weeks."
+                ?   `I've deleted **${ deletedMessages.size }** messages from the channel.`
+                :   "I didn't find any deletable messages from the last two weeks."
         );
     }
 }

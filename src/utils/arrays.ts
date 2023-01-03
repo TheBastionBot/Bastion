@@ -24,7 +24,7 @@ export const chunks = <T>(array: T[], size: number): T[][] => {
 export const shuffle = <T>(array: T[]) => {
     let currentIndex = array.length;
     while (currentIndex) {
-        let randomIndex = Math.floor(Math.random() * currentIndex--);
+        const randomIndex = Math.floor(Math.random() * currentIndex--);
         [ array[currentIndex], array[randomIndex] ] = [ array[randomIndex], array[currentIndex] ];
     }
 };

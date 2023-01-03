@@ -17,7 +17,7 @@ class GuildCreateListener extends Listener<"guildCreate"> {
     public async exec(guild: Guild): Promise<void> {
         // create the guild document
         GuildModel.findByIdAndUpdate(guild.id, {}, { upsert: true })
-        .catch(Logger.error);
+            .catch(Logger.error);
 
         // bastion log
         bastionLog(guild.client as Client, {
