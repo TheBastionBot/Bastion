@@ -43,7 +43,7 @@ class LogCommand extends Command {
 
         const guildDocument = await GuildModel.findById(interaction.guildId);
 
-        if (logContent && !moderation && !server) {
+        if (typeof logContent === "boolean" && !moderation && !server) {
             guildDocument.logContent = logContent;
             await guildDocument.save();
             return await interaction.editReply(`I've ${ logContent ? "enabled" : "disabled" } content logs for deleted or edited messages.`);
