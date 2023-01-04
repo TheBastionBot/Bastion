@@ -51,7 +51,7 @@ class SelectRolesAddCommand extends Command {
                     type: ApplicationCommandOptionType.Integer,
                     name: "min",
                     description: "The minimum number of roles users are allowed to select.",
-                    min_value: 1,
+                    min_value: 0,
                     max_value: 25,
                 },
                 {
