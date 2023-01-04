@@ -41,9 +41,10 @@ export const isValid = (embed: APIEmbed): boolean => {
 
     // check whether the author is valid
     if ("author" in embed) {
+        if (embed.author.constructor !== ({}).constructor) return false;
         if (typeof embed.author?.name !== "string") return false;
-        if (typeof embed.author?.url !== "string") return false;
-        if (typeof embed.author?.icon_url !== "string") return false;
+        if ("url" in embed.author && typeof embed.author.url !== "string") return false;
+        if ("icon_url" in embed.author && typeof embed.author?.icon_url !== "string") return false;
     }
 
     // check whether the color is valid
@@ -59,15 +60,15 @@ export const isValid = (embed: APIEmbed): boolean => {
             if (field?.constructor !== ({}).constructor) return false;
             if (!("name" in field)) return false;
             if (!("value" in field)) return false;
-            if (typeof field.inline !== "boolean") return false;
+            if ("inline" in field && typeof field.inline !== "boolean") return false;
         }
     }
 
     // check whether the footer is valid
     if ("footer" in embed) {
         if (embed.footer.constructor !== ({}).constructor) return false;
-        if (typeof embed.footer?.icon_url !== "string") return false;
-        if (typeof embed.footer?.text !== "string") return false;
+        if ("text" in embed.footer && typeof embed.footer?.text !== "string") return false;
+        if ("icon_url" in embed.footer && typeof embed.footer?.icon_url !== "string") return false;
     }
 
     // check whether the image is valid
