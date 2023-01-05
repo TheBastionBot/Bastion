@@ -9,6 +9,7 @@ import { PermissionFlagsBits, ApplicationCommandOptionType, ChatInputCommandInte
 import MemberModel from "../models/Member";
 import GuildModel from "../models/Guild";
 import { COLORS } from "../utils/constants";
+import { checkLevelUp } from "../utils/gamification";
 
 class GrantCommand extends Command {
     constructor() {
@@ -56,12 +57,14 @@ class GrantCommand extends Command {
 
         if (user) {
             // get user's profile data
-            const memberProfile = await MemberModel.findOne({ user: user.id, guild: interaction.guild.id });
-        
-            // check whether user profile exists
-            if (!memberProfile) {
-                return await interaction.editReply("User profile not found. Make sure the user has at least sent a message in the server.");
-            }
+            // find member document or create a new one
+            const memberDocument = await MemberModel.findOneAndUpdate({ user: interaction.user.id, guild: interaction.guildId }, {}, { new: true, upsert: true });
+
+            // update level
+            memberDocument.level = await checkLevelUp(interaction, memberDocument, guildDocument);
+
+            // save document
+            await memberDocument.save();
 
             // update XP & coins
             await MemberModel.updateOne({
@@ -79,9 +82,9 @@ class GrantCommand extends Command {
                 embeds: [{
                     color: COLORS.GREEN,
                     description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMember", {
-                        granter: interaction.user.tag,
+                        granter: interaction.user,
                         xp: xp ? xp : 0,
-                        coins: coins ? coins : 0, user: user.tag,
+                        coins: coins ? coins : 0, user: user,
                     }),
                 }],
             });
@@ -98,11 +101,11 @@ class GrantCommand extends Command {
         });
 
         // acknowledge
-        return await interaction.editReply({
+        await interaction.editReply({
             embeds: [{
                 color: COLORS.GREEN,
                 description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMembers", {
-                    granter: interaction.user.tag,
+                    granter: interaction.user,
                     xp: xp ? xp : 0,
                     coins: coins ? coins : 0,
                 }),
