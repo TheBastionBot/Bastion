@@ -21,19 +21,19 @@ class GrantCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.User,
                     name: "user",
-                    description: "The user to grant experience or coins."
+                    description: "The user to grant experience or coins.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "xp",
-                    description: "Amount of experience to grant."
+                    description: "Amount of experience to grant.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "coins",
-                    description: "Amount of coins to grant."
-                }
-            ]
+                    description: "Amount of coins to grant.",
+                },
+            ],
         });
     }
 
@@ -103,10 +103,10 @@ class GrantCommand extends Command {
                 color: COLORS.GREEN,
                 description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMembers", {
                     granter: interaction.user.tag,
-                    xp: xp? xp : 0,
-                    coins: coins? coins : 0,
+                    xp: xp ? xp : 0,
+                    coins: coins ? coins : 0,
                 }),
-            }]
+            }],
         });
     }
 }
