@@ -73,7 +73,7 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
                                     type: ComponentType.StringSelect,
                                     customId: MessageComponents.SelectRolesSelect,
                                     placeholder: "Select Roles",
-                                    minValues: selectRoleGroup.min || 1,
+                                    minValues: selectRoleGroup.min || 0,
                                     maxValues: selectRoleGroup.max || selectRoles.length,
                                     options: selectRoles,
                                 },
