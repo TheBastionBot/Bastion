@@ -76,9 +76,13 @@ async function checkLevelUp(message: Message<true> | ChatInputCommandInteraction
                 (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
                     .send(`${ user }, ${ gamificationMessage }`)
                     .catch(Logger.ignore);
+            } else if (message instanceof ChatInputCommandInteraction) {
+                message.channel
+                    .send(`${ user }, ${ gamificationMessage }`)
+                    .catch(Logger.ignore);
             } else {
                 message
-                    .reply((message instanceof ChatInputCommandInteraction ? `${ user }, ` : "") + gamificationMessage)
+                    .reply(gamificationMessage)
                     .catch(Logger.ignore);
             }
         }
