@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ChannelType, GuildTextBasedChannel, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
+import { APIEmbed, ChannelType, GuildTextBasedChannel, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild";
@@ -85,13 +85,28 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                const gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
+                const embed: APIEmbed = {
+                    color: COLORS.GREEN,
+                    author: {
+                        name: message.author.tag,
+                        icon_url: message.author.displayAvatarURL(),
+                    },
+                    title: "Level Up",
+                    description: `You are now level **${computedLevel}**!`,
+                };
+
                 if (guildDocument.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
                     (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
-                        .send(`${ message.author }, ${ gamificationMessage }`)
+                        .send({
+                            embeds: [{
+                                ...embed,
+                                description: `${ message.author } ${ embed.description }`
+                            },],
+                        })
                         .catch(Logger.ignore);
                 } else {
-                    message.reply(gamificationMessage)
+                    message
+                        .reply({ embeds: [ embed, ], })
                         .catch(Logger.ignore);
                 }
             }
