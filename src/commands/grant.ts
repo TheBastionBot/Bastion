@@ -60,31 +60,28 @@ class GrantCommand extends Command {
             // find member document or create a new one
             const memberDocument = await MemberModel.findOneAndUpdate({ user: interaction.user.id, guild: interaction.guildId }, {}, { new: true, upsert: true });
 
+            memberDocument.experience += xp || 0;
+            memberDocument.balance += coins || 0;
+
             // update level
             memberDocument.level = await checkLevelUp(interaction, memberDocument, guildDocument);
 
             // save document
             await memberDocument.save();
 
-            // update XP & coins
-            await MemberModel.updateOne({
-                user: user.id,
-                guild: interaction.guild.id,
-            }, {
-                $inc: {
-                    experience: xp ? xp : 0,
-                    balance: coins ? coins : 0,
-                },
-            });
-
             // acknowledge
             return await interaction.editReply({
                 embeds: [{
                     color: COLORS.GREEN,
+                    author: {
+                        name: interaction.guild.name,
+                    },
+                    title: "Grant",
                     description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMember", {
-                        granter: interaction.user,
+                        granter: interaction.user.tag,
                         xp: xp ? xp : 0,
-                        coins: coins ? coins : 0, user: user,
+                        coins: coins ? coins : 0,
+                        user: user.tag,
                     }),
                 }],
             });
@@ -104,8 +101,12 @@ class GrantCommand extends Command {
         await interaction.editReply({
             embeds: [{
                 color: COLORS.GREEN,
+                author: {
+                    name: interaction.guild.name,
+                },
+                title: "Grant",
                 description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMembers", {
-                    granter: interaction.user,
+                    granter: interaction.user.tag,
                     xp: xp ? xp : 0,
                     coins: coins ? coins : 0,
                 }),
