@@ -5,7 +5,7 @@
 issueOpenedResponse: |
   Thank you for opening this issue.
   A maintainer will get by as soon as practical to address this issue.
-  
+
   If this is a support question and not really an issue or suggestion, then please ask it in our [Discord Server](https://discord.gg/fzx8fkt 'Bastion HQ') instead.
 
 # Auto response when an issue is closed.
@@ -18,7 +18,7 @@ firstIssueOpenedResponse: |
   A maintainer will get by as soon as practical to address this issue.
 
   Since this is your first time here, please check the contributing guidelines to see other ways you can get involved.
-  
+
   If this is a support question and not really an issue or suggestion, then please ask it in our [Discord Server](https://discord.gg/fzx8fkt 'Bastion HQ') instead.
 
 # Auto response when a new pull request is opened.
@@ -52,4 +52,4 @@ inviteContributors: false
 
 
 # Create a status check to show pull requests as "Pending" if it's a work-in-progress.
-workInProgressCheck: true
+workInProgressCheck: false

@@ -1,12 +1,12 @@
 # Contributing Guidelines
 
-Contributions to [The Bastion Bot Project] include code, design, documentation,
-ideas, bug reports, answering user questions, running the project's
-infrastructure, and advocating for all types of Bastion users.
+Contributions to [Bastion] include code, design, documentation, ideas,
+bug reports, answering user questions, running the project's infrastructure,
+and advocating for all types of Bastion users.
 
-[The Bastion Bot Project] welcomes all contributions from anyone willing to work
-in good faith with other contributors and the community. No contribution is too
-small and all contributions are valued.
+[Bastion] welcomes all contributions from anyone willing to work in good faith
+with other contributors and the community. No contribution is too small and all
+contributions are valued.
 
 See the full [contributing guidelines] that explains the process for
 contributing to the project and describes what to expect at each step.
@@ -40,15 +40,13 @@ world, you can start doing that by going here: https://crowdin.com/project/basti
 
 If you are going to make some changes to this repository, you might want to read
 these before you open a Pull Request.
- -  [Setting up Development Environment](DEVELOPMENT_ENVIRONMENT.md)
- -  [Testing Guide](TESTING.md)
-
-> If you have any questions, feel free to ask us in the [Bastion HQ].
+ - [Testing Guide](TESTING.md)
+ - [Support](SUPPORT.md)
 
 
 <!-- Links -->
-[The Bastion Bot Project]: https://github.com/TheBastionBot 'The Bastion Bot GitHub Organization'
-[Contributing Guidelines]: https://bastion.gitbook.io/docs/contributing/guidelines 'The Bastion Bot - Contributing Guidelines'
-[Contributing Guidelines for Issues]: https://bastion.gitbook.io/docs/contributing/issues 'The Bastion Bot - Contributing on Issues'
-[Contributing Guidelines for Pull Requests]: https://bastion.gitbook.io/docs/contributing/pulls 'The Bastion Bot - Contributing on Pull Requests'
+[Bastion]: https://github.com/TheBastionBot 'Bastion'
+[Contributing Guidelines]: https://bastion.gitbook.io/docs/developers/contributing-guidelines 'Bastion - Contributing Guidelines'
+[Contributing Guidelines for Issues]: https://bastion.gitbook.io/docs/developers/contributing-guidelines/issues 'Bastion - Contributing on Issues'
+[Contributing Guidelines for Pull Requests]: https://bastion.gitbook.io/docs/developers/contributing-guidelines/pulls 'Bastion - Contributing on Pull Requests'
 [Bastion HQ]: https://discord.gg/fzx8fkt
