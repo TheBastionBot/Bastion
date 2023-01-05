@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildMember, PartialGuildMember } from "discord.js";
+import { GuildMember, PartialGuildMember, PresenceStatus } from "discord.js";
 import { Document } from "mongoose";
 
 import GuildModel from "../models/Guild";
@@ -80,6 +80,27 @@ export const clearInfraction = async (member: PartialGuildMember | GuildMember) 
 
         // save member
         return memberDocument.save();
+    }
+};
+
+/**
+ * Resolves the specified `PresenceStatus` to a human readable string.
+ * @param status The status you want to resolve.
+ */
+export const resolveStatus = (status: PresenceStatus) => {
+    switch (status) {
+    case "online":
+        return "Online";
+    case "idle":
+        return "Idle";
+    case "dnd":
+        return "Do Not Disturb";
+    case "invisible":
+        return "Invisible";
+    case "offline":
+        return "Offline";
+    default:
+        return status;
     }
 };
 
