@@ -7,7 +7,6 @@ import { Listener } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild";
 import { logGuildEvent } from "../utils/guilds";
-import gitDiff from "git-diff";
 
 class MessageUpdateListener extends Listener<"messageUpdate"> {
     constructor() {
@@ -55,14 +54,14 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     value: time(newMessage.createdAt),
                     inline: true,
                 },
-                guildDocument.logContent && oldMessage.content && newMessage.content && {
-                    name: "Diff",
-                    value: gitDiff(oldMessage.content, newMessage.content, {
-                        noHeaders: true,
-                        wordDiff: true
-                    })
-                        .split("\n")
-                        .join("\n"),
+                guildDocument.logContent && oldMessage.content && {
+                    name: "Old Content",
+                    value: oldMessage.content,
+                    inline: false,
+                },
+                guildDocument.logContent && newMessage.content && {
+                    name: "New Content",
+                    value: newMessage.content,
                     inline: false,
                 },
             ].filter(x => x),

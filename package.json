@@ -36,7 +36,6 @@
         "dotenv": "^16.0.3",
         "emoji-regex": "^10.2.1",
         "gamedig": "^4.0.5",
-        "git-diff": "^2.0.6",
         "jsdom": "^20.0.3",
         "libsodium-wrappers": "^0.7.10",
         "mathjs": "^11.4.0",
