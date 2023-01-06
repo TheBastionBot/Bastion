@@ -6,4 +6,4 @@
 #### Checklist
 <!-- For completed items, change [ ] to [x]. -->
 - [ ] Documentation is changed or added (if applicable)
-- [ ] Commit message follows the [commit guidelines](https://bastion.gitbook.io/docs/contributing/pulls#commit-message-guidelines)
+- [ ] Commit message follows the [commit guidelines](https://bastion.gitbook.io/docs/developers/contributing-guidelines/pulls#commit)

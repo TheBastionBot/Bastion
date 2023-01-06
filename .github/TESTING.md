@@ -7,7 +7,7 @@ your code is consistent with Bastion's [style guide] and doesn't break anything.
 After you've coded your heart out, run all the specified test scripts, by
 running this in your terminal:
 ```bash
-npm test
+npm test && npm run build
 ```
 This will verify the consistency of the coding style and if Bastion boots
 successfully.
@@ -21,5 +21,5 @@ test for yourself that your changes to the code are working fine.
 
 
 <!-- Links -->
-[Style Guide]: https://raw.githubusercontent.com/TheBastionBot/Bastion/master/.eslintrc
+[Style Guide]: https://raw.github.com/TheBastionBot/Bastion/main/.eslintrc.yml
 [Bastion HQ]: https://discord.gg/fzx8fkt

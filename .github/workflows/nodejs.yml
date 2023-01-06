@@ -1,0 +1,36 @@
+# This workflow will run tests using node and build the code on push or pull request events but only for the main and dev branches
+
+name: Node.js
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Dependencies
+      run: npm install
+
+    - name: Lint
+      run: npm test
+      env:
+        CI: true
+
+    - name: Build
+      run: npm run build
