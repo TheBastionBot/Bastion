@@ -64,7 +64,7 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     value: newMessage.content,
                     inline: false,
                 },
-            ].filter(x => x),
+            ].filter(f => f),
             timestamp: new Date().toISOString(),
         });
     }
