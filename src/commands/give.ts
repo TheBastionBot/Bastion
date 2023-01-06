@@ -24,6 +24,11 @@ class GiveCommand extends Command {
                     description: "The user to give experience or coins.",
                 },
                 {
+                    type: ApplicationCommandOptionType.Boolean,
+                    name: "everyone",
+                    description: "Give experience or coins to all active members."
+                },
+                {
                     type: ApplicationCommandOptionType.Integer,
                     name: "xp",
                     description: "Amount of experience to give.",
@@ -41,8 +46,17 @@ class GiveCommand extends Command {
         await interaction.deferReply();
 
         const user = interaction.options.getUser("user");
+        const everyone = interaction.options.getBoolean("everyone");
         const xp = interaction.options.getInteger("xp");
         const coins = interaction.options.getInteger("coins");
+
+        if (!user && !everyone) {
+            return await interaction.editReply("Please specify a user or set everyone to True.");
+        }
+
+        if (user && everyone) {
+            return await interaction.editReply("User and everyone cannot be used together.");
+        }
 
         if (!xp && !coins) {
             return await interaction.editReply("Please give at least 1 xp or coins.");
