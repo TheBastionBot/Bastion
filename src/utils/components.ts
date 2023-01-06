@@ -33,8 +33,6 @@ enum MessageComponents {
     VerificationButton = "VerificationButton",
     VerificationModal = "VerificationModal",
     VerificationTextInput = "VerificationTextInput",
-
-    PrivacyServerSelect = "PrivacyServerSelect",
 }
 
 export default MessageComponents;
