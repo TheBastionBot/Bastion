@@ -47,7 +47,7 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
                     value: time(message.createdAt),
                     inline: true,
                 },
-                guildDocument.logContent && message.content && {
+                guildDocument.serverLogContent && message.content && {
                     name: "Content",
                     value: message.content,
                     inline: false,

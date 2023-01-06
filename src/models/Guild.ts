@@ -52,7 +52,7 @@ export interface Guild {
     // logs
     moderationLogChannel?: string;
     serverLogChannel?: string;
-    logContent?: boolean;
+    serverLogContent?: boolean;
     // special channels and roles
     suggestionsChannel?: string;
     reportsChannel?: string;
@@ -194,7 +194,7 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         unique: true,
         sparse: true,
     },
-    logContent: {
+    serverLogContent: {
         type: Boolean,
     },
     suggestionsChannel: {

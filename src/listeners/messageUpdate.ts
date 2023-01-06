@@ -54,12 +54,12 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     value: time(newMessage.createdAt),
                     inline: true,
                 },
-                guildDocument.logContent && oldMessage.content && {
+                guildDocument.serverLogContent && oldMessage.content && {
                     name: "Old Content",
                     value: oldMessage.content,
                     inline: false,
                 },
-                guildDocument.logContent && newMessage.content && {
+                guildDocument.serverLogContent && newMessage.content && {
                     name: "New Content",
                     value: newMessage.content,
                     inline: false,
