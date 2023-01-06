@@ -10,28 +10,28 @@ import MemberModel from "../models/Member";
 import GuildModel from "../models/Guild";
 import { COLORS } from "../utils/constants";
 
-class GrantCommand extends Command {
+class GiveCommand extends Command {
     constructor() {
         super({
-            name: "grant",
-            description: "It allows you to grant experience or coins to the members of the server.",
+            name: "give",
+            description: "It allows you to give experience or coins to the members of the server.",
             clientPermissions: [ PermissionFlagsBits.ManageGuild ],
             userPermissions: [ PermissionFlagsBits.ManageGuild ],
             options: [
                 {
                     type: ApplicationCommandOptionType.User,
                     name: "user",
-                    description: "The user to grant experience or coins.",
+                    description: "The user to give experience or coins.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "xp",
-                    description: "Amount of experience to grant.",
+                    description: "Amount of experience to give.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "coins",
-                    description: "Amount of coins to grant.",
+                    description: "Amount of coins to give.",
                 },
             ],
         });
@@ -45,7 +45,7 @@ class GrantCommand extends Command {
         const coins = interaction.options.getInteger("coins");
 
         if (!xp && !coins) {
-            return await interaction.editReply("Please grant at least 1 xp or coins.");
+            return await interaction.editReply("Please give at least 1 xp or coins.");
         }
 
         const guildDocument = await GuildModel.findById(interaction.guild.id);
@@ -72,9 +72,9 @@ class GrantCommand extends Command {
                     author: {
                         name: interaction.guild.name,
                     },
-                    title: "Grant",
-                    description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMember", {
-                        granter: interaction.user.tag,
+                    title: "Give",
+                    description: (interaction.client as Client).locales.getText(interaction.guildLocale, "giveMember", {
+                        from: interaction.user.tag,
                         xp: xp ? xp : 0,
                         coins: coins ? coins : 0,
                         user: user.tag,
@@ -100,9 +100,9 @@ class GrantCommand extends Command {
                 author: {
                     name: interaction.guild.name,
                 },
-                title: "Grant",
-                description: (interaction.client as Client).locales.getText(interaction.guildLocale, "grantMembers", {
-                    granter: interaction.user.tag,
+                title: "Give",
+                description: (interaction.client as Client).locales.getText(interaction.guildLocale, "giveMembers", {
+                    from: interaction.user.tag,
                     xp: xp ? xp : 0,
                     coins: coins ? coins : 0,
                 }),
@@ -111,4 +111,4 @@ class GrantCommand extends Command {
     }
 }
 
-export = GrantCommand;
+export = GiveCommand;
