@@ -52,7 +52,7 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
                     value: message.content,
                     inline: false,
                 }
-            ].filter(x => x),
+            ].filter(f => f),
             timestamp: new Date().toISOString(),
         });
     }
