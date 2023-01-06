@@ -9,7 +9,6 @@ import { PermissionFlagsBits, ApplicationCommandOptionType, ChatInputCommandInte
 import MemberModel from "../models/Member";
 import GuildModel from "../models/Guild";
 import { COLORS } from "../utils/constants";
-import { checkLevelUp } from "../utils/gamification";
 
 class GrantCommand extends Command {
     constructor() {
@@ -63,9 +62,6 @@ class GrantCommand extends Command {
             memberDocument.experience += xp || 0;
             memberDocument.balance += coins || 0;
 
-            // update level
-            memberDocument.level = await checkLevelUp(interaction, memberDocument, guildDocument);
-
             // save document
             await memberDocument.save();
 
@@ -98,7 +94,7 @@ class GrantCommand extends Command {
         });
 
         // acknowledge
-        await interaction.editReply({
+        return await interaction.editReply({
             embeds: [{
                 color: COLORS.GREEN,
                 author: {
