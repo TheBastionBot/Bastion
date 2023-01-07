@@ -50,7 +50,7 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
                 guildDocument.serverLogContent && message.content && {
                     name: "Content",
                     value: message.content,
-                }
+                },
             ].filter(f => f),
             timestamp: new Date().toISOString(),
         });
