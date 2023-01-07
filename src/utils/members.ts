@@ -110,10 +110,10 @@ export const resolveStatus = (status: PresenceStatus) => {
  * @param amount The amount which is to be credited (or debited).
  * Use a negative value to debit the amount.
  */
-export const updateBalance = async (memberDocument: MemberDocument & Document, amount: number) => {
+export const updateBalance = (memberDocument: MemberDocument & Document, amount: number) => {
     // update member's balance
     if (memberDocument) {
-        memberDocument.balance = numbers.clamp(memberDocument.balance + amount, Number.MAX_SAFE_INTEGER);
+        memberDocument.balance = numbers.clamp(memberDocument.balance + amount, 0, Number.MAX_SAFE_INTEGER);
         return memberDocument;
     }
 };
