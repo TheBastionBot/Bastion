@@ -55,14 +55,8 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     inline: true,
                 },
                 guildDocument.serverLogContent && oldMessage.content && {
-                    name: "Old Content",
+                    name: "Previous Content",
                     value: oldMessage.content,
-                    inline: false,
-                },
-                guildDocument.serverLogContent && newMessage.content && {
-                    name: "New Content",
-                    value: newMessage.content,
-                    inline: false,
                 },
             ].filter(f => f),
             timestamp: new Date().toISOString(),
