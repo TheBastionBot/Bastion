@@ -117,3 +117,17 @@ export const updateBalance = async (memberDocument: MemberDocument & Document, a
         return memberDocument;
     }
 };
+
+/**
+ * Update experience of a member's account.
+ * @param memberDocument The member whose account experience is to be updated.
+ * @param amount The amount which is to be added (or removed).
+ * Use a negative value to remove the amount.
+ */
+export const updateExperience = (memberDocument: MemberDocument & Document, amount: number) => {
+    // update member's experience
+    if (memberDocument) {
+        memberDocument.experience = numbers.clamp(memberDocument.experience + amount, 0, Number.MAX_SAFE_INTEGER);
+        return memberDocument;
+    }
+};
