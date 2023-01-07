@@ -5,6 +5,7 @@
 import { Message, MessageType, PartialMessage, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
+import GuildModel from "../models/Guild";
 import { logGuildEvent } from "../utils/guilds";
 
 class MessageDeleteListener extends Listener<"messageDelete"> {
@@ -15,6 +16,8 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
     public async exec(message: Message<boolean> | PartialMessage): Promise<void> {
         if (!message.inGuild()) return;
         if (![ MessageType.Default, MessageType.Reply ].includes(message.type)) return;
+
+        const guildDocument = await GuildModel.findById(message.guild.id);
 
         await logGuildEvent(message.guild, {
             title: "Message Deleted",
@@ -44,7 +47,11 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
                     value: time(message.createdAt),
                     inline: true,
                 },
-            ],
+                guildDocument.serverLogContent && message.content && {
+                    name: "Content",
+                    value: message.content,
+                }
+            ].filter(f => f),
             timestamp: new Date().toISOString(),
         });
     }

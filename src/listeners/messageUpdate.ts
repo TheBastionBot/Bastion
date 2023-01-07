@@ -5,6 +5,7 @@
 import { Message, MessageType, PartialMessage, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
+import GuildModel from "../models/Guild";
 import { logGuildEvent } from "../utils/guilds";
 
 class MessageUpdateListener extends Listener<"messageUpdate"> {
@@ -16,6 +17,8 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
         if (!newMessage.inGuild()) return;
         if (![ MessageType.Default, MessageType.Reply ].includes(newMessage.type)) return;
         if (oldMessage.content === newMessage.content) return;
+
+        const guildDocument = await GuildModel.findById(newMessage.guild.id);
 
         await logGuildEvent(newMessage.guild, {
             title: "Message Updated",
@@ -51,7 +54,17 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
                     value: time(newMessage.createdAt),
                     inline: true,
                 },
-            ],
+                guildDocument.serverLogContent && oldMessage.content && {
+                    name: "Old Content",
+                    value: oldMessage.content,
+                    inline: false,
+                },
+                guildDocument.serverLogContent && newMessage.content && {
+                    name: "New Content",
+                    value: newMessage.content,
+                    inline: false,
+                },
+            ].filter(f => f),
             timestamp: new Date().toISOString(),
         });
     }
