@@ -73,7 +73,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
 
         // increment experience
-        memberDocument.experience = message.member.premiumSinceTimestamp ? memberDocument.experience + 2 : memberDocument.experience + 1;
+        members.updateExperience(memberDocument, message.member.premiumSinceTimestamp ? 2 : 1);
 
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(memberDocument.experience, guildDocument.gamificationMultiplier);
@@ -81,11 +81,12 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // level up
         if (computedLevel > memberDocument.level) {
             // credit reward amount into member's account
-            await members.updateBalance(memberDocument, computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER);
+            members.updateBalance(memberDocument, computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER);
 
             // achievement message
             if (guildDocument.gamificationMessages) {
                 const gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
+
                 if (guildDocument.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
                     (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
                         .send(`${ message.author }, ${ gamificationMessage }`)
