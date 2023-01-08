@@ -29,7 +29,7 @@ class SelfRolesSelectMenu extends MessageComponent {
             .concat(interaction.values.filter(id => selfRoleDocuments.some(doc => doc.id === id))); // add the selected self roles
 
         // update member roles
-        await interaction.member.roles.set(memberRoles)
+        await interaction.member.roles.set([ ...new Set(memberRoles) ])
             .catch(Logger.error);
 
         await interaction.deferUpdate();
