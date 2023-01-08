@@ -52,7 +52,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                 .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
 
             // update member roles
-            message.member.roles.set(memberRoles).catch(Logger.error);
+            message.member.roles.set([ ...new Set(memberRoles) ]).catch(Logger.error);
         }
     };
 
