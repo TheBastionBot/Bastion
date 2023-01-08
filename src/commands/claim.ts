@@ -71,7 +71,7 @@ class ClaimCommand extends Command {
         }
 
         // credit reward amount into member's account
-        await members.updateBalance(memberDocument, rewardAmount);
+        members.updateBalance(memberDocument, rewardAmount);
 
         // save document
         await memberDocument.save();

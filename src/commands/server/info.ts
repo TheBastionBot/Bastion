@@ -5,6 +5,7 @@
 import { ChannelType, ChatInputCommandInteraction, time } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
+import GuildModel from "../../models/Guild";
 import { COLORS, isPublicBastion } from "../../utils/constants";
 import { getPremiumTier } from "../../utils/premium";
 
@@ -19,6 +20,9 @@ class ChannelInfoCommand extends Command {
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
         await interaction.deferReply();
+
+        // get the guild document
+        const guildDocument = await GuildModel.findById(interaction.guildId);
 
         // check for premium membership
         const tier = isPublicBastion(interaction.client.user.id) && await getPremiumTier(interaction.guild.ownerId).catch(Logger.ignore);
@@ -71,7 +75,11 @@ class ChannelInfoCommand extends Command {
                             value: `${ interaction.guild.emojis.cache.size } Emojis`,
                             inline: true,
                         },
-                    ],
+                        guildDocument.serverLogContent && {
+                            name: "Privacy",
+                            value: "Logging is enabled for deleted and edited message content.",
+                        },
+                    ].filter(f => f),
                     thumbnail: {
                         url: interaction.guild.iconURL(),
                     },

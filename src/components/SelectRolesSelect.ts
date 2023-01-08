@@ -46,7 +46,7 @@ class SelectRolesSelectMenu extends MessageComponent {
                 .concat(roles); // add the selected roles
 
             // update member roles
-            await interaction.member.roles.set(memberRoles)
+            await interaction.member.roles.set([ ...new Set(memberRoles) ])
                 .catch(Logger.ignore);
         }
     }

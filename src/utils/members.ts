@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildMember, PartialGuildMember } from "discord.js";
+import { GuildMember, PartialGuildMember, PresenceStatus } from "discord.js";
 import { Document } from "mongoose";
 
 import GuildModel from "../models/Guild";
@@ -84,15 +84,50 @@ export const clearInfraction = async (member: PartialGuildMember | GuildMember) 
 };
 
 /**
+ * Resolves the specified `PresenceStatus` to a human readable string.
+ * @param status The status you want to resolve.
+ */
+export const resolveStatus = (status: PresenceStatus) => {
+    switch (status) {
+    case "online":
+        return "Online";
+    case "idle":
+        return "Idle";
+    case "dnd":
+        return "Do Not Disturb";
+    case "invisible":
+        return "Invisible";
+    case "offline":
+        return "Offline";
+    default:
+        return status;
+    }
+};
+
+/**
  * Update balance of a member's account.
  * @param memberDocument The member whose account balance is to be updated.
  * @param amount The amount which is to be credited (or debited).
  * Use a negative value to debit the amount.
  */
-export const updateBalance = async (memberDocument: MemberDocument & Document, amount: number) => {
+export const updateBalance = (memberDocument: MemberDocument & Document, amount: number) => {
     // update member's balance
     if (memberDocument) {
-        memberDocument.balance = numbers.clamp(memberDocument.balance + amount, Number.MAX_SAFE_INTEGER);
+        memberDocument.balance = numbers.clamp(memberDocument.balance + amount, 0, Number.MAX_SAFE_INTEGER);
+        return memberDocument;
+    }
+};
+
+/**
+ * Update experience of a member's account.
+ * @param memberDocument The member whose account experience is to be updated.
+ * @param amount The amount which is to be added (or removed).
+ * Use a negative value to remove the amount.
+ */
+export const updateExperience = (memberDocument: MemberDocument & Document, amount: number) => {
+    // update member's experience
+    if (memberDocument) {
+        memberDocument.experience = numbers.clamp(memberDocument.experience + amount, 0, Number.MAX_SAFE_INTEGER);
         return memberDocument;
     }
 };
