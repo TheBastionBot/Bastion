@@ -73,7 +73,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
 
         // increment experience
-        memberDocument.experience = message.member.premiumSinceTimestamp ? memberDocument.experience + 2 : memberDocument.experience + 1;
+        members.updateExperience(memberDocument, message.member.premiumSinceTimestamp ? 2 : 1);
 
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(memberDocument.experience, guildDocument.gamificationMultiplier);
