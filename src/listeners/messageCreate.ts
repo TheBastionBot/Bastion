@@ -81,11 +81,12 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // level up
         if (computedLevel > memberDocument.level) {
             // credit reward amount into member's account
-            await members.updateBalance(memberDocument, computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER);
+            members.updateBalance(memberDocument, computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER);
 
             // achievement message
             if (guildDocument.gamificationMessages) {
                 const gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
+
                 if (guildDocument.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
                     (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
                         .send(`${ message.author }, ${ gamificationMessage }`)
