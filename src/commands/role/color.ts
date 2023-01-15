@@ -12,7 +12,7 @@ class RoleColorCommand extends Command {
     constructor() {
         super({
             name: "color",
-            description: "Set the color of the specified role. If no role is specified, a role will be created and assigned to you.",
+            description: "Set the color of the specified role.",
             options: [
                 {
                     type: ApplicationCommandOptionType.String,
@@ -22,7 +22,7 @@ class RoleColorCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Role,
                     name: "role",
-                    description: "The role which you want the color changed.",
+                    description: "The role which you want the color changed. A role is created, if not specified.",
                 },
             ],
         });
