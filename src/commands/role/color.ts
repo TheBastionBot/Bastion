@@ -35,7 +35,7 @@ class RoleColorCommand extends Command {
         
         if (colorInput) {
             try {
-                color = (new Color(colorInput)).hex() as HexColorString;
+                color = (new Color(colorInput)).hex().toLowerCase() as HexColorString;
             } catch {
                 return interaction.editReply("Invalid color.");
             }
