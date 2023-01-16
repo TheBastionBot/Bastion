@@ -41,7 +41,7 @@ class RoleColorCommand extends Command {
             }
         }
         
-        color = `#${randomBytes(3).toString("hex")}`;
+        color = color || `#${randomBytes(3).toString("hex")}`;
         
         let role = interaction.options.getRole("role");
         if (!role) {
