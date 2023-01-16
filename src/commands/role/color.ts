@@ -48,16 +48,25 @@ class RoleColorCommand extends Command {
             const userRoleName = `User-${interaction.user.id}`;
             role = interaction.guild.roles.cache.find(r => r.name === userRoleName);
             if (!role) {
-                role = await interaction.guild.roles.create();
+                await interaction.guild.roles.create({
+                    name: userRoleName,
+                    color,
+                    hoist: false,
+                }).then(newRole => { role = newRole; })
+                    .catch(Logger.ignore);
+
                 if (!role) {
                     return interaction.editReply("Failed to create role.");
                 }
-                await role.edit({ name: userRoleName }).catch(Logger.ignore);
+
                 try {
                     await interaction.member.roles.add(role);
                 } catch {
+                    role.delete().catch(Logger.ignore);
                     return interaction.editReply("Failed to assign a new role to you.");
                 }
+
+                role.edit({ position: interaction.member.roles.cache.first().position, }).catch(Logger.ignore);
             }
         }
 
