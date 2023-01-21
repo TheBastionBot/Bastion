@@ -4,7 +4,7 @@
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { JSDOM } from "jsdom";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests";
 
@@ -49,7 +49,7 @@ class PHDCommand extends Command {
             });
         }
 
-        await interaction.editReply("I didn't find any comic. Please try again.");
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "comicNotFound"));
     }
 }
 

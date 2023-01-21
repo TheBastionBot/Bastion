@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 import * as numbers from "../../utils/numbers";
 import { COLORS } from "../../utils/constants";
@@ -61,7 +61,7 @@ class RollCommand extends Command {
 
         if (!matches?.length) {
             return await interaction.reply({
-                content: `\`${ notation }\` is an invalid (or unsupported) dice notation.`,
+                content: (interaction.client as Client).locales.getText(interaction.guildLocale, "diceNotationInvalid", { notation }),
                 ephemeral: true,
             });
         }

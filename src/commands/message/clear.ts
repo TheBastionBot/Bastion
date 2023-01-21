@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class ClearCommand extends Command {
     constructor() {
@@ -74,8 +74,8 @@ class ClearCommand extends Command {
 
         await interaction.editReply(
             deletedMessages?.size
-                ?   `I've deleted **${ deletedMessages.size }** messages from the channel.`
-                :   "I didn't find any deletable messages from the last two weeks."
+                ?   (interaction.client as Client).locales.getText(interaction.guildLocale, "messageBulkDeleted", { count: deletedMessages.size })
+                :   (interaction.client as Client).locales.getText(interaction.guildLocale, "messageBulkDeleteNotFound")
         );
     }
 }

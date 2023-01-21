@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 
 import { logModerationEvent } from "../utils/guilds";
 import { addInfraction, manageable } from "../utils/members";
@@ -42,7 +42,7 @@ class WarnCommand extends Command {
             // add infraction to the member
             await addInfraction(member, reason);
 
-            const warnMessage = await interaction.editReply(`${ user } received a warning for **${ reason }**.`);
+            const warnMessage = await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "warnSuccess", { user, reason }));
 
             // create moderation log
             return logModerationEvent(interaction.guild, {
@@ -73,7 +73,7 @@ class WarnCommand extends Command {
         }
 
         return await interaction.editReply({
-            content: `You don't have permission to warn ${ user }.`,
+            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "warnPermsError", { user }),
         });
     }
 }

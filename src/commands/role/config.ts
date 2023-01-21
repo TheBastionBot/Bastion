@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildPremiumTier } from "discord.js";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildPremiumTier, PermissionFlagsBits } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
 import RoleModel from "../../models/Role";
@@ -32,6 +32,7 @@ class RoleConfigCommand extends Command {
                     description: "A description for the role (max 100 characters).",
                 },
             ],
+            userPermissions: [ PermissionFlagsBits.ManageRoles ],
         });
     }
 
