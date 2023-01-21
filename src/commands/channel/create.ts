@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, ChannelType, GuildChannelTypes, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class ChannelCreateCommand extends Command {
     constructor() {
@@ -87,7 +87,7 @@ class ChannelCreateCommand extends Command {
             reason,
         });
 
-        await interaction.editReply(`I've created the ${ channel } channel.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "channelCreated", { channel }));
     }
 }
 

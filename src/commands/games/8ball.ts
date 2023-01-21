@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class Magic8BallCommand extends Command {
     private choices: string[];
@@ -47,7 +47,7 @@ class Magic8BallCommand extends Command {
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
-        await interaction.reply(`🎱 Magic 8-ball says... ${ this.choices[Math.floor(Math.random() * this.choices.length)] }`);
+        await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "8BallSays", { response: this.choices[Math.floor(Math.random() * this.choices.length)] }));
     }
 }
 

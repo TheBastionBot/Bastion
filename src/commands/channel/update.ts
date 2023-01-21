@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildTextBasedChannel, PermissionFlagsBits, ThreadChannel, VoiceBasedChannel, VoiceChannel } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class ChannelUpdateCommand extends Command {
     constructor() {
@@ -75,7 +75,7 @@ class ChannelUpdateCommand extends Command {
             reason,
         });
 
-        await interaction.editReply(`I've updated the ${ channel } channel.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "channelUpdated", { channel: channel }));
     }
 }
 
