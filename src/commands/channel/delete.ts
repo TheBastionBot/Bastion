@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
 
 class ChannelDeleteCommand extends Command {
     constructor() {
@@ -35,7 +35,7 @@ class ChannelDeleteCommand extends Command {
         await (channel || interaction.channel).delete(reason);
 
         if (channel?.id && channel.id !== interaction.channelId) {
-            await interaction.editReply(`I've deleted the **${ channel.name }** channel.`);
+            await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "channelDeleted", { channel: channel.name }));
         }
     }
 }

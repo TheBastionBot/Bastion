@@ -45,7 +45,7 @@ class InviteCommand extends Command {
 
         if (!interaction.memberPermissions.has(PermissionFlagsBits.CreateInstantInvite)) {
             return await interaction.reply({
-                content: "You don't have permissions to invite people to this channel.",
+                content: (interaction.client as Client).locales.getText(interaction.guildLocale, "invitePermsError"),
                 components: [
                     {
                         type: ComponentType.ActionRow,

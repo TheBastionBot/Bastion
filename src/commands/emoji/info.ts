@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 
 class EmojiInfoCommand extends Command {
     constructor() {
@@ -42,7 +42,7 @@ class EmojiInfoCommand extends Command {
             });
         }
 
-        await interaction.editReply(`I didn't find any custom emoji for **${ identifier }**.`);
+        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "emojiCustomNotFound", { identifier }));
     }
 }
 
