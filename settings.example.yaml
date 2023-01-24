@@ -19,6 +19,9 @@ owners:
 
 # MongoDB connection URI
 # `TESSERACT_MONGO_URI` environment variable overwrites this value.
+# NOTE: If you're running MongoDB locally and using Bastion's Docker image,
+# replace the IP `127.0.0.1` to `host.docker.internal` so Docker can access
+# your local MongoDB server.
 mongoURI: "mongodb://127.0.0.1:27017/bastion"
 
 # Presences
