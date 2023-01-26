@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits, escapeMarkdown } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild";
@@ -73,7 +73,7 @@ class LiveStreamsCommand extends Command {
             return await interaction.editReply("I've updated Twitch live notification settings.");
         }
 
-        return await interaction.editReply(guildDocument.twitchNotificationUsers?.length ? `You'll be notified when these Twitch channels go live: ${guildDocument.twitchNotificationUsers.join(", ")}.` : "You're not following any channels for live notifications.");
+        return await interaction.editReply(guildDocument.twitchNotificationUsers?.length ? `You'll be notified when these Twitch channels go live: **${ escapeMarkdown(guildDocument.twitchNotificationUsers.join(", ")) }**.` : "You're not following any channels for live notifications.");
     }
 }
 
