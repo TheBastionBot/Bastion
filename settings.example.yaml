@@ -85,7 +85,7 @@ openWeatherMapApiKey: ""
 tmdbApiKey: ""
 # Required for `apex`, `csgo`, and `fortnite` commands.
 trackerNetworkApiKey: ""
-# Required for `game` command.
+# Required for Twitch live stream notifications and `game` command.
 twitch:
   clientId: ""
   clientSecret: ""
