@@ -2,6 +2,7 @@
     "name": "bastion",
     "version": "10.8.2",
     "description": "Get an enhanced Discord experience!",
+    "type": "module",
     "homepage": "https://bastion.traction.one",
     "main": "./dist/index.js",
     "repository": "https://github.com/TheBastionBot/Bastion.git",
