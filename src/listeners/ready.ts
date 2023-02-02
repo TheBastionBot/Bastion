@@ -5,7 +5,7 @@
 import { Client } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
-import GuildModel, { Guild as GuildDocument } from "../models/Guild";
+import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 
 class ReadyListener extends Listener<"ready"> {
     constructor() {
@@ -31,4 +31,4 @@ class ReadyListener extends Listener<"ready"> {
     }
 }
 
-export = ReadyListener;
+export { ReadyListener as Listener };

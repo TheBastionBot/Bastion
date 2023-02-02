@@ -15,4 +15,4 @@ class ShardErrorListener extends Listener<"shardError"> {
     }
 }
 
-export = ShardErrorListener;
+export { ShardErrorListener as Listener };

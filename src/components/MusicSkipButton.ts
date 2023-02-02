@@ -6,7 +6,7 @@ import { StringSelectMenuInteraction } from "discord.js";
 import { AudioPlayerStatus } from "@discordjs/voice";
 import { Client, MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
+import MessageComponents from "../utils/components.js";
 
 class MusicSkipButton extends MessageComponent {
     constructor() {
@@ -28,4 +28,4 @@ class MusicSkipButton extends MessageComponent {
     }
 }
 
-export = MusicSkipButton;
+export { MusicSkipButton as MessageComponent };

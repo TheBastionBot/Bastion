@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Client, Command, Logger } from "@bastion/tesseract";
 
-import { logModerationEvent } from "../utils/guilds";
-import { addInfraction, manageable } from "../utils/members";
+import { logModerationEvent } from "../utils/guilds.js";
+import { addInfraction, manageable } from "../utils/members.js";
 
 class WarnCommand extends Command {
     constructor() {
@@ -78,4 +78,4 @@ class WarnCommand extends Command {
     }
 }
 
-export = WarnCommand;
+export { WarnCommand as Command };

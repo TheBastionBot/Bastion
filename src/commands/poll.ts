@@ -5,10 +5,10 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
-import PollModel from "../models/Poll";
-import MessageComponents from "../utils/components";
-import { COLORS, isPublicBastion } from "../utils/constants";
-import { checkFeature, Feature, getPremiumTier } from "../utils/premium";
+import PollModel from "../models/Poll.js";
+import MessageComponents from "../utils/components.js";
+import { COLORS, isPublicBastion } from "../utils/constants.js";
+import { checkFeature, Feature, getPremiumTier } from "../utils/premium.js";
 
 class PollCommand extends Command {
     /** The default poll vote reactions. */
@@ -141,4 +141,4 @@ class PollCommand extends Command {
     }
 }
 
-export = PollCommand;
+export { PollCommand as Command };

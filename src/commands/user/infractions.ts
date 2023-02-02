@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import MemberModel from "../../models/Member";
-import { COLORS } from "../../utils/constants";
+import GuildModel from "../../models/Guild.js";
+import MemberModel from "../../models/Member.js";
+import { COLORS } from "../../utils/constants.js";
 
 class UserInfractionsCommand extends Command {
     constructor() {
@@ -122,4 +122,4 @@ class UserInfractionsCommand extends Command {
     }
 }
 
-export = UserInfractionsCommand;
+export { UserInfractionsCommand as Command };

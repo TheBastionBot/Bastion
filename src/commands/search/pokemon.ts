@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { COLORS } from "../../utils/constants";
+import * as requests from "../../utils/requests.js";
+import { COLORS } from "../../utils/constants.js";
 
 interface Pokemon {
     number: string;
@@ -136,4 +136,4 @@ class PokemonCommand extends Command {
     }
 }
 
-export = PokemonCommand;
+export { PokemonCommand as Command };

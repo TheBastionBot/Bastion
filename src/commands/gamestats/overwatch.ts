@@ -40,4 +40,4 @@ class OverwatchCommand extends Command {
     }
 }
 
-export = OverwatchCommand;
+export { OverwatchCommand as Command };

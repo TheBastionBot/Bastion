@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import MessageComponents from "../../utils/components";
+import GuildModel from "../../models/Guild.js";
+import MessageComponents from "../../utils/components.js";
 
 class VerificationCommand extends Command {
     constructor() {
@@ -71,4 +71,4 @@ class VerificationCommand extends Command {
     }
 }
 
-export = VerificationCommand;
+export { VerificationCommand as Command };

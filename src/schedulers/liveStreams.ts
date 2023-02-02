@@ -5,11 +5,11 @@
 import { GuildTextBasedChannel, Snowflake } from "discord.js";
 import { Logger, Scheduler } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import memcache from "../utils/memcache";
-import * as requests from "../utils/requests";
-import { COLORS } from "../utils/constants";
-import { bastion, TwitchStream } from "../types";
+import GuildModel from "../models/Guild.js";
+import memcache from "../utils/memcache.js";
+import * as requests from "../utils/requests.js";
+import { COLORS } from "../utils/constants.js";
+import { bastion, TwitchStream } from "../types.js";
 
 const TWITCH_CACHE_NAMESPACE = "twitchStreams";
 
@@ -101,4 +101,4 @@ class LiveStreamNotificationScheduler extends Scheduler {
     }
 }
 
-export = LiveStreamNotificationScheduler;
+export { LiveStreamNotificationScheduler as Scheduler };

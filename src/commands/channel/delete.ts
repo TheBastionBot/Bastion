@@ -40,4 +40,4 @@ class ChannelDeleteCommand extends Command {
     }
 }
 
-export = ChannelDeleteCommand;
+export { ChannelDeleteCommand as Command };

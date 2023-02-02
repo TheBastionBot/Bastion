@@ -5,7 +5,7 @@
 import { Role, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class RoleDeleteListener extends Listener<"roleDelete"> {
     constructor() {
@@ -36,4 +36,4 @@ class RoleDeleteListener extends Listener<"roleDelete"> {
     }
 }
 
-export = RoleDeleteListener;
+export { RoleDeleteListener as Listener };

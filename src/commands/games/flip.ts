@@ -39,4 +39,4 @@ class FlipCommand extends Command {
     }
 }
 
-export = FlipCommand;
+export { FlipCommand as Command };

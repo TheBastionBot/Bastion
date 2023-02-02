@@ -79,4 +79,4 @@ class ChannelUpdateCommand extends Command {
     }
 }
 
-export = ChannelUpdateCommand;
+export { ChannelUpdateCommand as Command };

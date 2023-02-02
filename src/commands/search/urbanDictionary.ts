@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
+import * as requests from "../../utils/requests.js";
 
 interface Definition {
     definition: string;
@@ -56,4 +56,4 @@ class UrbanDictionaryCommand extends Command {
     }
 }
 
-export = UrbanDictionaryCommand;
+export { UrbanDictionaryCommand as Command };

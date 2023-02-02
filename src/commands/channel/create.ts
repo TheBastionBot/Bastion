@@ -91,4 +91,4 @@ class ChannelCreateCommand extends Command {
     }
 }
 
-export = ChannelCreateCommand;
+export { ChannelCreateCommand as Command };

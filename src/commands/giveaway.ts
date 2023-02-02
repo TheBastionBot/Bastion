@@ -5,10 +5,10 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
 import { Client, Command, Logger } from "@bastion/tesseract";
 
-import GiveawayModel from "../models/Giveaway";
-import MessageComponents from "../utils/components";
-import { COLORS, isPublicBastion } from "../utils/constants";
-import { checkFeature, Feature, getPremiumTier } from "../utils/premium";
+import GiveawayModel from "../models/Giveaway.js";
+import MessageComponents from "../utils/components.js";
+import { COLORS, isPublicBastion } from "../utils/constants.js";
+import { checkFeature, Feature, getPremiumTier } from "../utils/premium.js";
 
 class GiveawayCommand extends Command {
     /** The default reaction for participating. */
@@ -127,4 +127,4 @@ class GiveawayCommand extends Command {
     }
 }
 
-export = GiveawayCommand;
+export { GiveawayCommand as Command };

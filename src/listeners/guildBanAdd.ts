@@ -5,7 +5,7 @@
 import { GuildBan } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class GuildBanAddListener extends Listener<"guildBanAdd"> {
     constructor() {
@@ -37,4 +37,4 @@ class GuildBanAddListener extends Listener<"guildBanAdd"> {
     }
 }
 
-export = GuildBanAddListener;
+export { GuildBanAddListener as Listener };

@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { COLORS } from "../../utils/constants";
+import * as requests from "../../utils/requests.js";
+import { COLORS } from "../../utils/constants.js";
 
 interface Manga {
     titles: { [key: string]: string };
@@ -90,4 +90,4 @@ class MangaCommand extends Command {
     }
 }
 
-export = MangaCommand;
+export { MangaCommand as Command };

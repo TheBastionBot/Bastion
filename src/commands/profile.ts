@@ -5,11 +5,11 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import MemberModel from "../models/Member";
-import { COLORS } from "../utils/constants";
-import * as gamification from "../utils/gamification";
-import progress from "../utils/progress";
+import GuildModel from "../models/Guild.js";
+import MemberModel from "../models/Member.js";
+import { COLORS } from "../utils/constants.js";
+import * as gamification from "../utils/gamification.js";
+import progress from "../utils/progress.js";
 
 class ProfileCommand extends Command {
     constructor() {
@@ -149,4 +149,4 @@ class ProfileCommand extends Command {
     }
 }
 
-export = ProfileCommand;
+export { ProfileCommand as Command };

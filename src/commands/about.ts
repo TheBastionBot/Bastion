@@ -51,4 +51,4 @@ class AboutCommand extends Command {
     }
 }
 
-export = AboutCommand;
+export { AboutCommand as Command };

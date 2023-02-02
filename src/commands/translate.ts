@@ -45,4 +45,4 @@ class TranslateCommand extends Command {
     }
 }
 
-export = TranslateCommand;
+export { TranslateCommand as Command };

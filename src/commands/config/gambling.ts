@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import { isPublicBastion } from "../../utils/constants";
-import { isPremiumUser } from "../../utils/premium";
+import GuildModel from "../../models/Guild.js";
+import { isPublicBastion } from "../../utils/constants.js";
+import { isPremiumUser } from "../../utils/premium.js";
 
 class GamblingCommand extends Command {
     constructor() {
@@ -47,4 +47,4 @@ class GamblingCommand extends Command {
     }
 }
 
-export = GamblingCommand;
+export { GamblingCommand as Command };

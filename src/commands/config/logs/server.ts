@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../../models/Guild";
+import GuildModel from "../../../models/Guild.js";
 
 class LogServerCommand extends Command {
     constructor() {
@@ -40,4 +40,4 @@ class LogServerCommand extends Command {
     }
 }
 
-export = LogServerCommand;
+export { LogServerCommand as Command };

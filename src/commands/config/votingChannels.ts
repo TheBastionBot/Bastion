@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, GuildTextBasedChannel, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import { isPublicBastion } from "../../utils/constants";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium";
+import GuildModel from "../../models/Guild.js";
+import { isPublicBastion } from "../../utils/constants.js";
+import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
 
 class VotingChannelsCommand extends Command {
     constructor() {
@@ -94,4 +94,4 @@ class VotingChannelsCommand extends Command {
     }
 }
 
-export = VotingChannelsCommand;
+export { VotingChannelsCommand as Command };

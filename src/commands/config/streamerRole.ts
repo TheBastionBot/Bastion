@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
+import GuildModel from "../../models/Guild.js";
 
 class StreamerRoleCommand extends Command {
     constructor() {
@@ -41,4 +41,4 @@ class StreamerRoleCommand extends Command {
     }
 }
 
-export = StreamerRoleCommand;
+export { StreamerRoleCommand as Command };

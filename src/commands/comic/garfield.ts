@@ -32,4 +32,4 @@ class GarfieldCommand extends Command {
     }
 }
 
-export = GarfieldCommand;
+export { GarfieldCommand as Command };

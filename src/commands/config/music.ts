@@ -5,9 +5,9 @@
 import { ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import { isPublicBastion } from "../../utils/constants";
-import { isPremiumUser } from "../../utils/premium";
+import GuildModel from "../../models/Guild.js";
+import { isPublicBastion } from "../../utils/constants.js";
+import { isPremiumUser } from "../../utils/premium.js";
 
 class MusicCommand extends Command {
     constructor() {
@@ -39,4 +39,4 @@ class MusicCommand extends Command {
     }
 }
 
-export = MusicCommand;
+export { MusicCommand as Command };

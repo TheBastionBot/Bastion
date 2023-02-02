@@ -5,13 +5,13 @@
 import { APIEmbed, GuildMember, time } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import RoleModel from "../models/Role";
-import { COLORS } from "../utils/constants";
-import { generate as generateEmbed } from "../utils/embeds";
-import { logGuildEvent } from "../utils/guilds";
-import * as variables from "../utils/variables";
-import * as yaml from "../utils/yaml";
+import GuildModel from "../models/Guild.js";
+import RoleModel from "../models/Role.js";
+import { COLORS } from "../utils/constants.js";
+import { generate as generateEmbed } from "../utils/embeds.js";
+import { logGuildEvent } from "../utils/guilds.js";
+import * as variables from "../utils/variables.js";
+import * as yaml from "../utils/yaml.js";
 
 class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
     private greetings: string[];
@@ -98,4 +98,4 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
     }
 }
 
-export = GuildMemberAddListener;
+export { GuildMemberAddListener as Listener };

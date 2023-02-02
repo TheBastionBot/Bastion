@@ -5,8 +5,8 @@
 import { Message, MessageType, PartialMessage, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import { logGuildEvent } from "../utils/guilds";
+import GuildModel from "../models/Guild.js";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class MessageUpdateListener extends Listener<"messageUpdate"> {
     constructor() {
@@ -64,4 +64,4 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
     }
 }
 
-export = MessageUpdateListener;
+export { MessageUpdateListener as Listener };

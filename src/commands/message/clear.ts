@@ -80,4 +80,4 @@ class ClearCommand extends Command {
     }
 }
 
-export = ClearCommand;
+export { ClearCommand as Command };

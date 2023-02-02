@@ -5,8 +5,8 @@
 import { NonThreadGuildBasedChannel } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { resolveType } from "../utils/channels";
-import { logGuildEvent } from "../utils/guilds";
+import { resolveType } from "../utils/channels.js";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class ChannelCreateListener extends Listener<"channelCreate"> {
     constructor() {
@@ -41,4 +41,4 @@ class ChannelCreateListener extends Listener<"channelCreate"> {
     }
 }
 
-export = ChannelCreateListener;
+export { ChannelCreateListener as Listener };

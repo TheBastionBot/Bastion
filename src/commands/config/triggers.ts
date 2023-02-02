@@ -5,10 +5,10 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import TriggerModel from "../../models/Trigger";
-import { COLORS, isPublicBastion } from "../../utils/constants";
-import { parseEmoji } from "../../utils/emojis";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium";
+import TriggerModel from "../../models/Trigger.js";
+import { COLORS, isPublicBastion } from "../../utils/constants.js";
+import { parseEmoji } from "../../utils/emojis.js";
+import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
 
 class TriggersCommand extends Command {
     constructor() {
@@ -106,4 +106,4 @@ class TriggersCommand extends Command {
     }
 }
 
-export = TriggersCommand;
+export { TriggersCommand as Command };

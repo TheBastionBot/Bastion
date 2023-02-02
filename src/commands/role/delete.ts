@@ -42,4 +42,4 @@ class RoleDeleteCommand extends Command {
     }
 }
 
-export = RoleDeleteCommand;
+export { RoleDeleteCommand as Command };

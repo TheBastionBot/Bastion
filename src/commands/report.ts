@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, GuildTextBasedChannel } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import MessageComponents from "../utils/components";
-import { COLORS } from "../utils/constants";
+import GuildModel from "../models/Guild.js";
+import MessageComponents from "../utils/components.js";
+import { COLORS } from "../utils/constants.js";
 
 class ReportCommand extends Command {
     constructor() {
@@ -100,4 +100,4 @@ class ReportCommand extends Command {
     }
 }
 
-export = ReportCommand;
+export { ReportCommand as Command };
