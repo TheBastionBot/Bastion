@@ -4,9 +4,9 @@
  */
 import { Logger } from "@bastion/tesseract";
 import { MongoClient } from "mongodb";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 
-import * as yaml from "./utils/yaml";
+import * as yaml from "./utils/yaml.js";
 
 // configure dotenv
 dotenv.config();

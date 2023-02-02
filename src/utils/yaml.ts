@@ -4,7 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import * as yaml from "yaml";
+import yaml from "yaml";
 
 /**
  * Parse .yaml file into JSON.

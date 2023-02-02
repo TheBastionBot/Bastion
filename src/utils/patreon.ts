@@ -4,10 +4,10 @@
  */
 import * as querystring from "node:querystring";
 
-import memcache from "./memcache";
-import * as requests from "./requests";
-import * as settings from "./settings";
-import { patreon } from "../types";
+import memcache from "./memcache.js";
+import * as requests from "./requests.js";
+import * as settings from "./settings.js";
+import { patreon } from "../types.js";
 
 export const CACHE_NAMESPACE = "patreon";
 

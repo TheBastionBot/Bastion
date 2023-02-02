@@ -5,8 +5,8 @@
 import { APIEmbed, Guild } from "discord.js";
 import { Logger } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import { COLORS } from "./constants";
+import GuildModel from "../models/Guild.js";
+import { COLORS } from "./constants.js";
 
 /**
  * Log guild event in the guild's log channel.

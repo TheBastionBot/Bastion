@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 
 export interface Member {
     user: string;
