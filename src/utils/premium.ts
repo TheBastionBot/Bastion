@@ -140,7 +140,7 @@ export const getPremiumTier = async (identifier: Snowflake | User | GuildMember 
         }
     }
 
-    return null;
+    return Tier.Free;
 };
 
 /**
