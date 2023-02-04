@@ -5,8 +5,8 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import { bastion } from "../../types";
-import * as requests from "../../utils/requests";
+import { bastion } from "../../types.js";
+import * as requests from "../../utils/requests.js";
 
 interface APOD {
     copyright: string;
@@ -37,4 +37,4 @@ class APODCommand extends Command {
     }
 }
 
-export = APODCommand;
+export { APODCommand as Command };

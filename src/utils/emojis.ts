@@ -4,7 +4,7 @@
  */
 import getEmojiRegex from "emoji-regex";
 
-import * as snowflake from "./snowflake";
+import * as snowflake from "./snowflake.js";
 
 const EMOJI_REGEX = getEmojiRegex();
 

@@ -5,7 +5,7 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { AudioPlayerStatus } from "@discordjs/voice";
 import { Client, Command } from "@bastion/tesseract";
-import { music } from "@bastion/tesseract/typings/types";
+import { music } from "@bastion/tesseract/typings/types.js";
 
 class SkipCommand extends Command {
     constructor() {
@@ -31,4 +31,4 @@ class SkipCommand extends Command {
     }
 }
 
-export = SkipCommand;
+export { SkipCommand as Command };

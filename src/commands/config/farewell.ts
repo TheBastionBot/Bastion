@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
+import GuildModel from "../../models/Guild.js";
 
 class FarewellCommand extends Command {
     constructor() {
@@ -64,4 +64,4 @@ class FarewellCommand extends Command {
     }
 }
 
-export = FarewellCommand;
+export { FarewellCommand as Command };

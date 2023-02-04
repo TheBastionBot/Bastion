@@ -5,8 +5,8 @@
 import { ButtonInteraction, ButtonStyle, ComponentType, PermissionFlagsBits } from "discord.js";
 import { MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
-import { COLORS } from "../utils/constants";
+import MessageComponents from "../utils/components.js";
+import { COLORS } from "../utils/constants.js";
 
 class SuggestionResetButton extends MessageComponent {
     constructor() {
@@ -51,4 +51,4 @@ class SuggestionResetButton extends MessageComponent {
     }
 }
 
-export = SuggestionResetButton;
+export { SuggestionResetButton as MessageComponent };

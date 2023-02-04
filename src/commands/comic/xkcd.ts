@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
+import * as requests from "../../utils/requests.js";
 
 interface XKCD {
     title: string;
@@ -52,4 +52,4 @@ class XKCDCommand extends Command {
     }
 }
 
-export = XKCDCommand;
+export { XKCDCommand as Command };

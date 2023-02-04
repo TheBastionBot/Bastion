@@ -5,10 +5,10 @@
 import { Client, Listener, Logger } from "@bastion/tesseract";
 import { ButtonStyle, ChannelType, ComponentType, PermissionFlagsBits, VoiceState } from "discord.js";
 
-import GuildModel from "../models/Guild";
-import MessageComponents from "../utils/components";
-import { isPublicBastion } from "../utils/constants";
-import { isPremiumUser } from "../utils/premium";
+import GuildModel from "../models/Guild.js";
+import MessageComponents from "../utils/components.js";
+import { isPublicBastion } from "../utils/constants.js";
+import { isPremiumUser } from "../utils/premium.js";
 
 class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
     private newSessionChannelPrefix: string;
@@ -107,4 +107,4 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
     }
 }
 
-export = VoiceStateUpdateListener;
+export { VoiceStateUpdateListener as Listener };

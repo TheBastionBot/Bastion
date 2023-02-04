@@ -5,8 +5,8 @@
 import { StringSelectMenuInteraction } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import RoleModel from "../models/Role";
-import MessageComponents from "../utils/components";
+import RoleModel from "../models/Role.js";
+import MessageComponents from "../utils/components.js";
 
 class SelfRolesSelectMenu extends MessageComponent {
     constructor() {
@@ -36,4 +36,4 @@ class SelfRolesSelectMenu extends MessageComponent {
     }
 }
 
-export = SelfRolesSelectMenu;
+export { SelfRolesSelectMenu as MessageComponent };

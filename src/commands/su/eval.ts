@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
@@ -49,4 +49,4 @@ class EvalCommand extends Command {
     }
 }
 
-export = EvalCommand;
+export { EvalCommand as Command };

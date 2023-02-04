@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { COLORS } from "../../utils/constants";
+import * as requests from "../../utils/requests.js";
+import { COLORS } from "../../utils/constants.js";
 
 class AimLabCommand extends Command {
     constructor() {
@@ -104,4 +104,4 @@ class AimLabCommand extends Command {
     }
 }
 
-export = AimLabCommand;
+export { AimLabCommand as Command };

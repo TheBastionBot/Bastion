@@ -5,9 +5,9 @@
 import { Guild } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import { COLORS } from "../utils/constants";
-import { log as bastionLog } from "../utils/webhooks";
+import GuildModel from "../models/Guild.js";
+import { COLORS } from "../utils/constants.js";
+import { log as bastionLog } from "../utils/webhooks.js";
 
 class GuildDeleteListener extends Listener<"guildDelete"> {
     constructor() {
@@ -42,4 +42,4 @@ class GuildDeleteListener extends Listener<"guildDelete"> {
     }
 }
 
-export = GuildDeleteListener;
+export { GuildDeleteListener as Listener };

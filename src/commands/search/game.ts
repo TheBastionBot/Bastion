@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { bastion } from "../../types";
-import { COLORS } from "../../utils/constants";
+import * as requests from "../../utils/requests.js";
+import { bastion } from "../../types.js";
+import { COLORS } from "../../utils/constants.js";
 
 interface Game {
     alternative_names: string[];
@@ -106,4 +106,4 @@ class GameCommand extends Command {
     }
 }
 
-export = GameCommand;
+export { GameCommand as Command };

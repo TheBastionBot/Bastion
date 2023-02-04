@@ -85,4 +85,4 @@ class RoleUpdateCommand extends Command {
     }
 }
 
-export = RoleUpdateCommand;
+export { RoleUpdateCommand as Command };

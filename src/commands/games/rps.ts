@@ -61,4 +61,4 @@ class RockPaperScissorCommand extends Command {
     }
 }
 
-export = RockPaperScissorCommand;
+export { RockPaperScissorCommand as Command };

@@ -5,10 +5,10 @@
 import { Filter, Logger } from "@bastion/tesseract";
 import { Message, PermissionFlagsBits } from "discord.js";
 
-import GuildModel from "../models/Guild";
-import { logModerationEvent } from "../utils/guilds";
-import { addInfraction } from "../utils/members";
-import * as regex from "../utils/regex";
+import GuildModel from "../models/Guild.js";
+import { logModerationEvent } from "../utils/guilds.js";
+import { addInfraction } from "../utils/members.js";
+import * as regex from "../utils/regex.js";
 
 class LinkFilter extends Filter {
     constructor() {
@@ -67,4 +67,4 @@ class LinkFilter extends Filter {
     }
 }
 
-export = LinkFilter;
+export { LinkFilter as Filter };

@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildTextBasedChannel, ThreadChannel } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { bastion } from "../../types";
-import { COLORS } from "../../utils/constants";
+import * as requests from "../../utils/requests.js";
+import { bastion } from "../../types.js";
+import { COLORS } from "../../utils/constants.js";
 
 interface Movie {
     id: number;
@@ -119,4 +119,4 @@ class MovieCommand extends Command {
     }
 }
 
-export = MovieCommand;
+export { MovieCommand as Command };

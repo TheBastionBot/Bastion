@@ -5,8 +5,8 @@
 import { ButtonInteraction, PermissionFlagsBits, Snowflake } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
-import { logModerationEvent } from "../utils/guilds";
+import MessageComponents from "../utils/components.js";
+import { logModerationEvent } from "../utils/guilds.js";
 
 class UserReportTimeoutButton extends MessageComponent {
     constructor() {
@@ -62,4 +62,4 @@ class UserReportTimeoutButton extends MessageComponent {
     }
 }
 
-export = UserReportTimeoutButton;
+export { UserReportTimeoutButton as MessageComponent };

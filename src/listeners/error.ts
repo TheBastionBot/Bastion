@@ -14,4 +14,4 @@ class ErrorListener extends Listener<"error"> {
     }
 }
 
-export = ErrorListener;
+export { ErrorListener as Listener };

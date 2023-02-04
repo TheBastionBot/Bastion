@@ -5,9 +5,9 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import MemberModel from "../models/Member";
-import * as numbers from "../utils/numbers";
-import * as members from "../utils/members";
+import MemberModel from "../models/Member.js";
+import * as numbers from "../utils/numbers.js";
+import * as members from "../utils/members.js";
 
 class ClaimCommand extends Command {
     constructor() {
@@ -81,4 +81,4 @@ class ClaimCommand extends Command {
     }
 }
 
-export = ClaimCommand;
+export { ClaimCommand as Command };

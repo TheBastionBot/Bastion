@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import * as numbers from "./numbers";
+import * as numbers from "./numbers.js";
 
 export default (percentage = 0, steps = 10): string => {
     percentage = numbers.clamp(percentage, 0, 100);

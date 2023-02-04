@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { tesseract } from "@bastion/tesseract/typings/types";
+import { tesseract } from "@bastion/tesseract/typings/types.js";
 
 export namespace bastion {
     export interface Settings extends tesseract.Settings {

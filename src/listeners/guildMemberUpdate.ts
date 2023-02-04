@@ -5,7 +5,7 @@
 import { GuildMember, PartialGuildMember } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class GuildMemberUpdateListener extends Listener<"guildMemberUpdate"> {
     constructor() {
@@ -39,4 +39,4 @@ class GuildMemberUpdateListener extends Listener<"guildMemberUpdate"> {
     }
 }
 
-export = GuildMemberUpdateListener;
+export { GuildMemberUpdateListener as Listener };

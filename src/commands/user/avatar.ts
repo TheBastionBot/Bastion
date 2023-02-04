@@ -27,4 +27,4 @@ class UserAvatarCommand extends Command {
     }
 }
 
-export = UserAvatarCommand;
+export { UserAvatarCommand as Command };

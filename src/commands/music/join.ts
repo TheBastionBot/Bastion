@@ -43,4 +43,4 @@ class JoinCommand extends Command {
     }
 }
 
-export = JoinCommand;
+export { JoinCommand as Command };

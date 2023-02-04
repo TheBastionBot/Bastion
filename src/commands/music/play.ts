@@ -5,13 +5,13 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResource, entersState, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior, VoiceConnection, VoiceConnectionStatus } from "@discordjs/voice";
 import { Client, Command, Logger } from "@bastion/tesseract";
-import { music } from "@bastion/tesseract/typings/types";
-import * as playDL from "play-dl";
+import { music } from "@bastion/tesseract/typings/types.js";
+import playDL from "play-dl";
 import ytpl from "ytpl";
 
-import GuildModel from "../../models/Guild";
-import { isPublicBastion } from "../../utils/constants";
-import { isPremiumUser } from "../../utils/premium";
+import GuildModel from "../../models/Guild.js";
+import { isPublicBastion } from "../../utils/constants.js";
+import { isPremiumUser } from "../../utils/premium.js";
 
 class PlayCommand extends Command {
     constructor() {
@@ -232,4 +232,4 @@ class PlayCommand extends Command {
     }
 }
 
-export = PlayCommand;
+export { PlayCommand as Command };

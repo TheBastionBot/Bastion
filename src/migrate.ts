@@ -4,16 +4,16 @@
  */
 import { Logger } from "@bastion/tesseract";
 import { MongoClient } from "mongodb";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 
-import * as yaml from "./utils/yaml";
+import * as yaml from "./utils/yaml.js";
 
 // configure dotenv
 dotenv.config();
 
 const settings = yaml.parse("settings.yaml");
 
-const client = new MongoClient(settings?.mongoURI || process.env.TESSERACT_MONGO_URI);
+const client = new MongoClient(settings?.mongoURI || process.env.MONGO_URI);
 
 const main = async () => {
     await client.connect();

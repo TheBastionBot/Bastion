@@ -5,7 +5,7 @@
 import { APIEmbed } from "discord.js";
 import { Client } from "@bastion/tesseract";
 
-import { bastion } from "../types";
+import { bastion } from "../types.js";
 
 /**
  * Log data.

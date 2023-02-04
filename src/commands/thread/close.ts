@@ -39,4 +39,4 @@ class ThreadCloseCommand extends Command {
     }
 }
 
-export = ThreadCloseCommand;
+export { ThreadCloseCommand as Command };

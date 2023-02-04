@@ -50,4 +50,4 @@ class PruneCommand extends Command {
     }
 }
 
-export = PruneCommand;
+export { PruneCommand as Command };

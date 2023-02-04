@@ -3,13 +3,13 @@
  * @copyright 2022
  */
 import { NextFunction, Request, Response } from "express";
-import { Unauthorized } from "http-errors";
+import httpError from "http-errors";
 
-import * as settings from "../utils/settings";
+import * as settings from "../utils/settings.js";
 
 export default (req: Request, _: Response, next: NextFunction): void => {
     const authorization: string = req.get("Authorization");
 
     if (authorization && authorization === settings.get()?.auth) next();
-    else next(Unauthorized());
+    else next(httpError(401));
 };

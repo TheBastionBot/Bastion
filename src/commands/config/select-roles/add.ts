@@ -5,11 +5,11 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChannelType, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import SelectRoleGroupModel from "../../../models/SelectRoleGroup";
-import MessageComponents from "../../../utils/components";
-import { isPublicBastion, SelectRolesType, SelectRolesUI } from "../../../utils/constants";
-import { generate as generateEmbed } from "../../../utils/embeds";
-import { checkFeature, Feature, getPremiumTier } from "../../../utils/premium";
+import SelectRoleGroupModel from "../../../models/SelectRoleGroup.js";
+import MessageComponents from "../../../utils/components.js";
+import { isPublicBastion, SelectRolesType, SelectRolesUI } from "../../../utils/constants.js";
+import { generate as generateEmbed } from "../../../utils/embeds.js";
+import { checkFeature, Feature, getPremiumTier } from "../../../utils/premium.js";
 
 class SelectRolesAddCommand extends Command {
     constructor() {
@@ -124,4 +124,4 @@ class SelectRolesAddCommand extends Command {
     }
 }
 
-export = SelectRolesAddCommand;
+export { SelectRolesAddCommand as Command };

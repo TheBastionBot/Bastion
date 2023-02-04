@@ -5,8 +5,8 @@
 import { NonThreadGuildBasedChannel } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
-import { resolveType } from "../utils/channels";
+import { logGuildEvent } from "../utils/guilds.js";
+import { resolveType } from "../utils/channels.js";
 
 class ChannelDeleteListener extends Listener<"channelDelete"> {
     constructor() {
@@ -35,4 +35,4 @@ class ChannelDeleteListener extends Listener<"channelDelete"> {
     }
 }
 
-export = ChannelDeleteListener;
+export { ChannelDeleteListener as Listener };

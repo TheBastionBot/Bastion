@@ -6,8 +6,8 @@ import { APIEmbedField, ApplicationCommandOptionType, ChatInputCommandInteractio
 import { Client, Command } from "@bastion/tesseract";
 import R6API from "r6api.js";
 
-import { COLORS } from "../../utils/constants";
-import { bastion } from "../../types";
+import { COLORS } from "../../utils/constants.js";
+import { bastion } from "../../types.js";
 
 class Rainbow6Command extends Command {
     constructor() {
@@ -109,10 +109,10 @@ class Rainbow6Command extends Command {
         }
 
         // season stats
-        const latestSeason = Object.values(ranks?.[0]?.seasons || {}).slice(-1)[0];
+        const latestSeason: any = Object.values(ranks?.[0]?.seasons || {}).slice(-1)[0];
 
-        const pvpRanked = Object.values(latestSeason?.regions || {}).find(region => region?.boards?.pvp_ranked?.matches);
-        const pvpCasual = Object.values(latestSeason?.regions || {}).find(region => region?.boards?.pvp_casual?.matches);
+        const pvpRanked: any = Object.values(latestSeason?.regions || {}).find((region: any) => region?.boards?.pvp_ranked?.matches);
+        const pvpCasual: any = Object.values(latestSeason?.regions || {}).find((region: any) => region?.boards?.pvp_casual?.matches);
 
         if (pvpRanked) {
             fields.push(
@@ -245,4 +245,4 @@ class Rainbow6Command extends Command {
     }
 }
 
-export = Rainbow6Command;
+export { Rainbow6Command as Command };

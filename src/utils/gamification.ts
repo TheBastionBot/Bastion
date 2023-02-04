@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import * as numbers from "./numbers";
+import * as numbers from "./numbers.js";
 
 const DEFAUL_LEVELUP_MULTIPLIER = 0.42;
 const DEFAUL_CURRENCY_REWARD_MULTIPLIER = 42;

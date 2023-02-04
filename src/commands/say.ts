@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import { generate as generateEmbed } from "../utils/embeds";
+import { generate as generateEmbed } from "../utils/embeds.js";
 
 class SayCommand extends Command {
     constructor() {
@@ -35,4 +35,4 @@ class SayCommand extends Command {
     }
 }
 
-export = SayCommand;
+export { SayCommand as Command };

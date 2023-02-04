@@ -5,9 +5,9 @@
 import { GuildTextBasedChannel, MessageReaction, PartialMessageReaction, PartialUser, Snowflake, User } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import memcache from "../utils/memcache";
-import { COLORS } from "../utils/constants";
+import GuildModel from "../models/Guild.js";
+import memcache from "../utils/memcache.js";
+import { COLORS } from "../utils/constants.js";
 
 class MessageReactionAddListener extends Listener<"messageReactionAdd"> {
     constructor() {
@@ -80,4 +80,4 @@ class MessageReactionAddListener extends Listener<"messageReactionAdd"> {
     }
 }
 
-export = MessageReactionAddListener;
+export { MessageReactionAddListener as Listener };

@@ -5,8 +5,8 @@
 import { Role } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
-import { camelToTitleCase } from "../utils/strings";
+import { logGuildEvent } from "../utils/guilds.js";
+import { camelToTitleCase } from "../utils/strings.js";
 
 class RoleCreateListener extends Listener<"roleCreate"> {
     constructor() {
@@ -41,4 +41,4 @@ class RoleCreateListener extends Listener<"roleCreate"> {
     }
 }
 
-export = RoleCreateListener;
+export { RoleCreateListener as Listener };

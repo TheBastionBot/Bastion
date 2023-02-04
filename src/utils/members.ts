@@ -5,9 +5,9 @@
 import { GuildMember, PartialGuildMember, PresenceStatus } from "discord.js";
 import { Document } from "mongoose";
 
-import GuildModel from "../models/Guild";
-import MemberModel, { Member as MemberDocument } from "../models/Member";
-import * as numbers from "./numbers";
+import GuildModel from "../models/Guild.js";
+import MemberModel, { Member as MemberDocument } from "../models/Member.js";
+import * as numbers from "./numbers.js";
 
 /**
  * Check whether a moderator can manage the specified member.

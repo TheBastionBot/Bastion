@@ -5,10 +5,10 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import RoleModel from "../../models/Role";
-import * as strings from "../../utils/strings";
-import { COLORS } from "../../utils/constants";
-import * as snowflake from "../../utils/snowflake";
+import RoleModel from "../../models/Role.js";
+import * as strings from "../../utils/strings.js";
+import { COLORS } from "../../utils/constants.js";
+import * as snowflake from "../../utils/snowflake.js";
 
 class RoleInfoCommand extends Command {
     constructor() {
@@ -90,4 +90,4 @@ class RoleInfoCommand extends Command {
     }
 }
 
-export = RoleInfoCommand;
+export { RoleInfoCommand as Command };

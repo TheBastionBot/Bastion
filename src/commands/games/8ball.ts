@@ -51,4 +51,4 @@ class Magic8BallCommand extends Command {
     }
 }
 
-export = Magic8BallCommand;
+export { Magic8BallCommand as Command };

@@ -5,9 +5,9 @@
 import { ChannelType, ChatInputCommandInteraction, time } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import { COLORS, isPublicBastion } from "../../utils/constants";
-import { getPremiumTier } from "../../utils/premium";
+import GuildModel from "../../models/Guild.js";
+import { COLORS, isPublicBastion } from "../../utils/constants.js";
+import { getPremiumTier } from "../../utils/premium.js";
 
 class ChannelInfoCommand extends Command {
     constructor() {
@@ -95,4 +95,4 @@ class ChannelInfoCommand extends Command {
     }
 }
 
-export = ChannelInfoCommand;
+export { ChannelInfoCommand as Command };

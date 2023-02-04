@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import MemberModel from "../models/Member";
-import { updateBalance, updateExperience } from "../utils/members";
+import MemberModel from "../models/Member.js";
+import { updateBalance, updateExperience } from "../utils/members.js";
 
 class GiveCommand extends Command {
     constructor() {
@@ -68,4 +68,4 @@ class GiveCommand extends Command {
     }
 }
 
-export = GiveCommand;
+export { GiveCommand as Command };

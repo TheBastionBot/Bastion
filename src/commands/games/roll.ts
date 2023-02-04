@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as numbers from "../../utils/numbers";
-import { COLORS } from "../../utils/constants";
+import * as numbers from "../../utils/numbers.js";
+import { COLORS } from "../../utils/constants.js";
 
 class RollCommand extends Command {
     private pattern: RegExp;
@@ -112,4 +112,4 @@ class RollCommand extends Command {
     }
 }
 
-export = RollCommand;
+export { RollCommand as Command };

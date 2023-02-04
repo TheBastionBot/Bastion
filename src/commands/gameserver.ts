@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { Command } from "@bastion/tesseract";
 import gamedig from "gamedig";
 
-import { COLORS } from "../utils/constants";
+import { COLORS } from "../utils/constants.js";
 
 interface Player extends gamedig.Player {
     time?: number;
@@ -107,4 +107,4 @@ class GameServerCommand extends Command {
     }
 }
 
-export = GameServerCommand;
+export { GameServerCommand as Command };

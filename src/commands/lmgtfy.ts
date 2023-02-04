@@ -39,4 +39,4 @@ class LMGTFYCommand extends Command {
     }
 }
 
-export = LMGTFYCommand;
+export { LMGTFYCommand as Command };

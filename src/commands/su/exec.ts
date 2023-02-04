@@ -2,8 +2,8 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { promisify } from "util";
-import { exec as exe } from "child_process";
+import { promisify } from "node:util";
+import { exec as exe } from "node:child_process";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
@@ -58,4 +58,4 @@ class ExecCommand extends Command {
     }
 }
 
-export = ExecCommand;
+export { ExecCommand as Command };

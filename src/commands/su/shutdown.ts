@@ -32,4 +32,4 @@ class ShutdownCommand extends Command {
     }
 }
 
-export = ShutdownCommand;
+export { ShutdownCommand as Command };

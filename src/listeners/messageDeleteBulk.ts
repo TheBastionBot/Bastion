@@ -5,7 +5,7 @@
 import { Collection, GuildTextBasedChannel, Message, PartialMessage } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class MessageDeleteBulkListener extends Listener<"messageDeleteBulk"> {
     constructor() {
@@ -37,4 +37,4 @@ class MessageDeleteBulkListener extends Listener<"messageDeleteBulk"> {
     }
 }
 
-export = MessageDeleteBulkListener;
+export { MessageDeleteBulkListener as Listener };

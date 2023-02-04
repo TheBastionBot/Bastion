@@ -4,8 +4,8 @@
  */
 import { Guild, GuildMember, Snowflake, User } from "discord.js";
 
-import { fetchPatronByDiscordId } from "./patreon";
-import { patreon } from "../types";
+import { fetchPatronByDiscordId } from "./patreon.js";
+import { patreon } from "../types.js";
 
 export enum Tier {
     Free = "Free",

@@ -5,8 +5,8 @@
 import { ButtonInteraction } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import RoleModel from "../models/Role";
-import MessageComponents from "../utils/components";
+import RoleModel from "../models/Role.js";
+import MessageComponents from "../utils/components.js";
 
 class SelfRolesClearButton extends MessageComponent {
     constructor() {
@@ -34,4 +34,4 @@ class SelfRolesClearButton extends MessageComponent {
     }
 }
 
-export = SelfRolesClearButton;
+export { SelfRolesClearButton as MessageComponent };

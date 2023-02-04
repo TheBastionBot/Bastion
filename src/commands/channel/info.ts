@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildChannel, GuildTextBasedChannel, TextChannel, ThreadChannel } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import { COLORS } from "../../utils/constants";
-import { resolveType } from "../../utils/channels";
+import { COLORS } from "../../utils/constants.js";
+import { resolveType } from "../../utils/channels.js";
 
 class ChannelInfoCommand extends Command {
     constructor() {
@@ -62,4 +62,4 @@ class ChannelInfoCommand extends Command {
     }
 }
 
-export = ChannelInfoCommand;
+export { ChannelInfoCommand as Command };
