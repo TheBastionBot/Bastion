@@ -13,7 +13,7 @@ dotenv.config();
 
 const settings = yaml.parse("settings.yaml");
 
-const client = new MongoClient(settings?.mongoURI || process.env.TESSERACT_MONGO_URI);
+const client = new MongoClient(settings?.mongoURI || process.env.MONGO_URI);
 
 const main = async () => {
     await client.connect();
