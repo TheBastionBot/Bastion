@@ -109,10 +109,38 @@ class Rainbow6Command extends Command {
         }
 
         // season stats
-        const latestSeason: any = Object.values(ranks?.[0]?.seasons || {}).slice(-1)[0];
+        const latestSeason = Object.values(ranks?.[0]?.seasons || {}).slice(-1)[0] as {
+            seasonId: string;
+            seasonName: string;
+            seasonImage: string;
+            regions: {
+                boards: {
+                    pvp_casual: {
+                        matches: unknown;
+                        current: {
+                            icon: string;
+                        };
+                    };
+                    pvp_ranked: {
+                        matches: unknown;
+                        wins: number;
+                        losses: number;
+                        winRate: string;
+                        kd: number;
+                        kills: number;
+                        deaths: number;
+                        current: {
+                            name: string;
+                            icon: string;
+                            mmr: number;
+                        };
+                    };
+                };
+            }[];
+        };
 
-        const pvpRanked: any = Object.values(latestSeason?.regions || {}).find((region: any) => region?.boards?.pvp_ranked?.matches);
-        const pvpCasual: any = Object.values(latestSeason?.regions || {}).find((region: any) => region?.boards?.pvp_casual?.matches);
+        const pvpRanked = Object.values(latestSeason?.regions || {}).find(region => region?.boards?.pvp_ranked?.matches);
+        const pvpCasual = Object.values(latestSeason?.regions || {}).find(region => region?.boards?.pvp_casual?.matches);
 
         if (pvpRanked) {
             fields.push(
