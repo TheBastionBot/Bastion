@@ -5,8 +5,8 @@
 import { ModalSubmitInteraction } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import MessageComponents from "../utils/components";
+import GuildModel from "../models/Guild.js";
+import MessageComponents from "../utils/components.js";
 
 class VerificationModal extends MessageComponent {
     constructor() {
@@ -31,4 +31,4 @@ class VerificationModal extends MessageComponent {
     }
 }
 
-export = VerificationModal;
+export { VerificationModal as MessageComponent };

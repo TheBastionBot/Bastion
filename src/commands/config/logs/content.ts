@@ -5,7 +5,7 @@
 import { ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../../models/Guild";
+import GuildModel from "../../../models/Guild.js";
 
 class LogContentCommand extends Command {
     constructor() {
@@ -33,4 +33,4 @@ class LogContentCommand extends Command {
     }
 }
 
-export = LogContentCommand;
+export { LogContentCommand as Command };

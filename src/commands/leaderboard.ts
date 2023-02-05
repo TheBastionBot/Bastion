@@ -5,8 +5,8 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import MemberModel from "../models/Member";
-import { COLORS } from "../utils/constants";
+import MemberModel from "../models/Member.js";
+import { COLORS } from "../utils/constants.js";
 
 class LeaderboardCommand extends Command {
     constructor() {
@@ -76,4 +76,4 @@ class LeaderboardCommand extends Command {
     }
 }
 
-export = LeaderboardCommand;
+export { LeaderboardCommand as Command };

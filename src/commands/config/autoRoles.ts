@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import RoleModel from "../../models/Role";
-import { isPublicBastion } from "../../utils/constants";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium";
+import RoleModel from "../../models/Role.js";
+import { isPublicBastion } from "../../utils/constants.js";
+import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
 
 class AutoRolesCommand extends Command {
     constructor() {
@@ -92,4 +92,4 @@ class AutoRolesCommand extends Command {
     }
 }
 
-export = AutoRolesCommand;
+export { AutoRolesCommand as Command };

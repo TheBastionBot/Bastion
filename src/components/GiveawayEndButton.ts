@@ -5,9 +5,9 @@
 import { ButtonInteraction, ButtonStyle, ComponentType, PermissionFlagsBits, User } from "discord.js";
 import { Client, Logger, MessageComponent } from "@bastion/tesseract";
 
-import GiveawayModel from "../models/Giveaway";
-import MessageComponents from "../utils/components";
-import { COLORS } from "../utils/constants";
+import GiveawayModel from "../models/Giveaway.js";
+import MessageComponents from "../utils/components.js";
+import { COLORS } from "../utils/constants.js";
 
 class GiveawayEndButton extends MessageComponent {
     constructor() {
@@ -77,4 +77,4 @@ class GiveawayEndButton extends MessageComponent {
     }
 }
 
-export = GiveawayEndButton;
+export { GiveawayEndButton as MessageComponent };

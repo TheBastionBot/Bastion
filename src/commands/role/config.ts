@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildPremiumTier, PermissionFlagsBits } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
-import RoleModel from "../../models/Role";
-import { parseEmoji } from "../../utils/emojis";
-import * as snowflake from "../../utils/snowflake";
+import RoleModel from "../../models/Role.js";
+import { parseEmoji } from "../../utils/emojis.js";
+import * as snowflake from "../../utils/snowflake.js";
 
 class RoleConfigCommand extends Command {
     constructor() {
@@ -102,4 +102,4 @@ class RoleConfigCommand extends Command {
     }
 }
 
-export = RoleConfigCommand;
+export { RoleConfigCommand as Command };

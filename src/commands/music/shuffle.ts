@@ -5,7 +5,7 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as arrays from "../../utils/arrays";
+import * as arrays from "../../utils/arrays.js";
 
 class ShuffleCommand extends Command {
     constructor() {
@@ -29,4 +29,4 @@ class ShuffleCommand extends Command {
     }
 }
 
-export = ShuffleCommand;
+export { ShuffleCommand as Command };

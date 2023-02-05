@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { AudioPlayerStatus } from "@discordjs/voice";
 import { Client, Command } from "@bastion/tesseract";
-import { music } from "@bastion/tesseract/typings/types";
+import { music } from "@bastion/tesseract/typings/types.js";
 
-import { COLORS } from "../../utils/constants";
+import { COLORS } from "../../utils/constants.js";
 
 class QueueCommand extends Command {
     constructor() {
@@ -71,4 +71,4 @@ class QueueCommand extends Command {
     }
 }
 
-export = QueueCommand;
+export { QueueCommand as Command };

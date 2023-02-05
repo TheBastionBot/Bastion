@@ -5,7 +5,7 @@
 import { ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
+import GuildModel from "../../models/Guild.js";
 
 class AutoThreadsCommand extends Command {
     constructor() {
@@ -48,4 +48,4 @@ class AutoThreadsCommand extends Command {
     }
 }
 
-export = AutoThreadsCommand;
+export { AutoThreadsCommand as Command };

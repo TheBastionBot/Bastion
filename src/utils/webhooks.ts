@@ -5,7 +5,7 @@
 import { APIEmbed } from "discord.js";
 import { Client } from "@bastion/tesseract";
 
-import { bastion } from "../types";
+import { bastion } from "../types.js";
 
 /**
  * Log data.
@@ -16,7 +16,7 @@ export const log = async (client: Client, data: APIEmbed) => {
         const bastionWebhook = await client.fetchWebhook((client.settings as bastion.Settings).bastion.webhookId, (client.settings as bastion.Settings).bastion.webhookToken);
 
         await bastionWebhook?.send({
-            username: "Bastion",
+            username: client.user?.username,
             embeds: [ data ],
         });
     }

@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import SelectRoleGroupModel from "../../../models/SelectRoleGroup";
-import { COLORS } from "../../../utils/constants";
+import SelectRoleGroupModel from "../../../models/SelectRoleGroup.js";
+import { COLORS } from "../../../utils/constants.js";
 
 class SelectRolesListCommand extends Command {
     constructor() {
@@ -55,4 +55,4 @@ class SelectRolesListCommand extends Command {
     }
 }
 
-export = SelectRolesListCommand;
+export { SelectRolesListCommand as Command };

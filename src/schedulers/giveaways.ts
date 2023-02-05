@@ -5,9 +5,9 @@
 import { ButtonStyle, ComponentType, GuildTextBasedChannel, Snowflake, User } from "discord.js";
 import { Client, Logger, Scheduler } from "@bastion/tesseract";
 
-import GiveawayModel from "../models/Giveaway";
-import MessageComponents from "../utils/components";
-import { COLORS } from "../utils/constants";
+import GiveawayModel from "../models/Giveaway.js";
+import MessageComponents from "../utils/components.js";
+import { COLORS } from "../utils/constants.js";
 
 class GiveawayScheduler extends Scheduler {
     constructor() {
@@ -115,4 +115,4 @@ class GiveawayScheduler extends Scheduler {
     }
 }
 
-export = GiveawayScheduler;
+export { GiveawayScheduler as Scheduler };

@@ -19,4 +19,4 @@ class ShardDisconnectListener extends Listener<"shardDisconnect"> {
     }
 }
 
-export = ShardDisconnectListener;
+export { ShardDisconnectListener as Listener };

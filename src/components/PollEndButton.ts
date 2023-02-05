@@ -5,9 +5,9 @@
 import { ButtonInteraction, PermissionFlagsBits } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import PollModel from "../models/Poll";
-import MessageComponents from "../utils/components";
-import { COLORS } from "../utils/constants";
+import PollModel from "../models/Poll.js";
+import MessageComponents from "../utils/components.js";
+import { COLORS } from "../utils/constants.js";
 
 class PollEndButton extends MessageComponent {
     constructor() {
@@ -68,4 +68,4 @@ class PollEndButton extends MessageComponent {
     }
 }
 
-export = PollEndButton;
+export { PollEndButton as MessageComponent };

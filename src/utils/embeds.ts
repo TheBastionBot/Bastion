@@ -4,7 +4,7 @@
  */
 import { APIEmbed } from "discord.js";
 
-import { COLORS } from "./constants";
+import { COLORS } from "./constants.js";
 
 export const generate = (embed: string | APIEmbed, force?: boolean): string | APIEmbed => {
     // check whether this is a valid embed string

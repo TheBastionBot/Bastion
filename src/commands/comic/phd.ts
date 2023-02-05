@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { JSDOM } from "jsdom";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
+import * as requests from "../../utils/requests.js";
 
 class PHDCommand extends Command {
     constructor() {
@@ -53,4 +53,4 @@ class PHDCommand extends Command {
     }
 }
 
-export = PHDCommand;
+export { PHDCommand as Command };

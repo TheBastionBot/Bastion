@@ -4,9 +4,9 @@
  */
 import { ShardingManager } from "@bastion/tesseract";
 import { NextFunction, Request, Response, Router } from "express";
-import { InternalServerError } from "http-errors";
+import httpError from "http-errors";
 
-import auth from "../middlewares/auth";
+import auth from "../middlewares/auth.js";
 
 const router = Router();
 
@@ -24,8 +24,8 @@ router.get("/", auth, async (req: Request, res: Response, next: NextFunction): P
 
         return res.status(200).json(shards);
     } catch {
-        next(InternalServerError());
+        next(httpError(500));
     }
 });
 
-export = router;
+export { router };

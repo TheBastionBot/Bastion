@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { COLORS } from "../../utils/constants";
+import * as requests from "../../utils/requests.js";
+import { COLORS } from "../../utils/constants.js";
 
 class ValorantCommand extends Command {
     constructor() {
@@ -116,4 +116,4 @@ class ValorantCommand extends Command {
     }
 }
 
-export = ValorantCommand;
+export { ValorantCommand as Command };

@@ -43,4 +43,4 @@ class ThreadNameCommand extends Command {
     }
 }
 
-export = ThreadNameCommand;
+export { ThreadNameCommand as Command };

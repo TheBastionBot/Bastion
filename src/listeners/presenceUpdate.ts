@@ -5,7 +5,7 @@
 import { ActivityType, Presence } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
+import GuildModel from "../models/Guild.js";
 
 class PresenceUpdateListener extends Listener<"presenceUpdate"> {
     constructor() {
@@ -40,4 +40,4 @@ class PresenceUpdateListener extends Listener<"presenceUpdate"> {
     }
 }
 
-export = PresenceUpdateListener;
+export { PresenceUpdateListener as Listener };

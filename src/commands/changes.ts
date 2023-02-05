@@ -18,4 +18,4 @@ class ChangesCommand extends Command {
     }
 }
 
-export = ChangesCommand;
+export { ChangesCommand as Command };

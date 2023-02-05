@@ -4,7 +4,8 @@
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
-import { COLORS } from "../utils/constants";
+
+import { COLORS } from "../utils/constants.js";
 
 class StatusCommand extends Command {
     constructor() {
@@ -110,4 +111,4 @@ class StatusCommand extends Command {
     }
 }
 
-export = StatusCommand;
+export { StatusCommand as Command };

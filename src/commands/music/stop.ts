@@ -30,4 +30,4 @@ class StopCommand extends Command {
     }
 }
 
-export = StopCommand;
+export { StopCommand as Command };

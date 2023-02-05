@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import SelectRoleGroupModel from "../../../models/SelectRoleGroup";
+import SelectRoleGroupModel from "../../../models/SelectRoleGroup.js";
 
 class SelectRolesRemoveCommand extends Command {
     constructor() {
@@ -35,4 +35,4 @@ class SelectRolesRemoveCommand extends Command {
     }
 }
 
-export = SelectRolesRemoveCommand;
+export { SelectRolesRemoveCommand as Command };

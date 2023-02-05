@@ -46,4 +46,4 @@ class EmojiInfoCommand extends Command {
     }
 }
 
-export = EmojiInfoCommand;
+export { EmojiInfoCommand as Command };

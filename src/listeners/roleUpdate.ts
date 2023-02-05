@@ -5,8 +5,8 @@
 import { APIEmbedField, Role } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { logGuildEvent } from "../utils/guilds";
-import { camelToTitleCase } from "../utils/strings";
+import { logGuildEvent } from "../utils/guilds.js";
+import { camelToTitleCase } from "../utils/strings.js";
 
 class RoleUpdateListener extends Listener<"roleUpdate"> {
     constructor() {
@@ -52,4 +52,4 @@ class RoleUpdateListener extends Listener<"roleUpdate"> {
     }
 }
 
-export = RoleUpdateListener;
+export { RoleUpdateListener as Listener };

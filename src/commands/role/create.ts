@@ -75,4 +75,4 @@ class RoleCreateCommand extends Command {
     }
 }
 
-export = RoleCreateCommand;
+export { RoleCreateCommand as Command };

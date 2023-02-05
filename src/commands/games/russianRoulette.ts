@@ -44,4 +44,4 @@ class RussianRouletteCommand extends Command {
     }
 }
 
-export = RussianRouletteCommand;
+export { RussianRouletteCommand as Command };

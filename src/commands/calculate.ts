@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import * as math from "mathjs";
 import { Command } from "@bastion/tesseract";
 
-import sanitizeMessage from "../utils/sanitizeMessage";
+import sanitizeMessage from "../utils/sanitizeMessage.js";
 
 class CalculateCommand extends Command {
     constructor() {
@@ -49,4 +49,4 @@ class CalculateCommand extends Command {
     }
 }
 
-export = CalculateCommand;
+export { CalculateCommand as Command };

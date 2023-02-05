@@ -5,7 +5,7 @@
 import { ButtonInteraction, ComponentType, TextInputStyle } from "discord.js";
 import { MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
+import MessageComponents from "../utils/components.js";
 
 class VerificationButton extends MessageComponent {
     constructor() {
@@ -38,4 +38,4 @@ class VerificationButton extends MessageComponent {
     }
 }
 
-export = VerificationButton;
+export { VerificationButton as MessageComponent };

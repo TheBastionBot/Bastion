@@ -5,7 +5,7 @@
 import { ButtonInteraction, VoiceChannel, PermissionFlagsBits } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
+import MessageComponents from "../utils/components.js";
 
 class VoiceSessionUnlockButton extends MessageComponent {
     constructor() {
@@ -29,4 +29,4 @@ class VoiceSessionUnlockButton extends MessageComponent {
     }
 }
 
-export = VoiceSessionUnlockButton;
+export { VoiceSessionUnlockButton as MessageComponent };

@@ -5,12 +5,12 @@
 import { APIEmbed, GuildMember, PartialGuildMember, time } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild";
-import { COLORS } from "../utils/constants";
-import { generate as generateEmbed } from "../utils/embeds";
-import { logGuildEvent } from "../utils/guilds";
-import * as variables from "../utils/variables";
-import * as yaml from "../utils/yaml";
+import GuildModel from "../models/Guild.js";
+import { COLORS } from "../utils/constants.js";
+import { generate as generateEmbed } from "../utils/embeds.js";
+import { logGuildEvent } from "../utils/guilds.js";
+import * as variables from "../utils/variables.js";
+import * as yaml from "../utils/yaml.js";
 
 class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
     private farewells: string[];
@@ -80,4 +80,4 @@ class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
     }
 }
 
-export = GuildMemberRemoveListener;
+export { GuildMemberRemoveListener as Listener };

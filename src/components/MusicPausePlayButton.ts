@@ -6,7 +6,7 @@ import { StringSelectMenuInteraction } from "discord.js";
 import { AudioPlayerStatus } from "@discordjs/voice";
 import { Client, MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
+import MessageComponents from "../utils/components.js";
 
 class MusicPausePlayButton extends MessageComponent {
     constructor() {
@@ -30,4 +30,4 @@ class MusicPausePlayButton extends MessageComponent {
     }
 }
 
-export = MusicPausePlayButton;
+export { MusicPausePlayButton as MessageComponent };

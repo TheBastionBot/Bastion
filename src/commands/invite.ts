@@ -87,4 +87,4 @@ class InviteCommand extends Command {
     }
 }
 
-export = InviteCommand;
+export { InviteCommand as Command };

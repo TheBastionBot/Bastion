@@ -5,11 +5,11 @@
 import { ButtonStyle, ComponentType, GuildTextBasedChannel, PermissionFlagsBits, RoleSelectMenuInteraction } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
-import RoleModel from "../models/Role";
-import SelectRoleGroupModel from "../models/SelectRoleGroup";
-import * as arrays from "../utils/arrays";
-import MessageComponents from "../utils/components";
-import { SelectRolesUI } from "../utils/constants";
+import RoleModel from "../models/Role.js";
+import SelectRoleGroupModel from "../models/SelectRoleGroup.js";
+import * as arrays from "../utils/arrays.js";
+import MessageComponents from "../utils/components.js";
+import { SelectRolesUI } from "../utils/constants.js";
 
 class SelectRolesUpdateSelectMenu extends MessageComponent {
     constructor() {
@@ -102,4 +102,4 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
     }
 }
 
-export = SelectRolesUpdateSelectMenu;
+export { SelectRolesUpdateSelectMenu as MessageComponent };

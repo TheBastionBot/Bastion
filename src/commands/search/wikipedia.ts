@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
+import * as requests from "../../utils/requests.js";
 
 interface Wiki {
     title: string;
@@ -57,4 +57,4 @@ class WikipediaCommand extends Command {
     }
 }
 
-export = WikipediaCommand;
+export { WikipediaCommand as Command };

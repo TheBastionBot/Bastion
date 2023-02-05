@@ -1,35 +1,23 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "declaration": false,
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationDir": "typings",
         "declarationMap": false,
-        "diagnostics": true,
-        "emitBOM": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        "module": "CommonJS",
-        "moduleResolution": "Node",
+        "module": "Node16",
         "newLine": "lf",
-        "noErrorTruncation": true,
-        "noImplicitAny": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "outDir": "dist",
-        "preserveWatchOutput": true,
         "removeComments": true,
         "resolveJsonModule": true,
         "rootDir": "src",
-        "sourceMap": false,
         "skipLibCheck": true,
-        "target": "esnext"
-    },
-    "exclude": [
-        "node_modules"
-    ],
-    "include": [
-        "src/**/*"
-    ],
-    "typeRoots" : [
-        "./typings"
-    ]
+        "sourceMap": true,
+        "strict": false,
+        "target": "ES2022"
+    }
 }

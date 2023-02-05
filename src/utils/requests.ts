@@ -2,8 +2,8 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { IncomingHttpHeaders } from "http";
-import { UrlObject } from "url";
+import { IncomingHttpHeaders } from "node:http";
+import { UrlObject } from "node:url";
 import { Dispatcher, request } from "undici";
 
 export const get = (url: string | URL | UrlObject, headers?: IncomingHttpHeaders | string[], options?: { dispatcher?: Dispatcher; } & Omit<Dispatcher.RequestOptions, "origin" | "path" | "method"> & Partial<Pick<Dispatcher.RequestOptions, "method">>) => {

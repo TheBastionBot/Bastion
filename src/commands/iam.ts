@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import RoleModel from "../models/Role";
-import MessageComponents from "../utils/components";
+import RoleModel from "../models/Role.js";
+import MessageComponents from "../utils/components.js";
 
 class IamCommand extends Command {
     constructor() {
@@ -109,4 +109,4 @@ class IamCommand extends Command {
     }
 }
 
-export = IamCommand;
+export { IamCommand as Command };

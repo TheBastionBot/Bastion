@@ -5,8 +5,8 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
-import { COLORS } from "../../utils/constants";
-import { resolveStatus } from "../../utils/members";
+import { COLORS } from "../../utils/constants.js";
+import { resolveStatus } from "../../utils/members.js";
 
 class UserInfoCommand extends Command {
     constructor() {
@@ -83,4 +83,4 @@ class UserInfoCommand extends Command {
     }
 }
 
-export = UserInfoCommand;
+export { UserInfoCommand as Command };

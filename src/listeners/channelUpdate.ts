@@ -5,8 +5,8 @@
 import { DMChannel, NonThreadGuildBasedChannel } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
-import { resolveType } from "../utils/channels";
-import { logGuildEvent } from "../utils/guilds";
+import { resolveType } from "../utils/channels.js";
+import { logGuildEvent } from "../utils/guilds.js";
 
 class ChannelUpdateListener extends Listener<"channelUpdate"> {
     constructor() {
@@ -43,4 +43,4 @@ class ChannelUpdateListener extends Listener<"channelUpdate"> {
     }
 }
 
-export = ChannelUpdateListener;
+export { ChannelUpdateListener as Listener };

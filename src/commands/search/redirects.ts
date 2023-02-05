@@ -36,4 +36,4 @@ class RedirectsCommand extends Command {
     }
 }
 
-export = RedirectsCommand;
+export { RedirectsCommand as Command };

@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
+import GuildModel from "../../models/Guild.js";
 
 class StarboardCommand extends Command {
     constructor() {
@@ -46,4 +46,4 @@ class StarboardCommand extends Command {
     }
 }
 
-export = StarboardCommand;
+export { StarboardCommand as Command };

@@ -5,8 +5,8 @@
 import { GuildTextBasedChannel, Snowflake } from "discord.js";
 import { Logger, Scheduler } from "@bastion/tesseract";
 
-import PollModel from "../models/Poll";
-import { COLORS } from "../utils/constants";
+import PollModel from "../models/Poll.js";
+import { COLORS } from "../utils/constants.js";
 
 class PollScheduler extends Scheduler {
     constructor() {
@@ -109,4 +109,4 @@ class PollScheduler extends Scheduler {
     }
 }
 
-export = PollScheduler;
+export { PollScheduler as Scheduler };

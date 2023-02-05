@@ -22,4 +22,4 @@ class ReloadCommand extends Command {
     }
 }
 
-export = ReloadCommand;
+export { ReloadCommand as Command };

@@ -14,4 +14,4 @@ class ShardResumeListener extends Listener<"shardResume"> {
     }
 }
 
-export = ShardResumeListener;
+export { ShardResumeListener as Listener };

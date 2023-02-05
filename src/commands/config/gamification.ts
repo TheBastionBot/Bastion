@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
-import { isPublicBastion } from "../../utils/constants";
-import { isPremiumUser } from "../../utils/premium";
+import GuildModel from "../../models/Guild.js";
+import { isPublicBastion } from "../../utils/constants.js";
+import { isPremiumUser } from "../../utils/premium.js";
 
 class GamificationCommand extends Command {
     constructor() {
@@ -62,4 +62,4 @@ class GamificationCommand extends Command {
     }
 }
 
-export = GamificationCommand;
+export { GamificationCommand as Command };

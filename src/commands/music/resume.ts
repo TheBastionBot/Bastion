@@ -5,7 +5,7 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { AudioPlayerStatus } from "@discordjs/voice";
 import { Client, Command } from "@bastion/tesseract";
-import { music } from "@bastion/tesseract/typings/types";
+import { music } from "@bastion/tesseract/typings/types.js";
 
 class ResumeCommand extends Command {
     constructor() {
@@ -26,4 +26,4 @@ class ResumeCommand extends Command {
     }
 }
 
-export = ResumeCommand;
+export { ResumeCommand as Command };

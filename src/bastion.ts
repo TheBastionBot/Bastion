@@ -4,7 +4,7 @@
  */
 import { GatewayIntentBits, Options, Partials } from "discord.js";
 import { Client, Logger } from "@bastion/tesseract";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 
 // configure dotenv
 dotenv.config();

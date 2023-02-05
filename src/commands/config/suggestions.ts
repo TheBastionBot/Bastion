@@ -5,7 +5,7 @@
 import { ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
-import GuildModel from "../../models/Guild";
+import GuildModel from "../../models/Guild.js";
 
 class SuggestionsCommand extends Command {
     constructor() {
@@ -38,4 +38,4 @@ class SuggestionsCommand extends Command {
     }
 }
 
-export = SuggestionsCommand;
+export { SuggestionsCommand as Command };

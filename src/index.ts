@@ -2,13 +2,13 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import * as path from "path";
+import path from "node:path";
 import { Logger, ShardingManager, WebServer } from "@bastion/tesseract";
-import * as DiscordRPC from "discord-rpc";
-import * as dotenv from "dotenv";
-import { gray } from "picocolors";
+import DiscordRPC from "discord-rpc";
+import dotenv from "dotenv";
+import picocolors from "picocolors";
 
-import * as settings from "./utils/settings";
+import * as settings from "./utils/settings.js";
 
 // configure dotenv
 dotenv.config();
@@ -19,16 +19,14 @@ const rpc = new DiscordRPC.Client({ transport: "ipc" });
 rpc.login({ clientId: "267035345537728512" }).catch(Logger.ignore);
 
 // Sharding Manager
-const Manager = new ShardingManager(
-    path.resolve(path.dirname(__filename).split(path.sep).pop(), "bastion" + path.extname(__filename)),
-);
+const Manager = new ShardingManager(path.resolve("dist", "bastion.js"));
 
 // Spawn shards
 Manager.spawn().catch(Logger.error);
 
 // Sharding Manager Events
 Manager.on("shardCreate", shard => {
-    Logger.info(`Shard ${shard.id} — Launching ${ gray(`[ ${shard.id + 1} of ${ Manager.totalShards } ]`) }`);
+    Logger.info(`Shard ${shard.id} — Launching ${ picocolors.gray(`[ ${shard.id + 1} of ${ Manager.totalShards } ]`) }`);
 });
 
 // Tesseract Web Server

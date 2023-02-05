@@ -45,4 +45,4 @@ class DonateCommand extends Command {
     }
 }
 
-export = DonateCommand;
+export { DonateCommand as Command };

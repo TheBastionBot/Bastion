@@ -5,9 +5,9 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import * as requests from "../../utils/requests";
-import { COLORS } from "../../utils/constants";
-import { bastion } from "../../types";
+import * as requests from "../../utils/requests.js";
+import { COLORS } from "../../utils/constants.js";
+import { bastion } from "../../types.js";
 
 interface Weather {
     coord: {
@@ -180,4 +180,4 @@ class WeatherCommand extends Command {
     }
 }
 
-export = WeatherCommand;
+export { WeatherCommand as Command };

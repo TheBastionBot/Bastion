@@ -5,7 +5,7 @@
 import { ButtonInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
 import { MessageComponent } from "@bastion/tesseract";
 
-import MessageComponents from "../utils/components";
+import MessageComponents from "../utils/components.js";
 
 class SelectRolesNoRolesButton extends MessageComponent {
     constructor() {
@@ -38,4 +38,4 @@ class SelectRolesNoRolesButton extends MessageComponent {
     }
 }
 
-export = SelectRolesNoRolesButton;
+export { SelectRolesNoRolesButton as MessageComponent };

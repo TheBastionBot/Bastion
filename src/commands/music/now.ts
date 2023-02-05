@@ -5,8 +5,9 @@
 import { ButtonStyle, ChatInputCommandInteraction, ComponentType } from "discord.js";
 import { AudioPlayerStatus } from "@discordjs/voice";
 import { Client, Command } from "@bastion/tesseract";
-import { music } from "@bastion/tesseract/typings/types";
-import MessageComponents from "../../utils/components";
+import { music } from "@bastion/tesseract/typings/types.js";
+
+import MessageComponents from "../../utils/components.js";
 
 class NowCommand extends Command {
     constructor() {
@@ -47,4 +48,4 @@ class NowCommand extends Command {
     }
 }
 
-export = NowCommand;
+export { NowCommand as Command };
