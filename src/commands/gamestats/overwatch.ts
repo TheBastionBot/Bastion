@@ -5,11 +5,14 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
 
+import * as requests from "../../utils/requests.js";
+import { COLORS } from "../../utils/constants.js";
+
 class OverwatchCommand extends Command {
     constructor() {
         super({
             name: "overwatch",
-            description: "Check stats of any Overwatch player.",
+            description: "Check stats of any Overwatch 2 player.",
             options: [
                 {
                     type: ApplicationCommandOptionType.String,
@@ -33,9 +36,66 @@ class OverwatchCommand extends Command {
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
-        await interaction.reply({
-            content: "With the release of Overwatch 2 the APIs used to get the stats of players doesn't work anymore. This command will be available as soon as Blizzard releases new ways to see stats for Overwatch 2 players.",
-            ephemeral: true,
+        await interaction.deferReply();
+        const username = interaction.options.getString("username");
+        const platform = interaction.options.getString("platform") || "pc";
+
+        // get stats
+        const { body } = await requests.get("https://ow-api.com/v1/stats/" + platform + "/us/" + (username.replace("#", "-")) + "/profile");
+        const response = await body.json();
+
+        await interaction.editReply({
+            embeds: [
+                {
+                    color: COLORS.OVERWATCH,
+                    author: {
+                        name: "Overwatch 2 — Player Stats",
+                        icon_url: "https://us.forums.blizzard.com/en/overwatch/plugins/discourse-blizzard-themes/images/icons/overwatch-social.jpg",
+                    },
+                    title: username,
+                    description: response.private ? "This is a Private profile." : "",
+                    url: "https://overwatch.blizzard.com/en-us/career/" + username.replace("#", "-"),
+                    fields: response.private ? [] : [
+                        {
+                            name: "Tank",
+                            value: response.ratings.find(r => r.role === "tank") ? `${ response.ratings.find(r => r.role === "tank").group } ${ response.ratings.find(r => r.role === "tank").tier }` : "-",
+                            inline: true,
+                        },
+                        {
+                            name: "Damage",
+                            value: response.ratings.find(r => r.role === "offense") ? `${ response.ratings.find(r => r.role === "offense").group } ${ response.ratings.find(r => r.role === "offense").tier }` : "-",
+                            inline: true,
+                        },
+                        {
+                            name: "Support",
+                            value: response.ratings.find(r => r.role === "support") ? `${ response.ratings.find(r => r.role === "support").group } ${ response.ratings.find(r => r.role === "support").tier }` : "",
+                            inline: true,
+                        },
+                        {
+                            name: "Games Played",
+                            value: response.gamesPlayed?.toLocaleString() || "-",
+                            inline: true,
+                        },
+                        {
+                            name: "Games Won",
+                            value: response.gamesWon?.toLocaleString() || "-",
+                            inline: true,
+                        },
+                        {
+                            name: "Games Lost",
+                            value: response.gamesLost?.toLocaleString() || "-",
+                            inline: true,
+                        },
+                    ],
+                    thumbnail: {
+                        url: response.icon,
+                    },
+                    footer: {
+                        icon_url: response.private ? "" : response.endorsementIcon,
+                        text: response.private ? "" : "Endorsement Level " + (response.endorsement || 0),
+                    },
+                },
+            ],
         });
     }
 }
