@@ -28,7 +28,7 @@ class OverwatchCommand extends Command {
                         { name: "PC", value: "pc" },
                         { name: "PlayStation", value: "psn" },
                         { name: "Xbox", value: "xbl" },
-                        { name: "Nintendo Switch", value: "switch" },
+                        { name: "Nintendo Switch", value: "nintendo-switch" },
                     ],
                 },
                 {
