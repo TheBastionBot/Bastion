@@ -31,6 +31,16 @@ class OverwatchCommand extends Command {
                         { name: "Nintendo Switch", value: "switch" },
                     ],
                 },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "region",
+                    description: "The region of the player.",
+                    choices: [
+                        { name: "Americas", value: "us" },
+                        { name: "Europe", value: "eu" },
+                        { name: "Asia", value: "asia" },
+                    ],
+                },
             ],
         });
     }
@@ -39,9 +49,10 @@ class OverwatchCommand extends Command {
         await interaction.deferReply();
         const username = interaction.options.getString("username");
         const platform = interaction.options.getString("platform") || "pc";
+        const region = interaction.options.getString("region") || "us";
 
         // get stats
-        const { body } = await requests.get("https://ow-api.com/v1/stats/" + platform + "/us/" + (username.replace("#", "-")) + "/profile");
+        const { body } = await requests.get("https://ow-api.com/v1/stats/" + platform + "/" + region + "/" + (username.replace("#", "-")) + "/profile");
         const response = await body.json();
 
         await interaction.editReply({
