@@ -62,8 +62,8 @@ class PollScheduler extends Scheduler {
                             if (pollMessage.reactions.cache.has(reactions[key])) {
                                 // calculate votes
                                 const votesCount = pollMessage.reactions.cache.get(reactions[key]).count;
-                                votes[reactions[key]] = votesCount;
-                                totalVotes += votesCount;
+                                votes[reactions[key]] = votesCount - 1;
+                                totalVotes += votes[reactions[key]];
                             }
                         }
 
