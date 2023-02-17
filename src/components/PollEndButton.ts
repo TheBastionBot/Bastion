@@ -34,8 +34,8 @@ class PollEndButton extends MessageComponent {
             if (interaction.message.reactions.cache.has(reactions[key])) {
                 // calculate votes
                 const votesCount = interaction.message.reactions.cache.get(reactions[key]).count;
-                votes[reactions[key]] = votesCount;
-                totalVotes += votesCount;
+                votes[reactions[key]] = votesCount - 1;
+                totalVotes += votes[reactions[key]];
             }
         }
 
