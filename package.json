@@ -45,5 +45,11 @@
         "undici": "^5.20.0",
         "ytdl-core": "^4.11.2",
         "ytpl": "^2.3.0"
+    },
+    "overrides": {
+        "discord-api-types": "0.37.20"
+    },
+    "resolutions": {
+        "discord-api-types": "0.37.20"
     }
 }
