@@ -46,6 +46,12 @@
         "ytdl-core": "^4.11.2",
         "ytpl": "^2.3.0"
     },
+    "optionalDependencies": {
+        "bufferutil": "^4.0.7",
+        "erlpack": "github:discord/erlpack",
+        "utf-8-validate": "^5.0.10",
+        "zlib-sync": "^0.1.8"
+    },
     "overrides": {
         "discord-api-types": "0.37.20"
     },
