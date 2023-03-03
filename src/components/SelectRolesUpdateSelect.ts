@@ -98,7 +98,7 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
             });
         }
 
-        await selectRoleGroup.delete();
+        await selectRoleGroup.deleteOne();
     }
 }
 
