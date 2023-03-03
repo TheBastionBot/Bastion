@@ -6,7 +6,7 @@ import * as querystring from "node:querystring";
 
 import memcache from "./memcache.js";
 import * as requests from "./requests.js";
-import * as settings from "./settings.js";
+import Settings from "./settings.js";
 import { patreon } from "../types.js";
 
 export const CACHE_NAMESPACE = "patreon";
@@ -16,6 +16,8 @@ export const CACHE_NAMESPACE = "patreon";
  * @returns {Patron[]} List of all active patrons.
  */
 export const fetchPatrons = async (): Promise<patreon.Patron[]> => {
+    const settings = new Settings();
+
     // get patrons from cache
     const patronsCache = memcache.get(CACHE_NAMESPACE + ":patrons") as patreon.Patron[];
 
@@ -37,7 +39,7 @@ export const fetchPatrons = async (): Promise<patreon.Patron[]> => {
     while (url) {
         // fetch patrons
         const response = await requests.get(url, {
-            Authorization: `Bearer ${ settings.get()?.patreon?.accessToken }`,
+            Authorization: `Bearer ${ settings.get("patreon")?.accessToken }`,
         });
 
         const patreonResponse: patreon.PatreonResponse = await response.body.json();
