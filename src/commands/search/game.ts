@@ -6,8 +6,8 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
-import { bastion } from "../../types.js";
 import { COLORS } from "../../utils/constants.js";
+import Settings from "../../utils/settings.js";
 
 interface Game {
     alternative_names: string[];
@@ -56,8 +56,8 @@ class GameCommand extends Command {
             limit: "10",
             search: name,
         }), {
-            "authorization": "Bearer " + ((interaction.client as Client).settings as bastion.Settings)?.twitch?.accessToken,
-            "client-id": ((interaction.client as Client).settings as bastion.Settings)?.twitch?.clientId,
+            "authorization": "Bearer " + ((interaction.client as Client).settings as Settings)?.get("twitch")?.accessToken,
+            "client-id": ((interaction.client as Client).settings as Settings)?.get("twitch")?.clientId,
         });
         const games: Game[] = await body.json();
 

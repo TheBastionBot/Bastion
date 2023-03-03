@@ -7,7 +7,7 @@ import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
-import { bastion } from "../../types.js";
+import Settings from "../../utils/settings.js";
 
 class FortniteCommand extends Command {
     constructor() {
@@ -43,7 +43,7 @@ class FortniteCommand extends Command {
 
         // get stats
         const response = await requests.get(`https://api.fortnitetracker.com/v1/profile/${ platform }/${ encodeURIComponent(username) }`, {
-            "TRN-Api-Key": ((interaction.client as Client).settings as bastion.Settings).trackerNetworkApiKey,
+            "TRN-Api-Key": ((interaction.client as Client).settings as Settings).get("trackerNetworkApiKey"),
         });
 
         const body = await response.body.json();

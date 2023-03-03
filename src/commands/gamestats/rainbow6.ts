@@ -7,7 +7,7 @@ import { Client, Command } from "@bastion/tesseract";
 import R6API from "r6api.js";
 
 import { COLORS } from "../../utils/constants.js";
-import { bastion } from "../../types.js";
+import Settings from "../../utils/settings.js";
 
 class Rainbow6Command extends Command {
     constructor() {
@@ -42,7 +42,7 @@ class Rainbow6Command extends Command {
         const platform = interaction.options.getString("platform") as "uplay" | "psn" | "xbl";
 
         // initialize
-        const r6 = new R6API(((interaction.client as Client).settings as bastion.Settings).ubisoft);
+        const r6 = new R6API(((interaction.client as Client).settings as Settings).get("ubisoft"));
 
         // find user
         const users = await r6.findByUsername(platform, username);
