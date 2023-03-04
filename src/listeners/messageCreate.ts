@@ -15,9 +15,9 @@ import * as gamification from "../utils/gamification.js";
 import * as members from "../utils/members.js";
 import * as numbers from "../utils/numbers.js";
 import * as regex from "../utils/regex.js";
+import Settings from "../utils/settings.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
-import { bastion } from "../types.js";
 
 class MessageCreateListener extends Listener<"messageCreate"> {
     public activeUsers: Map<Snowflake, Snowflake[]>;
@@ -310,10 +310,9 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             // auto threads
             this.handleAutoThreads(message, guildDocument).catch(Logger.error);
         } else {
-            const relayDirectMessages = process.env.BASTION_RELAY_DMS || ((message.client as Client).settings as bastion.Settings)?.relayDirectMessages;
-            if (relayDirectMessages) {
+            if (((message.client as Client).settings as Settings)?.relayDirectMessages) {
                 // relay direct messages
-                this.handleDirectMessageRelay(message, relayDirectMessages).catch(Logger.error);
+                this.handleDirectMessageRelay(message, ((message.client as Client).settings as Settings)?.relayDirectMessages).catch(Logger.error);
             } else {
                 // instant responses
                 this.handleInstantResponses(message).catch(Logger.error);

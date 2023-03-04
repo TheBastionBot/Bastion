@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
-import { bastion } from "../../types.js";
+import Settings from "../../utils/settings.js";
 
 interface Definition {
     id?: string;
@@ -48,7 +48,7 @@ class DefinitionsCommand extends Command {
         const word = interaction.options.getString("word");
 
         // fetch definitions
-        const { body } = await requests.get(`https://api.wordnik.com/v4/word.json/${ encodeURIComponent(word.toLowerCase()) }/definitions?limit=10&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${ ((interaction.client as Client).settings as bastion.Settings)?.wordnikApiKey }`);
+        const { body } = await requests.get(`https://api.wordnik.com/v4/word.json/${ encodeURIComponent(word.toLowerCase()) }/definitions?limit=10&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${ ((interaction.client as Client).settings as Settings)?.get("wordnikApiKey") }`);
         const definitions: Definition[] = await body.json();
 
         if (definitions?.length) {

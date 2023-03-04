@@ -29,7 +29,7 @@
         "typescript": "^4.9.5"
     },
     "dependencies": {
-        "@bastion/tesseract": "^4.0.0",
+        "@bastion/tesseract": "^5.0.0",
         "@discordjs/opus": "^0.9.0",
         "@iamtraction/google-translate": "^2.0.1",
         "@types/gamedig": "^4.0.0",

@@ -54,9 +54,9 @@ musicActivity: true
 # `BASTION_RELAY_DMS` environment variable overwrites this value.
 relayDirectMessages: false
 
-# Safe Mode
-# When enabled, this disables usage of unsafe commands like `exec` and `eval`.
-# Keep this enabled if the bot owner isn't exclusively you.
+# Unsafe Mode
+# When enabled, this enables usage of unsafe commands like `exec` and `eval`.
+# Keep this disabled if the bot owner isn't exclusively you.
 # `UNSAFE_MODE` environment variable overwrites this value.
 unsafeMode: false
 

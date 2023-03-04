@@ -9,7 +9,8 @@ import GuildModel from "../models/Guild.js";
 import memcache from "../utils/memcache.js";
 import * as requests from "../utils/requests.js";
 import { COLORS } from "../utils/constants.js";
-import { bastion, TwitchStream } from "../types.js";
+import Settings from "../utils/settings.js";
+import { TwitchStream } from "../types.js";
 
 const TWITCH_CACHE_NAMESPACE = "twitchStreams";
 
@@ -42,8 +43,8 @@ class LiveStreamNotificationScheduler extends Scheduler {
                 if (guild.twitchNotificationChannel && this.client.guilds.cache.get(guild.id).channels.cache.has(guild.twitchNotificationChannel) && guild.twitchNotificationUsers?.length) {
                     // get current live streams
                     const { body } = await requests.get("https://api.twitch.tv/helix/streams/?user_login=" + guild.twitchNotificationUsers.join("&user_login="), {
-                        "authorization": "Bearer " + (this.client.settings as bastion.Settings).twitch.accessToken,
-                        "client-id": (this.client.settings as bastion.Settings).twitch.clientId,
+                        "authorization": "Bearer " + (this.client.settings as Settings).get("twitch").accessToken,
+                        "client-id": (this.client.settings as Settings).get("twitch").clientId,
                     });
 
                     const streams: TwitchStream[] = (await body.json())?.data || [];

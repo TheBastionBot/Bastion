@@ -7,7 +7,7 @@ import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
-import { bastion } from "../../types.js";
+import Settings from "../../utils/settings.js";
 
 interface Weather {
     coord: {
@@ -93,7 +93,7 @@ class WeatherCommand extends Command {
         const location = interaction.options.getString("location");
 
         // fetch current weather
-        const { body } = await requests.get(`https://api.openweathermap.org/data/2.5/weather?q=${ encodeURIComponent(location) }&APPID=${ ((interaction.client as Client).settings as bastion.Settings)?.openWeatherMapApiKey }`);
+        const { body } = await requests.get(`https://api.openweathermap.org/data/2.5/weather?q=${ encodeURIComponent(location) }&APPID=${ ((interaction.client as Client).settings as Settings)?.get("openWeatherMapApiKey") }`);
         const weather: Weather = await body.json();
 
         await interaction.editReply({

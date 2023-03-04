@@ -8,7 +8,9 @@ import DiscordRPC from "discord-rpc";
 import dotenv from "dotenv";
 import picocolors from "picocolors";
 
-import * as settings from "./utils/settings.js";
+import Settings from "./utils/settings.js";
+
+const settings = new Settings();
 
 // configure dotenv
 dotenv.config();
@@ -30,11 +32,9 @@ Manager.on("shardCreate", shard => {
 });
 
 // Tesseract Web Server
-const port = process.env.PORT || process.env.BASTION_API_PORT || settings.get()?.port;
-const auth = process.env.BASTION_API_AUTH || settings.get()?.auth;
-if (port && auth) {
+if (settings.auth && settings.port) {
     const server = new WebServer(Manager);
-    server.start(port);
+    server.start(settings.port);
 }
 
 // RPC Events

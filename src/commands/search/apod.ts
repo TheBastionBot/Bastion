@@ -5,8 +5,8 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
 
-import { bastion } from "../../types.js";
 import * as requests from "../../utils/requests.js";
+import Settings from "../../utils/settings.js";
 
 interface APOD {
     copyright: string;
@@ -30,7 +30,7 @@ class APODCommand extends Command {
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
         await interaction.deferReply();
 
-        const { body } = await requests.get(`https://api.nasa.gov/planetary/apod?api_key=${ ((interaction.client as Client).settings as bastion.Settings)?.nasaApiKey }`);
+        const { body } = await requests.get(`https://api.nasa.gov/planetary/apod?api_key=${ ((interaction.client as Client).settings as Settings)?.get("nasaApiKey") }`);
         const apod: APOD = await body.json();
 
         await interaction.editReply(`[${ apod.title }](${ apod.hdurl || apod.url }) — ${ apod.explanation }`);

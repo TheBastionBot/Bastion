@@ -6,8 +6,8 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildTextBas
 import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
-import { bastion } from "../../types.js";
 import { COLORS } from "../../utils/constants.js";
+import Settings from "../../utils/settings.js";
 
 interface TVShow {
     id: number;
@@ -61,7 +61,7 @@ class TVCommand extends Command {
 
         // fetch tv shows
         const { body } = await requests.get("https://api.themoviedb.org/3/search/tv?" + new URLSearchParams({
-            api_key: ((interaction.client as Client).settings as bastion.Settings)?.tmdbApiKey,
+            api_key: ((interaction.client as Client).settings as Settings)?.get("tmdbApiKey"),
             query: name,
         }));
         const results: TVShowResponse = await body.json();
