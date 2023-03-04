@@ -2,7 +2,10 @@
  * @author TRACTION (iamtraction)
  * @copyright 2023
  */
+import fs from "node:fs";
+import path from "node:path";
 import { Settings } from "@bastion/tesseract";
+import YAML from "yaml";
 
 import { bastion } from "../types.js";
 
@@ -44,5 +47,12 @@ export default class BastionSettings extends Settings {
 
     public get<K extends keyof bastion.Settings>(key: K): bastion.Settings[K] {
         return this.data[key];
+    }
+
+    public set<K extends keyof bastion.Settings>(key: K, value: bastion.Settings[K]): void {
+        fs.writeFileSync(path.resolve("settings.yaml"), YAML.stringify({
+            ...this.data,
+            [key]: value,
+        }));
     }
 }
