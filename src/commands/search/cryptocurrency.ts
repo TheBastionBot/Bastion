@@ -6,8 +6,8 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { Client, Command } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
-import { bastion } from "../../types.js";
 import { COLORS } from "../../utils/constants.js";
+import Settings from "../../utils/settings.js";
 
 interface Currency {
     name: string;
@@ -49,7 +49,7 @@ class CryptoCurrencyCommand extends Command {
 
         // fetch crypto currency
         const { body } = await requests.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?symbol=" + encodeURIComponent(symbol), {
-            "X-CMC_PRO_API_KEY": ((interaction.client as Client).settings as bastion.Settings)?.coinMarketCapApiKey,
+            "X-CMC_PRO_API_KEY": ((interaction.client as Client).settings as Settings)?.get("coinMarketCapApiKey"),
         });
         const response: CurrencyResponse = await body.json();
         const currency = Object.values(response?.data || {})[0];

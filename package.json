@@ -1,6 +1,6 @@
 {
     "name": "bastion",
-    "version": "10.9.0",
+    "version": "10.10.0",
     "description": "Get an enhanced Discord experience!",
     "type": "module",
     "homepage": "https://bastion.traction.one",
@@ -29,7 +29,7 @@
         "typescript": "^4.9.5"
     },
     "dependencies": {
-        "@bastion/tesseract": "^4.0.0",
+        "@bastion/tesseract": "^5.0.0",
         "@discordjs/opus": "^0.9.0",
         "@iamtraction/google-translate": "^2.0.1",
         "@types/gamedig": "^4.0.0",
@@ -49,7 +49,7 @@
     "optionalDependencies": {
         "bufferutil": "^4.0.7",
         "erlpack": "github:discord/erlpack",
-        "utf-8-validate": "^5.0.10",
+        "utf-8-validate": "^6.0.2",
         "zlib-sync": "^0.1.8"
     },
     "overrides": {

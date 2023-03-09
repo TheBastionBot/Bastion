@@ -6,14 +6,13 @@ import { Logger } from "@bastion/tesseract";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
-import * as yaml from "./utils/yaml.js";
+import Settings from "./utils/settings.js";
 
 // configure dotenv
 dotenv.config();
 
-const settings = yaml.parse("settings.yaml");
-
-const client = new MongoClient(settings?.mongoURI || process.env.MONGO_URI);
+const settings = new Settings();
+const client = new MongoClient(settings?.mongoURI);
 
 const main = async () => {
     await client.connect();
