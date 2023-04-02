@@ -14,6 +14,8 @@ class RoleUpdateListener extends Listener<"roleUpdate"> {
     }
 
     public async exec(oldRole: Role, newRole: Role): Promise<void> {
+        if (oldRole.name === newRole.name && oldRole.color === newRole.color && newRole.permissions.equals(oldRole.permissions)) return;
+
         const logFields: APIEmbedField[] = [
             {
                 name: "Name",
