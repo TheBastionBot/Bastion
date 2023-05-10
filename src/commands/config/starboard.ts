@@ -16,7 +16,7 @@ class StarboardCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where starred messages should be sent.",
+                    description: "The channel where starred messages will be logged.",
                     channel_types: [ ChannelType.GuildText ],
                 },
                 {

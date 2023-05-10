@@ -22,7 +22,7 @@ class GreetingCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "message",
-                    description: "The greeting message.",
+                    description: "The custom greeting message.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,

@@ -11,12 +11,12 @@ class ReportsCommand extends Command {
     constructor() {
         super({
             name: "reports",
-            description: "Configure reports in the server.",
+            description: "Configure user reports in the server.",
             options: [
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where reports should be sent.",
+                    description: "The channel where user reports will be sent.",
                     channel_types: [ ChannelType.GuildText ],
                 },
             ],

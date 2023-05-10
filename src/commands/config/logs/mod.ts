@@ -16,7 +16,7 @@ class LogModCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where moderation logs should be sent.",
+                    description: "The channel where moderation events will be logged.",
                     channel_types: [ ChannelType.GuildText ],
                 },
             ],

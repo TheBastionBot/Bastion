@@ -18,19 +18,19 @@ class UserInfractionsCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "timeout",
-                    description: "Number of violations after which the user is timed out.",
+                    description: "Number of violations after which a user is timed out.",
                     min_value: 1,
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "kick",
-                    description: "Number of violations after which the user is kicked.",
+                    description: "Number of violations after which a user is kicked.",
                     min_value: 1,
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "ban",
-                    description: "Number of violations after which the user is banned.",
+                    description: "Number of violations after which a user is banned.",
                     min_value: 1,
                 },
                 {

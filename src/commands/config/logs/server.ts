@@ -16,7 +16,7 @@ class LogServerCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where server logs should be sent.",
+                    description: "The channel where server events will be logged.",
                     channel_types: [ ChannelType.GuildText ],
                 },
             ],
