@@ -40,10 +40,6 @@ export interface Guild {
     linkFilter?: boolean;
     linkFilterWarnings?: boolean;
     linkFilterExemptions?: string[];
-    // message filter
-    messageFilter?: boolean;
-    messageFilterWarnings?: boolean;
-    messageFilterPatterns?: string[];
     // spam filters
     mentionSpamThreshold?: number;
     // starboard
@@ -162,15 +158,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
         type: Boolean,
     },
     linkFilterExemptions: {
-        type: [ String ],
-    },
-    messageFilter: {
-        type: Boolean,
-    },
-    messageFilterWarnings: {
-        type: Boolean,
-    },
-    messageFilterPatterns: {
         type: [ String ],
     },
     mentionSpamThreshold: {
