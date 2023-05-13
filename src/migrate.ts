@@ -11,10 +11,16 @@ import Settings from "./utils/settings.js";
 // configure dotenv
 dotenv.config();
 
+// init
 const settings = new Settings();
 const client = new MongoClient(settings?.mongoURI);
 
-const main = async () => {
+// commands
+const Commands = {
+    Filters: "filters",
+};
+
+const v10 = async () => {
     await client.connect();
     const db = client.db();
 
@@ -137,6 +143,32 @@ const main = async () => {
         Logger.info("Dropping User collection...");
         await db.collection("users").drop();
         Logger.info("Dropped User collection.");
+    }
+};
+
+const filters = async () => {
+    await client.connect();
+    const db = client.db();
+
+    // Message Filters
+    Logger.info("Deleting Message Filters...");
+    const Guild = db.collection("guilds");
+    await Guild.updateMany({}, {
+        $unset: {
+            messageFilter: 1,
+            messageFilterWarnings: 1,
+            messageFilterPatterns: 1,
+        },
+    });
+    Logger.info("Deleted Message Filters.");
+};
+
+const main = () => {
+    const [ , , command ] = process.argv;
+
+    switch (command) {
+        case Commands.Filters: return filters();
+        default: return v10();
     }
 };
 
