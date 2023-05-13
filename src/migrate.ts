@@ -168,12 +168,12 @@ const main = () => {
     const [ , , command ] = process.argv;
 
     switch (command.toLowerCase()) {
-        case Commands.Filters: return filters();
-        case Commands.v10: return v10();
-        default:
-            throw new Error("You need to specify a migration command.", {
-                cause: "None of the valid commands were used: " + Object.values(Commands).join(" / "),
-            });
+    case Commands.Filters: return filters();
+    case Commands.v10: return v10();
+    default:
+        throw new Error("You need to specify a migration command.", {
+            cause: "None of the valid commands were used: " + Object.values(Commands).join(" / "),
+        });
     }
 };
 
