@@ -32,14 +32,6 @@ export interface Guild {
     infractionsTimeoutThreshold?: number;
     infractionsKickThreshold?: number;
     infractionsBanThreshold?: number;
-    // invite filter
-    inviteFilter?: boolean;
-    inviteFilterWarnings?: boolean;
-    inviteFilterExemptions?: string[];
-    // link filter
-    linkFilter?: boolean;
-    linkFilterWarnings?: boolean;
-    linkFilterExemptions?: string[];
     // starboard
     starboardChannel?: string;
     starboardThreshold?: number;
@@ -139,24 +131,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     infractionsBanThreshold: {
         type: Number,
-    },
-    inviteFilter: {
-        type: Boolean,
-    },
-    inviteFilterWarnings: {
-        type: Boolean,
-    },
-    inviteFilterExemptions: {
-        type: [ String ],
-    },
-    linkFilter: {
-        type: Boolean,
-    },
-    linkFilterWarnings: {
-        type: Boolean,
-    },
-    linkFilterExemptions: {
-        type: [ String ],
     },
     starboardChannel: {
         type: String,
