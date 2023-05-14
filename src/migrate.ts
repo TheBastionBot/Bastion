@@ -152,16 +152,25 @@ const filters = async () => {
     const db = client.db();
 
     // Message Filters
-    Logger.info("Deleting Message Filters...");
+    Logger.info("Deleting Filters...");
     const Guild = db.collection("guilds");
     await Guild.updateMany({}, {
         $unset: {
+            // invite filter
+            inviteFilter: 1,
+            inviteFilterWarnings: 1,
+            inviteFilterExemptions: 1,
+            // link filter
+            linkFilter: 1,
+            linkFilterWarnings: 1,
+            linkFilterExemptions: 1,
+            // message filter
             messageFilter: 1,
             messageFilterWarnings: 1,
             messageFilterPatterns: 1,
         },
     });
-    Logger.info("Deleted Message Filters.");
+    Logger.info("Deleted Filters.");
 };
 
 const main = () => {
