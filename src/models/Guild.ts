@@ -32,6 +32,9 @@ export interface Guild {
     infractionsTimeoutThreshold?: number;
     infractionsKickThreshold?: number;
     infractionsBanThreshold?: number;
+    // automod rules
+    inviteFilterRule?: string;
+    linkFilterRule?: string;
     // starboard
     starboardChannel?: string;
     starboardThreshold?: number;
@@ -131,6 +134,16 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     infractionsBanThreshold: {
         type: Number,
+    },
+    inviteFilterRule: {
+        type: String,
+        unique: true,
+        sparse: true,
+    },
+    linkFilterRule: {
+        type: String,
+        unique: true,
+        sparse: true,
     },
     starboardChannel: {
         type: String,
