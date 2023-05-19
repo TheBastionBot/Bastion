@@ -16,7 +16,7 @@ class SuggestionsCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where suggestions should be sent.",
+                    description: "The channel where suggestions will be sent.",
                     channel_types: [ ChannelType.GuildText ],
                 },
             ],

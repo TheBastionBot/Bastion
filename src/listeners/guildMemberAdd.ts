@@ -50,8 +50,8 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
         greetingChannel.send({
             embeds: [
                 {
-                    ...greetingMessage,
                     color: COLORS.SECONDARY,
+                    ...greetingMessage,
                     footer: {
                         text: "Greetings!"
                     },

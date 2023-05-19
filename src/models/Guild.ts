@@ -32,20 +32,9 @@ export interface Guild {
     infractionsTimeoutThreshold?: number;
     infractionsKickThreshold?: number;
     infractionsBanThreshold?: number;
-    // invite filter
-    inviteFilter?: boolean;
-    inviteFilterWarnings?: boolean;
-    inviteFilterExemptions?: string[];
-    // link filter
-    linkFilter?: boolean;
-    linkFilterWarnings?: boolean;
-    linkFilterExemptions?: string[];
-    // message filter
-    messageFilter?: boolean;
-    messageFilterWarnings?: boolean;
-    messageFilterPatterns?: string[];
-    // spam filters
-    mentionSpamThreshold?: number;
+    // automod rules
+    inviteFilterRule?: string;
+    linkFilterRule?: string;
     // starboard
     starboardChannel?: string;
     starboardThreshold?: number;
@@ -146,35 +135,15 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     infractionsBanThreshold: {
         type: Number,
     },
-    inviteFilter: {
-        type: Boolean,
+    inviteFilterRule: {
+        type: String,
+        unique: true,
+        sparse: true,
     },
-    inviteFilterWarnings: {
-        type: Boolean,
-    },
-    inviteFilterExemptions: {
-        type: [ String ],
-    },
-    linkFilter: {
-        type: Boolean,
-    },
-    linkFilterWarnings: {
-        type: Boolean,
-    },
-    linkFilterExemptions: {
-        type: [ String ],
-    },
-    messageFilter: {
-        type: Boolean,
-    },
-    messageFilterWarnings: {
-        type: Boolean,
-    },
-    messageFilterPatterns: {
-        type: [ String ],
-    },
-    mentionSpamThreshold: {
-        type: Number,
+    linkFilterRule: {
+        type: String,
+        unique: true,
+        sparse: true,
     },
     starboardChannel: {
         type: String,

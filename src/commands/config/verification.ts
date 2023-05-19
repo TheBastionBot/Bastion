@@ -17,7 +17,7 @@ class VerificationCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Role,
                     name: "role",
-                    description: "The role that should be assigned to verified users.",
+                    description: "The role users are assigned when are verified.",
                 },
                 {
                     type: ApplicationCommandOptionType.String,

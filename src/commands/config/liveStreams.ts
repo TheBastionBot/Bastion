@@ -23,13 +23,13 @@ class LiveStreamsCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where you want to post the notification.",
+                    description: "The channel where the notifications will be sent.",
                     channel_types: [ ChannelType.GuildText ],
                 },
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "message",
-                    description: "A custom message to show with the live notification.",
+                    description: "The custom message for notification.",
                 },
             ],
             userPermissions: [ PermissionFlagsBits.ManageGuild ],

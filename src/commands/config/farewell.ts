@@ -22,7 +22,7 @@ class FarewellCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "message",
-                    description: "The farewell message.",
+                    description: "The custom farewell message.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,

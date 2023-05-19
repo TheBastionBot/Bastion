@@ -23,7 +23,7 @@ class GamificationCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.Channel,
                     name: "channel",
-                    description: "The channel where the level up messages should be sent.",
+                    description: "The channel where the level up messages will be sent.",
                     channel_types: [ ChannelType.GuildText ],
                 },
                 {

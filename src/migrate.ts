@@ -11,10 +11,17 @@ import Settings from "./utils/settings.js";
 // configure dotenv
 dotenv.config();
 
+// init
 const settings = new Settings();
 const client = new MongoClient(settings?.mongoURI);
 
-const main = async () => {
+// commands
+const Commands = {
+    Filters: "filters",
+    v10: "v10",
+};
+
+const v10 = async () => {
     await client.connect();
     const db = client.db();
 
@@ -137,6 +144,45 @@ const main = async () => {
         Logger.info("Dropping User collection...");
         await db.collection("users").drop();
         Logger.info("Dropped User collection.");
+    }
+};
+
+const filters = async () => {
+    await client.connect();
+    const db = client.db();
+
+    // Message Filters
+    Logger.info("Deleting Filters...");
+    const Guild = db.collection("guilds");
+    await Guild.updateMany({}, {
+        $unset: {
+            // invite filter
+            inviteFilter: 1,
+            inviteFilterWarnings: 1,
+            inviteFilterExemptions: 1,
+            // link filter
+            linkFilter: 1,
+            linkFilterWarnings: 1,
+            linkFilterExemptions: 1,
+            // message filter
+            messageFilter: 1,
+            messageFilterWarnings: 1,
+            messageFilterPatterns: 1,
+        },
+    });
+    Logger.info("Deleted Filters.");
+};
+
+const main = () => {
+    const [ , , command ] = process.argv;
+
+    switch (command.toLowerCase()) {
+    case Commands.Filters: return filters();
+    case Commands.v10: return v10();
+    default:
+        throw new Error("You need to specify a migration command.", {
+            cause: "None of the valid commands were used: " + Object.values(Commands).join(" / "),
+        });
     }
 };
 

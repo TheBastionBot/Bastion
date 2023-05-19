@@ -35,8 +35,8 @@ class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
         farewellChannel.send({
             embeds: [
                 {
-                    ...farewellMessage,
                     color: COLORS.SECONDARY,
+                    ...farewellMessage,
                     footer: {
                         text: "Farewell!"
                     },
