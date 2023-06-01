@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-export const SERVER_INVITE = /(https:\/\/)?(www\.)?(discord\.gg|discordapp\.com\/invite|discord\.com\/invite)\/([a-z0-9-.]+)?/i;
+export const SERVER_INVITE = /(?:https?:\/\/)?(?:www\.)?(?:discord\.gg|discord(?:app)?\.com\/invite)\/([a-z0-9-.]+)/i;
 export const URI = /((([A-Za-z]{3,9}:(?:\/\/))(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w\-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/i;
 export const WEBHOOK_URL = /(?:https:\/\/)(?:www\.)?(?:discordapp|discord)\.com\/api\/webhooks\/([0-9]+)\/([a-z0-9_-]+)/i;
 
