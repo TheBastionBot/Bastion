@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2023
  */
-import { AutoModerationActionType, AutoModerationRuleEventType, AutoModerationRuleTriggerType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
+import { AutoModerationActionOptions, AutoModerationActionType, AutoModerationRuleEventType, AutoModerationRuleTriggerType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../../../models/Guild.js";
@@ -35,6 +35,30 @@ class FilterInvitesCommand extends Command {
             return await interaction.editReply(`I've ${ newInviteFilterRule.enabled ? "enabled" : "disabled" } the **${ newInviteFilterRule.name }** AutoMod rule.`);
         }
 
+        const actions: AutoModerationActionOptions[] = [
+            {
+                type: AutoModerationActionType.BlockMessage,
+                metadata: {
+                    customMessage: "You are not allowed to send invites in this channel.",
+                },
+            },
+            {
+                type: AutoModerationActionType.Timeout,
+                metadata: {
+                    durationSeconds: 60,
+                },
+            },
+        ];
+
+        if (interaction.guild.channels.cache.has(guildDocument.moderationLogChannel)) {
+            actions.push({
+                type: AutoModerationActionType.SendAlertMessage,
+                metadata: {
+                    channel: guildDocument.moderationLogChannel,
+                },
+            });
+        }
+
         // create invite filter rule
         const newInviteFilterRule = await interaction.guild.autoModerationRules.create({
             enabled: true,
@@ -46,26 +70,7 @@ class FilterInvitesCommand extends Command {
                     "(?:https?://)?(?:www\\.)?(?:discord\\.gg|discord(?:app)?\\.com/invite)/[a-z0-9-.]+",
                 ],
             },
-            actions: [
-                {
-                    type: AutoModerationActionType.BlockMessage,
-                    metadata: {
-                        customMessage: "You are not allowed to send invites in this channel.",
-                    },
-                },
-                {
-                    type: AutoModerationActionType.SendAlertMessage,
-                    metadata: {
-                        channel: guildDocument.moderationLogChannel,
-                    },
-                },
-                {
-                    type: AutoModerationActionType.Timeout,
-                    metadata: {
-                        durationSeconds: 60,
-                    },
-                },
-            ],
+            actions,
             reason: "Configure Invite Filter",
         });
 
