@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2023
  */
-import { AutoModerationActionType, AutoModerationRuleEventType, AutoModerationRuleTriggerType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
+import { AutoModerationActionOptions, AutoModerationActionType, AutoModerationRuleEventType, AutoModerationRuleTriggerType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
 import { Command, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../../../models/Guild.js";
@@ -35,6 +35,30 @@ class FilterLinksCommand extends Command {
             return await interaction.editReply(`I've ${ newLinkFilterRule.enabled ? "enabled" : "disabled" } the **${ newLinkFilterRule.name }** AutoMod rule.`);
         }
 
+        const actions: AutoModerationActionOptions[] = [
+            {
+                type: AutoModerationActionType.BlockMessage,
+                metadata: {
+                    customMessage: "You are not allowed to send links in this channel.",
+                },
+            },
+            {
+                type: AutoModerationActionType.Timeout,
+                metadata: {
+                    durationSeconds: 60,
+                },
+            },
+        ];
+
+        if (interaction.guild.channels.cache.has(guildDocument.moderationLogChannel)) {
+            actions.push({
+                type: AutoModerationActionType.SendAlertMessage,
+                metadata: {
+                    channel: guildDocument.moderationLogChannel,
+                },
+            });
+        }
+
         // create link filter rule
         const newLinkFilterRule = await interaction.guild.autoModerationRules.create({
             enabled: true,
@@ -46,26 +70,7 @@ class FilterLinksCommand extends Command {
                     "https?://(?:[-;:&=+$,\\w]+@)?[A-Za-z0-9.-]+",
                 ],
             },
-            actions: [
-                {
-                    type: AutoModerationActionType.BlockMessage,
-                    metadata: {
-                        customMessage: "You are not allowed to send links in this channel.",
-                    },
-                },
-                {
-                    type: AutoModerationActionType.SendAlertMessage,
-                    metadata: {
-                        channel: guildDocument.moderationLogChannel,
-                    },
-                },
-                {
-                    type: AutoModerationActionType.Timeout,
-                    metadata: {
-                        durationSeconds: 60,
-                    },
-                },
-            ],
+            actions,
             reason: "Configure Link Filter",
         });
 
