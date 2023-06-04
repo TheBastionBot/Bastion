@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ChannelType, ChatInputCommandInteraction, time } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { COLORS, isPublicBastion } from "../../utils/constants.js";
@@ -33,7 +33,7 @@ class ChannelInfoCommand extends Command {
                     color: COLORS.PRIMARY,
                     author: {
                         name: interaction.guild.name,
-                        // TODO: server page - url: ,
+                        url: (interaction.client as Client).locales.getConstant("bastion.website") + "/servers/" + interaction.guild.id,
                     },
                     title: (interaction.guild.partnered ? "Partnered" : interaction.guild.verified ? "Verified" : "") + " Server",
                     // TODO: badges - description: ,
