@@ -9,27 +9,27 @@ import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 
 interface Pokemon {
-    number: string;
-    name: string;
+    number?: string;
+    name?: string;
     description?: string;
-    gen: number;
+    gen?: number;
     starter?: boolean;
     mega?: boolean;
     ultraBeast?: boolean;
     legendary?: boolean;
     mythical?: boolean;
-    species: string;
-    types: string[];
-    abilities: {
+    species?: string;
+    types?: string[];
+    abilities?: {
         normal: string[];
         hidden: string[];
     };
-    eggGroups: string[];
-    gender: [ number, number ] | [];
-    height: string;
-    weight: string;
-    sprite: string;
-    family: {
+    eggGroups?: string[];
+    gender?: [ number, number ] | [];
+    height?: string;
+    weight?: string;
+    sprite?: string;
+    family?: {
         evolutionLine: string[];
     };
 }
@@ -56,7 +56,7 @@ class PokemonCommand extends Command {
 
         // fetch pokemon
         const { body } = await requests.get(`https://pokeapi.glitch.me/v1/pokemon/${ encodeURIComponent(name) }`);
-        const pokemon: Pokemon[] = await body.json();
+        const pokemon: Pokemon[] = await body.json() as unknown[];
 
         if (pokemon?.length) {
             return await interaction.editReply({

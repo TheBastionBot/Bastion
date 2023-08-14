@@ -23,7 +23,7 @@ interface Anime {
 }
 
 interface AnimeResponse {
-    data: {
+    data?: {
         attributes: Anime;
     }[];
 }

@@ -9,6 +9,30 @@ import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
 
+interface ApexProfileResponse {
+    data?: {
+        platformInfo: {
+            platformUserHandle: string;
+            avatarUrl: string;
+        };
+        segments: {
+            type: string;
+            stats: {
+                rankScore: {
+                    displayValue: string;
+                    metadata: {
+                        rankName: string;
+                        iconUrl: string;
+                    };
+                };
+            };
+        }[];
+        metadata: {
+            activeLegendName: string;
+        };
+    };
+}
+
 class ApexLegendsCommand extends Command {
     constructor() {
         super({
@@ -46,8 +70,8 @@ class ApexLegendsCommand extends Command {
             "TRN-Api-Key": ((interaction.client as Client).settings as Settings).get("trackerNetworkApiKey"),
         });
 
-        const body = await response.body.json();
-        const overview = body?.data?.segments?.find((s: { type: string }) => s.type === "overview");
+        const body: ApexProfileResponse = await response.body.json();
+        const overview = body?.data?.segments?.find(s => s.type === "overview");
 
         if (!Object.keys(overview?.stats || {})?.length) return await interaction.editReply(`The profile for **${ username }** was not found in the specified platform.`);
 

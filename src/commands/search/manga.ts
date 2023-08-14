@@ -20,7 +20,7 @@ interface Manga {
 }
 
 interface MangaResponse {
-    data: {
+    data?: {
         attributes: Manga;
     }[];
 }

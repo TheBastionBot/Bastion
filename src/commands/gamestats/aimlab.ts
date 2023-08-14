@@ -8,6 +8,27 @@ import { Command } from "@bastion/tesseract";
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 
+interface AimLabResponse {
+    data?: {
+        aimlabProfile: {
+            username: string;
+            ranking: {
+                rank: {
+                    displayName: string;
+                    level: number;
+                    minSkill: number;
+                    maxSkill: number;
+                };
+                skill: number;
+            };
+            skillScores: {
+                name: string;
+                score: number;
+            }[];
+        };
+    };
+}
+
 class AimLabCommand extends Command {
     constructor() {
         super({
@@ -54,15 +75,15 @@ class AimLabCommand extends Command {
             },
         });
 
-        const body = await response.body.json();
+        const body: AimLabResponse = await response.body.json();
 
         if (!body?.data?.aimlabProfile) {
             return await interaction.editReply(`The profile for **${ username }** was not found.`);
         }
 
-        const skillScores = body.data.aimlabProfile?.skillScores?.length ? body.data.aimlabProfile.skillScores.map((skill: { name: string; score: string }) => ({
+        const skillScores = body.data.aimlabProfile?.skillScores?.length ? body.data.aimlabProfile.skillScores.map(skill => ({
             name: skill.name[0].toUpperCase() + skill.name.slice(1),
-            value: (skill.score as unknown as number).toFixed(),
+            value: skill.score.toFixed(),
             inline: true,
         })) : [];
 
@@ -83,7 +104,7 @@ class AimLabCommand extends Command {
                         },
                         {
                             name: "Skill Rating",
-                            value: (body.data.aimlabProfile?.ranking?.skill as unknown as number)?.toFixed(),
+                            value: body.data.aimlabProfile?.ranking?.skill?.toFixed(),
                             inline: true,
                         },
                         {

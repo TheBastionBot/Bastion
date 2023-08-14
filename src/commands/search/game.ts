@@ -10,22 +10,22 @@ import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
 
 interface Game {
-    alternative_names: string[];
-    artworks: string[];
-    cover: {
+    alternative_names?: string[];
+    artworks?: string[];
+    cover?: {
         url: string;
     };
-    first_release_date: number;
-    game_modes: number[];
-    genres: string[];
-    name: string;
-    platforms: string[];
-    screenshots: [];
-    summary: string;
-    total_rating: number;
-    url: string;
-    version_title: string;
-    websites: {
+    first_release_date?: number;
+    game_modes?: number[];
+    genres?: string[];
+    name?: string;
+    platforms?: string[];
+    screenshots?: [];
+    summary?: string;
+    total_rating?: number;
+    url?: string;
+    version_title?: string;
+    websites?: {
         url: string;
     }[];
 }
@@ -59,7 +59,7 @@ class GameCommand extends Command {
             "authorization": "Bearer " + ((interaction.client as Client).settings as Settings)?.get("twitch")?.accessToken,
             "client-id": ((interaction.client as Client).settings as Settings)?.get("twitch")?.clientId,
         });
-        const games: Game[] = await body.json();
+        const games: Game[] = await body.json() as unknown[];
 
         if (games?.length) {
             return await interaction.editReply({

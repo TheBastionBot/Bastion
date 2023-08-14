@@ -9,14 +9,14 @@ import * as requests from "../../utils/requests.js";
 import Settings from "../../utils/settings.js";
 
 interface APOD {
-    copyright: string;
-    date: string;
-    explanation: string;
+    copyright?: string;
+    date?: string;
+    explanation?: string;
     hdurl?: string;
-    media_type: string;
-    service_version: string;
-    title: string;
-    url: string;
+    media_type?: string;
+    service_version?: string;
+    title?: string;
+    url?: string;
 }
 
 class APODCommand extends Command {

@@ -9,6 +9,28 @@ import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
 
+interface CSGOProfileResponse {
+    data?: {
+        platformInfo: {
+            platformUserHandle: string;
+            avatarUrl: string;
+        };
+        segments: {
+            type: string;
+            stats: {
+                timePlayed: {
+                    value: number;
+                };
+                rankScore: {
+                    metadata: {
+                        iconUrl: string;
+                    };
+                };
+            };
+        }[];
+    };
+}
+
 class CSGOCommand extends Command {
     constructor() {
         super({
@@ -34,8 +56,8 @@ class CSGOCommand extends Command {
             "TRN-Api-Key": ((interaction.client as Client).settings as Settings).get("trackerNetworkApiKey"),
         });
 
-        const body = await response.body.json();
-        const overview = body?.data?.segments?.find((s: { type: string }) => s.type === "overview");
+        const body: CSGOProfileResponse = await response.body.json();
+        const overview = body?.data?.segments?.find(s => s.type === "overview");
 
         if (!Object.keys(overview?.stats || {})?.length) return await interaction.editReply(`The profile for **${ username }** was not found.`);
 

@@ -47,7 +47,7 @@ class LiveStreamNotificationScheduler extends Scheduler {
                         "client-id": (this.client.settings as Settings).get("twitch").clientId,
                     });
 
-                    const streams: TwitchStream[] = (await body.json())?.data || [];
+                    const streams: TwitchStream[] = (await body.json())?.["data"] || [];
 
                     // streams that were already notified
                     if (!twitchStreams.has(guild.id)) twitchStreams.set(guild.id, []);

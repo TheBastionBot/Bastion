@@ -79,13 +79,13 @@ export namespace patreon {
     }
 
     export interface PatreonResponse {
-        readonly data: PatreonEntity[];
-        readonly included: PatreonEntity[];
-        readonly links: {
+        readonly data?: PatreonEntity[];
+        readonly included?: PatreonEntity[];
+        readonly links?: {
             readonly prev: string;
             readonly next: string;
         };
-        readonly meta: {
+        readonly meta?: {
             readonly pagination: {
                 readonly total: number;
             };
