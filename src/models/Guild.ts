@@ -33,6 +33,7 @@ export interface Guild {
     infractionsKickThreshold?: number;
     infractionsBanThreshold?: number;
     // automod rules
+    emailFilterRule?: string;
     inviteFilterRule?: string;
     linkFilterRule?: string;
     // starboard
@@ -134,6 +135,11 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     infractionsBanThreshold: {
         type: Number,
+    },
+    emailFilterRule: {
+        type: String,
+        unique: true,
+        sparse: true,
     },
     inviteFilterRule: {
         type: String,
