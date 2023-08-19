@@ -29,7 +29,7 @@ mongoURI: "mongodb://127.0.0.1:27017/bastion"
 # status — online / idle / dnd / invisible
 # activity — 0 (Playing) / 1 (Streaming) / 2 (Listening) / 3 (Watching) /  4 (Custom) / 5 (Competing)
 # name — string
-# url — Twitch URL when `activity` is set to
+# url — Twitch URL when `activity` is set to `1` (Streaming)
 presences:
 - status: "online"
   activity: 3
