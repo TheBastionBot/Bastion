@@ -26,10 +26,10 @@ interface TVShow {
 }
 
 interface TVShowResponse {
-    page: number;
-    total_results: number;
-    total_pages: number;
-    results: TVShow[];
+    page?: number;
+    total_results?: number;
+    total_pages?: number;
+    results?: TVShow[];
 }
 
 class TVCommand extends Command {

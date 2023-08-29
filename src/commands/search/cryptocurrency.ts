@@ -18,11 +18,11 @@ interface Currency {
 }
 
 interface CurrencyResponse {
-    status: {
+    status?: {
         error_code: number;
         error_message: string;
     };
-    data: {
+    data?: {
         [key: string]: Currency;
     };
 }

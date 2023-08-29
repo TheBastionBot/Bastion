@@ -9,29 +9,44 @@ import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 
 interface Pokemon {
-    number: string;
-    name: string;
-    description?: string;
-    gen: number;
-    starter?: boolean;
-    mega?: boolean;
-    ultraBeast?: boolean;
-    legendary?: boolean;
-    mythical?: boolean;
-    species: string;
-    types: string[];
-    abilities: {
-        normal: string[];
-        hidden: string[];
+    number?: number;
+    name?: string;
+    codename?: string;
+    gen?: number;
+    species?: string;
+    types?: string[],
+    abilities?: {
+        name: string;
+        description: string;
+        hidden: boolean;
+    }[];
+    height?: string;
+    weight?: string;
+    mega?: boolean | {
+        stone: string;
+        sprite: string;
     };
-    eggGroups: string[];
-    gender: [ number, number ] | [];
-    height: string;
-    weight: string;
-    sprite: string;
-    family: {
-        evolutionLine: string[];
+    baseStats?: {
+        hp: number;
+        attack: number;
+        defense: number;
+        spAtk: number;
+        spDef: number;
+        speed: number;
     };
+    training?: {
+        evYield: string;
+        catchRate: string;
+        baseFriendship: string;
+        baseExp: string;
+        growthRate: string;
+    };
+    breeding?: {
+        gender: string;
+        eggGroups: string[];
+        eggCycles: string;
+    };
+    sprite?: string;
 }
 
 class PokemonCommand extends Command {
@@ -55,8 +70,8 @@ class PokemonCommand extends Command {
         const name = interaction.options.getString("name");
 
         // fetch pokemon
-        const { body } = await requests.get(`https://pokeapi.glitch.me/v1/pokemon/${ encodeURIComponent(name) }`);
-        const pokemon: Pokemon[] = await body.json();
+        const { body } = await requests.get(`https://ex.traction.one/pokedex/pokemon/${ encodeURIComponent(name) }`);
+        const pokemon: Pokemon[] = await body.json() as unknown[];
 
         if (pokemon?.length) {
             return await interaction.editReply({
@@ -64,19 +79,19 @@ class PokemonCommand extends Command {
                     {
                         color: COLORS.PRIMARY,
                         author: {
-                            name: (pokemon[0].mythical ? "Mythical " : "") + (pokemon[0].legendary ? "Legendary " : "") + (pokemon[0].mega ? "Mega" : "") + (pokemon[0].ultraBeast ? "Ultra Beast" : "") + (pokemon[0].starter ? "Starter " : "") + "Pokémon",
+                            name: (pokemon[0].codename ? "Ultra Beast" : "") + "Pokémon",
                         },
                         title: pokemon[0].name,
-                        description: "Discovered in generation " + pokemon[0].gen,
+                        description: pokemon[0].species,
                         fields: [
                             {
                                 name: "Number",
-                                value: pokemon[0].number,
+                                value: "#" + pokemon[0].number?.toString(),
                                 inline: true,
                             },
                             {
-                                name: "Species",
-                                value: pokemon[0].species,
+                                name: "Generation",
+                                value: pokemon[0].gen?.toString(),
                                 inline: true,
                             },
                             {
@@ -86,17 +101,17 @@ class PokemonCommand extends Command {
                             },
                             {
                                 name: "Abilities",
-                                value: `Normal: ${pokemon[0].abilities.normal.join(", ") || "-"}\nHidden: ${pokemon[0].abilities.hidden.join(", ") || "-"}`,
+                                value: pokemon[0].abilities.map(a => a.name).join("\n") || "Undiscovered",
                                 inline: true,
                             },
                             {
                                 name: "Egg Groups",
-                                value: pokemon[0].eggGroups.join("\n"),
+                                value: pokemon[0].breeding?.eggGroups.join("\n"),
                                 inline: true,
                             },
                             {
                                 name: "Gender Ratio",
-                                value: pokemon[0].gender.length ? `${pokemon[0].gender[0]}:${pokemon[0].gender[1]}` : "Genderless",
+                                value: pokemon[0].breeding?.gender || "Undiscovered",
                                 inline: true,
                             },
                             {
@@ -108,14 +123,6 @@ class PokemonCommand extends Command {
                                 name: "Weight",
                                 value: pokemon[0].weight,
                                 inline: true,
-                            },
-                            {
-                                name: "Evolution Line",
-                                value: pokemon[0].family.evolutionLine.join(" -> "),
-                            },
-                            {
-                                name: "Description",
-                                value: pokemon[0].description,
                             },
                         ],
                         thumbnail: {

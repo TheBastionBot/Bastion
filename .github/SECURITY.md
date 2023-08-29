@@ -11,7 +11,7 @@
 ## Reporting a Vulnerability
 
 If you find a vulnerability in Bastion, join [Bastion HQ] and send a direct
-message to **iamtraction#8383** with the details about the vulnerability and
+message to **@iamtraction** with the details about the vulnerability and
 we will fix it as soon as practical.
 
 Once fixed, you will be credited with finding the vulnerability in the release

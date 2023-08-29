@@ -49,7 +49,7 @@ class DefinitionsCommand extends Command {
 
         // fetch definitions
         const { body } = await requests.get(`https://api.wordnik.com/v4/word.json/${ encodeURIComponent(word.toLowerCase()) }/definitions?limit=10&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${ ((interaction.client as Client).settings as Settings)?.get("wordnikApiKey") }`);
-        const definitions: Definition[] = await body.json();
+        const definitions: Definition[] = await body.json() as unknown[];
 
         if (definitions?.length) {
             return await interaction.editReply(

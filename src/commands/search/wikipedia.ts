@@ -17,7 +17,7 @@ interface Wiki {
 }
 
 interface WikipediaResponse {
-    query: {
+    query?: {
         pages: Wiki[];
     };
 }

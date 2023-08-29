@@ -18,7 +18,7 @@ interface Definition {
 }
 
 interface UrbanDictionaryResponse {
-    list: Definition[];
+    list?: Definition[];
 }
 
 class UrbanDictionaryCommand extends Command {

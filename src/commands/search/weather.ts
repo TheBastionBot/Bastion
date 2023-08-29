@@ -10,15 +10,15 @@ import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
 
 interface Weather {
-    coord: {
+    coord?: {
         lat: number;
         lon: number;
     };
-    weather: {
+    weather?: {
         main: string;
         icon: string;
     }[];
-    main: {
+    main?: {
         temp: number;
         feels_like: number;
         temp_min: number;
@@ -28,31 +28,31 @@ interface Weather {
         sea_level: number;
         grnd_level: number;
     };
-    wind: {
+    wind?: {
         speed: number;
         deg: number;
     };
-    clouds: {
+    clouds?: {
         all: number;
     };
-    rain: {
+    rain?: {
         "1h": number;
         "3h": number;
     };
-    snow: {
+    snow?: {
         "1h": number;
         "3h": number;
     };
-    visibility: number;
-    dt: number;
-    sys: {
+    visibility?: number;
+    dt?: number;
+    sys?: {
         country: string;
         sunrise: number;
         sunset: number;
     };
-    timezone: number;
-    name: string;
-    cod: number;
+    timezone?: number;
+    name?: string;
+    cod?: number;
     message?: string;
 }
 

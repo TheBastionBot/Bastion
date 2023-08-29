@@ -8,14 +8,14 @@ import { Command } from "@bastion/tesseract";
 import * as requests from "../../utils/requests.js";
 
 interface XKCD {
-    title: string;
+    title?: string;
     safe_title?: string;
-    alt: string;
-    num: string;
-    day: number;
-    month: number;
-    year: number;
-    img: string;
+    alt?: string;
+    num?: string;
+    day?: number;
+    month?: number;
+    year?: number;
+    img?: string;
 }
 
 class XKCDCommand extends Command {

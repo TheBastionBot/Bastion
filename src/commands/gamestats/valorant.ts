@@ -8,6 +8,36 @@ import { Command } from "@bastion/tesseract";
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 
+interface AccountResponse {
+    data?: {
+        name: string;
+        tag: string;
+        region: string;
+        account_level: string;
+        card: {
+            wide: string;
+        };
+        last_update_raw: number;
+    };
+}
+
+interface MMRResponse {
+    data?: {
+        current_data: {
+            elo: string;
+            currenttierpatched: string;
+            ranking_in_tier: string;
+            games_needed_for_rating: string;
+            images: {
+                large: string;
+            };
+        };
+        by_season: {
+            number_of_games: string;
+        }[];
+    };
+}
+
 class ValorantCommand extends Command {
     constructor() {
         super({
@@ -45,7 +75,7 @@ class ValorantCommand extends Command {
 
         // get account data
         const accountResponse = await requests.get(`https://api.henrikdev.xyz/valorant/v1/account/${ encodeURIComponent(player[0]) }/${ encodeURIComponent(player[1]) }`);
-        const account = await accountResponse.body.json();
+        const account: AccountResponse = await accountResponse.body.json();
 
         if (accountResponse.statusCode !== 200) {
             await interaction.editReply(`The profile for **${ username }** was not found in the specified region.`);
@@ -53,7 +83,7 @@ class ValorantCommand extends Command {
 
         // get mmr data
         const mmrResponse = await requests.get(`https://api.henrikdev.xyz/valorant/v2/mmr/${ region }/${ encodeURIComponent(player[0]) }/${ encodeURIComponent(player[1]) }`);
-        const mmr = await mmrResponse.body.json();
+        const mmr: MMRResponse = await mmrResponse.body.json();
 
         await interaction.editReply({
             embeds: [

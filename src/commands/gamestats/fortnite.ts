@@ -9,6 +9,15 @@ import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
 
+interface FortniteResponse {
+    lifeTimeStats?: {
+        key: string;
+        value: string;
+    }[];
+    epicUserHandle?: string;
+    platformNameLong?: string;
+}
+
 class FortniteCommand extends Command {
     constructor() {
         super({
@@ -46,7 +55,7 @@ class FortniteCommand extends Command {
             "TRN-Api-Key": ((interaction.client as Client).settings as Settings).get("trackerNetworkApiKey"),
         });
 
-        const body = await response.body.json();
+        const body: FortniteResponse = await response.body.json();
 
         if (!body?.lifeTimeStats?.length) return await interaction.editReply(`The profile for **${ username }** was not found in the specified platform.`);
 
@@ -58,7 +67,7 @@ class FortniteCommand extends Command {
                         name: "Fortnite — Player Stats",
                     },
                     title: body.epicUserHandle,
-                    fields: body.lifeTimeStats.map((stat: { key: string; value: string }) => ({
+                    fields: body.lifeTimeStats.map(stat => ({
                         name: stat.key,
                         value: stat.value,
                         inline: true,

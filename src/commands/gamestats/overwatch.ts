@@ -8,6 +8,21 @@ import { Command } from "@bastion/tesseract";
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 
+interface OverwatchResponse {
+    private?: boolean;
+    gamesPlayed?: string;
+    gamesWon?: string;
+    gamesLost?: string;
+    ratings?: {
+        role: string;
+        group: string;
+        tier: string;
+    }[];
+    icon?: string;
+    endorsementIcon?: string;
+    endorsement?: number;
+}
+
 class OverwatchCommand extends Command {
     constructor() {
         super({
@@ -53,7 +68,7 @@ class OverwatchCommand extends Command {
 
         // get stats
         const { body } = await requests.get("https://ow-api.com/v1/stats/" + platform + "/" + region + "/" + (username.replace("#", "-")) + "/profile");
-        const response = await body.json();
+        const response: OverwatchResponse = await body.json();
 
         await interaction.editReply({
             embeds: [
