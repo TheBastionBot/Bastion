@@ -2,6 +2,8 @@ FROM node:lts-alpine as build
 
 WORKDIR /app
 
+RUN apk add --no-cache make g++ python3
+
 COPY src src
 COPY package.json tsconfig.json ./
 
@@ -13,7 +15,7 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-RUN apk add ffmpeg
+RUN apk add --no-cache make g++ python3 ffmpeg
 
 COPY package.json ./
 COPY settings.example.yaml ./settings.yaml
