@@ -28,24 +28,54 @@ class PollCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "option1",
-                    description: "The first option for the poll's answer.",
+                    description: "The 1st option for the poll's answer.",
                     required: true,
                 },
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "option2",
-                    description: "The first option for the poll's answer.",
+                    description: "The 2nd option for the poll's answer.",
                     required: true,
                 },
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "option3",
-                    description: "The first option for the poll's answer.",
+                    description: "The 3rd option for the poll's answer.",
                 },
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "option4",
-                    description: "The first option for the poll's answer.",
+                    description: "The 4th option for the poll's answer.",
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "option5",
+                    description: "The 5th option for the poll's answer.",
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "option6",
+                    description: "The 6th option for the poll's answer.",
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "option7",
+                    description: "The 7th option for the poll's answer.",
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "option8",
+                    description: "The 8th option for the poll's answer.",
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "option9",
+                    description: "The 9th option for the poll's answer.",
+                },
+                {
+                    type: ApplicationCommandOptionType.String,
+                    name: "option10",
+                    description: "The 10th option for the poll's answer.",
                 },
                 {
                     type: ApplicationCommandOptionType.Integer,
@@ -63,12 +93,8 @@ class PollCommand extends Command {
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         const question = interaction.options.getString("question");
-        const options = [
-            interaction.options.getString("option1"),
-            interaction.options.getString("option2"),
-            interaction.options.getString("option3"),
-            interaction.options.getString("option4"),
-        ].filter(o => !!o?.trim());
+
+        const options = Array.from(Array(10)).map((_, i) => interaction.options.getString("option" + (i + 1))).filter(o => !!o?.trim());
         const timer = interaction.options.getInteger("timer");
 
         // check for limits
