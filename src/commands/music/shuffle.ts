@@ -18,10 +18,10 @@ class ShuffleCommand extends Command {
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         const studio = (interaction.client as Client).studio.get(interaction.guild);
 
-        // shuffle the music queue
-        arrays.shuffle(studio.queue);
-
         if (studio?.queue?.length) {
+            // shuffle the music queue
+            arrays.shuffle(studio.queue);
+
             return await interaction.reply({ content: (interaction.client as Client).locales.getText(interaction.guildLocale, "musicQueueShuffle") });
         }
 
