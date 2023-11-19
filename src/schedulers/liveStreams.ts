@@ -42,10 +42,14 @@ class LiveStreamNotificationScheduler extends Scheduler {
                 // twitch streams
                 if (guild.twitchNotificationChannel && this.client.guilds.cache.get(guild.id).channels.cache.has(guild.twitchNotificationChannel) && guild.twitchNotificationUsers?.length) {
                     // get current live streams
-                    const { body } = await requests.get("https://api.twitch.tv/helix/streams/?user_login=" + guild.twitchNotificationUsers.join("&user_login="), {
+                    const { body, statusCode } = await requests.get("https://api.twitch.tv/helix/streams/?user_login=" + guild.twitchNotificationUsers.join("&user_login="), {
                         "authorization": "Bearer " + (this.client.settings as Settings).get("twitch").accessToken,
                         "client-id": (this.client.settings as Settings).get("twitch").clientId,
                     });
+
+                    if (statusCode >= 400) {
+                        Logger.error(await body.json());
+                    }
 
                     const streams: TwitchStream[] = (await body.json())?.["data"] || [];
 
