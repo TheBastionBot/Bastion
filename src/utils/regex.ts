@@ -9,3 +9,5 @@ export const WEBHOOK_URL = /(?:https:\/\/)(?:www\.)?(?:discordapp|discord)\.com\
 export const REGEX_CMYK = /^(\d{1,2}|100) (\d{1,2}|100) (\d{1,2}|100) (\d{1,2}|100)$/;
 export const REGEX_RGB = /^(\d{1,2}|1\d{2}|2[0-5]{2}) (\d{1,2}|1\d{2}|2[0-5]{2}) (\d{1,2}|1\d{2}|2[0-5]{2})$/;
 export const REGEX_HEX = /^#?(?:(?:([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2}))|(?:([0-9A-F])([0-9A-F])([0-9A-F])))$/i;
+
+export const TWITCH_CHANNEL = /^[a-z\d][\w]{0,24}$/i;

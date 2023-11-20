@@ -8,6 +8,7 @@ import { Command } from "@bastion/tesseract";
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
 import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
+import { TWITCH_CHANNEL } from "../../utils/regex.js";
 
 class LiveStreamsCommand extends Command {
     constructor() {
@@ -47,7 +48,7 @@ class LiveStreamsCommand extends Command {
         if (twitchChannel || channel || message) {
             // update followed channels
             if (twitchChannel) {
-                guildDocument.twitchNotificationUsers = guildDocument.twitchNotificationUsers?.includes(twitchChannel) ? guildDocument.twitchNotificationUsers.filter(u => u !== twitchChannel) : guildDocument.twitchNotificationUsers?.concat(twitchChannel);
+                guildDocument.twitchNotificationUsers = guildDocument.twitchNotificationUsers?.includes(twitchChannel) ? guildDocument.twitchNotificationUsers.filter(u => TWITCH_CHANNEL.test(u)).filter(u => u !== twitchChannel) : guildDocument.twitchNotificationUsers?.concat(twitchChannel);
 
                 // check for limits
                 if (isPublicBastion(interaction.client.user.id)) {
