@@ -30,7 +30,7 @@
         "typescript": "^5.2.2"
     },
     "dependencies": {
-        "@bastion/tesseract": "^5.0.4",
+        "@bastion/tesseract": "^5.1.0",
         "@discordjs/opus": "^0.9.0",
         "@iamtraction/google-translate": "^2.0.1",
         "discord-rpc": "^4.0.1",
