@@ -50,7 +50,7 @@ class LiveStreamNotificationScheduler extends Scheduler {
                     });
 
                     if (statusCode >= 400) {
-                        Logger.error(await body.json());
+                        return Logger.error(await body.json());
                     }
 
                     const streams: TwitchStream[] = (await body.json())?.["data"] || [];
