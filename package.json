@@ -40,6 +40,7 @@
         "jsdom": "^22.1.0",
         "libsodium-wrappers": "^0.7.13",
         "mathjs": "^12.1.0",
+        "openai": "^4.20.1",
         "play-dl": "^1.9.7",
         "r6api.js": "^4.4.1",
         "undici": "^5.27.2",
