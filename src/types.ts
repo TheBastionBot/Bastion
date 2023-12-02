@@ -12,6 +12,11 @@ export namespace bastion {
         auth?: string;
         coinMarketCapApiKey?: string;
         nasaApiKey?: string;
+        openai?: {
+            apiKey?: string;
+            model?: string;
+            maxTokens?: number;
+        };
         openWeatherMapApiKey?: string;
         tmdbApiKey?: string;
         trackerNetworkApiKey?: string;
