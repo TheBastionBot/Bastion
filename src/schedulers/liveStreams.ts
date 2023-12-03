@@ -9,6 +9,7 @@ import GuildModel from "../models/Guild.js";
 import memcache from "../utils/memcache.js";
 import * as requests from "../utils/requests.js";
 import { COLORS } from "../utils/constants.js";
+import { TWITCH_CHANNEL } from "../utils/regex.js";
 import Settings from "../utils/settings.js";
 import { TwitchStream } from "../types.js";
 
@@ -40,15 +41,16 @@ class LiveStreamNotificationScheduler extends Scheduler {
 
             for (const guild of guildDocuments) {
                 // twitch streams
-                if (guild.twitchNotificationChannel && this.client.guilds.cache.get(guild.id).channels.cache.has(guild.twitchNotificationChannel) && guild.twitchNotificationUsers?.length) {
+                const twitchNotificationUsers = guild.twitchNotificationUsers.filter(u => TWITCH_CHANNEL.test(u));
+                if (guild.twitchNotificationChannel && this.client.guilds.cache.get(guild.id).channels.cache.has(guild.twitchNotificationChannel) && twitchNotificationUsers?.length) {
                     // get current live streams
-                    const { body, statusCode } = await requests.get("https://api.twitch.tv/helix/streams/?user_login=" + guild.twitchNotificationUsers.join("&user_login="), {
+                    const { body, statusCode } = await requests.get("https://api.twitch.tv/helix/streams/?user_login=" + twitchNotificationUsers.join("&user_login="), {
                         "authorization": "Bearer " + (this.client.settings as Settings).get("twitch").accessToken,
                         "client-id": (this.client.settings as Settings).get("twitch").clientId,
                     });
 
                     if (statusCode >= 400) {
-                        Logger.error(await body.json());
+                        return Logger.error(await body.json());
                     }
 
                     const streams: TwitchStream[] = (await body.json())?.["data"] || [];

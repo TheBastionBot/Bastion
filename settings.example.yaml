@@ -79,6 +79,16 @@ auth: ""
 coinMarketCapApiKey: ""
 # Required for `apod` command.
 nasaApiKey: "DEMO_KEY"
+# Required for `chat` command to use the OpenAI's ChatGPT APIs.
+# API pricing depends on these values.
+# For more details, check https://openai.com/pricing
+openai:
+  apiKey: ""
+  # If you want to use GPT-4, set `model` to `gpt-4`.
+  model: "gpt-3.5-turbo"
+  # Change the `maxTokens` value to set the length of ChatGPT's responses.
+  # https://platform.openai.com/tokenizer
+  maxTokens: 100
 # Required for `weather` command.
 openWeatherMapApiKey: ""
 # Required for `movie` and `tv` commands.
