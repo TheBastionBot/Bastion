@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "disco
 import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResource, entersState, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior, VoiceConnection, VoiceConnectionStatus } from "@discordjs/voice";
 import { Client, Command, Logger } from "@bastion/tesseract";
 import { music } from "@bastion/tesseract/typings/types.js";
-import playDL from "play-dl";
+import playDL from "@iamtraction/play-dl";
 import ytpl from "ytpl";
 
 import GuildModel from "../../models/Guild.js";
