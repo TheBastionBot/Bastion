@@ -297,7 +297,12 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         if (message.author.bot) return;
 
         if (message.inGuild()) {
-            const guildDocument = await GuildModel.findById(message.guildId);
+            let guildDocument = await GuildModel.findById(message.guildId);
+
+            // create guild document if it wasn't found
+            if (!guildDocument) {
+                guildDocument = await GuildModel.findByIdAndUpdate(message.guildId, {}, { upsert: true });
+            }
 
             // gamification
             this.handleGamification(message, guildDocument).catch(Logger.error);
