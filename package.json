@@ -40,7 +40,7 @@
         "gamedig": "^5.0.0",
         "jsdom": "^24.0.0",
         "libsodium-wrappers": "^0.7.13",
-        "mathjs": "^12.4.2",
+        "mathjs": "^13.0.0",
         "openai": "^4.47.1",
         "r6api.js": "^4.4.1",
         "undici": "^6.18.0",
