@@ -4,17 +4,9 @@
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
-import gamedig from "gamedig";
+import { GameDig } from "gamedig";
 
 import { COLORS } from "../utils/constants.js";
-
-interface Player extends gamedig.Player {
-    time?: number;
-    raw?: {
-        frags?: number;
-        ping?: number;
-    };
-}
 
 class GameServerCommand extends Command {
     constructor() {
@@ -52,8 +44,8 @@ class GameServerCommand extends Command {
         const port = interaction.options.getInteger("port");
 
         // fetch data from the game server
-        const server = await gamedig.query({
-            type: game as gamedig.Type,
+        const server = await GameDig.query({
+            type: game,
             host: hostname,
             port: port,
         });
@@ -87,12 +79,10 @@ class GameServerCommand extends Command {
                         server.players
                             ?   server.players
                                 .filter(player => player.name)
-                                .sort((a: Player, b: Player) => b.time - a.time)
                                 .sort((a, b) => b.score - a.score)
-                                .sort((a: Player, b: Player) => b.raw?.frags - a.raw?.frags)
-                                .map((player: Player) => ({
+                                .map(player => ({
                                     name: (player.team ? "[" + player.team + "]" : "") + player.name,
-                                    value: "```\nSCORE " + (player.score || player.raw?.frags || 0) + ((player.ping || player.raw?.ping) ? "\tPING " + (player.ping || player.raw?.ping) + "ms" : "") + (player.time ? "\t" + (player.time / 60).toFixed(2) + " minutes" : "") + "```",
+                                    value: "```\nSCORE " + (player.score || 0) + (player.team ? "\tTEAM " + player.team : "") + (player.ping ? "\tPING " + player.ping + "ms" : "") + "```",
                                     inline: false,
                                 }))
                                 .slice(0, 5)

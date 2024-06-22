@@ -1,6 +1,6 @@
 {
     "name": "bastion",
-    "version": "10.15.0",
+    "version": "10.15.1",
     "description": "Get an enhanced Discord experience!",
     "type": "module",
     "homepage": "https://bastion.traction.one",
@@ -20,37 +20,37 @@
     "devDependencies": {
         "@types/discord-rpc": "^4.0.8",
         "@types/express": "^4.17.21",
-        "@types/gamedig": "^4.0.5",
+        "@types/gamedig": "^5.0.2",
         "@types/http-errors": "^2.0.4",
         "@types/jsdom": "^21.1.6",
-        "@types/node": "^20.10.2",
-        "@typescript-eslint/eslint-plugin": "^7.5.0",
-        "@typescript-eslint/parser": "^7.5.0",
-        "eslint": "^8.55.0",
-        "typescript": "^5.3.2"
+        "@types/node": "^20.12.12",
+        "@typescript-eslint/eslint-plugin": "^7.9.0",
+        "@typescript-eslint/parser": "^7.9.0",
+        "eslint": "^8.57.0",
+        "typescript": "^5.4.5"
     },
     "dependencies": {
-        "@bastion/tesseract": "^5.1.0",
+        "@bastion/tesseract": "^5.2.0",
         "@discordjs/opus": "^0.9.0",
         "@iamtraction/google-translate": "^2.0.1",
+        "@iamtraction/play-dl": "^1.9.8",
         "discord-rpc": "^4.0.1",
         "dotenv": "^16.3.1",
         "emoji-regex": "^10.3.0",
-        "gamedig": "^4.2.0",
+        "gamedig": "^5.0.0",
         "jsdom": "^24.0.0",
         "libsodium-wrappers": "^0.7.13",
-        "mathjs": "^12.1.0",
-        "openai": "^4.20.1",
-        "play-dl": "^1.9.7",
+        "mathjs": "^13.0.0",
+        "openai": "^4.47.1",
         "r6api.js": "^4.4.1",
-        "undici": "^6.11.1",
+        "undici": "^6.18.0",
         "ytdl-core": "^4.11.5",
         "ytpl": "^2.3.0"
     },
     "optionalDependencies": {
         "bufferutil": "^4.0.8",
         "erlpack": "github:discord/erlpack",
-        "utf-8-validate": "^6.0.3",
+        "utf-8-validate": "^6.0.4",
         "zlib-sync": "^0.1.9"
     }
 }
