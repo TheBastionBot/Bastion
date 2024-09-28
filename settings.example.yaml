@@ -84,8 +84,9 @@ nasaApiKey: "DEMO_KEY"
 # For more details, check https://openai.com/pricing
 openai:
   apiKey: ""
-  # If you want to use GPT-4, set `model` to `gpt-4`.
-  model: "gpt-3.5-turbo"
+  # If you want to use GPT-4o, set `model` to `gpt-4o`.
+  # https://openai.com/api/pricing
+  model: "gpt-4o-mini"
   # Change the `maxTokens` value to set the length of ChatGPT's responses.
   # https://platform.openai.com/tokenizer
   maxTokens: 100
