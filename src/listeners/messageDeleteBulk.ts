@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { Collection, GuildTextBasedChannel, Message, PartialMessage } from "discord.js";
+import { GuildTextBasedChannel, Message, OmitPartialGroupDMChannel, PartialMessage, ReadonlyCollection } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
 import { logGuildEvent } from "../utils/guilds.js";
@@ -12,7 +12,7 @@ class MessageDeleteBulkListener extends Listener<"messageDeleteBulk"> {
         super("messageDeleteBulk");
     }
 
-    public async exec(messages: Collection<string, Message<boolean> | PartialMessage>, channel: GuildTextBasedChannel): Promise<void> {
+    public async exec(messages: ReadonlyCollection<string, OmitPartialGroupDMChannel<Message<boolean> | PartialMessage>>, channel: GuildTextBasedChannel): Promise<void> {
         await logGuildEvent(channel.guild, {
             title: "Messages Cleared",
             fields: [
