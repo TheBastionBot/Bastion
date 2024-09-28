@@ -52,6 +52,8 @@ class PlayCommand extends Command {
                     entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
                 ]);
             } catch (error) {
+                Logger.error(error);
+
                 // seems to be a real disconnect which SHOULDN'T be recovered from
                 connection.destroy();
 

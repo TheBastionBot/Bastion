@@ -4,6 +4,7 @@
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Command } from "@bastion/tesseract";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 import translate = require("@iamtraction/google-translate");
 
 class TranslateCommand extends Command {

@@ -2,6 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
+// eslint-disable-next-line no-constant-binary-expression
 const frequency = (string: string): { [key: string]: number } => [ ...string ].reduce((a: { [key: string]: number }, c) => (a[c] = a[c] + 1 || 1) && a, {});
 
 const toTitleCase = (string: string, splitSeparator = " ", joinSeprator = " "): string => {
