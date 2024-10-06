@@ -42,7 +42,10 @@ class TranslateCommand extends Command {
         // fetch the translation
         const response = await translate(text, { from, to });
 
-        await interaction.editReply(response.text);
+        await interaction.editReply({
+            content: `${ response.text }
+-# Translated from ${ response.from.language.iso?.toUpperCase() } to ${ to.toUpperCase() }`,
+        });
     }
 }
 
