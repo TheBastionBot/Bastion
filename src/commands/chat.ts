@@ -92,6 +92,9 @@ class ChatCommand extends Command {
                         ],
                     },
                 ],
+                metadata: {
+                    user_id: interaction.member.id,
+                },
             });
 
             return await interaction.editReply({
