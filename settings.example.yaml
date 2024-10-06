@@ -90,6 +90,17 @@ openai:
   # Change the `maxTokens` value to set the length of ChatGPT's responses.
   # https://platform.openai.com/tokenizer
   maxTokens: 100
+# Required for `chat` command to use the Google's Gemini APIs.
+# API pricing depends on these values.
+# For more details, check https://ai.google.dev/pricing
+gemini:
+  apiKey: ""
+  # If you want to use Gemini 1.5 Pro, set `model` to `gemini-1.5-pro`.
+  # https://ai.google.dev/gemini-api/docs/models/gemini
+  model: "gemini-1.5-flash"
+  # Change the `maxOutputTokens` value to set the length of ChatGPT's responses.
+  # https://ai.google.dev/gemini-api/docs/tokens
+  maxOutputTokens: 256
 # Required for `weather` command.
 openWeatherMapApiKey: ""
 # Required for `movie` and `tv` commands.
