@@ -101,6 +101,17 @@ gemini:
   # Change the `maxOutputTokens` value to set the length of ChatGPT's responses.
   # https://ai.google.dev/gemini-api/docs/tokens
   maxOutputTokens: 256
+# Required for `chat` command to use the Anthropic's APIs.
+# API pricing depends on these values.
+# For more details, check https://www.anthropic.com/pricing#anthropic-api
+anthropic:
+  apiKey: ""
+  # If you want to use Claude 3.5 Sonnet, set `model` to `claude-3-5-sonnet-20240620`.
+  # https://docs.anthropic.com/en/docs/about-claude/models
+  model: "claude-3-haiku-20240307"
+  # Change the `maxTokens` value to set the length of Claude's responses.
+  # https://docs.anthropic.com/en/docs/about-claude/models#model-comparison-table
+  maxTokens: 128
 # Required for `weather` command.
 openWeatherMapApiKey: ""
 # Required for `movie` and `tv` commands.
