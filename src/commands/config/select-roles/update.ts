@@ -29,6 +29,11 @@ class SelectRolesUpdateCommand extends Command {
                     name: "message",
                     description: "The new message content.",
                 },
+                {
+                    type: ApplicationCommandOptionType.Boolean,
+                    name: "roles",
+                    description: "Reset the roles so you can add them again.",
+                },
             ],
             userPermissions: [ PermissionFlagsBits.ManageGuild ],
         });
@@ -38,6 +43,7 @@ class SelectRolesUpdateCommand extends Command {
         await interaction.deferReply();
         const id = interaction.options.getString("id");
         const message = generateEmbed(interaction.options.getString("message") || "");
+        const resetRoles = interaction.options.getBoolean("roles");
 
         // get the select roles group document
         const selectRoleGroup = await SelectRoleGroupModel.findById(id);
@@ -95,7 +101,19 @@ class SelectRolesUpdateCommand extends Command {
                 await selectRolesMessage.edit({
                     content: message ? typeof message === "string" ? message : "" : undefined,
                     embeds: message ? typeof message === "string" ? [] : [ message ] : undefined,
-                    components: arrays.chunks(selectRoles, 5).map(roles => ({
+                    components: resetRoles ? [
+                        {
+                            type: ComponentType.ActionRow,
+                            components: [
+                                {
+                                    type: ComponentType.Button,
+                                    customId: MessageComponents.SelectRolesNoRolesButton,
+                                    style: ButtonStyle.Danger,
+                                    label: "Add Roles",
+                                },
+                            ],
+                        },
+                    ] : arrays.chunks(selectRoles, 5).map(roles => ({
                         type: ComponentType.ActionRow,
                         components: roles.map(role => ({
                             customId: MessageComponents.SelectRolesButton + ":" + role.value,
@@ -108,7 +126,7 @@ class SelectRolesUpdateCommand extends Command {
                 });
             }
 
-            return interaction.editReply(`I've updated the Select Roles Group **${ id }**.`);
+            return interaction.editReply(`I've updated the Select Roles Group [**${ id }**](${ selectRolesMessage.url }).`);
         }
 
         await interaction.editReply(`The Select Roles Group **${ id }** doesn't exist anymore.`);

@@ -84,11 +84,34 @@ nasaApiKey: "DEMO_KEY"
 # For more details, check https://openai.com/pricing
 openai:
   apiKey: ""
-  # If you want to use GPT-4, set `model` to `gpt-4`.
-  model: "gpt-3.5-turbo"
+  # If you want to use GPT-4o, set `model` to `gpt-4o`.
+  # https://openai.com/api/pricing
+  model: "gpt-4o-mini"
   # Change the `maxTokens` value to set the length of ChatGPT's responses.
   # https://platform.openai.com/tokenizer
   maxTokens: 100
+# Required for `chat` command to use the Google's Gemini APIs.
+# API pricing depends on these values.
+# For more details, check https://ai.google.dev/pricing
+gemini:
+  apiKey: ""
+  # If you want to use Gemini 1.5 Pro, set `model` to `gemini-1.5-pro`.
+  # https://ai.google.dev/gemini-api/docs/models/gemini
+  model: "gemini-1.5-flash"
+  # Change the `maxOutputTokens` value to set the length of ChatGPT's responses.
+  # https://ai.google.dev/gemini-api/docs/tokens
+  maxOutputTokens: 256
+# Required for `chat` command to use the Anthropic's APIs.
+# API pricing depends on these values.
+# For more details, check https://www.anthropic.com/pricing#anthropic-api
+anthropic:
+  apiKey: ""
+  # If you want to use Claude 3.5 Sonnet, set `model` to `claude-3-5-sonnet-20240620`.
+  # https://docs.anthropic.com/en/docs/about-claude/models
+  model: "claude-3-haiku-20240307"
+  # Change the `maxTokens` value to set the length of Claude's responses.
+  # https://docs.anthropic.com/en/docs/about-claude/models#model-comparison-table
+  maxTokens: 128
 # Required for `weather` command.
 openWeatherMapApiKey: ""
 # Required for `movie` and `tv` commands.

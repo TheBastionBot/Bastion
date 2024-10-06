@@ -17,6 +17,16 @@ export namespace bastion {
             model?: string;
             maxTokens?: number;
         };
+        gemini?: {
+            apiKey?: string;
+            model?: string;
+            maxOutputTokens?: number;
+        };
+        anthropic?: {
+            apiKey?: string;
+            model?: string;
+            maxTokens?: number;
+        };
         openWeatherMapApiKey?: string;
         tmdbApiKey?: string;
         trackerNetworkApiKey?: string;

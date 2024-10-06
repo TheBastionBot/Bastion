@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResource, entersState, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior, VoiceConnection, VoiceConnectionStatus } from "@discordjs/voice";
+import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResource, DiscordGatewayAdapterCreator, entersState, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior, VoiceConnection, VoiceConnectionStatus } from "@discordjs/voice";
 import { Client, Command, Logger } from "@bastion/tesseract";
 import { music } from "@bastion/tesseract/typings/types.js";
 import playDL from "@iamtraction/play-dl";
@@ -39,7 +39,7 @@ class PlayCommand extends Command {
             selfMute: false,
             guildId: interaction.guildId,
             channelId: interaction.channelId,
-            adapterCreator: interaction.guild.voiceAdapterCreator,
+            adapterCreator: interaction.guild.voiceAdapterCreator as DiscordGatewayAdapterCreator,
         });
 
         // voice connection events
@@ -52,6 +52,8 @@ class PlayCommand extends Command {
                     entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
                 ]);
             } catch (error) {
+                Logger.error(error);
+
                 // seems to be a real disconnect which SHOULDN'T be recovered from
                 connection.destroy();
 
