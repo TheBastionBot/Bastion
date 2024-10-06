@@ -14,7 +14,7 @@ class ChatCommand extends Command {
     constructor() {
         super({
             name: "chat",
-            description: "Ask questions or chat with ChatGPT from OpenAI.",
+            description: "Ask questions or chat with Bastion.",
             owner: true,
             options: [
                 {
