@@ -4,6 +4,7 @@
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { Client, Command } from "@bastion/tesseract";
+import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -68,6 +69,33 @@ class ChatCommand extends Command {
 
             return await interaction.editReply({
                 content: result.response.text(),
+            });
+        }
+
+        // use Claude if Anthropic API key is present
+        if (((interaction.client as Client).settings as Settings).get("anthropic").apiKey) {
+            const anthropic = new Anthropic({
+                apiKey: ((interaction.client as Client).settings as Settings).get("anthropic").apiKey,
+            });
+
+            const result = await anthropic.messages.create({
+                model: ((interaction.client as Client).settings as Settings).get("anthropic").model,
+                max_tokens: ((interaction.client as Client).settings as Settings).get("anthropic").maxTokens,
+                messages: [
+                    {
+                        role: "user",
+                        content: [
+                            {
+                                type: "text",
+                                text: message,
+                            },
+                        ],
+                    },
+                ],
+            });
+
+            return await interaction.editReply({
+                content: result.content[0].type === "text" && result.content[0].text,
             });
         }
 
