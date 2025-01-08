@@ -48,7 +48,7 @@ class IamCommand extends Command {
                     await interaction.member.roles.add(role);
                 }
 
-                return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, interaction.member.roles.cache.has(role.id) ? "selfRoleUnassign" : "selfRoleAssign", { role: role }));
+                return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, interaction.member.roles.cache.has(role.id) ? "selfRoleAssign" : "selfRoleUnassign", { role: role }));
             }
 
             return await interaction.editReply({
