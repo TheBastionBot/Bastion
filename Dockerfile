@@ -1,4 +1,4 @@
-FROM node:lts-alpine as build
+FROM node:lts-alpine3.20 as build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN npm install
 RUN npm run build
 
 
-FROM node:lts-alpine
+FROM node:lts-alpine3.20
 
 WORKDIR /app
 
