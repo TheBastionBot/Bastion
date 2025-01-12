@@ -85,7 +85,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                let gamificationMessage = guildDocument.gamificationCustomMessage;
+                let gamificationMessage: string;
                 if (guildDocument.gamificationCustomMessage) {
                     const now = new Date();
                     const [year, month, day, hour, minute] = [
@@ -95,11 +95,11 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                         () => now.getUTCHours().toString().padStart(2, "0"),
                         () => now.getUTCMinutes().toString().padStart(2, "0")
                     ];
-                    gamificationMessage = gamificationMessage
+                    gamificationMessage = guildDocument.gamificationCustomMessage
                         .replaceAll(/%level%/g, `${computedLevel}`)
                         .replaceAll(/%username%/g, `${message.author.displayName}`)
                         .replaceAll(/%date%/g, `${year()}-${month()}-${day()}`)
-                        .replaceAll(/%time%/g, `${hour()}:${minute()}`)
+                        .replaceAll(/%time%/g, `${hour()}:${minute()}`);
                 } else {
                     gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
                 }
