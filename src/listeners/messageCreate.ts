@@ -97,6 +97,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                     ];
                     gamificationMessage = gamificationMessage
                         .replaceAll(/%%level%%/g, `${computedLevel}`)
+                        .replaceAll(/%%username%%/g, `${message.author.displayName}`)
                         .replaceAll(/%%date%%/g, `${year()}-${month()}-${day()}`)
                         .replaceAll(/%%time%%/g, `${hour()}:${minute()}`)
                 } else {
