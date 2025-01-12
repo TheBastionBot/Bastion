@@ -91,9 +91,9 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                     const [year, month, day, hour, minute] = [
                         () => now.getUTCFullYear().toString(),
                         () => (now.getUTCMonth() + 1).toString().padStart(2, "0"),
-                        () => now.getUTCDate().toString(),
-                        () => now.getUTCHours().toString(),
-                        () => now.getUTCMinutes().toString()
+                        () => now.getUTCDate().toString().padStart(2, "0"),
+                        () => now.getUTCHours().toString().padStart(2, "0"),
+                        () => now.getUTCMinutes().toString().padStart(2, "0")
                     ];
                     gamificationMessage = gamificationMessage
                         .replaceAll(/%%level%%/g, `${computedLevel}`)
