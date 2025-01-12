@@ -85,7 +85,23 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // achievement message
             if (guildDocument.gamificationMessages) {
-                const gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
+                let gamificationMessage = guildDocument.gamificationCustomMessage;
+                if (guildDocument.gamificationCustomMessage) {
+                    const now = new Date();
+                    const [year, month, day, hour, minute] = [
+                        () => now.getUTCFullYear().toString(),
+                        () => (now.getUTCMonth() + 1).toString().padStart(2, "0"),
+                        () => now.getUTCDate().toString(),
+                        () => now.getUTCHours().toString(),
+                        () => now.getUTCMinutes().toString()
+                    ];
+                    gamificationMessage = gamificationMessage
+                        .replaceAll(/%%level%%/g, `${computedLevel}`)
+                        .replaceAll(/%%date%%/g, `${year()}-${month()}-${day()}`)
+                        .replaceAll(/%%time%%/g, `${hour()}:${minute()}`)
+                } else {
+                    gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
+                }
 
                 if (guildDocument.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
                     (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
