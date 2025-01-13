@@ -29,7 +29,8 @@ class GamificationCommand extends Command {
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "message",
-                    description: "A custom message to send upon level up. Supports tokens: %level%, %date%, %time%, %username%."
+                    description: "A custom message to send upon level up. Supports tokens, emojis & markdown.",
+
                 },
                 {
                     type: ApplicationCommandOptionType.Number,
