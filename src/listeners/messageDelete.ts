@@ -14,6 +14,7 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
     }
 
     public async exec(message: Message<boolean> | PartialMessage): Promise<void> {
+        if (message.author.bot) return;
         if (!message.inGuild()) return;
         if (![ MessageType.Default, MessageType.Reply ].includes(message.type)) return;
 

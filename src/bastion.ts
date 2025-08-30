@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 import Settings from "./utils/settings.js";
 
 // configure dotenv
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const bastion = new Client({
     intents: [

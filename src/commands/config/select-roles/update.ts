@@ -45,6 +45,28 @@ class SelectRolesUpdateCommand extends Command {
         const message = generateEmbed(interaction.options.getString("message") || "");
         const resetRoles = interaction.options.getBoolean("roles");
 
+        const resetRolesMessageComponents: {
+            type: ComponentType;
+            components: {
+                type: ComponentType.Button;
+                customId: MessageComponents;
+                style: ButtonStyle.Danger;
+                label: string;
+            }[];
+        }[] = [
+            {
+                type: ComponentType.ActionRow,
+                components: [
+                    {
+                        type: ComponentType.Button,
+                        customId: MessageComponents.SelectRolesNoRolesButton,
+                        style: ButtonStyle.Danger,
+                        label: "Add Roles",
+                    },
+                ],
+            },
+        ];
+
         // get the select roles group document
         const selectRoleGroup = await SelectRoleGroupModel.findById(id);
 
@@ -80,7 +102,7 @@ class SelectRolesUpdateCommand extends Command {
                 await selectRolesMessage.edit({
                     content: message ? typeof message === "string" ? message : "" : undefined,
                     embeds: message ? typeof message === "string" ? [] : [ message ] : undefined,
-                    components: [
+                    components: resetRoles ? resetRolesMessageComponents : [
                         {
                             type: ComponentType.ActionRow,
                             components: [
@@ -101,19 +123,7 @@ class SelectRolesUpdateCommand extends Command {
                 await selectRolesMessage.edit({
                     content: message ? typeof message === "string" ? message : "" : undefined,
                     embeds: message ? typeof message === "string" ? [] : [ message ] : undefined,
-                    components: resetRoles ? [
-                        {
-                            type: ComponentType.ActionRow,
-                            components: [
-                                {
-                                    type: ComponentType.Button,
-                                    customId: MessageComponents.SelectRolesNoRolesButton,
-                                    style: ButtonStyle.Danger,
-                                    label: "Add Roles",
-                                },
-                            ],
-                        },
-                    ] : arrays.chunks(selectRoles, 5).map(roles => ({
+                    components: resetRoles ? resetRolesMessageComponents : arrays.chunks(selectRoles, 5).map(roles => ({
                         type: ComponentType.ActionRow,
                         components: roles.map(role => ({
                             customId: MessageComponents.SelectRolesButton + ":" + role.value,

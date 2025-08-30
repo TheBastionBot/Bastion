@@ -14,6 +14,7 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
     }
 
     public async exec(oldMessage: Message<boolean> | PartialMessage, newMessage: Message<boolean> | PartialMessage): Promise<void> {
+        if (newMessage.author.bot) return;
         if (!newMessage.inGuild()) return;
         if (![ MessageType.Default, MessageType.Reply ].includes(newMessage.type)) return;
         if (oldMessage.content === newMessage.content) return;

@@ -15,6 +15,7 @@ class MessageReactionAddListener extends Listener<"messageReactionAdd"> {
     }
 
     public async exec(reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser): Promise<void> {
+        if (user.bot) return;
         // check whether the reaction was of a star
         if (reaction.emoji.name !== "⭐") return;
         // check whether the message has the minimum reaction count

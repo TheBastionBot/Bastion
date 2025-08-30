@@ -7,9 +7,9 @@ import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 
-class ReadyListener extends Listener<"ready"> {
+class ClientReadyListener extends Listener<"clientReady"> {
     constructor() {
-        super("ready");
+        super("clientReady");
     }
 
     public async exec(client: Client<true>): Promise<void> {
@@ -31,4 +31,4 @@ class ReadyListener extends Listener<"ready"> {
     }
 }
 
-export { ReadyListener as Listener };
+export { ClientReadyListener as Listener };
