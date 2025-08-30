@@ -13,7 +13,7 @@ import Settings from "./utils/settings.js";
 const settings = new Settings();
 
 // configure dotenv
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // connect to Discord via IPC
 const rpc = new DiscordRPC.Client({ transport: "ipc" });
