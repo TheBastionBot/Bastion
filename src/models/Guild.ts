@@ -22,6 +22,7 @@ export interface Guild {
     musicRole?: string;
     // gamification
     gamification?: boolean;
+    gamificationCustomMessage?: string;
     gamificationMessages?: boolean;
     gamificationChannel?: string;
     gamificationMultiplier?: number;
@@ -109,6 +110,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     gamification: {
         type: Boolean,
+    },
+    gamificationCustomMessage: {
+        type: String
     },
     gamificationMessages: {
         type: Boolean,

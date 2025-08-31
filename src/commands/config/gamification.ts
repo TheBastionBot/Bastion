@@ -27,6 +27,12 @@ class GamificationCommand extends Command {
                     channel_types: [ ChannelType.GuildText ],
                 },
                 {
+                    type: ApplicationCommandOptionType.String,
+                    name: "message",
+                    description: "A custom message to send upon level up. Supports tokens, emojis & markdown.",
+
+                },
+                {
                     type: ApplicationCommandOptionType.Number,
                     name: "multiplier",
                     description: "The reward multiplier.",
@@ -40,6 +46,7 @@ class GamificationCommand extends Command {
         await interaction.deferReply();
         const messages = interaction.options.getBoolean("messages");
         const channel = interaction.options.getChannel("channel");
+        const customMessage = interaction.options.getString("message");
         const multiplier = interaction.options.getNumber("multiplier");
 
         // check for premium membership
@@ -55,6 +62,7 @@ class GamificationCommand extends Command {
         guildDocument.gamification = messages || multiplier ? true : guildDocument.gamification ? undefined : true;
         guildDocument.gamificationMessages = typeof messages === "boolean" ? messages : guildDocument.gamificationMessages || undefined;
         guildDocument.gamificationChannel = channel?.id || undefined;
+        guildDocument.gamificationCustomMessage = customMessage || undefined;
         guildDocument.gamificationMultiplier = multiplier || guildDocument.gamificationMultiplier || undefined;
 
         await guildDocument.save();
