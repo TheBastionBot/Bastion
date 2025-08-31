@@ -43,7 +43,10 @@ class GiveCommand extends Command {
         const xp = interaction.options.getInteger("xp");
 
         // check whether user is giving it to themselves
-        if (interaction.user.id !== interaction.guild.ownerId && interaction.user.id === user.id) {
+        const isGuildOwner = () => interaction.user.id === interaction.guild.ownerId;
+        const isGuildManager = () => interaction.memberPermissions.has(PermissionFlagsBits.ManageGuild);
+        const isGivingToSelf = () => interaction.user.id === user.id;
+        if (!isGuildOwner() && !isGuildManager() && isGivingToSelf()) {
             return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "giveSelfError"));
         }
 
