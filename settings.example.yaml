@@ -109,6 +109,9 @@ anthropic:
   # Change the `maxTokens` value to set the length of Claude's responses.
   # https://docs.anthropic.com/en/docs/about-claude/models#model-comparison-table
   maxTokens: 128
+# Optionally required for `search` command.
+# For more details, check https://www.tavily.com/#pricing
+tavilyApiKey: ""
 # Required for `weather` command.
 openWeatherMapApiKey: ""
 # Required for `movie` and `tv` commands.
