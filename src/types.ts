@@ -27,6 +27,7 @@ export namespace bastion {
             model?: string;
             maxTokens?: number;
         };
+        tavilyApiKey?: string;
         openWeatherMapApiKey?: string;
         tmdbApiKey?: string;
         trackerNetworkApiKey?: string;
