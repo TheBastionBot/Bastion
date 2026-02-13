@@ -24,7 +24,7 @@
         "@types/http-errors": "^2.0.5",
         "@types/jsdom": "^27.0.0",
         "@types/node": "^24.10.0",
-        "eslint": "^9.39.1",
+        "eslint": "^10.0.0",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.46.3"
     },
