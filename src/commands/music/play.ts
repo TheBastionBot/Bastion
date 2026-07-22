@@ -18,6 +18,16 @@ import { isPremiumUser } from "../../utils/premium.js";
 // YouTube cookies file in Netscape format (optional)
 const YOUTUBE_COOKIES_FILE = "cookies.txt";
 
+// whether the yt-dlp binary is available on PATH; probed once and cached as a shared promise
+let ytdlpAvailable: Promise<boolean> | undefined;
+const isYtdlpAvailable = (): Promise<boolean> => {
+    return (ytdlpAvailable ??= new Promise<boolean>(resolve => {
+        const probe = spawn("yt-dlp", [ "--version" ], { stdio: "ignore" });
+        probe.on("error", () => resolve(false));
+        probe.on("close", code => resolve(code === 0));
+    }));
+};
+
 class PlayCommand extends Command {
     constructor() {
         super({
@@ -132,6 +142,12 @@ class PlayCommand extends Command {
      * Create a audio resource for the specified audio.
      */
     private createAudioResource = async (audio: music.Song): Promise<AudioResource<music.Song>> => {
+        // prefer yt-dlp for streaming; if it isn't installed, fall back to play-dl
+        if (!(await isYtdlpAvailable())) {
+            const source = await playDL.stream(audio.url, { quality: 2 });
+            return createAudioResource(source.stream, { inputType: source.type, metadata: audio });
+        }
+
         // reject anything that isn't an http(s) URL, so it can't be smuggled in as a yt-dlp flag
         const url = new URL(audio.url);
         if (url.protocol !== "https:" && url.protocol !== "http:") throw new Error(`Unsupported audio URL protocol: ${ url.protocol }`);
