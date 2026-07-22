@@ -18,6 +18,16 @@ import { isPremiumUser } from "../../utils/premium.js";
 // YouTube cookies file in Netscape format (optional)
 const YOUTUBE_COOKIES_FILE = "cookies.txt";
 
+// whether the yt-dlp binary is available on PATH; probed once and cached as a shared promise
+let ytdlpAvailable: Promise<boolean> | undefined;
+const isYtdlpAvailable = (): Promise<boolean> => {
+    return (ytdlpAvailable ??= new Promise<boolean>(resolve => {
+        const probe = spawn("yt-dlp", [ "--version" ], { stdio: "ignore" });
+        probe.on("error", () => resolve(false));
+        probe.on("close", code => resolve(code === 0));
+    }));
+};
+
 class PlayCommand extends Command {
     constructor() {
         super({
@@ -132,6 +142,12 @@ class PlayCommand extends Command {
      * Create a audio resource for the specified audio.
      */
     private createAudioResource = async (audio: music.Song): Promise<AudioResource<music.Song>> => {
+        // prefer yt-dlp for streaming; if it isn't installed, fall back to play-dl
+        if (!(await isYtdlpAvailable())) {
+            const source = await playDL.stream(audio.url, { quality: 2 });
+            return createAudioResource(source.stream, { inputType: source.type, metadata: audio });
+        }
+
         // reject anything that isn't an http(s) URL, so it can't be smuggled in as a yt-dlp flag
         const url = new URL(audio.url);
         if (url.protocol !== "https:" && url.protocol !== "http:") throw new Error(`Unsupported audio URL protocol: ${ url.protocol }`);
@@ -158,8 +174,11 @@ class PlayCommand extends Command {
             if (code && !signal) Logger.error(new Error(`yt-dlp exited with code ${ code }: ${ stderr.trim() }`));
         });
 
-        // guard against unhandled stream errors (e.g. broken pipe) crashing the process
-        ytdlp.stdout.on("error", Logger.error);
+        // guard against unhandled stream errors crashing the process; a premature close is
+        // expected when a song is skipped/stopped, so don't log it as an error
+        ytdlp.stdout.on("error", (error: NodeJS.ErrnoException) => {
+            if (error.code !== "ERR_STREAM_PREMATURE_CLOSE") Logger.error(error);
+        });
         // kill the yt-dlp process once the stream is no longer being consumed
         ytdlp.stdout.on("close", () => ytdlp.killed || ytdlp.kill("SIGKILL"));
 
