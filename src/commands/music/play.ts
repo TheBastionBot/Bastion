@@ -174,8 +174,11 @@ class PlayCommand extends Command {
             if (code && !signal) Logger.error(new Error(`yt-dlp exited with code ${ code }: ${ stderr.trim() }`));
         });
 
-        // guard against unhandled stream errors (e.g. broken pipe) crashing the process
-        ytdlp.stdout.on("error", Logger.error);
+        // guard against unhandled stream errors crashing the process; a premature close is
+        // expected when a song is skipped/stopped, so don't log it as an error
+        ytdlp.stdout.on("error", (error: NodeJS.ErrnoException) => {
+            if (error.code !== "ERR_STREAM_PREMATURE_CLOSE") Logger.error(error);
+        });
         // kill the yt-dlp process once the stream is no longer being consumed
         ytdlp.stdout.on("close", () => ytdlp.killed || ytdlp.kill("SIGKILL"));
 
