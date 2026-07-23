@@ -31,7 +31,7 @@
     },
     "dependencies": {
         "@anthropic-ai/sdk": "^0.112.3",
-        "@bastion/tesseract": "^5.2.5",
+        "@bastion/tesseract": "^6.0.0",
         "@discordjs/opus": "^0.10.0",
         "@google/generative-ai": "^0.24.1",
         "@iamtraction/google-translate": "^2.0.1",

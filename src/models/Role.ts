@@ -19,7 +19,7 @@ export interface Role {
     bots?: boolean;
 }
 
-export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Schema<Role & mongoose.Document>({
+export default mongoose.model<Role>("Role", new mongoose.Schema<Role>({
     _id: {
         type: String,
         required: true,

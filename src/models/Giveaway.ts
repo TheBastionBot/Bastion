@@ -13,7 +13,7 @@ export interface Giveaway {
     ends: Date;
 }
 
-const giveawaySchema = new mongoose.Schema<Giveaway & mongoose.Document>({
+const giveawaySchema = new mongoose.Schema<Giveaway>({
     _id: {
         type: String,
         required: true,
@@ -38,4 +38,4 @@ const giveawaySchema = new mongoose.Schema<Giveaway & mongoose.Document>({
     },
 });
 
-export default mongoose.model<Giveaway & mongoose.Document>("Giveaway", giveawaySchema);
+export default mongoose.model<Giveaway>("Giveaway", giveawaySchema);
