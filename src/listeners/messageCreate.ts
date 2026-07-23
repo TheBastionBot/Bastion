@@ -301,7 +301,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // create guild document if it wasn't found
             if (!guildDocument) {
-                guildDocument = await GuildModel.findByIdAndUpdate(message.guildId, {}, { upsert: true });
+                guildDocument = await GuildModel.findByIdAndUpdate(message.guildId, {}, { new: true, upsert: true });
             }
 
             // gamification

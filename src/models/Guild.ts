@@ -62,7 +62,7 @@ export interface Guild {
     verifiedRole?: string;
 }
 
-export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.Schema<Guild & mongoose.Document>({
+export default mongoose.model<Guild>("Guild", new mongoose.Schema<Guild>({
     _id: {
         type: String,
         required: true,

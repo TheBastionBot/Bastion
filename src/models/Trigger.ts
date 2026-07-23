@@ -11,7 +11,7 @@ export interface Trigger {
     reactions?: string;
 }
 
-const triggerSchema = new mongoose.Schema<Trigger & mongoose.Document>({
+const triggerSchema = new mongoose.Schema<Trigger>({
     guild: {
         type: String,
         required: true,
@@ -29,4 +29,4 @@ const triggerSchema = new mongoose.Schema<Trigger & mongoose.Document>({
     },
 });
 
-export default mongoose.model<Trigger & mongoose.Document>("Trigger", triggerSchema);
+export default mongoose.model<Trigger>("Trigger", triggerSchema);

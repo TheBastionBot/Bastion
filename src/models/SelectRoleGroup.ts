@@ -16,7 +16,7 @@ export interface SelectRoleGroup {
     max?: number;
 }
 
-export default mongoose.model<SelectRoleGroup & mongoose.Document>("SelectRoleGroup", new mongoose.Schema<SelectRoleGroup & mongoose.Document>({
+export default mongoose.model<SelectRoleGroup>("SelectRoleGroup", new mongoose.Schema<SelectRoleGroup>({
     _id: {
         type: String,
         required: true,

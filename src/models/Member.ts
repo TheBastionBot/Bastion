@@ -18,7 +18,7 @@ export interface Member {
     boost?: number;
 }
 
-const memberSchema = new mongoose.Schema<Member & mongoose.Document>({
+const memberSchema = new mongoose.Schema<Member>({
     user: {
         type: String,
         required: true,
@@ -75,4 +75,4 @@ memberSchema.index({
     unique: true,
 });
 
-export default mongoose.model<Member & mongoose.Document>("Member", memberSchema);
+export default mongoose.model<Member>("Member", memberSchema);
