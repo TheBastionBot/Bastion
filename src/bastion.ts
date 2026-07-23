@@ -43,6 +43,7 @@ const bastion = new Client({
         MessageManager: {
             maxSize: 5,
         },
+        PresenceManager: 0,
     }),
     sweepers: {
         ...Options.DefaultSweeperSettings,
