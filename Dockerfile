@@ -1,28 +1,32 @@
-FROM node:lts-alpine as build
+FROM node:24-alpine AS build
 
 WORKDIR /app
 
 RUN apk add --no-cache make g++ python3
 
+COPY package.json package-lock.json tsconfig.json ./
+
+RUN npm ci
+
 COPY src src
-COPY package.json tsconfig.json ./
 
-RUN npm install
 RUN npm run build
+RUN npm prune --omit=dev
 
 
-FROM node:lts-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache make g++ python3 ffmpeg
+RUN apk add --no-cache ffmpeg yt-dlp
 
 COPY package.json ./
 COPY settings.example.yaml ./settings.yaml
 COPY data data
 COPY locales locales
-COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules node_modules
+COPY --from=build /app/dist dist
 
-RUN npm install --omit=dev
+USER node
 
-CMD npm start
+CMD [ "node", "." ]
