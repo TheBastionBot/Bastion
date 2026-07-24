@@ -15,7 +15,7 @@ const bastion = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildModeration,
         // GatewayIntentBits.GuildEmojisAndStickers,
         // GatewayIntentBits.GuildIntegrations,
         // GatewayIntentBits.GuildWebhooks,
