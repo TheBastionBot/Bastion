@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ChannelType, GuildTextBasedChannel, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
+import { ChannelType, GuildTextBasedChannel, Message, Team, ThreadAutoArchiveDuration } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
@@ -13,6 +13,7 @@ import { COLORS } from "../utils/constants.js";
 import { generate as generateEmbed } from "../utils/embeds.js";
 import * as gamification from "../utils/gamification.js";
 import * as members from "../utils/members.js";
+import memcache from "../utils/memcache.js";
 import * as numbers from "../utils/numbers.js";
 import * as regex from "../utils/regex.js";
 import Settings from "../utils/settings.js";
@@ -20,12 +21,8 @@ import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
 class MessageCreateListener extends Listener<"messageCreate"> {
-    public activeUsers: Map<Snowflake, Snowflake[]>;
-
     constructor() {
         super("messageCreate");
-
-        this.activeUsers = new Map<Snowflake, Snowflake[]>();
     }
 
     handleLevelRoles = async (message: Message, level: number): Promise<void> => {
@@ -57,11 +54,10 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     };
 
     handleGamification = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
-        // get recent users
-        const activeUsers = this.activeUsers.get(message.guild.id) || [];
+        const key = `xp:${ message.guildId }:${ message.author.id }`;
 
         // check whether the member had recently gained XP
-        if (activeUsers.includes(message.author.id)) return;
+        if (memcache.get(key)) return;
 
         // find member document or create a new one
         const memberDocument = await MemberModel.findOneAndUpdate({ user: message.author.id, guild: message.guildId }, {}, { new: true, upsert: true });
@@ -108,16 +104,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // save document
         await memberDocument.save();
 
-        // add to recent users
-        activeUsers.push(message.author.id);
-        this.activeUsers.set(message.guildId, activeUsers);
-
-        // remove the user after cooldown period
-        setTimeout(() => {
-            const activeUsers = this.activeUsers.get(message.guildId);
-            activeUsers.splice(activeUsers.indexOf(message.author.id), 1);
-            this.activeUsers.set(message.guildId, activeUsers);
-        }, 13e3).unref();
+        // set the XP cooldown for the member
+        memcache.set(key, true, 13 / 60); // 13 seconds
     };
 
     handleTriggers = async (message: Message<true>): Promise<unknown> => {
