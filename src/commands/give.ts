@@ -51,7 +51,7 @@ class GiveCommand extends Command {
         const memberDocument = await MemberModel.findOneAndUpdate({
             user: user.id,
             guild: interaction.guildId,
-        }, {}, { new: true, upsert: true });
+        }, {}, { returnDocument: "after", upsert: true });
 
         // update coins & XP
         updateBalance(memberDocument, coins);

@@ -30,7 +30,11 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         if (memcache.get(key)) return;
 
         // find member document or create a new one
-        const memberDocument = await MemberModel.findOneAndUpdate({ user: message.author.id, guild: message.guildId }, {}, { new: true, upsert: true });
+        const memberDocument = await MemberModel.findOneAndUpdate(
+            { user: message.author.id, guild: message.guildId },
+            {},
+            { returnDocument: "after", upsert: true },
+        );
 
         // check whether gamification is enabled
         if (!guildDocument.gamification) return;
@@ -42,7 +46,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         const { experience, level } = await MemberModel.findOneAndUpdate(
             { user: message.author.id, guild: message.guildId },
             { $inc: { experience: message.member.premiumSinceTimestamp ? 2 : 1 } },
-            { new: true, upsert: true },
+            { returnDocument: "after", upsert: true },
         );
 
         // compute current level from new experience
@@ -245,7 +249,11 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // create guild document if it wasn't found
             if (!guildDocument) {
-                guildDocument = await GuildModel.findByIdAndUpdate(message.guildId, {}, { new: true, upsert: true });
+                guildDocument = await GuildModel.findByIdAndUpdate(
+                    message.guildId,
+                    {},
+                    { returnDocument: "after", upsert: true },
+                );
             }
 
             // gamification
