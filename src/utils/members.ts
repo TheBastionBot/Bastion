@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildMember, GuildTextBasedChannel, Message, PartialGuildMember, PresenceStatus } from "discord.js";
+import { Guild, GuildMember, GuildTextBasedChannel, Message, PartialGuildMember, PresenceStatus, UserResolvable } from "discord.js";
 import { Document } from "mongoose";
 import { Client, Logger } from "@bastion/tesseract";
 
@@ -10,6 +10,13 @@ import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 import MemberModel, { Member as MemberDocument } from "../models/Member.js";
 import RoleModel from "../models/Role.js";
 import * as numbers from "./numbers.js";
+
+/**
+ * Resolves the specified user to a guild member, from the cache when available.
+ * @param guild The guild of the member.
+ * @param user The user you want to resolve.
+ */
+export const resolveMember = (guild: Guild, user: UserResolvable): Promise<GuildMember | null> => guild.members.fetch(user).catch(() => null);
 
 /**
  * Check whether a moderator can manage the specified member.

@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFl
 import { Client, Command, Logger } from "@bastion/tesseract";
 
 import { logModerationEvent } from "../utils/guilds.js";
-import { addInfraction, manageable } from "../utils/members.js";
+import { addInfraction, manageable, resolveMember } from "../utils/members.js";
 
 class WarnCommand extends Command {
     constructor() {
@@ -36,7 +36,8 @@ class WarnCommand extends Command {
         const user = interaction.options.getUser("user");
         const reason = interaction.options.getString("reason");
 
-        const member = await interaction.guild.members.fetch(user);
+        const member = await resolveMember(interaction.guild, user);
+        if (!member) return await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "memberNotFound", { user }));
 
         if (manageable(interaction.member, member)) {
             // add infraction to the member

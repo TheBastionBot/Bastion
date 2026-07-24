@@ -8,6 +8,7 @@ import { ButtonStyle, ChannelType, ComponentType, PermissionFlagsBits, VoiceStat
 import GuildModel from "../models/Guild.js";
 import MessageComponents from "../utils/components.js";
 import { isPublicBastion } from "../utils/constants.js";
+import * as members from "../utils/members.js";
 import { isPremiumUser } from "../utils/premium.js";
 
 class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
@@ -32,21 +33,25 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
             }
 
             // check whether all members left the old channel
-            if (guild.voiceSessionCategories.includes(oldState.channel?.parentId) && !oldState.channel.name.startsWith(this.newSessionChannelPrefix) && oldState.channel.members.size === 0 && oldState.channel.deletable) {
+            if (guild.voiceSessionCategories.includes(oldState.channel?.parentId) && !oldState.channel.name.startsWith(this.newSessionChannelPrefix) && !oldState.guild.voiceStates.cache.some(state => state.channelId === oldState.channelId) && oldState.channel.deletable) {
                 await oldState.channel.delete("Voice session automatically ended.");
             }
 
             // check whether member is requesting a new session channel to be created
             if (guild.voiceSessionCategories.includes(newState.channel?.parentId) && newState.channel.name.startsWith(this.newSessionChannelPrefix)) {
+                // resolve the member
+                const member = newState.member ?? await members.resolveMember(newState.guild, newState.id);
+                if (!member) return;
+
                 // HACK: channel number might have concurrency problem
                 const newSessionChannel = await newState.channel.guild.channels.create({
-                    name: newState.member.displayName + (newState.member.displayName.toLowerCase().endsWith("s") ? "' " : "'s ") + newState.channel.name.replace(this.newSessionChannelPrefix, ""),
+                    name: member.displayName + (member.displayName.toLowerCase().endsWith("s") ? "' " : "'s ") + newState.channel.name.replace(this.newSessionChannelPrefix, ""),
                     type: ChannelType.GuildVoice,
                     bitrate: newState.channel.guild.premiumTier ? newState.channel.guild.premiumTier * 128e3 : 96e3,
                     parent: newState.channel.parent,
                     permissionOverwrites: [
                         {
-                            id: newState.member.id,
+                            id: member.id,
                             allow: [
                                 PermissionFlagsBits.Connect,
                                 PermissionFlagsBits.CreateInstantInvite,
@@ -56,7 +61,7 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
                             ],
                         },
                         {
-                            id: newState.member.guild.id,
+                            id: member.guild.id,
                             allow: [
                                 PermissionFlagsBits.Speak,
                             ],
@@ -67,11 +72,11 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
                             ],
                         },
                     ],
-                    reason: "Voice session for " + (newState.member.user?.tag || newState.member.id),
+                    reason: "Voice session for " + (member.user?.tag || member.id),
                 });
 
                 // move member to the new channel
-                await newState.member.voice.setChannel(newSessionChannel).catch(Logger.ignore);
+                await member.voice.setChannel(newSessionChannel).catch(Logger.ignore);
 
                 // send voice session control message
                 await newSessionChannel.send({

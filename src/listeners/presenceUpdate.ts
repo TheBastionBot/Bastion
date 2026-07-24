@@ -6,6 +6,7 @@ import { ActivityType, Guild, Presence } from "discord.js";
 import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild.js";
+import * as members from "../utils/members.js";
 
 class PresenceUpdateListener extends Listener<"presenceUpdate"> {
     // streaming members per guild
@@ -25,10 +26,8 @@ class PresenceUpdateListener extends Listener<"presenceUpdate"> {
         // check for change in streaming state
         if (streaming === wasStreaming) return;
 
+        // updated before the checks below, so each change is handled only once
         if (streaming) {
-            // check whether member has enough roles
-            if (!(newPresence.member?.roles.cache.size > 1)) return;
-
             if (streamers) streamers.add(newPresence.userId);
             else this.streamers.set(newPresence.guild, new Set([ newPresence.userId ]));
         } else {
@@ -41,7 +40,13 @@ class PresenceUpdateListener extends Listener<"presenceUpdate"> {
         // check whether the streamer role is set and still exists
         if (!newPresence.guild.roles.cache.has(guildDocument?.streamerRole)) return;
 
-        // update streamer role by id -- no cached member required
+        if (streaming) {
+            // check whether member has enough roles
+            const member = await members.resolveMember(newPresence.guild, newPresence.userId);
+            if (!(member?.roles.cache.size > 1)) return;
+        }
+
+        // update streamer role
         const memberRole = { user: newPresence.userId, role: guildDocument.streamerRole };
         if (streaming) {
             newPresence.guild.members.addRole(memberRole).catch(Logger.ignore);

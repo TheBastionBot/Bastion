@@ -36,8 +36,8 @@ class StatusCommand extends Command {
         const guildCounts = await interaction.client.shard.broadcastEval(bastion => bastion.guilds.cache.size);
         const guildCount = onlyShard ? interaction.client.guilds.cache.size : guildCounts.reduce((acc, val) => acc + val, 0);
 
-        const userCounts = await interaction.client.shard.broadcastEval(bastion => bastion.users.cache.size);
-        const userCount = onlyShard ? interaction.client.users.cache.size : userCounts.reduce((acc, val) => acc + val, 0);
+        const userCounts = await interaction.client.shard.broadcastEval(bastion => bastion.guilds.cache.reduce((count, guild) => count + guild.memberCount, 0));
+        const userCount = onlyShard ? interaction.client.guilds.cache.reduce((count, guild) => count + guild.memberCount, 0) : userCounts.reduce((acc, val) => acc + val, 0);
 
         // calculate memory usage
         const rss = await interaction.client.shard.broadcastEval(() => process.memoryUsage().rss);
@@ -83,7 +83,7 @@ class StatusCommand extends Command {
                         },
                         {
                             name: "Presence",
-                            value: guildCount.toLocaleString() + " Servers\n" + userCount.toLocaleString() + " Users",
+                            value: guildCount.toLocaleString() + " Servers\n" + userCount.toLocaleString() + " Members",
                             inline: true,
                         },
                         {

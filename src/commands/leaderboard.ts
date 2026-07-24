@@ -43,13 +43,13 @@ class LeaderboardCommand extends Command {
                     color: COLORS.PRIMARY,
                     author: {
                         name: interaction.guild.name,
-                        // TODO: server page - url: ,
+                        url: (interaction.client as Client).locales.getConstant("bastion.website") + "/servers/" + interaction.guild.id,
                     },
                     title: "Leaderboard",
                     fields: members.map((member, i) => [
                         {
-                            name: `#${ i + 1 } — ${ interaction.client.users.cache.has(member.user) ? interaction.client.users.cache.get(member.user).tag + " / " : "" }${ member.user }`,
-                            value: `${ member.balance } Bastion Coins`,
+                            name: `#${ i + 1 }`,
+                            value: `<@${ member.user }> — ${ member.balance } Bastion Coins`,
                         },
                         {
                             name: "Level",
