@@ -39,6 +39,11 @@ class LiveStreamNotificationScheduler extends Scheduler {
 
             const twitchStreams = memcache.get(TWITCH_CACHE_NAMESPACE) as Map<Snowflake, string[]>;
 
+            // drop notification state for guilds bastion has left
+            for (const id of twitchStreams.keys()) {
+                if (!this.client.guilds.cache.has(id)) twitchStreams.delete(id);
+            }
+
             for (const guild of guildDocuments) {
                 // twitch streams
                 const twitchNotificationUsers = guild.twitchNotificationUsers.filter(u => TWITCH_CHANNEL.test(u));
