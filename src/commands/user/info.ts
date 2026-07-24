@@ -3,10 +3,10 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Command } from "@bastion/tesseract";
 
 import { COLORS } from "../../utils/constants.js";
-import { resolveStatus } from "../../utils/members.js";
+import { resolveMember, resolveStatus } from "../../utils/members.js";
 
 class UserInfoCommand extends Command {
     constructor() {
@@ -25,7 +25,7 @@ class UserInfoCommand extends Command {
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
         const user = interaction.options.getUser("user") || interaction.user;
-        const member = interaction.options.getUser("user") ? await interaction.guild.members.fetch(user).catch(Logger.ignore) : interaction.member;
+        const member = interaction.options.getUser("user") ? await resolveMember(interaction.guild, user) : interaction.member;
 
         await interaction.reply({
             embeds: [

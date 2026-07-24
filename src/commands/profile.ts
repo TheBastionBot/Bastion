@@ -9,6 +9,7 @@ import GuildModel from "../models/Guild.js";
 import MemberModel from "../models/Member.js";
 import { COLORS } from "../utils/constants.js";
 import * as gamification from "../utils/gamification.js";
+import * as members from "../utils/members.js";
 import progress from "../utils/progress.js";
 
 class ProfileCommand extends Command {
@@ -34,7 +35,7 @@ class ProfileCommand extends Command {
         const guildDocument = await GuildModel.findById(interaction.guildId);
 
         // check whether the specified user is a server member
-        const member = interaction.guild.members.cache.get(user?.id) || await interaction.guild.members.fetch(user);
+        const member = await members.resolveMember(interaction.guild, user);
         if (!member) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "memberNotFound", { user: user }));
 
         // get user's profile data
