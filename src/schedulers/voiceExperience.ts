@@ -31,8 +31,12 @@ class VoiceExperienceScheduler extends Scheduler {
             for (const guild of this.client.guilds.cache.values()) {
                 const eligible: GuildMember[] = [];
 
-                // non-bot human count per channel
+                // members might not be cached, so anyone not known to be a bot is counted as human
                 const humansByChannel = new Map<string, number>();
+                for (const voiceState of guild.voiceStates.cache.values()) {
+                    if (!voiceState.channelId || voiceState.member?.user.bot) continue;
+                    humansByChannel.set(voiceState.channelId, (humansByChannel.get(voiceState.channelId) ?? 0) + 1);
+                }
 
                 for (const voiceState of guild.voiceStates.cache.values()) {
                     const { channel, member } = voiceState;
@@ -43,18 +47,8 @@ class VoiceExperienceScheduler extends Scheduler {
                     // ignore the AFK channel and muted / deafened members
                     if (channel.id === guild.afkChannelId || voiceState.mute || voiceState.deaf) continue;
 
-                    // count this channel's non-bot humans
-                    let humans = humansByChannel.get(channel.id);
-                    if (humans === undefined) {
-                        humans = 0;
-                        for (const m of channel.members.values()) {
-                            if (!m.user.bot) humans++;
-                        }
-                        humansByChannel.set(channel.id, humans);
-                    }
-
                     // make sure user is not alone
-                    if (humans < 2) continue;
+                    if ((humansByChannel.get(channel.id) ?? 0) < 2) continue;
 
                     eligible.push(member);
                 }
