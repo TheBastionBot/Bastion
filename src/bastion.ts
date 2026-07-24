@@ -37,6 +37,8 @@ const bastion = new Client({
         Partials.Message,
         Partials.Channel,
         Partials.Reaction,
+        Partials.GuildMember,
+        Partials.User,
     ],
     makeCache: Options.cacheWithLimits({
         ...Options.DefaultMakeCacheSettings,

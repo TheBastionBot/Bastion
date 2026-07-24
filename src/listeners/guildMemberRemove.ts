@@ -68,7 +68,7 @@ class GuildMemberRemoveListener extends Listener<"guildMemberRemove"> {
                 },
                 {
                     name: "Joined Server",
-                    value: time(member.joinedAt),
+                    value: member.joinedAt ? time(member.joinedAt) : "-",
                     inline: true,
                 },
             ],

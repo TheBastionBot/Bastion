@@ -13,6 +13,9 @@ class GuildMemberUpdateListener extends Listener<"guildMemberUpdate"> {
     }
 
     public async exec(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember): Promise<void> {
+        // the previous state of an uncached member is unknown
+        if (oldMember.partial) return;
+
         if (oldMember.nickname !== newMember.nickname) {
             await logGuildEvent(newMember.guild, {
                 title: `Nickname ${ newMember.nickname ? "Updated" : "Removed" }`,
