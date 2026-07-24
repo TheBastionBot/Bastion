@@ -67,14 +67,20 @@ class ClaimCommand extends Command {
             rewardAmount *= 2;
         }
 
-        // credit the reward and update the streak atomically so a concurrent XP writer isn't clobbered
-        await MemberModel.updateOne({
+        // credit the reward and update the streak
+        const startOfToday = new Date(today).setHours(0, 0, 0, 0);
+        const { modifiedCount } = await MemberModel.updateOne({
             user: interaction.user.id,
             guild: interaction.guild.id,
+            // prevent concurrent claims from slipping through
+            lastClaimed: { $not: { $gte: startOfToday } },
         }, {
             $inc: { balance: rewardAmount },
             $set: { lastClaimed: today.getTime(), claimStreak },
         });
+
+        // a concurrent claim already collected today's reward
+        if (!modifiedCount) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "rewardsAlreadyClaimed"));
 
         // acknowledge
         await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "rewardsClaimed", { amount: rewardAmount }));
