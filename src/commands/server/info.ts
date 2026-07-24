@@ -24,8 +24,11 @@ class ChannelInfoCommand extends Command {
         // get the guild document
         const guildDocument = await GuildModel.findById(interaction.guildId);
 
-        // check for premium membership
-        const tier = isPublicBastion(interaction.client.user.id) && await getPremiumTier(interaction.guild.ownerId).catch(Logger.ignore);
+        // check for premium membership, and resolve the server owner
+        const [ tier, owner ] = await Promise.all([
+            isPublicBastion(interaction.client.user.id) && getPremiumTier(interaction.guild.ownerId).catch(Logger.ignore),
+            interaction.guild.fetchOwner().catch(() => null),
+        ]);
 
         await interaction.editReply({
             embeds: [
@@ -44,7 +47,7 @@ class ChannelInfoCommand extends Command {
                         },
                         {
                             name: "Owner",
-                            value: interaction.guild.members.cache.get(interaction.guild.ownerId)?.user?.tag || interaction.guild.ownerId,
+                            value: owner?.user.tag || interaction.guild.ownerId,
                         },
                         {
                             name: "Level",

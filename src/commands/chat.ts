@@ -55,7 +55,7 @@ class ChatCommand extends Command {
         const ordered = messages ? [ ...messages.values() ].sort((a, b) => a.createdTimestamp - b.createdTimestamp) : [];
         const history = ordered ? ordered.filter(m => m.content).map(m => ({
             role: m.author.id === interaction.client.user.id ? "assistant" : "user" as "user" | "assistant",
-            content: m.author.id === interaction.client.user.id ? m.cleanContent : `${ m.member.displayName || m.author.displayName }: ${ m.cleanContent }`,
+            content: m.author.id === interaction.client.user.id ? m.cleanContent : `${ m.member?.displayName ?? m.author.displayName }: ${ m.cleanContent }`,
         })) : [];
 
         // if first message is from the bot, remove it

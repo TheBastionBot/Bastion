@@ -55,7 +55,7 @@ class MessageReactionAddListener extends Listener<"messageReactionAdd"> {
                     color: COLORS.YELLOW,
                     author: {
                         name: reaction.message.author?.tag,
-                        icon_url: reaction.message.member?.displayAvatarURL(),
+                        icon_url: (reaction.message.member ?? reaction.message.author)?.displayAvatarURL(),
                         url: reaction.message.url,
                     },
                     description: reaction.message.content,
