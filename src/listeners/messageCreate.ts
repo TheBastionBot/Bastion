@@ -105,7 +105,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         await memberDocument.save();
 
         // set the XP cooldown for the member
-        memcache.set(key, true, 13 / 60); // 13 seconds
+        memcache.set(key, true, 30 / 60); // 30 seconds
     };
 
     handleTriggers = async (message: Message<true>): Promise<unknown> => {
