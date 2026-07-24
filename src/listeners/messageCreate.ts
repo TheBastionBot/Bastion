@@ -42,10 +42,14 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether member has exceeded max level or experience
         if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
 
+        // resolve the member
+        const member = message.member ?? await members.resolveMember(message.guild, message.author.id);
+        if (!member) return;
+
         // atomically increment experience so concurrent writers aren't clobbered
         const { experience, level } = await MemberModel.findOneAndUpdate(
             { user: message.author.id, guild: message.guildId },
-            { $inc: { experience: message.member.premiumSinceTimestamp ? 2 : 1 } },
+            { $inc: { experience: member.premiumSinceTimestamp ? 2 : 1 } },
             { returnDocument: "after", upsert: true },
         );
 
@@ -61,7 +65,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             });
 
             // reward level roles and announce the level up
-            members.handleLevelUp(message.member, guildDocument, computedLevel, message);
+            members.handleLevelUp(member, guildDocument, computedLevel, message);
         }
 
         // set the XP cooldown for the member
@@ -157,7 +161,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // create a new thread
         const thread = await message.channel.threads.create({
             type: ChannelType.PrivateThread,
-            name: message.member.displayName + " — " + new Date().toDateString(),
+            name: (message.member?.displayName ?? message.author.displayName) + " — " + new Date().toDateString(),
             autoArchiveDuration: ThreadAutoArchiveDuration.OneDay,
             reason: `Auto Thread for ${ message.author.tag }`,
             invitable: true,
