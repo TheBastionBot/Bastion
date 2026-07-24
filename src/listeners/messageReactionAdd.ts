@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildTextBasedChannel, MessageReaction, PartialMessageReaction, PartialUser, Snowflake, User } from "discord.js";
+import { GuildTextBasedChannel, MessageReaction, PartialMessageReaction, PartialUser, User } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild.js";
@@ -21,10 +21,8 @@ class MessageReactionAddListener extends Listener<"messageReactionAdd"> {
         // check whether the message has the minimum reaction count
         if (reaction.count < 2) return;
 
-        // check whether the message is already in starboard
-        const starboardCache = memcache.get("starboard") as Map<Snowflake, Snowflake[]> || new Map<Snowflake, Snowflake[]>();
-        const guildStarboardCache = starboardCache.get(reaction.message.guildId);
-        if (guildStarboardCache?.includes(reaction.message.id)) return;
+        // check whether the message is already in the starboard
+        if (memcache.get(`starboard:${ reaction.message.id }`)) return;
 
         const guildDocument = await GuildModel.findById(reaction.message.guildId);
 
@@ -71,13 +69,8 @@ class MessageReactionAddListener extends Listener<"messageReactionAdd"> {
             ],
         });
 
-        // update the starboard cache
-        if (guildStarboardCache instanceof Array) {
-            guildStarboardCache.push(reaction.message.id);
-        } else {
-            starboardCache.set(reaction.message.guildId, [ reaction.message.id ]);
-        }
-        memcache.set("starboard", starboardCache);
+        // remember this message for 3 days so it isn't reposted to the starboard
+        memcache.set(`starboard:${ reaction.message.id }`, true, 3 * 24 * 60);
     }
 }
 
