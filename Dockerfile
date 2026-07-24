@@ -5,9 +5,9 @@ WORKDIR /app
 RUN apk add --no-cache make g++ python3
 
 COPY src src
-COPY package.json tsconfig.json ./
+COPY package.json package-lock.json tsconfig.json ./
 
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 
@@ -17,12 +17,12 @@ WORKDIR /app
 
 RUN apk add --no-cache make g++ python3 ffmpeg
 
-COPY package.json ./
+COPY package.json package-lock.json ./
 COPY settings.example.yaml ./settings.yaml
 COPY data data
 COPY locales locales
 COPY --from=build /app/dist ./dist
 
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 
 CMD npm start

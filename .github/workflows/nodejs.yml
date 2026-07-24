@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Dependencies
-      run: npm install
+      run: npm ci
 
     - name: Lint
       run: npm test

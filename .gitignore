@@ -10,10 +10,6 @@
 /dist
 /typings
 
-# Lock file
-package-lock.json
-yarn.lock
-
 ### Logs ###
 screenlog.*
 
