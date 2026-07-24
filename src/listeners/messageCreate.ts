@@ -38,26 +38,27 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether member has exceeded max level or experience
         if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
 
-        // increment experience
-        members.updateExperience(memberDocument, message.member.premiumSinceTimestamp ? 2 : 1);
+        // atomically increment experience so concurrent writers aren't clobbered
+        const { experience, level } = await MemberModel.findOneAndUpdate(
+            { user: message.author.id, guild: message.guildId },
+            { $inc: { experience: message.member.premiumSinceTimestamp ? 2 : 1 } },
+            { new: true, upsert: true },
+        );
 
         // compute current level from new experience
-        const computedLevel: number = gamification.computeLevel(memberDocument.experience, guildDocument.gamificationMultiplier);
+        const computedLevel: number = gamification.computeLevel(experience, guildDocument.gamificationMultiplier);
 
         // level up
-        if (computedLevel > memberDocument.level) {
-            // credit reward amount into member's account
-            members.updateBalance(memberDocument, computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER);
+        if (computedLevel > level) {
+            // persist the new level and credit the reward amount
+            await MemberModel.updateOne({ user: message.author.id, guild: message.guildId }, {
+                $set: { level: computedLevel },
+                $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER },
+            });
 
             // reward level roles and announce the level up
             members.handleLevelUp(message.member, guildDocument, computedLevel, message);
         }
-
-        // update level
-        memberDocument.level = computedLevel;
-
-        // save document
-        await memberDocument.save();
 
         // set the XP cooldown for the member
         memcache.set(key, true, 30 / 60); // 30 seconds
