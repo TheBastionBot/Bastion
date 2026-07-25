@@ -47,12 +47,12 @@ class SelectRolesUpdateSelectMenu extends MessageComponent {
             await selectRoleGroup.save();
 
             const roleDocuments = await RoleModel.find({
-                $or: selectRoleGroup.roles.map(id => ({ id })),
+                _id: { $in: selectRoleGroup.roles },
             });
 
             const selectRoles = selectRoleGroup.roles.map(id => {
                 const role = interaction.guild.roles.cache.get(id);
-                const roleDocument = roleDocuments.find(r => r.id === id);
+                const roleDocument = roleDocuments.find(r => r._id === id);
 
                 return {
                     value: id,
