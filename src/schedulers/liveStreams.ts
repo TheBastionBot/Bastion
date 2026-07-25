@@ -32,7 +32,7 @@ class LiveStreamNotificationScheduler extends Scheduler {
             if (!this.client.guilds.cache.size) return;
 
             const guildDocuments = await GuildModel.find({
-                $or: this.client.guilds.cache.map(g => ({ _id: g.id })),
+                _id: { $in: [ ...this.client.guilds.cache.keys() ] },
                 twitchNotificationChannel: { $exists: true, $ne: null },
                 twitchNotificationUsers: { $exists: true, $type: "array", $ne: [] },
             });

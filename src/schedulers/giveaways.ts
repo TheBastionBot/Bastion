@@ -24,7 +24,7 @@ class GiveawayScheduler extends Scheduler {
 
             // identify giveaways which've reached their timeout
             const giveawayDocuments = await GiveawayModel.find({
-                $or: this.client.guilds.cache.map(g => ({ guild: g.id })),
+                guild: { $in: [ ...this.client.guilds.cache.keys() ] },
                 ends: {
                     $lte: new Date(),
                 },
@@ -106,7 +106,7 @@ class GiveawayScheduler extends Scheduler {
             // remove the completed giveaways
             if (completed.length) {
                 await GiveawayModel.deleteMany({
-                    $or: completed.map(id => ({ _id: id })),
+                    _id: { $in: completed },
                 }).catch(Logger.error);
             }
         } catch (e) {
