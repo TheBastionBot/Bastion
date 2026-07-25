@@ -75,4 +75,14 @@ memberSchema.index({
     unique: true,
 });
 
+// serves the guild leaderboard and the member rank, which filter by guild and
+// order by these fields, in this order
+memberSchema.index({
+    guild: 1,
+    level: -1,
+    experience: -1,
+    karma: -1,
+    balance: -1,
+});
+
 export default mongoose.model<Member>("Member", memberSchema);

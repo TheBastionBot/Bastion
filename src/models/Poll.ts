@@ -34,4 +34,11 @@ const pollSchema = new mongoose.Schema<Poll>({
     },
 });
 
+// the active poll count is checked per guild before a new poll is created, and
+// the scheduler collects due polls for the guilds on the shard
+pollSchema.index({
+    guild: 1,
+    ends: 1,
+});
+
 export default mongoose.model<Poll>("Poll", pollSchema);

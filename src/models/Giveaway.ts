@@ -38,4 +38,11 @@ const giveawaySchema = new mongoose.Schema<Giveaway>({
     },
 });
 
+// the active giveaway count is checked per guild before a new giveaway is
+// created, and the scheduler collects due giveaways for the guilds on the shard
+giveawaySchema.index({
+    guild: 1,
+    ends: 1,
+});
+
 export default mongoose.model<Giveaway>("Giveaway", giveawaySchema);
