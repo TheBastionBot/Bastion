@@ -152,7 +152,7 @@ export const assignLevelRoles = async (member: GuildMember, level: number): Prom
     const roles = await RoleModel.find({
         guild: member.guild.id,
         level: { $exists: true, $ne: null },
-    });
+    }).lean();
 
     // check whether there are any level up roles
     if (!roles?.length) return;
@@ -167,9 +167,9 @@ export const assignLevelRoles = async (member: GuildMember, level: number): Prom
     // update member roles
     if (levelRoles.length) {
         const memberRoles = member.roles.cache
-            .filter(r => !extraRoles.some(doc => doc.id === r.id))  // remove roles from any other level
+            .filter(r => !extraRoles.some(doc => doc._id === r.id))  // remove roles from any other level
             .map(r => r.id)
-            .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
+            .concat(levelRoles.map(doc => doc._id)); // add roles in the current level
 
         // update member roles
         member.roles.set([ ...new Set(memberRoles) ]).catch(Logger.error);

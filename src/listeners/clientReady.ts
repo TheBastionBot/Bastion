@@ -14,13 +14,15 @@ class ClientReadyListener extends Listener<"clientReady"> {
 
     public async exec(client: Client<true>): Promise<void> {
         // get all the guild documents
-        const guildDocuments = await GuildModel.find({}, "id").catch(Logger.error);
+        const guildDocuments = await GuildModel.find({}, "_id").lean().catch(Logger.error);
 
         if (guildDocuments) {
+            const knownGuilds = new Set(guildDocuments.map(doc => doc._id));
+
             // get all the guilds that don't have a document
             const newGuilds = client.guilds.cache
-                .map(g => ({ _id: g.id }))
-                .filter(g => !guildDocuments.some(doc => doc._id === g._id));
+                .filter(g => !knownGuilds.has(g.id))
+                .map(g => ({ _id: g.id }));
 
             // create the documents for the new guilds
             if (newGuilds.length) {
