@@ -16,7 +16,7 @@ export interface SelectRoleGroup {
     max?: number;
 }
 
-export default mongoose.model<SelectRoleGroup>("SelectRoleGroup", new mongoose.Schema<SelectRoleGroup>({
+const selectRoleGroupSchema = new mongoose.Schema<SelectRoleGroup>({
     _id: {
         type: String,
         required: true,
@@ -47,4 +47,12 @@ export default mongoose.model<SelectRoleGroup>("SelectRoleGroup", new mongoose.S
     max: {
         type: Number,
     },
-}));
+});
+
+// select role groups are listed per guild, optionally narrowed to a channel
+selectRoleGroupSchema.index({
+    guild: 1,
+    channel: 1,
+});
+
+export default mongoose.model<SelectRoleGroup>("SelectRoleGroup", selectRoleGroupSchema);

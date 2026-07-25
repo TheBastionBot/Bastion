@@ -31,7 +31,7 @@ class LeaderboardCommand extends Command {
                 balance: -1,
             },
             limit: 5,
-        });
+        }).lean();
 
         // check whether member documents have been created
         if (!members.length) return interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "profilesNotCreated"));

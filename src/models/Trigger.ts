@@ -29,4 +29,11 @@ const triggerSchema = new mongoose.Schema<Trigger>({
     },
 });
 
+// every message looks up the triggers of its guild, and the pattern suffix
+// also serves trigger removal
+triggerSchema.index({
+    guild: 1,
+    pattern: 1,
+});
+
 export default mongoose.model<Trigger>("Trigger", triggerSchema);

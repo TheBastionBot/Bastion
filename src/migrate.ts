@@ -1,11 +1,18 @@
 /*!
  * @author TRACTION (iamtraction)
- * @copyright 2022
+ * @copyright 2026
  */
+import mongoose from "mongoose";
 import { Logger } from "@bastion/tesseract";
-import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
+import GiveawayModel from "./models/Giveaway.js";
+import GuildModel from "./models/Guild.js";
+import MemberModel from "./models/Member.js";
+import PollModel from "./models/Poll.js";
+import RoleModel from "./models/Role.js";
+import SelectRoleGroupModel from "./models/SelectRoleGroup.js";
+import TriggerModel from "./models/Trigger.js";
 import Settings from "./utils/settings.js";
 
 // configure dotenv
@@ -13,172 +20,76 @@ dotenv.config();
 
 // init
 const settings = new Settings();
-const client = new MongoClient(settings?.mongoURI);
+
+// every model whose indexes are managed by this script
+const models = [
+    GiveawayModel,
+    GuildModel,
+    MemberModel,
+    PollModel,
+    RoleModel,
+    SelectRoleGroupModel,
+    TriggerModel,
+];
 
 // commands
 const Commands = {
-    Filters: "filters",
-    v10: "v10",
+    Indexes: "indexes",
 };
 
-const v10 = async () => {
-    await client.connect();
-    const db = client.db();
+// `npm run` strips anything that looks like a flag unless it's passed after a
+// `--` separator, so the destructive mode is opted into with a plain word
+const APPLY = "apply";
 
-    // Case
-    if (await db.collection("cases").findOne()) {
-        Logger.info("Dropping Case collection...");
-        await db.collection("cases").drop();
-        Logger.info("Dropped Case collection.");
+/**
+ * Makes the indexes in MongoDB match the ones declared in the schemas.
+ *
+ * Indexes declared in a schema are built automatically when a shard boots, but
+ * indexes that were *removed* from a schema are never dropped. This reconciles
+ * both directions, so index changes don't have to be applied by hand.
+ *
+ * Anything not declared in a schema is dropped, so this only reports what it
+ * intends to do until the changes are explicitly applied.
+ * @param apply Whether to apply the changes, instead of only reporting them.
+ */
+const indexes = async (apply: boolean): Promise<void> => {
+    // `autoIndex` builds the schema indexes as soon as a model is used against a
+    // live connection, which would apply half the changes before reporting them
+    await mongoose.connect(settings.mongoURI, { autoIndex: false });
+
+    let changes = 0;
+
+    for (const model of models) {
+        const collection = model.collection.name;
+        const { toDrop, toCreate } = await model.diffIndexes({ indexOptionsToCreate: true });
+
+        if (!toDrop.length && !toCreate.length) continue;
+
+        changes += toDrop.length + toCreate.length;
+
+        for (const name of toDrop) {
+            Logger.info(`${ collection }: drop ${ name }`);
+        }
+
+        for (const [ keys, options ] of toCreate) {
+            Logger.info(`${ collection }: create ${ JSON.stringify(keys) } ${ JSON.stringify(options) }`);
+        }
+
+        if (apply) await model.syncIndexes();
     }
 
-    // Config
-    if (await db.collection("configs").findOne()) {
-        Logger.info("Dropping Config collection...");
-        await db.collection("configs").drop();
-        Logger.info("Dropped Config collection.");
-    }
+    if (!changes) return Logger.info("Every collection is already in sync.");
 
-    // Giveaway
-    if (await db.collection("giveaways").findOne()) {
-        Logger.info("Dropping Giveaway collection...");
-        await db.collection("giveaways").drop();
-        Logger.info("Dropped Giveaway collection.");
-    }
+    if (apply) return Logger.info(`Applied ${ changes } index changes.`);
 
-    // Guild
-    if (await db.collection("guilds").findOne()) {
-        Logger.info("Migrating Guild documents...");
-        const Guild = db.collection("guilds");
-        await Guild.updateMany({}, {
-            $rename: {
-                moderationLogChannelId: "moderationLogChannel",
-                serverLogChannelId: "serverLogChannel",
-                suggestionsChannelId: "suggestionsChannel",
-                starboardChannelId: "starboardChannel",
-                reportsChannelId: "reportsChannel",
-                streamerRoleId: "streamerRole",
-                verifiedRoleId: "verifiedRole",
-            },
-            $unset: {
-                announcementsChannelId: 1,
-                chat: 1,
-                disabled: 1,
-                disabledCommands: 1,
-                farewell: 1,
-                filters: 1,
-                gambling: 1,
-                gamification: 1,
-                greeting: 1,
-                infractions: 1,
-                language: 1,
-                membersOnly: 1,
-                mentionSpam: 1,
-                moderationCaseCount: 1,
-                music: 1,
-                reactionAnnouncements: 1,
-                reactionPinning: 1,
-                referralsChannel: 1,
-                streamers: 1,
-                voiceSessions: 1,
-            },
-        });
-        Logger.info("Migrated Guild documents.");
-    }
-
-    // Member
-    // if (await db.collection("members").findOne()) {}
-
-    // Playlist
-    if (await db.collection("playlists").findOne()) {
-        Logger.info("Dropping Playlist collection...");
-        await db.collection("playlists").drop();
-        Logger.info("Dropped Playlist collection.");
-    }
-
-    // Poll
-    if (await db.collection("polls").findOne()) {
-        Logger.info("Dropping Poll collection...");
-        await db.collection("polls").drop();
-        Logger.info("Dropped Poll collection.");
-    }
-
-    // ReactionRoleGroup
-    if (await db.collection("reactionrolegroups").findOne()) {
-        Logger.info("Dropping ReactionRoleGroup collection...");
-        await db.collection("reactionrolegroups").drop();
-        Logger.info("Dropped ReactionRoleGroup collection.");
-    }
-
-    // Role
-    if (await db.collection("roles").findOne()) {
-        Logger.info("Migrating Role documents...");
-        const Role = db.collection("roles");
-        await Role.updateMany({}, {
-            $unset: {
-                autoAssignable: 1,
-                blacklisted: 1,
-                disabledCommands: 1,
-                emoji: 1,
-            }
-        });
-        Logger.info("Migrated Role documents.");
-    }
-
-    // TextChannel
-    if (await db.collection("textchannels").findOne()) {
-        Logger.info("Dropping TextChannel collection...");
-        await db.collection("textchannels").drop();
-        Logger.info("Dropped TextChannel collection.");
-    }
-
-    // Trigger
-    if (await db.collection("triggers").findOne()) {
-        Logger.info("Dropping Trigger collection...");
-        await db.collection("triggers").drop();
-        Logger.info("Dropped Trigger collection.");
-    }
-
-    // User
-    if (await db.collection("users").findOne()) {
-        Logger.info("Dropping User collection...");
-        await db.collection("users").drop();
-        Logger.info("Dropped User collection.");
-    }
+    Logger.info(`${ changes } index changes are pending. Re-run with "${ APPLY }" to apply them.`);
 };
 
-const filters = async () => {
-    await client.connect();
-    const db = client.db();
+const main = async (): Promise<void> => {
+    const [ , , command, ...flags ] = process.argv;
 
-    // Message Filters
-    Logger.info("Deleting Filters...");
-    const Guild = db.collection("guilds");
-    await Guild.updateMany({}, {
-        $unset: {
-            // invite filter
-            inviteFilter: 1,
-            inviteFilterWarnings: 1,
-            inviteFilterExemptions: 1,
-            // link filter
-            linkFilter: 1,
-            linkFilterWarnings: 1,
-            linkFilterExemptions: 1,
-            // message filter
-            messageFilter: 1,
-            messageFilterWarnings: 1,
-            messageFilterPatterns: 1,
-        },
-    });
-    Logger.info("Deleted Filters.");
-};
-
-const main = () => {
-    const [ , , command ] = process.argv;
-
-    switch (command.toLowerCase()) {
-    case Commands.Filters: return filters();
-    case Commands.v10: return v10();
+    switch (command?.toLowerCase()) {
+    case Commands.Indexes: return await indexes(flags.includes(APPLY));
     default:
         throw new Error("You need to specify a migration command.", {
             cause: "None of the valid commands were used: " + Object.values(Commands).join(" / "),
@@ -191,5 +102,6 @@ main()
     .catch(e => {
         Logger.info("Error when migrating. Join Bastion HQ for support: https://discord.gg/fzx8fkt");
         Logger.error(e);
+        process.exitCode = 1;
     })
-    .finally(() => client.close());
+    .finally(() => mongoose.disconnect());

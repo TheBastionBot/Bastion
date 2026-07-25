@@ -38,58 +38,44 @@ export const manageable = (moderator: GuildMember, member: GuildMember): boolean
 export const addInfraction = async (member: PartialGuildMember | GuildMember, reason: string) => {
     const guildDocument = await GuildModel.findById(member.guild.id);
 
-    let memberDocument = await MemberModel.findOne({ user: member.id, guild: member.guild.id });
+    // record the infraction in a single atomic upsert, so concurrent warnings
+    // can't both miss an existing document and collide on the unique index
+    const memberDocument = await MemberModel.findOneAndUpdate(
+        { user: member.id, guild: member.guild.id },
+        { $push: { infractions: reason } },
+        { returnDocument: "after", upsert: true },
+    );
 
-    // check whether member document exists
-    if (memberDocument) {
-        // add infraction to member
-        memberDocument.infractions = memberDocument.infractions instanceof Array ? memberDocument.infractions.concat(reason) : [ reason ];
-    } else {
-        // create the member document
-        memberDocument = await MemberModel.create({
-            user: member.id,
-            guild: guildDocument.id,
-            infractions: [ reason ],
-        });
+    const infractionCount = memberDocument.infractions.length;
+
+    if (infractionCount === guildDocument?.infractionsTimeoutThreshold) {
+        await member.timeout(9e5, infractionCount + " infractions");
     }
 
-    if (memberDocument.infractions.length === guildDocument.infractionsTimeoutThreshold) {
-        await member.timeout(9e5, memberDocument.infractions.length + " infractions");
+    if (infractionCount === guildDocument?.infractionsKickThreshold && member.kickable) {
+        await member.kick(infractionCount + " infractions");
     }
 
-    if (memberDocument.infractions.length === guildDocument.infractionsKickThreshold && member.kickable) {
-        await member.kick(memberDocument.infractions.length + " infractions");
-    }
-
-    if (memberDocument.infractions.length === guildDocument.infractionsBanThreshold && member.bannable) {
+    if (infractionCount === guildDocument?.infractionsBanThreshold && member.bannable) {
         await member.ban({
-            reason: memberDocument.infractions.length + " infractions",
+            reason: infractionCount + " infractions",
         });
 
         // clear all infractions once member is banned
-        memberDocument.infractions = [];
+        await clearInfraction(member);
     }
-
-    // save member
-    return memberDocument.save();
 };
 
 /**
- * Clear a member's infraction.
+ * Clear all of a member's infractions.
  * @param member The member.
  */
 export const clearInfraction = async (member: PartialGuildMember | GuildMember) => {
-    const memberDocument = await MemberModel.findOne({ user: member.id, guild: member.guild.id });
-
-    // check whether infractions exist
-    if (memberDocument?.infractions?.length) {
-        // clear all infractions
-        memberDocument.infractions = undefined;
-        delete memberDocument.infractions;
-
-        // save member
-        return memberDocument.save();
-    }
+    // clear the infractions in a single write, instead of reading the document
+    // first and saving it back
+    await MemberModel.updateOne({ user: member.id, guild: member.guild.id }, {
+        $unset: { infractions: 1 },
+    });
 };
 
 /**
@@ -152,7 +138,7 @@ export const assignLevelRoles = async (member: GuildMember, level: number): Prom
     const roles = await RoleModel.find({
         guild: member.guild.id,
         level: { $exists: true, $ne: null },
-    });
+    }).lean();
 
     // check whether there are any level up roles
     if (!roles?.length) return;
@@ -167,9 +153,9 @@ export const assignLevelRoles = async (member: GuildMember, level: number): Prom
     // update member roles
     if (levelRoles.length) {
         const memberRoles = member.roles.cache
-            .filter(r => !extraRoles.some(doc => doc.id === r.id))  // remove roles from any other level
+            .filter(r => !extraRoles.some(doc => doc._id === r.id))  // remove roles from any other level
             .map(r => r.id)
-            .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
+            .concat(levelRoles.map(doc => doc._id)); // add roles in the current level
 
         // update member roles
         member.roles.set([ ...new Set(memberRoles) ]).catch(Logger.error);

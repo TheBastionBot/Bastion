@@ -23,7 +23,7 @@ class PollScheduler extends Scheduler {
 
             // identify polls which've reached their timeout
             const pollDocuments = await PollModel.find({
-                $or: this.client.guilds.cache.map(g => ({ guild: g.id })),
+                guild: { $in: [ ...this.client.guilds.cache.keys() ] },
                 ends: {
                     $lte: new Date(),
                 },
@@ -100,7 +100,7 @@ class PollScheduler extends Scheduler {
             // remove the completed polls
             if (completed.length) {
                 await PollModel.deleteMany({
-                    $or: completed.map(id => ({ _id: id })),
+                    _id: { $in: completed },
                 }).catch(Logger.error);
             }
         } catch (e) {
