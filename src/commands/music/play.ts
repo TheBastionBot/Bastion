@@ -2,8 +2,10 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
+import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResource, DiscordGatewayAdapterCreator, entersState, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior, VoiceConnection, VoiceConnectionStatus } from "@discordjs/voice";
+import { AudioPlayerStatus, AudioResource, createAudioPlayer, createAudioResource, DiscordGatewayAdapterCreator, entersState, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior, StreamType, VoiceConnection, VoiceConnectionStatus } from "@discordjs/voice";
 import { Client, Command, Logger } from "@bastion/tesseract";
 import { music } from "@bastion/tesseract/typings/types.js";
 import playDL from "@iamtraction/play-dl";
@@ -12,6 +14,19 @@ import ytpl from "ytpl";
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
 import { isPremiumUser } from "../../utils/premium.js";
+
+// YouTube cookies file in Netscape format (optional)
+const YOUTUBE_COOKIES_FILE = "cookies.txt";
+
+// whether the yt-dlp binary is available on PATH; probed once and cached as a shared promise
+let ytdlpAvailable: Promise<boolean> | undefined;
+const isYtdlpAvailable = (): Promise<boolean> => {
+    return (ytdlpAvailable ??= new Promise<boolean>(resolve => {
+        const probe = spawn("yt-dlp", [ "--version" ], { stdio: "ignore" });
+        probe.on("error", () => resolve(false));
+        probe.on("close", code => resolve(code === 0));
+    }));
+};
 
 class PlayCommand extends Command {
     constructor() {
@@ -44,7 +59,9 @@ class PlayCommand extends Command {
 
         // voice connection events
         connection.on("error", Logger.error);
-        connection.on(VoiceConnectionStatus.Disconnected, async () => {
+        connection.on(VoiceConnectionStatus.Disconnected, async (_, newState) => {
+            // log the disconnect (with the close reason) to aid debugging connection issues
+            Logger.warn(`voice disconnected in ${ interaction.guild.name } (reason: ${ newState.reason })`);
             try {
                 // seems to be reconnecting to a new channel, ignore disconnect
                 await Promise.race([
@@ -125,8 +142,48 @@ class PlayCommand extends Command {
      * Create a audio resource for the specified audio.
      */
     private createAudioResource = async (audio: music.Song): Promise<AudioResource<music.Song>> => {
-        const source = await playDL.stream(audio.url, { quality: 2 });
-        return createAudioResource(source.stream, { inputType: source.type, metadata: audio });
+        // prefer yt-dlp for streaming; if it isn't installed, fall back to play-dl
+        if (!(await isYtdlpAvailable())) {
+            const source = await playDL.stream(audio.url, { quality: 2 });
+            return createAudioResource(source.stream, { inputType: source.type, metadata: audio });
+        }
+
+        // reject anything that isn't an http(s) URL, so it can't be smuggled in as a yt-dlp flag
+        const url = new URL(audio.url);
+        if (url.protocol !== "https:" && url.protocol !== "http:") throw new Error(`Unsupported audio URL protocol: ${ url.protocol }`);
+
+        // prefer WebM/Opus formats (251/250/249) so the audio can be demuxed and sent to Discord
+        // as-is to avoid a costly ffmpeg re-encode
+        const args = [ "--format", "251/250/249/bestaudio[acodec=opus]", "--output", "-", "--quiet", "--no-warnings" ];
+
+        // pass YouTube cookies if the file exists
+        if (existsSync(YOUTUBE_COOKIES_FILE)) args.push("--cookies", YOUTUBE_COOKIES_FILE);
+
+        // "--" terminates option parsing so the URL can never be treated as a flag
+        args.push("--", url.href);
+
+        // spawn yt-dlp; discard stdin, pipe stdout as the audio source, capture stderr for diagnostics
+        const ytdlp = spawn("yt-dlp", args, { stdio: [ "ignore", "pipe", "pipe" ] });
+        ytdlp.on("error", Logger.error);
+
+        // collect stderr so extraction failures aren't swallowed
+        let stderr = "";
+        ytdlp.stderr.on("data", chunk => stderr += chunk.toString());
+        ytdlp.on("close", (code, signal) => {
+            // signal is set only when we kill it ourselves (stream no longer needed), so ignore that case
+            if (code && !signal) Logger.error(new Error(`yt-dlp exited with code ${ code }: ${ stderr.trim() }`));
+        });
+
+        // guard against unhandled stream errors crashing the process; a premature close is
+        // expected when a song is skipped/stopped, so don't log it as an error
+        ytdlp.stdout.on("error", (error: NodeJS.ErrnoException) => {
+            if (error.code !== "ERR_STREAM_PREMATURE_CLOSE") Logger.error(error);
+        });
+        // kill the yt-dlp process once the stream is no longer being consumed
+        ytdlp.stdout.on("close", () => ytdlp.killed || ytdlp.kill("SIGKILL"));
+
+        // demux the WebM/Opus stream and send the Opus packets straight to Discord
+        return createAudioResource(ytdlp.stdout, { inputType: StreamType.WebmOpus, metadata: audio });
     };
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
@@ -166,6 +223,15 @@ class PlayCommand extends Command {
         const subscription = connection.subscribe(studio.player);
 
         if (!subscription) return await interaction.editReply("I couldn't connect to the voice channel.");
+
+        // wait for the connection to be ready before playing, otherwise audio is silently dropped
+        try {
+            await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
+        } catch {
+            connection.destroy();
+            (interaction.client as Client).studio.delete(interaction.guild);
+            return await interaction.editReply("I couldn't connect to the voice channel.");
+        }
 
         // check whether a YouTube plalist link is provided
         if (ytpl.validateID(song)) {

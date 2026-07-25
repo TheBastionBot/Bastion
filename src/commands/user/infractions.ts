@@ -3,11 +3,12 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import MemberModel from "../../models/Member.js";
 import { COLORS } from "../../utils/constants.js";
+import { resolveMember } from "../../utils/members.js";
 
 class UserInfractionsCommand extends Command {
     constructor() {
@@ -59,7 +60,7 @@ class UserInfractionsCommand extends Command {
 
         if (user) {
             // get member
-            const member = user ? await interaction.guild.members.fetch(user).catch(Logger.ignore) : undefined;
+            const member = await resolveMember(interaction.guild, user);
             const memberDocument = await MemberModel.findOne({ user: user.id, guild: interaction.guildId });
 
             if (!memberDocument?.infractions?.length) {

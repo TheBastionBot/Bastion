@@ -32,12 +32,17 @@ class LiveStreamNotificationScheduler extends Scheduler {
             if (!this.client.guilds.cache.size) return;
 
             const guildDocuments = await GuildModel.find({
-                $or: this.client.guilds.cache.map(g => ({ _id: g.id })),
+                _id: { $in: [ ...this.client.guilds.cache.keys() ] },
                 twitchNotificationChannel: { $exists: true, $ne: null },
                 twitchNotificationUsers: { $exists: true, $type: "array", $ne: [] },
             });
 
             const twitchStreams = memcache.get(TWITCH_CACHE_NAMESPACE) as Map<Snowflake, string[]>;
+
+            // drop notification state for guilds bastion has left
+            for (const id of twitchStreams.keys()) {
+                if (!this.client.guilds.cache.has(id)) twitchStreams.delete(id);
+            }
 
             for (const guild of guildDocuments) {
                 // twitch streams

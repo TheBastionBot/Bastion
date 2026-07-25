@@ -1,0 +1,9 @@
+*
+
+!src
+!data
+!locales
+!package.json
+!package-lock.json
+!tsconfig.json
+!settings.example.yaml

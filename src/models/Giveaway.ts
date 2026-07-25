@@ -13,7 +13,7 @@ export interface Giveaway {
     ends: Date;
 }
 
-const giveawaySchema = new mongoose.Schema<Giveaway & mongoose.Document>({
+const giveawaySchema = new mongoose.Schema<Giveaway>({
     _id: {
         type: String,
         required: true,
@@ -38,4 +38,11 @@ const giveawaySchema = new mongoose.Schema<Giveaway & mongoose.Document>({
     },
 });
 
-export default mongoose.model<Giveaway & mongoose.Document>("Giveaway", giveawaySchema);
+// the active giveaway count is checked per guild before a new giveaway is
+// created, and the scheduler collects due giveaways for the guilds on the shard
+giveawaySchema.index({
+    guild: 1,
+    ends: 1,
+});
+
+export default mongoose.model<Giveaway>("Giveaway", giveawaySchema);

@@ -31,7 +31,7 @@ const isUnicodeEmoji = (text: string): boolean => {
 };
 
 
-const parseEmoji = (text: string): string | void => {
+const parseEmoji = (text: string): string | undefined => {
     if (typeof text !== "string") return;
 
     if (snowflake.isValid(text)) return text;

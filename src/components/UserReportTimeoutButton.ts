@@ -7,6 +7,7 @@ import { Logger, MessageComponent } from "@bastion/tesseract";
 
 import MessageComponents from "../utils/components.js";
 import { logModerationEvent } from "../utils/guilds.js";
+import * as members from "../utils/members.js";
 
 class UserReportTimeoutButton extends MessageComponent {
     constructor() {
@@ -22,7 +23,9 @@ class UserReportTimeoutButton extends MessageComponent {
         const reportedUserId: Snowflake = interaction.message.embeds[0].fields.find(f => f.name === "User ID").value;
         const reportedReason: string = interaction.message.embeds[0].fields.find(f => f.name === "Reason").value;
 
-        await interaction.guild.members.cache.get(reportedUserId)?.timeout(36e5, reportedReason);
+        const member = await members.resolveMember(interaction.guild, reportedUserId);
+
+        await member?.timeout(36e5, reportedReason);
 
         const fieldData = [ ...interaction.message.embeds[0].fields ];
 

@@ -18,7 +18,7 @@ export interface Member {
     boost?: number;
 }
 
-const memberSchema = new mongoose.Schema<Member & mongoose.Document>({
+const memberSchema = new mongoose.Schema<Member>({
     user: {
         type: String,
         required: true,
@@ -75,4 +75,14 @@ memberSchema.index({
     unique: true,
 });
 
-export default mongoose.model<Member & mongoose.Document>("Member", memberSchema);
+// serves the guild leaderboard and the member rank, which filter by guild and
+// order by these fields, in this order
+memberSchema.index({
+    guild: 1,
+    level: -1,
+    experience: -1,
+    karma: -1,
+    balance: -1,
+});
+
+export default mongoose.model<Member>("Member", memberSchema);

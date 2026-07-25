@@ -2,12 +2,21 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { GuildMember, PartialGuildMember, PresenceStatus } from "discord.js";
+import { Guild, GuildMember, GuildTextBasedChannel, Message, PartialGuildMember, PresenceStatus, UserResolvable } from "discord.js";
 import { Document } from "mongoose";
+import { Client, Logger } from "@bastion/tesseract";
 
-import GuildModel from "../models/Guild.js";
+import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 import MemberModel, { Member as MemberDocument } from "../models/Member.js";
+import RoleModel from "../models/Role.js";
 import * as numbers from "./numbers.js";
+
+/**
+ * Resolves the specified user to a guild member, from the cache when available.
+ * @param guild The guild of the member.
+ * @param user The user you want to resolve.
+ */
+export const resolveMember = (guild: Guild, user: UserResolvable): Promise<GuildMember | null> => guild.members.fetch(user).catch(() => null);
 
 /**
  * Check whether a moderator can manage the specified member.
@@ -29,58 +38,44 @@ export const manageable = (moderator: GuildMember, member: GuildMember): boolean
 export const addInfraction = async (member: PartialGuildMember | GuildMember, reason: string) => {
     const guildDocument = await GuildModel.findById(member.guild.id);
 
-    let memberDocument = await MemberModel.findOne({ user: member.id, guild: member.guild.id });
+    // record the infraction in a single atomic upsert, so concurrent warnings
+    // can't both miss an existing document and collide on the unique index
+    const memberDocument = await MemberModel.findOneAndUpdate(
+        { user: member.id, guild: member.guild.id },
+        { $push: { infractions: reason } },
+        { returnDocument: "after", upsert: true },
+    );
 
-    // check whether member document exists
-    if (memberDocument) {
-        // add infraction to member
-        memberDocument.infractions = memberDocument.infractions instanceof Array ? memberDocument.infractions.concat(reason) : [ reason ];
-    } else {
-        // create the member document
-        memberDocument = await MemberModel.create({
-            user: member.id,
-            guild: guildDocument.id,
-            infractions: [ reason ],
-        });
+    const infractionCount = memberDocument.infractions.length;
+
+    if (infractionCount === guildDocument?.infractionsTimeoutThreshold) {
+        await member.timeout(9e5, infractionCount + " infractions");
     }
 
-    if (memberDocument.infractions.length === guildDocument.infractionsTimeoutThreshold) {
-        await member.timeout(9e5, memberDocument.infractions.length + " infractions");
+    if (infractionCount === guildDocument?.infractionsKickThreshold && member.kickable) {
+        await member.kick(infractionCount + " infractions");
     }
 
-    if (memberDocument.infractions.length === guildDocument.infractionsKickThreshold && member.kickable) {
-        await member.kick(memberDocument.infractions.length + " infractions");
-    }
-
-    if (memberDocument.infractions.length === guildDocument.infractionsBanThreshold && member.bannable) {
+    if (infractionCount === guildDocument?.infractionsBanThreshold && member.bannable) {
         await member.ban({
-            reason: memberDocument.infractions.length + " infractions",
+            reason: infractionCount + " infractions",
         });
 
         // clear all infractions once member is banned
-        memberDocument.infractions = [];
+        await clearInfraction(member);
     }
-
-    // save member
-    return memberDocument.save();
 };
 
 /**
- * Clear a member's infraction.
+ * Clear all of a member's infractions.
  * @param member The member.
  */
 export const clearInfraction = async (member: PartialGuildMember | GuildMember) => {
-    const memberDocument = await MemberModel.findOne({ user: member.id, guild: member.guild.id });
-
-    // check whether infractions exist
-    if (memberDocument?.infractions?.length) {
-        // clear all infractions
-        memberDocument.infractions = undefined;
-        delete memberDocument.infractions;
-
-        // save member
-        return memberDocument.save();
-    }
+    // clear the infractions in a single write, instead of reading the document
+    // first and saving it back
+    await MemberModel.updateOne({ user: member.id, guild: member.guild.id }, {
+        $unset: { infractions: 1 },
+    });
 };
 
 /**
@@ -129,5 +124,68 @@ export const updateExperience = (memberDocument: MemberDocument & Document, amou
     if (memberDocument) {
         memberDocument.experience = numbers.clamp(memberDocument.experience + amount, 0, Number.MAX_SAFE_INTEGER);
         return memberDocument;
+    }
+};
+
+/**
+ * Assign level-up roles to a member for the specified level.
+ * Swaps out roles configured for other levels and applies the roles
+ * configured for the nearest level at or below the member's level.
+ * @param member The guild member to update.
+ * @param level The member's current level.
+ */
+export const assignLevelRoles = async (member: GuildMember, level: number): Promise<void> => {
+    const roles = await RoleModel.find({
+        guild: member.guild.id,
+        level: { $exists: true, $ne: null },
+    }).lean();
+
+    // check whether there are any level up roles
+    if (!roles?.length) return;
+
+    // get the nearest level for which roles are available
+    const nearestLevel = numbers.smallestNeighbor(level, roles.map(r => r.level));
+
+    // identify valid roles
+    const levelRoles = roles.filter(r => r.level === nearestLevel && member.guild.roles.cache.has(r._id));
+    const extraRoles = roles.filter(r => r.level !== nearestLevel && member.guild.roles.cache.has(r._id));
+
+    // update member roles
+    if (levelRoles.length) {
+        const memberRoles = member.roles.cache
+            .filter(r => !extraRoles.some(doc => doc._id === r.id))  // remove roles from any other level
+            .map(r => r.id)
+            .concat(levelRoles.map(doc => doc._id)); // add roles in the current level
+
+        // update member roles
+        member.roles.set([ ...new Set(memberRoles) ]).catch(Logger.error);
+    }
+};
+
+/**
+ * Side effects of a member leveling up.
+ * Assign level roles and announce the level up.
+ * @param member The guild member who leveled up.
+ * @param guildDocument The guild's settings document.
+ * @param level The member's new level.
+ * @param fallback An optional message to reply to when no gamification
+ * channel is configured.
+ */
+export const handleLevelUp = (member: GuildMember, guildDocument: GuildDocument, level: number, fallback?: Message): void => {
+    // reward level roles, if available
+    assignLevelRoles(member, level).catch(Logger.error);
+
+    // check whether level up messages are enabled
+    if (!guildDocument.gamificationMessages) return;
+
+    const message = (member.client as Client).locales.getText(member.guild.preferredLocale, "leveledUp", { level: `Level ${ level }` });
+
+    // announce the achievement
+    if (guildDocument.gamificationChannel && member.guild.channels.cache.has(guildDocument.gamificationChannel)) {
+        (member.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
+            .send(`${ member.user }, ${ message }`)
+            .catch(Logger.ignore);
+    } else if (fallback) {
+        fallback.reply(message).catch(Logger.ignore);
     }
 };

@@ -19,7 +19,7 @@ export interface Role {
     bots?: boolean;
 }
 
-export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Schema<Role & mongoose.Document>({
+const roleSchema = new mongoose.Schema<Role>({
     _id: {
         type: String,
         required: true,
@@ -57,4 +57,13 @@ export default mongoose.model<Role & mongoose.Document>("Role", new mongoose.Sch
     bots: {
         type: Boolean,
     },
-}));
+});
+
+// every role lookup is scoped to a guild, and the level suffix additionally
+// serves the level role queries
+roleSchema.index({
+    guild: 1,
+    level: 1,
+});
+
+export default mongoose.model<Role>("Role", roleSchema);

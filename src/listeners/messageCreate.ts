@@ -2,69 +2,39 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ChannelType, GuildTextBasedChannel, Message, Snowflake, Team, ThreadAutoArchiveDuration } from "discord.js";
+import { ChannelType, Message, Team, ThreadAutoArchiveDuration } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 import MemberModel from "../models/Member.js";
-import RoleModel from "../models/Role.js";
 import TriggerModel from "../models/Trigger.js";
 import { COLORS } from "../utils/constants.js";
 import { generate as generateEmbed } from "../utils/embeds.js";
 import * as gamification from "../utils/gamification.js";
 import * as members from "../utils/members.js";
-import * as numbers from "../utils/numbers.js";
+import memcache from "../utils/memcache.js";
 import * as regex from "../utils/regex.js";
 import Settings from "../utils/settings.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
 class MessageCreateListener extends Listener<"messageCreate"> {
-    public activeUsers: Map<Snowflake, Snowflake[]>;
-
     constructor() {
         super("messageCreate");
-
-        this.activeUsers = new Map<Snowflake, Snowflake[]>();
     }
 
-    handleLevelRoles = async (message: Message, level: number): Promise<void> => {
-        const roles = await RoleModel.find({
-            guild: message.guild.id,
-            level: { $exists: true, $ne: null },
-        });
-
-        // check whether there are any level up roles
-        if (!roles?.length) return;
-
-        // get the nearest level for which roles are available
-        const nearestLevel = numbers.smallestNeighbor(level, roles.map(r => r.level));
-
-        // identify valid roles
-        const levelRoles = roles.filter(r => r.level === nearestLevel && message.guild.roles.cache.has(r._id));
-        const extraRoles = roles.filter(r => r.level !== nearestLevel && message.guild.roles.cache.has(r._id));
-
-        // update member roles
-        if (levelRoles.length) {
-            const memberRoles = message.member.roles.cache
-                .filter(r => !extraRoles.some(doc => doc.id === r.id))   // remove roles from any other level
-                .map(r => r.id)
-                .concat(levelRoles.map(doc => doc.id)); // add roles in the current level
-
-            // update member roles
-            message.member.roles.set([ ...new Set(memberRoles) ]).catch(Logger.error);
-        }
-    };
-
     handleGamification = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
-        // get recent users
-        const activeUsers = this.activeUsers.get(message.guild.id) || [];
+        const key = `xp:${ message.guildId }:${ message.author.id }`;
 
         // check whether the member had recently gained XP
-        if (activeUsers.includes(message.author.id)) return;
+        if (memcache.get(key)) return;
 
         // find member document or create a new one
-        const memberDocument = await MemberModel.findOneAndUpdate({ user: message.author.id, guild: message.guildId }, {}, { new: true, upsert: true });
+        const memberDocument = await MemberModel.findOneAndUpdate(
+            { user: message.author.id, guild: message.guildId },
+            {},
+            { returnDocument: "after", upsert: true },
+        );
 
         // check whether gamification is enabled
         if (!guildDocument.gamification) return;
@@ -72,52 +42,34 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether member has exceeded max level or experience
         if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
 
-        // increment experience
-        members.updateExperience(memberDocument, message.member.premiumSinceTimestamp ? 2 : 1);
+        // resolve the member
+        const member = message.member ?? await members.resolveMember(message.guild, message.author.id);
+        if (!member) return;
+
+        // atomically increment experience so concurrent writers aren't clobbered
+        const { experience, level } = await MemberModel.findOneAndUpdate(
+            { user: message.author.id, guild: message.guildId },
+            { $inc: { experience: member.premiumSinceTimestamp ? 2 : 1 } },
+            { returnDocument: "after", upsert: true },
+        );
 
         // compute current level from new experience
-        const computedLevel: number = gamification.computeLevel(memberDocument.experience, guildDocument.gamificationMultiplier);
+        const computedLevel: number = gamification.computeLevel(experience, guildDocument.gamificationMultiplier);
 
         // level up
-        if (computedLevel > memberDocument.level) {
-            // credit reward amount into member's account
-            members.updateBalance(memberDocument, computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER);
+        if (computedLevel > level) {
+            // persist the new level and credit the reward amount
+            await MemberModel.updateOne({ user: message.author.id, guild: message.guildId }, {
+                $set: { level: computedLevel },
+                $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER },
+            });
 
-            // achievement message
-            if (guildDocument.gamificationMessages) {
-                const gamificationMessage = (message.client as Client).locales.getText(message.guild.preferredLocale, "leveledUp", { level: `Level ${ computedLevel }` });
-
-                if (guildDocument.gamificationChannel && message.guild.channels.cache.has(guildDocument.gamificationChannel)) {
-                    (message.guild.channels.cache.get(guildDocument.gamificationChannel) as GuildTextBasedChannel)
-                        .send(`${ message.author }, ${ gamificationMessage }`)
-                        .catch(Logger.ignore);
-                } else {
-                    message.reply(gamificationMessage)
-                        .catch(Logger.ignore);
-                }
-            }
-
-            // reward level roles, if available
-            this.handleLevelRoles(message, computedLevel)
-                .catch(Logger.error);
+            // reward level roles and announce the level up
+            members.handleLevelUp(member, guildDocument, computedLevel, message);
         }
 
-        // update level
-        memberDocument.level = computedLevel;
-
-        // save document
-        await memberDocument.save();
-
-        // add to recent users
-        activeUsers.push(message.author.id);
-        this.activeUsers.set(message.guildId, activeUsers);
-
-        // remove the user after cooldown period
-        setTimeout(() => {
-            const activeUsers = this.activeUsers.get(message.guildId);
-            activeUsers.splice(activeUsers.indexOf(message.author.id), 1);
-            this.activeUsers.set(message.guildId, activeUsers);
-        }, 13e3).unref();
+        // set the XP cooldown for the member
+        memcache.set(key, true, 30 / 60); // 30 seconds
     };
 
     handleTriggers = async (message: Message<true>): Promise<unknown> => {
@@ -209,7 +161,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // create a new thread
         const thread = await message.channel.threads.create({
             type: ChannelType.PrivateThread,
-            name: message.member.displayName + " — " + new Date().toDateString(),
+            name: (message.member?.displayName ?? message.author.displayName) + " — " + new Date().toDateString(),
             autoArchiveDuration: ThreadAutoArchiveDuration.OneDay,
             reason: `Auto Thread for ${ message.author.tag }`,
             invitable: true,
@@ -301,7 +253,11 @@ class MessageCreateListener extends Listener<"messageCreate"> {
 
             // create guild document if it wasn't found
             if (!guildDocument) {
-                guildDocument = await GuildModel.findByIdAndUpdate(message.guildId, {}, { upsert: true });
+                guildDocument = await GuildModel.findByIdAndUpdate(
+                    message.guildId,
+                    {},
+                    { returnDocument: "after", upsert: true },
+                );
             }
 
             // gamification

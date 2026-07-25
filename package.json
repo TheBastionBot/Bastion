@@ -1,6 +1,6 @@
 {
     "name": "bastion",
-    "version": "10.17.0",
+    "version": "10.18.0",
     "description": "Get an enhanced Discord experience!",
     "type": "module",
     "homepage": "https://bastion.traction.one",
@@ -9,6 +9,9 @@
     "author": "TRACTION",
     "license": "",
     "private": true,
+    "engines": {
+        "node": ">=22.19.0"
+    },
     "scripts": {
         "build": "tsc",
         "build:commands": "tesseract commands",
@@ -18,40 +21,42 @@
         "test": "eslint ."
     },
     "devDependencies": {
-        "@types/discord-rpc": "^4.0.9",
-        "@types/express": "^5.0.5",
+        "@eslint/js": "^10.0.1",
+        "@types/discord-rpc": "^4.0.11",
+        "@types/express": "^5.0.6",
         "@types/gamedig": "^5.0.3",
         "@types/http-errors": "^2.0.5",
-        "@types/jsdom": "^27.0.0",
-        "@types/node": "^24.10.0",
-        "eslint": "^9.39.1",
-        "typescript": "^5.9.3",
-        "typescript-eslint": "^8.46.3"
+        "@types/jsdom": "^28.0.3",
+        "@types/node": "^24.13.3",
+        "eslint": "^10.7.0",
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.65.0"
     },
     "dependencies": {
-        "@anthropic-ai/sdk": "^0.68.0",
-        "@bastion/tesseract": "^5.2.5",
+        "@anthropic-ai/sdk": "^0.112.3",
+        "@bastion/tesseract": "^6.0.0",
         "@discordjs/opus": "^0.10.0",
         "@google/generative-ai": "^0.24.1",
         "@iamtraction/google-translate": "^2.0.1",
-        "@iamtraction/play-dl": "^1.9.8",
+        "@iamtraction/play-dl": "^2.0.1",
+        "@snazzah/davey": "^0.1.12",
         "discord-rpc": "^4.0.1",
-        "dotenv": "^17.2.3",
+        "dotenv": "^17.4.2",
         "emoji-regex": "^10.6.0",
-        "gamedig": "^5.3.2",
-        "jsdom": "^27.1.0",
-        "libsodium-wrappers": "^0.7.15",
-        "mathjs": "^15.1.0",
-        "openai": "^6.8.1",
+        "gamedig": "^5.3.3",
+        "jsdom": "^29.1.1",
+        "libsodium-wrappers": "^0.8.4",
+        "mathjs": "^15.2.0",
+        "openai": "^6.48.0",
         "r6api.js": "^4.4.1",
-        "undici": "^7.16.0",
+        "undici": "^8.8.0",
         "ytdl-core": "^4.11.5",
         "ytpl": "^2.3.0"
     },
     "optionalDependencies": {
-        "bufferutil": "^4.0.9",
+        "bufferutil": "^4.1.0",
         "erlpack": "github:discord/erlpack",
-        "utf-8-validate": "^6.0.5",
+        "utf-8-validate": "^6.0.6",
         "zlib-sync": "^0.1.10"
     }
 }

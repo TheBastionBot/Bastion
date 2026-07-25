@@ -62,7 +62,7 @@ export interface Guild {
     verifiedRole?: string;
 }
 
-export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.Schema<Guild & mongoose.Document>({
+export default mongoose.model<Guild>("Guild", new mongoose.Schema<Guild>({
     _id: {
         type: String,
         required: true,
@@ -72,8 +72,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     greetingChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     greetingMessage: {
         type: String,
@@ -84,8 +82,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     farewellChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     farewellMessage: {
         type: String,
@@ -99,13 +95,9 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     musicChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     musicRole: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     gamification: {
         type: Boolean,
@@ -115,8 +107,6 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     gamificationChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     gamificationMultiplier: {
         type: Number,
@@ -138,54 +128,36 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     emailFilterRule: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     inviteFilterRule: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     linkFilterRule: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     starboardChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     starboardThreshold: {
         type: Number,
     },
     moderationLogChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     serverLogChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     serverLogContent: {
         type: Boolean,
     },
     suggestionsChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     reportsChannel: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     streamerRole: {
         type: String,
-        unique: true,
-        sparse: true,
     },
     autoThreadChannels: {
         type: [ String ],
@@ -195,7 +167,8 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     twitchNotificationChannel: {
         type: String,
-        unique: true,
+        // the live stream scheduler selects the few guilds that configured
+        // notifications, so a sparse index keeps that lookup selective
         sparse: true,
     },
     twitchNotificationMessage: {
@@ -215,7 +188,5 @@ export default mongoose.model<Guild & mongoose.Document>("Guild", new mongoose.S
     },
     verifiedRole: {
         type: String,
-        unique: true,
-        sparse: true,
     },
 }));
