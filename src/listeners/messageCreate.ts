@@ -13,6 +13,7 @@ import { generate as generateEmbed } from "../utils/embeds.js";
 import * as gamification from "../utils/gamification.js";
 import * as members from "../utils/members.js";
 import memcache from "../utils/memcache.js";
+import { evaluateMessage } from "../utils/protection/index.js";
 import * as regex from "../utils/regex.js";
 import Settings from "../utils/settings.js";
 import * as variables from "../utils/variables.js";
@@ -22,6 +23,10 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     constructor() {
         super("messageCreate");
     }
+
+    handleProtection = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
+        await evaluateMessage(message, guildDocument);
+    };
 
     handleGamification = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
         const key = `xp:${ message.guildId }:${ message.author.id }`;
@@ -260,6 +265,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                 );
             }
 
+            // spam and raid protection
+            this.handleProtection(message, guildDocument).catch(Logger.error);
             // gamification
             this.handleGamification(message, guildDocument).catch(Logger.error);
             // message triggers
