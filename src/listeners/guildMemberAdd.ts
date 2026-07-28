@@ -10,6 +10,7 @@ import RoleModel from "../models/Role.js";
 import { COLORS } from "../utils/constants.js";
 import { generate as generateEmbed } from "../utils/embeds.js";
 import { logGuildEvent } from "../utils/guilds.js";
+import { evaluateJoin, isRaiding, recordJoin } from "../utils/protection/index.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
@@ -37,6 +38,14 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
     };
 
     handleGreetings = async (member: GuildMember): Promise<void> => {
+        // fifty raid joins would otherwise produce fifty greeting embeds,
+        // burying the raid alert moderators actually need. raid mode only
+        // exists once `protection` is enabled for the guild, so this is
+        // inherently opt-in and can't suppress greetings for a guild that
+        // hasn't turned the feature on. checked before the database read so
+        // a raid doesn't cost a query per join either.
+        if (isRaiding(member.guild.id)) return;
+
         const guildDocument = await GuildModel.findById(member.guild.id);
 
         // identify greeting channel
@@ -64,9 +73,26 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
         }).catch(Logger.ignore);
     };
 
+    handleRaidDetection = async (member: GuildMember): Promise<void> => {
+        // recording is pure in-memory; the guild document is only read once
+        // the raid threshold has actually been crossed
+        const joins = recordJoin(member.guild.id, member.guild.memberCount);
+        if (!joins) return;
+
+        const guildDocument = await GuildModel.findById(member.guild.id);
+
+        if (!guildDocument) return;
+
+        await evaluateJoin(member, guildDocument, joins);
+    };
+
     public async exec(member: GuildMember): Promise<void> {
         // auto roles
         this.handleAutoRoles(member).catch(Logger.error);
+
+        // raid detection runs before greetings, so a join that's part of a
+        // raid can be recognised before its own greeting is sent
+        this.handleRaidDetection(member).catch(Logger.error);
 
         // greetings
         this.handleGreetings(member).catch(Logger.error);
