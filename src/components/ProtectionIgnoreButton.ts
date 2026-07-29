@@ -7,6 +7,7 @@ import { Logger, MessageComponent } from "@bastion/tesseract";
 
 import MessageComponents from "../utils/components.js";
 import { IGNORE_TTL, ignoreMember } from "../utils/protection/index.js";
+import { appendModerator } from "../utils/protection/review.js";
 import { resolveMember } from "../utils/members.js";
 
 class ProtectionIgnoreButton extends MessageComponent {
@@ -39,19 +40,12 @@ class ProtectionIgnoreButton extends MessageComponent {
 
         ignoreMember(interaction.guildId, userId);
 
-        const fields = [ ...interaction.message.embeds[0].fields ];
-
         await interaction.update({
             embeds: [
-                {
-                    ...interaction.message.embeds[0].toJSON(),
-                    fields: fields.concat([
-                        {
-                            name: "Moderator",
-                            value: `${ interaction.user.tag } — ignored the member, not flagged again until <t:${ Math.floor((Date.now() + IGNORE_TTL * 6e4) / 1000) }:t>`,
-                        },
-                    ]),
-                },
+                appendModerator(
+                    interaction.message.embeds[0],
+                    `${ interaction.user.tag } — ignored the member, not flagged again until <t:${ Math.floor((Date.now() + IGNORE_TTL * 6e4) / 1000) }:t>`,
+                ),
             ],
             components: [],
         });

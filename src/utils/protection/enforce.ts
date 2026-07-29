@@ -198,7 +198,7 @@ const report = async (incident: Incident, guildDocument: GuildDocument, parts: s
                         inline: true,
                     },
                     {
-                        name: "Action",
+                        name: parts.length > 1 ? "Actions" : "Action",
                         value: parts.length > 1
                             ? parts.map(part => `• ${ part }`).join("\n")
                             : parts[0] ?? "",

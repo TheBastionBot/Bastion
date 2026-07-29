@@ -6,6 +6,7 @@ import { ButtonInteraction, PermissionFlagsBits, Snowflake } from "discord.js";
 import { Logger, MessageComponent } from "@bastion/tesseract";
 
 import MessageComponents from "../utils/components.js";
+import { appendModerator } from "../utils/protection/review.js";
 
 class ProtectionBanButton extends MessageComponent {
     constructor() {
@@ -38,21 +39,11 @@ class ProtectionBanButton extends MessageComponent {
             Logger.error(error);
         });
 
-        const fields = [ ...interaction.message.embeds[0].fields ];
-
         await interaction.update({
             embeds: [
-                {
-                    ...interaction.message.embeds[0].toJSON(),
-                    fields: fields.concat([
-                        {
-                            name: "Moderator",
-                            value: banned
-                                ? `${ interaction.user.tag } — banned the member`
-                                : `${ interaction.user.tag } — tried to ban the member, but I may lack permissions or they outrank me`,
-                        },
-                    ]),
-                },
+                appendModerator(interaction.message.embeds[0], banned
+                    ? `${ interaction.user.tag } — banned the member`
+                    : `${ interaction.user.tag } — tried to ban the member, but I may lack permissions or they outrank me`),
             ],
             components: banned ? [] : interaction.message.components,
         });
