@@ -2,50 +2,63 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
+interface MemcacheEntry {
+    /** The cached value. */
+    v: unknown;
+    /** When the item expires, in milliseconds since the epoch. Items without one never expire. */
+    exp?: number;
+}
+
+/** How often the leftovers of expired items are reclaimed, in milliseconds. */
+const SWEEP_INTERVAL = 6e4;
+
 class Memcache {
-    private store: Map<string, unknown>;
-    private expiries: Map<string, NodeJS.Timeout>;
+    private store: Map<string, MemcacheEntry>;
 
     constructor() {
-        this.store = new Map<string, unknown>();
-        this.expiries = new Map<string, NodeJS.Timeout>();
+        this.store = new Map<string, MemcacheEntry>();
+
+        setInterval(this.sweep, SWEEP_INTERVAL).unref();
     }
 
-    private cancel = (key: string): void => {
-        clearTimeout(this.expiries.get(key));
-        this.expiries.delete(key);
+    /** Looks up an item, dropping it if it has expired since it was last touched. */
+    private resolve = (key: string): MemcacheEntry => {
+        const entry = this.store.get(key);
+        if (!entry) return null;
+
+        if (entry.exp && entry.exp <= Date.now()) {
+            this.store.delete(key);
+            return null;
+        }
+
+        return entry;
+    };
+
+    /** Reclaims the expired items which nothing has touched since. */
+    private sweep = (): void => {
+        for (const key of this.store.keys()) this.resolve(key);
     };
 
     public get = (key: string): unknown => {
-        return this.store.get(key);
+        return this.resolve(key)?.v;
     };
 
     public set = (key: string, value: unknown, minutes?: number): boolean => {
-        this.cancel(key);
-        this.store.set(key, value);
-
-        if (minutes) {
-            this.expiries.set(key, setTimeout(() => this.delete(key), minutes * 6e4).unref());
-        }
+        this.store.set(key, { v: value, exp: minutes ? Date.now() + minutes * 6e4 : undefined });
 
         return true;
     };
 
     public delete = (key: string): unknown => {
-        if (!this.store.has(key)) return null;
+        const entry = this.resolve(key);
+        if (!entry) return null;
 
-        const item = this.store.get(key);
-
-        this.cancel(key);
         this.store.delete(key);
 
-        return item;
+        return entry.v;
     };
 
     public clear = (): boolean => {
-        for (const expiry of this.expiries.values()) clearTimeout(expiry);
-
-        this.expiries.clear();
         this.store.clear();
 
         return true;
