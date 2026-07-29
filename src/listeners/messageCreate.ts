@@ -87,6 +87,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     };
 
     handleTriggers = async (message: Message<true>): Promise<unknown> => {
+        if (!message.content) return;
+
         const triggers = await getTriggers(message.guildId);
         if (!triggers.length) return;
 
