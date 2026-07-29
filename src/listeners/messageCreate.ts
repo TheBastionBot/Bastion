@@ -15,7 +15,7 @@ import memcache from "../utils/memcache.js";
 import { evaluateMessage } from "../utils/protection/index.js";
 import * as regex from "../utils/regex.js";
 import Settings from "../utils/settings.js";
-import { getTriggers } from "../utils/triggers.js";
+import { getTriggers, matches } from "../utils/triggers.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
@@ -92,12 +92,14 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         const triggers = await getTriggers(message.guildId);
         if (!triggers.length) return;
 
+        const content = message.content.toUpperCase();
+
         // responses
         const responseMessages: string[] = [];
         const responseReactions: string[] = [];
 
         for (const trigger of triggers) {
-            if (!trigger.pattern.test(message.content)) continue;
+            if (!matches(trigger, content)) continue;
 
             if (trigger.message) {
                 responseMessages.push(trigger.message);
