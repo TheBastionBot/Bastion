@@ -32,10 +32,19 @@ class RaidVerificationButton extends MessageComponent {
             ? GuildVerificationLevel.VeryHigh
             : GuildVerificationLevel.High;
 
-        await interaction.guild.setVerificationLevel(
-            next,
-            `Raid response by ${ interaction.user.tag }`,
-        );
+        try {
+            await interaction.guild.setVerificationLevel(
+                next,
+                `Raid response by ${ interaction.user.tag }`,
+            );
+        } catch {
+            await interaction.reply({
+                content: "I couldn't raise the verification level. I need the **Manage Server** permission.",
+                ephemeral: true,
+            });
+
+            return;
+        }
 
         const level = next === GuildVerificationLevel.VeryHigh ? "Highest" : "High";
 
