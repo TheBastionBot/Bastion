@@ -38,6 +38,9 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     };
 
     handleGamification = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
+        // check whether gamification is enabled
+        if (!guildDocument.gamification) return;
+
         const key = `xp:${ message.guildId }:${ message.author.id }`;
 
         // check whether the member had recently gained XP
@@ -49,9 +52,6 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             {},
             { returnDocument: "after", upsert: true },
         );
-
-        // check whether gamification is enabled
-        if (!guildDocument.gamification) return;
 
         // check whether member has exceeded max level or experience
         if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
