@@ -7,7 +7,6 @@ import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 import MemberModel from "../models/Member.js";
-import TriggerModel from "../models/Trigger.js";
 import { COLORS } from "../utils/constants.js";
 import { generate as generateEmbed } from "../utils/embeds.js";
 import * as gamification from "../utils/gamification.js";
@@ -16,6 +15,7 @@ import memcache from "../utils/memcache.js";
 import { evaluateMessage } from "../utils/protection/index.js";
 import * as regex from "../utils/regex.js";
 import Settings from "../utils/settings.js";
+import { getTriggers } from "../utils/triggers.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
@@ -87,16 +87,15 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     };
 
     handleTriggers = async (message: Message<true>): Promise<unknown> => {
-        const triggers = await TriggerModel.find({ guild: message.guild.id });
+        const triggers = await getTriggers(message.guildId);
+        if (!triggers.length) return;
 
         // responses
         const responseMessages: string[] = [];
         const responseReactions: string[] = [];
 
         for (const trigger of triggers) {
-            const patternRegExp = new RegExp(trigger.pattern.replace(/\?/g, ".").replace(/\*+/g, ".*"), "ig");
-
-            if (!patternRegExp.test(message.content)) continue;
+            if (!trigger.pattern.test(message.content)) continue;
 
             if (trigger.message) {
                 responseMessages.push(trigger.message);
