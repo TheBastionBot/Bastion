@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2026
  */
-import { ButtonStyle, ComponentType, Guild, GuildMember, GuildVerificationLevel, PermissionFlagsBits } from "discord.js";
+import { ButtonStyle, ComponentType, Guild, GuildFeature, GuildMember, GuildVerificationLevel, PermissionFlagsBits } from "discord.js";
 import { Logger } from "@bastion/tesseract";
 
 import { Guild as GuildDocument } from "../../models/Guild.js";
@@ -328,6 +328,7 @@ export const alertRaid = async (guild: Guild, joins: number, until: number, guil
 
     const manageable = guild.members.me?.permissions.has(PermissionFlagsBits.ManageGuild);
     const atCeiling = guild.verificationLevel === GuildVerificationLevel.VeryHigh;
+    const paused = guild.features.includes(GuildFeature.InvitesDisabled);
 
     const buttons: {
         type: ComponentType.Button;
@@ -338,7 +339,7 @@ export const alertRaid = async (guild: Guild, joins: number, until: number, guil
     }[] = [
         {
             type: ComponentType.Button,
-            label: "Pause Invites",
+            label: paused ? "Resume Invites" : "Pause Invites",
             style: ButtonStyle.Danger,
             customId: MessageComponents.RaidPauseInvitesButton,
             disabled: !manageable,
