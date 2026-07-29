@@ -19,9 +19,18 @@ import Settings from "../utils/settings.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
+interface InstantResponse {
+    messages: string[];
+    responses: (string | string[])[];
+}
+
 class MessageCreateListener extends Listener<"messageCreate"> {
+    private responses: InstantResponse[];
+
     constructor() {
         super("messageCreate");
+
+        this.responses = yaml.parse("data", "responses.yaml") as InstantResponse[];
     }
 
     handleProtection = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
@@ -186,9 +195,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     handleInstantResponses = async (message: Message): Promise<void> => {
         if (!message.content) return;
 
-        const responses = yaml.parse("data", "responses.yaml");
-
-        for (const response of responses) {
+        for (const response of this.responses) {
             if (response.messages.includes(message.content.toLowerCase())) {
                 const replies: string | string[] = response.responses[Math.floor(Math.random() * response.responses.length)];
 
