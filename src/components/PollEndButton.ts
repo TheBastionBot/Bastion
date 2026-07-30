@@ -32,9 +32,9 @@ class PollEndButton extends MessageComponent {
         let totalVotes = 0;
         for (const key in reactions.slice(0, options.length)) {
             if (interaction.message.reactions.cache.has(reactions[key])) {
-                // calculate votes
-                const votesCount = interaction.message.reactions.cache.get(reactions[key]).count;
-                votes[reactions[key]] = votesCount - 1;
+                // calculate votes, discounting Bastion's own reaction only when it's there
+                const reaction = interaction.message.reactions.cache.get(reactions[key]);
+                votes[reactions[key]] = reaction.count - (reaction.me ? 1 : 0);
                 totalVotes += votes[reactions[key]];
             }
         }
