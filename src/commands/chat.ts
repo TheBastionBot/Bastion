@@ -61,10 +61,11 @@ class ChatCommand extends Command {
         // if first message is from the bot, remove it
         if (history[0]?.role === "assistant") history.shift();
 
-        // use ChatGPT if OpenAI API key is present
-        if (((interaction.client as Client).settings as Settings).get("openai").apiKey) {
+        // use any OpenAI compatible API, i.e. OpenAI, Ollama, etc., if its API key or base URL is present
+        if (((interaction.client as Client).settings as Settings).get("openai").apiKey || ((interaction.client as Client).settings as Settings).get("openai").baseURL) {
             const openai = new OpenAI({
-                apiKey: ((interaction.client as Client).settings as Settings).get("openai").apiKey,
+                baseURL: ((interaction.client as Client).settings as Settings).get("openai").baseURL || undefined,
+                apiKey: ((interaction.client as Client).settings as Settings).get("openai").apiKey || "bastion",
             });
 
             const response = await openai.chat.completions.create({
@@ -147,7 +148,7 @@ class ChatCommand extends Command {
         }
 
         return await interaction.editReply({
-            content: "You haven't set up API keys for any gen AI APIs.",
+            content: "You haven't set up any AI provider yet. Set an API key for OpenAI, Gemini or Anthropic, or the base URL of a self hosted, OpenAI compatible API, such as Ollama.",
         });
     }
 }

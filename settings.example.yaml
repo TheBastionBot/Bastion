@@ -79,10 +79,18 @@ auth: ""
 coinMarketCapApiKey: ""
 # Required for `apod` command.
 nasaApiKey: "DEMO_KEY"
-# Required for `chat` command to use the OpenAI's ChatGPT APIs.
+# Required for `chat` command to use the OpenAI's ChatGPT APIs, or any other
+# OpenAI compatible API, including self hosted ones, such as Ollama.
 # API pricing depends on these values.
-# For more details, check https://openai.com/pricing
+# For more details, check https://openai.com/pricing and https://ollama.com
 openai:
+  # Set the `baseURL` to use any other OpenAI compatible API, including self
+  # hosted ones, such as Ollama (http://localhost:11434/v1), LM Studio, vLLM,
+  # llama.cpp, etc. Leave it empty to use the OpenAI APIs.
+  # Self hosted APIs usually don't need an `apiKey`, but if yours does, set it
+  # below. Remember to set the `model` to one that's available on your server,
+  # for example, "llama3.2" on Ollama.
+  baseURL: ""
   apiKey: ""
   # https://openai.com/api/pricing
   model: "gpt-5-nano"
