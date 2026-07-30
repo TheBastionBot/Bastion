@@ -41,7 +41,7 @@ class GuildCreateListener extends Listener<"guildCreate"> {
             footer: {
                 text: `Shard ${ guild.shardId }`,
             },
-            timestamp: guild.members.me.joinedAt.toISOString(),
+            timestamp: (guild.members.me?.joinedAt ?? new Date()).toISOString(),
         }).catch(Logger.error);
     }
 }
