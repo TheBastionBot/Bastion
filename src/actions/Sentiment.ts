@@ -26,10 +26,11 @@ class SentimentCommand extends Command {
         const systemPrompt = "You are a helpful and informative AI assistant. You will analyze the given text and provide an assessment of its sentiment. Consider the overall tone, specific words and phrases used, and any contextual clues. Your response should be short, concise, objective, and informative.";
         const sentimentPrompt = `Please analyze the following text and provide a assessment of its sentiment: ${ interaction.targetMessage.content }`;
 
-        // use ChatGPT if OpenAI API key is present
-        if (((interaction.client as Client).settings as Settings).get("openai").apiKey) {
+        // use any OpenAI compatible API, i.e. OpenAI, Ollama, etc., if its API key or base URL is present
+        if (((interaction.client as Client).settings as Settings).get("openai").apiKey || ((interaction.client as Client).settings as Settings).get("openai").baseURL) {
             const openai = new OpenAI({
-                apiKey: ((interaction.client as Client).settings as Settings).get("openai").apiKey,
+                baseURL: ((interaction.client as Client).settings as Settings).get("openai").baseURL || undefined,
+                apiKey: ((interaction.client as Client).settings as Settings).get("openai").apiKey || "bastion",
             });
 
             const response = await openai.chat.completions.create({
