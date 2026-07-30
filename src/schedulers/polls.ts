@@ -78,7 +78,7 @@ class PollScheduler extends Scheduler {
                                     title: pollMessage.embeds[0].title,
                                     fields: pollMessage.embeds[0].fields.sort((a, b) => (votes[b.name] || 0) - (votes[a.name] || 0) ).map(f => ({
                                         name: f.value,
-                                        value: `${ votes[f.name] || 0 } votes — ${ ((votes[f.name] || 0) / totalVotes * 100).toFixed(0) }%`,
+                                        value: `${ votes[f.name] || 0 } votes — ${ totalVotes ? ((votes[f.name] || 0) / totalVotes * 100).toFixed(0) : 0 }%`,
                                     })),
                                     footer: {
                                         text: `${ totalVotes } votes`
