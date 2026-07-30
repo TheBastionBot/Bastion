@@ -42,11 +42,6 @@ class GiveCommand extends Command {
         const coins = interaction.options.getInteger("coins");
         const xp = interaction.options.getInteger("xp");
 
-        // check whether user is giving it to themselves
-        if (interaction.user.id !== interaction.guild.ownerId && interaction.user.id === user.id) {
-            return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "giveSelfError"));
-        }
-
         // get the member document or create a new one
         const memberDocument = await MemberModel.findOneAndUpdate({
             user: user.id,
@@ -60,7 +55,7 @@ class GiveCommand extends Command {
         // save the document
         await memberDocument.save();
 
-        await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "giveUser", {
+        return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "giveUser", {
             coins: coins.toLocaleString(),
             xp: xp.toLocaleString(),
             user,
