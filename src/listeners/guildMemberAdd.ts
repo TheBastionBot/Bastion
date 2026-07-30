@@ -119,7 +119,7 @@ class GuildMemberAddListener extends Listener<"guildMemberAdd"> {
             thumbnail: {
                 url: member.displayAvatarURL(),
             },
-            timestamp: member.joinedAt.toISOString(),
+            timestamp: (member.joinedAt ?? new Date()).toISOString(),
         });
     }
 }
