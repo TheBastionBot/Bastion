@@ -13,6 +13,7 @@ export namespace bastion {
         coinMarketCapApiKey?: string;
         nasaApiKey?: string;
         openai?: {
+            baseURL?: string;
             apiKey?: string;
             model?: string;
             maxTokens?: number;
