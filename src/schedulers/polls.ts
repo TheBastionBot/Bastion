@@ -54,7 +54,7 @@ class PollScheduler extends Scheduler {
                         const options = pollMessage.embeds[0].fields.map(f => f.value);
 
                         // identify poll votes
-                        const reactions = [ "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲" ];
+                        const reactions = [ "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯" ];
                         const votes: { [key: string]: number } = {};
 
                         let totalVotes = 0;
