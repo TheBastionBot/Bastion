@@ -131,6 +131,8 @@ const buildUpsell = (interaction: ChatInputCommandInteraction<"cached">, titleKe
     const locales = (interaction.client as Client).locales;
     const text = (k: string, v?: Record<string, string | number>): string => locales.getText(interaction.guildLocale, k, v);
 
+    const isOwner = interaction.user.id === interaction.guild.ownerId;
+
     return {
         flags: MessageFlags.IsComponentsV2,
         components: [
@@ -157,6 +159,10 @@ const buildUpsell = (interaction: ChatInputCommandInteraction<"cached">, titleKe
                     },
                 ],
             },
+            ...isOwner ? [ {
+                type: ComponentType.TextDisplay,
+                content: "-# " + text("premiumPatronHint"),
+            } ] : [],
         ],
     };
 };
