@@ -22,14 +22,14 @@ class MusicCommand extends Command {
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
 
+        const guildDocument = await GuildModel.findById(interaction.guildId);
+
         // check for premium membership
-        if (isPublicBastion(interaction.client.user.id)) {
+        if (!guildDocument.music && isPublicBastion(interaction.client.user.id)) {
             if (!await isPremiumUser(interaction.guild.ownerId)) {
                 return interaction.editReply(premiumFeatureUpsell(interaction, "premiumFeatureMusic"));
             }
         }
-
-        const guildDocument = await GuildModel.findById(interaction.guildId);
 
         // update music channel
         guildDocument.music = !guildDocument.music;
