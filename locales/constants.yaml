@@ -8,11 +8,13 @@ bastion.bot.invite: https://discord.com/oauth2/authorize?client_id=2670353455377
 bastion.name: Bastion
 bastion.project: The Bastion Bot Project
 bastion.project.url: https://github.com/TheBastionBot
+bastion.premium: https://bastion.traction.one/premium
 bastion.server.id: "267022940967665664"
 bastion.server.name: Bastion HQ
 bastion.server.invite: https://discord.gg/fzx8fkt
 bastion.website: https://bastion.traction.one
 bastion.dashboard: https://bastion.traction.one/dashboard
+bastion.docs: https://bastion.gitbook.io
 
 currency.symbol: ₿
 currency.abbreviation: BC
