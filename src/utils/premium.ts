@@ -159,10 +159,10 @@ const buildUpsell = (interaction: ChatInputCommandInteraction<"cached">, titleKe
                     },
                 ],
             },
-            ...isOwner ? [ {
+            {
                 type: ComponentType.TextDisplay,
-                content: "-# " + text("premiumPatronHint"),
-            } ] : [],
+                content: "-# " + text(isOwner ? "premiumPatronHintOwner" : "premiumPatronHintMember"),
+            },
         ],
     };
 };
