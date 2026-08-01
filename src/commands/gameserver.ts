@@ -2,12 +2,20 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { APIEmbedField, ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Client, Command } from "@bastion/tesseract";
+import { APIEmbedField, ApplicationCommandOptionType, AutocompleteInteraction, ChatInputCommandInteraction } from "discord.js";
+import { Client, Command, Logger } from "@bastion/tesseract";
 import { GameDig, games } from "gamedig";
 
 import { COLORS } from "../utils/constants.js";
 import sanitizeMessage from "../utils/sanitizeMessage.js";
+
+const GAMES = Object.entries(games)
+    .map(([ id, game ]) => ({
+        name: game.name.toLowerCase(),
+        id,
+        choice: { name: game.name, value: id },
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
 class GameServerCommand extends Command {
     constructor() {
@@ -20,6 +28,7 @@ class GameServerCommand extends Command {
                     name: "game",
                     description: "The game ID for the game server.",
                     required: true,
+                    autocomplete: true,
                 },
                 {
                     type: ApplicationCommandOptionType.String,
@@ -36,6 +45,21 @@ class GameServerCommand extends Command {
                 },
             ],
         });
+    }
+
+    public async autocomplete(interaction: AutocompleteInteraction): Promise<void> {
+        const query = interaction.options.getFocused().toLowerCase();
+        const matches = GAMES.filter(game => game.name.includes(query) || game.id.includes(query));
+
+        const starts = (game: typeof GAMES[number]): boolean => game.name.startsWith(query) || game.id.startsWith(query);
+
+        const results = [
+            ...matches.filter(starts),
+            ...matches.filter(game => !starts(game)),
+        ].slice(0, 25).map(game => game.choice);
+
+        // Discord stops accepting the suggestions a few seconds after the keystroke
+        await interaction.respond(results).catch(Logger.ignore);
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
