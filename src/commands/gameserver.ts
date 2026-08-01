@@ -7,6 +7,7 @@ import { Client, Command } from "@bastion/tesseract";
 import { GameDig, games } from "gamedig";
 
 import { COLORS } from "../utils/constants.js";
+import sanitizeMessage from "../utils/sanitizeMessage.js";
 
 class GameServerCommand extends Command {
     constructor() {
@@ -65,7 +66,7 @@ class GameServerCommand extends Command {
         if (server.map) {
             fields.push({
                 name: "Map",
-                value: server.map,
+                value: sanitizeMessage(server.map, 128),
                 inline: true,
             });
         }
@@ -79,7 +80,7 @@ class GameServerCommand extends Command {
         if (server.connect) {
             fields.push({
                 name: "Connect",
-                value: "`" + server.connect + "`",
+                value: "`" + sanitizeMessage(server.connect, 128) + "`",
                 inline: true,
             });
         }
@@ -88,13 +89,13 @@ class GameServerCommand extends Command {
             fields.push(
                 ...server.players
                     .filter(player => player.name)
-                    .sort((a, b) => b.score - a.score)
+                    .sort((a, b) => (b.score || 0) - (a.score || 0))
+                    .slice(0, 5)
                     .map(player => ({
-                        name: (player.team ? "[" + player.team + "]" : "") + player.name,
-                        value: "```\nSCORE " + (player.score || 0) + (player.team ? "\tTEAM " + player.team : "") + (player.ping ? "\tPING " + player.ping + "ms" : "") + "```",
+                        name: sanitizeMessage((player.team ? "[" + player.team + "]" : "") + player.name, 80),
+                        value: "```\n" + sanitizeMessage("SCORE " + (player.score || 0) + (player.team ? "\tTEAM " + player.team : "") + (player.ping ? "\tPING " + player.ping + "ms" : ""), 200) + "```",
                         inline: false,
                     }))
-                    .slice(0, 5)
             );
         }
 
@@ -106,7 +107,7 @@ class GameServerCommand extends Command {
                     author: {
                         name: "Game Server Stats",
                     },
-                    title: server.name,
+                    title: server.name && sanitizeMessage(server.name, 256),
                     fields,
                     footer: {
                         text: server.ping + "ms" + (server.password ? " • Password Protected" : ""),
