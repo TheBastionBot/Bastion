@@ -2,9 +2,9 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
-import { GameDig } from "gamedig";
+import { APIEmbedField, ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
+import { Client, Command } from "@bastion/tesseract";
+import { GameDig, games } from "gamedig";
 
 import { COLORS } from "../utils/constants.js";
 
@@ -37,18 +37,66 @@ class GameServerCommand extends Command {
         });
     }
 
-    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
+    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
+        const locales = (interaction.client as Client).locales;
         const game = interaction.options.getString("game");
         const hostname = interaction.options.getString("hostname");
         const port = interaction.options.getInteger("port");
+
+        // check the game against the supported games list
+        if (!Object.hasOwn(games, game)) {
+            return await interaction.editReply(locales.getText(interaction.guildLocale, "gameServerUnknownGame", { game }));
+        }
 
         // fetch data from the game server
         const server = await GameDig.query({
             type: game,
             host: hostname,
             port: port,
+        }).catch(() => null);
+
+        if (!server) {
+            return await interaction.editReply(locales.getText(interaction.guildLocale, "gameServerUnreachable"));
+        }
+
+        const fields: APIEmbedField[] = [];
+
+        if (server.map) {
+            fields.push({
+                name: "Map",
+                value: server.map,
+                inline: true,
+            });
+        }
+
+        fields.push({
+            name: "Players",
+            value: ((server.players ? server.players.length : 0) + (server.bots ? server.bots.length : 0)) + " / " + (server.maxplayers ?? "?"),
+            inline: true,
         });
+
+        if (server.connect) {
+            fields.push({
+                name: "Connect",
+                value: "`" + server.connect + "`",
+                inline: true,
+            });
+        }
+
+        if (server.players) {
+            fields.push(
+                ...server.players
+                    .filter(player => player.name)
+                    .sort((a, b) => b.score - a.score)
+                    .map(player => ({
+                        name: (player.team ? "[" + player.team + "]" : "") + player.name,
+                        value: "```\nSCORE " + (player.score || 0) + (player.team ? "\tTEAM " + player.team : "") + (player.ping ? "\tPING " + player.ping + "ms" : "") + "```",
+                        inline: false,
+                    }))
+                    .slice(0, 5)
+            );
+        }
 
         // acknowledge
         await interaction.editReply({
@@ -59,35 +107,7 @@ class GameServerCommand extends Command {
                         name: "Game Server Stats",
                     },
                     title: server.name,
-                    fields: [
-                        {
-                            name: "Map",
-                            value: server.map,
-                            inline: true,
-                        },
-                        {
-                            name: "Players",
-                            value: ((server.players ? server.players.length : 0) + (server.bots ? server.bots.length : 0)) + " / " + server.maxplayers,
-                            inline: true,
-                        },
-                        {
-                            name: "Connect",
-                            value: "`" + server.connect + "`",
-                            inline: true,
-                        },
-                    ].concat(
-                        server.players
-                            ?   server.players
-                                .filter(player => player.name)
-                                .sort((a, b) => b.score - a.score)
-                                .map(player => ({
-                                    name: (player.team ? "[" + player.team + "]" : "") + player.name,
-                                    value: "```\nSCORE " + (player.score || 0) + (player.team ? "\tTEAM " + player.team : "") + (player.ping ? "\tPING " + player.ping + "ms" : "") + "```",
-                                    inline: false,
-                                }))
-                                .slice(0, 5)
-                            :   []
-                    ),
+                    fields,
                     footer: {
                         text: server.ping + "ms" + (server.password ? " • Password Protected" : ""),
                     },
