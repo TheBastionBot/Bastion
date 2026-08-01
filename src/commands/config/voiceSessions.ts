@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { isPremiumUser } from "../../utils/premium.js";
+import { isPremiumUser, premiumFeatureUpsell } from "../../utils/premium.js";
 
 class VoiceSessionsCommand extends Command {
     constructor() {
@@ -32,7 +32,7 @@ class VoiceSessionsCommand extends Command {
         // check for premium membership
         if (isPublicBastion(interaction.client.user.id)) {
             if (!await isPremiumUser(interaction.guild.ownerId)) {
-                return interaction.editReply("Voice Sessions is only available in premium servers.");
+                return interaction.editReply(premiumFeatureUpsell(interaction, "premiumFeatureVoiceSessions"));
             }
         }
 

@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { isPremiumUser } from "../../utils/premium.js";
+import { isPremiumUser, premiumFeatureUpsell } from "../../utils/premium.js";
 
 class MusicCommand extends Command {
     constructor() {
@@ -22,14 +22,14 @@ class MusicCommand extends Command {
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
 
+        const guildDocument = await GuildModel.findById(interaction.guildId);
+
         // check for premium membership
-        if (isPublicBastion(interaction.client.user.id)) {
+        if (!guildDocument.music && isPublicBastion(interaction.client.user.id)) {
             if (!await isPremiumUser(interaction.guild.ownerId)) {
-                return interaction.editReply("Music is only enabled in Premium Servers in the Public Bastion.");
+                return interaction.editReply(premiumFeatureUpsell(interaction, "premiumFeatureMusic"));
             }
         }
-
-        const guildDocument = await GuildModel.findById(interaction.guildId);
 
         // update music channel
         guildDocument.music = !guildDocument.music;

@@ -8,7 +8,7 @@ import { Client, Command, Logger } from "@bastion/tesseract";
 import GiveawayModel from "../models/Giveaway.js";
 import MessageComponents from "../utils/components.js";
 import { COLORS, isPublicBastion } from "../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumFeatureUpsell, premiumLimitUpsell } from "../utils/premium.js";
 
 class GiveawayCommand extends Command {
     /** The default reaction for participating. */
@@ -62,8 +62,12 @@ class GiveawayCommand extends Command {
         if (timer && isPublicBastion(interaction.client.user.id)) {
             const tier = await getPremiumTier(interaction.guild.ownerId);
             const giveawayTimerLimit = checkFeature(tier, Feature.GiveawayTimeout) as number;
+            const timedGiveawaysAvailable = giveawayTimerLimit > 0;
+
             if (timer > giveawayTimerLimit) {
-                return await interaction.editReply(`You need to upgrade from Bastion ${ tier } to run giveaways for more than ${ giveawayTimerLimit } hours.`);
+                return await interaction.editReply(timedGiveawaysAvailable
+                    ? premiumLimitUpsell(interaction, "premiumLimitGiveawayTimer", giveawayTimerLimit, tier)
+                    : premiumFeatureUpsell(interaction, "premiumFeatureTimedGiveaways", tier));
             }
 
             // find active giveaways in the server
@@ -75,7 +79,7 @@ class GiveawayCommand extends Command {
             });
             const giveawaysLimit = checkFeature(tier, Feature.TimedGiveaways) as number;
             if (activeGiveawayCount >= giveawaysLimit) {
-                return await interaction.editReply(`You need to upgrade from Bastion ${ tier } to run more than ${ giveawaysLimit } giveaways simultaneously.`);
+                return await interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitGiveaways", giveawaysLimit, tier));
             }
         }
 

@@ -14,8 +14,10 @@ class DonateCommand extends Command {
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
+        const locales = (interaction.client as Client).locales;
+
         await interaction.reply({
-            content: (interaction.client as Client).locales.getText(interaction.guildLocale, "donate"),
+            content: locales.getText(interaction.guildLocale, "donate"),
             components: [
                 {
                     type: ComponentType.ActionRow,
@@ -36,7 +38,7 @@ class DonateCommand extends Command {
                             type: ComponentType.Button,
                             label: "Get Premium",
                             style: ButtonStyle.Link,
-                            url: "https://bastion.traction.one/premium",
+                            url: locales.getConstant("bastion.premium"),
                         },
                     ],
                 },

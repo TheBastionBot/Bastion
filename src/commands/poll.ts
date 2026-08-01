@@ -8,7 +8,7 @@ import { Command, Logger } from "@bastion/tesseract";
 import PollModel from "../models/Poll.js";
 import MessageComponents from "../utils/components.js";
 import { COLORS, isPublicBastion } from "../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumFeatureUpsell, premiumLimitUpsell } from "../utils/premium.js";
 
 class PollCommand extends Command {
     /** The default poll vote reactions. */
@@ -92,6 +92,8 @@ class PollCommand extends Command {
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
+        await interaction.deferReply();
+
         const question = interaction.options.getString("question");
 
         const options = Array.from(Array(10)).map((_, i) => interaction.options.getString("option" + (i + 1))).filter(o => !!o?.trim());
@@ -101,8 +103,12 @@ class PollCommand extends Command {
         if (timer && isPublicBastion(interaction.client.user.id)) {
             const tier = await getPremiumTier(interaction.guild.ownerId);
             const pollTimerLimit = checkFeature(tier, Feature.PollTimeout) as number;
+            const timedPollsAvailable = pollTimerLimit > 0;
+
             if (timer > pollTimerLimit) {
-                return await interaction.editReply(`You need to upgrade from Bastion ${ tier } to run polls for more than ${ pollTimerLimit } hours.`);
+                return await interaction.editReply(timedPollsAvailable
+                    ? premiumLimitUpsell(interaction, "premiumLimitPollTimer", pollTimerLimit, tier)
+                    : premiumFeatureUpsell(interaction, "premiumFeatureTimedPolls", tier));
             }
 
             // find active polls in the server
@@ -114,15 +120,14 @@ class PollCommand extends Command {
             });
             const pollsLimit = checkFeature(tier, Feature.TimedPolls) as number;
             if (activePollCount >= pollsLimit) {
-                return await interaction.editReply(`You need to upgrade from Bastion ${ tier } to run more than ${ pollsLimit } polls simultaneously.`);
+                return await interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitPolls", pollsLimit, tier));
             }
         }
 
         // calculate end date
         const expectedEndDate = timer ? new Date(Date.now() + timer * 36e5) : null;
 
-        const poll = await interaction.reply({
-            fetchReply: true,
+        const poll = await interaction.editReply({
             embeds: [
                 {
                     color: COLORS.PRIMARY,

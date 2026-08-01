@@ -9,7 +9,7 @@ import SelectRoleGroupModel from "../../../models/SelectRoleGroup.js";
 import MessageComponents from "../../../utils/components.js";
 import { isPublicBastion, SelectRolesType, SelectRolesUI } from "../../../utils/constants.js";
 import { generate as generateEmbed } from "../../../utils/embeds.js";
-import { checkFeature, Feature, getPremiumTier } from "../../../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumLimitUpsell } from "../../../utils/premium.js";
 
 class SelectRolesAddCommand extends Command {
     constructor() {
@@ -86,7 +86,7 @@ class SelectRolesAddCommand extends Command {
             const selectRoleGroupDocuments = await SelectRoleGroupModel.find({ guild: interaction.guildId });
 
             if (selectRoleGroupDocuments?.length >= limit) {
-                return interaction.editReply(`You need to upgrade from Bastion ${ tier } to add more than ${ limit } select role groups.`);
+                return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitSelectRoles", limit, tier));
             }
         }
 

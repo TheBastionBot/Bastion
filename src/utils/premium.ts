@@ -2,7 +2,8 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { Guild, GuildMember, Snowflake, User } from "discord.js";
+import { ButtonStyle, ChatInputCommandInteraction, ComponentType, Guild, GuildMember, InteractionEditReplyOptions, MessageFlags, Snowflake, User } from "discord.js";
+import { Client } from "@bastion/tesseract";
 
 import { fetchPatronByDiscordId } from "./patreon.js";
 import { patreon } from "../types.js";
@@ -118,6 +119,78 @@ export const checkFeature = (tier: Tier, feature: Feature) => {
 };
 
 /**
+ * Builds a premium gate response.
+ * @param interaction The interaction that hit the gate.
+ * @param titleKey The locale key for the heading.
+ * @param key The locale key describing the limit or feature.
+ * @param tier The tier the server is currently on.
+ * @param variables Variables to resolve in the specified locale string.
+ * @returns The response payload.
+ */
+const buildUpsell = (interaction: ChatInputCommandInteraction<"cached">, titleKey: string, key: string, tier: Tier, variables?: Record<string, number>): InteractionEditReplyOptions => {
+    const locales = (interaction.client as Client).locales;
+    const text = (k: string, v?: Record<string, string | number>): string => locales.getText(interaction.guildLocale, k, v);
+
+    const isOwner = interaction.user.id === interaction.guild.ownerId;
+
+    return {
+        flags: MessageFlags.IsComponentsV2,
+        components: [
+            {
+                type: ComponentType.TextDisplay,
+                content: "### " + text(titleKey),
+            },
+            {
+                type: ComponentType.TextDisplay,
+                content: text(key, variables),
+            },
+            {
+                type: ComponentType.TextDisplay,
+                content: "-# " + text("premiumSelfHostHint"),
+            },
+            {
+                type: ComponentType.ActionRow,
+                components: [
+                    {
+                        type: ComponentType.Button,
+                        label: text(tier === Tier.Free ? "premiumButton" : "premiumButtonUpgrade"),
+                        style: ButtonStyle.Link,
+                        url: locales.getConstant("bastion.premium"),
+                    },
+                ],
+            },
+            {
+                type: ComponentType.TextDisplay,
+                content: "-# " + text(isOwner ? "premiumPatronHintOwner" : "premiumPatronHintMember"),
+            },
+        ],
+    };
+};
+
+/**
+ * Builds the response for a gate where the server has used up an allowance.
+ * @param interaction The interaction that hit the gate.
+ * @param key The locale key describing the limit.
+ * @param limit The allowance the current tier grants, resolved into `%limit%`.
+ * @param tier The tier the server is currently on.
+ * @returns The response payload.
+ */
+export const premiumLimitUpsell = (interaction: ChatInputCommandInteraction<"cached">, key: string, limit: number, tier: Tier): InteractionEditReplyOptions =>
+    buildUpsell(interaction, "premiumTitleLimit", key, tier, { limit });
+
+/**
+ * Builds the response for a gate where the feature is unavailable on the
+ * server's tier at all.
+ * @param interaction The interaction that hit the gate.
+ * @param key The locale key describing the feature.
+ * @param tier The tier the server is currently on. Defaults to `Tier.Free`,
+ * since the boolean gates only fire when `isPremiumUser` is false.
+ * @returns The response payload.
+ */
+export const premiumFeatureUpsell = (interaction: ChatInputCommandInteraction<"cached">, key: string, tier: Tier = Tier.Free): InteractionEditReplyOptions =>
+    buildUpsell(interaction, "premiumTitleFeature", key, tier);
+
+/**
  * Returns the premium membership tier of the specified user.
  * @param identifier User who is to be checked for premium membership.
  * @returns The premium tier of the user.
@@ -148,4 +221,4 @@ export const getPremiumTier = async (identifier: Snowflake | User | GuildMember 
  * @param identifier User who is to be checked for premium membership.
  * @returns Whether the user is a premium user.
  */
-export const isPremiumUser = async (identifier: Snowflake | User | GuildMember | Guild): Promise<boolean> => !!await getPremiumTier(identifier);
+export const isPremiumUser = async (identifier: Snowflake | User | GuildMember | Guild): Promise<boolean> => await getPremiumTier(identifier) !== Tier.Free;

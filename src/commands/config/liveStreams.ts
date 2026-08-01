@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumLimitUpsell } from "../../utils/premium.js";
 import { TWITCH_CHANNEL } from "../../utils/regex.js";
 
 class LiveStreamsCommand extends Command {
@@ -55,7 +55,7 @@ class LiveStreamsCommand extends Command {
                     const tier = await getPremiumTier(interaction.guild.ownerId);
                     const limit = checkFeature(tier, Feature.StreamersPerService) as number;
                     if (guildDocument.twitchNotificationUsers?.length > limit) {
-                        return interaction.editReply(`You need to upgrade from Bastion ${ tier } to get live notifications for more than ${ limit } channels.`);
+                        return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitStreamers", limit, tier));
                     }
                 }
             }

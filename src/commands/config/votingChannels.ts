@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumLimitUpsell } from "../../utils/premium.js";
 
 class VotingChannelsCommand extends Command {
     constructor() {
@@ -53,7 +53,7 @@ class VotingChannelsCommand extends Command {
                 const tier = await getPremiumTier(interaction.guild.ownerId);
                 const limit = checkFeature(tier, Feature.VotingChannels) as number;
                 if (guildDocument.votingChannels?.length >= limit) {
-                    return interaction.editReply(`You need to upgrade from Bastion ${ tier } to add more than ${ limit } voting channels.`);
+                    return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitVotingChannels", limit, tier));
                 }
             }
 
