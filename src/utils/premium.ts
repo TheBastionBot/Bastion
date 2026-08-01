@@ -171,7 +171,7 @@ const buildUpsell = (interaction: ChatInputCommandInteraction<"cached">, titleKe
  * Builds the response for a gate where the server has used up an allowance.
  * @param interaction The interaction that hit the gate.
  * @param key The locale key describing the limit.
- * @param limit The allowance the server has used up, resolved into `%limit%`.
+ * @param limit The allowance the current tier grants, resolved into `%limit%`.
  * @param tier The tier the server is currently on.
  * @returns The response payload.
  */
