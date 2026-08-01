@@ -13,7 +13,7 @@ import ytpl from "ytpl";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { isPremiumUser } from "../../utils/premium.js";
+import { isPremiumUser, premiumFeatureUpsell } from "../../utils/premium.js";
 
 // YouTube cookies file in Netscape format (optional)
 const YOUTUBE_COOKIES_FILE = "cookies.txt";
@@ -201,7 +201,7 @@ class PlayCommand extends Command {
         // check for premium membership
         if (isPublicBastion(interaction.client.user.id)) {
             if (!await isPremiumUser(interaction.guild.ownerId)) {
-                return interaction.editReply("Music is only enabled in Premium Servers in the Public Bastion.");
+                return interaction.editReply(premiumFeatureUpsell(interaction, "premiumFeatureMusic"));
             }
         }
 
