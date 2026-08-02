@@ -32,10 +32,15 @@ let fetching: Promise<patreon.Patron[]> = null;
 const fetchFromPatreon = async (): Promise<patreon.Patron[]> => {
     const settings = new Settings();
     const collected: patreon.Patron[] = [];
+    const walked = new Set<string>();
 
     let url = PATRONS_URL;
 
     while (url) {
+        // prevent infinite loop if a page points back at an already walked page
+        if (walked.has(url)) throw new Error("Patreon paged back to somewhere it had already sent us.");
+        walked.add(url);
+
         const response = await requests.get(url, {
             Authorization: `Bearer ${ settings.get("patreon")?.accessToken }`,
         });
