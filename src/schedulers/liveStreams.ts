@@ -10,7 +10,7 @@ import * as arrays from "../utils/arrays.js";
 import * as requests from "../utils/requests.js";
 import { COLORS } from "../utils/constants.js";
 import { TWITCH_CHANNEL } from "../utils/regex.js";
-import { twitchHeaders } from "../utils/twitch.js";
+import { twitchRequest } from "../utils/twitch.js";
 import Settings from "../utils/settings.js";
 import { TwitchStream } from "../types.js";
 
@@ -102,13 +102,12 @@ class LiveStreamNotificationScheduler extends Scheduler {
 
     /**
      * Looks up which of the specified channels are currently live, a batch of channels at a time.
-     * Reports the channels it got an answer for alongside them. a batch Twitch refused says nothing
+     * Reports the channels it got an answer for alongside them. A batch Twitch refused says nothing
      * about whether its channels are live, which isn't the same as them having gone offline.
      */
     private async fetchLiveStreams(logins: string[]): Promise<{ streams: TwitchStream[]; answered: Set<string>; }> {
         const streams: TwitchStream[] = [];
         const answered = new Set<string>();
-        const headers = twitchHeaders(this.client.settings as Settings);
 
         for (const batch of arrays.chunks(logins, TWITCH_BATCH_SIZE)) {
             const query = new URLSearchParams([
@@ -117,13 +116,14 @@ class LiveStreamNotificationScheduler extends Scheduler {
             ]);
 
             try {
-                const { body, statusCode } = await requests.get("https://api.twitch.tv/helix/streams?" + query.toString(), headers);
+                const { body, statusCode } = await twitchRequest(this.client.settings as Settings, headers =>
+                    requests.get("https://api.twitch.tv/helix/streams?" + query.toString(), headers));
 
                 if (statusCode >= 400) {
                     Logger.error(`Twitch responded with ${ statusCode } for ${ batch.length } channels: ${ await body.text() }`);
 
-                    // a rejected token or an exhausted rate limit applies to every remaining batch too
-                    if (statusCode === 401 || statusCode === 429) break;
+                    // refused credentials or an exhausted rate limit apply to every remaining batch too
+                    if (statusCode === 401 || statusCode === 429) return { streams, answered };
 
                     continue;
                 }
@@ -133,6 +133,7 @@ class LiveStreamNotificationScheduler extends Scheduler {
 
                 for (const login of batch) answered.add(login);
             } catch (e) {
+                // one unreachable batch shouldn't cost every other channel its notifications
                 Logger.error(e);
             }
         }
