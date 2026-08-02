@@ -76,7 +76,7 @@ class LiveStreamNotificationScheduler extends Scheduler {
                                     color: COLORS.TWITCH,
                                     author: {
                                         name: stream.user_name,
-                                        url: "https://twitch.tv/" + stream.user_name,
+                                        url: "https://twitch.tv/" + stream.user_login,
                                     },
                                     description: stream.title,
                                     fields: [
