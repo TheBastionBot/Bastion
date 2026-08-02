@@ -130,7 +130,6 @@ trackerNetworkApiKey: ""
 twitch:
   clientId: ""
   clientSecret: ""
-  accessToken: ""
 # Required for `rainbow6` command.
 ubisoft:
   email: ""

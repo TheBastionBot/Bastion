@@ -35,7 +35,6 @@ export namespace bastion {
         twitch?: {
             clientId?: string;
             clientSecret?: string;
-            accessToken?: string;
         };
         ubisoft?: {
             email?: string;

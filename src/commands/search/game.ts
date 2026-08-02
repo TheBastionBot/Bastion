@@ -3,12 +3,12 @@
  * @copyright 2022
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Client, Command } from "@bastion/tesseract";
+import { Client, Command, Logger } from "@bastion/tesseract";
 
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
-import { twitchHeaders } from "../../utils/twitch.js";
+import { twitchRequest } from "../../utils/twitch.js";
 
 interface Game {
     alternative_names?: string[];
@@ -49,15 +49,27 @@ class GameCommand extends Command {
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         await interaction.deferReply();
+        const client = interaction.client as Client;
         const name = interaction.options.getString("name");
 
-        // fetch games
-        const { body } = await requests.post("https://api.igdb.com/v4/games?" + new URLSearchParams({
+        const url = "https://api.igdb.com/v4/games?" + new URLSearchParams({
             fields: "*, alternative_names.*, artworks.*, cover.*, genres.*, platforms.*, screenshots.*, videos.*, websites.*",
             limit: "10",
             search: name,
-        }), twitchHeaders((interaction.client as Client).settings as Settings));
-        const games: Game[] = await body.json() as unknown[];
+        });
+
+        const unavailable = (): Promise<unknown> => interaction.editReply(client.locales.getText(interaction.guildLocale, "searchUnavailable", { item: "games" }));
+
+        const response = await twitchRequest(client.settings as Settings, headers => requests.post(url, headers)).catch(Logger.error);
+        if (!response) return await unavailable();
+
+        if (response.statusCode >= 400) {
+            Logger.error(`IGDB responded with ${ response.statusCode }: ${ await response.body.text().catch(() => "") }`);
+            return await unavailable();
+        }
+
+        const games = await response.body.json().catch(Logger.error) as Game[];
+        if (!games) return await unavailable();
 
         if (games?.length) {
             return await interaction.editReply({
@@ -97,7 +109,7 @@ class GameCommand extends Command {
             });
         }
 
-        await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "searchNotFound", {
+        await interaction.editReply(client.locales.getText(interaction.guildLocale, "searchNotFound", {
             item: "game",
             query: name,
         }));
