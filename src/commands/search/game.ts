@@ -8,6 +8,7 @@ import { Client, Command } from "@bastion/tesseract";
 import * as requests from "../../utils/requests.js";
 import { COLORS } from "../../utils/constants.js";
 import Settings from "../../utils/settings.js";
+import { twitchHeaders } from "../../utils/twitch.js";
 
 interface Game {
     alternative_names?: string[];
@@ -55,10 +56,7 @@ class GameCommand extends Command {
             fields: "*, alternative_names.*, artworks.*, cover.*, genres.*, platforms.*, screenshots.*, videos.*, websites.*",
             limit: "10",
             search: name,
-        }), {
-            "authorization": "Bearer " + ((interaction.client as Client).settings as Settings)?.get("twitch")?.accessToken,
-            "client-id": ((interaction.client as Client).settings as Settings)?.get("twitch")?.clientId,
-        });
+        }), twitchHeaders((interaction.client as Client).settings as Settings));
         const games: Game[] = await body.json() as unknown[];
 
         if (games?.length) {
