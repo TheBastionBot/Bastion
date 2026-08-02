@@ -41,6 +41,7 @@ const buildEmbed = (stream: TwitchStream): APIEmbed => ({
         name: stream.user_name,
         url: "https://twitch.tv/" + stream.user_login,
     },
+    title: stream.game_name || undefined,
     description: stream.title,
     fields: [
         {
