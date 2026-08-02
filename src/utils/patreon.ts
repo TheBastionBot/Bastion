@@ -18,6 +18,7 @@ const qs = querystring.stringify({
     "fields[member]": "patron_status,is_follower,full_name,pledge_relationship_start,lifetime_support_cents,currently_entitled_amount_cents,last_charge_date,last_charge_status,will_pay_amount_cents",
     "fields[user]": "image_url,social_connections",
     "include": "user",
+    "page[count]": 1000,
 });
 const PATRONS_URL = "https://www.patreon.com/api/oauth2/v2/campaigns/754397/members?" + qs;
 
