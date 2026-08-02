@@ -2,6 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2025
  */
+import { IncomingHttpHeaders } from "node:http";
 import { Dispatcher } from "undici";
 
 import { refreshToken } from "./tokenRefresh.js";
@@ -9,6 +10,12 @@ import { refreshToken } from "./tokenRefresh.js";
 import type Settings from "./settings.js";
 
 const TWITCH_TOKEN_URL = "https://id.twitch.tv/oauth2/token";
+
+/** The credentials Twitch expects on every request. */
+export const twitchHeaders = (settings: Settings): IncomingHttpHeaders => ({
+    "client-id": settings?.get("twitch")?.clientId,
+    "authorization": "Bearer " + settings?.get("twitch")?.accessToken,
+});
 
 interface TwitchConfig {
     clientId: string;
