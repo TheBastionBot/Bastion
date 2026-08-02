@@ -118,15 +118,17 @@ export namespace patreon {
 
 export interface TwitchStream {
     readonly game_id: string;
+    readonly game_name: string;
     readonly id: string;
+    readonly is_mature: boolean;
     readonly language: string;
-    readonly pagination: string;
     readonly started_at: string;
-    readonly tag_ids: string;
+    readonly tags: string[];
     readonly thumbnail_url: string;
     readonly title: string;
     readonly type: "live" | "";
     readonly user_id: string;
+    readonly user_login: string;
     readonly user_name: string;
     readonly viewer_count: number;
 }
