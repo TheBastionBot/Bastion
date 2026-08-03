@@ -16,11 +16,14 @@
         "build": "tsc",
         "build:commands": "tesseract commands",
         "commands": "tesseract publish",
+        "lint": "eslint .",
         "migrate": "node ./dist/migrate.js",
         "start": "node .",
-        "test": "eslint . && tsc -p test --noEmit && vitest run --passWithNoTests",
+        "test": "npm run test:unit",
         "test:coverage": "vitest run --coverage --passWithNoTests",
-        "test:watch": "vitest"
+        "test:unit": "vitest run --passWithNoTests",
+        "test:watch": "vitest",
+        "typecheck": "tsc -p test --noEmit"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",

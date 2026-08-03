@@ -30,6 +30,16 @@ jobs:
       run: npm ci
 
     - name: Lint
+      run: npm run lint
+      env:
+        CI: true
+
+    - name: Type check
+      run: npm run typecheck
+      env:
+        CI: true
+
+    - name: Test
       run: npm test
       env:
         CI: true
