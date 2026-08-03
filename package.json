@@ -19,6 +19,7 @@
         "migrate": "node ./dist/migrate.js",
         "start": "node .",
         "test": "eslint . && tsc -p test --noEmit && vitest run --passWithNoTests",
+        "test:coverage": "vitest run --coverage --passWithNoTests",
         "test:watch": "vitest"
     },
     "devDependencies": {
@@ -29,6 +30,7 @@
         "@types/http-errors": "^2.0.5",
         "@types/jsdom": "^28.0.3",
         "@types/node": "^24.13.3",
+        "@vitest/coverage-v8": "^4.1.10",
         "eslint": "^10.7.0",
         "typescript": "^6.0.3",
         "typescript-eslint": "^8.65.0",
