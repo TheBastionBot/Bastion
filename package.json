@@ -18,7 +18,8 @@
         "commands": "tesseract publish",
         "migrate": "node ./dist/migrate.js",
         "start": "node .",
-        "test": "eslint ."
+        "test": "eslint .",
+        "test:watch": "vitest"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
@@ -30,7 +31,8 @@
         "@types/node": "^24.13.3",
         "eslint": "^10.7.0",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.65.0"
+        "typescript-eslint": "^8.65.0",
+        "vitest": "^4.1.10"
     },
     "dependencies": {
         "@anthropic-ai/sdk": "^0.112.3",
