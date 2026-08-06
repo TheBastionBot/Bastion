@@ -56,7 +56,7 @@
         "mathjs": "^15.2.0",
         "openai": "^6.48.0",
         "r6api.js": "^4.4.1",
-        "undici": "^8.8.0",
+        "undici": "^8.10.0",
         "ytpl": "^2.3.0"
     },
     "optionalDependencies": {
