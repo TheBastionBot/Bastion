@@ -44,7 +44,7 @@
         "@bastion/tesseract": "^6.0.0",
         "@discordjs/opus": "^0.10.0",
         "@google/generative-ai": "^0.24.1",
-        "@iamtraction/google-translate": "^2.0.1",
+        "@iamtraction/google-translate": "^3.0.0",
         "@iamtraction/play-dl": "^2.0.1",
         "@snazzah/davey": "^0.1.12",
         "discord-rpc": "^4.0.1",
