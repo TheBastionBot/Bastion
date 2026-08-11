@@ -32,6 +32,7 @@ export namespace bastion {
         openWeatherMapApiKey?: string;
         tmdbApiKey?: string;
         trackerNetworkApiKey?: string;
+        valorantApiKey?: string;
         twitch?: {
             clientId?: string;
             clientSecret?: string;
