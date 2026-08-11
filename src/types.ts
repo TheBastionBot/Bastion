@@ -11,6 +11,7 @@ export namespace bastion {
         port?: number;
         auth?: string;
         coinMarketCapApiKey?: string;
+        faceitApiKey?: string;
         nasaApiKey?: string;
         openai?: {
             baseURL?: string;
