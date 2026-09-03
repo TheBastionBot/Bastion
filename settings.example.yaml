@@ -124,8 +124,12 @@ tavilyApiKey: ""
 openWeatherMapApiKey: ""
 # Required for `movie` and `tv` commands.
 tmdbApiKey: ""
-# Required for `apex`, `csgo`, and `fortnite` commands.
+# Required for `apex` and `fortnite` commands.
 trackerNetworkApiKey: ""
+# Required for `faceit` command.
+faceitApiKey: ""
+# Required for `valorant` command.
+valorantApiKey: ""
 # Required for Twitch live stream notifications and `game` command.
 twitch:
   clientId: ""

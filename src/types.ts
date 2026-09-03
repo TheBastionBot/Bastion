@@ -11,6 +11,7 @@ export namespace bastion {
         port?: number;
         auth?: string;
         coinMarketCapApiKey?: string;
+        faceitApiKey?: string;
         nasaApiKey?: string;
         openai?: {
             baseURL?: string;
@@ -32,6 +33,7 @@ export namespace bastion {
         openWeatherMapApiKey?: string;
         tmdbApiKey?: string;
         trackerNetworkApiKey?: string;
+        valorantApiKey?: string;
         twitch?: {
             clientId?: string;
             clientSecret?: string;
