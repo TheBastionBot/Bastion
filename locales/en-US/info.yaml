@@ -79,3 +79,7 @@ shopRoleUnassignable: "I don't have permission to give you the **%role%** role. 
 shopInsufficientFunds: "The **%role%** role costs **%price% Bastion Coins**, and you only have **%balance%**."
 shopPurchased: "You've bought the **%role%** role for **%price% Bastion Coins**."
 shopPurchaseFailed: "I couldn't give you the **%role%** role, so I've returned your **%price% Bastion Coins**."
+shopEmpty: "There are no roles up for sale in the server."
+shopOptionPrice: "%price% Bastion Coins"
+shopOptionUnaffordable: "Need %shortfall% more Bastion Coins"
+shopOptionOwned: "You already have this role"
