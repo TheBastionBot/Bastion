@@ -3,11 +3,10 @@
  * @copyright 2022
  */
 import { Guild, GuildMember, GuildTextBasedChannel, Message, PartialGuildMember, PresenceStatus, UserResolvable } from "discord.js";
-import { Document } from "mongoose";
 import { Client, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
-import MemberModel, { Member as MemberDocument } from "../models/Member.js";
+import MemberModel from "../models/Member.js";
 import RoleModel from "../models/Role.js";
 import * as numbers from "./numbers.js";
 
@@ -96,34 +95,6 @@ export const resolveStatus = (status: PresenceStatus) => {
         return "Offline";
     default:
         return status;
-    }
-};
-
-/**
- * Update balance of a member's account.
- * @param memberDocument The member whose account balance is to be updated.
- * @param amount The amount which is to be credited (or debited).
- * Use a negative value to debit the amount.
- */
-export const updateBalance = (memberDocument: MemberDocument & Document, amount: number) => {
-    // update member's balance
-    if (memberDocument) {
-        memberDocument.balance = numbers.clamp(memberDocument.balance + amount, 0, Number.MAX_SAFE_INTEGER);
-        return memberDocument;
-    }
-};
-
-/**
- * Update experience of a member's account.
- * @param memberDocument The member whose account experience is to be updated.
- * @param amount The amount which is to be added (or removed).
- * Use a negative value to remove the amount.
- */
-export const updateExperience = (memberDocument: MemberDocument & Document, amount: number) => {
-    // update member's experience
-    if (memberDocument) {
-        memberDocument.experience = numbers.clamp(memberDocument.experience + amount, 0, Number.MAX_SAFE_INTEGER);
-        return memberDocument;
     }
 };
 
