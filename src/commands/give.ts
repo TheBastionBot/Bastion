@@ -6,7 +6,7 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction, PermissionFl
 import { Client, Command } from "@bastion/tesseract";
 
 import MemberModel from "../models/Member.js";
-import { updateBalance, updateExperience } from "../utils/members.js";
+import { clampedIncrement } from "../utils/economy.js";
 
 class GiveCommand extends Command {
     constructor() {
@@ -42,18 +42,20 @@ class GiveCommand extends Command {
         const coins = interaction.options.getInteger("coins");
         const xp = interaction.options.getInteger("xp");
 
-        // get the member document or create a new one
-        const memberDocument = await MemberModel.findOneAndUpdate({
-            user: user.id,
-            guild: interaction.guildId,
-        }, {}, { returnDocument: "after", upsert: true });
+        const member = { user: user.id, guild: interaction.guildId };
+
+        // make sure the member has a profile
+        await MemberModel.updateOne(member, {}, { upsert: true });
 
         // update coins & XP
-        updateBalance(memberDocument, coins);
-        updateExperience(memberDocument, xp);
-
-        // save the document
-        await memberDocument.save();
+        await MemberModel.updateOne(member, [
+            {
+                $set: {
+                    balance: clampedIncrement("balance", coins),
+                    experience: clampedIncrement("experience", xp),
+                },
+            },
+        ]);
 
         return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "giveUser", {
             coins: coins.toLocaleString(),

@@ -12,7 +12,7 @@ class LeaderboardCommand extends Command {
     constructor() {
         super({
             name: "leaderboard",
-            description: "Displays the server's leaderboard. You're ranked based on their level, XP, karma, and Bastion Coins.",
+            description: "Displays the server's leaderboard. You're ranked based on your level, XP, and karma.",
             scope: "guild",
         });
     }
@@ -28,7 +28,6 @@ class LeaderboardCommand extends Command {
                 level: -1,
                 experience: -1,
                 karma: -1,
-                balance: -1,
             },
             limit: 5,
         }).lean();
