@@ -18,6 +18,8 @@ enum MessageComponents {
     SelfRolesSelect = "SelfRolesSelect",
     SelfRolesClearButton = "SelfRolesClearButton",
 
+    ShopSelect = "ShopSelect",
+
     SuggestionAcceptButton = "SuggestionAcceptButton",
     SuggestionRejectButton = "SuggestionRejectButton",
     SuggestionResetButton = "SuggestionResetButton",
