@@ -31,6 +31,7 @@ export enum Feature {
     SelectRoles = "SelectRoles",
     AutoRoles = "AutoRoles",
     SelfRoles = "SelfRoles",
+    ShopRoles = "ShopRoles",
     Triggers = "Triggers",
 }
 
@@ -51,6 +52,7 @@ const Limits = {
         [Feature.SelectRoles]: 2,
         [Feature.AutoRoles]: 5,
         [Feature.SelfRoles]: 5,
+        [Feature.ShopRoles]: 5,
         [Feature.Triggers]: 5,
     },
 
@@ -70,6 +72,7 @@ const Limits = {
         [Feature.SelectRoles]: 5,
         [Feature.AutoRoles]: 10,
         [Feature.SelfRoles]: 10,
+        [Feature.ShopRoles]: 10,
         [Feature.Triggers]: 10,
     },
 
@@ -89,6 +92,7 @@ const Limits = {
         [Feature.SelectRoles]: 10,
         [Feature.AutoRoles]: 20,
         [Feature.SelfRoles]: 20,
+        [Feature.ShopRoles]: 20,
         [Feature.Triggers]: 20,
     },
 
@@ -108,6 +112,7 @@ const Limits = {
         [Feature.SelectRoles]: Infinity,
         [Feature.AutoRoles]: Infinity,
         [Feature.SelfRoles]: Infinity,
+        [Feature.ShopRoles]: Infinity,
         [Feature.Triggers]: Infinity,
     },
 };
