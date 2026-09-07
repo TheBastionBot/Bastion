@@ -28,7 +28,7 @@ class GuildDeleteListener extends Listener<"guildDelete"> {
             SelectRoleGroupModel.deleteMany({ guild: guild.id }),
             PollModel.deleteMany({ guild: guild.id }),
             GiveawayModel.deleteMany({ guild: guild.id }),
-        ]);
+        ]).catch(Logger.error);
 
         // bastion log
         bastionLog(guild.client as Client, {

@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { Message, MessageType, PartialMessage, time } from "discord.js";
-import { Listener } from "@bastion/tesseract";
+import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild.js";
 import SelectRoleGroupModel from "../models/SelectRoleGroup.js";
@@ -19,7 +19,7 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
 
         // cleanup Select Role Groups associated with the deleted message
         if (message.partial || message.author?.id === message.client.user.id) {
-            await SelectRoleGroupModel.deleteOne({ _id: message.id });
+            await SelectRoleGroupModel.deleteOne({ _id: message.id }).catch(Logger.error);
         }
 
         if (message.author.bot) return;

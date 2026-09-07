@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { GuildTextBasedChannel, Message, OmitPartialGroupDMChannel, PartialMessage, ReadonlyCollection } from "discord.js";
-import { Listener } from "@bastion/tesseract";
+import { Listener, Logger } from "@bastion/tesseract";
 
 import SelectRoleGroupModel from "../models/SelectRoleGroup.js";
 import { logGuildEvent } from "../utils/guilds.js";
@@ -15,7 +15,7 @@ class MessageDeleteBulkListener extends Listener<"messageDeleteBulk"> {
 
     public async exec(messages: ReadonlyCollection<string, OmitPartialGroupDMChannel<Message<boolean> | PartialMessage>>, channel: GuildTextBasedChannel): Promise<void> {
         // cleanup Select Role Groups associated with the deleted messages
-        await SelectRoleGroupModel.deleteMany({ _id: { $in: [ ...messages.keys() ] } });
+        await SelectRoleGroupModel.deleteMany({ _id: { $in: [ ...messages.keys() ] } }).catch(Logger.error);
 
         await logGuildEvent(channel.guild, {
             title: "Messages Cleared",

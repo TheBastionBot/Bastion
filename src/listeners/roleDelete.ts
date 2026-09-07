@@ -3,7 +3,7 @@
  * @copyright 2022
  */
 import { Role, time } from "discord.js";
-import { Listener } from "@bastion/tesseract";
+import { Listener, Logger } from "@bastion/tesseract";
 
 import RoleModel from "../models/Role.js";
 import { logGuildEvent } from "../utils/guilds.js";
@@ -14,7 +14,7 @@ class RoleDeleteListener extends Listener<"roleDelete"> {
     }
 
     public async exec(role: Role): Promise<void> {
-        await RoleModel.deleteOne({ _id: role.id });
+        await RoleModel.deleteOne({ _id: role.id }).catch(Logger.error);
 
         await logGuildEvent(role.guild, {
             color: role.color,
