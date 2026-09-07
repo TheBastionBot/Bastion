@@ -6,6 +6,7 @@ import { Message, MessageType, PartialMessage, time } from "discord.js";
 import { Listener } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild.js";
+import SelectRoleGroupModel from "../models/SelectRoleGroup.js";
 import { logGuildEvent } from "../utils/guilds.js";
 
 class MessageDeleteListener extends Listener<"messageDelete"> {
@@ -14,8 +15,14 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
     }
 
     public async exec(message: Message<boolean> | PartialMessage): Promise<void> {
-        if (message.author.bot) return;
         if (!message.inGuild()) return;
+
+        // cleanup Select Role Groups associated with the deleted message
+        if (message.partial || message.author?.id === message.client.user.id) {
+            await SelectRoleGroupModel.deleteOne({ _id: message.id });
+        }
+
+        if (message.author.bot) return;
         if (![ MessageType.Default, MessageType.Reply ].includes(message.type)) return;
 
         const guildDocument = await GuildModel.findById(message.guild.id);
