@@ -11,7 +11,7 @@ import { COLORS } from "../utils/constants.js";
 
 class GiveawayScheduler extends Scheduler {
     constructor() {
-        super("polls", "0 */15 * * * *");   // every 15th minute
+        super("giveaways", "0 */15 * * * *");   // every 15th minute
     }
 
     public async exec(): Promise<void> {
