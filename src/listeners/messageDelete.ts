@@ -3,9 +3,10 @@
  * @copyright 2022
  */
 import { Message, MessageType, PartialMessage, time } from "discord.js";
-import { Listener } from "@bastion/tesseract";
+import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild.js";
+import SelectRoleGroupModel from "../models/SelectRoleGroup.js";
 import { logGuildEvent } from "../utils/guilds.js";
 
 class MessageDeleteListener extends Listener<"messageDelete"> {
@@ -14,21 +15,29 @@ class MessageDeleteListener extends Listener<"messageDelete"> {
     }
 
     public async exec(message: Message<boolean> | PartialMessage): Promise<void> {
-        if (message.author.bot) return;
         if (!message.inGuild()) return;
-        if (![ MessageType.Default, MessageType.Reply ].includes(message.type)) return;
+
+        // cleanup Select Role Groups associated with the deleted message
+        if (!message.author || message.author.id === message.client.user.id) {
+            await SelectRoleGroupModel.deleteOne({ _id: message.id }).catch(Logger.error);
+        }
+
+        if (!message.partial) {
+            if (message.author.bot) return;
+            if (![ MessageType.Default, MessageType.Reply ].includes(message.type)) return;
+        }
 
         const guildDocument = await GuildModel.findById(message.guild.id);
 
         await logGuildEvent(message.guild, {
             title: "Message Deleted",
             fields: [
-                {
+                message.author && {
                     name: "Author",
                     value: message.author.tag,
                     inline: true,
                 },
-                {
+                message.author && {
                     name: "Author ID",
                     value: message.author.id,
                     inline: true,
