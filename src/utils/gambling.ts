@@ -6,6 +6,12 @@
 export const HOUSE_EDGE = 0.05;
 
 /**
+ * The smallest bet worth placing. Also the default bet when a wager is implied
+ * but not specified.
+ */
+export const MIN_WAGER = 100;
+
+/**
  * The multiple of the stake a winning bet returns, given the odds of winning and of a
  * stake-returning draw. Expected value works out to `-HOUSE_EDGE` for any odds, which is
  * what keeps wagering a sink rather than a faucet.
