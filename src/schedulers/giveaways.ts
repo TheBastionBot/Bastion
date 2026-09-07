@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2022
  */
-import { ButtonStyle, ComponentType, GuildTextBasedChannel, Snowflake, User } from "discord.js";
+import { ButtonStyle, ComponentType, DiscordAPIError, GuildTextBasedChannel, RESTJSONErrorCodes, Snowflake, User } from "discord.js";
 import { Client, Logger, Scheduler } from "@bastion/tesseract";
 
 import GiveawayModel from "../models/Giveaway.js";
@@ -41,65 +41,66 @@ class GiveawayScheduler extends Scheduler {
                     const channel = guild.channels.cache.get(giveawayDocument.channel) as GuildTextBasedChannel;
 
                     // identify the giveaway message
-                    const giveawayMessage = await channel.messages.fetch(giveawayDocument._id).catch(Logger.ignore);
+                    const giveawayMessage = await channel.messages.fetch(giveawayDocument._id).catch((e: DiscordAPIError) => e);
 
-                    if (giveawayMessage) {
-                        // find giveaway winners
-                        const winnerDetails = giveawayMessage.embeds[0].footer.text.match(/^(\d+) .+/i);
-                        const winnerCount = parseInt(winnerDetails?.[1]) || 1;
-                        let winners: User[] = [];
-
-                        if (giveawayMessage.reactions.cache.has("🎉")) {
-                            // identify giveaway participants
-                            await giveawayMessage.reactions.cache.get("🎉").users.fetch().catch(Logger.ignore);
-
-                            // get random participants
-                            winners = giveawayMessage.reactions.cache.get("🎉").users.cache.filter(u => !u.bot).random(winnerCount);
-                        }
-
-                        // announce the result
-                        await giveawayMessage.edit({
-                            embeds: [
-                                {
-                                    color: winners.length ? COLORS.SECONDARY : COLORS.RED,
-                                    author: {
-                                        name: "GIVEAWAY ENDED",
-                                    },
-                                    title: giveawayMessage.embeds[0].title,
-                                    description: (this.client as Client).locales.getText(guild.preferredLocale, winners.length ? "giveawayWinners" : "giveawayNoWinners"),
-                                    fields: winners.length ? [
-                                        {
-                                            name: "Congratulations",
-                                            value: winners.join(" "),
-                                        },
-                                    ] : [],
-                                    footer: {
-                                        text: winners.length ? `${ winnerCount } Winners` : "",
-                                    },
-                                    timestamp: new Date().toISOString(),
-                                },
-                            ],
-                            components: winners.length ? [
-                                {
-                                    type: ComponentType.ActionRow,
-                                    components: [
-                                        {
-                                            type: ComponentType.Button,
-                                            label: "Reroll Giveaway",
-                                            style: ButtonStyle.Secondary,
-                                            customId: MessageComponents.GiveawayEndButton,
-                                        },
-                                    ],
-                                },
-                            ] : [],
-                        }).then(() => {
-                            // mark this giveaway as complete
-                            completed.push(giveawayMessage.id);
-                        }).catch(Logger.error);
-                    } else {
-                        // mark this giveaway as complete
-                        completed.push(giveawayDocument.id);
+                    // check whether the giveaway message is actually gone
+                    if (giveawayMessage instanceof Error) {
+                        if (giveawayMessage.code === RESTJSONErrorCodes.UnknownMessage) completed.push(giveawayDocument._id);
+                        continue;
                     }
+
+                    // find giveaway winners
+                    const winnerDetails = giveawayMessage.embeds[0].footer.text.match(/^(\d+) .+/i);
+                    const winnerCount = parseInt(winnerDetails?.[1]) || 1;
+                    let winners: User[] = [];
+
+                    if (giveawayMessage.reactions.cache.has("🎉")) {
+                        // identify giveaway participants
+                        await giveawayMessage.reactions.cache.get("🎉").users.fetch().catch(Logger.ignore);
+
+                        // get random participants
+                        winners = giveawayMessage.reactions.cache.get("🎉").users.cache.filter(u => !u.bot).random(winnerCount);
+                    }
+
+                    // announce the result
+                    await giveawayMessage.edit({
+                        embeds: [
+                            {
+                                color: winners.length ? COLORS.SECONDARY : COLORS.RED,
+                                author: {
+                                    name: "GIVEAWAY ENDED",
+                                },
+                                title: giveawayMessage.embeds[0].title,
+                                description: (this.client as Client).locales.getText(guild.preferredLocale, winners.length ? "giveawayWinners" : "giveawayNoWinners"),
+                                fields: winners.length ? [
+                                    {
+                                        name: "Congratulations",
+                                        value: winners.join(" "),
+                                    },
+                                ] : [],
+                                footer: {
+                                    text: winners.length ? `${ winnerCount } Winners` : "",
+                                },
+                                timestamp: new Date().toISOString(),
+                            },
+                        ],
+                        components: winners.length ? [
+                            {
+                                type: ComponentType.ActionRow,
+                                components: [
+                                    {
+                                        type: ComponentType.Button,
+                                        label: "Reroll Giveaway",
+                                        style: ButtonStyle.Secondary,
+                                        customId: MessageComponents.GiveawayEndButton,
+                                    },
+                                ],
+                            },
+                        ] : [],
+                    }).then(() => {
+                        // mark this giveaway as complete
+                        completed.push(giveawayMessage.id);
+                    }).catch(Logger.error);
                 }
             }
 
