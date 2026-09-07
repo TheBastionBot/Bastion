@@ -55,7 +55,7 @@ class GiveCommand extends Command {
                     experience: clampedIncrement("experience", xp),
                 },
             },
-        ]);
+        ], { updatePipeline: true });
 
         return await interaction.reply((interaction.client as Client).locales.getText(interaction.guildLocale, "giveUser", {
             coins: coins.toLocaleString(),

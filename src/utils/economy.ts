@@ -59,7 +59,7 @@ export const credit = async (user: Snowflake, guild: Snowflake, amount: number):
                 balance: clampedIncrement("balance", amount),
             },
         },
-    ]);
+    ], { updatePipeline: true });
 };
 
 /**
