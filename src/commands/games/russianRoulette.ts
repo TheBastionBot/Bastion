@@ -1,9 +1,9 @@
 /*!
  * @author TRACTION (iamtraction)
- * @copyright 2022
+ * @copyright 2026
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Command, Logger } from "@bastion/tesseract";
 
 class RussianRouletteCommand extends Command {
     private outcomes: string[];
@@ -35,8 +35,8 @@ class RussianRouletteCommand extends Command {
         for (let index = 0; index < rounds; index++) {
             const outcome = this.outcomes[Math.floor(Math.random() * this.outcomes.length)];
 
-            if (interaction.replied) await interaction.followUp(outcome);
-            else await interaction.reply(outcome);
+            if (interaction.replied) await interaction.followUp(outcome).catch(Logger.ignore);
+            else await interaction.reply(outcome).catch(Logger.ignore);
 
             // check whether the game is over
             if (outcome.includes("BANG")) break;
