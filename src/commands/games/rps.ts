@@ -3,7 +3,10 @@
  * @copyright 2026
  */
 import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
-import { Command } from "@bastion/tesseract";
+import { Client, Command } from "@bastion/tesseract";
+
+import { credit, stake } from "../../utils/economy.js";
+import { MIN_WAGER, winnings } from "../../utils/gambling.js";
 
 enum Choices {
     Rock = "ROCK",
@@ -30,18 +33,35 @@ class RockPaperScissorCommand extends Command {
                     ],
                     required: true,
                 },
+                {
+                    type: ApplicationCommandOptionType.Integer,
+                    name: "wager",
+                    description: "The Bastion Coins you want to bet on your choice.",
+                    min_value: MIN_WAGER,
+                },
             ],
         });
 
         this.choices = [ Choices.Rock, Choices.Paper, Choices.Scissor ];
     }
 
-    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<void> {
+    public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
         const choice = interaction.options.getString("choice");
+        const wager = interaction.options.getInteger("wager");
+
+        const text = (key: string, variables?: Record<string, string | number>): string =>
+            (interaction.client as Client).locales.getText(interaction.guildLocale, key, variables);
+
+        if (wager) {
+            await interaction.deferReply();
+
+            const refusal = await stake(interaction.user.id, interaction.guildId, wager);
+            if (refusal) return await interaction.editReply(text(refusal, { wager: wager.toLocaleString() }));
+        }
 
         const today = new Date();
         const isAprilFoolsDay = today.getMonth() === 3 && today.getDate() === 1;
-        const isJoking = isAprilFoolsDay && Math.random() < 0.1;
+        const isJoking = isAprilFoolsDay && !wager && Math.random() < 0.1;
 
         const bastionChoice: string = isJoking ? Choices.Rock : this.choices[Math.floor(Math.random() * this.choices.length)];
 
@@ -62,7 +82,26 @@ class RockPaperScissorCommand extends Command {
             result = "You win, human.";
         }
 
-        await interaction.reply(`I chose **${ bastionChoice }**, you chose **${ choice }**. ${ result }`);
+        const round = `I chose **${ bastionChoice }**, you chose **${ choice }**. ${ result }`;
+
+        if (!wager) return await interaction.reply(round);
+
+        let reward = 0;
+        let settlement: string;
+
+        if (hasWon) {
+            reward = winnings(wager, 1 / 3, 1 / 3);
+            settlement = text("wagerWon", { winnings: reward.toLocaleString() });
+        } else if (isDraw) {
+            reward = wager;
+            settlement = text("wagerRefunded", { wager: wager.toLocaleString() });
+        } else {
+            settlement = text("wagerLost", { wager: wager.toLocaleString() });
+        }
+
+        if (reward) await credit(interaction.user.id, interaction.guildId, reward);
+
+        await interaction.editReply(`${ round }\n-# ${ settlement }`);
     }
 }
 
