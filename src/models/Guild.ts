@@ -27,7 +27,6 @@ export interface Guild {
     gamificationMultiplier?: number;
     // gambling
     gambling?: boolean;
-    gamblingMultiplier?: number;
     // infractions
     infractionsTimeoutThreshold?: number;
     infractionsKickThreshold?: number;
@@ -116,9 +115,6 @@ export default mongoose.model<Guild>("Guild", new mongoose.Schema<Guild>({
     },
     gambling: {
         type: Boolean,
-    },
-    gamblingMultiplier: {
-        type: Number,
     },
     infractionsTimeoutThreshold: {
         type: Number,
