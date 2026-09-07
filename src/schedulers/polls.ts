@@ -38,22 +38,22 @@ class PollScheduler extends Scheduler {
                 if (!guild) continue;
 
                 // identify the channel for the poll
-                const channel = await guild.channels.fetch(pollDocument.channel).catch((e: DiscordAPIError) => e);
+                const channel = await guild.channels.fetch(pollDocument.channel).catch((e: Error) => e);
 
                 // check whether the poll's channel is actually gone
                 if (channel instanceof Error) {
-                    if (channel.code === RESTJSONErrorCodes.UnknownChannel) completed.push(pollDocument.id);
+                    if (channel instanceof DiscordAPIError && channel.code === RESTJSONErrorCodes.UnknownChannel) completed.push(pollDocument._id);
                     continue;
                 }
 
                 if (!channel?.isTextBased()) continue;
 
                 // identify the poll message
-                const pollMessage = await channel.messages.fetch(pollDocument.id).catch((e: DiscordAPIError) => e);
+                const pollMessage = await channel.messages.fetch(pollDocument._id).catch((e: Error) => e);
 
                 // check whether the poll message is actually gone
                 if (pollMessage instanceof Error) {
-                    if (pollMessage.code === RESTJSONErrorCodes.UnknownMessage) completed.push(pollDocument.id);
+                    if (pollMessage instanceof DiscordAPIError && pollMessage.code === RESTJSONErrorCodes.UnknownMessage) completed.push(pollDocument._id);
                     continue;
                 }
 

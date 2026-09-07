@@ -39,22 +39,22 @@ class GiveawayScheduler extends Scheduler {
                 if (!guild) continue;
 
                 // identify the channel for the giveaway
-                const channel = await guild.channels.fetch(giveawayDocument.channel).catch((e: DiscordAPIError) => e);
+                const channel = await guild.channels.fetch(giveawayDocument.channel).catch((e: Error) => e);
 
                 // check whether the giveaway's channel is actually gone
                 if (channel instanceof Error) {
-                    if (channel.code === RESTJSONErrorCodes.UnknownChannel) completed.push(giveawayDocument._id);
+                    if (channel instanceof DiscordAPIError && channel.code === RESTJSONErrorCodes.UnknownChannel) completed.push(giveawayDocument._id);
                     continue;
                 }
 
                 if (!channel?.isTextBased()) continue;
 
                 // identify the giveaway message
-                const giveawayMessage = await channel.messages.fetch(giveawayDocument._id).catch((e: DiscordAPIError) => e);
+                const giveawayMessage = await channel.messages.fetch(giveawayDocument._id).catch((e: Error) => e);
 
                 // check whether the giveaway message is actually gone
                 if (giveawayMessage instanceof Error) {
-                    if (giveawayMessage.code === RESTJSONErrorCodes.UnknownMessage) completed.push(giveawayDocument._id);
+                    if (giveawayMessage instanceof DiscordAPIError && giveawayMessage.code === RESTJSONErrorCodes.UnknownMessage) completed.push(giveawayDocument._id);
                     continue;
                 }
 
