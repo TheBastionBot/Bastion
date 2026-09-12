@@ -53,8 +53,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             { returnDocument: "after", upsert: true },
         );
 
-        // check whether member has exceeded max level or experience
-        if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
+        // check whether member has exceeded max experience
+        if (memberDocument.experience >= gamification.MAX_EXPERIENCE) return;
 
         // resolve the member
         const member = message.member ?? await members.resolveMember(message.guild, message.author.id);
@@ -70,16 +70,17 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(experience, guildDocument.gamificationMultiplier);
 
-        // level up
-        if (computedLevel > level) {
-            // persist the new level and credit the reward amount
+        // update level
+        if (computedLevel !== level) {
+            const leveledUp = computedLevel > level;
+
             await MemberModel.updateOne({ user: message.author.id, guild: message.guildId }, {
                 $set: { level: computedLevel },
-                $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER },
+                ...(leveledUp ? { $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER } } : {}),
             });
 
-            // reward level roles and announce the level up
-            members.handleLevelUp(member, guildDocument, computedLevel, message);
+            if (leveledUp) members.handleLevelUp(member, guildDocument, computedLevel, message);
+            else members.assignLevelRoles(member, computedLevel).catch(Logger.error);
         }
 
         // set the XP cooldown for the member
@@ -146,21 +147,32 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether gamification is enabled
         if (!guildDocument.gamification) return;
 
-        const mentiondUsers = message.mentions.users?.filter(u => u.id !== message.author.id);
-        if (mentiondUsers?.size && [ "thank you", "thankyou", "thanks" ].some(w => message.content.toLowerCase().includes(w))) {
-            const users = Array.from(mentiondUsers.keys());
+        // check whether anyone is mentioned
+        if (!message.mentions.users?.size) return;
 
-            await MemberModel.updateMany({
-                user: {
-                    $in: users,
-                },
-                guild: message.guild.id,
-            }, {
-                $inc: {
-                    karma: 1,
-                },
-            });
-        }
+        // check karma limitations
+        const recipients = message.mentions.users.filter(u => u.id !== message.author.id && !u.bot);
+        if (recipients.size !== 1) return;
+
+        const content = message.content.toLowerCase();
+        if (![ "thank you", "thankyou", "thanks" ].some(w => content.includes(w))) return;
+
+        const key = `karma:${ message.guildId }:${ message.author.id }`;
+
+        // check whether the member had recently given karma
+        if (memcache.get(key)) return;
+
+        await MemberModel.updateOne({
+            user: recipients.firstKey(),
+            guild: message.guildId,
+        }, {
+            $inc: {
+                karma: 1,
+            },
+        }, { upsert: true });
+
+        // set the cooldown
+        memcache.set(key, true, 15);
     };
 
     handleAutoThreads = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {

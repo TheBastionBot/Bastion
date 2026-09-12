@@ -78,7 +78,7 @@ class VoiceExperienceScheduler extends Scheduler {
             const byKey = new Map(memberDocuments.map(d => [ `${ d.guild }:${ d.user }`, d ]));
 
             const operations: mongoose.AnyBulkWriteOperation<Member>[] = [];
-            const levelUps: { member: GuildMember; guildDocument: GuildDocument; level: number }[] = [];
+            const levelChanges: { member: GuildMember; guildDocument: GuildDocument; level: number; leveledUp: boolean }[] = [];
 
             for (const guildDocument of guildDocuments) {
                 for (const member of eligibleByGuild.get(guildDocument.id)) {
@@ -86,8 +86,8 @@ class VoiceExperienceScheduler extends Scheduler {
                     const currentExperience = current?.experience || 0;
                     const currentLevel = current?.level || 0;
 
-                    // respect the max level / experience caps
-                    if (currentLevel >= gamification.MAX_LEVEL || currentExperience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) continue;
+                    // respect the max experience cap
+                    if (currentExperience >= gamification.MAX_EXPERIENCE) continue;
 
                     // compute the XP award and the resulting level
                     const amount = VOICE_XP_PER_TICK * (member.premiumSinceTimestamp ? 2 : 1);
@@ -96,10 +96,12 @@ class VoiceExperienceScheduler extends Scheduler {
 
                     // compute new level and credit the currency reward
                     const update: mongoose.mongo.UpdateFilter<Member> = { $inc: { experience: amount } };
+                    if (newLevel !== currentLevel) {
+                        update.$set = { level: newLevel };
+                        levelChanges.push({ member, guildDocument, level: newLevel, leveledUp });
+                    }
                     if (leveledUp) {
                         update.$inc = { experience: amount, balance: newLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER };
-                        update.$set = { level: newLevel };
-                        levelUps.push({ member, guildDocument, level: newLevel });
                     }
 
                     operations.push({
@@ -117,9 +119,10 @@ class VoiceExperienceScheduler extends Scheduler {
                 await MemberModel.bulkWrite(operations);
             }
 
-            // level-up side effects (roles + notification) for members who crossed a level this tick
-            for (const { member, guildDocument, level } of levelUps) {
-                members.handleLevelUp(member, guildDocument, level);
+            // level change side effects for members who crossed a level this tick
+            for (const { member, guildDocument, level, leveledUp } of levelChanges) {
+                if (leveledUp) members.handleLevelUp(member, guildDocument, level);
+                else members.assignLevelRoles(member, level).catch(Logger.error);
             }
         } catch (e) {
             Logger.error(e);

@@ -121,15 +121,15 @@ export const assignLevelRoles = async (member: GuildMember, level: number): Prom
     const levelRoles = roles.filter(r => r.level === nearestLevel && member.guild.roles.cache.has(r._id));
     const extraRoles = roles.filter(r => r.level !== nearestLevel && member.guild.roles.cache.has(r._id));
 
-    // update member roles
-    if (levelRoles.length) {
-        const memberRoles = member.roles.cache
-            .filter(r => !extraRoles.some(doc => doc._id === r.id))  // remove roles from any other level
-            .map(r => r.id)
-            .concat(levelRoles.map(doc => doc._id)); // add roles in the current level
+    // the roles the member should hold afterwards
+    const memberRoles = new Set(member.roles.cache
+        .filter(r => !extraRoles.some(doc => doc._id === r.id))  // remove roles from any other level
+        .map(r => r.id));
+    for (const doc of levelRoles) memberRoles.add(doc._id); // add roles in the current level
 
-        // update member roles
-        member.roles.set([ ...new Set(memberRoles) ]).catch(Logger.error);
+    // update member roles
+    if (memberRoles.size !== member.roles.cache.size || member.roles.cache.some(r => !memberRoles.has(r.id))) {
+        member.roles.set([ ...memberRoles ]).catch(Logger.error);
     }
 };
 
