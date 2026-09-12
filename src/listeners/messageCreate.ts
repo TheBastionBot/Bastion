@@ -147,21 +147,24 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether gamification is enabled
         if (!guildDocument.gamification) return;
 
-        const mentiondUsers = message.mentions.users?.filter(u => u.id !== message.author.id);
-        if (mentiondUsers?.size && [ "thank you", "thankyou", "thanks" ].some(w => message.content.toLowerCase().includes(w))) {
-            const users = Array.from(mentiondUsers.keys());
+        // check whether anyone is mentioned
+        if (!message.mentions.users?.size) return;
 
-            await MemberModel.updateMany({
-                user: {
-                    $in: users,
-                },
-                guild: message.guild.id,
-            }, {
-                $inc: {
-                    karma: 1,
-                },
-            });
-        }
+        // check karma limitations
+        const recipients = message.mentions.users.filter(u => u.id !== message.author.id && !u.bot);
+        if (recipients.size !== 1) return;
+
+        const content = message.content.toLowerCase();
+        if (![ "thank you", "thankyou", "thanks" ].some(w => content.includes(w))) return;
+
+        await MemberModel.updateOne({
+            user: recipients.firstKey(),
+            guild: message.guildId,
+        }, {
+            $inc: {
+                karma: 1,
+            },
+        }, { upsert: true });
     };
 
     handleAutoThreads = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
