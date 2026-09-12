@@ -157,6 +157,11 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         const content = message.content.toLowerCase();
         if (![ "thank you", "thankyou", "thanks" ].some(w => content.includes(w))) return;
 
+        const key = `karma:${ message.guildId }:${ message.author.id }`;
+
+        // check whether the member had recently given karma
+        if (memcache.get(key)) return;
+
         await MemberModel.updateOne({
             user: recipients.firstKey(),
             guild: message.guildId,
@@ -165,6 +170,9 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                 karma: 1,
             },
         }, { upsert: true });
+
+        // set the cooldown
+        memcache.set(key, true, 15);
     };
 
     handleAutoThreads = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
