@@ -53,8 +53,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             { returnDocument: "after", upsert: true },
         );
 
-        // check whether member has exceeded max level or experience
-        if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
+        // check whether member has exceeded max experience
+        if (memberDocument.experience >= gamification.MAX_EXPERIENCE) return;
 
         // resolve the member
         const member = message.member ?? await members.resolveMember(message.guild, message.author.id);

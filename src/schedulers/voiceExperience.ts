@@ -86,8 +86,8 @@ class VoiceExperienceScheduler extends Scheduler {
                     const currentExperience = current?.experience || 0;
                     const currentLevel = current?.level || 0;
 
-                    // respect the max level / experience caps
-                    if (currentLevel >= gamification.MAX_LEVEL || currentExperience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) continue;
+                    // respect the max experience cap
+                    if (currentExperience >= gamification.MAX_EXPERIENCE) continue;
 
                     // compute the XP award and the resulting level
                     const amount = VOICE_XP_PER_TICK * (member.premiumSinceTimestamp ? 2 : 1);
