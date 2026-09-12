@@ -70,16 +70,17 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(experience, guildDocument.gamificationMultiplier);
 
-        // level up
-        if (computedLevel > level) {
-            // persist the new level and credit the reward amount
+        // update level
+        if (computedLevel !== level) {
+            const leveledUp = computedLevel > level;
+
             await MemberModel.updateOne({ user: message.author.id, guild: message.guildId }, {
                 $set: { level: computedLevel },
-                $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER },
+                ...(leveledUp ? { $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER } } : {}),
             });
 
-            // reward level roles and announce the level up
-            members.handleLevelUp(member, guildDocument, computedLevel, message);
+            if (leveledUp) members.handleLevelUp(member, guildDocument, computedLevel, message);
+            else members.assignLevelRoles(member, computedLevel).catch(Logger.error);
         }
 
         // set the XP cooldown for the member
