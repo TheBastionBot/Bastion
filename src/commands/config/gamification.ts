@@ -30,6 +30,8 @@ class GamificationCommand extends Command {
                     type: ApplicationCommandOptionType.Number,
                     name: "multiplier",
                     description: "The reward multiplier.",
+                    min_value: 0.1,
+                    max_value: 10,
                 },
             ],
             userPermissions: [ PermissionFlagsBits.ManageGuild ],
