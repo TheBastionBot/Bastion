@@ -2,16 +2,11 @@
  * @author TRACTION (iamtraction)
  * @copyright 2026
  */
-import mongoose from "mongoose";
+import { readdir } from "node:fs/promises";
+import mongoose, { type Model } from "mongoose";
 import { Logger } from "@bastion/tesseract";
 import dotenv from "dotenv";
 
-import GiveawayModel from "./models/Giveaway.js";
-import GuildModel from "./models/Guild.js";
-import MemberModel from "./models/Member.js";
-import RoleModel from "./models/Role.js";
-import SelectRoleGroupModel from "./models/SelectRoleGroup.js";
-import TriggerModel from "./models/Trigger.js";
 import Settings from "./utils/settings.js";
 
 // configure dotenv
@@ -19,16 +14,6 @@ dotenv.config();
 
 // init
 const settings = new Settings();
-
-// every model whose indexes are managed by this script
-const models = [
-    GiveawayModel,
-    GuildModel,
-    MemberModel,
-    RoleModel,
-    SelectRoleGroupModel,
-    TriggerModel,
-];
 
 // commands
 const Commands = {
@@ -38,6 +23,17 @@ const Commands = {
 // `npm run` strips anything that looks like a flag unless it's passed after a
 // `--` separator, so the destructive mode is opted into with a plain word
 const APPLY = "apply";
+
+/**
+ * Loads every model declared in the models directory.
+ */
+const loadModels = async (): Promise<Model<unknown>[]> => {
+    const directory = new URL("./models/", import.meta.url);
+
+    const modules = (await readdir(directory)).filter(file => file.endsWith(".js"));
+
+    return await Promise.all(modules.map(async module => (await import(new URL(module, directory).href)).default as Model<unknown>));
+};
 
 /**
  * Makes the indexes in MongoDB match the ones declared in the schemas.
@@ -51,13 +47,14 @@ const APPLY = "apply";
  * @param apply Whether to apply the changes, instead of only reporting them.
  */
 const indexes = async (apply: boolean): Promise<void> => {
-    // `autoIndex` builds the schema indexes as soon as a model is used against a
-    // live connection, which would apply half the changes before reporting them
+    // `autoIndex` builds the schema indexes as soon as a model is used against
+    // a live connection, which would apply half the changes before reporting
+    // them, and would create the collection of every model that's missing one
     await mongoose.connect(settings.mongoURI, { autoIndex: false });
 
     let changes = 0;
 
-    for (const model of models) {
+    for (const model of await loadModels()) {
         const collection = model.collection.name;
         const { toDrop, toCreate } = await model.diffIndexes({ indexOptionsToCreate: true });
 
