@@ -9,7 +9,6 @@ import dotenv from "dotenv";
 import GiveawayModel from "./models/Giveaway.js";
 import GuildModel from "./models/Guild.js";
 import MemberModel from "./models/Member.js";
-import PollModel from "./models/Poll.js";
 import RoleModel from "./models/Role.js";
 import SelectRoleGroupModel from "./models/SelectRoleGroup.js";
 import TriggerModel from "./models/Trigger.js";
@@ -26,7 +25,6 @@ const models = [
     GiveawayModel,
     GuildModel,
     MemberModel,
-    PollModel,
     RoleModel,
     SelectRoleGroupModel,
     TriggerModel,
