@@ -22,10 +22,15 @@ const snakeToTitleCase = (string: string, separator = " "): string => {
     return toTitleCase(string, "_", separator);
 };
 
+const withSubtext = (content: string, note?: string): string => {
+    return note ? `${ content }\n-# ${ note }` : content;
+};
+
 export {
     frequency,
     toTitleCase,
     toSnakeCase,
     camelToTitleCase,
     snakeToTitleCase,
+    withSubtext,
 };

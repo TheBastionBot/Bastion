@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { isPremiumUser } from "../../utils/premium.js";
+import { isPremiumUser, premiumFeatureUpsell } from "../../utils/premium.js";
 
 class GamificationCommand extends Command {
     constructor() {
@@ -30,6 +30,8 @@ class GamificationCommand extends Command {
                     type: ApplicationCommandOptionType.Number,
                     name: "multiplier",
                     description: "The reward multiplier.",
+                    min_value: 0.1,
+                    max_value: 10,
                 },
             ],
             userPermissions: [ PermissionFlagsBits.ManageGuild ],
@@ -45,7 +47,7 @@ class GamificationCommand extends Command {
         // check for premium membership
         if (multiplier && isPublicBastion(interaction.client.user.id)) {
             if (!await isPremiumUser(interaction.guild.ownerId)) {
-                return interaction.editReply("Gamification Multiplier can be set to a custom value only in Premium Servers in the Public Bastion.");
+                return interaction.editReply(premiumFeatureUpsell(interaction, "premiumFeatureXpMultiplier"));
             }
         }
 

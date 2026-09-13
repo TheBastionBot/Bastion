@@ -14,7 +14,7 @@ export default tseslint.config({
         },
         sourceType: "module",
     },
-    files: [ "src/**/*.ts" ],
+    files: [ "src/**/*.ts", "test/**/*.ts" ],
     rules: {
         indent: [ "warn", 4 ],
         "linebreak-style": [ "warn", "unix" ],

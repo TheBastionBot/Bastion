@@ -36,17 +36,32 @@ class PHDCommand extends Command {
 
         const { document } = new JSDOM(html).window;
 
-        const images = [];
-        for (const element of document?.getElementsByName("comic2")?.values() || []) {
-            const imageUrl = element?.getAttribute("src");
-            if (imageUrl) images.push(imageUrl);
+        const images: string[] = [];
+
+        for (const element of document.querySelectorAll("img.img-responsive")) {
+            const source = element.getAttribute("src");
+            if (!source?.includes("/comics/archive/")) continue;
+
+            const imageUrl = new URL(source, comicURL);
+
+            // the hidden thumbnail leaks in with a malformed, extensionless source
+            if (!/\.\w{3,4}$/.test(imageUrl.pathname)) continue;
+
+            // the sources are linked over plain HTTP on the `www` host, which redirects
+            if (/^(?:www\.)?phdcomics\.com$/.test(imageUrl.hostname)) {
+                imageUrl.protocol = "https:";
+                imageUrl.hostname = "phdcomics.com";
+            }
+
+            // the comic is duplicated for the responsive layouts
+            if (!images.includes(imageUrl.href)) images.push(imageUrl.href);
         }
 
         if (images.length) {
-            return await interaction.editReply({
-                content: `[PHD Comics${ issue ? `#${ issue }` : "" }](<${ comicURL }>)`,
-                files: images.slice(0, 10).map(i => ({ name: i?.split("/").pop(), attachment: i })),
-            });
+            return await interaction.editReply([
+                `[PHD Comics${ issue ? `#${ issue }` : "" }](<${ comicURL }>)`,
+                ...images.slice(0, 5),
+            ].join("\n"));
         }
 
         await interaction.editReply((interaction.client as Client).locales.getText(interaction.guildLocale, "comicNotFound"));

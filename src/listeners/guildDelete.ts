@@ -5,7 +5,11 @@
 import { Guild } from "discord.js";
 import { Client, Listener, Logger } from "@bastion/tesseract";
 
+import GiveawayModel from "../models/Giveaway.js";
 import GuildModel from "../models/Guild.js";
+import RoleModel from "../models/Role.js";
+import SelectRoleGroupModel from "../models/SelectRoleGroup.js";
+import TriggerModel from "../models/Trigger.js";
 import { COLORS } from "../utils/constants.js";
 import { log as bastionLog } from "../utils/webhooks.js";
 
@@ -15,8 +19,14 @@ class GuildDeleteListener extends Listener<"guildDelete"> {
     }
 
     public async exec(guild: Guild): Promise<void> {
-        // delete the guild document
-        await GuildModel.findByIdAndDelete(guild.id);
+        // delete all the guild related data
+        await Promise.all([
+            GuildModel.findByIdAndDelete(guild.id),
+            RoleModel.deleteMany({ guild: guild.id }),
+            TriggerModel.deleteMany({ guild: guild.id }),
+            SelectRoleGroupModel.deleteMany({ guild: guild.id }),
+            GiveawayModel.deleteMany({ guild: guild.id }),
+        ]).catch(Logger.error);
 
         // bastion log
         bastionLog(guild.client as Client, {

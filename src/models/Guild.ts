@@ -27,7 +27,6 @@ export interface Guild {
     gamificationMultiplier?: number;
     // gambling
     gambling?: boolean;
-    gamblingMultiplier?: number;
     // infractions
     infractionsTimeoutThreshold?: number;
     infractionsKickThreshold?: number;
@@ -36,6 +35,9 @@ export interface Guild {
     emailFilterRule?: string;
     inviteFilterRule?: string;
     linkFilterRule?: string;
+    // protection
+    protection?: number;
+    honeypotChannel?: string;
     // starboard
     starboardChannel?: string;
     starboardThreshold?: number;
@@ -114,9 +116,6 @@ export default mongoose.model<Guild>("Guild", new mongoose.Schema<Guild>({
     gambling: {
         type: Boolean,
     },
-    gamblingMultiplier: {
-        type: Number,
-    },
     infractionsTimeoutThreshold: {
         type: Number,
     },
@@ -133,6 +132,12 @@ export default mongoose.model<Guild>("Guild", new mongoose.Schema<Guild>({
         type: String,
     },
     linkFilterRule: {
+        type: String,
+    },
+    protection: {
+        type: Number,
+    },
+    honeypotChannel: {
         type: String,
     },
     starboardChannel: {
@@ -167,8 +172,6 @@ export default mongoose.model<Guild>("Guild", new mongoose.Schema<Guild>({
     },
     twitchNotificationChannel: {
         type: String,
-        // the live stream scheduler selects the few guilds that configured
-        // notifications, so a sparse index keeps that lookup selective
         sparse: true,
     },
     twitchNotificationMessage: {

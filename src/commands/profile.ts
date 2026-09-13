@@ -56,7 +56,6 @@ class ProfileCommand extends Command {
             level: -1,
             experience: -1,
             karma: -1,
-            balance: -1,
         } }).countDocuments({
             $or: [
                 {
@@ -70,12 +69,6 @@ class ProfileCommand extends Command {
                     level: memberProfile.level,
                     experience: memberProfile.experience,
                     karma: { $gt: memberProfile.karma },
-                },
-                {
-                    level: memberProfile.level,
-                    experience: memberProfile.experience,
-                    karma: memberProfile.karma,
-                    balance: { $gt: memberProfile.balance },
                 },
             ],
         });

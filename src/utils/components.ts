@@ -18,9 +18,18 @@ enum MessageComponents {
     SelfRolesSelect = "SelfRolesSelect",
     SelfRolesClearButton = "SelfRolesClearButton",
 
+    ShopSelect = "ShopSelect",
+
     SuggestionAcceptButton = "SuggestionAcceptButton",
     SuggestionRejectButton = "SuggestionRejectButton",
     SuggestionResetButton = "SuggestionResetButton",
+
+    ProtectionBanButton = "ProtectionBanButton",
+    ProtectionIgnoreButton = "ProtectionIgnoreButton",
+    ProtectionUnbanButton = "ProtectionUnbanButton",
+
+    RaidPauseInvitesButton = "RaidPauseInvitesButton",
+    RaidVerificationButton = "RaidVerificationButton",
 
     UserReportBanButton = "UserReportBanButton",
     UserReportKickButton = "UserReportKickButton",

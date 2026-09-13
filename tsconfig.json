@@ -1,5 +1,6 @@
 {
     "compileOnSave": true,
+    "include": [ "src" ],
     "compilerOptions": {
         "alwaysStrict": true,
         "declaration": true,

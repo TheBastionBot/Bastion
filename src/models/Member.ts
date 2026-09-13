@@ -82,7 +82,6 @@ memberSchema.index({
     level: -1,
     experience: -1,
     karma: -1,
-    balance: -1,
 });
 
 export default mongoose.model<Member>("Member", memberSchema);

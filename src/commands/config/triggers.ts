@@ -8,7 +8,8 @@ import { Command } from "@bastion/tesseract";
 import TriggerModel from "../../models/Trigger.js";
 import { COLORS, isPublicBastion } from "../../utils/constants.js";
 import { parseEmoji } from "../../utils/emojis.js";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumLimitUpsell } from "../../utils/premium.js";
+import { invalidateTriggers } from "../../utils/triggers.js";
 
 class TriggersCommand extends Command {
     constructor() {
@@ -56,6 +57,9 @@ class TriggersCommand extends Command {
                 pattern: remove,
             });
 
+            // clear the trigger cache for the guild
+            invalidateTriggers(interaction.guildId);
+
             return interaction.editReply(`I've deleted the triggers matching **${ remove }**.`);
         }
 
@@ -70,7 +74,7 @@ class TriggersCommand extends Command {
 
                 const limit = checkFeature(tier, Feature.Triggers) as number;
                 if (triggerCount >= limit) {
-                    return interaction.editReply(`You need to upgrade from Bastion ${ tier } to add more than ${ limit } triggers.`);
+                    return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitTriggers", limit, tier));
                 }
             }
 
@@ -81,6 +85,9 @@ class TriggersCommand extends Command {
                 message: message,
                 reactions: emoji,
             });
+
+            // clear the trigger cache for the guild
+            invalidateTriggers(interaction.guildId);
 
             return interaction.editReply(`I've add the trigger **${ add }**.`);
         }

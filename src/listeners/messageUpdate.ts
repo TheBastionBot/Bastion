@@ -3,10 +3,11 @@
  * @copyright 2022
  */
 import { Message, MessageType, PartialMessage, time } from "discord.js";
-import { Listener } from "@bastion/tesseract";
+import { Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../models/Guild.js";
 import { logGuildEvent } from "../utils/guilds.js";
+import { evaluateMessage } from "../utils/protection/index.js";
 
 class MessageUpdateListener extends Listener<"messageUpdate"> {
     constructor() {
@@ -19,7 +20,20 @@ class MessageUpdateListener extends Listener<"messageUpdate"> {
         if (![ MessageType.Default, MessageType.Reply ].includes(newMessage.type)) return;
         if (oldMessage.content === newMessage.content) return;
 
-        const guildDocument = await GuildModel.findById(newMessage.guild.id);
+        let guildDocument = await GuildModel.findById(newMessage.guild.id);
+
+        // create guild document if it wasn't found
+        if (!guildDocument) {
+            guildDocument = await GuildModel.findByIdAndUpdate(
+                newMessage.guild.id,
+                {},
+                { returnDocument: "after", upsert: true },
+            );
+        }
+
+        // re-evaluate the edited message, since a scam link is often edited
+        // into an innocuous message minutes after it was posted.
+        evaluateMessage(newMessage as Message<true>, guildDocument, oldMessage.content).catch(Logger.error);
 
         await logGuildEvent(newMessage.guild, {
             title: "Message Updated",

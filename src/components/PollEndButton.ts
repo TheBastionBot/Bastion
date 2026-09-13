@@ -1,13 +1,11 @@
 /*!
  * @author TRACTION (iamtraction)
- * @copyright 2022
+ * @copyright 2026
  */
-import { ButtonInteraction, PermissionFlagsBits } from "discord.js";
-import { Logger, MessageComponent } from "@bastion/tesseract";
+import { ButtonInteraction, MessageFlags, PermissionFlagsBits } from "discord.js";
+import { Client, Logger, MessageComponent } from "@bastion/tesseract";
 
-import PollModel from "../models/Poll.js";
 import MessageComponents from "../utils/components.js";
-import { COLORS } from "../utils/constants.js";
 
 class PollEndButton extends MessageComponent {
     constructor() {
@@ -18,53 +16,47 @@ class PollEndButton extends MessageComponent {
         });
     }
 
-    public async exec(interaction: ButtonInteraction<"cached">): Promise<void> {
-        // fetch message
-        await interaction.message.fetch().catch(Logger.ignore);
+    /** Removes the end button, acknowledging the click even if it can't be. */
+    private async clearButton(interaction: ButtonInteraction<"cached">): Promise<unknown> {
+        return await interaction.update({ components: [] }).catch(async (e: Error) => {
+            Logger.error(e);
+            return await interaction.deferUpdate().catch(Logger.ignore);
+        });
+    }
 
-        // identify poll options
-        const options = interaction.message.embeds[0].fields.map(f => f.value);
+    public async exec(interaction: ButtonInteraction<"cached">): Promise<unknown> {
+        const text = (key: string): string => (interaction.client as Client).locales.getText(interaction.guildLocale, key);
 
-        // identify poll votes
-        const reactions = [ "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯" ];
-        const votes: { [key: string]: number } = {};
+        // fetch the message if poll data isn't cached
+        const message = interaction.message.poll
+            ? interaction.message
+            : await interaction.message.fetch().catch((e: Error) => {
+                Logger.error(e);
+                return interaction.message;
+            });
 
-        let totalVotes = 0;
-        for (const key in reactions.slice(0, options.length)) {
-            if (interaction.message.reactions.cache.has(reactions[key])) {
-                // calculate votes
-                const votesCount = interaction.message.reactions.cache.get(reactions[key]).count;
-                votes[reactions[key]] = votesCount - 1;
-                totalVotes += votes[reactions[key]];
-            }
+        const poll = message.poll;
+
+        // make sure the poll exists
+        if (!poll) {
+            return await interaction.reply({ content: text("pollNotFound"), flags: MessageFlags.Ephemeral });
         }
 
-        await interaction.message.edit({
-            embeds: [
-                {
-                    color: COLORS.SECONDARY,
-                    author: {
-                        name: "POLL ENDED",
-                    },
-                    title: interaction.message.embeds[0].title,
-                    fields: interaction.message.embeds[0].fields.sort((a, b) => (votes[b.name] || 0) - (votes[a.name] || 0) ).map(f => ({
-                        name: f.value,
-                        value: `${ votes[f.name] || 0 } votes — ${ ((votes[f.name] || 0) / totalVotes * 100).toFixed(0) }%`,
-                    })),
-                    footer: {
-                        text: `${ totalVotes } votes`
-                    },
-                    timestamp: interaction.createdAt.toISOString(),
-                },
-            ],
-            components: [],
+        // clear the end button if the poll is already ended
+        if (poll.resultsFinalized || (poll.expiresTimestamp !== null && Date.now() > poll.expiresTimestamp)) {
+            return await this.clearButton(interaction);
+        }
+
+        // end the poll
+        const ended = await poll.end().then(() => true).catch((e: Error) => {
+            Logger.error(e);
+            return false;
         });
 
-        await interaction.message.reactions.removeAll().catch(Logger.ignore);
+        // clear the end button
+        if (ended) return await this.clearButton(interaction);
 
-        await PollModel.findByIdAndDelete(interaction.message.id).catch(Logger.error);
-
-        await interaction.deferUpdate();
+        return await interaction.reply({ content: text("pollEndError"), flags: MessageFlags.Ephemeral });
     }
 }
 

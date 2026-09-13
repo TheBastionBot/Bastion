@@ -7,7 +7,7 @@ import { Client, Command, Logger } from "@bastion/tesseract";
 
 import GuildModel from "../../models/Guild.js";
 import { COLORS, isPublicBastion } from "../../utils/constants.js";
-import { getPremiumTier } from "../../utils/premium.js";
+import { getPremiumTier, Tier } from "../../utils/premium.js";
 
 class ChannelInfoCommand extends Command {
     constructor() {
@@ -90,7 +90,7 @@ class ChannelInfoCommand extends Command {
                         url: interaction.guild.bannerURL() || interaction.guild.splashURL() || interaction.guild.discoverySplashURL(),
                     },
                     footer: {
-                        text: `Powered by Bastion${ tier ? ` ${ tier }` : "" } • ${ interaction.guildId }`,
+                        text: `Powered by Bastion${ tier && tier !== Tier.Free ? ` ${ tier }` : "" } • ${ interaction.guildId }`,
                     },
                 },
             ],

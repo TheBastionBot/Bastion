@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import RoleModel from "../../models/Role.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumLimitUpsell } from "../../utils/premium.js";
 
 class RoleLevelsCommand extends Command {
     constructor() {
@@ -72,7 +72,7 @@ class RoleLevelsCommand extends Command {
 
                 const levelRolesLimit = checkFeature(tier, Feature.RolesPerLevel) as number;
                 if (levelRolesCount >= levelRolesLimit) {
-                    return interaction.editReply(`You need to upgrade from Bastion ${ tier } to have more than ${ levelRolesLimit } roles per level.`);
+                    return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitRolesPerLevel", levelRolesLimit, tier));
                 }
 
                 if (!levelRolesCount) {
@@ -84,7 +84,7 @@ class RoleLevelsCommand extends Command {
 
                     const roleLevelsLimit = checkFeature(tier, Feature.RoleLevels) as number;
                     if (roleLevels?.length >= roleLevelsLimit) {
-                        return interaction.editReply(`You need to upgrade from Bastion ${ tier } to have more than ${ roleLevelsLimit } levels for level roles.`);
+                        return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitRoleLevels", roleLevelsLimit, tier));
                     }
                 }
             }

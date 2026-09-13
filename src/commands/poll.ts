@@ -1,19 +1,20 @@
 /*!
  * @author TRACTION (iamtraction)
- * @copyright 2022
+ * @copyright 2026
  */
 import { ApplicationCommandOptionType, ButtonStyle, ChatInputCommandInteraction, ComponentType, PermissionFlagsBits } from "discord.js";
-import { Command, Logger } from "@bastion/tesseract";
+import { Command } from "@bastion/tesseract";
 
-import PollModel from "../models/Poll.js";
 import MessageComponents from "../utils/components.js";
-import { COLORS, isPublicBastion } from "../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../utils/premium.js";
+
+const QUESTION_LIMIT = 300;
+const ANSWER_LIMIT = 55;
+const DURATION_LIMIT = 768; // hours
+const DEFAULT_DURATION = 1; // hours
+const REQUIRED_ANSWERS = 2;
+const ORDINALS = [ "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th" ];
 
 class PollCommand extends Command {
-    /** The default poll vote reactions. */
-    private reactions: string[];
-
     constructor() {
         super({
             name: "poll",
@@ -24,118 +25,50 @@ class PollCommand extends Command {
                     name: "question",
                     description: "The question for the poll.",
                     required: true,
+                    max_length: QUESTION_LIMIT,
                 },
-                {
+                ...ORDINALS.map((ordinal, i) => ({
                     type: ApplicationCommandOptionType.String,
-                    name: "option1",
-                    description: "The 1st option for the poll's answer.",
-                    required: true,
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option2",
-                    description: "The 2nd option for the poll's answer.",
-                    required: true,
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option3",
-                    description: "The 3rd option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option4",
-                    description: "The 4th option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option5",
-                    description: "The 5th option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option6",
-                    description: "The 6th option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option7",
-                    description: "The 7th option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option8",
-                    description: "The 8th option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option9",
-                    description: "The 9th option for the poll's answer.",
-                },
-                {
-                    type: ApplicationCommandOptionType.String,
-                    name: "option10",
-                    description: "The 10th option for the poll's answer.",
-                },
+                    name: "option" + (i + 1),
+                    description: `The ${ ordinal } option for the poll's answer.`,
+                    required: i < REQUIRED_ANSWERS || undefined,
+                    max_length: ANSWER_LIMIT,
+                })),
                 {
                     type: ApplicationCommandOptionType.Integer,
                     name: "timer",
-                    description: "Number of hours the poll should run.",
+                    description: `Number of hours the poll should run. Defaults to ${ DEFAULT_DURATION } hour${ DEFAULT_DURATION === 1 ? "" : "s" }.`,
                     min_value: 1,
-                    max_value: 720,
+                    max_value: DURATION_LIMIT,
+                },
+                {
+                    type: ApplicationCommandOptionType.Boolean,
+                    name: "multiple",
+                    description: "Whether members can vote for more than one option.",
                 },
             ],
-            userPermissions: [ PermissionFlagsBits.ManageGuild ],
+            userPermissions: [ PermissionFlagsBits.SendPolls ],
+            clientPermissions: [ PermissionFlagsBits.SendPolls ],
         });
-
-        this.reactions = [ "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯" ];
     }
 
     public async exec(interaction: ChatInputCommandInteraction<"cached">): Promise<unknown> {
-        const question = interaction.options.getString("question");
+        const question = interaction.options.getString("question").trim();
 
-        const options = Array.from(Array(10)).map((_, i) => interaction.options.getString("option" + (i + 1))).filter(o => !!o?.trim());
-        const timer = interaction.options.getInteger("timer");
+        const answers = ORDINALS
+            .map((_, i) => interaction.options.getString("option" + (i + 1))?.trim())
+            .filter(option => !!option)
+            .map(option => ({ text: option }));
 
-        // check for limits
-        if (timer && isPublicBastion(interaction.client.user.id)) {
-            const tier = await getPremiumTier(interaction.guild.ownerId);
-            const pollTimerLimit = checkFeature(tier, Feature.PollTimeout) as number;
-            if (timer > pollTimerLimit) {
-                return await interaction.editReply(`You need to upgrade from Bastion ${ tier } to run polls for more than ${ pollTimerLimit } hours.`);
-            }
-
-            // find active polls in the server
-            const activePollCount = await PollModel.countDocuments({
-                guild: interaction.guild.id,
-                ends: {
-                    $gte: new Date(),
+        return await interaction.reply({
+            poll: {
+                question: {
+                    text: question,
                 },
-            });
-            const pollsLimit = checkFeature(tier, Feature.TimedPolls) as number;
-            if (activePollCount >= pollsLimit) {
-                return await interaction.editReply(`You need to upgrade from Bastion ${ tier } to run more than ${ pollsLimit } polls simultaneously.`);
-            }
-        }
-
-        // calculate end date
-        const expectedEndDate = timer ? new Date(Date.now() + timer * 36e5) : null;
-
-        const poll = await interaction.reply({
-            fetchReply: true,
-            embeds: [
-                {
-                    color: COLORS.PRIMARY,
-                    author: {
-                        name: "POLL",
-                    },
-                    title: question,
-                    fields: options.map((option, i) => ({
-                        name: this.reactions[i],
-                        value: option,
-                    })),
-                },
-            ],
+                answers,
+                duration: interaction.options.getInteger("timer") ?? DEFAULT_DURATION,
+                allowMultiselect: interaction.options.getBoolean("multiple") ?? false,
+            },
             components: [
                 {
                     type: ComponentType.ActionRow,
@@ -150,20 +83,6 @@ class PollCommand extends Command {
                 },
             ],
         });
-
-        if (expectedEndDate) {
-            // create the poll document
-            await PollModel.create({
-                _id: poll.id,
-                channel: poll.channelId,
-                guild: poll.guildId,
-                ends: expectedEndDate,
-            });
-        }
-
-        for (const i of options.keys()) {
-            await poll.react(this.reactions[i]).catch(Logger.ignore);
-        }
     }
 }
 

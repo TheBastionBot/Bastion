@@ -13,7 +13,7 @@ import ytpl from "ytpl";
 
 import GuildModel from "../../models/Guild.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { isPremiumUser } from "../../utils/premium.js";
+import { isPremiumUser, premiumFeatureUpsell } from "../../utils/premium.js";
 
 // YouTube cookies file in Netscape format (optional)
 const YOUTUBE_COOKIES_FILE = "cookies.txt";
@@ -193,16 +193,16 @@ class PlayCommand extends Command {
         // get the guild document
         const guildDocument = await GuildModel.findById(interaction.guildId);
 
-        // check whether music is enabled in the guild
-        if (!guildDocument.music) {
-            return interaction.editReply("Music is not enabled in the server.");
-        }
-
         // check for premium membership
         if (isPublicBastion(interaction.client.user.id)) {
             if (!await isPremiumUser(interaction.guild.ownerId)) {
-                return interaction.editReply("Music is only enabled in Premium Servers in the Public Bastion.");
+                return interaction.editReply(premiumFeatureUpsell(interaction, "premiumFeatureMusic"));
             }
+        }
+
+        // check whether music is enabled in the guild
+        if (!guildDocument.music) {
+            return interaction.editReply("Music is not enabled in the server.");
         }
 
         // get existing music studio or create a new one

@@ -2,44 +2,34 @@
  * @author TRACTION (iamtraction)
  * @copyright 2026
  */
-import mongoose from "mongoose";
+import { readdir } from "node:fs/promises";
+import mongoose, { type Model } from "mongoose";
 import { Logger } from "@bastion/tesseract";
 import dotenv from "dotenv";
 
-import GiveawayModel from "./models/Giveaway.js";
-import GuildModel from "./models/Guild.js";
-import MemberModel from "./models/Member.js";
-import PollModel from "./models/Poll.js";
-import RoleModel from "./models/Role.js";
-import SelectRoleGroupModel from "./models/SelectRoleGroup.js";
-import TriggerModel from "./models/Trigger.js";
 import Settings from "./utils/settings.js";
 
 // configure dotenv
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // init
 const settings = new Settings();
 
-// every model whose indexes are managed by this script
-const models = [
-    GiveawayModel,
-    GuildModel,
-    MemberModel,
-    PollModel,
-    RoleModel,
-    SelectRoleGroupModel,
-    TriggerModel,
-];
-
-// commands
-const Commands = {
-    Indexes: "indexes",
-};
-
-// `npm run` strips anything that looks like a flag unless it's passed after a
-// `--` separator, so the destructive mode is opted into with a plain word
 const APPLY = "apply";
+
+// collections MongoDB keeps for itself, which no model will ever declare
+const SYSTEM_COLLECTION = /^system\./;
+
+/**
+ * Loads every model declared in the models directory.
+ */
+const loadModels = async (): Promise<Model<unknown>[]> => {
+    const directory = new URL("./models/", import.meta.url);
+
+    const modules = (await readdir(directory)).filter(file => file.endsWith(".js"));
+
+    return await Promise.all(modules.map(async module => (await import(new URL(module, directory).href)).default as Model<unknown>));
+};
 
 /**
  * Makes the indexes in MongoDB match the ones declared in the schemas.
@@ -53,13 +43,9 @@ const APPLY = "apply";
  * @param apply Whether to apply the changes, instead of only reporting them.
  */
 const indexes = async (apply: boolean): Promise<void> => {
-    // `autoIndex` builds the schema indexes as soon as a model is used against a
-    // live connection, which would apply half the changes before reporting them
-    await mongoose.connect(settings.mongoURI, { autoIndex: false });
-
     let changes = 0;
 
-    for (const model of models) {
+    for (const model of await loadModels()) {
         const collection = model.collection.name;
         const { toDrop, toCreate } = await model.diffIndexes({ indexOptionsToCreate: true });
 
@@ -68,39 +54,89 @@ const indexes = async (apply: boolean): Promise<void> => {
         changes += toDrop.length + toCreate.length;
 
         for (const name of toDrop) {
-            Logger.info(`${ collection }: drop ${ name }`);
+            console.log(`${ collection }: drop ${ name }`);
         }
 
         for (const [ keys, options ] of toCreate) {
-            Logger.info(`${ collection }: create ${ JSON.stringify(keys) } ${ JSON.stringify(options) }`);
+            console.log(`${ collection }: create ${ JSON.stringify(keys) } ${ JSON.stringify(options) }`);
         }
 
         if (apply) await model.syncIndexes();
     }
 
-    if (!changes) return Logger.info("Every collection is already in sync.");
+    if (!changes) return console.log("Every collection is already in sync.");
 
-    if (apply) return Logger.info(`Applied ${ changes } index changes.`);
+    if (apply) return console.log(`Applied ${ changes } index changes.`);
 
-    Logger.info(`${ changes } index changes are pending. Re-run with "${ APPLY }" to apply them.`);
+    console.log(`${ changes } index changes are pending. Re-run with "${ APPLY }" to apply them.`);
 };
 
-const main = async (): Promise<void> => {
-    const [ , , command, ...flags ] = process.argv;
+/**
+ * Reports every collection in the database, and drops the dead ones.
+ *
+ * Dropping a collection can't be undone, so this only reports what it intends
+ * to do until the changes are explicitly applied.
+ * @param apply Whether to drop the dead collections, instead of only reporting them.
+ */
+const collections = async (apply: boolean): Promise<void> => {
+    const db = mongoose.connection.db;
+    const declared = new Set((await loadModels()).map(model => model.collection.name));
 
-    switch (command?.toLowerCase()) {
-    case Commands.Indexes: return await indexes(flags.includes(APPLY));
-    default:
-        throw new Error("You need to specify a migration command.", {
-            cause: "None of the valid commands were used: " + Object.values(Commands).join(" / "),
-        });
+    const names = (await db.listCollections().toArray())
+        .filter(collection => collection.type === "collection" && !SYSTEM_COLLECTION.test(collection.name))
+        .map(collection => collection.name)
+        .sort();
+
+    const width = Math.max("collection".length, ...names.map(name => name.length));
+    const dead: string[] = [];
+
+    console.log(`${ "collection".padEnd(width) }  documents`);
+
+    for (const name of names) {
+        const documents = await db.collection(name).countDocuments();
+        const modelled = declared.has(name);
+
+        if (!modelled) dead.push(name);
+
+        console.log(`${ name.padEnd(width) }  ${ documents }${ modelled ? "" : "  — no model" }`);
+    }
+
+    console.log();
+
+    if (!dead.length) return console.log(`${ names.length } collections, none of them dead.`);
+
+    if (!apply) return console.log(`${ names.length } collections, ${ dead.length } of them dead. Re-run with "${ APPLY }" to drop ${ dead.length === 1 ? "it" : "them" }.`);
+
+    for (const name of dead) {
+        await db.dropCollection(name);
+        console.log(`Dropped ${ name }.`);
     }
 };
 
+// commands
+const Commands: Record<string, (apply: boolean) => Promise<void>> = {
+    collections,
+    indexes,
+};
+
+const main = async (): Promise<void> => {
+    const [ , , name, ...flags ] = process.argv;
+    const command = name?.toLowerCase();
+
+    if (!Object.hasOwn(Commands, command || "")) {
+        throw new Error("You need to specify a migration command.", {
+            cause: "None of the valid commands were used: " + Object.keys(Commands).join(" / "),
+        });
+    }
+
+    await mongoose.connect(settings.mongoURI, { autoIndex: false });
+
+    await Commands[command](flags.some(flag => flag.toLowerCase() === APPLY));
+};
+
 main()
-    .then(() => Logger.info("Migration completed successfully."))
     .catch(e => {
-        Logger.info("Error when migrating. Join Bastion HQ for support: https://discord.gg/fzx8fkt");
+        console.error("Error when migrating. Join Bastion HQ for support: https://discord.gg/fzx8fkt");
         Logger.error(e);
         process.exitCode = 1;
     })

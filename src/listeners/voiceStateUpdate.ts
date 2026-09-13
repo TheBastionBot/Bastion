@@ -27,11 +27,6 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
         const guild = await GuildModel.findById(oldState.guild?.id || newState.guild?.id);
 
         if (guild.voiceSessionCategories?.length) {
-            // check for premium membership
-            if (isPublicBastion(oldState.client.user.id)) {
-                if (!await isPremiumUser(oldState.guild?.ownerId)) return;
-            }
-
             // check whether all members left the old channel
             if (guild.voiceSessionCategories.includes(oldState.channel?.parentId) && !oldState.channel.name.startsWith(this.newSessionChannelPrefix) && !oldState.guild.voiceStates.cache.some(state => state.channelId === oldState.channelId) && oldState.channel.deletable) {
                 await oldState.channel.delete("Voice session automatically ended.");
@@ -39,6 +34,11 @@ class VoiceStateUpdateListener extends Listener<"voiceStateUpdate"> {
 
             // check whether member is requesting a new session channel to be created
             if (guild.voiceSessionCategories.includes(newState.channel?.parentId) && newState.channel.name.startsWith(this.newSessionChannelPrefix)) {
+                // check for premium membership
+                if (isPublicBastion(oldState.client.user.id)) {
+                    if (!await isPremiumUser(oldState.guild?.ownerId)) return;
+                }
+
                 // resolve the member
                 const member = newState.member ?? await members.resolveMember(newState.guild, newState.id);
                 if (!member) return;

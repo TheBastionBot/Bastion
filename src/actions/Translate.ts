@@ -2,7 +2,7 @@
  * @author TRACTION (iamtraction)
  * @copyright 2024
  */
-import { ApplicationCommandType, MessageContextMenuCommandInteraction } from "discord.js";
+import { ApplicationCommandType, MessageContextMenuCommandInteraction, MessageFlags } from "discord.js";
 import { Command } from "@bastion/tesseract";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 import translate = require("@iamtraction/google-translate");
@@ -25,6 +25,7 @@ class TranslateCommand extends Command {
         return await interaction.reply({
             content: `${ response.text }
 -# Translated from ${ response.from.language.iso?.toUpperCase() } to English`,
+            flags: [ MessageFlags.Ephemeral ],
         });
     }
 }

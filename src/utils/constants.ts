@@ -28,8 +28,8 @@ export enum COLORS {
 
     AIM_LAB = 0x68c7c3,
     APEX_LEGENDS = 0xda292a,
-    CSGO = 0xf3a11d,
     DESTINY_2 = 0x9d9a93,
+    FACEIT = 0xff5500,
     FORTNITE = 0x149af9,
     OVERWATCH = 0xed6516,
     PUBG = 0xf2a900,

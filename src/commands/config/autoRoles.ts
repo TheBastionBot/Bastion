@@ -7,7 +7,7 @@ import { Command } from "@bastion/tesseract";
 
 import RoleModel from "../../models/Role.js";
 import { isPublicBastion } from "../../utils/constants.js";
-import { checkFeature, Feature, getPremiumTier } from "../../utils/premium.js";
+import { checkFeature, Feature, getPremiumTier, premiumLimitUpsell } from "../../utils/premium.js";
 
 class AutoRolesCommand extends Command {
     constructor() {
@@ -63,7 +63,7 @@ class AutoRolesCommand extends Command {
 
                 const limit = checkFeature(tier, Feature.AutoRoles) as number;
                 if (autoRoleCount >= limit) {
-                    return interaction.editReply(`You need to upgrade from Bastion ${ tier } to add more than ${ limit } auto roles.`);
+                    return interaction.editReply(premiumLimitUpsell(interaction, "premiumLimitAutoRoles", limit, tier));
                 }
             }
 

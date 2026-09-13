@@ -7,23 +7,40 @@ import { Client, Listener, Logger } from "@bastion/tesseract";
 
 import GuildModel, { Guild as GuildDocument } from "../models/Guild.js";
 import MemberModel from "../models/Member.js";
-import TriggerModel from "../models/Trigger.js";
 import { COLORS } from "../utils/constants.js";
 import { generate as generateEmbed } from "../utils/embeds.js";
 import * as gamification from "../utils/gamification.js";
 import * as members from "../utils/members.js";
 import memcache from "../utils/memcache.js";
+import { evaluateMessage } from "../utils/protection/index.js";
 import * as regex from "../utils/regex.js";
 import Settings from "../utils/settings.js";
+import { getTriggers, matches } from "../utils/triggers.js";
 import * as variables from "../utils/variables.js";
 import * as yaml from "../utils/yaml.js";
 
+interface InstantResponse {
+    messages: string[];
+    responses: (string | string[])[];
+}
+
 class MessageCreateListener extends Listener<"messageCreate"> {
+    private responses: InstantResponse[];
+
     constructor() {
         super("messageCreate");
+
+        this.responses = yaml.parse("data", "responses.yaml") as InstantResponse[];
     }
 
+    handleProtection = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
+        await evaluateMessage(message, guildDocument);
+    };
+
     handleGamification = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
+        // check whether gamification is enabled
+        if (!guildDocument.gamification) return;
+
         const key = `xp:${ message.guildId }:${ message.author.id }`;
 
         // check whether the member had recently gained XP
@@ -36,11 +53,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
             { returnDocument: "after", upsert: true },
         );
 
-        // check whether gamification is enabled
-        if (!guildDocument.gamification) return;
-
-        // check whether member has exceeded max level or experience
-        if (memberDocument.level >= gamification.MAX_LEVEL || memberDocument.experience >= gamification.MAX_EXPERIENCE(guildDocument.gamificationMultiplier)) return;
+        // check whether member has exceeded max experience
+        if (memberDocument.experience >= gamification.MAX_EXPERIENCE) return;
 
         // resolve the member
         const member = message.member ?? await members.resolveMember(message.guild, message.author.id);
@@ -56,16 +70,17 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // compute current level from new experience
         const computedLevel: number = gamification.computeLevel(experience, guildDocument.gamificationMultiplier);
 
-        // level up
-        if (computedLevel > level) {
-            // persist the new level and credit the reward amount
+        // update level
+        if (computedLevel !== level) {
+            const leveledUp = computedLevel > level;
+
             await MemberModel.updateOne({ user: message.author.id, guild: message.guildId }, {
                 $set: { level: computedLevel },
-                $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER },
+                ...(leveledUp ? { $inc: { balance: computedLevel * gamification.DEFAUL_CURRENCY_REWARD_MULTIPLIER } } : {}),
             });
 
-            // reward level roles and announce the level up
-            members.handleLevelUp(member, guildDocument, computedLevel, message);
+            if (leveledUp) members.handleLevelUp(member, guildDocument, computedLevel, message);
+            else members.assignLevelRoles(member, computedLevel).catch(Logger.error);
         }
 
         // set the XP cooldown for the member
@@ -73,16 +88,19 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     };
 
     handleTriggers = async (message: Message<true>): Promise<unknown> => {
-        const triggers = await TriggerModel.find({ guild: message.guild.id });
+        if (!message.content) return;
+
+        const triggers = await getTriggers(message.guildId);
+        if (!triggers.length) return;
+
+        const content = message.content.toUpperCase();
 
         // responses
         const responseMessages: string[] = [];
         const responseReactions: string[] = [];
 
         for (const trigger of triggers) {
-            const patternRegExp = new RegExp(trigger.pattern.replace(/\?/g, ".").replace(/\*+/g, ".*"), "ig");
-
-            if (!patternRegExp.test(message.content)) continue;
+            if (!matches(trigger, content)) continue;
 
             if (trigger.message) {
                 responseMessages.push(trigger.message);
@@ -129,21 +147,32 @@ class MessageCreateListener extends Listener<"messageCreate"> {
         // check whether gamification is enabled
         if (!guildDocument.gamification) return;
 
-        const mentiondUsers = message.mentions.users?.filter(u => u.id !== message.author.id);
-        if (mentiondUsers?.size && [ "thank you", "thankyou", "thanks" ].some(w => message.content.toLowerCase().includes(w))) {
-            const users = Array.from(mentiondUsers.keys());
+        // check whether anyone is mentioned
+        if (!message.mentions.users?.size) return;
 
-            await MemberModel.updateMany({
-                user: {
-                    $in: users,
-                },
-                guild: message.guild.id,
-            }, {
-                $inc: {
-                    karma: 1,
-                },
-            });
-        }
+        // check karma limitations
+        const recipients = message.mentions.users.filter(u => u.id !== message.author.id && !u.bot);
+        if (recipients.size !== 1) return;
+
+        const content = message.content.toLowerCase();
+        if (![ "thank you", "thankyou", "thanks" ].some(w => content.includes(w))) return;
+
+        const key = `karma:${ message.guildId }:${ message.author.id }`;
+
+        // check whether the member had recently given karma
+        if (memcache.get(key)) return;
+
+        await MemberModel.updateOne({
+            user: recipients.firstKey(),
+            guild: message.guildId,
+        }, {
+            $inc: {
+                karma: 1,
+            },
+        }, { upsert: true });
+
+        // set the cooldown
+        memcache.set(key, true, 15);
     };
 
     handleAutoThreads = async (message: Message<true>, guildDocument: GuildDocument): Promise<void> => {
@@ -181,9 +210,7 @@ class MessageCreateListener extends Listener<"messageCreate"> {
     handleInstantResponses = async (message: Message): Promise<void> => {
         if (!message.content) return;
 
-        const responses = yaml.parse("data", "responses.yaml");
-
-        for (const response of responses) {
+        for (const response of this.responses) {
             if (response.messages.includes(message.content.toLowerCase())) {
                 const replies: string | string[] = response.responses[Math.floor(Math.random() * response.responses.length)];
 
@@ -260,6 +287,8 @@ class MessageCreateListener extends Listener<"messageCreate"> {
                 );
             }
 
+            // spam and raid protection
+            this.handleProtection(message, guildDocument).catch(Logger.error);
             // gamification
             this.handleGamification(message, guildDocument).catch(Logger.error);
             // message triggers
