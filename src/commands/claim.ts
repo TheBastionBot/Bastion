@@ -48,7 +48,7 @@ class ClaimCommand extends Command {
 
         // reduce the reward into half if the user has been a member for less than 3 days
         if (today.getTime() - interaction.member.joinedTimestamp < 2592e5) {
-            rewardAmount /= 2;
+            rewardAmount = Math.round(rewardAmount / 2);
         }
 
         // increment claim streak, if they didn't miss their timeframe
